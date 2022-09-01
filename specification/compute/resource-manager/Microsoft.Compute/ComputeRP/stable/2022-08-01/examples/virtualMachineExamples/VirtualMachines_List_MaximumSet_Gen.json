@@ -142,7 +142,7 @@
                     }
                   }
                 ],
-                "networkApiVersion": "2020-11-01",
+                "networkApiVersion": "2022-05-01",
                 "networkInterfaceConfigurations": [
                   {
                     "name": "aaaaaaaa",
@@ -150,6 +150,7 @@
                       "primary": true,
                       "deleteOption": "Delete",
                       "enableAcceleratedNetworking": true,
+                      "disableTcpStateTracking": true,
                       "enableFpga": true,
                       "enableIPForwarding": true,
                       "networkSecurityGroup": {
@@ -255,199 +256,6 @@
               "hostGroup": {
                 "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
               },
-              "instanceView": {
-                "platformUpdateDomain": 1,
-                "platformFaultDomain": 29,
-                "computerName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                "osName": "aaaaaaaaaaa",
-                "osVersion": "aaaaaaaaaaaaaa",
-                "hyperVGeneration": "V1",
-                "rdpThumbPrint": "aaaaaaaaaaaaaaaaaaaaaaa",
-                "vmAgent": {
-                  "vmAgentVersion": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                  "extensionHandlers": [
-                    {
-                      "type": "aaaaa",
-                      "typeHandlerVersion": "aaaaaaaaaaaaaaaaaaa",
-                      "status": {
-                        "code": "aaa",
-                        "level": "Info",
-                        "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                        "message": "aaaaaaaaaaaaaaaaaaa",
-                        "time": "2022-01-14T16:43:41.657Z"
-                      }
-                    }
-                  ],
-                  "statuses": [
-                    {
-                      "code": "aaa",
-                      "level": "Info",
-                      "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                      "message": "aaaaaaaaaaaaaaaaaaa",
-                      "time": "2022-01-14T16:43:41.657Z"
-                    }
-                  ]
-                },
-                "maintenanceRedeployStatus": {
-                  "isCustomerInitiatedMaintenanceAllowed": true,
-                  "preMaintenanceWindowStartTime": "2022-01-14T16:43:41.682Z",
-                  "preMaintenanceWindowEndTime": "2022-01-14T16:43:41.682Z",
-                  "maintenanceWindowStartTime": "2022-01-14T16:43:41.682Z",
-                  "maintenanceWindowEndTime": "2022-01-14T16:43:41.682Z",
-                  "lastOperationResultCode": "None",
-                  "lastOperationMessage": "aa"
-                },
-                "disks": [
-                  {
-                    "name": "a",
-                    "encryptionSettings": [
-                      {
-                        "diskEncryptionKey": {
-                          "secretUrl": "aaaaaaaaa",
-                          "sourceVault": {
-                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
-                          }
-                        },
-                        "keyEncryptionKey": {
-                          "keyUrl": "aaaaaaaaaaaaa",
-                          "sourceVault": {
-                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
-                          }
-                        },
-                        "enabled": true
-                      }
-                    ],
-                    "statuses": [
-                      {
-                        "code": "aaa",
-                        "level": "Info",
-                        "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                        "message": "aaaaaaaaaaaaaaaaaaa",
-                        "time": "2022-01-14T16:43:41.657Z"
-                      }
-                    ]
-                  }
-                ],
-                "extensions": [
-                  {
-                    "name": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                    "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                    "typeHandlerVersion": "aaaaaa",
-                    "substatuses": [
-                      {
-                        "code": "aaa",
-                        "level": "Info",
-                        "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                        "message": "aaaaaaaaaaaaaaaaaaa",
-                        "time": "2022-01-14T16:43:41.657Z"
-                      }
-                    ],
-                    "statuses": [
-                      {
-                        "code": "aaa",
-                        "level": "Info",
-                        "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                        "message": "aaaaaaaaaaaaaaaaaaa",
-                        "time": "2022-01-14T16:43:41.657Z"
-                      }
-                    ]
-                  }
-                ],
-                "vmHealth": {
-                  "status": {
-                    "code": "aaa",
-                    "level": "Info",
-                    "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                    "message": "aaaaaaaaaaaaaaaaaaa",
-                    "time": "2022-01-14T16:43:41.657Z"
-                  }
-                },
-                "bootDiagnostics": {
-                  "consoleScreenshotBlobUri": "aaaaaaaaaaaaaaaaaaaaaaa",
-                  "serialConsoleLogBlobUri": "aaaaaaaaaaaaaaaaaaa",
-                  "status": {
-                    "code": "aaa",
-                    "level": "Info",
-                    "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                    "message": "aaaaaaaaaaaaaaaaaaa",
-                    "time": "2022-01-14T16:43:41.657Z"
-                  }
-                },
-                "assignedHost": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                "statuses": [
-                  {
-                    "code": "aaa",
-                    "level": "Info",
-                    "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                    "message": "aaaaaaaaaaaaaaaaaaa",
-                    "time": "2022-01-14T16:43:41.657Z"
-                  }
-                ],
-                "patchStatus": {
-                  "availablePatchSummary": {
-                    "status": "Unknown",
-                    "assessmentActivityId": "aaaaaaaaaaaaaaaaaaa",
-                    "rebootPending": true,
-                    "criticalAndSecurityPatchCount": 22,
-                    "otherPatchCount": 25,
-                    "startTime": "2022-01-14T16:43:41.682Z",
-                    "lastModifiedTime": "2022-01-14T16:43:41.683Z",
-                    "error": {
-                      "details": [
-                        {
-                          "code": "aaaaaaaaaaaaaaaaaaaaa",
-                          "target": "aaaaaa",
-                          "message": "aaaaaaaaaaaaa"
-                        }
-                      ],
-                      "innererror": {
-                        "exceptiontype": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                        "errordetail": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                      },
-                      "code": "aaaaaa",
-                      "target": "aaaaaaaaa",
-                      "message": "aaa"
-                    }
-                  },
-                  "lastPatchInstallationSummary": {
-                    "status": "Unknown",
-                    "installationActivityId": "aaaaaa",
-                    "maintenanceWindowExceeded": true,
-                    "notSelectedPatchCount": 20,
-                    "excludedPatchCount": 1,
-                    "pendingPatchCount": 2,
-                    "installedPatchCount": 28,
-                    "failedPatchCount": 30,
-                    "startTime": "2022-01-14T16:43:41.683Z",
-                    "lastModifiedTime": "2022-01-14T16:43:41.683Z",
-                    "error": {
-                      "details": [
-                        {
-                          "code": "aaaaaaaaaaaaaaaaaaaaa",
-                          "target": "aaaaaa",
-                          "message": "aaaaaaaaaaaaa"
-                        }
-                      ],
-                      "innererror": {
-                        "exceptiontype": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                        "errordetail": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                      },
-                      "code": "aaaaaa",
-                      "target": "aaaaaaaaa",
-                      "message": "aaa"
-                    }
-                  },
-                  "configurationStatuses": [
-                    {
-                      "code": "aaa",
-                      "level": "Info",
-                      "displayStatus": "aaaaaaaaaaaaaaaaaaaaaaaa",
-                      "message": "aaaaaaaaaaaaaaaaaaa",
-                      "time": "2022-01-14T16:43:41.657Z"
-                    }
-                  ]
-                }
-              },
               "licenseType": "aaaaaaaaaaaaaaa",
               "extensionsTimeBudget": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
               "platformFaultDomain": 8,
@@ -522,7 +330,12 @@
                     ]
                   },
                   "suppressFailures": true,
-                  "protectedSettingsFromKeyVault": {}
+                  "protectedSettingsFromKeyVault": {
+                    "sourceVault": {
+                      "id": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/kvName"
+                    },
+                    "secretUrl": "https://kvName.vault.azure.net/secrets/secretName/79b88b3a6f5440ffb2e73e44a0db712e"
+                  }
                 },
                 "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "name": "aaaaaaaaaaaaa",
@@ -685,7 +498,7 @@
                     }
                   }
                 ],
-                "networkApiVersion": "2020-11-01",
+                "networkApiVersion": "2022-05-01",
                 "networkInterfaceConfigurations": [
                   {
                     "name": "aaaaaaaa",
@@ -693,6 +506,7 @@
                       "primary": true,
                       "deleteOption": "Delete",
                       "enableAcceleratedNetworking": true,
+                      "disableTcpStateTracking": true,
                       "enableFpga": true,
                       "enableIPForwarding": true,
                       "networkSecurityGroup": {
@@ -1065,7 +879,12 @@
                     ]
                   },
                   "suppressFailures": true,
-                  "protectedSettingsFromKeyVault": {}
+                  "protectedSettingsFromKeyVault": {
+                    "sourceVault": {
+                      "id": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/kvName"
+                    },
+                    "secretUrl": "https://kvName.vault.azure.net/secrets/secretName/79b88b3a6f5440ffb2e73e44a0db712e"
+                  }
                 },
                 "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "name": "aaaaaaaaaaaaa",

@@ -231,6 +231,9 @@
           "Create a scale set with spot restore policy": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotRestorePolicy.json"
           },
+          "Create a scale set with priority mix policy": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPriorityMixPolicy.json"
+          },
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
@@ -239,6 +242,12 @@
           },
           "Create a scale set with SecurityType as ConfidentialVM": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityTypeConfidentialVM.json"
+          },
+          "Create a scale set with Disk Controller Type": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithDiskControllerType.json"
+          },
+          "Create a scale set where nic config has DisableTcpStateTracking property": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithDisableTcpStateTrackingNetworkInterface.json"
           }
         }
       },
@@ -427,6 +436,9 @@
           },
           "Get a virtual machine scale set": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Get.json"
+          },
+          "Get VM scale set VM with Disk Controller Type": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Get_WithDiskControllerType.json"
           }
         }
       }
@@ -3618,6 +3630,25 @@
       },
       "description": "Specifies the Spot-Try-Restore properties for the virtual machine scale set. <br><br> With this property customer can enable or disable automatic restore of the evicted Spot VMSS VM instances opportunistically based on capacity availability and pricing constraint."
     },
+    "PriorityMixPolicy": {
+      "type": "object",
+      "properties": {
+        "baseRegularPriorityCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The base number of regular priority VMs that will be created in this scale set as it scales out."
+        },
+        "regularPriorityPercentageAboveBase": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "The percentage of VM instances, after the base regular priority count has been reached, that are expected to use regular priority."
+        }
+      },
+      "description": "Specifies the target splits for Spot and Regular priority VMs within a scale set with flexible orchestration mode. <br><br>With this property the customer is able to specify the base number of regular priority VMs created as the VMSS flex instance scales out and the split between Spot and Regular priority VMs after this base target has been reached."
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -3776,7 +3807,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
         },
         "osType": {
           "type": "string",
@@ -3828,7 +3859,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
         },
         "image": {
           "$ref": "./computeRPCommon.json#/definitions/VirtualHardDisk",
@@ -3878,7 +3909,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -3925,6 +3956,13 @@
             "lun"
           ],
           "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
+        },
+        "diskControllerType": {
+          "type": "string",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/DiskControllerType",
+            "description": "Specifies the disk controller type configured for the virtual machines in the scale set. <br><br> Minimum api-version: 2022-08-01"
+          }
         }
       },
       "description": "Describes a virtual machine scale set storage profile."
@@ -3949,6 +3987,13 @@
             "lun"
           ],
           "description": "The data disks."
+        },
+        "diskControllerType": {
+          "type": "string",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/DiskControllerType",
+            "description": "Specifies the disk controller type configured for the virtual machines in the scale set. <br>NOTE: You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set.<br><br> Minimum api-version: 2022-08-01"
+          }
         }
       },
       "description": "Describes a virtual machine scale set storage profile."
@@ -4116,6 +4161,10 @@
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
         },
+        "disableTcpStateTracking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is disabled for tcp state tracking."
+        },
         "enableFpga": {
           "type": "boolean",
           "description": "Specifies whether the network interface is FPGA networking-enabled."
@@ -4166,6 +4215,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "disableTcpStateTracking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is disabled for tcp state tracking."
         },
         "enableFpga": {
           "type": "boolean",
@@ -4498,7 +4551,7 @@
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
         },
         "protectedSettingsFromKeyVault": {
-          "type": "object",
+          "$ref": "./computeRPCommon.json#/definitions/KeyVaultSecretReference",
           "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
         }
       },
@@ -4692,6 +4745,10 @@
         "userData": {
           "type": "string",
           "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
+          "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -4764,6 +4821,10 @@
         "spotRestorePolicy": {
           "$ref": "#/definitions/SpotRestorePolicy",
           "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "priorityMixPolicy": {
+          "$ref": "#/definitions/PriorityMixPolicy",
+          "description": "Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance."
         },
         "timeCreated": {
           "readOnly": true,

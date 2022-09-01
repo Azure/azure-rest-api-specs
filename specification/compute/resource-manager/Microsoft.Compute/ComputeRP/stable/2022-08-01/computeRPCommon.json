@@ -674,6 +674,18 @@
       ],
       "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
+    "DiskControllerType": {
+      "type": "string",
+      "enum": [
+        "SCSI",
+        "NVMe"
+      ],
+      "x-ms-enum": {
+        "name": "DiskControllerTypes",
+        "modelAsString": true
+      },
+      "description": "Specifies the disk controller type configured for the VM and VirtualMachineScaleSet. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please check the HyperVGenerations capability returned as part of VM sku capabilities in the response of Microsoft.Compute SKUs api for the region contains V2 (https://docs.microsoft.com/rest/api/compute/resourceskus/list) . <br> For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes."
+    },
     "KeyVaultSecretReference": {
       "properties": {
         "secretUrl": {
@@ -937,7 +949,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -987,7 +999,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -1053,6 +1065,10 @@
             "lun"
           ],
           "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
+        },
+        "diskControllerType": {
+          "$ref": "#/definitions/DiskControllerType",
+          "description": "Specifies the disk controller type configured for the VM. <br><br>NOTE: This property will be set to the default disk controller type if not specified provided virtual machine is being created as a hyperVGeneration: V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. <br>You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. <br><br> Minimum api-version: 2022-08-01"
         }
       },
       "description": "Specifies the storage settings for the virtual machine disks."
@@ -1264,6 +1280,10 @@
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
           "description": "Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell."
+        },
+        "enableVMAgentPlatformUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether VMAgent Platform Updates is enabled for the Windows virtual machine. Default value is false."
         }
       },
       "description": "Specifies Windows operating system settings on the virtual machine."
@@ -1313,6 +1333,10 @@
         "patchSettings": {
           "$ref": "#/definitions/LinuxPatchSettings",
           "description": "[Preview Feature] Specifies settings related to VM Guest Patching on Linux."
+        },
+        "enableVMAgentPlatformUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether VMAgent Platform Updates is enabled for the Linux virtual machine. Default value is false."
         }
       },
       "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
