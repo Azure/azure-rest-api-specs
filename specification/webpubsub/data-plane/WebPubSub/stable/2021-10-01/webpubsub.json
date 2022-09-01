@@ -36,6 +36,71 @@
         }
       }
     },
+    "/api/hubs/{hub}/:closeConnections": {
+      "post": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Close the connections in the hub.",
+        "operationId": "WebPubSub_CloseAllConnections",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "query",
+            "name": "excluded",
+            "description": "Exclude these connectionIds when closing the connections in the hub.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "reason",
+            "description": "The reason closing the client connection.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/hubs/{hub}/:generateToken": {
       "post": {
         "tags": [
@@ -95,71 +160,6 @@
             "schema": {
               "$ref": "#/definitions/ClientTokenResponse"
             }
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/hubs/{hub}/:closeConnections": {
-      "post": {
-        "tags": [
-          "webpubsub"
-        ],
-        "summary": "Close the connections in the hub.",
-        "operationId": "WebPubSub_CloseAllConnections",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "query",
-            "name": "excluded",
-            "description": "Exclude these connectionIds when closing the connections in the hub.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "reason",
-            "description": "The reason closing the client connection.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The version of the REST APIs.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
           },
           "default": {
             "description": "Error response",
@@ -252,64 +252,6 @@
       }
     },
     "/api/hubs/{hub}/connections/{connectionId}": {
-      "head": {
-        "tags": [
-          "webpubsub"
-        ],
-        "summary": "Check if the connection with the given connectionId exists.",
-        "operationId": "WebPubSub_ConnectionExists",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "The connection Id.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The version of the REST APIs.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "webpubsub"
@@ -355,6 +297,64 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Check if the connection with the given connectionId exists.",
+        "operationId": "WebPubSub_ConnectionExists",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "The connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "default": {
             "description": "Error response",
@@ -663,6 +663,70 @@
       }
     },
     "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
+      "delete": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Remove a connection from the target group.",
+        "operationId": "WebPubSub_RemoveConnectionFromGroup",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "webpubsub"
@@ -726,13 +790,15 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}": {
       "delete": {
         "tags": [
           "webpubsub"
         ],
-        "summary": "Remove a connection from the target group.",
-        "operationId": "WebPubSub_RemoveConnectionFromGroup",
+        "summary": "Revoke permission for the connection.",
+        "operationId": "WebPubSub_RevokePermission",
         "produces": [
           "text/plain",
           "application/json",
@@ -749,12 +815,18 @@
           },
           {
             "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "name": "permission",
+            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "enum": [
+              "sendToGroup",
+              "joinLeaveGroup"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubPermission",
+              "modelAsString": true
+            }
           },
           {
             "in": "path",
@@ -766,6 +838,12 @@
           },
           {
             "in": "query",
+            "name": "targetName",
+            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
             "required": true,
@@ -774,6 +852,161 @@
         ],
         "responses": {
           "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Check if a connection has permission to the specified action.",
+        "operationId": "WebPubSub_CheckPermission",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "permission",
+            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "sendToGroup",
+              "joinLeaveGroup"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubPermission",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "in": "query",
+            "name": "targetName",
+            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Grant permission to the connection.",
+        "operationId": "WebPubSub_GrantPermission",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "permission",
+            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "sendToGroup",
+              "joinLeaveGroup"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubPermission",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "in": "query",
+            "name": "targetName",
+            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "Success"
           },
           "default": {
@@ -997,13 +1230,13 @@
         }
       }
     },
-    "/api/hubs/{hub}/users/{userId}/groups/{group}": {
-      "put": {
+    "/api/hubs/{hub}/users/{userId}/groups": {
+      "delete": {
         "tags": [
           "webpubsub"
         ],
-        "summary": "Add a user to the target group.",
-        "operationId": "WebPubSub_AddUserToGroup",
+        "summary": "Remove a user from all groups.",
+        "operationId": "WebPubSub_RemoveUserFromAllGroups",
         "produces": [
           "text/plain",
           "application/json",
@@ -1017,15 +1250,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
-            "required": true,
-            "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
           },
           {
             "in": "path",
@@ -1044,7 +1268,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
@@ -1061,7 +1285,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/hubs/{hub}/users/{userId}/groups/{group}": {
       "delete": {
         "tags": [
           "webpubsub"
@@ -1125,15 +1351,13 @@
             }
           }
         }
-      }
-    },
-    "/api/hubs/{hub}/users/{userId}/groups": {
-      "delete": {
+      },
+      "put": {
         "tags": [
           "webpubsub"
         ],
-        "summary": "Remove a user from all groups.",
-        "operationId": "WebPubSub_RemoveUserFromAllGroups",
+        "summary": "Add a user to the target group.",
+        "operationId": "WebPubSub_AddUserToGroup",
         "produces": [
           "text/plain",
           "application/json",
@@ -1147,6 +1371,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1
           },
           {
             "in": "path",
@@ -1165,241 +1398,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}": {
-      "put": {
-        "tags": [
-          "webpubsub"
-        ],
-        "summary": "Grant permission to the connection.",
-        "operationId": "WebPubSub_GrantPermission",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "permission",
-            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "sendToGroup",
-              "joinLeaveGroup"
-            ],
-            "x-ms-enum": {
-              "name": "WebPubSubPermission",
-              "modelAsString": true
-            }
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "Target connection Id.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "in": "query",
-            "name": "targetName",
-            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The version of the REST APIs.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
           "200": {
             "description": "Success"
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "webpubsub"
-        ],
-        "summary": "Revoke permission for the connection.",
-        "operationId": "WebPubSub_RevokePermission",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "permission",
-            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "sendToGroup",
-              "joinLeaveGroup"
-            ],
-            "x-ms-enum": {
-              "name": "WebPubSubPermission",
-              "modelAsString": true
-            }
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "Target connection Id.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "in": "query",
-            "name": "targetName",
-            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The version of the REST APIs.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "webpubsub"
-        ],
-        "summary": "Check if a connection has permission to the specified action.",
-        "operationId": "WebPubSub_CheckPermission",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "permission",
-            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "sendToGroup",
-              "joinLeaveGroup"
-            ],
-            "x-ms-enum": {
-              "name": "WebPubSubPermission",
-              "modelAsString": true
-            }
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "Target connection Id.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "in": "query",
-            "name": "targetName",
-            "description": "The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The version of the REST APIs.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error response",
