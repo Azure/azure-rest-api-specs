@@ -56,6 +56,8 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/Watchlists.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/ContentTemplates.json
 ```
 ### Tag: package-preview-2022-08
 
