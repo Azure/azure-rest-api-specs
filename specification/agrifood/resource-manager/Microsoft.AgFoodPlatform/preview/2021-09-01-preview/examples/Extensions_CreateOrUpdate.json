@@ -4,7 +4,15 @@
     "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "examples-rg",
     "farmBeatsResourceName": "examples-farmbeatsResourceName",
-    "extensionId": "provider.extension"
+    "extensionId": "provider.extension",
+    "body": {
+      "extensionVersion": "1.0",
+      "apiProperties": {
+        "examples-api": {
+          "apiFreshnessWindow": 3600
+        }
+      }
+    }
   },
   "responses": {
     "201": {
@@ -26,6 +34,11 @@
           "installedExtensionVersion": "1.0",
           "extensionAuthLink": "https://www.provider.com/extension/",
           "extensionApiDocsLink": "https://docs.provider.com/documentation/extension"
+        },
+        "additionalApiProperties": {
+          "examples-api": {
+            "apiFreshnessWindow": 3600
+          }
         }
       }
     }
