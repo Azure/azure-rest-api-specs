@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
   - Microsoft.CostManagement/preview/2022-08-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/preview/2022-08-01-preview/settings.json
 ```
 ### Tag: package-2022-05
 
