@@ -60,7 +60,11 @@
             "description": "Define the search for only azure benefit eligible offers, if no value selected, this filter is ignored. Default: null",
             "x-schema": {
               "$ref": "#/definitions/AzureBenefit"
-            }
+            },
+            "enum": [
+              "Eligible",
+              "NotEligible"
+            ]
           },
           {
             "type": "array",
@@ -69,7 +73,15 @@
             "description": "Define the search publisher types. Default: False",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PublisherType"
+              "type": "string",
+              "enum": [
+                "Microsoft",
+                "ThirdParty"
+              ],
+              "x-ms-enum": {
+                "name": "PublisherType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -79,7 +91,16 @@
             "description": "Define the search for badges.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/Badge"
+              "type": "string",
+              "enum": [
+                "PreferredSolution",
+                "PowerBICertified",
+                "AdditionalPurchaseRequirement"
+              ],
+              "x-ms-enum": {
+                "name": "Badge",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -127,7 +148,50 @@
             "collectionFormat": "csv",
             "required": true,
             "items": {
-              "$ref": "#/definitions/SearchV2FieldName"
+              "type": "string",
+              "enum": [
+                "All",
+                "Popularity",
+                "ApplicableProducts",
+                "Categories",
+                "BigCatLastModifiedDate",
+                "Industries",
+                "CategoryIds",
+                "Market",
+                "LinkedAddIns",
+                "SupportedProducts",
+                "HideKeys",
+                "PublisherId",
+                "CspStates",
+                "DisplayName",
+                "AzureBenefit",
+                "Badges",
+                "SmallIconUri",
+                "MediumIconUri",
+                "LargeIconUri",
+                "WideIconUri",
+                "IndustryCloud",
+                "MicrosoftProduct",
+                "PublishingState",
+                "Language",
+                "LegacyId",
+                "OfferType",
+                "Plans",
+                "OperatingSystems",
+                "PricingTypes",
+                "PublisherDisplayName",
+                "Summary",
+                "VmImageGenerations",
+                "VmImageTypes",
+                "VmArchitectureTypes",
+                "Description",
+                "RatingBuckets",
+                "RatingAverage"
+              ],
+              "x-ms-enum": {
+                "name": "SearchV2FieldName",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -147,7 +211,35 @@
             "description": "Array of product types to search by. E.g. ['VirtualMachine']",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/ProductType"
+              "type": "string",
+              "enum": [
+                "None",
+                "DevService",
+                "ManagedApplication",
+                "VirtualMachine",
+                "AzureApplication",
+                "Container",
+                "SaaS",
+                "SolutionTemplate",
+                "IotEdgeModules",
+                "ManagedServices",
+                "ContainerApps",
+                "VisualStudioExtension",
+                "DynamicsOps",
+                "DynamicsCE",
+                "DynamicsBC",
+                "PowerBI",
+                "ConsultingServices",
+                "CosellOnly",
+                "CoreVirtualMachine",
+                "PowerBIVisuals",
+                "Office365",
+                "AADApps"
+              ],
+              "x-ms-enum": {
+                "name": "ProductType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -157,7 +249,18 @@
             "description": "Array of pricing types to search by. E.g. ['byol']",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PricingType"
+              "type": "string",
+              "enum": [
+                "Free",
+                "FreeTrial",
+                "Byol",
+                "Payg",
+                "Ri"
+              ],
+              "x-ms-enum": {
+                "name": "PricingType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -264,7 +367,17 @@
             "description": "Array of azure portal rating buckets to search by. E.g. ['Above1']",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/RatingBucket"
+              "type": "string",
+              "enum": [
+                "AboveOne",
+                "AboveTwo",
+                "AboveThree",
+                "AboveFour"
+              ],
+              "x-ms-enum": {
+                "name": "RatingBucket",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -294,7 +407,16 @@
             "description": "Array of vm security types to search by. E.g. ['Trusted']",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmSecurityType"
+              "type": "string",
+              "enum": [
+                "None",
+                "Trusted",
+                "Confidential"
+              ],
+              "x-ms-enum": {
+                "name": "VmSecurityType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -317,7 +439,50 @@
             "description": "Array facets to facet by, if none selected then no facets will return. E.g. facets=pricingTypes,operatingSystems",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/SearchV2FieldName"
+              "type": "string",
+              "enum": [
+                "All",
+                "Popularity",
+                "ApplicableProducts",
+                "Categories",
+                "BigCatLastModifiedDate",
+                "Industries",
+                "CategoryIds",
+                "Market",
+                "LinkedAddIns",
+                "SupportedProducts",
+                "HideKeys",
+                "PublisherId",
+                "CspStates",
+                "DisplayName",
+                "AzureBenefit",
+                "Badges",
+                "SmallIconUri",
+                "MediumIconUri",
+                "LargeIconUri",
+                "WideIconUri",
+                "IndustryCloud",
+                "MicrosoftProduct",
+                "PublishingState",
+                "Language",
+                "LegacyId",
+                "OfferType",
+                "Plans",
+                "OperatingSystems",
+                "PricingTypes",
+                "PublisherDisplayName",
+                "Summary",
+                "VmImageGenerations",
+                "VmImageTypes",
+                "VmArchitectureTypes",
+                "Description",
+                "RatingBuckets",
+                "RatingAverage"
+              ],
+              "x-ms-enum": {
+                "name": "SearchV2FieldName",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -400,7 +565,7 @@
         "modelAsString": true
       }
     },
-	"RatingBucket": {
+    "RatingBucket": {
       "type": "string",
       "description": "",
       "enum": [
