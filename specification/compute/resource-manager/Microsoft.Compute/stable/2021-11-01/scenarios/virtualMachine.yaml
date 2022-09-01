@@ -6,6 +6,8 @@ variables:
     type: string
   publicIPID:
     type: string
+  adminPwd:
+    type: secureString
 
 scenarios:
   - scenario: VirtualMachine
@@ -25,7 +27,7 @@ scenarios:
           - replace: /parameters/properties/osProfile/adminUsername
             value: goscenario
           - replace: /parameters/properties/osProfile/adminPassword
-            value: QWE!@#123
+            value: $(adminPwd)
           - replace: /parameters/properties/storageProfile/osDisk/managedDisk/storageAccountType
             value: Standard_LRS
       - step: VirtualMachine_Get
