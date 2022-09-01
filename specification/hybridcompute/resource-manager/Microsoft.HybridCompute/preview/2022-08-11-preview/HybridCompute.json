@@ -673,6 +673,130 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{locations}/publishers/{publishers}/extensionTypes/{extensionTypes}/versions/{versions}": {
+      "get": {
+        "tags": [
+          "extensions"
+        ],
+        "operationId": "ExtensionMetadata_Get",
+        "description": "Gets an Extension Metadata based on location, publisher, extensionType and version",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locations",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the Extension being received."
+          },
+          {
+            "name": "publishers",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The publisher of the Extension being received."
+          },
+          {
+            "name": "extensionTypes",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The extensionType of the Extension being received."
+          },
+          {
+            "name": "versions",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the Extension being received."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValue"
+            }
+          },
+          "default": {
+            "description": "Error in retrieving an extension metadata",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET an extensions metadata": {
+            "$ref": "./examples/ExtensionMetadata_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{locations}/publishers/{publishers}/extensionTypes/{extensionTypes}/versions": {
+      "get": {
+        "tags": [
+          "extensions"
+        ],
+        "operationId": "ExtensionMetadata_List",
+        "description": "Gets all Extension versions based on location, publisher, extensionType",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locations",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the Extension being received."
+          },
+          {
+            "name": "publishers",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The publisher of the Extension being received."
+          },
+          {
+            "name": "extensionTypes",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The extensionType of the Extension being received."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error in retrieving extension list",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "GET a list of extensions": {
+            "$ref": "./examples/ExtensionMetadata_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.HybridCompute/operations": {
       "get": {
         "tags": [
@@ -711,6 +835,67 @@
     }
   },
   "definitions": {
+    "ExtensionValueListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ExtensionValue"
+          },
+          "description": "The list of extension metadata",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "The List Extension Metadata response."
+    },
+    "ExtensionValue": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionValueProperties",
+          "description": "The single extension based on search criteria"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Describes a Extension Metadata"
+    },
+    "ExtensionValueProperties": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the Extension being received."
+        },
+        "versions": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the Extension being received."
+        },
+        "locations": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the Extension being received."
+        },
+        "extensionTypes": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the Extension being received."
+        },
+        "publishers": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The publisher of the Extension being received."
+        }
+      },
+      "description": "Describes Extension Metadata properties"
+    },
     "OperationListResult": {
       "type": "object",
       "properties": {
