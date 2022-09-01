@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-12-01-preview-only
+tag: package-2022-04-01
 ```
 
 ### Suppression

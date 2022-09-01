@@ -15,6 +15,38 @@ module-name: sdk/resourcemanager/authorization/armauthorization
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+  - from: authorization-RoleAssignmentsCalls.json
+    where: $.definitions
+    transform: |
+      $["RoleAssignmentPropertiesWithScope"] = {
+        "allOf": [
+          {
+            "$ref": "#/definitions/RoleAssignmentProperties"
+          }
+        ]
+      }
+  - from: authorization-RoleAssignmentsCalls.json
+    where: $.definitions.RoleAssignment.properties
+    transform: |
+      $["properties"] = {
+        "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
+        "description": "Role assignment properties."
+      }
+  - rename-operation:
+      from: RoleAssignments_ListForSubscription
+      to: RoleAssignments_List
+  - from: authorization-RoleAssignmentsCalls.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/roleAssignments"].get.parameters
+    transform: >-
+      $.splice(3,0,{
+        "name": "parentResourcePath",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The parent resource identity.",
+        "x-ms-skip-url-encoding": true
+      });
 ```
 
 ### Go multi-api
