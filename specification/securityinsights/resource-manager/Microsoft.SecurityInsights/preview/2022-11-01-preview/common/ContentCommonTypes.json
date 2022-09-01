@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-09-01-preview",
+    "version": "2022-11-01-preview",
     "title": "Common content metadata types"
   },
   "paths": {},
   "definitions": {
-    "metadataContentId": {
+    "metadataId": {
       "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a metadata, both will have the same contentId.",
       "type": "string"
     },
@@ -256,7 +256,7 @@
       "properties": {
         "contentId": {
           "description": "Id of the content item we depend on",
-          "$ref": "#/definitions/metadataContentId"
+          "$ref": "#/definitions/metadataId"
         },
         "kind": {
           "description": "Type of the content item we depend on",
