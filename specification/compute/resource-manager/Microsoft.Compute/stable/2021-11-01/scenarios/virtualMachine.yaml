@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  subnetID:
+    type: string
+  publicIPID:
+    type: string
+  adminPwd:
+    type: secureString
+
+scenarios:
+  - scenario: VirtualMachine
+    description: Microsoft.Compute/virtualMachines CRUD
+    steps:
+      - step: NetworkAndSubnet_Create
+        armTemplate: peArmTemplate/Create_Network_And_Subnet.json
+      - step: PublicIpAddress_Create
+        armTemplate: peArmTemplate/Create_PublicIpAddress.json
+      - step: NetworkInterface_Create
+        armTemplate: peArmTemplate/Create_NetworkInterface.json
+      - step: VirtualMachine_Create
+        exampleFile: ../examples/compute/CreateAWindowsVmWithPatchSettingAssessmentModeOfImageDefault.json
+        requestUpdate:
+          - replace: /parameters/properties/networkProfile/networkInterfaces/0/id
+            value: $(nicID)
+          - replace: /parameters/properties/osProfile/adminUsername
+            value: goscenario
+          - replace: /parameters/properties/osProfile/adminPassword
+            value: $(adminPwd)
+          - replace: /parameters/properties/storageProfile/osDisk/managedDisk/storageAccountType
+            value: Standard_LRS
+      - step: VirtualMachine_Get
+        exampleFile: ../examples/compute/GetVirtualMachine.json
+      - step: VirtualMachine_List
+        exampleFile: ../examples/compute/VirtualMachines_List_MinimumSet_Gen.json
+      - step: VirtualMachine_ListAll
+        exampleFile: ../examples/compute/VirtualMachines_ListAll_MinimumSet_Gen.json
+      - step: VirtualMachine_Delete
+        exampleFile: ../examples/compute/ForceDeleteVirtualMachine.json
+
+

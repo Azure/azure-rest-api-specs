@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: ManagedDisk
+    description: Microsoft.Compute/disks CRUD
+    variables:
+      diskName: scenario_disk
+    steps:
+      - step: ManagedDisk_Create
+        exampleFile: ../examples/CreateAnEmptyManagedDisk.json
+        requestUpdate:
+          - replace: /disk/properties/diskSizeGB
+            value: 10
+      - step: ManagedDisk_GrantAccess
+        exampleFile: ../examples/BeginGetAccessManagedDisk.json
+      - step: ManagedDisk_RevokeAccess
+        exampleFile: ../examples/EndGetAccessManagedDisk.json
+      - step: ManagedDisk_Update
+        exampleFile: ../examples/UpdateAManagedDiskToRemoveDiskAccess.json
+      - step: ManagedDisk_Get
+        exampleFile: ../examples/GetInformationAboutAManagedDisk.json
+      - step: ManagedDisk_List
+        exampleFile: ../examples/ListManagedDisksInASubscription.json
+      - step: ManagedDisk_ListByResourceGroup
+        exampleFile: ../examples/ListManagedDisksInAResourceGroup.json
+      - step: ManagedDisk_Delete
+        exampleFile: ../examples/DeleteAManagedDisk.json
+
+
+
+
+
+
+

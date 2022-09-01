@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "defaultValue": "template_nic",
+      "metadata": {
+        "description": "Name of Application Insights resource."
+      }
+    },
+    "subnetID": {
+      "type": "string"
+    },
+    "publicIPID": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('name')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "eastus",
+      "apiVersion": "2021-05-01",
+      "properties": {
+        "enableAcceleratedNetworking": true,
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[parameters('publicIPID')]"
+              },
+              "subnet": {
+                "id": "[parameters('subnetID')]"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": {
+    "nicID": {
+      "value": "[resourceId('Microsoft.Network/networkInterfaces', parameters('name'))]",
+      "type": "string"
+    }
+  }
+}
