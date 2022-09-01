@@ -6,7 +6,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   fluent: true
-  namespace: com.azure.agrifood
+  title: AgriFoodMgmtClient
   license-header: MICROSOFT_MIT_NO_CODEGEN
   output-folder: $(azure-libraries-for-java-folder)/agrifood/arm-agrifood
 ```
