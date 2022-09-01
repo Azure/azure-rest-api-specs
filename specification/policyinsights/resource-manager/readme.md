@@ -143,6 +143,12 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-09'
 input-file:
+  - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+  - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+  - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
   - Microsoft.PolicyInsights/stable/2022-09-01/attestations.json
 ```
 ### Tag: package-2022-03
