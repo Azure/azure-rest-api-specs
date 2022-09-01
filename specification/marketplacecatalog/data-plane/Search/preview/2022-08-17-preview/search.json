@@ -642,7 +642,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProductSummary"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "totalCount": {
           "type": "integer",
@@ -757,46 +758,47 @@
         },
         "summary": {
           "type": "string",
-          "description": "Summary"
+          "description": "The Summary"
         },
         "longSummary": {
           "type": "string",
-          "description": "LongSummary"
+          "description": "The LongSummary"
         },
         "privacyPolicyUrl": {
           "type": "string",
-          "description": "PrivacyPolicyUrl"
+          "description": "The PrivacyPolicyUrl"
         },
         "version": {
           "type": "string",
-          "description": "Version"
+          "description": "The Version"
         },
         "standardContractAmendmentsRevisionId": {
           "type": "string",
-          "description": "StandardContractAmendmentsRevisionId"
+          "description": "The StandardContractAmendmentsRevisionId"
         },
         "cspLegalTermsUri": {
           "type": "string",
-          "description": "CspLegalTermsUri"
+          "description": "The CspLegalTermsUri"
         },
         "productOwnershipSellingMotion": {
           "type": "string",
-          "description": "ProductOwnershipSellingMotion"
+          "description": "PThe roductOwnershipSellingMotion"
         },
         "videos": {
           "type": "array",
-          "description": "Videos",
+          "description": "The Videos",
           "items": {
             "$ref": "#/definitions/Video"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "isReseller": {
           "type": "boolean",
-          "description": "IsReseller"
+          "description": "The IsReseller"
         },
         "screenshots": {
           "type": "array",
-          "description": "Screenshots",
+          "description": "The Screenshots",
           "items": {
             "type": "string"
           }
@@ -827,7 +829,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Description"
+          "description": "The Description"
         },
         "ratingBuckets": {
           "type": "array",
@@ -853,19 +855,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlanSummary"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "legalTermsUri": {
-          "type": "string"
+          "type": "string",
+          "description": "The LegalTermsUri"
         },
         "legalTermsType": {
-          "type": "string"
+          "type": "string",
+          "description": "The legal terms type"
         },
         "supportUri": {
-          "type": "string"
+          "type": "string",
+          "description": "The support uri"
         },
         "links": {
           "type": "array",
+          "description": "The links",
           "items": {
             "$ref": "#/definitions/Link"
           }
@@ -958,18 +965,18 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "caption"
+          "description": "The caption"
         },
         "uri": {
           "type": "string",
-          "description": "uri"
+          "description": "The uri"
         },
         "videoPurpose": {
           "type": "string",
-          "description": "videoPurpose"
+          "description": "The videoPurpose"
         },
         "previewImage": {
-          "description": "previewImage",
+          "description": "The previewImage",
           "allOf": [
             {
               "$ref": "#/definitions/PreviewImage"
@@ -983,15 +990,15 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "caption"
+          "description": "The caption"
         },
         "uri": {
           "type": "string",
-          "description": "uri"
+          "description": "The uri"
         },
         "imagePurpose": {
           "type": "string",
-          "description": "imagePurpose"
+          "description": "The imagePurpose"
         }
       }
     },
@@ -1051,7 +1058,8 @@
           "description": "Display name of the plan"
         },
         "architectureType": {
-          "type": "string"
+          "type": "string",
+          "description": "The architecture type"
         },
         "metadata": {
           "description": "change this",
@@ -1093,35 +1101,42 @@
           "description": "Files related to the marketplace item",
           "items": {
             "$ref": "#/definitions/Artifact"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "description": "The summary"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "The description"
         },
         "skuId": {
-          "type": "string"
+          "type": "string",
+          "description": "The sku id"
         },
         "type": {
           "$ref": "#/definitions/PlanType"
         },
         "categoryIds": {
           "type": "array",
+          "description": "The category ids",
           "items": {
             "type": "string"
           }
         },
         "displayRank": {
-          "type": "string"
+          "type": "string",
+          "description": "The display rank"
         },
         "purchaseDurationDiscounts": {
           "type": "array",
           "description": "List of purchase duration discounts",
           "items": {
             "$ref": "#/definitions/PurchaseDurationDiscount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "leadGeneration": {
           "description": "Lead generation info",
@@ -1132,7 +1147,8 @@
           ]
         },
         "isPrivate": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The description"
         }
       }
     },
@@ -1155,18 +1171,19 @@
       "properties": {
         "generation": {
           "type": "string",
-          "description": "generation"
+          "description": "The generation"
         },
         "altStackReference": {
           "type": "string",
-          "description": "altStackReference"
+          "description": "The altStackReference"
         },
         "relatedSkus": {
           "type": "array",
-          "description": "relatedSkus",
+          "description": "The relatedSkus",
           "items": {
             "$ref": "#/definitions/PlanSkuRelation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1175,15 +1192,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name"
+          "description": "The Name"
         },
         "generation": {
           "type": "string",
-          "description": "Generation"
+          "description": "The Generation"
         },
         "identity": {
           "type": "string",
-          "description": "Identity"
+          "description": "The Identity"
         }
       }
     },
@@ -1241,11 +1258,11 @@
       "properties": {
         "duration": {
           "type": "string",
-          "description": "duration"
+          "description": "The duration"
         },
         "discountPercentage": {
           "type": "number",
-          "description": "discountPercentage",
+          "description": "The discountPercentage",
           "format": "double"
         }
       }
@@ -1255,7 +1272,7 @@
       "properties": {
         "productId": {
           "type": "string",
-          "description": "productId"
+          "description": "The productId"
         }
       }
     },
