@@ -26,14 +26,14 @@ These are the global settings for the search.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-06-23-preview
+tag: package-2022-08-17-preview
 ```
 
 ### Tag: package-2022-06-23-preview
 
-These settings apply only when `--tag=package-2022-06-23-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-08-17-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02-02'
+```yaml $(tag) == 'package-2022-08-17-preview'
 input-file:
-  - preview/2022-06-23-preview/search.json
+  - preview/2022-08-17-preview/search.json
 ```
