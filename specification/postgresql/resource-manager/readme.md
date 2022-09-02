@@ -60,17 +60,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
 ```
-### Tag: package-flexibleserver-2022-03-privatepreview
-
-These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-03-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
-```
 
 ### Tag: package-flexibleserver-2022-01-preview
 
