@@ -444,7 +444,19 @@
             "$ref": "#/parameters/Accept-Language"
           },
           {
-            "$ref": "#/parameters/Location"
+            "name": "location",
+            "in": "query",
+            "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "collectionFormat": "csv",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/View"
