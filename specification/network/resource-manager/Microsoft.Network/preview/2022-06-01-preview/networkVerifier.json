@@ -977,6 +977,71 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "NetworkVerifier"
+        ],
+        "summary": "Updates the specific Network Verifier resource",
+        "operationId": "NetworkVerifierPatch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkVerifierName",
+            "description": "The name of the Network Verifier resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Network Verifier resource object to create/update",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NetworkVerifier was updated",
+            "schema": {
+              "$ref": "#/definitions/NetworkVerifier"
+            }
+          },
+          "404": {
+            "description": "NetworkVerifier Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVerifierPatch": {
+            "$ref": "./examples/NetworkVerifierPatch.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "NetworkVerifier"
@@ -1070,9 +1135,6 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string"
-        },
-        "type": {
           "type": "string"
         },
         "ipTrafficProperties": {
@@ -1204,6 +1266,7 @@
     },
     "ErrorDetails": {
       "description": "Common error representation.",
+      "type": "object",
       "properties": {
         "innerError": {
           "type": "string"

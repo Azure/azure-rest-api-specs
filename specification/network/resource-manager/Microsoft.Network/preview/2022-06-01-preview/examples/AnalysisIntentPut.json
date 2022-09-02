@@ -9,7 +9,6 @@
     "parameters": {
       "name": "testAnalysisIntent",
       "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
-      "location": "eastus2euap",
       "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
       "properties": {
         "description": "This is a test Analysis Intent",
@@ -30,8 +29,7 @@
           ],
           "protocols": "TCP"
         }
-      },
-      "tags": {}
+      }
     }
   },
   "responses": {
@@ -40,7 +38,6 @@
         "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
         "properties": {
           "description": "This is a test Analysis Intent",
-          "type": null,
           "ipTrafficProperties": {
             "sourceIps": [
               "*"
@@ -61,21 +58,13 @@
           "destinationResourceId": "internet"
         },
         "name": "testAnalysisIntent",
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
-        "tags": {},
-        "location": "eastus2euap"
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent"
       }
     },
     "404": {
       "body": {
         "code": "404",
         "message": "Parent Network Verifier Not Found"
-      }
-    },
-    "409": {
-      "body": {
-        "code": "409",
-        "message": "Analysis Intent Already Exists. Update Not Supported."
       }
     }
   }
