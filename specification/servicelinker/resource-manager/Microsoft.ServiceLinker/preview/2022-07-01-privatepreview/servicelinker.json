@@ -34,6 +34,280 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns": {
+      "get": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connector_ListDryrun",
+        "description": "list dryrun jobs",
+        "x-ms-examples": {
+          "ConnectorDryrunList": {
+            "$ref": "./examples/ConnectorDryrunList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns/{dryrunName}": {
+      "get": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connector_GetDryrun",
+        "description": "get a dryrun job",
+        "x-ms-examples": {
+          "ConnectorDryrunGet": {
+            "$ref": "./examples/ConnectorDryrunGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connector_CreateDryrun",
+        "description": "create a dryrun job to do necessary check before actual creation",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunCreate": {
+            "$ref": "./examples/ConnectorDryrunCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "description": "dryrun resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "201": {
+            "description": "Long running operation",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connector_UpdateDryrun",
+        "description": "update a dryrun job to do necessary check before actual creation",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConnectorDryrunUpdate": {
+            "$ref": "./examples/ConnectorDryrunUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "description": "dryrun resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Connector"
+        ],
+        "operationId": "Connector_DeleteDryrun",
+        "description": "delete a dryrun job",
+        "x-ms-examples": {
+          "ConnectorDryrunDelete": {
+            "$ref": "./examples/ConnectorDryrunDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The job is deleted."
+          },
+          "204": {
+            "description": "Deleted. The job is not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/connectors": {
       "get": {
         "deprecated": false,
@@ -697,6 +971,250 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns": {
+      "get": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_ListDryrun",
+        "description": "list dryrun jobs",
+        "x-ms-examples": {
+          "ListDryrun": {
+            "$ref": "./examples/ListDryrun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/dryruns/{dryrunName}": {
+      "get": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_GetDryrun",
+        "description": "get a dryrun job",
+        "x-ms-examples": {
+          "GetDryrun": {
+            "$ref": "./examples/GetDryrun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_CreateDryrun",
+        "description": "create a dryrun job to do necessary check before actual creation",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PutDryrun": {
+            "$ref": "./examples/PutDryrun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "description": "dryrun resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "201": {
+            "description": "Long running operation",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_UpdateDryrun",
+        "description": "add a dryrun job to do necessary check before actual creation",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PatchDryrun": {
+            "$ref": "./examples/PatchDryrun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "description": "dryrun resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DryrunPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DryrunResource"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_DeleteDryrun",
+        "description": "delete a dryrun job",
+        "x-ms-examples": {
+          "DeleteDryrun": {
+            "$ref": "./examples/DeleteDryrun.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dryrunName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of dryrun.",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The job is deleted."
+          },
+          "204": {
+            "description": "Deleted. The job is not found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1605,6 +2123,229 @@
           "x-nullable": true,
           "type": "string",
           "description": "The key vault id to store secret"
+        }
+      }
+    },
+    "DryrunList": {
+      "description": "The list of dryrun.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "x-nullable": true,
+          "description": "The link used to get the next page of dryrun list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of dryrun.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DryrunResource"
+          }
+        }
+      }
+    },
+    "DryrunResource": {
+      "type": "object",
+      "description": "a dryrun job resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the dryrun job.",
+          "$ref": "#/definitions/DryrunProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DryrunPatch": {
+      "type": "object",
+      "description": "a dryrun job to be updated.",
+      "properties": {
+        "properties": {
+          "description": "The properties of the dryrun job.",
+          "$ref": "#/definitions/DryrunProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DryrunProperties": {
+      "description": "The properties of the dryrun job",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "The parameters of the dryrun",
+          "$ref": "#/definitions/DryrunParameters"
+        },
+        "prerequisiteResults": {
+          "readOnly": true,
+          "description": "the result of the dryrun",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DryrunPrerequisiteResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "operationPreviews": {
+          "readOnly": true,
+          "description": "the preview of the operations for creation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DryrunOperationPreview"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state. "
+        }
+      }
+    },
+    "DryrunActionName": {
+      "description": "The name of action for you dryrun job.",
+      "type": "string",
+      "enum": [
+        "createOrUpdate"
+      ],
+      "x-ms-enum": {
+        "name": "DryrunActionName",
+        "modelAsString": true
+      }
+    },
+    "DryrunParameters": {
+      "description": "The parameters of the dryrun",
+      "discriminator": "actionName",
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "$ref": "#/definitions/DryrunActionName"
+        }
+      },
+      "required": [
+        "actionName"
+      ]
+    },
+    "CreateOrUpdateDryrunParameters": {
+      "x-ms-discriminator-value": "createOrUpdate",
+      "type": "object",
+      "description": "The dryrun parameters for creation or update a linker",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DryrunParameters"
+        },
+        {
+          "$ref": "#/definitions/LinkerProperties"
+        }
+      ]
+    },
+    "DryrunPrerequisiteResultType": {
+      "description": "The type of dryrun result.",
+      "type": "string",
+      "enum": [
+        "basicError",
+        "permissionsMissing"
+      ],
+      "x-ms-enum": {
+        "name": "DryrunPrerequisiteResultType",
+        "modelAsString": true
+      }
+    },
+    "DryrunPrerequisiteResult": {
+      "description": "A result of dryrun",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DryrunPrerequisiteResultType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "BasicErrorDryrunPrerequisiteResult": {
+      "x-ms-discriminator-value": "basicError",
+      "description": "The represent of basic error",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DryrunPrerequisiteResult"
+        }
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      }
+    },
+    "PermissionsMissingDryrunPrerequisiteResult": {
+      "x-ms-discriminator-value": "permissionsMissing",
+      "description": "The represent of missing permissions",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DryrunPrerequisiteResult"
+        }
+      ],
+      "properties": {
+        "scope": {
+          "description": "The permission scope",
+          "type": "string"
+        },
+        "permissions": {
+          "description": "The permission list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommendedRole": {
+          "description": "The recommended role to resolve permissions missing",
+          "type": "string"
+        }
+      }
+    },
+    "DryrunOperationPreview": {
+      "description": "The preview of the operations for creation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The operation name",
+          "type": "string"
+        },
+        "operationType": {
+          "description": "The operation type",
+          "type": "string",
+          "enum": [
+            "configConnection",
+            "configNetwork",
+            "configAuth"
+          ],
+          "x-ms-enum": {
+            "name": "DryrunPreviewOperationType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The description of the operation",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action defined by RBAC, refer https://docs.microsoft.com/azure/role-based-access-control/role-definitions#actions-format",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The scope of the operation, refer https://docs.microsoft.com/azure/role-based-access-control/scope-overview",
+          "type": "string"
         }
       }
     }
