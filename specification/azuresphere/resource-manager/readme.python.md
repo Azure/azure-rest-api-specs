@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.azuresphere
   package-name: azure-mgmt-azuresphere
-  package-version: 2021-02-01-preview
+  package-version: 2022-09-01-preview
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

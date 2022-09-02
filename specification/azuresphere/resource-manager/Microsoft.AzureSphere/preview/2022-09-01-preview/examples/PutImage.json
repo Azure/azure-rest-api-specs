@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "imageId": "default",
+    "api-version": "2022-02-01-privatepreview",
+    "resource": {
+      "properties": {
+        "uri": "http://url.of/the/image"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "The Azure Sphere image uploaded successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/images/default",
+        "name": "Image1",
+        "type": "Microsoft.AzureSphere/catalogs/images"
+      }
+    },
+    "201": {
+      "description": "The Azure Sphere image requested to be uploaded successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/images/default",
+        "name": "Image1",
+        "type": "Microsoft.AzureSphere/catalogs/images"
+      }
+    }
+  }
+}

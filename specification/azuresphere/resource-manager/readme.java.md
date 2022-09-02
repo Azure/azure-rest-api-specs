@@ -16,18 +16,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azuresphere
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2021-02-01-preview
+  - tag: package-2022-09-01-preview
 ```
 
-### Tag: package-2021-02-01-preview and java
+### Tag: package-2022-09-01-preview and java
 
-These settings apply only when `--tag=package-2021-02-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2022-09-01-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2021-02-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2022-09-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuresphere.v2021_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuresphere/mgmt-v2021_02_01_preview
+  namespace: com.microsoft.azure.management.azuresphere.v2022-09-01-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuresphere/mgmt-v2022-09-01-preview
 regenerate-manager: true
 generate-interface: true
 ```
