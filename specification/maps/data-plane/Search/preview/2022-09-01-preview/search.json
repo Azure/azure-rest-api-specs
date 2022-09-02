@@ -57,9 +57,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "default": 5,
       "minimum": 1,
-      "maximum": 20,
       "x-ms-parameter-location": "method"
     },
     "Accept-Language": {
@@ -676,19 +674,16 @@
         "summary": {
           "description": "Summary for the batch request",
           "type": "object",
-          "readOnly": true,
           "properties": {
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
               "type": "integer",
-              "format": "int32",
-              "readOnly": true
+              "format": "int32"
             },
             "totalRequests": {
               "description": "Total number of requests in the batch",
               "type": "integer",
-              "format": "int32",
-              "readOnly": true
+              "format": "int32"
             }
           }
         },
@@ -736,8 +731,7 @@
           "properties": {
             "type": {
               "type": "string",
-              "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection",
-              "readOnly": true
+              "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection"
             },
             "confidence": {
               "$ref": "#/definitions/Confidence"
@@ -785,18 +779,15 @@
       "properties": {
         "addressLine": {
           "description": "AddressLine that includes Street Name and Number",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "locality": {
           "description": "locality property",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "neighborhood": {
           "description": "neighborhood property",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "adminDistricts": {
           "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
@@ -817,28 +808,24 @@
         },
         "postalCode": {
           "description": "Postal Code property",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "countryRegion": {
           "type": "object",
           "properties": {
             "ISO": {
               "description": "ISO of country/region",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "name": {
               "description": "name of country/region",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             }
           }
         },
         "formattedAddress": {
           "description": "Formatted Address property",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
