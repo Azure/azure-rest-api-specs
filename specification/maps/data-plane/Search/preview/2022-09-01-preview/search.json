@@ -940,16 +940,17 @@
           "description": "A URL that lists many of the data providers for Azure Maps and their related copyright information.",
           "type": "string"
         },
-        "sourcesByGeometriesArrayIndex": {
-          "description": "A dictionary of various data providers used to create the data in the result and the associated copyright information for them. A key in the dictionary is a geometry index in the GeometryCollection object.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/BoundaryCopyright"
+        "geometriesCopyright": {
+          "description": "A collection of copyright information for each geometry of the Boundary object in the same order they appear.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeometryCopyright"
           }
         }
       }
     },
-    "BoundaryCopyright": {
+    "GeometryCopyright": {
+      "description": "Copyright information of a geometry of a Boundary object.",
       "type": "object",
       "properties": {
         "sourceName": {
