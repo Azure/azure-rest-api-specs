@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: Deployments
+    description: Microsoft.Resources/deployments
+    steps:
+      - step: ResourceGroup_CalculateTemplateHash
+        exampleFile: ../examples/CalculateTemplateHash.json
+
+      - step: Deployments_Create
+        exampleFile: ../examples/PutDeploymentResourceGroup.json
+        requestUpdate:
+          - remove: /parameters/properties/templateLink/queryString
+          - replace: /parameters/properties/templateLink/uri
+            value: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json
+
+      - step: Deployments_WhatIf
+        exampleFile: ../examples/PostDeploymentWhatIfOnResourceGroup.json
+        requestUpdate:
+          - replace: /parameters/properties/templateLink
+            value: {}
+          - add: /parameters/properties/templateLink/uri
+            value: https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json
