@@ -53,10 +53,11 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Configuration.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Databases.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
 ```
 ### Tag: package-flexibleserver-2022-03-privatepreview

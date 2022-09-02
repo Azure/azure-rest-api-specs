@@ -37,6 +37,17 @@ batch:
   - tag: package-2017-12-01
 ```
 
+### Tag: package-flexibleserver-2022-03-preview and go
+
+These settings apply only when `--tag=package-flexibleserver-2022-03-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-03-preview' && $(go)
+rpname: postgresql
+namespace: postgresqlflexibleservers
+output-folder: $(go-sdk-folder)/services/$(rpname)/mgmt/2022-03-08-preview/$(namespace)
+```
+
 ### Tag: package-flexibleserver-2022-03-privatepreview and go
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview --go` is specified on the command line.
