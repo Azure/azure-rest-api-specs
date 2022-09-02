@@ -1011,7 +1011,7 @@
             "name": "body",
             "description": "The Network Verifier resource object to create/update",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifier"
+              "$ref": "#/definitions/NetworkVerifierUpdate"
             }
           }
         ],
@@ -1019,7 +1019,7 @@
           "200": {
             "description": "NetworkVerifier was updated",
             "schema": {
-              "$ref": "#/definitions/NetworkVerifier"
+              "$ref": "#/definitions/NetworkVerifierUpdate"
             }
           },
           "404": {
@@ -1380,6 +1380,20 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "NetworkVerifierUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkVerifierProperties"
         }
       }
     },
