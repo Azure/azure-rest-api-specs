@@ -67,7 +67,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AdministratorPropertiesForAdd"
+              "$ref": "#/definitions/ActiveDirectoryAdministratorAdd"
             },
             "description": "The required parameters for adding an active directory administrator for a server."
           }
@@ -235,6 +235,17 @@
     }
   },
   "definitions": {
+    "ActiveDirectoryAdministratorAdd": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorPropertiesForAdd",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the active directory administrator."
+        }
+      },
+      "description": "Represents an Active Directory administrator."
+    },
     "AdministratorPropertiesForAdd": {
       "type": "object",
       "properties": {
