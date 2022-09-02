@@ -281,6 +281,48 @@
         }
       }
     },
+    "/providers/Microsoft.Support/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "description": "Check the availability of a resource name. This API should be used to check the uniqueness of the name for support ticket creation for the selected subscription.",
+        "operationId": "SupportTicketsNoSubscription_CheckNameAvailability",
+        "x-ms-examples": {
+          "Checks whether name is available for SupportTicket resource": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "checkNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets": {
       "get": {
         "tags": [
@@ -338,11 +380,86 @@
           "List support tickets created on or after a certain date and in open state for a subscription": {
             "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInOpenStateBySubscription.json"
           },
+          "List support tickets in updating state for a subscription": {
+            "$ref": "./examples/ListSupportTicketsInUpdatingStateBySubscription.json"
+          },
+          "List support tickets created on or after a certain date and in updating state for a subscription": {
+            "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInUpdatingStateBySubscription.json"
+          },
           "List support tickets with a certain service id for a subscription": {
             "$ref": "./examples/ListSupportTicketsServiceIdEqualsForSubscription.json"
           },
           "List support tickets with a certain problem classification id for a subscription": {
             "$ref": "./examples/ListSupportTicketsProblemClassificationIdEqualsForSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/supportTickets": {
+      "get": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "description": "Lists all the support tickets. <br/><br/>You can also filter the support tickets by <i>Status</i>, <i>CreatedDate</i>, , <i>ServiceId</i>, and <i>ProblemClassificationId</i> using the $filter parameter. Output will be a paged result with <i>nextLink</i>, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
+        "operationId": "SupportTicketsNoSubscription_List",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of values to return in the collection. Default is 25 and max is 100.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. We support 'odata v4.0' filter semantics. <a target='_blank' href='https://docs.microsoft.com/odata/concepts/queryoptions-overview'>Learn more</a> <br/><i>Status</i> , <i>ServiceId</i>, and <i>ProblemClassificationId</i> filters can only be used with 'eq' operator. For <i>CreatedDate</i> filter, the supported operators are 'gt' and 'ge'. When using both filters, combine them using the logical 'AND'."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved support tickets.",
+            "schema": {
+              "$ref": "#/definitions/SupportTicketsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List support tickets for a subscription": {
+            "$ref": "./examples/ListSupportTickets.json"
+          },
+          "List support tickets in open state for a subscription": {
+            "$ref": "./examples/ListSupportTicketsInOpenState.json"
+          },
+          "List support tickets created on or after a certain date and in open state for a subscription": {
+            "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInOpenState.json"
+          },
+          "List support tickets in updating state for a subscription": {
+            "$ref": "./examples/ListSupportTicketsInUpdatingState.json"
+          },
+          "List support tickets created on or after a certain date and in updating state for a subscription": {
+            "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInUpdatingState.json"
+          },
+          "List support tickets with a certain service id for a subscription": {
+            "$ref": "./examples/ListSupportTicketsServiceIdEquals.json"
+          },
+          "List support tickets with a certain problem classification id for a subscription": {
+            "$ref": "./examples/ListSupportTicketsProblemClassificationIdEquals.json"
           }
         }
       }
@@ -393,7 +510,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "This API allows you to update the severity level, ticket status, and your contact information in the support ticket.<br/><br/>Note: The severity levels cannot be changed if a support ticket is actively being worked upon by an Azure support engineer. In such a case, contact your support engineer to request severity update by adding a new communication using the Communications API.<br/><br/>Changing the ticket status to _closed_ is allowed only on an unassigned case. When an engineer is actively working on the ticket, send your ticket closure request by sending a note to your engineer.",
+        "description": "This API allows you to update the severity level, ticket status, advanced diagnostic consent and your contact information in the support ticket.<br/><br/>Note: The severity levels cannot be changed if a support ticket is actively being worked upon by an Azure support engineer. In such a case, contact your support engineer to request severity update by adding a new communication using the Communications API.",
         "operationId": "SupportTickets_Update",
         "parameters": [
           {
@@ -442,6 +559,9 @@
           },
           "Update status of a support ticket": {
             "$ref": "./examples/UpdateStatusOfSupportTicketForSubscription.json"
+          },
+          "Update advanced diagnostic consent of a support ticket": {
+            "$ref": "./examples/UpdateAdvancedDiagnosticConsentOfSupportTicketForSubscription.json"
           }
         }
       },
@@ -551,6 +671,167 @@
         }
       }
     },
+    "/providers/Microsoft.Support/supportTickets/{supportTicketName}": {
+      "get": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "description": "Gets details for a specific support ticket. Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
+        "operationId": "SupportTicketsNoSubscription_Get",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved support ticket.",
+            "schema": {
+              "$ref": "#/definitions/SupportTicketDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of a ticket": {
+            "$ref": "./examples/GetSupportTicketDetails.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "description": "This API allows you to update the severity level, ticket status, and your contact information in the support ticket.<br/><br/>Note: The severity levels cannot be changed if a support ticket is actively being worked upon by an Azure support engineer. In such a case, contact your support engineer to request severity update by adding a new communication using the Communications API.",
+        "operationId": "SupportTicketsNoSubscription_Update",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateSupportTicket",
+            "in": "body",
+            "description": "UpdateSupportTicket object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSupportTicket"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated support ticket.",
+            "schema": {
+              "$ref": "#/definitions/SupportTicketDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update severity of a support ticket": {
+            "$ref": "./examples/UpdateSeverityOfSupportTicket.json"
+          },
+          "Update contact details of a support ticket": {
+            "$ref": "./examples/UpdateContactDetailsOfSupportTicket.json"
+          },
+          "Update status of a support ticket": {
+            "$ref": "./examples/UpdateStatusOfSupportTicket.json"
+          },
+          "Update advanced diagnostic consent of a support ticket": {
+            "$ref": "./examples/UpdateAdvancedDiagnosticConsentOfSupportTicket.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SupportTickets"
+        ],
+        "description": "Creates a new support ticket for Billing, and Subscription Management issues. Learn the [prerequisites](https://aka.ms/supportAPI) required to create a support ticket.<br/><br/>Always call the Services and ProblemClassifications API to get the most recent set of services and problem categories required for support ticket creation.<br/><br/>Adding attachments is not currently supported via the API. To add a file to an existing support ticket, visit the [Manage support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/managesupportrequest) page in the Azure portal, select the support ticket, and use the file upload control to add a new file.<br/><br/>Providing consent to share diagnostic information with Azure support is currently not supported via the API. The Azure support engineer working on your ticket will reach out to you for consent if your issue requires gathering diagnostic information from your Azure resources.<br/><br/>",
+        "operationId": "SupportTicketsNoSubscription_Create",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createSupportTicketParameters",
+            "in": "body",
+            "description": "Support ticket request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SupportTicketDetails"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - SupportTicket created successfully.",
+            "schema": {
+              "$ref": "#/definitions/SupportTicketDetails"
+            }
+          },
+          "202": {
+            "description": "Accepted, SupportTicket will be created asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a ticket for Billing related issues": {
+            "$ref": "./examples/CreateBillingSupportTicket.json"
+          },
+          "Create a ticket for Subscription Management related issues": {
+            "$ref": "./examples/CreateSubMgmtSupportTicket.json"
+          },
+          "Create a ticket for Technical issue related to a specific resource": {
+            "$ref": "./examples/CreateTechnicalSupportTicket.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/checkNameAvailability": {
       "post": {
         "tags": [
@@ -582,6 +863,55 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/supportTickets/{supportTicketName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Communications"
+        ],
+        "description": "Check the availability of a resource name. This API should be used to check the uniqueness of the name for adding a new communication to the support ticket.",
+        "operationId": "CommunicationsNoSubscription_CheckNameAvailability",
+        "x-ms-examples": {
+          "Checks whether name is available for Communication resource": {
+            "$ref": "./examples/CheckNameAvailabilityForNoSubscriptionSupportTicketCommunication.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "checkNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -666,6 +996,70 @@
           },
           "List web communication created on or after a specific date for a subscription support ticket": {
             "$ref": "./examples/ListWebCommunicationsForSubscriptionSupportTicketCreatedOnOrAfter.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/supportTickets/{supportTicketName}/communications": {
+      "get": {
+        "tags": [
+          "Communications"
+        ],
+        "description": "Lists all communications (attachments not included) for a support ticket. <br/></br> You can also filter support ticket communications by _CreatedDate_ or _CommunicationType_ using the $filter parameter. The only type of communication supported today is _Web_. Output will be a paged result with _nextLink_, using which you can retrieve the next set of Communication results. <br/><br/>Support ticket data is available for 18 months after ticket creation. If a ticket was created more than 18 months ago, a request for data might cause an error.",
+        "operationId": "SupportTicketCommunicationsNoSubscription_List",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of values to return in the collection. Default is 10 and max is 10.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. You can filter by communicationType and createdDate properties. CommunicationType supports Equals ('eq') operator and createdDate supports Greater Than ('gt') and Greater Than or Equals ('ge') operators. You may combine the CommunicationType and CreatedDate filters by Logical And ('and') operator."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved communications for a support ticket.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List communications for a no-subscription support ticket": {
+            "$ref": "./examples/ListCommunicationsForSupportTicket.json"
+          },
+          "List web communications for a no-subscription support ticket": {
+            "$ref": "./examples/ListWebCommunicationsForSupportTicket.json"
+          },
+          "List web communication created on or after a specific date for a no-subscription support ticket": {
+            "$ref": "./examples/ListWebCommunicationsForSupportTicketCreatedOnOrAfter.json"
           }
         }
       }
@@ -780,6 +1174,305 @@
         "x-ms-examples": {
           "AddCommunicationToSubscriptionTicket": {
             "$ref": "./examples/CreateSupportTicketCommunication.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/supportTickets/{supportTicketName}/communications/{communicationName}": {
+      "get": {
+        "tags": [
+          "Communications"
+        ],
+        "description": "Returns communication details for a support ticket.",
+        "operationId": "CommunicationsNoSubscription_Get",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "communicationName",
+            "in": "path",
+            "description": "Communication name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved communication details.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get communication details for a no-subscription support ticket": {
+            "$ref": "./examples/GetCommunicationDetailsForSupportTicket.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Communications"
+        ],
+        "description": "Adds a new customer communication to an Azure support ticket.",
+        "operationId": "CommunicationsNoSubscription_Create",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "communicationName",
+            "in": "path",
+            "description": "Communication name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createCommunicationParameters",
+            "in": "body",
+            "description": "Communication object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationDetails"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Communication created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationDetails"
+            }
+          },
+          "202": {
+            "description": "Accepted - Communication will be created asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "AddCommunicationToNoSubscriptionTicket": {
+            "$ref": "./examples/CreateNoSubscriptionSupportTicketCommunication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/chatTranscripts": {
+      "get": {
+        "tags": [
+          "ChatTranscripts"
+        ],
+        "description": "Lists all chat transcripts for a support ticket under subscription",
+        "operationId": "ChatTranscripts_List",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved chat transcripts for a support ticket under a subscription.",
+            "schema": {
+              "$ref": "#/definitions/ChatTranscriptsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List communications for a subscription support ticket": {
+            "$ref": "./examples/ListChatTranscriptsForSubscriptionSupportTicket.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/supportTickets/{supportTicketName}/chatTranscripts": {
+      "get": {
+        "tags": [
+          "ChatTranscripts"
+        ],
+        "description": "Lists all chat transcripts for a support ticket",
+        "operationId": "SupportTicketChatTranscriptsNoSubscription_List",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved chat transcripts for a support ticket.",
+            "schema": {
+              "$ref": "#/definitions/ChatTranscriptsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List communications for a no-subscription support ticket": {
+            "$ref": "./examples/ListChatTranscriptsForSupportTicket.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/chatTranscripts/{chatTranscriptName}": {
+      "get": {
+        "tags": [
+          "ChatTranscripts"
+        ],
+        "description": "Returns chatTranscript details for a support ticket under a subscription.",
+        "operationId": "ChatTranscripts_Get",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chatTranscriptName",
+            "in": "path",
+            "description": "ChatTranscript name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved chat transcript details for a subscription ticket.",
+            "schema": {
+              "$ref": "#/definitions/ChatTranscriptDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get chat transcript details for a subscription support ticket": {
+            "$ref": "./examples/GetchatTranscriptDetailsForSubscriptionSupportTicket.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/supportTickets/{supportTicketName}/chatTranscripts/{chatTranscriptName}": {
+      "get": {
+        "tags": [
+          "chatTranscripts"
+        ],
+        "description": "Returns chatTranscript details for a no subscription support ticket.",
+        "operationId": "ChatTranscriptsNoSubscription_Get",
+        "parameters": [
+          {
+            "name": "supportTicketName",
+            "in": "path",
+            "description": "Support ticket name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chatTranscriptName",
+            "in": "path",
+            "description": "ChatTranscript name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved chat transcript details.",
+            "schema": {
+              "$ref": "#/definitions/ChatTranscriptDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get chat transcript details for a subscription support ticket": {
+            "$ref": "./examples/GetchatTranscriptDetailsForSupportTicket.json"
           }
         }
       }
@@ -1183,6 +1876,18 @@
           "description": "Indicates if this requires a 24x7 response from Azure.",
           "type": "boolean"
         },
+        "advancedDiagnosticConsent": {
+          "description": "Advanced diagnostic consent to be updated on the support ticket.",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Consent",
+            "modelAsString": true
+          }
+        },
         "contactDetails": {
           "$ref": "#/definitions/ContactProfile",
           "description": "Contact information of the user requesting to create a support ticket."
@@ -1533,6 +2238,119 @@
         "contactDetails": {
           "$ref": "#/definitions/UpdateContactProfile",
           "description": "Contact details to be updated on the support ticket."
+        },
+        "advancedDiagnosticConsent": {
+          "description": "Advanced diagnostic consent to be updated on the support ticket.",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Consent",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ChatTranscriptsListResult": {
+      "description": "Collection of Chat Transcripts resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Chat Transcripts resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatTranscriptDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of Chat Transcripts resources.",
+          "type": "string"
+        }
+      }
+    },
+    "ChatTranscriptDetails": {
+      "x-ms-azure-resource": true,
+      "description": "Object that represents a Chat Transcript resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the resource 'Microsoft.Support/chatTranscripts'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "properties": {
+            "communications": {
+              "description": "List of chat transcript communication resources.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ChatTranscriptDetailsProperties"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "type": "object",
+          "description": "List of chat transcript communication resources."
+        }
+      }
+    },
+    "ChatTranscriptDetailsProperties": {
+      "description": "Describes the properties of a Chat Transcript Details resource.",
+      "required": [
+        "body"
+      ],
+      "type": "object",
+      "properties": {
+        "communicationType": {
+          "description": "Communication type.",
+          "enum": [
+            "web"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TranscriptCommunicationType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "communicationDirection": {
+          "description": "Direction of communication.",
+          "enum": [
+            "inbound",
+            "outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CommunicationDirection",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "sender": {
+          "description": "Name of the sender.",
+          "type": "string"
+        },
+        "body": {
+          "description": "Body of the communication.",
+          "type": "string"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "description": "Time in UTC (ISO 8601 format) when the communication was created.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
