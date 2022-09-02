@@ -439,6 +439,66 @@
       }
     }
   },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
+    "post": {
+      "tags": [
+          "AzureFirewalls"
+      ],
+      "operationId": "AzureFirewalls_PacketCapture",
+      "description": "Runs a packet capture on AzureFirewall.",
+      "parameters": [
+      {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the resource group."
+      },
+      {
+        "name": "azureFirewallName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the Azure Firewall."
+      },
+      {
+        "name": "parameters",
+        "in": "body",
+        "required": true,
+        "schema": {
+            "$ref": "./network.json#/definitions/FirewallPacketCaptureParameters"
+        },
+        "description": "Parameters supplied to update azure firewall tags."
+        },
+        {
+        "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+        "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "Accepted and the operation will complete asynchronously."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "./network.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Run Azure Firewall Packet Capture": {
+          "$ref": "./examples/AzureFirewallPacketCapture.json"
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      }
+    }
+  },
   "definitions": {
     "AzureFirewallIPConfigurationPropertiesFormat": {
       "properties": {
@@ -1148,6 +1208,89 @@
         }
       },
       "description": "List of SNAT IP Prefixes learnt by firewall to not SNAT"
+    },
+    "FirewallPacketCaptureParameters": {
+      "properties": {
+        "durationInSeconds": {
+            "type": "int",
+            "description": "Duration of packet capture in seconds."
+        }, 
+        "numberOfPacketsToCapture": {
+            "type": "int",
+            "description": "Number of packets to be captured."
+        },
+        "SASURL": {
+            "type": "string",
+            "description": "Upload capture location"
+        },
+        "fileName": {
+            "type": "string",
+            "description": "Name of file to be uploaded to SASURL"
+        }, 
+        "fileName": {
+            "type": "string",
+            "description": "Name of file to be uploaded to SASURL"
+        },
+        "flags": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureFlags",
+            "description": "The packet flag type to be captured."
+        }, 
+        "filterRules ": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AzureFirewallCaptureRule"
+            },
+            "description": "Rules to filter packet captures."
+        }
+      },
+      "description": "Packet capture parameters on azure firewall."
+    },
+    "AzureFirewallPacketCaptureFlags": {
+      "properties": {
+        "type": {
+          "description": "Flags to capture",
+          "$ref": "#/definitions/AzureFirewallPacketCaptureFlagsType"
+        }
+      },
+      "description": "Properties of the AzureFirewallRCAction."
+    },
+    "AzureFirewallPacketCaptureFlagsType": {
+      "type": "string",
+      "description": "The flags type to be captured.",
+      "enum": [
+        "tcp-fin", 
+        "tcp-syn",
+        "tcp-rst", 
+        "tcp-push",
+        "tcp-act",
+        "tcp-urg"
+      ]
+    },
+    "AzureFirewallCaptureRule": {
+      "properties": {
+        "source": {
+          "type": "array",
+          "description": "List of source IP addresses/subnets to be captured.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destination": {
+          "type": "array",
+          "description": "List of destination IP addresses/subnets to be captured.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Ports": {
+          "type": "array",
+          "description": "List of ports to be captured.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Group of src/dest ips and ports to be captured."
     }
   }
 }
