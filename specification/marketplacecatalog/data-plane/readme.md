@@ -44,4 +44,4 @@ These settings apply only when `--tag=package-2022-08-17-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-08-17-preview'
 input-file:
-  - Search/previe/2022-08-17-preview/search.json
+  - Search/preview/2022-08-17-preview/search.json
