@@ -4056,6 +4056,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/deletedProtectionContainers": {
+      "get": {
+        "tags": [
+          "SoftDeletedContainers"
+        ],
+        "description": "Lists the soft deleted containers registered to Recovery Services Vault.",
+        "operationId": "DeletedProtectionContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/BMSContainerQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Backup Protection Containers": {
+            "$ref": "./examples/AzureStorage/SoftDeletedContainers_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSecurityPIN": {
       "post": {
         "tags": [
@@ -8426,6 +8482,10 @@
         "policyName": {
           "description": "Name of the policy used for protection",
           "type": "string"
+        },
+        "softDeleteRetentionPeriod": {
+          "description": "Soft delete retention period in days",
+          "type": "integer"
         }
       },
       "discriminator": "protectedItemType"
