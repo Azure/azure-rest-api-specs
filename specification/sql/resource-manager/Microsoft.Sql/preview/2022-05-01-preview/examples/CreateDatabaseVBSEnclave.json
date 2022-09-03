@@ -7,14 +7,8 @@
     "api-version": "2022-05-01-preview",
     "parameters": {
       "location": "southeastasia",
-      "sku": {
-        "name": "S0",
-        "tier": "Standard"
-      },
       "properties": {
-        "createMode": "Secondary",
-        "secondaryType": "Standby",
-        "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-NorthEurope/providers/Microsoft.Sql/servers/testsvr1/databases/testdb"
+        "enclaveType": "VBS"
       }
     }
   },
@@ -38,18 +32,16 @@
             "capacity": 10
           },
           "creationDate": "2017-06-07T04:41:33.937Z",
-          "currentBackupStorageRedundancy": "Geo",
           "currentServiceObjectiveName": "S0",
+          "currentBackupStorageRedundancy": "Geo",
           "defaultSecondaryLocation": "North Europe",
           "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
           "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
           "readScale": "Disabled",
           "requestedBackupStorageRedundancy": "Geo",
           "requestedServiceObjectiveName": "S0",
-          "secondaryType": "Standby",
-          "isLedgerOn": false,
-          "isInfraEncryptionEnabled": false,
-          "zoneRedundant": false
+          "zoneRedundant": false,
+          "enclaveType": "VBS"
         },
         "location": "southeastasia",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
@@ -76,18 +68,16 @@
             "capacity": 10
           },
           "creationDate": "2017-06-07T04:41:33.937Z",
-          "currentBackupStorageRedundancy": "Geo",
+          "currentBackupStorageRedundancy": "Zone",
           "currentServiceObjectiveName": "S0",
           "defaultSecondaryLocation": "North Europe",
           "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
           "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
           "readScale": "Disabled",
-          "requestedBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Zone",
           "requestedServiceObjectiveName": "S0",
-          "secondaryType": "Standby",
-          "isLedgerOn": false,
-          "isInfraEncryptionEnabled": false,
-          "zoneRedundant": false
+          "zoneRedundant": false,
+          "enclaveType": "VBS"
         },
         "location": "southeastasia",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
