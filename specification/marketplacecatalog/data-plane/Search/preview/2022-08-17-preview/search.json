@@ -1079,7 +1079,7 @@
           "type": "string",
           "description": "Display name of the plan"
         },
-        "architectureType": {
+        "vmArchitectureType": {
           "type": "string",
           "description": "The architecture type"
         },
@@ -1191,6 +1191,7 @@
     },
     "PlanMetadata": {
       "type": "object",
+      "description": "The plan metadata",
       "properties": {
         "generation": {
           "type": "string",
@@ -1213,6 +1214,23 @@
     "PlanSkuRelation": {
       "type": "object",
       "description": "The plan sku relation",
+      "properties": {
+        "sku": {
+          "description": "The Sku",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RelatedSku"
+            }
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Relation Type"
+        }
+      }
+    },
+    "RelatedSku": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
