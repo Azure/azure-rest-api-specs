@@ -789,13 +789,51 @@
         },
         "retentionInDaysAsDefault": {
           "readOnly": true,
-          "type": "boolean",
-          "description": "True - Value originates from workspace retention in days, False - Customer specific."
+          "type": "string",
+          "description": "True - Value originates from workspace retention in days, False - Customer specific.",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "retentionInDaysAsDefault",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Value originates from workspace retention in days."
+              },
+              {
+                "value": "False",
+                "description": "Value is customer specific."
+              }
+            ]
+          }
         },
         "totalRetentionInDaysAsDefault": {
           "readOnly": true,
-          "type": "boolean",
-          "description": "True - Value originates from retention in days, False - Customer specific."
+          "type": "string",
+          "description": "True - Value originates from retention in days, False - Customer specific.",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "totalRetentionInDaysAsDefault",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Value originates from retention in days."
+              },
+              {
+                "value": "False",
+                "description": "Value is customer specific."
+              }
+            ]
+          }
         }
       },
       "description": "Table properties."
