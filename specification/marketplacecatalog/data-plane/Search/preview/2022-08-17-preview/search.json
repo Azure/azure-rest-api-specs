@@ -583,7 +583,7 @@
     },
     "RatingBucket": {
       "type": "string",
-      "description": "",
+      "description": "The rating bucket",
       "enum": [
         "AboveOne",
         "AboveTwo",
@@ -597,7 +597,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "",
+      "description": "The vm security type",
       "enum": [
         "None",
         "Trusted",
@@ -610,9 +610,11 @@
     },
     "FacetsItem": {
       "type": "object",
+      "description": "The facets item",
       "properties": {
         "facetValues": {
           "type": "object",
+          "description": "The facet values",
           "additionalProperties": {
             "$ref": "#/definitions/FacetValue"
           }
@@ -621,6 +623,7 @@
     },
     "FacetValue": {
       "type": "object",
+      "description": "The facet value",
       "properties": {
         "count": {
           "type": "integer",
@@ -640,6 +643,7 @@
         },
         "results": {
           "type": "array",
+          "description": "The results",
           "items": {
             "$ref": "#/definitions/ProductSummary"
           },
@@ -647,9 +651,11 @@
         },
         "totalCount": {
           "type": "integer",
+          "description": "The total count",
           "format": "int64"
         },
         "showingResultsFor": {
+          "description": "The showing results for",
           "type": "string"
         },
         "nextLink": {
@@ -706,6 +712,7 @@
         },
         "badges": {
           "type": "array",
+          "description": "The badges",
           "items": {
             "$ref": "#/definitions/Badge"
           }
@@ -805,26 +812,32 @@
         },
         "vmImageGenerations": {
           "type": "array",
+          "description": "The vm image generations",
           "items": {
             "type": "string"
           }
         },
         "vmArchitectureTypes": {
           "type": "array",
+          "description": "The vm architecture types",
           "items": {
             "type": "string"
           }
         },
         "smallIconUri": {
+          "description": "The small icon uri",
           "type": "string"
         },
         "mediumIconUri": {
+          "description": "The medium icon uri",
           "type": "string"
         },
         "largeIconUri": {
+          "description": "The large icon uri",
           "type": "string"
         },
         "wideIconUri": {
+          "description": "The wide icon uri",
           "type": "string"
         },
         "description": {
@@ -833,15 +846,18 @@
         },
         "ratingBuckets": {
           "type": "array",
+          "description": "The rating buckets",
           "items": {
             "$ref": "#/definitions/RatingBucket"
           }
         },
         "ratingAverage": {
           "type": "number",
+          "description": "The rating average",
           "format": "double"
         },
         "startingPrice": {
+          "description": "The starting price",
           "$ref": "#/definitions/MarketStartPrice"
         },
         "linkedAddIns": {
@@ -853,6 +869,7 @@
         },
         "plans": {
           "type": "array",
+          "description": "The plans",
           "items": {
             "$ref": "#/definitions/PlanSummary"
           },
@@ -881,7 +898,7 @@
     },
     "AzureBenefit": {
       "type": "string",
-      "description": "",
+      "description": "The azure benefit",
       "enum": [
         "Eligible",
         "NotEligible"
@@ -893,7 +910,7 @@
     },
     "Badge": {
       "type": "string",
-      "description": "",
+      "description": "The badge",
       "enum": [
         "PreferredSolution",
         "PowerBICertified",
@@ -906,7 +923,7 @@
     },
     "PublisherType": {
       "type": "string",
-      "description": "",
+      "description": "The publisher type",
       "enum": [
         "Microsoft",
         "ThirdParty"
@@ -918,7 +935,7 @@
     },
     "PublishingStage": {
       "type": "string",
-      "description": "",
+      "description": "The publishing stage",
       "enum": [
         "Preview",
         "Public"
@@ -930,7 +947,7 @@
     },
     "ProductType": {
       "type": "string",
-      "description": "",
+      "description": "The product type",
       "enum": [
         "None",
         "DevService",
@@ -962,6 +979,7 @@
     },
     "Video": {
       "type": "object",
+      "description": "The video",
       "properties": {
         "caption": {
           "type": "string",
@@ -987,6 +1005,7 @@
     },
     "PreviewImage": {
       "type": "object",
+      "description": "The preview image",
       "properties": {
         "caption": {
           "type": "string",
@@ -1004,6 +1023,7 @@
     },
     "MarketStartPrice": {
       "type": "object",
+      "description": "The market start price",
       "properties": {
         "market": {
           "type": "string",
@@ -1117,7 +1137,8 @@
           "description": "The sku id"
         },
         "type": {
-          "$ref": "#/definitions/PlanType"
+          "$ref": "#/definitions/PlanType",
+          "description": "The plan type"
         },
         "categoryIds": {
           "type": "array",
@@ -1223,6 +1244,7 @@
     },
     "Artifact": {
       "type": "object",
+      "description": "The plan artifact",
       "properties": {
         "name": {
           "type": "string",
@@ -1240,7 +1262,7 @@
     },
     "PlanType": {
       "type": "string",
-      "description": "",
+      "description": "The plan type",
       "enum": [
         "SolutionTemplate",
         "ManagedApp"
@@ -1252,9 +1274,7 @@
     },
     "PurchaseDurationDiscount": {
       "type": "object",
-      "required": [
-        "discountPercentage"
-      ],
+      "description": "The purchase duration discount",
       "properties": {
         "duration": {
           "type": "string",
@@ -1269,6 +1289,7 @@
     },
     "LeadGeneration": {
       "type": "object",
+      "description": "The lead generation",
       "properties": {
         "productId": {
           "type": "string",
@@ -1278,6 +1299,7 @@
     },
     "Link": {
       "type": "object",
+      "description": "The link",
       "properties": {
         "id": {
           "type": "string",
@@ -1295,7 +1317,7 @@
     },
     "IndustryCloud": {
       "type": "string",
-      "description": "",
+      "description": "The industry cloud",
       "enum": [
         "NotApplicable",
         "True",
@@ -1308,7 +1330,7 @@
     },
     "Gallery": {
       "type": "string",
-      "description": "",
+      "description": "The gallery",
       "enum": [
         "AppsourceApps",
         "AppsourceConsultingServices",
@@ -1321,9 +1343,9 @@
         "modelAsString": true
       }
     },
-    "SearchV2FieldName": {
+    "SearchFieldName": {
       "type": "string",
-      "description": "",
+      "description": "The search field name",
       "enum": [
         "All",
         "Popularity",
@@ -1364,7 +1386,7 @@
         "RatingAverage"
       ],
       "x-ms-enum": {
-        "name": "SearchV2FieldName",
+        "name": "SearchFieldName",
         "modelAsString": true
       }
     }
