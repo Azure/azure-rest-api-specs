@@ -705,6 +705,19 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "clientCertificateMode": {
+          "description": "Client certificate mode for mTLS authentication. Ignore indicates server drops client certificate on forwarding. Accept indicates server forwards client certificate but does not requires a client certificate. Require indicates server requires a client certificate.",
+          "enum": [
+            "ignore",
+            "accept",
+            "require"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IngressClientCertificateMode",
+            "modelAsString": true
+          }
         }
       }
     },
