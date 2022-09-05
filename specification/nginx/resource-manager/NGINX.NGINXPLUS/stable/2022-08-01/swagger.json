@@ -4,6 +4,16 @@
     "title": "Nginx.NginxPlus",
     "version": "2022-08-01"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -882,6 +892,13 @@
           "$ref": "#/definitions/ProvisioningState"
         },
         "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
