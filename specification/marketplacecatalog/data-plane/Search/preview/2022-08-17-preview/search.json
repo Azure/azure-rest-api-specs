@@ -39,21 +39,6 @@
             "description": "The search publisher name. E.g. publisherName=red hat"
           },
           {
-            "type": "integer",
-            "name": "skip",
-            "description": "Number of items to skip. Minimum: 0",
-            "in": "query",
-            "format": "int32",
-            "required": false
-          },
-          {
-            "type": "integer",
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return. Default: 20, Minimum: 0, Maximum: 50000",
-            "format": "int32"
-          },
-          {
             "type": "string",
             "name": "azureBenefit",
             "in": "query",
@@ -186,8 +171,8 @@
                 "MicrosoftProduct",
                 "PublishingState",
                 "Language",
-                "LegacyId",
-                "OfferType",
+                "UniqueProductId",
+                "ProductType",
                 "Plans",
                 "OperatingSystems",
                 "PricingTypes",
@@ -481,8 +466,8 @@
                 "MicrosoftProduct",
                 "PublishingState",
                 "Language",
-                "LegacyId",
-                "OfferType",
+                "UniqueProductId",
+                "ProductType",
                 "Plans",
                 "OperatingSystems",
                 "PricingTypes",
@@ -500,6 +485,21 @@
                 "modelAsString": true
               }
             }
+          },
+          {
+            "type": "integer",
+            "name": "skip",
+            "description": "Number of items to skip. Minimum: 0",
+            "in": "query",
+            "format": "int32",
+            "required": false
+          },
+          {
+            "type": "integer",
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return. Default: 20, Minimum: 0, Maximum: 50000",
+            "format": "int32"
           },
           {
             "type": "string",
@@ -1071,9 +1071,9 @@
             }
           ]
         },
-        "legacyPlanId": {
+        "uniquePlanId": {
           "type": "string",
-          "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
+          "description": "Unique plan Id which is obtained by combining Offer->UniqueProductId and PlanId with no separator in between"
         },
         "displayName": {
           "type": "string",
@@ -1393,8 +1393,8 @@
         "MicrosoftProduct",
         "PublishingState",
         "Language",
-        "LegacyId",
-        "OfferType",
+        "UniqueProductId",
+        "ProductType",
         "Plans",
         "OperatingSystems",
         "PricingTypes",

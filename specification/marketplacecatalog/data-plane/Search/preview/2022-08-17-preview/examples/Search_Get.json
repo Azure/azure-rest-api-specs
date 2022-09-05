@@ -4,14 +4,21 @@
     "top": 2,
     "language": "en",
     "gallery": "Azure",
+    "publishingStage": "Public",
     "market": "US",
     "select": [
-      "LegacyId",
+      "UniqueProductId",
       "ProductType"
     ],
     "pricingTypes": [
-      "Free",
-      "FreeTrial"
+      "Byol"
+    ],
+    "orderBy": [
+      "Popularity desc",
+      "RatingAverage asc"
+    ],
+    "facets": [
+      "PricingTypes"
     ],
     "api-version": "2022-08-17-preview",
     "x-ms-app": "MyApplication"
@@ -19,18 +26,38 @@
   "responses": {
     "200": {
       "body": {
-        "facets": {},
+        "facets": {
+          "pricingTypes": {
+            "facetValues": {
+              "Payg": {
+                "count": 57690
+              },
+              "Byol": {
+                "count": 14472
+              },
+              "Free": {
+                "count": 10962
+              },
+              "FreeTrial": {
+                "count": 3492
+              },
+              "Ri": {
+                "count": 630
+              }
+            }
+          }
+        },
         "results": [
           {
-            "uniqueProductId": "enterprisedb-corp.biganimal-prod-v1",
+            "uniqueProductId": "sendgrid.tsg-saas-offer",
             "productType": "SaaS"
           },
           {
-            "uniqueProductId": "epica1581707374769.epica",
+            "uniqueProductId": "sendgrid.tsg-saas-offer",
             "productType": "SaaS"
           }
         ],
-        "totalCount": 823,
+        "totalCount": 14472,
         "nextLink": "nextLink"
       }
     }
