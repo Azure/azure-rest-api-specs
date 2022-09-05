@@ -1433,10 +1433,21 @@
           "description": "Remote endpoint resource ID.",
           "type": "string"
         },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
         "vnetTrafficTag": {
           "description": "Virtual network traffic tag.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "manualPrivateLinkServiceConnections": {
           "description": "List of private link service connections that need manual approval.",
@@ -1557,6 +1568,14 @@
           "description": "Internal FQDN.",
           "type": "string",
           "readOnly": true
+        },
+        "redirectMapId": {
+          "description": "Redirect map ID.",
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "description": "PrivateLinkService ARM region.",
+          "type": "string"
         }
       }
     },
