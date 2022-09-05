@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "clusterName": "cluster-name",
+    "resourceGroupName": "resource-group",
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "category": "monitor",
+            "endpoints": [
+              {
+                "domainName": "gcs.prod.monitoring.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": "443",
+                    "protocol": "Https"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "aad-cdn",
+            "endpoints": [
+              {
+                "domainName": "aadcdn.msftauth.net",
+                "endpointDetails": [
+                  {
+                    "port": "443",
+                    "protocol": "Https"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "configuration",
+            "endpoints": [
+              {
+                "domainName": "hdiconfigactions-secondary.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": "443",
+                    "protocol": "Https"
+                  }
+                ]
+              },
+              {
+                "domainName": "hdiconfigactions.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": "443",
+                    "protocol": "Https"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

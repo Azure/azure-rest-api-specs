@@ -740,6 +740,51 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "OutboundNetworkDependenciesEndpoints"
+        ],
+        "operationId": "Clusters_ListOutboundNetworkDependenciesEndpoints",
+        "description": "Get all the outbound network dependencies endpoints in a HDInsight cluster.",
+        "x-ms-examples": {
+          "Get all the outbound network dependencies endpoints in a HDInsight cluster.": {
+            "$ref": "./examples/ListOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/OutboundNetworkDependenciesEndpointListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2211,6 +2256,75 @@
           "$ref": "#/definitions/Resource"
         }
       ]
+    },
+    "OutboundNetworkDependenciesEndpointListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of outbound network dependencies endpoints",
+          "items": {
+            "$ref": "#/definitions/OutboundNetworkDependenciesEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "A list of outbound network dependencies endpoints"
+    },
+    "OutboundNetworkDependenciesEndpoint": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of endpoint"
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Array of endpoints",
+          "items": {
+            "$ref": "#/definitions/OutboundNetworkDependenciesEndpointProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "A outbound network dependencies endpoint"
+    },
+    "OutboundNetworkDependenciesEndpointProperties": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of endpoint"
+        },
+        "endpointDetails": {
+          "type": "array",
+          "description": "Array of endpoint details",
+          "items": {
+            "$ref": "#/definitions/OutboundNetworkDependenciesEndpointDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Outbound network dependencies endpoint properties"
+    },
+    "OutboundNetworkDependenciesEndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "string",
+          "description": "The port of endpoint"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol of endpoint"
+        }
+      },
+      "description": "Outbound network dependencies endpoint detail"
     }
   },
   "parameters": {

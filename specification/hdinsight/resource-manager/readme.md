@@ -88,6 +88,7 @@ directive:
       - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
       - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
       - Microsoft.HDInsight/stable/2021-06-01/cluster.json
+      - Microsoft.HDInsight/preview/2022-11-01-preview/cluster.json
     where:
       - $.definitions.Role.properties.VMGroupName
 ```
