@@ -102,7 +102,7 @@
           "404": {
             "description": "analysisIntent Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -174,7 +174,7 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -362,7 +362,7 @@
           "404": {
             "description": "AnalysisRun Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -441,7 +441,7 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -622,7 +622,7 @@
           "404": {
             "description": "ConfigurationSnapshot Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -694,7 +694,7 @@
           "404": {
             "description": "Parent resource not found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -896,7 +896,7 @@
           "404": {
             "description": "NetworkVerifier Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -1025,7 +1025,7 @@
           "404": {
             "description": "NetworkVerifier Not Found",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/Error"
             },
             "x-ms-error-response": true
           },
@@ -1109,7 +1109,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1164,7 +1164,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1216,7 +1216,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1267,17 +1267,19 @@
         }
       }
     },
-    "ErrorDetails": {
-      "description": "Common error details representation.",
+    "Error": {
       "type": "object",
-      "properties": {
-        "innerError": {
-          "type": "string"
-        }
-      },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          "$ref": "./network.json#/definitions/Error"
+        }
+      ]
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ErrorDetails"
         }
       ]
     },
@@ -1357,7 +1359,7 @@
       "x-ms-azure-resource": true,
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ]
     },
