@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-01-15-privatepreview",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "avladuwestus2rg",
+    "networkFabricName": "testNetworkFabric1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/NetworkFabrics/testNetworkFabric1",
+        "name": "testNetworkFabric1",
+        "type": "microsoft.managedNetworkFabric/NetworkFabrics",
+        "location": "westus",
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "properties": {
+          "networkFabricSku": "fabricSkuName",
+          "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/rgName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/nfcName",
+          "networkToNetworkInterconnect": {
+            "mpBgpConfiguration": {
+              "peerAsn": 102
+            }
+          },
+          "terminalServerConfiguration": {
+            "username": "username"
+          },
+          "managementNetworkConfiguration": {
+            "managementVpnConfiguration": {
+              "importRouteTargets": [
+                "65531:2001",
+                "65532:2001"
+              ],
+              "exportRouteTargets": [
+                "65531",
+                "65532"
+              ]
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

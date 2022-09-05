@@ -1,136 +1,139 @@
 {
   "parameters": {
-    "subscriptionId": "aaaaaaaa",
+    "subscriptionId": "subscriptionId",
     "resourceGroupName": "rgNetworkFabrics",
     "api-version": "2022-01-15-privatepreview",
-    "networkFabricName": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "networkFabricName": "aa",
     "body": {
+      "tags": {},
       "properties": {
-        "annotation": "aaaaaaaaaaaaa",
+        "racks": [
+          "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/NetworkRacks/networkRackName",
+          "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/NetworkRacks/networkRackName"
+        ],
+        "annotation": "aaaaaaa",
+        "l2IsolationDomains": [
+          "aaaaaaaaaaaaaaa"
+        ],
+        "l3IsolationDomains": [
+          "aaaaaaaaa"
+        ],
         "administrativeState": "Provision",
         "networkToNetworkInterconnect": {
           "mpBgpConfiguration": {
-            "routerId": "aaaaaaaa",
-            "peerAsn": 22,
-            "primaryIpv4Prefix": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "primaryIpv6Prefix": "aaaaaaaaaaaaaa",
-            "secondaryIpv4Prefix": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "secondaryIpv6Prefix": "aaaaaaaaaaa"
-          }
+            "routerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "peerAsn": 13
+          },
+          "portCount": 17,
+          "mtu": 22,
+          "ipv4Prefix": "aaaaa",
+          "ipv6Prefix": "aaaaaaaaaa"
         },
         "terminalServerConfiguration": {
-          "primaryIPv4Address": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "primaryPeerIPv4Address": "aaaaaaaaaaaaaaaaa",
-          "secondaryIPv4Address": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "secondaryPeerIPv4Address": "a",
-          "username": "aaaaaaaaaaaaaaaaaaaaaaa",
+          "tsIPv4Address": "aaaaaaaaaaaa",
+          "peIPv4Address": "aaaaaaaa",
+          "username": "aaa",
           "password": "aaaaaaaaaaaa"
         },
         "managementNetworkConfiguration": {
           "managementVpnConfiguration": {
+            "desiredState": "Enabled",
             "importRouteTargets": [
-              "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaa"
             ],
             "exportRouteTargets": [
-              "aaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             ]
           }
         }
-      },
-      "tags": {
-        "key2426": "aaaaaaaaa"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "location": "westus",
+        "tags": {},
         "properties": {
-          "networkFabricSku": "aaaaaaaaaaaaaaaaaaaaa",
-          "networkFabricControllerId": "aaaaaaaaaaaaaaaaaa",
+          "networkFabricSku": "fabricSkuName",
+          "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/rgName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/nfcName",
           "networkToNetworkInterconnect": {
-            "layer2Configuration": {
-              "portCount": 26,
-              "mtu": 5,
-              "interfaces": [
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              ]
+            "mpBgpConfiguration": {
+              "peerAsn": 13,
+              "vlanId": 28,
+              "fabricAsn": 6,
+              "routerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             },
-            "layer3Configuration": {
-              "vlanId": 4,
-              "fabricAsn": 28,
-              "routerId": "aaaaaaaaaaaaaaa",
-              "peerAsn": 21,
-              "primaryIpv4Prefix": "aaaaaaaaaaa",
-              "primaryIpv6Prefix": "aaaaaaaaaaaaaaaaaaaaaa",
-              "secondaryIpv4Prefix": "aaaaaaaaa",
-              "secondaryIpv6Prefix": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-            }
+            "interfaces": [
+              "aaaaaaaaaaaaaaaaaaa"
+            ],
+            "provisioningState": "Succeeded",
+            "portCount": 17,
+            "mtu": 22,
+            "ipv4Prefix": "aaaaa",
+            "ipv6Prefix": "aaaaaaaaaa"
           },
           "terminalServerConfiguration": {
-            "networkDeviceId": "aaaaaaaaaaaa",
-            "primaryIPv4Address": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "primaryPeerIPv4Address": "aaaaaaaaaaaaaaaaa",
-            "secondaryIPv4Address": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "secondaryPeerIPv4Address": "a",
-            "username": "aaaaaaaaaaaaaaaaaaaaaaa"
+            "username": "aaa",
+            "tsIPv4Address": "aaaaaaaaaaaa",
+            "peIPv4Address": "aaaaaaaa"
           },
           "managementNetworkConfiguration": {
-            "ipv4Prefix": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "ipv6Prefix": "aaaaaaaaaaaaaaaaaaaaa",
             "managementVpnConfiguration": {
-              "state": "Enabled",
               "importRouteTargets": [
-                "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "aaaaaaa",
+                "65532:2001"
               ],
               "exportRouteTargets": [
-                "aaaaaaaaa"
-              ]
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "65532"
+              ],
+              "state": "Enabled",
+              "desiredState": "Enabled"
             },
-            "workloadVpnConfiguration": {
-              "state": "Enabled",
-              "importRouteTargets": [
-                "aaaaaaaaaaaaaaaaaaa"
-              ],
-              "exportRouteTargets": [
-                "aaaaaaaaaaaaaaaa"
-              ]
-            }
+            "ipv4Prefix": "aaaa",
+            "ipv6Prefix": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "networkToNetworkInterconnectStatus": {
+            "ipv4ProvisioningState": "Succeeded",
+            "ipv6ProvisioningState": "Succeeded",
+            "mpBgpConfigurationState": "Succeeded"
+          },
+          "terminalServerConnectivity": "Ipv4Reachable",
+          "managementVpnReachability": {
+            "ipv4": "Reachable",
+            "ipv6": "Reachable"
           },
           "validationResult": {
             "result": "Success",
             "errors": [
-              "aaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaa"
             ]
           },
           "operationalState": "Provisioning",
-          "provisioningState": "Succeeded",
-          "annotation": "aaaaaaaaaaaaa",
+          "provisioningState": "Accepted",
+          "annotation": "aaaaaaa",
           "racks": [
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/NetworkRacks/networkRackName"
           ],
           "l2IsolationDomains": [
-            "aaaaaaaaaaaaaaaaaaaaaaaa"
+            "aaaaaaaaaaaaaaa"
           ],
           "l3IsolationDomains": [
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "aaaaaaaaa"
           ],
           "administrativeState": "Provision"
         },
-        "tags": {
-          "key1611": "aaaaaaaaaaaaa"
-        },
-        "location": "aaaa",
-        "id": "aaaaa",
-        "name": "aaaaaaaaaaaaaaaaa",
-        "type": "aaa",
+        "id": "/subscriptions/subscriptionId/resourceGroups/avladuwestus2rg/providers/Microsoft.ManagedNetworkFabric/NetworkFabrics/testNetworkFabric1",
+        "name": "testNetworkFabric1",
+        "type": "microsoft.managedNetworkFabric/NetworkFabrics",
         "systemData": {
-          "createdBy": "aaaaaaa",
+          "createdBy": "aaaaaaaa",
           "createdByType": "User",
-          "createdAt": "2022-08-18T08:46:08.288Z",
-          "lastModifiedBy": "aaaaaaaaaaaaaaaa",
+          "createdAt": "2022-05-27T07:44:18.512Z",
+          "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaa",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-08-18T08:46:08.288Z"
+          "lastModifiedAt": "2022-05-27T07:44:18.512Z"
         }
       }
     },
