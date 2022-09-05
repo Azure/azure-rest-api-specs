@@ -826,6 +826,14 @@
             "type": "string"
           }
         },
+        "vmSecurityTypes": {
+          "type": "array",
+          "description": "The vm Security Types",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          },
+          "x-ms-identifiers": []
+        },
         "smallIconUri": {
           "description": "The small icon uri",
           "type": "string"
@@ -1114,9 +1122,12 @@
           "type": "boolean",
           "description": "A value indicating whether the plan is quantifiable"
         },
-        "vmSecurityType": {
-          "type": "string",
-          "description": "VM security type"
+        "vmSecurityTypes": {
+          "type": "array",
+          "description": "VM security types",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          }
         },
         "artifacts": {
           "type": "array",
