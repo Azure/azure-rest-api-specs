@@ -12,6 +12,9 @@
       ],
       "default": "ResourceGroup"
     },
+    "authentication": {
+      "$ref": "#/definitions/Authentication"
+    },
     "variables": {
       "$ref": "#/definitions/Variables"
     },
@@ -46,6 +49,56 @@
     "Name": {
       "type": "string",
       "pattern": "^[A-Za-z_$][A-Za-z0-9_-]*$"
+    },
+    "Authentication": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AzureAD",
+            "None"
+          ],
+          "default": "AzureAD"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "AzureAD"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "type": {},
+              "audience": {
+                "type": "string",
+                "description": "The resource identifier (application ID URI) of the resource you want, a.k.a., the audience of the token.",
+                "examples": [
+                  "https://management.azure.com/",
+                  "https://storage.azure.com/"
+                ]
+              }
+            },
+            "required": [
+              "audience"
+            ],
+            "additionalProperties": false
+          },
+          "else": {
+            "properties": {
+              "type": {}
+            },
+            "additionalProperties": false
+          }
+        }
+      ]
     },
     "JsonPointer": {
       "type": "string",
@@ -274,6 +327,10 @@
           "type": "string",
           "description": "A long description of the scenario"
         },
+        "authentication": {
+          "$ref": "#/definitions/Authentication",
+          "description": "Authentication method to use for the scenario"
+        },
         "variables": {
           "$ref": "#/definitions/Variables"
         },
@@ -334,6 +391,9 @@
         }
       ],
       "properties": {
+        "authentication": {
+          "$ref": "#/definitions/Authentication"
+        },
         "outputVariables": {
           "type": "object",
           "propertyNames": {
@@ -416,6 +476,7 @@
         },
         "step": {},
         "description": {},
+        "authentication": {},
         "variables": {},
         "outputVariables": {}
       },
@@ -454,6 +515,7 @@
         },
         "step": {},
         "description": {},
+        "authentication": {},
         "variables": {},
         "outputVariables": {}
       },
