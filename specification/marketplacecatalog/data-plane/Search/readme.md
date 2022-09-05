@@ -29,7 +29,7 @@ openapi-type: data-plane
 tag: package-2022-08-17-preview
 ```
 
-### Tag: package-2022-06-23-preview
+### Tag: package-2022-08-17-preview
 
 These settings apply only when `--tag=package-2022-08-17-preview` is specified on the command line.
 
