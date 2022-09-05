@@ -103,7 +103,8 @@
             "description": "analysisIntent Not Found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -174,7 +175,8 @@
             "description": "Parent resource not found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -361,7 +363,8 @@
             "description": "AnalysisRun Not Found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -439,7 +442,8 @@
             "description": "Parent resource not found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -619,7 +623,8 @@
             "description": "ConfigurationSnapshot Not Found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -690,7 +695,8 @@
             "description": "Parent resource not found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -891,7 +897,8 @@
             "description": "NetworkVerifier Not Found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -1019,7 +1026,8 @@
             "description": "NetworkVerifier Not Found",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Default error response.",
@@ -1328,8 +1336,20 @@
       "description": "Verifier instance to manage and run analysis.",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/NetworkVerifierProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true,
