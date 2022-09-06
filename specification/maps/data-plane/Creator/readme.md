@@ -43,6 +43,8 @@ input-file:
   - preview/2022-09-01-preview/tileset.json
   - preview/2022-09-01-preview/style.json
   - preview/2022-09-01-preview/mapconfiguration.json
+  - preview/2022-09-01-preview/routeset.json
+  - preview/2022-09-01-preview/wayfind.json
   - preview/2.0/alias.json
   - preview/2.0/data.json
   - preview/2.0/dataset.json
