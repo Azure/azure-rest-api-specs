@@ -41,11 +41,11 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 input-file:
   - Microsoft.CostManagement/preview/2022-08-01-preview/scheduledActions.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/settings.json
+  - Microsoft.CostManagement/preview/2022-08-01-preview/common-types.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.exports.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.generatedetailedcostreport.json
-  - Microsoft.CostManagement/preview/2022-08-01-preview/scheduledActions.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.pricesheets.json
   - Microsoft.CostManagement/preview/2022-08-01-preview/costallocation.json
 ```
