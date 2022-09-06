@@ -342,6 +342,10 @@
           "items": {
             "$ref": "#/definitions/targetReference"
           }
+        },
+        "filters": {
+          "description": "Model that represents available filters that can be applied to a targets list.",
+          "$ref": "#/definitions/filters"
         }
       },
       "required": [
@@ -349,6 +353,22 @@
         "id",
         "targets"
       ],
+      "additionalProperties": false
+    },
+    "filters": {
+      "description": "Model that represents the Experiment properties model.",
+      "type": "object",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "String of the availability zone ID."
+          },
+          "description": "List of Azure availability zones to filter targets by.",
+          "minItems": 0
+        }
+      },
       "additionalProperties": false
     },
     "targetReference": {
