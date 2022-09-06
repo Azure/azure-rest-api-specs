@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "azureFirewallName": "azureFirewall1",
+    "parameters": {
+        "properties": {
+            "durationInSeconds": 300,
+            "numberOfPacketsToCapture": 5000,
+            "SASURL": "someSASURL",
+            "fileName": "azureFirewallPacketCapture",
+            "flags": [
+                "tcp-syn",
+                "tcp-fin"
+            ], 
+            "filterRules": [
+                {
+                    "source": [
+                      "20.1.1.0"
+                    ],
+                    "destination": [
+                      "20.1.2.0"
+                    ],
+                    "DestinationPort": "4500"
+                },
+                {
+                    "source": [
+                      "10.1.1.0", "10.1.1.1"
+                    ],
+                    "destination": [
+                      "10.1.2.0"
+                    ],
+                    "DestinationPort": "123"
+                }
+            ]
+        }
+      }
+  },
+  "responses": {
+    "202": {}
+  }
+}
