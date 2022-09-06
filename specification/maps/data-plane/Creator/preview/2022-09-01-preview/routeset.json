@@ -1,270 +1,386 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"version": "2022-09-01",
-		"title": "Azure Maps Routeset Service.",
-		"description": "APIs for managing routesets."
-	},
-	"x-ms-parameterized-host": {
-		"hostTemplate": "{geography}.atlas.microsoft.com",
-		"parameters": [
-		  {
-			"$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
-		  }
-		]
-	},
-	"schemes": ["https"],
-	"consumes": [],
-	"produces": ["application/json"],	
-	"security": [
-		{ "AADToken": ["https://atlas.microsoft.com/.default"] },
-		{ "SharedKey": [] },
-		{ "SasToken": [] }
-	],
-	"securityDefinitions": {
-		"AADToken": {
-		  "type": "oauth2",
-		  "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-		  "flow": "implicit",
-		  "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
-		  "scopes": {
-			"https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
-		  }
-		},
-		"SharedKey": {
-		  "type": "apiKey",
-		  "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
-		  "name": "subscription-key",
-		  "in": "query"
-		},
-		"SasToken": {
-		  "type": "apiKey",
-		  "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
-		  "name": "SAS Token",
-		  "in": "header"
-		}
-	},
-	"definitions": {
-		"Routeset": {
-			"description": "Detailed information for the routeset.",
-			"type": "object",
-			"properties": {
-				"routesetId": {
-					"description": "The unique ID of the routeset.",
-					"type": "string",
-					"readOnly": true
-				},
-				"ontology": {
-					"description": "The ontology of the source dataset. For more information about Azure Maps Creator ontologies, see the [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) article.",
-					"type": "string",
-					"readOnly": true
-				},
-				"datasetId": {
-					"description": "The ID of the dataset used to create the routeset.",
-					"type": "string",
-					"readOnly": true
-				},
-				"description": {
-					"description": "The description code for the building with the ontology version number.",
-					"type": "string",
-					"readOnly": true
-				},
-				"facilityDetails": {
-					"description": "The facility information and building level ordinal numbers.",
-					"type": "array",
-					"readOnly": true
-				},
-				"creationMode": {
-					"description": "The ontology used to generate the routeset.",
-					"type": "string",
-					"readOnly": true
-				},
-				"created": {
-					"description": "The date and time the routeset object was created.",
-					"type": "string",
-					"format": "date-time",
-					"readOnly": true
-				}
-			}
-		}
-	},
-	"responses": {
-		"400": { "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive." },
-		"401": { "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token." },
-		"403": { "description": "Permission, capacity, or authentication issues." },
-		"404": { "description": "Not Found: the requested resource could not be found, but it may be available again in the future." },
-		"500": { "description": "An error occurred while processing the request. Please try again later." }
-},
-	"parameters": {
-		"ApiVersion": {
-			"name": "api-version",
-			"description": "Version number of Azure Maps API.",
-			"type": "string",
-			"in": "query",
-			"required": true,
-			"default": "2022-09-01",
-			"x-ms-parameter-location": "client"
-		},
-		"DatasetId": {
-			"name": "datasetId",
-			"type": "string",
-			"in": "path",
-			"description": "The ID of the dataset used to create the routeset.",
-			"required": true,
-			"x-ms-parameter-location": "method"
-		},
-		"Description": {
-			"name": "description",
-			"description": "User provided description of the routeset.",
-			"type": "string",
-			"in": "query",
-			"x-ms-parameter-location": "client"
-		},
-		"RoutesetId": {
-			"name": "routesetId",
-			"description": "The ID of the routeset to query from.",
-			"type": "string",
-			"in": "path",
-			"required": true,
-			"x-ms-parameter-location": "method"
-		},
-		"SubscriptionKey": {
-			"name": "subscription-key",
-			"description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](https://docs.microsoft.com/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
-			"type": "string",
-			"in": "query",
-			"required": true,
-			"x-ms-parameter-location": "client"
-		},
-		"RoutesetOperationId": {
-			"name": "routesetOperationId",
-			"description": "The ID used to query the status of the routeset creation.",
-			"type": "string",
-			"in": "path",
-			"required": true,
-			"x-ms-parameter-location": "method"
-		}
-	},
-	"paths": {
-		"/routesets": {
-			"post": {
-				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create special data structures consumed by the Azure Maps Wayfinding service to discover the shortest paths within a facility.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
-				"operationId": "routesetCreate",
-				"x-ms-long-running-operation": true,
-				"x-ms-long-running-operation-options": {
-				  "final-state-via": "location"
-				},
-				"x-ms-examples": {
-				  "Create a routeset from a previously created dataset ": {
-					"$ref": "./examples/wayfind/Routeset_Create.json"
-				  }
-				},
-				"parameters": [
-					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
-					{"$ref": "#/parameters/SubscriptionKey"},
-					{"$ref": "#/parameters/ApiVersion"},
-					{"$ref": "#/parameters/DatasetId"},
-					{"$ref": "#/parameters/Description"}
-				],
-				"responses": {
-					"202": { "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2" },
-					"400": { "$ref": "#/responses/400" },
-					"401": { "$ref": "#/responses/401" },
-					"403": { "$ref": "#/responses/403" },
-					"404": { "$ref": "#/responses/404" },
-					"500": { "$ref": "#/responses/500" }
-				}
-			},
-			"get": {
-				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a list of all routesets in the current Azure Maps Creator account.",
-				"operationId": "routesetList",
-				"parameters": [
-					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
-					{"$ref": "#/parameters/SubscriptionKey"},
-					{"$ref": "#/parameters/ApiVersion"}
-				],
-				"responses": {
-					"200": { 
-						"description": "List routeset request completed successfully. The response body contains a list of all routesets.",
-						"schema": { "$ref": "#/definitions/Routeset" }
-					},
-					"400": { "$ref": "#/responses/400" },
-					"401": { "$ref": "#/responses/401" },
-					"403": { "$ref": "#/responses/403" },
-					"404": { "$ref": "#/responses/404" },
-					"500": { "$ref": "#/responses/500" }
-				}
-			}
-		},
-		"/routesets/{routesetId}": {
-			"get": {
-				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a routeset.",
-				"operationId": "routesetGet",
-				"x-ms-examples": {
-				  "Get details for a previously created dataset": {
-					"$ref": "./examples/wayfind/Routeset_GetDetails.json"
-				  }
-				},
-				"parameters": [
-					{"$ref": "#/parameters/RoutesetId"},
-					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
-					{"$ref": "#/parameters/SubscriptionKey"},
-					{"$ref": "#/parameters/ApiVersion"}
-				  ],
-				"responses": {
-				  "200": {
-					"description": "The get routeset request completed successfully.",
-					"schema": { "$ref": "#/definitions/Routeset" }
-				  },
-				  "400": { "$ref": "#/responses/400" },
-				  "401": { "$ref": "#/responses/401" },
-				  "403": { "$ref": "#/responses/403" },
-				  "404": { "$ref": "#/responses/404" },
-				  "500": { "$ref": "#/responses/500" }
-			  }
-			},
-			"delete": {
-				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to delete an existing routeset. Use this API when a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your routeset, send a `DELETE` request with the `routesetId` of the routeset to delete.",
-				"operationId": "routesetDelete",
-				"x-ms-examples": {
-					"Delete an existing routeset": {
-					  "$ref": "./examples/wayfind/Routeset_Delete.json"
-					}
-				  },
-				  "parameters": [
-					{"$ref": "#/parameters/RoutesetId"},
-					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
-					{"$ref": "#/parameters/SubscriptionKey"},
-					{"$ref": "#/parameters/ApiVersion"}
-				  ],
-				"responses": {
-					"204": { "description": "Routeset delete request completed successfully." },
-					"400": { "$ref": "#/responses/400" },
-					"401": { "$ref": "#/responses/401" },
-					"403": { "$ref": "#/responses/403" },
-					"404": { "$ref": "#/responses/404" },
-					"500": { "$ref": "#/responses/500" }
-				}
-			}
-		},
-		"/routesets/operations/{operationId}": {
-			"get": {
-			  "description": "This API allows the caller to view the current progress of a routeset operation. The path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request with the `operationId` of the desired operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
-			  "operationId": "routesetGetOperation",
-			  "x-ms-examples": {
-				"Get the status of an operation which is still running": { "$ref": "./examples/wayfind/Routeset_GetOperationStillRunning.json" },
-				"Get the status of an operation which has finished successfully": { "$ref": "./examples/wayfind/Routeset_GetOperation.json" }
-			  },
-			  "parameters": [
-				{ "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId" },
-				{ "$ref": "#/parameters/ApiVersion" },
-				{ "$ref": "#/parameters/RoutesetOperationId" }
-			  ],
-			  "responses": {
-				"200": { "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2" },
-				"400": { "$ref": "#/responses/400" }
-				}
-			}
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-09-01",
+    "title": "Azure Maps Routeset Service.",
+    "description": "APIs for managing routesets."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "SharedKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Routeset": {
+      "description": "Detailed information for the routeset.",
+      "type": "object",
+      "properties": {
+        "routesetId": {
+          "description": "The unique ID of the routeset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ontology": {
+          "description": "The ontology of the source dataset. For more information about Azure Maps Creator ontologies, see the [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) article.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datasetId": {
+          "description": "The ID of the dataset used to create the routeset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description code for the building with the ontology version number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "facilityDetails": {
+          "description": "The facility information and building level ordinal numbers.",
+          "type": "array",
+          "readOnly": true
+        },
+        "creationMode": {
+          "description": "The ontology used to generate the routeset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The date and time the routeset object was created.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token."
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues."
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future."
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later."
+    }
+  },
+  "parameters": {
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2022-09-01",
+      "x-ms-parameter-location": "client"
+    },
+    "DatasetId": {
+      "name": "datasetId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID of the dataset used to create the routeset.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "Description": {
+      "name": "description",
+      "description": "User provided description of the routeset.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "client"
+    },
+    "RoutesetId": {
+      "name": "routesetId",
+      "description": "The ID of the routeset to query from.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "Used with Shared Key authentication which relies on passing an Azure Maps account generated subscription key with each request to Azure Maps. For more information, see [Authentication with Azure Maps](https://docs.microsoft.com/azure/azure-maps/azure-maps-authentication#shared-key-authentication).",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "RoutesetOperationId": {
+      "name": "routesetOperationId",
+      "description": "The ID used to query the status of the routeset creation.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/routesets": {
+      "post": {
+        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create special data structures consumed by the Azure Maps Wayfinding service to discover the shortest paths within a facility.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "routesetCreate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create a routeset from a previously created dataset ": {
+            "$ref": "./examples/wayfind/Routeset_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetId"
+          },
+          {
+            "$ref": "#/parameters/Description"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a list of all routesets in the current Azure Maps Creator account.",
+        "operationId": "routesetList",
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List routeset request completed successfully. The response body contains a list of all routesets.",
+            "schema": {
+              "$ref": "#/definitions/Routeset"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/routesets/{routesetId}": {
+      "get": {
+        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a routeset.",
+        "operationId": "routesetGet",
+        "x-ms-examples": {
+          "Get details for a previously created dataset": {
+            "$ref": "./examples/wayfind/Routeset_GetDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/RoutesetId"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The get routeset request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Routeset"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to delete an existing routeset. Use this API when a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your routeset, send a `DELETE` request with the `routesetId` of the routeset to delete.",
+        "operationId": "routesetDelete",
+        "x-ms-examples": {
+          "Delete an existing routeset": {
+            "$ref": "./examples/wayfind/Routeset_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/RoutesetId"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Routeset delete request completed successfully."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/routesets/operations/{operationId}": {
+      "get": {
+        "description": "This API allows the caller to view the current progress of a routeset operation. The path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request with the `operationId` of the desired operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
+        "operationId": "routesetGetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/wayfind/Routeset_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/wayfind/Routeset_GetOperation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/RoutesetOperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          }
+        }
+      }
+    }
+  }
 }
