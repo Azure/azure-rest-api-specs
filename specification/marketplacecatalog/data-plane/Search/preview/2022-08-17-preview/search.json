@@ -153,7 +153,7 @@
                 "Categories",
                 "BigCatLastModifiedDate",
                 "Industries",
-                "Labels",
+                "CategoryIds",
                 "Market",
                 "LinkedAddIns",
                 "SupportedProducts",
@@ -302,7 +302,7 @@
           },
           {
             "type": "array",
-            "name": "labels",
+            "name": "categoryIds",
             "in": "query",
             "description": "Array of category ids to return. E.g. ['analytics']",
             "collectionFormat": "csv",
@@ -448,7 +448,7 @@
                 "Categories",
                 "BigCatLastModifiedDate",
                 "Industries",
-                "Labels",
+                "CategoryIds",
                 "Market",
                 "LinkedAddIns",
                 "SupportedProducts",
@@ -693,7 +693,7 @@
             "type": "string"
           }
         },
-        "labels": {
+        "categoryIds": {
           "type": "array",
           "description": "List of category IDs the marketplace item belongs to",
           "items": {
@@ -1153,9 +1153,9 @@
           "$ref": "#/definitions/PlanType",
           "description": "The plan type"
         },
-        "labels": {
+        "categoryIds": {
           "type": "array",
-          "description": "The labels",
+          "description": "The categoryIds",
           "items": {
             "type": "string"
           }
@@ -1287,10 +1287,28 @@
           "type": "string",
           "description": "Artifact uri"
         },
-        "artifactType": {
-          "type": "string",
-          "description": "Artifact type"
+        "type": {
+          "description": "Artifact type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactType"
+            }
+          ]
         }
+      }
+    },
+    "ArtifactType": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": true
       }
     },
     "PlanType": {
@@ -1386,7 +1404,7 @@
         "Categories",
         "BigCatLastModifiedDate",
         "Industries",
-        "Labels",
+        "CategoryIds",
         "Market",
         "LinkedAddIns",
         "SupportedProducts",
