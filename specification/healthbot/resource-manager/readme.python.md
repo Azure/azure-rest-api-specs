@@ -5,6 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ```yaml $(python)
 azure-arm: true
+title: HealthBotMgmtClient
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.healthbot
 package-name: azure-mgmt-healthbot
