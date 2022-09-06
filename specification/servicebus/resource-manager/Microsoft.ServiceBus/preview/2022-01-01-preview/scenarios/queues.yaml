@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  namespaceName: 
+    type: string
+    prefix: sbnamespaceq
+
+prepareSteps:
+  - step: Namespace_Create
+    exampleFile: ../examples/NameSpaces/SBNameSpaceCreate.json
+
+scenarios:
+  - scenario: Queue
+    description: Microsoft.ServiceBus/namespaces/queues
+    variables:
+      queueName:
+        type: string
+        prefix: queuena
+      authorizationRuleName:
+        type: string
+        prefix: queueauthrule
+    steps:
+    - step: Queue_Create
+      exampleFile: ../examples/Queues/SBQueueCreate.json
+    - step: Queue_Get
+      exampleFile: ../examples/Queues/SBQueueGet.json
+    - step: Queue_ListByNamespace
+      exampleFile: ../examples/Queues/SBQueueListByNameSpace.json
+    - step: Queue_CreateAuthorizationRule
+      exampleFile: ../examples/Queues/SBQueueAuthorizationRuleCreate.json
+    - step: Queue_GetAuthorizationRule
+      exampleFile: ../examples/Queues/SBQueueAuthorizationRuleGet.json
+    - step: Queue_ListAuthorizationRules
+      exampleFile: ../examples/Queues/SBQueueAuthorizationRuleListAll.json
+    - step: Queue_RegenerateKeys
+      exampleFile: ../examples/Queues/SBQueueAuthorizationRuleRegenerateKey.json
+    - step: Queue_ListKeys
+      exampleFile: ../examples/Queues/SBQueueAuthorizationRuleListKey.json
+    - step: Queue_DeleteAuthorizationRule
+      exampleFile: ../examples/Queues/SBQueueAuthorizationRuleDelete.json
+    - step: Queue_Delete
+      exampleFile: ../examples/Queues/SBQueueDelete.json
+
+cleanUpSteps:
+  - step: Namespace_Delete
+    exampleFile: ../examples/NameSpaces/SBNameSpaceDelete.json

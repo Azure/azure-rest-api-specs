@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  namespaceName:
+    type: string
+    prefix: sbnamespacemc
+  namespaceName2:
+    type: string
+    prefix: sbnamespacetwomc
+
+prepareSteps:
+  - step: Namespace_Create
+    exampleFile: ../examples/NameSpaces/SBNameSpaceCreate.json
+  - step: Namespace_Create2
+    operationId: Namespaces_CreateOrUpdate
+    parameters:
+      namespaceName: $(namespaceName2)
+      parameters:
+        location: westus2
+        sku: 
+          tier: Premium
+          name: Premium
+    outputVariables:
+      recondNamespaceId:
+        type: string
+        fromResponse: /id
+
+scenarios:
+  - scenario: MigrationConfig
+    description: Microsoft.ServiceBus/namespaces/migrationConfigurations
+    variables:
+      postMigrationName:
+        type: string
+        prefix: postmigrationna
+    steps:
+    - step: MigrationConfig_Create
+      exampleFile: ../examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json
+      requestUpdate:
+        - replace: /parameters/properties/targetNamespace
+          value: $(recondNamespaceId)
+        - replace: /parameters/properties/postMigrationName
+          value: $(postMigrationName)
+    - step: MigrationConfig_Get
+      exampleFile: ../examples/Migrationconfigurations/SBMigrationconfigurationGet.json
+    - step: MigrationConfig_List
+      exampleFile: ../examples/Migrationconfigurations/SBMigrationconfigurationList.json
+    - step: MigrationConfig_Revert
+      exampleFile: ../examples/Migrationconfigurations/SBMigrationconfigurationRevert.json
+    - step: MigrationConfig_CompleteMigration
+      exampleFile: ../examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json

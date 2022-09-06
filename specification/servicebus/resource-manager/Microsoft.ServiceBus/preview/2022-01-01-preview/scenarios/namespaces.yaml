@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: Namespace
+    description: Microsoft.ServiceBus/namespaces
+    variables:
+      namespaceName: 
+        type: string
+        prefix: sbnamespace
+      authorizationRuleName:
+        type: string
+        prefix: sbauthrule
+    steps:
+      - step: Namespace_CheckNameAvailability
+        exampleFile: ../examples/NameSpaces/SBNameSpaceCheckNameAvailability.json
+        requestUpdate:
+          - replace: /parameters/name
+            value: $(namespaceName)
+      - step: Namespace_Create
+        exampleFile: ../examples/NameSpaces/SBNameSpaceCreate.json
+        requestUpdate:
+          - replace: /parameters/sku/name
+            value: Premium
+          - replace: /parameters/sku/tier
+            value: Premium
+      - step: Namespace_Update
+        exampleFile: ../examples/NameSpaces/SBNameSpaceUpdate.json
+      - step: Namespace_Get
+        exampleFile: ../examples/NameSpaces/SBNameSpaceGet.json
+      - step: Namespace_List
+        exampleFile: ../examples/NameSpaces/SBNameSpaceList.json
+      - step: Namespace_ListByResourceGroup
+        exampleFile: ../examples/NameSpaces/SBNameSpaceListByResourceGroup.json
+      - step: Operation_List
+        exampleFile: ../examples/SBOperations_List.json
+      
+      # AuthorizationRule
+      - step: Namespace_CreateAuthorizationRule
+        exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleCreate.json
+      - step: Namespace_GetAuthorizationRule
+        exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleGet.json
+      - step: Namespace_ListAuthorizationRules
+        exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json
+      - step: Namespace_RegenerateKeys
+        exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenerateKey.json
+      - step: Namespace_ListKeys
+        exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleListKey.json        
+      
+      # NetworkRuleSet
+      # - step: Create_Subnet
+      #   armTemplate: armtemplate/Create_NetworkAndSubnet.json
+      # - step: Namespace_CreateNetworkRuleSet
+      #   exampleFile: ../examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetCreate.json
+      #   requestUpdate:
+      #     - remove: /parameters/properties/virtualNetworkRules/1
+      #     - remove: /parameters/properties/virtualNetworkRules/2
+      #     - replace: /parameters/properties/virtualNetworkRules/0/subnet/id
+      #       value: $(subnetId)
+      - step: Namespace_GetNetworkRuleSet
+        exampleFile: ../examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetGet.json
+      - step: Namespace_ListNetworkRuleSets
+        exampleFile: ../examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetList.json
+
+      - step: Namespace_DeleteAuthorizationRule
+        exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleDelete.json
+      - step: Namespace_Delete
+        exampleFile: ../examples/NameSpaces/SBNameSpaceDelete.json

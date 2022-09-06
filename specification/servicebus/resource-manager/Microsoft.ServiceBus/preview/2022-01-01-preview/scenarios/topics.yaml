@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  namespaceName: 
+    type: string
+    prefix: sbnamespacet
+
+prepareSteps:
+  - step: Namespace_Create
+    exampleFile: ../examples/NameSpaces/SBNameSpaceCreate.json
+
+scenarios:
+  - scenario: Topic
+    description: Microsoft.ServiceBus/namespaces/topics
+    variables:
+      topicName:
+        type: string
+        prefix: topicna
+      authorizationRuleName:
+        type: string
+        prefix: topicauthrule
+      subscriptionName:
+        type: string
+        prefix: subscriptionna
+      ruleName: 
+        type: string
+        prefix: rulena
+    steps:
+    - step: Topic_Create
+      exampleFile: ../examples/Topics/SBTopicCreate.json
+    - step: Topic_Get
+      exampleFile: ../examples/Topics/SBTopicGet.json
+    - step: Topic_ListByNamespace
+      exampleFile: ../examples/Topics/SBTopicListByNameSpace.json
+    - step: Topic_CreateAuthorizationRule
+      exampleFile: ../examples/Topics/SBTopicAuthorizationRuleCreate.json
+    - step: Topic_GetAuthorizationRule
+      exampleFile: ../examples/Topics/SBTopicAuthorizationRuleGet.json
+    - step: Topic_ListAuthorizationRules
+      exampleFile: ../examples/Topics/SBTopicAuthorizationRuleListAll.json
+    - step: Topic_RegenerateKeys
+      exampleFile: ../examples/Topics/SBTopicAuthorizationRuleRegenerateKey.json
+    - step: Topic_ListKeys
+      exampleFile: ../examples/Topics/SBTopicAuthorizationRuleListKey.json
+    - step: Topic_DeleteAuthorizationRule
+      exampleFile: ../examples/Topics/SBTopicAuthorizationRuleDelete.json
+
+    # Subscription
+    - step: Subscription_Create
+      exampleFile: ../examples/Subscriptions/SBSubscriptionCreate.json
+    - step: Subscription_Get
+      exampleFile: ../examples/Subscriptions/SBSubscriptionGet.json
+    - step: Subscription_ListByTopic
+      exampleFile: ../examples/Subscriptions/SBSubscriptionListByTopic.json
+
+    # Rule
+    - step: Rule_Create
+      exampleFile: ../examples/Rules/RuleCreate_CorrelationFilter.json
+    - step: Rule_Get
+      exampleFile: ../examples/Rules/RuleGet.json
+    - step: Rule_ListBySubscription
+      exampleFile: ../examples/Rules/RuleListBySubscription.json
+    - step: Rule_Delete
+      exampleFile: ../examples/Rules/RuleDelete.json
+      
+    - step: Subscription_Delete
+      exampleFile: ../examples/Subscriptions/SBSubscriptionDelete.json
+    - step: Topic_Delete
+      exampleFile: ../examples/Topics/SBTopicDelete.json
+
+cleanUpSteps:
+  - step: Namespace_Delete
+    exampleFile: ../examples/NameSpaces/SBNameSpaceDelete.json
