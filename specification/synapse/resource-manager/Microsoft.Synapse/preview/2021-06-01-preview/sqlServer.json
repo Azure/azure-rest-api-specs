@@ -1599,18 +1599,30 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators.",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "storageEndpoint": {
           "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
@@ -1623,7 +1635,11 @@
         "retentionDays": {
           "format": "int32",
           "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "creationTime": {
           "format": "date-time",
