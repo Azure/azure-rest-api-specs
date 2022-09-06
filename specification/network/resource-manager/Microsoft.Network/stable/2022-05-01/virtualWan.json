@@ -1675,6 +1675,240 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}": {
+      "get": {
+        "operationId": "RouteMaps_Get",
+        "x-ms-examples": {
+          "RouteMapGet": {
+            "$ref": "./examples/RouteMapGet.json"
+          }
+        },
+        "description": "Retrieves the details of a RouteMap.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RouteMap's resource group."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub containing the RouteMap."
+          },
+          {
+            "name": "routeMapName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteMap."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RouteMap retrieved.",
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RouteMaps_CreateOrUpdate",
+        "x-ms-examples": {
+          "RouteMapPut": {
+            "$ref": "./examples/RouteMapPut.json"
+          }
+        },
+        "description": "Creates a RouteMap if it doesn't exist else updates the existing one.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RouteMap's resource group."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub containing the RouteMap."
+          },
+          {
+            "name": "routeMapName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteMap."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "routeMapParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            },
+            "description": "Parameters supplied to create or update a RouteMap."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RouteMap created or updated.",
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the RouteMap retrieved.",
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "RouteMaps_Delete",
+        "x-ms-examples": {
+          "RouteMapDelete": {
+            "$ref": "./examples/RouteMapDelete.json"
+          }
+        },
+        "description": "Deletes a RouteMap.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RouteMap's resource group."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub containing the RouteMap."
+          },
+          {
+            "name": "routeMapName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteMap."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. RouteMap deleted."
+          },
+          "202": {
+            "description": "Request received successfully. RouteMap deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No RouteMaps exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeMaps": {
+      "get": {
+        "operationId": "RouteMaps_List",
+        "x-ms-examples": {
+          "RouteMapList": {
+            "$ref": "./examples/RouteMapList.json"
+          }
+        },
+        "description": "Retrieves the details of all RouteMaps.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RouteMap's resource group'."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub containing the RouteMap."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the RouteMaps for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListRouteMapsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}": {
       "put": {
         "operationId": "HubVirtualNetworkConnections_CreateOrUpdate",
@@ -5683,6 +5917,126 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes": {
+      "post": {
+        "operationId": "VirtualHubs_GetInboundRoutes",
+        "x-ms-examples": {
+          "Inbound Routes for the Virtual Hub on a Particular Connection": {
+            "$ref": "./examples/GetInboundRoutes.json"
+          }
+        },
+        "description": "Gets the inbound routes configured for the Virtual Hub on a particular connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "getInboundRoutesParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetInboundRoutesParameters"
+            },
+            "description": "Parameters supplied to get the inbound routes for a connection resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Follow the location header for the inbound routes list."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/outboundRoutes": {
+      "post": {
+        "operationId": "VirtualHubs_GetOutboundRoutes",
+        "x-ms-examples": {
+          "Outbound Routes for the Virtual Hub on a Particular Connection": {
+            "$ref": "./examples/GetOutboundRoutes.json"
+          }
+        },
+        "description": "Gets the outbound routes configured for the Virtual Hub on a particular connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "getOutboundRoutesParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetOutboundRoutesParameters"
+            },
+            "description": "Parameters supplied to get the outbound routes for a connection resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Follow the location header for the outbound routes list."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}": {
       "put": {
         "operationId": "RoutingIntent_CreateOrUpdate",
@@ -6253,6 +6607,14 @@
           "type": "array",
           "readOnly": true,
           "description": "List of references to IpConfigurations.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "routeMaps": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to RouteMaps.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
@@ -8432,6 +8794,14 @@
         "vnetRoutes": {
           "$ref": "#/definitions/VnetRoute",
           "description": "List of routes that control routing from VirtualHub into a virtual network connection."
+        },
+        "inboundRouteMap": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The resource id of the RouteMap associated with this RoutingConfiguration for inbound learned routes."
+        },
+        "outboundRouteMap": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The resource id of theRouteMap associated with this RoutingConfiguration for outbound advertised routes."
         }
       }
     },
@@ -8457,6 +8827,10 @@
     "VnetRoute": {
       "description": "List of routes that control routing from VirtualHub into a virtual network connection.",
       "properties": {
+        "staticRoutesConfig": {
+          "$ref": "#/definitions/StaticRoutesConfig",
+          "description": "Configuration for static routes on this HubVnetConnection."
+        },
         "staticRoutes": {
           "type": "array",
           "description": "List of all Static Routes.",
@@ -8471,6 +8845,21 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
+        }
+      }
+    },
+    "StaticRoutesConfig": {
+      "description": "Configuration for static routes on this HubVnetConnectionConfiguration for static routes on this HubVnetConnection.",
+      "type": "object",
+      "properties": {
+        "propagateStaticRoutes": {
+          "description": "Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vnetLocalRouteOverrideCriteria": {
+          "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic with destination in spoke.",
+          "$ref": "#/definitions/VnetLocalRouteOverrideCriteria"
         }
       }
     },
@@ -8547,6 +8936,55 @@
         "virtualWanResourceType": {
           "type": "string",
           "description": "The type of the specified resource like RouteTable, ExpressRouteConnection, HubVirtualNetworkConnection, VpnConnection and P2SConnection."
+        }
+      }
+    },
+    "EffectiveRouteMapRoute": {
+      "description": "The effective RouteMap route configured on the connection resource.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The address prefix of the route.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bgpCommunities": {
+          "description": "BGP communities of the route.",
+          "type": "string"
+        },
+        "asPath": {
+          "description": "The ASPath of this route.",
+          "type": "string"
+        }
+      }
+    },
+    "GetInboundRoutesParameters": {
+      "description": "The parameters specifying the connection resource whose inbound routes are being requested.",
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The connection resource whose inbound routes are being requested."
+        },
+        "connectionType": {
+          "type": "string",
+          "description": "The type of the specified connection resource like ExpressRouteConnection, HubVirtualNetworkConnection, VpnConnection and P2SConnection."
+        }
+      }
+    },
+    "GetOutboundRoutesParameters": {
+      "description": "The parameters specifying the connection resource whose outbound routes are being requested.",
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The connection resource whose outbound routes are being requested."
+        },
+        "connectionType": {
+          "type": "string",
+          "description": "The type of the specified connection resource like ExpressRouteConnection, HubVirtualNetworkConnection, VpnConnection and P2SConnection."
         }
       }
     },
@@ -8671,6 +9109,253 @@
       },
       "description": "The routing policy object used in a RoutingIntent resource.",
       "type": "object"
+    },
+    "RouteMap": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteMapProperties",
+          "description": "Properties of the RouteMap resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource id."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "The RouteMap child resource of a Virtual hub.",
+      "type": "object"
+    },
+    "ListRouteMapsResult": {
+      "description": "List of RouteMaps and a URL nextLink to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMap"
+          },
+          "description": "List of RouteMaps."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "RouteMapProperties": {
+      "properties": {
+        "associatedInboundConnections": {
+          "type": "array",
+          "description": "List of connections which have this RoutMap associated for inbound traffic.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associatedOutboundConnections": {
+          "type": "array",
+          "description": "List of connections which have this RoutMap associated for outbound traffic.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rules": {
+          "type": "array",
+          "description": "List of RouteMap rules to be applied.",
+          "items": {
+            "$ref": "#/definitions/RouteMapRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the RouteMap resource."
+        }
+      },
+      "description": "Properties of RouteMap resource",
+      "type": "object"
+    },
+    "RouteMapRule": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name for the rule."
+        },
+        "matchCriteria": {
+          "type": "array",
+          "description": "List of matching criterion which will be applied to traffic.",
+          "items": {
+            "$ref": "#/definitions/Criterion"
+          },
+          "x-ms-identifiers": []
+        },
+        "actions": {
+          "type": "array",
+          "description": "List of actions which will be applied on a match.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextStepIfMatched": {
+          "$ref": "#/definitions/NextStep",
+          "description": "Next step after rule is evaluated. Current supported behaviors are 'Continue'(to next rule) and 'Terminate'."
+        }
+      },
+      "description": "A RouteMap Rule.",
+      "type": "object"
+    },
+    "Criterion": {
+      "properties": {
+        "routePrefix": {
+          "type": "array",
+          "description": "List of route prefixes which this criteria matches.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "community": {
+          "type": "array",
+          "description": "List of BGP communities which this criteria matches.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asPath": {
+          "type": "array",
+          "description": "List of AS paths which this criteria matches.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matchCondition": {
+          "$ref": "#/definitions/RouteMapMatchCondition",
+          "description": "Match condition to apply RouteMap rules."
+        }
+      },
+      "description": "A matching criteria which matches routes based on route prefix, community, and AS path.",
+      "type": "object"
+    },
+    "Action": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RouteMapActionType",
+          "description": "Type of action to be taken. Supported types are 'Remove', 'Add', 'Replace', and 'Drop.'"
+        },
+        "parameters": {
+          "type": "array",
+          "description": "List of parameters relevant to the action.For instance if type is drop then parameters has list of prefixes to be dropped.If type is add, parameters would have list of ASN numbers to be added",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Action to be taken on a route matching a RouteMap criterion.",
+      "type": "object"
+    },
+    "Parameter": {
+      "properties": {
+        "routePrefix": {
+          "type": "array",
+          "description": "List of route prefixes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "community": {
+          "type": "array",
+          "description": "List of BGP communities.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asPath": {
+          "type": "array",
+          "description": "List of AS paths.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Parameters for an Action.",
+      "type": "object"
+    },
+    "RouteMapMatchCondition": {
+      "type": "string",
+      "description": "Match condition to apply RouteMap rules.",
+      "enum": [
+        "Unknown",
+        "Contains",
+        "Equals",
+        "NotContains",
+        "NotEquals"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMapMatchCondition",
+        "modelAsString": true
+      }
+    },
+    "NextStep": {
+      "type": "string",
+      "description": "Supported next step behaviors after a rule is applied to a matched route",
+      "enum": [
+        "Unknown",
+        "Continue",
+        "Terminate"
+      ],
+      "x-ms-enum": {
+        "name": "NextStep",
+        "modelAsString": true
+      }
+    },
+    "RouteMapActionType": {
+      "type": "string",
+      "description": "Kind of actions which can be taken on a matched route. Add, Replace, Remove refer to parameters on the route, like community or prefix",
+      "enum": [
+        "Unknown",
+        "Remove",
+        "Add",
+        "Replace",
+        "Drop"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMapActionType",
+        "modelAsString": true
+      }
+    },
+    "VnetLocalRouteOverrideCriteria": {
+      "type": "string",
+      "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic with destination in spoke vnet.",
+      "enum": [
+        "Contains",
+        "Equal"
+      ],
+      "x-ms-enum": {
+        "name": "VnetLocalRouteOverrideCriteria",
+        "modelAsString": true
+      }
     }
   }
 }
