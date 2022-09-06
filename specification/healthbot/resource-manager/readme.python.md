@@ -9,7 +9,7 @@ title: HealthBotMgmtClient
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.healthbot
 package-name: azure-mgmt-healthbot
-package-version: 2020-10-20-preview
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
