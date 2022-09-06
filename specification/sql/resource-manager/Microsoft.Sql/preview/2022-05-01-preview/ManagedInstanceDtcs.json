@@ -161,7 +161,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDtcName - User tried to interact with Azure SQL Managed Instance DTC settings with a DTC name different from 'current'.\n\n * 400 InvalidUpdateDtcOperationParameters - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 InvalidDtcAuthenticationMethod - DTC authentication method \"{0}\" is not supported.\n\n * 400 InvalidDtcXaTransactionsDefaultTimeoutValue - Invalid DTC XA Transactions default timeout value.\n\n * 400 InvalidDtcXaTransactionsMaximumTimeoutValue - Invalid DTC XA Transactions maximum timeout value.\n\n * 400 InvalidDtcVirtualClusterVersion - Virtual cluster version of the Azure SQL Managed Instance \"{0}\" is not supported.\n\n * 400 ManagementServiceManagedInstanceDtcFeatureDisabled - User tried to interact with Azure SQL Managed Instance DTC settings but DTC feature is currently not supported.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           }
         },
         "x-ms-long-running-operation": true,
@@ -267,8 +267,18 @@
           "type": "boolean"
         },
         "snaLu6point2TransactionsEnabled": {
-          "description": "Allow SNA LU 6.2 to managed instance DTC.",
+          "description": "Allow SNA LU 6.2 Transactions to managed instance DTC.",
           "type": "boolean"
+        },
+        "xaTransactionsDefaultTimeout": {
+          "format": "int32",
+          "description": "Default timeout for XA Transactions (in seconds).",
+          "type": "integer"
+        },
+        "xaTransactionsMaximumTimeout": {
+          "format": "int32",
+          "description": "Maximum timeout for XA Transactions (in seconds).",
+          "type": "integer"
         }
       }
     },
