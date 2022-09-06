@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-09-01",
+    "version": "2022-09-01-preview",
     "title": "Azure Maps Routeset Service.",
     "description": "APIs for managing routesets."
   },
@@ -57,6 +57,30 @@
     }
   },
   "definitions": {
+    "LevelOrdinals": {
+      "description": "The level identifiers in the facility.",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "FacilityDetails": {
+      "description": "The level identifiers in the facility.",
+      "type": "object",
+      "properties": {
+        "facilityId": {
+          "description": "the identifier of the structure this routeset was created from.",
+          "type": "string"
+        },
+        "levelOrdinals": {
+          "description": "the level identifiers within this facility",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LevelOrdinals"
+          }
+        }
+      }
+    },
     "Routeset": {
       "description": "Detailed information for the routeset.",
       "type": "object",
@@ -84,6 +108,9 @@
         "facilityDetails": {
           "description": "The facility information and building level ordinal numbers.",
           "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacilityDetails"
+          },
           "readOnly": true
         },
         "creationMode": {
@@ -124,13 +151,13 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2022-09-01",
+      "default": "2022-09-01-preview",
       "x-ms-parameter-location": "client"
     },
     "DatasetId": {
       "name": "datasetId",
       "type": "string",
-      "in": "path",
+      "in": "query",
       "description": "The ID of the dataset used to create the routeset.",
       "required": true,
       "x-ms-parameter-location": "method"
@@ -158,8 +185,8 @@
       "required": true,
       "x-ms-parameter-location": "client"
     },
-    "RoutesetOperationId": {
-      "name": "routesetOperationId",
+    "OperationId": {
+      "name": "operationId",
       "description": "The ID used to query the status of the routeset creation.",
       "type": "string",
       "in": "path",
@@ -369,7 +396,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/RoutesetOperationId"
+            "$ref": "#/parameters/OperationId"
           }
         ],
         "responses": {
