@@ -26,6 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
+tag: package-2021-04-searchservice-preview
 
 directive:
   - where:
