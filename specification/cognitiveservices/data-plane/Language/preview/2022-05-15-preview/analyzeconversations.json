@@ -873,21 +873,21 @@
           "description": "The entity resolution object kind.",
           "type": "string",
           "enum": [
-            "Boolean",
-            "DateTime",
-            "Number",
-            "Ordinal",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency",
-            "NumericRange",
-            "TemporalSpan"
+            "BooleanResolution",
+            "DateTimeResolution",
+            "NumberResolution",
+            "OrdinalResolution",
+            "SpeedResolution",
+            "WeightResolution",
+            "LengthResolution",
+            "VolumeResolution",
+            "AreaResolution",
+            "AgeResolution",
+            "InformationResolution",
+            "TemperatureResolution",
+            "CurrencyResolution",
+            "NumericRangeResolution",
+            "TemporalSpanResolution"
           ],
           "x-ms-enum": {
             "name": "ResolutionKind",
@@ -924,7 +924,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Age",
+      "x-ms-discriminator-value": "AgeResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -957,7 +957,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Volume",
+      "x-ms-discriminator-value": "VolumeResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1013,7 +1013,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Speed",
+      "x-ms-discriminator-value": "SpeedResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1055,7 +1055,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Area",
+      "x-ms-discriminator-value": "AreaResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1096,7 +1096,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Length",
+      "x-ms-discriminator-value": "LengthResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1141,7 +1141,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Information",
+      "x-ms-discriminator-value": "InformationResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1182,7 +1182,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Temperature",
+      "x-ms-discriminator-value": "TemperatureResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1215,7 +1215,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Weight",
+      "x-ms-discriminator-value": "WeightResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1259,7 +1259,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Currency",
+      "x-ms-discriminator-value": "CurrencyResolution",
       "properties": {
         "ISO4217": {
           "type": "string",
@@ -1288,7 +1288,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Boolean",
+      "x-ms-discriminator-value": "BooleanResolution",
       "properties": {
         "value": {
           "type": "boolean"
@@ -1306,7 +1306,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "DateTime",
+      "x-ms-discriminator-value": "DateTimeResolution",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
@@ -1348,7 +1348,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Number",
+      "x-ms-discriminator-value": "NumberResolution",
       "properties": {
         "numberKind": {
           "type": "string",
@@ -1384,7 +1384,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Ordinal",
+      "x-ms-discriminator-value": "OrdinalResolution",
       "properties": {
         "offset": {
           "type": "string",
@@ -1422,7 +1422,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalSpan",
+      "x-ms-discriminator-value": "TemporalSpanResolution",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -1447,7 +1447,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumericRange",
+      "x-ms-discriminator-value": "NumericRangeResolution",
       "properties": {
         "rangeKind": {
           "type": "string",

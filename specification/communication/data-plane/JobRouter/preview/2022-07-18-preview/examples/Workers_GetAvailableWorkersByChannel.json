@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2022-07-18-preview",
+    "status": "active",
+    "channelId": "CustomChatChannel",
+    "hasCapacity": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "routerWorker": {
+              "id": "DefaultWorker",
+              "state": "active",
+              "queueAssignments": {
+                "MainQueue": {},
+                "SecondaryQueue": {}
+              },
+              "totalCapacity": 100,
+              "labels": {},
+              "tags": {},
+              "channelConfigurations": {
+                "CustomChatChannel": {
+                  "capacityCostPerJob": 10
+                },
+                "CustomVoiceChannel": {
+                  "capacityCostPerJob": 100
+                }
+              },
+              "offers": [],
+              "assignedJobs": [],
+              "loadRatio": 0,
+              "availableForOffers": true
+            },
+            "etag": "etag"
+          },
+          {
+            "routerWorker": {
+              "id": "SecondWorker",
+              "state": "active",
+              "queueAssignments": {
+                "MainQueue": {},
+                "SecondaryQueue": {}
+              },
+              "totalCapacity": 100,
+              "labels": {},
+              "tags": {},
+              "channelConfigurations": {
+                "CustomChatChannel": {
+                  "capacityCostPerJob": 10
+                },
+                "CustomVoiceChannel": {
+                  "capacityCostPerJob": 100
+                }
+              },
+              "offers": [],
+              "assignedJobs": [],
+              "loadRatio": 0,
+              "availableForOffers": true
+            },
+            "etag": "etag"
+          }
+        ],
+        "nextLink": "null"
+      }
+    }
+  }
+}
