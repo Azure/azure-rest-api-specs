@@ -1,0 +1,757 @@
+{
+    "x-generator": "NSwag v13.12.1.0 (NJsonSchema v10.4.6.0 (Newtonsoft.Json v13.0.0.0))",
+    "swagger": "2.0",
+    "info": {
+      "title": "Microsoft Marketplace Catalog Offer API",
+      "version": "2022-09-01-preview"
+    },
+    "host": "catalogapi.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "paths": {
+      "/offers/{id}": {
+        "get": {
+          "tags": [
+            "SinglePublicOffer"
+          ],
+          "operationId": "SinglePublicOffer_Get",
+          "parameters": [
+            {
+              "type": "string",
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "Offer legacy or big id",
+              "x-nullable": true
+            },
+            {
+              "type": "string",
+              "name": "api-version",
+              "x-originalName": "apiVersion",
+              "in": "query",
+              "description": "API version",
+              "default": "2022-09-01-preview",
+              "x-nullable": true
+            },
+            {
+              "type": "string",
+              "name": "language",
+              "in": "query",
+              "description": "Offer language",
+              "default": "en",
+              "x-nullable": true
+            },
+            {
+              "type": "string",
+              "name": "market",
+              "in": "query",
+              "description": "Offer market",
+              "default": "US",
+              "x-nullable": true
+            },
+            {
+              "type": "boolean",
+              "name": "includeStopSoldPlans",
+              "in": "query",
+              "description": "To include stop sold or hidden plans",
+              "default": false,
+              "x-nullable": false
+            },
+            {
+              "type": "array",
+              "name": "hideKeys",
+              "in": "query",
+              "description": "Add hide key to retrieve preview items",
+              "collectionFormat": "multi",
+              "x-nullable": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "boolean",
+              "name": "includeHiddenPlans",
+              "in": "query",
+              "description": "To include hidden plans",
+              "default": false,
+              "x-nullable": false
+            }
+          ],
+          "responses": {
+            "200": {
+              "x-nullable": false,
+              "description": "Returns a single public or preview offer",
+              "schema": {
+                "$ref": "#/definitions/ProductSummary"
+              }
+            },
+            "404": {
+              "x-nullable": false,
+              "description": "In case offer does not exist",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "ProductSummary": {
+        "type": "object",
+        "required": [
+          "productType"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "Display name"
+          },
+          "popularity": {
+            "type": "number",
+            "description": "Popularity of the product",
+            "format": "double"
+          },
+          "categories": {
+            "type": "array",
+            "description": "List of categories the marketplace item belongs to",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cloudIndustryCategories": {
+            "type": "array",
+            "description": "List of cloud industry IDs the item belongs to",
+            "items": {
+              "type": "string"
+            }
+          },
+          "labels": {
+            "type": "array",
+            "description": "List of category IDs the marketplace item belongs to",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publisherId": {
+            "type": "string",
+            "description": "Publisher id"
+          },
+          "azureBenefit": {
+            "$ref": "#/definitions/AzureBenefit"
+          },
+          "badges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Badge"
+            }
+          },
+          "publisherType": {
+            "description": "A value indicating whether it is a microsoft product",
+            "allOf": [
+              {
+                "$ref": "#/definitions/PublisherType"
+              }
+            ]
+          },
+          "publishingStage": {
+            "$ref": "#/definitions/PublishingStage"
+          },
+          "uniqueProductId": {
+            "type": "string",
+            "description": "Offer legacy id"
+          },
+          "productType": {
+            "description": "Offer type",
+            "allOf": [
+              {
+                "$ref": "#/definitions/ProductType"
+              }
+            ]
+          },
+          "operatingSystems": {
+            "type": "array",
+            "description": "Operating system info for this offer",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pricingTypes": {
+            "type": "array",
+            "description": "The list of the pricing types for which this offer is designated",
+            "items": {
+              "$ref": "#/definitions/PricingType"
+            }
+          },
+          "publisherDisplayName": {
+            "type": "string",
+            "description": "Publisher display name"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary"
+          },
+          "longSummary": {
+            "type": "string",
+            "description": "LongSummary"
+          },
+          "privacyPolicyUrl": {
+            "type": "string",
+            "description": "PrivacyPolicyUrl"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version"
+          },
+          "standardContractAmendmentsRevisionId": {
+            "type": "string",
+            "description": "StandardContractAmendmentsRevisionId"
+          },
+          "cspLegalTermsUri": {
+            "type": "string",
+            "description": "CspLegalTermsUri"
+          },
+          "productOwnershipSellingMotion": {
+            "type": "string",
+            "description": "ProductOwnershipSellingMotion"
+          },
+          "videos": {
+            "type": "array",
+            "description": "Videos",
+            "items": {
+              "$ref": "#/definitions/Video"
+            }
+          },
+          "isReseller": {
+            "type": "boolean",
+            "description": "IsReseller"
+          },
+          "screenshots": {
+            "type": "array",
+            "description": "Screenshots",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vmImageGenerations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vmArchitectureTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "smallIconUri": {
+            "type": "string"
+          },
+          "mediumIconUri": {
+            "type": "string"
+          },
+          "largeIconUri": {
+            "type": "string"
+          },
+          "wideIconUri": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "ratingBuckets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RatingBucket"
+            }
+          },
+          "ratingAverage": {
+            "type": "number",
+            "format": "double"
+          },
+          "startingPrice": {
+            "$ref": "#/definitions/MarketStartPrice"
+          },
+          "linkedAddIns": {
+            "type": "array",
+            "description": "List of linked Add Ins provided for the item",
+            "items": {
+              "type": "string"
+            }
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PlanSummary"
+            }
+          },
+          "legalTermsUri": {
+            "type": "string"
+          },
+          "legalTermsType": {
+            "type": "string"
+          },
+          "supportUri": {
+            "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Link"
+            }
+          }
+        }
+      },
+      "AzureBenefit": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "Eligible",
+          "NotEligible"
+        ],
+        "x-ms-enum": {
+          "name": "AzureBenefit",
+          "modelAsString": true
+        }
+      },
+      "Badge": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "PreferredSolution",
+          "PowerBICertified",
+          "AdditionalPurchaseRequirement"
+        ],
+        "x-ms-enum": {
+          "name": "Badge",
+          "modelAsString": true
+        }
+      },
+      "PublisherType": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "Microsoft",
+          "ThirdParty"
+        ],
+        "x-ms-enum": {
+          "name": "PublisherType",
+          "modelAsString": true
+        }
+      },
+      "PublishingStage": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "Preview",
+          "Public"
+        ],
+        "x-ms-enum": {
+          "name": "PublishingStage",
+          "modelAsString": true
+        }
+      },
+      "ProductType": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "None",
+          "DevService",
+          "ManagedApplication",
+          "VirtualMachine",
+          "AzureApplication",
+          "Container",
+          "SaaS",
+          "SolutionTemplate",
+          "IotEdgeModules",
+          "ManagedServices",
+          "ContainerApps",
+          "VisualStudioExtension",
+          "DynamicsOps",
+          "DynamicsCE",
+          "DynamicsBC",
+          "PowerBI",
+          "ConsultingServices",
+          "CosellOnly",
+          "CoreVirtualMachine",
+          "PowerBIVisuals",
+          "Office365",
+          "AADApps"
+        ],
+        "x-ms-enum": {
+          "name": "ProductType",
+          "modelAsString": true
+        }
+      },
+      "PricingType": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "Free",
+          "FreeTrial",
+          "Byol",
+          "Payg",
+          "Ri"
+        ],
+        "x-ms-enum": {
+          "name": "PricingType",
+          "modelAsString": true
+        }
+      },
+      "Video": {
+        "type": "object",
+        "properties": {
+          "caption": {
+            "type": "string",
+            "description": "caption"
+          },
+          "uri": {
+            "type": "string",
+            "description": "uri"
+          },
+          "videoPurpose": {
+            "type": "string",
+            "description": "videoPurpose"
+          },
+          "previewImage": {
+            "description": "previewImage",
+            "allOf": [
+              {
+                "$ref": "#/definitions/PreviewImage"
+              }
+            ]
+          }
+        }
+      },
+      "PreviewImage": {
+        "type": "object",
+        "properties": {
+          "caption": {
+            "type": "string",
+            "description": "caption"
+          },
+          "uri": {
+            "type": "string",
+            "description": "uri"
+          },
+          "imagePurpose": {
+            "type": "string",
+            "description": "imagePurpose"
+          }
+        }
+      },
+      "RatingBucket": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "AboveOne",
+          "AboveTwo",
+          "AboveThree",
+          "AboveFour"
+        ],
+        "x-ms-enum": {
+          "name": "RatingBucket",
+          "modelAsString": true
+        }
+      },
+      "MarketStartPrice": {
+        "type": "object",
+        "properties": {
+          "market": {
+            "type": "string",
+            "description": "The market."
+          },
+          "termUnits": {
+            "type": "string",
+            "description": "The terms pricing model units."
+          },
+          "meterUnits": {
+            "type": "string",
+            "description": "The meters pricing model units."
+          },
+          "minTermPrice": {
+            "type": "number",
+            "description": "Starting (minimal) terms price.",
+            "format": "decimal"
+          },
+          "minMeterPrice": {
+            "type": "number",
+            "description": "Starting (minimal) meters price.",
+            "format": "decimal"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency for price."
+          }
+        }
+      },
+      "PlanSummary": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "planId": {
+            "type": "string",
+            "description": "Plan id"
+          },
+          "cspState": {
+            "description": "A value indicating whether the product is available for purchase through CSP channel",
+            "allOf": [
+              {
+                "$ref": "#/definitions/CSPState"
+              }
+            ]
+          },
+          "uniquePlanId": {
+            "type": "string",
+            "description": "Unique plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the plan"
+          },
+          "vmArchitectureType": {
+            "type": "string"
+          },
+          "metadata": {
+            "description": "change this",
+            "allOf": [
+              {
+                "$ref": "#/definitions/PlanMetadata"
+              }
+            ]
+          },
+          "operatingSystem": {
+            "description": "Operating system info for this plan",
+            "allOf": [
+              {
+                "$ref": "#/definitions/OperatingSystem"
+              }
+            ]
+          },
+          "uiDefinitionUri": {
+            "type": "string",
+            "description": "What blade to opne when someone wants to create a marketplace item"
+          },
+          "pricingTypes": {
+            "type": "array",
+            "description": "The list of the pricing types for which this plan is designated",
+            "items": {
+              "$ref": "#/definitions/PricingType"
+            }
+          },
+          "isQuantifiable": {
+            "type": "boolean",
+            "description": "A value indicating whether the plan is quantifiable"
+          },
+          "vmSecuritytype": {
+            "type": "string",
+            "description": "VM security type"
+          },
+          "artifacts": {
+            "type": "array",
+            "description": "Files related to the marketplace item",
+            "items": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "skuId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/definitions/ProductType"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayRank": {
+            "type": "string"
+          },
+          "purchaseDurationDiscounts": {
+            "type": "array",
+            "description": "List of purchase duration discounts",
+            "items": {
+              "$ref": "#/definitions/PurchaseDurationDiscount"
+            }
+          },
+          "leadGeneration": {
+            "description": "Lead generation info",
+            "allOf": [
+              {
+                "$ref": "#/definitions/LeadGeneration"
+              }
+            ]
+          },
+          "isPrivate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CSPState": {
+        "type": "string",
+        "description": "",
+        "enum": [
+          "OptIn",
+          "OptOut",
+          "Terminated",
+          "SelectiveOptIn"
+        ],
+        "x-ms-enum": {
+          "name": "CSPState",
+          "modelAsString": true
+        }
+      },
+      "PlanMetadata": {
+        "type": "object",
+        "properties": {
+          "generation": {
+            "type": "string",
+            "description": "generation"
+          },
+          "altStackReference": {
+            "type": "string",
+            "description": "altStackReference"
+          },
+          "relatedSkus": {
+            "type": "array",
+            "description": "relatedSkus",
+            "items": {
+              "$ref": "#/definitions/PlanSkuRelation"
+            }
+          }
+        }
+      },
+      "PlanSkuRelation": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "description": "Sku",
+            "allOf": [
+              {
+                "$ref": "#/definitions/RelatedSku"
+              }
+            ]
+          },
+          "relationType": {
+            "type": "string",
+            "description": "Relation Type"
+          }
+        }
+      },
+      "RelatedSku": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name"
+          },
+          "generation": {
+            "type": "string",
+            "description": "Generation"
+          },
+          "identity": {
+            "type": "string",
+            "description": "Identity"
+          }
+        }
+      },
+      "OperatingSystem": {
+        "type": "object",
+        "properties": {
+          "family": {
+            "type": "string",
+            "description": "Operating system family"
+          },
+          "type": {
+            "type": "string",
+            "description": "Operating system type"
+          },
+          "name": {
+            "type": "string",
+            "description": "Operating system name"
+          }
+        }
+      },
+      "Artifact": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Artifact name"
+          },
+          "uri": {
+            "type": "string",
+            "description": "Artifact uri"
+          },
+          "type": {
+            "type": "string",
+            "description": "Artifact type"
+          }
+        }
+      },
+      "PurchaseDurationDiscount": {
+        "type": "object",
+        "required": [
+          "discountPercentage"
+        ],
+        "properties": {
+          "duration": {
+            "type": "string",
+            "description": "duration"
+          },
+          "discountPercentage": {
+            "type": "number",
+            "description": "discountPercentage",
+            "format": "double"
+          }
+        }
+      },
+      "LeadGeneration": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "productId"
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the link"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the link"
+          },
+          "uri": {
+            "type": "string",
+            "description": "URI of the link"
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "JWT": {
+        "type": "apiKey",
+        "description": "Copy this into the value field: Bearer {token}",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
