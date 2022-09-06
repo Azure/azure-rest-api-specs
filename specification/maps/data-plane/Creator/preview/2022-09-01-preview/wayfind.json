@@ -13,6 +13,9 @@
 			"get": {
 				"description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path from one location in a facility to another.",
 				"operationId": "wayfindingGetPath",
+				"x-ms-examples": {
+					"Get the shortest path between two points in the facility.": { "$ref": "./examples/wayfind/Wayfind_GetPath.json" } 
+				},
 				"parameters": [
 					{"$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"},
 					{"$ref": "#/parameters/SubscriptionKey"},
@@ -127,6 +130,7 @@
 			"name": "width",
 			"description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a width of 2.0, the searched path will avoid openings less than 2.0 meters wide. The default width is 0.0.",	"type": "number",
 			"in": "query",
+			"default": "0.0",
 			"x-ms-parameter-location": "client"
 		}
 	},
