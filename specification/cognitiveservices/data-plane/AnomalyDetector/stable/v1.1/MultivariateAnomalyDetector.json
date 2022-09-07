@@ -105,7 +105,6 @@
           },
           {
             "type": "integer",
-            "default": 10,
             "required": false,
             "description": "top indicates how many models will be fetched.",
             "name": "top",
@@ -126,6 +125,9 @@
         "responses": {
           "201": {
             "description": "Create and train a multivariate anomaly detection model.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
             "headers": {
               "Location": {
                 "description": "Location and ID of the model.",
@@ -168,6 +170,43 @@
       }
     },
     "/multivariate/models/{modelId}": {
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Delete model successfully. "
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "operationId": "DeleteMultivariateModel",
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Model identifier",
+            "format": "uuid"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
+          }
+        }
+      },
       "get": {
         "responses": {
           "200": {
@@ -205,43 +244,6 @@
         "x-ms-examples": {
           "Get multivariate model": {
             "$ref": "./examples/GetModel.json"
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Delete model successfully. "
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Delete Multivariate Model",
-        "description": "Delete an existing multivariate model according to the modelId",
-        "operationId": "DeleteMultivariateModel",
-        "parameters": [
-          {
-            "name": "modelId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Model identifier",
-            "format": "uuid"
-          }
-        ],
-        "x-ms-examples": {
-          "Delete multivariate model": {
-            "$ref": "./examples/DeleteModel.json"
           }
         }
       }
