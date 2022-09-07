@@ -31,7 +31,7 @@
       "get": {
         "responses": {
           "200": {
-            "description": "Get Multivariate Anomaly Detection Result by Result Id.",
+            "description": "Get multivariate anomaly detection result by Result Id.",
             "schema": {
               "$ref": "#/definitions/DetectionResult"
             }
@@ -50,7 +50,7 @@
           }
         },
         "summary": "Get Multivariate Anomaly Detection Result",
-        "description": "Get multivariate anomaly detection result based on resultId returned by the /models/<string:modelId>/entire/detect api",
+        "description": "For asynchronous inference, get multivariate anomaly detection result based on resultId returned by the /models/<string:modelId>/entire/detect api.",
         "operationId": "GetDetectionResult",
         "parameters": [
           {
@@ -73,7 +73,7 @@
       "get": {
         "responses": {
           "200": {
-            "description": "Succeed to get the list of models.",
+            "description": "Get the list of models successfully.",
             "schema": {
               "$ref": "#/definitions/ModelList"
             }
@@ -92,23 +92,23 @@
           }
         },
         "summary": "List Multivariate Models",
-        "description": "List models of a resource",
+        "description": "List models of a resource.",
         "operationId": "ListMultivariateModel",
         "parameters": [
           {
             "type": "integer",
             "default": 0,
             "required": false,
-            "description": "$skip indicates how many models will be skipped.",
-            "name": "$skip",
+            "description": "skip indicates how many models will be skipped.",
+            "name": "skip",
             "in": "query"
           },
           {
             "type": "integer",
             "default": 10,
             "required": false,
-            "description": "$top indicates how many models will be fetched.",
-            "name": "$top",
+            "description": "top indicates how many models will be fetched.",
+            "name": "top",
             "in": "query"
           }
         ],
@@ -147,7 +147,7 @@
           }
         },
         "summary": "Train a Multivariate Anomaly Detection Model",
-        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be in a single CSV file in which the first column is timestamp and the second column is value.",
+        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
         "operationId": "TrainMultivariateModel",
         "parameters": [
           {
@@ -168,43 +168,6 @@
       }
     },
     "/multivariate/models/{modelId}": {
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Successfully marked model for deletion. Model will be removed within a predefined time period."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Delete Multivariate Model",
-        "description": "Delete an existing multivariate model according to the modelId",
-        "operationId": "DeleteMultivariateModel",
-        "parameters": [
-          {
-            "name": "modelId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Model identifier",
-            "format": "uuid"
-          }
-        ],
-        "x-ms-examples": {
-          "Delete multivariate model": {
-            "$ref": "./examples/DeleteModel.json"
-          }
-        }
-      },
       "get": {
         "responses": {
           "200": {
@@ -244,6 +207,43 @@
             "$ref": "./examples/GetModel.json"
           }
         }
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Delete model successfully. "
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "operationId": "DeleteMultivariateModel",
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Model identifier",
+            "format": "uuid"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
+          }
+        }
       }
     },
     "/multivariate/models/{modelId}/entire/detect": {
@@ -272,7 +272,7 @@
           }
         },
         "summary": "Detect Multivariate Anomaly",
-        "description": "Submit detection multivariate anomaly task with the trained model of modelId, the input schema should be the same with the training request. Thus request will be complete asynchronously and will return a resultId for querying the detection result.The request should be a source link to indicate an externally accessible Azure storage Uri (preferably a Shared Access Signature Uri). All time-series used in generate the model must be zipped into one single file. Each time-series will be as follows: the first column is timestamp and the second column is value.",
+        "description": "Submit multivariate anomaly detection task with the modelId of trained model and inference data, the input schema should be the same with the training request. The request will complete asynchronously and return a resultId to query the detection result.The request should be a source link to indicate an externally accessible Azure storage Uri, either pointed to an Azure blob storage folder, or pointed to a CSV file in Azure blob storage.",
         "operationId": "DetectAnomaly",
         "parameters": [
           {
@@ -304,7 +304,7 @@
       "post": {
         "responses": {
           "200": {
-            "description": "Detection has successfully completed.",
+            "description": "Detection has completed successfully.",
             "schema": {
               "$ref": "#/definitions/LastDetectionResult"
             }
@@ -323,7 +323,7 @@
           }
         },
         "summary": "Detect anomalies in the last point of the request body",
-        "description": "Synchronized API for anomaly detection.",
+        "description": "Submit multivariate anomaly detection task with the modelId of trained model and inference data, and the inference data should be put into request body in a JSON format. The request will complete synchronously and return the detection immediately in the response body.",
         "operationId": "LastDetectAnomaly",
         "parameters": [
           {
@@ -362,8 +362,8 @@
       "properties": {
         "dataSource": {
           "type": "string",
-          "description": "Source link to the input variables. Each variable should be a csv file with two columns, `timestamp` and `value`. By default, the file name of the variable will be used as its variable name.",
-          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D "
+          "description": "Source link to the input data to indicate an accessible Azure storage Uri, either pointed to an Azure blob storage folder, or pointed to a CSV file in Azure blob storage based on you data schema selection. ",
+          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.csv"
         },
         "dataSchema": {
           "$ref": "#/definitions/DataSchema"
@@ -371,13 +371,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "A required field, indicating the start time of training data. Should be date-time.",
+          "description": "A required field, indicating the start time of training data, which should be date-time of ISO 8601 format.",
           "example": "2019-04-01T00:00:00Z"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "A required field, indicating the end time of training data. Should be date-time.",
+          "description": "A required field, indicating the end time of training data, which should be date-time of ISO 8601 format.",
           "example": "2019-04-02T00:00:00Z"
         },
         "displayName": {
@@ -388,7 +388,7 @@
         },
         "slidingWindow": {
           "type": "integer",
-          "description": "An optional field, indicating how many previous points will be used to compute the anomaly score of the subsequent point.",
+          "description": "An optional field, indicating how many previous points will be used to detect whether the timestamp is anomaly or not. ",
           "example": 20
         },
         "alignPolicy": {
@@ -412,7 +412,7 @@
       "description": "Training result of a model including its status, errors and diagnostics information."
     },
     "DataSchema": {
-      "description": "Data schema for input data source: OneTable or MultiTable.",
+      "description": "Data schema for input data source: OneTable or MultiTable. OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default schema is OneTable.",
       "enum": [
         "OneTable",
         "MultiTable"
@@ -451,7 +451,7 @@
         "modelAsString": false,
         "name": "alignMode"
       },
-      "description": "An optional field, indicating how we align different variables to the same time-range. Either Inner or Outer. "
+      "description": "An optional field, indicating how to align different variables to the same time-range. Either Inner or Outer. "
     },
     "FillNAMethod": {
       "enum": [
@@ -467,7 +467,7 @@
         "modelAsString": true,
         "name": "fillNAMethod"
       },
-      "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to NotFill, when the alignMode is Outer."
+      "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed."
     },
     "ModelStatus": {
       "description": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
@@ -579,7 +579,7 @@
         }
       },
       "type": "object",
-      "description": "Diagnostics Information for inspecting model/variable states."
+      "description": "Diagnostics information to help inspect the states of model or variable."
     },
     "ModelState": {
       "properties": {
@@ -697,19 +697,19 @@
       "properties": {
         "models": {
           "type": "array",
-          "description": "List of models",
+          "description": "List of models.",
           "items": {
             "$ref": "#/definitions/ModelSnapshot"
           }
         },
         "currentCount": {
           "type": "integer",
-          "description": "Current count of trained multivariate models.",
+          "description": "Number of trained multivariate models.",
           "example": 10
         },
         "maxCount": {
           "type": "integer",
-          "description": "Max number of models that can be trained for this subscription.",
+          "description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
           "example": 20
         },
         "nextLink": {
@@ -804,24 +804,24 @@
       "properties": {
         "dataSource": {
           "type": "string",
-          "description": "Source link to the input variables. Each variable should be a csv with two columns, `timestamp` and `value`. The file name of the variable will be used as its name. The variables used in detection should be exactly the same with those used in the training phase.",
-          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip?sp=rl&st=2020-12-04T06:03:47Z&se=2022-12-05T06:03:00Z&sv=2019-12-12&sr=b&sig=AZTbvZ7fcp3MdqGY%2FvGHJXJjUgjS4DneCGl7U5omq5c%3D "
+          "description": "Source link to the input data to indicate an accessible Azure storage Uri, either pointed to an Azure blob storage folder, or pointed to a CSV file in Azure blob storage based on you data schema selection. The data schema should be exactly the same with those used in the training phase.",
+          "example": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.csv"
         },
         "topContributorCount": {
           "type": "integer",
-          "description": "Top contributor count.",
+          "description": "An optional field, which is used to specify the number of top contributed variables for one anomalous timestamp in the response. The default number is 10.",
           "example": 10
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "A required field, indicating the start time of data for detection. Should be date-time.",
+          "description": "A required field, indicating the start time of data for detection, which should be date-time of ISO 8601 format.",
           "example": "2019-04-01T00:15:00Z"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "A required field, indicating the end time of data for detection. Should be date-time.",
+          "description": "A required field, indicating the end time of data for detection, which should be date-time of ISO 8601 format.",
           "example": "2019-04-01T00:40:00Z"
         }
       },
@@ -971,7 +971,7 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "timestamp",
+          "description": "The timestamp for this anomaly.",
           "example": "2020-01-01T00:00:00Z"
         },
         "value": {
@@ -979,7 +979,7 @@
         },
         "errors": {
           "type": "array",
-          "description": "Error message for the current timestamp",
+          "description": "Error message for the current timestamp.",
           "items": {
             "$ref": "#/definitions/ErrorResponse"
           }
@@ -1001,14 +1001,14 @@
         },
         "severity": {
           "type": "number",
-          "description": "Indicates the significance of the anomaly. The higher the severity, the more significant the anomaly.",
+          "description": "Indicates the significance of the anomaly. The higher the severity, the more significant the anomaly is.",
           "example": 0.8,
           "minimum": 0.0,
           "maximum": 1.0
         },
         "score": {
           "type": "number",
-          "description": "Raw score from the model.",
+          "description": "Raw anomaly score of severity, will help indicate the degree of abnormality as well.",
           "example": 0.3,
           "minimum": 0.0,
           "maximum": 2.0
@@ -1063,7 +1063,7 @@
         },
         "topContributorCount": {
           "type": "integer",
-          "description": "Top contributor count.",
+          "description": "An optional field, which is used to specify the number of top contributed variables for one anomalous timestamp in the response. The default number is 10.",
           "example": 10
         }
       },
