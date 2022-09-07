@@ -8007,6 +8007,27 @@
       },
       "additionalProperties": false
     },
+    "EgressPublicNetworkAccessType": {
+      "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EgressPublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "EndpointAuthKeys": {
       "description": "Keys for endpoint authentication.",
       "type": "object",
@@ -11006,6 +11027,11 @@
           "default": false,
           "type": "boolean"
         },
+        "egressPublicNetworkAccess": {
+          "description": "If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.",
+          "default": "Enabled",
+          "$ref": "#/definitions/EgressPublicNetworkAccessType"
+        },
         "endpointComputeType": {
           "description": "[Required] The compute type of the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
@@ -11132,6 +11158,11 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "publicNetworkAccess": {
+          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled.",
+          "default": "Enabled",
+          "$ref": "#/definitions/PublicNetworkAccessType"
         },
         "traffic": {
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
@@ -11562,6 +11593,27 @@
           "default": "PT2S",
           "type": "string"
         }
+      },
+      "additionalProperties": false
+    },
+    "PublicNetworkAccessType": {
+      "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
       },
       "additionalProperties": false
     },
