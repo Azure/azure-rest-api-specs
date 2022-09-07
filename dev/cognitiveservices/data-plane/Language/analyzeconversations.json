@@ -136,6 +136,10 @@
           "Successful Conversation Summarization Task Submit": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskSubmit.json"
           }
+          ,
+          "Successful Conversation Sentiment Analysis Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSentimentSubmit.json"
+          }          
         },
         "x-ms-long-running-operation": true
       }
@@ -179,6 +183,9 @@
           },
           "Successful Get Text Conversation Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
+          },
+          "Successful Get Conversation Sentiment Analysis Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSentimentTaskStatusRequest.json"
           },
           "Successful Get Conversation Summarization Result": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskResult.json"
@@ -1624,10 +1631,11 @@
     },
     "AnalyzeConversationLROTaskKind": {
       "type": "string",
-      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
+      "description": "Enumeration of supported analysis tasks on a collection of conversation.",
       "enum": [
         "ConversationalPIITask",
-        "ConversationalSummarizationTask"
+        "ConversationalSummarizationTask",
+        "ConversationalSentimentTask"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -1639,7 +1647,8 @@
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
         "ConversationalPIIResults",
-        "ConversationalSummarizationResults"
+        "ConversationalSummarizationResults",
+        "ConversationalSentimentResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -2206,6 +2215,123 @@
         "aspect",
         "text"
       ]
+    },
+    "AnalyzeConversationalSentimentTask": {
+      "type": "object",
+      "description": "Task definition for a sentiment analysis in conversations.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ConversationalSentimentTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationalSentimentTask"
+    },
+    "ConversationalSentimentTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Conversational sentiment analysis task.",
+      "properties": {
+        "predictionSource": {
+          "type": "string",
+          "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
+          "$ref": "#/definitions/TranscriptContentType"
+        }        
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationSentimentResult": {
+      "type": "object",
+      "description": "Result from the sentiment analysis operation performed on a list of conversations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
+      ],
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ConversationSentimentResults"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ConversationalSentimentResults"
+    },
+    "ConversationSentimentResults": {
+      "type": "object",
+      "description": "The result from sentiment analysis operation for each conversation.",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConversationSentimentResult"
+              },
+              {
+                "$ref": "#/definitions/ConversationResultBase"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ConversationSentimentResult": {
+      "description": "The result from sentiment analysis operation for each conversation item.",
+      "required": [
+        "conversationItems"
+      ],
+      "properties": {
+        "conversationItems": {
+          "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationSentimentItemResult"
+          }
+        }
+      }
+    },        
+    "ConversationSentimentItemResult": {
+      "type": "object",
+      "required": [
+        "id",
+        "participantId",
+        "sentiment",
+        "confidenceScores"
+      ],
+      "properties": {
+        "id": {
+          "description": "The identifier for the conversation item",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The identifier for the speaker",
+          "type": "string"
+        },
+        "sentiment": {
+          "$ref": "common.json#/definitions/Sentiment"
+        },                
+        "confidenceScores": {
+          "type": "object",
+          "$ref": "common.json#/definitions/SentimentConfidenceScores"
+        }
+      }
     },
     "AnalyzeConversationJobState": {
       "description": "Contains the status of the analyze conversations job submitted along with related statistics.",
