@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "bulkActionId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+    "bulkAction": {
+      "properties": {
+        "targetType": "stixindicator",
+        "condition": {
+          "conditionConnective": "and",
+          "clauses": [
+            {
+              "field": "source",
+              "operator": "equal",
+              "values": [ "source1" ]
+            },
+            {
+              "clauseConnective": "or",
+              "field": "confidence",
+              "operator": "greaterthan",
+              "values": [ "50" ]
+            }
+          ]
+        },
+        "operation": {
+          "type": "edit",
+          "steps": [
+            {
+              "field": "confidence",
+              "mutator": "setvalue",
+              "value": "99"
+            }
+          ]
+        },
+        "executionOrder": 1
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/threatIntelligenceBulkActions/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/FileImports",
+        "properties": {
+          "targetType": "stixindicator",
+          "condition": {
+            "conditionConnective": "and",
+            "clauses": [
+              {
+                "field": "source",
+                "operator": "equal",
+                "values": [ "source1" ]
+              },
+              {
+                "clauseConnective": "or",
+                "field": "confidence",
+                "operator": "greaterthan",
+                "values": [ "50" ]
+              }
+            ]
+          },
+          "operation": {
+            "type": "edit",
+            "steps": [
+              {
+                "field": "confidence",
+                "mutator": "setvalue",
+                "value": "99"
+              }
+            ]
+          },
+          "estimatedIndicatorCountAtCreation": 150,
+          "estimatedIndicatorCountAtExecutionStartTime": 0,
+          "affectedIndicatorCount": 0,
+          "executionOrder": 1,
+          "createdTimeUtc": "2022-09-07T14:55:21.2455672Z",
+          "lastModifiedTimeUtc": "2022-09-07T14:55:21.2455672Z"
+        }
+      }
+    }
+  }
+}

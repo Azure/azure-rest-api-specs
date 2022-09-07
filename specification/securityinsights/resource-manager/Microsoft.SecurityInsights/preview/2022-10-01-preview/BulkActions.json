@@ -1,0 +1,575 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Security Insights",
+      "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+      "version": "2022-10-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligenceBulkActions": {
+        "get": {
+          "x-ms-examples": {
+            "Get all bulk actions.": {
+              "$ref": "./examples/bulkActions/GetBulkActions.json"
+            }
+          },
+          "tags": [
+            "BulkActions"
+          ],
+          "description": "Gets all bulk actions.",
+          "operationId": "BulkActions_List",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/BulkActionList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligenceBulkActions/{bulkActionId}": {
+        "get": {
+          "x-ms-examples": {
+            "Get a bulk action.": {
+              "$ref": "./examples/bulkActions/GetBulkActionById.json"
+            }
+          },
+          "tags": [
+            "BulkActions"
+          ],
+          "description": "Gets a bulk action.",
+          "operationId": "BulkActions_Get",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            },
+            {
+              "$ref": "#/parameters/BulkActionId"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/BulkAction"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "put": {
+          "x-ms-examples": {
+            "Create a bulk action.": {
+              "$ref": "./examples/bulkActions/CreateBulkAction.json"
+            }
+          },
+          "tags": [
+            "BulkActions"
+          ],
+          "description": "Creates or updates a bulk action.",
+          "operationId": "BulkActions_CreateOrUpdate",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            },
+            {
+              "$ref": "#/parameters/BulkActionId"
+            },
+            {
+              "$ref": "#/parameters/BulkAction"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/definitions/BulkAction"
+              }
+            },
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "$ref": "#/definitions/BulkAction"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "delete": {
+          "x-ms-examples": {
+          },
+          "tags": [
+            "BulkActions"
+          ],
+          "description": "Delete the bulk action.",
+          "operationId": "BulkActions_Delete",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            },
+            {
+              "$ref": "#/parameters/BulkActionId"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Bulk action deleted.",
+              "schema": {
+                "$ref": "#/definitions/BulkAction"
+              }
+            },
+            "204": {
+              "description": "No Content - No existing bulk action could be deleted."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location"
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Connective": {
+        "description": "Connective used to join the conditions or clauses together.",
+        "enum": [
+          "And",
+          "Or"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "Connective",
+          "values": [
+            {
+              "description": "Conditions/clauses should be joined together using logical AND operator.",
+              "value": "And"
+            },
+            {
+              "description": "Conditions/clauses should be joined together using logical OR operator.",
+              "value": "Or"
+            }
+          ]
+        }
+      },
+      "Clause": {
+        "description": "Represents a clauses in a condition.",
+        "type": "object",
+        "properties": {
+          "clauseConnective": {
+            "description": "Connective used to logically join the values on this clause",
+            "type": "string",
+            "$ref": "#/definitions/Connective"
+          },
+          "field": {
+            "description": "The name of the field we are targeting.",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator which describes how this clause should be constructed into an expression.",
+            "type": "string",
+            "enum": [
+              "Equal",
+              "NotEqual",
+              "LessThan",
+              "GreaterThan",
+              "StringContains",
+              "StringNotCotains",
+              "IsNull"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ConditionOperator",
+              "values": [
+                {
+                  "description": "The '=' operator.",
+                  "value": "Equal"
+                },
+                {
+                  "description": "The '!=' operator.",
+                  "value": "NotEqual"
+                },
+                {
+                  "description": "The '<' operator.",
+                  "value": "LessThan"
+                },
+                {
+                  "description": "The '>' operator.",
+                  "value": "GreaterThan"
+                }, 
+                {
+                  "description": "The 'contains' operator for strings.",
+                  "value": "StringContains"
+                },       
+                {
+                  "description": "The 'not contains' operator for strings.",
+                  "value": "StringNotContains"
+                },              
+                {
+                  "description": "The 'is_null' operator.",
+                  "value": "IsNull"
+                }
+              ]
+            }
+          },
+          "values": {
+            "description": "Represents all values to construct this clause from in combination with the clause's field and operator.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Condition": {
+        "description": "Represents a condition which is composed of a set of clauses.",
+        "type": "object",
+        "properties": {
+          "conditionConnective": {
+            "description": "Connective used to logically join the clauses.",
+            "type": "string",
+            "$ref": "#/definitions/Connective"
+          },
+          "clauses": {
+            "description": "List of clauses which make up this condition.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/definitions/Clause"
+            }
+          }
+        }
+      },
+      "OperationStep": {
+        "description": "Represents one modification in the multi-step Operation",
+        "type": "object",
+        "properties": {
+          "field": {
+            "description": "Name of the field this step is modifying.",
+            "type": "string"
+          },
+          "mutator": {
+            "description": "Mutator for this operation step.",
+            "type": "string",
+            "enum": [
+              "SetValue",
+              "SetNull",
+              "SetEmpty",
+              "AddToSet",
+              "AppendToList",
+              "RemoveFromSet"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "OperationMutator",
+              "values": [
+                {
+                  "description": "Use this operator when a scalar value should be replaced/overwritten.",
+                  "value": "SetValue"
+                },
+                {
+                  "description": "Use this operator when a scalar or array value should be set explicitly to NULL.",
+                  "value": "SetNull"
+                },
+                {
+                  "description": "Use this operator when an array value should be set to the empty set/list.",
+                  "value": "SetEmpty"
+                },
+                {
+                  "description": "Use this operator to add an element to a set (i.e. an unordered multivalue variable).",
+                  "value": "AddToSet"
+                },
+                {
+                  "description": "Use this operator to add an element to the end of a list (i.e. an ordered multivalue variable).",
+                  "value": "AppendToList"
+                },
+                {
+                  "description": "Use this operator to remove the specified element from a set (i.e. an unordered multivalue variable).",
+                  "value": "RemoveFromSet"
+                }
+              ]
+            }
+          },
+          "value": {
+            "description": "Value to be applied by this operation step.",
+            "type": "string"
+          }
+        }    
+      },
+      "Operation": {
+        "description": "Represents the operation to be applied to all items captured by this bulk action.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "Describes which type of operation we are applying to items captured by this bulk action.",
+            "type": "string",
+            "enum": [
+              "Delete",
+              "Edit"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "OperationType",
+              "values": [
+                {
+                  "description": "This item will be deleted.",
+                  "value": "Delete"
+                },
+                {
+                  "description": "This item will be edited.",
+                  "value": "Edit"
+                }
+              ]
+            }
+          },
+          "steps": {
+            "description": "List of operation steps to be applied.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/definitions/OperationStep"
+            }
+          }
+        }
+      },
+      "BulkAction": {
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          }
+        ],
+        "description": "Represents a bulk action in Azure Security Insights.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/BulkActionProperties",
+            "description": "Bulk action properties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "type": "object"
+      },
+      "BulkActionList": {
+        "description": "List all the bulk actions.",
+        "properties": {
+          "nextLink": {
+            "description": "URL to fetch the next set of bulk actions.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "value": {
+            "description": "Array of bulk actions.",
+            "items": {
+              "$ref": "#/definitions/BulkAction"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value"
+        ]
+      },
+      "BulkActionProperties": {
+        "description": "Describes the BulkAction's properties",
+        "properties": {
+          "targetType": {
+            "description": "Describes the type this bulk action targets for execution.",
+            "enum": [
+              "StixIndicator"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "TargetType",
+              "values": [
+                {
+                  "description": "This bulk action is targeting stix indicators.",
+                  "value": "StixIndicator"
+                }
+              ]
+            }
+          },
+          "condition": {
+            "description": "The condition which describes what instances of the target type should be affected by this bulk action.",
+            "type": "object",
+            "$ref": "#/definitions/Condition"
+          },  
+          "operation": {
+            "description": "The operation which describes how the targeted objects will be modified by this bulk action.",
+            "type": "object",
+            "$ref": "#/definitions/Operation"
+          },
+          "estimatedIndicatorCountAtCreation": {
+            "description": "Estimated number of indicators to be affected by this bulk action, computed at creation time.",
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          "estimatedIndicatorCountAtExecutionStartTime": {
+            "description": "Estimated number of indicators to be affected by this bulk action, computed at execution start time.",
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          "affectedIndicatorCount": {
+            "description": "Total number of affected indicators from this bulk action.",
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32"
+          }, 
+          "executionOrder": {
+            "description": "Index of this bulk action in the execution queue.",
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdTimeUtc": {
+            "description": "The time this bulk action was created.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },    
+          "lastModifiedTimeUtc": {
+            "description": "The last time this bulk action was modified.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "targetType",
+          "condition",
+          "operation"
+        ],
+        "type": "object"
+      }
+    },
+    "parameters": {
+      "BulkActionId": {
+        "description": "Bulk Action ID",
+        "in": "path",
+        "name": "bulkActionId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "BulkAction": {
+        "description": "The bulk action",
+        "in": "body",
+        "name": "bulkAction",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/BulkAction"
+        },
+        "x-ms-parameter-location": "method"
+      }
+    }
+  }
+  

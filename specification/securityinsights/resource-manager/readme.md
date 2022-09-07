@@ -41,6 +41,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-10-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2022-10-01-preview/AutomationRules.json
   - Microsoft.SecurityInsights/preview/2022-10-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2022-10-01-preview/BulkActions.json
   - Microsoft.SecurityInsights/preview/2022-10-01-preview/Enrichment.json
   - Microsoft.SecurityInsights/preview/2022-10-01-preview/Entities.json
   - Microsoft.SecurityInsights/preview/2022-10-01-preview/EntityQueries.json
