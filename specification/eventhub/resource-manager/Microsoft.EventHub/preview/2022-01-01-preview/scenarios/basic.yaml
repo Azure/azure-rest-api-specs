@@ -1,0 +1,125 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  namespaceName:
+    type: string
+    prefix: namespacen
+  eventHubName:
+    type: string
+    prefix: eventhubna
+  storageAccountName: "storageeventhub2"
+  authorizationRuleName:
+    type: string
+    prefix: authorizat
+  consumerGroupName:
+    type: string
+    prefix: consumergr
+  schemaGroupName:
+    type: string
+    prefix: schemagrou
+  applicationGroupName:
+    type: string
+    prefix: applicatio
+scenarios:
+  - scenario: Namespace
+    description: Microsoft.EventHub/namespaces
+    steps:
+      - step: Namespaces_CheckNameAvailability
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceCheckNameAvailability.json
+      - step: Operations_List
+        exampleFile: ..\examples\EHOperations_List.json
+      - step: Namespaces_CreateOrUpdate
+        operationId: Namespaces_CreateOrUpdate
+        parameters:
+          parameters:
+            location: $(location)
+            sku:
+              name: Premium
+              tier: Premium
+      - step: Namespaces_List
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceList.json
+      - step: Namespaces_ListAuthorizationRules
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleListAll.json
+      - step: Namespaces_ListNetworkRuleSet
+        exampleFile: ..\examples\NameSpaces\VirtualNetworkRule\EHNetworkRuleSetList.json
+      - step: Namespaces_GetNetworkRuleSet
+        exampleFile: ..\examples\NameSpaces\VirtualNetworkRule\EHNetworkRuleSetGet.json
+      - step: Namespaces_ListByResourceGroup
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceListByResourceGroup.json
+      - step: Namespaces_Get
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceGet.json
+      - step: Namespaces_Update
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceUpdate.json
+        requestUpdate:
+          - remove: /parameters/identity
+          - add: /parameters/tags
+            value: {
+              "tag1": "value1",
+              "tag2": "value2"
+            }
+      - step: Namespaces_CreateOrUpdateAuthorizationRule
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleCreate.json
+      - step: Namespaces_GetAuthorizationRule
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleGet.json
+      - step: Namespaces_ListKeys
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleListKey.json
+      - step: Namespaces_RegenerateKeys
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleRegenerateKey.json
+      - step: Namespaces_DeleteAuthorizationRule
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleDelete.json
+
+      # Eventhub
+      - step: StorageAccount_Create
+        armTemplate: armtemplate/Create_StorageAccount.json
+      - step: EventHubs_CreateOrUpdate
+        exampleFile: ..\examples\EventHubs\EHEventHubCreate.json
+        requestUpdate:
+          - replace: /parameters/properties/captureDescription/destination/properties/storageAccountResourceId
+            value: $(storageAccountId)
+      - step: EventHubs_ListByNamespace
+        exampleFile: ..\examples\EventHubs\EHEventHubListByNameSpace.json
+      - step: EventHubs_ListAuthorizationRules
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleListAll.json
+      - step: EventHubs_Get
+        exampleFile: ..\examples\EventHubs\EHEventHubGet.json
+      - step: EventHubs_CreateOrUpdateAuthorizationRule
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleCreate.json
+      - step: EventHubs_GetAuthorizationRule
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleGet.json
+      - step: EventHubs_ListKeys
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleListKey.json
+      - step: EventHubs_RegenerateKeys
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleRegenerateKey.json
+      - step: ConsumerGroups_CreateOrUpdate
+        exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupCreate.json
+      - step: ConsumerGroups_ListByEventHub
+        exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupListByEventHub.json
+      - step: ConsumerGroups_Get
+        exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupGet.json
+      - step: EventHubs_DeleteAuthorizationRule
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleDelete.json
+      - step: EventHubs_Delete
+        exampleFile: ..\examples\EventHubs\EHEventHubDelete.json
+      - step: ApplicationGroup_CreateOrUpdateApplicationGroup
+        exampleFile: ..\examples\ApplicationGroup\ApplicationGroupCreate.json
+      - step: ApplicationGroup_ListByNamespace
+        exampleFile: ..\examples\ApplicationGroup\ApplicationGroupListByNamespace.json
+      - step: ApplicationGroup_Get
+        exampleFile: ..\examples\ApplicationGroup\ApplicationGroupGet.json
+      - step: SchemaRegistry_CreateOrUpdate
+        exampleFile: ..\examples\SchemaRegistry\SchemaRegistryCreate.json
+      - step: SchemaRegistry_ListByNamespace
+        exampleFile: ..\examples\SchemaRegistry\SchemaRegistryListByNamespace.json
+      - step: SchemaRegistry_Get
+        exampleFile: ..\examples\SchemaRegistry\SchemaRegistryGet.json
+      - step: SchemaRegistry_Delete
+        exampleFile: ..\examples\SchemaRegistry\SchemaRegistryDelete.json
+      - step: ConsumerGroups_Delete
+        exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupDelete.json
+      - step: ApplicationGroup_Delete
+        exampleFile: ..\examples\ApplicationGroup\ApplicationGroupDelete.json
+      - step: Namespaces_Delete
+        exampleFile: ..\examples\NameSpaces\EHNameSpaceDelete.json

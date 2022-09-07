@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  namespaceName:
+    type: string
+    prefix: namespacen2
+  namespaceNameSecond:
+    type: string
+    prefix: namespacensecond
+  alias:
+    type: string
+    prefix: alias2
+  authorizationRuleName:
+    type: string
+    prefix: authorizat2
+
+prepareSteps:
+  - step: Namespaces_CreateOrUpdate
+    operationId: Namespaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        sku:
+          name: Standard
+          tier: Standard
+  - step: Namespaces_CreateOrUpdate_Second
+    operationId: Namespaces_CreateOrUpdate
+    parameters:
+      namespaceName: $(namespaceNameSecond)
+      parameters:
+        location: westus2
+        sku:
+          name: Standard
+          tier: Standard
+    outputVariables:
+      secondNamespaceId:
+        fromResponse: /id
+  - step: Namespaces_CreateOrUpdateAuthorizationRule
+    exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleCreate.json
+
+scenarios:
+  - scenario: DisasterRecoveryConfig
+    description: Microsoft.EventHub/namespaces/disasterRecoveryConfigs
+    steps:
+      - step: DisasterRecoveryConfigs_CheckNameAvailability
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasCheckNameAvailability.json
+      - step: DisasterRecoveryConfigs_CreateOrUpdate
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasCreate.json
+        requestUpdate:
+          - replace: /parameters/properties/partnerNamespace
+            value: $(secondNamespaceId)
+      - step: DisasterRecoveryConfigs_List
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasList.json
+      - step: DisasterRecoveryConfigs_GetAuthorizationRule
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasAuthorizationRuleGet.json
+      - step: DisasterRecoveryConfigs_Get
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasGet.json
+      - step: DisasterRecoveryConfigs_ListAuthorizationRules
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasAuthorizationRuleListAll.json
+      - step: DisasterRecoveryConfigs_ListKeys
+        exampleFile: ..\examples\disasterRecoveryConfigs\EHAliasAuthorizationRuleListKey.json
+      - step: DisasterRecoveryConfigs_FailOver
+        operationId: DisasterRecoveryConfigs_FailOver
+        parameters:
+          namespaceName: $(namespaceNameSecond)
