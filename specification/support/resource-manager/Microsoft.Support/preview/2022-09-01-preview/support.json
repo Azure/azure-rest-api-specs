@@ -2275,21 +2275,6 @@
       "description": "Object that represents a Chat Transcript resource.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Id of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the resource 'Microsoft.Support/chatTranscripts'.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "properties": {
             "communications": {
@@ -2303,7 +2288,12 @@
           },
           "type": "object",
           "description": "List of chat transcript communication resources."
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          }
+        ]
       }
     },
     "ChatTranscriptDetailsProperties": {
