@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-01",
+    "version": "2022-10-01-preview",
     "title": "DataProtectionBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -4042,6 +4042,65 @@
       },
       "x-ms-discriminator-value": "AzureOperationalStoreParameters"
     },
+    "KubernetesClusterBackupDatasourceParameters": {
+      "description": "Parameters for Kubernetes Cluster Backup Datasource",
+      "required": [
+        "snapshotVolumes",
+        "includeClusterScopeResources"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "properties": {
+        "snapshotVolumes": {
+          "description": "Gets or sets the volume snapshot property.",
+          "type": "boolean"
+        },
+        "includeClusterScopeResources": {
+          "description": "Gets or sets the include cluster resources property.",
+          "type": "boolean"
+        },
+        "includedNamespaces": {
+          "description": "Gets or sets the include namespaces property.",
+          "items": {
+              "type": "string"
+            },
+          "type": "array"
+        },
+        "excludedNamespaces": {
+          "description": "Gets or sets the exclude namespaces property.",
+          "items": {
+              "type": "string"
+            },
+          "type": "array"
+        },
+        "includedResourceTypes": {
+          "description": "Gets or sets the include resource types property.",
+          "items": {
+              "type": "string"
+            },
+          "type": "array"
+        },
+        "excludedResourceTypes": {
+          "description": "Gets or sets the exclude resource types property.",
+          "items": {
+              "type": "string"
+            },
+          "type": "array"
+        },
+        "LabelSelectors": {
+          "description": "Gets or sets the LabelSelectors property.",
+          "items": {
+              "type": "string"
+            },
+          "type": "array"
+        }
+      },
+      "x-ms-discriminator-value": "KubernetesClusterBackupDatasourceParameters"
+    },
     "AzureRetentionRule": {
       "allOf": [
         {
@@ -4781,6 +4840,21 @@
             "name": "DataStoreTypes",
             "modelAsString": true
           }
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "BackupDatasourceParameters": {
+      "description": "Parameters for Backup Datasource",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
         }
       },
       "discriminator": "objectType"
@@ -5577,6 +5651,14 @@
             "$ref": "#/definitions/DataStoreParameters"
           },
           "x-ms-identifiers": []
+        },
+        "backupDatasourceParametersList": {
+          "description": "Gets or sets the Backup Data Source Parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupDatasourceParameters"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5666,6 +5748,65 @@
         }
       },
       "x-ms-discriminator-value": "KubernetesPVRestoreCriteria"
+    },
+    "KubernetesClusterRestoreCriteria": {
+      "description": "kubernetes Cluster Backup target info for restore operation",
+      "required": [
+          "snapshotVolumes",
+          "includeClusterScopeResources"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+          "snapshotVolumes": {
+            "description": "Gets or sets the volume snapshot property.",
+            "type": "boolean"
+          },
+          "includeClusterScopeResources": {
+            "description": "Gets or sets the include cluster resources property.",
+            "type": "boolean"
+          },
+          "includedNamespaces": {
+            "description": "Gets or sets the include namespaces property.",
+            "items": {
+                "type": "string"
+              },
+            "type": "array"
+          },
+          "excludedNamespaces": {
+            "description": "Gets or sets the exclude namespaces property.",
+            "items": {
+                "type": "string"
+              },
+            "type": "array"
+          },
+          "includedResourceTypes": {
+            "description": "Gets or sets the include resource types property.",
+            "items": {
+                "type": "string"
+              },
+            "type": "array"
+          },
+          "excludedResourceTypes": {
+            "description": "Gets or sets the exclude resource types property.",
+            "items": {
+                "type": "string"
+              },
+            "type": "array"
+          },
+          "LabelSelectors": {
+            "description": "Gets or sets the LabelSelectors property.",
+            "items": {
+                "type": "string"
+              },
+            "type": "array"
+          }
+        },
+      "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
     },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
