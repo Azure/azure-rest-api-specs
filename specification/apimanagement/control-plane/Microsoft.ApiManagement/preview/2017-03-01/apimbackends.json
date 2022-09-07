@@ -326,283 +326,356 @@
         "tls": {
           "$ref": "#/definitions/BackendTlsProperties",
           "description": "Backend TLS Properties"
-        }
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/BackendCircuitBreakerProperties",
+          "description": "Backend Circuit Breaker Configuration"
+        },
+        "description": "Backend entity base Parameter set."
       },
-      "description": "Backend entity base Parameter set."
-    },
-    "BackendCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BackendContract"
+      "BackendCollection": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/BackendContract"
+            },
+            "description": "Backend values."
           },
-          "description": "Backend values."
-        },
-        "count": {
-          "type": "integer",
-          "description": "Total number of entities"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Backend list representation."
-    },
-    "BackendContract": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the Backend entity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackendContractProperties"
-        }
-      ],
-      "description": "Backend details."
-    },
-    "BackendContractProperties": {
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Runtime Url of the Backend.",
-          "minLength": 1,
-          "maxLength": 2000
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "http",
-            "soap"
-          ],
-          "x-ms-enum": {
-            "name": "BackendProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "http",
-                "description": "The Backend is a RESTful service."
-              },
-              {
-                "value": "soap",
-                "description": "The Backend is a SOAP service."
-              }
-            ]
+          "count": {
+            "type": "integer",
+            "description": "Total number of entities"
           },
-          "description": "Backend communication protocol."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackendBaseParameters"
-        }
-      ],
-      "required": [
-        "url",
-        "protocol"
-      ],
-      "description": "Parameters supplied to the Create Backend operation."
-    },
-    "BackendCredentialsContract": {
-      "properties": {
-        "certificate": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 32,
-          "description": "List of Client Certificate Thumbprint."
+          "nextLink": {
+            "type": "string",
+            "description": "Next page link if any."
+          }
         },
-        "query": {
-          "type": "object",
-          "additionalProperties": {
+        "description": "Paged Backend list representation."
+      },
+      "BackendContract": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the Backend entity."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BackendContractProperties"
+          }
+        ],
+        "description": "Backend details."
+      },
+      "BackendContractProperties": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Runtime Url of the Backend.",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "http",
+              "soap"
+            ],
+            "x-ms-enum": {
+              "name": "BackendProtocol",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "http",
+                  "description": "The Backend is a RESTful service."
+                },
+                {
+                  "value": "soap",
+                  "description": "The Backend is a SOAP service."
+                }
+              ]
+            },
+            "description": "Backend communication protocol."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BackendBaseParameters"
+          }
+        ],
+        "required": [
+          "url",
+          "protocol"
+        ],
+        "description": "Parameters supplied to the Create Backend operation."
+      },
+      "BackendCredentialsContract": {
+        "properties": {
+          "certificate": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "maxItems": 32,
+            "description": "List of Client Certificate Thumbprint."
           },
-          "description": "Query Parameter description."
+          "query": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Query Parameter description."
+          },
+          "header": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Header Parameter description."
+          },
+          "authorization": {
+            "description": "Authorization header authentication",
+            "$ref": "#/definitions/BackendAuthorizationHeaderCredentials"
+          }
         },
-        "header": {
-          "type": "object",
-          "additionalProperties": {
+        "description": "Details of the Credentials used to connect to Backend."
+      },
+      "BackendProperties": {
+        "properties": {
+          "serviceFabricCluster": {
+            "$ref": "#/definitions/BackendServiceFabricClusterProperties",
+            "description": "Backend Service Fabric Cluster Properties"
+          }
+        },
+        "description": "Properties specific to the Backend Type."
+      },
+      "BackendServiceFabricClusterProperties": {
+        "properties": {
+          "clientCertificateThumbprint": {
+            "description": "The client certificate thumbprint for the management endpoint.",
+            "type": "string"
+          },
+          "maxPartitionResolutionRetries": {
+            "description": "Maximum number of retries while attempting resolve the partition.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "partitionResolutionRequestTimeout": {
+            "type": "string",
+            "format": "duration",
+            "description": "Maximum time allowed to update partition resolution data. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
+          },
+          "managementEndpoints": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "The cluster management endpoint."
           },
-          "description": "Header Parameter description."
+          "serverCertificateThumbprints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Thumbprints of certificates cluster management service uses for tls communication"
+          },
+          "serverX509Names": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/X509CertificateName"
+            },
+            "description": "Server X509 Certificate Names Collection"
+          }
         },
-        "authorization": {
-          "description": "Authorization header authentication",
-          "$ref": "#/definitions/BackendAuthorizationHeaderCredentials"
-        }
+        "required": [
+          "managementEndpoints",
+          "clientCertificateThumbprint"
+        ],
+        "description": "Properties of the Service Fabric Type Backend."
       },
-      "description": "Details of the Credentials used to connect to Backend."
-    },
-    "BackendProperties": {
-      "properties": {
-        "serviceFabricCluster": {
-          "$ref": "#/definitions/BackendServiceFabricClusterProperties",
-          "description": "Backend Service Fabric Cluster Properties"
-        }
-      },
-      "description": "Properties specific to the Backend Type."
-    },
-    "BackendServiceFabricClusterProperties": {
-      "properties": {
-        "clientCertificateThumbprint": {
-          "description": "The client certificate thumbprint for the management endpoint.",
-          "type": "string"
-        },
-        "maxPartitionResolutionRetries": {
-          "description": "Maximum number of retries while attempting resolve the partition.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "partitionResolutionRequestTimeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "Maximum time allowed to update partition resolution data. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
-        },
-        "managementEndpoints": {
-          "type": "array",
-          "items": {
+      "X509CertificateName": {
+        "properties": {
+          "name": {
+            "description": "Common Name of the Certificate.",
             "type": "string"
           },
-          "description": "The cluster management endpoint."
-        },
-        "serverCertificateThumbprints": {
-          "type": "array",
-          "items": {
+          "issuerCertificateThumbprint": {
+            "description": "Thumbprint for the Issuer of the Certificate.",
             "type": "string"
+          }
+        },
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-windows-cluster-x509-security"
+        },
+        "description": "Properties of server X509Names."
+      },
+      "BackendTlsProperties": {
+        "properties": {
+          "validateCertificateChain": {
+            "description": "Flag indicating whether SSL certificate chain validation should be done when using self-signed certificates for this backend host.",
+            "type": "boolean",
+            "default": true
           },
-          "description": "Thumbprints of certificates cluster management service uses for tls communication"
+          "validateCertificateName": {
+            "description": "Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.",
+            "type": "boolean",
+            "default": true
+          }
         },
-        "serverX509Names": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/X509CertificateName"
+        "description": "Properties controlling TLS Certificate Validation."
+      },
+      "BackendCircuitBreakerProperties": {
+        "properties": {
+          "failureCondition": {
+            "$ref": "#/definitions/CircuitBreakerFailureCondition",
+            "description": "The conditions for tripping the circuit breaker."
           },
-          "description": "Server X509 Certificate Names Collection"
-        }
-      },
-      "required": [
-        "managementEndpoints",
-        "clientCertificateThumbprint"
-      ],
-      "description": "Properties of the Service Fabric Type Backend."
-    },
-    "X509CertificateName": {
-      "properties": {
-        "name": {
-          "description": "Common Name of the Certificate.",
-          "type": "string"
-        },
-        "issuerCertificateThumbprint": {
-          "description": "Thumbprint for the Issuer of the Certificate.",
-          "type": "string"
-        }
-      },
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-windows-cluster-x509-security"
-      },
-      "description": "Properties of server X509Names."
-    },
-    "BackendTlsProperties": {
-      "properties": {
-        "validateCertificateChain": {
-          "description": "Flag indicating whether SSL certificate chain validation should be done when using self-signed certificates for this backend host.",
-          "type": "boolean",
-          "default": true
-        },
-        "validateCertificateName": {
-          "description": "Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.",
-          "type": "boolean",
-          "default": true
-        }
-      },
-      "description": "Properties controlling TLS Certificate Validation."
-    },
-    "BackendProxyContract": {
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx",
-        "description": "Backend entity uses these details to connect to a WebProxy."
-      },
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "WebProxy Server AbsoluteUri property which includes the entire URI stored in the Uri instance, including all fragments and query strings.",
-          "minLength": 1,
-          "maxLength": 2000
-        },
-        "username": {
-          "type": "string",
-          "description": "Username to connect to the WebProxy server"
-        },
-        "password": {
-          "type": "string",
-          "description": "Password to connect to the WebProxy Server"
-        }
-      },
-      "required": [
-        "url"
-      ],
-      "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
-    },
-    "BackendUpdateParameters": {
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "Runtime Url of the Backend.",
-          "minLength": 1,
-          "maxLength": 2000
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "http",
-            "soap"
-          ],
-          "x-ms-enum": {
-            "name": "BackendProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "http",
-                "description": "The Backend is a RESTful service."
-              },
-              {
-                "value": "soap",
-                "description": "The Backend is a SOAP service."
-              }
-            ]
+          "state": {
+            "type": "string",
+            "enum": [
+              "open",
+              "closed",
+              "half-open"
+            ],
+            "description": "The status of the circuit breaker"
           },
-          "description": "Backend communication protocol."
+          "tripDuration": {
+            "type": "string",
+            "description": "The duration for which the circuit will be tripped."
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackendBaseParameters"
+      "CircuitBreakerFailureCondition": {
+        "properties": {
+          "count": {
+            "type": "string",
+            "description": "The threshold for opening the circuit."
+          },
+          "percentage": {
+            "type": "string",
+            "description": "The threshold for opening the circuit."
+          },
+          "interval": {
+            "type": "string",
+            "description": "The interval during which the failures are counted."
+          },
+          "statusCodeRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FailureCodeRange"
+            },
+            "maxItems": 10,
+            "description": "The status code ranges which are considered as failure."
+          },
+          "errorReasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "maxItems": 10,
+            "description": "The error reasons which are considered as failure."
+          }
         }
-      ],
-      "description": "Parameters supplied to the Update Backend operation."
-    }
-  },
-  "parameters": {
-    "BackendIdParameter": {
-      "name": "backendid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 255,
-      "pattern": "^[^*#&+:<>?]+$",
-      "x-ms-parameter-location": "method"
+      },
+      "FailureCodeRange": {
+        "properties": {
+          "min": {
+            "type": "integer",
+            "description": "The minimum http status code.",
+            "minimum": 200,
+            "maximum": 599
+          },
+          "max": {
+            "type": "integer",
+            "description": "The maximum http status code.",
+            "minimum": 200,
+            "maximum": 599
+          }
+        }
+      },
+      "BackendProxyContract": {
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx",
+          "description": "Backend entity uses these details to connect to a WebProxy."
+        },
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "WebProxy Server AbsoluteUri property which includes the entire URI stored in the Uri instance, including all fragments and query strings.",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "username": {
+            "type": "string",
+            "description": "Username to connect to the WebProxy server"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password to connect to the WebProxy Server"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
+      },
+      "BackendUpdateParameters": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Runtime Url of the Backend.",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "http",
+              "soap"
+            ],
+            "x-ms-enum": {
+              "name": "BackendProtocol",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "http",
+                  "description": "The Backend is a RESTful service."
+                },
+                {
+                  "value": "soap",
+                  "description": "The Backend is a SOAP service."
+                }
+              ]
+            },
+            "description": "Backend communication protocol."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BackendBaseParameters"
+          }
+        ],
+        "description": "Parameters supplied to the Update Backend operation."
+      }
+    },
+    "parameters": {
+      "BackendIdParameter": {
+        "name": "backendid",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
+        "minLength": 1,
+        "maxLength": 255,
+        "pattern": "^[^*#&+:<>?]+$",
+        "x-ms-parameter-location": "method"
+      }
     }
   }
-}
