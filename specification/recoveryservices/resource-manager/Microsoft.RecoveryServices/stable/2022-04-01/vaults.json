@@ -184,6 +184,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/capabilities": {
+      "post": {
+        "tags": [
+          "RecoveryServices"
+        ],
+        "summary": "API to get details about capabilities provided by Microsoft.RecoveryServices RP",
+        "operationId": "RecoveryServices_Capabilities",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Contains information about Resource type and properties to get capabilities",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceCapabilities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capabilities for Microsoft.RecoveryServices/Vaults": {
+            "$ref": "./examples/Capabilities.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "tags": [
@@ -858,6 +916,111 @@
         },
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "ResourceCapabilitiesBase": {
+      "description": "Base class for request and response capabilities information for Microsoft.RecoveryServices",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceCapabilities": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCapabilitiesBase"
+        }
+      ],
+      "description": "Input to get capabilities information for Microsoft.RecoveryServices",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilitiesProperties"
+        }
+      }
+    },
+    "CapabilitiesResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCapabilitiesBase"
+        }
+      ],
+      "description": "Capabilities response for Microsoft.RecoveryServices",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilitiesResponseProperties"
+        }
+      }
+    },
+    "CapabilitiesProperties": {
+      "description": "Capabilities information",
+      "type": "object",
+      "properties": {
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/DNSZone"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CapabilitiesResponseProperties": {
+      "description": "Capabilities properties in response",
+      "type": "object",
+      "properties": {
+        "dnsZones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/DNSZoneResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DNSZone": {
+      "description": "DNSZone information",
+      "type": "object",
+      "properties": {
+        "subResource": {
+          "description": "Subresource type for vault, AzureBackup or AzureSiteRecovery",
+          "enum": [
+            "AzureBackup",
+            "AzureSiteRecovery"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VaultSubResourceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DNSZoneResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DNSZone"
+        }
+      ],
+      "type": "object",
+      "description": "DNSZone information for Microsoft.RecoveryServices",
+      "properties": {
+        "requiredZoneNames": {
+          "description": "The private link resource Private link DNS zone name.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
