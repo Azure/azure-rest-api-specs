@@ -37,6 +37,12 @@ tag: package-preview-2022-10
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2022-10'
+directive:
+  - suppress: R3026
+    reason: Patch is not implemented in this version.
+    where:
+      - $.definitions.experiment
+      
 input-file:
   - Microsoft.Chaos/preview/2022-10-01-preview/capabilities.json
   - Microsoft.Chaos/preview/2022-10-01-preview/capabilityTypes.json
