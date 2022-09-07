@@ -70,6 +70,53 @@
       }
     },
     "/multivariate/models": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "Create and train a multivariate anomaly detection model.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location and ID of the model.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Train a Multivariate Anomaly Detection Model",
+        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
+        "operationId": "TrainMultivariateModel",
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            },
+            "description": "Training request"
+          }
+        ],
+        "x-ms-examples": {
+          "Train Multivariate model": {
+            "$ref": "./examples/TrainModel.json"
+          }
+        }
+      },
       "get": {
         "responses": {
           "200": {
@@ -119,53 +166,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "models"
-        }
-      },
-      "post": {
-        "responses": {
-          "201": {
-            "description": "Create and train a multivariate anomaly detection model.",
-            "schema": {
-              "$ref": "#/definitions/Model"
-            },
-            "headers": {
-              "Location": {
-                "description": "Location and ID of the model.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Train a Multivariate Anomaly Detection Model",
-        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
-        "operationId": "TrainMultivariateModel",
-        "parameters": [
-          {
-            "name": "body",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ModelInfo"
-            },
-            "description": "Training request"
-          }
-        ],
-        "x-ms-examples": {
-          "Train Multivariate model": {
-            "$ref": "./examples/TrainModel.json"
-          }
         }
       }
     },
@@ -253,6 +253,9 @@
         "responses": {
           "201": {
             "description": "Submit a multivariate model detection task successfully.",
+            "schema": {
+              "$ref": "#/definitions/DetectionResult"
+            },
             "headers": {
               "Location": {
                 "description": "Location and ID of the detection result.",
@@ -690,6 +693,38 @@
       },
       "type": "object"
     },
+    "Model": {
+      "required": [
+        "createdTime",
+        "lastUpdatedTime",
+        "modelId"
+      ],
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Model identifier.",
+          "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was created.",
+          "example": "2020-06-30T00:00:00Z"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was last updated.",
+          "example": "2020-06-30T00:00:00Z"
+        },
+        "modelInfo": {
+          "$ref": "#/definitions/ModelInfo"
+        }
+      },
+      "type": "object",
+      "description": "Response of getting a model."
+    },
     "ModelList": {
       "required": [
         "currentCount",
@@ -763,38 +798,6 @@
         }
       },
       "type": "object"
-    },
-    "Model": {
-      "required": [
-        "createdTime",
-        "lastUpdatedTime",
-        "modelId"
-      ],
-      "properties": {
-        "modelId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "Model identifier.",
-          "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time (UTC) when the model was created.",
-          "example": "2020-06-30T00:00:00Z"
-        },
-        "lastUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time (UTC) when the model was last updated.",
-          "example": "2020-06-30T00:00:00Z"
-        },
-        "modelInfo": {
-          "$ref": "#/definitions/ModelInfo"
-        }
-      },
-      "type": "object",
-      "description": "Response of getting a model."
     },
     "DetectionRequest": {
       "required": [
