@@ -7,15 +7,16 @@
   },
   "responses": {
     "200": {
-      "operationId": "[operation-Id]",
-      "created": "2022-09-01T00:00:00.000+00:00",
-      "status": "Succeeded"
+      "body": {
+        "operationId": "[operation-Id]",
+        "created": "2022-09-01T00:00:00.000+00:00",
+        "status": "Succeeded"
+      },
+      "headers": {
+        "Resource-Location": "https://us.atlas.microsoft.com/routesets/[routeset-id]?api-version=2022-09-01-preview",
+        "Access-Control-Expose-Headers": "Resource-Location"
+      }
     },
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
-    },
-    "headers": {
-      "Resource-Location": "https://us.atlas.microsoft.com/routesets/[routeset-id]?api-version=2022-09-01-preview"
-    }
+    "400": {}
   }
 }
