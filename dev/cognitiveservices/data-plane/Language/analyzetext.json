@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Cognitive Language Service",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-07-01-preview"
+    "title": "Microsoft Cognitive Language Service - Text Analysis",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -88,6 +88,9 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
+          },
+          "Successful Dynamic Classifcation Request": {
+            "$ref": "./examples/text/SuccessfuDynamicClassificationRequest.json"
           }
         }
       }
@@ -136,6 +139,12 @@
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
+          },
+          "Successful Healthcare Post Request": {
+            "$ref": "./examples/text/SuccessfulHealthcarePostRequest.json"
+          },
+          "Successful Submit Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -183,6 +192,12 @@
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
             "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
+          },
+          "Successful Get Text Analysis Health Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareTaskStatusRequest.json"
+          },
+          "Successful Get Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
           }
         }
       }
@@ -238,7 +253,8 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
-        "EntityLinking"
+        "EntityLinking",
+        "DynamicClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -258,7 +274,8 @@
         "ExtractiveSummarization",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
+        "CustomMultiLabelClassification",
+        "AbstractiveSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -274,7 +291,8 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults"
+        "EntityLinkingResults",
+        "DynamicClassificationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -294,7 +312,8 @@
         "ExtractiveSummarizationLROResults",
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
+        "CustomMultiLabelClassificationLROResults",
+        "AbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -302,6 +321,7 @@
       }
     },
     "MultiLanguageAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -312,6 +332,7 @@
       }
     },
     "LanguageDetectionAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -322,6 +343,7 @@
       }
     },
     "AnalyzeTextTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -333,6 +355,7 @@
       }
     },
     "AnalyzeTextLROTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -349,6 +372,7 @@
       ]
     },
     "AnalyzeTextTaskResult": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -360,6 +384,7 @@
       }
     },
     "AnalyzeTextEntityLinkingInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -376,6 +401,7 @@
       "x-ms-discriminator-value": "EntityLinking"
     },
     "AnalyzeTextEntityRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -392,6 +418,7 @@
       "x-ms-discriminator-value": "EntityRecognition"
     },
     "AnalyzeTextKeyPhraseExtractionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -408,6 +435,7 @@
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
     "AnalyzeTextPiiEntitiesRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -424,6 +452,7 @@
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
     "AnalyzeTextLanguageDetectionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
@@ -440,6 +469,7 @@
       "x-ms-discriminator-value": "LanguageDetection"
     },
     "AnalyzeTextSentimentAnalysisInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -455,7 +485,24 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
+    "AnalyzeTextDynamicClassificationInput": {
+      "properties": {
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        },
+        "parameters": {
+          "$ref": "#/definitions/DynamicClassificationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTask"
+        }
+      ],
+      "x-ms-discriminator-value": "DynamicClassification"
+    },
     "AnalyzeTextJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -505,6 +552,7 @@
       ]
     },
     "CustomResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
@@ -703,6 +751,32 @@
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
+        "fhirVersion": {
+          "type": "string",
+          "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "enum": [
+            "4.0.1"
+          ],
+          "x-ms-enum": {
+            "name": "fhirVersion",
+            "modelAsString": true
+          }
+        },
+        "documentType": {
+          "type": "string",
+          "description": "Document type that can be provided as input for Fhir Documents.",
+          "enum": [
+            "None",
+            "ClinicalTrial",
+            "DischargeSummary",
+            "ProgressNote",
+            "HistoryAndPhysical",
+            "Consult",
+            "Imaging",
+            "Pathology",
+            "ProcedureNote"
+          ]
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
         }
@@ -766,6 +840,11 @@
           "items": {
             "$ref": "#/definitions/HealthcareRelation"
           }
+        },
+        "fhirBundle": {
+          "type": "object",
+          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "additionalProperties": {}
         }
       },
       "allOf": [
@@ -793,32 +872,32 @@
           "type": "string",
           "description": "Healthcare Entity Category.",
           "enum": [
-            "BODY_STRUCTURE",
-            "AGE",
-            "GENDER",
-            "EXAMINATION_NAME",
-            "DATE",
-            "DIRECTION",
-            "FREQUENCY",
-            "MEASUREMENT_VALUE",
-            "MEASUREMENT_UNIT",
-            "RELATIONAL_OPERATOR",
-            "TIME",
-            "GENE_OR_PROTEIN",
-            "VARIANT",
-            "ADMINISTRATIVE_EVENT",
-            "CARE_ENVIRONMENT",
-            "HEALTHCARE_PROFESSION",
-            "DIAGNOSIS",
-            "SYMPTOM_OR_SIGN",
-            "CONDITION_QUALIFIER",
-            "MEDICATION_CLASS",
-            "MEDICATION_NAME",
-            "DOSAGE",
-            "MEDICATION_FORM",
-            "MEDICATION_ROUTE",
-            "FAMILY_RELATION",
-            "TREATMENT_NAME"
+            "BodyStructure",
+            "Age",
+            "Gender",
+            "ExaminationName",
+            "Date",
+            "Direction",
+            "Frequency",
+            "MeasurementValue",
+            "MeasurementUnit",
+            "RelationalOperator",
+            "Time",
+            "GeneOrProtein",
+            "Variant",
+            "AdministrativeEvent",
+            "CareEnvironment",
+            "HealthcareProfession",
+            "Diagnosis",
+            "SymptomOrSign",
+            "ConditionalQualifier",
+            "MedicationClass",
+            "MedicationName",
+            "Dosage",
+            "MedicationForm",
+            "MedicationRoute",
+            "FamilyRelation",
+            "TreatmentName"
           ]
         },
         "subcategory": {
@@ -902,6 +981,11 @@
             "name": "relationType",
             "modelAsString": true
           }
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
         },
         "entities": {
           "description": "The entities in the relation.",
@@ -2257,8 +2341,94 @@
           "type": "number",
           "format": "double",
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+        },
+        "script": {
+          "type": "string",
+          "description": "Identifies the script of the input document.",
+          "enum": [
+            "Latin"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptKind",
+            "modelAsString": true
+          }
         }
       }
+    },
+    "DynamicClassificationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Zero Shot Classification task.",
+      "properties": {
+        "classificationType": {
+          "type": "string",
+          "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
+          "default": "Multi",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "ClassificationType",
+            "modelAsString": true
+          }
+        },
+        "categories" : {
+          "type": "array",
+          "description": "a list of categories to which input is classified to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ],
+      "required": [
+        "categories"
+      ]
+    },
+    "DynamicClassificationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/DynamicClassificationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "DynamicClassificationResults"
+    },
+    "DynamicClassificationResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ClassificationDocumentResult"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
     },
     "AnalyzeTextJobState": {
       "allOf": [
@@ -2548,7 +2718,7 @@
       "type": "object",
       "properties": {
         "detectedLanguage": {
-          "type": "string",
+          "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       }
@@ -2691,6 +2861,133 @@
           "type": "string"
         }
       }
+    },
+    "AbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AbstractiveSummarizationLROResults": {
+      "type": "object",
+      "description": "An object representing the results for an Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/AbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "AbstractiveSummarizationResultBase": {
+      "type": "object",
+      "description": "An object representing the summarization results of each document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the pre-build summarization results of each document.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummaryDocumentResult": {
+      "type": "object",
+      "description": "An object representing the summarization result of a single document.",
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "description": "A list of abstractive summaries.",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummary"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "summaries"
+      ]
+    },
+    "AbstractiveSummary": {
+      "type": "object",
+      "description": "An object representing a single summary with context for given document.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the summary."
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "common.json#/definitions/SummaryContext"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
     }
   },
   "parameters": {}

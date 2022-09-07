@@ -5225,6 +5225,64 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataWarehouseQueries": {
+      "get": {
+        "operationId": "SqlPoolsDatawareHouseQueries_Get",
+        "summary": "Get SQL pool DatawareHouse Queries ",
+        "description": "SQL pool DatawareHouse Queries ",
+        "tags": [
+          "SqlPools,DatawareHouseQueries"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/DataWarehouseQueries"
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Sql pool DataWarehouseQueries": {
+            "$ref": "./examples/GetDatawareHouseQueries.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7621,6 +7679,121 @@
           "items": {
             "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
           }
+        }
+      }
+    },
+    "DataWarehouseQueries": {
+      "description": "The response to a list datawarehouse queries.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataWareHouseQueriesProperties",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "DataWareHouseQueriesProperties": {
+      "description": "Properties of a datawarehousequeries.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "description": "Requested QueryId. of datawarehousequeries",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time for queries datawarehousequeries",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for queries",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration of requested queries.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "status": {
+          "description": " Status of dataWarehouseQueries.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryText": {
+          "description": " QueryText Message",
+          "type": "string",
+          "readOnly": true
+        },
+        "importance": {
+          "description": "dataWarehouseQueries Importance",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupName": {
+          "description": "Requested GroupName ",
+          "type": "string",
+          "readOnly": true
+        },
+        "classifierName": {
+          "description": "Requested ClassifierName",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceAllocationPercentage": {
+          "description": "AllocationPercentage of the Resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The operation error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "login": {
+          "description": "Login Details",
+          "type": "string",
+          "readOnly": true
+        },
+        "progress": {
+          "description": "Progress value",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "sessionId": {
+          "description": "SessionId for Resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceClass": {
+          "description": "Requested ResourceClass",
+          "type": "string",
+          "enum": [
+            "xlargerc",
+            "largerc",
+            "mediumrc",
+            "smallrc"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DatawarehousequeriesResourceClass"
+          }
+        },
+        "concurrencySlots": {
+          "description": "Requested ConcurrencySlots",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
