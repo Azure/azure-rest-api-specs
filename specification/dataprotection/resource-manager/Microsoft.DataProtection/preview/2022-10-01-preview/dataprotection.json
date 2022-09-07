@@ -5804,6 +5804,37 @@
                 "type": "string"
               },
             "type": "array"
+          },
+          "pvRestoreMode": {
+            "description": "Gets or sets the PV Restore Mode property.",
+            "enum": [
+              "RestoreWithVolumeData",
+              "RestoreWithoutVolumeData"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PersistentVolumeRestoreMode",
+              "modelAsString": true
+            }
+          },
+          "conflictPolicy": {
+            "description": "Gets or sets the Conflict Policy property.",
+            "enum": [
+              "Skip",
+              "Skip"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExistingResourcePolicy",
+              "modelAsString": true
+            }
+          },
+          "namespaceMappings": {
+            "description": "Gets or sets the Namespace Mappings property.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         },
       "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
