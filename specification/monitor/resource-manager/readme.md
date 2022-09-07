@@ -72,7 +72,7 @@ input-file:
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
 - Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json
 - Microsoft.Monitor/preview/2021-06-03-preview/monitoringAccounts_API.json
-- Microsoft.Monitor/preview/2021-06-01-preview/operations_API.json
+- Microsoft.Monitor/preview/2021-06-03-preview/operations_API.json
 ```
 
 ### Tag: package-2022-06-01-only
@@ -100,6 +100,7 @@ These settings apply only when `--tag=package-2021-06-03-preview-only` is specif
 ``` yaml $(tag) == 'package-2021-06-03-preview-only'
 input-file:
 - Microsoft.Monitor/preview/2021-06-03-preview/monitoringAccounts_API.json
+- Microsoft.Monitor/preview/2021-06-03-preview/operations_API.json
 ```
 
 ### Tag: package-2016-03-preview-monitorlegacy
