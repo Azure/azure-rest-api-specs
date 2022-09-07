@@ -15,6 +15,17 @@ batch:
   - tag: package-2021-06-preview
   - tag: package-2021-02-preview
   - tag: package-2022-03
+  - tag: package-2022-10-preview
+```
+
+### Tag:  package-2022-10-preview and ruby
+
+These settings apply only when `--tag= package-2022-10-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == ' package-2022-03' && $(ruby)
+namespace: "Azure::DataProtection::Mgmt::V2022_10_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_data_protection/lib
 ```
 
 ### Tag:  package-2022-03 and ruby
