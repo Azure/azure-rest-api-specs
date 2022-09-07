@@ -821,6 +821,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/EnvironmentSkuProperties",
+          "description": "SKU properties of the Environment."
+        },
         "properties": {
           "description": "Managed environment resource specific properties",
           "type": "object",
@@ -895,6 +899,16 @@
               "description": "The endpoint of the eventstream of the Environment.",
               "type": "string",
               "readOnly": true
+            },
+            "workloadProfiles": {
+              "description": "Workload profiles configured for the Managed Environment.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkloadProfile"
+              },
+              "x-ms-identifiers": [
+                "workloadProfileType"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -969,6 +983,65 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "WorkloadProfile": {
+      "description": "Workload profile to scope container app execution.",
+      "type": "object",
+      "properties": {
+        "workloadProfileType": {
+          "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
+          "description": "Workload profile type for the workloads to run on."
+        },
+        "minimumCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximumCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity."
+        }
+      },
+      "required": [
+        "workloadProfileType",
+        "minimumCount",
+        "maximumCount"
+      ]
+    },
+    "EnvironmentSkuProperties": {
+      "description": "Managed Environment resource SKU properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://aka.ms/container-apps-pricing"
+          },
+          "enum": [
+            "Consumption",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Consumption",
+                "description": "Consumption SKU of Managed Environment."
+              },
+              {
+                "value": "Premium",
+                "description": "Premium SKU of Managed Environment."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "securityDefinitions": {

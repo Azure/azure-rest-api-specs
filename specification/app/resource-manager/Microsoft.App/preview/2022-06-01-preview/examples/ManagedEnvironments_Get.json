@@ -13,6 +13,9 @@
         "type": "Microsoft.App/managedEnvironments",
         "location": "North Central US",
         "tags": {},
+        "sku": {
+          "name": "Premium"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "deploymentErrors": null,
@@ -26,7 +29,24 @@
             "expirationDate": "2022-11-06T04:00:00Z",
             "thumbprint": "CERTIFICATE_THUMBPRINT"
           },
-          "eventStreamEndpoint": "testEndpoint"
+          "eventStreamEndpoint": "testEndpoint",
+          "workloadProfiles": [
+            {
+              "workloadProfileType": "GeneralPurpose",
+              "minimumCount": 3,
+              "maximumCount": 12
+            },
+            {
+              "workloadProfileType": "MemoryOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "workloadProfileType": "ComputeOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            }
+          ]
         }
       }
     }

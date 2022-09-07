@@ -504,6 +504,11 @@
         "dapr": {
           "$ref": "#/definitions/Dapr",
           "description": "Dapr configuration for the Container App."
+        },
+        "maxInactiveRevisions": {
+          "format": "int32",
+          "description": "Optional. Max inactive revisions a Container App can have.",
+          "type": "integer"
         }
       }
     },
@@ -558,6 +563,10 @@
                 "create",
                 "read"
               ]
+            },
+            "workloadProfileType": {
+              "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
+              "description": "Workload profile type to pin for container app execution."
             },
             "latestRevisionName": {
               "description": "Name of the latest revision of the Container App.",

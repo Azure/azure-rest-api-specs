@@ -8,6 +8,7 @@
       "location": "East US",
       "properties": {
         "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "workloadProfileType": "GeneralPurpose",
         "configuration": {
           "ingress": {
             "external": true,
@@ -54,7 +55,8 @@
             "httpMaxRequestSize": 10,
             "logLevel": "debug",
             "enableApiLogging": true
-          }
+          },
+          "maxInactiveRevisions": 10
         },
         "template": {
           "containers": [
@@ -127,6 +129,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "workloadProfileType": "GeneralPurpose",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
