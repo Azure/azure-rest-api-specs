@@ -251,6 +251,7 @@
       }
     },
     "AnalyzeConversationTask": {
+      "type": "object",
       "description": "The base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -263,6 +264,7 @@
       }
     },
     "AnalyzeConversationTaskResult": {
+      "type": "object",
       "description": "The base class of a conversation task result.",
       "discriminator": "kind",
       "required": [
@@ -275,6 +277,7 @@
       }
     },
     "ConversationalTask": {
+      "type": "object",
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -393,6 +396,7 @@
       "additionalProperties": true
     },
     "TextConversationItem": {
+      "type": "object",
       "description": "The text modality of an input conversation.",
       "allOf": [
         {
@@ -826,7 +830,8 @@
           "type": "string",
           "enum": [
             "EntitySubtype",
-            "ListKey"
+            "ListKey",
+            "RegexKey"
           ],
           "x-ms-enum": {
             "name": "ExtraInformationKind",
@@ -867,6 +872,26 @@
         "key": {
           "type": "string",
           "description": "The canonical form of the extracted entity."
+        }
+      }
+    },
+    "RegexKey": {
+      "description": "The regex key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "RegexKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the regex pattern used in extracting the entity."
+        },
+        "regexPattern": {
+          "type": "string",
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
         }
       }
     },
@@ -1557,6 +1582,7 @@
       }
     },
     "AnalyzeConversationJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -1579,6 +1605,7 @@
       ]
     },
     "AnalyzeConversationLROTask": {
+      "type": "object",
       "description": "The base class for an long running conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -1658,6 +1685,7 @@
       }
     },
     "MultiLanguageConversationAnalysisInput": {
+      "type": "object",
       "required": [
         "conversations"
       ],
@@ -1722,6 +1750,7 @@
       }
     },
     "TextConversation": {
+      "type": "object",
       "x-ms-discriminator-value": "text",
       "required": [
         "conversationItems"
@@ -1742,6 +1771,7 @@
       }
     },
     "TranscriptConversation": {
+      "type": "object",
       "x-ms-discriminator-value": "transcript",
       "required": [
         "conversationItems"
@@ -1950,6 +1980,7 @@
       ]
     },
     "ConversationPIIResult": {
+      "type": "object",
       "description": "The result from PII detection and redaction operation for each conversation.",
       "required": [
         "conversationItems"
