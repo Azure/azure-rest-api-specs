@@ -40,7 +40,7 @@
           }
         },
         "x-ms-examples": {
-          "List billing meters by location": {
+          "BillingMeters_Get": {
             "$ref": "./examples/BillingMeters_Get.json"
           }
         }
@@ -57,6 +57,10 @@
         }
       ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Region for the billing meter."
+        },
         "properties": {
           "description": "Revision resource specific properties",
           "type": "object",
@@ -74,17 +78,13 @@
                 "modelAsString": true
               }
             },
-            "shortName": {
+            "meterType": {
               "type": "string",
-              "description": "Unique short name for the meter."
+              "description": "Billing meter type."
             },
             "friendlyName": {
               "type": "string",
               "description": "The everyday name of the billing meter."
-            },
-            "billingLocation": {
-              "type": "string",
-              "description": "Region for the billing meter."
             }
           }
         }
