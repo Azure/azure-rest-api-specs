@@ -1,0 +1,2957 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Data Quality",
+    "version": "2022-09-01"
+  },
+  "paths": {
+    "/accounts/{accountId}/alerts": {
+      "post": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "CreateAlert",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DQAlert"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "DeletAllAlerts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "GetAllMatchedAlerts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "Level",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "ScopeId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "SkipDetails",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "SkipToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "GetAlertDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "UpdateAlert",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "DeleteAlert",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/alerts/exist": {
+      "post": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "CheckAlertNameScopeUniqueness",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AlertNameValidation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/rules": {
+      "post": {
+        "tags": [
+          "AssessmentRules"
+        ],
+        "operationId": "CreateRules",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DataQualityRules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AssessmentRules"
+        ],
+        "operationId": "GetRules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AssessmentRules"
+        ],
+        "operationId": "UpdateRules",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataQualityRules"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AssessmentRules"
+        ],
+        "operationId": "DeleteAllRules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataQualityRules"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/favourite-fields": {
+      "put": {
+        "tags": [
+          "AssessmentRules"
+        ],
+        "operationId": "SetFavouriteFields",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "DataSourceFQN",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DataQualityRules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/assessments": {
+      "post": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "SubmitJob",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "additionalProperties": { }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "GetAssetRunMetadata",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobStatusEntity"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/status": {
+      "get": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "GetJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assessmentId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/scores": {
+      "get": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "GetJobRun",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assessmentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/rules": {
+      "get": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "GetJobRules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assessmentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/errorfile": {
+      "get": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "DownloadJobErrorFile",
+        "produces": [
+          "text/csv",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assessmentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/cancel": {
+      "post": {
+        "tags": [
+          "Assessments"
+        ],
+        "operationId": "CancelJob",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assessmentId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules": {
+      "post": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "CreateScheduledAssessments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "runNow",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetScheduledAssessments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadataPagedResults"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}": {
+      "patch": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "UpdateScheduledAssessments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "runNow",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "UpdateScheduledAssessmentsPost",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "runNow",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetScheduledAssessmentMetadata",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "DeleteScheduledAssessments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleName}": {
+      "head": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "ExistsScheduledAssessment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/scheduleNames": {
+      "get": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetAllScheduleNames",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/runs": {
+      "get": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetScheduledAssessmentsRuns",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleTriggerRunEntity"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/runs": {
+      "post": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetScheduledAssessmentsRunsBulkStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleBulkRunsStatus"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleTriggerRunEntityAssetInfo"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/runs/{runId}": {
+      "get": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetScheduledAssessmentRunDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleTriggerRunEntityAssetInfo"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/runs/{runId}/cancel": {
+      "post": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "CancelScheduledAssessmentRun",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/triggerinternal": {
+      "post": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "RunScheduledAssessmentsInternal",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/trigger": {
+      "post": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "RunScheduledAssessmentsExternal",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/queryFilterRuns": {
+      "post": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "GetScheduledAssessmentsRunsFiltered",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableRepositoryQueryPayloadModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleTriggerRunEntity"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/{triggerRunId}/status": {
+      "put": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "UpdateTriggerRunStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "triggerRunId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobOpInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/runs/{runId}/status": {
+      "put": {
+        "tags": [
+          "Scheduling"
+        ],
+        "operationId": "UpdateManualRunStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobOpInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/trends": {
+      "post": {
+        "tags": [
+          "Trending"
+        ],
+        "operationId": "GetRulesTrendings",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RuleTrendingQueryPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleTrendingEntity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/trends/rules": {
+      "post": {
+        "tags": [
+          "Trending"
+        ],
+        "operationId": "GetRulesTrendingsByRuleId",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RuleTrendingQueryPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RuleTrending"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/validation": {
+      "post": {
+        "tags": [
+          "Validation"
+        ],
+        "operationId": "Validate",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "AccountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "additionalProperties": { }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/views/viewsource/{ViewSourceName}": {
+      "post": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "CreateView",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ViewSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DataQualityView"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/views/{ViewId}": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "GetView",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ViewId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataQualityView"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "DeleteView",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ViewId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "UpdateView",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ViewId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DataQualityView"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/viewsources": {
+      "post": {
+        "tags": [
+          "ViewSourceContoller"
+        ],
+        "operationId": "CreateViewSource",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ViewSource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ViewSource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ViewSourceContoller"
+        ],
+        "operationId": "GetViewSources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ViewSourceDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/viewsources/{source}": {
+      "head": {
+        "tags": [
+          "ViewSourceContoller"
+        ],
+        "operationId": "CheckViewSourceName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "source",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ViewSourceContoller"
+        ],
+        "operationId": "GetViewSource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "source",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ViewSourceDetail"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/viewsources/{ViewSourceName}/views/{ViewName}/validation": {
+      "head": {
+        "tags": [
+          "ViewSourceContoller"
+        ],
+        "operationId": "CheckUniqueViewName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ViewSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "ViewName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertingScope": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "enum": [
+            "CATALOG_PATH"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "AlertNameValidation": {
+      "type": "object",
+      "properties": {
+        "alertName": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertingScope"
+          }
+        }
+      }
+    },
+    "Asset": {
+      "type": "object",
+      "properties": {
+        "guid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        }
+      }
+    },
+    "Assets": {
+      "type": "object",
+      "properties": {
+        "datasourceKind": {
+          "type": "string"
+        },
+        "datasourceName": {
+          "type": "string"
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": { },
+        "credentials": {
+          "$ref": "#/definitions/CredentialEntity"
+        }
+      }
+    },
+    "Attributes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "qualifiedName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Collection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "referenceName": {
+          "type": "string"
+        }
+      }
+    },
+    "CredentialEntity": {
+      "type": "object",
+      "properties": {
+        "credentialType": {
+          "enum": [
+            "AccountKey",
+            "ServicePrincipal",
+            "BasicAuth",
+            "SqlAuth",
+            "AmazonARN",
+            "ConsumerKeyAuth",
+            "DelegatedAuth",
+            "ManagedIdentity"
+          ],
+          "type": "string"
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "credentialProperties": { }
+      }
+    },
+    "DataQualityRules": {
+      "type": "object",
+      "properties": {
+        "modelVersion": {
+          "default": "1.0.0",
+          "type": "string"
+        },
+        "dataSourceId": {
+          "type": "string"
+        },
+        "dataSourceFQN": {
+          "type": "string"
+        },
+        "favouriteFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schemaAtSource": {
+          "$ref": "#/definitions/SourceSchema"
+        },
+        "schemaReference": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "dataSourceType": {
+          "enum": [
+            "CATALOG_ASSET",
+            "FLOWLET"
+          ],
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        }
+      }
+    },
+    "DataQualityView": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/Attributes"
+        },
+        "scriptType": {
+          "enum": [
+            "DSL",
+            "SQL"
+          ],
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          }
+        },
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "guid": {
+          "type": "string"
+        }
+      }
+    },
+    "DQAlert": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ],
+          "type": "string"
+        },
+        "notificationFrequency": {
+          "enum": [
+            "IMMEDIATE"
+          ],
+          "type": "string"
+        },
+        "notificationType": {
+          "enum": [
+            "EMAIL"
+          ],
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "alertingScopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertingScope"
+          }
+        },
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "lastUpdatedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastUpdatedBy": {
+          "type": "string"
+        },
+        "lastActivatedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "activatedCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "DQAssetList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "FilterPayloadModel": {
+      "type": "object",
+      "properties": {
+        "operand": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JobOpInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "JobStatusEntity": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "assetID": {
+          "type": "string"
+        },
+        "jobID": {
+          "type": "string"
+        },
+        "jobRunId": {
+          "type": "string"
+        },
+        "jobStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "totalRunTime": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "globalScore": {
+          "format": "double",
+          "type": "number"
+        },
+        "jobEnvironment": {
+          "type": "string"
+        },
+        "scheduleId": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": { }
+    },
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "INCOMPLETE",
+            "DRAFT",
+            "PUBLISHED"
+          ],
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "ASSET",
+            "FIELD"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "NOTNULL",
+            "INFERRED",
+            "UNIQUE",
+            "REGEX",
+            "LIKE",
+            "ENUMERATION",
+            "DUPLICATE",
+            "CUSTOM",
+            "TIMELINESS",
+            "REFERENCE"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "typeProperties": { }
+      }
+    },
+    "RuleTrending": {
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "type": "string"
+        },
+        "scores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleTrendingEntity"
+          }
+        }
+      }
+    },
+    "RuleTrendingEntity": {
+      "type": "object",
+      "properties": {
+        "jobTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "score": {
+          "format": "double",
+          "type": "number"
+        },
+        "totalRows": {
+          "format": "double",
+          "type": "number"
+        },
+        "failedRows": {
+          "format": "double",
+          "type": "number"
+        },
+        "passedRows": {
+          "format": "double",
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "RuleTrendingQueryPayload": {
+      "type": "object",
+      "properties": {
+        "jobCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "start": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "end": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "ScheduleBulkRunsStatus": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "triggerRunIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ScheduleMetadata": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "scheduleName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/TriggerRecurrence"
+        },
+        "datasources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Assets"
+          }
+        },
+        "scheduleStatus": {
+          "enum": [
+            "RUNNING",
+            "PAUSED",
+            "DELETED",
+            "DELETING",
+            "TRIGGER_DELETED",
+            "PIPELINE_DELETED"
+          ],
+          "type": "string"
+        },
+        "runOnce": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ScheduleMetadataPagedResults": {
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ScheduleTriggerRunEntity": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "scheduleName": {
+          "type": "string"
+        },
+        "triggerRunId": {
+          "type": "string"
+        },
+        "triggerStatus": {
+          "type": "string"
+        },
+        "triggerStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "triggerLastUpdateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "assessmentType": {
+          "type": "string"
+        }
+      }
+    },
+    "ScheduleTriggerRunEntityAssetInfo": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "scheduleName": {
+          "type": "string"
+        },
+        "triggerRunId": {
+          "type": "string"
+        },
+        "triggerStatus": {
+          "type": "string"
+        },
+        "triggerStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "triggerLastUpdateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "assessmentType": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "$ref": "#/definitions/TriggerDQJobsStatus"
+        }
+      }
+    },
+    "Schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "SourceSchema": {
+      "type": "object",
+      "properties": {
+        "schemaProvider": {
+          "default": "CATALOG",
+          "enum": [
+            "CATALOG",
+            "DATAQUALITY_SCAN"
+          ],
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "refreshedAt": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "TableRepositoryQueryPayloadModel": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterPayloadModel"
+          }
+        },
+        "lastUpdatedAfter": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastUpdatedBefore": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerDQJobsStatus": {
+      "type": "object",
+      "properties": {
+        "Succeeded": {
+          "$ref": "#/definitions/DQAssetList"
+        },
+        "InProgress": {
+          "$ref": "#/definitions/DQAssetList"
+        },
+        "Queued": {
+          "$ref": "#/definitions/DQAssetList"
+        },
+        "Failed": {
+          "$ref": "#/definitions/DQAssetList"
+        },
+        "Cancelled": {
+          "$ref": "#/definitions/DQAssetList"
+        },
+        "Skipped": {
+          "$ref": "#/definitions/DQAssetList"
+        }
+      }
+    },
+    "TriggerRecurrence": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "type": "string"
+        },
+        "interval": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "schedule": { },
+        "timezone": {
+          "type": "string"
+        }
+      }
+    },
+    "ViewEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updatedTime": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "ViewSource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ViewSourceProperties"
+        }
+      }
+    },
+    "ViewSourceDetail": {
+      "type": "object",
+      "properties": {
+        "views": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ViewEntry"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ViewSourcePropertiesDTO"
+        }
+      }
+    },
+    "ViewSourceDTO": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "parentCollection": {
+          "type": "string"
+        }
+      }
+    },
+    "ViewSourceProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "collection": {
+          "$ref": "#/definitions/Collection"
+        }
+      }
+    },
+    "ViewSourcePropertiesDTO": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "collection": {
+          "$ref": "#/definitions/Collection"
+        }
+      }
+    }
+  }
+}
