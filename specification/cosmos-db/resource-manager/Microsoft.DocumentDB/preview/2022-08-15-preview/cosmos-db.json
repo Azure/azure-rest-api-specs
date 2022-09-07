@@ -7688,6 +7688,10 @@
           "description": "The object that represents the metadata for the Account Keys of the Cosmos DB account.",
           "type": "object",
           "$ref": "#/definitions/DatabaseAccountKeysMetadata"
+        },
+        "enablePartitionMerge": {
+          "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
+          "type": "boolean"
         }
       }
     },
@@ -7838,6 +7842,10 @@
           "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
           "type": "object",
           "$ref": "#/definitions/DatabaseAccountKeysMetadata"
+        },
+        "enablePartitionMerge": {
+          "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
+          "type": "boolean"
         }
       },
       "required": [
@@ -8012,6 +8020,10 @@
           "description": "This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
           "type": "object",
           "$ref": "#/definitions/DatabaseAccountKeysMetadata"
+        },
+        "enablePartitionMerge": {
+          "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
+          "type": "boolean"
         }
       }
     },
@@ -9901,20 +9913,25 @@
     "DatabaseAccountKeysMetadata": {
       "description": "The metadata related to each access key for the given Cosmos DB database account.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "primaryMasterKey": {
+          "readOnly": true,
           "description": "The metadata related to the Primary Read-Write Key for the given Cosmos DB database account.",
           "$ref": "#/definitions/AccountKeyMetadata"
         },
         "secondaryMasterKey": {
+          "readOnly": true,
           "description": "The metadata related to the Secondary Read-Write Key for the given Cosmos DB database account.",
           "$ref": "#/definitions/AccountKeyMetadata"
         },
         "primaryReadonlyMasterKey": {
+          "readOnly": true,
           "description": "The metadata related to the Primary Read-Only Key for the given Cosmos DB database account.",
           "$ref": "#/definitions/AccountKeyMetadata"
         },
         "secondaryReadonlyMasterKey": {
+          "readOnly": true,
           "description": "The metadata related to the Secondary Read-Only Key for the given Cosmos DB database account.",
           "$ref": "#/definitions/AccountKeyMetadata"
         }
