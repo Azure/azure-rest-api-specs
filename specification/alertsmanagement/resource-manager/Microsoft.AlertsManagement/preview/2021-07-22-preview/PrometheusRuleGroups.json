@@ -198,6 +198,55 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "PrometheusRuleGroups"
+        ],
+        "description": "Update an Prometheus rule group definition.",
+        "operationId": "PrometheusRuleGroups_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResourcePatch"
+            },
+            "description": "The parameters of the rule group to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrometheusRuleGroupResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchPrometheusRuleGroup": {
+            "$ref": "./examples/patchPrometheusRuleGroup.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "PrometheusRuleGroups"
@@ -340,9 +389,10 @@
           "description": "Resource tags"
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrometheusRuleGroupProperties",
-          "description": "The alert rule properties of the resource."
+          "enabled": {
+            "type": "boolean",
+            "description": "the flag that indicates whether the Prometheus rule group is enabled."
+          }
         }
       },
       "description": "The Prometheus rule group resource for patch operations."
