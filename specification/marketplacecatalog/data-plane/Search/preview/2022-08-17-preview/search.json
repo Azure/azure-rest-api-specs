@@ -42,7 +42,7 @@
             "type": "string",
             "name": "azureBenefit",
             "in": "query",
-            "description": "Define the search for only azure benefit eligible offers, if no value selected, this filter is ignored. Default: null",
+            "description": "Define the search for only azure benefit eligible offers, if no value selected, this filter is ignored. Default: null. \n- `Eligible`: Eligible.\n- `NotEligible`: Not Eligible.",
             "x-schema": {
               "$ref": "#/definitions/AzureBenefit"
             },
@@ -59,7 +59,7 @@
             "type": "array",
             "name": "publisherTypes",
             "in": "query",
-            "description": "Define the search publisher types, possible values: Microsoft, ThirdParty. Default: Microsoft",
+            "description": "Define the search publisher types, possible values: Microsoft, ThirdParty. Default: Microsoft. \n- `Microsoft`: Microsoft.\n- `ThirdParty`: Third Party.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -77,7 +77,7 @@
             "type": "array",
             "name": "badges",
             "in": "query",
-            "description": "The following product badges are available: preferredSolution, powerBICertified, AdditionalPurchaseRequirement",
+            "description": "The following product badges are available: \n- `PreferredSolution`: Preferred Solution.\n- `PowerBICertified`: power BI Certified.\n- `AdditionalPurchaseRequirement`: Additional Purchase Requirement.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -96,7 +96,7 @@
             "type": "string",
             "name": "industryCloud",
             "in": "query",
-            "description": "Define the search for IndustryCloud offers. Default: NotApplicable",
+            "description": "Define the search for IndustryCloud offers. Default: NotApplicable. \n- `NotApplicable`: Not Applicable.\n- `True`: True.\n- `False`: False.",
             "x-schema": {
               "$ref": "#/definitions/IndustryCloud"
             },
@@ -134,41 +134,14 @@
             ],
             "x-ms-enum": {
               "name": "Gallery",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "AppsourceApps",
-                  "value": "AppsourceApps",
-                  "description": "The AppsourceApps"
-                },
-                {
-                  "name": "AppsourceConsultingServices",
-                  "value": "AppsourceConsultingServices",
-                  "description": "The AppsourceConsultingServices"
-                },
-                {
-                  "name": "AMPApps",
-                  "value": "AMPApps",
-                  "description": "The AMPApps"
-                },
-                {
-                  "name": "AMPConsultingServices",
-                  "value": "AMPConsultingServices",
-                  "description": "The AMPConsultingServices"
-                },
-                {
-                  "name": "Azure",
-                  "value": "Azure",
-                  "description": "The Azure"
-                }
-              ]
+              "modelAsString": true
             }
           },
           {
             "type": "array",
             "name": "select",
             "in": "query",
-            "description": "Array of fields to return. E.g. 'pricingTypes'",
+            "description": "Array of fields to return. E.g. 'pricingTypes'. \n- `All`: All fields.\n- `Popularity`: Popularity.\n- `ApplicableProducts`: Applicable Products.\n- `Categories`: Categories.\n- `Industries`: Industries.\n- `CategoryIds`: Category Ids.\n- `Market`: Market.\n- `LinkedAddIns`: Linked AddIns.\n- `SupportedProducts`: Supported Products.\n- `HideKeys`: Hide Keys.\n- `PublisherId`: Publisher Id.\n- `CspStates`: Csp States.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `MediumIconUri`: Medium Icon Uri.\n- `LargeIconUri`: Large Icon Uri.\n- `WideIconUri`: Wide Icon Uri.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `Language`: Language.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.",
             "collectionFormat": "csv",
             "required": true,
             "items": {
@@ -178,7 +151,6 @@
                 "Popularity",
                 "ApplicableProducts",
                 "Categories",
-                "BigCatLastModifiedDate",
                 "Industries",
                 "CategoryIds",
                 "Market",
@@ -270,7 +242,7 @@
             "type": "array",
             "name": "pricingTypes",
             "in": "query",
-            "description": "Array of pricing types to search by. E.g. 'byol'",
+            "description": "Array of pricing types to search by. \n- `Free`: Free.\n- `FreeTrial`: Free trial.\n- `Byol`: Bring your own license.\n- `Payg`: Pay as you go.\n- `RI`: Reserved Instance.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -500,7 +472,6 @@
                 "Popularity",
                 "ApplicableProducts",
                 "Categories",
-                "BigCatLastModifiedDate",
                 "Industries",
                 "CategoryIds",
                 "Market",
@@ -1457,7 +1428,6 @@
         "Popularity",
         "ApplicableProducts",
         "Categories",
-        "BigCatLastModifiedDate",
         "Industries",
         "CategoryIds",
         "Market",
