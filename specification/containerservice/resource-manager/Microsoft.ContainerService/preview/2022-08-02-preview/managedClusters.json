@@ -2894,48 +2894,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/guardrailsversions": {
-      "get": {
-        "tags": [
-          "guardrailsVersions"
-        ],
-        "operationId": "GuardrailsVersions_List",
-        "summary": "List available guardrails versions.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ListGuardrailsVersionsResponse"
-            }
-          },
-          "default": {
-            "description": "Error details",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Guardrails versions": {
-            "$ref": "./examples/GuardrailsVersions_List.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -4753,6 +4711,10 @@
         },
         "azureMonitorProfile": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfile"
+        },
+        "guardrailsProfile": {
+          "$ref": "#/definitions/GuardrailsProfile",
+          "description": "The guardrails profile holds all the guardrails information for a given cluster"
         }
       },
       "description": "Properties of the managed cluster."
@@ -7247,23 +7209,6 @@
         "version"
       ],
       "description": "The Guardrails profile."
-    },
-    "ListGuardrailsVersionsResponse": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "isPreview": {
-          "type": "boolean",
-          "description": "Describes whether this version is in preview"
-        },
-        "default": {
-          "type": "boolean",
-          "description": "Describes whether this version is default"
-        }
-      }
     }
   },
   "parameters": {
