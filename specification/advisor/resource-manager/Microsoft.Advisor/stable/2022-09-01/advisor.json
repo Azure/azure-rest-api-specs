@@ -1174,19 +1174,6 @@
           "description": "The recommendation-type GUID.",
           "type": "string"
         },
-        "risk": {
-          "description": "The potential risk of not implementing the recommendation.",
-          "enum": [
-            "Error",
-            "Warning",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "risk",
-            "modelAsString": true
-          }
-        },
         "shortDescription": {
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
@@ -1279,11 +1266,11 @@
       "type": "object",
       "properties": {
         "problem": {
-          "description": "The issue or opportunity identified by the recommendation.",
+          "description": "The issue or opportunity identified by recommendation and proposed solution.",
           "type": "string"
         },
         "solution": {
-          "description": "The remediation action suggested by the recommendation.",
+          "description": "The issue or opportunity identified by recommendation and proposed solution.",
           "type": "string"
         }
       }
