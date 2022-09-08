@@ -1,0 +1,747 @@
+import "@cadl-lang/rest";
+
+using Cadl.Rest;
+
+namespace QuestionAnswering;
+
+// FIXME: (missing-docs) Add documentation
+enum ErrorCodeTypeKnownValues {
+  "BadArgument",
+  "Forbidden",
+  "NotFound",
+  "KbNotFound",
+  "Unauthorized",
+  "Unspecified",
+  "EndpointKeysError",
+  "QuotaExceeded",
+  "QnaRuntimeError",
+  "SKULimitExceeded",
+  "OperationNotFound",
+  "ServiceError",
+  "ValidationFailure",
+  "ExtractionFailure",
+}
+
+@knownValues(ErrorCodeTypeKnownValues)
+model ErrorCodeType is string;
+
+// FIXME: (missing-docs) Add documentation
+enum OperationStateTypeKnownValues {
+  "Failed",
+  "NotStarted",
+  "Running",
+  "Succeeded",
+}
+
+@knownValues(OperationStateTypeKnownValues)
+model OperationStateType is string;
+
+// FIXME: (missing-docs) Add documentation
+enum EnvironmentTypeKnownValues {
+  "Prod",
+  "Test",
+}
+
+@knownValues(EnvironmentTypeKnownValues)
+model EnvironmentType is string;
+
+// FIXME: (missing-docs) Add documentation
+enum StrictFiltersCompoundOperationTypeKnownValues {
+  "AND",
+  "OR",
+}
+
+@knownValues(StrictFiltersCompoundOperationTypeKnownValues)
+model StrictFiltersCompoundOperationType is string;
+
+@doc("Endpoint settings.")
+model EndpointSettingsDTO {
+  @doc("Active Learning settings of the endpoint.")
+  activeLearning?: EndpointSettingsDTOActiveLearning;
+}
+
+@doc("Active Learning settings of the endpoint.")
+model EndpointSettingsDTOActiveLearning {
+  ...ActiveLearningSettingsDTO;
+}
+
+@doc("Active Learning settings of the endpoint.")
+model ActiveLearningSettingsDTO {
+  @doc("True/False string providing Active Learning")
+  enable?: string;
+}
+
+@doc("""
+Error response. As per Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+@error
+model ErrorResponse {
+  @doc("The error object.")
+  error?: ErrorResponseError;
+}
+
+@doc("The error object.")
+model ErrorResponseError {
+  ...Error;
+}
+
+@doc("""
+The error object. As per Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+model Error {
+  @doc("One of a server-defined set of error codes.")
+  code: ErrorCodeType;
+
+  @doc("A human-readable representation of the error.")
+  message?: string;
+
+  @doc("The target of the error.")
+  target?: string;
+
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: Error[];
+
+  @doc("""
+An object containing more specific information than the current object about
+the error.
+""")
+  innerError?: InnerErrorModel;
+}
+
+@doc("""
+An object containing more specific information about the error. As per
+Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+model InnerErrorModel {
+  @doc("A more specific error code than was provided by the containing error.")
+  code?: string;
+
+  @doc("""
+An object containing more specific information than the current object about
+the error.
+""")
+  innerError?: InnerErrorModel;
+}
+
+@doc("Schema for EndpointKeys generate/refresh operations.")
+model EndpointKeysDTO {
+  @doc("Primary Access Key.")
+  primaryEndpointKey?: string;
+
+  @doc("Secondary Access Key.")
+  secondaryEndpointKey?: string;
+
+  @doc("Current version of runtime.")
+  installedVersion?: string;
+
+  @doc("Latest version of runtime.")
+  lastStableVersion?: string;
+
+  @doc("Language setting of runtime.")
+  language?: string;
+}
+
+@doc("Collection of word alterations.")
+model WordAlterationsDTO {
+  @doc("Collection of word alterations.")
+  wordAlterations: AlterationsDTO[];
+}
+
+@doc("Collection of words that are synonyms.")
+model AlterationsDTO {
+  @doc("Words that are synonymous with each other.")
+  alterations: string[];
+}
+
+@doc("Collection of knowledgebases owned by a user.")
+model KnowledgebasesDTO {
+  @doc("Collection of knowledgebase records.")
+  knowledgebases?: KnowledgebaseDTO[];
+}
+
+@doc("Response schema for CreateKb operation.")
+model KnowledgebaseDTO {
+  @doc("Unique id that identifies a knowledgebase.")
+  id?: string;
+
+  @doc("URL host name at which the knowledgebase is hosted.")
+  hostName?: string;
+
+  @doc("Time stamp at which the knowledgebase was last accessed (UTC).")
+  lastAccessedTimestamp?: string;
+
+  @doc("Time stamp at which the knowledgebase was last modified (UTC).")
+  lastChangedTimestamp?: string;
+
+  @doc("Time stamp at which the knowledgebase was last published (UTC).")
+  lastPublishedTimestamp?: string;
+
+  @doc("Friendly name of the knowledgebase.")
+  name?: string;
+
+  @doc("User who created / owns the knowledgebase.")
+  userId?: string;
+
+  @doc("URL sources from which Q-A were extracted and added to the knowledgebase.")
+  urls?: string[];
+
+  @doc("""
+Custom sources from which Q-A were extracted or explicitly added to the
+knowledgebase.
+""")
+  sources?: string[];
+}
+
+@doc("Record to track long running operation.")
+model Operation {
+  @doc("Operation state.")
+  operationState?: OperationStateType;
+
+  @doc("Timestamp when the operation was created.")
+  createdTimestamp?: string;
+
+  @doc("Timestamp when the current state was entered.")
+  lastActionTimestamp?: string;
+
+  @doc("Relative URI to the target resource location for completed resources.")
+  resourceLocation?: string;
+
+  @doc("User Id")
+  userId?: string;
+
+  @doc("Operation Id.")
+  operationId?: string;
+
+  @doc("Error details in case of failures.")
+  errorResponse?: ErrorResponse;
+}
+
+@doc("Post body schema for Replace KB operation.")
+model ReplaceKbDTO {
+  @doc("""
+List of Q-A (QnADTO) to be added to the knowledgebase. Q-A Ids are assigned by
+the service and should be omitted.
+""")
+  qnAList: QnAdto[];
+}
+
+@doc("Q-A object.")
+model QnAdto {
+  @doc("Unique id for the Q-A.")
+  id?: int32;
+
+  @doc("Answer text")
+  answer: string;
+
+  @doc("""
+Source from which Q-A was indexed. eg.
+https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
+""")
+  source?: string;
+
+  @doc("List of questions associated with the answer.")
+  questions: string[];
+
+  @doc("List of metadata associated with the answer.")
+  metadata?: MetadataDTO[];
+
+  @doc("Context of a QnA")
+  context?: QnAdtoContext;
+}
+
+@doc("Name - value pair of metadata.")
+model MetadataDTO {
+  @doc("Metadata name.")
+  name: string;
+
+  @doc("Metadata value.")
+  value: string;
+}
+
+@doc("Context of a QnA")
+model QnAdtoContext {
+  ...ContextDTO;
+}
+
+@doc("Context associated with Qna.")
+model ContextDTO {
+  @doc("""
+To mark if a prompt is relevant only with a previous question or not.
+true - Do
+not include this QnA as search result for queries without context
+false -
+ignores context and includes this QnA in search result
+""")
+  isContextOnly?: boolean;
+
+  @doc("List of prompts associated with the answer.")
+  prompts?: PromptDTO[];
+}
+
+@doc("Prompt for an answer.")
+model PromptDTO {
+  @doc("Index of the prompt - used in ordering of the prompts")
+  displayOrder?: int32;
+
+  @doc("""
+Qna id corresponding to the prompt - if QnaId is present, QnADTO object is
+ignored.
+""")
+  qnaId?: int32;
+
+  @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
+  qna?: PromptDTOQna;
+
+  @doc("Text displayed to represent a follow up question prompt")
+  displayText?: string;
+}
+
+@doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
+model PromptDTOQna {
+  ...QnAdto;
+}
+
+@doc("Contains list of QnAs to be updated")
+model UpdateKbOperationDTO {
+  @doc("An instance of CreateKbInputDTO for add operation")
+  add?: UpdateKbOperationDTOAdd;
+
+  @doc("An instance of DeleteKbContentsDTO for delete Operation")
+  delete?: UpdateKbOperationDTODelete;
+
+  @doc("An instance of UpdateKbContentsDTO for Update Operation")
+  update?: UpdateKbOperationDTOUpdate;
+
+  @doc("""
+Enable hierarchical extraction of Q-A from files and urls. The value set during
+KB creation will be used if this field is not present.
+""")
+  enableHierarchicalExtraction?: boolean;
+
+  @doc("""
+Text string to be used as the answer in any Q-A which has no extracted answer
+from the document but has a hierarchy. Required when
+EnableHierarchicalExtraction field is set to True.
+""")
+  defaultAnswerUsedForExtraction?: string;
+}
+
+@doc("An instance of CreateKbInputDTO for add operation")
+model UpdateKbOperationDTOAdd {
+  ...CreateKbInputDTO;
+}
+
+@doc("Input to create KB.")
+model CreateKbInputDTO {
+  @doc("""
+List of QNA to be added to the index. Ids are generated by the service and
+should be omitted.
+""")
+  qnaList?: QnAdto[];
+
+  @doc("List of URLs to be added to knowledgebase.")
+  urls?: string[];
+
+  @doc("List of files to be added to knowledgebase.")
+  files?: FileDTO[];
+}
+
+@doc("DTO to hold details of uploaded files.")
+model FileDTO {
+  @doc("""
+File name. Supported file types are \".tsv\", \".pdf\", \".txt\", \".docx\",
+\".xlsx\".
+""")
+  fileName: string;
+
+  @doc("Public URI of the file.")
+  fileUri: string;
+}
+
+@doc("An instance of DeleteKbContentsDTO for delete Operation")
+model UpdateKbOperationDTODelete {
+  ...DeleteKbContentsDTO;
+}
+
+@doc("PATCH body schema of Delete Operation in UpdateKb")
+model DeleteKbContentsDTO {
+  @doc("List of Qna Ids to be deleted")
+  ids?: int32[];
+
+  @doc("List of sources to be deleted from knowledgebase.")
+  sources?: string[];
+}
+
+@doc("An instance of UpdateKbContentsDTO for Update Operation")
+model UpdateKbOperationDTOUpdate {
+  ...UpdateKbContentsDTO;
+}
+
+@doc("PATCH body schema for Update operation in Update Kb")
+model UpdateKbContentsDTO {
+  @doc("Friendly name for the knowledgebase.")
+  name?: string;
+
+  @doc("List of Q-A (UpdateQnaDTO) to be added to the knowledgebase.")
+  qnaList?: UpdateQnaDTO[];
+
+  @doc("""
+List of existing URLs to be refreshed. The content will be extracted again and
+re-indexed.
+""")
+  urls?: string[];
+}
+
+@doc("PATCH Body schema for Update Qna List")
+model UpdateQnaDTO {
+  @doc("Unique id for the Q-A")
+  id?: int32;
+
+  @doc("Answer text")
+  answer?: string;
+
+  @doc("""
+Source from which Q-A was indexed. eg.
+https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
+""")
+  source?: string;
+
+  @doc("List of questions associated with the answer.")
+  questions?: UpdateQnaDTOQuestions;
+
+  @doc("List of metadata associated with the answer to be updated")
+  metadata?: UpdateQnaDTOMetadata;
+
+  @doc("Context associated with Qna to be updated.")
+  context?: UpdateQnaDTOContext;
+}
+
+@doc("List of questions associated with the answer.")
+model UpdateQnaDTOQuestions {
+  ...UpdateQuestionsDTO;
+}
+
+@doc("""
+PATCH Body schema for Update Kb which contains list of questions to be added
+and deleted
+""")
+model UpdateQuestionsDTO {
+  @doc("List of questions to be added")
+  add?: string[];
+
+  @doc("List of questions to be deleted.")
+  delete?: string[];
+}
+
+@doc("List of metadata associated with the answer to be updated")
+model UpdateQnaDTOMetadata {
+  ...UpdateMetadataDTO;
+}
+
+@doc("PATCH Body schema to represent list of Metadata to be updated")
+model UpdateMetadataDTO {
+  @doc("List of Metadata associated with answer to be deleted")
+  delete?: MetadataDTO[];
+
+  @doc("List of metadata associated with answer to be added")
+  add?: MetadataDTO[];
+}
+
+@doc("Context associated with Qna to be updated.")
+model UpdateQnaDTOContext {
+  ...UpdateContextDTO;
+}
+
+@doc("Update Body schema to represent context to be updated")
+model UpdateContextDTO {
+  @doc("List of prompts associated with qna to be deleted")
+  promptsToDelete?: int32[];
+
+  @doc("List of prompts to be added to the qna.")
+  promptsToAdd?: PromptDTO[];
+
+  @doc("""
+To mark if a prompt is relevant only with a previous question or not.
+true - Do
+not include this QnA as search result for queries without context
+false -
+ignores context and includes this QnA in search result
+""")
+  isContextOnly?: boolean;
+}
+
+@doc("Post body schema for CreateKb operation.")
+model CreateKbDTO {
+  @doc("Friendly name for the knowledgebase.")
+  name: string;
+
+  @doc("""
+List of Q-A (QnADTO) to be added to the knowledgebase. Q-A Ids are assigned by
+the service and should be omitted.
+""")
+  qnaList?: QnAdto[];
+
+  @doc("List of URLs to be used for extracting Q-A.")
+  urls?: string[];
+
+  @doc("List of files from which to Extract Q-A.")
+  files?: FileDTO[];
+
+  @doc("""
+Enable hierarchical extraction of Q-A from files and urls. Value to be
+considered False if this field is not present.
+""")
+  enableHierarchicalExtraction?: boolean;
+
+  @doc("""
+Text string to be used as the answer in any Q-A which has no extracted answer
+from the document but has a hierarchy. Required when
+EnableHierarchicalExtraction field is set to True.
+""")
+  defaultAnswerUsedForExtraction?: string;
+
+  @doc("""
+Language of the knowledgebase. Please find the list of supported languages <a
+href=\"https://aka.ms/qnamaker-languages#languages-supported\"
+target=\"_blank\">here</a>.
+""")
+  language?: string;
+}
+
+@doc("List of QnADTO")
+model QnADocumentsDTO {
+  @doc("List of answers.")
+  qnaDocuments?: QnAdto[];
+}
+
+@doc("POST body schema to query the knowledgebase.")
+model QueryDTO {
+  @doc("""
+Exact qnaId to fetch from the knowledgebase, this field takes priority over
+question.
+""")
+  qnaId?: string;
+
+  @doc("User question to query against the knowledge base.")
+  question?: string;
+
+  @doc("Max number of answers to be returned for the question.")
+  top?: int32;
+
+  @doc("""
+Unique identifier for the user. Optional parameter for telemetry. For more
+information, refer <a href=\"http://aka.ms/qnamaker-analytics#user-traffic\"
+target=\"blank\">Analytics and Telemetry</a>.
+""")
+  userId?: string;
+
+  @doc("Query against the test index.")
+  isTest?: boolean;
+
+  @doc("Threshold for answers returned based on score.")
+  scoreThreshold?: float32;
+
+  @doc("Context object with previous QnA's information.")
+  context?: QueryDTOContext;
+
+  @doc("Optional field. Set to 'QuestionOnly' for using a question only Ranker.")
+  rankerType?: string;
+
+  @doc("Find only answers that contain these metadata.")
+  strictFilters?: MetadataDTO[];
+
+  @doc("Optional field. Set to OR for using OR as Operation for Strict Filters.")
+  strictFiltersCompoundOperationType?: StrictFiltersCompoundOperationType;
+}
+
+@doc("Context object with previous QnA's information.")
+model QueryDTOContext {
+  ...QueryContextDTO;
+}
+
+@doc("Context object with previous QnA's information.")
+model QueryContextDTO {
+  @doc("Previous QnA Id - qnaId of the top result.")
+  previousQnaId?: string;
+
+  @doc("Previous user query.")
+  previousUserQuery?: string;
+}
+
+@doc("Represents List of Question Answers.")
+model QnASearchResultList {
+  @doc("Represents Search Result list.")
+  answers?: QnASearchResult[];
+}
+
+@doc("Represents Search Result.")
+model QnASearchResult {
+  @doc("List of questions.")
+  questions?: string[];
+
+  @doc("Answer.")
+  answer?: string;
+
+  @doc("Search result score.")
+  score?: float32;
+
+  @doc("Id of the QnA result.")
+  id?: int32;
+
+  @doc("Source of QnA result.")
+  source?: string;
+
+  @doc("List of metadata.")
+  metadata?: MetadataDTO[];
+
+  @doc("Context object of the QnA")
+  context?: QnASearchResultContext;
+}
+
+@doc("Context object of the QnA")
+model QnASearchResultContext {
+  ...ContextDTOAutoGenerated;
+}
+
+@doc("Context associated with Qna.")
+model ContextDTOAutoGenerated {
+  @doc("""
+To mark if a prompt is relevant only with a previous question or not.
+true - Do
+not include this QnA as search result for queries without context
+false -
+ignores context and includes this QnA in search result
+""")
+  isContextOnly?: boolean;
+
+  @doc("List of prompts associated with the answer.")
+  prompts?: PromptDTOAutoGenerated[];
+}
+
+@doc("Prompt for an answer.")
+model PromptDTOAutoGenerated {
+  @doc("Index of the prompt - used in ordering of the prompts")
+  displayOrder?: int32;
+
+  @doc("""
+Qna id corresponding to the prompt - if QnaId is present, QnADTO object is
+ignored.
+""")
+  qnaId?: int32;
+
+  @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
+  qna?: PromptDTOQnaAutoGenerated;
+
+  @doc("Text displayed to represent a follow up question prompt")
+  displayText?: string;
+}
+
+@doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
+model PromptDTOQnaAutoGenerated {
+  ...QnAdtoAutoGenerated;
+}
+
+@doc("Q-A object.")
+model QnAdtoAutoGenerated {
+  @doc("Unique id for the Q-A.")
+  id?: int32;
+
+  @doc("Answer text")
+  answer: string;
+
+  @doc("""
+Source from which Q-A was indexed. eg.
+https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
+""")
+  source?: string;
+
+  @doc("List of questions associated with the answer.")
+  questions: string[];
+
+  @doc("List of metadata associated with the answer.")
+  metadata?: MetadataDTO[];
+
+  @doc("Context of a QnA")
+  context?: QnAdtoContextAutoGenerated;
+}
+
+@doc("Context of a QnA")
+model QnAdtoContextAutoGenerated {
+  ...ContextDTOAutoGenerated;
+}
+
+@doc("""
+Error response. As per Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+@error
+model ErrorResponseAutoGenerated {
+  @doc("The error object.")
+  error?: ErrorResponseErrorAutoGenerated;
+}
+
+@doc("The error object.")
+model ErrorResponseErrorAutoGenerated {
+  ...ErrorAutoGenerated;
+}
+
+@doc("""
+The error object. As per Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+model ErrorAutoGenerated {
+  @doc("One of a server-defined set of error codes.")
+  code: ErrorCodeType;
+
+  @doc("A human-readable representation of the error.")
+  message?: string;
+
+  @doc("The target of the error.")
+  target?: string;
+
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: ErrorAutoGenerated[];
+
+  @doc("""
+An object containing more specific information than the current object about
+the error.
+""")
+  innerError?: InnerErrorModelAutoGenerated;
+}
+
+@doc("""
+An object containing more specific information about the error. As per
+Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+model InnerErrorModelAutoGenerated {
+  @doc("A more specific error code than was provided by the containing error.")
+  code?: string;
+
+  @doc("""
+An object containing more specific information than the current object about
+the error.
+""")
+  innerError?: InnerErrorModelAutoGenerated;
+}
+
+@doc("Active learning feedback records.")
+model FeedbackRecordsDTO {
+  @doc("List of feedback records.")
+  feedbackRecords?: FeedbackRecordDTO[];
+}
+
+@doc("Active learning feedback record.")
+model FeedbackRecordDTO {
+  @doc("Unique identifier for the user.")
+  userId?: string;
+
+  @doc("The suggested question being provided as feedback.")
+  userQuestion?: string;
+
+  @doc("The qnaId for which the suggested question is provided as feedback.")
+  qnaId?: int32;
+}

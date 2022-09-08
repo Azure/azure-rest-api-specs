@@ -1,0 +1,25 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@serviceTitle("QuestionAnswering")
+@server(
+  "{Endpoint}/qnamaker/v4.0",
+  "An API for QnAMaker Service",
+  {
+    @doc("""
+Supported Cognitive Services endpoint (e.g., https://< qnamaker-resource-name>
+.api.cognitiveservices.azure.com).
+""")
+    Endpoint: string,
+
+    @doc("""
+QnA Maker App Service endpoint (for example:
+https://{qnaservice-hostname}.azurewebsites.net).
+""")
+    RuntimeEndpoint: string,
+  }
+)
+@doc("An API for QnAMaker Service")
+namespace QuestionAnswering;

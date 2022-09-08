@@ -1,0 +1,251 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "./models.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace QuestionAnswering;
+
+// FIXME: (missing-docs) Add documentation
+interface EndpointSettingsOperations {
+  @summary("Gets endpoint settings for an endpoint.")
+  @doc("Gets endpoint settings for an endpoint.")
+  @route("/endpointSettings")
+  @get
+  GetSettings is Azure.Core.Foundations.Operation<{}, EndpointSettingsDTO>;
+
+  @summary("Updates endpoint settings for an endpoint.")
+  @doc("Updates endpoint settings for an endpoint.")
+  @route("/endpointSettings")
+  @patch
+  UpdateSettings is Azure.Core.Foundations.Operation<
+    {
+      @doc("Post body of the request.")
+      @body
+      endpointSettingsPayload: EndpointSettingsDTO;
+    },
+    void
+  >;
+}
+// FIXME: (missing-docs) Add documentation
+interface EndpointKeysOperations {
+  @summary("Gets endpoint keys for an endpoint")
+  @doc("Gets endpoint keys for an endpoint")
+  @route("/endpointkeys")
+  @get
+  GetKeys is Azure.Core.Foundations.Operation<{}, EndpointKeysDTO>;
+
+  @summary("Re-generates an endpoint key.")
+  @doc("Re-generates an endpoint key.")
+  @route("/endpointkeys/{keyType}")
+  @patch
+  RefreshKeys is Azure.Core.Foundations.Operation<
+    {
+      @doc("Type of Key")
+      @path
+      keyType: string;
+    },
+    EndpointKeysDTO
+  >;
+}
+// FIXME: (missing-docs) Add documentation
+interface AlterationsOperations {
+  @summary("Download alterations from runtime.")
+  @doc("Download alterations from runtime.")
+  @route("/alterations")
+  @get
+  Get is Azure.Core.Foundations.Operation<{}, WordAlterationsDTO>;
+
+  @summary("Replace alterations data.")
+  @doc("Replace alterations data.")
+  @route("/alterations")
+  @put
+  Replace is Azure.Core.Foundations.Operation<
+    {
+      @doc("New alterations data.")
+      @body
+      wordAlterations: WordAlterationsDTO;
+    },
+    void
+  >;
+}
+// FIXME: (missing-docs) Add documentation
+interface KnowledgebaseOperations {
+  @summary("Gets all knowledgebases for a user.")
+  @doc("Gets all knowledgebases for a user.")
+  @route("/knowledgebases")
+  @get
+  ListAll is Azure.Core.Foundations.Operation<{}, KnowledgebasesDTO>;
+
+  @summary("Gets details of a specific knowledgebase.")
+  @doc("Gets details of a specific knowledgebase.")
+  @route("/knowledgebases/{kbId}")
+  @get
+  GetDetails is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+    },
+    KnowledgebaseDTO
+  >;
+
+  @summary("Deletes the knowledgebase and all its data.")
+  @doc("Deletes the knowledgebase and all its data.")
+  @route("/knowledgebases/{kbId}")
+  @delete
+  Delete is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+    },
+    void
+  >;
+
+  @summary("Publishes all changes in test index of a knowledgebase to its prod index.")
+  @doc("Publishes all changes in test index of a knowledgebase to its prod index.")
+  @route("/knowledgebases/{kbId}")
+  @post
+  Publish is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+    },
+    void
+  >;
+
+  @summary("Replace knowledgebase contents.")
+  @doc("Replace knowledgebase contents.")
+  @route("/knowledgebases/{kbId}")
+  @put
+  Replace is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+
+      @doc("An instance of ReplaceKbDTO which contains list of qnas to be uploaded")
+      @body
+      replaceKb: ReplaceKbDTO;
+    },
+    void
+  >;
+
+  @summary("Asynchronous operation to modify a knowledgebase.")
+  @doc("Asynchronous operation to modify a knowledgebase.")
+  @route("/knowledgebases/{kbId}")
+  @patch
+  Update is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+
+      @doc("Post body of the request.")
+      @body
+      updateKb: UpdateKbOperationDTO;
+    },
+    Operation
+  >;
+
+  @summary("Asynchronous operation to create a new knowledgebase.")
+  @doc("Asynchronous operation to create a new knowledgebase.")
+  @route("/knowledgebases/create")
+  @post
+  Create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Post body of the request.")
+      @body
+      createKbPayload: CreateKbDTO;
+    },
+    Operation
+  >;
+
+  @summary("Download the knowledgebase.")
+  @doc("Download the knowledgebase.")
+  @route("/knowledgebases/{kbId}/{environment}/qna")
+  @get
+  Download is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+
+      @doc("Specifies whether environment is Test or Prod.")
+      @path
+      environment: EnvironmentType;
+
+      @doc("""
+The source property filter to apply. Sample value: Editorial,
+smartLight%20FAQ.tsv .
+""")
+      @query
+      source: string;
+
+      @doc("""
+changedSince property is used to return all QnAs created or updated after a
+specific time duration. The user can filter QnAs by seconds (s), minutes (m),
+hours (h) and days (d). The user may use any integral value along with the
+suffix for time. For instance, the value of 5m returns all QnA pairs updated or
+created in the last 5 minutes.
+""")
+      @query
+      changedSince: string;
+    },
+    QnADocumentsDTO
+  >;
+}
+// FIXME: (missing-docs) Add documentation
+interface OperationsOperations {
+  @summary("Gets details of a specific long running operation.")
+  @doc("Gets details of a specific long running operation.")
+  @route("/operations/{operationId}")
+  @get
+  GetDetails is Azure.Core.Foundations.Operation<
+    {
+      @doc("Operation id.")
+      @path
+      operationId: string;
+    },
+    Operation
+  >;
+}
+// FIXME: (missing-docs) Add documentation
+interface RuntimeOperations {
+  @summary("GenerateAnswer call to query the knowledgebase.")
+  @doc("GenerateAnswer call to query the knowledgebase.")
+  @route("/knowledgebases/{kbId}/generateAnswer")
+  @post
+  GenerateAnswer is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+
+      @doc("Post body of the request.")
+      @body
+      generateAnswerPayload: QueryDTO;
+    },
+    QnASearchResultList
+  >;
+
+  @summary("Train call to add suggestions to the knowledgebase.")
+  @doc("Train call to add suggestions to the knowledgebase.")
+  @route("/knowledgebases/{kbId}/train")
+  @post
+  Train is Azure.Core.Foundations.Operation<
+    {
+      @doc("Knowledgebase id.")
+      @path
+      kbId: string;
+
+      @doc("Post body of the request.")
+      @body
+      trainPayload: FeedbackRecordsDTO;
+    },
+    void
+  >;
+}
