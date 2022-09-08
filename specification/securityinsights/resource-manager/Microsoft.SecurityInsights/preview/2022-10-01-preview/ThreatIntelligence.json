@@ -464,6 +464,96 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligenceIndicators/query": {
+      "post": {
+        "x-ms-examples": {
+          "Query Indicators from condition": {
+            "$ref": "./examples/threatintelligence/QueryThreatIntelligenceByCondition.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Query Indicators from condition.",
+        "operationId": "ThreatIntelligenceIndicator_QueryFromCondition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ThreatIntelligenceQueryByCondition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligenceIndicators/count": {
+      "post": {
+        "x-ms-examples": {
+          "Count Indicators from condition": {
+            "$ref": "./examples/threatintelligence/CountThreatIntelligenceByCondition.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Count Indicators from condition.",
+        "operationId": "ThreatIntelligenceIndicator_CountFromCondition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ThreatIntelligenceCountByCondition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformationCount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -522,9 +612,139 @@
         "$ref": "#/definitions/ThreatIntelligenceAppendTags"
       },
       "x-ms-parameter-location": "method"
+    },
+    "ThreatIntelligenceQueryByCondition": {
+      "description": "Filtering criteria for querying threat intelligence indicators by condition.",
+      "in": "body",
+      "name": "filterCriteria",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ThreatIntelligenceQueryByCondition"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ThreatIntelligenceCountByCondition": {
+      "description": "Filtering criteria for counting threat intelligence indicators by condition.",
+      "in": "body",
+      "name": "filterCriteria",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ThreatIntelligenceCountByCondition"
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
+    "Connective": {
+      "description": "Connective used to join the conditions or clauses together.",
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Connective",
+        "values": [
+          {
+            "description": "Conditions/clauses should be joined together using logical AND operator.",
+            "value": "And"
+          },
+          {
+            "description": "Conditions/clauses should be joined together using logical OR operator.",
+            "value": "Or"
+          }
+        ]
+      }
+    },
+    "Clause": {
+      "description": "Represents a clauses in a condition.",
+      "type": "object",
+      "properties": {
+        "clauseConnective": {
+          "description": "Connective used to logically join the values on this clause",
+          "type": "string",
+          "$ref": "#/definitions/Connective"
+        },
+        "field": {
+          "description": "The name of the field we are targeting.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Operator which describes how this clause should be constructed into an expression.",
+          "type": "string",
+          "enum": [
+            "Equal",
+            "NotEqual",
+            "LessThan",
+            "GreaterThan",
+            "StringContains",
+            "StringNotCotains",
+            "IsNull"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConditionOperator",
+            "values": [
+              {
+                "description": "The '=' operator.",
+                "value": "Equal"
+              },
+              {
+                "description": "The '!=' operator.",
+                "value": "NotEqual"
+              },
+              {
+                "description": "The '<' operator.",
+                "value": "LessThan"
+              },
+              {
+                "description": "The '>' operator.",
+                "value": "GreaterThan"
+              }, 
+              {
+                "description": "The 'contains' operator for strings.",
+                "value": "StringContains"
+              },       
+              {
+                "description": "The 'not contains' operator for strings.",
+                "value": "StringNotContains"
+              },              
+              {
+                "description": "The 'is_null' operator.",
+                "value": "IsNull"
+              }
+            ]
+          }
+        },
+        "values": {
+          "description": "Represents all values to construct this clause from in combination with the clause's field and operator.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "description": "Represents a condition which is composed of a set of clauses.",
+      "type": "object",
+      "properties": {
+        "conditionConnective": {
+          "description": "Connective used to logically join the clauses.",
+          "type": "string",
+          "$ref": "#/definitions/Connective"
+        },
+        "clauses": {
+          "description": "List of clauses which make up this condition.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Clause"
+          }
+        }
+      }
+    },
     "ThreatIntelligenceInformationList": {
       "description": "List of all the threat intelligence information objects.",
       "properties": {
@@ -546,6 +766,57 @@
       "required": [
         "value"
       ]
+    },
+    "ThreatIntelligenceInformationCount": {
+      "description": "Count of threat intelligence information objects which match query.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The count of threat intelligence objects.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ThreatIntelligenceQueryByCondition": {
+      "description": "Definition of the query threat intelligence objects by condition parameter.",
+      "properties": {
+        "condition": {
+          "description": "The query condition.",
+          "type": "object",
+          "$ref": "#/definitions/Condition"
+        },
+        "pageSize": {
+          "description": "Page size",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sortBy": {
+          "description": "Columns to sort by and sorting order",
+          "items": {
+            "description": "Sort By",
+            "$ref": "#/definitions/ThreatIntelligenceSortingCriteria"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "skipToken": {
+          "description": "Skip token.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceCountByCondition": {
+      "description": "Definition of the count threat intelligence objects by condition parameter.",
+      "properties": {
+        "condition": {
+          "description": "The query condition.",
+          "type": "object",
+          "$ref": "#/definitions/Condition"
+        }
+      },
+      "type": "object"
     },
     "ThreatIntelligenceInformation": {
       "allOf": [

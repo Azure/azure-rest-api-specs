@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01-preview",
+    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "threatIntelligenceCountByCondition": {
+      "condition": {
+        "conditionConnective": "and",
+        "clauses": [
+          {
+            "field": "source",
+            "operator": "equal",
+            "values": [ "source1" ]
+          },
+          {
+            "clauseConnective": "or",
+            "field": "confidence",
+            "operator": "greaterthan",
+            "values": [ "50" ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2
+      }
+    }
+  }
+}
