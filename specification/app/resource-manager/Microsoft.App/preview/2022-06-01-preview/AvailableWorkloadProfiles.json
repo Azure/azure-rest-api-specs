@@ -15,7 +15,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsWorkloadProfileTypes": {
       "get": {
         "tags": [
-          "WorkloadProfiles"
+          "AvailableWorkloadProfiles"
         ],
         "summary": "Get available workload profiles by location.",
         "description": "Get all available workload profiles for a location.",
@@ -35,7 +35,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WorkloadProfilesCollection"
+              "$ref": "#/definitions/AvailableWorkloadProfilesCollection"
             }
           },
           "default": {
@@ -54,7 +54,7 @@
     }
   },
   "definitions": {
-    "WorkloadProfile": {
+    "AvailableWorkloadProfile": {
       "description": "A premium workload profile.",
       "type": "object",
       "allOf": [
@@ -102,7 +102,7 @@
         }
       }
     },
-    "WorkloadProfilesCollection": {
+    "AvailableWorkloadProfilesCollection": {
       "description": "Collection of available workload profiles in the location.",
       "required": [
         "value"
@@ -113,7 +113,7 @@
           "description": "Collection of workload profiles.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WorkloadProfile"
+            "$ref": "#/definitions/AvailableWorkloadProfile"
           }
         }
       }
