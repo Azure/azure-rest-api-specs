@@ -797,6 +797,10 @@
         "eventGroupingSettings": {
           "$ref": "#/definitions/EventGroupingSettings",
           "description": "The event grouping settings."
+        },
+        "sentinelEntitiesMappings": {
+          "$ref": "#/definitions/SentinelEntitiesMappings",
+          "description": "Array of the sentinel entity mappings of the alert rule"
         }
       },
       "type": "object"
@@ -1759,6 +1763,10 @@
         "eventGroupingSettings": {
           "$ref": "#/definitions/EventGroupingSettings",
           "description": "The event grouping settings."
+        },
+        "sentinelEntitiesMappings": {
+          "$ref": "#/definitions/SentinelEntitiesMappings",
+          "description": "Array of the sentinel entity mappings of the alert rule"
         }
       },
       "required": [
@@ -1878,6 +1886,10 @@
           "type": "object",
           "$ref": "#/definitions/AlertDetailsOverride",
           "description": "The alert details override settings"
+        },
+        "sentinelEntitiesMappings": {
+          "$ref": "#/definitions/SentinelEntitiesMappings",
+          "description": "Array of the sentinel entity mappings of the alert rule"
         }
       },
       "type": "object"
@@ -2051,6 +2063,10 @@
           "type": "object",
           "$ref": "#/definitions/AlertDetailsOverride",
           "description": "The alert details override settings"
+        },
+        "sentinelEntitiesMappings": {
+          "$ref": "#/definitions/SentinelEntitiesMappings",
+          "description": "Array of the sentinel entity mappings of the alert rule"
         }
       },
       "type": "object"
@@ -2094,6 +2110,24 @@
       },
       "type": "object"
     },
+    "SentinelEntitiesMappings": {
+      "description": "List of sentinel entity mappings of the alert rule",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SentinelEntityMapping"
+      },
+      "x-ms-identifiers": []
+    },
+    "SentinelEntityMapping": {
+      "description": "A single sentinel entity mapping",
+      "properties": {
+        "columnName": {
+          "description": "the column name to be mapped to the SentinelEntities",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AlertDetailsOverride": {
       "description": "Settings for how to dynamically override alert static details",
       "properties": {
@@ -2111,6 +2145,27 @@
         },
         "alertSeverityColumnName": {
           "description": "the column name to take the alert severity from",
+          "type": "string"
+        },
+        "alertDynamicProperties": {
+          "description": "List of additional dynamic properties to override",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertPropertyMapping"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "type": "object"
+    },
+    "AlertPropertyMapping": {
+      "description": "A single alert property mapping to override",
+      "properties": {
+        "alertProperty": {
+          "$ref": "#/definitions/AlertProperty"
+        },
+        "value": {
+          "description": "the column name to use to override this property",
           "type": "string"
         }
       },
@@ -2423,6 +2478,63 @@
           {
             "description": "Submission mail entity type",
             "value": "SubmissionMail"
+          }
+        ]
+      }
+    },
+    "AlertProperty": {
+      "description": "The V3 alert property",
+      "enum": [
+        "AlertLink",
+        "ConfidenceLevel",
+        "ConfidenceScore",
+        "ExtendedLinks",
+        "ProductName",
+        "ProviderName",
+        "ProductComponentName",
+        "RemediationSteps",
+        "Techniques"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AlertProperty",
+        "values": [
+          {
+            "description": "Alert's link",
+            "value": "AlertLink"
+          },
+          {
+            "description": "Confidence level property",
+            "value": "ConfidenceLevel"
+          },
+          {
+            "description": "Confidence score",
+            "value": "ConfidenceScore"
+          },
+          {
+            "description": "Extended links to the alert",
+            "value": "ExtendedLinks"
+          },
+          {
+            "description": "Product name alert property",
+            "value": "ProductName"
+          },
+          {
+            "description": "Provider name alert property",
+            "value": "ProviderName"
+          },
+          {
+            "description": "Product component name alert property",
+            "value": "ProductComponentName"
+          },
+          {
+            "description": "Remediation steps alert property",
+            "value": "RemediationSteps"
+          },
+          {
+            "description": "Techniques alert property",
+            "value": "Techniques"
           }
         ]
       }
