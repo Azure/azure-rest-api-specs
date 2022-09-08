@@ -126,6 +126,7 @@
         },
         "industries": {
           "type": "array",
+          "description": "List of industry the item belongs to",
           "items": {
             "type": "string"
           }
@@ -570,7 +571,7 @@
           "description": "A value indicating whether the product is available for purchase through CSP channel",
           "allOf": [
             {
-              "$ref": "#/definitions/CSPState"
+              "$ref": "#/definitions/CspState"
             }
           ]
         },
@@ -685,7 +686,7 @@
         }
       }
     },
-    "CSPState": {
+    "CspState": {
       "type": "string",
       "description": "",
       "enum": [
@@ -695,7 +696,7 @@
         "SelectiveOptIn"
       ],
       "x-ms-enum": {
-        "name": "CSPState",
+        "name": "CspState",
         "modelAsString": true
       }
     },
@@ -756,7 +757,7 @@
     "Artifact": {
       "type": "object",
       "required": [
-        "type"
+        "artifactType"
       ],
       "properties": {
         "name": {
@@ -767,7 +768,7 @@
           "type": "string",
           "description": "Artifact uri"
         },
-        "type": {
+        "artifactType": {
           "description": "Artifact type",
           "allOf": [
             {
