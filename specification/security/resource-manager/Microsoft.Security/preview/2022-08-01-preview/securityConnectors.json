@@ -402,7 +402,7 @@
         }
       }
     },
-    "AWSEnvironmentData": {
+    "AwsEnvironmentData": {
       "type": "object",
       "description": "The aws connector environment data",
       "x-ms-discriminator-value": "AwsAccount",
@@ -636,7 +636,11 @@
             "CspmMonitorAzureDevOps",
             "DefenderForServersGcp",
             "DefenderForContainersGcp",
-            "DefenderForDatabasesGcp"
+            "DefenderForDatabasesGcp",
+            "DefenderCspmAws",
+            "DefenderCspmGcp",
+            "DefenderForDevOpsGithub",
+            "DefenderForDevOpsAzureDevOps"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -793,23 +797,10 @@
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
             },
-            "servicePrincipalSecretMetadata": {
+            "configuration": {
               "type": "object",
-              "description": "Metadata of Service Principal secret for autoprovisioning",
-              "properties": {
-                "expiryDate": {
-                  "type": "string",
-                  "description": "expiration date of service principal secret"
-                },
-                "parameterStoreRegion": {
-                  "type": "string",
-                  "description": "region of parameter store where secret is kept"
-                },
-                "parameterNameInStore": {
-                  "type": "string",
-                  "description": "name of secret resource in parameter store"
-                }
-              }
+              "description": "configuration for arc auto-provisioning",
+              "properties": {}
             }
           }
         },
@@ -934,24 +925,10 @@
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
             },
-            "servicePrincipalSecretMetadata": {
+            "configuration": {
               "type": "object",
-              "description": "Metadata of Service Principal secret for autoprovisioning",
-              "properties": {
-                "expiryDate": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "expiration date of service principal secret"
-                },
-                "parameterStoreRegion": {
-                  "type": "string",
-                  "description": "region of parameter store where secret is kept"
-                },
-                "parameterNameInStore": {
-                  "type": "string",
-                  "description": "name of secret resource in parameter store"
-                }
-              }
+              "description": "configuration for arc auto-provisioning",
+              "properties": {}
             }
           }
         }
@@ -1040,16 +1017,7 @@
             "configuration": {
               "type": "object",
               "description": "Configuration for ARC autoprovisioning",
-              "properties": {
-                "clientId": {
-                  "type": "string",
-                  "description": "The Azure service principal client id for agent onboarding"
-                },
-                "agentOnboardingServiceAccountNumericId": {
-                  "type": "string",
-                  "description": "The agent onboarding service account numeric id"
-                }
-              }
+              "properties": {}
             }
           }
         },
@@ -1136,17 +1104,8 @@
             },
             "configuration": {
               "type": "object",
-              "description": "Configuration for ARC autoprovisioning",
-              "properties": {
-                "clientId": {
-                  "type": "string",
-                  "description": "The Azure service principal client id for agent onboarding"
-                },
-                "agentOnboardingServiceAccountNumericId": {
-                  "type": "string",
-                  "description": "The agent onboarding service account numeric id"
-                }
-              }
+              "description": "configuration for arc auto-provisioning",
+              "properties": {}
             }
           }
         },
@@ -1233,6 +1192,87 @@
       "type": "object",
       "description": "The CSPM monitoring for AzureDevOps offering",
       "x-ms-discriminator-value": "CspmMonitorAzureDevOps",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderCspmAwsOffering": {
+      "type": "object",
+      "description": "The CSPM P1 for Aws offering",
+      "x-ms-discriminator-value": "DefenderCspmAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Server VM scanning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Server VM scanning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Server VM scanning",
+              "properties": {
+                "cloudRoleArn": {
+                  "type": "string",
+                  "description": "The cloud role ARN in AWS for this feature"
+                },
+                "scanningMode": {
+                  "type": "string",
+                  "description": "The scanning mode for the vm scan.",
+                  "enum": [
+                    "Default"
+                  ],
+                  "x-ms-enum": {
+                    "name": "scanningMode",
+                    "modelAsString": true
+                  }
+                },
+                "exclusionTags": {
+                  "type": "object",
+                  "description": "VM tags that indicates that VM should not be scanned",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "defenderCspmGcpOffering": {
+      "type": "object",
+      "description": "The CSPM P1 for GCP offering",
+      "x-ms-discriminator-value": "DefenderCspmGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderForDevOpsGithubOffering": {
+      "type": "object",
+      "description": "The Defender for DevOps for Github offering",
+      "x-ms-discriminator-value": "DefenderForDevOpsGithub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderForDevOpsAzureDevOpsOffering": {
+      "type": "object",
+      "description": "The Defender for DevOps for Azure DevOps offering",
+      "x-ms-discriminator-value": "DefenderForDevOpsAzureDevOps",
       "allOf": [
         {
           "$ref": "#/definitions/cloudOffering"
