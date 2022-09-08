@@ -44,15 +44,20 @@ scenarios:
 
 - **scope**
   - **Type:** Required, Enum
-  - **Enum:** ResourceGroup, Subscription, Tenant
-  - Now only "ResourceGroup" is supported.
-    - **ResourceGroup:** All of the following API scenario and steps should be under some resourceGroup. It means:
+  - **Enum:** ResourceGroup, Subscription, Tenant, None
+    - **ResourceGroup:** All scenarios and steps should be executed under some resourceGroup. It means:
       - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
       - The consumer SHOULD set the following variables:
         - **subscriptionId**
         - **resourceGroupName**
         - **location**
       - For details of how variables work please see [Variables](./Variables.md)
+    - **Subscription:** All scenarios and steps will be executed under some subscription. It means:
+      - No resource group need to be created.
+      - The consumer SHOULD set the following variables:
+        - **subscriptionId**
+    - **Tenant:** All scenarios and steps will be executed under tenant scope.
+    - **None:** None of the assumptions above will be made. Use this if the scenario is for data-plane APIs.
 - **variables**
   - **Type:** Optional, Map of Strings or Variables
   - See [Variables](./Variables.md)

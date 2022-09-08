@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-10-01-preview",
+    "jobId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "qnaGenerationRequestBody": {
+      "documents": [
+        {
+          "id": "1",
+          "documentKind": "url",
+          "content": "https://simple.wikipedia.org/wiki/Photosynthesis",
+          "language": "en"
+        }        
+      ],      
+      "qnAGenerationParameters": {
+        "fetchRawContent": true,
+        "maxQACount": 10
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the gna generation job.",
+      "headers": {
+        "Operation-Location": "{Endpoint}:443/language/generate-questionanswers/jobs/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee?api-version=2022-10-01-preview"
+      }
+    }
+  }
+}
