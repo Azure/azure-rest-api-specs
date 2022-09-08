@@ -284,6 +284,18 @@
           "type": "string",
           "description": "The resource(s) validation scope. This value must be a valid identifier: e.g. /subscriptions/sub_id/resourceGroups/rg_name. For tenant scope, pass: / for more information refer to this documentation site: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-subscription?tabs=azure-cli#deployment-scopes"
         },
+        "validationType": {
+          "type": "string",
+          "description": "Optional parameter, by default this operation uses 'ArmFull' as the validation type. There are two supported values: 'ArmFull' and 'ArmPartial', the difference between both is that 'ArmFull' besides calling RP preflight ('ArmPartial'), also validates that existing resource properties such as: 'location', 'identity' and 'plan' remain unmodified. Additionally validates that the resource location is available and that the number of target resource groups (nested deployments) do not exceed 800 limit.",
+          "enum": [
+            "ArmFull",
+            "ArmPartial"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationType",
+            "modelAsString": true
+          }
+        },
         "resources": {
           "type": "array",
           "description": "Array of resources to validate. These resources must share the same resource type, and namespace as the top-level properties",
