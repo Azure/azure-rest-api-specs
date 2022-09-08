@@ -12,14 +12,14 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/billingMeters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsWorkloadProfileTypes": {
       "get": {
         "tags": [
-          "BillingMeters"
+          "WorkloadProfiles"
         ],
-        "summary": "Get billing meters by location.",
-        "description": "Get all billingMeters for a location.",
-        "operationId": "BillingMeters_Get",
+        "summary": "Get available workload profiles by location.",
+        "description": "Get all available workload profiles for a location.",
+        "operationId": "AvailableWorkloadProfiles_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -35,7 +35,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BillingMeterCollection"
+              "$ref": "#/definitions/WorkloadProfilesCollection"
             }
           },
           "default": {
@@ -47,15 +47,15 @@
         },
         "x-ms-examples": {
           "BillingMeters_Get": {
-            "$ref": "./examples/BillingMeters_Get.json"
+            "$ref": "./examples/AvailableWorkloadProfiles_Get.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "BillingMeter": {
-      "description": "A premium billing meter.",
+    "WorkloadProfile": {
+      "description": "A premium workload profile.",
       "type": "object",
       "allOf": [
         {
@@ -65,13 +65,13 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Region for the billing meter."
+          "description": "Region of the workload profile."
         },
         "properties": {
           "description": "Revision resource specific properties",
           "type": "object",
           "properties": {
-            "category": {
+            "billingMeterCategory": {
               "description": "Used to map workload profile types to billing meter.",
               "type": "string",
               "enum": [
@@ -84,30 +84,36 @@
                 "modelAsString": true
               }
             },
-            "meterType": {
-              "type": "string",
-              "description": "Billing meter type."
+            "cores": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of cores in CPU."
+            },
+            "memoryGiB": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Memory in GB."
             },
             "friendlyName": {
               "type": "string",
-              "description": "The everyday name of the billing meter."
+              "description": "The everyday name of the workload profile."
             }
           }
         }
       }
     },
-    "BillingMeterCollection": {
-      "description": "Collection of premium workload billing meters.",
+    "WorkloadProfilesCollection": {
+      "description": "Collection of available workload profiles in the location.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of billing meters.",
+          "description": "Collection of workload profiles.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BillingMeter"
+            "$ref": "#/definitions/WorkloadProfile"
           }
         }
       }
