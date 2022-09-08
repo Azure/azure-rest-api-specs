@@ -518,7 +518,7 @@
         },
         "x-ms-examples": {
           "Get participants from a call.": {
-            "$ref": "./examples/CallConnections_GetParticipants.json"
+            "$ref": "./examples/CallConnections_ListParticipants.json"
           }
         }
       }
@@ -947,7 +947,7 @@
       }
     },
     "MediaStreamingTransportType": {
-      "description": "The type of tranport to be used for media streaming, eg. Websocket",
+      "description": "The type of transport to be used for media streaming, eg. Websocket",
       "enum": [
         "websocket"
       ],
@@ -1353,7 +1353,7 @@
         },
         "targetParticipant": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Target participant of DTFM tone recognition."
+          "description": "Target participant of DTMF tone recognition."
         },
         "dtmfOptions": {
           "$ref": "#/definitions/DtmfOptions",
@@ -1402,6 +1402,7 @@
           "description": "Maximum number of DTMFs to be collected.",
           "maximum": 2147483647,
           "minimum": 1,
+          "description": "Maximum number of DTMF tones to be collected.",
           "type": "integer"
         },
         "stopTones": {
