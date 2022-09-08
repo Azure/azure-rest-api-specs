@@ -16,11 +16,6 @@
           "SinglePublicOffer"
         ],
         "operationId": "SinglePublicOffer_Get",
-        "x-ms-examples": {
-          "Product_Get": {
-            "$ref": "./examples/SinglePublicOffer_Get.json"
-          }
-        },
         "parameters": [
           {
             "type": "string",
@@ -111,7 +106,7 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Display name"
+          "description": "Product display name"
         },
         "popularity": {
           "type": "number",
@@ -120,7 +115,12 @@
         },
         "categories": {
           "type": "array",
-          "description": "List of categories the marketplace item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industries": {
+          "type": "array",
           "items": {
             "type": "string"
           }
@@ -132,9 +132,9 @@
             "type": "string"
           }
         },
-        "labels": {
+        "categoryIds": {
           "type": "array",
-          "description": "List of category IDs the marketplace item belongs to",
+          "description": "Array of product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'",
           "items": {
             "type": "string"
           }
@@ -144,16 +144,22 @@
           "description": "Publisher id"
         },
         "azureBenefit": {
-          "$ref": "#/definitions/AzureBenefit"
+          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit), Possible values: Eligible, NotEligible, if no value selected, this filter is ignored. Default: null",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureBenefit"
+            }
+          ]
         },
         "badges": {
           "type": "array",
+          "description": "The following product badges are available: preferredSolution, powerBICertified, AdditionalPurchaseRequirement",
           "items": {
             "$ref": "#/definitions/Badge"
           }
         },
         "publisherType": {
-          "description": "A value indicating whether it is a microsoft product",
+          "description": "A value indicating whether it is a Microsoft product or a third-party offer",
           "allOf": [
             {
               "$ref": "#/definitions/PublisherType"
@@ -161,11 +167,16 @@
           ]
         },
         "publishingStage": {
-          "$ref": "#/definitions/PublishingStage"
+          "description": "Publishing Stage, can be Live or Preview",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublishingStage"
+            }
+          ]
         },
         "uniqueProductId": {
           "type": "string",
-          "description": "Offer legacy id"
+          "description": "Product unique identifier"
         },
         "productType": {
           "description": "Offer type",
@@ -177,14 +188,14 @@
         },
         "operatingSystems": {
           "type": "array",
-          "description": "Operating system info for this offer",
+          "description": "Operating system info for this product",
           "items": {
             "type": "string"
           }
         },
         "pricingTypes": {
           "type": "array",
-          "description": "The list of the pricing types for which this offer is designated",
+          "description": "The list of the pricing types for which this offer is designated: \n - `Free`: The product has at least one plan that is free of charge.\n - `FreeTrial`: The product has at least one plan that is free trial.\n - `Byol`: The product has at least one plan that is bring your own license.\n - `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n - `Ri`: The product has at least one plan that is Reserved Instance billing model.",
           "items": {
             "$ref": "#/definitions/PricingType"
           }
@@ -195,117 +206,150 @@
         },
         "summary": {
           "type": "string",
-          "description": "Summary"
+          "description": "Product summary"
         },
         "longSummary": {
-          "type": "string",
-          "description": "LongSummary"
+          "type": "string"
         },
-        "privacyPolicyUrl": {
+        "privacyPolicyUri": {
           "type": "string",
-          "description": "PrivacyPolicyUrl"
+          "description": "The Privacy Policy URL"
         },
         "version": {
           "type": "string",
-          "description": "Version"
+          "description": "The product version"
         },
         "standardContractAmendmentsRevisionId": {
-          "type": "string",
-          "description": "StandardContractAmendmentsRevisionId"
+          "type": "string"
         },
         "cspLegalTermsUri": {
           "type": "string",
-          "description": "CspLegalTermsUri"
-        },
-        "productOwnershipSellingMotion": {
-          "type": "string",
-          "description": "ProductOwnershipSellingMotion"
+          "description": "The CSP legal terms URI"
         },
         "videos": {
           "type": "array",
-          "description": "Videos",
           "items": {
             "$ref": "#/definitions/Video"
           }
         },
         "isReseller": {
-          "type": "boolean",
-          "description": "IsReseller"
+          "type": "boolean"
         },
         "screenshots": {
           "type": "array",
-          "description": "Screenshots",
           "items": {
             "type": "string"
           }
         },
         "vmImageGenerations": {
           "type": "array",
+          "description": "Array of vm generations to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2, possible values, 1,2, s uch as ['1']",
           "items": {
             "type": "string"
           }
         },
         "vmArchitectureTypes": {
           "type": "array",
+          "description": "Array of Virtual Machine image architecture types to search by, 1-x64, 2-ARM, such as ['1']",
           "items": {
             "type": "string"
           }
         },
+        "vmSecurityTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          }
+        },
         "smallIconUri": {
-          "type": "string"
+          "type": "string",
+          "description": "URI to the small product icon"
         },
         "mediumIconUri": {
-          "type": "string"
+          "type": "string",
+          "description": "URI to the medium product icon"
         },
         "largeIconUri": {
-          "type": "string"
+          "type": "string",
+          "description": "URI to the large product icon"
         },
         "wideIconUri": {
-          "type": "string"
+          "type": "string",
+          "description": "URI to the wide product icon"
         },
         "description": {
           "type": "string",
-          "description": "Description"
+          "description": "The product description text"
         },
         "ratingBuckets": {
           "type": "array",
+          "description": "Rating buckets, Above1, Above2, Above3, Above4. Above5",
           "items": {
             "$ref": "#/definitions/RatingBucket"
           }
         },
         "ratingAverage": {
           "type": "number",
+          "description": "Average rating for the offer",
           "format": "double"
         },
         "startingPrice": {
-          "$ref": "#/definitions/MarketStartPrice"
+          "description": "The offer starting price",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketStartPrice"
+            }
+          ]
         },
         "linkedAddIns": {
           "type": "array",
-          "description": "List of linked Add Ins provided for the item",
+          "description": "List of linked Add Ins supported by the product",
           "items": {
             "type": "string"
           }
         },
         "plans": {
           "type": "array",
+          "description": "List of plans that are available for this product",
           "items": {
             "$ref": "#/definitions/PlanSummary"
           }
         },
         "legalTermsUri": {
-          "type": "string"
+          "type": "string",
+          "description": "The legal terms URI"
         },
         "legalTermsType": {
-          "type": "string"
+          "type": "string",
+          "description": "The legal terms type"
         },
         "supportUri": {
-          "type": "string"
+          "type": "string",
+          "description": "The publisher support URI"
         },
         "links": {
           "type": "array",
+          "description": "Links provided by the publisher",
           "items": {
             "$ref": "#/definitions/Link"
+          }
+        },
+        "productOwnershipSellingMotion": {
+          "type": "string",
+          "description": "Product ownership selling motion"
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "It maps to the list of products the publisher provides with which their offer works",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -384,7 +428,8 @@
         "CoreVirtualMachine",
         "PowerBIVisuals",
         "Office365",
-        "AADApps"
+        "AADApps",
+        "AzureServices"
       ],
       "x-ms-enum": {
         "name": "ProductType",
@@ -446,6 +491,19 @@
           "type": "string",
           "description": "imagePurpose"
         }
+      }
+    },
+    "VmSecurityType": {
+      "type": "integer",
+      "description": "0 = None\n1 = Trusted\n2 = Confidential",
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "x-ms-enum": {
+        "name": "VmSecurityType",
+        "modelAsString": true
       }
     },
     "RatingBucket": {
@@ -513,34 +571,27 @@
         },
         "uniquePlanId": {
           "type": "string",
-          "description": "Unique plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
+          "description": "Unique plan Id which is obtained by combining uniqueProductId and PlanId with no separator in between"
         },
         "displayName": {
           "type": "string",
           "description": "Display name of the plan"
         },
         "vmArchitectureType": {
-          "type": "string"
+          "type": "string",
+          "description": "The VM image architecture type: x64, ARM"
         },
         "metadata": {
-          "description": "change this",
+          "description": "Additional plan metadata",
           "allOf": [
             {
               "$ref": "#/definitions/PlanMetadata"
             }
           ]
         },
-        "operatingSystem": {
-          "description": "Operating system info for this plan",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperatingSystem"
-            }
-          ]
-        },
         "uiDefinitionUri": {
           "type": "string",
-          "description": "What blade to open when someone wants to create a marketplace item"
+          "description": "What Azure portal view to open when someone wants to create a marketplace item"
         },
         "pricingTypes": {
           "type": "array",
@@ -553,47 +604,59 @@
           "type": "boolean",
           "description": "A value indicating whether the plan is quantifiable"
         },
-        "vmSecuritytype": {
-          "type": "string",
-          "description": "VM security type"
+        "vmSecuritytypes": {
+          "type": "array",
+          "description": "VM security types",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          }
         },
         "artifacts": {
           "type": "array",
-          "description": "Files related to the marketplace item",
+          "description": "Plan-level resources and configuration files",
           "items": {
             "$ref": "#/definitions/Artifact"
           }
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "description": "The plan summary text"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Plan description"
         },
         "skuId": {
-          "type": "string"
+          "type": "string",
+          "description": "The SKU id"
         },
         "type": {
-          "$ref": "#/definitions/ProductType"
+          "description": "The plan type, for Azure Appliation product type, this can be Solution Template or ManagedApp",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductType"
+            }
+          ]
         },
-        "labels": {
+        "categoryIds": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "displayRank": {
-          "type": "string"
+          "type": "string",
+          "description": "The display rank"
         },
         "purchaseDurationDiscounts": {
           "type": "array",
-          "description": "List of purchase duration discounts",
+          "description": "The percentage discount for third-party virtual machines software reservations",
           "items": {
             "$ref": "#/definitions/PurchaseDurationDiscount"
           }
         },
         "leadGeneration": {
-          "description": "Lead generation info",
+          "description": "Lead generation information",
           "allOf": [
             {
               "$ref": "#/definitions/LeadGeneration"
@@ -601,7 +664,19 @@
           ]
         },
         "isPrivate": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2"
+        },
+        "altArchitectureReference": {
+          "type": "string"
         }
       }
     },
@@ -673,25 +748,11 @@
         }
       }
     },
-    "OperatingSystem": {
-      "type": "object",
-      "properties": {
-        "family": {
-          "type": "string",
-          "description": "Operating system family"
-        },
-        "type": {
-          "type": "string",
-          "description": "Operating system type"
-        },
-        "name": {
-          "type": "string",
-          "description": "Operating system name"
-        }
-      }
-    },
     "Artifact": {
       "type": "object",
+      "required": [
+        "type"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -702,9 +763,27 @@
           "description": "Artifact uri"
         },
         "type": {
-          "type": "string",
-          "description": "Artifact type"
+          "description": "Artifact type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactType"
+            }
+          ]
         }
+      }
+    },
+    "ArtifactType": {
+      "type": "integer",
+      "description": "0 = Template\n1 = Fragment\n2 = Custom\n3 = Metadata",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": true
       }
     },
     "PurchaseDurationDiscount": {
@@ -715,11 +794,11 @@
       "properties": {
         "duration": {
           "type": "string",
-          "description": "duration"
+          "description": "The duration"
         },
         "discountPercentage": {
           "type": "number",
-          "description": "discountPercentage",
+          "description": "The discountPercentage",
           "format": "double"
         }
       }
@@ -730,6 +809,10 @@
         "productId": {
           "type": "string",
           "description": "productId"
+        },
+        "leadGenEnabled": {
+          "type": "boolean",
+          "description": "An indicator if leadgen is enabled"
         }
       }
     },
