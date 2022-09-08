@@ -209,6 +209,27 @@
       },
       "description": "node type capability"
     },
+    "FastProvisioningEditionCapability": {
+      "type": "object",
+      "properties": {
+        "supportedSku": {
+          "type": "string",
+          "description": "Fast provisioning supported sku name",
+          "readOnly": true
+        },
+        "supportedStorageGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Fast provisioning supported storage in Gb",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "string",
+          "description": "Fast provisioning supported version",
+          "readOnly": true
+        }
+      }
+    },
     "FlexibleServerEditionCapability": {
       "type": "object",
       "properties": {
@@ -329,6 +350,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HyperscaleNodeEditionCapability"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "fastProvisioningSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether fast provisioning is supported in this region.",
+          "readOnly": true
+        },
+        "supportedFastProvisioningEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FastProvisioningEditionCapability"
           },
           "x-ms-identifiers": [],
           "readOnly": true
