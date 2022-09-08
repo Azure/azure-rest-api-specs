@@ -20,19 +20,6 @@
   "produces": [
     "application/json"
   ],
-  "security": [
-    {
-      "AADToken": [
-        "https://atlas.microsoft.com/.default"
-      ]
-    },
-    {
-      "SharedKey": []
-    },
-    {
-      "SasToken": []
-    }
-  ],
   "securityDefinitions": {
     "AADToken": {
       "type": "oauth2",
@@ -56,6 +43,19 @@
       "in": "header"
     }
   },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
   "definitions": {
     "FacilityDetails": {
       "description": "The level identifiers in the facility.",
@@ -63,14 +63,17 @@
       "properties": {
         "facilityId": {
           "description": "the identifier of the structure this routeset was created from.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "levelOrdinals": {
           "description": "the level identifiers within this facility",
           "type": "array",
           "items": {
             "type": "number"
-          }
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
         }
       }
     },
@@ -104,6 +107,7 @@
           "items": {
             "$ref": "#/definitions/FacilityDetails"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "creationMode": {
@@ -118,23 +122,6 @@
           "readOnly": true
         }
       }
-    }
-  },
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token."
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues."
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future."
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later."
     }
   },
   "parameters": {
@@ -223,19 +210,27 @@
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "x-ms-error-response": true
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+            "x-ms-error-response": true
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "x-ms-error-response": true
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "x-ms-error-response": true
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       },
@@ -266,19 +261,27 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "x-ms-error-response": true
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+            "x-ms-error-response": true
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "x-ms-error-response": true
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "x-ms-error-response": true
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -314,19 +317,27 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "x-ms-error-response": true
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+            "x-ms-error-response": true
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "x-ms-error-response": true
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "x-ms-error-response": true
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       },
@@ -357,19 +368,27 @@
             "description": "Routeset delete request completed successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "x-ms-error-response": true
           },
           "401": {
-            "$ref": "#/responses/401"
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+            "x-ms-error-response": true
           },
           "403": {
-            "$ref": "#/responses/403"
+            "description": "Permission, capacity, or authentication issues.",
+            "x-ms-error-response": true
           },
           "404": {
-            "$ref": "#/responses/404"
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "x-ms-error-response": true
           },
           "500": {
-            "$ref": "#/responses/500"
+            "description": "An error occurred while processing the request. Please try again later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -402,7 +421,11 @@
             "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
           },
           "400": {
-            "$ref": "#/responses/400"
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }

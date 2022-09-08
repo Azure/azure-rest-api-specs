@@ -12,71 +12,6 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/wayfinding/path": {
-      "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path from one location in a facility to another.",
-        "operationId": "wayfindingGetPath",
-        "x-ms-examples": {
-          "Get the shortest path between two points in the facility.": {
-            "$ref": "./examples/wayfind/Wayfind_GetPath.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/RoutesetId"
-          },
-          {
-            "$ref": "#/parameters/FacilityId"
-          },
-          {
-            "$ref": "#/parameters/From"
-          },
-          {
-            "$ref": "#/parameters/To"
-          },
-          {
-            "$ref": "#/parameters/Avoid"
-          },
-          {
-            "$ref": "#/parameters/Width"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WayfindResult"
-            }
-          },
-          "400": {
-            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
-          },
-          "401": {
-            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token."
-          },
-          "403": {
-            "description": "Permission, capacity, or authentication issues."
-          },
-          "404": {
-            "description": "Not Found: the requested resource could not be found, but it may be available again in the future."
-          },
-          "500": {
-            "description": "An error occurred while processing the request. Please try again later."
-          }
-        }
-      }
-    }
-  },
   "securityDefinitions": {
     "AADToken": {
       "type": "oauth2",
@@ -113,6 +48,103 @@
       "SasToken": []
     }
   ],
+  "definitions": {
+    "Point": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "the point latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "description": "the point longitude",
+          "type": "number"
+        }
+      },
+      "required": [
+        "latitude",
+        "longitude"
+      ]
+    },
+    "Leg": {
+      "description": "A section of the overall path.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "The leg mode of traversal for this leg. It can be default (all on the same level), elevators or stairs when moving vertically between levels."
+        },
+        "lengthInMeters": {
+          "type": "number",
+          "description": "The leg length, in meters, of this leg."
+        },
+        "timeInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The leg travel time, in seconds, to travel between the first and last point of this leg."
+        },
+        "startLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The floor where this leg starts."
+        },
+        "endLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The floor where this leg ends."
+        },
+        "points": {
+          "description": "The leg shape points. Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second at endLevel.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Point"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Path": {
+      "description": "The details about a particular path between the origin and destination. It can be made up of one or more legs.",
+      "type": "object",
+      "properties": {
+        "lengthInMeters": {
+          "type": "number",
+          "description": "The path length, in meters, of the entire path."
+        },
+        "timeInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The path total time, in seconds, to travel between the origin and the destination when following this path."
+        },
+        "legs": {
+          "description": "The different travel sections of this path.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Leg"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WayfindResult": {
+      "description": "The object returned by this Wayfinding Path request.",
+      "type": "object",
+      "properties": {
+        "noResultsExplanation": {
+          "type": "string",
+          "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why."
+        },
+        "paths": {
+          "description": "An array of wayfinding path results.  An empty array will be returned if no results were found.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Path"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
   "parameters": {
     "ApiVersion": {
       "name": "api-version",
@@ -182,87 +214,74 @@
       "x-ms-parameter-location": "client"
     }
   },
-  "definitions": {
-    "Point": {
-      "type": "object",
-      "properties": {
-        "latitude": {
-          "description": "the point latitude",
-          "type": "number"
-        },
-        "longitude": {
-          "description": "the point longitude",
-          "type": "number"
-        }
-      }
-    },
-    "Leg": {
-      "description": "A section of the overall path.",
-      "type": "object",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "The leg mode of traversal for this leg. It can be default (all on the same level), elevators or stairs when moving vertically between levels."
-        },
-        "lengthInMeters": {
-          "type": "number",
-          "description": "The leg length, in meters, of this leg."
-        },
-        "timeInSeconds": {
-          "type": "integer",
-          "description": "The leg travel time, in seconds, to travel between the first and last point of this leg."
-        },
-        "startLevel": {
-          "type": "integer",
-          "description": "The floor where this leg starts."
-        },
-        "endLevel": {
-          "type": "integer",
-          "description": "The floor where this leg ends."
-        },
-        "points": {
-          "description": "The leg shape points. Their vertical position is determined as follows: all the points are at the same height when startLevel and endLevel are the same, otherwise the array will contain only two points: the first at startLevel and the second at endLevel.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Point"
+  "paths": {
+    "/wayfinding/path": {
+      "get": {
+        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path from one location in a facility to another.",
+        "operationId": "wayfindingGetPath",
+        "x-ms-examples": {
+          "Get the shortest path between two points in the facility.": {
+            "$ref": "./examples/wayfind/Wayfind_GetPath.json"
           }
-        }
-      }
-    },
-    "Path": {
-      "description": "The details about a particular path between the origin and destination. It can be made up of one or more legs.",
-      "type": "object",
-      "properties": {
-        "lengthInMeters": {
-          "type": "number",
-          "description": "The path length, in meters, of the entire path."
         },
-        "timeInSeconds": {
-          "type": "integer",
-          "description": "The path total time, in seconds, to travel between the origin and the destination when following this path."
-        },
-        "legs": {
-          "description": "The different travel sections of this path.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Leg"
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/RoutesetId"
+          },
+          {
+            "$ref": "#/parameters/FacilityId"
+          },
+          {
+            "$ref": "#/parameters/From"
+          },
+          {
+            "$ref": "#/parameters/To"
+          },
+          {
+            "$ref": "#/parameters/Avoid"
+          },
+          {
+            "$ref": "#/parameters/Width"
           }
-        }
-      }
-    },
-    "WayfindResult": {
-      "description": "The object returned by this Wayfinding Path request.",
-      "type": "object",
-      "properties": {
-        "noResultsExplanation": {
-          "type": "string",
-          "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why."
-        },
-        "paths": {
-          "description": "An array of wayfinding path results.  An empty array will be returned if no results were found.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Path"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WayfindResult"
+            }
+          },
+          "400": {
+            "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token. Make sure to provide a valid key for an active Azure subscription and Maps resource. Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Permission, capacity, or authentication issues.",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "An error occurred while processing the request. Please try again later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
