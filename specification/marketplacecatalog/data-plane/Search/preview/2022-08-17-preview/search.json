@@ -114,7 +114,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 3166 two-digit alpha code, Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'",
             "required": true
           },
           {
@@ -720,7 +720,7 @@
           ]
         },
         "publishingStage": {
-          "description": "The product publishing stage",
+          "description": "Publishing Stage, can be Live or Preview",
           "allOf": [
             {
               "$ref": "#/definitions/PublishingStage"
@@ -729,7 +729,7 @@
         },
         "uniqueProductId": {
           "type": "string",
-          "description": "Offer legacy id"
+          "description": "Product unique identifier"
         },
         "productType": {
           "description": "The delivery method, deployment model",
@@ -759,43 +759,19 @@
         },
         "summary": {
           "type": "string",
-          "description": "The Summary"
+          "description": "Product Summary"
         },
-        "longSummary": {
+        "privacyPolicyUri": {
           "type": "string",
-          "description": "The LongSummary"
-        },
-        "privacyPolicyUrl": {
-          "type": "string",
-          "description": "The PrivacyPolicyUrl"
+          "description": "The Privacy Policy Uri"
         },
         "version": {
           "type": "string",
-          "description": "The Version"
-        },
-        "standardContractAmendmentsRevisionId": {
-          "type": "string",
-          "description": "The StandardContractAmendmentsRevisionId"
+          "description": "The product version"
         },
         "cspLegalTermsUri": {
           "type": "string",
           "description": "The CSP legal terms URI"
-        },
-        "productOwnershipSellingMotion": {
-          "type": "string",
-          "description": "The productOwnershipSellingMotion"
-        },
-        "videos": {
-          "type": "array",
-          "description": "Videos included in the product",
-          "items": {
-            "$ref": "#/definitions/Video"
-          },
-          "x-ms-identifiers": []
-        },
-        "isReseller": {
-          "type": "boolean",
-          "description": "The IsReseller"
         },
         "screenshots": {
           "type": "array",
@@ -844,7 +820,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The Description"
+          "description": "The product description text"
         },
         "ratingBuckets": {
           "type": "array",
@@ -859,7 +835,7 @@
           "format": "double"
         },
         "startingPrice": {
-          "description": "The starting price",
+          "description": "The offer starting price",
           "$ref": "#/definitions/MarketStartPrice"
         },
         "linkedAddIns": {
@@ -871,7 +847,7 @@
         },
         "plans": {
           "type": "array",
-          "description": "The plans",
+          "description": "List of plans that are available for this product",
           "items": {
             "$ref": "#/definitions/PlanSummary"
           },
@@ -879,7 +855,7 @@
         },
         "legalTermsUri": {
           "type": "string",
-          "description": "The LegalTermsUri"
+          "description": "The legal terms uri"
         },
         "legalTermsType": {
           "type": "string",
@@ -887,11 +863,11 @@
         },
         "supportUri": {
           "type": "string",
-          "description": "The support uri"
+          "description": "The publisher support URL"
         },
         "links": {
           "type": "array",
-          "description": "The links",
+          "description": "Links provided by the publisher",
           "items": {
             "$ref": "#/definitions/Link"
           }
@@ -980,50 +956,6 @@
         "modelAsString": true
       }
     },
-    "Video": {
-      "type": "object",
-      "description": "Videos included in the product",
-      "properties": {
-        "caption": {
-          "type": "string",
-          "description": "The caption"
-        },
-        "uri": {
-          "type": "string",
-          "description": "The uri"
-        },
-        "videoPurpose": {
-          "type": "string",
-          "description": "The videoPurpose"
-        },
-        "previewImage": {
-          "description": "An Image used as preview for a video",
-          "allOf": [
-            {
-              "$ref": "#/definitions/PreviewImage"
-            }
-          ]
-        }
-      }
-    },
-    "PreviewImage": {
-      "type": "object",
-      "description": "An Image used as preview for a video",
-      "properties": {
-        "caption": {
-          "type": "string",
-          "description": "The caption"
-        },
-        "uri": {
-          "type": "string",
-          "description": "The uri"
-        },
-        "imagePurpose": {
-          "type": "string",
-          "description": "The image Purpose"
-        }
-      }
-    },
     "MarketStartPrice": {
       "type": "object",
       "description": "The product starting price",
@@ -1089,14 +1021,6 @@
           "allOf": [
             {
               "$ref": "#/definitions/PlanMetadata"
-            }
-          ]
-        },
-        "operatingSystem": {
-          "description": "Operating system info for this plan",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperatingSystem"
             }
           ]
         },
@@ -1248,24 +1172,6 @@
         "identity": {
           "type": "string",
           "description": "The Identity"
-        }
-      }
-    },
-    "OperatingSystem": {
-      "type": "object",
-      "description": "The Operation System details",
-      "properties": {
-        "family": {
-          "type": "string",
-          "description": "Operating system family"
-        },
-        "type": {
-          "type": "string",
-          "description": "Operating system type"
-        },
-        "name": {
-          "type": "string",
-          "description": "Operating system name"
         }
       }
     },
