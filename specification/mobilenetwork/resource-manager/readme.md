@@ -68,23 +68,23 @@ input-file:
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/ts29571.json
 ```
 
-### Tag: package-2022-01-01-preview
+### Tag: package-2021-04-01-preview
 
-These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01-01-preview'
+```yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/attachedDataNetwork.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/common.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/dataNetwork.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/mobileNetwork.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/operation.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/packetCoreControlPlane.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/packetCoreDataPlane.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/service.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/simPolicy.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/slice.json
-  - Microsoft.MobileNetwork/preview/2022-01-01-preview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/ts29571.json
 ```
 
 ---
@@ -98,7 +98,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
