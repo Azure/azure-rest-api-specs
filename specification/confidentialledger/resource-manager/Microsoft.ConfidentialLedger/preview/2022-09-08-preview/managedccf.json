@@ -34,51 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "NameAvailability"
-        ],
-        "description": "To check whether a resource name is available.",
-        "operationId": "CheckNameAvailability",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "nameAvailabilityRequest",
-            "in": "body",
-            "description": "Name availability request payload.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CheckNameAvailability": {
-            "$ref": "./examples/CheckNameAvailability.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCF/{appName}": {
       "get": {
         "tags": [
