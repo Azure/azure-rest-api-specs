@@ -55,9 +55,28 @@
             ]
           }
         ],
+        "sentinelEntitiesMappings": [
+          {
+              "columnName": "Entities"
+          }
+        ],
         "alertDetailsOverride": {
           "alertDisplayNameFormat": "Alert from {{Computer}}",
-          "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}"
+          "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}",
+          "alertDynamicProperties": [
+            {
+                "alertProperty": "ProductComponentName",
+                "value": "ProductComponentNameCustomColumn"
+            },
+            {
+                "alertProperty": "ProductName",
+                "value": "ProductNameCustomColumn"
+            },
+            {
+                "alertProperty": "AlertLink",
+                "value": "Link"
+            }
+          ]
         },
         "incidentConfiguration": {
           "createIncident": true,
