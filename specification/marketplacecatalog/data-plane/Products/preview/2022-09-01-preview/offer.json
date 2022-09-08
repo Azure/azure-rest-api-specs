@@ -16,6 +16,11 @@
           "SinglePublicOffer"
         ],
         "operationId": "SinglePublicOffer_Get",
+        "x-ms-examples": {
+          "Product_Get": {
+            "$ref": "./examples/SinglePublicOffer_Get.json"
+          }
+        },
         "parameters": [
           {
             "type": "string",
@@ -595,7 +600,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "The list of the pricing types for which this plan is designated",
+          "description": "The list of the pricing types for which this plan is designated: \n - `Free`: The product has at least one plan that is free of charge.\n - `FreeTrial`: The product has at least one plan that is free trial.\n - `Byol`: The product has at least one plan that is bring your own license.\n - `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n - `Ri`: The product has at least one plan that is Reserved Instance billing model.",
           "items": {
             "$ref": "#/definitions/PricingType"
           }
@@ -631,7 +636,7 @@
           "description": "The SKU id"
         },
         "type": {
-          "description": "The plan type, for Azure Appliation product type, this can be Solution Template or ManagedApp",
+          "description": "The plan type, for Azure Application product type, this can be Solution Template or ManagedApp",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
