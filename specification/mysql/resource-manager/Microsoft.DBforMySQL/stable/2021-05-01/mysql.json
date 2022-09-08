@@ -1548,7 +1548,7 @@
           "type": "string",
           "description": "Primary user identity resource id"
         },
-        "primaryKeyUri": {
+        "primaryKeyURI": {
           "type": "string",
           "description": "Primary key uri"
         },
@@ -1556,7 +1556,7 @@
           "type": "string",
           "description": "Geo backup user identity resource id as identity can't cross region, need identity in same region as geo backup"
         },
-        "geoBackupKeyUri": {
+        "geoBackupKeyURI": {
           "type": "string",
           "description": "Geo backup key uri as key vault can't cross region, need cmk in same region as geo backup"
         },
@@ -1682,10 +1682,26 @@
         },
         "delegatedSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "description": "Delegated subnet resource id used to setup vnet for a server."
         },
         "privateDnsZoneResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          },
           "description": "Private DNS zone resource id."
         }
       },

@@ -4492,7 +4492,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "blobContainerName": {
           "description": "The name of the Storage blob container that is the destination of the deadletter events",
@@ -4998,7 +5006,8 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of an Event Hub destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -5032,7 +5041,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource ID of the storage account that contains the queue that is the destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "queueName": {
           "description": "The name of the Storage queue under a storage account that is the destination of an event subscription.",
@@ -5068,7 +5085,8 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource ID of an hybrid connection that is the destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -5102,7 +5120,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceBus/namespaces/queues"
+              }
+            ]
+          }
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -5136,7 +5162,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceBus/namespaces/topics"
+              }
+            ]
+          }
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -5170,7 +5204,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Azure Function destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Web/sites/functions"
+              }
+            ]
+          }
         },
         "maxEventsPerBatch": {
           "format": "int32",

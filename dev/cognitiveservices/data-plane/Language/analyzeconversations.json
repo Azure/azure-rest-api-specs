@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
-    "version": "2022-07-01-preview"
+    "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -132,7 +132,14 @@
           },
           "Successful Conversation Summarization Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
+          },
+          "Successful Conversation Summarization Task Submit": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskSubmit.json"
           }
+          ,
+          "Successful Conversation Sentiment Analysis Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSentimentSubmit.json"
+          }          
         },
         "x-ms-long-running-operation": true
       }
@@ -176,8 +183,54 @@
           },
           "Successful Get Text Conversation Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
+          },
+          "Successful Get Conversation Sentiment Analysis Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSentimentTaskStatusRequest.json"
+          },
+          "Successful Get Conversation Summarization Result": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskResult.json"
           }
         }
+      }
+    },
+    "/analyze-conversations/jobs/{jobId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel a long-running Text Analysis conversations job.",
+        "operationId": "AnalyzeConversation_CancelJob",
+        "summary": "Cancel a long-running Text Analysis conversations job",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsJobsCancelRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -205,6 +258,7 @@
       }
     },
     "AnalyzeConversationTask": {
+      "type": "object",
       "description": "The base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -217,6 +271,7 @@
       }
     },
     "AnalyzeConversationTaskResult": {
+      "type": "object",
       "description": "The base class of a conversation task result.",
       "discriminator": "kind",
       "required": [
@@ -229,6 +284,7 @@
       }
     },
     "ConversationalTask": {
+      "type": "object",
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -347,6 +403,7 @@
       "additionalProperties": true
     },
     "TextConversationItem": {
+      "type": "object",
       "description": "The text modality of an input conversation.",
       "allOf": [
         {
@@ -780,7 +837,8 @@
           "type": "string",
           "enum": [
             "EntitySubtype",
-            "ListKey"
+            "ListKey",
+            "RegexKey"
           ],
           "x-ms-enum": {
             "name": "ExtraInformationKind",
@@ -824,6 +882,26 @@
         }
       }
     },
+    "RegexKey": {
+      "description": "The regex key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "RegexKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the regex pattern used in extracting the entity."
+        },
+        "regexPattern": {
+          "type": "string",
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+        }
+      }
+    },
     "BaseResolution": {
       "description": "The abstract base class for entity resolutions.",
       "type": "object",
@@ -833,21 +911,21 @@
           "description": "The entity resolution object kind.",
           "type": "string",
           "enum": [
-            "Boolean",
-            "DateTime",
-            "Number",
-            "Ordinal",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency",
-            "NumericRange",
-            "TemporalSpan"
+            "BooleanResolution",
+            "DateTimeResolution",
+            "NumberResolution",
+            "OrdinalResolution",
+            "SpeedResolution",
+            "WeightResolution",
+            "LengthResolution",
+            "VolumeResolution",
+            "AreaResolution",
+            "AgeResolution",
+            "InformationResolution",
+            "TemperatureResolution",
+            "CurrencyResolution",
+            "NumericRangeResolution",
+            "TemporalSpanResolution"
           ],
           "x-ms-enum": {
             "name": "ResolutionKind",
@@ -884,7 +962,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Age",
+      "x-ms-discriminator-value": "AgeResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -917,7 +995,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Volume",
+      "x-ms-discriminator-value": "VolumeResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -973,7 +1051,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Speed",
+      "x-ms-discriminator-value": "SpeedResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1015,7 +1093,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Area",
+      "x-ms-discriminator-value": "AreaResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1056,7 +1134,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Length",
+      "x-ms-discriminator-value": "LengthResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1101,7 +1179,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Information",
+      "x-ms-discriminator-value": "InformationResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1142,7 +1220,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Temperature",
+      "x-ms-discriminator-value": "TemperatureResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1175,7 +1253,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Weight",
+      "x-ms-discriminator-value": "WeightResolution",
       "properties": {
         "unit": {
           "type": "string",
@@ -1219,7 +1297,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Currency",
+      "x-ms-discriminator-value": "CurrencyResolution",
       "properties": {
         "ISO4217": {
           "type": "string",
@@ -1248,7 +1326,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Boolean",
+      "x-ms-discriminator-value": "BooleanResolution",
       "properties": {
         "value": {
           "type": "boolean"
@@ -1266,7 +1344,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "DateTime",
+      "x-ms-discriminator-value": "DateTimeResolution",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
@@ -1308,7 +1386,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Number",
+      "x-ms-discriminator-value": "NumberResolution",
       "properties": {
         "numberKind": {
           "type": "string",
@@ -1344,7 +1422,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "Ordinal",
+      "x-ms-discriminator-value": "OrdinalResolution",
       "properties": {
         "offset": {
           "type": "string",
@@ -1382,7 +1460,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalSpan",
+      "x-ms-discriminator-value": "TemporalSpanResolution",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -1407,7 +1485,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumericRange",
+      "x-ms-discriminator-value": "NumericRangeResolution",
       "properties": {
         "rangeKind": {
           "type": "string",
@@ -1511,6 +1589,7 @@
       }
     },
     "AnalyzeConversationJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -1533,6 +1612,7 @@
       ]
     },
     "AnalyzeConversationLROTask": {
+      "type": "object",
       "description": "The base class for an long running conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -1551,10 +1631,11 @@
     },
     "AnalyzeConversationLROTaskKind": {
       "type": "string",
-      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
+      "description": "Enumeration of supported analysis tasks on a collection of conversation.",
       "enum": [
         "ConversationalPIITask",
-        "ConversationalSummarizationTask"
+        "ConversationalSummarizationTask",
+        "ConversationalSentimentTask"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationLROTaskKind",
@@ -1566,7 +1647,8 @@
       "description": "Enumeration of supported Conversation Analysis task results.",
       "enum": [
         "ConversationalPIIResults",
-        "ConversationalSummarizationResults"
+        "ConversationalSummarizationResults",
+        "ConversationalSentimentResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -1612,6 +1694,7 @@
       }
     },
     "MultiLanguageConversationAnalysisInput": {
+      "type": "object",
       "required": [
         "conversations"
       ],
@@ -1676,6 +1759,7 @@
       }
     },
     "TextConversation": {
+      "type": "object",
       "x-ms-discriminator-value": "text",
       "required": [
         "conversationItems"
@@ -1696,6 +1780,7 @@
       }
     },
     "TranscriptConversation": {
+      "type": "object",
       "x-ms-discriminator-value": "transcript",
       "required": [
         "conversationItems"
@@ -1732,7 +1817,7 @@
       "properties": {
         "itn": {
           "type": "string",
-          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft’s Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
+          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft's Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
         },
         "maskedItn": {
           "type": "string",
@@ -1746,12 +1831,16 @@
           "type": "string",
           "description": "The lexical form of the recognized text from speech to text API with the actual words recognized."
         },
-        "audioTimings": {
+        "wordLevelTimings": {
           "type": "array",
           "description": "The list of word level audio timing information",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
+        },
+        "conversationItemLevelTiming": {
+          "description": "Conversation item level audio timing. This still can help on AI quality if word level audio timings are not available.",
+          "$ref": "#/definitions/ConversationItemLevelTiming"
         }
       }
     },
@@ -1900,6 +1989,7 @@
       ]
     },
     "ConversationPIIResult": {
+      "type": "object",
       "description": "The result from PII detection and redaction operation for each conversation.",
       "required": [
         "conversationItems"
@@ -2004,11 +2094,31 @@
             "type": "string",
             "enum": [
               "issue",
-              "resolution"
+              "resolution",
+              "chapterTitle",
+              "narrative"
             ],
             "x-ms-enum": {
               "name": "SummaryAspect",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "issue",
+                  "description": "A summary of issues in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "resolution",
+                  "description": "A summary of resolutions in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                },
+                {
+                  "value": "chapterTitle",
+                  "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
+                },
+                {
+                  "value": "narrative",
+                  "description": "A generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length and keeps the salient information."
+                }
+              ]
             }
           }
         }
@@ -2016,6 +2126,9 @@
       "allOf": [
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        },
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
         }
       ]
     },
@@ -2089,12 +2202,136 @@
         },
         "text": {
           "type": "string"
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "#/definitions/ItemizedSummaryContext"
+          }
         }
       },
       "required": [
         "aspect",
         "text"
       ]
+    },
+    "AnalyzeConversationalSentimentTask": {
+      "type": "object",
+      "description": "Task definition for a sentiment analysis in conversations.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ConversationalSentimentTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationalSentimentTask"
+    },
+    "ConversationalSentimentTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Conversational sentiment analysis task.",
+      "properties": {
+        "predictionSource": {
+          "type": "string",
+          "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
+          "$ref": "#/definitions/TranscriptContentType"
+        }        
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AnalyzeConversationSentimentResult": {
+      "type": "object",
+      "description": "Result from the sentiment analysis operation performed on a list of conversations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
+      ],
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ConversationSentimentResults"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ConversationalSentimentResults"
+    },
+    "ConversationSentimentResults": {
+      "type": "object",
+      "description": "The result from sentiment analysis operation for each conversation.",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ConversationSentimentResult"
+              },
+              {
+                "$ref": "#/definitions/ConversationResultBase"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ConversationSentimentResult": {
+      "description": "The result from sentiment analysis operation for each conversation item.",
+      "required": [
+        "conversationItems"
+      ],
+      "properties": {
+        "conversationItems": {
+          "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationSentimentItemResult"
+          }
+        }
+      }
+    },        
+    "ConversationSentimentItemResult": {
+      "type": "object",
+      "required": [
+        "id",
+        "participantId",
+        "sentiment",
+        "confidenceScores"
+      ],
+      "properties": {
+        "id": {
+          "description": "The identifier for the conversation item",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The identifier for the speaker",
+          "type": "string"
+        },
+        "sentiment": {
+          "$ref": "common.json#/definitions/Sentiment"
+        },                
+        "confidenceScores": {
+          "type": "object",
+          "$ref": "common.json#/definitions/SentimentConfidenceScores"
+        }
+      }
     },
     "AnalyzeConversationJobState": {
       "description": "Contains the status of the analyze conversations job submitted along with related statistics.",
@@ -2249,6 +2486,33 @@
       "allOf": [
         {
           "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      ]
+    },
+    "ConversationItemLevelTiming": {
+      "type": "object",
+      "description": "The conversation item level audio timing.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTiming"
+        }
+      ]
+    },
+    "ItemizedSummaryContext": {
+      "type": "object",
+      "description": "The context of the summary with conversation item id.",
+      "required": [
+        "conversationItemId"
+      ],
+      "properties": {
+        "conversationItemId": {
+          "type": "string",
+          "description": "Reference to the id of ConversationItem."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/SummaryContext"
         }
       ]
     }
