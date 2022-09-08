@@ -34,43 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.ConfidentialLedger/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Retrieves a list of available API operations",
-        "summary": "Retrieves a list of available API operations under this Resource Provider.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; response contains the list of operations under Microsoft.ConfidentialLedger resource provider.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (ManagedCCF does not exist.)",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "OperationsGet": {
-            "$ref": "./examples/Operations_Get.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/checkNameAvailability": {
       "post": {
         "tags": [
@@ -467,28 +430,6 @@
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationList": {
-      "description": "List containing this Resource Provider's available operations.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Resource provider operations list.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next page for list of Azure operations.",
-          "type": "string",
           "readOnly": true
         }
       }
