@@ -145,6 +145,9 @@
           },
           "Successful Submit Abstractive Summarization Task": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
+          },
+          "Successful Healthcare DocumentType Post Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -198,6 +201,9 @@
           },
           "Successful Get Abstractive Summarization Result": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "Succesful Get Text Analysis Health DocumentType Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
           }
         }
       }
@@ -763,8 +769,12 @@
           }
         },
         "documentType": {
+          "x-ms-enum": {
+            "name": "documentType",
+            "modelAsString": true
+          },
           "type": "string",
-          "description": "Document type that can be provided as input for Fhir Documents.",
+          "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.",
           "enum": [
             "None",
             "ClinicalTrial",
@@ -2372,7 +2382,7 @@
             "modelAsString": true
           }
         },
-        "categories" : {
+        "categories": {
           "type": "array",
           "description": "a list of categories to which input is classified to.",
           "items": {
