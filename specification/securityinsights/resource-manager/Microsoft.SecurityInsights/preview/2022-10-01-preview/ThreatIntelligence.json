@@ -638,8 +638,8 @@
     "Connective": {
       "description": "Connective used to join the conditions or clauses together.",
       "enum": [
-        "And",
-        "Or"
+        "and",
+        "or"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -648,11 +648,11 @@
         "values": [
           {
             "description": "Conditions/clauses should be joined together using logical AND operator.",
-            "value": "And"
+            "value": "and"
           },
           {
             "description": "Conditions/clauses should be joined together using logical OR operator.",
-            "value": "Or"
+            "value": "or"
           }
         ]
       }
@@ -663,7 +663,6 @@
       "properties": {
         "clauseConnective": {
           "description": "Connective used to logically join the values on this clause",
-          "type": "string",
           "$ref": "#/definitions/Connective"
         },
         "field": {
@@ -674,13 +673,13 @@
           "description": "Operator which describes how this clause should be constructed into an expression.",
           "type": "string",
           "enum": [
-            "Equal",
-            "NotEqual",
-            "LessThan",
-            "GreaterThan",
-            "StringContains",
-            "StringNotCotains",
-            "IsNull"
+            "equal",
+            "notequal",
+            "lessthan",
+            "greaterthan",
+            "stringcontains",
+            "stringnotcontains",
+            "isnull"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -688,31 +687,31 @@
             "values": [
               {
                 "description": "The '=' operator.",
-                "value": "Equal"
+                "value": "equal"
               },
               {
                 "description": "The '!=' operator.",
-                "value": "NotEqual"
+                "value": "notequal"
               },
               {
                 "description": "The '<' operator.",
-                "value": "LessThan"
+                "value": "lessthan"
               },
               {
                 "description": "The '>' operator.",
-                "value": "GreaterThan"
+                "value": "greaterthan"
               }, 
               {
                 "description": "The 'contains' operator for strings.",
-                "value": "StringContains"
+                "value": "stringcontains"
               },       
               {
                 "description": "The 'not contains' operator for strings.",
-                "value": "StringNotContains"
+                "value": "stringnotcontains"
               },              
               {
                 "description": "The 'is_null' operator.",
-                "value": "IsNull"
+                "value": "isnull"
               }
             ]
           }
@@ -732,14 +731,12 @@
       "properties": {
         "conditionConnective": {
           "description": "Connective used to logically join the clauses.",
-          "type": "string",
           "$ref": "#/definitions/Connective"
         },
         "clauses": {
           "description": "List of clauses which make up this condition.",
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/Clause"
           }
         }
@@ -783,7 +780,6 @@
       "properties": {
         "condition": {
           "description": "The query condition.",
-          "type": "object",
           "$ref": "#/definitions/Condition"
         },
         "pageSize": {
@@ -812,7 +808,6 @@
       "properties": {
         "condition": {
           "description": "The query condition.",
-          "type": "object",
           "$ref": "#/definitions/Condition"
         }
       },
