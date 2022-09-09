@@ -12,11 +12,6 @@
         ],
         "summary": "Get service health status.",
         "operationId": "HealthApi_GetServiceStatus",
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "in": "query",
@@ -32,6 +27,11 @@
           },
           "default": {
             "description": "Error response"
+          }
+        },
+        "x-ms-examples": {
+          "HealthApi_GetServiceStatus": {
+            "$ref": "./examples/HealthApi_GetServiceStatus.json"
           }
         }
       }
@@ -83,7 +83,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -97,6 +97,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseAllConnections": {
+            "$ref": "./examples/WebPubSub_CloseAllConnections.json"
           }
         }
       }
@@ -144,7 +149,9 @@
             "description": "The expire time of the generated token.",
             "type": "integer",
             "format": "int32",
-            "default": 60
+            "default": 60,
+            "maximum": 2147483647,
+            "minimum": 1
           },
           {
             "in": "query",
@@ -173,6 +180,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GenerateClientToken": {
+            "$ref": "./examples/WebPubSub_GenerateClientToken.json"
           }
         }
       }
@@ -248,6 +260,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToAll": {
+            "$ref": "./examples/WebPubSub_SendToAll.json"
+          }
         }
       }
     },
@@ -296,7 +313,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -310,6 +327,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseConnection": {
+            "$ref": "./examples/WebPubSub_CloseConnection.json"
           }
         }
       },
@@ -369,6 +391,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ConnectionExists": {
+            "$ref": "./examples/WebPubSub_ConnectionExists.json"
+          }
         }
       }
     },
@@ -426,7 +453,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response",
@@ -440,6 +467,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToConnection": {
+            "$ref": "./examples/WebPubSub_SendToConnection.json"
           }
         }
       }
@@ -471,8 +503,7 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "pattern": "^(?!\\s+$).{1,1024}$"
           },
           {
             "in": "query",
@@ -501,6 +532,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GroupExists": {
+            "$ref": "./examples/WebPubSub_GroupExists.json"
           }
         }
       }
@@ -532,8 +568,7 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "pattern": "^(?!\\s+$).{1,1024}$"
           },
           {
             "in": "query",
@@ -561,7 +596,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -575,6 +610,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseGroupConnections": {
+            "$ref": "./examples/WebPubSub_CloseGroupConnections.json"
           }
         }
       }
@@ -644,7 +684,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response",
@@ -658,6 +698,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToGroup": {
+            "$ref": "./examples/WebPubSub_SendToGroup.json"
           }
         }
       }
@@ -710,7 +755,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -724,6 +769,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveConnectionFromGroup": {
+            "$ref": "./examples/WebPubSub_RemoveConnectionFromGroup.json"
           }
         }
       },
@@ -753,8 +803,7 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "pattern": "^(?!\\s+$).{1,1024}$"
           },
           {
             "in": "path",
@@ -788,6 +837,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_AddConnectionToGroup": {
+            "$ref": "./examples/WebPubSub_AddConnectionToGroup.json"
           }
         }
       }
@@ -852,7 +906,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -866,6 +920,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RevokePermission": {
+            "$ref": "./examples/WebPubSub_RevokePermission.json"
           }
         }
       },
@@ -946,6 +1005,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CheckPermission": {
+            "$ref": "./examples/WebPubSub_CheckPermission.json"
+          }
         }
       },
       "put": {
@@ -1022,6 +1086,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GrantPermission": {
+            "$ref": "./examples/WebPubSub_GrantPermission.json"
+          }
         }
       }
     },
@@ -1082,6 +1151,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WebPubSub_UserExists": {
+            "$ref": "./examples/WebPubSub_UserExists.json"
+          }
         }
       }
     },
@@ -1140,7 +1214,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -1154,6 +1228,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseUserConnections": {
+            "$ref": "./examples/WebPubSub_CloseUserConnections.json"
           }
         }
       }
@@ -1212,7 +1291,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response",
@@ -1226,6 +1305,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToUser": {
+            "$ref": "./examples/WebPubSub_SendToUser.json"
           }
         }
       }
@@ -1268,8 +1352,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "The user is deleted."
           },
           "default": {
             "description": "Error response",
@@ -1283,6 +1367,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveUserFromAllGroups": {
+            "$ref": "./examples/WebPubSub_RemoveUserFromAllGroups.json"
           }
         }
       }
@@ -1314,8 +1403,7 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "pattern": "^(?!\\s+$).{1,1024}$"
           },
           {
             "in": "path",
@@ -1335,7 +1423,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error response",
@@ -1349,6 +1437,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveUserFromGroup": {
+            "$ref": "./examples/WebPubSub_RemoveUserFromGroup.json"
           }
         }
       },
@@ -1378,8 +1471,7 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "pattern": "^(?!\\s+$).{1,1024}$"
           },
           {
             "in": "path",
@@ -1413,6 +1505,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_AddUserToGroup": {
+            "$ref": "./examples/WebPubSub_AddUserToGroup.json"
           }
         }
       }
