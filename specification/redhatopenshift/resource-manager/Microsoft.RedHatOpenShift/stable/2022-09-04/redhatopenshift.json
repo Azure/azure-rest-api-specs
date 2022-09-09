@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Red Hat OpenShift Client",
     "description": "Rest API for Azure Red Hat OpenShift 4",
-    "version": "2022-04-01"
+    "version": "2022-09-04"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -26,7 +26,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -53,6 +53,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/openshiftversions": {
+      "get": {
+        "tags": [
+          "OpenShiftVersions"
+        ],
+        "summary": "Lists all OpenShift versions available to install in the specified location.",
+        "description": "The operation returns the installable OpenShift versions as strings.",
+        "operationId": "OpenShiftVersions_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all OpenShift versions available to install in the specified location.": {
+            "$ref": "./examples/OpenShiftVersions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/openShiftClusters": {
       "get": {
         "tags": [
@@ -63,10 +106,10 @@
         "operationId": "OpenShiftClusters_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -93,6 +136,206 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftCluster/{resourceName}/machinePools": {
+      "get": {
+        "tags": [
+          "MachinePools"
+        ],
+        "summary": "Lists MachinePools that belong to that Azure Red Hat OpenShift Cluster.",
+        "description": "The operation returns properties of each MachinePool.",
+        "operationId": "MachinePools_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachinePoolList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists MachinePools that belong to that Azure Red Hat OpenShift Cluster.": {
+            "$ref": "./examples/MachinePools_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftCluster/{resourceName}/secrets": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Lists Secrets that belong to that Azure Red Hat OpenShift Cluster.",
+        "description": "The operation returns properties of each Secret.",
+        "operationId": "Secrets_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists Secrets that belong to that Azure Red Hat OpenShift Cluster.": {
+            "$ref": "./examples/Secrets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftCluster/{resourceName}/syncIdentityProviders": {
+      "get": {
+        "tags": [
+          "SyncIdentityProviders"
+        ],
+        "summary": "Lists SyncIdentityProviders that belong to that Azure Red Hat OpenShift Cluster.",
+        "description": "The operation returns properties of each SyncIdentityProvider.",
+        "operationId": "SyncIdentityProviders_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProviderList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists SyncIdentityProviders that belong to that Azure Red Hat OpenShift Cluster.": {
+            "$ref": "./examples/SyncIdentityProviders_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftCluster/{resourceName}/syncSets": {
+      "get": {
+        "tags": [
+          "SyncSets"
+        ],
+        "summary": "Lists SyncSets that belong to that Azure Red Hat OpenShift Cluster.",
+        "description": "The operation returns properties of each SyncSet.",
+        "operationId": "SyncSets_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncSetList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists SyncSets that belong to that Azure Red Hat OpenShift Cluster.": {
+            "$ref": "./examples/SyncSets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftClusters": {
       "get": {
         "tags": [
@@ -103,13 +346,13 @@
         "operationId": "OpenShiftClusters_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -146,13 +389,13 @@
         "operationId": "OpenShiftClusters_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -191,13 +434,13 @@
         "operationId": "OpenShiftClusters_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -252,13 +495,13 @@
         "operationId": "OpenShiftClusters_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -298,13 +541,13 @@
         "operationId": "OpenShiftClusters_Update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -361,13 +604,13 @@
         "operationId": "OpenShiftClusters_ListAdminCredentials",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -408,13 +651,13 @@
         "operationId": "OpenShiftClusters_ListCredentials",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -441,6 +684,966 @@
         "x-ms-examples": {
           "Lists credentials of an OpenShift cluster with the specified subscription, resource group and resource name.": {
             "$ref": "./examples/OpenShiftClusters_ListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openshiftclusters/{resourceName}/machinePool/{childResourceName}": {
+      "get": {
+        "tags": [
+          "MachinePools"
+        ],
+        "summary": "Gets a MachinePool with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a MachinePool.",
+        "operationId": "MachinePools_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the MachinePool resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a MachinePool with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/MachinePools_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachinePools"
+        ],
+        "summary": "Creates or updates a MachinePool with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a MachinePool.",
+        "operationId": "MachinePools_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the MachinePool resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The MachinePool resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a MachinePool with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/MachinePools_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachinePools"
+        ],
+        "summary": "Deletes a MachinePool with the specified subscription, resource group and resource name.",
+        "description": "The operation returns nothing.",
+        "operationId": "MachinePools_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the MachinePool resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a MachinePool with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/MachinePools_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachinePools"
+        ],
+        "summary": "Patches (create or update) a MachinePool with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a MachinePool.",
+        "operationId": "MachinePools_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the MachinePool resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The MachinePool resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachinePoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches (create or update) a MachinePool with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/MachinePools_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openshiftclusters/{resourceName}/secret/{childResourceName}": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Gets a Secret with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a Secret.",
+        "operationId": "Secrets_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the Secret resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Secret with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/Secrets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Creates or updates a Secret with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a Secret.",
+        "operationId": "Secrets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the Secret resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Secret resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a Secret with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/Secrets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Deletes a Secret with the specified subscription, resource group and resource name.",
+        "description": "The operation returns nothing.",
+        "operationId": "Secrets_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the Secret resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a Secret with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/Secrets_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Patches (create or update) a Secret with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a Secret.",
+        "operationId": "Secrets_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the Secret resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Secret resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecretUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches (create or update) a Secret with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/Secrets_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openshiftclusters/{resourceName}/syncIdentityProvider/{childResourceName}": {
+      "get": {
+        "tags": [
+          "SyncIdentityProviders"
+        ],
+        "summary": "Gets a SyncIdentityProvider with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a SyncIdentityProvider.",
+        "operationId": "SyncIdentityProviders_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncIdentityProvider resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SyncIdentityProvider with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncIdentityProviders_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SyncIdentityProviders"
+        ],
+        "summary": "Creates or updates a SyncIdentityProvider with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a SyncIdentityProvider.",
+        "operationId": "SyncIdentityProviders_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncIdentityProvider resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SyncIdentityProvider resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a SyncIdentityProvider with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncIdentityProviders_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SyncIdentityProviders"
+        ],
+        "summary": "Deletes a SyncIdentityProvider with the specified subscription, resource group and resource name.",
+        "description": "The operation returns nothing.",
+        "operationId": "SyncIdentityProviders_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncIdentityProvider resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SyncIdentityProvider with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncIdentityProviders_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SyncIdentityProviders"
+        ],
+        "summary": "Patches (create or update) a SyncIdentityProvider with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a SyncIdentityProvider.",
+        "operationId": "SyncIdentityProviders_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncIdentityProvider resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SyncIdentityProvider resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProviderUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches (create or update) a SyncIdentityProvider with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncIdentityProviders_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openshiftclusters/{resourceName}/syncSet/{childResourceName}": {
+      "get": {
+        "tags": [
+          "SyncSets"
+        ],
+        "summary": "Gets a SyncSet with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a SyncSet.",
+        "operationId": "SyncSets_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncSet resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SyncSet with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncSets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SyncSets"
+        ],
+        "summary": "Creates or updates a SyncSet with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a SyncSet.",
+        "operationId": "SyncSets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncSet resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SyncSet resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a SyncSet with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncSets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SyncSets"
+        ],
+        "summary": "Deletes a SyncSet with the specified subscription, resource group and resource name.",
+        "description": "The operation returns nothing.",
+        "operationId": "SyncSets_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncSet resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SyncSet with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncSets_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SyncSets"
+        ],
+        "summary": "Patches (create or update) a SyncSet with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a SyncSet.",
+        "operationId": "SyncSets_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "The name of the SyncSet resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SyncSet resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncSetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches (create or update) a SyncSet with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/SyncSets_Update.json"
           }
         }
       }
@@ -601,6 +1804,70 @@
         }
       }
     },
+    "MachinePool": {
+      "description": "MachinePool represents a MachinePool",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachinePoolProperties",
+          "description": "The MachinePool Properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "MachinePoolList": {
+      "description": "MachinePoolList represents a list of MachinePools",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Machine Pools.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachinePool"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "MachinePoolProperties": {
+      "description": "MachinePoolProperties represents the properties of a MachinePool",
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "string"
+        }
+      }
+    },
+    "MachinePoolUpdate": {
+      "description": "MachinePool represents a MachinePool",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachinePoolProperties",
+          "description": "The MachinePool Properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
     "MasterProfile": {
       "description": "MasterProfile represents a master profile.",
       "type": "object",
@@ -642,7 +1909,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -652,7 +1919,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -693,7 +1960,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OpenShiftCluster"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
@@ -765,9 +2033,64 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
+        }
+      }
+    },
+    "OpenShiftVersion": {
+      "description": "OpenShiftVersion represents an OpenShift version that can be installed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "The ID for the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OpenShiftVersionProperties",
+          "description": "The properties for the OpenShiftVersion resource."
+        }
+      }
+    },
+    "OpenShiftVersionList": {
+      "description": "OpenShiftVersionList represents a List of available versions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The List of available versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenShiftVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Next Link to next operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OpenShiftVersionProperties": {
+      "description": "OpenShiftVersionProperties represents the properties of an OpenShiftVersion.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version represents the version to create the cluster at.",
+          "type": "string"
         }
       }
     },
@@ -819,6 +2142,72 @@
       ],
       "type": "string"
     },
+    "Secret": {
+      "description": "Secret represents a secret.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecretProperties",
+          "description": "The Secret Properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SecretList": {
+      "description": "SecretList represents a list of Secrets",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of secrets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "SecretProperties": {
+      "description": "SecretProperties represents the properties of a Secret",
+      "type": "object",
+      "properties": {
+        "secretResources": {
+          "description": "The Secrets Resources.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "SecretUpdate": {
+      "description": "Secret represents a secret.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecretProperties",
+          "description": "The Secret Properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
     "ServicePrincipalProfile": {
       "description": "ServicePrincipalProfile represents a service principal profile.",
       "type": "object",
@@ -830,6 +2219,135 @@
         "clientSecret": {
           "description": "The client secret used for the cluster.",
           "type": "string"
+        }
+      }
+    },
+    "SyncIdentityProvider": {
+      "description": "SyncIdentityProvider represents a SyncIdentityProvider",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncIdentityProviderProperties",
+          "description": "The SyncIdentityProvider Properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncIdentityProviderList": {
+      "description": "SyncSetList represents a list of SyncSets",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of sync identity providers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncIdentityProvider"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "SyncIdentityProviderProperties": {
+      "description": "SyncSetProperties represents the properties of a SyncSet",
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "string"
+        }
+      }
+    },
+    "SyncIdentityProviderUpdate": {
+      "description": "SyncIdentityProvider represents a SyncIdentityProvider",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncIdentityProviderProperties",
+          "description": "The SyncIdentityProvider Properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncSet": {
+      "description": "SyncSet represents a SyncSet for an Azure Red Hat OpenShift Cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncSetProperties",
+          "description": "The Syncsets properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncSetList": {
+      "description": "SyncSetList represents a list of SyncSets",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of syncsets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyncSet"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "SyncSetProperties": {
+      "description": "SyncSetProperties represents the properties of a SyncSet",
+      "type": "object",
+      "properties": {
+        "resources": {
+          "description": "Resources represents the SyncSets configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "SyncSetUpdate": {
+      "description": "SyncSet represents a SyncSet for an Azure Red Hat OpenShift Cluster.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncSetProperties",
+          "description": "The Syncsets properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
         }
       }
     },
@@ -889,6 +2407,17 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API the caller wants to use.",
+      "required": true,
+      "type": "string",
+      "pattern": "^\\d{2}-\\d{2}-\\d{4}(-preview)?$",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
