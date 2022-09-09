@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "ComponentPolicyStatesClient",
-    "version": "2022-04-01"
+    "version": "2022-04-01",
+    "description": "Query component policy states at varying resource scopes for Resource Provider mode policies."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -76,7 +77,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -139,7 +140,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -202,7 +203,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -277,7 +278,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -340,7 +341,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -406,7 +407,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/QueryFailureComponentPolicyStates"
+              "$ref": "../../stable/2019-10-01/policyMetadata.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -449,119 +450,142 @@
       "properties": {
         "@odata.id": {
           "description": "OData entity ID; always set to null since component policy state records do not have an entity ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "@odata.context": {
           "description": "OData context string; used by OData clients to resolve type information based on metadata.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "timestamp": {
           "description": "Timestamp for the component policy state record.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "componentId": {
           "description": "Component Id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "componentType": {
           "description": "Component type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "componentName": {
           "description": "Component name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceId": {
           "description": "Resource ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentId": {
           "description": "Policy assignment ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDefinitionId": {
           "description": "Policy definition ID.",
-          "type": "string"
-        },
-        "isCompliant": {
-          "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against. This property is deprecated; please use ComplianceState instead.",
-          "type": "boolean"
+          "type": "string",
+          "readOnly": true
         },
         "subscriptionId": {
           "description": "Subscription ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceType": {
           "description": "Resource type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceLocation": {
           "description": "Resource location.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceGroup": {
           "description": "Resource group name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentName": {
           "description": "Policy assignment name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentOwner": {
           "description": "Policy assignment owner.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentParameters": {
           "description": "Policy assignment parameters.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyAssignmentScope": {
           "description": "Policy assignment scope.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDefinitionName": {
           "description": "Policy definition name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDefinitionAction": {
           "description": "Policy definition action, i.e. effect.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDefinitionCategory": {
           "description": "Policy definition category.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policySetDefinitionId": {
           "description": "Policy set definition ID, if the policy assignment is for a policy set.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policySetDefinitionName": {
           "description": "Policy set definition name, if the policy assignment is for a policy set.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policySetDefinitionOwner": {
           "description": "Policy set definition owner, if the policy assignment is for a policy set.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policySetDefinitionCategory": {
           "description": "Policy set definition category, if the policy assignment is for a policy set.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policySetDefinitionParameters": {
           "description": "Policy set definition parameters, if the policy assignment is for a policy set.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyDefinitionReferenceId": {
           "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "complianceState": {
           "description": "Compliance state of the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "policyEvaluationDetails": {
-          "description": "Policy evaluation details.",
+          "description": "Policy evaluation details. This is only included in the response if the request contains $expand=PolicyEvaluationDetails.",
           "type": "object",
           "$ref": "#/definitions/ComponentPolicyEvaluationDetails"
         },
@@ -570,7 +594,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "policyDefinitionVersion": {
           "description": "Evaluated policy definition version.",
@@ -599,6 +624,7 @@
         "evaluatedExpressions": {
           "description": "Details of the evaluated expressions.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ComponentExpressionEvaluationDetails"
           },
@@ -620,7 +646,8 @@
         },
         "expression": {
           "description": "Expression evaluated.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "expressionKind": {
           "description": "The kind of expression that was evaluated.",
@@ -629,56 +656,23 @@
         },
         "path": {
           "description": "Property path if the expression is a field or an alias.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "expressionValue": {
           "description": "Value of the expression.",
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "targetValue": {
           "description": "Target value to be compared with the expression value.",
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "operator": {
           "description": "Operator to compare the expression value and the target value.",
-          "type": "string"
-        }
-      }
-    },
-    "ComplianceDetail": {
-      "type": "object",
-      "description": "The compliance state rollup.",
-      "properties": {
-        "complianceState": {
-          "description": "The compliance state.",
-          "type": "string"
-        },
-        "count": {
-          "description": "Summarized count value for this compliance state.",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "QueryFailureComponentPolicyStates": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "Error definition.",
-          "properties": {
-            "code": {
-              "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "Description of the error.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "type": "string",
+          "readOnly": true
         }
       }
     }
