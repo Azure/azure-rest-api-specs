@@ -136,6 +136,12 @@
               }
             }
           },
+          "200": {
+            "description": "The requested update version.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
           "default": {
             "description": "Default response.",
             "schema": {
@@ -183,9 +189,6 @@
             "schema": {
               "$ref": "#/definitions/Update"
             }
-          },
-          "304": {
-            "description": "Not modified."
           },
           "default": {
             "description": "Default response.",
@@ -467,9 +470,6 @@
               "$ref": "#/definitions/UpdateFile"
             }
           },
-          "304": {
-            "description": "Not modified."
-          },
           "default": {
             "description": "Default response.",
             "schema": {
@@ -484,11 +484,11 @@
         "tags": [
           "Update management"
         ],
-        "operationId": "DeviceUpdate_ListOperations",
+        "operationId": "DeviceUpdate_ListOperationStatuses",
         "description": "Get a list of all import update operations. Completed operations are kept for 7 days before auto-deleted. Delete operations are not returned by this API version.",
         "x-ms-examples": {
-          "DeviceUpdate_ListOperations": {
-            "$ref": "./examples/DeviceUpdate_ListOperations.json"
+          "DeviceUpdate_ListOperationStatuses": {
+            "$ref": "./examples/DeviceUpdate_ListOperationStatuses.json"
           }
         },
         "parameters": [
@@ -539,11 +539,11 @@
         "tags": [
           "Update management"
         ],
-        "operationId": "DeviceUpdate_GetOperation",
+        "operationId": "DeviceUpdate_GetOperationStatus",
         "description": "Retrieve operation status.",
         "x-ms-examples": {
-          "DeviceUpdate_GetOperation": {
-            "$ref": "./examples/DeviceUpdate_GetOperation.json"
+          "DeviceUpdate_GetOperationStatus": {
+            "$ref": "./examples/DeviceUpdate_GetOperationStatus.json"
           }
         },
         "parameters": [
@@ -572,9 +572,6 @@
             "schema": {
               "$ref": "#/definitions/UpdateOperation"
             }
-          },
-          "304": {
-            "description": "Not modified."
           },
           "default": {
             "description": "Default response.",
@@ -1980,11 +1977,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_GetOperation",
+        "operationId": "DeviceManagement_GetOperationStatus",
         "description": "Retrieve operation status.",
         "x-ms-examples": {
-          "DeviceManagement_GetOperation": {
-            "$ref": "./examples/DeviceManagement_GetOperation.json"
+          "DeviceManagement_GetOperationStatus": {
+            "$ref": "./examples/DeviceManagement_GetOperationStatus.json"
           }
         },
         "parameters": [
@@ -2014,9 +2011,6 @@
               "$ref": "#/definitions/DeviceOperation"
             }
           },
-          "304": {
-            "description": "Not modified."
-          },
           "default": {
             "description": "Default response.",
             "schema": {
@@ -2031,11 +2025,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_ListOperations",
+        "operationId": "DeviceManagement_ListOperationStatuses",
         "description": "Get a list of all device import operations. Completed operations are kept for 7 days before auto-deleted.",
         "x-ms-examples": {
-          "DeviceManagement_ListOperations": {
-            "$ref": "./examples/DeviceManagement_ListOperations.json"
+          "DeviceManagement_ListOperationStatuses": {
+            "$ref": "./examples/DeviceManagement_ListOperationStatuses.json"
           }
         },
         "parameters": [
@@ -2222,7 +2216,7 @@
             "$ref": "#/parameters/InstanceIdParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/LogCollectionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2249,11 +2243,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_ListDeviceHealth",
+        "operationId": "DeviceManagement_ListHealthOfDevices",
         "description": "Get list of device health",
         "x-ms-examples": {
-          "DeviceManagement_ListDeviceHealth": {
-            "$ref": "./examples/DeviceManagement_ListDeviceHealth.json"
+          "DeviceManagement_ListHealthOfDevices": {
+            "$ref": "./examples/DeviceManagement_ListHealthOfDevices.json"
           }
         },
         "parameters": [
