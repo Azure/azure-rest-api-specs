@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2022-04-07-preview",
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "recognizeRequest": {
+      "recognizeInputType": "dtmf",
+      "stopCurrentOperations": true,
+      "playPrompt": {
+        "sourceType": "file",
+        "fileSource": {
+          "uri": "https://some.file.azure.com/sample.wav"
+        }
+      },
+      "recognizeConfigurations": {
+        "interruptPromptAndStartRecognition": true,
+        "initialSilenceTimeoutInSeconds": 5,
+        "targetParticipant": null,
+        "dtmfConfigurations": {
+          "interToneTimeoutInSeconds": 3,
+          "maxTonesToCollect": 5,
+          "stopTones": [
+            "Pound"
+          ]
+        }
+      }
+    },
+    "responses": {
+      "202": {}
+    }
+  }
+}
