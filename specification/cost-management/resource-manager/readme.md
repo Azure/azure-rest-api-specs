@@ -309,6 +309,7 @@ directive:
     reason: 'false alarm ' 
   - suppress: TopLevelResourcesListBySubscription
     from: costmanagement.json
+    where: $.definitions.Setting
     reason: 'Not a Subscription Level RP'
 ```
 
