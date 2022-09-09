@@ -5917,6 +5917,27 @@
       "x-ms-discriminator-value": "Auto",
       "additionalProperties": false
     },
+    "AutoRebuildSetting": {
+      "description": "AutoRebuild setting for the derived image",
+      "enum": [
+        "Disabled",
+        "OnBaseImageUpdate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AutoRebuildSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled"
+          },
+          {
+            "value": "OnBaseImageUpdate"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "AutoSeasonality": {
       "type": "object",
       "allOf": [
@@ -8376,6 +8397,15 @@
         }
       ],
       "properties": {
+        "autoRebuild": {
+          "description": "Defines if image needs to be rebuilt based on base image changes.",
+          "default": "Disabled",
+          "$ref": "#/definitions/AutoRebuildSetting",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "build": {
           "description": "Configuration settings for Docker build context.",
           "$ref": "#/definitions/BuildContext",
