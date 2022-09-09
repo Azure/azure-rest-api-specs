@@ -240,8 +240,8 @@
       "Connective": {
         "description": "Connective used to join the conditions or clauses together.",
         "enum": [
-          "And",
-          "Or"
+          "and",
+          "or"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -250,11 +250,11 @@
           "values": [
             {
               "description": "Conditions/clauses should be joined together using logical AND operator.",
-              "value": "And"
+              "value": "and"
             },
             {
               "description": "Conditions/clauses should be joined together using logical OR operator.",
-              "value": "Or"
+              "value": "or"
             }
           ]
         }
@@ -265,7 +265,6 @@
         "properties": {
           "clauseConnective": {
             "description": "Connective used to logically join the values on this clause",
-            "type": "string",
             "$ref": "#/definitions/Connective"
           },
           "field": {
@@ -276,13 +275,13 @@
             "description": "Operator which describes how this clause should be constructed into an expression.",
             "type": "string",
             "enum": [
-              "Equal",
-              "NotEqual",
-              "LessThan",
-              "GreaterThan",
-              "StringContains",
-              "StringNotCotains",
-              "IsNull"
+              "equal",
+              "notequal",
+              "lessthan",
+              "greaterthan",
+              "stringcontains",
+              "stringnotcontains",
+              "isnull"
             ],
             "x-ms-enum": {
               "modelAsString": true,
@@ -290,31 +289,31 @@
               "values": [
                 {
                   "description": "The '=' operator.",
-                  "value": "Equal"
+                  "value": "equal"
                 },
                 {
                   "description": "The '!=' operator.",
-                  "value": "NotEqual"
+                  "value": "notequal"
                 },
                 {
                   "description": "The '<' operator.",
-                  "value": "LessThan"
+                  "value": "lessthan"
                 },
                 {
                   "description": "The '>' operator.",
-                  "value": "GreaterThan"
+                  "value": "greaterthan"
                 }, 
                 {
                   "description": "The 'contains' operator for strings.",
-                  "value": "StringContains"
+                  "value": "stringcontains"
                 },       
                 {
                   "description": "The 'not contains' operator for strings.",
-                  "value": "StringNotContains"
+                  "value": "stringnotcontains"
                 },              
                 {
                   "description": "The 'is_null' operator.",
-                  "value": "IsNull"
+                  "value": "isnull"
                 }
               ]
             }
@@ -324,7 +323,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "x-ms-identifiers": []
           }
         }
       },
@@ -334,16 +334,15 @@
         "properties": {
           "conditionConnective": {
             "description": "Connective used to logically join the clauses.",
-            "type": "string",
             "$ref": "#/definitions/Connective"
           },
           "clauses": {
             "description": "List of clauses which make up this condition.",
             "type": "array",
             "items": {
-              "type": "object",
               "$ref": "#/definitions/Clause"
-            }
+            },
+            "x-ms-identifiers": []
           }
         }
       },
@@ -359,12 +358,12 @@
             "description": "Mutator for this operation step.",
             "type": "string",
             "enum": [
-              "SetValue",
-              "SetNull",
-              "SetEmpty",
-              "AddToSet",
-              "AppendToList",
-              "RemoveFromSet"
+              "setvalue",
+              "setnull",
+              "setempty",
+              "addtoset",
+              "appendtolist",
+              "removefromset"
             ],
             "x-ms-enum": {
               "modelAsString": true,
@@ -372,27 +371,27 @@
               "values": [
                 {
                   "description": "Use this operator when a scalar value should be replaced/overwritten.",
-                  "value": "SetValue"
+                  "value": "setvalue"
                 },
                 {
                   "description": "Use this operator when a scalar or array value should be set explicitly to NULL.",
-                  "value": "SetNull"
+                  "value": "setnull"
                 },
                 {
                   "description": "Use this operator when an array value should be set to the empty set/list.",
-                  "value": "SetEmpty"
+                  "value": "setempty"
                 },
                 {
                   "description": "Use this operator to add an element to a set (i.e. an unordered multivalue variable).",
-                  "value": "AddToSet"
+                  "value": "addtoset"
                 },
                 {
                   "description": "Use this operator to add an element to the end of a list (i.e. an ordered multivalue variable).",
-                  "value": "AppendToList"
+                  "value": "appendtolist"
                 },
                 {
                   "description": "Use this operator to remove the specified element from a set (i.e. an unordered multivalue variable).",
-                  "value": "RemoveFromSet"
+                  "value": "removefromset"
                 }
               ]
             }
@@ -411,8 +410,8 @@
             "description": "Describes which type of operation we are applying to items captured by this bulk action.",
             "type": "string",
             "enum": [
-              "Delete",
-              "Edit"
+              "delete",
+              "edit"
             ],
             "x-ms-enum": {
               "modelAsString": true,
@@ -420,11 +419,11 @@
               "values": [
                 {
                   "description": "This item will be deleted.",
-                  "value": "Delete"
+                  "value": "delete"
                 },
                 {
                   "description": "This item will be edited.",
-                  "value": "Edit"
+                  "value": "edit"
                 }
               ]
             }
@@ -435,7 +434,8 @@
             "items": {
               "type": "object",
               "$ref": "#/definitions/OperationStep"
-            }
+            },
+            "x-ms-identifiers": []
           }
         }
       },
@@ -468,7 +468,8 @@
             "items": {
               "$ref": "#/definitions/BulkAction"
             },
-            "type": "array"
+            "type": "array",
+            "x-ms-identifiers": []
           }
         },
         "type": "object",
@@ -482,7 +483,7 @@
           "targetType": {
             "description": "Describes the type this bulk action targets for execution.",
             "enum": [
-              "StixIndicator"
+              "stixindicator"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -491,7 +492,7 @@
               "values": [
                 {
                   "description": "This bulk action is targeting stix indicators.",
-                  "value": "StixIndicator"
+                  "value": "stixindicator"
                 }
               ]
             }
@@ -526,7 +527,6 @@
           }, 
           "executionOrder": {
             "description": "Index of this bulk action in the execution queue.",
-            "readOnly": true,
             "type": "integer",
             "format": "int32"
           },
