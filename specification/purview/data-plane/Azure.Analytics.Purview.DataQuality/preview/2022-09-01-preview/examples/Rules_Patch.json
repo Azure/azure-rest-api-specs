@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "assetId": "da7eb3d5-9d0c-4774-9c31-f0b635cefd2c",
+    "api-version": "2019-09-01",
+    "rulesPatchParameter": {
+      "add": [
+        {
+          "description": "Description.",
+          "status": "PUBLISHED",
+          "type": "INFERRED",
+          "level": "FIELD",
+          "typeProperties": {
+            "fields": [
+              "{birthdate}"
+            ],
+            "type": "string"
+          }
+        }
+      ],
+      "schemaReference": {
+        "{last_name}": {
+          "nativeType": "string"
+        },
+        "{birthdate}": {
+          "nativeType": "string"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "modelVersion": null,
+        "dataSourceId": "da7eb3d5-9d0c-4774-9c31-f0b635cefd2c",
+        "dataSourceFQN": "https://dqdemosource.dfs.core.windows.net/dataquality/DQTestdata1/userdata{N}.parquet",
+        "favouriteFields": [
+          "last_name"
+        ],
+        "schemaReference": {
+          "{last_name}": {
+            "nativeType": "string"
+          },
+          "{birthdate}": {
+            "nativeType": "string"
+          }
+        },
+        "dataSourceType": "CATALOG_ASSET",
+        "rules": [
+          {
+            "typeProperties": {
+              "fields": [
+                "{last_name}"
+              ],
+              "type": "string"
+            },
+            "id": "{last_name}/##InferredTypeCheck",
+            "name": "",
+            "description": "",
+            "status": "PUBLISHED",
+            "level": "FIELD",
+            "type": "INFERRED",
+            "tags": null
+          },
+          {
+            "typeProperties": {
+              "fields": [
+                "{birthdate}"
+              ],
+              "type": "string"
+            },
+            "id": "{birthdate}/##InferredTypeCheck",
+            "name": "",
+            "description": "Description.",
+            "status": "PUBLISHED",
+            "level": "FIELD",
+            "type": "INFERRED",
+            "tags": null
+          }
+        ]
+      }
+    }
+  }
+}
