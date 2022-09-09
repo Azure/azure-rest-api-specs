@@ -28,6 +28,8 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-flexibleserver-2022-03-preview
+  - tag: package-flexibleserver-2022-03-privatepreview
   - tag: package-flexibleserver-2021-06
   - tag: package-flexibleserver-2021-06-preview
   - tag: package-2020-11-05-preview
