@@ -530,20 +530,28 @@
         },
         "description": "Properties controlling TLS Certificate Validation."
       },
-      "BackendCircuitBreakerProperties": {
+      "BackendCircuitBreakerProperties":
+      {
         "properties": {
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/CircuitBreakerRuleProperties"
+            },
+            "maxItems": 15,
+            "description": "The rules for tripping the backend.",
+            "x-apim-code-optional": true
+          }
+      },
+      "CircuitBreakerRuleProperties": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The rule name."
+          },
           "failureCondition": {
             "$ref": "#/definitions/CircuitBreakerFailureCondition",
             "description": "The conditions for tripping the circuit breaker."
-          },
-          "state": {
-            "type": "string",
-            "enum": [
-              "open",
-              "closed",
-              "half-open"
-            ],
-            "description": "The status of the circuit breaker"
           },
           "tripDuration": {
             "type": "string",
