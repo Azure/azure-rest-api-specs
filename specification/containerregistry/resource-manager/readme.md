@@ -26,7 +26,7 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-02-preview
+tag: package-2021-09
 ```
 
 ### Tag: package-2022-02-preview-only
