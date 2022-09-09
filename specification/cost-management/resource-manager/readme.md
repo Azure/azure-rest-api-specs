@@ -307,6 +307,9 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
+  - suppress: TopLevelResourcesListBySubscription
+    from: costmanagement.json
+    reason: 'Not a Subscription Level RP'
 ```
 
 ### Tag: package-2018-08-preview
