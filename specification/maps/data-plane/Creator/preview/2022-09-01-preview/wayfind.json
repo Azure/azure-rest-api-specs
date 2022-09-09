@@ -179,25 +179,41 @@
       "required": true,
       "x-ms-parameter-location": "client"
     },
-    "From": {
-      "name": "from",
+    "FromPoint": {
+      "name": "fromPoint",
       "type": "string",
       "in": "query",
-      "description": "The path origin in the following format: {latitude},{longitude},{levelOrdinal}.",
+      "description": "The path origin point in the following format: {latitude},{longitude}.",
       "required": true,
       "x-ms-parameter-location": "client"
     },
-    "To": {
-      "name": "to",
-      "type": "string",
+    "FromLevel": {
+      "name": "fromLevel",
+      "type": "integer",
       "in": "query",
-      "description": "The path destination in the following format: {latitude},{longitude},{levelOrdinal}.",
+      "description": "The path origin level.",
       "required": true,
       "x-ms-parameter-location": "client"
     },
-    "Avoid": {
-      "name": "avoid",
-      "description": "To avoid certain types of connectors in the resulting path. Valid values are: 'elevators' and 'stairs'. Multiple comma separated values can be selected.",
+    "ToPoint": {
+      "name": "toPoint",
+      "type": "string",
+      "in": "query",
+      "description": "The path destination in the following format: {latitude},{longitude}.",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ToLevel": {
+      "name": "toLevel",
+      "type": "integer",
+      "in": "query",
+      "description": "The path destination level.",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "AvoidFeatures": {
+      "name": "avoidFeatures",
+      "description": "To avoid certain types of connectors in the resulting path. Valid features that can be avoided are: 'elevators' and 'stairs'. Multiple comma separated values can be selected.",
       "type": "array",
       "items": {
         "type": "string"
@@ -205,8 +221,8 @@
       "in": "query",
       "x-ms-parameter-location": "client"
     },
-    "Width": {
-      "name": "width",
+    "MinWidth": {
+      "name": "minWidth",
       "description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a width of 1.0, the searched path will avoid openings less than 1 meters wide.",
       "type": "number",
       "in": "query",
@@ -241,16 +257,22 @@
             "$ref": "#/parameters/FacilityId"
           },
           {
-            "$ref": "#/parameters/From"
+            "$ref": "#/parameters/FromPoint"
           },
           {
-            "$ref": "#/parameters/To"
+            "$ref": "#/parameters/FromLevel"
           },
           {
-            "$ref": "#/parameters/Avoid"
+            "$ref": "#/parameters/ToPoint"
           },
           {
-            "$ref": "#/parameters/Width"
+            "$ref": "#/parameters/ToLevel"
+          },
+          {
+            "$ref": "#/parameters/AvoidFeatures"
+          },
+          {
+            "$ref": "#/parameters/MinWidth"
           }
         ],
         "responses": {
