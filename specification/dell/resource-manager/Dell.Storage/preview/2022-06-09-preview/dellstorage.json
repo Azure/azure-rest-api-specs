@@ -483,10 +483,6 @@
           "type": "string",
           "description": "Azure Tenant Id"
         },
-        "resourceId": {
-          "type": "string",
-          "description": "Azure Resource Id"
-        },
         "marketplace": {
           "$ref": "#/definitions/Marketplace",
           "description": "Marketplace details"
@@ -513,10 +509,6 @@
           "type": "string",
           "description": "Azure Tenant Id"
         },
-        "resourceId": {
-          "type": "string",
-          "description": "Azure Resource Id"
-        },
         "marketplace": {
           "$ref": "#/definitions/Marketplace",
           "description": "Marketplace details"
@@ -537,7 +529,6 @@
       "description": "Properties specific to the Dell File System resource",
       "required": [
         "tenantId",
-        "resourceId",
         "marketplace",
         "provisioningState",
         "user"
@@ -558,6 +549,10 @@
           "type": "string",
           "description": "Offer Id"
         },
+        "termId": {
+          "type": "string",
+          "description": "Term Id"
+        },
         "publisherId": {
           "type": "string",
           "description": "Publisher Id"
@@ -565,19 +560,14 @@
         "status": {
           "$ref": "#/definitions/MarketplaceSubscriptionStatus",
           "description": "Marketplace subscription status"
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource Id"
         }
       },
       "description": "MarketplaceDetails of Dell FileSystem resource",
       "required": [
-        "marketplaceSubscriptionId",
         "planId",
         "offerId",
-        "publisherId",
-        "status"
+        "termId",
+        "publisherId"
       ]
     },
     "MarketplaceSubscriptionStatus": {
