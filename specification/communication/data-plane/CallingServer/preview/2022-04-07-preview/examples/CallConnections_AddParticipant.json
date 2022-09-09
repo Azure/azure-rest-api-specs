@@ -2,15 +2,17 @@
   "parameters": {
     "endpoint": "https://contoso.communications.azure.com",
     "api-version": "2022-04-07-preview",
-    "addParticipantRequest": {
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "addParticipantsRequest": {
       "participantsToAdd": [
         {
+          "kind": "communicationUser",
           "communicationUser": {
             "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_ae9e3307-f56e-44be-8934-80a63f080538"
           }
         }
       ],
-      "operationContext": "5161f20a-7225-4a74-a529-efaf8e7b351d",
+      "operationContext": "adding participant",
       "sourceCallerId": {
         "value": "+18440123456"
       },
@@ -20,14 +22,18 @@
   "responses": {
     "202": {
       "body": {
-        "operationId": "6431f20a-1235-4a74-j632-asas8h6f999s",
-        "status": "running",
         "operationContext": "adding participant",
-        "resultDetails": {
-          "code": "success",
-          "subCode": "success",
-          "message": "request successfully received"
-        }
+        "participants": [
+          {
+            "identifier": {
+              "kind": "communicationUser",
+              "communicationUser": {
+                "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_ae9e3307-f56e-44be-8934-80a63f080538"
+              }
+            },
+            "isMuted": false
+          }
+        ]
       }
     }
   }
