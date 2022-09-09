@@ -7,7 +7,26 @@
     "azureDevOpsProjectName": "myProject",
     "azureDevOpsRepoName": "myRepo",
     "api-version": "2022-09-01-preview",
-    "azureDevOpsRepo": {}
+    "azureDevOpsRepo": {
+      "properties": {
+        "actionableRemediation": {
+          "state": "Enabled",
+          "categories": [
+            "Secrets"
+          ],
+          "severityLevels": [
+            "High"
+          ],
+          "branchConfiguration": {
+            "names": [
+              "main"
+            ]
+          }
+        },
+        "repoId": "00000000-0000-0000-0000-000000000000",
+        "repoUrl": "https://dev.azure.com/myOrg/myProject/_git/myRepo"
+      }
+    }
   },
   "responses": {
     "201": {
@@ -19,6 +38,22 @@
         "name": "myRepo",
         "type": "Microsoft.SecurityDevOps/azureDevOpsConnectos/orgs/projects/repos",
         "properties": {
+          "actionableRemediation": {
+            "state": "Enabled",
+            "categories": [
+              "Secrets"
+            ],
+            "severityLevels": [
+              "High"
+            ],
+            "branchConfiguration": {
+              "names": [
+                "main"
+              ]
+            }
+          },
+          "repoId": "00000000-0000-0000-0000-000000000000",
+          "repoUrl": "https://dev.azure.com/myOrg/myProject/_git/myRepo",
           "provisioningState": "Created"
         }
       }
@@ -30,6 +65,22 @@
         "name": "myRepo",
         "type": "Microsoft.SecurityDevOps/azureDevOpsConnectos/orgs/projects/repos",
         "properties": {
+          "actionableRemediation": {
+            "state": "Enabled",
+            "categories": [
+              "Secrets"
+            ],
+            "severityLevels": [
+              "High"
+            ],
+            "branchConfiguration": {
+              "names": [
+                "main"
+              ]
+            }
+          },
+          "repoId": "00000000-0000-0000-0000-000000000000",
+          "repoUrl": "https://dev.azure.com/myOrg/myProject/_git/myRepo",
           "provisioningState": "Succeeded"
         }
       }
