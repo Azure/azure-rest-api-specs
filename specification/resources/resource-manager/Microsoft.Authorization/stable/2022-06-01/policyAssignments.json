@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2021-06-01",
+    "version": "2022-06-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -107,6 +107,12 @@
           },
           "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
+          },
+          "Create or update a policy assignment with resource selectors": {
+            "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
+          },
+          "Create or update a policy assignment with overrides": {
+            "$ref": "./examples/createPolicyAssignmentWithOverrides.json"
           }
         },
         "parameters": [
@@ -169,6 +175,12 @@
           },
           "Retrieve a policy assignment with a user assigned identity": {
             "$ref": "./examples/getPolicyAssignmentWithUserAssignedIdentity.json"
+          },
+          "Retrieve a policy assignment with resource selectors": {
+            "$ref": "./examples/getPolicyAssignmentWithResourceSelectors.json"
+          },
+          "Retrieve a policy assignment with overrides": {
+            "$ref": "./examples/getPolicyAssignmentWithOverrides.json"
           }
         },
         "parameters": [
@@ -219,6 +231,12 @@
           },
           "Update a policy assignment with a user assigned identity": {
             "$ref": "./examples/updatePolicyAssignmentWithUserAssignedIdentity.json"
+          },
+          "Update a policy assignment with resource selectors": {
+            "$ref": "./examples/updatePolicyAssignmentWithResourceSelectors.json"
+          },
+          "Update a policy assignment with overrides": {
+            "$ref": "./examples/updatePolicyAssignmentWithOverrides.json"
           }
         },
         "parameters": [
@@ -770,6 +788,23 @@
             "policyDefinitionReferenceId"
           ],
           "description": "The messages that describe why a resource is non-compliant with the policy."
+        },
+        "resourceSelectors": {
+          "type": "array",
+          "items": {
+            "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The resource selector list to filter policies by resource properties."
+        },
+        "overrides": {
+          "type": "array",
+          "items": {
+            "$ref": "../../common/v1/types.json#/definitions/Override"
+          },
+          "description": "The policy property value override."
         }
       },
       "description": "The policy assignment properties."
@@ -923,9 +958,37 @@
       },
       "description": "Identity for the resource.  Policy assignments support a maximum of one identity.  That is either a system assigned identity or a single user assigned identity."
     },
+    "PolicyAssignmentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "resourceSelectors": {
+          "type": "array",
+          "items": {
+            "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The resource selector list to filter policies by resource properties."
+        },
+        "overrides": {
+          "type": "array",
+          "items": {
+            "$ref": "../../common/v1/types.json#/definitions/Override"
+          },
+          "description": "The policy property value override."
+        }
+      },
+      "description": "The policy assignment properties for Patch request."
+    },
     "PolicyAssignmentUpdate": {
       "type": "object",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyAssignmentUpdateProperties",
+          "description": "The policy assignment properties for Patch request."
+        },
         "location": {
           "type": "string",
           "description": "The location of the policy assignment. Only required when utilizing managed identity."
@@ -934,7 +997,8 @@
           "$ref": "#/definitions/Identity",
           "description": "The managed identity associated with the policy assignment."
         }
-      }
+      },
+      "description": "The policy assignment for Patch request."
     }
   },
   "parameters": {

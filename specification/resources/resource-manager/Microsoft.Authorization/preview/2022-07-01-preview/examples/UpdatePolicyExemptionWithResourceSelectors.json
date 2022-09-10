@@ -2,7 +2,23 @@
   "parameters": {
     "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/demoCluster",
     "policyExemptionName": "DemoExpensiveVM",
-    "api-version": "2022-07-01-preview"
+    "api-version": "2022-07-01-preview",
+    "parameters": {
+      "properties": {
+        "assignmentScopeValidation": "Default",
+        "resourceSelectors": [
+          {
+            "name": "SDPRegions",
+            "selectors": [
+              {
+                "kind": "resourceLocation",
+                "in": [ "eastus2euap", "centraluseuap" ]
+              }
+            ]
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
@@ -18,7 +34,19 @@
           "description": "Exempt demo cluster from limit sku",
           "metadata": {
             "reason": "Temporary exemption for a expensive VM demo"
-          }
+          },
+          "assignmentScopeValidation": "Default",
+          "resourceSelectors": [
+            {
+              "name": "SDPRegions",
+              "selectors": [
+                {
+                  "kind": "resourceLocation",
+                  "in": [ "eastus2euap", "centraluseuap" ]
+                }
+              ]
+            }
+          ]
         },
         "systemData": {
           "createdBy": "string",

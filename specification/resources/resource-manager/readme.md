@@ -42,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2021-06
+tag: package-policy-2022-06
 ```
 
 ``` yaml $(package-resources)
@@ -72,6 +72,26 @@ tag: package-templatespecs-2022-02
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
+
+### Tag: package-policy-2022-06
+
+These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2022-06'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2022-06-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-changes-2022-05
 
 These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
@@ -735,6 +755,10 @@ directive:
     from: policyVariableValues.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: BodyTopLevelProperties
+    from: policyAssignments.json
+    where: $.definitions.PolicyAssignment.properties
+    reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties

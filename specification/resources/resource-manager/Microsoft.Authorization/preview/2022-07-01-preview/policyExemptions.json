@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2020-07-01-preview",
+    "version": "2022-07-01-preview",
     "description": "To exempt your resources from policy evaluation and non-compliance state, you can create an exemption at a scope."
   },
   "host": "management.azure.com",
@@ -83,6 +83,9 @@
         "x-ms-examples": {
           "Create or update a policy exemption": {
             "$ref": "./examples/createOrUpdatePolicyExemption.json"
+          },
+          "Create or update a policy exemption with resource selectors": {
+            "$ref": "./examples/createOrUpdatePolicyExemptionWithResourceSelectors.json"
           }
         },
         "parameters": [
@@ -136,6 +139,9 @@
         "x-ms-examples": {
           "Retrieve a policy exemption": {
             "$ref": "./examples/getPolicyExemption.json"
+          },
+          "Retrieve a policy exemption with resource selectors": {
+            "$ref": "./examples/getPolicyExemptionWithResourceSelectors.json"
           }
         },
         "parameters": [
@@ -144,6 +150,53 @@
           },
           {
             "$ref": "#/parameters/PolicyExemptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy exemption.",
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PolicyExemptions"
+        ],
+        "operationId": "PolicyExemptions_Update",
+        "summary": "Updates a policy exemption.",
+        "description": " This operation updates a policy exemption with the given scope and name.",
+        "x-ms-examples": {
+          "Update a policy exemption with resource selectors": {
+            "$ref": "./examples/updatePolicyExemptionWithResourceSelectors.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyExemptionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyExemptionUpdate"
+            },
+            "description": "Parameters for policy exemption patch request."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -439,6 +492,39 @@
         "metadata": {
           "type": "object",
           "description": "The policy exemption metadata. Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "resourceSelectors": {
+          "type": "array",
+          "items": {
+            "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The resource selector list to filter policies by resource properties."
+        },
+        "assignmentScopeValidation": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "DoNotValidate"
+          ],
+          "x-ms-enum": {
+            "name": "assignmentScopeValidation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "This option will validate the exemption is at or under the assignment scope."
+              },
+              {
+                "value": "DoNotValidate",
+                "description": "This option will bypass the validation the exemption scope is at or under the policy assignment scope."
+              }
+            ]
+          },
+          "default": "Default",
+          "description": "The option whether validate the exemption is at or under the assignment scope."
         }
       },
       "description": "The policy exemption properties."
@@ -494,6 +580,56 @@
         }
       },
       "description": "List of policy exemptions."
+    },
+    "PolicyExemptionUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "resourceSelectors": {
+          "type": "array",
+          "items": {
+            "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The resource selector list to filter policies by resource properties."
+        },
+        "assignmentScopeValidation": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "DoNotValidate"
+          ],
+          "x-ms-enum": {
+            "name": "assignmentScopeValidation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "This option will validate the exemption is at or under the assignment scope."
+              },
+              {
+                "value": "DoNotValidate",
+                "description": "This option will bypass the validation the exemption scope is at or under the policy assignment scope."
+              }
+            ]
+          },
+          "default": "Default",
+          "description": "The option whether validate the exemption is at or under the assignment scope."
+        }
+      },
+      "description": "The policy exemption properties for Patch request."
+    },
+    "PolicyExemptionUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyExemptionUpdateProperties",
+          "description": "The policy exemption properties for Patch request."
+        }
+      },
+      "description": "The policy exemption for Patch request."
     }
   },
   "parameters": {
