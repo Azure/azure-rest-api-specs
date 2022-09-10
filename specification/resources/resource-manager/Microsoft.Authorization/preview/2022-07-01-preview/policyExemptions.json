@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -429,6 +429,7 @@
   },
   "definitions": {
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -438,6 +439,7 @@
       "description": "An error response from a policy operation."
     },
     "PolicyExemptionProperties": {
+      "type": "object",
       "required": [
         "policyAssignmentId",
         "exemptionCategory"
@@ -510,7 +512,7 @@
             "DoNotValidate"
           ],
           "x-ms-enum": {
-            "name": "assignmentScopeValidation",
+            "name": "AssignmentScopeValidation",
             "modelAsString": true,
             "values": [
               {
@@ -530,6 +532,7 @@
       "description": "The policy exemption properties."
     },
     "PolicyExemption": {
+      "type": "object",
       "required": [
         "properties"
       ],
@@ -565,6 +568,7 @@
       "x-ms-azure-resource": true
     },
     "PolicyExemptionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -589,9 +593,7 @@
           "items": {
             "$ref": "../../common/v1/types.json#/definitions/ResourceSelector"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "The resource selector list to filter policies by resource properties."
         },
         "assignmentScopeValidation": {
@@ -601,7 +603,7 @@
             "DoNotValidate"
           ],
           "x-ms-enum": {
-            "name": "assignmentScopeValidation",
+            "name": "AssignmentScopeValidation",
             "modelAsString": true,
             "values": [
               {
