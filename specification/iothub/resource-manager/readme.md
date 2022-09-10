@@ -119,6 +119,14 @@ input-file:
   - Microsoft.Devices/preview/2020-08-31-preview/iothub.json
 ```
 
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.Devices/stable/2020-09-18/iothub.json
+```
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
