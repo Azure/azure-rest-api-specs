@@ -10,6 +10,7 @@
             "numberOfPacketsToCapture": 5000,
             "SASURL": "someSASURL",
             "fileName": "azureFirewallPacketCapture",
+            "protocol": "ANY",
             "flags": [
                 "tcp-syn",
                 "tcp-fin"
@@ -22,7 +23,7 @@
                     "destination": [
                       "20.1.2.0"
                     ],
-                    "DestinationPort": "4500"
+                    "destinationPorts": "4500"
                 },
                 {
                     "source": [
@@ -31,7 +32,10 @@
                     "destination": [
                       "10.1.2.0"
                     ],
-                    "DestinationPort": "123"
+                    "destinationPorts": [
+                        "123",
+                        "80"
+                    ]
                 }
             ]
         }
