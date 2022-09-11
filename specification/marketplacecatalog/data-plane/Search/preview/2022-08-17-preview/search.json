@@ -979,7 +979,7 @@
           "description": "A value indicating whether the product is available for purchase through CSP channel",
           "allOf": [
             {
-              "$ref": "#/definitions/CSPState"
+              "$ref": "#/definitions/CspState"
             }
           ]
         },
@@ -1046,7 +1046,7 @@
           "description": "The sku id"
         },
         "type": {
-          "$ref": "#/definitions/PlanType",
+          "$ref": "#/definitions/ProductType",
           "description": "The plan type, for Azure Application product type, this can be Solution Template or ManagedApp"
         },
         "categoryIds": {
@@ -1082,7 +1082,7 @@
         }
       }
     },
-    "CSPState": {
+    "CspState": {
       "type": "string",
       "description": "PA value showing whether the product is available for purchase through CSP channel, Possible values, OptIn, OptOut, SelectiveOptIn, for more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
       "enum": [
@@ -1092,7 +1092,7 @@
         "SelectiveOptIn"
       ],
       "x-ms-enum": {
-        "name": "CSPState",
+        "name": "CspState",
         "modelAsString": true
       }
     },
@@ -1166,7 +1166,7 @@
           "type": "string",
           "description": "Artifact uri"
         },
-        "type": {
+        "artifactType": {
           "description": "Artifact type",
           "allOf": [
             {
@@ -1187,18 +1187,6 @@
       ],
       "x-ms-enum": {
         "name": "ArtifactType",
-        "modelAsString": true
-      }
-    },
-    "PlanType": {
-      "type": "string",
-      "description": "The type of the plan",
-      "enum": [
-        "SolutionTemplate",
-        "ManagedApp"
-      ],
-      "x-ms-enum": {
-        "name": "PlanType",
         "modelAsString": true
       }
     },
