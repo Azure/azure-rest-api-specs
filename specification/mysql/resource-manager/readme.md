@@ -160,6 +160,15 @@ input-file:
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
+### Tag: package-flexibleserver-2022-08-01-privatepreview
+
+These settings apply only when `--tag=package-flexibleserver-2022-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-08-01-preview'
+input-file:
+- Microsoft.DBforMySQL/preview/2022-08-01-privatepreview/BackupAndExport.json
+```
+
 ## Suppression
 
 ``` yaml

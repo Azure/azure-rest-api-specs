@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-privatepreview",
+    "parameters": {
+      "targetDetails": {
+        "sasUriList": [
+          "sasuri1",
+          "sasuri2"
+        ]
+      },
+      "backupSettings": {
+        "backupName": "customer-backup-name"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/backups/customer-backup-name",
+        "name": "customer-backup-name",
+        "type": "Microsoft.DBforMySQL/flexibleServers/backups",
+        "properties": {
+          "datasourceSizeInBytes": 1024,
+          "dataTransferredInBytes": 1024,
+          "backupMetadata": "{\"key1\":\"value1\",\"key2\":\"value2\"}"
+        }
+      }
+    },
+    "202": {}
+  }
+}
