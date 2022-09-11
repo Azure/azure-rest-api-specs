@@ -466,7 +466,7 @@
         "in": "body",
         "required": true,
         "schema": {
-            "$ref": "./network.json#/definitions/FirewallPacketCaptureParameters"
+            "$ref": "#/definitions/FirewallPacketCaptureParameters"
         },
         "description": "Parameters supplied to update azure firewall tags."
         },
@@ -1212,11 +1212,11 @@
     "FirewallPacketCaptureParameters": {
       "properties": {
         "durationInSeconds": {
-            "type": "int",
+            "type": "string",
             "description": "Duration of packet capture in seconds."
         }, 
         "numberOfPacketsToCapture": {
-            "type": "int",
+            "type": "string",
             "description": "Number of packets to be captured."
         },
         "SASURL": {
@@ -1227,11 +1227,15 @@
             "type": "string",
             "description": "Name of file to be uploaded to SASURL"
         },
+        "protocol": {
+          "$ref": "#/definitions/AzureFirewallNetworkRuleProtocol",
+          "description": "The protocol of packets to capture"
+      }, 
         "flags": {
             "$ref": "#/definitions/AzureFirewallPacketCaptureFlags",
-            "description": "The packet flag type to be captured."
+            "description": "The tcp-flag type to be captured. Used with protocol TCP"
         }, 
-        "filterRules ": {
+        "filterRules": {
             "type": "array",
             "items": {
               "$ref": "#/definitions/AzureFirewallCaptureRule"
@@ -1278,7 +1282,7 @@
             "type": "string"
           }
         },
-        "Ports": {
+        "destinationPorts": {
           "type": "array",
           "description": "List of ports to be captured.",
           "items": {
