@@ -118,26 +118,6 @@
           "description": "Popularity of the product",
           "format": "double"
         },
-        "categories": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "industries": {
-          "type": "array",
-          "description": "List of industry the item belongs to",
-          "items": {
-            "type": "string"
-          }
-        },
-        "cloudIndustryCategories": {
-          "type": "array",
-          "description": "List of cloud industry IDs the item belongs to",
-          "items": {
-            "type": "string"
-          }
-        },
         "categoryIds": {
           "type": "array",
           "description": "Array of product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'",
@@ -214,9 +194,6 @@
           "type": "string",
           "description": "Product summary"
         },
-        "longSummary": {
-          "type": "string"
-        },
         "privacyPolicyUri": {
           "type": "string",
           "description": "The Privacy Policy URL"
@@ -225,27 +202,9 @@
           "type": "string",
           "description": "The product version"
         },
-        "standardContractAmendmentsRevisionId": {
-          "type": "string"
-        },
         "cspLegalTermsUri": {
           "type": "string",
           "description": "The CSP legal terms URI"
-        },
-        "videos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Video"
-          }
-        },
-        "isReseller": {
-          "type": "boolean"
-        },
-        "screenshots": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "vmImageGenerations": {
           "type": "array",
@@ -455,48 +414,6 @@
       "x-ms-enum": {
         "name": "PricingType",
         "modelAsString": true
-      }
-    },
-    "Video": {
-      "type": "object",
-      "properties": {
-        "caption": {
-          "type": "string",
-          "description": "caption"
-        },
-        "uri": {
-          "type": "string",
-          "description": "uri"
-        },
-        "videoPurpose": {
-          "type": "string",
-          "description": "videoPurpose"
-        },
-        "previewImage": {
-          "description": "previewImage",
-          "allOf": [
-            {
-              "$ref": "#/definitions/PreviewImage"
-            }
-          ]
-        }
-      }
-    },
-    "PreviewImage": {
-      "type": "object",
-      "properties": {
-        "caption": {
-          "type": "string",
-          "description": "caption"
-        },
-        "uri": {
-          "type": "string",
-          "description": "uri"
-        },
-        "imagePurpose": {
-          "type": "string",
-          "description": "imagePurpose"
-        }
       }
     },
     "VmSecurityType": {
