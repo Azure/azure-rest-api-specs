@@ -1,7 +1,7 @@
 {
   "x-generator": "NSwag v13.12.1.0 (NJsonSchema v10.4.6.0 (Newtonsoft.Json v13.0.0.0))",
   "swagger": "2.0",
-  "info": {
+  "info": {    
     "title": "Microsoft Marketplace Catalog Products API",
     "version": "2022-09-01-preview"
   },
@@ -185,7 +185,7 @@
           "description": "Product unique identifier"
         },
         "productType": {
-          "description": "Offer type",
+          "description": "Product type",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -560,7 +560,7 @@
     "PlanSummary": {
       "type": "object",
       "required": [
-        "type"
+        "productType"
       ],
       "properties": {
         "planId": {
@@ -636,7 +636,7 @@
           "type": "string",
           "description": "The SKU id"
         },
-        "type": {
+        "productType": {
           "description": "The plan type, for Azure Application product type, this can be Solution Template or ManagedApp",
           "allOf": [
             {
