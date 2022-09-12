@@ -284,9 +284,18 @@
           "$ref": "common.json#/definitions/JobState"
         },
         {
-          "$ref": "#/definitions/GenerationResult"
+          "$ref": "#/definitions/GenerationJobResult"
         }
       ]
+    },
+    "GenerationJobResult": {
+      "description": "Generation Job result represents the job result with extracted documents and question answers generated.",
+      "type": "object",
+      "properties": {
+        "result": {          
+          "$ref": "#/definitions/GenerationResult"
+        }
+      }
     },
     "GenerationResult": {
       "type": "object",
