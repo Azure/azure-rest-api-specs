@@ -1,0 +1,249 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "./models.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
+
+interface QuestionAnsweringProjectsOperations {
+  @summary("Gets all projects for a user.")
+  @doc("Gets all projects for a user.")
+  ListProjects is Azure.Core.ResourceList<
+    ProjectMetadata,
+    {
+      parameters: {
+        @doc("The maximum number of resources to return from the collection.")
+        @query
+        top: int32;
+
+        @doc("An offset into the collection of the first resource to be returned.")
+        @query
+        skip: int32;
+
+        @doc("The maximum number of resources to include in a single response.")
+        @query
+        maxpagesize: int32;
+      };
+    }
+  >;
+
+  @summary("Get the requested project metadata.")
+  @doc("Get the requested project metadata.")
+  GetProjectDetails is Azure.Core.ResourceRead<ProjectMetadata>;
+
+  @summary("Create or update a project.")
+  @doc("Create or update a project.")
+  CreateProject is Azure.Core.ResourceCreateOrUpdate<ProjectMetadata>;
+
+  @summary("Delete the project.")
+  @doc("Delete the project.")
+  DeleteProject is Azure.Core.LongRunningResourceDelete<ProjectMetadata>;
+
+  @summary("Gets the status of a Project delete job.")
+  @doc("Gets the status of a Project delete job.")
+  GetDeleteStatus is Azure.Core.ResourceRead<JobState>;
+
+  @summary("Export project metadata and assets.")
+  @doc("Export project metadata and assets.")
+  Export is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<
+    ExportJobState,
+    {
+      parameters: {
+        @doc("Knowledge base Import or Export format.")
+        @query
+        format: Format;
+
+        @doc("Kind of the asset of the project.")
+        @query
+        assetKind: AssetKind;
+      };
+    }
+  >;
+
+  @summary("""
+Gets the status of an Export job, once job completes, returns the project
+metadata, and assets.
+""")
+  @doc("""
+Gets the status of an Export job, once job completes, returns the project
+metadata, and assets.
+""")
+  GetExportStatus is Azure.Core.ResourceRead<ExportJobState>;
+
+  @summary("Import project assets.")
+  @doc("Import project assets.")
+  @route("/query-knowledgebases/projects/{projectName}/:import")
+  @post
+  Import is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the project to use.")
+      @path
+      projectName: string;
+
+      @doc("Knowledge base Import or Export format.")
+      @query
+      format: Format;
+
+      @doc("Kind of the asset of the project.")
+      @query
+      assetKind: AssetKind;
+
+      @doc("Project assets the needs to be imported.")
+      @body
+      body: ImportJobOptions;
+    },
+    void
+  >;
+
+  @summary("Gets the status of an Import job.")
+  @doc("Gets the status of an Import job.")
+  GetImportStatus is Azure.Core.ResourceRead<JobState>;
+
+  @summary("Deploy project to production.")
+  @doc("Deploy project to production.")
+  @route("/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}")
+  @put
+  DeployProject is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the project to use.")
+      @path
+      projectName: string;
+
+      @doc("The name of the specific deployment of the project to use.")
+      @path
+      deploymentName: string;
+    },
+    void
+  >;
+
+  @summary("Gets the status of a Deploy job.")
+  @doc("Gets the status of a Deploy job.")
+  GetDeployStatus is Azure.Core.ResourceRead<JobState>;
+
+  @summary("List all deployments of a project.")
+  @doc("List all deployments of a project.")
+  ListDeployments is Azure.Core.ResourceList<
+    ProjectDeployment,
+    {
+      parameters: {
+        @doc("The maximum number of resources to return from the collection.")
+        @query
+        top: int32;
+
+        @doc("An offset into the collection of the first resource to be returned.")
+        @query
+        skip: int32;
+
+        @doc("The maximum number of resources to include in a single response.")
+        @query
+        maxpagesize: int32;
+      };
+    }
+  >;
+
+  @summary("Gets all the synonyms of a project.")
+  @doc("Gets all the synonyms of a project.")
+  GetSynonyms is Azure.Core.ResourceList<
+    WordAlterations,
+    {
+      parameters: {
+        @doc("The maximum number of resources to return from the collection.")
+        @query
+        top: int32;
+
+        @doc("An offset into the collection of the first resource to be returned.")
+        @query
+        skip: int32;
+
+        @doc("The maximum number of resources to include in a single response.")
+        @query
+        maxpagesize: int32;
+      };
+    }
+  >;
+
+  @summary("Updates all the synonyms of a project.")
+  @doc("Updates all the synonyms of a project.")
+  UpdateSynonyms is Azure.Core.ResourceCreateOrReplace<WordAlterations>;
+
+  @summary("Gets all the sources of a project.")
+  @doc("Gets all the sources of a project.")
+  GetSources is Azure.Core.ResourceList<
+    QnaSourceRecord,
+    {
+      parameters: {
+        @doc("The maximum number of resources to return from the collection.")
+        @query
+        top: int32;
+
+        @doc("An offset into the collection of the first resource to be returned.")
+        @query
+        skip: int32;
+
+        @doc("The maximum number of resources to include in a single response.")
+        @query
+        maxpagesize: int32;
+      };
+    }
+  >;
+
+  @summary("Updates the sources of a project.")
+  @doc("Updates the sources of a project.")
+  UpdateSources is Azure.Core.LongRunningResourceCreateOrUpdate<QnaSourceRecord>;
+
+  @summary("Gets the status of update sources job.")
+  @doc("Gets the status of update sources job.")
+  GetUpdateSourcesStatus is Azure.Core.ResourceRead<JobState>;
+
+  @summary("Gets all the QnAs of a project.")
+  @doc("Gets all the QnAs of a project.")
+  GetQnas is Azure.Core.ResourceList<
+    RetrieveQnaRecord,
+    {
+      parameters: {
+        @doc("Source of the QnA.")
+        @query
+        source: string;
+
+        @doc("The maximum number of resources to return from the collection.")
+        @query
+        top: int32;
+
+        @doc("An offset into the collection of the first resource to be returned.")
+        @query
+        skip: int32;
+
+        @doc("The maximum number of resources to include in a single response.")
+        @query
+        maxpagesize: int32;
+      };
+    }
+  >;
+
+  @summary("Updates the QnAs of a project.")
+  @doc("Updates the QnAs of a project.")
+  UpdateQnas is Azure.Core.LongRunningResourceCreateOrUpdate<RetrieveQnaRecord>;
+
+  @summary("Gets the status of update QnAs job.")
+  @doc("Gets the status of update QnAs job.")
+  GetUpdateQnasStatus is Azure.Core.ResourceRead<JobState>;
+
+  @summary("Update Active Learning feedback.")
+  @doc("Update Active Learning feedback.")
+  @route("/query-knowledgebases/projects/{projectName}/feedback")
+  @post
+  AddFeedback is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the project to use.")
+      @path
+      projectName: string;
+
+      @doc("Feedback for Active Learning.")
+      @body
+      body: ActiveLearningFeedback;
+    },
+    void
+  >;
+}
