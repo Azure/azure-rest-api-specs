@@ -52,14 +52,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-            "$ref": "../../stable/2019-10-01/policyStates.json#/definitions/QueryFailure"
+              "$ref": "../../stable/2019-10-01/policyStates.json#/definitions/QueryFailure"
             }
           }
         },
         "x-ms-examples": {
-            "List operations": {
-                "$ref": "./examples/Operations_ListOperations.json"
-            }
+          "List operations": {
+            "$ref": "./examples/Operations_ListOperations.json"
+          }
         }
       }
     }
@@ -67,6 +67,7 @@
   "definitions": {
     "OperationsListResultsDefinition": {
       "description": "List of available operations.",
+      "type": "object",
       "properties": {
         "@odata.count": {
           "description": "OData entity count; represents the number of operations returned.",
@@ -88,6 +89,7 @@
     },
     "OperationDefinition": {
       "description": "Operation definition.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Operation name.",
@@ -99,6 +101,7 @@
         },
         "display": {
           "description": "Display metadata associated with the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Resource provider name.",
@@ -132,4 +135,3 @@
     }
   }
 }
-  
