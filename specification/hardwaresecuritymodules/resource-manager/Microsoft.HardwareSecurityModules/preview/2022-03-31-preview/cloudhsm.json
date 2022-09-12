@@ -390,264 +390,6 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateLinkResources/{privateLinkResourceName}": {
-            "get": {
-                "tags": [
-                    ""
-                ],
-                "operationId": "CloudHsmPrivateLinkResources_Get",
-                "description": "Gets the private link resource supported for the cloud hsm pool.",
-                "x-ms-long-running-operation": true,
-                "parameters": [{
-                        "$ref": "#/parameters/SubscriptionId"
-                    }, {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }, {
-                        "$ref": "#/parameters/CloudHsmName"
-                    }, {
-                        "$ref": "#/parameters/ApiVersion"
-                    }, {
-                        "in": "path",
-                        "name": "privateLinkResourceName",
-                        "required": true,
-                        "type": "string",
-                        "description": "private Link Resource name"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved private link resources.",
-                        "schema": {
-                            "$ref": "#/definitions/PrivateLinkResource"
-                        }
-                    },
-                    "default": {
-                        "description": "The error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudHsmError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "CloudHsmPrivateLinkResources_Get_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateLinkResources_Get_MaximumSet_Gen.json"
-                    }
-                }
-            }
-        },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnectionProxies/{peConnectionProxyName}/validate": {
-            "post": {
-                "tags": [
-                    ""
-                ],
-                "operationId": "CloudHsmPrivateEndpointConnectionProxy_Validate",
-                "description": "Validates the private endpoint connection porxy of the cloud hsm pool.",
-                "parameters": [{
-                        "$ref": "#/parameters/SubscriptionId"
-                    }, {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }, {
-                        "$ref": "#/parameters/CloudHsmName"
-                    }, {
-                        "$ref": "#/parameters/ApiVersion"
-                    }, {
-                        "in": "path",
-                        "name": "peConnectionProxyName",
-                        "required": true,
-                        "type": "string",
-                        "description": "privateEndpointConnection proxy name"
-                    }, {
-                        "in": "body",
-                        "name": "body",
-                        "x-ms-client-flatten": true,
-                        "schema": {
-                            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-                        },
-                        "description": "Parameters to validate the PrivateEndpointConnectionProxy"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved private endpoint connection proxy resource.",
-                        "schema": {
-                            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-                        }
-                    },
-                    "default": {
-                        "description": "The error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudHsmError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "CloudHsmPrivateEndpointConnectionProxy_Validate_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateEndpointConnectionProxy_Validate_MaximumSet_Gen.json"
-                    }
-                }
-            }
-        },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnectionProxies/{peConnectionProxyName}": {
-            "get": {
-                "tags": [
-                    "CloudHsmPrivateEndpointConnectionProxy"
-                ],
-                "operationId": "CloudHsmPrivateEndpointConnectionProxy_Get",
-                "description": "Gets the private endpoint connection porxy of the cloud hsm pool.",
-                "x-ms-long-running-operation": true,
-                "parameters": [{
-                        "$ref": "#/parameters/SubscriptionId"
-                    }, {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }, {
-                        "$ref": "#/parameters/CloudHsmName"
-                    }, {
-                        "$ref": "#/parameters/ApiVersion"
-                    }, {
-                        "in": "path",
-                        "name": "peConnectionProxyName",
-                        "required": true,
-                        "type": "string",
-                        "description": "privateEndpointConnection proxy name"
-                    }, {
-                        "in": "query",
-                        "name": "chsm-operation",
-                        "type": "string",
-                        "description": "cloud hsm operation name"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved private endpoint connection proxy resource.",
-                        "schema": {
-                            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-                        }
-                    },
-                    "default": {
-                        "description": "The error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudHsmError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "CloudHsmPrivateEndpointConnectionProxy_Get_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateEndpointConnectionProxy_Get_MaximumSet_Gen.json"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    ""
-                ],
-                "operationId": "CloudHsmPrivateEndpointConnectionProxy_Create",
-                "description": "Create the private endpoint connection proxy for the cloud hsm pool.",
-                "x-ms-long-running-operation": true,
-                "parameters": [{
-                        "$ref": "#/parameters/SubscriptionId"
-                    }, {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }, {
-                        "$ref": "#/parameters/CloudHsmName"
-                    }, {
-                        "$ref": "#/parameters/ApiVersion"
-                    }, {
-                        "in": "path",
-                        "name": "peConnectionProxyName",
-                        "required": true,
-                        "type": "string",
-                        "description": "privateEndpointConnection proxy name"
-                    }, {
-                        "in": "body",
-                        "name": "body",
-                        "x-ms-client-flatten": true,
-                        "schema": {
-                            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-                        },
-                        "description": "Parameters to create the PrivateEndpointConnectionProxy"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved private endpoint connection proxy resource.",
-                        "schema": {
-                            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-                        }
-                    },
-                    "default": {
-                        "description": "The error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudHsmError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "CloudHsmPrivateEndpointConnectionProxy_Create_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateEndpointConnectionProxy_Create_MaximumSet_Gen.json"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    ""
-                ],
-                "operationId": "CloudHsmPrivateEndpointConnectionProxy_Delete",
-                "description": "Deletes the private endpoint connection porxy for the cloud hsm pool.",
-                "x-ms-long-running-operation": true,
-                "parameters": [{
-                        "$ref": "#/parameters/SubscriptionId"
-                    }, {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }, {
-                        "$ref": "#/parameters/CloudHsmName"
-                    }, {
-                        "$ref": "#/parameters/ApiVersion"
-                    }, {
-                        "in": "path",
-                        "name": "peConnectionProxyName",
-                        "required": true,
-                        "type": "string",
-                        "description": "privateEndpointConnection proxy name"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved private endpoint connection proxy resource.",
-                        "schema": {
-                            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-                        }
-                    },
-                    "202": {
-                        "description": "The private endpoint connection proxy is being deleted.",
-                        "headers": {
-                            "Retry-After": {
-                                "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "Location": {
-                                "description": "The URI to poll for completion status.",
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "The private endpoint connection proxy does not exist."
-                    },
-                    "default": {
-                        "description": "The error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudHsmError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "CloudHsmPrivateEndpointConnectionProxy_Delete_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateEndpointConnectionProxy_Delete_MaximumSet_Gen.json"
-                    }
-                }
-            }
-        },
         "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnections/{peConnectionName}": {
             "put": {
                 "tags": [
@@ -743,11 +485,6 @@
                     "202": {
                         "description": "The private endpoint connection is being deleted.",
                         "headers": {
-                            "Retry-After": {
-                                "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
-                                "type": "integer",
-                                "format": "int32"
-                            },
                             "Location": {
                                 "description": "The URI to poll for completion status.",
                                 "type": "string"
@@ -877,10 +614,10 @@
                     "type": "string",
                     "description": "The Cloud HSM Partition State"
                 },
-				"stateMessage":{
-					"type": "string",
+                "stateMessage": {
+                    "type": "string",
                     "description": "The Cloud HSM Partition State message"
-				}
+                }
             }
         },
         "CloudHsmResource": {
@@ -959,10 +696,10 @@
                     "type": "string",
                     "description": "State of Cloud HSM Resource's Fabric Pool"
                 },
-				"stateMessage":{
-					"type": "string",
+                "stateMessage": {
+                    "type": "string",
                     "description": "The Cloud HSM Partition State message"
-				}
+                }
             },
             "description": "Properties of a Cloud HSM resource.",
             "type": "object"
