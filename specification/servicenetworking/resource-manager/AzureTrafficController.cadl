@@ -1,0 +1,145 @@
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-resource-manager";
+
+@armProviderNamespace
+@serviceTitle("TrafficControllerClient")
+@serviceVersion("2022-10-01-preview")
+@doc("Traffic Controller Provider management API.")
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+namespace Microsoft.ServiceNetworking;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+
+
+//----------------------- Frontends -----------------------
+@doc("Frontends Subresource of Traffic Controller.")
+@resource("frontend")
+@parentResource(TrafficController)
+model Frontend is TrackedResource<FrontendProperties>{
+  @key("frontendsName")
+  @segment("frontends")
+  @doc("Frontends.")
+  @visibility("read")
+  @path
+  name : string;
+}
+
+@doc("Frontend Properties.")
+model FrontendProperties {
+  @doc("Frontend Mode (Optional).")
+  mode?: string;
+  @doc("Frontend IP Address Type (Optional).")
+  ipAddressType?: FrontendIPAddressType;
+  @doc("Frontend Public IP Address (Optional).")
+  publicIPAddress?: FrontendPropertiesIPAddress;
+  @doc("Frontend Private IP Address (Optional).")
+  privateIPAddress?: FrontendPropertiesIPAddress;
+  @visibility("read")
+  @doc("Provisioning State Enum")
+  provisioningState?: ProvisioningState;
+}
+
+enum FrontendIPAddressType {
+  IPv4,
+  IPv6,
+}
+
+@doc("Frontend IP Address.")
+model FrontendPropertiesIPAddress {
+  @doc("IP Address.")
+  id: string;
+}
+
+//----------------------- Associations -----------------------
+@doc("Association Subresource of Traffic Controller")
+@resource("association")
+@parentResource(TrafficController)
+model Association is TrackedResource<AssociationProperties> {
+  @key("associationsName")
+  @segment("associations")
+  @doc("associations")
+  @visibility("read")
+  @path
+  name : string;
+}
+
+@doc("Association Properties.")
+model AssociationProperties { 
+  @doc("Association Type")
+  associationType: AssociationType;
+  @doc("Association Subnet")
+  subnet?: AssociationSubnet;
+  @visibility("read")
+  @doc("Provisioning State")
+  provisioningState: ProvisioningState;
+
+}
+
+enum AssociationType {
+  subnets,
+}
+
+@doc("Association Subnet.")
+model AssociationSubnet {
+  @doc("Association ID.")
+  id: string;
+}
+
+//----------------------- Traffic Controller -----------------------
+@resource("trafficControllers")
+model TrafficController is TrackedResource<TrafficControllerProperties> {
+  @key("trafficControllerName")
+  @path
+  @segment("trafficControllers")
+  @doc("traffic controller name for path")
+  name: string;
+}
+
+@doc("Traffic Controller Properties.")
+model TrafficControllerProperties {
+  @doc("Configuration Endpoints.")
+  configurationEndpoints: string[];
+  @doc("List of Frontends")
+  frontends: Frontend[];
+  @doc("List of Associations")
+  associations: Association[];
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@knownValues(ProvisioningStateKV)
+model ProvisioningState is string;
+
+@lroStatus
+enum ProvisioningStateKV {
+  ...ResourceProvisioningStateKV,
+  Provisioning,
+  Updating,
+  Deleting,
+  Accepted,
+}
+//----------------------- Paths -----------------------
+
+@armResourceOperations
+interface FrontendsInterface extends ResourceOperations<Frontend, FrontendProperties>{
+}
+
+@armResourceOperations
+interface AssociationsInterface extends ResourceOperations<Association, AssociationProperties>{
+}
+
+@armResourceOperations
+interface TrafficControllerInterface extends ResourceOperations<TrafficController, TrafficControllerProperties>{
+}
+

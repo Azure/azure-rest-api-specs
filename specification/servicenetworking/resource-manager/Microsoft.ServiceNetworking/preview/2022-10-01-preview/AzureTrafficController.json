@@ -216,7 +216,7 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_CreateOrUpdate",
-        "description": "Create a TrafficController.",
+        "description": "Create or Update a TrafficController.",
         "x-ms-examples": {
           "Put Traffic Controller": {
             "$ref": "./examples/TrafficControllerPut.json"
@@ -282,10 +282,10 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_Update",
-        "description": "Update a TrafficController.",
+        "description": "Patch a TrafficController.",
         "x-ms-examples": {
-          "Update Traffic Controller": {
-            "$ref": "./examples/TrafficControllerUpdate.json"
+          "Patch Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPatch.json"
           }
         },
         "parameters": [
@@ -475,7 +475,7 @@
           "FrontendsInterface"
         ],
         "operationId": "FrontendsInterface_CreateOrUpdate",
-        "description": "Create a Frontend.",
+        "description": "Create or Update a Traffic Controller Frontend.",
         "x-ms-examples": {
           "Put Frontend": {
             "$ref": "./examples/FrontendPut.json"
@@ -547,7 +547,7 @@
         "description": "Update a Frontend.",
         "x-ms-examples": {
           "Update Frontend": {
-            "$ref": "./examples/FrontendUpdate.json"
+            "$ref": "./examples/FrontendPatch.json"
           }
         },
         "parameters": [
@@ -743,7 +743,7 @@
           "AssociationsInterface"
         ],
         "operationId": "AssociationsInterface_CreateOrUpdate",
-        "description": "Create a Association.",
+        "description": "Create or Update a Traffic Controller Association.",
         "x-ms-examples": {
           "Put Association": {
             "$ref": "./examples/AssociationPut.json"
@@ -815,7 +815,7 @@
         "description": "Update a Association.",
         "x-ms-examples": {
           "Update Association": {
-            "$ref": "./examples/AssociationUpdate.json"
+            "$ref": "./examples/AssociationPatch.json"
           }
         },
         "parameters": [
@@ -1169,11 +1169,8 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Provisioning",
         "Updating",
-        "Deleting",
-        "Accepted"
+        "Deleting"
       ],
       "description": "Provisioning State Enum (Eg: Succeeded, Canceled, Deleting)",
       "x-ms-enum": {
