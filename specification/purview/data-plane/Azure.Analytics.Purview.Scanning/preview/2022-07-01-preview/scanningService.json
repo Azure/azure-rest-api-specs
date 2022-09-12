@@ -1070,14 +1070,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/IntegrationRuntime"
+              "$ref": "#/definitions/IActionResult"
             }
-          },
-          "204": {
-            "description": "Success"
           },
           "default": {
             "description": "An error response received from the Scanning Service",
@@ -1350,7 +1347,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OkResult"
+              "$ref": "#/definitions/IActionResult"
             }
           },
           "default": {
@@ -1402,7 +1399,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OkResult"
+              "$ref": "#/definitions/IActionResult"
             }
           },
           "default": {
@@ -1434,7 +1431,14 @@
             "in": "path",
             "name": "managedVNetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedVirtualNetworkName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1477,7 +1481,14 @@
             "in": "path",
             "name": "managedVNetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedVirtualNetworkName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1533,7 +1544,14 @@
             "in": "path",
             "name": "managedVNetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedVirtualNetworkName",
+              "modelAsString": true
+            }
           },
           {
             "in": "path",
@@ -1579,7 +1597,14 @@
             "in": "path",
             "name": "managedVNetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedVirtualNetworkName",
+              "modelAsString": true
+            }
           },
           {
             "in": "path",
@@ -1592,14 +1617,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ManagedPrivateEndpoint"
+              "$ref": "#/definitions/IActionResult"
             }
-          },
-          "204": {
-            "description": "Success"
           },
           "default": {
             "description": "An error response received from the Scanning Service",
@@ -1631,7 +1653,14 @@
             "in": "path",
             "name": "managedVNetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedVirtualNetworkName",
+              "modelAsString": true
+            }
           },
           {
             "in": "path",
@@ -1732,7 +1761,14 @@
             "in": "path",
             "name": "managedVNetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedVirtualNetworkName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3544,6 +3580,9 @@
       },
       "discriminator": "kind"
     },
+    "IActionResult": {
+      "type": "object"
+    },
     "IntegrationRuntimeStatus": {
       "required": [
         "kind"
@@ -3609,16 +3648,6 @@
         }
       }
     },
-    "OkResult": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
     "EnableInteractiveQueryForIntegrationRuntimeRequest": {
       "type": "object",
       "properties": {
@@ -3634,9 +3663,6 @@
         "vNetId": {
           "type": "string",
           "readOnly": true
-        },
-        "preventDataExfiltration": {
-          "type": "boolean"
         },
         "alias": {
           "type": "string",
