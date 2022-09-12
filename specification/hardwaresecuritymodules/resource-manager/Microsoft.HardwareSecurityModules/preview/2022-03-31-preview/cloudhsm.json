@@ -353,7 +353,7 @@
                 "tags": [
                     "CloudHsmPrivateLinkResources"
                 ],
-                "operationId": "CloudHsmPrivateLinkResources_ListByResource",
+                "operationId": "PrivateLinkResources_ListByCloudHsmResource",
                 "description": "Gets the private link resources supported for the cloud hsm pool.",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -385,7 +385,7 @@
                 },
                 "x-ms-examples": {
                     "CloudHsmPrivateLinkResources_ListByResource_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateLinkResources_ListByResource_MaximumSet_Gen.json"
+                        "$ref": "./examples/PrivateLinkResources_ListByCloudHsmResource_MaximumSet_Gen.json"
                     }
                 }
             }
@@ -826,7 +826,7 @@
                 "tags": [
                     "CloudHsmPrivateEndpointConnections"
                 ],
-                "operationId": "CloudHsmPrivateEndpointConnection_ListByResource",
+                "operationId": "PrivateEndpointConnections_ListByCloudHsmResource",
                 "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -858,7 +858,7 @@
                 },
                 "x-ms-examples": {
                     "CloudHsmPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsmPrivateEndpointConnection_ListByResource_MaximumSet_Gen.json"
+                        "$ref": "./examples/PrivateEndpointConnections_ListByCloudHsmResource_MaximumSet_Gen.json"
                     }
                 }
             }
@@ -904,7 +904,7 @@
                     "description": "The Cloud HSM Resource id"
                 },
                 "sku": {
-                    "$ref": "#/definitions/Sku"
+                    "$ref": "#/definitions/CloudHsmSku"
                 },
                 "tags": {
                     "type": "object",
@@ -918,6 +918,9 @@
                     "type": "string",
                     "readOnly": true,
                     "description": "The Cloud HSM Resource type"
+                },
+                "systemData": {
+                    "$ref": "#/definitions/SystemData"
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -1079,6 +1082,9 @@
                     "type": "string",
                     "description": "ETAG value for Private Endpoint Connection entry"
                 },
+                "systemData": {
+                    "$ref": "#/definitions/SystemData"
+                },
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/PrivateEndpointConnectionProperties"
@@ -1132,6 +1138,9 @@
                 "etag": {
                     "type": "string",
                     "description": "ETAG value for Private Endpoint Connection proxy entry"
+                },
+                "systemData": {
+                    "$ref": "#/definitions/SystemData"
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -1268,7 +1277,7 @@
                 }
             }
         },
-        "Sku": {
+        "CloudHsmSku": {
             "type": "object",
             "description": "Cloud Hsm SKU information",
             "properties": {
@@ -1519,6 +1528,53 @@
             ],
             "x-ms-enum": {
                 "name": "PrivateEndpointServiceConnectionStatus",
+                "modelAsString": true
+            }
+        },
+        "SystemData": {
+            "description": "Metadata pertaining to creation and last modification of the key vault resource.",
+            "readOnly": true,
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "description": "The identity that created the key vault resource."
+                },
+                "createdByType": {
+                    "description": "The type of identity that created the key vault resource.",
+                    "$ref": "#/definitions/IdentityType"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The timestamp of the key vault resource creation (UTC)."
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "description": "The identity that last modified the key vault resource."
+                },
+                "lastModifiedByType": {
+                    "description": "The type of identity that last modified the key vault resource.",
+                    "$ref": "#/definitions/IdentityType"
+                },
+                "lastModifiedAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The timestamp of the key vault resource last modification (UTC)."
+                }
+            },
+            "type": "object"
+        },
+        "IdentityType": {
+            "type": "string",
+            "description": "The type of identity.",
+            "enum": [
+                "User",
+                "Application",
+                "ManagedIdentity",
+                "Key"
+            ],
+            "x-ms-enum": {
+                "name": "identityType",
                 "modelAsString": true
             }
         }
