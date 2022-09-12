@@ -1347,7 +1347,7 @@
         "initialSilenceTimeoutInSeconds": {
           "format": "int32",
           "description": "Time to wait for first input after prompt (if any).",
-          "maximum": 2147483647,
+          "maximum": 300,
           "minimum": 0,
           "type": "integer"
         },
@@ -1393,14 +1393,12 @@
         "interToneTimeoutInSeconds": {
           "format": "int32",
           "description": "Time to wait between DTMF inputs to stop recognizing.",
-          "maximum": 2147483647,
+          "maximum": 60,
           "minimum": 0,
           "type": "integer"
         },
         "maxTonesToCollect": {
           "format": "int32",
-          "maximum": 2147483647,
-          "minimum": 1,
           "description": "Maximum number of DTMF tones to be collected.",
           "type": "integer"
         },
@@ -2126,7 +2124,7 @@
       }
     },
     "RecognitionType": {
-      "description": "Determines the sub-type pf the recognize operation.\r\nIn case of cancel operation the this field is not set and is returned empty",
+      "description": "Determines the sub-type of the recognize operation.\r\nIn case of cancel operation the this field is not set and is returned empty",
       "enum": [
         "dtmf"
       ],
