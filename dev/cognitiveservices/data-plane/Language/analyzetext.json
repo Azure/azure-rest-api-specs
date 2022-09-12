@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
@@ -88,6 +88,9 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
+          },
+          "Successful Dynamic Classifcation Request": {
+            "$ref": "./examples/text/SuccessfuDynamicClassificationRequest.json"
           }
         }
       }
@@ -142,6 +145,9 @@
           },
           "Successful Submit Abstractive Summarization Task": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
+          },
+          "Successful Healthcare DocumentType Post Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -195,6 +201,9 @@
           },
           "Successful Get Abstractive Summarization Result": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "Succesful Get Text Analysis Health DocumentType Request": {
+            "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
           }
         }
       }
@@ -250,7 +259,8 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
-        "EntityLinking"
+        "EntityLinking",
+        "DynamicClassification"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -287,7 +297,8 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults"
+        "EntityLinkingResults",
+        "DynamicClassificationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -316,6 +327,7 @@
       }
     },
     "MultiLanguageAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -326,6 +338,7 @@
       }
     },
     "LanguageDetectionAnalysisInput": {
+      "type": "object",
       "properties": {
         "documents": {
           "type": "array",
@@ -336,6 +349,7 @@
       }
     },
     "AnalyzeTextTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -347,6 +361,7 @@
       }
     },
     "AnalyzeTextLROTask": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -363,6 +378,7 @@
       ]
     },
     "AnalyzeTextTaskResult": {
+      "type": "object",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -374,6 +390,7 @@
       }
     },
     "AnalyzeTextEntityLinkingInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -390,6 +407,7 @@
       "x-ms-discriminator-value": "EntityLinking"
     },
     "AnalyzeTextEntityRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -406,6 +424,7 @@
       "x-ms-discriminator-value": "EntityRecognition"
     },
     "AnalyzeTextKeyPhraseExtractionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -422,6 +441,7 @@
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
     "AnalyzeTextPiiEntitiesRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -438,6 +458,7 @@
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
     "AnalyzeTextLanguageDetectionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
@@ -454,6 +475,7 @@
       "x-ms-discriminator-value": "LanguageDetection"
     },
     "AnalyzeTextSentimentAnalysisInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -469,7 +491,24 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
+    "AnalyzeTextDynamicClassificationInput": {
+      "properties": {
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        },
+        "parameters": {
+          "$ref": "#/definitions/DynamicClassificationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTask"
+        }
+      ],
+      "x-ms-discriminator-value": "DynamicClassification"
+    },
     "AnalyzeTextJobsInput": {
+      "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -519,6 +558,7 @@
       ]
     },
     "CustomResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
@@ -728,6 +768,25 @@
             "modelAsString": true
           }
         },
+        "documentType": {
+          "x-ms-enum": {
+            "name": "documentType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.",
+          "enum": [
+            "None",
+            "ClinicalTrial",
+            "DischargeSummary",
+            "ProgressNote",
+            "HistoryAndPhysical",
+            "Consult",
+            "Imaging",
+            "Pathology",
+            "ProcedureNote"
+          ]
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
         }
@@ -823,32 +882,32 @@
           "type": "string",
           "description": "Healthcare Entity Category.",
           "enum": [
-            "BODY_STRUCTURE",
-            "AGE",
-            "GENDER",
-            "EXAMINATION_NAME",
-            "DATE",
-            "DIRECTION",
-            "FREQUENCY",
-            "MEASUREMENT_VALUE",
-            "MEASUREMENT_UNIT",
-            "RELATIONAL_OPERATOR",
-            "TIME",
-            "GENE_OR_PROTEIN",
-            "VARIANT",
-            "ADMINISTRATIVE_EVENT",
-            "CARE_ENVIRONMENT",
-            "HEALTHCARE_PROFESSION",
-            "DIAGNOSIS",
-            "SYMPTOM_OR_SIGN",
-            "CONDITION_QUALIFIER",
-            "MEDICATION_CLASS",
-            "MEDICATION_NAME",
-            "DOSAGE",
-            "MEDICATION_FORM",
-            "MEDICATION_ROUTE",
-            "FAMILY_RELATION",
-            "TREATMENT_NAME"
+            "BodyStructure",
+            "Age",
+            "Gender",
+            "ExaminationName",
+            "Date",
+            "Direction",
+            "Frequency",
+            "MeasurementValue",
+            "MeasurementUnit",
+            "RelationalOperator",
+            "Time",
+            "GeneOrProtein",
+            "Variant",
+            "AdministrativeEvent",
+            "CareEnvironment",
+            "HealthcareProfession",
+            "Diagnosis",
+            "SymptomOrSign",
+            "ConditionalQualifier",
+            "MedicationClass",
+            "MedicationName",
+            "Dosage",
+            "MedicationForm",
+            "MedicationRoute",
+            "FamilyRelation",
+            "TreatmentName"
           ]
         },
         "subcategory": {
@@ -2292,8 +2351,94 @@
           "type": "number",
           "format": "double",
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+        },
+        "script": {
+          "type": "string",
+          "description": "Identifies the script of the input document.",
+          "enum": [
+            "Latin"
+          ],
+          "x-ms-enum": {
+            "name": "ScriptKind",
+            "modelAsString": true
+          }
         }
       }
+    },
+    "DynamicClassificationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Zero Shot Classification task.",
+      "properties": {
+        "classificationType": {
+          "type": "string",
+          "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
+          "default": "Multi",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "ClassificationType",
+            "modelAsString": true
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "a list of categories to which input is classified to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ],
+      "required": [
+        "categories"
+      ]
+    },
+    "DynamicClassificationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/DynamicClassificationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "DynamicClassificationResults"
+    },
+    "DynamicClassificationResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/ClassificationDocumentResult"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
     },
     "AnalyzeTextJobState": {
       "allOf": [
