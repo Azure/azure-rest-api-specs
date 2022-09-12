@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgcloudhsm",
+    "cloudHsmName": "chsm1",
+    "api-version": "2022-03-31-preview",
+    "peConnectionName": "sample-pec"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMs/chsm1/privateEndpointConnections/sample-pec",
+        "name": "sample-pec",
+        "type": "Microsoft.HardwareSecurityModules/cloudHSMs/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pec"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "This was automatically approved by user1234@contoso.com",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "204": {
+		"headers": {}
+	}
+  }
+}
