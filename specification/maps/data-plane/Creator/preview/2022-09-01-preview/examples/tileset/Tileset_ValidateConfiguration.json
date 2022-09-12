@@ -11,7 +11,7 @@
           "maxZoom": 18,
           "features": {
             "featureClasses": [
-              "unit",
+              "unit"
             ],
             "filter": [
               "any",
@@ -19,9 +19,17 @@
                 "!=",
                 [
                   "get",
-                  "roomType"
+                  "featureType"
                 ],
                 "conference"
+              ],
+              [
+                "!=",
+                [
+                  "get",
+                  "featureType"
+                ],
+                "restroom"
               ]
             ]
           }
