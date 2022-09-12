@@ -3,7 +3,7 @@
         "subscriptionId": "00000000-0000-0000-0000-000000000000",
         "resourceGroupName": "rgcloudhsm",
         "cloudHsmName": "chsm1",
-        "api-version": "2022-03-31-preview",
+        "api-version": "2022-08-31-preview",
         "body": {
             "tags": {
                 "Dept": "hsm",
@@ -17,7 +17,7 @@
             "body": {
                 "name": "chsm1",
                 "location": "eastus2",
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMs/chsm1",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/chsm1",
                 "sku": {
                     "family": "B",
                     "name": "Standard_B1"
@@ -27,7 +27,7 @@
                     "Environment": "dogfood",
                     "Slice": "A"
                 },
-                "type": "Microsoft.HardwareSecurityModules/cloudHSMs",
+                "type": "Microsoft.HardwareSecurityModules/cloudHSMClusters",
                 "systemData": {
                     "createdBy": "CHsmUser1",
                     "createdByType": "User",
@@ -43,19 +43,19 @@
                         "fipsState": 2,
                         "activationStatus": "null"
                     },
-                    "hsmPartitions": null,
-                    "fabricPoolState": "Started"
+                    "hsms": null,
+                    "state": "Started"
                 }
             }
         },
         "202": {
             "headers": {
-                "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMs/chsm1?api-version=2022-07-01&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9"
+                "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/chsm1?api-version=2022-07-01&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9"
             },
             "body": {
                 "name": "chsm1",
                 "location": "eastus2",
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMs/chsm1",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/chsm1",
                 "sku": {
                     "family": "B",
                     "name": "Standard_B1"
@@ -65,7 +65,7 @@
                     "Environment": "dogfood",
                     "Slice": "A"
                 },
-                "type": "Microsoft.HardwareSecurityModules/cloudHSMs",
+                "type": "Microsoft.HardwareSecurityModules/cloudHSMClusters",
                 "systemData": {
                     "createdBy": "CHsmUser1",
                     "createdByType": "User",
@@ -81,8 +81,8 @@
                         "fipsState": 2,
                         "activationStatus": "null"
                     },
-                    "hsmPartitions": null,
-                    "fabricPoolState": "Started"
+                    "hsms": null,
+                    "state": "Started"
                 }
             }
         }

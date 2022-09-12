@@ -3,7 +3,7 @@
     "info": {
         "title": "Azure Cloud HSM Resource Provider",
         "description": "The Azure management API provides a RESTful set of web services that interact with Azure Cloud HSM RP.",
-        "version": "2022-03-31-preview"
+        "version": "2022-08-31-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -33,10 +33,10 @@
         }
     },
     "paths": {
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}": {
             "put": {
                 "tags": [
-                    "cloudHSMs"
+                    ""
                 ],
                 "operationId": "CloudHsm_CreateOrUpdate",
                 "description": "Create or Update a Cloud HSM in the specified subscription.",
@@ -88,7 +88,7 @@
             },
             "patch": {
                 "tags": [
-                    "cloudHSMs"
+                    ""
                 ],
                 "operationId": "CloudHsm_Update",
                 "x-ms-long-running-operation": true,
@@ -146,7 +146,7 @@
             },
             "get": {
                 "tags": [
-                    "cloudHSMs"
+                    ""
                 ],
                 "operationId": "CloudHsm_Get",
                 "description": "Gets the specified Cloud HSM.",
@@ -183,7 +183,7 @@
             },
             "delete": {
                 "tags": [
-                    "cloudHSMs"
+                    ""
                 ],
                 "operationId": "CloudHsm_Delete",
                 "description": "Deletes the specified Cloud HSM.",
@@ -222,10 +222,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters": {
             "get": {
                 "tags": [
-                    "cloudHSMs"
+                    ""
                 ],
                 "operationId": "CloudHsm_ListByResourceGroup",
                 "description": "The List operation gets information about the Cloud HSMs associated with the subscription and within the specified resource group.",
@@ -267,10 +267,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHSMs": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters": {
             "get": {
                 "tags": [
-                    "cloudHSMs"
+                    ""
                 ],
                 "operationId": "CloudHsm_ListBySubscription",
                 "description": "The List operation gets information about the Cloud HSMs associated with the subscription.",
@@ -313,7 +313,7 @@
         "/resourceprovider/api/providers/Microsoft.HardwareSecurityModules/operations": {
             "get": {
                 "tags": [
-                    "CloudHsmOperations"
+                    ""
                 ],
                 "operationId": "Operations_List",
                 "description": "Get a list of Cloud HSM operations.",
@@ -348,10 +348,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}/privateLinkResources": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateLinkResources": {
             "get": {
                 "tags": [
-                    "CloudHsmPrivateLinkResources"
+                    ""
                 ],
                 "operationId": "PrivateLinkResources_ListByCloudHsmResource",
                 "description": "Gets the private link resources supported for the cloud hsm pool.",
@@ -390,10 +390,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}/privateLinkResources/{privateLinkResourceName}": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateLinkResources/{privateLinkResourceName}": {
             "get": {
                 "tags": [
-                    "CloudHsmPrivateLinkResources"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateLinkResources_Get",
                 "description": "Gets the private link resource supported for the cloud hsm pool.",
@@ -435,10 +435,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}/privateEndpointConnectionProxies/{peConnectionProxyName}/validate": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnectionProxies/{peConnectionProxyName}/validate": {
             "post": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnectionProxies"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateEndpointConnectionProxy_Validate",
                 "description": "Validates the private endpoint connection porxy of the cloud hsm pool.",
@@ -487,7 +487,7 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}/privateEndpointConnectionProxies/{peConnectionProxyName}": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnectionProxies/{peConnectionProxyName}": {
             "get": {
                 "tags": [
                     "CloudHsmPrivateEndpointConnectionProxy"
@@ -538,7 +538,7 @@
             },
             "put": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnectionProxies"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateEndpointConnectionProxy_Create",
                 "description": "Create the private endpoint connection proxy for the cloud hsm pool.",
@@ -589,7 +589,7 @@
             },
             "delete": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnectionProxies"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateEndpointConnectionProxy_Delete",
                 "description": "Deletes the private endpoint connection porxy for the cloud hsm pool.",
@@ -648,10 +648,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}/privateEndpointConnections/{peConnectionName}": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnections/{peConnectionName}": {
             "put": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnections"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateEndpointConnection_Create",
                 "description": "Creates the private endpoint connection for the cloud hsm pool.",
@@ -712,7 +712,7 @@
             },
             "delete": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnections"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateEndpointConnection_Delete",
                 "description": "Deletes the private endpoint connection for the cloud hsm pool.",
@@ -772,7 +772,7 @@
             },
             "get": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnections"
+                    ""
                 ],
                 "operationId": "CloudHsmPrivateEndpointConnection_Get",
                 "description": "Gets the private endpoint connection for the cloud hsm pool.",
@@ -821,10 +821,10 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMs/{cloudHsmName}/privateEndpointConnections": {
+        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnections": {
             "get": {
                 "tags": [
-                    "CloudHsmPrivateEndpointConnections"
+                    ""
                 ],
                 "operationId": "PrivateEndpointConnections_ListByCloudHsmResource",
                 "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM",
@@ -869,12 +869,11 @@
             "type": "object",
             "description": "The Cloud HSM Partition Properties",
             "properties": {
-                "partitionId": {
-                    "format": "int32",
-                    "type": "integer",
+                "hsmId": {
+                    "type": "string",
                     "description": "The Cloud HSM PartitionId"
                 },
-                "partitionState": {
+                "state": {
                     "type": "string",
                     "description": "The Cloud HSM Partition State"
                 }
@@ -924,14 +923,14 @@
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/CloudHsmResourceProperties"
+                    "$ref": "#/definitions/CloudHsmClusterProperties"
                 }
             },
             "description": "Cloud HSM resource",
             "type": "object",
             "x-ms-azure-resource": true
         },
-        "CloudHsmResourceProperties": {
+        "CloudHsmClusterProperties": {
             "properties": {
                 "provisioningState": {
                     "type": "string",
@@ -944,7 +943,7 @@
                 "securityDomain": {
                     "$ref": "#/definitions/SecurityDomainProperties"
                 },
-                "hsmPartitions": {
+                "hsms": {
                     "type": "array",
                     "description": "An array of Cloud HSM Resource's HSM partitions",
                     "x-ms-identifiers": [],
@@ -952,7 +951,7 @@
                         "$ref": "#/definitions/CloudHsmPartitionProperties"
                     }
                 },
-                "fabricPoolState": {
+                "state": {
                     "type": "string",
                     "description": "State of Cloud HSM Resource's Fabric Pool"
                 }
