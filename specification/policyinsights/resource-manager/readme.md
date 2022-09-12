@@ -154,7 +154,6 @@ input-file:
 - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
 - Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
-- Microsoft.PolicyInsights/stable/2022-04-01/operations.json
 ```
 ### Tag: package-2022-03
 
