@@ -48,13 +48,13 @@ input-file:
 - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
-### Tag: package-2022-03
+### Tag: package-2022-08
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-08'
 input-file:
-- Microsoft.HardwareSecurityModules/preview/2022-03-31/cloudhsm.json
+- Microsoft.HardwareSecurityModules/preview/2022-08-31/cloudhsm.json
 ```
 
 # Code Generation
