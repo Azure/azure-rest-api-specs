@@ -465,7 +465,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligenceIndicators/query": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/queryThreatIntelligenceIndicators": {
       "post": {
         "x-ms-examples": {
           "Query Indicators from condition": {
@@ -510,7 +510,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligenceIndicators/count": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/countThreatIntelligenceIndicators": {
       "post": {
         "x-ms-examples": {
           "Count Indicators from condition": {
@@ -679,7 +679,8 @@
             "greaterthan",
             "stringcontains",
             "stringnotcontains",
-            "isnull"
+            "isnull",
+            "isnotnull"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -712,6 +713,10 @@
               {
                 "description": "The 'is_null' operator.",
                 "value": "isnull"
+              },
+              {
+                "description": "The 'is_not_null operator.",
+                "value": "isnotnull"
               }
             ]
           }
@@ -785,9 +790,11 @@
           "$ref": "#/definitions/Condition"
         },
         "pageSize": {
-          "description": "Page size",
+          "description": "Number of threat intelligence indicators to return in one page.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 100,
+          "minimum": 1
         },
         "sortBy": {
           "description": "Columns to sort by and sorting order",
