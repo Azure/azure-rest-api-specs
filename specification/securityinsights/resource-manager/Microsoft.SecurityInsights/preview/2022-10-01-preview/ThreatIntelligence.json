@@ -638,8 +638,8 @@
     "Connective": {
       "description": "Connective used to join the conditions or clauses together.",
       "enum": [
-        "and",
-        "or"
+        "And",
+        "Or"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -648,11 +648,11 @@
         "values": [
           {
             "description": "Conditions/clauses should be joined together using logical AND operator.",
-            "value": "and"
+            "value": "And"
           },
           {
             "description": "Conditions/clauses should be joined together using logical OR operator.",
-            "value": "or"
+            "value": "Or"
           }
         ]
       }
@@ -673,14 +673,14 @@
           "description": "Operator which describes how this clause should be constructed into an expression.",
           "type": "string",
           "enum": [
-            "equal",
-            "notequal",
-            "lessthan",
-            "greaterthan",
-            "stringcontains",
-            "stringnotcontains",
-            "isnull",
-            "isnotnull"
+            "Equal",
+            "NotEqual",
+            "LessThan",
+            "GreaterThan",
+            "StringContains",
+            "StringNotContains",
+            "IsNull",
+            "IsNotNull"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -688,35 +688,35 @@
             "values": [
               {
                 "description": "The '=' operator.",
-                "value": "equal"
+                "value": "Equal"
               },
               {
                 "description": "The '!=' operator.",
-                "value": "notequal"
+                "value": "NotEqual"
               },
               {
                 "description": "The '<' operator.",
-                "value": "lessthan"
+                "value": "LessThan"
               },
               {
                 "description": "The '>' operator.",
-                "value": "greaterthan"
+                "value": "GreaterThan"
               }, 
               {
                 "description": "The 'contains' operator for strings.",
-                "value": "stringcontains"
+                "value": "StringContains"
               },       
               {
                 "description": "The 'not contains' operator for strings.",
-                "value": "stringnotcontains"
+                "value": "StringNotContains"
               },              
               {
                 "description": "The 'is_null' operator.",
-                "value": "isnull"
+                "value": "IsNull"
               },
               {
-                "description": "The 'not is_null operator.",
-                "value": "isnotnull"
+                "description": "The 'not is_null' operator.",
+                "value": "IsNotNull"
               }
             ]
           }
@@ -1270,6 +1270,44 @@
           },
           {
             "value": "descending"
+          }
+        ]
+      }
+    },
+    "ThreatIntelligenceQueryByConditionSortCriteria": {
+      "description": "List of available fields for sorting.",
+      "properties": {
+        "field": {
+          "description": "Field name",
+          "type": "string"
+        },
+        "sortOrder": {
+          "$ref": "#/definitions/ThreatIntelligenceQueryByConditionSortOrder",
+          "description": "Sorting order.."
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceQueryByConditionSortOrder": {
+      "description": "Sorting order.",
+      "enum": [
+        "Unsorted",
+        "Ascending",
+        "Descending"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ThreatIntelligenceQueryByConditionSortOrder",
+        "values": [
+          {
+            "value": "Unsorted"
+          },
+          {
+            "value": "Ascending"
+          },
+          {
+            "value": "Descending"
           }
         ]
       }
