@@ -1066,7 +1066,7 @@
               "antiSpyware",
               "antiVirus",
               "ipsVulnerability",
-              "URLFiltering",
+              "urlFiltering",
               "fileBlocking",
               "dnsSubscription"
             ],
@@ -3623,7 +3623,7 @@
               "antiSpyware",
               "antiVirus",
               "ipsVulnerability",
-              "URLFiltering",
+              "urlFiltering",
               "fileBlocking",
               "dnsSubscription"
             ],
@@ -4400,11 +4400,7 @@
           "description": "The active directory identifier for this principal."
         }
       },
-      "description": "A managed identity assigned by the user.",
-      "required": [
-        "clientId",
-        "principalId"
-      ]
+      "description": "A managed identity assigned by the user."
     },
     "BillingCycle": {
       "type": "string",
@@ -4459,17 +4455,13 @@
     "CertificateObject": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "certificate object name"
-        },
         "certificateSignerResourceId": {
           "type": "string",
-          "description": "Resource Id of certificate signer"
+          "description": "Resource Id of certificate signer, to be populated only when certificateSelfSigned is false"
         },
         "certificateSelfSigned": {
           "$ref": "#/definitions/BooleanEnum",
-          "description": "Is certificate self signed"
+          "description": "use certificate self signed"
         },
         "auditComment": {
           "type": "string",
@@ -4491,8 +4483,7 @@
       },
       "description": "certificate used for inbound and outbound decryption",
       "required": [
-        "name",
-        "certificateSignerResourceId"
+        "certificateSelfSigned"
       ]
     },
     "CertificateObjectGlobalRulestackResource": {
@@ -4856,7 +4847,9 @@
       "required": [
         "networkProfile",
         "dnsSettings",
-        "frontEndSettings"
+        "frontEndSettings",
+        "planData",
+        "marketplaceDetails"
       ]
     },
     "FirewallResource": {
@@ -5161,6 +5154,10 @@
           "description": "System metadata for this resource.",
           "readOnly": true
         },
+        "location": {
+          "type": "string",
+          "description": "Global Location"
+        },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
@@ -5168,7 +5165,8 @@
       },
       "description": "PaloAltoNetworks GlobalRulestack",
       "required": [
-        "properties"
+        "properties",
+        "location"
       ],
       "allOf": [
         {
@@ -5200,6 +5198,10 @@
     "GlobalRulestackResourceUpdate": {
       "type": "object",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Global Location"
+        },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
@@ -5216,6 +5218,10 @@
         "panEtag": {
           "type": "string",
           "description": "PanEtag info"
+        },
+        "panLocation": {
+          "type": "string",
+          "description": "Rulestack Location, Required for GlobalRulestacks, Not for LocalRulestacks"
         },
         "scope": {
           "$ref": "#/definitions/ScopeType",
@@ -5442,6 +5448,10 @@
           "type": "string",
           "description": "PanEtag info"
         },
+        "panLocation": {
+          "type": "string",
+          "description": "Rulestack Location, Required for GlobalRulestacks, Not for LocalRulestacks"
+        },
         "scope": {
           "$ref": "#/definitions/ScopeType",
           "description": "Rulestack Type"
@@ -5554,11 +5564,8 @@
       "properties": {
         "marketplaceSubscriptionId": {
           "type": "string",
-          "description": "Marketplace Subscription Id"
-        },
-        "planId": {
-          "type": "string",
-          "description": "Plan Id"
+          "description": "Marketplace Subscription Id",
+          "readOnly": true
         },
         "offerId": {
           "type": "string",
@@ -5569,7 +5576,11 @@
           "description": "Publisher Id"
         }
       },
-      "description": "MarketplaceDetails of PAN Firewall resource"
+      "description": "MarketplaceDetails of PAN Firewall resource",
+      "required": [
+        "offerId",
+        "publisherId"
+      ]
     },
     "MediumString": {
       "type": "string",
@@ -5698,7 +5709,11 @@
           "readOnly": true
         }
       },
-      "description": "Billing plan information."
+      "description": "Billing plan information.",
+      "required": [
+        "billingCycle",
+        "planId"
+      ]
     },
     "PostRulesResource": {
       "type": "object",
@@ -6168,7 +6183,12 @@
           "description": "enable or disable decryption"
         },
         "tags": {
-          "$ref": "#/definitions/TagInfo",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagInfo"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "TagInfo[]",
           "description": "tag for rule"
         },
         "provisioningState": {
@@ -6206,6 +6226,10 @@
         "panEtag": {
           "type": "string",
           "description": "PanEtag info"
+        },
+        "panLocation": {
+          "type": "string",
+          "description": "Rulestack Location, Required for GlobalRulestacks, Not for LocalRulestacks"
         },
         "scope": {
           "$ref": "#/definitions/ScopeType",
@@ -6257,7 +6281,7 @@
         "antiSpyware",
         "antiVirus",
         "ipsVulnerability",
-        "URLFiltering",
+        "urlFiltering",
         "fileBlocking",
         "dnsSubscription"
       ],

@@ -1,96 +1,96 @@
 {
   "parameters": {
     "api-version": "2022-08-29-preview",
-    "subscriptionId": "faut",
-    "resourceGroupName": "rgPaloAltoNetworks",
-    "firewallName": "wqjjichxrsuxeeomgvm",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27",
+    "resourceGroupName": "firewall-rg",
+    "firewallName": "firewall1",
     "resource": {
       "properties": {
-        "panEtag": "teykhodghguvwnypdkhopvzd",
+        "panEtag": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
         "networkProfile": {
           "vnetConfiguration": {
             "vnet": {
-              "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-              "addressSpace": "qpgxdy"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet",
+              "addressSpace": "10.1.0.0/16"
             },
             "trustSubnet": {
-              "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-              "addressSpace": "qpgxdy"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet",
+              "addressSpace": "10.1.1.0/24"
             },
             "unTrustSubnet": {
-              "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-              "addressSpace": "qpgxdy"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
+              "addressSpace": "10.1.1.0/24"
             },
             "ipOfTrustSubnetForUdr": {
-              "resourceId": "dnjceuobx",
-              "address": "fywemvedwjfnhkqzdvjcxng"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
+              "address": "10.1.1.0/24"
             }
           },
           "vwanConfiguration": {
-            "networkVirtualApplianceId": "fmdzzcratuqbminhtgikekqfp",
+            "networkVirtualApplianceId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
             "vHub": {
-              "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-              "addressSpace": "qpgxdy"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
+              "addressSpace": "10.1.1.0/24"
             },
             "trustSubnet": {
-              "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-              "addressSpace": "qpgxdy"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet",
+              "addressSpace": "10.1.1.0/24"
             },
             "unTrustSubnet": {
-              "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-              "addressSpace": "qpgxdy"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
+              "addressSpace": "10.1.1.0/24"
             },
             "ipOfTrustSubnetForUdr": {
-              "resourceId": "dnjceuobx",
-              "address": "fywemvedwjfnhkqzdvjcxng"
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
+              "address": "10.1.1.0/24"
             }
           },
           "networkType": "VNET",
           "publicIps": [
             {
-              "resourceId": "dnjceuobx",
-              "address": "fywemvedwjfnhkqzdvjcxng"
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-publicIp1",
+              "address": "20.22.90.106"
             }
           ],
-          "enableEgressNat": "DISABLED",
+          "enableEgressNat": "ENABLED",
           "egressNatIp": [
             {
-              "resourceId": "dnjceuobx",
-              "address": "fywemvedwjfnhkqzdvjcxng"
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1",
+              "address": "20.22.92.111"
             }
           ]
         },
         "associatedRulestack": {
-          "resourceId": "chqskmzuuwpxtpjgpqxebrckoxj",
-          "rulestackId": "bargfydwzwvznwipu",
-          "location": "kzkimkincxcvu"
+          "resourceId": "lrs1",
+          "rulestackId": "PANRSID",
+          "location": "Central US EUAP"
         },
         "dnsSettings": {
           "enableDnsProxy": "DISABLED",
           "enabledDnsType": "CUSTOM",
           "dnsServers": [
             {
-              "resourceId": "dnjceuobx",
-              "address": "fywemvedwjfnhkqzdvjcxng"
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1",
+              "address": "20.22.92.111"
             }
           ]
         },
         "frontEndSettings": [
           {
-            "name": "qagwloheylwdmgszdskrhxlofe",
+            "name": "frontendsetting11",
             "protocol": "TCP",
             "frontendConfiguration": {
-              "port": "iygelbkihvwaykowtdwdzllvlql",
+              "port": "80",
               "address": {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp1",
+                "address": "20.22.91.251"
               }
             },
             "backendConfiguration": {
-              "port": "iygelbkihvwaykowtdwdzllvlql",
+              "port": "80",
               "address": {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp2",
+                "address": "20.22.32.136"
               }
             }
           }
@@ -98,120 +98,118 @@
         "provisioningState": "Accepted",
         "planData": {
           "usageType": "PAYG",
-          "billingCycle": "WEEKLY",
-          "planId": "lviflcfmwrwfdmelbfwbrk"
+          "billingCycle": "MONTHLY",
+          "planId": "liftrpantestplan"
         },
         "marketplaceDetails": {
-          "marketplaceSubscriptionId": "yayjvocuojiwntywcy",
-          "planId": "jyagvfyuuiamgyilfw",
-          "offerId": "ydamqkn",
-          "publisherId": "ltqoedhktptllpmjrqmqupzwgp"
+          "offerId": "liftr-pan-ame-test",
+          "publisherId": "isvtestuklegacy"
         }
       },
       "identity": {
         "type": "None",
         "userAssignedIdentities": {
-          "key7692": {
-            "clientId": "vxdhrlzloynnlolyj",
-            "principalId": "rwrpkwukgfsbgojyn"
+          "key16": {
+            "clientId": "",
+            "principalId": "aaaaaaaaaaaaaaa"
           }
         }
       },
       "tags": {
-        "key7345": "xxevbjlzrbnsxiuqrlwrodcdfodyw"
+        "key922": "aaaaaaaaaaaaaaaaaaaaa"
       },
-      "location": "mofppgmzhtvlfylijozvgggcrueot"
+      "location": "Central US EUAP"
     }
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "panEtag": "teykhodghguvwnypdkhopvzd",
+          "panEtag": "aaaaaaaaa",
           "networkProfile": {
             "vnetConfiguration": {
               "vnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "trustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "unTrustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "ipOfTrustSubnetForUdr": {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             },
             "vwanConfiguration": {
-              "networkVirtualApplianceId": "fmdzzcratuqbminhtgikekqfp",
+              "networkVirtualApplianceId": "aaaaaaaaaaaaaaaaaaaaaaa",
               "vHub": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "trustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "unTrustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "ipOfTrustSubnetForUdr": {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             },
             "networkType": "VNET",
             "publicIps": [
               {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             ],
             "enableEgressNat": "DISABLED",
             "egressNatIp": [
               {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             ]
           },
           "associatedRulestack": {
-            "resourceId": "chqskmzuuwpxtpjgpqxebrckoxj",
-            "rulestackId": "bargfydwzwvznwipu",
-            "location": "kzkimkincxcvu"
+            "resourceId": "aaaaaaaaaa",
+            "rulestackId": "aaaaaaaaaaaaaaaa",
+            "location": "aaaaa"
           },
           "dnsSettings": {
             "enableDnsProxy": "DISABLED",
             "enabledDnsType": "CUSTOM",
             "dnsServers": [
               {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             ]
           },
           "frontEndSettings": [
             {
-              "name": "qagwloheylwdmgszdskrhxlofe",
+              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
               "protocol": "TCP",
               "frontendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {
-                  "resourceId": "dnjceuobx",
-                  "address": "fywemvedwjfnhkqzdvjcxng"
+                  "resourceId": "aa",
+                  "address": "aaaaaaaaaaaaaaaaaa"
                 }
               },
               "backendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {
-                  "resourceId": "dnjceuobx",
-                  "address": "fywemvedwjfnhkqzdvjcxng"
+                  "resourceId": "aa",
+                  "address": "aaaaaaaaaaaaaaaaaa"
                 }
               }
             }
@@ -220,135 +218,134 @@
           "planData": {
             "usageType": "PAYG",
             "billingCycle": "WEEKLY",
-            "planId": "lviflcfmwrwfdmelbfwbrk",
-            "effectiveDate": "2022-08-30T09:03:47.587Z"
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "effectiveDate": "2022-09-13T00:46:05.283Z"
           },
           "marketplaceDetails": {
-            "marketplaceSubscriptionId": "yayjvocuojiwntywcy",
-            "planId": "jyagvfyuuiamgyilfw",
-            "offerId": "ydamqkn",
-            "publisherId": "ltqoedhktptllpmjrqmqupzwgp"
+            "marketplaceSubscriptionId": "aa",
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
           }
         },
         "systemData": {
-          "createdBy": "arcxkwsmcvhflbvvrexcwqyan",
+          "createdBy": "praval",
           "createdByType": "User",
-          "createdAt": "2022-08-30T09:03:30.517Z",
-          "lastModifiedBy": "mzikveppyypok",
+          "createdAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-08-30T09:03:30.517Z"
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z"
         },
         "identity": {
-          "tenantId": "wkfgdgzkvmvija",
-          "principalId": "mahyqsbhkfjlpadfjnkgqqykskcdjz",
+          "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "principalId": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
           "type": "None",
           "userAssignedIdentities": {
-            "key7692": {
-              "clientId": "vxdhrlzloynnlolyj",
-              "principalId": "rwrpkwukgfsbgojyn"
+            "key16": {
+              "clientId": "aaaaaaaaaaaaaaaaaaaaaa",
+              "principalId": "aaaaaaaaaaaaaaa"
             }
           }
         },
         "tags": {
-          "key7345": "xxevbjlzrbnsxiuqrlwrodcdfodyw"
+          "key922": "value"
         },
-        "location": "mofppgmzhtvlfylijozvgggcrueot",
-        "id": "twhvpabewkruiyqtdfxnuhf",
-        "name": "fxmdumpdmrrkjuffkmprjkfrrzb",
-        "type": "yajmtoq"
+        "id": "/providers/PaloAltoNetworks.Cloudngfw/globalrulestacks/armid1/firewalls/armid1",
+        "name": "armid1",
+        "type": "firewalls",
+        "location": "Central US EUAP"
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       },
       "body": {
         "properties": {
-          "panEtag": "teykhodghguvwnypdkhopvzd",
+          "panEtag": "aaaaaaaaa",
           "networkProfile": {
             "vnetConfiguration": {
               "vnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "trustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "unTrustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "ipOfTrustSubnetForUdr": {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             },
             "vwanConfiguration": {
-              "networkVirtualApplianceId": "fmdzzcratuqbminhtgikekqfp",
+              "networkVirtualApplianceId": "aaaaaaaaaaaaaaaaaaaaaaa",
               "vHub": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "trustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "unTrustSubnet": {
-                "resourceId": "jhxkcyqtguntfddbbosubqqmf",
-                "addressSpace": "qpgxdy"
+                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
+                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
               },
               "ipOfTrustSubnetForUdr": {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             },
             "networkType": "VNET",
             "publicIps": [
               {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             ],
             "enableEgressNat": "DISABLED",
             "egressNatIp": [
               {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             ]
           },
           "associatedRulestack": {
-            "resourceId": "chqskmzuuwpxtpjgpqxebrckoxj",
-            "rulestackId": "bargfydwzwvznwipu",
-            "location": "kzkimkincxcvu"
+            "resourceId": "aaaaaaaaaa",
+            "rulestackId": "aaaaaaaaaaaaaaaa",
+            "location": "aaaaa"
           },
           "dnsSettings": {
             "enableDnsProxy": "DISABLED",
             "enabledDnsType": "CUSTOM",
             "dnsServers": [
               {
-                "resourceId": "dnjceuobx",
-                "address": "fywemvedwjfnhkqzdvjcxng"
+                "resourceId": "aa",
+                "address": "aaaaaaaaaaaaaaaaaa"
               }
             ]
           },
           "frontEndSettings": [
             {
-              "name": "qagwloheylwdmgszdskrhxlofe",
+              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
               "protocol": "TCP",
               "frontendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {
-                  "resourceId": "dnjceuobx",
-                  "address": "fywemvedwjfnhkqzdvjcxng"
+                  "resourceId": "aa",
+                  "address": "aaaaaaaaaaaaaaaaaa"
                 }
               },
               "backendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {
-                  "resourceId": "dnjceuobx",
-                  "address": "fywemvedwjfnhkqzdvjcxng"
+                  "resourceId": "aa",
+                  "address": "aaaaaaaaaaaaaaaaaa"
                 }
               }
             }
@@ -357,42 +354,41 @@
           "planData": {
             "usageType": "PAYG",
             "billingCycle": "WEEKLY",
-            "planId": "lviflcfmwrwfdmelbfwbrk",
-            "effectiveDate": "2022-08-30T09:03:47.587Z"
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "effectiveDate": "2022-09-13T00:46:05.283Z"
           },
           "marketplaceDetails": {
-            "marketplaceSubscriptionId": "yayjvocuojiwntywcy",
-            "planId": "jyagvfyuuiamgyilfw",
-            "offerId": "ydamqkn",
-            "publisherId": "ltqoedhktptllpmjrqmqupzwgp"
+            "marketplaceSubscriptionId": "aa",
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
           }
         },
         "systemData": {
-          "createdBy": "arcxkwsmcvhflbvvrexcwqyan",
+          "createdBy": "aaaaaaaaaaaaa",
           "createdByType": "User",
-          "createdAt": "2022-08-30T09:03:30.517Z",
-          "lastModifiedBy": "mzikveppyypok",
+          "createdAt": "2022-09-13T00:45:41.884Z",
+          "lastModifiedBy": "aaaaaaaaa",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-08-30T09:03:30.517Z"
+          "lastModifiedAt": "2022-09-13T00:45:41.884Z"
         },
         "identity": {
-          "tenantId": "wkfgdgzkvmvija",
-          "principalId": "mahyqsbhkfjlpadfjnkgqqykskcdjz",
+          "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "principalId": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
           "type": "None",
           "userAssignedIdentities": {
-            "key7692": {
-              "clientId": "vxdhrlzloynnlolyj",
-              "principalId": "rwrpkwukgfsbgojyn"
+            "key16": {
+              "clientId": "aaaaaaaaaaaaaaaaaaaaaa",
+              "principalId": "aaaaaaaaaaaaaaa"
             }
           }
         },
         "tags": {
-          "key7345": "xxevbjlzrbnsxiuqrlwrodcdfodyw"
+          "key922": "aaaaaaaaaaaaaaaaaaaaa"
         },
-        "location": "mofppgmzhtvlfylijozvgggcrueot",
-        "id": "twhvpabewkruiyqtdfxnuhf",
-        "name": "fxmdumpdmrrkjuffkmprjkfrrzb",
-        "type": "yajmtoq"
+        "location": "aaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "aaaaaaaaaaaaa",
+        "type": "aaaaaa"
       }
     }
   }

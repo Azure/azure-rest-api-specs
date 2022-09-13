@@ -1,35 +1,52 @@
 {
   "parameters": {
     "api-version": "2022-08-29-preview",
-    "subscriptionId": "faut",
-    "resourceGroupName": "rgPaloAltoNetworks",
-    "firewallName": "wqjjichxrsuxeeomgvm",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27",
+    "resourceGroupName": "firewall-rg",
+    "firewallName": "firewall1",
     "resource": {
       "properties": {
         "networkProfile": {
           "networkType": "VNET",
           "publicIps": [
-            {}
+            {
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-publicIp1",
+              "address": "20.22.90.106"
+            }
           ],
-          "enableEgressNat": "DISABLED"
+          "enableEgressNat": "ENABLED"
         },
         "dnsSettings": {},
         "frontEndSettings": [
           {
-            "name": "qagwloheylwdmgszdskrhxlofe",
+            "name": "frontendsetting11",
             "protocol": "TCP",
             "frontendConfiguration": {
-              "port": "iygelbkihvwaykowtdwdzllvlql",
-              "address": {}
+              "port": "80",
+              "address": {
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp1",
+                "address": "20.22.91.251"
+              }
             },
             "backendConfiguration": {
-              "port": "iygelbkihvwaykowtdwdzllvlql",
-              "address": {}
+              "port": "80",
+              "address": {
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp2",
+                "address": "20.22.32.136"
+              }
             }
           }
-        ]
+        ],
+        "planData": {
+          "billingCycle": "MONTHLY",
+          "planId": "liftrpantestplan"
+        },
+        "marketplaceDetails": {
+          "offerId": "liftr-pan-ame-test",
+          "publisherId": "isvtestuklegacy"
+        }
       },
-      "location": "mofppgmzhtvlfylijozvgggcrueot"
+      "location": "Central US EUAP"
     }
   },
   "responses": {
@@ -46,25 +63,33 @@
           "dnsSettings": {},
           "frontEndSettings": [
             {
-              "name": "qagwloheylwdmgszdskrhxlofe",
+              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
               "protocol": "TCP",
               "frontendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {}
               },
               "backendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {}
               }
             }
-          ]
+          ],
+          "planData": {
+            "billingCycle": "WEEKLY",
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "marketplaceDetails": {
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
+          }
         },
-        "location": "mofppgmzhtvlfylijozvgggcrueot"
+        "location": "aaaaaaaaaaaaaaaaa"
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       },
       "body": {
         "properties": {
@@ -78,20 +103,28 @@
           "dnsSettings": {},
           "frontEndSettings": [
             {
-              "name": "qagwloheylwdmgszdskrhxlofe",
+              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
               "protocol": "TCP",
               "frontendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {}
               },
               "backendConfiguration": {
-                "port": "iygelbkihvwaykowtdwdzllvlql",
+                "port": "aaaaaaa",
                 "address": {}
               }
             }
-          ]
+          ],
+          "planData": {
+            "billingCycle": "WEEKLY",
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "marketplaceDetails": {
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
+          }
         },
-        "location": "mofppgmzhtvlfylijozvgggcrueot"
+        "location": "aaaaaaaaaaaaaaaaa"
       }
     }
   }
