@@ -42,7 +42,7 @@
         "operationId": "CloudHsmCluster_CreateOrUpdate",
         "description": "Create or Update a Cloud HSM in the specified subscription.",
         "x-ms-long-running-operation": true,
-		"x-ms-long-running-operation-options": {
+        "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "parameters": [
@@ -107,7 +107,7 @@
         ],
         "operationId": "CloudHsmCluster_Update",
         "x-ms-long-running-operation": true,
-		"x-ms-long-running-operation-options": {
+        "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "description": "Update a Cloud HSM in the specified subscription.",
@@ -214,7 +214,7 @@
         "operationId": "CloudHsmCluster_Delete",
         "description": "Deletes the specified Cloud HSM.",
         "x-ms-long-running-operation": true,
-		"x-ms-long-running-operation-options": {
+        "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "parameters": [
@@ -237,7 +237,7 @@
           },
           "202": {
             "description": "Accepted",
-			"headers": {
+            "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
                 "type": "string"
@@ -401,7 +401,7 @@
           ""
         ],
         "operationId": "PrivateLinkResources_ListByCloudHsmResource",
-        "description": "Gets the private link resources supported for the cloud hsm pool."
+        "description": "Gets the private link resources supported for the cloud hsm pool.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -512,7 +512,7 @@
         "operationId": "CloudHsmPrivateEndpointConnection_Delete",
         "description": "Deletes the private endpoint connection for the cloud hsm pool.",
         "x-ms-long-running-operation": true,
-		"x-ms-long-running-operation-options": {
+        "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "parameters": [
@@ -1074,7 +1074,7 @@
     "CloudHsmSku": {
       "type": "object",
       "description": "Cloud Hsm SKU information",
-	  "required": [
+      "required": [
         "name",
         "family"
       ],
@@ -1082,7 +1082,7 @@
         "family": {
           "type": "string",
           "description": "Sku family of the Cloud HSM Cluster",
-		  "enum": [
+          "enum": [
             "B"
           ],
           "x-ms-client-default": "B",
@@ -1094,7 +1094,7 @@
         "name": {
           "type": "string",
           "description": "Sku name of the Cloud HSM Cluster",
-		  "enum": [
+          "enum": [
             "Standard_B1"
           ],
           "x-ms-enum": {
