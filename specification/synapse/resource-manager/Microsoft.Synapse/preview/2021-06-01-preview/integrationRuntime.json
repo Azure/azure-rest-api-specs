@@ -1323,6 +1323,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/start/1D07BF48606A4078866C57F0F8701590": {
+      "get": {
+        "tags": [
+          "integrationruntimes",
+          "start",
+          "1D07BF48606A4078866C57F0F8701590"
+        ],
+        "operationId": "Integrationruntimes_Start_1D07BF48606A4078866C57F0F8701590",
+        "description": "Start an integration runtime for 1D07BF48606A4078866C57F0F8701590",
+        "x-ms-examples": {
+          "Get list of start Integrationruntimes": {
+            "$ref": "./examples/Getstart1D07BF48606A4078866C57F0F8701590.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Start1D07BF48606A4078866C57F0F8701590"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -3045,6 +3096,61 @@
           "description": "The port of endpoint.",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "Start1D07BF48606A4078866C57F0F8701590": {
+      "description": "Workspace Start Integrationruntimes 1D07BF48606A4078866C57F0F8701590.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/Start1D07BF48606A4078866C57F0F8701590Properties",
+          "description": "Workspace Start Integrationruntimes 1D07BF48606A4078866C57F0F8701590.Properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Start1D07BF48606A4078866C57F0F8701590Properties": {
+      "description": "Properties of the Integrationruntimes Start 1D07BF48606A4078866C57F0F8701590.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "description": "status of Start Integrationruntimes.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Workspace status",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Name of Operation Statuses.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "properties value for 1D07BF48606A4078866C57F0F8701590",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "error value for 1D07BF48606A4078866C57F0F8701590",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
