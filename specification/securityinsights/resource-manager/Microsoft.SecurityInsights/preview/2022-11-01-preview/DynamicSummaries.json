@@ -1,0 +1,368 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries": {
+      "get": {
+        "x-ms-examples": {
+          "Get all summaries.": {
+            "$ref": "./examples/dynamicSummaries/GetSummaries.json"
+          }
+        },
+        "tags": [
+          "Summaries"
+        ],
+        "description": "Gets all summaries",
+        "operationId": "Summaries_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/summaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a summary.": {
+            "$ref": "./examples/dynamicSummaries/GetSummaryById.json"
+          }
+        },
+        "tags": [
+          "Summaries"
+        ],
+        "description": "Gets a summary",
+        "operationId": "Summaries_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SummaryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a summary.": {
+            "$ref": "./examples/dynamicSummaries/DeleteSummary.json"
+          }
+        },
+        "tags": [
+          "Summaries"
+        ],
+        "description": "Delete a summary.",
+        "operationId": "Summaries_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SummaryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a Summary.": {
+            "$ref": "./examples/dynamicSummaries/CreateSummary.json"
+          },
+          "Creates or updates a summary and bulk creates summary items.": {
+            "$ref": "./examples/dynamicSummaries/CreateSummaryAndSummaryItems.json"
+          }
+        },
+        "tags": [
+          "Summaries"
+        ],
+        "description": "Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its Items, we should call this endpoint with rawContent property. The rawContent is mainly used for small summary (content size below 3.8 MB). The status of processing such large file can be polled through the URL returned in Azure-AsyncOperation header.",
+        "operationId": "Summaries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SummaryId"
+          },
+          {
+            "$ref": "#/parameters/Summary"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "201": {
+            "description": "Created. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Contains the status URL on which clients are expected to poll the status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SummaryList": {
+      "description": "List all the summaries.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of summaries.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of summaries.",
+          "items": {
+            "$ref": "#/definitions/Summary"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Summary": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Summary in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SummaryProperties",
+          "description": "Summary properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData"
+      },
+      "type": "object"
+    },
+    "SummaryProperties": {
+      "description": "Describes summary properties",
+      "properties": {
+        "summaryId": {
+          "description": "The id (a Guid) of the summary",
+          "type": "string"
+        },
+        "summaryName": {
+          "description": "The name of the summary",
+          "type": "string"
+        },
+        "sourceInfo": {
+          "description": "The source info for the summary",
+          "type": "object"
+        },
+        "searchKey": {
+          "description": "The search key is used to optimize query performance when using summaries for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.",
+          "type": "string"
+        },
+        "tactics": {
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "description": "A list of relevant mitre attacks",
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The list of techniques for summary",
+          "items":{
+            "description": "Related Technique",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "relationName": {
+          "description": "The relation name for the summary",
+          "type": "string"
+        },
+        "relationId": {
+          "description": "The relation Id (GUID) for the summary",
+          "type": "string"
+        },
+        "summaryDescription": {
+          "description": "The description for the summary",
+          "type": "string"
+        },
+        "rawContent": {
+          "description": "The raw content that represents to summary items to create.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the summary",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the summary is deleted or not",
+          "type": "boolean"
+        },
+        "tenantId": {
+          "description": "The tenantId where the summary belongs to",
+          "type": "string"
+        },
+        "summaryStatus": {
+          "description": "The status of the Summary : Active, Deleted",
+          "type": "string"
+        },
+        "uploadStatus": {
+          "description": "The status of the Summary upload : New, InProgress or Complete. Pls note : When a Summary upload status is equal to InProgress, the Summary cannot be deleted",
+          "type": "string"
+        }
+      },
+      "required": [
+        "summaryName"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "SummaryId": {
+      "description": "Summary Id",
+      "in": "path",
+      "name": "summaryId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Summary": {
+      "description": "The summary",
+      "in": "body",
+      "name": "summary",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Summary"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
