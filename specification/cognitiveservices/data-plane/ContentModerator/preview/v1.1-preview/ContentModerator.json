@@ -38,6 +38,9 @@
             "$ref": "#/parameters/Locale"
           },
           {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
             "name": "textDetectRequest",
             "in": "body",
             "description": "Text detect request",
@@ -183,6 +186,21 @@
       "type": "string",
       "in": "query",
       "x-ms-parameter-location": "method"
+    },
+    "QueryApiVersion": {
+      "name": "api-version",
+      "description": "Requested API version.",
+      "required": true,
+      "type": "string",
+      "in": "query",
+      "enum": [
+        "2022-09-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersion",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "client"
     }
   },
   "x-ms-parameterized-host": {
