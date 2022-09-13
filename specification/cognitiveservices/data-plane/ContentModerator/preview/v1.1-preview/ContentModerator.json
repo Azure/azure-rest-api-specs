@@ -83,124 +83,49 @@
         "modelAsString": false
       }
     },
-    "TextDetectMode": {
-      "type": "string",
-      "x-nullable": false,
-      "enum": [
-        "Quick",
-        "Normal"
-      ],
-      "default": "Normal",
-      "x-ms-enum": {
-        "name": "TextDetectMode",
-        "modelAsString": false
-      }
-    },
-    "ModelOutputDetailKVPair": {
+    "TextDetectResult": {
       "type": "object",
       "required": [
-        "key", 
-        "value",
-        "valueType"
-        ],
+        "category"
+      ],
       "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "valueType": {
-          "type": "string",
-          "x-nullable": false,
-          "enum": [
-            "Number",
-            "Boolean",
-            "String"
-          ],
-          "x-ms-enum": {
-            "name": "ValueType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "ModelOutputDetail": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ModelOutputDetailKVPair"
-      }
-    },
-    "BasicTextDetectResult":{
-      "type": "object",
-      "required": ["category", "isDetected"],
-      "properties": {
-        "textDetectResultType": {
-          "type": "string",
-          "description": "Whether the text is detected as a whole or has masks",
-          "x-nullable": false,
-          "enum": [
-            "Whole",
-            "Masked"
-          ],
-          "x-ms-enum": {
-            "name": "textDetectResultType",
-            "modelAsString": false
-          }
-        },
         "category": {
           "$ref": "#/definitions/TextCategory"
         },
-        "isDetected": {
-          "type": "boolean",
-          "description": "Whether this category is detected in input text"
-        }
-      },
-      "discriminator": "textDetectResultType"
-    },
-    "WholeTextDetectResult": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BasicTextDetectResult"
-        }
-      ],
-      "properties": {
-        "modelOutputDetail": {
-          "$ref": "#/definitions/ModelOutputDetail"
-        }
-      },
-      "x-ms-discriminator-value": "Whole"
-    },
-    "MaskedTextDetectResult": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BasicTextDetectResult"
-        }
-      ],
-      "properties": {
-        "masks": {
+        "results": {
+          "description": "The result array, each element contains detection result of one segment defined by start and end offset",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "start": {
-                "description": "Inclusive start offset of mask",
+                "description": "Inclusive start offset",
                 "type": "integer"
               },
               "end": {
-                "description": "Exclusive end offset of mask",
+                "description": "Exclusive end offset",
                 "type": "integer"
               },
+              "isDetected": {
+                "type": "boolean",
+                "description": "Whether this category is detected in input text"
+              },
+              "score": {
+                "description": "The score of detection result",
+                "type": "number",
+                "format": "float"
+              },
               "modelOutputDetail": {
-                "$ref": "#/definitions/ModelOutputDetail"
+                "description": "The additional fields of model output",
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
               }
             }
           }
         }
-      },
-      "x-ms-discriminator-value": "Masked"
+      }
     },
     "TextDetectRequest": {
       "description": "The text detect request",
@@ -219,29 +144,15 @@
           "items": {
             "$ref": "#/definitions/TextCategory"
           }
-        },
-        "detectMode": {
-          "$ref": "#/definitions/TextDetectMode"
         }
       }
     },
     "TextDetectResponse": {
-      "type": "object",
-      "required": ["detectResults"],
-      "properties": {
-        "wholeTextDetectResults": {
-          "type": "array",
-          "items": {
-              "$ref": "#/definitions/WholeTextDetectResult"
-            }
-        },
-        "maskedTextDetectResults": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MaskedTextDetectResult"
-          }
+      "description": "The text detect response",
+      "type": "array",
+      "items": {
+          "$ref": "#/definitions/TextDetectResult"
         }
-      }
     },
     "ErrorCode": {
       "type": "object",
