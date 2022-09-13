@@ -28,8 +28,6 @@ These are the global settings for the PolicyInsights API.
 title: PolicyInsightsClient
 openapi-type: arm
 tag: package-2022-04
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Validations
@@ -166,6 +164,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
@@ -181,6 +180,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
@@ -196,6 +196,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
@@ -211,6 +212,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 ```
@@ -225,6 +227,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/preview/2020-07-01-preview/checkPolicyRestrictions.json
 ```
@@ -239,6 +242,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 ```
 
