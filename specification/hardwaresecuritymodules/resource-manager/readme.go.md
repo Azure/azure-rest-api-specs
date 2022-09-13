@@ -42,3 +42,11 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ```yaml $(tag)=='package-2018-10' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-10-31-preview/$(namespace)
 ```
+
+### Tag: package-2022-08 and go
+
+These settings apply only when `--tag=package-2022-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2022-08' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-08-31/$(namespace)

@@ -50,11 +50,11 @@ input-file:
 
 ### Tag: package-2022-08
 
-These settings apply only when `--tag=package-2022-03` is specified on the command line.
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2022-08'
 input-file:
-- Microsoft.HardwareSecurityModules/preview/2022-08-31/cloudhsm.json
+- Microsoft.HardwareSecurityModules/preview/2022-08-31-preview/cloudhsm.json
 ```
 
 # Code Generation
