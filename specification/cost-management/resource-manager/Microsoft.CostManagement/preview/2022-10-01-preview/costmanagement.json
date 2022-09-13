@@ -1287,6 +1287,173 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/settings": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_List",
+        "description": "List all cost management settings in the requested scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SettingsList": {
+            "$ref": "./examples/settingsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/settings/{type}": {
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_CreateOrUpdateByScope",
+        "description": "Create or update a setting within the given scope.",
+        "x-ms-examples": {
+          "CreateOrUpdateSettingByScope": {
+            "$ref": "./examples/settings-createOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "#/parameters/settingTypeParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "setting",
+            "description": "Setting to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_GetByScope",
+        "description": "Get the setting from the given scope by name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SettingByScope": {
+            "$ref": "./examples/setting-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "#/parameters/settingTypeParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_DeleteByScope",
+        "description": "Delete a setting within the given scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SettingDeleteByScope": {
+            "$ref": "./examples/setting-delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "#/parameters/settingTypeParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2720,6 +2887,49 @@
         "name": "ReservationReportSchema",
         "modelAsString": true
       }
+    },
+    "Setting": {
+      "description": "Setting definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "common-types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagInheritanceProperties",
+          "title": "Tag Inheritance properties"
+        }
+      }
+    },
+    "SettingsListResult": {
+      "description": "Setting list result. It contains a list of settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of settings.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        }
+      }
+    },
+    "TagInheritanceProperties": {
+      "type": "object",
+      "description": "The properties of the tag inheritance setting.",
+      "required": [
+        "preferContainerTags"
+      ],
+      "properties": {
+        "preferContainerTags": {
+          "description": "Prefer Container tags to override container tags with resource tags in case of conflicts.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "parameters": {
@@ -2731,12 +2941,42 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "settingTypeParameter": {
+      "name": "type",
+      "in": "path",
+      "description": "Setting type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "taginheritance"
+      ],
+      "x-ms-enum": {
+        "name": "SettingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "taginheritance",
+            "description": "Tag Inheritance Settings is to inherit user defined tags from container(subscription/resource group) to its respective resources.",
+            "name": "TagInheritance"
+          }
+        ]
+      }
+    },
     "scopeViewParameter": {
       "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The scope associated with view operations. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, 'providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for External Billing Account scope and 'providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for External Subscription scope.",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeSettingParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with setting. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope.",
       "x-ms-parameter-location": "method"
     },
     "scopeDimensionParameter": {
