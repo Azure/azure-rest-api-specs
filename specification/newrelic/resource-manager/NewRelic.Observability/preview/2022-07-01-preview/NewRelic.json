@@ -1,0 +1,1738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NewRelic.Observability",
+    "version": "2022-07-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Monitors"
+    },
+    {
+      "name": "TagRules"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/NewRelic.Observability/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/monitors": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_ListBySubscription",
+        "description": "List NewRelicMonitorResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_ListByResourceGroup",
+        "description": "List NewRelicMonitorResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_Get",
+        "description": "Get a NewRelicMonitorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_CreateOrUpdate",
+        "description": "Create a NewRelicMonitorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_Update",
+        "description": "Update a NewRelicMonitorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_Delete",
+        "description": "Delete a NewRelicMonitorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_Delete_MaximumSet_Gen.json"
+          },
+          "Monitors_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/hosts": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_Hosts",
+        "description": "List the compute resources currently being monitored by the NewRelic resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMHostsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_Hosts_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_Hosts_MaximumSet_Gen.json"
+          },
+          "Monitors_Hosts_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_Hosts_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredResources": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_ListMonitoredResources",
+        "description": "List the resources currently being monitored by the NewRelic monitor resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListMonitoredResources_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListMonitoredResources_MaximumSet_Gen.json"
+          },
+          "Monitors_ListMonitoredResources_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ListMonitoredResources_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/tagRules": {
+      "get": {
+        "tags": [
+          "TagRules"
+        ],
+        "operationId": "TagRules_ListByNewRelicMonitorResource",
+        "description": "List TagRule resources by NewRelicMonitorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TagRules_ListByNewRelicMonitorResource_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_ListByNewRelicMonitorResource_MaximumSet_Gen.json"
+          },
+          "TagRules_ListByNewRelicMonitorResource_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_ListByNewRelicMonitorResource_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}": {
+      "get": {
+        "tags": [
+          "TagRules"
+        ],
+        "operationId": "TagRules_Get",
+        "description": "Get a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          },
+          {
+            "$ref": "#/parameters/TagRule.ruleSetName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_Get_MaximumSet_Gen.json"
+          },
+          "TagRules_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TagRules"
+        ],
+        "operationId": "TagRules_CreateOrUpdate",
+        "description": "Create a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          },
+          {
+            "$ref": "#/parameters/TagRule.ruleSetName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "TagRules_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "TagRules"
+        ],
+        "operationId": "TagRules_Delete",
+        "description": "Delete a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          },
+          {
+            "$ref": "#/parameters/TagRule.ruleSetName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_Delete_MaximumSet_Gen.json"
+          },
+          "TagRules_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "TagRules"
+        ],
+        "operationId": "TagRules_Update",
+        "description": "Update a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          },
+          {
+            "$ref": "#/parameters/TagRule.ruleSetName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/TagRuleUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_Update_MaximumSet_Gen.json"
+          },
+          "TagRules_Update_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_Update_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/vmHostPayloads": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_VmHostPayload",
+        "description": "Returns the payload that needs to be passed in the request body for installing NewRelic agent on a VM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRelicMonitorResource.monitorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMExtensionPayload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_VmHostPayload_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_VmHostPayload_MaximumSet_Gen.json"
+          },
+          "Monitors_VmHostPayload_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_VmHostPayload_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountInfo": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account id"
+        },
+        "ingestionKey": {
+          "$ref": "#/definitions/SecureString",
+          "description": "ingestion key of account"
+        },
+        "region": {
+          "type": "string",
+          "description": "NewRelic account region"
+        }
+      },
+      "description": "Account Info of the NewRelic account"
+    },
+    "AutoUpdateSetting": {
+      "type": "string",
+      "description": "Update settings of OneAgent.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUpdateSetting",
+        "modelAsString": true
+      }
+    },
+    "AvailabilityState": {
+      "type": "string",
+      "description": "The availability state of OneAgent.",
+      "enum": [
+        "CRASHED",
+        "LOST",
+        "MONITORED",
+        "PRE_MONITORED",
+        "SHUTDOWN",
+        "UNEXPECTED_SHUTDOWN",
+        "UNKNOWN",
+        "UNMONITORED"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityState",
+        "modelAsString": true
+      }
+    },
+    "BillingCycle": {
+      "type": "string",
+      "description": "different usage type like YEARLY/MONTHLY",
+      "enum": [
+        "YEARLY",
+        "MONTHLY",
+        "WEEKLY"
+      ],
+      "x-ms-enum": {
+        "name": "BillingCycle",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "YEARLY",
+            "value": "YEARLY",
+            "description": "Billing cycle is YEARLY"
+          },
+          {
+            "name": "MONTHLY",
+            "value": "MONTHLY",
+            "description": "Billing cycle is MONTHLY"
+          },
+          {
+            "name": "WEEKLY",
+            "value": "WEEKLY",
+            "description": "Billing cycle is WEEKLY"
+          }
+        ]
+      }
+    },
+    "FilteringTag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name (also known as the key) of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag."
+        },
+        "action": {
+          "$ref": "#/definitions/TagAction",
+          "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion."
+        }
+      },
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "required": [
+        "name",
+        "value",
+        "action"
+      ]
+    },
+    "LiftrResourceCategories": {
+      "type": "string",
+      "description": "Liftr Resource category.",
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "x-ms-enum": {
+        "name": "LiftrResourceCategories",
+        "modelAsString": true
+      }
+    },
+    "LogModule": {
+      "type": "string",
+      "description": "Tells whether log modules are enabled or not",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "x-ms-enum": {
+        "name": "LogModule",
+        "modelAsString": true
+      }
+    },
+    "LogRules": {
+      "type": "object",
+      "properties": {
+        "sendAadLogs": {
+          "$ref": "#/definitions/SendAadLogsStatus",
+          "description": "Flag specifying if AAD logs should be sent for the Monitor resource."
+        },
+        "sendSubscriptionLogs": {
+          "$ref": "#/definitions/SendSubscriptionLogsStatus",
+          "description": "Flag specifying if subscription logs should be sent for the Monitor resource."
+        },
+        "sendActivityLogs": {
+          "$ref": "#/definitions/SendActivityLogsStatus",
+          "description": "Flag specifying if activity logs from Azure resources should be sent for the Monitor resource."
+        },
+        "filteringTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FilteringTag[]",
+          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.\nIf only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags."
+        }
+      },
+      "description": "Set of rules for sending logs for the Monitor resource."
+    },
+    "MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
+      "enum": [
+        "Active",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "monitoring is enabled"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "monitoring is disabled"
+          }
+        ]
+      }
+    },
+    "MetricRules": {
+      "type": "object",
+      "properties": {
+        "filteringTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FilteringTag[]",
+          "description": "List of filtering tags to be used for capturing metrics."
+        }
+      },
+      "description": "Set of rules for sending metrics for the Monitor resource."
+    },
+    "MonitorProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "monitoringStatus": {
+          "$ref": "#/definitions/MonitoringStatus",
+          "description": "MonitoringStatus of the resource",
+          "readOnly": true
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "NewRelic Organization properties of the resource",
+          "readOnly": true
+        },
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id",
+          "readOnly": true
+        },
+        "newRelicAccountProperties": {
+          "$ref": "#/definitions/NewRelicAccountProperties",
+          "description": "MarketplaceSubscriptionStatus of the resource"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "User Info"
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "Plan details"
+        },
+        "liftrResourceCategory": {
+          "$ref": "#/definitions/LiftrResourceCategories",
+          "description": "Liftr resource category",
+          "readOnly": true
+        },
+        "liftrResourcePreference": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Liftr resource preference. The priority of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties specific to the NewRelic Monitor resource",
+      "required": [
+        "userInfo",
+        "planData"
+      ]
+    },
+    "MonitoredResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM id of the resource."
+        },
+        "sendingMetrics": {
+          "$ref": "#/definitions/SendingMetricsStatus",
+          "description": "Flag indicating if resource is sending metrics to NewRelic."
+        },
+        "reasonForMetricsStatus": {
+          "type": "string",
+          "description": "Reason for why the resource is sending metrics (or why it is not sending)."
+        },
+        "sendingLogs": {
+          "$ref": "#/definitions/SendingLogsStatus",
+          "description": "Flag indicating if resource is sending logs to NewRelic."
+        },
+        "reasonForLogsStatus": {
+          "type": "string",
+          "description": "Reason for why the resource is sending logs (or why it is not sending)."
+        }
+      },
+      "description": "Details of resource being monitored by NewRelic monitor resource"
+    },
+    "MonitoredResourceListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          },
+          "x-cadl-name": "MonitoredResource[]",
+          "description": "The MonitoredResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<MonitoredResource>"
+        }
+      },
+      "description": "List of all the resources being monitored by NewRelic monitor resource",
+      "required": [
+        "value"
+      ]
+    },
+    "MonitoringStatus": {
+      "type": "string",
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "monitoring is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "monitoring is disabled"
+          }
+        ]
+      }
+    },
+    "MonitoringTagRulesProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "logRules": {
+          "$ref": "#/definitions/LogRules",
+          "description": "Set of rules for sending logs for the Monitor resource."
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
+        }
+      },
+      "description": "The resource-specific properties for this resource."
+    },
+    "MonitoringType": {
+      "type": "string",
+      "description": "The monitoring mode of OneAgent",
+      "enum": [
+        "CLOUD_INFRASTRUCTURE",
+        "FULL_STACK"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringType",
+        "modelAsString": true
+      }
+    },
+    "NewRelicAccountProperties": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User id"
+        },
+        "accountInfo": {
+          "$ref": "#/definitions/AccountInfo",
+          "description": "NewRelic Account Information"
+        },
+        "organizationInfo": {
+          "$ref": "#/definitions/OrganizationInfo",
+          "description": "NewRelic Organization Information"
+        },
+        "singleSignOnProperties": {
+          "$ref": "#/definitions/NewRelicSingleSignOnProperties",
+          "description": "date when plan was applied"
+        }
+      },
+      "description": "Properties of the NewRelic account"
+    },
+    "NewRelicMonitorResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitorProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "A Monitor Resource by NewRelic",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NewRelicMonitorResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NewRelicMonitorResource"
+          },
+          "x-cadl-name": "NewRelicMonitorResource[]",
+          "description": "The NewRelicMonitorResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<NewRelicMonitorResource>"
+        }
+      },
+      "description": "The response of a NewRelicMonitorResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "NewRelicMonitorResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/NewRelicMonitorResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the NewRelicMonitorResource."
+    },
+    "NewRelicMonitorResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "newRelicAccountProperties": {
+          "$ref": "#/definitions/NewRelicAccountProperties",
+          "description": "MarketplaceSubscriptionStatus of the resource"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "User Info"
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "Plan details"
+        }
+      },
+      "description": "The updatable properties of the NewRelicMonitorResource."
+    },
+    "NewRelicSingleSignOnProperties": {
+      "type": "object",
+      "properties": {
+        "singleSignOnState": {
+          "$ref": "#/definitions/SingleSignOnStates",
+          "description": "Single sign-on state"
+        },
+        "enterpriseAppId": {
+          "type": "string",
+          "description": "The Id of the Enterprise App used for Single sign-on."
+        },
+        "singleSignOnUrl": {
+          "type": "string",
+          "description": "The login URL specific to this NewRelic Organization"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state"
+        }
+      },
+      "description": "Single sign on Info of the NewRelic account"
+    },
+    "OrganizationInfo": {
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "description": "Organization id"
+        }
+      },
+      "description": "Organization Info of the NewRelic account"
+    },
+    "PlanData": {
+      "type": "object",
+      "properties": {
+        "usageType": {
+          "$ref": "#/definitions/UsageType",
+          "description": "different usage type like PAYG/COMMITTED. this could be enum"
+        },
+        "billingCycle": {
+          "$ref": "#/definitions/BillingCycle",
+          "description": "different billing cycles like MONTHLY/WEEKLY. this could be enum"
+        },
+        "planDetails": {
+          "type": "string",
+          "description": "plan id as published by NewRelic"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "date when plan was applied"
+        }
+      },
+      "description": "Plan data of NewRelic Monitor resource",
+      "required": [
+        "planDetails"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the Monitor resource",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Monitor resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Monitor resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Monitor resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Monitor resource deletion started"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Monitor resource creation successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Monitor resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Monitor resource creation canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Monitor resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Monitor resource state is unknown"
+          }
+        ]
+      }
+    },
+    "SecureString": {
+      "type": "string",
+      "description": "Credential string.",
+      "format": "password",
+      "x-ms-secret": true
+    },
+    "SendAadLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether AAD logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendAadLogsStatus",
+        "modelAsString": true
+      }
+    },
+    "SendActivityLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether activity logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendActivityLogsStatus",
+        "modelAsString": true
+      }
+    },
+    "SendSubscriptionLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether subscription logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendSubscriptionLogsStatus",
+        "modelAsString": true
+      }
+    },
+    "SendingLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendingLogsStatus",
+        "modelAsString": true
+      }
+    },
+    "SendingMetricsStatus": {
+      "type": "string",
+      "description": "Indicates whether metrics are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendingMetricsStatus",
+        "modelAsString": true
+      }
+    },
+    "SingleSignOnStates": {
+      "type": "string",
+      "description": "Various states of the SSO resource",
+      "enum": [
+        "Initial",
+        "Enable",
+        "Disable",
+        "Existing"
+      ],
+      "x-ms-enum": {
+        "name": "SingleSignOnStates",
+        "modelAsString": true
+      }
+    },
+    "TagAction": {
+      "type": "string",
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "x-ms-enum": {
+        "name": "TagAction",
+        "modelAsString": true
+      }
+    },
+    "TagRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "A tag rule belonging to NewRelic account",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TagRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagRule"
+          },
+          "x-cadl-name": "TagRule[]",
+          "description": "The TagRule items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<TagRule>"
+        }
+      },
+      "description": "The response of a TagRule list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TagRuleUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TagRuleUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the TagRule."
+    },
+    "TagRuleUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "logRules": {
+          "$ref": "#/definitions/LogRules",
+          "description": "Set of rules for sending logs for the Monitor resource."
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
+        }
+      },
+      "description": "The updatable properties of the TagRule."
+    },
+    "UpdateStatus": {
+      "type": "string",
+      "description": "The current update status of OneAgent.",
+      "enum": [
+        "INCOMPATIBLE",
+        "OUTDATED",
+        "SCHEDULED",
+        "SUPPRESSED",
+        "UNKNOWN",
+        "UP2DATE",
+        "UPDATE_IN_PROGRESS",
+        "UPDATE_PENDING",
+        "UPDATE_PROBLEM"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateStatus",
+        "modelAsString": true
+      }
+    },
+    "UsageType": {
+      "type": "string",
+      "description": "different usage type like PAYG/COMMITTED",
+      "enum": [
+        "PAYG",
+        "COMMITTED"
+      ],
+      "x-ms-enum": {
+        "name": "UsageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PAYG",
+            "value": "PAYG",
+            "description": "Usage type is PAYG"
+          },
+          {
+            "name": "COMMITTED",
+            "value": "COMMITTED",
+            "description": "Usage type is COMMITTED"
+          }
+        ]
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name",
+          "maxLength": 50
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name",
+          "maxLength": 50
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/email",
+          "description": "User Email"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Contact phone number",
+          "maxLength": 40
+        },
+        "country": {
+          "type": "string",
+          "description": "country if user"
+        }
+      },
+      "description": "User Info of NewRelic Monitor resource",
+      "required": [
+        "emailAddress"
+      ]
+    },
+    "VMExtensionPayload": {
+      "type": "object",
+      "properties": {
+        "ingestionKey": {
+          "type": "string",
+          "description": "Ingestion key of the account"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Id of the account created"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region of the account created"
+        }
+      },
+      "description": "Response of payload to be passed while installing VM agent.",
+      "required": [
+        "ingestionKey"
+      ]
+    },
+    "VMHostsListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMInfo"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "VMInfo[]",
+          "description": "The VMInfo items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<VMInfo>"
+        }
+      },
+      "description": "Response of a list VM Host Operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "VMInfo": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Azure VM resource ID"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the NewRelic agent installed on the VM."
+        },
+        "monitoringType": {
+          "$ref": "#/definitions/MonitoringType",
+          "description": "The monitoring mode of OneAgent"
+        },
+        "autoUpdateSetting": {
+          "$ref": "#/definitions/AutoUpdateSetting",
+          "description": "Update settings of OneAgent."
+        },
+        "updateStatus": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The current update status of OneAgent."
+        },
+        "availabilityState": {
+          "$ref": "#/definitions/AvailabilityState",
+          "description": "The availability state of OneAgent."
+        },
+        "logModule": {
+          "$ref": "#/definitions/LogModule",
+          "description": "Tells whether log modules are enabled or not"
+        },
+        "hostGroup": {
+          "type": "string",
+          "description": "The name of the host group"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The name of the host"
+        }
+      },
+      "description": "Details of VM Resource having NewRelic OneAgent installed"
+    },
+    "email": {
+      "type": "string",
+      "description": "Reusable representation of an email address",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    }
+  },
+  "parameters": {
+    "NewRelicMonitorResource.monitorName": {
+      "name": "monitorName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the Monitors resource",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TagRule.ruleSetName": {
+      "name": "ruleSetName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the TagRule",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
