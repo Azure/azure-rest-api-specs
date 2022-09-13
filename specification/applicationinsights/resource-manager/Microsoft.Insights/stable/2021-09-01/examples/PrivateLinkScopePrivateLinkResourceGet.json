@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "MyResourceGroup",
     "scopeName": "MyPrivateLinkScope",
-    "api-version": "2019-10-17-preview",
+    "api-version": "2021-09-01",
     "groupName": "azuremonitor"
   },
   "responses": {
@@ -15,14 +15,20 @@
         "properties": {
           "groupId": "azuremonitor",
           "requiredMembers": [
-            "draft",
-            "breeze",
-            "livemetrics",
-            "snapshotdebugger",
+            "api",
+            "global.in.ai",
             "profiler",
-            "oms-12300000-1111-2222-3333-444444444444",
-            "ods-12300000-1111-2222-3333-444444444444",
-            "agent-12300000-1111-2222-3333-444444444444"
+            "live",
+            "snapshot",
+            "agentsolutionpackstore",
+            "dce-global"
+          ],
+          "requiredZoneNames": [
+            "privatelink.monitor.azure.com",
+            "privatelink.oms.opinsights.azure.com",
+            "privatelink.ods.opinsights.azure.com",
+            "privatelink.agentsvc.azure-automation.net",
+            "privatelink.blob.core.windows.net"
           ]
         }
       }
