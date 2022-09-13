@@ -1,13 +1,13 @@
 # Cdn
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Cdn.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Cdn, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,42 @@ To build the SDK for Cdn, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the Cdn API.
 
 ``` yaml
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2020-09
+tag: package-preview-2022-05
+```
+
+
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.Cdn/preview/2022-05-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2022-05-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2022-05-01-preview/cdnwebapplicationfirewall.json
+```
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Cdn/stable/2021-06-01/afdx.json
+  - Microsoft.Cdn/stable/2021-06-01/cdn.json
+  - Microsoft.Cdn/stable/2021-06-01/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2020-09
@@ -61,16 +83,6 @@ input-file:
 - Microsoft.Cdn/stable/2019-12-31/cdn.json
 ```
 
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06'
-input-file:
-- Microsoft.Cdn/stable/2019-06-15/cdn.json
-- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
-```
-
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
@@ -84,6 +96,16 @@ directive:
       - $.paths
     suppress:
       - OperationsAPIImplementation
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2019-04
@@ -112,7 +134,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 input-file:
 - Microsoft.Cdn/stable/2017-04-02/cdn.json
 ```
- 
+
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
@@ -121,7 +143,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 input-file:
 - Microsoft.Cdn/stable/2016-10-02/cdn.json
 ```
- 
+
 ### Tag: package-2016-04
 
 These settings apply only when `--tag=package-2016-04` is specified on the command line.
@@ -130,7 +152,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 input-file:
 - Microsoft.Cdn/stable/2016-04-02/cdn.json
 ```
- 
+
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
@@ -140,10 +162,9 @@ input-file:
 - Microsoft.Cdn/stable/2015-06-01/cdn.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -155,16 +176,15 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
-
-## C# 
+## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
@@ -187,6 +207,3 @@ See configuration in [readme.node.md](./readme.node.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
-
-

@@ -219,7 +219,7 @@
         "description": "Send test notifications to a set of provided receivers",
         "operationId": "ActionGroups_PostTestNotifications",
         "x-ms-examples": {
-          "List action groups": {
+          "Create notifications at subscription level": {
             "$ref": "./examples/postTestNotifications.json"
           }
         },
@@ -242,9 +242,137 @@
         ],
         "responses": {
           "202": {
+            "description": "The notification request accepted",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The location header that has the polling uri."
+              }
+            }
+          },
+          "200": {
             "description": "The notification succeeded",
             "schema": {
-              "$ref": "#/definitions/TestNotificationResponse"
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/createNotifications": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Send test notifications to a set of provided receivers",
+        "operationId": "ActionGroups_CreateNotificationsAtResourceGroupLevel",
+        "x-ms-examples": {
+          "Create notifications at resource group level": {
+            "$ref": "./examples/postTestNotificationsAtResourceGroupLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "notificationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationRequestBody"
+            },
+            "description": "The notification request body which includes the contact details"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The notification request accepted",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The location header that has the polling uri."
+              }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/createNotifications": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Send test notifications to a set of provided receivers",
+        "operationId": "ActionGroups_CreateNotificationsAtActionGroupResourceLevel",
+        "x-ms-examples": {
+          "Create notifications at resource group level": {
+            "$ref": "./examples/postTestNotificationsAtActionGroupResourceLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "notificationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationRequestBody"
+            },
+            "description": "The notification request body which includes the contact details"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The notification request accepted",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The location header that has the polling uri."
+              }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
             }
           },
           "default": {
@@ -261,7 +389,7 @@
         "description": "Get the test notifications by the notification id",
         "operationId": "ActionGroups_GetTestNotifications",
         "x-ms-examples": {
-          "Get notification details": {
+          "Get notification details at subscription level": {
             "$ref": "./examples/getTestNotifications.json"
           }
         },
@@ -292,12 +420,93 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/notificationStatus/{notificationId}": {
+      "get": {
+        "description": "Get the test notifications by the notification id",
+        "operationId": "ActionGroups_GetTestNotificationsAtResourceGroupLevel",
+        "x-ms-examples": {
+          "Get notification details at resource group level": {
+            "$ref": "./examples/getTestNotificationsAtResourceGroupLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotificationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The notification details",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}": {
+      "get": {
+        "description": "Get the test notifications by the notification id",
+        "operationId": "ActionGroups_GetTestNotificationsAtActionGroupResourceLevel",
+        "x-ms-examples": {
+          "Get notification details at resource group level": {
+            "$ref": "./examples/getTestNotificationsAtActionGroupResourceLevel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NotificationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The notification details",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/actionGroups": {
       "get": {
         "description": "Get a list of all action groups in a subscription.",
         "operationId": "ActionGroups_ListBySubscriptionId",
         "x-ms-examples": {
-          "List action groups": {
+          "List action groups at subscription level": {
             "$ref": "./examples/listActionGroups.json"
           }
         },
@@ -333,7 +542,7 @@
         "description": "Get a list of all action groups in a resource group.",
         "operationId": "ActionGroups_ListByResourceGroup",
         "x-ms-examples": {
-          "List action groups": {
+          "List action groups at resource group level": {
             "$ref": "./examples/listActionGroups.json"
           }
         },
@@ -435,16 +644,6 @@
           "readOnly": true,
           "description": "Azure resource type"
         },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource kind"
-        },
-        "identity": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource identity"
-        },
         "location": {
           "type": "string",
           "description": "Resource location",
@@ -468,50 +667,30 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "TestNotificationResponse": {
-      "description": "The response when test notification succeeded",
-      "type": "object",
-      "properties": {
-        "notificationId": {
-          "type": "string",
-          "description": "The notification id"
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "The correlation id"
-        },
-        "createdTime": {
-          "type": "string",
-          "description": "The created time"
-        }
-      },
-      "required": [
-        "notificationId",
-        "correlationId",
-        "createdTime"
-      ]
-    },
     "TestNotificationDetailsResponse": {
       "description": "The details of the test notification results.",
       "type": "object",
       "properties": {
-        "Context": {
+        "context": {
           "type": "object",
           "$ref": "#/definitions/Context"
         },
-        "State": {
+        "state": {
           "type": "string",
           "description": "The overall state"
         },
-        "CompletedTime": {
+        "completedTime": {
           "type": "string",
           "description": "The completed time"
         },
-        "CreatedTime": {
+        "createdTime": {
           "type": "string",
           "description": "The created time"
         },
-        "ActionDetails": {
+        "actionDetails": {
+          "x-ms-identifiers": [
+            "name"
+          ],
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActionDetail"
@@ -520,7 +699,7 @@
         }
       },
       "required": [
-        "State"
+        "state"
       ]
     },
     "ActionDetail": {
@@ -557,11 +736,11 @@
       "description": "The context info",
       "type": "object",
       "properties": {
-        "NotificationSource": {
+        "notificationSource": {
           "type": "string",
           "description": "The source of the notification request"
         },
-        "ContextType": {
+        "contextType": {
           "type": "string",
           "description": "The context id type"
         }
@@ -614,6 +793,9 @@
           "items": {
             "$ref": "#/definitions/EmailReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of email receivers that are part of this action group."
         },
         "smsReceivers": {
@@ -621,6 +803,9 @@
           "items": {
             "$ref": "#/definitions/SmsReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of SMS receivers that are part of this action group."
         },
         "webhookReceivers": {
@@ -628,6 +813,9 @@
           "items": {
             "$ref": "#/definitions/WebhookReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of webhook receivers that are part of this action group."
         },
         "itsmReceivers": {
@@ -635,6 +823,9 @@
           "items": {
             "$ref": "#/definitions/ItsmReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of ITSM receivers that are part of this action group."
         },
         "azureAppPushReceivers": {
@@ -642,6 +833,9 @@
           "items": {
             "$ref": "#/definitions/AzureAppPushReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of AzureAppPush receivers that are part of this action group."
         },
         "automationRunbookReceivers": {
@@ -649,6 +843,9 @@
           "items": {
             "$ref": "#/definitions/AutomationRunbookReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of AutomationRunbook receivers that are part of this action group."
         },
         "voiceReceivers": {
@@ -656,6 +853,9 @@
           "items": {
             "$ref": "#/definitions/VoiceReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of voice receivers that are part of this action group."
         },
         "logicAppReceivers": {
@@ -663,6 +863,9 @@
           "items": {
             "$ref": "#/definitions/LogicAppReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of logic app receivers that are part of this action group."
         },
         "azureFunctionReceivers": {
@@ -670,6 +873,9 @@
           "items": {
             "$ref": "#/definitions/AzureFunctionReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of azure function receivers that are part of this action group."
         },
         "armRoleReceivers": {
@@ -677,6 +883,9 @@
           "items": {
             "$ref": "#/definitions/ArmRoleReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of ARM role receivers that are part of this action group. Roles are Azure RBAC roles and only built-in roles are supported."
         },
         "eventHubReceivers": {
@@ -684,6 +893,9 @@
           "items": {
             "$ref": "#/definitions/EventHubReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event hub receivers that are part of this action group."
         }
       },
@@ -710,6 +922,9 @@
           "items": {
             "$ref": "#/definitions/EmailReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of email receivers that are part of this action group."
         },
         "smsReceivers": {
@@ -717,6 +932,9 @@
           "items": {
             "$ref": "#/definitions/SmsReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of SMS receivers that are part of this action group."
         },
         "webhookReceivers": {
@@ -724,6 +942,9 @@
           "items": {
             "$ref": "#/definitions/WebhookReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of webhook receivers that are part of this action group."
         },
         "itsmReceivers": {
@@ -731,6 +952,9 @@
           "items": {
             "$ref": "#/definitions/ItsmReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of ITSM receivers that are part of this action group."
         },
         "azureAppPushReceivers": {
@@ -738,6 +962,9 @@
           "items": {
             "$ref": "#/definitions/AzureAppPushReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of AzureAppPush receivers that are part of this action group."
         },
         "automationRunbookReceivers": {
@@ -745,6 +972,9 @@
           "items": {
             "$ref": "#/definitions/AutomationRunbookReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of AutomationRunbook receivers that are part of this action group."
         },
         "voiceReceivers": {
@@ -752,6 +982,9 @@
           "items": {
             "$ref": "#/definitions/VoiceReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of voice receivers that are part of this action group."
         },
         "logicAppReceivers": {
@@ -759,6 +992,9 @@
           "items": {
             "$ref": "#/definitions/LogicAppReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of logic app receivers that are part of this action group."
         },
         "azureFunctionReceivers": {
@@ -766,6 +1002,9 @@
           "items": {
             "$ref": "#/definitions/AzureFunctionReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of azure function receivers that are part of this action group."
         },
         "armRoleReceivers": {
@@ -773,6 +1012,9 @@
           "items": {
             "$ref": "#/definitions/ArmRoleReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of ARM role receivers that are part of this action group. Roles are Azure RBAC roles and only built-in roles are supported."
         },
         "eventHubReceivers": {
@@ -780,6 +1022,9 @@
           "items": {
             "$ref": "#/definitions/EventHubReceiver"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event hub receivers that are part of this action group."
         }
       },

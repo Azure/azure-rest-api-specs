@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-consumption"
   output-folder: "$(typescript-sdks-folder)/sdk/consumption/arm-consumption"
-  clear-output-folder: true
   generate-metadata: true
 ```

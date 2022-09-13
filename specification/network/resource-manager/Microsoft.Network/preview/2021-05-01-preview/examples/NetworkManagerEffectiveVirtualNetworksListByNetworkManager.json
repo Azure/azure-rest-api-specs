@@ -1,0 +1,27 @@
+{
+  "title": "List Effective Virtual Networks List By Network Groups",
+  "parameters": {
+    "api-version": "2021-05-01-preview",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+      "conditionalMembers": "location='useast2'",
+      "skipToken": "FakeSkipTokenCode"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testNetworkManager",
+            "location": "useast2",
+            "membershipType": "Static"
+          }
+        ],
+        "skipToken": "NextFakeSkipTokenCode"
+      }
+    }
+  }
+}

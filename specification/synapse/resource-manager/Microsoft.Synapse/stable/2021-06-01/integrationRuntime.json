@@ -1377,7 +1377,7 @@
         }
       ],
       "properties": {
-        "state": {
+        "provisioningState": {
           "description": "Integration runtime state, only valid for managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeState",
           "readOnly": true
@@ -1386,6 +1386,11 @@
           "description": "Managed integration runtime properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+        },
+        "managedVirtualNetwork": {
+          "description": "Managed integration runtime managed virtual network.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedIntegrationRuntimeManagedVirtualNetworkReference"
         }
       },
       "required": [
@@ -1407,6 +1412,24 @@
         "customerVirtualNetwork": {
           "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
           "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeManagedVirtualNetworkReference": {
+      "description": "Managed integration runtime managed virtual network reference.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "The reference name of the managed virtual network",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the managed virtual network.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the managed virtual network.",
+          "type": "string"
         }
       }
     },
