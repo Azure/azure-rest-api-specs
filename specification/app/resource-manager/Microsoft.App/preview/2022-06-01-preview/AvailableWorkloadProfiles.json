@@ -78,7 +78,7 @@
               "description": "Used to map workload profile types to billing meter.",
               "type": "string",
               "enum": [
-                "PremiumSkuGeneralCompute",
+                "PremiumSkuGeneralPurpose",
                 "PremiumSkuMemoryOptimized",
                 "PremiumSkuComputeOptimized"
               ],
@@ -86,6 +86,10 @@
                 "name": "Category",
                 "modelAsString": true
               }
+            },
+            "default": {
+              "type": "boolean",
+              "description": "indicates whether the profile is default for the location."
             },
             "cores": {
               "type": "integer",
