@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2022-10-01-preview",
+    "jobId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "qnaGenerationRequestBody": {
+      "documents": [
+        {
+          "id": "1",
+          "documentKind": "raw",
+          "content": "Satya Nadella was born in Hyderabad of present-day Telangana, India into a Telugu-speaking Hindu family. His mother Prabhavati was a Sanskrit lecturer and his father, Bukkapuram Nadella Yugandhar, was an [TAG]Indian Administrative Service[TAG] officer of the 1962 batch.",
+          "language": "en"
+        }
+      ],
+      "qnAGenerationParameters": {
+        "useMarkedAnswer": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the gna generation job.",
+      "headers": {
+        "Operation-Location": "https://<resource-endpoint>/language/generate-questionanswers/jobs/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee?api-version=2022-10-01-preview"
+      }
+    }
+  }
+}

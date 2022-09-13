@@ -1,0 +1,345 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Generate Question and Answer pairs ",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection, question answering and question answers generation. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
+    "version": "2022-10-01-preview"
+  },
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    },
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    },
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/generate-questionanswers": {
+      "post": {
+        "summary": "Generate Question and Answers from a set of documents.",
+        "operationId": "GenerateQuestionAnswers_SubmitJob",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GenerationRequest"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQAGenerationJob.json"
+          },
+          "Successful query with marked documents": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQAGenerationJob_useMarkedAnswer.json"
+          },
+          "Successful query with URL in a document": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulSubmitQAGenerationJob_URL.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/generate-questionanswers/jobs/{jobId}": {
+      "get": {
+        "summary": "Gets the status of a question answers generation job.",
+        "operationId": "GenerateQuestionAnswers_GetJobStatus",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobIdParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Question answers generation job status.",
+            "schema": {
+              "$ref": "#/definitions/GenerationJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulQAGenerationJobStatus.json"
+          },
+          "Successful query with marked documents": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulQAGenerationJobStatus_useMarkedAnswer.json"
+          },
+          "Successful query with URL in a document": {
+            "$ref": "./examples/questionanswering/generate/SuccessfulQAGenerationJobStatus_URL.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoint (e.g., https://RESOURCE-NAME.api.cognitiveservices.azure.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "JobIdParameter": {
+      "name": "jobId",
+      "in": "path",
+      "description": "Job ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GenerationRequest": {
+      "name": "generationRequest",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/GenerationRequest"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "Language": {
+      "type": "string",
+      "description": "Language of the document content. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+    },
+    "GenerationRequest": {
+      "type": "object",
+      "description": "Question Answers Generation job with documents and parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The set of documents to process as part of question answers generation job.",
+          "items": {
+            "$ref": "#/definitions/GenerationDocument"
+          }
+        },
+        "parameters": {
+          "description": "Parameters that define max number of question answers to be generated, fetch raw contents of documents or not, etc.",
+          "$ref": "#/definitions/GenerationParameters"
+        }
+      }
+    },    
+    "GenerationDocument": {
+      "type": "object",
+      "required": [
+        "id",
+        "content",
+        "documentType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier."
+        },
+        "content": {
+          "type": "string",
+          "description": "The input text, html or URL to process."
+        },
+        "documentKind": {
+          "type": "string",
+          "$ref": "#/definitions/DocumentKind"
+        },
+        "language": {
+          "type": "string",
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+        }
+      },
+      "description": "An input document to be processed for question answer generation."
+    },
+    "DocumentKind": {
+      "type": "string",
+      "description": "Document type.",
+      "enum": [
+        "Raw",
+        "URL",
+        "HTML"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DocumentKind",
+        "values": [
+          {
+            "value": "Raw",
+            "description": "Raw text which can have answer markers."
+          },
+          {
+            "value": "URL",
+            "description": "Content is a URL, whose page needs to be downloaded and used for generation of question answers."
+          },
+          {
+            "value": "HTML",
+            "description": "HTML markup text."
+          }
+        ]
+      }
+    },
+    "GenerationParameters": {
+      "type": "object",
+      "description": "Parameters for configuring question answers generation and limiting the output.",
+      "additionalProperties": false,
+      "properties": {
+        "fetchRawContent": {
+          "type": "boolean",
+          "description": "Enable to fetch raw contents of document in the result."
+        },
+        "useMarkedAnswer": {
+          "type": "boolean",
+          "description": "Specify this as true - if the documents have marker tags &lt;answer&gt; and &lt;/answer&gt; for marked answers. Example: Satya Nadella was born in &lt;answer&gt; Hyderabad &lt;/answer&gt; of present-day Telangana, India into a Telugu-speaking Hindu family."
+        },
+        "maxResultCount": {
+          "type": "integer",
+          "description": "Maximum number of results (question answers) to be generated.",
+          "format": "int32",
+          "maximum": 30,
+          "minimum": 1
+        }
+      }
+    },    
+    "GenerationJobState": {
+      "description": "Generation Job state represents the job metadata and any errors and a result object if job succeeded.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/JobState"
+        },
+        {
+          "$ref": "#/definitions/GenerationResult"
+        }
+      ]
+    },
+    "GenerationResult": {
+      "type": "object",
+      "description": "Result of question answer generation job.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The set of documents with processed raw contents.",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        },
+        "value": {
+          "type": "array",
+          "description": "The set of question and answers generated in the generation job.",
+          "items": {
+            "$ref": "#/definitions/GeneratedQAs"
+          }
+        }
+      }
+    },
+    "GeneratedQAs": {
+      "type": "array",
+      "description": "An array of question answers generated from documents in the job.",
+      "items": {
+        "$ref": "#/definitions/GeneratedQA"
+      }
+    },
+    "GeneratedQA": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "A question generated for a specific answer from a document in the job."
+        },
+        "answer": {
+          "type": "string",
+          "description": "Entity or phrase which is the answer to the generated question from a particular document in the job."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "description": "Confidence score of a question generated against the answer in the document's content."
+        },
+        "confidenceBucket": {
+          "type": "string",
+          "description": "Confidence bucket of a question generated against the answer in the document's content. Possible values &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;."
+        },
+        "documentId": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier, GUID will be assigned if user had not provided Id in job request."
+        }        
+      },
+      "description": "Question and Answer generated from the document."
+    }
+  }
+}
