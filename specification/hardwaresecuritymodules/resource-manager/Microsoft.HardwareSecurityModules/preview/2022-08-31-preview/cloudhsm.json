@@ -128,8 +128,9 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmPatchParameters"
             },
             "description": "Parameters to create Cloud HSM"
           }
@@ -764,6 +765,24 @@
         }
       },
       "description": "Properties of a Cloud HSM resource.",
+      "type": "object"
+    },
+    "CloudHsmPatchParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The Cloud HSM Resource tags",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The Cloud HSM Resource tags additional properties"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/CloudHsmSku",
+          "description": "SKU details"
+        }
+      },
+      "description": "Patchable properties of the Cloud HSM",
       "type": "object"
     },
     "CloudHsmPrivateEndpointConnection": {
