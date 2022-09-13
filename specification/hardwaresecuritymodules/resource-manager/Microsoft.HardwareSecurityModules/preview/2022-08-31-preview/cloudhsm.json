@@ -474,7 +474,7 @@
             "schema": {
               "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
             },
-            "description": "Parameters to validate the PrivateEndpointConnection"
+            "description": "Parameters of the PrivateEndpointConnection"
           }
         ],
         "responses": {
@@ -505,6 +505,73 @@
         "x-ms-examples": {
           "CloudHsmPrivateEndpointConnection_Create_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmPrivateEndpointConnection_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          ""
+        ],
+        "operationId": "CloudHsmPrivateEndpointConnections_Update",
+        "description": "Updates the private endpoint connection for the cloud hsm pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "path",
+            "name": "peConnectionName",
+            "required": true,
+            "type": "string",
+            "description": "PrivateEndpointConnection name"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CloudHsmPrivateEndpointConnectionPatchParameters"
+            },
+            "description": "Parameters to patch the PrivateEndpointConnection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The state of private endpoint connection was updated successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "(specified only if operation does not finish synchronously) The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmPrivateEndpointConnection_Update_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmPrivateEndpointConnection_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -783,6 +850,20 @@
         }
       },
       "description": "Patchable properties of the Cloud HSM",
+      "type": "object"
+    },
+    "CloudHsmPrivateEndpointConnectionPatchParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The Cloud HSM PrivateEndpointConnection tags",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The Cloud HSM PrivateEndpointConnection tags additional properties"
+          }
+        }
+      },
+      "description": "Patchable properties of the Cloud HSM PrivateEndpointConnection",
       "type": "object"
     },
     "CloudHsmPrivateEndpointConnection": {
