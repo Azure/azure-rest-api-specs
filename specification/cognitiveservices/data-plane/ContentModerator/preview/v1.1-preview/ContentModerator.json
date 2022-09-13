@@ -17,190 +17,270 @@
       "apim_key": []
     }
   ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/Endpoint"
-      }
-    ]
-  },
   "paths": {
-    "/contentmoderator/moderate/v1.1-preview.1/Text/Detect": {
+    "/contentmoderator/moderate/v1.1-preview/text/detect": {
       "post": {
         "tags": [
-          "TextModeration"
+          "Text"
         ],
-        "summary": "[Summary]",
-        "description": "[Description]",
-        "operationId": "TextModeration_Detect",
-        "parameters": [
-          {
-            "$ref": "#/parameters/textLanguage"
-          },
-          {
-            "$ref": "#/parameters/textRegion"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "[Description]",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LabelRequest"
-            }
-          }
-        ],
+        "summary": "Text Detect",
+        "description": "A sync API for text detection",
+        "operationId": "Text_Detect",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/Locale"
+          },
+          {
+            "name": "textDetectRequest",
+            "in": "body",
+            "description": "Text detect request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextDetectRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Status 200",
             "schema": {
-              "$ref": "#/definitions/LabelResponse"
+              "$ref": "#/definitions/TextDetectResponse"
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "Client error or server error (4xx or 5xx)",
             "schema": {
-              "$ref": "#/definitions/LabelError"
+              "$ref": "#/definitions/ErrorCode"
             }
           }
         }
       }
     }
   },
-  "x-ms-paths": {
-  },
   "definitions": {
-    "LabelRequest": {
-      "description": "[Description]",
+    "TextCategory": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "DisInfoTopics",
+        "HateSpeech",
+        "PII",
+        "Profanity",
+        "SelfHarm",
+        "SensitiveTopics",
+        "Sexual",
+        "Violance"
+      ],
+      "x-ms-enum": {
+        "name": "TextCategory",
+        "modelAsString": false
+      }
+    },
+    "TextDetectMode": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Quick",
+        "Normal"
+      ],
+      "default": "Normal",
+      "x-ms-enum": {
+        "name": "TextDetectMode",
+        "modelAsString": false
+      }
+    },
+    "ModelOutputDetailKVPair": {
       "type": "object",
       "required": [
-        "Text"
-      ],
+        "key", 
+        "value",
+        "valueType"
+        ],
       "properties": {
-        "Text": {
+        "key": {
           "type": "string"
         },
-        "LabelCategories": {
-          "type": "array",
-          "items": {
-            "$ref": "#definitions/LabelCategory"
+        "value": {
+          "type": "string"
+        },
+        "valueType": {
+          "type": "string",
+          "x-nullable": false,
+          "enum": [
+            "Number",
+            "Boolean",
+            "String"
+          ],
+          "x-ms-enum": {
+            "name": "ValueType",
+            "modelAsString": false
           }
-        }
-      }
-    },
-    "LabelCategory":{
-      "type": "object",
-      "required":[
-        "Category"
-      ],
-      "properties": {
-        "Category": {
-          "$ref": "#definitions/Category"
-        },
-        "SubCategory": {
-          "$ref": "#definitions/SubCategory"
-        }
-      }
-    },
-    "Category": {
-      "type": "string",
-      "x-nullable": false,
-      "enum": [
-        "Sexual",
-        "SelfHarm",
-        "Violance"
-      ]
-    },
-    "SubCategory": {
-      "type": "string",
-      "x-nullable": false,
-      "enum": [
-        "Gun",
-        "Fight"
-      ]
-    },
-    "LabelResponse": {
-      "type": "object",
-      "required": ["Results"],
-      "properties": {
-        "Results": {
-          "type": "array",
-          "items": {
-              "$ref": "#definitions/LabelResult"
-            }
-        }
-      }
-    },
-    "LabelResult": {
-      "type": "object",
-      "required": ["Category", "Labeled"],
-      "properties": {
-        "Category": {
-          "$ref": "#definitions/Category"
-        },
-        "SubCategory": {
-          "$ref": "#definitions/SubCategory"
-        },
-        "Labeled": {
-          "type": "boolean"
-        },
-        "Score": {
-          "type": "number",
-          "format": "float"
-        },
-        "ModelOutputDetail": {
-          "$ref": "#definitions/ModelOutputDetail"
         }
       }
     },
     "ModelOutputDetail": {
       "type": "array",
       "items": {
-        "$ref": "#definitions/ModelOutputDetailKVPair"
+        "$ref": "#/definitions/ModelOutputDetailKVPair"
       }
     },
-    "ModelOutputDetailKVPair": {
+    "BasicTextDetectResult":{
+      "type": "object",
+      "required": ["category", "isDetected"],
+      "properties": {
+        "textDetectResultType": {
+          "type": "string",
+          "description": "Whether the text is detected as a whole or has masks",
+          "x-nullable": false,
+          "enum": [
+            "Whole",
+            "Masked"
+          ],
+          "x-ms-enum": {
+            "name": "textDetectResultType",
+            "modelAsString": false
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/TextCategory"
+        },
+        "isDetected": {
+          "type": "boolean",
+          "description": "Whether this category is detected in input text"
+        }
+      },
+      "discriminator": "textDetectResultType"
+    },
+    "WholeTextDetectResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasicTextDetectResult"
+        }
+      ],
+      "properties": {
+        "modelOutputDetail": {
+          "$ref": "#/definitions/ModelOutputDetail"
+        }
+      },
+      "x-ms-discriminator-value": "Whole"
+    },
+    "MaskedTextDetectResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasicTextDetectResult"
+        }
+      ],
+      "properties": {
+        "masks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "description": "Inclusive start offset of mask",
+                "type": "integer"
+              },
+              "end": {
+                "description": "Exclusive end offset of mask",
+                "type": "integer"
+              },
+              "modelOutputDetail": {
+                "$ref": "#/definitions/ModelOutputDetail"
+              }
+            }
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Masked"
+    },
+    "TextDetectRequest": {
+      "description": "The text detect request",
       "type": "object",
       "required": [
-        "Key", 
-        "Value"
-        ],
+        "text"
+      ],
       "properties": {
-        "Key": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "description": "The text need to perform detection"
         },
-        "Value": {
-          "type": "string"
+        "categories": {
+          "type": "array",
+          "description": "The categories will be detected, if not assigned, all the categories will be detected",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          }
         },
-        "ValueType": {
-          "type": "string"
+        "detectMode": {
+          "$ref": "#/definitions/TextDetectMode"
         }
       }
     },
-    "LabelError": {}
+    "TextDetectResponse": {
+      "type": "object",
+      "required": ["detectResults"],
+      "properties": {
+        "wholeTextDetectResults": {
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/WholeTextDetectResult"
+            }
+        },
+        "maskedTextDetectResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaskedTextDetectResult"
+          }
+        }
+      }
+    },
+    "ErrorCode": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    }
   },
   "parameters": {
-    "textLanguage": {
-      "name": "language",
-      "in": "query",
-      "description": "Language of the text, by default English.",
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<resource-name>.cognitiveservices.azure.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     },
-    "textRegion": {
-      "name": "region",
-      "in": "query",
-      "description": "Region setting, by default UnitedStates.",
+    "Locale": {
+      "name": "locale",
+      "description": "Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
+      "required": false,
       "type": "string",
+      "in": "query",
       "x-ms-parameter-location": "method"
     }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/contentmoderator/moderate/v1.1-preview",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
   }
 }
