@@ -81,10 +81,9 @@
 - rule:
     type: label
     label: Approved-BreakingChange
-    booleanFilterExpression: !(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)
+    booleanFilterExpression: !(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview
     onLabeledAddLabels:
         - WaitForARMFeedback
-        - ARMReview
       
         
 - rule:
