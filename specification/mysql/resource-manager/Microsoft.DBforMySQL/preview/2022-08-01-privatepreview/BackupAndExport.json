@@ -31,8 +31,8 @@
       ],
       "properties": {
         "targetDetails": {
-          "$ref": "#/definitions/BackupTargetDetails",
-          "description": "Backup Target Details"
+          "$ref": "#/definitions/BackupStoreDetails",
+          "description": "Backup Target Store Details"
         }
       }
     },
@@ -45,11 +45,31 @@
         }
       ]
     },
-    "BackupTargetDetails": {
-      "description": "BackupTargetDetails is used for scenarios where backup data is streamed/copied over to a storage destination.",
+    "BackupStoreDetails": {
+      "description": "Details about the target where the backup content will be stored.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "FullBackupStoreDetails": {
+      "description": "FullBackupStoreDetails is used for scenarios where backup data is streamed/copied over to a storage destination.",
       "type": "object",
       "required": [
         "sasUriList"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupStoreDetails"
+        }
       ],
       "properties": {
         "sasUriList": {
@@ -76,8 +96,7 @@
           "description": "Backup Format for the current backup.",
           "enum": [
             "None",
-            "Mapped",
-            "Raw"
+            "CollatedFormat"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -91,12 +110,12 @@
       "description": "PreBackup Response Properties",
       "type": "object",
       "required": [
-        "estimatedBackupSize"
+        "numberOfContainers"
       ],
       "properties": {
-        "estimatedBackupSize": {
-          "format": "int64",
-          "description": "Estimated size of the resource data to be backed up.",
+        "numberOfContainers": {
+          "format": "int32",
+          "description": "Estimated no of storage containers required for resource data to be backed up.",
           "type": "integer"
         }
       }
@@ -251,7 +270,7 @@
             "$ref": "./examples/PreBackup.json"
           }
         },
-        "description": "Validates if backup can be performed for given server and estimates backup size.",
+        "description": "Validates if backup can be performed for given server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
