@@ -2,13 +2,22 @@
     "parameters": {
         "subscriptionId": "00000000-0000-0000-0000-000000000000",
         "resourceGroupName": "rgcloudhsm",
-        "cloudHsmName": "chsm1",
+        "cloudHsmClusterName": "chsm1",
         "api-version": "2022-08-31-preview",
         "body": {
+            "location": "eastus2",
+            "sku": {
+                "family": "B",
+                "name": "Standard_B1"
+            },
             "tags": {
                 "Dept": "hsm",
-                "Environment": "dogfood",
-                "Slice": "A"
+                "Environment": "dogfood"
+            },
+            "properties": {
+                "securityDomain": {
+                    "fipsState": 2
+                }
             }
         }
     },
@@ -24,10 +33,9 @@
                 },
                 "tags": {
                     "Dept": "hsm",
-                    "Environment": "dogfood",
-                    "Slice": "A"
+                    "Environment": "dogfood"
                 },
-                "type": "Microsoft.HardwareSecurityModules/cloudHSMClusters",
+                "type": "Microsoft.HardwareSecurityModules/cloudHSM",
                 "systemData": {
                     "createdBy": "CHsmUser1",
                     "createdByType": "User",
@@ -43,16 +51,11 @@
                         "fipsState": 2,
                         "activationStatus": "null"
                     },
-                    "hsms": null,
-                    "state": "Started",
-                    "stateMessage": ""
+                    "hsms": null
                 }
             }
         },
-        "202": {
-            "headers": {
-                "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/chsm1?api-version=2022-07-01&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9"
-            },
+        "201": {
             "body": {
                 "name": "chsm1",
                 "location": "eastus2",
@@ -63,11 +66,10 @@
                 },
                 "tags": {
                     "Dept": "hsm",
-                    "Environment": "dogfood",
-                    "Slice": "A"
+                    "Environment": "dogfood"
                 },
                 "type": "Microsoft.HardwareSecurityModules/cloudHSMClusters",
-                "systemData": {
+				"systemData": {
                     "createdBy": "CHsmUser1",
                     "createdByType": "User",
                     "createdAt": "2022-09-12T12:00:00.0000000Z",
@@ -82,9 +84,7 @@
                         "fipsState": 2,
                         "activationStatus": "null"
                     },
-                    "hsms": null,
-                    "state": "Started",
-                    "stateMessage": ""
+                    "hsms": null
                 }
             }
         }

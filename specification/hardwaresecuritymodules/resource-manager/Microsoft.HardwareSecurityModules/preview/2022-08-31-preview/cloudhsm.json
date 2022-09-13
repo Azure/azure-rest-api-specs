@@ -33,12 +33,12 @@
         }
     },
     "paths": {
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}": {
             "put": {
                 "tags": [
                     ""
                 ],
-                "operationId": "CloudHsm_CreateOrUpdate",
+                "operationId": "CloudHsmCluster_CreateOrUpdate",
                 "description": "Create or Update a Cloud HSM in the specified subscription.",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -46,7 +46,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }, {
@@ -82,7 +82,7 @@
                 },
                 "x-ms-examples": {
                     "CloudHsm_CreateOrUpdate_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsm_CreateOrUpdate_MaximumSet_Gen.json"
+                        "$ref": "./examples/CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen.json"
                     }
                 }
             },
@@ -90,7 +90,7 @@
                 "tags": [
                     ""
                 ],
-                "operationId": "CloudHsm_Update",
+                "operationId": "CloudHsmCluster_Update",
                 "x-ms-long-running-operation": true,
                 "description": "Update a Cloud HSM in the specified subscription.",
                 "parameters": [{
@@ -98,7 +98,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }, {
@@ -140,7 +140,7 @@
                 },
                 "x-ms-examples": {
                     "CloudHsm_Update_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsm_Update_MaximumSet_Gen.json"
+                        "$ref": "./examples/CloudHsmCluster_Update_MaximumSet_Gen.json"
                     }
                 }
             },
@@ -148,7 +148,7 @@
                 "tags": [
                     ""
                 ],
-                "operationId": "CloudHsm_Get",
+                "operationId": "CloudHsmCluster_Get",
                 "description": "Gets the specified Cloud HSM.",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -156,7 +156,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }
@@ -177,7 +177,7 @@
                 },
                 "x-ms-examples": {
                     "CloudHsm_Get_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsm_Get_MaximumSet_Gen.json"
+                        "$ref": "./examples/CloudHsmCluster_Get_MaximumSet_Gen.json"
                     }
                 }
             },
@@ -185,7 +185,7 @@
                 "tags": [
                     ""
                 ],
-                "operationId": "CloudHsm_Delete",
+                "operationId": "CloudHsmCluster_Delete",
                 "description": "Deletes the specified Cloud HSM.",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -193,7 +193,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }
@@ -217,17 +217,17 @@
                 },
                 "x-ms-examples": {
                     "CloudHsm_Delete_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsm_Delete_MaximumSet_Gen.json"
+                        "$ref": "./examples/CloudHsmCluster_Delete_MaximumSet_Gen.json"
                     }
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters": {
             "get": {
                 "tags": [
                     ""
                 ],
-                "operationId": "CloudHsm_ListByResourceGroup",
+                "operationId": "CloudHsmCluster_ListByResourceGroup",
                 "description": "The List operation gets information about the Cloud HSMs associated with the subscription and within the specified resource group.",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -262,17 +262,17 @@
                 },
                 "x-ms-examples": {
                     "CloudHsm_ListByResourceGroup_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsm_ListByResourceGroup_MaximumSet_Gen.json"
+                        "$ref": "./examples/CloudHsmCluster_ListByResourceGroup_MaximumSet_Gen.json"
                     }
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters": {
             "get": {
                 "tags": [
                     ""
                 ],
-                "operationId": "CloudHsm_ListBySubscription",
+                "operationId": "CloudHsmCluster_ListBySubscription",
                 "description": "The List operation gets information about the Cloud HSMs associated with the subscription.",
                 "x-ms-long-running-operation": true,
                 "parameters": [{
@@ -305,12 +305,12 @@
                 },
                 "x-ms-examples": {
                     "CloudHsm_ListBySubscription_MaximumSet_Gen": {
-                        "$ref": "./examples/CloudHsm_ListBySubscription_MaximumSet_Gen.json"
+                        "$ref": "./examples/CloudHsmCluster_ListBySubscription_MaximumSet_Gen.json"
                     }
                 }
             }
         },
-        "/resourceprovider/api/providers/Microsoft.HardwareSecurityModules/operations": {
+        "/providers/Microsoft.HardwareSecurityModules/operations": {
             "get": {
                 "tags": [
                     ""
@@ -348,7 +348,7 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateLinkResources": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateLinkResources": {
             "get": {
                 "tags": [
                     ""
@@ -361,7 +361,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }
@@ -390,7 +390,7 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnections/{peConnectionName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}": {
             "put": {
                 "tags": [
                     ""
@@ -402,7 +402,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }, {
@@ -464,7 +464,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }, {
@@ -518,7 +518,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }, {
@@ -558,7 +558,7 @@
                 }
             }
         },
-        "/resourceprovider/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHSMClusters/{cloudHsmName}/privateEndpointConnections": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections": {
             "get": {
                 "tags": [
                     ""
@@ -571,7 +571,7 @@
                     }, {
                         "$ref": "#/parameters/ResourceGroupName"
                     }, {
-                        "$ref": "#/parameters/CloudHsmName"
+                        "$ref": "#/parameters/cloudHsmClusterName"
                     }, {
                         "$ref": "#/parameters/ApiVersion"
                     }
@@ -691,14 +691,6 @@
                     "items": {
                         "$ref": "#/definitions/CloudHsmPartitionProperties"
                     }
-                },
-                "state": {
-                    "type": "string",
-                    "description": "State of Cloud HSM Resource's Fabric Pool"
-                },
-                "stateMessage": {
-                    "type": "string",
-                    "description": "The Cloud HSM Partition State message"
                 }
             },
             "description": "Properties of a Cloud HSM resource.",
@@ -1352,8 +1344,8 @@
             "maxLength": 90,
             "x-ms-parameter-location": "method"
         },
-        "CloudHsmName": {
-            "name": "cloudHsmName",
+        "cloudHsmClusterName": {
+            "name": "cloudHsmClusterName",
             "in": "path",
             "required": true,
             "type": "string",
