@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-03
+tag: package-2022-09
 ```
 
 ## Suppression
@@ -46,17 +46,41 @@ directive:
 ```
 
 
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-09-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-09-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-09-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-09-01/operations.json
+```
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-05-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-05-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-05-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-05-01/operations.json
+```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.AzureStackHCI/stable/2022-03-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2022-03-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2022-03-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
 ```
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -122,10 +146,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

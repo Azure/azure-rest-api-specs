@@ -945,7 +945,8 @@
           "type": "boolean",
           "x-ms-mutability": [
             "create",
-            "update"
+            "update",
+            "read"
           ]
         }
       }
@@ -1413,7 +1414,11 @@
                   "enum": [
                     "Enabled",
                     "Disabled"
-                  ]
+                  ],
+                  "x-ms-enum": {
+                    "name": "DesiredState",
+                    "modelAsString": false
+                  }
                 },
                 "actualState": {
                   "description": "Actual state",
@@ -1425,6 +1430,10 @@
                     "Disabled",
                     "Unknown"
                   ],
+                  "x-ms-enum": {
+                    "name": "ActualState",
+                    "modelAsString": false
+                  },
                   "readOnly": true
                 }
               }
