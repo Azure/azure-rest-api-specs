@@ -12,11 +12,11 @@ API Scenario is a YAML file defining RESTful API usage scenarios of your service
 
 ![demo](./how-to/runApiTest.gif)
 
-## Quick start
+## Quick starts
 
 - [Example: Write and run your first API scenario file](./how-to/QuickStart.md)
-- [Example: Generate a basic API scenario file](./how-to/generateABasicApiScenario.md)
-- [Example: Integrate with ARM Template](./how-to/integrateWithArmTemplate.md)
+- [Example: Generate a basic API scenario file](./how-to/GenerateABasicApiScenario.md)
+- [Example: Resolve external dependencies](./how-to/ResolveDependencies.md)
 - [API scenario file sample](../samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml)
 
 ## References
@@ -24,4 +24,11 @@ API Scenario is a YAML file defining RESTful API usage scenarios of your service
 - [API Scenario Definition Reference](./references/ApiScenarioDefinition.md)
 - [API Scenario Variable Definition Reference](./references/Variables.md)
 - [API Scenario Runner Reference](./references/Runner.md)
-- [API Scenario JSON Schema](./references/v1.1/schema.json)
+- [API Scenario JSON Schema](./references/v1.2/schema.json)
+
+## Feedback
+
+If you have any question or need support, feel free to contact us via:
+- [StackOverflow](https://stackoverflow.microsoft.com/posts/tagged/28051)
+- Teams channel: https://aka.ms/SwaggerSupport (for MS FTEs)
+- Email: vscswagger@microsoft.com.
