@@ -166,6 +166,14 @@ These settings apply only when `--tag=package-flexibleserver-2022-08-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-08-01-preview'
 input-file:
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/preview/2021-12-01-preview/AzureADAdministrator.json
 - Microsoft.DBforMySQL/preview/2022-08-01-privatepreview/BackupAndExport.json
 ```
 
