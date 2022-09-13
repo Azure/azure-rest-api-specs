@@ -2896,10 +2896,21 @@
     },
     "Setting": {
       "description": "Setting definition.",
+      "discriminator": "name",
       "type": "object",
       "allOf": [
         {
           "$ref": "common-types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TagInheritanceSetting": {
+      "description": "Tag Inheritance Setting definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "taginheritance",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Setting"
         }
       ],
       "properties": {
