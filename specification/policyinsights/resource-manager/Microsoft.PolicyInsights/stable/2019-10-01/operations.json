@@ -65,9 +65,8 @@
     }
   },
   "definitions": {
-    "OperationsListResultsDefinition": {
+    "OperationsListResults": {
       "description": "List of available operations.",
-      "type": "object",
       "properties": {
         "@odata.count": {
           "description": "OData entity count; represents the number of operations returned.",
@@ -79,7 +78,7 @@
           "description": "List of available operations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationDefinition"
+            "$ref": "#/definitions/Operation"
           },
           "x-ms-identifiers": [
             "name"
@@ -87,21 +86,15 @@
         }
       }
     },
-    "OperationDefinition": {
+    "Operation": {
       "description": "Operation definition.",
-      "type": "object",
       "properties": {
         "name": {
           "description": "Operation name.",
           "type": "string"
         },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
         "display": {
           "description": "Display metadata associated with the operation.",
-          "type": "object",
           "properties": {
             "provider": {
               "description": "Resource provider name.",

@@ -1666,57 +1666,6 @@
         }
       }
     },
-    "OperationsListResults": {
-      "description": "List of available operations.",
-      "properties": {
-        "@odata.count": {
-          "description": "OData entity count; represents the number of operations returned.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1
-        },
-        "value": {
-          "description": "List of available operations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "Operation": {
-      "description": "Operation definition.",
-      "properties": {
-        "name": {
-          "description": "Operation name.",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Resource provider name.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource name on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation name.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Operation description.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
     "MetadataDocument": {
       "description": "Metadata XML document.",
       "type": "string"
