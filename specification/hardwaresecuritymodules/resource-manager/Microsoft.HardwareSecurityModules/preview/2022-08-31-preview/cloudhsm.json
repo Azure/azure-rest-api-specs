@@ -42,6 +42,9 @@
         "operationId": "CloudHsmCluster_CreateOrUpdate",
         "description": "Create or Update a Cloud HSM in the specified subscription.",
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -73,8 +76,14 @@
               "$ref": "#/definitions/CloudHsmResource"
             }
           },
-          "201": {
+          "202": {
             "description": "Created Cloud HSM",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/CloudHsmResource"
             }
@@ -98,6 +107,9 @@
         ],
         "operationId": "CloudHsmCluster_Update",
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Update a Cloud HSM in the specified subscription.",
         "parameters": [
           {
@@ -161,7 +173,6 @@
         ],
         "operationId": "CloudHsmCluster_Get",
         "description": "Gets the specified Cloud HSM.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -203,6 +214,9 @@
         "operationId": "CloudHsmCluster_Delete",
         "description": "Deletes the specified Cloud HSM.",
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -222,7 +236,13 @@
             "description": "OK Response."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+			"headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -248,7 +268,6 @@
         ],
         "operationId": "CloudHsmCluster_ListByResourceGroup",
         "description": "The List operation gets information about the Cloud HSMs associated with the subscription and within the specified resource group.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -259,8 +278,9 @@
           {
             "in": "query",
             "name": "$skiptoken",
-            "type": "string",
-            "description": "continuationToken value"
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -297,7 +317,6 @@
         ],
         "operationId": "CloudHsmCluster_ListBySubscription",
         "description": "The List operation gets information about the Cloud HSMs associated with the subscription.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -305,8 +324,9 @@
           {
             "in": "query",
             "name": "$skiptoken",
-            "type": "string",
-            "description": "continuationToken value"
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -381,8 +401,7 @@
           ""
         ],
         "operationId": "PrivateLinkResources_ListByCloudHsmResource",
-        "description": "Gets the private link resources supported for the cloud hsm pool.",
-        "x-ms-long-running-operation": true,
+        "description": "Gets the private link resources supported for the cloud hsm pool."
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -410,9 +429,6 @@
               "$ref": "#/definitions/CloudHsmError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CloudHsmPrivateLinkResources_ListByResource_MaximumSet_Gen": {
@@ -496,6 +512,9 @@
         "operationId": "CloudHsmPrivateEndpointConnection_Delete",
         "description": "Deletes the private endpoint connection for the cloud hsm pool.",
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -519,10 +538,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The private endpoint connection was successfully deleted.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
+            "description": "The private endpoint connection was successfully deleted."
           },
           "202": {
             "description": "The private endpoint connection is being deleted.",
@@ -583,9 +599,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "204": {
-            "description": "The private endpoint connection does not exist."
-          },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
@@ -607,7 +620,6 @@
         ],
         "operationId": "PrivateEndpointConnections_ListByCloudHsmResource",
         "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -1062,14 +1074,33 @@
     "CloudHsmSku": {
       "type": "object",
       "description": "Cloud Hsm SKU information",
+	  "required": [
+        "name",
+        "family"
+      ],
       "properties": {
         "family": {
           "type": "string",
-          "description": "Sku family"
+          "description": "Sku family of the Cloud HSM Cluster",
+		  "enum": [
+            "B"
+          ],
+          "x-ms-client-default": "B",
+          "x-ms-enum": {
+            "name": "CloudHsmSkuFamily",
+            "modelAsString": true
+          }
         },
         "name": {
           "type": "string",
-          "description": "Sku name"
+          "description": "Sku name of the Cloud HSM Cluster",
+		  "enum": [
+            "Standard_B1"
+          ],
+          "x-ms-enum": {
+            "name": "CloudHsmSkuName",
+            "modelAsString": false
+          }
         },
         "capacity": {
           "format": "int32",
