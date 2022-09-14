@@ -62,6 +62,12 @@
             "schema": {
               "$ref": "#/definitions/OrchestratorVersionProfileListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "managedClusters.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -74,6 +80,7 @@
   },
   "definitions": {
     "OrchestratorProfile": {
+      "type": "object",
       "properties": {
         "orchestratorType": {
           "type": "string",
@@ -94,6 +101,7 @@
       "description": "Contains information about orchestrator."
     },
     "OrchestratorVersionProfile": {
+      "type": "object",
       "properties": {
         "orchestratorType": {
           "type": "string",
@@ -116,6 +124,7 @@
           "items": {
             "$ref": "#/definitions/OrchestratorProfile"
           },
+          "x-ms-identifiers": [],
           "description": "The list of available upgrade versions."
         }
       },
@@ -126,12 +135,14 @@
       "description": "The profile of an orchestrator and its available versions."
     },
     "OrchestratorVersionProfileProperties": {
+      "type": "object",
       "properties": {
         "orchestrators": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/OrchestratorVersionProfile"
           },
+          "x-ms-identifiers": [],
           "description": "List of orchestrator version profiles."
         }
       },
@@ -141,6 +152,7 @@
       "description": "The properties of an orchestrator version profile."
     },
     "OrchestratorVersionProfileListResult": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
