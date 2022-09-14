@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  adminPassword:
+    type: secureString
+
+prepareSteps:
+  - step: VirtualNetwork_Create
+    armTemplate: armtemplate/Create_NetworkAndSubnet.json
+  - step: NetworkInterface_Create
+    armTemplate: armtemplate/Create_NetworkInterface.json
+  - step: VirtualMachine_Create
+    armTemplate: armtemplate/Create_VirtualMachine.json
+
+scenarios:
+  - scenario: MetricAlert
+    description: Microsoft.Insights/metricAlerts
+    variables:
+      ruleName:
+        type: string
+        prefix: metricalertna
+    steps:
+      - step: MetricAlerts_Create
+        operationId: MetricAlerts_CreateOrUpdate
+        parameters:
+          parameters:
+            location: global
+            properties:
+              description: This is the description of the rule1
+              severity: 3
+              enabled: true
+              scopes:
+                - $(virtualMachineId)
+              evaluationFrequency: PT1M
+              windowSize: PT15M
+              targetResourceType: Microsoft.Compute/virtualMachines
+              targetResourceRegion: $(location)
+              criteria: 
+                odata.type: Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria
+                allOf:
+                  - criterionType: DynamicThresholdCriterion
+                    name: High_CPU_80
+                    metricName: Percentage CPU
+                    metricNamespace: microsoft.compute/virtualmachines
+                    dimensions: 
+                    operator: GreaterOrLessThan
+                    alertSensitivity: Medium
+                    timeAggregation: Average
+                    failingPeriods: 
+                      numberOfEvaluationPeriods: 4
+                      minFailingPeriodsToAlert: 4
+              autoMitigate: true
+              actions:
+      - step: MetricAlerts_ListBySubscription
+        operationId: MetricAlerts_ListBySubscription
+      - step: MetricAlerts_ListByResourceGroup
+        operationId: MetricAlerts_ListByResourceGroup
+      - step: MetricAlerts_Get
+        exampleFile: ..\examples\getMetricAlertSingleResource.json
+      - step: MetricAlerts_Update
+        operationId: MetricAlerts_Update
+        parameters:
+          parameters:
+            tags:
+              tag1: value1
+      - step: MetricAlertsStatus_List
+        exampleFile: ..\examples\getMetricAlertStatus.json
+        outputVariables:
+          statusName:
+            type: string
+            fromResponse: /value/0/name
+      - step: MetricAlertsStatus_ListByName
+        exampleFile: ..\examples\getMetricAlertStatusByName.json
+      - step: MetricAlerts_Delete
+        exampleFile: ..\examples\deleteMetricAlert.json

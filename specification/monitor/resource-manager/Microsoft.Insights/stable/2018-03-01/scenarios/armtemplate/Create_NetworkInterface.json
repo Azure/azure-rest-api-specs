@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "subnetId": {
+        "type": "string",
+        "defaultValue": "vmssvnet"
+      },
+      "location": {
+        "type": "string"
+      }
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Network/networkInterfaces",
+        "apiVersion": "2021-08-01",
+        "name": "vmnic",
+        "location": "[parameters('location')]",
+        "tags": {},
+        "properties": {
+            "ipConfigurations": [
+                {
+                    "name": "Ipv4config",
+                    "properties": {
+                        "subnet": {
+                            "id": "[parameters('subnetId')]"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+    ],
+    "outputs": {
+      "vnicId": {
+        "type": "string",
+        "value": "[resourceId('Microsoft.Network/networkInterfaces', 'vmnic')]"
+      }
+    }
+  }

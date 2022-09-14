@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: PrivateLinkScope
+    description: microsoft.insights/privateLinkScopes
+    variables:
+      scopeName:
+        type: string
+        prefix: linkscopena
+    steps:
+      - step: PrivateLinkScopes_Create
+        operationId: PrivateLinkScopes_CreateOrUpdate
+        parameters:
+          AzureMonitorPrivateLinkScopePayload:
+            location: Global
+      - step: PrivateLinkScopes_List
+        exampleFile: ..\examples\PrivateLinkScopesList.json
+      - step: PrivateLinkScopes_ListByResourceGroup
+        exampleFile: ..\examples\PrivateLinkScopesListByResourceGroup.json
+      - step: PrivateLinkScopes_Get
+        exampleFile: ..\examples\PrivateLinkScopesGet.json
+      - step: PrivateLinkScopes_UpdateTags
+        exampleFile: ..\examples\PrivateLinkScopesUpdateTagsOnly.json
+      - step: PrivateLinkScopes_Delete
+        exampleFile: ..\examples\PrivateLinkScopesDelete.json

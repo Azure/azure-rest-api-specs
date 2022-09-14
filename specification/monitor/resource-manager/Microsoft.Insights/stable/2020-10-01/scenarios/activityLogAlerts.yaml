@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: ActivityLogAlert
+    description: Microsoft.Insights/activityLogAlerts
+    variables:
+      activityLogAlertName:
+        type: string
+        prefix: activitylogalertna
+    steps:
+      - step: ActivityLogAlerts_Create
+        operationId: ActivityLogAlerts_CreateOrUpdate
+        parameters:
+          activityLogAlertRule:
+            location: Global
+            enabled: true
+            description: "Description of sample Activity Log Alert rule."
+            properties:
+              scopes:
+                - /subscriptions/$(subscriptionId)
+              condition:
+                allOf:
+                  - field: category
+                    equals: Administrative
+                  - field: level
+                    equals: Error
+      - step: ActivityLogAlerts_ListBySubscriptionId
+        exampleFile: ..\examples\ActivityLogAlertRule_ListBySubscriptionId.json
+      - step: ActivityLogAlerts_ListByResourceGroup
+        exampleFile: ..\examples\ActivityLogAlertRule_ListByResourceGroupName.json
+      - step: ActivityLogAlerts_Get
+        exampleFile: ..\examples\ActivityLogAlertRule_Get.json
+      - step: ActivityLogAlerts_Update
+        exampleFile: ..\examples\ActivityLogAlertRule_Update.json
+      - step: ActivityLogAlerts_Delete
+        exampleFile: ..\examples\ActivityLogAlertRule_Delete.json

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: ActionGroups
+    description: Microsoft.Insights/actionGroups
+    variables:
+      actionGroupName:
+        type: string
+        prefix: actiongroupna
+    steps:
+      - step: ActionGroups_Create
+        operationId: ActionGroups_CreateOrUpdate
+        parameters:
+          actionGroup:
+            location: Global
+            properties:
+              groupShortName: sample
+              enabled: true
+              emailReceivers:
+                - name: John Doe's email
+                  emailAddress: johndoe@eamil.com
+                  useCommonAlertSchema: false
+              smsReceivers: 
+                - name: John Doe's mobile
+                  countryCode: 1
+                  phoneNumber: 1234567890
+      - step: ActionGroups_Get
+        exampleFile: ..\examples\getActionGroup.json
+      - step: ActionGroups_Update
+        exampleFile: ..\examples\patchActionGroup.json
+      - step: ActionGroups_ListBySubscriptionId
+        operationId: ActionGroups_ListBySubscriptionId
+      - step: ActionGroups_ListByResourceGroup
+        operationId: ActionGroups_ListByResourceGroup
+      - step: ActionGroups_Delete
+        exampleFile: ..\examples\deleteActionGroup.json

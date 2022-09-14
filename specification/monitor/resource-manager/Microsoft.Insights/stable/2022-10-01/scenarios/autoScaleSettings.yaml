@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location: 
+    type: string
+    value: "eastus"
+  adminPassword:
+    type: secureString
+
+prepareSteps:
+  - step: NetworkAndSubnet_Create
+    armTemplate: armtemplate/Create_NetworkAndSubnet.json
+  - step: NetworkInterface_Create
+    armTemplate: armtemplate/Create_NetworkInterface.json
+  - step: VMSS_Create
+    armTemplate: armtemplate/Create_VMSS.json
+
+scenarios:
+  - scenario: AutoscaleSettings
+    description: Microsoft.Insights/autoscalesettings
+    variables:
+      autoscaleSettingName:
+        type: string
+        prefix: autoscalesettingna
+    steps:
+      - step: AutoscaleSettings_Create
+        exampleFile: ..\examples\createOrUpdateAutoscaleSetting.json
+        requestUpdate:
+          - replace: /parameters/properties/targetResourceUri
+            value: $(vmssId)
+          - remove: /parameters/properties/notifications/0/webhooks
+          - remove: /parameters/properties/profiles/0/rules
+          - remove: /parameters/properties/profiles/1
+      - step: AutoscaleSettings_Update
+        exampleFile: ..\examples\patchAutoscaleSetting.json
+        requestUpdate:
+          - remove: /autoscaleSettingResource/properties
+      - step: AutoscaleSettings_ListBySubscription
+        exampleFile: ..\examples\listAutoscaleSettingBySubscription.json
+      - step: AutoscaleSettings_ListByResourceGroup
+        exampleFile: ..\examples\listAutoscaleSetting.json
+      - step: AutoscaleSettings_Get
+        exampleFile: ..\examples\getAutoscaleSetting.json
+
+      - step: PredictiveMetric_Get
+        exampleFile: ..\examples\GetPredictiveMetric.json
+      - step: EventCategories_List
+        exampleFile: ..\..\2015-04-01\examples\GetEventCategories.json
+      - step: Operations_List
+        exampleFile: ..\..\2015-04-01\examples\OperationList.json
+
+      - step: AutoscaleSettings_Delete
+        exampleFile: ..\examples\deleteAutoscaleSetting.json

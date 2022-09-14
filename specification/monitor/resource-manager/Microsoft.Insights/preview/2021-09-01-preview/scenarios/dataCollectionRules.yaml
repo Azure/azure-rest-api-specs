@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  managedClustersName:
+    type: string
+    prefix: associationaks
+  azureClientId:
+    type: string
+  azureClientSecret:
+    type: string
+
+prepareSteps:
+  - step: WorkSpaces_Create
+    armTemplate: armtemplate/Create_OperationalInsightsWorkspaces.json
+  - step: ContainerService_Create
+    armTemplate: armtemplate/Create_ContainerService.json
+
+scenarios:
+  - scenario: DataCollectionRule
+    description: Microsoft.Insights/dataCollectionRules
+    variables:
+      dataCollectionRuleName:
+        type: string
+        prefix: datacollectionrulena
+      associationName: myAssociation
+    steps:
+      - step: DataCollectionRules_Create
+        exampleFile: ..\examples\DataCollectionRulesCreate.json
+        requestUpdate:
+          - replace: /body/properties/destinations/logAnalytics/0/workspaceResourceId
+            value: $(workspaceId)
+          - remove: /body/properties/dataFlows/0/streams/2
+        outputVariables:
+          dataCollectionRuleId:
+            type: string
+            fromResponse: /id
+      - step: DataCollectionRules_ListBySubscription
+        exampleFile: ..\examples\DataCollectionRulesListBySubscription.json
+      - step: DataCollectionRules_ListByResourceGroup
+        exampleFile: ..\examples\DataCollectionRulesListByResourceGroup.json
+      - step: DataCollectionRules_Get
+        exampleFile: ..\examples\DataCollectionRulesGet.json
+      - step: DataCollectionRules_Update
+        exampleFile: ..\examples\DataCollectionRulesUpdate.json
+
+      - step: DataCollectionRuleAssociations_Create
+        exampleFile: ..\examples\DataCollectionRuleAssociationsCreate.json
+        requestUpdate:
+          - replace: /body/properties/dataCollectionRuleId
+            value: $(dataCollectionRuleId)
+      - step: DataCollectionRuleAssociations_ListByResource
+        exampleFile: ..\examples\DataCollectionRuleAssociationsListByResource.json
+      - step: DataCollectionRuleAssociations_ListByRule
+        exampleFile: ..\examples\DataCollectionRuleAssociationsListByRule.json
+      - step: DataCollectionRuleAssociations_Get
+        exampleFile: ..\examples\DataCollectionRuleAssociationsGet.json
+      - step: DataCollectionRuleAssociations_Delete
+        exampleFile: ..\examples\DataCollectionRuleAssociationsDelete.json
+
+      - step: DataCollectionRules_Delete
+        exampleFile: ..\examples\DataCollectionRulesDelete.json
