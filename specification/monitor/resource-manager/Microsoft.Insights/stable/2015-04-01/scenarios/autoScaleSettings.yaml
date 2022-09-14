@@ -4,7 +4,7 @@ scope: ResourceGroup
 variables:
   location: 
     type: string
-    value: "eastus"
+    value: eastus
   adminPassword:
     type: secureString
 
@@ -43,8 +43,6 @@ scenarios:
       - step: AutoscaleSettings_Get
         exampleFile: ..\examples\getAutoscaleSetting.json
 
-      - step: PredictiveMetric_Get
-        exampleFile: ..\examples\GetPredictiveMetric.json
       - step: EventCategories_List
         exampleFile: ..\..\2015-04-01\examples\GetEventCategories.json
       - step: Operations_List

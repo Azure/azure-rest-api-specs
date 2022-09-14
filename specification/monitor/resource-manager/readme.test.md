@@ -12,5 +12,5 @@ test-resources:
   - Microsoft.Insights/stable/2018-04-16/scenarios/scheduledQueryRules.yaml
   - Microsoft.Insights/stable/2020-10-01/scenarios/activityLogAlerts.yaml
   - Microsoft.Insights/stable/2022-06-01/scenarios/actionGroups.yaml
-  - Microsoft.Insights/stable/2022-10-01/scenarios/autoScaleSettings.yaml
+  - Microsoft.Insights/stable/2015-04-01/scenarios/autoScaleSettings.yaml
 ```
