@@ -1577,7 +1577,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomSetupBase"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -2000,7 +2001,8 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeNode"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "otherErrors": {
           "description": "The errors that occurred on this integration runtime.",
@@ -2008,7 +2010,8 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "lastOperation": {
           "description": "The last operation result that occurred on this integration runtime.",
@@ -2018,6 +2021,7 @@
       }
     },
     "ManagedIntegrationRuntimeOperationResult": {
+      "type": "object",
       "description": "Properties of managed integration runtime operation result.",
       "properties": {
         "type": {
@@ -2061,6 +2065,7 @@
       }
     },
     "ManagedIntegrationRuntimeNode": {
+      "type": "object",
       "description": "Properties of integration runtime node.",
       "properties": {
         "nodeId": {
@@ -2096,6 +2101,7 @@
       }
     },
     "ManagedIntegrationRuntimeError": {
+      "type": "object",
       "description": "Error definition for managed integration runtime.",
       "properties": {
         "time": {
@@ -2319,6 +2325,7 @@
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
+      "type": "object",
       "description": "Properties of Self-hosted integration runtime node.",
       "properties": {
         "nodeName": {
@@ -2893,6 +2900,7 @@
       }
     },
     "IntegrationRuntimeResource": {
+      "type": "object",
       "description": "Integration runtime resource type.",
       "allOf": [
         {
@@ -2952,6 +2960,7 @@
       }
     },
     "IntegrationRuntimeStatusResponse": {
+      "type": "object",
       "description": "Integration runtime status response.",
       "properties": {
         "name": {
