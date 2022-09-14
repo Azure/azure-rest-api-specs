@@ -25,7 +25,7 @@ using Azure.ResourceManager;
 @doc("Frontend Subresource of Traffic Controller.")
 @parentResource(TrafficController)
 model Frontend is TrackedResource<FrontendProperties>{
-  @key("frontendsName")
+  @key("frontendName")
   @doc("Frontends")
   @visibility("read")
   @path
@@ -79,7 +79,7 @@ model AssociationProperties {
   subnet?: AssociationSubnet;
   @visibility("read")
   @doc("Provisioning State")
-  provisioningState: ProvisioningState;
+  provisioningState?: ProvisioningState;
 
 }
 
@@ -109,10 +109,10 @@ model TrafficControllerProperties {
   configurationEndpoints: string[];
   @visibility("read")
   @doc("Frontends References List")
-  frontends : ResourceID[];
+  frontends? : ResourceID[];
   @visibility("read")
   @doc("Associations References List")
-  associations : ResourceID[];
+  associations? : ResourceID[];
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;

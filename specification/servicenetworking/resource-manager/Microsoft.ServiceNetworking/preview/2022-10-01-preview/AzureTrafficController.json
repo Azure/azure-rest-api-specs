@@ -694,7 +694,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}": {
       "get": {
         "tags": [
           "FrontendsInterface"
@@ -720,7 +720,7 @@
             "$ref": "#/parameters/TrafficController.trafficControllerName"
           },
           {
-            "$ref": "#/parameters/Frontend.frontendsName"
+            "$ref": "#/parameters/Frontend.frontendName"
           }
         ],
         "responses": {
@@ -763,7 +763,7 @@
             "$ref": "#/parameters/TrafficController.trafficControllerName"
           },
           {
-            "$ref": "#/parameters/Frontend.frontendsName"
+            "$ref": "#/parameters/Frontend.frontendName"
           },
           {
             "name": "resource",
@@ -832,7 +832,7 @@
             "$ref": "#/parameters/TrafficController.trafficControllerName"
           },
           {
-            "$ref": "#/parameters/Frontend.frontendsName"
+            "$ref": "#/parameters/Frontend.frontendName"
           },
           {
             "name": "properties",
@@ -884,7 +884,7 @@
             "$ref": "#/parameters/TrafficController.trafficControllerName"
           },
           {
-            "$ref": "#/parameters/Frontend.frontendsName"
+            "$ref": "#/parameters/Frontend.frontendName"
           }
         ],
         "responses": {
@@ -980,8 +980,7 @@
       },
       "description": "Association Properties.",
       "required": [
-        "associationType",
-        "provisioningState"
+        "associationType"
       ]
     },
     "AssociationSubnet": {
@@ -1278,9 +1277,7 @@
       },
       "description": "Traffic Controller Properties.",
       "required": [
-        "configurationEndpoints",
-        "frontends",
-        "associations"
+        "configurationEndpoints"
       ]
     },
     "TrafficControllerUpdate": {
@@ -1324,8 +1321,8 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Frontend.frontendsName": {
-      "name": "frontendsName",
+    "Frontend.frontendName": {
+      "name": "frontendName",
       "in": "path",
       "required": true,
       "description": "Frontends",
