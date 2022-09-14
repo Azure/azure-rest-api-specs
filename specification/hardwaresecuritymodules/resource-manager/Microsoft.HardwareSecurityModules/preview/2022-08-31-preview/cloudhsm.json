@@ -47,16 +47,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -113,16 +113,16 @@
         "description": "Update a Cloud HSM in the specified subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -175,16 +175,16 @@
         "description": "Gets the specified Cloud HSM.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -219,16 +219,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -270,10 +270,10 @@
         "description": "The List operation gets information about the Cloud HSMs associated with the subscription and within the specified resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "query",
@@ -283,7 +283,7 @@
             "description": "Maximum number of results to return."
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -319,7 +319,7 @@
         "description": "The List operation gets information about the Cloud HSMs associated with the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "in": "query",
@@ -329,7 +329,7 @@
             "description": "Maximum number of results to return."
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -365,7 +365,7 @@
         "description": "Get a list of Cloud HSM operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -404,23 +404,23 @@
         "description": "Gets the private link resources supported for the cloud hsm cluster.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmPrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -446,16 +446,16 @@
         "description": "Creates or updates the private endpoint connection for the cloud hsm cluster.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "path",
@@ -467,29 +467,18 @@
           {
             "in": "body",
             "name": "properties",
-            "x-ms-client-flatten": true,
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Parameters of the PrivateEndpointConnection"
           }
         ],
         "responses": {
           "200": {
-            "description": "The state of private endpoint connection was updated successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "(specified only if operation does not finish synchronously) The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.",
-                "type": "string"
-              }
-            },
+            "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -517,16 +506,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "path",
@@ -573,16 +562,16 @@
         "description": "Gets the private endpoint connection for the cloud hsm cluster.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "path",
@@ -596,7 +585,7 @@
           "200": {
             "description": "Private endpoint connection successfully returned.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -622,23 +611,23 @@
         "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/cloudHsmClusterName"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "List of all CloudHsmCluster private endpoint connections associated with the Cloud HSM.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmPrivateEndpointConnectionsListResult"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -647,9 +636,6 @@
               "$ref": "#/definitions/CloudHsmError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CloudHsmPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
@@ -732,7 +718,7 @@
           "description": "The Cloud HSM Resource type"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "description": "Cloud HSM resource",
@@ -781,44 +767,6 @@
       },
       "description": "Patchable properties of the Cloud HSM",
       "type": "object"
-    },
-    "CloudHsmPrivateEndpointConnection": {
-      "type": "object",
-      "description": "private endpoint connection resource",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CloudHsmPrivateEndpointConnectionProperties"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Modified whenever there is a change in the state of private endpoint connection."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CloudHsmResource"
-        }
-      ]
-    },
-    "CloudHsmPrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "private endpoint connection properties information",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/CloudHsmPrivateEndpointConnectionProvisioningState",
-          "description": "provisioning state for Private Endpoint Connection properties"
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/CloudHsmPrivateEndpoint",
-          "description": "Properties of the private endpoint object."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/CloudHsmPrivateLinkServiceConnectionState",
-          "description": "Approval state of the private link connection."
-        }
-      }
     },
     "SecurityDomainProperties": {
       "type": "object",
@@ -976,218 +924,9 @@
           "description": "The URL to get the next set of operations."
         }
       }
-    },
-    "CloudHsmPrivateLinkResourceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "#/definitions/CloudHsmPrivateLinkResource"
-          }
-        }
-      },
-      "description": "A list of private link resources",
-      "type": "object"
-    },
-    "CloudHsmPrivateLinkResource": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Resource properties.",
-          "$ref": "#/definitions/CloudHsmPrivateLinkResourceProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CloudHsmResource"
-        }
-      ],
-      "description": "A private link resource",
-      "type": "object"
-    },
-    "CloudHsmPrivateLinkResourceProperties": {
-      "properties": {
-        "groupId": {
-          "description": "Group identifier of private link resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "Required member names of private link resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Required DNS zone names of the the private link resource."
-        }
-      },
-      "description": "Properties of a private link resource.",
-      "type": "object"
-    },
-    "CloudHsmPrivateEndpointConnectionsListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
-          },
-          "description": "The private endpoint connection associated with a cloud HSM clusters."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of cloud HSM Pools."
-        }
-      },
-      "description": "List of private endpoint connections associated with a cloud HSM clusters",
-      "type": "object"
-    },
-    "CloudHsmPrivateEndpoint": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Full resource identifier of the private endpoint resource."
-        }
-      },
-      "description": "Private endpoint object.",
-      "type": "object"
-    },
-    "CloudHsmPrivateLinkServiceConnectionState": {
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/CloudHsmPrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval or rejection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
-          "enum": [
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ActionsRequired",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "An object that represents the approval state of the private link connection.",
-      "type": "object"
-    },
-    "CloudHsmPrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
-    "CloudHsmPrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Failed",
-        "Disconnected",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the key vault resource.",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the key vault resource."
-        },
-        "createdByType": {
-          "description": "The type of identity that created the key vault resource.",
-          "$ref": "#/definitions/IdentityType"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the key vault resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the key vault resource."
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the key vault resource.",
-          "$ref": "#/definitions/IdentityType"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the key vault resource last modification (UTC)."
-        }
-      },
-      "type": "object"
-    },
-    "IdentityType": {
-      "type": "string",
-      "description": "The type of identity.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "identityType",
-        "modelAsString": true
-      }
     }
   },
   "parameters": {
-    "SubscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the resource group that contains the Cloud HSM cluster.",
-      "x-ms-parameter-location": "method"
-    },
     "cloudHsmClusterName": {
       "name": "cloudHsmClusterName",
       "in": "path",
