@@ -401,7 +401,7 @@
           ""
         ],
         "operationId": "CloudHsmPrivateLinkResources_ListByCloudHsm",
-        "description": "Gets the private link resources supported for the cloud hsm pool.",
+        "description": "Gets the private link resources supported for the cloud hsm cluster.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -443,7 +443,7 @@
           ""
         ],
         "operationId": "CloudHsmPrivateEndpointConnections_Create",
-        "description": "Creates the private endpoint connection for the cloud hsm pool.",
+        "description": "Creates or updates the private endpoint connection for the cloud hsm cluster.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -510,7 +510,7 @@
           ""
         ],
         "operationId": "CloudHsmPrivateEndpointConnections_Delete",
-        "description": "Deletes the private endpoint connection for the cloud hsm pool.",
+        "description": "Deletes the private endpoint connection for the cloud hsm cluster.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -570,7 +570,7 @@
           ""
         ],
         "operationId": "CloudHsmPrivateEndpointConnections_Get",
-        "description": "Gets the private endpoint connection for the cloud hsm pool.",
+        "description": "Gets the private endpoint connection for the cloud hsm cluster.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -1039,14 +1039,14 @@
           "items": {
             "$ref": "#/definitions/CloudHsmPrivateEndpointConnection"
           },
-          "description": "The private endpoint connection associated with a cloud HSM Pools."
+          "description": "The private endpoint connection associated with a cloud HSM clusters."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of cloud HSM Pools."
         }
       },
-      "description": "List of private endpoint connections associated with a cloud HSM Pools",
+      "description": "List of private endpoint connections associated with a cloud HSM clusters",
       "type": "object"
     },
     "CloudHsmPrivateEndpoint": {
@@ -1185,7 +1185,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the resource group that contains the managed HSM pool.",
+      "description": "Name of the resource group that contains the Cloud HSM cluster.",
       "x-ms-parameter-location": "method"
     },
     "cloudHsmClusterName": {
