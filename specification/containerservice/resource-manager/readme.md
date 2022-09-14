@@ -46,6 +46,7 @@ These settings apply only when `--tag=package-preview-2022-08-03` is specified o
 input-file:
   - Microsoft.ContainerService/preview/2022-08-03-preview/managedClusters.json
   - Microsoft.ContainerService/preview/2022-07-02-preview/fleets.json
+  - Microsoft.ContainerService/preview/2022-08-03-preview/location.json
 ```
 
 ### Tag: package-preview-2022-08
