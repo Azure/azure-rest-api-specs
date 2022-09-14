@@ -814,7 +814,9 @@
             "subjectName": {
               "description": "Subject name of the certificate.",
               "type": "string",
-              "readOnly": true
+              "x-ms-mutability": [
+                "create"
+              ]
             },
             "subjectAlternativeNames": {
               "description": "Subject alternative names the certificate applies to.",
@@ -862,6 +864,32 @@
             },
             "publicKeyHash": {
               "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            },
+            "error": {
+              "description": "Any error occurred during the certificate provision.",
+              "type": "string",
+              "readOnly": true
+            },
+            "domainControlValidation": {
+              "description": "Selected type of domain control validation for managed certificates.",
+              "enum": [
+                "CNAME",
+                "HTTP",
+                "TXT"
+              ],
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedCertificateDomainControlValidation",
+                "modelAsString": true
+              }
+            },
+            "validationToken": {
+              "description": "A TXT token used for DNS TXT domain control validation when issuing this type of managed certificates.",
               "type": "string",
               "readOnly": true
             }
