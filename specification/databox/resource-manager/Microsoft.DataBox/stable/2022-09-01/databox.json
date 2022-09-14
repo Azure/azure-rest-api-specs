@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-02-01",
+    "version": "2022-09-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -1440,6 +1440,35 @@
         }
       }
     },
+    "ContactInfo": {
+      "description": "Contact Info.",
+      "required": [
+        "ContactName",
+        "Phone"
+      ],
+      "type": "object",
+      "properties": {
+        "contactName": {
+          "description": "Contact name of the person.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number of the contact person.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "phoneExtension": {
+          "description": "Phone extension number of the contact person.",
+          "type": "string"
+        },
+        "mobile": {
+          "description": "Mobile number of the contact person.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "CopyLogDetails": {
       "description": "Details for log generated during copy.",
       "required": [
@@ -2812,6 +2841,15 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "granularCopyLogDetails": {
+          "description": "Copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxDiskGranularCopyLogDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "disksAndSizeDetails": {
           "description": "Contains the map of disk serial number to the disk size being used for the job. Is returned only after the disks are shipped to the customer.",
           "type": "object",
@@ -3629,6 +3667,9 @@
           "$ref": "#/definitions/Preferences",
           "description": "Preferences for the order."
         },
+        "reverseShippingDetails": {
+          "$ref": "#/definitions/ReverseShippingDetails"
+        },
         "copyLogDetails": {
           "description": "List of copy log details.",
           "type": "array",
@@ -4008,6 +4049,64 @@
           "description": "Describes whether the shipping address is editable or not.",
           "type": "boolean",
           "readOnly": true
+        },
+        "reverseShippingDetailsUpdate": {
+          "format": "int32",
+          "description": "The Editable status for Reverse Shipping Address and Contact Info",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "NotSupported"
+          ],
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name ": "ReverseShippingDetailsEditStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Reverse shipping details can be edited."
+              },
+              {
+                "value": "Disabled",
+                "description": "Edit is disabled for Reverse shipping details."
+              },
+              {
+                "value": "NotSupported",
+                "description": "Edit is not supported for Reverse shipping details. Either subscription feature is not available or SKU doesn't support this feature."
+              }
+            ]
+          }
+        },
+        "reverseTransportPreferenceUpdate": {
+          "format": "int32",
+          "description": "The Editable status for Reverse Transport preferences",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "NotSupported"
+          ],
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name ": "ReverseTransportPreferenceEditStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Reverse Transport Preferences can be edited."
+              },
+              {
+                "value": "Disabled",
+                "description": "Edit is disabled for Reverse Transport Preferences."
+              },
+              {
+                "value": "NotSupported",
+                "description": "Edit is not supported for Reverse Transport Preferences. Either subscription feature is not available or SKU doesn't support this feature."
+              }
+            ]
+          }
         },
         "isPrepareToShipEnabled": {
           "description": "Is Prepare To Ship Enabled on this job",
@@ -4926,6 +5025,9 @@
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the sku."
         },
+        "reverseTransportPreferences": {
+          "$ref": "#/definitions/TransportPreferences"
+        },
         "encryptionPreferences": {
           "$ref": "#/definitions/EncryptionPreferences",
           "description": "Preferences related to the Encryption."
@@ -5148,6 +5250,28 @@
           }
         }
       }
+    },
+    "ReverseShippingDetails": {
+      "description": "Reverse Shipping Address and contact details for a job.",
+      "required": [
+        "ContactDetails",
+        "ShippingAddress"
+      ],
+      "type": "object",
+      "properties": {
+        "contactDetails": {
+          "$ref": "#/definitions/ContactInfo"
+        },
+        "shippingAddress": {
+          "$ref": "#/definitions/ShippingAddress"
+        },
+        "isUpdated": {
+          "description": "A flag to indicate whether Reverse Shipping details are updated or not after device has been prepared.\r\nRead only field",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
     },
     "ScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling orders.",
@@ -5739,6 +5863,14 @@
           "description": "Required feature to access the sku.",
           "type": "string",
           "readOnly": true
+        },
+        "countriesWithinCommerceBoundary": {
+          "description": "List of all the Countries in the SKU specific commerce boundary",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -6104,6 +6236,11 @@
               }
             ]
           }
+        },
+        "isUpdated": {
+          "description": "Read only property which indicates whether transport preferences has been updated or not after device is prepared.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -6151,6 +6288,12 @@
         "shippingAddress": {
           "$ref": "#/definitions/ShippingAddress",
           "description": "Shipping address of the customer."
+        },
+        "reverseShippingDetails": {
+          "$ref": "#/definitions/ReverseShippingDetails"
+        },
+        "preferences": {
+          "$ref": "#/definitions/Preferences"
         },
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyEncryptionKey",

@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2022-02
 ```
 
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+- Microsoft.DataBox/stable/2022-09-01/databox.json
+```
+
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
