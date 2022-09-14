@@ -18,10 +18,6 @@ scenarios:
         prefix: schedulequeryrulena
     steps:
       - step: ScheduledQueryRules_Create
-        # exampleFile: ..\examples\createOrUpdateScheduledQueryRule.json
-        # requestUpdate:
-        #   - remove: /parameters/properties/actions
-        #   # - replace: /
         operationId: ScheduledQueryRules_CreateOrUpdate
         parameters:
           parameters:
@@ -48,10 +44,8 @@ scenarios:
                 timeWindowInMinutes: 15
 
       - step: ScheduledQueryRules_ListBySubscription
-        # exampleFile: ..\examples\listScheduledQueryRulesBySubscription.json\
         operationId: ScheduledQueryRules_ListBySubscription
       - step: ScheduledQueryRules_ListByResourceGroup
-        # exampleFile: ..\examples\listScheduledQueryRulesByResourceGroup.json
         operationId: ScheduledQueryRules_ListByResourceGroup
       - step: ScheduledQueryRules_Get
         exampleFile: ..\examples\getScheduledQueryRules.json
