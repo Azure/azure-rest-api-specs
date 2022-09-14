@@ -13,7 +13,6 @@ import "@azure-tools/cadl-azure-resource-manager";
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Microsoft.ServiceNetworking;
 
-
 using Cadl.Http;
 using Cadl.Rest;
 using Cadl.Versioning;
@@ -23,15 +22,14 @@ using Azure.ResourceManager;
 
 
 //----------------------- Frontends -----------------------
-@doc("Frontends Subresource of Traffic Controller.")
-@resource("frontend")
+@doc("Frontend Subresource of Traffic Controller.")
 @parentResource(TrafficController)
 model Frontend is TrackedResource<FrontendProperties>{
   @key("frontendsName")
-  @segment("frontends")
-  @doc("Frontends.")
+  @doc("Frontends")
   @visibility("read")
   @path
+  @segment("frontends")
   name : string;
 }
 
@@ -46,7 +44,7 @@ model FrontendProperties {
   @doc("Frontend Private IP Address (Optional).")
   privateIPAddress?: FrontendPropertiesIPAddress;
   @visibility("read")
-  @doc("Provisioning State Enum")
+  @doc("test doc")
   provisioningState?: ProvisioningState;
 }
 
@@ -63,15 +61,14 @@ model FrontendPropertiesIPAddress {
 
 //----------------------- Associations -----------------------
 @doc("Association Subresource of Traffic Controller")
-@resource("association")
 @parentResource(TrafficController)
 model Association is TrackedResource<AssociationProperties> {
-  @key("associationsName")
-  @segment("associations")
-  @doc("associations")
+  @key("associationName")
   @visibility("read")
+  @doc("Name of Association")
   @path
-  name : string;
+  @segment("associations")
+  name: string;
 }
 
 @doc("Association Properties.")
@@ -110,10 +107,12 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 model TrafficControllerProperties {
   @doc("Configuration Endpoints.")
   configurationEndpoints: string[];
-  @doc("List of Frontends")
-  frontends: Frontend[];
-  @doc("List of Associations")
-  associations: Association[];
+  @visibility("read")
+  @doc("Frontends References List")
+  frontends : ResourceID[];
+  @visibility("read")
+  @doc("Associations References List")
+  associations : ResourceID[];
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -130,14 +129,20 @@ enum ProvisioningStateKV {
   Deleting,
   Accepted,
 }
+@doc("Resource ID definition used by parent to reference child resources.")
+model ResourceID{
+  @doc("Resource ID of child resource.")
+  id : string;
+}
+
 //----------------------- Paths -----------------------
 
 @armResourceOperations
-interface FrontendsInterface extends ResourceOperations<Frontend, FrontendProperties>{
+interface AssociationsInterface extends ResourceInstanceOperations<Association, AssociationProperties>, ResourceListByParent<Association>{
 }
 
 @armResourceOperations
-interface AssociationsInterface extends ResourceOperations<Association, AssociationProperties>{
+interface FrontendsInterface extends ResourceInstanceOperations<Frontend, FrontendProperties>, ResourceListByParent<Frontend>{
 }
 
 @armResourceOperations

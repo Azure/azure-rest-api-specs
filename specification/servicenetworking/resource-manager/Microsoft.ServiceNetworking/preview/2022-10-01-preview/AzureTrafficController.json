@@ -59,12 +59,7 @@
           "Operations"
         ],
         "operationId": "Operations_List",
-        "description": "List the operations for the provider.",
-        "x-ms-examples": {
-          "Get Operations List": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -95,7 +90,7 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_ListBySubscription",
-        "description": "List TrafficController resources by subscription ID.",
+        "description": "List TrafficController resources by subscription ID",
         "x-ms-examples": {
           "Get Traffic Controllers List": {
             "$ref": "./examples/TrafficControllersGetList.json"
@@ -134,7 +129,7 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_ListByResourceGroup",
-        "description": "List TrafficController resources by resource group.",
+        "description": "List TrafficController resources by resource group",
         "x-ms-examples": {
           "Get Traffic Controllers": {
             "$ref": "./examples/TrafficControllersGet.json"
@@ -176,7 +171,12 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_Get",
-        "description": "Get a TrafficController.",
+        "description": "Get a TrafficController",
+        "x-ms-examples": {
+          "Get Traffic Controller": {
+            "$ref": "./examples/TrafficControllerGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -191,11 +191,6 @@
             "$ref": "#/parameters/TrafficController.trafficControllerName"
           }
         ],
-        "x-ms-examples": {
-          "Get Traffic Controller": {
-            "$ref": "./examples/TrafficControllerGet.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
@@ -216,7 +211,7 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_CreateOrUpdate",
-        "description": "Create or Update a TrafficController.",
+        "description": "Create a TrafficController",
         "x-ms-examples": {
           "Put Traffic Controller": {
             "$ref": "./examples/TrafficControllerPut.json"
@@ -282,7 +277,7 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_Update",
-        "description": "Patch a TrafficController.",
+        "description": "Update a TrafficController",
         "x-ms-examples": {
           "Patch Traffic Controller": {
             "$ref": "./examples/TrafficControllerPatch.json"
@@ -331,7 +326,7 @@
           "TrafficControllerInterface"
         ],
         "operationId": "TrafficControllerInterface_Delete",
-        "description": "Delete a TrafficController.",
+        "description": "Delete a TrafficController",
         "x-ms-examples": {
           "Delete Traffic Controller": {
             "$ref": "./examples/TrafficControllerDelete.json"
@@ -381,281 +376,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends": {
-      "get": {
-        "tags": [
-          "FrontendsInterface"
-        ],
-        "operationId": "FrontendsInterface_ListByTrafficController",
-        "description": "List Frontend resources by TrafficController.",
-        "x-ms-examples": {
-          "Get Frontends": {
-            "$ref": "./examples/FrontendsGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TrafficController.trafficControllerName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FrontendListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}": {
-      "get": {
-        "tags": [
-          "FrontendsInterface"
-        ],
-        "operationId": "FrontendsInterface_Get",
-        "description": "Get a Frontend.",
-        "x-ms-examples": {
-          "Get Frontend": {
-            "$ref": "./examples/FrontendGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TrafficController.trafficControllerName"
-          },
-          {
-            "$ref": "#/parameters/Frontend.frontendName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Frontend"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "FrontendsInterface"
-        ],
-        "operationId": "FrontendsInterface_CreateOrUpdate",
-        "description": "Create or Update a Traffic Controller Frontend.",
-        "x-ms-examples": {
-          "Put Frontend": {
-            "$ref": "./examples/FrontendPut.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TrafficController.trafficControllerName"
-          },
-          {
-            "$ref": "#/parameters/Frontend.frontendName"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/Frontend"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Frontend"
-            }
-          },
-          "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Frontend"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "FrontendsInterface"
-        ],
-        "operationId": "FrontendsInterface_Update",
-        "description": "Update a Frontend.",
-        "x-ms-examples": {
-          "Update Frontend": {
-            "$ref": "./examples/FrontendPatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TrafficController.trafficControllerName"
-          },
-          {
-            "$ref": "#/parameters/Frontend.frontendName"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/FrontendUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Frontend"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "FrontendsInterface"
-        ],
-        "operationId": "FrontendsInterface_Delete",
-        "description": "Delete a Frontend.",
-        "x-ms-examples": {
-          "Delete Frontend": {
-            "$ref": "./examples/FrontendDelete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TrafficController.trafficControllerName"
-          },
-          {
-            "$ref": "#/parameters/Frontend.frontendName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations": {
       "get": {
         "tags": [
           "AssociationsInterface"
         ],
         "operationId": "AssociationsInterface_ListByTrafficController",
-        "description": "List Association resources by TrafficController.",
+        "description": "List Association resources by TrafficController",
         "x-ms-examples": {
           "Get Associations": {
             "$ref": "./examples/AssociationsGet.json"
@@ -700,7 +427,7 @@
           "AssociationsInterface"
         ],
         "operationId": "AssociationsInterface_Get",
-        "description": "Get a Association.",
+        "description": "Get a Association",
         "x-ms-examples": {
           "Get Association": {
             "$ref": "./examples/AssociationGet.json"
@@ -743,7 +470,7 @@
           "AssociationsInterface"
         ],
         "operationId": "AssociationsInterface_CreateOrUpdate",
-        "description": "Create or Update a Traffic Controller Association.",
+        "description": "Create a Association",
         "x-ms-examples": {
           "Put Association": {
             "$ref": "./examples/AssociationPut.json"
@@ -812,7 +539,7 @@
           "AssociationsInterface"
         ],
         "operationId": "AssociationsInterface_Update",
-        "description": "Update a Association.",
+        "description": "Update a Association",
         "x-ms-examples": {
           "Update Association": {
             "$ref": "./examples/AssociationPatch.json"
@@ -864,10 +591,10 @@
           "AssociationsInterface"
         ],
         "operationId": "AssociationsInterface_Delete",
-        "description": "Delete a Association.",
+        "description": "Delete a Association",
         "x-ms-examples": {
-          "Delete Association": {
-            "$ref": "./examples/AssociationDelete.json"
+          "Update Association": {
+            "$ref": "./examples/AssociationPatch.json"
           }
         },
         "parameters": [
@@ -916,6 +643,274 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends": {
+      "get": {
+        "tags": [
+          "FrontendsInterface"
+        ],
+        "operationId": "FrontendsInterface_ListByTrafficController",
+        "description": "List Frontend resources by TrafficController",
+        "x-ms-examples": {
+          "Get Frontends": {
+            "$ref": "./examples/FrontendsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrafficController.trafficControllerName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FrontendListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendsName}": {
+      "get": {
+        "tags": [
+          "FrontendsInterface"
+        ],
+        "operationId": "FrontendsInterface_Get",
+        "description": "Get a Frontend",
+        "x-ms-examples": {
+          "Get Frontend": {
+            "$ref": "./examples/FrontendGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrafficController.trafficControllerName"
+          },
+          {
+            "$ref": "#/parameters/Frontend.frontendsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Frontend"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FrontendsInterface"
+        ],
+        "operationId": "FrontendsInterface_CreateOrUpdate",
+        "description": "Create a Frontend",
+        "x-ms-examples": {
+          "Put Frontend": {
+            "$ref": "./examples/FrontendPut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrafficController.trafficControllerName"
+          },
+          {
+            "$ref": "#/parameters/Frontend.frontendsName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Frontend"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Frontend"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Frontend"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "FrontendsInterface"
+        ],
+        "operationId": "FrontendsInterface_Update",
+        "description": "Update a Frontend",
+        "x-ms-examples": {
+          "Update Frontend": {
+            "$ref": "./examples/FrontendPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrafficController.trafficControllerName"
+          },
+          {
+            "$ref": "#/parameters/Frontend.frontendsName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/FrontendUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Frontend"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FrontendsInterface"
+        ],
+        "operationId": "FrontendsInterface_Delete",
+        "description": "Delete a Frontend",
+        "x-ms-examples": {
+          "Delete Frontend": {
+            "$ref": "./examples/FrontendDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TrafficController.trafficControllerName"
+          },
+          {
+            "$ref": "#/parameters/Frontend.frontendsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -932,7 +927,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "description": "Traffic Controller Association.",
+      "description": "Association Subresource of Traffic Controller",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -948,11 +943,11 @@
             "$ref": "#/definitions/Association"
           },
           "x-cadl-name": "Association[]",
-          "description": "The Association items on this page."
+          "description": "The Association items on this page"
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items.",
+          "description": "The link to the next page of items",
           "x-cadl-name": "Rest.ResourceLocation<Association>"
         }
       },
@@ -966,21 +961,22 @@
       "properties": {
         "associationType": {
           "$ref": "#/definitions/AssociationType",
-          "description": "Association Type."
+          "description": "Association Type"
         },
         "subnet": {
           "$ref": "#/definitions/AssociationSubnet",
-          "description": "Association Subnet."
+          "description": "Association Subnet"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
+          "description": "Provisioning State",
           "readOnly": true
         }
       },
       "description": "Association Properties.",
       "required": [
-        "associationType"
+        "associationType",
+        "provisioningState"
       ]
     },
     "AssociationSubnet": {
@@ -988,10 +984,10 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Association Subnet ID."
+          "description": "Association ID."
         }
       },
-      "description": "Association Subnet",
+      "description": "Association Subnet.",
       "required": [
         "id"
       ]
@@ -1001,7 +997,6 @@
       "enum": [
         "subnets"
       ],
-      "description": "Association Type Enum (Eg: subnets)",
       "x-ms-enum": {
         "name": "AssociationType",
         "modelAsString": false
@@ -1010,6 +1005,14 @@
     "AssociationUpdate": {
       "type": "object",
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties"
         }
@@ -1021,11 +1024,11 @@
       "properties": {
         "associationType": {
           "$ref": "#/definitions/AssociationType",
-          "description": "Association Type."
+          "description": "Association Type"
         },
         "subnet": {
           "$ref": "#/definitions/AssociationSubnet",
-          "description": "Association Subnet."
+          "description": "Association Subnet"
         }
       },
       "description": "The updatable properties of the Association."
@@ -1043,7 +1046,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "description": "Traffic Controller Frontends.",
+      "description": "Frontend Subresource of Traffic Controller.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1056,7 +1059,6 @@
         "IPv4",
         "IPv6"
       ],
-      "description": "Type of the Frontend IP Address Enum (Eg: IPv4, IPv6)",
       "x-ms-enum": {
         "name": "FrontendIPAddressType",
         "modelAsString": false
@@ -1071,11 +1073,11 @@
             "$ref": "#/definitions/Frontend"
           },
           "x-cadl-name": "Frontend[]",
-          "description": "The Frontend items on this page."
+          "description": "The Frontend items on this page"
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items.",
+          "description": "The link to the next page of items",
           "x-cadl-name": "Rest.ResourceLocation<Frontend>"
         }
       },
@@ -1105,7 +1107,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
+          "description": "test doc",
           "readOnly": true
         }
       },
@@ -1133,8 +1135,7 @@
             "type": "string"
           },
           "x-cadl-name": "Record<string>",
-          "description": "Resource tags.",
-          "x-ms-client-flatten": true
+          "description": "Resource tags."
         },
         "properties": {
           "$ref": "#/definitions/FrontendUpdateProperties"
@@ -1169,14 +1170,29 @@
       "enum": [
         "Succeeded",
         "Failed",
+        "Canceled",
+        "Provisioning",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Accepted"
       ],
-      "description": "Provisioning State Enum (Eg: Succeeded, Canceled, Deleting)",
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
       }
+    },
+    "ResourceID": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of child resource."
+        }
+      },
+      "description": "Resource ID definition used by parent to reference child resources.",
+      "required": [
+        "id"
+      ]
     },
     "TrafficController": {
       "type": "object",
@@ -1207,11 +1223,11 @@
             "$ref": "#/definitions/TrafficController"
           },
           "x-cadl-name": "TrafficController[]",
-          "description": "The TrafficController items on this page."
+          "description": "The TrafficController items on this page"
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items.",
+          "description": "The link to the next page of items",
           "x-cadl-name": "Rest.ResourceLocation<TrafficController>"
         }
       },
@@ -1234,18 +1250,20 @@
         "frontends": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Frontend"
+            "$ref": "#/definitions/ResourceID"
           },
-          "x-cadl-name": "Frontend[]",
-          "description": "List of Frontends."
+          "x-cadl-name": "ResourceID[]",
+          "description": "Frontends References List",
+          "readOnly": true
         },
         "associations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Association"
+            "$ref": "#/definitions/ResourceID"
           },
-          "x-cadl-name": "Association[]",
-          "description": "List of Associations."
+          "x-cadl-name": "ResourceID[]",
+          "description": "Associations References List",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1272,8 +1290,7 @@
           "description": "Resource tags."
         },
         "properties": {
-          "$ref": "#/definitions/TrafficControllerUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/TrafficControllerUpdateProperties"
         }
       },
       "description": "The type used for update operations of the TrafficController."
@@ -1288,22 +1305,6 @@
           },
           "x-cadl-name": "string[]",
           "description": "Configuration Endpoints."
-        },
-        "frontends": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Frontend"
-          },
-          "x-cadl-name": "Frontend[]",
-          "description": "List of Frontends."
-        },
-        "associations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Association"
-          },
-          "x-cadl-name": "Association[]",
-          "description": "List of Associations."
         }
       },
       "description": "The updatable properties of the TrafficController."
@@ -1314,15 +1315,15 @@
       "name": "associationName",
       "in": "path",
       "required": true,
-      "description": "Associations.",
+      "description": "Name of Association",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Frontend.frontendName": {
-      "name": "frontendName",
+    "Frontend.frontendsName": {
+      "name": "frontendsName",
       "in": "path",
       "required": true,
-      "description": "Frontends.",
+      "description": "Frontends",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -1330,7 +1331,7 @@
       "name": "trafficControllerName",
       "in": "path",
       "required": true,
-      "description": "Traffic controller name for path.",
+      "description": "traffic controller name for path",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
