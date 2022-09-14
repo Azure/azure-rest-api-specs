@@ -189,7 +189,8 @@
             "description": "Accepted"
           },
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "default": {
             "schema": {
@@ -548,7 +549,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -613,7 +615,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -1652,6 +1655,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           }
         ],
@@ -1712,6 +1719,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           },
           {
@@ -3779,6 +3790,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           }
         ],
@@ -3838,6 +3853,10 @@
             "enum": [
               "default"
             ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "BlobAuditingPolicyName"
+            },
             "x-ms-parameter-location": "method"
           },
           {
@@ -5485,6 +5504,7 @@
       }
     },
     "GeoBackupPolicyProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -5510,6 +5530,7 @@
       "description": "The properties of the geo backup policy."
     },
     "GeoBackupPolicy": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GeoBackupPolicyProperties",
@@ -5550,6 +5571,7 @@
       "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
+      "type": "object",
       "properties": {
         "aggregationFunction": {
           "description": "The function that is used to aggregate each query's metrics.",
