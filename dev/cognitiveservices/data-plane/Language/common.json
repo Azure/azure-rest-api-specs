@@ -193,7 +193,7 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "TaskState"
+            "name": "State"
           }
         }
       },
@@ -270,7 +270,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "JobState"
+            "name": "State"
           }
         },
         "errors": {
@@ -741,6 +741,64 @@
         }
       }
     },
+    "Sentiment": {
+      "type": "string",
+      "description": "Predicted sentiment.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "TextSentiment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "positive",
+            "description": "Positive sentiment."
+          },
+          {
+            "value": "neutral",
+            "description": "Neutral sentiment."
+          },
+          {
+            "value": "negative",
+            "description": "Negative sentiment."
+          },
+          {
+            "value": "mixed",
+            "description": "Mixed sentiment."
+          }                   
+        ]
+      }
+    },
+    "SentimentConfidenceScores": {
+      "type": "object",
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "neutral": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
+    },
     "AbstractiveSummarizationTaskParametersBase": {
       "type": "object",
       "description": "Supported parameters for an Abstractive Summarization task.",
@@ -833,7 +891,7 @@
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
-      "format":  "uri",
+      "format": "uri",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
