@@ -400,7 +400,7 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmPrivateLinkResources_ListByCloudHsmResource",
+        "operationId": "CloudHsmPrivateLinkResources_ListByCloudHsm",
         "description": "Gets the private link resources supported for the cloud hsm pool.",
         "parameters": [
           {
@@ -429,9 +429,6 @@
               "$ref": "#/definitions/CloudHsmError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CloudHsmPrivateLinkResources_ListByResource_MaximumSet_Gen": {
@@ -706,7 +703,7 @@
         },
         "location": {
           "type": "string",
-          "description": "The supported Azure location where the dedicated HSM should be created.",
+          "description": "The supported Azure location where the Cloud HSM should be created.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -899,6 +896,9 @@
           "description": "The error message."
         },
         "innererror": {
+          "x-ms-client-name": "innerError",
+          "readOnly": true,
+          "description": "The inner error, contains a more specific error code.",
           "$ref": "#/definitions/Error"
         }
       },
@@ -985,10 +985,6 @@
           "items": {
             "$ref": "#/definitions/CloudHsmPrivateLinkResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of operations."
         }
       },
       "description": "A list of private link resources",
@@ -1058,7 +1054,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Full identifier of the private endpoint resource."
+          "description": "Full resource identifier of the private endpoint resource."
         }
       },
       "description": "Private endpoint object.",
