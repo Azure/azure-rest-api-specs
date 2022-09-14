@@ -1,0 +1,405 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "NetworkWatcherDiagnosticApi",
+		"description": "The Microsoft Azure Network Watcher Diagnostic API provides a RESTful set of web services that interact with Microsoft Azure Network watcher service to check connectivity in your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Network Watcher service.",
+		"version": "2021-02-01"
+	},
+	"host": "",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow.",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"paths": {
+		"/api.diagnosticstest.msftcloudes.com/api/diagnosticdata/": {
+			"post": {
+				"tags": [
+					"NetworkWatcherDiagnostic_NextHop"
+				],
+				"description": "Gets the next hop from the specified VM.",
+				"parameters": [
+					{
+						"name": "SymptomId",
+						"in": "body",
+						"required": true,
+						"enum": [
+							"NetworkWatcherNextHop"
+						],
+						"description": "Parameter that define the next hop endpoint."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/NextHopParameters"
+						},
+						"description": "Parameters that define the source and destination endpoint."
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the next hop from the VM.",
+						"schema": {
+							"$ref": "#/definitions/NextHopResult"
+						}
+					}
+				},
+				"x-ms-long-running-operation": true,
+				"x-ms-long-running-operation-options": {
+					"final-state-via": "location"
+				}
+			}
+		},
+		"/api.diagnosticstest.msftcloudes.com/api/diagnosticdata/": {
+			"post": {
+				"tags": [
+					"NetworkWatchers_GetNetworkConfigurationDiagnostic"
+				],
+				"description": "Gets Network Configuration Diagnostic data to help customers understand and debug network behavior. It provides detailed information on what security rules were applied to a specified traffic flow and the result of evaluating these rules. Customers must provide details of a flow like source, destination, protocol, etc. The API returns whether traffic was allowed or denied, the rules evaluated for the specified flow and the evaluation results.",
+				"parameters": [
+					{
+						"name": "SymptomId",
+						"in": "body",
+						"required": true,
+						"enum": [
+							"NetworkWatcherNetworkConfigurationDiagnostic"
+						],
+						"description": "Parameter that define the Network Configuration Diagnostic endpoint."
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/NetworkConfigurationDiagnosticParameters"
+						},
+						"description": "Parameters to get network configuration diagnostic."
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the result of network configuration diagnostic.",
+						"schema": {
+							"$ref": "#/definitions/NetworkConfigurationDiagnosticResponse"
+						}
+					},
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously.",
+						"schema": {
+							"$ref": "#/definitions/NetworkConfigurationDiagnosticResponse"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-long-running-operation": true,
+				"x-ms-long-running-operation-options": {
+					"final-state-via": "location"
+				}
+			}
+		}
+	},
+	"definitions": {
+		"ErrorResponse": {
+			"description": "The error object.",
+			"properties": {
+				"error": {
+					"title": "Error",
+					"$ref": "./network.json#/definitions/ErrorDetails",
+					"description": "The error details object."
+				}
+			}
+		},
+		"NextHopParameters": {
+			"description": "Parameters that define the source and destination endpoint.",
+			"required": [
+				"Region",
+				"ResourceUri",
+				"SourceIPAddress",
+				"DestinationIpAddress"
+			],
+			"properties": {
+				"Region": {
+					"type": "string",
+					"description": "The region of the target resource against which the action is to be performed."
+				},
+				"ResourceUri": {
+					"type": "string",
+					"description": "The resource identifier of the target resource against which the action is to be performed."
+				},
+				"SourceIPAddress": {
+					"type": "string",
+					"description": "The source IP address."
+				},
+				"DestinationIpAddress": {
+					"type": "string",
+					"description": "The destination IP address."
+				},
+				"TargetNicResourceId": {
+					"type": "string",
+					"description": "The NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
+				}
+			}
+		},
+		"NextHopResult": {
+			"description": "The information about next hop from the specified VM.",
+			"properties": {
+				"nextHopType": {
+					"type": "string",
+					"enum": [
+						"Internet",
+						"VirtualAppliance",
+						"VirtualNetworkGateway",
+						"VnetLocal",
+						"HyperNetGateway",
+						"None"
+					],
+					"x-ms-enum": {
+						"name": "NextHopType",
+						"modelAsString": true
+					},
+					"description": "Next hop type."
+				},
+				"nextHopIpAddress": {
+					"type": "string",
+					"description": "Next hop IP Address."
+				},
+				"routeTableId": {
+					"type": "string",
+					"description": "The resource identifier for the route table associated with the route being returned. If the route being returned does not correspond to any user created routes then this field will be the string 'System Route'."
+				}
+			}
+		},
+		"NetworkConfigurationDiagnosticParameters": {
+			"description": "Parameters to get network configuration diagnostic.",
+			"required": [
+				"ResourceUri",
+				"Region",
+				"SourceAddress",
+				"DestinationPort",
+				"DestinationAddress",
+				"Protocol",
+				"Direction"
+			],
+			"properties": {
+				"ResourceUri": {
+					"type": "string",
+					"description": "The ID of the target resource to perform network configuration diagnostic. Valid options are VM, NetworkInterface, VMSS/NetworkInterface and Application Gateway."
+				},
+				"Region": {
+					"type": "string",
+					"description": "The Region of the target resource to perform network configuration diagnostic."
+				},
+				"SourceAddress": {
+					"type": "string",
+					"description": "Traffic source. Accepted values are '*', IP Address/CIDR, Service Tag."
+				},
+				"DestinationAddress": {
+					"type": "string",
+					"description": "Traffic destination. Accepted values are: '*', IP Address/CIDR, Service Tag."
+				},
+				"DestinationPort": {
+					"type": "string",
+					"description": "The destination port to perform network configuration diagnostic."
+				},
+				"Protocol": {
+					"type": "string",
+					"description": "Protocol to be verified on. Accepted values are '*', TCP, UDP, ICMP."
+				},
+				"Direction": {
+					"$ref": "#/definitions/Direction",
+					"description": "The direction of the traffic."
+				}
+			}
+		},
+		"NetworkConfigurationDiagnosticResponse": {
+			"description": "Results of network configuration diagnostic on the target resource.",
+			"properties": {
+				"results": {
+					"readOnly": true,
+					"type": "array",
+					"description": "List of network configuration diagnostic results.",
+					"items": {
+						"$ref": "#/definitions/NetworkConfigurationDiagnosticResult"
+					}
+				}
+			}
+		},
+		"NetworkConfigurationDiagnosticResult": {
+			"description": "Network configuration diagnostic result corresponded to provided traffic query.",
+			"properties": {
+				"profile": {
+					"$ref": "#/definitions/NetworkConfigurationDiagnosticProfile",
+					"description": "Network configuration diagnostic profile."
+				},
+				"networkSecurityGroupResult": {
+					"$ref": "#/definitions/NetworkSecurityGroupResult",
+					"description": "Network security group result."
+				}
+			}
+		},
+		"profiles": {
+			"type": "array",
+			"description": "List of network configuration diagnostic profiles.",
+			"items": {
+				"$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
+			}
+		},
+		"NetworkConfigurationDiagnosticProfile": {
+			"description": "Parameters to compare with network configuration.",
+			"required": [
+				"direction",
+				"protocol",
+				"source",
+				"destination",
+				"destinationPort"
+			],
+			"properties": {
+				"direction": {
+					"$ref": "#/definitions/Direction",
+					"description": "The direction of the traffic."
+				},
+				"protocol": {
+					"type": "string",
+					"description": "Protocol to be verified on. Accepted values are '*', TCP, UDP."
+				},
+				"source": {
+					"type": "string",
+					"description": "Traffic source. Accepted values are '*', IP Address/CIDR, Service Tag."
+				},
+				"destination": {
+					"type": "string",
+					"description": "Traffic destination. Accepted values are: '*', IP Address/CIDR, Service Tag."
+				},
+				"destinationPort": {
+					"type": "string",
+					"description": "Traffic destination port. Accepted values are '*' and a single port in the range (0 - 65535)."
+				}
+			}
+		},
+		"NetworkSecurityGroupResult": {
+			"description": "Network configuration diagnostic result corresponded provided traffic query.",
+			"properties": {
+				"securityRuleAccessResult": {
+					"$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleAccess",
+					"description": "The network traffic is allowed or denied."
+				},
+				"evaluatedNetworkSecurityGroups": {
+					"readOnly": true,
+					"type": "array",
+					"description": "List of results network security groups diagnostic.",
+					"items": {
+						"$ref": "#/definitions/EvaluatedNetworkSecurityGroup"
+					}
+				}
+			}
+		},
+		"EvaluatedNetworkSecurityGroup": {
+			"description": "Results of network security group evaluation.",
+			"properties": {
+				"networkSecurityGroupId": {
+					"type": "string",
+					"description": "Network security group ID."
+				},
+				"appliedTo": {
+					"type": "string",
+					"description": "Resource ID of nic or subnet to which network security group is applied."
+				},
+				"matchedRule": {
+					"$ref": "#/definitions/MatchedRule",
+					"description": "Matched network security rule."
+				},
+				"rulesEvaluationResult": {
+					"readOnly": true,
+					"type": "array",
+					"description": "List of network security rules evaluation results.",
+					"items": {
+						"$ref": "#/definitions/NetworkSecurityRulesEvaluationResult"
+					}
+				}
+			}
+		},
+		"MatchedRule": {
+			"description": "Matched rule.",
+			"properties": {
+				"ruleName": {
+					"type": "string",
+					"description": "Name of the matched network security rule."
+				},
+				"action": {
+					"type": "string",
+					"description": "The network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'."
+				}
+			}
+		},
+		"Direction": {
+			"type": "string",
+			"description": "The direction of the traffic.",
+			"enum": [
+				"Inbound",
+				"Outbound"
+			],
+			"x-ms-enum": {
+				"name": "Direction",
+				"modelAsString": true
+			}
+		},
+		"NetworkSecurityRulesEvaluationResult": {
+			"description": "Network security rules evaluation result.",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "Name of the network security rule."
+				},
+				"protocolMatched": {
+					"type": "boolean",
+					"description": "Value indicating whether protocol is matched."
+				},
+				"sourceMatched": {
+					"type": "boolean",
+					"description": "Value indicating whether source is matched."
+				},
+				"sourcePortMatched": {
+					"type": "boolean",
+					"description": "Value indicating whether source port is matched."
+				},
+				"destinationMatched": {
+					"type": "boolean",
+					"description": "Value indicating whether destination is matched."
+				},
+				"destinationPortMatched": {
+					"type": "boolean",
+					"description": "Value indicating whether destination port is matched."
+				}
+			}
+		}
+	}
+}
