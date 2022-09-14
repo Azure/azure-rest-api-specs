@@ -1,5 +1,5 @@
 ## Python
-
+ 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
