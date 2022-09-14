@@ -1443,8 +1443,8 @@
     "ContactInfo": {
       "description": "Contact Info.",
       "required": [
-        "ContactName",
-        "Phone"
+        "contactName",
+        "phone"
       ],
       "type": "object",
       "properties": {
@@ -1466,8 +1466,7 @@
           "description": "Mobile number of the contact person.",
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "CopyLogDetails": {
       "description": "Details for log generated during copy.",
@@ -3668,7 +3667,8 @@
           "description": "Preferences for the order."
         },
         "reverseShippingDetails": {
-          "$ref": "#/definitions/ReverseShippingDetails"
+          "$ref": "#/definitions/ReverseShippingDetails",
+          "description": "Optional Reverse Shipping details for order."
         },
         "copyLogDetails": {
           "description": "List of copy log details.",
@@ -4051,17 +4051,16 @@
           "readOnly": true
         },
         "reverseShippingDetailsUpdate": {
-          "format": "int32",
           "description": "The Editable status for Reverse Shipping Address and Contact Info",
           "enum": [
             "Enabled",
             "Disabled",
             "NotSupported"
           ],
-          "type": "integer",
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name ": "ReverseShippingDetailsEditStatus",
+            "name": "ReverseShippingDetailsEditStatus",
             "modelAsExtensible": true,
             "values": [
               {
@@ -4080,17 +4079,16 @@
           }
         },
         "reverseTransportPreferenceUpdate": {
-          "format": "int32",
           "description": "The Editable status for Reverse Transport preferences",
           "enum": [
             "Enabled",
             "Disabled",
             "NotSupported"
           ],
-          "type": "integer",
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name ": "ReverseTransportPreferenceEditStatus",
+            "name": "ReverseTransportPreferenceEditStatus",
             "modelAsExtensible": true,
             "values": [
               {
@@ -5026,7 +5024,8 @@
           "description": "Preferences related to the shipment logistics of the sku."
         },
         "reverseTransportPreferences": {
-          "$ref": "#/definitions/TransportPreferences"
+          "$ref": "#/definitions/TransportPreferences",
+          "description": "Optional Preferences related to the reverse shipment logistics of the sku."
         },
         "encryptionPreferences": {
           "$ref": "#/definitions/EncryptionPreferences",
@@ -5254,8 +5253,8 @@
     "ReverseShippingDetails": {
       "description": "Reverse Shipping Address and contact details for a job.",
       "required": [
-        "ContactDetails",
-        "ShippingAddress"
+        "contactDetails",
+        "shippingAddress"
       ],
       "type": "object",
       "properties": {
@@ -5270,8 +5269,7 @@
           "type": "boolean",
           "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "ScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling orders.",
