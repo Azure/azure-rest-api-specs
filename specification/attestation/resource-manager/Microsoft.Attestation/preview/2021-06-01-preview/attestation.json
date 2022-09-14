@@ -676,9 +676,21 @@
           "type": "string",
           "description": "Name of the operation."
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display object with properties of the operation."
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -701,6 +713,47 @@
         "description": {
           "type": "string",
           "description": "Description of the operation."
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Microsoft Azure Attestation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Microsoft Azure Attestation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
         }
       }
     },
