@@ -2896,15 +2896,28 @@
     },
     "Setting": {
       "description": "Setting definition.",
-      "discriminator": "name",
+      "discriminator": "kind",
       "type": "object",
       "allOf": [
         {
           "$ref": "common-types.json#/definitions/ProxyResource"
         }
       ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of settings.",
+          "enum": [
+            "taginheritance"
+          ],
+          "x-ms-enum": {
+            "name": "SetingsKind",
+            "modelAsString": true
+          }
+        }
+      },
       "required": [
-        "name"
+        "kind"
       ]
     },
     "TagInheritanceSetting": {
