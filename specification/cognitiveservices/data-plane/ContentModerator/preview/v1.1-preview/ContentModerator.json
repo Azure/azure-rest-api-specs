@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Content Moderator Client",
-    "version": "1.1-preview",
+    "version": "2022-09-30-preview",
     "description": "[Description]"
   },
   "securityDefinitions": {
@@ -86,6 +86,35 @@
         "modelAsString": false
       }
     },
+    "TextDetectDiagnosis": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "Inclusive start offset",
+          "type": "integer"
+        },
+        "end": {
+          "description": "Exclusive end offset",
+          "type": "integer"
+        },
+        "isHitted": {
+          "type": "boolean",
+          "description": "Whether this category is hitted in this mask"
+        },
+        "score": {
+          "description": "The score of detection result",
+          "type": "number",
+          "format": "float"
+        },
+        "diagnosisDetail": {
+          "description": "The additional fields of model output",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TextDetectResult": {
       "type": "object",
       "required": [
@@ -95,37 +124,27 @@
         "category": {
           "$ref": "#/definitions/TextCategory"
         },
-        "results": {
-          "description": "The result array, each element contains detection result of one segment defined by start and end offset",
+        "isHitted": {
+          "description": "Whether this category is hitted in this input text",
+          "type": "boolean"
+        },
+        "score": {
+          "description": "The score of detection result",
+          "type": "number",
+          "format": "float"
+        },
+        "modelOutputDetail": {
+          "description": "The additional fields of model output",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "diagnoses": {
+          "description": "The diagnoses array, each element contains detection result of one mask defined by start and end offset",
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "start": {
-                "description": "Inclusive start offset",
-                "type": "integer"
-              },
-              "end": {
-                "description": "Exclusive end offset",
-                "type": "integer"
-              },
-              "isDetected": {
-                "type": "boolean",
-                "description": "Whether this category is detected in input text"
-              },
-              "score": {
-                "description": "The score of detection result",
-                "type": "number",
-                "format": "float"
-              },
-              "modelOutputDetail": {
-                "description": "The additional fields of model output",
-                "type": "object",
-                "additionalProperties": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/definitions/TextDetectDiagnosis"
           }
         }
       }
@@ -152,10 +171,18 @@
     },
     "TextDetectResponse": {
       "description": "The text detect response",
-      "type": "array",
-      "items": {
-          "$ref": "#/definitions/TextDetectResult"
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/TextDetectResult"
+            }
         }
+      }
     },
     "ErrorCode": {
       "type": "object",
@@ -204,7 +231,7 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/contentmoderator/moderate/v1.1-preview",
+    "hostTemplate": "{endpoint}/contentmoderator/moderate",
     "useSchemePrefix": false,
     "parameters": [
       {
