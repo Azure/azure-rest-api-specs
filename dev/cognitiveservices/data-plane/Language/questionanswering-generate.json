@@ -268,9 +268,9 @@
           "type": "boolean",
           "description": "Specify this as true - if the documents have marker tags &lt;answer&gt; and &lt;/answer&gt; for marked answers. Example: Satya Nadella was born in &lt;answer&gt; Hyderabad &lt;/answer&gt; of present-day Telangana, India into a Telugu-speaking Hindu family."
         },
-        "maxResultCount": {
+        "maxQACount": {
           "type": "integer",
-          "description": "Maximum number of results (question answers) to be generated.",
+          "description": "Maximum number of question answer pairs to be generated.",
           "format": "int32",
           "maximum": 30,
           "minimum": 1
@@ -284,9 +284,18 @@
           "$ref": "common.json#/definitions/JobState"
         },
         {
-          "$ref": "#/definitions/GenerationResult"
+          "$ref": "#/definitions/GenerationJobResult"
         }
       ]
+    },
+    "GenerationJobResult": {
+      "description": "Generation Job result represents the job result with extracted documents and question answers generated.",
+      "type": "object",
+      "properties": {
+        "result": {          
+          "$ref": "#/definitions/GenerationResult"
+        }
+      }
     },
     "GenerationResult": {
       "type": "object",
@@ -296,7 +305,7 @@
           "type": "array",
           "description": "The set of documents with processed raw contents.",
           "items": {
-            "$ref": "#/definitions/Document"
+            "$ref": "#/definitions/GenerationDocument"
           }
         },
         "value": {
