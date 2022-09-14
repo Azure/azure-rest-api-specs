@@ -1466,8 +1466,7 @@
           "description": "Mobile number of the contact person.",
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "CopyLogDetails": {
       "description": "Details for log generated during copy.",
@@ -3668,7 +3667,8 @@
           "description": "Preferences for the order."
         },
         "reverseShippingDetails": {
-          "$ref": "#/definitions/ReverseShippingDetails"
+          "$ref": "#/definitions/ReverseShippingDetails",
+          "description": "Optional Reverse Shipping details for order."
         },
         "copyLogDetails": {
           "description": "List of copy log details.",
@@ -5026,7 +5026,8 @@
           "description": "Preferences related to the shipment logistics of the sku."
         },
         "reverseTransportPreferences": {
-          "$ref": "#/definitions/TransportPreferences"
+          "$ref": "#/definitions/TransportPreferences",
+          "description": "Optional Preferences related to the reverse shipment logistics of the sku."
         },
         "encryptionPreferences": {
           "$ref": "#/definitions/EncryptionPreferences",
@@ -5270,8 +5271,7 @@
           "type": "boolean",
           "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "ScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling orders.",
