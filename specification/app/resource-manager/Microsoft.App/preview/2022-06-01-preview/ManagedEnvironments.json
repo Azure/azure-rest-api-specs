@@ -407,6 +407,9 @@
         "x-ms-examples": {
           "Get Certificate": {
             "$ref": "./examples/Certificate_Get.json"
+          },
+          "Get Managed Certificate": {
+            "$ref": "./examples/ManagedCertificate_Get.json"
           }
         }
       },
@@ -457,6 +460,16 @@
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -467,6 +480,9 @@
         "x-ms-examples": {
           "Create or Update Certificate": {
             "$ref": "./examples/Certificate_CreateOrUpdate.json"
+          },
+          "Create or Update Managed Certificate": {
+            "$ref": "./examples/ManagedCertificate_CreateOrUpdate.json"
           }
         }
       },

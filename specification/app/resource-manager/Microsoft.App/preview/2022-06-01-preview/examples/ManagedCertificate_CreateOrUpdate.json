@@ -8,8 +8,8 @@
     "certificateEnvelope": {
       "location": "East US",
       "properties": {
-        "password": "private key password",
-        "value": "PFX-or-PEM-blob"
+        "subjectName": "my-subject-name.company.country.net",
+        "domainControlValidation": "CNAME"
       }
     }
   },
@@ -21,16 +21,9 @@
         "type": "Microsoft.App/ManagedEnvironments/Certificates",
         "location": "East US",
         "properties": {
+          "subjectName": "CN=my-subject-name.company.country.net",
           "provisioningState": "Succeeded",
-          "subjectName": "my-subject-name.company.country.net",
-          "subjectAlternativeNames": [
-            "CN=my-subject-name.com"
-          ],
-          "issuer": "Issuer Name",
-          "issueDate": "2021-11-06T04:00:00Z",
-          "expirationDate": "2022-11-06T04:00:00Z",
-          "thumbprint": "CERTIFICATE_THUMBPRINT",
-          "valid": true
+          "domainControlValidation": "CNAME"
         }
       }
     },
