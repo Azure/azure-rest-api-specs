@@ -827,6 +827,9 @@
           "application/json"
         ],
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Start integration runtime": {
             "$ref": "./examples/IntegrationRuntimes_Start.json"
@@ -2093,7 +2096,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -2198,7 +2202,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scheduledUpdateDate": {
           "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
@@ -2248,7 +2253,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedIntegrationRuntime"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "pushedVersion": {
           "description": "The version that the integration runtime is going to update to.",
@@ -2541,7 +2547,8 @@
           "description": "Integration runtime node monitoring data.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeNodeMonitoringData"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3010,7 +3017,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
