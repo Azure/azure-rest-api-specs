@@ -2,9 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "ApplicationInsightsManagementClient"
-    },
     "description": "Azure Application Insights API reference for Private Links Scopes management.",
     "version": "2021-09-01"
   },
@@ -116,6 +113,10 @@
       "delete": {
         "description": "Deletes a Azure Monitor PrivateLinkScope.",
         "operationId": "PrivateLinkScopes_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -152,7 +153,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateLinkScopesDelete": {
             "$ref": "./examples/PrivateLinkScopesDelete.json"
@@ -485,6 +485,10 @@
         ],
         "description": "Approve or reject a private endpoint connection with a given name.",
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -536,7 +540,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Approve or reject a private endpoint connection with a given name.": {
             "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
@@ -549,6 +552,10 @@
         ],
         "description": "Deletes a private endpoint connection with a given name.",
         "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -592,7 +599,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Deletes a private endpoint connection with a given name.": {
             "$ref": "./examples/PrivateEndpointConnectionDelete.json"
@@ -696,6 +702,10 @@
         ],
         "description": "Approve or reject a private endpoint connection with a given name.",
         "operationId": "PrivateLinkScopedResources_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -753,7 +763,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a scoped resource in a private link scope.": {
             "$ref": "./examples/PrivateLinkScopedResourceUpdate.json"
@@ -766,6 +775,10 @@
         ],
         "description": "Deletes a private endpoint connection with a given name.",
         "operationId": "PrivateLinkScopedResources_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -809,7 +822,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Deletes a scoped resource with a given name.": {
             "$ref": "./examples/PrivateLinkScopedResourceDelete.json"
@@ -946,6 +958,31 @@
             "Canceled",
             "Provisioning"
           ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The state is Succeeded.",
+                "name": "Succeeded"
+              },
+              {
+                "value": "Failed",
+                "description": "The state is Failed.",
+                "name": "Failed"
+              },
+              {
+                "value": "Canceled",
+                "description": "The state is Canceled.",
+                "name": "Canceled"
+              },
+              {
+                "value": "Provisioning",
+                "description": "The state is Provisioning.",
+                "name": "Provisioning"
+              }
+            ]
+          },
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
           "readOnly": true
         },
@@ -1100,6 +1137,31 @@
             "Canceled",
             "Provisioning"
           ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The state is Succeeded.",
+                "name": "Succeeded"
+              },
+              {
+                "value": "Failed",
+                "description": "The state is Failed.",
+                "name": "Failed"
+              },
+              {
+                "value": "Canceled",
+                "description": "The state is Canceled.",
+                "name": "Canceled"
+              },
+              {
+                "value": "Provisioning",
+                "description": "The state is Provisioning.",
+                "name": "Provisioning"
+              }
+            ]
+          },
           "readOnly": true
         }
       }
