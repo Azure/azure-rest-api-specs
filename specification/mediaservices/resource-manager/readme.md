@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-08
+tag: package-metadata-2022-08
 opt-in-extensible-enums: true
 ```
 
@@ -63,6 +63,21 @@ directive:
 ```
 
 
+### Tag: package-metadata-2022-08
+
+These settings apply only when `--tag=package-metadata-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-metadata-2022-08'
+input-file:
+  - Microsoft.Media/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2022-08-01/streamingservice.json
+```
+
 ### Tag: package-2022-08
 
 These settings apply only when `--tag=package-2022-08` is specified on the command line.
@@ -77,6 +92,7 @@ input-file:
   - Microsoft.Media/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2022-08-01/streamingservice.json
 ```
+
 ### Tag: package-account-2021-11
 
 These settings apply only when `--tag=package-account-2021-11` is specified on the command line.
