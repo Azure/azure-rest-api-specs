@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2021-05-01"
+    "version": "2022-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -498,6 +498,18 @@
             "modelAsString": true
           }
         },
+        "SyncScope": {
+          "type": "string",
+          "enum": [
+            "All",
+            "CloudOnly"
+          ],
+          "description": "All or CloudOnly, All users in AAD are synced to AAD DS domain or only users actively syncing in the cloud",
+          "x-ms-enum": {
+            "name": "FilteredSync",
+            "modelAsString": true
+          }
+        },
         "notificationSettings": {
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
@@ -905,6 +917,32 @@
           "description": "A flag to determine whether or not KerberosArmoring is enabled or disabled.",
           "x-ms-enum": {
             "name": "KerberosArmoring",
+            "modelAsString": true
+          }
+        },
+        "ldapSigning": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "description": "A flag to determine whether or not LdapSigning is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "LdapSigning",
+            "modelAsString": true
+          }
+        },
+        "channelBinding": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "description": "A flag to determine whether or not ChannelBinding is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "ChannelBinding",
             "modelAsString": true
           }
         }
