@@ -1,8 +1,8 @@
-### Tag: package-2022-10
+### Tag: package-2022-06
 
-These settings apply only when `--tag=package-2022-10` is specified on the command line.
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-06'
 test-resources:
   - Microsoft.Insights/preview/2019-10-17-preview/scenarios/privateLinkScopes.yaml
   - Microsoft.Insights/preview/2021-09-01-preview/scenarios/dataCollectionEndpoints.yaml
