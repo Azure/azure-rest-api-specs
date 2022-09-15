@@ -373,7 +373,14 @@
             "description": "Not Found"
           },
           "default": {
-            "description": "Error response"
+            "description": "Error response",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -501,7 +508,14 @@
             "description": "Not Found"
           },
           "default": {
-            "description": "Error response"
+            "description": "Error response",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -538,8 +552,7 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
+            "pattern": "^(?!\\s+$).{1,1024}$"
           },
           {
             "in": "query",
@@ -960,7 +973,14 @@
             "description": "Not Found"
           },
           "default": {
-            "description": "Error response"
+            "description": "Error response",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1091,7 +1111,14 @@
             "description": "Not Found"
           },
           "default": {
-            "description": "Error response"
+            "description": "Error response",
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
