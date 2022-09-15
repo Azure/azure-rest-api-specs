@@ -1639,45 +1639,45 @@
             "modelAsString": true
           }
         },
-          "monitoringSettings": {
-            "description": "Monitoring Settings of the vault",
-            "$ref": "#/definitions/MonitoringSettings"
-          },
-          "redundancySettings": {
-            "description": "The redundancy Settings of a Vault",
-            "type": "object",
-            "properties": {
-              "standardTierStorageRedundancy": {
-                "description": "The storage redundancy setting of a vault",
-                "enum": [
-                  "LocallyRedundant",
-                  "GeoRedundant",
-                  "ZoneRedundant"
-                ],
-                "type": "string",
-                "readOnly": true,
-                "x-ms-enum": {
-                  "name": "standardTierStorageRedundancy",
-                  "modelAsString": true
-                }
-              },
-              "crossRegionRestore": {
-                "description": "Flag to show if Cross Region Restore is enabled on the Vault or not",
-                "enum": [
-                  "Enabled",
-                  "Disabled"
-                ],
-                "type": "string",
-                "readOnly": true,
-                "x-ms-enum": {
-                  "name": "crossRegionRestore",
-                  "modelAsString": true
-                }
+        "monitoringSettings": {
+          "description": "Monitoring Settings of the vault",
+          "$ref": "#/definitions/MonitoringSettings"
+        },
+        "redundancySettings": {
+          "description": "The redundancy Settings of a Vault",
+          "type": "object",
+          "properties": {
+            "standardTierStorageRedundancy": {
+              "description": "The storage redundancy setting of a vault",
+              "enum": [
+                "LocallyRedundant",
+                "GeoRedundant",
+                "ZoneRedundant"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "standardTierStorageRedundancy",
+                "modelAsString": true
+              }
+            },
+            "crossRegionRestore": {
+              "description": "Flag to show if Cross Region Restore is enabled on the Vault or not",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "crossRegionRestore",
+                "modelAsString": true
               }
             }
           }
         }
-      },
+      }
+    },
     "IdentityData": {
       "required": [
         "type"
