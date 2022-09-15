@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-01-preview
+tag: package-2022-10-preview
 ```
 
 ### Suppression
