@@ -1853,6 +1853,7 @@
       }
     },
     "ServerUsage": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -1896,13 +1897,15 @@
       "description": "Represents server metrics."
     },
     "ServerUsageListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServerUsage"
           },
-          "description": "The list of server metrics for the server."
+          "description": "The list of server metrics for the server.",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
