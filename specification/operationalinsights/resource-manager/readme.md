@@ -102,7 +102,6 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
@@ -130,7 +129,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 ```
@@ -158,7 +156,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 ```
@@ -194,7 +191,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
@@ -222,7 +218,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
@@ -252,7 +247,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 - Microsoft.OperationalInsights/preview/2021-12-01-preview/Operations.json
@@ -282,7 +276,6 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2022-10-01/Operations.json
