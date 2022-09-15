@@ -270,18 +270,18 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "default": {
             "schema": {
@@ -912,7 +912,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object",
+              "type": "array",
               "items": {
                 "$ref": "#/definitions/TrustedServiceByPassConfiguration"
               }
@@ -972,7 +972,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object",
+              "type": "array",
               "items": {
                 "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
               }
@@ -1816,11 +1816,11 @@
           "description": "The max ECO tokens per pool"
         },
         "extendedProperties": {
-          "type": "string",
+          "type": "object",
           "description": "Scope Pool Extended Properties",
           "properties": {
             "poolLimitAndPolicies": {
-              "type": "string",
+              "type": "object",
               "description": "Scope pool Limit And Policies",
               "properties": {
                 "maxTokensPerJob": {
