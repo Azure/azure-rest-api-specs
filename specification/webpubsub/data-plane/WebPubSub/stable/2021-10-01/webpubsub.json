@@ -552,7 +552,8 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!\\s+$).{1,1024}$"
+            "maxLength": 1024,
+            "minLength": 1
           },
           {
             "in": "query",
