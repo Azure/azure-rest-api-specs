@@ -794,53 +794,6 @@
         }
       }
     },
-    "CustomDomainConfiguration": {
-      "type": "object",
-      "description": "Configuration properties for apps environment custom domain",
-      "properties": {
-        "customDomainVerificationId": {
-          "description": "Id used to verify domain name ownership",
-          "type": "string",
-          "readOnly": true
-        },
-        "dnsSuffix": {
-          "type": "string",
-          "description": "Dns suffix for the environment domain",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "certificateValue": {
-          "format": "byte",
-          "description": "PFX or PEM blob",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "certificatePassword": {
-          "format": "byte",
-          "description": "Certificate password",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "expirationDate": {
-          "format": "date-time",
-          "description": "Certificate expiration date.",
-          "type": "string",
-          "readOnly": true
-        },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "subjectName": {
-          "description": "Subject name of the certificate.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ManagedEnvironment": {
       "description": "An environment for hosting container apps",
       "type": "object",
@@ -921,7 +874,7 @@
               ]
             },
             "customDomainConfiguration": {
-              "$ref": "#/definitions/CustomDomainConfiguration",
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDomainConfiguration",
               "description": "Custom domain configuration for the environment"
             },
             "eventStreamEndpoint": {
