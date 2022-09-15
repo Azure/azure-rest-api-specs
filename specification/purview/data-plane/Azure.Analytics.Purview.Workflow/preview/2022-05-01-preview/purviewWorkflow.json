@@ -6,11 +6,11 @@
     "description": "Workflows are automated, repeatable business processes which allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.Workflow service is a micro service within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/endpoint"
       }
     ]
   },
@@ -1613,14 +1613,14 @@
       "description": "Client Request Id",
       "x-ms-parameter-location": "client"
     },
-    "Endpoint": {
-      "name": "Endpoint",
+    "endpoint": {
+      "name": "endpoint",
       "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
-      "format": "uri",
       "in": "path",
+      "format": "url",
       "x-ms-skip-url-encoding": true
     },
     "window": {
@@ -1696,15 +1696,15 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string"
-      },
-      "enum": [
-        "approval",
-        "task"
-      ],
-      "x-ms-enum": {
-        "name": "type",
-        "modelAsString": true
+        "type": "string",
+        "enum": [
+          "approval",
+          "task"
+        ],
+        "x-ms-enum": {
+          "name": "type",
+          "modelAsString": true
+        }
       },
       "description": "Filter items by workflow request type.",
       "x-ms-parameter-location": "method"
@@ -1806,7 +1806,7 @@
       "name": "requestRole",
       "in": "query",
       "required": false,
-      "type": "array",
+      "type": "string",
       "items": {
         "type": "string"
       },
