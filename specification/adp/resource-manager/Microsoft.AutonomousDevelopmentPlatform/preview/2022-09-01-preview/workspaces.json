@@ -1,0 +1,942 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "adp",
+    "version": "2022-09-01-preview",
+    "description": "Microsoft.AutonomousDevelopmentPlatform resource management API."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "checkNameAvailability"
+    },
+    {
+      "name": "Workspaces"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AutonomousDevelopmentPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all provider operations": {
+            "$ref": "./examples/AdpOperationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "checkNameAvailability"
+        ],
+        "operationId": "checkNameAvailability_post",
+        "description": "Checks the resource name is available.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "The checkNameAvailability parameters.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/AdpCheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListBySubscription",
+        "description": "List Workspace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspaces by subscription": {
+            "$ref": "./examples/AdpWorkspacesListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "List Workspace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspaces by resource group": {
+            "$ref": "./examples/AdpWorkspacesListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Get a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Workspace.workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workspace": {
+            "$ref": "./examples/AdpWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Create a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Workspace.workspaceName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a workspace": {
+            "$ref": "./examples/AdpWorkspacePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Update a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Workspace.workspaceName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "ARM operation accepted."
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a workspace": {
+            "$ref": "./examples/AdpWorkspacePatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "Delete a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Workspace.workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/AdpWorkspaceDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoGeneratedDomainNameLabelScope": {
+      "type": "string",
+      "description": "Scope for FQDN generation",
+      "enum": [
+        "TenantReuse",
+        "SubscriptionReuse",
+        "ResourceGroupReuse",
+        "NoReuse"
+      ],
+      "x-ms-enum": {
+        "name": "AutoGeneratedDomainNameLabelScope",
+        "modelAsString": true
+      }
+    },
+    "Azure.ResourceManager.ManagedIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Active Directory tenant id of the principal.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier of this principal.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.UserAssignedIdentity"
+          },
+          "description": "The identities assigned to this resource by the user."
+        }
+      },
+      "description": "The properties of the managed service identities assigned to this resource.",
+      "required": [
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.ManagedServiceIdentity": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "The managed service identities envelope."
+    },
+    "Azure.ResourceManager.UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      },
+      "description": "A managed identity assigned by the user.",
+      "required": [
+        "clientId",
+        "principalId"
+      ]
+    },
+    "AzureSku": {
+      "type": "object",
+      "properties": {
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "The DataExplorer SKU tier (optional)."
+        },
+        "name": {
+          "type": "string",
+          "description": "The DataExplorer SKU name (optional)."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The DataExplorer SKU capacity (optional)."
+        }
+      },
+      "description": "The Data Explorer Azure SKU"
+    },
+    "CheckNameAvailabilityParameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to be checked."
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The resource type to be checked."
+        }
+      },
+      "description": "Check name availability parameters",
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason",
+          "description": "Gets the reason that the resource name could not be used. The reason element is only returned if nameAvailable is false.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets an error message explaining the Reason value in more detail.",
+          "readOnly": true
+        }
+      },
+      "description": "Check name availability result"
+    },
+    "CustomerManagedKeyEncryption": {
+      "type": "object",
+      "properties": {
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "The key encryption key Url, versioned or not. Example: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        },
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "The identity configuration for Customer-managed key settings defining which identity should be used to authenticate to Key Vault.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Customer-Managed Key Encryption Properties",
+      "required": [
+        "keyEncryptionKeyUrl",
+        "keyEncryptionKeyIdentity"
+      ]
+    },
+    "DataCatalog": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DataCatalogState",
+          "description": "The Data Catalog state."
+        },
+        "externalWorkspaceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The resource ID of the external Workspaces which will be used as Data Catalogs. A non empty value is expected only when the Data Catalog state is External. The target Workspaces must be configured with Data Catalog state Enabled."
+        },
+        "dataExplorer": {
+          "$ref": "#/definitions/DataExplorer",
+          "description": "Configuration for the Azure Data Explorer instance. A non empty value is expected only when the Data Catalog state is Enabled. If not provided, defaults to: {tier: 'Standard', name: 'Standard_D13_v2', capacity: 2}."
+        }
+      },
+      "description": "Data Catalog Configuration",
+      "required": [
+        "state"
+      ]
+    },
+    "DataCatalogState": {
+      "type": "string",
+      "description": "Data Catalog State",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "DataCatalogState",
+        "modelAsString": true
+      }
+    },
+    "DataExplorer": {
+      "type": "object",
+      "properties": {
+        "azureSku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The Azure DataExplorer SKU",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Explorer Configuration",
+      "required": [
+        "azureSku"
+      ]
+    },
+    "Encryption": {
+      "type": "object",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/CustomerManagedKeyEncryption",
+          "description": "The customer-managed key encryption properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Encryption Configuration"
+    },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "User assigned identity to use for accessing key encryption key Url. Example: /subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId."
+        }
+      },
+      "description": "Key Encryption Key Identity",
+      "required": [
+        "userAssignedIdentityResourceId"
+      ]
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "properties": {},
+      "description": "The managed identity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Reason": {
+      "type": "string",
+      "description": "Reasons for the unavailability of the name",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "Reason",
+        "modelAsString": true
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "Resource Types supported for Check Name Availability",
+      "enum": [
+        "Microsoft.AutonomousDevelopmentPlatform/accounts",
+        "Microsoft.AutonomousDevelopmentPlatform/workspaces"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true
+      }
+    },
+    "SkuTier": {
+      "type": "string",
+      "description": "Data Catalog SKU tier",
+      "enum": [
+        "Basic",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true
+      }
+    },
+    "StorageSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StorageSkuName",
+          "description": "The SKU name."
+        }
+      },
+      "description": "Storage SKU",
+      "required": [
+        "name"
+      ]
+    },
+    "StorageSkuName": {
+      "type": "string",
+      "description": "Storage SKU Name",
+      "enum": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS",
+        "Premium_LRS",
+        "Premium_ZRS",
+        "Standard_GZRS",
+        "Standard_RAGZRS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageSkuName",
+        "modelAsString": true
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9][-a-z0-9]{0,45}$",
+          "maxLength": 46,
+          "readOnly": false,
+          "x-ms-parameter-location": "method"
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "Microsoft.AutonomousDevelopmentPlatform Workspace",
+      "required": [
+        "properties",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkspaceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "x-cadl-name": "Workspace[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a Workspace list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "properties": {
+        "autoGeneratedDomainNameLabelScope": {
+          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
+          "description": "The scope for the FQDN label generation. If not provided, defaults to TenantReuse."
+        },
+        "dataLocation": {
+          "type": "string",
+          "description": "The Workspace's data location. If not provided, defaults to the resource's location."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption configuration."
+        },
+        "storageSku": {
+          "$ref": "#/definitions/StorageSku",
+          "description": "The Storage SKU. If not provided, defaults to Standard_ZRS."
+        },
+        "storageAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
+        },
+        "dataCatalog": {
+          "$ref": "#/definitions/DataCatalog",
+          "description": "The Data Catalog configuration."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "The ARM Id of the source resource that originated the data for this Workspace"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The data-plane endpoint uri.",
+          "readOnly": true
+        }
+      },
+      "description": "Workspace Properties"
+    },
+    "WorkspaceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceUpdateProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "The type used for update operations of the Workspace."
+    },
+    "WorkspaceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "autoGeneratedDomainNameLabelScope": {
+          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
+          "description": "The scope for the FQDN label generation. If not provided, defaults to TenantReuse."
+        },
+        "dataLocation": {
+          "type": "string",
+          "description": "The Workspace's data location. If not provided, defaults to the resource's location."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption configuration."
+        },
+        "storageSku": {
+          "$ref": "#/definitions/StorageSku",
+          "description": "The Storage SKU. If not provided, defaults to Standard_ZRS."
+        },
+        "storageAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
+        },
+        "dataCatalog": {
+          "$ref": "#/definitions/DataCatalog",
+          "description": "The Data Catalog configuration."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "The ARM Id of the source resource that originated the data for this Workspace"
+        }
+      },
+      "description": "The updatable properties of the Workspace."
+    }
+  },
+  "parameters": {
+    "Workspace.workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-z0-9][-a-z0-9]{0,45}$",
+      "maxLength": 46,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
