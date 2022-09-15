@@ -935,6 +935,115 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/checkDefaultStorageAccountStatus": {
+      "post": {
+        "tags": [
+          "Workspaces, checkDefaultStorageAccountStatus"
+        ],
+        "operationId": "WorkspaceCheckDefaultStorageAccountStatus_Create",
+        "description": "Check Default Storage Account Status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            },
+            "name": "checkDefaultStorageAccountStatus",
+            "in": "body",
+            "description": "Check Default Storage Account Status",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Workspace check default storage account status": {
+            "$ref": "./examples/CheckDefaultStorageAccountStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "get": {
+        "tags": [
+          "ScopePools"
+        ],
+        "operationId": "ScopePoolsListByWorkspace_Get",
+        "description": "Gets a list of scope pools",
+        "x-ms-examples": {
+          "Get list of scope pools": {
+            "$ref": "./examples/GetScopePoolsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScopePoolsListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -1597,6 +1706,152 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatusProperties": {
+      "description": "Properties of the Check Default Storage Account Status.",
+      "type": "object",
+      "properties": {
+        "isPrivateLinked": {
+          "description": "Is Storage Account Status Linked.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "privateEndpointResourceId": {
+          "description": "Endpoint ResourceId.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatus": {
+      "description": "Workspace Check Default Storage Account Status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/CheckDefaultStorageAccountStatusProperties",
+          "description": "Workspace Check Default Storage Account Status Properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopePoolsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ScopePools"
+          },
+          "description": "A list of Scope pools"
+        }
+      },
+      "description": "The response to a list Scope pools request"
+    },
+    "ScopePools": {
+      "type": "object",
+      "title": "Scope Pools",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/ScopePoolProperties",
+          "description": "The properties of a Scope pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Scope pool for workspace"
+    },
+    "ScopePoolProperties": {
+      "type": "object",
+      "description": "Properties for Scope Pool",
+      "properties": {
+        "creationDate": {
+          "description": "The Creation Date for Scope Pool",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "maxQueuedJobs": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The maximum numbers of jobs that can queue up"
+        },
+        "maxRunningJobs": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The maximum number of jobs that can run simultaneously"
+        },
+        "maxTokens": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The max tokens per pool"
+        },
+        "maxEcoTokens": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The max ECO tokens per pool"
+        },
+        "extendedProperties": {
+          "type": "string",
+          "description": "Scope Pool Extended Properties",
+          "properties": {
+            "poolLimitAndPolicies": {
+              "type": "string",
+              "description": "Scope pool Limit And Policies",
+              "properties": {
+                "maxTokensPerJob": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max Tokens Per Job"
+                },
+                "maxEcoTokensPerJob": {
+                  "type": "number",
+                  "format": "int32",
+                  "description": "Max ECO Tokens Per Job"
+                }
+              }
+            }
+          }
+        },
+        "provisioningState": {
+          "enum": [
+            "Provisioning",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "DeleteError",
+            "UpdateError"
+          ],
+          "description": "Provisioning State of Scope Pool",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Workspace provisioning State",
+            "modelAsString": true
+          }
         }
       }
     }

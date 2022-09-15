@@ -90,7 +90,7 @@
         }
       }
     },
-    "/providers/Microsoft.ElasticSan/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ElasticSan/skus": {
       "get": {
         "tags": [
           "Elastic San Skus"
@@ -98,6 +98,9 @@
         "summary": "List all the available Skus in the region and information related to them",
         "operationId": "Skus_List",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
