@@ -39,8 +39,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmCluster_CreateOrUpdate",
-        "description": "Create or Update a Cloud HSM in the specified subscription.",
+        "operationId": "CloudHsmClusters_CreateOrUpdate",
+        "description": "Create or Update a Cloud HSM Cluster in the specified subscription.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -64,33 +64,33 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmCluster"
             },
-            "description": "Parameters to create Cloud HSM"
+            "description": "Parameters to create Cloud HSM Cluster"
           }
         ],
         "responses": {
           "200": {
-            "description": "Created Cloud HSM",
+            "description": "Created Cloud HSM Cluster",
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmCluster"
             }
           },
           "201": {
-            "description": "Created Cloud HSM",
+            "description": "Created Cloud HSM Cluster",
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmCluster"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsm_CreateOrUpdate_MaximumSet_Gen": {
+          "CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
@@ -99,12 +99,12 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmCluster_Update",
+        "operationId": "CloudHsmClusters_Update",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Update a Cloud HSM in the specified subscription.",
+        "description": "Update a Cloud HSM Cluster in the specified subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -124,16 +124,16 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CloudHsmPatchParameters"
+              "$ref": "#/definitions/CloudHsmClusterPatchParameters"
             },
-            "description": "Parameters to create Cloud HSM"
+            "description": "Parameters to create Cloud HSM Cluster"
           }
         ],
         "responses": {
           "200": {
-            "description": "Patched Cloud HSM",
+            "description": "Patched Cloud HSM Cluster",
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmCluster"
             }
           },
           "202": {
@@ -145,18 +145,18 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmCluster"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsm_Update_MaximumSet_Gen": {
+          "CloudHsmCluster_Update_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_Update_MaximumSet_Gen.json"
           }
         }
@@ -165,8 +165,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmCluster_Get",
-        "description": "Gets the specified Cloud HSM.",
+        "operationId": "CloudHsmClusters_Get",
+        "description": "Gets the specified Cloud HSM Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -183,20 +183,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieved Cloud HSM",
+            "description": "Retrieved Cloud HSM Cluster",
             "schema": {
-              "$ref": "#/definitions/CloudHsm"
+              "$ref": "#/definitions/CloudHsmCluster"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsm_Get_MaximumSet_Gen": {
+          "CloudHsmCluster_Get_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_Get_MaximumSet_Gen.json"
           }
         }
@@ -205,8 +205,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmCluster_Delete",
-        "description": "Deletes the specified Cloud HSM.",
+        "operationId": "CloudHsmClusters_Delete",
+        "description": "Deletes the specified Cloud HSM Cluster",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -244,12 +244,12 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsm_Delete_MaximumSet_Gen": {
+          "CloudHsmCluster_Delete_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_Delete_MaximumSet_Gen.json"
           }
         }
@@ -260,8 +260,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmCluster_ListByResourceGroup",
-        "description": "The List operation gets information about the Cloud HSMs associated with the subscription and within the specified resource group.",
+        "operationId": "CloudHsmClusters_ListByResourceGroup",
+        "description": "The List operation gets information about the Cloud HSM Clusters associated with the subscription and within the specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -282,15 +282,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Get information about all Cloud HSMs in the specified resource group.",
+            "description": "Get information about all Cloud HSM Clusters in the specified resource group.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmListResult"
+              "$ref": "#/definitions/CloudHsmClusterListResult"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -298,7 +298,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "CloudHsm_ListByResourceGroup_MaximumSet_Gen": {
+          "CloudHsmCluster_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
@@ -309,8 +309,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmCluster_ListBySubscription",
-        "description": "The List operation gets information about the Cloud HSMs associated with the subscription.",
+        "operationId": "CloudHsmClusters_ListBySubscription",
+        "description": "The List operation gets information about the Cloud HSM Clusters associated with the subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -328,15 +328,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Get information about all Cloud HSMs in the specified subscription.",
+            "description": "Get information about all Cloud HSM Clusters in the specified subscription.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmListResult"
+              "$ref": "#/definitions/CloudHsmClusterListResult"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -344,7 +344,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "CloudHsm_ListBySubscription_MaximumSet_Gen": {
+          "CloudHsmCluster_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_ListBySubscription_MaximumSet_Gen.json"
           }
         }
@@ -356,7 +356,7 @@
           ""
         ],
         "operationId": "Operations_List",
-        "description": "Get a list of Cloud HSM operations.",
+        "description": "Get a list of Cloud HSM Cluster operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -366,13 +366,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CloudHsmOperationListResult"
+              "$ref": "#/definitions/CloudHsmClusterOperationListResult"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -394,8 +394,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmPrivateLinkResources_ListByCloudHsm",
-        "description": "Gets the private link resources supported for the cloud hsm cluster.",
+        "operationId": "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster",
+        "description": "Gets the private link resources supported for the Cloud Hsm Cluster.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -420,13 +420,13 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsmPrivateLinkResources_ListByResource_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmPrivateLinkResource_ListByCloudHsm_MaximumSet_Gen.json"
+          "CloudHsmClusterPrivateLinkResources_ListByResource_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateLinkResource_ListByCloudHsmCluster_MaximumSet_Gen.json"
           }
         }
       }
@@ -436,8 +436,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmPrivateEndpointConnections_Create",
-        "description": "Creates or updates the private endpoint connection for the cloud hsm cluster.",
+        "operationId": "CloudHsmClusterPrivateEndpointConnections_Create",
+        "description": "Creates or updates the private endpoint connection for the Cloud Hsm Cluster.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -478,13 +478,13 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsmPrivateEndpointConnection_Create_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmPrivateEndpointConnection_Create_MaximumSet_Gen.json"
+          "CloudHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen.json"
           }
         }
       },
@@ -492,8 +492,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmPrivateEndpointConnections_Delete",
-        "description": "Deletes the private endpoint connection for the cloud hsm cluster.",
+        "operationId": "CloudHsmClusterPrivateEndpointConnections_Delete",
+        "description": "Deletes the private endpoint connection for the Cloud Hsm Cluster.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -538,13 +538,13 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsmPrivateEndpointConnection_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmPrivateEndpointConnection_Delete_MaximumSet_Gen.json"
+          "CloudHsmClusterPrivateEndpointConnection_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_Delete_MaximumSet_Gen.json"
           }
         }
       },
@@ -552,8 +552,8 @@
         "tags": [
           ""
         ],
-        "operationId": "CloudHsmPrivateEndpointConnections_Get",
-        "description": "Gets the private endpoint connection for the cloud hsm cluster.",
+        "operationId": "CloudHsmClusterPrivateEndpointConnections_Get",
+        "description": "Gets the private endpoint connection for the Cloud Hsm Cluster.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -585,13 +585,13 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsmPrivateEndpointConnection_Get_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmPrivateEndpointConnection_Get_MaximumSet_Gen.json"
+          "CloudHsmClusterPrivateEndpointConnection_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -601,8 +601,8 @@
         "tags": [
           ""
         ],
-        "operationId": "PrivateEndpointConnections_ListByCloudHsm",
-        "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM",
+        "operationId": "PrivateEndpointConnections_ListByCloudHsmCluster",
+        "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -619,7 +619,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of all CloudHsmCluster private endpoint connections associated with the Cloud HSM.",
+            "description": "List of all CloudHsmCluster private endpoint connections associated with the Cloud HSM Cluster.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -627,57 +627,57 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmError"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
         "x-ms-examples": {
-          "CloudHsmPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmPrivateEndpointConnection_ListByCloudHsm_MaximumSet_Gen.json"
+          "CloudHsmClusterPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_ListByCloudHsmCluster_MaximumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "CloudHsmPartitionProperties": {
+    "CloudHsmProperties": {
       "type": "object",
-      "description": "The Cloud HSM Partition Properties",
+      "description": "The Cloud HSM Properties",
       "properties": {
         "hsmId": {
           "type": "string",
-          "description": "FQDN of the Cloud HSM Partition"
+          "description": "FQDN of the Cloud HSM"
         },
         "state": {
           "type": "string",
-          "description": "The Cloud HSM Partition State"
+          "description": "The Cloud HSM State"
         },
         "stateMessage": {
           "type": "string",
-          "description": "The Cloud HSM Partition State message"
+          "description": "The Cloud HSM State message"
         }
       }
     },
-    "CloudHsm": {
+    "CloudHsmCluster": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CloudHsmClusterProperties",
-          "description": "Properties of the Cloud HSM"
+          "description": "Properties of the Cloud HSM Cluster"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CloudHsmResource"
+          "$ref": "#/definitions/CloudHsmClusterResource"
         }
       ],
       "description": "Resource information with extended details.",
       "type": "object"
     },
-    "CloudHsmResource": {
+    "CloudHsmClusterResource": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/CloudHsmSku",
+          "$ref": "#/definitions/CloudHsmClusterSku",
           "description": "SKU details"
         }
       },
@@ -686,7 +686,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Cloud HSM resource",
+      "description": "Cloud HSM Cluster Resource",
       "type": "object",
       "x-ms-azure-resource": true
     },
@@ -694,7 +694,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "The Cloud HSM Resource provisioningState",
+          "description": "The Cloud HSM Cluster Resource provisioningState",
           "enum": [
             "Succeeded",
             "Canceled",
@@ -707,46 +707,46 @@
         },
         "autoGeneratedDomainNameLabelScope": {
           "type": "string",
-          "description": "The Cloud HSM Resource auto-generated Domain Name Label Scope"
+          "description": "The Cloud HSM Cluster Resource auto-generated Domain Name Label Scope"
         },
         "securityDomain": {
-          "$ref": "#/definitions/SecurityDomainProperties"
+          "$ref": "#/definitions/CloudHsmClusterSecurityDomainProperties"
         },
         "hsms": {
           "type": "array",
-          "description": "An array of Cloud HSM Resource's HSM partitions",
+          "description": "An array of Cloud HSM Cluster Resource's HSM partitions",
           "x-ms-identifiers": [
             "hsmId"
           ],
           "items": {
-            "$ref": "#/definitions/CloudHsmPartitionProperties"
+            "$ref": "#/definitions/CloudHsmProperties"
           }
         }
       },
-      "description": "Properties of a Cloud HSM resource.",
+      "description": "Properties of a Cloud HSM Cluster resource.",
       "type": "object"
     },
-    "CloudHsmPatchParameters": {
+    "CloudHsmClusterPatchParameters": {
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The Cloud HSM Resource tags",
+          "description": "The Cloud HSM Cluster Resource tags",
           "additionalProperties": {
             "type": "string",
-            "description": "The Cloud HSM Resource tags additional properties"
+            "description": "The Cloud HSM Cluster Resource tags additional properties"
           }
         },
         "sku": {
-          "$ref": "#/definitions/CloudHsmSku",
+          "$ref": "#/definitions/CloudHsmClusterSku",
           "description": "SKU details"
         }
       },
-      "description": "Patchable properties of the Cloud HSM",
+      "description": "Patchable properties of the Cloud HSM Cluster",
       "type": "object"
     },
-    "SecurityDomainProperties": {
+    "CloudHsmClusterSecurityDomainProperties": {
       "type": "object",
-      "description": "Security domain properties information",
+      "description": "Security domain properties information for Cloud HSM cluster",
       "properties": {
         "fipsState": {
           "format": "int32",
@@ -759,9 +759,9 @@
         }
       }
     },
-    "CloudHsmSku": {
+    "CloudHsmClusterSku": {
       "type": "object",
-      "description": "Cloud Hsm SKU information",
+      "description": "Cloud Hsm Cluster SKU information",
       "required": [
         "name",
         "family"
@@ -775,7 +775,7 @@
           ],
           "x-ms-client-default": "B",
           "x-ms-enum": {
-            "name": "CloudHsmSkuFamily",
+            "name": "CloudHsmClusterSkuFamily",
             "modelAsString": true
           }
         },
@@ -787,7 +787,7 @@
             "Standard B10"
           ],
           "x-ms-enum": {
-            "name": "CloudHsmSkuName",
+            "name": "CloudHsmClusterSkuName",
             "modelAsString": false
           }
         },
@@ -798,13 +798,13 @@
         }
       }
     },
-    "CloudHsmError": {
+    "CloudHsmClusterError": {
       "properties": {
         "error": {
           "$ref": "#/definitions/Error"
         }
       },
-      "description": "The Cloud HSM error details",
+      "description": "The Cloud HSM Cluster error details",
       "type": "object"
     },
     "Error": {
@@ -829,29 +829,29 @@
       "type": "object",
       "description": "Error details"
     },
-    "CloudHsmListResult": {
+    "CloudHsmClusterListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudHsm"
+            "$ref": "#/definitions/CloudHsmCluster"
           },
-          "description": "The list of Cloud HSMs."
+          "description": "The list of Cloud HSM Clusters."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of Cloud HSMs."
+          "description": "The URL to get the next set of Cloud HSM Clusters."
         }
       },
-      "description": "List of Cloud HSMs",
+      "description": "List of Cloud HSM Clusters",
       "type": "object"
     },
-    "CloudHsmOperation": {
+    "CloudHsmClusterOperation": {
       "description": "REST API operation",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the Cloud HSM Resource Provider Operation.",
+          "description": "The name of the Cloud HSM Cluster Resource Provider Operation.",
           "type": "string"
         },
         "isDataAction": {
@@ -883,19 +883,19 @@
         }
       }
     },
-    "CloudHsmOperationListResult": {
+    "CloudHsmClusterOperationListResult": {
       "type": "object",
-      "description": "Result of the request to list Cloud HSM Provider operations. It contains a list of operations.",
+      "description": "Result of the request to list Cloud HSM Cluster Provider operations. It contains a list of operations.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudHsmOperation"
+            "$ref": "#/definitions/CloudHsmClusterOperation"
           },
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "List of Cloud HSM Resource Provider operations."
+          "description": "List of Cloud HSM Cluster Resource Provider operations."
         },
         "nextLink": {
           "type": "string",
@@ -910,7 +910,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Cloud HSM within the specified resource group. Cloud HSM names must be between 3 and 24 characters in length.",
+      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
       "pattern": "^[a-zA-Z0-9-]{3,24}$",
       "maxLength": 24,
       "minLength": 3,
