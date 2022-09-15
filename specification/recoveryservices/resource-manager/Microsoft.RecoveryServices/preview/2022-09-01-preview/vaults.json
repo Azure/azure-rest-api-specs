@@ -1800,6 +1800,22 @@
           "description": "Gets or sets id.",
           "readOnly": true,
           "type": "string"
+        },
+        "groupIds": {
+          "description": "Group Ids for the Private Endpoint",
+          "type": "array",
+          "items": {
+            "description": "Subresource type for vault, AzureBackup or AzureSiteRecovery",
+            "enum": [
+              "AzureBackup",
+              "AzureSiteRecovery"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "VaultSubResourceType",
+              "modelAsString": true
+            }
+          }
         }
       }
     },
