@@ -6,13 +6,11 @@
     "description": "Workflows are automated, repeatable business processes which allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.Workflow service is a micro service within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
-    "type": "string",
-    "format": "url",
     "parameters": [
       {
-        "$ref": "#/parameters/endpoint"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -72,7 +70,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/requestStatus"
+            "$ref": "#/parameters/requestRole"
           },
           {
             "$ref": "#/parameters/workflowDefinitionIdList"
@@ -1457,7 +1455,11 @@
           "description": "The workflow Type.",
           "enum": [
             "ApprovalWorkflow"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
         },
         "category": {
           "type": "string",
@@ -1465,7 +1467,11 @@
           "enum": [
             "DataCatalog",
             "Governance"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
         },
         "action": {
           "type": "string",
@@ -1477,7 +1483,11 @@
             "ImportTerms",
             "GrantDataAccess",
             "UpdateAssetAttributes"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1603,8 +1613,8 @@
       "description": "Client Request Id",
       "x-ms-parameter-location": "client"
     },
-    "endpoint": {
-      "name": "endpoint",
+    "Endpoint": {
+      "name": "Endpoint",
       "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/",
       "x-ms-parameter-location": "client",
       "required": true,
@@ -1624,6 +1634,10 @@
         "30d",
         "90d"
       ],
+      "x-ms-enum": {
+        "name": "window",
+        "modelAsString": true
+      },
       "description": "Time window of filtering items.",
       "x-ms-parameter-location": "method"
     },
@@ -1653,6 +1667,10 @@
         "submittedTime",
         "requestor"
       ],
+      "x-ms-enum": {
+        "name": "sortKey",
+        "modelAsString": true
+      },
       "description": "The key used for sorting the items.",
       "x-ms-parameter-location": "method"
     },
@@ -1684,6 +1702,10 @@
         "approval",
         "task"
       ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true
+      },
       "description": "Filter items by workflow request type.",
       "x-ms-parameter-location": "method"
     },
@@ -1728,7 +1750,11 @@
         "ImportTerms",
         "GrantDataAccess",
         "UpdateAssetAttributes"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "workflowType",
+        "modelAsString": true
+      }
     },
     "workflowRunId": {
       "name": "workflowRunId",
@@ -1776,15 +1802,15 @@
       "description": "Filter workflow requests by workflow request type.",
       "x-ms-parameter-location": "method"
     },
-    "requestStatus": {
-      "name": "requestStatus",
+    "requestRole": {
+      "name": "requestRole",
       "in": "query",
       "required": false,
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "Filter workflow requests by workflow request status.",
+      "description": "Filter workflow requests by workflow request role.",
       "x-ms-parameter-location": "method"
     }
   }
