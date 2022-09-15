@@ -421,13 +421,13 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "labels",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/customLocationFindTargetResourceGroupProperties"
             },
-            "description": "Labels supplied to match with Resource Sync Rule. This is a map of {key,value} pairs."
+            "description": "Parameters of the find target resource group request."
           }
         ],
         "responses": {
@@ -801,7 +801,12 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "x-ms-identifiers": [
+            "apiVersion",
+            "resourceType",
+            "resourceProviderNamespace"
+          ]
         }
       }
     },
@@ -820,7 +825,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/EnabledResourceType"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -878,16 +886,27 @@
       ]
     },
     "customLocationFindTargetResourceGroupProperties": {
-      "description": "Labels of the custom resource, this is a map of {key,value} pairs.",
+      "description": "The Find Target Resource Group operation request.",
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
+      "properties": {
+        "labels": {
+          "description": "Labels of the custom resource, this is a map of {key,value} pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
       }
     },
     "customLocationFindTargetResourceGroupResult": {
       "description": "The Find Target Resource Group operation response.",
       "type": "object",
       "properties": {
+        "matchedResourceSyncRule": {
+          "description": "The matching resource sync rule is the particular resource sync rule that matched the match expressions and labels and had lowest priority. This is the rule responsible for mapping the target resource to the target resource group.",
+          "type": "string",
+          "readOnly": true
+        },
         "targetResourceGroup": {
           "description": "The target resource group of matching resource sync rule. The labels from the request will be used to find out matching resource sync rule against the selector property of the resource sync rule. The one with highest priority will be returned if there are multiple matching rules.",
           "type": "string",
@@ -910,7 +929,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/customLocation"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -968,10 +990,10 @@
     },
     "customLocationOperationsList": {
       "description": "Lists of Custom Locations operations.",
-      "type": "object",
       "required": [
         "value"
       ],
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Next page of operations.",
@@ -982,7 +1004,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/customLocationOperation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1014,7 +1039,10 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "displayName": {
           "description": "Display name for the Custom Locations location.",
@@ -1071,7 +1099,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1155,7 +1184,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/resourceSyncRule"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },

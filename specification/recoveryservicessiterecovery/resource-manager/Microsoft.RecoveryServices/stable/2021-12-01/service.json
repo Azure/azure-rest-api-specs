@@ -7979,14 +7979,22 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri"
+          ]
         },
         "vmManagedDisks": {
           "description": "The list of vm managed disk details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId",
+            "primaryStagingAzureStorageAccountId",
+            "recoveryResourceGroupId"
+          ]
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8144,14 +8152,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectionIntentDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri"
+          ]
         },
         "vmManagedDisks": {
           "description": "The list of vm managed disk inputs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectionIntentManagedDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "multiVmGroupName": {
           "description": "The multi vm group name.",
@@ -8338,14 +8352,22 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri"
+          ]
         },
         "vmManagedDisks": {
           "description": "The list of vm managed disk details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId",
+            "primaryStagingAzureStorageAccountId",
+            "recoveryResourceGroupId"
+          ]
         },
         "multiVmGroupName": {
           "description": "The multi vm group name.",
@@ -8968,21 +8990,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri"
+          ]
         },
         "unprotectedDisks": {
           "description": "The list of unprotected disks.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AUnprotectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskLunId"
+          ]
         },
         "protectedManagedDisks": {
           "description": "The list of protected managed disks.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectedManagedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "recoveryBootDiagStorageAccountId": {
           "description": "The recovery boot diagnostic storage account Arm Id.",
@@ -9033,7 +9064,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "vmSyncedConfigDetails": {
           "$ref": "#/definitions/AzureToAzureVmSyncedConfigDetails",
@@ -9205,14 +9239,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectionIntentDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri"
+          ]
         },
         "vmManagedDisks": {
           "description": "The list of vm managed disk details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AProtectionIntentManagedDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "recoveryResourceGroupId": {
           "description": "The recovery resource group id.",
@@ -9324,7 +9364,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri",
+            "recoveryAzureStorageAccountId",
+            "primaryStagingAzureStorageAccountId"
+          ]
         },
         "recoveryResourceGroupId": {
           "description": "The recovery resource group Id. Valid for V2 scenarios.",
@@ -9363,14 +9408,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskUri",
+            "recoveryAzureStorageAccountId",
+            "primaryStagingAzureStorageAccountId"
+          ]
         },
         "vmManagedDisks": {
           "description": "The list of vm managed disk details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId",
+            "primaryStagingAzureStorageAccountId",
+            "recoveryResourceGroupId"
+          ]
         },
         "recoveryResourceGroupId": {
           "description": "The recovery resource group Id. Valid for V2 scenarios.",
@@ -9541,7 +9596,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmManagedDiskUpdateDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
@@ -9827,6 +9885,9 @@
           "items": {
             "$ref": "#/definitions/AgentDiskDetails"
           },
+          "x-ms-identifiers": [
+            "diskId"
+          ],
           "readOnly": true
         }
       }
@@ -9926,7 +9987,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReplicationAppliance"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The value of next link.",
@@ -10071,7 +10133,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         }
       }
     },
@@ -10164,7 +10229,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AZoneDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "Azure"
@@ -10240,7 +10306,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InputEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "endpointName"
+          ]
         }
       }
     },
@@ -10363,7 +10432,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InconsistentVmDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "vmName"
+          ]
         }
       },
       "x-ms-discriminator-value": "ConsistencyCheckTaskDetails"
@@ -10441,7 +10513,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReplicationProviderSpecificContainerCreationInput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10555,14 +10628,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "providerSpecificInput": {
           "description": "The provider specific input.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10848,6 +10923,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         },
         "forwardProtectedItemCount": {
@@ -11052,7 +11130,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         }
       }
     },
@@ -11363,7 +11444,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "health": {
           "description": "Health of fabric.",
@@ -11491,7 +11575,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverReplicationProtectedItemDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "x-ms-discriminator-value": "FailoverJobDetails"
@@ -11594,7 +11681,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ASRTask"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         }
       },
       "discriminator": "instanceType"
@@ -11608,7 +11698,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InnerHealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "errorSource": {
           "description": "Source of error.",
@@ -12005,7 +12098,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HyperVReplicaAzureDiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "diskEncryptionSetId": {
           "description": "The DiskEncryptionSet ARM Id.",
@@ -12231,7 +12327,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureVmDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "vhdId",
+            "diskId"
+          ]
         },
         "recoveryAzureVmName": {
           "description": "Recovery Azure given name.",
@@ -12285,7 +12385,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "selectedRecoveryAzureNetworkId": {
           "description": "The selected recovery azure network Id.",
@@ -12384,7 +12487,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HyperVReplicaAzureManagedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -12552,7 +12658,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpdateDiskInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -12660,7 +12769,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "vmId": {
           "description": "The virtual machine Id.",
@@ -12683,7 +12795,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaBaseReplicationDetails"
@@ -12785,7 +12898,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "vmId": {
           "description": "The virtual machine Id.",
@@ -12808,7 +12924,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "HyperVReplica2012R2"
@@ -12948,7 +13065,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "vmId": {
           "description": "The virtual machine Id.",
@@ -12971,7 +13091,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "HyperVReplica2012"
@@ -13024,7 +13145,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "hasPhysicalDisk": {
           "description": "A value indicating whether the VM has a physical disk attached. String value of SrsDataContract.PresenceStatus enum.",
@@ -13299,7 +13421,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageAzureV2DiskInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "targetAzureNetworkId": {
           "description": "The selected target Azure network Id.",
@@ -13806,7 +13931,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageAzureV2ProtectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "diskResized": {
           "description": "A value indicating whether any disk is resized for this VM.",
@@ -13843,7 +13971,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureVmDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "vhdId",
+            "diskId"
+          ]
         },
         "recoveryAzureVMName": {
           "description": "Recovery Azure given name.",
@@ -13866,7 +13998,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "selectedRecoveryAzureNetworkId": {
           "description": "The selected recovery azure network Id.",
@@ -13932,7 +14067,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "lastRpoCalculatedTime": {
           "format": "date-time",
@@ -13957,7 +14095,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageAzureV2ManagedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "lastRecoveryPointReceived": {
           "format": "date-time",
@@ -14019,7 +14160,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageAzureV2SwitchProviderBlockingErrorDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "switchProviderDetails": {
           "$ref": "#/definitions/InMageAzureV2SwitchProviderDetails",
@@ -14272,7 +14416,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpdateDiskInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -14353,7 +14500,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskVolumeDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "label"
+          ]
         }
       }
     },
@@ -14366,14 +14516,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageVolumeExclusionOptions"
-          }
+          },
+          "x-ms-identifiers": [
+            "volumeLabel"
+          ]
         },
         "diskSignatureOptions": {
           "description": "The guest disk signature based option for disk exclusion.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageDiskSignatureExclusionOptions"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -14774,6 +14928,9 @@
           "items": {
             "$ref": "#/definitions/InMageRcmFabricSwitchProviderBlockingErrorDetails"
           },
+          "x-ms-identifiers": [
+            "errorCode"
+          ],
           "readOnly": true
         }
       }
@@ -14984,7 +15141,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmDiskInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "disksDefault": {
           "$ref": "#/definitions/InMageRcmDisksDefaultInput",
@@ -15253,6 +15413,9 @@
           "items": {
             "$ref": "#/definitions/AgentDetails"
           },
+          "x-ms-identifiers": [
+            "agentId"
+          ],
           "readOnly": true
         }
       },
@@ -15798,7 +15961,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmFailbackProtectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "mobilityAgentDetails": {
           "$ref": "#/definitions/InMageRcmFailbackMobilityAgentDetails",
@@ -15809,7 +15975,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmFailbackNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "macAddress"
+          ]
         },
         "lastPlannedFailoverStartTime": {
           "format": "date-time",
@@ -16641,7 +16810,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmProtectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "isLastUpgradeSuccessful": {
           "description": "A value indicating whether last agent upgrade was successful or not.",
@@ -16662,21 +16834,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmLastAgentUpgradeErrorDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "agentUpgradeBlockingErrorDetails": {
           "description": "The agent upgrade blocking error information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmAgentUpgradeBlockingErrorDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "vmNics": {
           "description": "The network details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "discoveredVmDetails": {
           "$ref": "#/definitions/InMageRcmDiscoveredProtectedVmDetails",
@@ -16908,7 +17089,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageRcmNicInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "licenseType": {
           "description": "The license type.",
@@ -17003,7 +17187,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageProtectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "ipAddress": {
           "description": "The source IP address.",
@@ -17067,7 +17254,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "discoveryType": {
           "description": "A value indicating the discovery type of the machine.",
@@ -17089,7 +17279,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "lastRpoCalculatedTime": {
           "format": "date-time",
@@ -17479,14 +17672,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ASRTask"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "errors": {
           "description": "The errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "taskId"
+          ]
         },
         "startTime": {
           "format": "date-time",
@@ -17772,6 +17971,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         }
       }
@@ -17814,28 +18016,40 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RetentionVolume"
-          }
+          },
+          "x-ms-identifiers": [
+            "volumeName"
+          ]
         },
         "dataStores": {
           "description": "The list of data stores in the fabric.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStore"
-          }
+          },
+          "x-ms-identifiers": [
+            "symbolicName"
+          ]
         },
         "validationErrors": {
           "description": "Validation errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "healthErrors": {
           "description": "Health errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "diskCount": {
           "format": "int32",
@@ -18041,6 +18255,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         },
         "allowedOperations": {
@@ -18319,7 +18536,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Subnet"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "friendlyName": {
           "description": "The Friendly Name.",
@@ -18429,7 +18649,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDiscovery"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The value of next link.",
@@ -18654,7 +18877,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MobilityServiceUpdate"
-          }
+          },
+          "x-ms-identifiers": [
+            "version"
+          ]
         },
         "hostId": {
           "description": "The agent generated Id.",
@@ -18735,7 +18961,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "agentExpiryDate": {
           "format": "date-time",
@@ -19018,6 +19247,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         },
         "protectedItemCount": {
@@ -19271,7 +19503,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "policyId": {
           "description": "Policy ARM Id.",
@@ -19464,6 +19699,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         }
       }
@@ -19534,6 +19772,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         }
       }
@@ -19820,14 +20061,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanAction"
-          }
+          },
+          "x-ms-identifiers": [
+            "actionName"
+          ]
         },
         "endGroupActions": {
           "description": "The end group actions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanAction"
-          }
+          },
+          "x-ms-identifiers": [
+            "actionName"
+          ]
         }
       }
     },
@@ -20110,7 +20357,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -20188,14 +20436,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "providerSpecificDetails": {
           "description": "The provider id and provider specific details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -20373,7 +20623,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -20428,7 +20679,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -20602,7 +20854,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "draIdentifier": {
           "description": "The DRA Id.",
@@ -20787,6 +21042,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         }
       }
@@ -20893,7 +21151,10 @@
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/ReplicationEligibilityResultsErrorInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     },
@@ -21032,7 +21293,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "policyId": {
           "description": "The ID of Policy governing this PE.",
@@ -21281,6 +21545,9 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
+          "x-ms-identifiers": [
+            "errorId"
+          ],
           "readOnly": true
         },
         "protectedItemCount": {
@@ -21339,7 +21606,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResolveHealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "healthErrorId"
+          ]
         }
       }
     },
@@ -21383,7 +21653,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorSummary"
-          }
+          },
+          "x-ms-identifiers": [
+            "summaryCode"
+          ]
         },
         "categorizedResourceCounts": {
           "description": "The categorized resource counts.",
@@ -21883,7 +22156,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OSVersionWrapper"
-          }
+          },
+          "x-ms-identifiers": [
+            "version"
+          ]
         }
       }
     },
@@ -21896,7 +22172,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SupportedOSProperty"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -21913,7 +22190,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SupportedOSDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "osName"
+          ]
         }
       }
     },
@@ -22091,7 +22371,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComputeSizeErrorDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "highIopsSupported": {
           "description": "The value indicating whether the target compute size supports high Iops.",
@@ -22213,7 +22494,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverReplicationProtectedItemDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "x-ms-discriminator-value": "TestFailoverJobDetails"
@@ -22547,7 +22831,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -22594,7 +22879,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMNicInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "licenseType": {
           "description": "License type.",
@@ -22693,7 +22981,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         },
         "protectedItemsHealth": {
           "$ref": "#/definitions/ResourceHealthSummary",
@@ -22864,7 +23155,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         }
       }
     },
@@ -23035,7 +23329,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPConfigDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "selectionType": {
           "description": "Selection type for failover.",
@@ -23106,7 +23403,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPConfigInputDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "ipConfigName"
+          ]
         },
         "selectionType": {
           "description": "Selection type for failover.",
@@ -23306,7 +23606,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtDiskInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "licenseType": {
           "description": "License type.",
@@ -23547,7 +23850,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtProtectedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "targetNetworkId": {
           "description": "The target network Id.",
@@ -23558,7 +23864,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtNicDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "targetNicTags": {
           "description": "The tags for the target NICs.",
@@ -24032,7 +24341,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtNicInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "nicId"
+          ]
         },
         "vmDisks": {
           "description": "The list of disk update properties.",
@@ -24040,7 +24352,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtUpdateDiskInput"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "licenseType": {
           "description": "The license type.",
@@ -24128,7 +24443,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RunAsAccount"
-          }
+          },
+          "x-ms-identifiers": [
+            "accountId"
+          ]
         },
         "replicationPairCount": {
           "description": "The number of replication pairs configured in this CS.",
@@ -24259,7 +24577,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageFabricSwitchProviderBlockingErrorDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         }
       },
       "x-ms-discriminator-value": "VMware"
@@ -24387,14 +24708,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InMageDiskDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         },
         "validationErrors": {
           "description": "The validation errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
-          }
+          },
+          "x-ms-identifiers": [
+            "errorId"
+          ]
         }
       },
       "x-ms-discriminator-value": "VMwareVirtualMachine"

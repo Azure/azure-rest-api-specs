@@ -11,4 +11,13 @@ typescript:
   package-name: "@azure/arm-cdn"
   output-folder: "$(typescript-sdks-folder)/sdk/cdn/arm-cdn"
   generate-metadata: true
+
+modelerfour:
+  naming:
+    override:
+      AFDProfiles: $DO_NOT_NORMALIZE$AfdProfiles
+      AFDCustomDomains: $DO_NOT_NORMALIZE$AfdCustomDomains
+      AFDEndpoints: $DO_NOT_NORMALIZE$AfdEndpoints
+      AFDOriginGroups: $DO_NOT_NORMALIZE$AfdOriginGroups
+      AFDOrigins: $DO_NOT_NORMALIZE$AfdOrigins
 ```

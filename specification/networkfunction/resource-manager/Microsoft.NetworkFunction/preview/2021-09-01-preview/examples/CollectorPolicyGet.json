@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "azureTrafficCollectorName": "atc",
+    "collectorPolicyName": "cp1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "atc",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.NetworkFunction/azureTrafficCollectors/atc/collectorPolicies/cp1",
+        "etag": "w/\\72090554-7e3b-43f2-80ad-99a9020dcb11\\",
+        "type": "Microsoft.NetworkFunction/azureTrafficCollectors/collectorPolicies",
+        "properties": {
+          "ingestionPolicy": {
+            "ingestionType": "IPFIX",
+            "ingestionSources": [
+              {
+                "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+                "sourceType": "Resource"
+              }
+            ]
+          },
+          "emissionPolicies": [
+            {
+              "emissionType": "IPFIX",
+              "emissionDestinations": [
+                {
+                  "destinationType": "AzureMonitor"
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -226,7 +226,7 @@
           "manualTrigger"
         ],
         "description": "Triggers playbook on a specific incident",
-        "operationId": "AutomationRules_ManualTriggerPlaybook",
+        "operationId": "Incidents_RunPlaybook",
         "consumes": [
           "application/json"
         ],
@@ -366,11 +366,11 @@
       "properties": {
         "actionConfiguration": {
           "type": "object",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/IncidentPropertiesAction"
         }
       },
-      "x-ms-discriminator-value": "ModifyProperties"
+      "x-ms-discriminator-value": "ModifyProperties",
+      "x-ms-client-flatten": true
     },
     "AutomationRuleProperties": {
       "description": "Automation rule properties",
@@ -399,7 +399,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleAction"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "lastModifiedTimeUtc": {
           "format": "date-time",
@@ -786,10 +787,10 @@
       "properties": {
         "actionConfiguration": {
           "type": "object",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PlaybookActionProperties"
         }
       },
+      "x-ms-client-flatten": true,
       "x-ms-discriminator-value": "RunPlaybook"
     },
     "AutomationRulesList": {
@@ -835,7 +836,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
-          }
+          },
+          "x-ms-identifiers": [
+            "conditionType"
+          ]
         }
       }
     },
@@ -892,6 +896,9 @@
     },
     "ManualTriggerRequestBody": {
       "type": "object",
+      "required": [
+        "logicAppsResourceId"
+      ],
       "properties": {
         "tenantId": {
           "format": "uuid",
@@ -927,10 +934,10 @@
       "properties": {
         "conditionProperties": {
           "type": "object",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AutomationRulePropertyValuesCondition"
         }
       },
+      "x-ms-client-flatten": true,
       "x-ms-discriminator-value": "Property"
     },
     "triggersOn": {

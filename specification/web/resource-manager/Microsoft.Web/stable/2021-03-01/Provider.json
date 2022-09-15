@@ -21,20 +21,11 @@
           "Provider"
         ],
         "summary": "Get available application frameworks and their versions",
-        "description": "Description for Get available application frameworks and their versions",
+        "description": "Get available application frameworks and their versions",
         "operationId": "Provider_GetAvailableStacks",
         "parameters": [
           {
-            "name": "osTypeSelected",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "WindowsFunctions",
-              "LinuxFunctions",
-              "All"
-            ]
+            "$ref": "#/parameters/osTypeSelectedParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -65,19 +56,11 @@
           "Provider"
         ],
         "summary": "Get available Function app frameworks and their versions",
-        "description": "Description for Get available Function app frameworks and their versions",
+        "description": "Get available Function app frameworks and their versions",
         "operationId": "Provider_GetFunctionAppStacks",
         "parameters": [
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -113,7 +96,7 @@
           "Provider"
         ],
         "summary": "Get available Function app frameworks and their versions for location",
-        "description": "Description for Get available Function app frameworks and their versions for location",
+        "description": "Get available Function app frameworks and their versions for location",
         "operationId": "Provider_GetFunctionAppStacksForLocation",
         "parameters": [
           {
@@ -124,15 +107,7 @@
             "type": "string"
           },
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -168,7 +143,7 @@
           "Provider"
         ],
         "summary": "Get available Web app frameworks and their versions for location",
-        "description": "Description for Get available Web app frameworks and their versions for location",
+        "description": "Get available Web app frameworks and their versions for location",
         "operationId": "Provider_GetWebAppStacksForLocation",
         "parameters": [
           {
@@ -179,15 +154,7 @@
             "type": "string"
           },
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -223,7 +190,7 @@
           "Provider"
         ],
         "summary": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
-        "description": "Description for Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
+        "description": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
         "operationId": "Provider_ListOperations",
         "parameters": [
           {
@@ -260,19 +227,11 @@
           "Provider"
         ],
         "summary": "Get available Web app frameworks and their versions",
-        "description": "Description for Get available Web app frameworks and their versions",
+        "description": "Get available Web app frameworks and their versions",
         "operationId": "Provider_GetWebAppStacks",
         "parameters": [
           {
-            "name": "stackOsType",
-            "in": "query",
-            "description": "Stack OS Type",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "All"
-            ]
+            "$ref": "#/parameters/stackOsTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -308,20 +267,11 @@
           "Provider"
         ],
         "summary": "Get available application frameworks and their versions",
-        "description": "Description for Get available application frameworks and their versions",
+        "description": "Get available application frameworks and their versions",
         "operationId": "Provider_GetAvailableStacksOnPrem",
         "parameters": [
           {
-            "name": "osTypeSelected",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "Windows",
-              "Linux",
-              "WindowsFunctions",
-              "LinuxFunctions",
-              "All"
-            ]
+            "$ref": "#/parameters/osTypeSelectedParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -388,21 +338,30 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackMajorVersion"
-          }
+          },
+          "x-ms-identifiers": [
+            "runtimeVersion"
+          ]
         },
         "frameworks": {
           "description": "List of frameworks associated with application stack.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationStack"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "isDeprecated": {
           "description": "<code>true</code> if this is the stack is deprecated; otherwise, <code>false</code>.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationStack"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -464,7 +423,10 @@
           "items": {
             "$ref": "#/definitions/FunctionAppMinorVersion"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "value"
+          ]
         }
       }
     },
@@ -622,7 +584,10 @@
               "items": {
                 "$ref": "#/definitions/FunctionAppMajorVersion"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": [
+                "value"
+              ]
             },
             "preferredOs": {
               "description": "Function App stack preferred OS.",
@@ -773,7 +738,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackMinorVersion"
-          }
+          },
+          "x-ms-identifiers": [
+            "runtimeVersion"
+          ]
         },
         "applicationInsights": {
           "description": "<code>true</code> if this supports Application Insights; otherwise, <code>false</code>.",
@@ -849,7 +817,10 @@
           "items": {
             "$ref": "#/definitions/WebAppMinorVersion"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "value"
+          ]
         }
       }
     },
@@ -991,7 +962,10 @@
               "items": {
                 "$ref": "#/definitions/WebAppMajorVersion"
               },
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-identifiers": [
+                "value"
+              ]
             },
             "preferredOs": {
               "description": "Web App stack preferred OS.",
@@ -1094,6 +1068,39 @@
       "description": "API Version",
       "required": true,
       "type": "string"
+    },
+    "osTypeSelectedParameter": {
+      "name": "osTypeSelected",
+      "in": "query",
+      "type": "string",
+      "enum": [
+        "Windows",
+        "Linux",
+        "WindowsFunctions",
+        "LinuxFunctions",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ProviderOsTypeSelected",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "stackOsTypeParameter": {
+      "name": "stackOsType",
+      "in": "query",
+      "description": "Stack OS Type",
+      "type": "string",
+      "enum": [
+        "Windows",
+        "Linux",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ProviderStackOsType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

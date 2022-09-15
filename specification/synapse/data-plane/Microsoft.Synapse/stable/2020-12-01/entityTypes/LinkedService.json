@@ -2690,6 +2690,104 @@
         "clientId"
       ]
     },
+    "SapOdpLinkedService": {
+      "x-ms-discriminator-value": "SapOdp",
+      "description": "SAP ODP Linked Service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to SAP ODP linked service type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOdpLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOdpLinkedServiceTypeProperties": {
+      "description": "Properties specific to this linked service type.",
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Host name of the SAP instance where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "systemNumber": {
+          "type": "object",
+          "description": "System number of the SAP system where the table is located. (Usually a two-digit decimal number represented as a string.) Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "description": "Client ID of the client on the SAP system where the table is located. (Usually a three-digit decimal number represented as a string) Type: string (or Expression with resultType string)."
+        },
+        "language": {
+          "type": "object",
+          "description": "Language of the SAP system where the table is located. The default value is EN. Type: string (or Expression with resultType string)."
+        },
+        "systemId": {
+          "type": "object",
+          "description": "SystemID of the SAP system where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "Username to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to access the SAP server where the table is located.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "messageServer": {
+          "type": "object",
+          "description": "The hostname of the SAP Message Server. Type: string (or Expression with resultType string)."
+        },
+        "messageServerService": {
+          "type": "object",
+          "description": "The service name or port number of the Message Server. Type: string (or Expression with resultType string)."
+        },
+        "sncMode": {
+          "type": "object",
+          "description": "SNC activation indicator to access the SAP server where the table is located. Must be either 0 (off) or 1 (on). Type: string (or Expression with resultType string)."
+        },
+        "sncMyName": {
+          "type": "object",
+          "description": "Initiator's SNC name to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "sncPartnerName": {
+          "type": "object",
+          "description": "Communication partner's SNC name to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "sncLibraryPath": {
+          "type": "object",
+          "description": "External security product's library to access the SAP server where the table is located. Type: string (or Expression with resultType string)."
+        },
+        "sncQop": {
+          "type": "object",
+          "description": "SNC Quality of Protection. Allowed value include: 1, 2, 3, 8, 9. Type: string (or Expression with resultType string)."
+        },
+        "x509CertificatePath": {
+          "type": "object",
+          "description": "SNC X509 certificate file path. Type: string (or Expression with resultType string)."
+        },
+        "logonGroup": {
+          "type": "object",
+          "description": "The Logon Group for the SAP System. Type: string (or Expression with resultType string)."
+        },
+        "subscriberName": {
+          "type": "object",
+          "description": "The subscriber name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RestServiceLinkedService": {
       "x-ms-discriminator-value": "RestService",
       "description": "Rest Service linked service.",
@@ -2729,7 +2827,8 @@
             "Anonymous",
             "Basic",
             "AadServicePrincipal",
-            "ManagedServiceIdentity"
+            "ManagedServiceIdentity",
+            "OAuth2ClientCredential"
           ],
           "x-ms-enum": {
             "name": "RestServiceAuthenticationType",
@@ -2767,11 +2866,426 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "clientId": {
+          "type": "object",
+          "description": "The client ID associated with your application. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret associated with your application.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "tokenEndpoint": {
+          "type": "object",
+          "description": "The token endpoint of the authorization server to acquire access token. Type: string (or Expression with resultType string)."
+        },
+        "resource": {
+          "type": "object",
+          "description": "The target service or resource to which the access will be requested. Type: string (or Expression with resultType string)."
+        },
+        "scope": {
+          "type": "object",
+          "description": "The scope of the access required. It describes what kind of access will be requested. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "url",
         "authenticationType"
+      ]
+    },
+    "TeamDeskLinkedService": {
+      "x-ms-discriminator-value": "TeamDesk",
+      "description": "Linked service for TeamDesk.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "TeamDesk linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TeamDeskLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "TeamDeskLinkedServiceTypeProperties": {
+      "description": "TeamDesk linked service type properties.",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Token"
+          ],
+          "x-ms-enum": {
+            "name": "TeamDeskAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "type": "object",
+          "description": "The url to connect TeamDesk source. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The username of the TeamDesk source. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password of the TeamDesk source.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the TeamDesk source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "authenticationType",
+        "url"
+      ]
+    },
+    "QuickbaseLinkedService": {
+      "x-ms-discriminator-value": "Quickbase",
+      "description": "Linked service for Quickbase.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Quickbase linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuickbaseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "QuickbaseLinkedServiceTypeProperties": {
+      "description": "Quickbase linked service type properties.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The url to connect Quickbase source. Type: string (or Expression with resultType string)."
+        },
+        "userToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The user token for the Quickbase source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url",
+        "userToken"
+      ]
+    },
+    "SmartsheetLinkedService": {
+      "x-ms-discriminator-value": "Smartsheet",
+      "description": "Linked service for Smartsheet.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Smartsheet linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SmartsheetLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SmartsheetLinkedServiceTypeProperties": {
+      "description": "Smartsheet linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Smartsheet source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
+    "ZendeskLinkedService": {
+      "x-ms-discriminator-value": "Zendesk",
+      "description": "Linked service for Zendesk.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Zendesk linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ZendeskLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ZendeskLinkedServiceTypeProperties": {
+      "description": "Zendesk linked service type properties.",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Token"
+          ],
+          "x-ms-enum": {
+            "name": "ZendeskAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "type": "object",
+          "description": "The url to connect Zendesk source. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The username of the Zendesk source. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password of the Zendesk source.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Zendesk source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "authenticationType",
+        "url"
+      ]
+    },
+    "DataworldLinkedService": {
+      "x-ms-discriminator-value": "Dataworld",
+      "description": "Linked service for Dataworld.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dataworld linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataworldLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DataworldLinkedServiceTypeProperties": {
+      "description": "Dataworld linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Dataworld source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
+    "AppFiguresLinkedService": {
+      "x-ms-discriminator-value": "AppFigures",
+      "description": "Linked service for AppFigures.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "AppFigures linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppFiguresLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AppFiguresLinkedServiceTypeProperties": {
+      "description": "AppFigures linked service type properties.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "object",
+          "description": "The username of the Appfigures source."
+        },
+        "password": {
+          "description": "The password of the AppFigures source.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "clientKey": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The client key for the AppFigures source."
+        }
+      },
+      "required": [
+        "userName",
+        "password",
+        "clientKey"
+      ]
+    },
+    "AsanaLinkedService": {
+      "x-ms-discriminator-value": "Asana",
+      "description": "Linked service for Asana.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Asana linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsanaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AsanaLinkedServiceTypeProperties": {
+      "description": "Asana linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the Asana source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
+      ]
+    },
+    "TwilioLinkedService": {
+      "x-ms-discriminator-value": "Twilio",
+      "description": "Linked service for Twilio.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Twilio linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TwilioLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "TwilioLinkedServiceTypeProperties": {
+      "description": "Twilio linked service type properties.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "object",
+          "description": "The Account SID of Twilio service."
+        },
+        "password": {
+          "description": "The auth token of Twilio service.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "userName",
+        "password"
+      ]
+    },
+    "GoogleSheetsLinkedService": {
+      "x-ms-discriminator-value": "GoogleSheets",
+      "description": "Linked service for GoogleSheets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "GoogleSheets linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleSheetsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleSheetsLinkedServiceTypeProperties": {
+      "description": "GoogleSheets linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the GoogleSheets source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
       ]
     },
     "AmazonS3LinkedService": {
@@ -6145,6 +6659,43 @@
         "tenantId",
         "servicePrincipalId",
         "servicePrincipalKey"
+      ]
+    },
+    "AzureSynapseArtifactsLinkedService": {
+      "x-ms-discriminator-value": "AzureSynapseArtifacts",
+      "description": "Azure Synapse Analytics (Artifacts) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Synapse Analytics (Artifacts) linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSynapseArtifactsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureSynapseArtifactsLinkedServiceTypeProperties": {
+      "description": "Azure Synapse Analytics (Artifacts) linked service properties.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "object",
+          "description": "https://<workspacename>.dev.azuresynapse.net, Azure Synapse Analytics workspace URL. Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "endpoint"
       ]
     }
   }

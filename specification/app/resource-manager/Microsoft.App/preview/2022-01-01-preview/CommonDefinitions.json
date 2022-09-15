@@ -172,7 +172,15 @@
             },
             "scheme": {
               "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
-              "type": "string"
+              "enum": [
+                "HTTP",
+                "HTTPS"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Scheme",
+                "modelAsString": true
+              }
             }
           }
         },
@@ -222,9 +230,9 @@
         "type": {
           "description": "The type of probe.",
           "enum": [
-            "liveness",
-            "readiness",
-            "startup"
+            "Liveness",
+            "Readiness",
+            "Startup"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -258,37 +266,6 @@
           "x-ms-identifiers": [
             "triggerParameter"
           ]
-        }
-      }
-    },
-    "Dapr": {
-      "description": "Container App Dapr configuration.",
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "description": "Boolean indicating if the Dapr side car is enabled",
-          "type": "boolean"
-        },
-        "appId": {
-          "description": "Dapr application identifier",
-          "type": "string"
-        },
-        "appProtocol": {
-          "description": "Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http",
-          "enum": [
-            "http",
-            "grpc"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "appProtocol",
-            "modelAsString": true
-          }
-        },
-        "appPort": {
-          "format": "int32",
-          "description": "Tells Dapr which port your application is listening on",
-          "type": "integer"
         }
       }
     },
@@ -504,10 +481,6 @@
         "scale": {
           "$ref": "#/definitions/Scale",
           "description": "Scaling properties for the Container App."
-        },
-        "dapr": {
-          "$ref": "#/definitions/Dapr",
-          "description": "Dapr configuration for the Container App."
         },
         "volumes": {
           "description": "List of volume definitions for the Container App.",

@@ -4341,6 +4341,12 @@
             "$ref": "#/definitions/BillingProfile"
           }
         },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -6336,13 +6342,10 @@
             "modelAsString": true
           }
         },
-        "billingProfilesInfo": {
-          "type": "array",
+        "billingProfileInfo": {
           "description": "The list of billing profiles associated with agreement and present only for specific agreements.",
           "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/BillingProfileInfo"
-          }
+          "$ref": "#/definitions/BillingProfileInfo"
         },
         "effectiveDate": {
           "description": "The date from which the agreement is effective.",
@@ -6371,8 +6374,8 @@
       }
     },
     "BillingProfileInfo": {
-      "type": "object",
       "description": "Details about billing profile associated with agreement and available only for specific agreements.",
+      "type": "object",
       "properties": {
         "billingProfileId": {
           "description": "The unique identifier for the billing profile.",

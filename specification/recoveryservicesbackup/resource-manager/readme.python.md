@@ -2,7 +2,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-recoveryservicesbackup
@@ -14,11 +14,11 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(track2)
+```yaml $(python)
 clear-output-folder: true
 batch:
   - tag: package-passivestamp-2021-11-15
-  - tag: package-2021-12
+  - tag: package-2022-06-01-preview
 ```
 
 ### Tag: package-passivestamp-2021-11-15 and python
@@ -32,17 +32,17 @@ namespace: azure.mgmt.recoveryservicesbackup.passivestamp
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/passivestamp
 ```
 
-### Tag: package-2021-12 and python
+### Tag: package-2022-06-01-preview and python
 
-These settings apply only when `--tag=package-2021-12 --python` is specified on the command line.
+These settings apply only when `--tag=package-2022-06-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-12'
+``` yaml $(tag) == 'package-2022-06-01-preview'
 namespace: azure.mgmt.recoveryservicesbackup.activestamp
 output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
 ```
 
-``` yaml $(python) && $(track2)
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 directive:

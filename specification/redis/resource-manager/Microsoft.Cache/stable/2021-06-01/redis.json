@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisCacheOperations": {
+            "$ref": "./examples/RedisCacheOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1383,7 +1388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The redis cache was successfully deleted."
+            "description": "Linked server was successfully deleted."
           },
           "204": {
             "description": "Linked server was successfully deleted."
@@ -1657,6 +1662,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
@@ -1775,6 +1786,56 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/asyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperationStatus"
+        ],
+        "operationId": "AsyncOperationStatus_Get",
+        "description": "For checking the ongoing status of an operation",
+        "x-ms-examples": {
+          "RedisCacheAsyncOperationStatus": {
+            "$ref": "./examples/RedisCacheAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location at which operation was triggered"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of asynchronous operation"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asynchronous operation status response",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1839,6 +1900,10 @@
               "type": "string",
               "description": "The storage account connection string for storing rdb file"
             },
+            "aof-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the aof backup is enabled"
+            },
             "aof-storage-connection-string-0": {
               "type": "string",
               "description": "First storage account connection string"
@@ -1882,6 +1947,10 @@
               "type": "string",
               "description": "Zonal Configuration",
               "readOnly": true
+            },
+            "authnotrequired": {
+              "type": "string",
+              "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
             }
           },
           "additionalProperties": {},
@@ -1889,7 +1958,7 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)"
+          "description": "Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0."
         },
         "enableNonSslPort": {
           "type": "boolean",
@@ -1956,6 +2025,17 @@
         },
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "type": "Microsoft.ClassicNetwork/virtualNetworks/subnets"
+              }
+            ]
+          },
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
@@ -2056,6 +2136,9 @@
           "items": {
             "$ref": "#/definitions/RedisInstanceDetails"
           },
+          "x-ms-identifiers": [
+            "shardId"
+          ],
           "description": "List of the Redis instances associated with the cache"
         },
         "privateEndpointConnections": {
@@ -2431,6 +2514,7 @@
           "items": {
             "$ref": "#/definitions/ScheduleEntry"
           },
+          "x-ms-identifiers": [],
           "description": "List of patch schedules for a Redis cache."
         }
       },
@@ -2551,6 +2635,14 @@
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/Redis"
+              }
+            ]
+          },
           "description": "Fully qualified resourceId of the linked redis cache."
         },
         "linkedRedisCacheLocation": {
@@ -2632,6 +2724,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the resource provider."
         },
         "nextLink": {
@@ -2689,6 +2784,10 @@
           "items": {
             "$ref": "#/definitions/UpgradeNotification"
           },
+          "x-ms-identifiers": [
+            "name",
+            "timestamp"
+          ],
           "description": "List of all notifications."
         },
         "nextLink": {
@@ -2698,6 +2797,23 @@
         }
       },
       "description": "The response of listUpgradeNotifications."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "Asynchronous operation status",
+      "properties": {
+        "properties": {
+          "description": "Additional properties from RP, only when operation is successful",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+        }
+      ],
+      "x-ms-external": true
     }
   },
   "parameters": {

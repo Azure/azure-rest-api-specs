@@ -3967,7 +3967,7 @@
         "tags": [
           "managedPrivateEndpoints"
         ],
-        "operationId": "managedPrivateEndpoints_CreateOrUpdate",
+        "operationId": "ManagedPrivateEndpoints_CreateOrUpdate",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Create": {
             "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
@@ -4358,6 +4358,194 @@
           },
           "default": {
             "description": "App Service error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters": {
+      "get": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_ListByFactory",
+        "x-ms-examples": {
+          "GlobalParameters_ListByFactory": {
+            "$ref": "./examples/GlobalParameters_ListByFactory.json"
+          }
+        },
+        "description": "Lists Global parameters",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}": {
+      "get": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_Get",
+        "x-ms-examples": {
+          "GlobalParameters_Get": {
+            "$ref": "./examples/GlobalParameters_Get.json"
+          }
+        },
+        "description": "Gets a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_CreateOrUpdate",
+        "x-ms-examples": {
+          "GlobalParameters_Create": {
+            "$ref": "./examples/GlobalParameters_Create.json"
+          },
+          "GlobalParameters_Update": {
+            "$ref": "./examples/GlobalParameters_Update.json"
+          }
+        },
+        "description": "Creates or updates a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "default",
+            "description": "Global parameter resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GlobalParameterResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "globalParameters"
+        ],
+        "operationId": "GlobalParameters_Delete",
+        "x-ms-examples": {
+          "GlobalParameters_Delete": {
+            "$ref": "./examples/GlobalParameters_Delete.json"
+          }
+        },
+        "description": "Deletes a Global parameter",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/globalParameterName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4837,6 +5025,26 @@
         "runId"
       ]
     },
+    "GlobalParameterListResponse": {
+      "description": "A list of Global parameters.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of global parameters.",
+          "items": {
+            "$ref": "#/definitions/GlobalParameterResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
     "CloudError": {
       "x-ms-external": true,
       "description": "The object that defines the structure of an Azure Data Factory error response.",
@@ -4987,6 +5195,16 @@
         "type": "object"
       }
     },
+    "PurviewConfiguration": {
+      "description": "Purview configuration.",
+      "type": "object",
+      "properties": {
+        "purviewResourceId": {
+          "description": "Purview resource id.",
+          "type": "string"
+        }
+      }
+    },
     "FactoryRepoConfiguration": {
       "description": "Factory's git repo information.",
       "type": "object",
@@ -5059,7 +5277,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`",
           "type": "string"
         },
         "clientId": {
@@ -5193,6 +5411,10 @@
           "description": "Version of the factory.",
           "type": "string",
           "readOnly": true
+        },
+        "purviewConfiguration": {
+          "$ref": "#/definitions/PurviewConfiguration",
+          "description": "Purview information of the factory."
         },
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
@@ -5385,6 +5607,24 @@
         "properties"
       ]
     },
+    "GlobalParameterResource": {
+      "description": "Global parameters resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/GlobalParameter.json#/definitions/GlobalParameter",
+          "description": "Properties of the global parameter."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "Factory": {
       "description": "Factory resource type.",
       "type": "object",
@@ -5538,13 +5778,18 @@
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "description": "Linked service reference type.",
           "enum": [
             "LinkedServiceReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -6756,7 +7001,11 @@
           "description": "Data flow reference type.",
           "enum": [
             "DataFlowReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -6844,7 +7093,11 @@
           "description": "Managed Virtual Network reference type.",
           "enum": [
             "ManagedVirtualNetworkReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ManagedVirtualNetworkReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -6974,6 +7227,20 @@
       "properties": {
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkConnectionState"
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private endpoint."
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "Private endpoint which a connection belongs to.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource Id for private endpoint",
+          "type": "string"
         }
       }
     },
@@ -7043,7 +7310,11 @@
           "description": "Credential reference type.",
           "enum": [
             "CredentialReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "CredentialReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -7235,6 +7506,17 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "globalParameterName": {
+      "name": "globalParameterName",
+      "description": "The global parameter name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
       "x-ms-parameter-location": "method"
     }
   }
