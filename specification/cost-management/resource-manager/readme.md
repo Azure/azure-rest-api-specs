@@ -32,6 +32,15 @@ azure-validator: false
 
 ---
 
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.json
+```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.

@@ -26,17 +26,43 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-08
+tag: package-preview-2022-09
 ```
 
 ---
 
 
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2022-09-01-preview/operations.json
+```
 ### Tag: package-preview-2022-08
 
 These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-08'
+``` yaml $(tag) == 'package-preview-2022-08'
 input-file:
   - Microsoft.SecurityInsights/preview/2022-08-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2022-08-01-preview/AutomationRules.json
@@ -58,6 +84,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-08-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2022-08-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
