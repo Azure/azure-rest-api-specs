@@ -932,7 +932,8 @@
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
         "modelAsString": true
-      }
+      },
+      "default": "Enabled"
     },
     "NetworkRuleSets": {
       "description": "Network Rule Set Properties of this IoT Central application.",
@@ -940,11 +941,13 @@
       "properties": {
         "applyToDevices": {
           "description": "Whether these rules apply for device connectivity to IoT Hub and Device Provisioning service associated with this application.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": "false"
         },
         "applyToIoTCentral": {
           "description": "Whether these rules apply for connectivity via IoT Central web portal and APIs.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": "false"
         },
         "defaultAction": {
           "description": "The default network action to apply.",
@@ -960,7 +963,11 @@
             "filterName"
           ]
         }
-      }
+      },
+      "x-ms-mutability": [
+        "update",
+        "read"
+      ]
     },
     "NetworkRuleSetIpRule": {
       "description": "An object for an IP range that will be allowed access.",
@@ -998,7 +1005,8 @@
       "x-ms-enum": {
         "name": "NetworkAction",
         "modelAsString": true
-      }
+      },
+      "default": "Allow"
     },
     "AppState": {
       "description": "The current state of the application.",
