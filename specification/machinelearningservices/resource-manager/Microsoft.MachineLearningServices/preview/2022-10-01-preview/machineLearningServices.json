@@ -1328,56 +1328,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/schedules": {
-      "patch": {
-        "tags": [
-          "MachineLearningComputes"
-        ],
-        "operationId": "Compute_UpdateSchedules",
-        "description": "Updates schedules of a compute instance",
-        "x-ms-examples": {
-          "Update schedules of ComputeInstance": {
-            "$ref": "./examples/Compute/updateSchedules.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ComputeNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The object for updating schedules of specified ComputeInstance.",
-            "schema": {
-              "$ref": "#/definitions/ComputeSchedules"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateIdleShutdownSetting": {
       "post": {
         "tags": [
