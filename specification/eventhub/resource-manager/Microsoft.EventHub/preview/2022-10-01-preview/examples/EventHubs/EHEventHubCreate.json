@@ -23,6 +23,11 @@
               "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
             }
           }
+        },
+        "retentionDescription": {
+          "cleanupPolicy": "Compaction",
+          "retentionTimeInHours": "48",
+          "tombstoneRetentionTimeInHours": "1"
         }
       }
     }
@@ -58,7 +63,13 @@
             },
             "intervalInSeconds": 120,
             "sizeLimitInBytes": 10485763
-          }
+          },
+          ,
+        "retentionDescription": {
+          "cleanupPolicy": "Compaction",
+          "retentionTimeInHours": "48",
+          "tombstoneRetentionTimeInHours": "1"
+        }
         }
       }
     }

@@ -266,6 +266,33 @@
       },
       "description": "Properties to configure capture description for eventhub"
     },
+    "RetentionDescription": {
+      "properties": {
+        "cleanupPolicy": {
+          "type": "string",
+          "description": "Enumerates the possible values for cleanup policy",
+          "enum": [
+            "Delete",
+            "Compaction"
+          ],
+          "x-ms-enum": {
+            "name": "CleanupPolicyRetentionDescription",
+            "modelAsString": false
+          }
+        },
+        "retentionTimeInHours": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of hours to retain the events for this Event Hub. This value is only used when cleanupPolicy is Delete"
+        },
+        "tombstoneRetentionTimeInHours": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of hours to retain the tombstone markers of a compacted Event Hub. This value is only used when cleanupPolicy is Compaction. Consumer must complete reading the tombstone marker within this specified amount of time if consumer begins from starting offset to ensure they get a valid snapshot for the specific key described by the tombstone marker within the compacted Event Hub"
+        }
+      },
+      "description": "Properties to configure retention settings for the  eventhub"
+    },
     "Eventhub": {
       "properties": {
         "properties": {
@@ -325,6 +352,10 @@
             "captureDescription": {
               "$ref": "#/definitions/CaptureDescription",
               "description": "Properties of capture description"
+            },
+            "retentionDescription": {
+              "$ref": "#/definitions/RetentionDescription",
+              "description": "Event Hub retention settings"
             }
           },
           "description": "Properties supplied to the Create Or Update Event Hub operation."
