@@ -1626,24 +1626,18 @@
             "modelAsString": true
           }
         },
-        "networkSettings": {
-          "description": "Network settings related to recoveryServices Vaults",
-          "type": "object",
-          "properties": {
-            "publicNetworkAccess": {
-              "description": "property to enable or disable resource provider inbound network traffic from public clients",
-              "type": "string",
-              "enum": [
-                "Enabled",
-                "Disabled"
-              ],
-              "x-ms-enum": {
-                "name": "PublicNetworkAccess",
-                "modelAsString": true
-                }
-              }
-            }
-          },
+        "publicNetworkAccess": {
+          "description": "property to enable or disable resource provider inbound network traffic from public clients",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
           "monitoringSettings": {
             "description": "Monitoring Settings of the vault",
             "$ref": "#/definitions/MonitoringSettings"
