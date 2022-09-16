@@ -754,6 +754,9 @@
             "description": "OK"
           },
           "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
             "description": "Created"
           },
           "default": {
@@ -1407,7 +1410,11 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
           "type": "object",
           "readOnly": true
