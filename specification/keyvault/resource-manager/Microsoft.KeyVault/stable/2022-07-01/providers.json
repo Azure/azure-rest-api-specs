@@ -68,6 +68,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [],
           "description": "List of Storage operations supported by the Storage resource provider."
         },
         "nextLink": {
@@ -140,14 +141,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Metric specifications of operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "type": "object"
@@ -216,7 +223,10 @@
           "description": "The dimensions of metric",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "fillGapWithZero": {
           "type": "boolean",
