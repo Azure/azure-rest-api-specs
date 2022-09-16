@@ -706,7 +706,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2028,6 +2028,7 @@
       }
     },
     "ManagedIntegrationRuntimeOperationResult": {
+      "type": "object",
       "description": "Properties of managed integration runtime operation result.",
       "properties": {
         "type": {
@@ -2071,6 +2072,7 @@
       }
     },
     "ManagedIntegrationRuntimeNode": {
+      "type": "object",
       "description": "Properties of integration runtime node.",
       "properties": {
         "nodeId": {
@@ -2091,7 +2093,8 @@
           "x-ms-enum": {
             "name": "ManagedIntegrationRuntimeNodeStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-identifiers": []
         },
         "errors": {
           "description": "The errors that occurred on this integration runtime node.",
@@ -2106,6 +2109,7 @@
       }
     },
     "ManagedIntegrationRuntimeError": {
+      "type": "object",
       "description": "Error definition for managed integration runtime.",
       "properties": {
         "time": {
@@ -2190,7 +2194,8 @@
           "x-ms-enum": {
             "name": "IntegrationRuntimeInternalChannelEncryptionMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-identifiers": []
         },
         "version": {
           "description": "Version of the integration runtime.",
@@ -2282,7 +2287,8 @@
       "x-ms-enum": {
         "name": "IntegrationRuntimeAutoUpdate",
         "modelAsString": true
-      }
+      },
+      "x-ms-identifiers": []
     },
     "LinkedIntegrationRuntime": {
       "description": "The linked integration runtime information.",
@@ -2317,6 +2323,7 @@
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
+      "type": "object",
       "description": "Properties of Self-hosted integration runtime node.",
       "properties": {
         "nodeName": {
@@ -2891,6 +2898,7 @@
       }
     },
     "IntegrationRuntimeResource": {
+      "type": "object",
       "description": "Integration runtime resource type.",
       "allOf": [
         {
@@ -2950,6 +2958,7 @@
       }
     },
     "IntegrationRuntimeStatusResponse": {
+      "type": "object",
       "description": "Integration runtime status response.",
       "properties": {
         "name": {
