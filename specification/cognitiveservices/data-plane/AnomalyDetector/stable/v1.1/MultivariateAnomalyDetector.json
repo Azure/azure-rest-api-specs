@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Anomaly Detector Client",
-    "version": "1.1",
+    "version": "v1.1",
     "description": "Multivariate Time-Series Anomaly Detection API"
   },
   "consumes": [
@@ -27,7 +27,7 @@
     "https"
   ],
   "paths": {
-    "/multivariate/entire/detect/{resultId}": {
+    "/multivariate/detect-batch/{resultId}": {
       "get": {
         "responses": {
           "200": {
@@ -51,7 +51,7 @@
         },
         "summary": "Get Multivariate Anomaly Detection Result",
         "description": "For asynchronous inference, get multivariate anomaly detection result based on resultId returned by the /models/<string:modelId>/entire/detect api.",
-        "operationId": "GetDetectionResult",
+        "operationId": "GetBatchDetectionResult",
         "parameters": [
           {
             "name": "resultId",
@@ -70,53 +70,6 @@
       }
     },
     "/multivariate/models": {
-      "post": {
-        "responses": {
-          "201": {
-            "description": "Create and train a multivariate anomaly detection model.",
-            "schema": {
-              "$ref": "#/definitions/Model"
-            },
-            "headers": {
-              "Location": {
-                "description": "Location and ID of the model.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Train a Multivariate Anomaly Detection Model",
-        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
-        "operationId": "TrainMultivariateModel",
-        "parameters": [
-          {
-            "name": "body",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ModelInfo"
-            },
-            "description": "Training request"
-          }
-        ],
-        "x-ms-examples": {
-          "Train Multivariate model": {
-            "$ref": "./examples/TrainModel.json"
-          }
-        }
-      },
       "get": {
         "responses": {
           "200": {
@@ -167,13 +120,20 @@
           "nextLinkName": "nextLink",
           "itemName": "models"
         }
-      }
-    },
-    "/multivariate/models/{modelId}": {
-      "delete": {
+      },
+      "post": {
         "responses": {
-          "204": {
-            "description": "Delete model successfully. "
+          "201": {
+            "description": "Create and train a multivariate anomaly detection model.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location and ID of the model.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -188,25 +148,28 @@
             }
           }
         },
-        "summary": "Delete Multivariate Model",
-        "description": "Delete an existing multivariate model according to the modelId",
-        "operationId": "DeleteMultivariateModel",
+        "summary": "Train a Multivariate Anomaly Detection Model",
+        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
+        "operationId": "CreateMultivariateModel",
         "parameters": [
           {
-            "name": "modelId",
-            "in": "path",
+            "name": "body",
             "required": true,
-            "type": "string",
-            "description": "Model identifier",
-            "format": "uuid"
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            },
+            "description": "Training request"
           }
         ],
         "x-ms-examples": {
-          "Delete multivariate model": {
-            "$ref": "./examples/DeleteModel.json"
+          "Train Multivariate model": {
+            "$ref": "./examples/TrainModel.json"
           }
         }
-      },
+      }
+    },
+    "/multivariate/models/{modelId}": {
       "get": {
         "responses": {
           "200": {
@@ -246,9 +209,46 @@
             "$ref": "./examples/GetModel.json"
           }
         }
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Delete model successfully. "
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "operationId": "DeleteMultivariateModel",
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Model identifier",
+            "format": "uuid"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
+          }
+        }
       }
     },
-    "/multivariate/models/{modelId}/entire/detect": {
+    "/multivariate/models/{modelId}/detect-batch": {
       "post": {
         "responses": {
           "201": {
@@ -278,7 +278,7 @@
         },
         "summary": "Detect Multivariate Anomaly",
         "description": "Submit multivariate anomaly detection task with the modelId of trained model and inference data, the input schema should be the same with the training request. The request will complete asynchronously and return a resultId to query the detection result.The request should be a source link to indicate an externally accessible Azure storage Uri, either pointed to an Azure blob storage folder, or pointed to a CSV file in Azure blob storage.",
-        "operationId": "DetectAnomaly",
+        "operationId": "BatchDetectAnomaly",
         "parameters": [
           {
             "name": "modelId",
@@ -305,7 +305,7 @@
         }
       }
     },
-    "/multivariate/models/{modelId}/last/detect": {
+    "/multivariate/models/{modelId}/detect-last": {
       "post": {
         "responses": {
           "200": {
@@ -693,6 +693,38 @@
       },
       "type": "object"
     },
+    "ModelList": {
+      "required": [
+        "currentCount",
+        "maxCount",
+        "models"
+      ],
+      "properties": {
+        "models": {
+          "type": "array",
+          "description": "List of models.",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "currentCount": {
+          "type": "integer",
+          "description": "Number of trained multivariate models.",
+          "example": 10
+        },
+        "maxCount": {
+          "type": "integer",
+          "description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
+          "example": 20
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch more models."
+        }
+      },
+      "type": "object",
+      "description": "Response of listing models."
+    },
     "Model": {
       "required": [
         "createdTime",
@@ -724,80 +756,6 @@
       },
       "type": "object",
       "description": "Response of getting a model."
-    },
-    "ModelList": {
-      "required": [
-        "currentCount",
-        "maxCount",
-        "models"
-      ],
-      "properties": {
-        "models": {
-          "type": "array",
-          "description": "List of models.",
-          "items": {
-            "$ref": "#/definitions/ModelSnapshot"
-          }
-        },
-        "currentCount": {
-          "type": "integer",
-          "description": "Number of trained multivariate models.",
-          "example": 10
-        },
-        "maxCount": {
-          "type": "integer",
-          "description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
-          "example": 20
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to fetch more models."
-        }
-      },
-      "type": "object",
-      "description": "Response of listing models."
-    },
-    "ModelSnapshot": {
-      "required": [
-        "createdTime",
-        "lastUpdatedTime",
-        "modelId",
-        "status",
-        "variablesCount"
-      ],
-      "properties": {
-        "modelId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "Model identifier.",
-          "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time (UTC) when the model was created.",
-          "example": "2020-06-30T00:00:00Z"
-        },
-        "lastUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time (UTC) when the model was last updated.",
-          "example": "2020-06-30T00:00:00Z"
-        },
-        "status": {
-          "$ref": "#/definitions/ModelStatus"
-        },
-        "displayName": {
-          "type": "string",
-          "example": "DevOps-Test"
-        },
-        "variablesCount": {
-          "type": "integer",
-          "description": "Total number of variables.",
-          "example": 18
-        }
-      },
-      "type": "object"
     },
     "DetectionRequest": {
       "required": [
