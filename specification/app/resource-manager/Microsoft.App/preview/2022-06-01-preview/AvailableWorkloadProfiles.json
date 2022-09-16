@@ -87,9 +87,17 @@
                 "modelAsString": true
               }
             },
-            "default": {
-              "type": "boolean",
-              "description": "indicates whether the profile is default for the location."
+            "applicability": {
+              "type": "string",
+              "description": "indicates whether the profile is default for the location.",
+              "enum": [
+                "LocationDefault",
+                "Custom"
+              ],
+              "x-ms-enum": {
+                "name": "Applicability",
+                "modelAsString": true
+              }
             },
             "cores": {
               "type": "integer",
