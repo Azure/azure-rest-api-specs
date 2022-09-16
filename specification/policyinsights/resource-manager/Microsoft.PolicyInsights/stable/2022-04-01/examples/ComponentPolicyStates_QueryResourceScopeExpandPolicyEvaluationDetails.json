@@ -4,7 +4,7 @@
     "resourceId": "subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myCluster",
     "api-version": "2022-04-01",
     "$expand": "PolicyEvaluationDetails",
-    "$filter": "componentId eq 'default/test-pod' and componentType eq 'pods' and componentName eq 'test-pod'"
+    "$filter": "componentType eq 'pod' AND componentId eq 'default/test-pod' AND componentName eq 'test-pod'"
   },
   "responses": {
     "200": {
@@ -16,7 +16,7 @@
             "@odata.id": null,
             "@odata.context": "https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providersMicrosoft.ContainerService/managedClusters/myCluster/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata#latest/$entity",
             "componentId": "default/test-pod",
-            "componentType": "pods",
+            "componentType": "pod",
             "componentName": "test-pod",
             "timestamp": "2019-10-09T16:04:31Z",
             "resourceId": "/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myCluster",
@@ -55,7 +55,7 @@
             "@odata.id": null,
             "@odata.context": "https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providersMicrosoft.ContainerService/managedClusters/myCluster/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata#latest/$entity",
             "componentId": "default/test-pod",
-            "componentType": "pods",
+            "componentType": "pod",
             "componentName": "test-pod",
             "timestamp": "2019-10-09T16:04:31Z",
             "resourceId": "/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myCluster",
