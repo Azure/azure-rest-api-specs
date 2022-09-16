@@ -1076,71 +1076,6 @@
       }
     },
     "/accounts/{accountId}/assessments/schedules/{scheduleId}": {
-      "patch": {
-        "tags": [
-          "Scheduling"
-        ],
-        "operationId": "UpdateScheduledAssessments",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "runNow",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "Scheduling"
@@ -1204,6 +1139,11 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_Put": {
+            "$ref": "./examples/Assessment_Schedule_Put.json"
+          }
         }
       },
       "get": {
@@ -1251,6 +1191,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorModel"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_GetById": {
+            "$ref": "./examples/Assessment_Schedule_GetById.json"
           }
         }
       },
@@ -1300,6 +1245,11 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_Delete": {
+            "$ref": "./examples/Assessment_Schedule_Delete.json"
+          }
         }
       }
     },
@@ -1340,6 +1290,11 @@
             "schema": {
               "$ref": "#/definitions/ProblemDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_Exist": {
+            "$ref": "./examples/Assessment_Schedule_Exist.json"
           }
         }
       }
@@ -1502,6 +1457,11 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_Run": {
+            "$ref": "./examples/Assessment_Schedule_Run.json"
+          }
         }
       }
     },
@@ -1558,6 +1518,11 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_RunById": {
+            "$ref": "./examples/Assessment_Schedule_RunById.json"
+          }
         }
       }
     },
@@ -1611,55 +1576,10 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
-        }
-      }
-    },
-    "/accounts/{accountId}/assessments/schedules/{scheduleId}/triggerinternal": {
-      "post": {
-        "tags": [
-          "Scheduling"
-        ],
-        "operationId": "RunScheduledAssessmentsInternal",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_Cancel": {
+            "$ref": "./examples/Assessment_Schedule_Cancel.json"
           }
         }
       }
@@ -1710,6 +1630,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorModel"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_Trigger": {
+            "$ref": "./examples/Assessment_Schedule_Trigger.json"
           }
         }
       }
@@ -1769,139 +1694,10 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
-        }
-      }
-    },
-    "/accounts/{accountId}/assessments/schedules/{scheduleId}/{triggerRunId}/status": {
-      "put": {
-        "tags": [
-          "Scheduling"
-        ],
-        "operationId": "UpdateTriggerRunStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "triggerRunId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobOpInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/accounts/{accountId}/assets/{assetId}/runs/{runId}/status": {
-      "put": {
-        "tags": [
-          "Scheduling"
-        ],
-        "operationId": "UpdateManualRunStatus",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobOpInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
+        },
+        "x-ms-examples": {
+          "Assessment_Schedule_QueryFilterRuns": {
+            "$ref": "./examples/Assessment_Schedule_QueryFilterRuns.json"
           }
         }
       }
