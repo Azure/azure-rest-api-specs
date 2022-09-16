@@ -24,7 +24,14 @@
         "asyncExecution": false,
         "runAsUser": "user1",
         "runAsPassword": "<runAsPassword>",
-        "timeoutInSeconds": 3600
+        "timeoutInSeconds": 3600,
+        "outputBlobUri": "Base URI of a storage append blob(without SAS token) OR SAS URI with read, append, create, write access.",
+        "errorBlobUri": "Base URI of a storage append blob(without SAS token) OR SAS URI with read, append, create, write access.",
+        "outputBlobManagedIdentity": {
+          "clientId": "GUID. Needed only when outputBlobUri does not contain SAS token and user-assigned managed Identity is used. Use empty outputBlobManagedIdentity (like errorBlobManagedIdentity in this example) for system-assigned managed identity."
+        },
+        "errorBlobManagedIdentity": {
+        }
       }
     }
   },
@@ -56,7 +63,9 @@
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "outputBlobUri": "Base URI of a storage append blob(without SAS token)",
+          "errorBlobUri": "Base URI of a storage append blob(without SAS token)"
         }
       }
     },
@@ -72,7 +81,7 @@
         },
         "properties": {
           "source": {
-            "script": "Write-Host Hello World!"
+            "scriptUri": "Base URI of a storage blob with read access or public URI that contains script."
           },
           "parameters": [
             {
@@ -87,7 +96,9 @@
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Creating"
+          "provisioningState": "Creating",
+          "outputBlobUri": "Base URI of a storage append blob(without SAS token)",
+          "errorBlobUri": "Base URI of a storage append blob(without SAS token)"
         }
       }
     }
