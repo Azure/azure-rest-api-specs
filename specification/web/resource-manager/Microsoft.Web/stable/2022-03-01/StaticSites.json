@@ -1377,6 +1377,105 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/config/basicAuth": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the basic auth state of a static site.",
+        "operationId": "StaticSites_GetStaticSiteBasicAuth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteBasicAuthPropertiesARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the basic auth state of a static site": {
+            "$ref": "./examples/GetStaticSiteBasicAuthState.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Adds or updates basic auth for a static site.",
+        "operationId": "StaticSites_CreateOrUpdateStaticSiteBasicAuth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "basicAuthEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the basic auth properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteBasicAuthPropertiesARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteBasicAuthPropertiesARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates basic auth properties of a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBasicAuth.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/config/functionappsettings": {
       "put": {
         "tags": [
@@ -3543,6 +3642,50 @@
         },
         "identity": {
           "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
+    "StaticSiteBasicAuthPropertiesARMResource": {
+      "description": "Static site basic auth properties ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteBasicAuthPropertiesARMResource resource specific properties",
+          "required": [
+            "applicableEnvironmentsMode"
+          ],
+          "type": "object",
+          "properties": {
+            "environments": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "password": {
+              "description": "The password for basic auth.",
+              "type": "string"
+            },
+            "secretUrl": {
+              "description": "Url to the secret in Key Vault.",
+              "type": "string"
+            },
+            "applicableEnvironmentsMode": {
+              "description": "State indicating if basic auth is enabled and for what environments it is active.",
+              "type": "string"
+            },
+            "secretState": {
+              "description": "State indicating if basic auth has a secret and what type it is.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
