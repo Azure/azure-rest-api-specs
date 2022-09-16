@@ -3354,6 +3354,238 @@
           }
         }
       }
+    },
+   
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies": {
+      "get": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy-List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxies": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
+      "get": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy-Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy-Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy-Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
+      "post": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy-UnlockDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnlockDelete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4266,8 +4498,9 @@
     },
     "BackupVault": {
       "description": "Backup Vault",
+      "type": "object",
       "properties": {
-        "monitoringSettings": {
+	    "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
         },
@@ -4276,19 +4509,21 @@
           "enum": [
             "Failed",
             "Provisioning",
+            "Updating",
             "Succeeded",
+            "Deleting",
             "Unknown",
-            "Updating"
+            "SubscriptionSuspended"
           ],
-          "readOnly": true,
+		  "readOnly": true,
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "ProvisioningState"
+			"name": "ProvisioningState"
           }
         },
         "resourceMoveState": {
-          "description": "Resource move state for backup vault",
+          "description": "This property is already there in IResourceEntity, but we are keeping it here so that it can be part of client facing contracts as well.\r\nThis property is only updated during GetVault\r\nResource Move state of the BackupVault resource",
           "enum": [
             "Unknown",
             "InProgress",
@@ -4310,23 +4545,32 @@
         },
         "resourceMoveDetails": {
           "$ref": "#/definitions/ResourceMoveDetails",
-          "description": "Resource move details for backup vault",
+          "description": "This property is already there in IResourceEntity, but we are keeping it here so that it can be part of client facing contracts as well.\r\nThis property is only updated during GetVault\r\nResource Move details of the BackupVault resource",
           "readOnly": true
         },
         "storageSettings": {
           "description": "Storage Settings",
           "items": {
             "$ref": "#/definitions/StorageSetting"
-          },
-          "x-ms-identifiers": [],
-          "type": "array"
+		  },
+-         "x-ms-identifiers": [],
+-         "type": "array"
         },
         "isVaultProtectedByResourceGuard": {
-          "description": "Is vault protected by resource guard",
-          "type": "boolean"
+          "description": "IsVaultProtectedByResourceGuard",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "resourceGuardArmId": {
+          "description": "ResourceGuardArmId\r\nThis is to be generated in run time and not stored in catalog.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
-      "required": [
+	  "required": [
         "storageSettings"
       ],
       "title": "BackupVault",
@@ -6443,6 +6687,17 @@
         }
       }
     },
+	"ResourceGuardOperationDetail": {
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "type": "string"
+        },
+        "defaultResourceRequest": {
+          "type": "string"
+        }
+      }
+    },
     "ResourceGuardResource": {
       "allOf": [
         {
@@ -6472,6 +6727,82 @@
           "items": {
             "$ref": "#/definitions/ResourceGuardResource"
           }
+        }
+      }
+    },
+	"ResourceGuardProxyBase": {
+      "type": "object",
+      "properties": {
+        "resourceGuardResourceId": {
+          "type": "string"
+        },
+        "resourceGuardOperationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardOperationDetail"
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+	"ResourceGuardProxyBaseResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceGuardProxyBase",
+          "description": "ResourceGuardProxyBaseResource properties"
+        }
+      }
+    },
+	"ResourceGuardProxyBaseResourceList": {
+      "description": "List of ResourceGuardProxyBase resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+          }
+        }
+      }
+    },
+	"UnlockDeleteRequest": {
+      "description": "Request body of unlock delete API.",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceToBeDeleted": {
+          "type": "string"
+        }
+      }
+    },
+    "UnlockDeleteResponse": {
+      "description": "Response of Unlock Delete API.",
+      "type": "object",
+      "properties": {
+        "unlockDeleteExpiryTime": {
+          "description": "This is the time when unlock delete privileges will get expired.",
+          "type": "string"
         }
       }
     }
