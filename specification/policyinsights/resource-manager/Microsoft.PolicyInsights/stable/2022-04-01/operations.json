@@ -46,13 +46,13 @@
           "200": {
             "description": "List of available operations.",
             "schema": {
-              "$ref": "#/definitions/OperationsListResultsDefinition"
+              "$ref": "#/definitions/OperationsListResults"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2019-10-01/policyStates.json#/definitions/QueryFailure"
+              "$ref": "../../stable/2019-10-01/operations.json#/definitions/QueryFailure"
             }
           }
         },
@@ -65,7 +65,7 @@
     }
   },
   "definitions": {
-    "OperationsListResultsDefinition": {
+    "OperationsListResults": {
       "description": "List of available operations.",
       "type": "object",
       "properties": {
@@ -79,7 +79,7 @@
           "description": "List of available operations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationDefinition"
+            "$ref": "#/definitions/Operation"
           },
           "x-ms-identifiers": [
             "name"
@@ -87,7 +87,7 @@
         }
       }
     },
-    "OperationDefinition": {
+    "Operation": {
       "description": "Operation definition.",
       "type": "object",
       "properties": {
