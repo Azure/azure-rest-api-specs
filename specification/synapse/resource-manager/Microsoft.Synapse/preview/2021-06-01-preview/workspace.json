@@ -1342,10 +1342,7 @@
         "initialWorkspaceAdminObjectId": {
           "description": "AAD object ID of initial workspace admin",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "readOnly": true
         }
       }
     },
@@ -1383,7 +1380,11 @@
         },
         "managedResourceGroupName": {
           "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -1403,7 +1404,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "managedVirtualNetwork": {
           "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
