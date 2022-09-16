@@ -154,7 +154,7 @@ input-file:
  - ./Microsoft.Sql/stable/2021-11-01/VirtualNetworkRules.json
  - ./Microsoft.Sql/stable/2021-11-01/WorkloadClassifiers.json
  - ./Microsoft.Sql/stable/2021-11-01/WorkloadGroups.json
-
+```
 ### Tag: package-preview-2022-05
 
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
