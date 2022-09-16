@@ -5558,6 +5558,7 @@
       ],
       "properties": {
         "properties": {
+          "type": "object",
           "title": "Metadata Sync Config properties",
           "description": "Metadata Sync Config properties",
           "properties": {
@@ -6178,6 +6179,7 @@
       }
     },
     "TransparentDataEncryptionProperties": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -6194,6 +6196,7 @@
       "description": "Represents the properties of a database transparent data encryption."
     },
     "TransparentDataEncryption": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -6440,6 +6443,7 @@
       }
     },
     "SqlPoolUsage": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -6483,6 +6487,7 @@
       "description": "The Sql pool usages."
     },
     "SqlPoolUsageListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -7041,14 +7046,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators.",
@@ -7355,6 +7368,7 @@
       }
     },
     "DataMaskingPolicyProperties": {
+      "type": "object",
       "properties": {
         "dataMaskingState": {
           "type": "string",
@@ -7394,6 +7408,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7520,6 +7535,7 @@
       }
     },
     "DataMaskingRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7545,6 +7561,7 @@
       "description": "Represents a Sql pool data masking rule."
     },
     "DataMaskingRuleProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -7625,6 +7642,7 @@
       "description": "The properties of a Sql pool data masking rule."
     },
     "DataMaskingRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

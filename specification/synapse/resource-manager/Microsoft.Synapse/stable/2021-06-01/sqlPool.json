@@ -5443,6 +5443,7 @@
         "properties": {
           "title": "Metadata Sync Config properties",
           "description": "Metadata Sync Config properties",
+          "type": "object",
           "properties": {
             "enabled": {
               "type": "boolean",
@@ -5459,6 +5460,7 @@
       }
     },
     "GeoBackupPolicyProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -5484,6 +5486,7 @@
       "description": "The properties of the geo backup policy."
     },
     "GeoBackupPolicy": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GeoBackupPolicyProperties",
@@ -5512,6 +5515,7 @@
       "description": "A database geo backup policy."
     },
     "GeoBackupPolicyListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5524,6 +5528,7 @@
       "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
+      "type": "object",
       "properties": {
         "aggregationFunction": {
           "description": "The function that is used to aggregate each query's metrics.",
@@ -5607,6 +5612,7 @@
       "description": "A database query."
     },
     "QueryStatistic": {
+      "type": "object",
       "properties": {
         "queryId": {
           "description": "The id of the query",
@@ -5625,6 +5631,7 @@
       "description": "A database query."
     },
     "QueryInterval": {
+      "type": "object",
       "properties": {
         "intervalStartTime": {
           "description": "The start time of the measurement interval (ISO8601 format).",
@@ -5650,6 +5657,7 @@
       "description": "A database query."
     },
     "QueryMetric": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the metric",
@@ -5685,6 +5693,7 @@
       "description": "A database query."
     },
     "TopQueriesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5804,6 +5813,7 @@
       }
     },
     "ReplicationLinkProperties": {
+      "type": "object",
       "properties": {
         "isTerminationAllowed": {
           "readOnly": true,
@@ -5891,6 +5901,7 @@
       "description": "Represents the properties of a Sql pool replication link."
     },
     "ReplicationLink": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -5916,6 +5927,7 @@
       "description": "Represents a Sql pool replication link."
     },
     "ReplicationLinkListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -6049,6 +6061,7 @@
       }
     },
     "TransparentDataEncryptionProperties": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -6065,6 +6078,7 @@
       "description": "Represents the properties of a database transparent data encryption."
     },
     "TransparentDataEncryption": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -6312,6 +6326,7 @@
       }
     },
     "SqlPoolUsage": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -6355,6 +6370,7 @@
       "description": "The Sql pool usages."
     },
     "SqlPoolUsageListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -6914,14 +6930,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators.",
@@ -7228,6 +7252,7 @@
       }
     },
     "DataMaskingPolicyProperties": {
+      "type": "object",
       "properties": {
         "dataMaskingState": {
           "type": "string",
@@ -7267,6 +7292,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7393,6 +7419,7 @@
       }
     },
     "DataMaskingRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7418,6 +7445,7 @@
       "description": "Represents a Sql pool data masking rule."
     },
     "DataMaskingRuleProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
