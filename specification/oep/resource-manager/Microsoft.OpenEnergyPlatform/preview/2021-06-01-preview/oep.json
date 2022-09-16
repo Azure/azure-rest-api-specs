@@ -1350,6 +1350,32 @@
         "privateLinkServiceArmRegion": {
           "description": "PrivateLinkService ARM region.",
           "type": "string"
+        },
+        "explicitDnsSettings": {
+          "description": "Explicit DNS Settings for member.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExplicitDNSSettings"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ExplicitDNSSettings": {
+      "description": "Explicit DNS Settings for member.",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "description": "Fqdn of member.",
+          "type": "string"
+        },
+        "aRecord": {
+          "description": "ARecord name.",
+          "type": "string"
+        },
+        "dnsZoneName": {
+          "description": "DNS Zone Name.",
+          "type": "string"
         }
       }
     },
