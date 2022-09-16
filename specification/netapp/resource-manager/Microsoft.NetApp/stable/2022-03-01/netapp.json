@@ -5072,9 +5072,9 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 500 GiB, 500 GiB for large volumes. Upper limit is 100TiB. Specified in bytes.",
           "minimum": 107374182400,
-          "maximum": 109951162777600,
+          "maximum": 549755813888000,
           "default": 107374182400,
           "example": 107374182400
         },
@@ -5115,20 +5115,20 @@
           "title": "Snapshot ID",
           "type": "string",
           "x-nullable": true,
+          "x-ms-mutability": [
+            "create"
+          ],
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
-          "maxLength": 36,
-          "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
         "backupId": {
           "title": "Backup ID",
           "type": "string",
           "x-nullable": true,
+          "x-ms-mutability": [
+            "create"
+          ],
           "description": "UUID v4 or resource identifier used to identify the Backup.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
-          "maxLength": 36,
-          "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
         "baremetalTenantId": {
@@ -5809,9 +5809,9 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 500 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
           "minimum": 107374182400,
-          "maximum": 109951162777600,
+          "maximum": 549755813888000,
           "default": 107374182400,
           "example": 107374182400
         },
@@ -6743,18 +6743,9 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "required": [
-        "location",
         "properties"
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "id": {
           "type": "string",
           "readOnly": true,
