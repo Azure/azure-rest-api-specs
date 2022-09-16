@@ -2576,7 +2576,8 @@
         },
         "registerBeforeOAuthFlow": {
           "type": "boolean",
-          "description": "Whether to register the settings before OAuth validation is performed. Recommended to True."
+          "description": "Whether to register the settings before OAuth validation is performed. Recommended to True.",
+          "readOnly": true
         },
         "IsValidated": {
           "type": "boolean",
@@ -2714,6 +2715,66 @@
       },
       "description": "The parameters to provide for the DirectLine Speech channel."
     },
+    "TelephonyChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TelephonyChannel",
+      "description": "Telephony channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TelephonyChannelProperties",
+          "description": "The set of properties specific to Telephony channel resource"
+        }
+      }
+    },
+    "TelephonyChannelProperties": {
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TelephonyPhoneNumbers"
+          },
+          "description": "The list of Telephony phone numbers"
+        },
+        "apiConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TelephonyChannelResourceApiConfiguration"
+          },
+          "description": "The list of Telephony phone numbers"
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "The extensionKey1",
+          "x-nullable": true
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "The extensionKey2",
+          "x-nullable": true
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "Direct Line embed code of the resource",
+          "x-nullable": true
+        },
+        "premiumSKU": {
+          "type": "string",
+          "description": "Direct Line embed code of the resource",
+          "x-nullable": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Direct Line embed code of the resource"
+        }
+      },
+      "description": "The parameters to provide for the Direct Line channel."
+    },
     "ChannelResponseList": {
       "properties": {
         "nextLink": {
@@ -2757,6 +2818,10 @@
     "Site": {
       "type": "object",
       "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        },
         "siteId": {
           "type": "string",
           "description": "Site Id",
@@ -2839,6 +2904,11 @@
             "type": "string"
           }
         },
+        "isWebChatSpeechEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for Webchat Speech",
+          "default": false
+        },
         "isWebchatPreviewEnabled": {
           "type": "boolean",
           "description": "Whether this site is enabled for preview versions of Webchat",
@@ -2876,6 +2946,83 @@
         "siteName",
         "key"
       ]
+    },
+    "TelephonyPhoneNumbers": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The element id."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number."
+        },
+        "acsEndpoint": {
+          "type": "string",
+          "description": "The endpoint of ACS."
+        },
+        "acsSecret": {
+          "type": "string",
+          "description": "The secret of ACS."
+        },
+        "acsResourceId": {
+          "type": "string",
+          "description": "The resource id of ACS."
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "The subscription key of cognitive service."
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "The service region of cognitive service."
+        },
+        "cognitiveServiceResourceId": {
+          "type": "string",
+          "description": "The resource id of cognitive service."
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "The default locale of the phone number."
+        }
+      },
+      "description": "A telephone number for the Telephony channel"
+    },
+    "TelephonyChannelResourceApiConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of config."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "The provider name.",
+          "x-nullable": true
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "The cognitive service subscription key.",
+          "x-nullable": true
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "The cognitive service region.",
+          "x-nullable": true
+        },
+        "cognitiveServiceResourceId": {
+          "type": "string",
+          "description": "The cognitive service resourceId.",
+          "x-nullable": true
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "The default locale.",
+          "x-nullable": true
+        }
+      },
+      "description": "A resource Api configuration for the Telephony channel"
     },
     "ConnectionItemName": {
       "properties": {
