@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2022-05-05-preview"
+    "version": "2022-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1209,7 +1209,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/detachAndDeleteTrafficFilter": {
-      "delete": {
+      "post": {
         "tags": [
           "TrafficFilter"
         ],
@@ -1242,9 +1242,6 @@
           "200": {
             "description": "Success"
           },
-          "204": {
-            "description": "Success"
-          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -1252,7 +1249,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DetachAndDeleteTrafficFilter_Delete": {
             "$ref": "./examples/DetachAndDeleteTrafficFilter_Delete.json"
@@ -1310,7 +1306,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/deleteTrafficFilter": {
-      "delete": {
+      "post": {
         "tags": [
           "TrafficFilter"
         ],
@@ -1341,9 +1337,6 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
-          },
-          "204": {
             "description": "Success"
           },
           "default": {
