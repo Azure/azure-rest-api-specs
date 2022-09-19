@@ -89,6 +89,7 @@ These settings apply only when `--tag=package-2021-12-01-preview-only` is specif
 ``` yaml $(tag) == 'package-2021-12-01-preview-only'
 input-file:
 - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-2020-10-01
