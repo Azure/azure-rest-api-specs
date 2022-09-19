@@ -290,7 +290,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the issuer."
+            "description": "The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
           },
           {
             "name": "parameter",
@@ -469,7 +469,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the certificate."
+            "description": "The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
           },
           {
             "name": "parameters",
@@ -521,7 +521,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the certificate."
+            "description": "The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
           },
           {
             "name": "parameters",
@@ -1559,6 +1559,7 @@
           "type": "array",
           "items": {
             "type": "string",
+            "description": "Defines how the certificate's key may be used.",
             "enum": [
               "digitalSignature",
               "nonRepudiation",

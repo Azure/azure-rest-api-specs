@@ -1,0 +1,3015 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-07-31",
+    "title": "Microsoft Marketplace Catalog Browse API",
+    "description": "Microsoft Marketplace Catalog Browse API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/locations/{location}/edgeZones/{edgeZone}/products": {
+      "get": {
+        "tags": [
+          "ARM-Authenticated-Location-EdgeZones-Products-Listing-By-Subscription"
+        ],
+        "summary": "Get a list of edge zone products",
+        "operationId": "EdgeZonesProducts_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/EdgeZoneParameter"
+          },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns list of edge zone products",
+            "schema": {
+              "$ref": "#/definitions/PageResultOfCatalogItem"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "In case request malformed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeZonesProducts_List": {
+            "$ref": "./examples/EdgeZonesProducts_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Subscription id of the caller"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Location of the edge zones"
+    },
+    "EdgeZoneParameter": {
+      "name": "edgeZone",
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Required edge zone"
+    },
+    "LanguageParameter": {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "The language of the free texts"
+    },
+    "MarketParameter": {
+      "name": "market",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "The required market"
+    },
+    "SelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "description": "Properties to be returned in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "The optional page continuation token that is used in the event of paginated result.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "PageResultOfCatalogItem": {
+      "type": "object",
+      "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "additionalProperties": true,
+      "properties": {
+        "nextPageLink": {
+          "type": "string",
+          "description": "Gets the link for the next page of items in the feed.",
+          "format": "uri",
+          "x-nullable": true
+        },
+        "count": {
+          "type": "integer",
+          "description": "Gets the total count of items in the feed.",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "items": {
+          "type": "array",
+          "description": "Gets the collection of entities for this feed.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/CatalogItem"
+          }
+        }
+      }
+    },
+    "CatalogItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "offerId",
+        "legacyId",
+        "bigId"
+      ],
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Language of the offer"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name",
+          "x-nullable": true
+        },
+        "hasStandardContractAmendments": {
+          "type": "boolean",
+          "description": "A value indicating whether standard contract amendments are present for this product"
+        },
+        "publisherMpnId": {
+          "type": "string",
+          "description": "The publisher's Microsoft Partner Network (MPN) Id",
+          "x-nullable": true
+        },
+        "sellerId": {
+          "type": "string",
+          "description": "Partner Center Seller Id",
+          "x-nullable": true
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id",
+          "x-nullable": true
+        },
+        "partnerCenterId": {
+          "type": "string",
+          "description": "Partner center id",
+          "x-nullable": true
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name",
+          "x-nullable": true
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer id"
+        },
+        "legacyId": {
+          "type": "string",
+          "description": "Offer legacy id"
+        },
+        "determinedStorefronts": {
+          "type": "array",
+          "description": "The list of the storefronts for which this offer is designated",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Store"
+          }
+        },
+        "standardContractAmendmentsRevisionId": {
+          "type": "string",
+          "description": "Standard contract amendments for this product",
+          "format": "uuid"
+        },
+        "universalAmendmentUrl": {
+          "type": "string",
+          "description": "The universal amendment link for an enterprise contract.",
+          "x-nullable": true
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of the catalog item",
+          "x-nullable": true
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Long summary",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the catalog item",
+          "x-nullable": true
+        },
+        "offerType": {
+          "description": "Offer type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferType"
+            }
+          ]
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is private"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is preview"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether sale of this item is stopped"
+        },
+        "stopSellInfo": {
+          "description": "A StopSellInfo object providing stop sell related data",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/StopSellInfo"
+            }
+          ]
+        },
+        "fulfillBeforeChargeEligible": {
+          "type": "boolean",
+          "description": "A value indicating whether this item is eligible for fulfill before charge"
+        },
+        "marketingMaterial": {
+          "description": "Marketing material added by the publisher",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketingMaterial"
+            }
+          ]
+        },
+        "markets": {
+          "type": "array",
+          "description": "Markets for the item",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isvContactDetails": {
+          "type": "object",
+          "description": "ISV contact details",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "bigId": {
+          "type": "string",
+          "description": "Big catalog id"
+        },
+        "ocpSolutionId": {
+          "type": "string",
+          "description": "OCP solution id of the product",
+          "x-nullable": true
+        },
+        "legalTermsUri": {
+          "type": "string",
+          "description": "Legal terms URI",
+          "x-nullable": true
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "CSP legal terms URI",
+          "x-nullable": true
+        },
+        "legalTermsType": {
+          "description": "Type of to the legal terms",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LegalTermsType"
+            }
+          ]
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "Uri to the privacy policy of the product",
+          "x-nullable": true
+        },
+        "helpLink": {
+          "type": "string",
+          "description": "Help link for the product",
+          "x-nullable": true
+        },
+        "supportUri": {
+          "type": "string",
+          "description": "Support uri of the product",
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Big Cat submission version",
+          "x-nullable": true
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "User interface definition uri",
+          "x-nullable": true
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "List of category IDs the marketplace item belongs to",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "List of operating systems the marketplace item supports",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "marketCode": {
+          "type": "string",
+          "description": "Market code of a service offer",
+          "x-nullable": true
+        },
+        "marketStates": {
+          "type": "array",
+          "description": "Market states of a service offer",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "primaryIndustry": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "primaryCategories": {
+          "type": "array",
+          "description": "List of category IDs the item belongs to",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "cloudIndustryCategories": {
+          "type": "array",
+          "description": "List of cloud industry IDs the item belongs to",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "primaryProduct": {
+          "type": "string",
+          "description": "Primary product for the offer",
+          "x-nullable": true
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "It maps to the list of products the publisher provides with which their offer works",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Service type that applies to the offer",
+          "x-nullable": true
+        },
+        "competencies": {
+          "type": "array",
+          "description": "Competencies that apply to the offer",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Competency"
+          }
+        },
+        "hasPrices": {
+          "type": "boolean",
+          "description": "A value indicating whether the item has prices",
+          "x-nullable": true
+        },
+        "duration": {
+          "description": "The duration that applies to the item",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Duration"
+            }
+          ]
+        },
+        "marketPricingDetails": {
+          "type": "array",
+          "description": "The pricing details of each market to the item",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/MarketPricingDetailsItem"
+          }
+        },
+        "startingPrice": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/MarketStartPrice"
+            }
+          ]
+        },
+        "pricing": {
+          "description": "The pricing that applies to the item",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pricing"
+            }
+          ]
+        },
+        "solutionAreas": {
+          "type": "array",
+          "description": "The states that apply to the item",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "screenshotUris": {
+          "type": "array",
+          "description": "List of screenshot image URIs provided for the item",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "List of Links provided for the item",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters for the item",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "iconFileUris": {
+          "type": "object",
+          "description": "Dictionary of icon image URIs by icon type",
+          "x-nullable": true,
+          "x-dictionaryKey": {
+            "$ref": "#/definitions/IconKind"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "List of artifacts",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "metadata": {
+          "description": "Custom item metadata",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferMetadata"
+            }
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "description": "Dictionary of properties provided for the item",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "images": {
+          "type": "array",
+          "description": "List of Images",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ImageGroup"
+          }
+        },
+        "videos": {
+          "type": "array",
+          "description": "List of product videos",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ProductVideo"
+          }
+        },
+        "plans": {
+          "type": "array",
+          "description": "Plans available for the offer details",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name the gallery item belongs to",
+          "x-nullable": true
+        },
+        "definitionTemplates": {
+          "description": "Definition templates",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefinitionTemplates"
+            }
+          ]
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "Dictionary of additional properties provided for the item",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "restrictedAudience": {
+          "description": "This fields supports setting explicit audience like subscription, tenant or user",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RestrictedAudience"
+            }
+          ]
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "A value indicating is the marketplace item deleted"
+        },
+        "isThirdParty": {
+          "type": "boolean",
+          "description": "A value indicating whether the product is third party offer or not"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "This value is used to merge different entities to a single item",
+          "x-nullable": true
+        },
+        "hideKeys": {
+          "type": "array",
+          "description": "List of hide keys provided for the item",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "description": "List of keywords provided for the item",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "popularity": {
+          "type": "number",
+          "description": "Popularity of the product",
+          "format": "double"
+        },
+        "pricingDetailsUri": {
+          "type": "string",
+          "description": "Pricing details uri of the product",
+          "x-nullable": true
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "isByol": {
+          "type": "boolean",
+          "description": "A value indicating whether it has licensed plans"
+        },
+        "isMacc": {
+          "type": "boolean",
+          "description": "A value indicating whether it is MACC eligible"
+        },
+        "hasFreePlans": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free plans"
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "A value indicating whether product is quantifiable"
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference",
+          "x-nullable": true
+        },
+        "hasPaygPlans": {
+          "type": "boolean",
+          "description": "A value indicating whether an offer has a 'Pay As You Go' plan"
+        },
+        "isReseller": {
+          "type": "boolean",
+          "description": "A value indicating whether microsoft is acting as a reseller"
+        },
+        "ttl": {
+          "type": "integer",
+          "description": "Expiration policy in seconds",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "isExcludedFromSearch": {
+          "type": "boolean",
+          "description": "A value indicating whether the offer should be excluded from search"
+        },
+        "applicableStoreFronts": {
+          "description": "A value indicating which storefront this offer should surface on",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/StoreFrontOptions"
+            }
+          ]
+        },
+        "offerVersion": {
+          "type": "string",
+          "description": "Offer version specified by the publisher on publishing portal",
+          "x-nullable": true
+        },
+        "isMicrosoftProduct": {
+          "type": "boolean",
+          "description": "A value indicating whether it is a microsoft product",
+          "x-nullable": true
+        },
+        "productOwnershipSellingMotion": {
+          "type": "string",
+          "description": "Product ownership selling motion",
+          "x-nullable": true
+        },
+        "documentLinks": {
+          "type": "array",
+          "description": "The list of document links provided for the item",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "offerEnvironment": {
+          "description": "A value indicating offer's environment",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentInfo"
+            }
+          ]
+        },
+        "linkedAddIns": {
+          "type": "array",
+          "description": "List of linked Add Ins provided for the item",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkedAddInsTypes": {
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "excludeFromBootstrap": {
+          "type": "boolean",
+          "description": "A value indicating whether the offer should not be re-ingest during bootstrap session"
+        },
+        "hydrationNotificationReceivedAt": {
+          "type": "string",
+          "description": "Notification creation time",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "bigCatLastModifiedDate": {
+          "type": "string",
+          "description": "Last modified date",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "disableSendEmailOnPurchase": {
+          "type": "boolean",
+          "description": "Indication to disable sending email on purchase"
+        },
+        "hideFromSaasBlade": {
+          "type": "boolean",
+          "description": "Indication to hide from SaaS blade"
+        },
+        "integratedWithMicrosoftGraphApi": {
+          "type": "boolean",
+          "description": "Indication if there is integrated with Microsoft graph API"
+        },
+        "multiTenantAadAppId": {
+          "type": "string",
+          "description": "Multi tenant AAD app id",
+          "x-nullable": true
+        },
+        "licenseManagementType": {
+          "type": "string",
+          "description": "License management type",
+          "x-nullable": true
+        },
+        "licenseModel": {
+          "type": "string",
+          "description": "License model",
+          "x-nullable": true
+        },
+        "pbiServicePrincipalIds": {
+          "type": "array",
+          "description": "PBI service principals",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isCoreVm": {
+          "type": "boolean",
+          "description": "Set to true only for offers of OfferType.VirtualMachine to indicate that it was originally of OfferType.CoreVirtualMachine",
+          "x-nullable": true
+        },
+        "m365CertificationInfo": {
+          "description": "M365 Certification info",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/M365CertificationInfo"
+            }
+          ]
+        },
+        "downloadLink": {
+          "type": "string",
+          "description": "Download link for offers of type OfferType.PowerBIVisuals",
+          "x-nullable": true
+        },
+        "downloadSampleLink": {
+          "type": "string",
+          "description": "Download sample report link for offers of type OfferType.PowerBIVisuals",
+          "x-nullable": true
+        },
+        "omexAssetId": {
+          "type": "string",
+          "description": "Asset ID for offers of type OfferType.PowerBIVisuals",
+          "x-nullable": true
+        },
+        "mixProductId": {
+          "type": "string",
+          "description": "Product ID for offers of type OfferType.PowerBIVisuals",
+          "x-nullable": true
+        },
+        "appFreeType": {
+          "type": "string",
+          "description": "Whether an offer has additional purchases required",
+          "x-nullable": true
+        },
+        "storeFrontPricings": {
+          "type": "object",
+          "description": "storefront pricings parameters for AppSource and AMP",
+          "x-nullable": true,
+          "x-dictionaryKey": {
+            "$ref": "#/definitions/Store"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/UIPricing"
+          }
+        },
+        "hasRIPlans": {
+          "type": "boolean",
+          "description": "Has plans with reservations"
+        },
+        "enrichedData": {
+          "description": "Enriched offer data",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnrichedData"
+            }
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Office capabilities",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/OfficeCapabilityType"
+          }
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "release date",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "hideFromAdminPortal": {
+          "type": "boolean",
+          "description": "the flag is used in embedded views"
+        },
+        "awards": {
+          "type": "array",
+          "description": "the flag is used in embedded views",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "powerBIVisualId": {
+          "type": "string",
+          "description": "the ID is used to correlate to a Visual for PowerBI",
+          "x-nullable": true
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this offer is designated",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "autoRunLaunchEvents": {
+          "type": "array",
+          "description": "A list of auto run launch events for office products",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "service": {
+          "type": "string",
+          "description": "BigCat Service",
+          "x-nullable": true
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "BigCat Service Id",
+          "x-nullable": true
+        },
+        "productType": {
+          "type": "string",
+          "description": "BigCat Product Type",
+          "x-nullable": true
+        },
+        "productFamily": {
+          "type": "string",
+          "description": "BigCat Product Family",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "partitionKey": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "ts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "searchScore": {
+          "type": "number",
+          "description": "Gets or sets the search relevance score when it is linked to a search score",
+          "format": "double",
+          "x-nullable": true
+        }
+      }
+    },
+    "Store": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell",
+        "DakotaDownstream"
+      ],
+      "enum": [
+        "Appsource",
+        "AMP",
+        "Ibiza",
+        "Cosell",
+        "DakotaDownstream"
+      ],
+      "x-ms-enum": {
+        "name": "Store",
+        "modelAsString": false
+      }
+    },
+    "OfferType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals",
+        "Office365",
+        "AADApps"
+      ],
+      "enum": [
+        "None",
+        "DevService",
+        "ManagedApplication",
+        "VirtualMachine",
+        "AzureApplication",
+        "Container",
+        "SaaS",
+        "SolutionTemplate",
+        "IotEdgeModules",
+        "ManagedServices",
+        "ContainerApps",
+        "VisualStudioExtension",
+        "DynamicsOps",
+        "DynamicsCE",
+        "DynamicsBC",
+        "PowerBI",
+        "ConsultingServices",
+        "CosellOnly",
+        "CoreVirtualMachine",
+        "PowerBIVisuals",
+        "Office365",
+        "AADApps"
+      ],
+      "x-ms-enum": {
+        "name": "OfferType",
+        "modelAsString": false
+      }
+    },
+    "StopSellInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "description": "A value indicating when the sale of this item is going to be stopped",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "reason": {
+          "description": "A value indicating the reason for stopping to sell this item",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/StopSellReason"
+            }
+          ]
+        },
+        "alternativeOfferId": {
+          "type": "string",
+          "description": "A value indicating an ID of an alternative offer provided by the same publisher",
+          "x-nullable": true
+        },
+        "alternativePlanId": {
+          "type": "string",
+          "description": "A value indicating an ID of an alternative plan of the same offer",
+          "x-nullable": true
+        }
+      }
+    },
+    "StopSellReason": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "EndOfSupport",
+        "SecurityIssue",
+        "Other"
+      ],
+      "enum": [
+        "EndOfSupport",
+        "SecurityIssue",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "StopSellReason",
+        "modelAsString": false
+      }
+    },
+    "PricingType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Free",
+        "FreeTrial",
+        "Byol",
+        "Payg",
+        "Ri"
+      ],
+      "enum": [
+        "Free",
+        "FreeTrial",
+        "Byol",
+        "Payg",
+        "Ri"
+      ],
+      "x-ms-enum": {
+        "name": "PricingType",
+        "modelAsString": false
+      }
+    },
+    "OfficeCapabilityType": {
+      "type": "integer",
+      "format": "int32",
+      "description": "1 = Capability1\n2 = Capability2\n3 = Capability3\n4 = Capability4\n5 = Capability5\n6 = Capability6\n7 = Capability7\n8 = Capability8\n9 = Capability9\n10 = Capability10\n11 = Capability11",
+      "x-enumNames": [
+        "Capability1",
+        "Capability2",
+        "Capability3",
+        "Capability4",
+        "Capability5",
+        "Capability6",
+        "Capability7",
+        "Capability8",
+        "Capability9",
+        "Capability10",
+        "Capability11"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "x-ms-enum": {
+        "name": "OfficeCapabilityType",
+        "modelAsString": false
+      }
+    },
+    "EnrichedData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tags": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "popularity": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/PopularityEnrichedData"
+            }
+          ]
+        },
+        "rating": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RatingEnrichedData"
+            }
+          ]
+        },
+        "isAzureBenefitEligible": {
+          "type": "boolean"
+        },
+        "isSolutionMap": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PopularityEnrichedData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "appSourceCs": {
+          "type": "number",
+          "format": "double"
+        },
+        "appSourceApps": {
+          "type": "number",
+          "format": "double"
+        },
+        "ampCs": {
+          "type": "number",
+          "format": "double"
+        },
+        "ampApps": {
+          "type": "number",
+          "format": "double"
+        },
+        "azurePortalApps": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "RatingEnrichedData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "appSource": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RatingSummary"
+            }
+          ]
+        },
+        "amp": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RatingSummary"
+            }
+          ]
+        },
+        "azurePortal": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RatingSummary"
+            }
+          ]
+        },
+        "g2": {
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RatingSummary"
+            }
+          ]
+        }
+      }
+    },
+    "RatingSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "totalRatings": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "source": {
+          "$ref": "#/definitions/ReviewSource"
+        },
+        "averageRating": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "externalOfferReference": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "starsDistribution": {
+          "type": "object",
+          "x-nullable": true,
+          "x-dictionaryKey": {
+            "$ref": "#/definitions/RatingStars"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "buckets": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReviewSource": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "AppSource",
+        "Amp",
+        "Ibiza",
+        "G2",
+        "Internal",
+        "All"
+      ],
+      "enum": [
+        "None",
+        "AppSource",
+        "Amp",
+        "Ibiza",
+        "G2",
+        "Internal",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ReviewSource",
+        "modelAsString": false
+      }
+    },
+    "RatingStars": {
+      "type": "integer",
+      "format": "int32",
+      "description": "0 = None\n1 = One\n2 = Two\n3 = Three\n4 = Four\n5 = Five",
+      "x-enumNames": [
+        "None",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "x-ms-enum": {
+        "name": "RatingStars",
+        "modelAsString": false
+      }
+    },
+    "UIPricing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pricingOptions": {
+          "description": "A value indicating what pricing options are available on the application",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PricingOptions"
+            }
+          ]
+        },
+        "hasPrices": {
+          "type": "boolean",
+          "description": "Has prices",
+          "x-nullable": true
+        }
+      }
+    },
+    "PricingOptions": {
+      "type": "integer",
+      "format": "int32",
+      "description": "0 = None\n1 = Free\n2 = FreeTrial\n4 = Paid\n8 = Byol",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Free",
+        "FreeTrial",
+        "Paid",
+        "Byol"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8
+      ],
+      "x-ms-enum": {
+        "name": "PricingOptions",
+        "modelAsString": false
+      }
+    },
+    "M365CertificationInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "m365CertificationType": {
+          "description": "M365 Certification Type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CertificationType"
+            }
+          ]
+        },
+        "m365CertificationDetailsUrl": {
+          "type": "string",
+          "description": "M365 Certification Url",
+          "x-nullable": true
+        },
+        "m365CertificationId": {
+          "type": "string",
+          "description": "M365 Certification Id",
+          "x-nullable": true
+        }
+      }
+    },
+    "CertificationType": {
+      "type": "integer",
+      "format": "int32",
+      "description": "0 = Undefined\n1 = None\n2 = SelfAttested\n3 = MicrosoftCertified",
+      "x-enumNames": [
+        "Undefined",
+        "None",
+        "SelfAttested",
+        "MicrosoftCertified"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "x-ms-enum": {
+        "name": "CertificationType",
+        "modelAsString": false
+      }
+    },
+    "EnvironmentInfo": {
+      "type": "integer",
+      "format": "int32",
+      "description": "1 = DogFood\n2 = Canary\n3 = Production\n4 = FairFax\n5 = Unknown",
+      "x-enumNames": [
+        "DogFood",
+        "Canary",
+        "Production",
+        "FairFax",
+        "Unknown"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentInfo",
+        "modelAsString": false
+      }
+    },
+    "LinkProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the link",
+          "x-nullable": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the link",
+          "x-nullable": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "URI of the link",
+          "x-nullable": true
+        }
+      }
+    },
+    "StoreFrontOptions": {
+      "type": "integer",
+      "format": "int32",
+      "description": "0 = None\n1 = Azure\n2 = AMP\n4 = AppSource\n8 = Any",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Azure",
+        "AMP",
+        "AppSource",
+        "Any"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8
+      ],
+      "x-ms-enum": {
+        "name": "StoreFrontOptions",
+        "modelAsString": false
+      }
+    },
+    "RestrictedAudience": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "Subscription based restricted audience",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenants": {
+          "type": "array",
+          "description": "Tenant based restricted audience",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "User based restricted audience",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "User groups restricted audience",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DefinitionTemplates": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "uiDefinitionFileUri": {
+          "type": "string",
+          "description": "UI definition file URI",
+          "x-nullable": true
+        },
+        "defaultDeploymentTemplateId": {
+          "type": "string",
+          "description": "Default deployment template id",
+          "x-nullable": true
+        },
+        "deploymentTemplateFileUris": {
+          "type": "object",
+          "description": "A dictionary containing the deployment template file IDs defined in the package manifest and corresponding URIs",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deploymentFragmentFileUris": {
+          "type": "object",
+          "description": "a dictionary containing the deployment fragment file IDs defined in the package manifest and corresponding URIs",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProductVideo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Caption of the product video",
+          "x-nullable": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "Video uri",
+          "format": "uri",
+          "x-nullable": true
+        },
+        "videoPurpose": {
+          "type": "string",
+          "description": "Video purpose",
+          "x-nullable": true
+        },
+        "previewImage": {
+          "description": "Preview image",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreviewImage"
+            }
+          ]
+        }
+      }
+    },
+    "PreviewImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Caption of preview image",
+          "x-nullable": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "Image uri",
+          "format": "uri",
+          "x-nullable": true
+        },
+        "imagePurpose": {
+          "type": "string",
+          "description": "Image purpose",
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "context of the image group",
+          "x-nullable": true
+        },
+        "items": {
+          "type": "array",
+          "description": "List of images",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image id",
+          "x-nullable": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "Image uri",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Image type",
+          "x-nullable": true
+        }
+      }
+    },
+    "MarketingMaterial": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path to the marketing site",
+          "x-nullable": true
+        },
+        "learnUri": {
+          "type": "string",
+          "description": "Path to the learn site",
+          "x-nullable": true
+        }
+      }
+    },
+    "LegalTermsType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "EA"
+      ],
+      "enum": [
+        "None",
+        "EA"
+      ],
+      "x-ms-enum": {
+        "name": "LegalTermsType",
+        "modelAsString": false
+      }
+    },
+    "Competency": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "competencyName": {
+          "type": "string",
+          "description": "Competency name",
+          "x-nullable": true
+        },
+        "competencyLevel": {
+          "type": "string",
+          "description": "Competency level",
+          "x-nullable": true
+        }
+      }
+    },
+    "Duration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "durationValue": {
+          "type": "integer",
+          "description": "Duration value",
+          "format": "int64"
+        },
+        "durationUnit": {
+          "description": "Duration unit",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceDurationUnit"
+            }
+          ]
+        }
+      }
+    },
+    "ServiceDurationUnit": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Days",
+        "Hours",
+        "Weeks",
+        "Months"
+      ],
+      "enum": [
+        "Days",
+        "Hours",
+        "Weeks",
+        "Months"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceDurationUnit",
+        "modelAsString": false
+      }
+    },
+    "MarketPricingDetailsItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pricing": {
+          "description": "Pricing that applies to the item",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Pricing"
+            }
+          ]
+        },
+        "marketCode": {
+          "type": "string",
+          "description": "Market code of a service offer",
+          "x-nullable": true
+        },
+        "marketStates": {
+          "type": "array",
+          "description": "Market states of a service offer",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code",
+          "x-nullable": true
+        },
+        "planPrices": {
+          "type": "array",
+          "description": "Plan prices",
+          "x-nullable": true,
+          "x-ms-identifiers": [
+            "planId"
+          ],
+          "items": {
+            "$ref": "#/definitions/PlanPrice"
+          }
+        }
+      }
+    },
+    "PlanPrice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Plan id",
+          "x-nullable": true
+        },
+        "currencyDecorator": {
+          "description": "Currency decorator",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CurrencyDecorator"
+            }
+          ]
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the item",
+          "format": "double"
+        }
+      }
+    },
+    "CurrencyDecorator": {
+      "type": "integer",
+      "format": "int32",
+      "description": "0 = Fixed\n1 = Estimated",
+      "x-enumNames": [
+        "Fixed",
+        "Estimated"
+      ],
+      "enum": [
+        0,
+        1
+      ],
+      "x-ms-enum": {
+        "name": "CurrencyDecorator",
+        "modelAsString": false
+      }
+    },
+    "MarketStartPrice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "market",
+        "currency"
+      ],
+      "properties": {
+        "market": {
+          "type": "string",
+          "description": "The market."
+        },
+        "termUnits": {
+          "type": "string",
+          "description": "The terms pricing model units.",
+          "x-nullable": true
+        },
+        "meterUnits": {
+          "type": "string",
+          "description": "The meters pricing model units.",
+          "x-nullable": true
+        },
+        "minTermPrice": {
+          "type": "number",
+          "description": "Starting (minimal) terms price.",
+          "format": "decimal",
+          "x-nullable": true
+        },
+        "minMeterPrice": {
+          "type": "number",
+          "description": "Starting (minimal) meters price.",
+          "format": "decimal",
+          "x-nullable": true
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency for price."
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Filter type",
+          "x-nullable": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Filter value",
+          "x-nullable": true
+        }
+      }
+    },
+    "IconKind": {
+      "type": "integer",
+      "format": "int32",
+      "description": "0 = Small\n1 = Medium\n2 = Large\n3 = Wide\n4 = Hero",
+      "x-enumNames": [
+        "Small",
+        "Medium",
+        "Large",
+        "Wide",
+        "Hero"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "x-ms-enum": {
+        "name": "IconKind",
+        "modelAsString": false
+      }
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Artifact name",
+          "x-nullable": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "Artifact uri",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Artifact type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactType"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ],
+      "enum": [
+        "Template",
+        "Fragment",
+        "Custom",
+        "Metadata"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": false
+      }
+    },
+    "OfferMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "leadGeneration": {
+          "description": "Lead generation info",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/LeadGeneration"
+            }
+          ]
+        },
+        "testDrive": {
+          "description": "Test Drive info",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/TestDrive"
+            }
+          ]
+        }
+      }
+    },
+    "LeadGeneration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Product Id",
+          "x-nullable": true
+        },
+        "leadGenEnabled": {
+          "type": "boolean",
+          "description": "An indicator if lead generation is enabled",
+          "x-nullable": true
+        }
+      }
+    },
+    "TestDrive": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Test drive description",
+          "x-nullable": true
+        },
+        "userManual": {
+          "type": "string",
+          "description": "User manual",
+          "x-nullable": true
+        },
+        "testDriveDuration": {
+          "type": "string",
+          "description": "Test Drive Duration",
+          "x-nullable": true
+        },
+        "accessInformation": {
+          "type": "string",
+          "description": "Access Information",
+          "x-nullable": true
+        },
+        "orchestrationType": {
+          "type": "string",
+          "description": "Orchestration Type",
+          "x-nullable": true
+        },
+        "labId": {
+          "type": "string",
+          "description": "Lab identifier",
+          "x-nullable": true
+        },
+        "demoId": {
+          "type": "string",
+          "description": "Demo identifier",
+          "x-nullable": true
+        },
+        "video": {
+          "description": "Walk-through video",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductVideo"
+            }
+          ]
+        },
+        "powerBiDashboardLink": {
+          "type": "string",
+          "description": "Power Bi dashboard link",
+          "x-nullable": true
+        }
+      }
+    },
+    "CSPState": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ],
+      "enum": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ],
+      "x-ms-enum": {
+        "name": "CSPState",
+        "modelAsString": false
+      }
+    },
+    "VmSecurityType": {
+      "type": "string",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ],
+      "enum": [
+        "None",
+        "Trusted",
+        "Confidential"
+      ],
+      "x-ms-enum": {
+        "name": "VmSecurityType",
+        "modelAsString": false
+      }
+    },
+    "BillingComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "billingTag": {
+          "type": "string",
+          "description": "Billing Tag",
+          "x-nullable": true
+        },
+        "customMeterIds": {
+          "type": "object",
+          "description": "Custom Meter Ids",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      }
+    },
+    "PurchaseDurationDiscount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "TermUpn": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "termId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "upn": {
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OpenProperty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {}
+        }
+      }
+    },
+    "OperatingSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "Operating system family",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Operating system type",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Operating system name",
+          "x-nullable": true
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Plan id",
+          "x-nullable": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the plan",
+          "x-nullable": true
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of the plan",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the plan",
+          "x-nullable": true
+        },
+        "restrictedAudience": {
+          "description": "Restricted audience",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RestrictedAudience"
+            }
+          ]
+        },
+        "skuId": {
+          "type": "string",
+          "description": "Sku id",
+          "x-nullable": true
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan id",
+          "x-nullable": true
+        },
+        "legacyPlanId": {
+          "type": "string",
+          "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between",
+          "x-nullable": true
+        },
+        "keywords": {
+          "type": "array",
+          "description": "List of keywords",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Offer type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferType"
+            }
+          ]
+        },
+        "leadGeneration": {
+          "description": "Lead generation info",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/LeadGeneration"
+            }
+          ]
+        },
+        "testDrive": {
+          "description": "Test Drive info",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/TestDrive"
+            }
+          ]
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availabilities for this plan",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/AvailabilityEntity"
+          }
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Category IDs for this plan",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "conversionPaths": {
+          "type": "array",
+          "description": "Conversion paths for this plan",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "description": "Metadata for this plan",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/OpenProperty"
+            }
+          ]
+        },
+        "operatingSystem": {
+          "description": "Operating system info for this plan",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperatingSystem"
+            }
+          ]
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "What blade to open when someone wants to create a marketplace item",
+          "x-nullable": true
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "Files related to the marketplace item",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the marketplace item",
+          "x-nullable": true
+        },
+        "itemName": {
+          "type": "string",
+          "description": "Item name",
+          "x-nullable": true
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "A value indicating whether the item is private"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is hidden"
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "isByol": {
+          "type": "boolean",
+          "description": "A value indicating whether it has licensed plans"
+        },
+        "isFree": {
+          "type": "boolean",
+          "description": "A value indicating whether it has at least one free availability in any market"
+        },
+        "isPayg": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is 'Pay As You Go'"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether plan has been stopped from selling"
+        },
+        "stopSellInfo": {
+          "description": "A StopSellInfo object providing stop sell related data",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/StopSellInfo"
+            }
+          ]
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference",
+          "x-nullable": true
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2",
+          "x-nullable": true
+        },
+        "altArchitectureReference": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "architectureType": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "cspState": {
+          "description": "A value indicating whether the product is available for purchase through CSP channel",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CSPState"
+            }
+          ]
+        },
+        "resourceProviderNamespace": {
+          "type": "string",
+          "description": "Resource Provider Namespace",
+          "x-nullable": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Provider type",
+          "x-nullable": true
+        },
+        "minQuantity": {
+          "type": "integer",
+          "description": "Min quantity",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "description": "Max quantity",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is quantifiable"
+        },
+        "callToAction": {
+          "type": "string",
+          "description": "The action that can be performed on this plan, on the storefronts",
+          "x-nullable": true
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "URL to redirect the user to post the performed action on the storefronts",
+          "x-nullable": true
+        },
+        "serviceIdentifier": {
+          "type": "string",
+          "description": "Service identifier",
+          "x-nullable": true
+        },
+        "vmSecurityType": {
+          "description": "VM security type",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/VmSecurityType"
+            }
+          ]
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "Display rank",
+          "x-nullable": true
+        },
+        "billingComponents": {
+          "type": "array",
+          "description": "Billing components",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/BillingComponent"
+          }
+        },
+        "purchaseDurationDiscounts": {
+          "type": "array",
+          "description": "List of purchase duration discounts",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/PurchaseDurationDiscount"
+          }
+        },
+        "upns": {
+          "type": "array",
+          "description": "List of user principal names(UPNs)",
+          "x-ms-identifiers": [
+            "termId"
+          ],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TermUpn"
+          }
+        },
+        "hasRI": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan supports reservations"
+        },
+        "isHiddenPrivateOffer": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is used as hidden private offer requiring a quote",
+          "x-nullable": true
+        },
+        "certifications": {
+          "type": "array",
+          "description": "List of certifications",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this plan is designated",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        }
+      }
+    },
+    "PIFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exclusionProperties": {
+          "type": "array",
+          "description": "List of exclusion properties",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "inclusionProperties": {
+          "type": "array",
+          "description": "List of inclusion properties",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "remediationId": {
+          "type": "string",
+          "description": "Remediation identifier",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Remediation type",
+          "x-nullable": true
+        }
+      }
+    },
+    "Term": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "termDescriptionParameters": {
+          "type": "array",
+          "description": "Term description parameters",
+          "x-ms-identifiers": [],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TermDescriptionParameter"
+          }
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term id",
+          "x-nullable": true
+        },
+        "termUnits": {
+          "type": "string",
+          "description": "Term unit",
+          "x-nullable": true
+        },
+        "prorationPolicy": {
+          "description": "Proration policy",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProrationPolicy"
+            }
+          ]
+        },
+        "termDescription": {
+          "type": "string",
+          "description": "Term description",
+          "x-nullable": true
+        },
+        "price": {
+          "description": "Price for the term",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "renewTermId": {
+          "type": "string",
+          "description": "Renew term id",
+          "x-nullable": true
+        },
+        "renewTermUnits": {
+          "type": "string",
+          "description": "Renew term units",
+          "x-nullable": true
+        },
+        "billingPlan": {
+          "description": "Billing Plan",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingPlan"
+            }
+          ]
+        },
+        "renewToTermBillingPlan": {
+          "type": "string",
+          "description": "Renew Billing Plan",
+          "x-nullable": true
+        }
+      }
+    },
+    "TermDescriptionParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "description": "Term description parameter",
+          "x-nullable": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Term description parameter value",
+          "x-nullable": true
+        }
+      }
+    },
+    "ProrationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minimumProratedUnits": {
+          "type": "string",
+          "description": "Minimum prorated units",
+          "x-nullable": true
+        }
+      }
+    },
+    "BillingPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "billingPeriod": {
+          "type": "string",
+          "description": "Billing period",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "description": "Billing plan title",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Billing plan description",
+          "x-nullable": true
+        },
+        "price": {
+          "description": "Billing plan price",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "Currency code i.e. 'USD'",
+          "x-nullable": true
+        },
+        "isPIRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether a payment instrument is required"
+        },
+        "listPrice": {
+          "type": "number",
+          "description": "Retail price for the item",
+          "format": "decimal"
+        },
+        "msrp": {
+          "type": "number",
+          "description": "Manufacturer's suggested retail price for the item",
+          "format": "decimal"
+        }
+      }
+    },
+    "Meter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "Meter id",
+          "x-nullable": true
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Compute part number",
+          "x-nullable": true
+        },
+        "consumptionResourceId": {
+          "type": "string",
+          "description": "Consumption resource id",
+          "x-nullable": true
+        },
+        "price": {
+          "description": "Price for this meter",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Price"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type for this meter",
+          "x-nullable": true
+        },
+        "includedQuantityProperties": {
+          "type": "array",
+          "description": "Included quantity properties",
+          "x-ms-identifiers": [
+            "termId"
+          ],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/IncludedQuantityProperty"
+          }
+        }
+      }
+    },
+    "IncludedQuantityProperty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "termId": {
+          "type": "string",
+          "description": "Term id",
+          "x-nullable": true
+        },
+        "quantity": {
+          "type": "string",
+          "description": "Quantity of terms",
+          "x-nullable": true
+        }
+      }
+    },
+    "PricingAudience": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "DirectCommercial",
+        "PartnerCommercial",
+        "Custom",
+        "IndirectCommercial",
+        "IndirectGov",
+        "DirectChk",
+        "DirectBlue",
+        "DirectRock"
+      ],
+      "enum": [
+        "None",
+        "DirectCommercial",
+        "PartnerCommercial",
+        "Custom",
+        "IndirectCommercial",
+        "IndirectGov",
+        "DirectChk",
+        "DirectBlue",
+        "DirectRock"
+      ],
+      "x-ms-enum": {
+        "name": "PricingAudience",
+        "modelAsString": false
+      }
+    },
+    "AvailabilityEntity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Partition key",
+          "x-nullable": true
+        },
+        "ts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "actions": {
+          "type": "array",
+          "description": "List of allowed actions",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "market": {
+          "type": "string",
+          "description": "Market for the availability collection",
+          "x-nullable": true
+        },
+        "isPIRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether a payment instrument is required"
+        },
+        "appId": {
+          "type": "string",
+          "description": "App id of the availability collection",
+          "x-nullable": true
+        },
+        "planID": {
+          "type": "string",
+          "description": "Plan Id of the availability collection",
+          "x-nullable": true
+        },
+        "meterId": {
+          "type": "string",
+          "description": "Applicable billing meter Id",
+          "x-nullable": true
+        },
+        "meter": {
+          "description": "Applicable billing meter information",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Meter"
+            }
+          ]
+        },
+        "pricingAudience": {
+          "description": "Pricing audience",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PricingAudience"
+            }
+          ]
+        },
+        "terms": {
+          "type": "array",
+          "description": "List of applicable terms",
+          "x-ms-identifiers": [
+            "termId"
+          ],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Term"
+          }
+        },
+        "piFilter": {
+          "description": "Applicable billing meter information",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/PIFilter"
+            }
+          ]
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether it has been stopped from sell in a market"
+        },
+        "hasFreeTrials": {
+          "type": "boolean",
+          "description": "A value indicating whether it has free trials"
+        },
+        "assetBehaviors": {
+          "type": "array",
+          "description": "Asset behaviors",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "consumptionUnitType": {
+          "type": "string",
+          "description": "Consumption unit type",
+          "x-nullable": true
+        },
+        "displayRank": {
+          "type": "integer",
+          "description": "Display rank",
+          "format": "int32"
+        },
+        "remediationRequired": {
+          "type": "boolean",
+          "description": "A value indicating whether remediation is required to acquire availability"
+        },
+        "remediations": {
+          "type": "array",
+          "description": "Remediation actions for acquiring availability if RemediationRequired is true",
+          "x-ms-identifiers": [
+            "remediationId"
+          ],
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Remediation"
+          }
+        },
+        "startDate": {
+          "type": "integer",
+          "description": "Availability effectiveness start date - in epoch minutes",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "endDate": {
+          "type": "integer",
+          "description": "Availability effectiveness end date - in epoch minutes",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "planAvailabilities": {
+          "type": "array",
+          "description": "Plan availabilities",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/AvailabilityEntity"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

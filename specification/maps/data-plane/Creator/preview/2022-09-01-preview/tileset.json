@@ -1,0 +1,646 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Tileset Service",
+    "version": "2022-09-01-preview",
+    "description": "APIs for managing Tilesets."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "SharedKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "SharedKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "2022-09-01-preview",
+      "x-ms-parameter-location": "client"
+    },
+    "DatasetIdQuery": {
+      "name": "datasetId",
+      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create) call.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "TilesetId": {
+      "name": "tilesetId",
+      "description": "The Tileset Id",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DescriptionTileset": {
+      "name": "description",
+      "description": "User provided description of the tileset. Maximum length 1024 characters.",
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "TilesetOperationId": {
+      "name": "operationId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID to query the status for the tileset create/import request.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/tilesets": {
+      "post": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n [This](https://docs.microsoft.com/en-us/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Tileset Create API allows the caller to create a tileset from a dataset. A tileset contains a set of tiles that can be consumed \nfrom the [Get Map Tile](/rest/api/maps/render/getmaptile) to retrieve custom tiles. To make a dataset, use the \n[DataSet Create API](/rest/api/maps/v2/dataset/create).\n\n## Submit Create Request\n\nTo create your tileset you will make a `POST` request with an **optional request body** as [tileset configuration](/rest/api/documentation-preview/tileset/create?#tilesetconfiguration). The `datasetId` query parameter will be used as the source of the tileset data.\n\nThe Create Tileset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "Tileset_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create Tileset by providing a Dataset Id": {
+            "$ref": "./examples/tileset/Tileset_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          },
+          {
+            "$ref": "#/parameters/DescriptionTileset"
+          },
+          {
+            "name": "TilesetConfiguration",
+            "in": "body",
+            "description": "The custom tileset configuration to use.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TilesetConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all tilesets created.   \n<br>",
+        "operationId": "Tileset_List",
+        "x-ms-examples": {
+          "Get a list of all tilesets": {
+            "$ref": "./examples/tileset/Tileset_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-pageable": {
+          "itemName": "tilesets",
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
+            "schema": {
+              "$ref": "#/definitions/TilesetListResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/tilesets/{tilesetId}": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a tileset.",
+        "operationId": "Tileset_Get",
+        "x-ms-examples": {
+          "Gets the details for a single tileset": {
+            "$ref": "./examples/tileset/Tileset_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TilesetId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List tileset request completed successfully. The response body contains a list of all tilesets.",
+            "schema": {
+              "$ref": "#/definitions/Tileset"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      },
+      "delete": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created tileset.<br>    \nYou can use this API if a tileset is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `tilesetId` of the tileset to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Tileset Delete API returns a HTTP `204 No Content` response with an empty body, if the tileset was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the tileset with the passed-in `tilesetId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Tileset Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "operationId": "Tileset_Delete",
+        "x-ms-examples": {
+          "Delete a created tileset": {
+            "$ref": "./examples/tileset/Tileset_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TilesetId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tileset delete request completed successfully."
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/tilesets:fetchConfiguration": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to get a default [tileset configuration](/rest/api/documentation-preview/tileset/get-configuration?#tilesetconfiguration) based on the dataset provided. Then the tileset configuration can be used to create custom tileset using the [Tileset Create API](/rest/api/documentation-preview/tileset/create)",
+        "operationId": "Tileset_GetConfiguration",
+        "x-ms-examples": {
+          "Gets the tileset configuration for a given dataset": {
+            "$ref": "./examples/tileset/Tileset_GetConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get tileset configuration request completed successfully. The response body contains a default [tileset configuration](/rest/api/documentation-preview/tileset/get-configuration?#tilesetconfiguration) generated for the given dataset.",
+            "schema": {
+              "$ref": "#/definitions/TilesetConfiguration"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/tilesets:validateConfiguration": {
+      "post": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to validate a [tileset configuration](/rest/api/documentation-preview/tileset/validate-configuration?#tilesetconfiguration).",
+        "operationId": "Tileset_ValidateConfiguration",
+        "x-ms-examples": {
+          "Validates the correctness of a tileset configuration": {
+            "$ref": "./examples/tileset/Tileset_ValidateConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdQuery"
+          },
+          {
+            "name": "TilesetConfiguration",
+            "in": "body",
+            "description": "The custom tileset configuration to use.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TilesetConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate tileset configuration request completed successfully. The response body contains the validation results.",
+            "schema": {
+              "$ref": "#/definitions/TilesetConfigurationValidationResult"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/tilesets/operations/{operationId}": {
+      "get": {
+        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "operationId": "Tileset_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/tileset/Tileset_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/tileset/Tileset_GetOperation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TilesetOperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "./tileset.json#/definitions/LongRunningOperationResult"
+            },
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The Id for this long-running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status state of the request.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "LroStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The request has not started processing yet."
+              },
+              {
+                "value": "Running",
+                "description": "The request has started processing."
+              },
+              {
+                "value": "Failed",
+                "description": "The request has one or more failures."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The request has successfully completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        },
+        "warning": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "TilesetListResult": {
+      "description": "The response model for the Tileset List API. Returns a list of all tilesets.",
+      "type": "object",
+      "properties": {
+        "tilesets": {
+          "description": "A list of all tilesets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Tileset"
+          }
+        },
+        "nextLink": {
+          "description": "If present, the location of the next page of data.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Tileset": {
+      "description": "Detail information for the data.",
+      "type": "object",
+      "properties": {
+        "tilesetId": {
+          "description": "The unique tileset id for the tileset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ontology": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+        },
+        "datasetId": {
+          "description": "The unique dataset Id used to create the tileset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description the caller provided when creating the tileset. Maximum length 1024 characters.",
+          "type": "string",
+          "readOnly": true
+        },
+        "minZoom": {
+          "description": "The lowest tile zoom level tile generated for the tileset.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "maxZoom": {
+          "description": "The highest tile zoom level tile generated for the tileset.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "bbox": {
+          "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BoundingBox"
+        },
+        "tilesetConfiguration": {
+          "description": "Tileset configuration which is used to build the tileset.",
+          "$ref": "#/definitions/TilesetConfiguration"
+        },
+        "defaultMapConfigurationId": {
+          "description": "The default generated map configuration id for the tileset",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TilesetConfiguration": {
+      "description": "Tileset configuration top-level fields. A tileset configuration is a JSON object that must contain the following top-level fields:",
+      "type": "object",
+      "required": [
+        "version",
+        "layers"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of Azure Maps Tiling service configuration reference that the tileset configuration uses. Currently only version 1 is allowed. Using any version other the current version or a previous version will result in an error.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "layers": {
+          "description": "The names of the layers and their configuration options. The configuration layers object contains key-value pairs associating the names of tile layers with their configuration. For each key-value pair, the key is the name of the layer, and the value is a LayerObject containing the configuration and options for the layer. Each layer must have a name. This is the unique identifier for the layer of data in your final tileset. In any tileset, each layer name must be unique. The layer name must be a string with only underscores (_) and alphanumeric characters. The corresponding LayerObject for each layer name describes how that vector tile layer should be created. It specifies which feature classes to retrieve feature data, the precision of the data through zoom levels, and how to transform features and render them into tiles.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LayerObject"
+          }
+        }
+      }
+    },
+    "LayerObject": {
+      "description": "Layer object for tileset configuration.",
+      "type": "object",
+      "required": [
+        "features",
+        "minZoom",
+        "maxZoom"
+      ],
+      "properties": {
+        "features": {
+          "description": "Specifies the feature classes and filters.",
+          "$ref": "#/definitions/Feature"
+        },
+        "minZoom": {
+          "description": "The lowest zoom level for the layer to build.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxZoom": {
+          "description": "The highest zoom level for the layer to build.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Feature": {
+      "description": "Feature configuration for tileset configuration.",
+      "type": "object",
+      "required": [
+        "featureClasses"
+      ],
+      "properties": {
+        "featureClasses": {
+          "description": "The list of feature classes that will be used to build the layer. The valid feature classes can be found in its ontology definition. For example, [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "description": "Removes features that do not match a pattern. Refer to [MapLibre filter expression](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers/#filter)",
+          "type": "object"
+        }
+      }
+    },
+    "TilesetConfigurationValidationResult": {
+      "description": "Tileset configuration validation result.",
+      "type": "object",
+      "properties": {
+        "valid": {
+          "description": "Validation result.",
+          "type": "boolean"
+        },
+        "warnings": {
+          "description": "The list of validation warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationWarning"
+          }
+        },
+        "errors": {
+          "description": "The list of validation errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "ValidationError": {
+      "description": "Tileset configuration validation errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Validation error code.",
+          "$ref": "#/definitions/TilesetConfigurationErrorCode"
+        },
+        "message": {
+          "description": "Validation error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target element for the validation error.",
+          "type": "string"
+        }
+      }
+    },
+    "ValidationWarning": {
+      "description": "Tileset configuration validation errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Validation warning code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Validation warning message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target element for the validation warning.",
+          "type": "string"
+        }
+      }
+    },
+    "TilesetConfigurationErrorCode": {
+      "description": "The possible error code for tileset configuration validation request.",
+      "type": "string",
+      "enum": [
+        "DuplicateLayerNameFound",
+        "UndefinedFeatureClasses",
+        "DuplicateFeatureClassFound",
+        "CustomLayerNameNotSupported",
+        "CustomOntologyNotSupported"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DuplicateLayerNameFound",
+            "description": "The layer name should be unique."
+          },
+          {
+            "value": "UndefinedFeatureClasses",
+            "description": "Feature class should be defined in ontology definition, and the feature class name is case sensitive."
+          },
+          {
+            "value": "DuplicateFeatureClassFound",
+            "description": "Feature class name should be unique."
+          },
+          {
+            "value": "CustomLayerNameNotSupported",
+            "description": "Custom layer name is not supported right now."
+          },
+          {
+            "value": "CustomOntologyNotSupported",
+            "description": "Custom ontology is not supported right now, 'Facility-2.0' is the supported ontology."
+          }
+        ]
+      }
+    }
+  }
+}

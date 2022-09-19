@@ -4,6 +4,16 @@
     "title": "Nginx.NginxPlus",
     "version": "2021-05-01-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -888,6 +898,13 @@
           },
           "x-ms-identifiers": []
         },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
         "package": {
           "$ref": "#/definitions/NginxConfigurationPackage"
         },
@@ -1107,6 +1124,25 @@
         }
       }
     },
+    "NginxStorageAccount": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxLogging": {
+      "type": "object",
+      "properties": {
+        "storageAccount": {
+          "$ref": "#/definitions/NginxStorageAccount"
+        }
+      }
+    },
     "NginxDeploymentProperties": {
       "type": "object",
       "properties": {
@@ -1131,6 +1167,9 @@
         },
         "enableDiagnosticsSupport": {
           "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
         }
       }
     },
@@ -1179,6 +1218,9 @@
       "properties": {
         "enableDiagnosticsSupport": {
           "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
         }
       }
     },
