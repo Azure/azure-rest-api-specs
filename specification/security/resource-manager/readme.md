@@ -169,11 +169,11 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -216,11 +216,11 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -270,7 +270,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
