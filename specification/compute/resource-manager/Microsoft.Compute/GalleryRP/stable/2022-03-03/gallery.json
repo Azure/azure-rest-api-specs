@@ -525,66 +525,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/latestVersionName": {
-      "get": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_GetLatestVersionName",
-        "description": "Retrieves information about the latest image version in the Gallery Image.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery from which the Image Definitions are to be retrieved."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition to be retrieved."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "location",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The location to query for the latest version name."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LatestGalleryImageVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get name of latest gallery image version.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_GetLatestVersionName.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}": {
       "put": {
         "tags": [
