@@ -5,6 +5,7 @@
     "version": "2022-05-01-preview",
     "description": "Workflows are automated, repeatable business processes which allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.Workflow service is a micro service within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
   },
+  "host": "purview.azure.com",
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
@@ -70,9 +71,6 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/requestRole"
-          },
-          {
             "$ref": "#/parameters/workflowDefinitionIdList"
           },
           {
@@ -94,7 +92,7 @@
             "$ref": "#/parameters/type"
           },
           {
-            "$ref": "#/parameters/status"
+            "$ref": "#/parameters/requestStatus"
           },
           {
             "$ref": "#/parameters/keyword"
@@ -489,7 +487,7 @@
             "$ref": "#/parameters/isDescending"
           },
           {
-            "$ref": "#/parameters/status"
+            "$ref": "#/parameters/workflowRunStatus"
           },
           {
             "$ref": "#/parameters/workflowDefinitionIdList"
@@ -539,6 +537,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/withDetails"
           }
         ],
         "responses": {
@@ -577,9 +578,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/withDetails"
-          },
           {
             "$ref": "#/parameters/workflowRunId"
           },
@@ -889,7 +887,7 @@
             "$ref": "#/parameters/isDescending"
           },
           {
-            "$ref": "#/parameters/status"
+            "$ref": "#/parameters/workflowRunStatus"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -935,6 +933,7 @@
     },
     "WorkflowRequest": {
       "type": "object",
+      "description": "The workflow request properties.",
       "properties": {
         "type": {
           "type": "string",
@@ -983,6 +982,7 @@
         },
         {
           "type": "object",
+          "description": "The workflow approval request.",
           "properties": {
             "approvalId": {
               "type": "string",
@@ -1029,6 +1029,7 @@
         },
         {
           "type": "object",
+          "description": "The workflow task request.",
           "properties": {
             "taskRequestId": {
               "type": "string",
@@ -1246,6 +1247,7 @@
     },
     "WorkflowRun": {
       "type": "object",
+      "description": "The workflow run.",
       "properties": {
         "id": {
           "type": "string",
@@ -1353,7 +1355,29 @@
     },
     "RequestEventPayloadWebRequest": {
       "title": "RequestEventPayloadWebRequest",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "requestType": {
+          "type": "string",
+          "description": "The request type of a workflow run.",
+          "enum": [
+            "CreateTermRequest",
+            "UpdateTermRequest",
+            "DeleteTermRequest",
+            "ImportTermsRequest",
+            "UpdateAssetAttributesRequest",
+            "GrantDataAccessRequest"
+          ],
+          "x-ms-enum": {
+            "name": "requestType",
+            "modelAsString": true
+          }
+        },
+        "payload": {
+          "type": "object",
+          "description": "The request payload which need to involve workflow to operate."
+        }
+      }
     },
     "WorkflowRunCancelReply": {
       "title": "WorkflowRunCancelReply",
@@ -1387,6 +1411,7 @@
     },
     "WorkflowDefinitionMetadata": {
       "title": "WorkflowDefinitionMetadata",
+      "description": "The workflow definition metadata, not include detailed definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -1502,10 +1527,11 @@
         },
         {
           "type": "object",
+          "description": "The workflow definition.",
           "properties": {
             "definition": {
               "type": "object",
-              "description": "The workflow definition detail."
+              "description": "The workflow definition properties."
             }
           },
           "required": [
@@ -1517,6 +1543,7 @@
     "WorkflowDefinitionCreateOrUpdateCommand": {
       "title": "WorkflowDefinitionCreateOrUpdateCommand",
       "type": "object",
+      "description": "The workflow definition create or update payload.",
       "properties": {
         "workflowType": {
           "$ref": "#/definitions/WorkflowTypeDetail"
@@ -1780,37 +1807,52 @@
       "description": "The approval request id (GUID)",
       "x-ms-parameter-location": "method"
     },
-    "status": {
+    "workflowRunStatus": {
       "name": "status",
       "in": "query",
       "required": false,
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": [
+          "InProgress",
+          "Failed",
+          "Completed",
+          "NotStarted",
+          "Canceling",
+          "CancellationFailed",
+          "Canceled"
+        ],
+        "x-ms-enum": {
+          "name": "status",
+          "modelAsString": true
+        }
       },
       "description": "Filter workflow runs by workflow run status.",
       "x-ms-parameter-location": "method"
     },
-    "requestType": {
-      "name": "requestType",
+    "requestStatus": {
+      "name": "status",
       "in": "query",
       "required": false,
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": [
+          "pending",
+          "approved",
+          "rejected",
+          "canceled",
+          "notstarted",
+          "inprogress",
+          "completed"
+        ],
+        "x-ms-enum": {
+          "name": "status",
+          "modelAsString": true
+        }
       },
-      "description": "Filter workflow requests by workflow request type.",
-      "x-ms-parameter-location": "method"
-    },
-    "requestRole": {
-      "name": "requestRole",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "items": {
-        "type": "string"
-      },
-      "description": "Filter workflow requests by workflow request role.",
+      "description": "Filter workflow request by workflow request status.",
       "x-ms-parameter-location": "method"
     }
   }
