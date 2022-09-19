@@ -37,7 +37,8 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - Microsoft.CostManagement\preview\2022-10-01-preview\costmanagement.riSpTradeIn.json
+  - Microsoft.CostManagement/preview/2022-10-01-preview/costmanagement.riSpTradeIn.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
 ```
 
 ### Tag: package-2022-05
@@ -297,10 +298,6 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm '
-  - suppress: R3023
-    from: costmanagement.riSpTradeIn.json
-    where: $.paths
-    reason: operations API for Microsoft.CostManagement are defined in costManagement.json
 ```
 
 ### Tag: package-2018-08-preview
