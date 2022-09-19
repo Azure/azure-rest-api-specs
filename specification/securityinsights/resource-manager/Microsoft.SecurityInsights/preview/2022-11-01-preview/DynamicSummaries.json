@@ -331,11 +331,20 @@
         },
         "summaryStatus": {
           "description": "The status of the Summary : Active, Deleted",
-          "type": "string"
+          "enum": [
+            "Active",
+            "Deleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "summaryStatus"
+          }
         },
-        "uploadStatus": {
-          "description": "The status of the Summary upload : New, InProgress or Complete. Pls note : When a Summary upload status is equal to InProgress, the Summary cannot be deleted",
-          "type": "string"
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Dynamic Summary resource."
         }
       },
       "required": [
