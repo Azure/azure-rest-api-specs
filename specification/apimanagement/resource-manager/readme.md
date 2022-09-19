@@ -47,10 +47,12 @@ input-file:
   - Microsoft.ApiManagement/stable/2022-08-01/apimapis.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimapisByTags.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimapiversionsets.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimauthorizationproviders.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimauthorizationservers.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimbackends.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimcaches.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimconnectivitycheck.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimcontenttypes.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimdeletedservices.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimdeployment.json
@@ -65,15 +67,20 @@ input-file:
   - Microsoft.ApiManagement/stable/2022-08-01/apimnetworkstatus.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimnotifications.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimoutbounddependency.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimpolicies.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimpolicyfragments.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimportalconfigs.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimportalrevisions.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimportalsettings.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimprivatelink.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimproducts.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimproductsByTags.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimquotas.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimregions.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimschema.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimsettings.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimskus.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimsubscriptions.json
