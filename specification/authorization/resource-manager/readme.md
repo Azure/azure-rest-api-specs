@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-08-01-preview-only
+tag: package-2021-12-01-preview-only
 ```
 
 ### Suppression
@@ -172,8 +172,6 @@ These settings apply only when `--tag=package-2022-08-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2022-08-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2022-08-01-preview/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/preview/2022-08-01-preview/RoleEligibilityScheduleRequest.json
 - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
