@@ -18,7 +18,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(python)
 multiapi: true
 batch:
-  - tag: package-preview-2022-08
+  - tag: package-preview-2022-08-only
   - tag: package-2022-07
   - tag: package-preview-2022-07
   - tag: package-2022-06
