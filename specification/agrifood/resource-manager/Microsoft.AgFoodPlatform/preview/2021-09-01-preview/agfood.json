@@ -1246,14 +1246,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "SolutionId.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1261,6 +1253,14 @@
           },
           {
             "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "solutionId",
+            "description": "Solution Id of the solution.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1313,7 +1313,7 @@
           {
             "in": "path",
             "name": "solutionId",
-            "description": "SolutionId.",
+            "description": "Solution Id of the solution.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
@@ -1364,7 +1364,7 @@
           {
             "in": "path",
             "name": "solutionId",
-            "description": "SolutionId.",
+            "description": "Solution Id of the solution.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
@@ -1415,16 +1415,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
           },
           {
             "in": "query",
@@ -1519,6 +1516,9 @@
             "name": "$skipToken",
             "description": "Skip token for getting next set of results.",
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2301,15 +2301,15 @@
           "readOnly": true
         },
         "inputParameterScopes": {
-          "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data asccess\r\nFor working with WeatherScope we need FarmHierachy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
+          "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
           "type": "array",
           "items": {
             "type": "string"
           },
           "readOnly": true
         },
-        "openAPISpecsDictionary": {
-          "description": "Gets apiVersion: Swagger Document Dictionary to capture all apiversions of swagger exposed by partner to farmbeats.",
+        "openApiSpecsDictionary": {
+          "description": "Gets apiVersion: Swagger Document Dictionary to capture all api versions of swagger exposed by partner to farmbeats.",
           "type": "object",
           "additionalProperties": {
             "type": "object"
@@ -2331,7 +2331,7 @@
           "readOnly": true
         },
         "roleDefinitionIds": {
-          "description": "List of RoleDefinitionIds needed to make the SaaS multi tenant application access releavant fb data.",
+          "description": "List of RoleDefinitionIds needed to make the SaaS multi tenant application access relevant fb data.",
           "type": "array",
           "items": {
             "type": "string"
