@@ -145,6 +145,15 @@
           },
           {
             "in": "query",
+            "name": "minutesToExpire",
+            "description": "The expire time of the generated token.",
+            "type": "integer",
+            "format": "int32",
+            "default": 60,
+            "minimum": 1
+          },
+          {
+            "in": "query",
             "name": "group",
             "description": "Groups that the connection will join when it connects.",
             "type": "array",
@@ -152,15 +161,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "minutesToExpire",
-            "description": "The expire time of the generated token.",
-            "type": "integer",
-            "format": "int32",
-            "default": 60,
-            "minimum": 1
           },
           {
             "in": "query",
