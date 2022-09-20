@@ -248,17 +248,21 @@
         }
       }
     },
-    "/multivariate/models/{modelId}/detect-batch": {
+    "/multivariate/models/{modelId}:detect-batch": {
       "post": {
         "responses": {
-          "201": {
+          "202": {
             "description": "Submit a multivariate model detection task successfully.",
             "schema": {
               "$ref": "#/definitions/DetectionResult"
             },
             "headers": {
-              "Location": {
-                "description": "Location and ID of the detection result.",
+              "Operation-Location": {
+                "description": "Location of the detection result.",
+                "type": "string"
+              },
+              "Operation-Id": {
+                "description": "Id of the detection result.",
                 "type": "string"
               }
             }
@@ -305,7 +309,7 @@
         }
       }
     },
-    "/multivariate/models/{modelId}/detect-last": {
+    "/multivariate/models/{modelId}:detect-last": {
       "post": {
         "responses": {
           "200": {
@@ -426,7 +430,15 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": false,
-        "name": "DataSchema"
+        "name": "DataSchema",
+        "values": [
+          {
+            "value": "OneTable"
+          },
+          {
+            "value": "MultiTable"
+          }
+        ]
       }
     },
     "AlignPolicy": {
@@ -454,7 +466,15 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": false,
-        "name": "alignMode"
+        "name": "alignMode",
+        "values": [
+          {
+            "value": "Inner"
+          },
+          {
+            "value": "Outer"
+          }
+        ]
       },
       "description": "An optional field, indicating how to align different variables to the same time-range. Either Inner or Outer. "
     },
@@ -470,7 +490,24 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "fillNAMethod"
+        "name": "fillNAMethod",
+        "values": [
+          {
+            "value": "Previous"
+          },
+          {
+            "value": "Subsequent"
+          },
+          {
+            "value": "Linear"
+          },
+          {
+            "value": "Zero"
+          },
+          {
+            "value": "Fixed"
+          }
+        ]
       },
       "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed."
     },
@@ -486,7 +523,21 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": false,
-        "name": "modelStatus"
+        "name": "modelStatus",
+        "values": [
+          {
+            "value": "CREATED"
+          },
+          {
+            "value": "RUNNING"
+          },
+          {
+            "value": "READY"
+          },
+          {
+            "value": "FAILED"
+          }
+        ]
       }
     },
     "ErrorResponse": {
@@ -923,7 +974,21 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": false,
-        "name": "DetectionStatus"
+        "name": "DetectionStatus",
+        "values": [
+          {
+            "value": "CREATED"
+          },
+          {
+            "value": "RUNNING"
+          },
+          {
+            "value": "READY"
+          },
+          {
+            "value": "FAILED"
+          }
+        ]
       }
     },
     "AnomalyState": {
