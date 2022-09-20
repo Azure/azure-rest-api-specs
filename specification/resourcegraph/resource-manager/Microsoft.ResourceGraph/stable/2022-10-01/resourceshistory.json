@@ -59,7 +59,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ResourceHistoryRequestResponse"
             }
           },
           "default": {
@@ -147,6 +147,21 @@
             "name": "ResultFormat",
             "modelAsString": false
           }
+        }
+      }
+    },
+    "ResourceHistoryRequestResponse": {
+      "description": "The result of quering for snapshots of a resource for a given time interval.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "Number of snapshots returned in the current response.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "snapshots": {
+          "description": "All snapshots of a resource for a given time interval.",
+          "type": "object"
         }
       }
     },
