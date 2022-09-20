@@ -39,16 +39,7 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - Microsoft.CostManagement/preview/2022-10-05-preview/common-types.json
   - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
-```
-### Tag: package-preview-2022-10
-
-These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-10'
-input-file:
-  - Microsoft.CostManagement/preview/2022-10-01-preview/costmanagement.json
 ```
 
 ### Tag: package-preview-2022-08
