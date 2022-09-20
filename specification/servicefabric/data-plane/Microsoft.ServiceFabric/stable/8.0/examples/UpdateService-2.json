@@ -1,0 +1,17 @@
+{
+  "operationId": "UpdateService",
+  "description": "This example shows how to update placement and load balancing related settings of a stateful Service Fabric service.",
+  "parameters": {
+    "serviceId": "test~test2",
+    "api-version": "6.0",
+    "ServiceUpdateDescription": {
+      "ServiceKind": "Stateful",
+      "Flags": "40",
+      "PlacementConstraints": "Color==Green",
+      "StandByReplicaKeepDurationSeconds": "1000"
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "parameters": {
+    "api-version": "2020-06-05-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "virtualMachineName": "DemoVM",
+    "body": {
+      "properties": {
+        "hardwareProfile": {
+          "memoryMB": 4096,
+          "cpuCount": 4
+        },
+        "storageProfile": {
+          "disks": [
+            {
+              "name": "test",
+              "diskSizeGB": 10
+            }
+          ]
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "name": "test",
+              "ipv4AddressType": "Dynamic",
+              "ipv6AddressType": "Dynamic",
+              "macAddressType": "Static"
+            }
+          ]
+        }
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachines/DemoVM",
+        "name": "DemoVM",
+        "type": "Microsoft.SCVMM/VirtualMachines",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso"
+        },
+        "properties": {
+          "cloudId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/Clouds/HRCloud",
+          "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachineTemplates/HRVirtualMachineTemplate",
+          "vmmServerId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VMMServers/ContosoVMMServer",
+          "hardwareProfile": {
+            "memoryMB": 4096,
+            "cpuCount": 4,
+            "dynamicMemoryEnabled": "false",
+            "dynamicMemoryMaxMB": 0,
+            "dynamicMemoryMinMB": 0,
+            "isHighlyAvailable": "string"
+          },
+          "osProfile": {
+            "computerName": "DemoVM",
+            "osType": "Windows",
+            "osName": "string"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "name": "test",
+                "ipv4Addresses": [
+                  "string"
+                ],
+                "ipv6Addresses": [
+                  "string"
+                ],
+                "macAddress": "string",
+                "virtualNetworkId": "string",
+                "displayName": "string",
+                "networkName": "string",
+                "ipv4AddressType": "Dynamic",
+                "ipv6AddressType": "Dynamic",
+                "macAddressType": "Static",
+                "nicId": "string"
+              }
+            ]
+          },
+          "storageProfile": {
+            "disks": [
+              {
+                "name": "test",
+                "diskId": "string",
+                "diskSizeGB": 10,
+                "maxDiskSizeGB": 10,
+                "displayName": "string",
+                "bus": 0,
+                "lun": 0,
+                "busType": "string",
+                "vhdType": "string",
+                "volumeType": "string",
+                "vhdFormatType": "string",
+                "templateDiskId": "string",
+                "storageQoSPolicy": {
+                  "name": "string",
+                  "id": "string"
+                },
+                "createDiffDisk": "false"
+              }
+            ]
+          },
+          "vmName": "string",
+          "uuid": "string",
+          "generation": 0,
+          "powerState": "string",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachines/DemoVM",
+        "name": "DemoVM",
+        "type": "Microsoft.SCVMM/VirtualMachines",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso"
+        },
+        "properties": {
+          "cloudId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/Clouds/HRCloud",
+          "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachineTemplates/HRVirtualMachineTemplate",
+          "vmmServerId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VMMServers/ContosoVMMServer",
+          "hardwareProfile": {
+            "memoryMB": 4096,
+            "cpuCount": 4,
+            "dynamicMemoryEnabled": "false",
+            "dynamicMemoryMaxMB": 0,
+            "dynamicMemoryMinMB": 0,
+            "isHighlyAvailable": "string"
+          },
+          "osProfile": {
+            "computerName": "DemoVM",
+            "osType": "Windows",
+            "osName": "string"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "name": "test",
+                "ipv4Addresses": [
+                  "string"
+                ],
+                "ipv6Addresses": [
+                  "string"
+                ],
+                "macAddress": "string",
+                "virtualNetworkId": "string",
+                "displayName": "string",
+                "networkName": "string",
+                "ipv4AddressType": "Dynamic",
+                "ipv6AddressType": "Dynamic",
+                "macAddressType": "Static",
+                "nicId": "string"
+              }
+            ]
+          },
+          "storageProfile": {
+            "disks": [
+              {
+                "name": "test",
+                "diskId": "string",
+                "diskSizeGB": 10,
+                "maxDiskSizeGB": 10,
+                "displayName": "string",
+                "bus": 0,
+                "lun": 0,
+                "busType": "string",
+                "vhdType": "string",
+                "volumeType": "string",
+                "vhdFormatType": "string",
+                "templateDiskId": "string",
+                "storageQoSPolicy": {
+                  "name": "string",
+                  "id": "string"
+                },
+                "createDiffDisk": "false"
+              }
+            ]
+          },
+          "vmName": "string",
+          "uuid": "string",
+          "generation": 0,
+          "powerState": "string",
+          "provisioningState": "Created"
+        }
+      }
+    },
+    "202": {}
+  }
+}

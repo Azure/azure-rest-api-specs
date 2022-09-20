@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "virtualHubName": "virtualHub2",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-11-01",
+    "subscriptionId": "subid",
+    "virtualHubParameters": {
+      "location": "West US",
+      "tags": {
+        "key1": "value1"
+      },
+      "properties": {
+        "virtualWan": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
+        },
+        "addressPrefix": "10.168.0.0/24",
+        "sku": "Basic"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "name": "virtualHub2",
+        "type": "Microsoft.Network/virtualHubs",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualWan": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
+          },
+          "virtualNetworkConnections": [],
+          "virtualHubRouteTableV2s": [],
+          "addressPrefix": "10.168.0.0/24",
+          "sku": "Basic"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub2",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "name": "virtualHub2",
+        "type": "Microsoft.Network/virtualHubs",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualWan": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1"
+          },
+          "virtualNetworkConnections": [],
+          "virtualHubRouteTableV2s": [],
+          "addressPrefix": "10.168.0.0/24",
+          "sku": "Basic"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2021-07-01",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "configName": "default",
+    "parameters": {
+      "properties": {
+        "timeInWeek": [
+          {
+            "day": "Monday",
+            "hourSlots": [
+              1,
+              2
+            ]
+          }
+        ],
+        "notAllowedTime": [
+          {
+            "start": "2020-11-26T03:00:00Z",
+            "end": "2020-11-30T12:00:00Z"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/default",
+        "type": "Microsoft.ContainerService/managedClusters/maintenanceConfigurations",
+        "name": "default",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "timeInWeek": [
+            {
+              "day": "Monday",
+              "hourSlots": [
+                1,
+                2
+              ]
+            }
+          ],
+          "notAllowedTime": [
+            {
+              "start": "2020-11-26T03:00:00Z",
+              "end": "2020-11-30T12:00:00Z"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

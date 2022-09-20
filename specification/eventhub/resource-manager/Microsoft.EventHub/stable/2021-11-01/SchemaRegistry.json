@@ -1,0 +1,321 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "version": "2021-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemagroups": {
+      "get": {
+        "tags": [
+          "SchemaRegistry"
+        ],
+        "operationId": "SchemaRegistry_ListByNamespace",
+        "x-ms-examples": {
+          "SchemaRegistryListAll": {
+            "$ref": "./examples/SchemaRegistry/SchemaRegistryListByNamespace.json"
+          }
+        },
+        "description": "Gets all the Schema Groups in a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of SchemaGroups.",
+            "schema": {
+              "$ref": "#/definitions/SchemaGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemagroups/{schemaGroupName}": {
+      "put": {
+        "tags": [
+          "SchemaRegistry"
+        ],
+        "operationId": "SchemaRegistry_CreateOrUpdate",
+        "x-ms-examples": {
+          "SchemaRegistryCreate": {
+            "$ref": "./examples/SchemaRegistry/SchemaRegistryCreate.json"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v2/definitions.json#/parameters/SchemaGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaGroup"
+            },
+            "description": "Parameters supplied to create an Event Hub resource."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SchemaGroup successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SchemaGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SchemaRegistry"
+        ],
+        "operationId": "SchemaRegistry_Delete",
+        "x-ms-examples": {
+          "SchemaRegistryDelete": {
+            "$ref": "./examples/SchemaRegistry/SchemaRegistryDelete.json"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v2/definitions.json#/parameters/SchemaGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SchemaGroup successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SchemaRegistry"
+        ],
+        "operationId": "SchemaRegistry_Get",
+        "x-ms-examples": {
+          "SchemaRegistryGet": {
+            "$ref": "./examples/SchemaRegistry/SchemaRegistryGet.json"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v2/definitions.json#/parameters/SchemaGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Schema Group description.",
+            "schema": {
+              "$ref": "#/definitions/SchemaGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SchemaGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "updatedAtUtc": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the Schema Group was updated"
+            },
+            "createdAtUtc": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the Schema Group was created."
+            },
+            "eTag": {
+              "readOnly": true,
+              "format": "uuid",
+              "type": "string",
+              "description": "The ETag value."
+            },
+            "groupProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "dictionary object for SchemaGroup group properties"
+            },
+            "schemaCompatibility": {
+              "type": "string",
+              "description": "",
+              "enum": [
+                "None",
+                "Backward",
+                "Forward"
+              ],
+              "x-ms-enum": {
+                "name": "SchemaCompatibility",
+                "modelAsString": true
+              }
+            },
+            "schemaType": {
+              "type": "string",
+              "description": "",
+              "enum": [
+                "Unknown",
+                "Avro"
+              ],
+              "x-ms-enum": {
+                "name": "SchemaType",
+                "modelAsString": true
+              }
+            }
+          },
+          "description": ""
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Single item in List or Get Schema Group operation"
+    },
+    "SchemaGroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaGroup"
+          },
+          "description": "Result of the List SchemaGroups operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Schema Groups."
+        }
+      },
+      "description": "The result of the List SchemaGroup operation."
+    }
+  }
+}

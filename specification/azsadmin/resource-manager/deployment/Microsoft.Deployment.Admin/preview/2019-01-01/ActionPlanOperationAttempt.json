@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/{location}/actionplans/{planId}/operations/{operationId}/attempts": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the information about Action Plan operation attempts.": {
+            "$ref": "./examples/ActionPlanOperationAttempt/Get.json"
+          }
+        },
+        "description": "Returns the information about action plan operation attempt.",
+        "tags": [
+          "ActionPlanOperationAttempt"
+        ],
+        "operationId": "ActionPlanOperationAttempt_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationAttemptResult"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationAttemptResult": {
+      "description": "Result of an Operation Attempt.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Result of an Operation Attempt.",
+          "$ref": "#/definitions/OperationAttemptProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "OperationAttemptProperties": {
+      "type": "object",
+      "description": "Operation Attempt Properties.",
+      "properties": {
+        "startTime": {
+          "description": "The deployment start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The deployment end time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PlanIdParameter": {
+      "description": "Identifier of the action plan.",
+      "name": "planId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "description": "Identifier of the action plan operation.",
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

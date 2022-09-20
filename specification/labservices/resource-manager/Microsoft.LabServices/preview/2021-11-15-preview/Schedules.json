@@ -1,0 +1,470 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-15-preview",
+    "title": "LabServicesClient",
+    "description": "REST API for managing Azure Lab Services schedules."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/schedules": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "in": "query",
+          "name": "$filter",
+          "type": "string",
+          "description": "The filter to apply to the operation."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get all schedules for a lab.",
+        "description": "Returns a list of all schedules for a lab.",
+        "operationId": "Schedules_ListByLab",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains all schedules for the given lab.",
+            "schema": {
+              "$ref": "#/definitions/PagedSchedules"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "getListSchedule": {
+            "$ref": "./examples/Schedules/listSchedule.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/schedules/{scheduleName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "Labs.json#/parameters/LabNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ScheduleNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get a lab Schedule.",
+        "description": "Returns the properties of a lab Schedule.",
+        "operationId": "Schedules_Get",
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the lab schedule.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSchedule": {
+            "$ref": "./examples/Schedules/getSchedule.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Create or update a lab schedule.",
+        "description": "Operation to create or update a lab schedule.",
+        "operationId": "Schedules_CreateOrUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The schedule was updated; response contains the lab schedule.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "201": {
+            "description": "The schedule was created; response contains the lab schedule.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putSchedule": {
+            "$ref": "./examples/Schedules/putSchedule.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Update a lab schedule.",
+        "description": "Operation to update a lab schedule.",
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "Schedules_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The schedule was updated; response contains the lab schedule.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchSchedule": {
+            "$ref": "./examples/Schedules/patchSchedule.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Deletes a schedule resource.",
+        "description": "Operation to delete a schedule resource.",
+        "operationId": "Schedules_Delete",
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "202": {
+            "description": "The request was accepted."
+          },
+          "204": {
+            "description": "The request has been fulfilled."
+          },
+          "default": {
+            "description": "The default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "deleteSchedule": {
+            "$ref": "./examples/Schedules/deleteSchedule.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Schedule": {
+      "description": "Schedule for automatically turning virtual machines in a lab on and off at specified times.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the schedule.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Schedule resource properties",
+          "$ref": "#/definitions/ScheduleProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PagedSchedules": {
+      "description": "Paged list of schedules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array page of schedule results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link to get the next page of schedule results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduleUpdate": {
+      "description": "Schedule for automatically turning virtual machines in a lab on and off at specified times. Used for updates.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Schedule resource properties",
+          "$ref": "#/definitions/ScheduleUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScheduleUpdateProperties": {
+      "description": "Schedule resource properties used for updates.",
+      "type": "object",
+      "properties": {
+        "startAt": {
+          "description": "When lab user virtual machines will be started. Timestamp offsets will be ignored and timeZoneId is used instead.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "stopAt": {
+          "description": "When lab user virtual machines will be stopped. Timestamp offsets will be ignored and timeZoneId is used instead.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "recurrencePattern": {
+          "description": "The recurrence pattern of the scheduled actions.",
+          "$ref": "#/definitions/RecurrencePattern"
+        },
+        "timeZoneId": {
+          "description": "The IANA timezone id for the schedule.",
+          "type": "string",
+          "maxLength": 50
+        },
+        "notes": {
+          "description": "Notes for this schedule.",
+          "type": "string",
+          "maxLength": 1000
+        }
+      }
+    },
+    "ScheduleProperties": {
+      "description": "Schedule resource properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the schedule.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "stopAt",
+        "timeZoneId"
+      ]
+    },
+    "RecurrencePattern": {
+      "description": "Recurrence pattern of a lab schedule.",
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "description": "The frequency of the recurrence.",
+          "$ref": "#/definitions/RecurrenceFrequency"
+        },
+        "weekDays": {
+          "description": "The week days the schedule runs. Used for when the Frequency is set to Weekly.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WeekDay",
+            "maxItems": 7
+          }
+        },
+        "interval": {
+          "description": "The interval to invoke the schedule on. For example, interval = 2 and RecurrenceFrequency.Daily will run every 2 days. When no interval is supplied, an interval of 1 is used.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 365
+        },
+        "expirationDate": {
+          "description": "When the recurrence will expire. This date is inclusive.",
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "frequency",
+        "expirationDate"
+      ]
+    },
+    "WeekDay": {
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "description": "Days of the week.",
+      "x-ms-enum": {
+        "name": "WeekDay",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Sunday",
+            "description": "Schedule will run on Sunday"
+          },
+          {
+            "value": "Monday",
+            "description": "Schedule will run on Monday"
+          },
+          {
+            "value": "Tuesday",
+            "description": "Schedule will run on Tuesday"
+          },
+          {
+            "value": "Wednesday",
+            "description": "Schedule will run on Wednesday"
+          },
+          {
+            "value": "Thursday",
+            "description": "Schedule will run on Thursday"
+          },
+          {
+            "value": "Friday",
+            "description": "Schedule will run on Friday"
+          },
+          {
+            "value": "Saturday",
+            "description": "Schedule will run on Saturday"
+          }
+        ]
+      }
+    },
+    "RecurrenceFrequency": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Weekly"
+      ],
+      "description": "Schedule recurrence frequencies.",
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Daily",
+            "description": "Schedule will run every days."
+          },
+          {
+            "value": "Weekly",
+            "description": "Schedule will run every week on days specified in weekDays."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ScheduleNameParameter": {
+      "name": "scheduleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the schedule that uniquely identifies it within containing lab. Used in resource URIs.",
+      "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$",
+      "minLength": 1,
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

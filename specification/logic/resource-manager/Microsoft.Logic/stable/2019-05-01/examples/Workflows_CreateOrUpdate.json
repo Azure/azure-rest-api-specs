@@ -1,0 +1,193 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "test-resource-group",
+    "workflowName": "test-workflow",
+    "workflow": {
+      "properties": {
+        "integrationAccount": {
+          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account"
+        },
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "$connections": {
+              "defaultValue": {},
+              "type": "Object"
+            }
+          },
+          "triggers": {
+            "manual": {
+              "type": "Request",
+              "kind": "Http",
+              "inputs": {
+                "schema": {}
+              }
+            }
+          },
+          "actions": {
+            "Find_pet_by_ID": {
+              "runAfter": {},
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['test-custom-connector']['connectionId']"
+                  }
+                },
+                "method": "get",
+                "path": "/pet/@{encodeURIComponent('1')}"
+              }
+            }
+          },
+          "outputs": {}
+        },
+        "parameters": {
+          "$connections": {
+            "value": {
+              "test-custom-connector": {
+                "connectionId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Web/connections/test-custom-connector",
+                "connectionName": "test-custom-connector",
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/brazilsouth/managedApis/test-custom-connector"
+              }
+            }
+          }
+        }
+      },
+      "location": "brazilsouth",
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "createdTime": "2018-04-25T01:39:21.4365247Z",
+          "changedTime": "2018-08-09T22:54:54.3533634Z",
+          "state": "Enabled",
+          "version": "08586677515911718341",
+          "accessEndpoint": "http://tempuri.org",
+          "integrationAccount": {
+            "name": "test-integration-account",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account",
+            "type": "Microsoft.Logic/integrationAccounts"
+          },
+          "integrationServiceEnvironment": {
+            "name": "test-integration-service-environment",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationServiceEnvironments/test-integration-service-environment",
+            "type": "Microsoft.Logic/integrationServiceEnvironments"
+          },
+          "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {},
+            "triggers": {},
+            "actions": {},
+            "outputs": {}
+          },
+          "parameters": {},
+          "endpointsConfiguration": {
+            "workflow": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "13.84.159.168"
+                },
+                {
+                  "address": "13.65.86.56"
+                },
+                {
+                  "address": "13.65.82.190"
+                }
+              ],
+              "accessEndpointIpAddresses": [
+                {
+                  "address": "104.210.153.89"
+                },
+                {
+                  "address": "13.85.79.155"
+                },
+                {
+                  "address": "13.65.39.247"
+                }
+              ]
+            },
+            "connector": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "40.84.145.61"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "createdTime": "2018-04-25T01:39:21.4365247Z",
+          "changedTime": "2018-08-09T22:54:54.3533634Z",
+          "state": "Enabled",
+          "version": "08586677515911718341",
+          "accessEndpoint": "http://tempuri.org",
+          "integrationAccount": {
+            "name": "test-integration-account",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account",
+            "type": "Microsoft.Logic/integrationAccounts"
+          },
+          "integrationServiceEnvironment": {
+            "name": "test-integration-service-environment",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationServiceEnvironments/test-integration-service-environment",
+            "type": "Microsoft.Logic/integrationServiceEnvironments"
+          },
+          "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {},
+            "triggers": {},
+            "actions": {},
+            "outputs": {}
+          },
+          "parameters": {},
+          "endpointsConfiguration": {
+            "workflow": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "13.84.159.168"
+                },
+                {
+                  "address": "13.65.86.56"
+                },
+                {
+                  "address": "13.65.82.190"
+                }
+              ],
+              "accessEndpointIpAddresses": [
+                {
+                  "address": "104.210.153.89"
+                },
+                {
+                  "address": "13.85.79.155"
+                },
+                {
+                  "address": "13.65.39.247"
+                }
+              ]
+            },
+            "connector": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "40.84.145.61"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

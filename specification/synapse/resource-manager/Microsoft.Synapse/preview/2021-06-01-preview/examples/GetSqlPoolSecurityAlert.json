@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "securityalert-6852",
+    "workspaceName": "securityalert-2080",
+    "sqlPoolName": "testdb",
+    "securityAlertPolicyName": "default",
+    "api-version": "2021-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-6852/providers/Microsoft.Synapse/workspaces/securityalert-2080/sqlPools/testdb",
+        "name": "default",
+        "type": "Microsoft.Synapse/workspaces/sqlPools/securityAlertPolicies",
+        "properties": {
+          "state": "Enabled",
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            "test@microsoft.com",
+            "user@microsoft.com"
+          ],
+          "disabledAlerts": [
+            "Usage_Anomaly"
+          ],
+          "retentionDays": 0,
+          "storageAccountAccessKey": "",
+          "creationTime": "2018-10-08T00:00:00Z"
+        }
+      }
+    }
+  }
+}

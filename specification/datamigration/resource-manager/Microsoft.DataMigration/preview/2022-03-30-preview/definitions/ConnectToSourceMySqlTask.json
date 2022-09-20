@@ -1,0 +1,47 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-03-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ConnectToSourceMySqlTaskInput": {
+      "type": "object",
+      "description": "Input for the task that validates MySQL database connection",
+      "properties": {
+        "sourceConnectionInfo": {
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo",
+          "description": "Information for connecting to MySQL source"
+        },
+        "targetPlatform": {
+          "$ref": "./Common.json#/definitions/MySqlTargetPlatform",
+          "description": "Target Platform for the migration"
+        },
+        "checkPermissionsGroup": {
+          "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
+          "description": "Permission group for validations"
+        },
+        "isOfflineMigration": {
+          "type": "boolean",
+          "description": "Flag for whether or not the migration is offline",
+          "default": false
+        }
+      },
+      "required": [
+        "sourceConnectionInfo"
+      ]
+    }
+  }
+}

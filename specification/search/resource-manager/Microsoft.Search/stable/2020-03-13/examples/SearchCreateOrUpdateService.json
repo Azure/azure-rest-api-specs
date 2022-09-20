@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-03-13",
+    "subscriptionId": "subid",
+    "service": {
+      "location": "westus",
+      "tags": {
+        "app-name": "My e-commerce app"
+      },
+      "sku": {
+        "name": "standard"
+      },
+      "properties": {
+        "replicaCount": 3,
+        "partitionCount": 1,
+        "hostingMode": "default"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": []
+          },
+          "privateEndpointConnections": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": []
+          },
+          "privateEndpointConnections": []
+        }
+      }
+    }
+  }
+}

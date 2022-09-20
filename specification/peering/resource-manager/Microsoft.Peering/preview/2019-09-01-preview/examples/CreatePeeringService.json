@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "resourceGroupName": "MyResourceGroup",
+    "peeringServiceName": "MyPeeringService",
+    "api-version": "2019-09-01-preview",
+    "peeringService": {
+      "properties": {
+        "peeringServiceLocation": "state1",
+        "peeringServiceProvider": "serviceProvider1"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "peeringServiceLocation": "state1",
+          "peeringServiceProvider": "serviceProvider1",
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "name": "MyPeeringService",
+        "id": "/subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService",
+        "type": "Microsoft.Peering/peeringServices"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "peeringServiceLocation": "state1",
+          "peeringServiceProvider": "serviceProvider1",
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "name": "MyPeeringService",
+        "id": "/subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peeringServices/MyPeeringService",
+        "type": "Microsoft.Peering/peeringServices"
+      }
+    }
+  }
+}

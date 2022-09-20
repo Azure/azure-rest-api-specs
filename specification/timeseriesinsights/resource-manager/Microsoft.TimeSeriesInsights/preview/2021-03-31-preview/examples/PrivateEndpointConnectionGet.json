@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "environmentName": "myEnvironment",
+    "api-version": "2021-03-31-preview",
+    "privateEndpointConnectionName": "myPrivateEndpointConnectionName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1/privateEndpointConnections/myPrivateEndpointConnectionName",
+        "name": "myPrivateEndpointConnectionName",
+        "type": "Microsoft.TimeSeriesInsights/Environments/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}

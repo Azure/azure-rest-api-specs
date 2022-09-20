@@ -1,0 +1,197 @@
+{
+  "parameters": {
+    "api-version": "2020-10-05-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "PostgreSQL Server Group",
+              "operation": "List/Get PostgreSQL Server Groups",
+              "description": "Return the list of server groups or gets the properties for the specified server group."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/write",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "PostgreSQL Server Group",
+              "operation": "Create/Update PostgreSQL Server Group",
+              "description": "Creates a server group with the specified parameters or update the properties or tags for the specified server group."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/delete",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "PostgreSQL Server Grouo",
+              "operation": "Delete PostgreSQL Server Group",
+              "description": "Deletes an existing server group."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/servers/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "PostgreSQL Server",
+              "operation": "List/Get PostgreSQL Servers of Server Group",
+              "description": "Return the list of servers of server group or gets the properties for the specified server from server group."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/servers/configurations/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Configurations",
+              "operation": "List/Get Configurations of Server",
+              "description": "Return the list of configurations for a server or gets the value for the specified configuration."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Configurations",
+              "operation": "List/Get Configurations of Server Group",
+              "description": "Return the list of configurations for a server group or gets the value for the specified configuration."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations/write",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Configurations",
+              "operation": "Update Configurations of Server Group",
+              "description": "Update an value of configurations."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/firewallRules/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Firewall Rules",
+              "operation": "List/Get Firewall Rules",
+              "description": "Return the list of firewall rules for a server group or gets the properties for the specified firewall rule."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/firewallRules/write",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Firewall Rules",
+              "operation": "Create/Update Firewall Rule",
+              "description": "Creates a firewall rule with the specified parameters or update an existing rule."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/firewallRules/delete",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Firewall Rules",
+              "operation": "Delete Firewall Rule",
+              "description": "Deletes an existing firewall rule."
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Database Metric Definition",
+              "operation": "Get database metric definitions",
+              "description": "Return types of metrics that are available for databases"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "cpu_percent",
+                    "displayName": "CPU percent",
+                    "displayDescription": "CPU percent",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "fillGapWithZero": true
+                  },
+                  {
+                    "name": "memory_percent",
+                    "displayName": "Memory percent",
+                    "displayDescription": "Memory percent",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "fillGapWithZero": true
+                  },
+                  {
+                    "name": "io_consumption_percent",
+                    "displayName": "IO percent",
+                    "displayDescription": "IO percent",
+                    "unit": "Percent",
+                    "aggregationType": "Average",
+                    "fillGapWithZero": true
+                  },
+                  {
+                    "name": "storage_percent",
+                    "displayName": "Storage percentage",
+                    "displayDescription": "Storage percentage",
+                    "unit": "Percent",
+                    "aggregationType": "Average"
+                  },
+                  {
+                    "name": "storage_used",
+                    "displayName": "Storage used",
+                    "displayDescription": "Storage used",
+                    "unit": "Bytes",
+                    "aggregationType": "Average"
+                  },
+                  {
+                    "name": "storage_limit",
+                    "displayName": "Storage limit",
+                    "displayDescription": "Storage limit",
+                    "unit": "Bytes",
+                    "aggregationType": "Average"
+                  },
+                  {
+                    "name": "active_connections",
+                    "displayName": "Total active connections",
+                    "displayDescription": "Total active connections",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "fillGapWithZero": true
+                  },
+                  {
+                    "name": "connections_failed",
+                    "displayName": "Total failed connections",
+                    "displayDescription": "Total failed connections",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "fillGapWithZero": true
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Database Metric Definition",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the disagnostic setting for the resource"
+            }
+          },
+          {
+            "name": "Microsoft.DBforPostgreSQL/serverGroupsv2/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft DB for PostgreSQL",
+              "resource": "Database Metric Definition",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

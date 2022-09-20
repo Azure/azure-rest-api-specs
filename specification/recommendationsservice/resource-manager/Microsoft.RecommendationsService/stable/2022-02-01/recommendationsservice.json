@@ -1,0 +1,1435 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RecommendationsService",
+    "description": "Dynamics 365 Recommendations Service resource provider",
+    "version": "2022-02-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account."
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecommendationsService/checkNameAvailability": {
+      "post": {
+        "operationId": "Accounts_CheckNameAvailability",
+        "description": "Checks that the RecommendationsService Account name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "description": "Check name availability request details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful. The response describes the name availability.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check name availability of RecommendationsService Account - name available": {
+            "$ref": "./examples/Accounts_CheckNameAvailabilityAvailable.json"
+          },
+          "Check name availability of RecommendationsService Account - name unavailable": {
+            "$ref": "./examples/Accounts_CheckNameAvailabilityUnavailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecommendationsService/accounts": {
+      "get": {
+        "operationId": "Accounts_ListBySubscription",
+        "description": "Returns list of RecommendationsService Account resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account resources list.",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get RecommendationsService Account resources by subscription": {
+            "$ref": "./examples/Accounts_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts": {
+      "get": {
+        "operationId": "Accounts_ListByResourceGroup",
+        "description": "Returns list of RecommendationsService Account resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account resources list.",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get RecommendationsService Account resources by resource group": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "description": "Returns RecommendationsService Account resource for a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RecommendationsService Account resource": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_CreateOrUpdate",
+        "description": "Creates or updates RecommendationsService Account resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "description": "Account details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "201": {
+            "description": "RecommendationsService Account resource is being created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update RecommendationsService Account resource": {
+            "$ref": "./examples/Accounts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "operationId": "Accounts_Update",
+        "description": "Updates RecommendationsService Account details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "description": "Account resource patch details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "202": {
+            "description": "RecommendationsService Account resource is being updated.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update existing RecommendationsService Account resource": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "description": "Deletes RecommendationsService Account resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RecommendationsService Account resource deleted successfully."
+          },
+          "202": {
+            "description": "RecommendationsService Account resource is being deleted."
+          },
+          "204": {
+            "description": "RecommendationsService Account resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete RecommendationsService Account resource": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/status": {
+      "post": {
+        "operationId": "Accounts_GetStatus",
+        "description": "Returns RecommendationsService Account status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the account.",
+            "schema": {
+              "$ref": "#/definitions/AccountStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RecommendationsService Account status - Modeling resource exists": {
+            "$ref": "./examples/Accounts_GetStatus_ModelingExists.json"
+          },
+          "Get account status - no Modeling resource exists": {
+            "$ref": "./examples/Accounts_GetStatus_NoModelingExists.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/modeling": {
+      "get": {
+        "operationId": "Modeling_ListByAccountResource",
+        "description": "Returns list of Modeling resources for a given Account name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modeling resources list.",
+            "schema": {
+              "$ref": "#/definitions/ModelingResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Modeling resources by RecommendationsService Account resource": {
+            "$ref": "./examples/Modeling_ListByAccountResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/modeling/{modelingName}": {
+      "get": {
+        "operationId": "Modeling_Get",
+        "description": "Returns Modeling resources for a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ModelingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modeling resource details.",
+            "schema": {
+              "$ref": "#/definitions/ModelingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Modeling resource": {
+            "$ref": "./examples/Modeling_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Modeling_CreateOrUpdate",
+        "description": "Creates or updates Modeling resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ModelingNameParameter"
+          },
+          {
+            "description": "Modeling resource details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ModelingResource"
+            }
+          },
+          "201": {
+            "description": "Modeling resource is being created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ModelingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Modeling resource": {
+            "$ref": "./examples/Modeling_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "operationId": "Modeling_Update",
+        "description": "Updates Modeling resource details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ModelingNameParameter"
+          },
+          {
+            "description": "Modeling resource patch details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelingPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ModelingResource"
+            }
+          },
+          "202": {
+            "description": "Modeling resource is being updated.",
+            "schema": {
+              "$ref": "#/definitions/ModelingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Modeling resource": {
+            "$ref": "./examples/Modeling_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "Modeling_Delete",
+        "description": "Deletes Modeling resources of a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ModelingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modeling resource deleted successfully."
+          },
+          "202": {
+            "description": "Modeling resource is being deleted."
+          },
+          "204": {
+            "description": "Modeling resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Modeling resource": {
+            "$ref": "./examples/Modeling_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/serviceEndpoints": {
+      "get": {
+        "operationId": "ServiceEndpoints_ListByAccountResource",
+        "description": "Returns list of ServiceEndpoint resources for a given Account name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ServiceEndpoint resources list.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get ServiceEndpoint resources by RecommendationsService Account resource": {
+            "$ref": "./examples/ServiceEndpoints_ListByAccountResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/serviceEndpoints/{serviceEndpointName}": {
+      "get": {
+        "operationId": "ServiceEndpoints_Get",
+        "description": "Returns ServiceEndpoint resources for a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ServiceEndpoint resource details.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ServiceEndpoint resource": {
+            "$ref": "./examples/ServiceEndpoints_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceEndpoints_CreateOrUpdate",
+        "description": "Creates or updates ServiceEndpoint resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceEndpointNameParameter"
+          },
+          {
+            "description": "ServiceEndpoint resource details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResource"
+            }
+          },
+          "201": {
+            "description": "ServiceEndpoint resource is being created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update ServiceEndpoint resource": {
+            "$ref": "./examples/ServiceEndpoints_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "operationId": "ServiceEndpoints_Update",
+        "description": "Updates ServiceEndpoint resource details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceEndpointNameParameter"
+          },
+          {
+            "description": "ServiceEndpoint resource patch details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResource"
+            }
+          },
+          "202": {
+            "description": "ServiceEndpoint resource is being updated.",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update ServiceEndpoint resource": {
+            "$ref": "./examples/ServiceEndpoints_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "ServiceEndpoints_Delete",
+        "description": "Deletes ServiceEndpoint resources of a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ServiceEndpoint resource deleted successfully."
+          },
+          "202": {
+            "description": "ServiceEndpoint Account resource is being created or updated."
+          },
+          "204": {
+            "description": "ServiceEndpoint resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ServiceEndpoint resource": {
+            "$ref": "./examples/ServiceEndpoints_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/providers/Microsoft.RecommendationsService/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatuses_Get",
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Requested operation status",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get operation status": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.RecommendationsService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Returns list of operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all RecommendationsService operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Tags": {
+      "description": "Resource tags.",
+      "type": "object",
+      "readOnly": false,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "EndpointAuthentication": {
+      "description": "Service endpoints authentication details.",
+      "type": "object",
+      "properties": {
+        "aadTenantID": {
+          "description": "AAD tenant ID.",
+          "type": "string"
+        },
+        "principalID": {
+          "description": "AAD principal ID.",
+          "type": "string"
+        },
+        "principalType": {
+          "description": "AAD principal type.",
+          "type": "string",
+          "enum": [
+            "Application",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "principalType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EndpointAuthenticationsList": {
+      "description": "The list of service endpoints authentication details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EndpointAuthentication"
+      },
+      "x-ms-identifiers": []
+    },
+    "CorsRule": {
+      "description": "CORS details.",
+      "type": "object",
+      "required": [
+        "allowedOrigins"
+      ],
+      "properties": {
+        "allowedOrigins": {
+          "description": "The origin domains that are permitted to make a request against the service via CORS.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "allowedMethods": {
+          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedHeaders": {
+          "description": "The request headers that the origin domain may specify on the CORS request.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposedHeaders": {
+          "description": "The response headers to expose to CORS clients.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAgeInSeconds": {
+          "description": "The number of seconds that the client/browser should cache a preflight response.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "CorsRuleList": {
+      "description": "The list of CORS details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CorsRule"
+      },
+      "x-ms-identifiers": []
+    },
+    "AccountResource": {
+      "description": "Account resource details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Account resource properties.",
+          "type": "object",
+          "properties": {
+            "configuration": {
+              "description": "Account configuration. This can only be set at RecommendationsService Account creation.",
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "enum": [
+                "Free",
+                "Capacity"
+              ],
+              "x-ms-enum": {
+                "name": "AccountConfiguration",
+                "modelAsString": true
+              }
+            },
+            "endpointAuthentications": {
+              "description": "The list of service endpoints authentication details.",
+              "$ref": "#/definitions/EndpointAuthenticationsList"
+            },
+            "cors": {
+              "description": "The list of CORS details.",
+              "$ref": "#/definitions/CorsRuleList"
+            },
+            "reportsConnectionString": {
+              "description": "Connection string to write Accounts reports to.",
+              "type": "string"
+            },
+            "provisioningState": {
+              "description": "The resource provisioning state.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "AccountResourceList": {
+      "description": "The list of RecommendationsService Account resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of RecommendationsService Account resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of RecommendationsService Account resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountResource"
+          }
+        }
+      }
+    },
+    "AccountPatchResource": {
+      "description": "Account resource patch details.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "$ref": "#/definitions/Tags"
+        },
+        "properties": {
+          "description": "Account resource patch properties.",
+          "type": "object",
+          "properties": {
+            "endpointAuthentications": {
+              "description": "The list of service endpoints authentication details.",
+              "$ref": "#/definitions/EndpointAuthenticationsList"
+            },
+            "cors": {
+              "description": "The list of CORS details.",
+              "$ref": "#/definitions/CorsRuleList"
+            },
+            "reportsConnectionString": {
+              "description": "Connection string to write Accounts reports to.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ModelingInputData": {
+      "description": "The configuration to raw CDM data to be used as Modeling resource input.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Connection string to raw input data.",
+          "type": "string"
+        }
+      }
+    },
+    "ModelingResource": {
+      "description": "Modeling resource details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Modeling resource properties.",
+          "type": "object",
+          "properties": {
+            "features": {
+              "description": "Modeling features controls the set of supported scenarios\\models being computed. This can only be set at Modeling creation.",
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "enum": [
+                "Basic",
+                "Standard",
+                "Premium"
+              ],
+              "x-ms-enum": {
+                "name": "ModelingFeatures",
+                "modelAsString": true
+              }
+            },
+            "frequency": {
+              "description": "Modeling frequency controls the modeling compute frequency.",
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "enum": [
+                "Low",
+                "Medium",
+                "High"
+              ],
+              "x-ms-enum": {
+                "name": "ModelingFrequency",
+                "modelAsString": true
+              }
+            },
+            "size": {
+              "description": "Modeling size controls the maximum supported input data size.",
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "enum": [
+                "Small",
+                "Medium",
+                "Large"
+              ],
+              "x-ms-enum": {
+                "name": "ModelingSize",
+                "modelAsString": true
+              }
+            },
+            "inputData": {
+              "description": "The configuration to raw CDM data to be used as Modeling resource input.",
+              "$ref": "#/definitions/ModelingInputData"
+            },
+            "provisioningState": {
+              "description": "The resource provisioning state.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "ModelingResourceList": {
+      "description": "The list of Modeling resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Modeling resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Modeling resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelingResource"
+          }
+        }
+      }
+    },
+    "ModelingPatchResource": {
+      "description": "Modeling resource patch details.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "$ref": "#/definitions/Tags"
+        },
+        "properties": {
+          "description": "Modeling resource properties to update.",
+          "type": "object",
+          "properties": {
+            "inputData": {
+              "description": "The configuration to raw CDM data to be used as Modeling resource input.",
+              "$ref": "#/definitions/ModelingInputData"
+            }
+          }
+        }
+      }
+    },
+    "ServiceEndpointResource": {
+      "description": "ServiceEndpoint resource details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ServiceEndpoint resource properties.",
+          "type": "object",
+          "properties": {
+            "preAllocatedCapacity": {
+              "description": "ServiceEndpoint pre-allocated capacity controls the maximum requests-per-second allowed for that endpoint. Only applicable when Account configuration is Capacity.",
+              "type": "integer",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "format": "int32",
+              "minimum": 0
+            },
+            "pairedLocation": {
+              "description": "The paired location that will be used by this ServiceEndpoint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "url": {
+              "description": "The URL where the ServiceEndpoint API is accessible at.",
+              "type": "string",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "The resource provisioning state.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "ServiceEndpointResourceList": {
+      "description": "The list of ServiceEndpoint resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of ServiceEndpoint resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of ServiceEndpoint resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpointResource"
+          }
+        }
+      }
+    },
+    "ServiceEndpointPatchResource": {
+      "description": "ServiceEndpoint resource patch details.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "AccountStatus": {
+      "description": "Account status.",
+      "type": "object",
+      "properties": {
+        "scopesStatuses": {
+          "description": "The list of scopes statuses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeStatuses"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ScopeStatuses": {
+      "description": "Scope statuses.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "The scope that the statuses refers to.",
+          "type": "string"
+        },
+        "statuses": {
+          "description": "Scope stage statuses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StageStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "StageStatus": {
+      "description": "Stage status.",
+      "type": "object",
+      "properties": {
+        "stage": {
+          "description": "The stage name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the stage.",
+          "type": "string"
+        },
+        "time": {
+          "description": "The time of the status.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AccountNameParameter": {
+      "description": "The name of the RecommendationsService Account resource.",
+      "type": "string",
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ModelingNameParameter": {
+      "description": "The name of the Modeling resource.",
+      "type": "string",
+      "name": "modelingName",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceEndpointNameParameter": {
+      "description": "The name of the ServiceEndpoint resource.",
+      "type": "string",
+      "name": "serviceEndpointName",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
