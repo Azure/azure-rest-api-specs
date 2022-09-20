@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  workspaceName:
+    type: string
+    prefix: oiautorest
+
+prepareSteps:
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+
+scenarios:
+  - scenario: WorkspacePurge
+    description: Microsoft.OperationalInsights/workspaces/purge
+    steps:
+      # - step: Workspaces_Delete
+      #   operationId: Workspaces_Delete
+      - step: WorkspacePurge_Purge
+        exampleFile: ..\examples\WorkspacesPurge.json
+        outputVariables:
+          purgeId:
+            type: string
+            fromResponse: /operationId
+      - step: WorkspacePurge_GetPurgeStatus
+        exampleFile: ..\examples\WorkspacesPurgeOperation.json
+        requestUpdate:
+          - replace: /purgeId
+            value: $(purgeId)
+        

@@ -1,0 +1,188 @@
+scope: ResourceGroup
+variables:
+  workspaceName:
+    type: string
+    prefix: workspacen
+  queryPackName:
+    type: string
+    prefix: querypackn
+  tableName:
+    type: string
+    prefix: tablename
+  id:
+    type: string
+    prefix: id
+  clusterName:
+    type: string
+    prefix: clusternam
+  dataExportName:
+    type: string
+    prefix: dataexport
+  dataSourceName:
+    type: string
+    prefix: datasource
+  linkedServiceName:
+    type: string
+    prefix: linkedserv
+  # dataSourceType:
+  #   type: string
+  #   prefix: datasource
+  storageInsightName:
+    type: string
+    prefix: storageins
+  savedSearchId:
+    type: string
+    prefix: savedsearc
+  intelligencePackName:
+    type: string
+    prefix: intelligen
+scenarios:
+  - steps:
+      - step: QueryPacks_CreateOrUpdate
+        exampleFile: ..\..\2019-09-01\examples\QueryPacksCreate.json
+      - step: QueryPacks_List
+        exampleFile: ..\..\2019-09-01\examples\QueryPacksList.json
+      - step: QueryPacks_Get
+        exampleFile: ..\..\2019-09-01\examples\QueryPacksGet.json
+      - step: QueryPacks_ListByResourceGroup
+        exampleFile: ..\..\2019-09-01\examples\QueryPacksListByResourceGroup.json
+      - step: QueryPacks_UpdateTags
+        exampleFile: ..\..\2019-09-01\examples\QueryPacksUpdateTagsOnly.json
+
+# preview failed
+      # - step: Tables_CreateOrUpdate
+      #   exampleFile: ..\..\..\preview\2021-12-01-preview\examples\TablesUpsert.json
+      # - step: Tables_ListByWorkspace
+      #   exampleFile: ..\..\..\preview\2021-12-01-preview\examples\TablesList.json
+      # - step: Tables_Get
+      #   exampleFile: ..\..\..\preview\2021-12-01-preview\examples\TablesGet.json
+      # - step: Tables_Update
+      #   exampleFile: ..\..\..\preview\2021-12-01-preview\examples\TablesUpsert.json
+      # - step: Tables_Migrate
+      #   exampleFile: ..\..\..\preview\2021-12-01-preview\examples\TablesMigrate.json
+
+      - step: Clusters_CreateOrUpdate
+        exampleFile: ..\..\2021-06-01\examples\ClustersCreate.json
+      - step: Clusters_List
+        exampleFile: ..\..\2021-06-01\examples\ClustersSubscriptionList.json
+      - step: Clusters_ListByResourceGroup
+        exampleFile: ..\..\2021-06-01\examples\ClustersListByResourceGroup.json
+      - step: Clusters_Get
+        exampleFile: ..\..\2021-06-01\examples\ClustersGet.json
+      - step: Clusters_Update
+        exampleFile: ..\..\2021-06-01\examples\ClustersUpdate.json
+      - step: Queries_Put
+        exampleFile: ..\..\2019-09-01\examples\QueryPackQueriesPut.json
+      - step: Queries_List
+        exampleFile: ..\..\2019-09-01\examples\QueryPackQueriesList.json
+      - step: Queries_Get
+        exampleFile: ..\..\2019-09-01\examples\QueryPackQueriesGet.json
+      - step: Queries_Update
+        exampleFile: ..\..\2019-09-01\examples\QueryPackQueriesUpdate.json
+      - step: Queries_Search
+        exampleFile: ..\..\2019-09-01\examples\QueryPackQueriesSearch.json
+      - step: SavedSearches_CreateOrUpdate
+        exampleFile: ..\examples\WorkspacesSavedSearchesCreateOrUpdate.json
+      - step: SavedSearches_ListByWorkspace
+        exampleFile: ..\examples\SavedSearchesListByWorkspace.json
+      - step: SavedSearches_Get
+        exampleFile: ..\examples\WorkspacesSavedSearchesGet.json
+      - step: DataExports_CreateOrUpdate
+        exampleFile: ..\examples\DataExportCreateOrUpdate.json
+      - step: DataExports_ListByWorkspace
+        exampleFile: ..\examples\DataExportListByWorkspace.json
+      - step: DataExports_Get
+        exampleFile: ..\examples\DataExportGet.json
+      # - step: DataSources_CreateOrUpdate
+      #   exampleFile: ..\examples\DataSourcesCreate.json
+      # - step: DataSources_ListByWorkspace
+      #   exampleFile: ..\examples\DataSourcesListByWorkspace.json
+      # - step: DataSources_Get
+      #   exampleFile: ..\examples\DataSourcesGet.json
+      - step: StorageInsightConfigs_CreateOrUpdate
+        exampleFile: ..\examples\StorageInsightsCreateOrUpdate.json
+      - step: StorageInsightConfigs_ListByWorkspace
+        exampleFile: ..\examples\StorageInsightsListByWorkspace.json
+      - step: StorageInsightConfigs_Get
+        exampleFile: ..\examples\StorageInsightsGet.json
+      - step: LinkedServices_CreateOrUpdate
+        exampleFile: ..\examples\LinkedServicesCreate.json
+      - step: LinkedServices_ListByWorkspace
+        exampleFile: ..\examples\LinkedServicesListByWorkspace.json
+      - step: LinkedServices_Get
+        exampleFile: ..\examples\LinkedServicesGet.json
+      - step: LinkedStorageAccounts_CreateOrUpdate
+        exampleFile: ..\examples\LinkedStorageAccountsCreate.json
+      - step: LinkedStorageAccounts_ListByWorkspace
+        exampleFile: ..\examples\LinkedStorageAccountsListByWorkspace.json
+      - step: LinkedStorageAccounts_Get
+        exampleFile: ..\examples\LinkedStorageAccountsGet.json
+
+
+      - variables:
+          asyncOperationId:
+            type: string
+            prefix: asyncopera
+        step: OperationStatuses_Get
+        exampleFile: ..\examples\OperationStatusesGet.json
+      - variables:
+          purgeId:
+            type: string
+            prefix: purgeid
+        step: WorkspacePurge_GetPurgeStatus
+        exampleFile: ..\examples\WorkspacesPurgeOperation.json
+      - step: WorkspacePurge_Purge
+        exampleFile: ..\examples\WorkspacesPurge.json
+
+
+
+      - step: AvailableServiceTiers_ListByWorkspace
+        exampleFile: ..\examples\WorkspacesAvailableServiceTiers.json
+      - variables:
+          gatewayId:
+            type: string
+            prefix: gatewayid
+        step: Gateways_Delete
+        exampleFile: ..\examples\WorkspacesGatewaysDelete.json
+      - step: IntelligencePacks_List
+        exampleFile: ..\examples\WorkspacesListIntelligencePacks.json
+      - step: IntelligencePacks_Disable
+        exampleFile: ..\examples\WorkspacesDisableIntelligencePack.json
+      - step: IntelligencePacks_Enable
+        exampleFile: ..\examples\WorkspacesEnableIntelligencePack.json
+      - step: ManagementGroups_List
+        exampleFile: ..\examples\WorkspacesListManagementGroups.json
+      - step: SharedKeys_Regenerate
+        exampleFile: ..\examples\WorkspacesRegenerateSharedKeys.json
+      - step: Schema_Get
+        exampleFile: ..\examples\SavedSearchesGetSchema.json
+      - step: SharedKeys_GetSharedKeys
+        exampleFile: ..\examples\WorkspacesGetSharedKeys.json
+      - step: Usages_List
+        exampleFile: ..\examples\WorkspacesListUsages.json
+      - step: LinkedStorageAccounts_Delete
+        exampleFile: ..\examples\LinkedStorageAccountsDelete.json
+      - step: LinkedServices_Delete
+        exampleFile: ..\examples\LinkedServicesDelete.json
+      - step: StorageInsightConfigs_Delete
+        exampleFile: ..\examples\StorageInsightsDelete.json
+
+      - step: DataExports_Delete
+        exampleFile: ..\examples\DataExportDelete.json
+      - step: SavedSearches_Delete
+        exampleFile: ..\examples\WorkspacesDeleteSavedSearches.json
+      - step: Queries_Delete
+        exampleFile: ..\..\2019-09-01\examples\QueryPackQueriesDelete.json
+      - step: Clusters_Delete
+        exampleFile: ..\..\2021-06-01\examples\ClustersDelete.json
+
+      - step: QueryPacks_Delete
+        exampleFile: ..\..\2019-09-01\examples\QueryPacksDelete.json
+
+
+# 9/26
+# workspaces pass
+## tables not pass, preview operation
+## workspacepurge not pass, does not have the role 'Data Purger' >>>bug
+## datasources not generate >>>> bug
+
