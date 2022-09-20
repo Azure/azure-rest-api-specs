@@ -2205,6 +2205,33 @@
         }
       }
     },
+    "SapOdpSource": {
+      "description": "A copy activity source for SAP ODP source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "extractionMode": {
+          "type": "object",
+          "description": "The extraction mode. Allowed value include: Full, Delta and Recovery. The default value is Full. Type: string (or Expression with resultType string)."
+        },
+        "subscriberProcess": {
+          "type": "object",
+          "description": "The subscriber process to manage the delta process. Type: string (or Expression with resultType string)."
+        },
+        "selection": {
+          "type": "object",
+          "description": "Specifies the selection conditions from source data. Type: array of objects(selection) (or Expression with resultType array of objects)."
+        },
+        "projection": {
+          "type": "object",
+          "description": "Specifies the columns to be selected from source data. Type: array of objects(projection) (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "SapTableSource": {
       "description": "A copy activity source for SAP Table source.",
       "type": "object",
@@ -7421,6 +7448,10 @@
         "runConcurrently": {
           "description": "Concurrent run setting used for data flow execution. Allows sinks with the same save order to be processed concurrently. Type: boolean (or Expression with resultType boolean)",
           "type": "object"
+        },
+        "sourceStagingConcurrency": {
+          "description": "Specify number of parallel staging for sources applicable to the sink. Type: integer (or Expression with resultType integer)",
+          "type": "object"
         }
       },
       "required": [
@@ -7738,6 +7769,250 @@
           "description": "Metadata item value. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "SynapseNotebookActivity": {
+      "description": "Execute Synapse notebook activity.",
+      "type": "object",
+      "x-ms-discriminator-value": "SynapseNotebook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute Synapse notebook activity properties.",
+          "$ref": "#/definitions/SynapseNotebookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SynapseNotebookActivityTypeProperties": {
+      "description": "Execute Synapse notebook activity properties.",
+      "type": "object",
+      "properties": {
+        "notebook": {
+          "description": "Synapse notebook reference.",
+          "$ref": "#/definitions/SynapseNotebookReference"
+        },
+        "sparkPool": {
+          "description": "The name of the big data pool which will be used to execute the notebook.",
+          "$ref": "#/definitions/BigDataPoolParametrizationReference"
+        },
+        "parameters": {
+          "description": "Notebook parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NotebookParameter"
+          }
+        },
+        "executorSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the session, which will be used for overriding 'executorCores' and 'executorMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
+        },
+        "conf": {
+          "type": "object",
+          "description": "Spark configuration properties, which will override the 'conf' of the notebook you provide."
+        },
+        "driverSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "notebook"
+      ]
+    },
+    "SynapseNotebookReference": {
+      "description": "Synapse notebook reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse notebook reference type.",
+          "enum": [
+            "NotebookReference"
+          ],
+          "x-ms-enum": {
+            "name": "NotebookReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference notebook name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "BigDataPoolParametrizationReference": {
+      "description": "Big data pool reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Big data pool reference type.",
+          "enum": [
+            "BigDataPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "BigDataPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "NotebookParameter": {
+      "description": "Notebook parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Notebook parameter type.",
+          "$ref": "#/definitions/NotebookParameterType"
+        }
+      }
+    },
+    "NotebookParameterType": {
+      "description": "Notebook parameter type.",
+      "type": "string",
+      "enum": [
+        "string",
+        "int",
+        "float",
+        "bool"
+      ],
+      "x-ms-enum": {
+        "name": "NotebookParameterType",
+        "modelAsString": true
+      }
+    },
+    "SynapseSparkJobDefinitionActivity": {
+      "description": "Execute spark job activity.",
+      "type": "object",
+      "x-ms-discriminator-value": "SparkJob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute spark job activity properties.",
+          "$ref": "#/definitions/SynapseSparkJobActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SynapseSparkJobActivityTypeProperties": {
+      "description": "Execute spark job activity properties.",
+      "type": "object",
+      "properties": {
+        "sparkJob": {
+          "description": "Synapse spark job reference.",
+          "$ref": "#/definitions/SynapseSparkJobReference"
+        },
+        "args": {
+          "x-ms-client-name": "arguments",
+          "description": "User specified arguments to SynapseSparkJobDefinitionActivity.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "file": {
+          "type": "object",
+          "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "className": {
+          "type": "object",
+          "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "files": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "targetBigDataPool": {
+          "$ref": "#/definitions/BigDataPoolParametrizationReference",
+          "description": "The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool' of the spark job definition you provide."
+        },
+        "executorSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "conf": {
+          "type": "object",
+          "description": "Spark configuration properties, which will override the 'conf' of the spark job definition you provide."
+        },
+        "driverSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "sparkJob"
+      ]
+    },
+    "SynapseSparkJobReference": {
+      "description": "Synapse spark job reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse spark job reference type.",
+          "enum": [
+            "SparkJobDefinitionReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkJobReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference spark job name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   }
 }

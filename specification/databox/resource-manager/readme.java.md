@@ -25,6 +25,7 @@ batch:
   - tag: package-2021-05
   - tag: package-2021-08-preview
   - tag: package-2021-12
+  - tag: package-2022-02
 ```
 
 ### Tag: package-2018-01 and java
@@ -127,6 +128,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.databox.v2021_12-01
   output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2021_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2022-02 and java
+
+These settings apply only when `--tag=package-2022-02-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2022_02-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2022_02_01
 regenerate-manager: true
 generate-interface: true
 ```

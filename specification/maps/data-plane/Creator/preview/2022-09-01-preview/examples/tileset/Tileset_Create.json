@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-09-01-preview",
+    "datasetId": "[dataset-Id]",
+    "description": "Example description.",
+    "TilesetConfiguration": {
+      "version": 1,
+      "layers": {
+        "Indoor unit": {
+          "minZoom": 10,
+          "maxZoom": 18,
+          "features": {
+            "featureClasses": [
+              "unit",
+              "wall"
+            ],
+            "filter": [
+              "any",
+              [
+                "!=",
+                [
+                  "get",
+                  "roomType"
+                ],
+                "conference"
+              ],
+              [
+                "!=",
+                [
+                  "get",
+                  "roomType"
+                ],
+                "restroom"
+              ]
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://us.atlas.microsoft.com/tilesets/operations/{operationId}?api-version=2022-09-01-preview",
+        "Access-Control-Expose-Headers": "Operation-Location"
+      }
+    }
+  }
+}
