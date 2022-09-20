@@ -1020,10 +1020,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1060,10 +1057,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1093,8 +1087,8 @@
         "tags": [
           "IntegrationRuntimes"
         ],
-        "description": "Creates or Updates an instance of a integrationRuntime",
-        "operationId": "IntegrationRuntimes_CreateOrUpdate",
+        "description": "Create or replace an instance of a integrationRuntime",
+        "operationId": "IntegrationRuntimes_CreateOrReplace",
         "consumes": [
           "application/json"
         ],
@@ -1103,10 +1097,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1159,10 +1150,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1201,10 +1189,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1246,10 +1231,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1257,6 +1239,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters"
             }
@@ -1334,10 +1317,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1379,10 +1359,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "integrationRuntimeName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/integrationRuntimeName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1390,6 +1367,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/EnableInteractiveQueryForIntegrationRuntimeRequest"
             }
@@ -1468,8 +1446,8 @@
         "tags": [
           "ManagedVirtualNetworks"
         ],
-        "description": "Creates or Updates a ManagedVirtualNetwork",
-        "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+        "description": "Create or replace a ManagedVirtualNetwork",
+        "operationId": "ManagedVirtualNetworks_CreateOrReplace",
         "consumes": [
           "application/json"
         ],
@@ -1529,20 +1507,20 @@
         }
       }
     },
-    "/managedvirtualnetworks/{managedVNetName}/managedprivateendpoints/{managedPEName}": {
+    "/managedvirtualnetworks/{managedVNetName}/managedprivateendpoints/{managedPrivateEndpointName}": {
       "get": {
         "tags": [
           "ManagedVirtualNetworks"
         ],
         "description": "Gets a ManagedPrivateEndpoint",
-        "operationId": "ManagedVirtualNetworks_GetPE",
+        "operationId": "ManagedVirtualNetworks_GetPrivateEndpoint",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "managedVNetName",
+            "name": "managedPrivateEndpointName",
             "required": true,
             "type": "string",
             "enum": [
@@ -1640,8 +1618,8 @@
         "tags": [
           "ManagedVirtualNetworks"
         ],
-        "description": "Creates a ManagedPrivateEndpoint",
-        "operationId": "ManagedVirtualNetworks_CreateOrUpdatePE",
+        "description": "Create or replace a ManagedPrivateEndpoint",
+        "operationId": "ManagedVirtualNetworks_CreateOrReplacePrivateEndpoint",
         "consumes": [
           "application/json"
         ],
@@ -9139,6 +9117,16 @@
       "type": "string",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
+    },
+    "integrationRuntimeName": {
+      "in": "path",
+      "name": "integrationRuntimeName",
+      "description": "IntegrationRuntime name.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
     }
   },
   "securityDefinitions": {
