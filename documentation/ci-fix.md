@@ -51,7 +51,7 @@ Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azur
 ## Breaking Change Check
 - An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
     - The same-version breaking change linter rules check for changes to an existing api-version swagger.
--	When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract. 
+-	When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract.
    	- However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
 	- The cross version breaking change linter rules checks for this by comparing the new swagger with the latest GA swagger. If there is no latest GA swagger, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the swagger is considered good.
 
@@ -63,7 +63,7 @@ For the former, a label 'NewApiVersionRequired' will be added automatically; For
 run oad locally (the breaking change is reported by oad tool):
 ```
 npm install -g @azure/oad
-oad compare <old-spec-path> <new-spec-path> 
+oad compare <old-spec-path> <new-spec-path>
 ```
 Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
@@ -79,7 +79,7 @@ npm install -g autorest
 
 #### Given a swagger spec, run linter:
 ```
-autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec> 
+autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
 ```
 #### Given a readme file, run linter:
 ```
@@ -111,7 +111,7 @@ Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md
 
 ## API Readiness Check
 
-This CI check is to make sure service is ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider. 
+This CI check is to make sure service is ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider.
 
 To fix this CI check failure, if you haven't got ARM signed off, pls get ARM signed off first then deploy ARM manifest. After deploying ARM manifest, this operationsList HTTP request will succeed and CI pass.
 
@@ -145,7 +145,7 @@ npm install -g autorest
 ```
 #### Given a swagger spec, run the validator:
 ```
-autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec> 
+autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
 ```
 #### Given a readme file, run the validator:
 ```
@@ -167,11 +167,11 @@ This validator is to ensure the cadl & swagger files in PR are consistent and th
 
 ## Traffic Validation
 
-It generates traffics for all operations defined in swaggers under default tag of readme.md by using [RESTLer](https://github.com/microsoft/restler-fuzzer). Then it validates the request and response pairs from these traffics against correspondent swaggers. Finally, it provides a html report that reflects swagger accuracy.
+This validator generates traffic for all operations defined in Swagger files under default tag of readme.md by using [RESTler](https://github.com/microsoft/restler-fuzzer). Then, it validates the request and response pairs from the traffic against the corresponding Swagger definitions. Finally, it provides an html report that reports the Swagger accuracy.
 
 ### How to understand and improve the report
 Please refer to [swagger-accuracy-report](./swagger-accuracy-report.md).
 
 ## Suppression Process
 
-In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance. 
+In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance.

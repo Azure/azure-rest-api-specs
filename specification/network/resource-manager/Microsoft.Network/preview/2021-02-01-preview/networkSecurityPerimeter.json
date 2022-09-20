@@ -587,6 +587,9 @@
         },
         {
           "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
         }
       ],
       "get": {
@@ -746,7 +749,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies/{associationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -759,62 +762,33 @@
         },
         {
           "$ref": "#/parameters/AssociationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
         }
       ],
-      "get": {
+      "post": {
         "tags": [
-          "NspAssociationsProxy"
+          "NspAssociationReconcile"
         ],
-        "operationId": "NspAssociationsProxy_Get",
-        "description": "Gets the specified NSP association by name.",
-        "responses": {
-          "200": {
-            "description": "OK - Returns information about the NSP resource association.",
-            "schema": {
-              "$ref": "#/definitions/NspAssociation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspAssociationGet": {
-            "$ref": "./examples/NspAssociationGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "NspAssociationsProxy"
-        ],
-        "operationId": "NspAssociationsProxy_CreateOrUpdate",
-        "description": "Creates or updates a NSP resource association.",
+        "operationId": "NspAssociationReconcile_Post",
+        "description": "Reconcile NSP association",
         "parameters": [
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NspAssociation"
+              "$ref": "#/definitions/NspAssociationReconcile"
             },
-            "description": "Parameters that hold the NspAssociation resource to be created/updated."
+            "description": "Parameters for NSP association reconcile"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Existing resource association is updated. Returns the resource.",
+            "description": "Reconcile NSP association.",
             "schema": {
-              "$ref": "#/definitions/NspAssociation"
-            }
-          },
-          "201": {
-            "description": "Create - Returns the NspAssociation resource created.",
-            "schema": {
-              "$ref": "#/definitions/NspAssociation"
+              "$ref": "#/definitions/NspAssociationReconcile"
             }
           },
           "default": {
@@ -825,85 +799,8 @@
           }
         },
         "x-ms-examples": {
-          "NspAssociationPut": {
-            "$ref": "./examples/NspAssociationPut.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "NspAssociationsProxy"
-        ],
-        "operationId": "NspAssociationsProxy_Delete",
-        "description": "Deletes an NSP association resource.",
-        "responses": {
-          "200": {
-            "description": "Delete Succeed."
-          },
-          "204": {
-            "description": "Request successful. The resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspAssociationDelete": {
-            "$ref": "./examples/NspAssociationProxyDelete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies": {
-      "get": {
-        "tags": [
-          "NspAssociationsProxy"
-        ],
-        "operationId": "NspAssociationsProxy_List",
-        "description": "Lists the NSP resource associations.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "#/parameters/ListSkipTokenParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns the list of NSP resource associations.",
-            "schema": {
-              "$ref": "#/definitions/NspAssociationsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspAssociationList": {
-            "$ref": "./examples/NspAssociationList.json"
+          "NspAssociationReconcile": {
+            "$ref": "./examples/NspAssociationReconcile.json"
           }
         }
       }
@@ -943,106 +840,6 @@
         "x-ms-examples": {
           "Check Dns Name Availability": {
             "$ref": "./examples/PerimeterAssociableResourcesList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{networkSecurityPerimeterProfile}/checkMembers": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterProfileParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NetworkSecurityPerimetersCheckMembers"
-        ],
-        "operationId": "NetworkSecurityPerimeters_CheckMembers",
-        "description": "Action to check members associated to an NSP Profile",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckMembers"
-            },
-            "description": "Parameter supplied to create the network security perimeter check members."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Check members, nothing is getting created or updated.",
-            "schema": {
-              "$ref": "#/definitions/CheckMembers"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Post Check Members": {
-            "$ref": "./examples/NSPCheckMembersPost.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Network/locations/{location}/queryNetworkSecurityPerimeter": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/LocationParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "QueryNetworkSecurityPerimeters"
-        ],
-        "operationId": "NetworkSecurityPerimeters_Query",
-        "description": "Action to query network security parameter",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryNSPReqRes"
-            },
-            "description": "Parameter supplied to query network security parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Query NSP using parameter guid, no resource created or updated.",
-            "schema": {
-              "$ref": "#/definitions/QueryNSPReqRes"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Post Query NSP": {
-            "$ref": "./examples/QueryNSP.json"
           }
         }
       }
@@ -1117,9 +914,8 @@
           "description": "The network security perimeter properties"
         },
         "location": {
-          "readOnly": true,
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "description": "The location in which NSP is created."
         },
         "name": {
           "type": "string",
@@ -1169,6 +965,7 @@
           "description": "The provisioning state of the scope assignment resource."
         },
         "perimeterGuid": {
+          "readOnly": true,
           "type": "string",
           "description": "perimeter guid of the network security perimeter."
         }
@@ -1229,6 +1026,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Version number that increases with every update to access rules within the profile."
+        },
+        "diagnosticSettingsVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Version number that increases with every update to diagnostic settings within the profile."
         }
       },
       "description": "Properties of NSP profile."
@@ -1317,9 +1119,10 @@
         "subscriptions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SubscriptionId"
           },
-          "description": "Subscription id in the ARM id format."
+          "description": "List of subscription ids"
         },
         "networkSecurityPerimeters": {
           "type": "array",
@@ -1331,6 +1134,15 @@
         }
       },
       "description": "Properties of NSP access rule."
+    },
+    "SubscriptionId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Subscription id in the ARM id format."
+        }
+      }
     },
     "PerimeterBasedAccessRule": {
       "type": "object",
@@ -1434,6 +1246,11 @@
         }
       }
     },
+    "NspAssociationReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP association."
+    },
     "PerimeterAssociableResource": {
       "type": "object",
       "properties": {
@@ -1505,79 +1322,6 @@
       },
       "description": "Properties of the perimeter associable resources."
     },
-    "CheckMembers": {
-      "type": "object",
-      "properties": {
-        "memberDestinations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MemberDestination"
-          },
-          "x-ms-identifiers": [
-            "privateLinkResourceId"
-          ]
-        }
-      },
-      "description": "Request object for check members API."
-    },
-    "MemberDestination": {
-      "type": "object",
-      "properties": {
-        "privateLinkResourceId": {
-          "type": "string",
-          "description": "Private link resource Id."
-        },
-        "isMember": {
-          "type": "string",
-          "readOnly": true,
-          "description": "yes/no, if it is member or not.",
-          "enum": [
-            "yes",
-            "no"
-          ],
-          "x-ms-enum": {
-            "name": "isMember",
-            "modelAsString": true
-          }
-        },
-        "profile": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Network security perimeter profile."
-        }
-      }
-    },
-    "QueryNSPReqRes": {
-      "type": "object",
-      "properties": {
-        "networkSecurityPerimeters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryNSPObj"
-          }
-        }
-      },
-      "description": "Request object for query NSP."
-    },
-    "QueryNSPObj": {
-      "type": "object",
-      "properties": {
-        "perimeterGuid": {
-          "type": "string",
-          "description": "Perimeter guid of NSP."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Id of NSP."
-        }
-      }
-    },
-    "NspAccessRuleReconcile": {
-      "type": "object",
-      "properties": {},
-      "description": "Request object for NSP reconcile."
-    },
     "NSPProvisioningState": {
       "type": "string",
       "readOnly": true,
@@ -1594,6 +1338,11 @@
         "name": "nspProvisioningState",
         "modelAsString": true
       }
+    },
+    "NspAccessRuleReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP reconcile."
     }
   },
   "parameters": {
