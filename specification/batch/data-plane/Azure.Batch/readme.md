@@ -36,97 +36,7 @@ These settings apply only when `--tag=package-2022-01.15.0` is specified on the 
 
 ``` yaml $(tag) == 'package-2022-01.15.0'
 input-file:
-- Microsoft.Batch/stable/2022-01-01.15.0/BatchService.json
-```
-
-### Tag: package-2021-06.14.0
-
-These settings apply only when `--tag=package-2021-06.14.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06.14.0'
-input-file:
-- Microsoft.Batch/stable/2021-06-01.14.0/BatchService.json
-```
-
-### Tag: package-2020-09.12.0
-
-These settings apply only when `--tag=package-2020-09.12.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-09.12.0'
-input-file:
-- Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
-```
-
-### Tag: package-2020-03.11.0
-
-These settings apply only when `--tag=package-2020-03.11.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-03.11.0'
-input-file:
-- Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
-```
-
-### Tag: package-2019-08.10.0
-
-These settings apply only when `--tag=package-2019-08.10.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-08.10.0'
-input-file:
-- Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
-```
-
-### Tag: package-2019-06.9.0
-
-These settings apply only when `--tag=package-2019-06.9.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06.9.0'
-input-file:
-- Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
-```
-
-### Tag: package-2018-12.8.0
-
-These settings apply only when `--tag=package-2018-12.8.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-12.8.0'
-input-file:
-- Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
-```
-
-### Tag: package-2018-08.7.0
-
-These settings apply only when `--tag=package-2018-08.7.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-08.7.0'
-input-file:
-- Microsoft.Batch/stable/2018-08-01.7.0/BatchService.json
-```
-
-### Tag: package-2018-03.6.1
-
-These settings apply only when `--tag=package-2018-03.6.1` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-03.6.1'
-input-file:
-- Microsoft.Batch/stable/2018-03-01.6.1/BatchService.json
-```
-
-### Tag: package-2017-09.6.0
-
-These settings apply only when `--tag=package-2017-09.6.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-09.6.0'
-input-file:
-- Microsoft.Batch/stable/2017-09-01.6.0/BatchService.json
-```
-
-### Tag: package-2017-06.5.1
-
-These settings apply only when `--tag=package-2017-06.5.1` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-06.5.1'
-input-file:
-- Microsoft.Batch/stable/2017-06-01.5.1/BatchService.json
+- stable/2022-01-01.15.0/BatchService.json
 ```
 
 ## Suppression
@@ -267,52 +177,6 @@ directive:
       - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].delete.responses
     reason: These delete operations have the required responses. Looks like a bug with the validator.
 ```
-
-### Tag: package-2017-05.5.0
-
-These settings apply only when `--tag=package-2017-05.5.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-05.5.0'
-input-file:
-- Microsoft.Batch/stable/2017-05-01.5.0/BatchService.json
-```
-
-### Tag: package-2017-01.4.0
-
-These settings apply only when `--tag=package-2017-01.4.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-01.4.0'
-input-file:
-- Microsoft.Batch/stable/2017-01-01.4.0/BatchService.json
-```
-
-### Tag: package-2016-07.3.1
-
-These settings apply only when `--tag=package-2016-07.3.1` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-07.3.1'
-input-file:
-- Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
-```
-
-### Tag: package-2016-02.3.0
-
-These settings apply only when `--tag=package-2016-02.3.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-02.3.0'
-input-file:
-- Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
-```
-
-### Tag: package-2015-12.2.2
-
-These settings apply only when `--tag=package-2015-12.2.2` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-12.2.2'
-input-file:
-- Microsoft.Batch/stable/2015-12-01.2.2/BatchService.json
-```
-
 ---
 
 ## Code Generation
@@ -406,20 +270,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2018-08-01.7.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2018-03-01.6.1/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-09-01.6.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-06-01.5.1/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-05-01.5.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2017-01-01.4.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
-  - $(this-folder)/Microsoft.Batch/stable/2015-12-01.2.2/BatchService.json
+  - $(this-folder)/stable/2022-01-01.15.0/BatchService.json
 
 ```
 
