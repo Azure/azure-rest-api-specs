@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "workspaceName": "sampleacct",
+    "resourceGroupName": "default-synthetics-westus3",
+    "api-version": "2022-10-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "westus3",
+      "identity": {
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {}
+        }
+      },
+      "properties": {
+        "friendlyName": "Synthetics",
+        "description": "Synthetics Description",
+        "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
+        "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
+        "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
+      }
+    }
+  },
+  "responses": {
+    "201": {}
+  }
+}
