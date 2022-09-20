@@ -498,6 +498,9 @@
           "Snapshot_Download_ComplianceReport": {
             "$ref": "./examples/Snapshot_ComplianceReport_Download.json"
           },
+          "Snapshot_Download_CompliancePdfReport": {
+            "$ref": "./examples/Snapshot_CompliancePdfReport_Download.json"
+          },
           "Snapshot_Download_ResourceList": {
             "$ref": "./examples/Snapshot_ResourceList_Download.json"
           }
@@ -1078,6 +1081,18 @@
             "$ref": "#/definitions/ComplianceReportItem"
           },
           "x-ms-identifiers": []
+        },
+        "compliancePdfReport": {
+          "description": "compliance pdf report",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "sasUri": {
+              "description": "uri of compliance pdf report",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     },
@@ -1234,6 +1249,7 @@
       "x-ms-parameter-location": "method",
       "enum": [
         "ComplianceReport",
+        "CompliancePdfReport",
         "ResourceList"
       ],
       "type": "string",
