@@ -35,7 +35,7 @@ azure-validator: false
 
 ### Tag: package-preview-2022-10-05
 
-These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-10-05` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2022-10-05'
 input-file:
