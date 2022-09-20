@@ -316,7 +316,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/IdentityData"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "Azure Databricks accessConnector properties",
@@ -349,39 +349,6 @@
         }
       }
     },
-    "IdentityData": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "None",
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the resource."
-    },
     "AccessConnectorUpdate": {
       "description": "An update to an azure databricks accessConnector.",
       "type": "object",
@@ -394,8 +361,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/IdentityData",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
