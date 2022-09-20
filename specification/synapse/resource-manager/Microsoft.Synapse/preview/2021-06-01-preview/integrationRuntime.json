@@ -1323,6 +1323,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/stop/8A2431BC39114B709A447C12F99E3BB4": {
+      "get": {
+        "tags": [
+          "integrationRuntimes",
+          "stop",
+          "8A2431BC39114B709A447C12F99E3BB4"
+        ],
+        "operationId": "Get_Stop8A2431BC39114B709A447C12F99E3BB4",
+        "description": "Integration runtime for 8A2431BC39114B709A447C12F99E3BB4",
+        "x-ms-examples": {
+          "Get list of stop Integrationruntimes": {
+            "$ref": "./examples/Getstop8A2431BC39114B709A447C12F99E3BB4.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Stop8A2431BC39114B709A447C12F99E3BB4"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3047,6 +3095,62 @@
           "format": "int32"
         }
       }
+    },
+    "Stop8A2431BC39114B709A447C12F99E3BB4": {
+      "description": "Workspace Stop Integrationruntimes 8A2431BC39114B709A447C12F99E3BB4.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/Stop8A2431BC39114B709A447C12F99E3BB4Properties",
+          "description": "Workspace Stop Integrationruntimes 8A2431BC39114B709A447C12F99E3BB4.Properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Stop8A2431BC39114B709A447C12F99E3BB4Properties": {
+      "description": "Properties of the Integrationruntimes Stop 8A2431BC39114B709A447C12F99E3BB4.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "description": "status of stop Integrationruntimes.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Workspace status",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Name of Operation Statuses.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "properties value for 8A2431BC39114B709A447C12F99E3BB4",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "error value for 8A2431BC39114B709A447C12F99E3BB4",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+
     }
   },
   "parameters": {
