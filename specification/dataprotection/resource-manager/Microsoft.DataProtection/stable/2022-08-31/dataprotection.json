@@ -4498,7 +4498,6 @@
     },
     "BackupVault": {
       "description": "Backup Vault",
-      "type": "object",
       "properties": {
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettings",
@@ -4523,7 +4522,7 @@
           }
         },
         "resourceMoveState": {
-          "description": "This property is already there in IResourceEntity, but we are keeping it here so that it can be part of client facing contracts as well.\r\nThis property is only updated during GetVault\r\nResource Move state of the BackupVault resource",
+          "description": "Resource move state for backup vault",
           "enum": [
             "Unknown",
             "InProgress",
@@ -4545,7 +4544,7 @@
         },
         "resourceMoveDetails": {
           "$ref": "#/definitions/ResourceMoveDetails",
-          "description": "This property is already there in IResourceEntity, but we are keeping it here so that it can be part of client facing contracts as well.\r\nThis property is only updated during GetVault\r\nResource Move details of the BackupVault resource",
+          "description": "Resource move details for backup vault",
           "readOnly": true
         },
         "storageSettings": {
@@ -4557,17 +4556,8 @@
           "type": "array"
         },
         "isVaultProtectedByResourceGuard": {
-          "description": "IsVaultProtectedByResourceGuard",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "resourceGuardArmId": {
-          "description": "ResourceGuardArmId\r\nThis is to be generated in run time and not stored in catalog.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
+          "description": "Is vault protected by resource guard",
+          "type": "boolean"
         }
       },
       "required": [
