@@ -39,8 +39,25 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 input-file:
   - Microsoft.Network/stable/2022-05-01/network.json
   - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2020-05-01/frontdoor.json
+  - Microsoft.Network/stable/2021-06-01/frontdoor.json
   - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Network/stable/2021-06-01/frontdoor.json
+  - Microsoft.Network/stable/2021-06-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2021-06-01/network.json
+  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
 ```
 
 ### Tag: package-2020-11

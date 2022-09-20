@@ -24,17 +24,27 @@ To see additional help and options, run:
 
 These are the global settings for the Machine Learning Services API.
 
-
 ``` yaml
 openapi-type: arm
-tag: package-2022-05-01
+tag: package-preview-2022-06
 ```
 
+
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/workspaceFeatures.json
+```
 ### Tag: package-2022-05-01
 
 These settings apply only when `--tag=package-2022-05-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05-01'
+``` yaml $(tag) == 'package-2022-05-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2022-05-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json
@@ -45,7 +55,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02-01-preview'
+``` yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-02-01-preview/mfe.json
@@ -56,7 +66,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01-01-preview'
+``` yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
   - Microsoft.MachineLearningServices/preview/2022-01-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceFeatures.json
@@ -67,7 +77,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07-01'
+``` yaml $(tag) == 'package-2021-07-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2021-07-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
@@ -78,7 +88,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04-01'
+``` yaml $(tag) == 'package-2021-04-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2021-04-01/machineLearningServices.json
 ```
@@ -87,17 +97,16 @@ input-file:
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01-01'
+``` yaml $(tag) == 'package-2021-01-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2021-01-01/machineLearningServices.json
 ```
-
 
 ### Tag: package-2021-03-01-preview
 
 These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-01-preview'
+``` yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/mfe.json
@@ -284,5 +293,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
