@@ -6,12 +6,12 @@
     "version": "2022-06-30-preview"
   },
   "paths": {
-    "/messaging/messages/:send": {
+    "/messaging/notifications/:send": {
       "post": {
         "tags": [
-          "Messaging"
+          "Notifications"
         ],
-        "operationId": "SendMessage",
+        "operationId": "Notification_SendMessage",
         "consumes": [
           "application/json"
         ],
@@ -31,8 +31,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/SendMessageResponse"
             }
@@ -54,22 +54,6 @@
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-    },
-    "MessageStatus": {
-      "description": "Status of a message.",
-      "enum": [
-        "enqueued",
-        "sent",
-        "delivered",
-        "read",
-        "failed",
-        "unknown"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MessageStatus",
-        "modelAsString": true
-      }
     },
     "MessageTemplate": {
       "description": "The template object used to create templates.",
@@ -177,17 +161,13 @@
     "SendMessageResult": {
       "description": "Result of the sending one message.",
       "required": [
-        "id",
-        "status"
+        "id"
       ],
       "type": "object",
       "properties": {
         "id": {
           "description": "The message id.",
           "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/MessageStatus"
         }
       }
     }
