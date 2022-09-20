@@ -38,6 +38,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2022-07' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-07-01/$(namespace)
+direcitve:
+- from: 'keyvault.json'
+  where: '$.definitions.CheckNameAvailabilityResult.properties.reason["x-ms-enum"]'
+  transform: >
+    $["name"] = "ReasonForKeyVault"
+- from: 'managedHsm.json'
+  where: '$.definitions.CheckMhsmNameAvailabilityResult.properties.reason["x-ms-enum"]'
+  transform: >
+    $["name"] = "ReasonForManagedHsm"
 ```
 
 ### Tag: package-preview-2021-11 and go
