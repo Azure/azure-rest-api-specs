@@ -508,7 +508,7 @@
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
           },
-          "201": {
+          "202": {
             "description": "Migration request submitted.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
@@ -521,7 +521,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
