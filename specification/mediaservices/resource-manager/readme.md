@@ -194,6 +194,7 @@ input-file:
   - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
   - Microsoft.Media/stable/2018-07-01/Encoding.json
   - Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
+  - Microsoft.Media/preview/2020-02-01-preview/Common.json
   - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
@@ -210,6 +211,7 @@ input-file:
   - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
   - Microsoft.Media/stable/2018-07-01/Encoding.json
   - Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
+  - Microsoft.Media/preview/2019-09-01-preview/Common.json
   - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
@@ -263,6 +265,7 @@ These settings apply only when `--tag=package-2018-03-preview` is specified on t
 input-file:
   - Microsoft.Media/preview/2018-03-30-preview/Accounts.json
   - Microsoft.Media/preview/2018-03-30-preview/Assets.json
+  - Microsoft.Media/preview/2018-03-30-preview/Common.json
   - Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
   - Microsoft.Media/preview/2018-03-30-preview/Encoding.json
   - Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
@@ -277,6 +280,7 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 input-file:
   - Microsoft.Media/preview/2018-06-01-preview/Accounts.json
   - Microsoft.Media/preview/2018-06-01-preview/Assets.json
+  - Microsoft.Media/preview/2018-06-01-preview/Common.json
   - Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json
   - Microsoft.Media/preview/2018-06-01-preview/Encoding.json
   - Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
