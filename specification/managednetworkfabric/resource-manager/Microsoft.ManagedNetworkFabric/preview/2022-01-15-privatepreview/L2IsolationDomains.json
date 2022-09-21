@@ -294,6 +294,264 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/{l2IsolationDomainName}/updateAdministrativeState": {
+      "post": {
+        "tags": [
+          "L2IsolationDomains"
+        ],
+        "operationId": "L2IsolationDomains_updateAdministrativeState",
+        "description": "Enables isolation domain across the fabric or on specified racks.",
+        "summary": "Implements the operation to the underlying hardware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l2IsolationDomainName",
+            "description": "Name of the L2IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L2IsolationDomains_updateAdministrativeState_MaximumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_updateAdministrativeState_MaximumSet_Gen.json"
+          },
+          "L2IsolationDomains_updateAdministrativeState_MinimumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_updateAdministrativeState_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/{l2IsolationDomainName}/clearArpTable": {
+      "post": {
+        "tags": [
+          "L2IsolationDomains"
+        ],
+        "operationId": "L2IsolationDomains_clearArpTable",
+        "description": "Clears ARP tables for this Isolation Domain.",
+        "summary": "Implements the operation to the underlying hardware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l2IsolationDomainName",
+            "description": "Name of the L2IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L2IsolationDomains_clearArpTable_MaximumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_clearArpTable_MaximumSet_Gen.json"
+          },
+          "L2IsolationDomains_clearArpTable_MinimumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_clearArpTable_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/{l2IsolationDomainName}/clearNeighborTable": {
+      "post": {
+        "tags": [
+          "L2IsolationDomains"
+        ],
+        "operationId": "L2IsolationDomains_clearNeighborTable",
+        "description": "Clears IPv6 neighbors for this Isolation Domain.",
+        "summary": "Implements the operation to the underlying hardware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l2IsolationDomainName",
+            "description": "Name of the L2IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L2IsolationDomains_clearNeighborTable_MaximumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_clearNeighborTable_MaximumSet_Gen.json"
+          },
+          "L2IsolationDomains_clearNeighborTable_MinimumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_clearNeighborTable_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/{l2IsolationDomainName}/getArpEntries": {
+      "post": {
+        "tags": [
+          "L2IsolationDomains"
+        ],
+        "operationId": "L2IsolationDomains_getArpEntries",
+        "description": "Clears IPv6 neighbors for this Isolation Domain.",
+        "summary": "Implements the operation to the underlying hardware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l2IsolationDomainName",
+            "description": "Name of the L2IsolationDomain.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "./common.json#/definitions/GetARPResponse"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L2IsolationDomains_getArpEntries_MaximumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_getArpEntries_MaximumSet_Gen.json"
+          },
+          "L2IsolationDomains_getArpEntries_MinimumSet_Gen": {
+            "$ref": "./examples/L2IsolationDomains_getArpEntries_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains": {
       "get": {
         "operationId": "L2IsolationDomains_ListByResourceGroup",
@@ -388,6 +646,10 @@
         }
       ],
       "properties": {
+        "networkFabricId": {
+          "type": "string",
+          "description": "Network Fabric ARM resource id."
+        },
         "vlanId": {
           "type": "integer",
           "format": "int32",
@@ -398,22 +660,19 @@
           "format": "int32",
           "description": "mtu. Example: 9000."
         },
-        "operationalState": {
-          "type": "string",
-          "description": "state. Example: Enabled | Disabled.",
+        "disabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
           "readOnly": true
         },
         "administrativeState": {
-          "type": "string",
-          "description": "administrativeState state for the desired action on the resource.",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "L2AdministrativeState"
-          }
+          "description": "state. Example: Enabled | Disabled.",
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
         },
         "provisioningState": {
           "description": "Gets the provisioning state of the resource.",
@@ -436,18 +695,6 @@
           "type": "integer",
           "format": "int32",
           "description": "mtu. Example: 9000."
-        },
-        "administrativeState": {
-          "type": "string",
-          "description": "administrativeState state for the desired action on the resource.",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "L2AdministrativeState"
-          }
         }
       },
       "description": "L2IsolationDomainPatchProperties define the patchable resource properties."

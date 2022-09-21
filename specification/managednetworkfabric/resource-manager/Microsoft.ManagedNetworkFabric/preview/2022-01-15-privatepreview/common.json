@@ -123,6 +123,82 @@
         "modelAsString": true,
         "name": "FailedSucceededState"
       }
+    },
+    "UpdateAdministrativeState": {
+      "type": "object",
+      "description": "Update administrative state on list of resources.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Administrative state.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "AdministrativeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnableDisableOnResources"
+        }
+      ]
+    },
+    "EnableDisableOnResources": {
+      "type": "object",
+      "description": "Update administrative state on list of resources.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "Network Fabrics or Network Rack resource Id.",
+          "items": {
+            "description": "Network Fabrics or Network Rack resource Id.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ARPProperties": {
+      "type": "object",
+      "description": "Show ARP table entry properties",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Ipv4 or Ipv6 address"
+        },
+        "age": {
+          "type": "string",
+          "description": "Duration in seconds."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Hardware address."
+        },
+        "interface": {
+          "type": "string",
+          "description": "Layer 2 interface name."
+        },
+        "state": {
+          "type": "string",
+          "description": "ARP status"
+        }
+      },
+      "required": [
+        "address",
+        "age",
+        "macAddress",
+        "interface"
+      ]
+    },
+    "GetARPResponse": {
+      "type": "object",
+      "description": "Show ARP entries response per network device",
+      "additionalProperties": {
+        "$ref": "#/definitions/ARPProperties"
+      }
     }
   },
   "parameters": {}
