@@ -1,0 +1,557 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Mission Virtual Enclave",
+    "version": "2022-08-02-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "VirtualEnclave"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Mission/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Mission/azureResource": {
+      "get": {
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "operationId": "VirtualEnclave_ListBySubscription",
+        "description": "List azureResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/azureResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "VirtualEnclave_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/azureResource": {
+      "get": {
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "operationId": "VirtualEnclave_ListByResourceGroup",
+        "description": "List azureResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/azureResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "VirtualEnclave_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/azureResource/{resourceName}": {
+      "get": {
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "operationId": "VirtualEnclave_Get",
+        "description": "Get a azureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureResource.resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/azureResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_Get_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_Get_MaximumSet_Gen.json"
+          },
+          "VirtualEnclave_Get_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "operationId": "VirtualEnclave_CreateOrUpdate",
+        "description": "Create a azureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureResource.resourceName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/azureResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/azureResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/azureResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualEnclave_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VirtualEnclave_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "operationId": "VirtualEnclave_Update",
+        "description": "Update a azureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureResource.resourceName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/azureResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/azureResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_Update_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_Update_MaximumSet_Gen.json"
+          },
+          "VirtualEnclave_Update_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "operationId": "VirtualEnclave_Delete",
+        "description": "Delete a azureResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/azureResource.resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualEnclave_Delete_MaximumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_Delete_MaximumSet_Gen.json"
+          },
+          "VirtualEnclave_Delete_MinimumSet_Gen": {
+            "$ref": "../../cadl/examples/VirtualEnclave_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "azureResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/azureResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "A azureResource resource",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "azureResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/azureResource"
+          },
+          "x-cadl-name": "azureResource[]",
+          "description": "The azureResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a azureResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "azureResourceProperties": {
+      "type": "object",
+      "properties": {
+        "vmAdminUsername": {
+          "type": "string",
+          "description": "The name of the Admin"
+        },
+        "vmAdminSshPublicKey": {
+          "type": "string",
+          "description": "The Ssh Public key for the Admin"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The value of Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The Resource Group being used"
+        },
+        "providerNamespace": {
+          "type": "string",
+          "description": "The Provider Namespace being used"
+        },
+        "actualResourceName": {
+          "type": "string",
+          "description": "The name of the actual resource name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The properties of azureResource",
+      "required": [
+        "vmAdminUsername",
+        "vmAdminSshPublicKey",
+        "subscriptionId",
+        "resourceGroup",
+        "providerNamespace",
+        "actualResourceName",
+        "provisioningState"
+      ]
+    },
+    "azureResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/azureResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the azureResource."
+    },
+    "azureResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "vmAdminSshPublicKey": {
+          "type": "string",
+          "description": "The Ssh Public key for the Admin"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The value of Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The Resource Group being used"
+        },
+        "providerNamespace": {
+          "type": "string",
+          "description": "The Provider Namespace being used"
+        },
+        "actualResourceName": {
+          "type": "string",
+          "description": "The name of the actual resource name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The updatable properties of the azureResource."
+    }
+  },
+  "parameters": {
+    "azureResource.resourceName": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the azureResource Resource",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
