@@ -8,10 +8,11 @@ using Cadl.Http;
 namespace Azure.Language.QnAMaker;
 
 interface QuestionAnsweringOperations {
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("Answers the specified question using your knowledge base.")
   @doc("Answers the specified question using your knowledge base.")
-  GetAnswers is Azure.Core.ResourceCreateWithServiceProvidedName<
-    AnswersResult,
+  @route(":query-knowledgebases")
+  getAnswers is Azure.Core.Foundations.Operation<
     {
       parameters: {
         @doc("The name of the project to use.")
@@ -22,10 +23,13 @@ interface QuestionAnsweringOperations {
         @query
         deploymentName: string;
       };
-    }
+    },
+    AnswersResult
   >;
 
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("Answers the specified question using the provided text in the body.")
   @doc("Answers the specified question using the provided text in the body.")
-  GetAnswersFromText is Azure.Core.ResourceCreateWithServiceProvidedName<AnswersFromTextResult>;
+  @route(":query-text")
+  getAnswersFromText is Azure.Core.Foundations.Operation<{}, AnswersFromTextResult>;
 }
