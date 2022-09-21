@@ -120,7 +120,7 @@
             "type": "string"
           },
           "example": [
-            16315551234
+            "16315551234"
           ]
         },
         "type": {
@@ -129,7 +129,7 @@
         "content": {
           "description": "External message content.",
           "type": "string",
-          "example": "Come on guys, lets go for lunch together."
+          "example": "Come on everyone, lets go for lunch together."
         },
         "mediaUri": {
           "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image",
@@ -160,12 +160,17 @@
     "SendMessageResult": {
       "description": "Result of the sending one message.",
       "required": [
-        "id"
+        "id",
+        "to"
       ],
       "type": "object",
       "properties": {
         "id": {
           "description": "The message id.",
+          "type": "string"
+        },
+        "to": {
+          "description": "The native external platform user identifier of the recipient.",
           "type": "string"
         }
       }
