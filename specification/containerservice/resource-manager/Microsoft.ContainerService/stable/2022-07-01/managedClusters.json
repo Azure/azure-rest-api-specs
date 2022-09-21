@@ -497,12 +497,32 @@
         "responses": {
           "200": {
             "description": "OK",
+            "headers": {
+              "Operation-Location": {
+                "description": "The operation status URL.",
+                "type": "string"
+              },
+              "Operation-Id": {
+                "description": "The operation ID.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
           },
           "201": {
             "description": "Created",
+            "headers": {
+              "Operation-Location": {
+                "description": "The operation status URL.",
+                "type": "string"
+              },
+              "Operation-Id": {
+                "description": "The operation ID.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
@@ -515,6 +535,16 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "GetOperationStatus": {
+            "description": "Link to status monitor endpoint",
+            "operationRef": "../2017-08-31/managedClusters.json#/paths/~1subscriptions~1{subscriptionId}~1providers~1Microsoft.ContainerService~1managedClusters~1locations~1{location}~1operations~1{operationId}/get",
+            "parameters": {
+              "operationId": "$response.header.Operation-Id",
+              "location": "$request.body.location.name"
+            }
+          }
+        },
         "x-ms-examples": {
           "Create/Update Managed Cluster": {
             "$ref": "./examples/ManagedClustersCreate_Update.json"
