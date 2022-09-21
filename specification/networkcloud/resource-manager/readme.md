@@ -27,7 +27,7 @@ These are the global settings for NetworkCloud.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2022-07-30-preview
+tag: package-2022-09-30-preview
 ```
 
 ### Tag: package-2022-04-29-preview
@@ -48,6 +48,17 @@ These settings apply only when `--tag=package-2022-07-30-preview` is specified o
 ```yaml $(tag) == 'package-2022-07-30-preview'
 input-file:
   - Microsoft.NetworkCloud/preview/2022-07-30-preview/networkcloud.json
+```
+
+---
+
+### Tag: package-2022-09-30-preview
+
+These settings apply only when `--tag=package-2022-09-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-30-preview'
+input-file:
+  - Microsoft.NetworkCloud/preview/2022-09-30-preview/networkcloud.json
 ```
 
 ---
