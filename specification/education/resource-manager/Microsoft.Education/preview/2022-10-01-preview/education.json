@@ -59,141 +59,6 @@
         }
       }
     },
-    "/providers/Microsoft.Education/grants": {
-      "get": {
-        "tags": [
-          "Grants"
-        ],
-        "x-ms-examples": {
-          "GrantList": {
-            "$ref": "./examples/GrantList.json"
-          },
-          "GrantListIncludeAllocatedBudget": {
-            "$ref": "./examples/GrantListIncludeAllocatedBudget.json"
-          }
-        },
-        "operationId": "Grants_ListAllV2",
-        "description": "Get a list of grants that Microsoft has provided.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/IncludeAllocatedBudgetParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "list of Grants",
-            "schema": {
-              "$ref": "#/definitions/GrantListResponse"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants": {
-      "get": {
-        "tags": [
-          "Grants"
-        ],
-        "x-ms-examples": {
-          "GrantList": {
-            "$ref": "./examples/GrantDefaultList.json"
-          },
-          "GrantListIncludeAllocatedBudget": {
-            "$ref": "./examples/GrantDefaultListIncludeAllocatedBudget.json"
-          }
-        },
-        "operationId": "Grants_ListV2",
-        "description": "Get details for a specific grant linked to the provided billing account and billing profile.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/BillingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BillingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IncludeAllocatedBudgetParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "list of Grants",
-            "schema": {
-              "$ref": "#/definitions/GrantListResponse"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default": {
-      "get": {
-        "tags": [
-          "Grants"
-        ],
-        "x-ms-examples": {
-          "Grant": {
-            "$ref": "./examples/Grant.json"
-          },
-          "GrantIncludeAllocatedBudget": {
-            "$ref": "./examples/GrantIncludeAllocatedBudget.json"
-          }
-        },
-        "operationId": "Grants_GetV2",
-        "description": "Get details for a specific grant linked to the provided billing account and billing profile.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/BillingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BillingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IncludeAllocatedBudgetParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Grant detail",
-            "schema": {
-              "$ref": "#/definitions/GrantDetails"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default/renew": {
       "post": {
         "tags": [
@@ -245,65 +110,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "GrantListResponse": {
-      "description": "List of Grants info.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of labs.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/GrantDetails"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "GrantDetails": {
-      "description": "Grant details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GrantDetailProperties",
-          "description": "Grant detail properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "GrantDetailProperties": {
       "description": "Grant detail properties",
       "type": "object",
@@ -362,20 +168,6 @@
           "readOnly": true
         }
       }
-    },
-    "Amount": {
-      "description": "The amount.",
-      "type": "object",
-      "properties": {
-        "currency": {
-          "description": "The type of currency being used for the value.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Amount value.",
-          "type": "number"
-        }
-      }
     }
   },
   "parameters": {
@@ -385,29 +177,6 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2022-10-01-preview"
-    },
-    "BillingAccountNameParameter": {
-      "name": "billingAccountName",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Billing account name."
-    },
-    "BillingProfileNameParameter": {
-      "name": "billingProfileName",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Billing profile name."
-    },
-    "IncludeAllocatedBudgetParameter": {
-      "name": "includeAllocatedBudget",
-      "x-ms-parameter-location": "method",
-      "in": "query",
-      "type": "boolean",
-      "description": "May be used to include information about budget that has been allocated."
     },
     "OperationIdParameter": {
       "name": "operationId",
