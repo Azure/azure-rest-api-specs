@@ -511,12 +511,7 @@
       "required": false,
       "x-ms-parameter-location": "method",
       "schema": {
-        "type": "object",
-        "properties": {
-          "comments": {
-            "type": "string"
-          }
-        }
+        "$ref": "#/definitions/comments"
       }
     },
     "alertState": {
@@ -856,6 +851,15 @@
           "$ref": "#/definitions/egressConfig"
         }
       }
+    },
+    "comments": {
+       "type": "object",
+       "description": "Change alert state reason",
+       "properties": {
+          "comments": {
+            "type": "string"
+          }
+        }
     },
     "egressConfig": {
       "type": "object",
