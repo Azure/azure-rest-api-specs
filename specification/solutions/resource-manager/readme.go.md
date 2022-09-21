@@ -39,7 +39,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2021-07' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-07-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2021-07-01/managedapplications
 ```
 
 ### Tag: package-managedapplications-2021-02 and go
@@ -49,7 +49,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2021-02' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-02-01-preview/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2021-02-01-preview/managedapplications
 ```
 
 ### Tag: package-managedapplications-2020-08 and go
@@ -59,7 +59,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2020-08' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2020-08-21-preview/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2020-08-21-preview/managedapplications
 ```
 
 ### Tag: package-managedapplications-2019-07 and go
@@ -69,7 +69,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2019-07' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-07-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2019-07-01/managedapplications
 ```
 
 
@@ -80,7 +80,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2018-09' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-09-01-preview/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2018-09-01-preview/managedapplications
 ```
 
 ### Tag: package-managedapplications-2018-06 and go
@@ -90,7 +90,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2018-06' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-06-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2018-06-01/managedapplications
 ```
 
 
@@ -101,7 +101,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2018-03' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-03-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2018-03-01/managedapplications
 ```
 
 
@@ -112,7 +112,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2018-02' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2018-02-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2018-02-01/managedapplications
 ```
 
 ### Tag: package-managedapplications-2017-12 and go
@@ -122,7 +122,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2017-12' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-12-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2017-12-01/managedapplications
 ```
 
 ### Tag: package-managedapplications-2017-09 and go
@@ -132,5 +132,5 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-managedapplications-2017-09' && $(go)
 namespace: managedapplications
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-09-01/managedapplications
+output-folder: $(go-sdk-folder)/services/solutions/mgmt/2017-09-01/managedapplications
 ```
