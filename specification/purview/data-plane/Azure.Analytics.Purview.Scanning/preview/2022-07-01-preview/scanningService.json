@@ -13,6 +13,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
@@ -1035,6 +1053,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1072,6 +1096,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1126,6 +1156,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1133,7 +1169,7 @@
         },
         "x-ms-examples": {
           "IntegrationRuntimes_CreateOrUpdate": {
-            "$ref": "./examples/IntegrationRuntimes_CreateOrUpdate.json"
+            "$ref": "./examples/IntegrationRuntimes_CreateOrReplace.json"
           }
         }
       }
@@ -1143,7 +1179,7 @@
         "tags": [
           "IntegrationRuntimes"
         ],
-        "description": "Gets an integrationRuntimeStatus",
+        "description": "Gets an IntegrationRuntimeStatus object. This is significantly different from IntegrationRuntime",
         "operationId": "IntegrationRuntimes_Status",
         "produces": [
           "application/json"
@@ -1165,6 +1201,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1204,6 +1246,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1254,6 +1302,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1271,7 +1325,7 @@
         "tags": [
           "IntegrationRuntimes"
         ],
-        "description": "Lists integrationruntimes in account",
+        "description": "Lists integrationruntimes in an account",
         "operationId": "IntegrationRuntimes_ListByAccount",
         "produces": [
           "application/json"
@@ -1290,6 +1344,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1382,6 +1442,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1394,7 +1460,7 @@
         }
       }
     },
-    "/managedvirtualnetworks/{managedVNetName}": {
+    "/managedvirtualnetworks/{managedVirtualNetworkName}": {
       "get": {
         "tags": [
           "ManagedVirtualNetworks"
@@ -1406,17 +1472,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "managedVNetName",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedVirtualNetworkName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1431,6 +1487,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1456,17 +1518,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "managedVNetName",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedVirtualNetworkName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1495,19 +1547,25 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
         "x-ms-examples": {
-          "ManagedVirtualNetworks_CreateOrUpdate": {
-            "$ref": "./examples/ManagedVirtualNetworks_CreateOrUpdate.json"
+          "ManagedVirtualNetworks_CreateOrReplace": {
+            "$ref": "./examples/ManagedVirtualNetworks_CreateOrReplace.json"
           }
         }
       }
     },
-    "/managedvirtualnetworks/{managedVNetName}/managedprivateendpoints/{managedPrivateEndpointName}": {
+    "/managedvirtualnetworks/{managedVirtualNetworkName}/managedprivateendpoints/{managedPrivateEndpointName}": {
       "get": {
         "tags": [
           "ManagedVirtualNetworks"
@@ -1519,23 +1577,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "managedVNetName",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedVirtualNetworkName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
-            "in": "path",
-            "name": "managedPrivateEndpointName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/managedPrivateEndpointName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1550,14 +1595,20 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
         "x-ms-examples": {
-          "ManagedVirtualNetworks_GetPE": {
-            "$ref": "./examples/ManagedVirtualNetworks_GetPE.json"
+          "ManagedVirtualNetworks_GetPrivateEndpoint": {
+            "$ref": "./examples/ManagedVirtualNetworks_GetPrivateEndpoint.json"
           }
         }
       },
@@ -1566,29 +1617,16 @@
           "ManagedVirtualNetworks"
         ],
         "description": "Deletes a ManagedPrivateEndpoint",
-        "operationId": "ManagedVirtualNetworks_DeletePE",
+        "operationId": "ManagedVirtualNetworks_DeletePrivateEndpoint",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "managedVNetName",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedVirtualNetworkName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
-            "in": "path",
-            "name": "managedPrivateEndpointName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/managedPrivateEndpointName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1603,14 +1641,20 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
         "x-ms-examples": {
-          "ManagedVirtualNetworks_DeletePE": {
-            "$ref": "./examples/ManagedVirtualNetworks_DeletePE.json"
+          "ManagedVirtualNetworks_DeletePrivateEndpoint": {
+            "$ref": "./examples/ManagedVirtualNetworks_DeletePrivateEndpoint.json"
           }
         }
       },
@@ -1628,23 +1672,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "managedVNetName",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedVirtualNetworkName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
-            "in": "path",
-            "name": "managedPrivateEndpointName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/managedPrivateEndpointName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1673,14 +1704,20 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
         "x-ms-examples": {
-          "ManagedVirtualNetworks_CreateOrUpdatePE": {
-            "$ref": "./examples/ManagedVirtualNetworks_CreateOrUpdatePE.json"
+          "ManagedVirtualNetworks_CreateOrReplacePrivateEndpoint": {
+            "$ref": "./examples/ManagedVirtualNetworks_CreateOrReplacePrivateEndpoint.json"
           }
         }
       }
@@ -1709,6 +1746,12 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -1724,29 +1767,19 @@
         }
       }
     },
-    "/managedvirtualnetworks/{managedVNetName}/managedprivateendpoints": {
+    "/managedvirtualnetworks/{managedVirtualNetworkName}/managedprivateendpoints": {
       "get": {
         "tags": [
           "ManagedVirtualNetworks"
         ],
-        "description": "Gets a list of ManagedPrivateEndpoints",
-        "operationId": "ManagedVirtualNetworks_ListPEByAccount",
+        "description": "Gets a list of ManagedPrivateEndpoints for a given account",
+        "operationId": "ManagedVirtualNetworks_ListPrivateEndpointsByAccount",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "managedVNetName",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedVirtualNetworkName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1761,14 +1794,20 @@
           },
           "default": {
             "description": "An error response received from the Scanning Service",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
         "x-ms-examples": {
-          "ManagedVirtualNetworks_ListPEByAccount": {
-            "$ref": "./examples/ManagedVirtualNetworks_ListPEByAccount.json"
+          "ManagedVirtualNetworks_ListPrivateEndpointsByAccount": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListPrivateEndpointsByAccount.json"
           }
         },
         "x-ms-pageable": {
@@ -9128,17 +9167,32 @@
       "maxLength": 63,
       "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
       "x-ms-parameter-location": "client"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+    },
+    "managedVirtualNetworkName": {
+      "in": "path",
+      "name": "managedVirtualNetworkName",
+      "description": "The Managed VirtualNetwork name. It is restricted to the value 'default' for now.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedVirtualNetworkName",
+        "modelAsString": true
       },
-      "description": "Azure Active Directory OAuth2 Flow."
+      "x-ms-parameter-location": "client"
+    },
+    "managedPrivateEndpointName": {
+      "in": "path",
+      "name": "managedPrivateEndpointName",
+      "description": "The Managed PrivateEndpoint name.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 127,
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "x-ms-parameter-location": "client"
     }
   }
 }
