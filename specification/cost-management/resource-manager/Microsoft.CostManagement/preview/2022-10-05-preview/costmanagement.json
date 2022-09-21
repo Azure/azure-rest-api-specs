@@ -2858,6 +2858,140 @@
         }
       }
     },
+    "ForecastType": {
+      "description": "The type of the forecast.",
+      "type": "string",
+      "enum": [
+        "Usage",
+        "ActualCost",
+        "AmortizedCost"
+      ],
+      "x-ms-enum": {
+        "name": "ForecastType",
+        "modelAsString": true
+      }
+    },
+    "ForecastTimeframe": {
+      "description": "The time frame for pulling data for the forecast.",
+      "type": "string",
+      "enum": [
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "ForecastTimeframe",
+        "modelAsString": true
+      }
+    },
+    "ForecastTimePeriod": {
+      "description": "Has time period for pulling data for the forecast.",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "GranularityType": {
+      "description": "The granularity of rows in the forecast.",
+      "type": "string",
+      "enum": [
+        "Daily"
+      ],
+      "x-ms-enum": {
+        "name": "GranularityType",
+        "modelAsString": true
+      }
+    },
+    "ForecastDatasetConfiguration": {
+      "description": "The configuration of dataset in the forecast.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the forecast. Any valid forecast column name is allowed. If not provided, then forecast includes all columns.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ForecastFilter": {
+      "description": "The filter expression to be used in the export.",
+      "type": "object",
+      "properties": {
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastFilter"
+          },
+          "x-ms-identifiers": [],
+          "minItems": 2
+        },
+        "or": {
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastFilter"
+          },
+          "x-ms-identifiers": [],
+          "minItems": 2
+        },
+        "dimensions": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/ForecastComparisonExpression"
+        },
+        "tags": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/ForecastComparisonExpression"
+        }
+      }
+    },
+    "ForecastComparisonExpression": {
+      "description": "The comparison expression to be used in the forecast.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "ForecastOperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
     "QueryDefinition": {
       "description": "The definition of a query.",
       "type": "object",
