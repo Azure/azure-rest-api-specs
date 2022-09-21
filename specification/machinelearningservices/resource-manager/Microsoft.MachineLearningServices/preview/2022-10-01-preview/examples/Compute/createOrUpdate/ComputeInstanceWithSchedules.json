@@ -11,57 +11,30 @@
         "computeType": "ComputeInstance",
         "properties": {
           "vmSize": "STANDARD_NC6",
-          "subnet": {
-            "id": "test-subnet-resource-id"
-          },
           "applicationSharingPolicy": "Personal",
-          "autologgerSettings": {
-            "mlflowAutologger": "Enabled"
-          },
           "sshSettings": {
             "sshPublicAccess": "Disabled"
           },
-          "customServices": [
-            {
-              "name": "rstudio-workbench",
-              "image": {
-                "type": "docker",
-                "reference": "ghcr.io/azure/rstudio-workbench:latest"
-              },
-              "environmentVariables": {
-                "RSP_LICENSE": {
-                  "type": "local",
-                  "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
-                }
-              },
-              "docker": {
-                "privileged": true
-              },
-              "endpoints": [
-                {
-                  "protocol": "http",
-                  "name": "connect",
-                  "target": 8787,
-                  "published": 4444,
-                  "hostIp": null
-                }
-              ],
-              "volumes": [
-                {
-                  "type": "bind",
-                  "source": "/mnt/azureuser/",
-                  "target": "/home/testuser/",
-                  "readOnly": true
-                }
-              ]
-            }
-          ],
           "computeInstanceAuthorizationType": "personal",
           "personalComputeInstanceSettings": {
             "assignedUser": {
               "objectId": "00000000-0000-0000-0000-000000000000",
               "tenantId": "00000000-0000-0000-0000-000000000000"
             }
+          },
+          "schedules": {
+            "computeStartStop": [
+              {
+                "status": "Enabled",
+                "action": "Stop",
+                "triggerType": "Cron",
+                "cron": {
+                  "expression": "0 18 * * *",
+                  "startTime": "2021-04-23T01:30:00",
+                  "timeZone": "Pacific Standard Time"
+                }
+              }
+            ]
           }
         }
       }
