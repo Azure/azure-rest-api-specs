@@ -699,6 +699,19 @@
         "modelAsString": true
       }
     },
+    "ControlFamilyStatus": {
+      "description": "Indicates the control family status.",
+      "enum": [
+        "Healthy",
+        "Unhealthy"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ControlFamilyStatus",
+        "modelAsString": true
+      }
+    },
     "ControlStatus": {
       "description": "Indicates the control status.",
       "enum": [
@@ -738,6 +751,34 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ControlType",
+        "modelAsString": true
+      }
+    },
+    "ControlFamilyType": {
+      "description": "Indicates the control family type.",
+      "enum": [
+        "FullyAutomated",
+        "PartiallyAutomated",
+        "Manual"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ControlFamilyType",
+        "modelAsString": true
+      }
+    },
+    "CategoryType": {
+      "description": "Indicates the compliance category type.",
+      "enum": [
+        "FullyAutomated",
+        "PartiallyAutomated",
+        "Manual"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CategoryType",
         "modelAsString": true
       }
     },
@@ -882,19 +923,24 @@
         }
       }
     },
-    "Category": {
+    "ControlFamily": {
       "type": "object",
-      "description": "A class represent the compliance category.",
+      "description": "A class represent the control family.",
       "properties": {
-        "categoryName": {
-          "description": "The name of the compliance category. e.g. \"Operational Security\"",
+        "familyName": {
+          "description": "The name of the control family. e.g. \"Malware Protection - Anti-Virus\"",
           "type": "string",
           "readOnly": true
         },
-        "categoryStatus": {
+        "familyType": {
+          "description": "The control family type ",
+          "$ref": "#/definitions/ControlFamilyType",
+          "readOnly": true
+        },
+        "familyStatus": {
           "readOnly": true,
-          "description": "Category status.",
-          "$ref": "#/definitions/CategoryStatus"
+          "description": "Control family status.",
+          "$ref": "#/definitions/ControlFamilyStatus"
         },
         "controls": {
           "readOnly": true,
@@ -906,6 +952,39 @@
           },
           "x-ms-identifiers": [
             "controlId"
+          ]
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "description": "A class represent the compliance category.",
+      "properties": {
+        "categoryName": {
+          "description": "The name of the compliance category. e.g. \"Operational Security\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "categoryType": {
+          "description": "The category type ",
+          "$ref": "#/definitions/CategoryType",
+          "readOnly": true
+        },
+        "categoryStatus": {
+          "readOnly": true,
+          "description": "Category status.",
+          "$ref": "#/definitions/CategoryStatus"
+        },
+        "controlFamilies": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of control families.",
+          "items": {
+            "description": "Single control family content.",
+            "$ref": "#/definitions/ControlFamily"
+          },
+          "x-ms-identifiers": [
+            "familyName"
           ]
         }
       }
