@@ -49,49 +49,6 @@
         }
       }
     },
-    "/providers/Microsoft.Education/operationStatus/{operationId}": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "x-ms-examples": {
-          "OperationStatus": {
-            "$ref": "./examples/OperationStatus.json"
-          }
-        },
-        "operationId": "Operation_Status",
-        "description": "Get operation status",
-        "parameters": [
-          {
-            "$ref": "#/parameters/OperationIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed, if location & retry-after headers are not present. Else, Operation in progress",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Education/grants": {
       "get": {
         "tags": [
@@ -216,55 +173,6 @@
             "description": "Grant detail",
             "schema": {
               "$ref": "#/definitions/GrantDetails"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default/renew": {
-      "post": {
-        "tags": [
-          "Grants"
-        ],
-        "x-ms-examples": {
-          "GrantRenew": {
-            "$ref": "./examples/GrantRenew.json"
-          }
-        },
-        "operationId": "Grant_Renewal",
-        "description": "Request grant renewal",
-        "parameters": [
-          {
-            "$ref": "#/parameters/BillingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BillingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Grant renewal completed"
-          },
-          "202": {
-            "description": "Grant renewal accepted",
-            "headers": {
-              "Location": {
-                "description": "GET the URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
             }
           },
           "default": {
