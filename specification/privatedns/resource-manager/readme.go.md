@@ -21,7 +21,27 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi) 
 batch:
+  - tag: package-2020-06
+  - tag: package-2020-01
   - tag: package-2018-09
+```
+
+### Tag: package-2020-06 and go
+
+These settings apply only when `--tag=package-2020-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-06' && $(go)
+output-folder: $(go-sdk-folder)/services/privatedns/mgmt/2020-06-01/privatedns
+```
+
+### Tag: package-2020-01 and go
+
+These settings apply only when `--tag=package-2020-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-01' && $(go)
+output-folder: $(go-sdk-folder)/services/privatedns/mgmt/2020-01-01/privatedns
 ```
 
 ### Tag: package-2018-09 and go

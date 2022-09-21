@@ -827,7 +827,7 @@
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
     },
-    "Resource": {
+    "ResourceForAutoscale": {
       "type": "object",
       "properties": {
         "id": {
@@ -876,7 +876,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceForAutoscale"
         }
       ],
       "required": [
@@ -1060,7 +1060,7 @@
     "TimespanParameter": {
       "name": "timespan",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
       "x-ms-parameter-location": "method"
@@ -1068,16 +1068,16 @@
     "IntervalParameter": {
       "name": "interval",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "format": "duration",
       "description": "The interval (i.e. timegrain) of the query.",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
-      "name": "metricName",
+      "name": "metricnames",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
       "x-ms-parameter-location": "method"
@@ -1091,9 +1091,9 @@
       "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
-      "name": "metricNamespace",
+      "name": "metricnamespace",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "Metric namespace to query metric definitions for.",
       "x-ms-parameter-location": "method"

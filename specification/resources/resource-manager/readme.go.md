@@ -107,6 +107,8 @@ batch:
   - tag: package-templatespecs-2019-06-preview
   - tag: package-features-2015-12
   - tag: package-features-2021-07
+  - tag: package-locks-2020-05
+  - tag: package-locks-2017-04
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - tag: package-policy-2021-06
@@ -121,6 +123,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2021-04
   - tag: package-resources-2021-01
   - tag: package-resources-2020-10
   - tag: package-resources-2020-06
@@ -186,6 +189,26 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-features-2015-12' && $(go)
 namespace: features
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-12-01/$(namespace)
+```
+
+### Tag: package-locks-2020-05 and go
+
+These settings apply only when `--tag=package-locks-2020-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-locks-2020-05' && $(go)
+namespace: locks
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2020-05-01/locks
+```
+
+### Tag: package-locks-2017-04 and go
+
+These settings apply only when `--tag=package-locks-2017-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-locks-2017-04' && $(go)
+namespace: locks
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-04-01/locks
 ```
 
 ### Tag: package-locks-2016-09 and go
@@ -326,6 +349,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-policy-2015-10' && $(go)
 namespace: policy
 output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2015-10-01-preview/policy
+```
+
+### Tag: package-resources-2021-04 and go
+
+These settings apply only when `--tag=package-resources-2021-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-resources-2021-04' && $(go)
+namespace: resources
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-04-01/resources
 ```
 
 ### Tag: package-resources-2021-01 and go

@@ -48,6 +48,9 @@ directive:
 
 ```yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-04-04
+  - tag: package-2022-03-02
+  - tag: package-2022-03-01
   - tag: package-2021-12-01
   - tag: package-2021-11-01
   - tag: package-2021-08-01
@@ -75,6 +78,36 @@ batch:
   - tag: package-container-service-2016-09
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
+```
+
+### Tag: package-2022-04-04 and go
+
+These settings apply only when `--tag=package-2022-04-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2022-04-04' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-04-04/$(namespace)
+```
+
+### Tag: package-2022-03-02 and go
+
+These settings apply only when `--tag=package-2022-03-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2022-03-02' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-03-02/$(namespace)
+```
+
+### Tag: package-2022-03-01 and go
+
+These settings apply only when `--tag=package-2022-03-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2022-03-01' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-03-01/$(namespace)
 ```
 
 ### Tag: package-2021-12-01 and go
