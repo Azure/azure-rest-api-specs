@@ -13,9 +13,23 @@
     }
   },
   "responses": {
-    "201": {
+    "202": {
       "headers": {
-        "Location": "{Endpoint}/anomalydetector/1.1/multivariate/results/{resultId}"
+        "Operation-Location": "{Endpoint}/anomalydetector/1.1/multivariate/results/",
+        "Operation-Id": "663884e6-b117-11ea-b3de-0242ac130004"
+      },
+      "body": {
+        "resultId": "663884e6-b117-11ea-b3de-0242ac130004",
+        "summary": {
+          "status": "CREATED",
+          "errors": [],
+          "setupInfo": {
+            "dataSource": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.csv",
+            "topContributorCount": 10,
+            "startTime": "2021-01-01T00:00:00Z",
+            "endTime": "2021-01-01T00:29:00Z"
+          }
+        }
       }
     },
     "default": {
