@@ -86,7 +86,7 @@
           "200": {
             "description": "list of Grants",
             "schema": {
-              "$ref": "#/definitions/GrantListResponse"
+              "$ref": "#/definitions/GrantListResponseV2"
             }
           },
           "default": {
@@ -134,7 +134,7 @@
           "200": {
             "description": "list of Grants",
             "schema": {
-              "$ref": "#/definitions/GrantListResponse"
+              "$ref": "#/definitions/GrantListResponseV2"
             }
           },
           "default": {
@@ -182,7 +182,7 @@
           "200": {
             "description": "Grant detail",
             "schema": {
-              "$ref": "#/definitions/GrantDetails"
+              "$ref": "#/definitions/GrantDetailsV2"
             }
           },
           "default": {
@@ -269,7 +269,7 @@
         }
       }
     },
-    "GrantListResponse": {
+    "GrantListResponseV2": {
       "description": "List of Grants info.",
       "type": "object",
       "properties": {
@@ -278,7 +278,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/GrantDetails"
+            "$ref": "#/definitions/GrantDetailsV2"
           }
         },
         "nextLink": {
@@ -288,7 +288,7 @@
         }
       }
     },
-    "GrantDetails": {
+    "GrantDetailsV2": {
       "description": "Grant details.",
       "type": "object",
       "allOf": [
@@ -298,13 +298,13 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GrantDetailProperties",
+          "$ref": "#/definitions/GrantDetailPropertiesV2",
           "description": "Grant detail properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "GrantDetailProperties": {
+    "GrantDetailPropertiesV2": {
       "description": "Grant detail properties",
       "type": "object",
       "properties": {
