@@ -9,42 +9,6 @@
     "https"
   ],
   "paths": {
-    "/providers/Microsoft.MachineLearningServices/operations": {
-      "get": {
-        "tags": [
-          "Operation"
-        ],
-        "description": "Lists all of the available Azure Machine Learning Services REST API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/AmlOperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List registries.": {
-            "$ref": "./examples/Workspace/operationsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/registries": {
       "get": {
         "tags": [
@@ -574,7 +538,6 @@
     },
     "RegistryTrackedResource": {
       "required": [
-        "location",
         "properties"
       ],
       "type": "object",
@@ -590,10 +553,6 @@
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
-        },
-        "location": {
-          "description": "The geo-location where the resource lives.",
           "type": "string"
         },
         "properties": {
