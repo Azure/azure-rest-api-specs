@@ -52,6 +52,13 @@ input-file:
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-06-01-preview/AvailableWorkloadProfiles.json
   - Microsoft.App/preview/2022-06-01-preview/BillingMeters.json
+directive:
+- suppress: R3018
+  from: AuthConfigs.json
+  reason: Use of boolean type is required
+- suppress: R3016
+  from: AuthConfigs.json
+  reason: Use disableWWWAuthenticate to align with AuthSettingV2
 ```
 
 ### Tag: package-2022-03
@@ -146,6 +153,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 ## Az
