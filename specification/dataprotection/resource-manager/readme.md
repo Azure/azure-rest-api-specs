@@ -47,6 +47,15 @@ message-format: json
 ```
 
 
+### Tag: package-2022-10-preview
+
+These settings apply only when `--tag=package-2022-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10-preview'
+input-file:
+- Microsoft.DataProtection/preview/2022-10-01-preview/dataprotection.json
+```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
