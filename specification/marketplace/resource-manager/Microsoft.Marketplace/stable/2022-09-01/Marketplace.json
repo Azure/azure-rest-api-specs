@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-03-01",
+    "version": "2022-09-01",
     "title": "Marketplace RP Service",
     "description": "REST APIs for Private Marketplace"
   },
@@ -276,6 +276,51 @@
         "x-ms-examples": {
           "QueryUserOffers": {
             "$ref": "./examples/QueryUserOffers.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryUserRules": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "QueryUserRules",
+        "description": "All rules approved in the private store that are relevant for user subscriptions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryUserRulesProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of rules",
+            "schema": {
+              "$ref": "#/definitions/RuleListResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryUserRules": {
+            "$ref": "./examples/QueryUserRules.json"
           }
         }
       }
@@ -815,6 +860,95 @@
         "x-ms-examples": {
           "GetPrivateStoreOffers": {
             "$ref": "./examples/GetPrivateStoreOffers.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/setRules": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "SetCollectionRules",
+        "description": "Set rule for specific private store and collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/SetRulesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SetCollectionRules": {
+            "$ref": "./examples/SetCollectionRules.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/queryRules": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "QueryRules",
+        "description": "Get a list of all private store rules in the given private store and collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RuleListResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffers": {
+            "$ref": "./examples/GetCollectionRules.json"
           }
         }
       }
@@ -1952,6 +2086,78 @@
           "type": "integer",
           "format": "int64",
           "readOnly": true
+        },
+        "appliedRules": {
+          "description": "Gets list of collection rules",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
+    },
+    "RuleListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "nextLink": {
+          "description": "URL to get the next set of rules list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "SetRulesRequest": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "nextLink": {
+          "description": "URL to get the next set of rules list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Rule type",
+          "type": "string",
+          "enum": [
+            "PrivateProducts",
+            "TermsAndCondition"
+          ],
+          "x-ms-enum": {
+            "name": "ruleType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "description": "Gets or sets rule's value, not required for boolean rules",
+            "type": "string"
+          }
         }
       }
     },
@@ -2545,6 +2751,30 @@
       "type": "object",
       "properties": {
         "subscriptionsIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryUserRulesProperties": {
+      "description": "Query user's rules properties",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryUserRulesDetails",
+          "description": "Query user's rules details",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "QueryUserRulesDetails": {
+      "description": "List of subscriptions IDs to query the user's rules",
+      "type": "object",
+      "properties": {
+        "subscriptionIds": {
+          "description": "List of subscription IDs",
           "type": "array",
           "items": {
             "type": "string"
