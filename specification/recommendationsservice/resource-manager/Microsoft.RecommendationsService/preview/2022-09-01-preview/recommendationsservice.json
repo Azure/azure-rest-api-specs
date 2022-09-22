@@ -403,119 +403,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/refreshDelegatedResourceIdentity": {
-      "post": {
-        "summary": "Notify of updates to identities for delegated resources",
-        "operationId": "Accounts_RefreshDelegatedResourceIdentity",
-        "description": "",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Source resources to be refreshed",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Credentials refreshed successfully"
-          },
-          "202": {
-            "description": "Async operation accepted"
-          },
-          "400": {
-            "description": "One or more source resources are invalid",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "x-ms-error-response": true,
-            "headers": {
-              "WWW-Authenticate": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Caller is not authorized to perform this action",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Backing resource not found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "503": {
-            "description": "Service unavailable",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/RefreshDelegatedResourceIdentityErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Refresh Delegated Resource Identity": {
-            "$ref": "./examples/Accounts_RefreshDelegatedResourceIdentity.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecommendationsService/accounts/{accountName}/modeling": {
       "get": {
         "operationId": "Modeling_ListByAccountResource",
@@ -1222,7 +1109,7 @@
             },
             "encryption": {
               "description": "The Encryption configuration.",
-              "$ref": "#/definitions/Encryption"
+              "$ref": "#/definitions/AccountEncryption"
             },
             "provisioningState": {
               "description": "The resource provisioning state.",
@@ -1284,7 +1171,7 @@
             },
             "encryption": {
               "description": "The Encryption configuration.",
-              "$ref": "#/definitions/Encryption"
+              "$ref": "#/definitions/AccountEncryption"
             }
           }
         },
@@ -1294,7 +1181,7 @@
         }
       }
     },
-    "Encryption": {
+    "AccountEncryption": {
       "description": "The Encryption configuration.",
       "type": "object",
       "properties": {
@@ -1553,37 +1440,6 @@
           "description": "The time of the status.",
           "type": "string",
           "format": "date-time"
-        }
-      }
-    },
-    "RefreshDelegatedResourceIdentityRequestBody": {
-      "description": "The body of the RefreshDelegatedResourceIdentityRequest request.",
-      "type": "object",
-      "properties": {
-        "sourceResourceInternalIds": {
-          "description": "Array of source resource internal_ids to refresh for the backing resource",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "12345678-90ab-cdef-1234-567890abcdef"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "RefreshDelegatedResourceIdentityErrorResponse": {
-      "description": "The body of the RefreshDelegatedResourceIdentityRequest error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Status code",
-          "type": "string",
-          "example": "HTTP Status Code"
-        },
-        "message": {
-          "description": "Error message",
-          "type": "string",
-          "example": "Error Message"
         }
       }
     }
