@@ -432,6 +432,19 @@
           "type": "boolean",
           "description": "Whether to Advertise the range to Internet."
         },
+        "prefixType": {
+          "type": "string",
+          "description": "Type of custom IP prefix. Should be Singular, Parent, or Child.",
+          "enum": [
+            "Singular",
+            "Parent",
+            "Child"
+          ],
+          "x-ms-enum": {
+            "name": "CustomIpPrefixType",
+            "modelAsString": true
+          }
+        },
         "publicIpPrefixes": {
           "readOnly": true,
           "type": "array",

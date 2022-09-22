@@ -10,7 +10,7 @@ go:
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum and then remove it from the generated code to avoid the generator generates the code by hard-coding the single-entry enum value
     # this directive adds a DummyOrchestrationServiceName to the enum type
-  - from: ComputeRP/virtualMachineScaleSet.json
+  - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
@@ -38,7 +38,7 @@ azure-arm: true
 
 directive:
   # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
-  - from: DiskRP/diskRPCommon.json
+  - from: diskRPCommon.json
     where: "$.definitions.PurchasePlan"
     transform: >
       $["x-ms-client-name"] = "DiskPurchasePlan";

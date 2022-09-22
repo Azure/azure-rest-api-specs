@@ -41,6 +41,10 @@
                 ]
               },
               "vnetRoutes": {
+                "staticRoutesConfig": {
+                  "propagateStaticRoutes": true,
+                  "vnetLocalRouteOverrideCriteria": "Equal"
+                },
                 "staticRoutes": [
                   {
                     "name": "route1",
@@ -65,6 +69,12 @@
                   }
                 ]
               }
+            },
+            "inboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
+            },
+            "outboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
             }
           }
         },
@@ -123,6 +133,12 @@
                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/bgpConnections/bgpConn2"
                   }
                 ]
+              },
+              "inboundRouteMap": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
+              },
+              "outboundRouteMap": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
               }
             }
           }

@@ -6,6 +6,8 @@
       "type": "string",
       "enum": [
         "ResourceGroup",
+        "Subscription",
+        "Tenant",
         "None"
       ],
       "default": "ResourceGroup"
@@ -388,8 +390,16 @@
                         "type": "string"
                       }
                     },
-                    "body":{
-                      "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+                    "body": {
+                      "type": [
+                        "object",
+                        "number",
+                        "array",
+                        "integer",
+                        "string",
+                        "boolean",
+                        "null"
+                      ]
                     }
                   },
                   "additionalProperties": false
@@ -397,7 +407,7 @@
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/JsonPatchOpTest"
+                    "$ref": "#/definitions/JsonTestOp"
                   }
                 }
               ]
@@ -608,7 +618,7 @@
       },
       "additionalProperties": false
     },
-    "JsonPatchOpTest": {
+    "JsonTestOp": {
       "type": "object",
       "required": [
         "test"
@@ -644,7 +654,7 @@
                   "examples": [
                     "to.not.have.property('b')",
                     "to.match(/^foo/)",
-                    "to.be.not.undefined"
+                    "to.not.be.undefined"
                   ]
                 }
               },

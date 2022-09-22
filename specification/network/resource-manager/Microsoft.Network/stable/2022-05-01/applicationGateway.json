@@ -3548,6 +3548,23 @@
             "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
           },
           "description": "The rule groups of the web application firewall rule set."
+        },
+        "tiers": {
+          "type": "array",
+          "description": "Tier of an application gateway that support the rule set.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "WAF",
+              "Standard_v2",
+              "WAF_v2"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewayTierTypes",
+              "modelAsString": true
+            }
+          }
         }
       },
       "required": [
@@ -3587,6 +3604,37 @@
           "type": "integer",
           "format": "int32",
           "description": "The identifier of the web application firewall rule."
+        },
+        "ruleIdString": {
+          "type": "string",
+          "description": "The string representation of the web application firewall rule identifier."
+        },
+        "state": {
+          "type": "string",
+          "description": "The string representation of the web application firewall rule state.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayWafRuleStateTypes",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "description": "The string representation of the web application firewall rule action.",
+          "enum": [
+            "None",
+            "AnomalyScoring",
+            "Allow",
+            "Block",
+            "Log"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayWafRuleActionTypes",
+            "modelAsString": true
+          }
         },
         "description": {
           "type": "string",
