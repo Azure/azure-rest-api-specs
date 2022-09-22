@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.elastic
 package-name: azure-mgmt-elastic
-package-version: 2022-07-01-preview
+package-version: 2020-07-01-preview
 clear-output-folder: true
 
 ``` yaml $(python)
