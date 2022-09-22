@@ -64,7 +64,7 @@ generate-tests: false
 artifact-id: azure-developer-loadtesting
 namespace: com.azure.developer.loadtesting
 partial-update: true
-output-folder: $(azure-sdk-for-java-folder)
+output-folder: $(azure-sdk-for-java-folder)/sdk/loadtestservice/azure-developer-loadtesting
 service-versions:
 - 2022-06-01-preview
 directive:
