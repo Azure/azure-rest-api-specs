@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "TrafficControllerClient",
+    "title": "TrafficController",
     "version": "2022-10-01-preview",
     "description": "Traffic Controller Provider management API.",
     "x-cadl-generated": [
@@ -1057,14 +1057,14 @@
         }
       ]
     },
-    "FrontendIPAddressType": {
+    "FrontendIPAddressVersion": {
       "type": "string",
       "enum": [
         "IPv4",
         "IPv6"
       ],
       "x-ms-enum": {
-        "name": "FrontendIPAddressType",
+        "name": "FrontendIPAddressVersion",
         "modelAsString": false
       }
     },
@@ -1090,16 +1090,26 @@
         "value"
       ]
     },
+    "FrontendMode": {
+      "type": "string",
+      "enum": [
+        "public"
+      ],
+      "x-ms-enum": {
+        "name": "FrontendMode",
+        "modelAsString": false
+      }
+    },
     "FrontendProperties": {
       "type": "object",
       "properties": {
         "mode": {
-          "type": "string",
+          "$ref": "#/definitions/FrontendMode",
           "description": "Frontend Mode (Optional)."
         },
-        "ipAddressType": {
-          "$ref": "#/definitions/FrontendIPAddressType",
-          "description": "Frontend IP Address Type (Optional)."
+        "ipAddressVersion": {
+          "$ref": "#/definitions/FrontendIPAddressVersion",
+          "description": "Frontend IP Address Version (Optional)."
         },
         "publicIPAddress": {
           "$ref": "#/definitions/FrontendPropertiesIPAddress",
@@ -1151,11 +1161,11 @@
       "type": "object",
       "properties": {
         "mode": {
-          "type": "string",
+          "$ref": "#/definitions/FrontendMode",
           "description": "Frontend Mode (Optional)."
         },
-        "ipAddressType": {
-          "$ref": "#/definitions/FrontendIPAddressType",
+        "ipAddressVersion": {
+          "$ref": "#/definitions/FrontendIPAddressVersion",
           "description": "Frontend IP Address Type (Optional)."
         },
         "publicIPAddress": {
@@ -1297,16 +1307,7 @@
     },
     "TrafficControllerUpdateProperties": {
       "type": "object",
-      "properties": {
-        "configurationEndpoints": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "Configuration Endpoints."
-        }
-      },
+      "properties": {},
       "description": "The updatable properties of the TrafficController."
     }
   },

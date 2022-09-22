@@ -6,8 +6,8 @@ import "@azure-tools/cadl-autorest";
 import "@azure-tools/cadl-azure-resource-manager";
 
 @armProviderNamespace
-@serviceTitle("TrafficControllerClient")
-@serviceVersion("2022-10-01-preview")
+@service({title:"TrafficController"})
+@service({version: "2022-10-01-preview"})
 @doc("Traffic Controller Provider management API.")
 @versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
@@ -36,9 +36,9 @@ model Frontend is TrackedResource<FrontendProperties>{
 @doc("Frontend Properties.")
 model FrontendProperties {
   @doc("Frontend Mode (Optional).")
-  mode?: string;
-  @doc("Frontend IP Address Type (Optional).")
-  ipAddressType?: FrontendIPAddressType;
+  mode?: FrontendMode;
+  @doc("Frontend IP Address Version (Optional).")
+  ipAddressVersion?: FrontendIPAddressVersion;
   @doc("Frontend Public IP Address (Optional).")
   publicIPAddress?: FrontendPropertiesIPAddress;
   @doc("Frontend Private IP Address (Optional).")
@@ -48,7 +48,10 @@ model FrontendProperties {
   provisioningState?: ProvisioningState;
 }
 
-enum FrontendIPAddressType {
+enum FrontendMode {
+  public
+}
+enum FrontendIPAddressVersion {
   IPv4,
   IPv6,
 }
@@ -84,7 +87,7 @@ model AssociationProperties {
 }
 
 enum AssociationType {
-  subnets,
+  "subnets",
 }
 
 @doc("Association Subnet.")
@@ -107,7 +110,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 model TrafficControllerProperties {
   @doc("Configuration Endpoints.")
   @visibility("read")
-  configurationEndpoints: string[];
+  configurationEndpoints?: string[];
   @visibility("read")
   @doc("Frontends References List")
   frontends? : ResourceID[];
@@ -137,7 +140,6 @@ model ResourceID{
 }
 
 //----------------------- Paths -----------------------
-
 @armResourceOperations
 interface AssociationsInterface extends ResourceInstanceOperations<Association, AssociationProperties>, ResourceListByParent<Association>{
 }
@@ -150,3 +152,4 @@ interface FrontendsInterface extends ResourceInstanceOperations<Frontend, Fronte
 interface TrafficControllerInterface extends ResourceOperations<TrafficController, TrafficControllerProperties>{
 }
 
+interface Operations extends Azure.ResourceManager.Operations {}
