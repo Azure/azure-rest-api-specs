@@ -507,7 +507,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/OpenIDConfigurationResponse"
             }
           },
           "default": {
@@ -565,6 +565,45 @@
         "policyCertificate": {
           "description": "RFC 7517 Json Web Key describing the certificate.",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "OpenIDConfigurationResponse": {
+      "type": "object",
+      "description": "The response to the OpenID metadata description document API",
+      "properties": {
+        "responseTypesSupported": {
+          "description": "Types supported in the OpenID metadata API",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "idTokenSigningAlgValuesSupported": {
+          "description": "List of the supported signing algorithms",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "revocationEndpoint": {
+          "description": "Revocation endpoint",
+          "type": "string"
+        },
+        "issuer": {
+          "description": "Issuer tenant base endpoint",
+          "type": "string"
+        },
+        "jwksUri": {
+          "description": "The URI to retrieve the signing keys",
+          "type": "string"
+        },
+        "claimsSupported": {
+          "description": "Set of claims supported by the OpenID metadata endpoint",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
