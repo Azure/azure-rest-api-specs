@@ -524,14 +524,14 @@
         }
       }
     },
-	"/facets": {
+    "/facets": {
       "get": {
         "tags": [
           "Public-Search"
         ],
         "summary": "Get a list of offers count per filter",
         "operationId": "Facets_Get",
-		    "x-ms-examples": {
+        "x-ms-examples": {
           "Facets_Get": {
             "$ref": "./examples/Facets_Get.json"
           }
@@ -921,7 +921,7 @@
               }
             }
           },
-		      {
+          {
             "type": "string",
             "name": "x-ms-app",
             "x-originalName": "callingApp",
@@ -962,14 +962,14 @@
         }
       }
     },
-	  "/suggestions/products": {
+    "/suggestions/products": {
       "get": {
         "tags": [
           "Public-Suggestions"
         ],
         "summary": "Get a list of azure marketplace products suggestions",
         "operationId": "Suggestions_GetProducts",
-		    "x-ms-examples": {
+        "x-ms-examples": {
           "SuggestionsProducts_Get": {
             "$ref": "./examples/SuggestionsProducts_Get.json"
           }
@@ -1187,13 +1187,6 @@
             }
           },
           {
-            "type": "string",
-            "name": "market",
-            "in": "query",
-            "description": "Product sold market, Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Such as 'US'",
-            "required": true
-          },
-          {
             "type": "array",
             "name": "linkedAddIns",
             "in": "query",
@@ -1319,7 +1312,7 @@
             "format": "int32",
             "x-nullable": false
           },
-		      {
+          {
             "type": "string",
             "name": "x-ms-app",
             "x-originalName": "callingApp",
@@ -1429,7 +1422,7 @@
         "modelAsString": true
       }
     },
-	  "SuggestionType": {
+    "SuggestionType": {
       "type": "string",
       "description": "The type of the suggestion",
       "enum": [
@@ -1465,65 +1458,65 @@
         }
       }
     },
-	  "FacetsResponse": {
+    "FacetsResponse": {
       "type": "object",
-	    "description": "The facets response",
+      "description": "The facets response",
       "required": [
         "facets"
       ],
       "properties": {
         "facets": {
-			    "description": "The facet items results",
-          "type": "array",
-          "items": {
+          "description": "The facet items results",
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/FacetsItem"
           }
         }
       }
     },
-	  "SuggestionsResponse": {
+    "SuggestionsResponse": {
       "type": "object",
-	    "description": "The suggestion response",
+      "description": "The suggestion response",
       "required": [
         "suggestions",
         "count"
       ],
       "properties": {
         "suggestions": {
-			    "description": "The suggestion items results",
+          "description": "The suggestion items results",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SuggestionItem"
           }
         },
         "count": {
-			    "description": "The suggestion count",
+          "description": "The suggestion count",
           "type": "integer",
           "format": "int64"
         }
       }
     },
     "SuggestionItem": {
-		  "description": "The suggestion item",
+      "description": "The suggestion item",
       "type": "object",
       "required": [
         "displayText"
       ],
       "properties": {
         "suggestionType": {
-			    "description": "The suggestion type",
+          "description": "The suggestion type",
           "$ref": "#/definitions/SuggestionType"
         },
         "displayText": {
-			    "description": "The suggestion display text",
+          "description": "The suggestion display text",
           "type": "string"
         },
         "id": {
-			    "description": "The suggestion item id",
+          "description": "The suggestion item id",
           "type": "string"
         },
         "iconUrl": {
-			    "description": "The icon url",
+          "description": "The icon url",
           "type": "string"
         },
         "productType": {
