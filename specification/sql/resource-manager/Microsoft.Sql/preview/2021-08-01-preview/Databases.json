@@ -846,13 +846,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/DatabaseUserIdentity"
           }
-        },
-        "delegatedResources": {
-          "description": "Resources delegated to the database - Internal Use Only",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Delegation"
-          }
         }
       }
     },
@@ -1202,11 +1195,6 @@
         "federatedClientId": {
           "format": "uuid",
           "description": "The Client id used for cross tenant per database CMK scenario",
-          "type": "string"
-        },
-        "primaryDelegatedIdentityClientId": {
-          "format": "uuid",
-          "description": "The Primary Delegated Identity Client id used for per database CMK - for internal use only",
           "type": "string"
         },
         "sourceResourceId": {
@@ -1572,11 +1560,6 @@
           "format": "uuid",
           "description": "The Client id used for cross tenant per database CMK scenario",
           "type": "string"
-        },
-        "primaryDelegatedIdentityClientId": {
-          "format": "uuid",
-          "description": "The Primary Delegated Identity Client id used for per database CMK - for internal use only",
-          "type": "string"
         }
       }
     },
@@ -1593,22 +1576,6 @@
         "clientId": {
           "format": "uuid",
           "description": "The Azure Active Directory client id.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Delegation": {
-      "description": "Delegated Resource Properties - Internal Use Only",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The resource id of the source resource - Internal Use Only",
-          "type": "string"
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "AAD tenant guid of the source resource identity - Internal Use Only.",
           "type": "string",
           "readOnly": true
         }

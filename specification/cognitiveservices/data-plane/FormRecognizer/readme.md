@@ -15,6 +15,13 @@ openapi-type: data-plane
 
 # Releases
 
+### Release 2022-06-30-preview
+These settings apply only when `--tag=2022-06-30-preview` is specified on the command line.
+``` yaml $(tag) == '2022-06-30-preview'
+input-file:
+  - preview/2022-06-30-preview/FormRecognizer.json
+
+```
 ### Release 2022-01-30-preview
 These settings apply only when `--tag=2022-01-30-preview` is specified on the command line.
 ``` yaml $(tag) == '2022-01-30-preview'
@@ -116,13 +123,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_formrecognizer']
 ```
 
 

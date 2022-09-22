@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-resources-2021-04
+tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-privatelinks)
@@ -66,18 +66,26 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-05
+tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-changes)
-tag: package-changes-2022-03
+tag: package-changes-2022-05
+```
+### Tag: package-changes-2022-05
+
+These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-05'
+input-file:
+- Microsoft.Resources/stable/2022-05-01/changes.json
 ```
 
-### Tag: package-changes-2022-03
+### Tag: package-changes-2022-03-01-preview
 
 These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-changes-2022-03'
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
 input-file:
 - Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
@@ -93,6 +101,8 @@ input-file:
 - Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
 - Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
 
 # Needed when there is more than one input file
 override-info:
@@ -351,6 +361,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2022-02
+
+These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2022-02'
+input-file:
+- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
 ```
 
 ### Tag: package-templatespecs-2021-05
@@ -708,6 +727,14 @@ directive:
     from: policyExemptions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyVariables.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyVariableValues.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties
@@ -835,6 +862,12 @@ directive:
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
+    from: policyVariables.json
+    reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyVariableValues.json
+    reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: RequiredReadOnlySystemData
@@ -872,14 +905,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 ## Python
 
@@ -927,5 +960,4 @@ input-file:
 override-info:
   title: PolicyClient
 ```
-
 
