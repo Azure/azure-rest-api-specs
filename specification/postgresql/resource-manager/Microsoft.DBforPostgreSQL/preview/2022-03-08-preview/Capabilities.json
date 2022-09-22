@@ -102,8 +102,7 @@
           "type": "string",
           "description": "The status",
           "readOnly": true
-        }
-      },
+        },
       "description": "storage size in MB capability"
     },
     "VcoreCapability": {
@@ -140,12 +139,23 @@
       },
       "description": "Vcores capability"
     },
+    "ServerVersion": {
+      "type": "string"
+    },
     "ServerVersionCapability": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
           "description": "server version",
+          "readOnly": true
+        },
+        "supportedVersionsToUpgrade": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported servers versions to upgrade",
           "readOnly": true
         },
         "supportedVcores": {
