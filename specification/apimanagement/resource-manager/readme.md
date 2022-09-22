@@ -31,12 +31,6 @@ openapi-type: arm
 tag: package-2021-08
 ```
 
-``` yaml
-modelerfour:
-  lenient-model-deduplication: true
-tag: package-2021-08
-```
-
 
 ### Tag: package-preview-2021-12
 
