@@ -52,6 +52,7 @@ input-file:
   - Microsoft.RecoveryServices/preview/2022-09-01-preview/replicationusages.json
   - Microsoft.RecoveryServices/preview/2022-09-01-preview/vaults.json
   - Microsoft.RecoveryServices/preview/2022-09-01-preview/vaultusages.json
+```
 
 ### Tag: package-2022-08
 
@@ -63,8 +64,8 @@ input-file:
   - Microsoft.RecoveryServices/stable/2022-08-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2022-08-01/vaults.json
   - Microsoft.RecoveryServices/stable/2022-08-01/vaultusages.json
-
 ```
+
 ### Tag: package-2022-04
 
 These settings apply only when `--tag=package-2022-04` is specified on the command line.
