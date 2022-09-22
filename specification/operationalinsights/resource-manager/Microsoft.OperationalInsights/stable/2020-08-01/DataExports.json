@@ -229,7 +229,10 @@
             "description": "OK response definition."
           },
           "404": {
-            "description": "Not found the specific data export."
+            "description": "Not found the specific data export.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -285,8 +288,7 @@
         },
         "destination": {
           "$ref": "#/definitions/Destination",
-          "description": "destination properties.",
-          "x-ms-client-flatten": true
+          "description": "destination properties."
         },
         "enable": {
           "type": "boolean",
