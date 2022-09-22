@@ -3,7 +3,7 @@
   "info": {
     "title": "Content Moderator Client",
     "version": "2022-09-30-preview",
-    "description": "[Description]"
+    "description": "Detect harmful content"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -24,7 +24,7 @@
           "Text"
         ],
         "summary": "Text Detect",
-        "description": "A sync API for text detection",
+        "description": "A sync API for harmful content detection",
         "operationId": "Text_Detect",
         "consumes": [
           "application/json"
@@ -97,9 +97,9 @@
           "description": "Exclusive end offset",
           "type": "integer"
         },
-        "isHitted": {
+        "detected": {
           "type": "boolean",
-          "description": "Whether this category is hitted in this mask"
+          "description": "Whether this category is detected in [start,end)"
         },
         "score": {
           "description": "The score of detection result",
@@ -124,8 +124,8 @@
         "category": {
           "$ref": "#/definitions/TextCategory"
         },
-        "isHitted": {
-          "description": "Whether this category is hitted in this input text",
+        "detected": {
+          "description": "Whether this category is detected in this input text",
           "type": "boolean"
         },
         "score": {
@@ -141,7 +141,7 @@
           }
         },
         "diagnoses": {
-          "description": "The diagnoses array, each element contains detection result of one mask defined by start and end offset",
+          "description": "The diagnoses array, each element contains detection result in [start,end)",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextDetectDiagnosis"
