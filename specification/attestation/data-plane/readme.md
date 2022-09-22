@@ -25,7 +25,7 @@ These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-10-01
+tag: package-2022-08-01
 ```
 
 ### Tag: package-2018-09-01
@@ -44,6 +44,15 @@ These settings apply only when `--tag=package-2020-10-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-10-01'
 input-file:
 - Microsoft.Attestation/stable/2020-10-01/attestation.json
+```
+
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-01'
+input-file:
+- Microsoft.Attestation/stable/2022-08-01/attestation.json
 ```
 
 ---
