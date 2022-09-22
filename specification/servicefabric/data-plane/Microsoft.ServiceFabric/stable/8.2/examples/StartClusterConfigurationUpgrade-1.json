@@ -1,0 +1,40 @@
+{
+  "operationId": "StartClusterConfigurationUpgrade",
+  "description": "This example shows how to start upgrading the configuration of a Service Fabric standalone cluster.",
+  "parameters": {
+    "api-version": "6.0",
+    "nameId": "samples/apps/CalculatorApp",
+    "ClusterConfigurationUpgradeDescription": {
+      "ClusterConfig": "<PutYourClusterConfigHere>",
+      "ApplicationHealthPolicies": {
+        "ApplicationHealthPolicyMap": [
+          {
+            "Key": "fabric:/samples/CalculatorApp",
+            "Value": {
+              "ConsiderWarningAsError": true,
+              "MaxPercentUnhealthyDeployedApplications": 10,
+              "DefaultServiceTypeHealthPolicy": {
+                "MaxPercentUnhealthyPartitionsPerService": 0,
+                "MaxPercentUnhealthyReplicasPerPartition": 0,
+                "MaxPercentUnhealthyServices": 0
+              },
+              "ServiceTypeHealthPolicyMap": [
+                {
+                  "Key": "Svc1Type",
+                  "Value": {
+                    "MaxPercentUnhealthyPartitionsPerService": 0,
+                    "MaxPercentUnhealthyReplicasPerPartition": 0,
+                    "MaxPercentUnhealthyServices": 10
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {}
+  }
+}

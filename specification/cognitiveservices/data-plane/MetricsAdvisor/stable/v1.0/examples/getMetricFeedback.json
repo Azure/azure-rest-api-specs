@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "feedbackId": "99998888-7777-6666-5555-444433332222"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "startTime": "2020-01-01T00:00:00.000Z",
+        "endTime": "2020-01-01T00:00:00.000Z",
+        "value": {
+          "anomalyValue": "NotAnomaly"
+        },
+        "anomalyDetectionConfigurationId": "00000000-0000-0000-0000-000000000000",
+        "anomalyDetectionConfigurationSnapshot": {
+          "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+          "name": "Anomaly detection configuration name",
+          "description": "Anomaly detection configuration description",
+          "metricId": "22222222-2222-2222-2222-000000000001",
+          "wholeMetricConfiguration": {
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          },
+          "dimensionGroupOverrideConfigurations": [
+            {
+              "group": {
+                "dimension": {
+                  "city": "Beijing"
+                }
+              },
+              "conditionOperator": "AND",
+              "smartDetectionCondition": {
+                "sensitivity": 91.0,
+                "anomalyDetectorDirection": "Both",
+                "suppressCondition": {
+                  "minNumber": 1,
+                  "minRatio": 100.0
+                }
+              },
+              "hardThresholdCondition": {
+                "lowerBound": 1.0,
+                "upperBound": 100.0,
+                "anomalyDetectorDirection": "Both",
+                "suppressCondition": {
+                  "minNumber": 1,
+                  "minRatio": 100.0
+                }
+              },
+              "changeThresholdCondition": {
+                "changePercentage": 5.0,
+                "shiftPoint": 1,
+                "withinRange": false,
+                "anomalyDetectorDirection": "Both",
+                "suppressCondition": {
+                  "minNumber": 1,
+                  "minRatio": 100.0
+                }
+              }
+            }
+          ],
+          "seriesOverrideConfigurations": [
+            {
+              "series": {
+                "dimension": {
+                  "category": "Jewelry",
+                  "city": "Beijing"
+                }
+              },
+              "conditionOperator": "AND",
+              "smartDetectionCondition": {
+                "sensitivity": 91.0,
+                "anomalyDetectorDirection": "Both",
+                "suppressCondition": {
+                  "minNumber": 1,
+                  "minRatio": 100.0
+                }
+              },
+              "hardThresholdCondition": {
+                "lowerBound": 1.0,
+                "upperBound": 100.0,
+                "anomalyDetectorDirection": "Both",
+                "suppressCondition": {
+                  "minNumber": 1,
+                  "minRatio": 100.0
+                }
+              },
+              "changeThresholdCondition": {
+                "changePercentage": 5.0,
+                "shiftPoint": 1,
+                "withinRange": false,
+                "anomalyDetectorDirection": "Both",
+                "suppressCondition": {
+                  "minNumber": 1,
+                  "minRatio": 100.0
+                }
+              }
+            }
+          ]
+        },
+        "feedbackId": "99999999-9999-9999-9999-000000000001",
+        "createdTime": "2020-03-01T00:00:00.000Z",
+        "userPrincipal": "viewer@company.example",
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "dimensionFilter": {
+          "dimension": {
+            "city": "Beijing"
+          }
+        },
+        "feedbackType": "Anomaly"
+      }
+    }
+  }
+}

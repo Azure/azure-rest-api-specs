@@ -1,0 +1,108 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2022-03-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ProjectFileProperties": {
+      "type": "object",
+      "description": "Base class for file properties.",
+      "properties": {
+        "extension": {
+          "description": "Optional File extension. If submitted it should not have a leading period and must match the extension from filePath.",
+          "type": "string"
+        },
+        "filePath": {
+          "description": "Relative path of this file resource. This property can be set when creating or updating the file resource.",
+          "type": "string"
+        },
+        "lastModified": {
+          "description": "Modification DateTime.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "mediaType": {
+          "description": "File content type. This property can be modified to reflect the file content type.",
+          "type": "string"
+        },
+        "size": {
+          "description": "File size.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectFile": {
+      "type": "object",
+      "description": "A file resource",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
+        },
+        "properties": {
+          "description": "Custom file properties",
+          "$ref": "#/definitions/ProjectFileProperties"
+        },
+        "systemData": {
+          "$ref": "../sqlmigration.json#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "FileList": {
+      "type": "object",
+      "description": "OData page of files",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of files",
+          "items": {
+            "$ref": "#/definitions/ProjectFile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of files"
+        }
+      }
+    },
+    "FileStorageInfo": {
+      "type": "object",
+      "description": "File storage information.",
+      "properties": {
+        "uri": {
+          "description": "A URI that can be used to access the file content.",
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1443 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "These are the Network Experiment APIs.\n",
+    "version": "2019-11-01",
+    "title": "NetworkExperiments"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "NetworkExperimentProfiles",
+      "description": "The configuration of Network Experiment profiles"
+    },
+    {
+      "name": "Experiments",
+      "description": "The configuration of the Network Experiment experiments"
+    },
+    {
+      "name": "PreconfiguredEndpoints",
+      "description": "The preconfigured endpoints and details"
+    },
+    {
+      "name": "Reports",
+      "description": "The analysis and results of the experiments"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/NetworkExperimentProfiles": {
+      "get": {
+        "tags": [
+          "NetworkExperimentProfiles"
+        ],
+        "summary": "Gets a list of Network Experiment Profiles under a subscription",
+        "operationId": "NetworkExperimentProfiles_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List NetworkExperiment Profiles in a Resource Group": {
+            "$ref": "./examples/NetworkExperimentListProfiles.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles": {
+      "get": {
+        "tags": [
+          "NetworkExperimentProfiles"
+        ],
+        "summary": "Gets a list of Network Experiment Profiles within a resource group under a subscription",
+        "operationId": "NetworkExperimentProfiles_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List NetworkExperiment Profiles in a Resource Group": {
+            "$ref": "./examples/NetworkExperimentListProfiles.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}": {
+      "get": {
+        "tags": [
+          "NetworkExperimentProfiles"
+        ],
+        "summary": "Gets an NetworkExperiment Profile by ProfileName",
+        "operationId": "NetworkExperimentProfiles_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an NetworkExperiment Profile by Profile Id": {
+            "$ref": "./examples/NetworkExperimentGetProfile.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkExperimentProfiles"
+        ],
+        "summary": "Creates an NetworkExperiment Profile",
+        "operationId": "NetworkExperimentProfiles_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "An Network Experiment Profile",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new protection policy has been created.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates an NetworkExperiment Profile in a Resource Group": {
+            "$ref": "./examples/NetworkExperimentCreateProfile.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkExperimentProfiles"
+        ],
+        "description": "Updates an NetworkExperimentProfiles",
+        "summary": "Updates an NetworkExperimentProfiles by NetworkExperimentProfile name",
+        "operationId": "NetworkExperimentProfiles_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The Profile Update Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileUpdateModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. successful operation",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates an Experiment": {
+            "$ref": "./examples/NetworkExperimentUpdateProfile.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkExperimentProfiles"
+        ],
+        "summary": "Deletes an NetworkExperiment Profile by ProfileName",
+        "operationId": "NetworkExperimentProfiles_Delete",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the profile was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an NetworkExperiment Profile by ProfileName": {
+            "$ref": "./examples/NetworkExperimentDeleteProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/PreconfiguredEndpoints": {
+      "get": {
+        "tags": [
+          "PreconfiguredEndpoints"
+        ],
+        "summary": "Gets a list of Preconfigured Endpoints",
+        "operationId": "PreconfiguredEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PreconfiguredEndpointList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of Preconfigured Endpoints": {
+            "$ref": "./examples/NetworkExperimentGetPreconfiguredEndpoints.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments": {
+      "get": {
+        "tags": [
+          "Experiments"
+        ],
+        "summary": "Gets a list of Experiments",
+        "operationId": "Experiments_ListByProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ExperimentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of Experiments": {
+            "$ref": "./examples/NetworkExperimentListExperiments.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}": {
+      "get": {
+        "tags": [
+          "Experiments"
+        ],
+        "summary": "Gets an Experiment by ExperimentName",
+        "operationId": "Experiments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an Experiment by ExperimentName": {
+            "$ref": "./examples/NetworkExperimentGetExperiment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Experiments"
+        ],
+        "summary": "Creates or updates an Experiment",
+        "operationId": "Experiments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "description": "The Experiment resource",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new experiment has been created.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates an Experiment": {
+            "$ref": "./examples/NetworkExperimentCreateExperiment.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Experiments"
+        ],
+        "description": "Updates an Experiment",
+        "summary": "Updates an Experiment by Experiment id",
+        "operationId": "Experiments_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The Experiment Update Model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentUpdateModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. successful operation",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates an Experiment": {
+            "$ref": "./examples/NetworkExperimentUpdateExperiment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Experiments"
+        ],
+        "summary": "Deletes an Experiment",
+        "operationId": "Experiments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the policy was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes an Experiment": {
+            "$ref": "./examples/NetworkExperimentDeleteExperiment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}/LatencyScorecard": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Gets a Latency Scorecard for a given Experiment",
+        "operationId": "Reports_GetLatencyScorecards",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "endDateTimeUTC",
+            "type": "string",
+            "description": "The end DateTime of the Latency Scorecard in UTC",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "type": "string",
+            "description": "The country associated with the Latency Scorecard. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "aggregationInterval",
+            "type": "string",
+            "description": "The aggregation interval of the Latency Scorecard",
+            "enum": [
+              "Daily",
+              "Weekly",
+              "Monthly"
+            ],
+            "x-ms-enum": {
+              "name": "latencyScorecardAggregationInterval",
+              "modelAsString": true
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LatencyScorecard"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Latency Scorecard for a given Experiment": {
+            "$ref": "./examples/NetworkExperimentGetLatencyScorecard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}/Timeseries": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Gets a Timeseries for a given Experiment",
+        "operationId": "Reports_GetTimeseries",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "startDateTimeUTC",
+            "type": "string",
+            "format": "date-time",
+            "description": "The start DateTime of the Timeseries in UTC",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "endDateTimeUTC",
+            "type": "string",
+            "format": "date-time",
+            "description": "The end DateTime of the Timeseries in UTC",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "aggregationInterval",
+            "type": "string",
+            "description": "The aggregation interval of the Timeseries",
+            "enum": [
+              "Hourly",
+              "Daily"
+            ],
+            "x-ms-enum": {
+              "name": "timeseriesAggregationInterval",
+              "modelAsString": true
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "timeseriesType",
+            "type": "string",
+            "description": "The type of Timeseries",
+            "enum": [
+              "MeasurementCounts",
+              "LatencyP50",
+              "LatencyP75",
+              "LatencyP95"
+            ],
+            "x-ms-enum": {
+              "name": "timeseriesType",
+              "modelAsString": true
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "endpoint",
+            "type": "string",
+            "description": "The specific endpoint",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "type": "string",
+            "description": "The country associated with the Timeseries. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Timeseries"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Timeseries for a given Experiment": {
+            "$ref": "./examples/NetworkExperimentGetTimeseries.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProfileProperties": {
+      "description": "Defines the properties of an experiment",
+      "type": "object",
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/NetworkExperimentResourceState"
+        },
+        "enabledState": {
+          "type": "string",
+          "description": "The state of the Experiment",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProfileList": {
+      "description": "Defines a list of Profiles. It contains a list of Profile objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Profile"
+          },
+          "description": "List of Profiles within a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Profile objects if there are any."
+        }
+      }
+    },
+    "Profile": {
+      "description": "Defines an Network Experiment Profile and lists of Experiments",
+      "properties": {
+        "name": {
+          "description": "The name of the Profile",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The properties of a Profile",
+          "$ref": "#/definitions/ProfileProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Endpoint": {
+      "description": "Defines the endpoint properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint URL",
+          "type": "string"
+        }
+      }
+    },
+    "ProfileUpdateProperties": {
+      "description": "Defines the properties of an experiment",
+      "type": "object",
+      "properties": {
+        "enabledState": {
+          "type": "string",
+          "description": "The enabled state of the Profile",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProfileUpdateModel": {
+      "description": "Defines modifiable attributes of a Profile",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The properties of a Profile",
+          "$ref": "#/definitions/ProfileUpdateProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ExperimentUpdateProperties": {
+      "description": "Defines the properties of an experiment",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the intent or details of the Experiment",
+          "type": "string"
+        },
+        "enabledState": {
+          "type": "string",
+          "description": "The state of the Experiment",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExperimentUpdateModel": {
+      "description": "Defines modifiable attributes of an Experiment",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "description": "The properties of a Profile",
+          "$ref": "#/definitions/ExperimentUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExperimentProperties": {
+      "description": "Defines the properties of an experiment",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the details or intents of the Experiment",
+          "type": "string"
+        },
+        "endpointA": {
+          "description": "The endpoint A of an experiment",
+          "$ref": "#/definitions/Endpoint"
+        },
+        "endpointB": {
+          "description": "The endpoint B of an experiment",
+          "$ref": "#/definitions/Endpoint"
+        },
+        "enabledState": {
+          "type": "string",
+          "description": "The state of the Experiment",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/NetworkExperimentResourceState"
+        },
+        "status": {
+          "description": "The description of Experiment status from the server side",
+          "type": "string",
+          "readOnly": true
+        },
+        "scriptFileUri": {
+          "description": "The uri to the Script used in the Experiment",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExperimentList": {
+      "description": "Defines a list of Experiments. It contains a list of Experiment objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Experiment"
+          },
+          "description": "List of Experiments within a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Experiment objects if there are any."
+        }
+      }
+    },
+    "Experiment": {
+      "description": "Defines the properties of an Experiment",
+      "properties": {
+        "name": {
+          "description": "The name of the Experiment",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of an Experiment",
+          "$ref": "#/definitions/ExperimentProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LatencyScorecard": {
+      "description": "Defines the LatencyScorecard",
+      "properties": {
+        "properties": {
+          "description": "The properties of a latency scorecard",
+          "$ref": "#/definitions/LatencyScorecardProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "NetworkExperimentResourceState": {
+      "description": "Defines the server side resource status",
+      "readOnly": true,
+      "enum": [
+        "Creating",
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Deleting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NetworkExperimentResourceState",
+        "modelAsString": true
+      }
+    },
+    "LatencyScorecardProperties": {
+      "description": "Defines a the properties of a Latency Scorecard",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique identifier of the Latency Scorecard",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the Latency Scorecard",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the Latency Scorecard",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpointA": {
+          "description": "The A endpoint in the scorecard",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpointB": {
+          "description": "The B endpoint in the scorecard",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDateTimeUTC": {
+          "description": "The start time of the Latency Scorecard in UTC",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endDateTimeUTC": {
+          "description": "The end time of the Latency Scorecard in UTC",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "country": {
+          "description": "The country associated with the Latency Scorecard. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html",
+          "type": "string",
+          "readOnly": true
+        },
+        "latencyMetrics": {
+          "description": "The latency metrics of the Latency Scorecard",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LatencyMetric"
+          }
+        }
+      }
+    },
+    "LatencyMetric": {
+      "description": "Defines the properties of a latency metric used in the latency scorecard",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Latency Metric",
+          "type": "string",
+          "readOnly": true
+        },
+        "endDateTimeUTC": {
+          "description": "The end time of the Latency Scorecard in UTC",
+          "type": "string",
+          "readOnly": true
+        },
+        "aValue": {
+          "description": "The metric value of the A endpoint",
+          "type": "number",
+          "readOnly": true
+        },
+        "bValue": {
+          "description": "The metric value of the B endpoint",
+          "type": "number",
+          "readOnly": true
+        },
+        "delta": {
+          "description": "The difference in value between endpoint A and B",
+          "type": "number",
+          "readOnly": true
+        },
+        "deltaPercent": {
+          "description": "The percent difference between endpoint A and B",
+          "type": "number",
+          "readOnly": true
+        },
+        "aCLower95CI": {
+          "description": "The lower end of the 95% confidence interval for endpoint A",
+          "type": "number",
+          "readOnly": true
+        },
+        "aHUpper95CI": {
+          "description": "The upper end of the 95% confidence interval for endpoint A",
+          "type": "number",
+          "readOnly": true
+        },
+        "bCLower95CI": {
+          "description": "The lower end of the 95% confidence interval for endpoint B",
+          "type": "number",
+          "readOnly": true
+        },
+        "bUpper95CI": {
+          "description": "The upper end of the 95% confidence interval for endpoint B",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "Timeseries": {
+      "description": "Defines the Timeseries",
+      "properties": {
+        "properties": {
+          "description": "The properties of a Timeseries",
+          "$ref": "#/definitions/TimeseriesProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "TimeseriesProperties": {
+      "description": "Defines the properties of a timeseries",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint associated with the Timeseries data point"
+        },
+        "startDateTimeUTC": {
+          "type": "string",
+          "description": "The start DateTime of the Timeseries in UTC"
+        },
+        "endDateTimeUTC": {
+          "type": "string",
+          "description": "The end DateTime of the Timeseries in UTC"
+        },
+        "aggregationInterval": {
+          "type": "string",
+          "description": "The aggregation interval of the Timeseries",
+          "enum": [
+            "Hourly",
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "aggregationInterval",
+            "modelAsString": true
+          }
+        },
+        "timeseriesType": {
+          "type": "string",
+          "description": "The type of Timeseries",
+          "enum": [
+            "MeasurementCounts",
+            "LatencyP50",
+            "LatencyP75",
+            "LatencyP95"
+          ],
+          "x-ms-enum": {
+            "name": "timeseriesType",
+            "modelAsString": true
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "The country associated with the Timeseries. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html"
+        },
+        "timeseriesData": {
+          "description": "The set of data points for the timeseries",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeseriesDataPoint"
+          }
+        }
+      }
+    },
+    "TimeseriesDataPoint": {
+      "description": "Defines a timeseries datapoint used in a timeseries",
+      "type": "object",
+      "properties": {
+        "dateTimeUTC": {
+          "description": "The DateTime of the Timeseries data point in UTC",
+          "type": "string"
+        },
+        "value": {
+          "description": "The Value of the Timeseries data point",
+          "type": "number"
+        }
+      }
+    },
+    "PreconfiguredEndpointList": {
+      "description": "Defines a list of preconfigured endpoints.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PreconfiguredEndpoint"
+          },
+          "description": "List of PreconfiguredEndpoints supported by NetworkExperiment."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of PreconfiguredEndpoints if there are any."
+        }
+      }
+    },
+    "PreconfiguredEndpoint": {
+      "description": "Defines the properties of a preconfigured endpoint",
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The properties of a preconfiguredEndpoint",
+          "$ref": "#/definitions/PreconfiguredEndpointProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PreconfiguredEndpointProperties": {
+      "description": "Defines the properties of a preconfigured endpoint",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the endpoint",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint that is preconfigured",
+          "type": "string"
+        },
+        "endpointType": {
+          "description": "The type of endpoint",
+          "type": "string",
+          "enum": [
+            "AFD",
+            "AzureRegion",
+            "CDN",
+            "ATM"
+          ],
+          "x-ms-enum": {
+            "name": "endpointType",
+            "modelAsString": true
+          }
+        },
+        "backend": {
+          "description": "The preconfigured endpoint backend",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "ProfileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "x-ms-parameter-location": "method",
+      "description": "The Profile identifier associated with the Tenant and Partner"
+    },
+    "ExperimentNameParameter": {
+      "name": "experimentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "x-ms-parameter-location": "method",
+      "description": "The Experiment identifier associated with the Experiment"
+    }
+  }
+}

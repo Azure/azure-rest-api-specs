@@ -138,7 +138,7 @@
             "description": "The Windows IoT Device Service metadata and security metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeviceServiceProperties"
+              "$ref": "#/definitions/DeviceService"
             }
           },
           {
@@ -151,6 +151,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "201": {
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceService"
@@ -196,7 +202,7 @@
             "description": "The Windows IoT Device Service metadata and security metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeviceServiceProperties"
+              "$ref": "#/definitions/DeviceService"
             }
           },
           {
@@ -251,6 +257,12 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "204": {
+            "description": "OK. The request has succeeded with no content to return.",
             "schema": {
               "$ref": "#/definitions/DeviceService"
             }
@@ -538,6 +550,14 @@
         "display": {
           "$ref": "#/definitions/OperationDisplayInfo",
           "description": "The operation supported by Azure Data Catalog Service."
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "origin": {
+          "description": "Indicates the executor of the operation.",
+          "type": "string"
         }
       }
     },
@@ -566,21 +586,27 @@
     "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A human-readable representation of the error.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "A human-readable representation of the error's details.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "description": "One of a server-defined set of error codes.",
+              "type": "string"
+            },
+            "message": {
+              "description": "A human-readable representation of the error.",
+              "type": "string"
+            },
+            "target": {
+              "description": "The target of the particular error.",
+              "type": "string"
+            },
+            "details": {
+              "description": "A human-readable representation of the error's details.",
+              "type": "string"
+            }
+          }
         }
       }
     },

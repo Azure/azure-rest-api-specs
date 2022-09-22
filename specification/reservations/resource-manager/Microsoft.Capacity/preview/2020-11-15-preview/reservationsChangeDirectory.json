@@ -1,0 +1,229 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Reservation API",
+    "description": "This API describe Azure Reservation",
+    "version": "2020-11-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/changeDirectory": {
+      "post": {
+        "summary": "Change directory of `ReservationOrder`.",
+        "description": "Change directory (tenant) of `ReservationOrder` and all `Reservation` under it to specified tenant id",
+        "operationId": "ReservationOrder_ChangeDirectory",
+        "x-ms-examples": {
+          "ChangeDirectory": {
+            "$ref": "./examples/ChangeDirectoryReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeDirectoryParameter"
+          }
+        ],
+        "tags": [
+          "ReservationOrder, ChangeDirectory"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Reservation`s created after the change directory operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDirectoryResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChangeDirectoryRequest": {
+      "type": "object",
+      "properties": {
+        "destinationTenantId": {
+          "description": "Tenant id GUID that reservation order is to be transferred to",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeDirectoryResponse": {
+      "type": "object",
+      "description": "Change directory response",
+      "properties": {
+        "reservationOrder": {
+          "$ref": "#/definitions/ChangeDirectoryResult"
+        },
+        "reservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChangeDirectoryResult"
+          }
+        }
+      }
+    },
+    "ChangeDirectoryResult": {
+      "type": "object",
+      "description": "Change directory result for reservation order or reservation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the reservation order or reservation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the reservation order or reservation"
+        },
+        "isSucceeded": {
+          "description": "True if change directory operation succeeded on this reservation order or reservation",
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error reason if operation failed. Null otherwise"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ExtendedErrorInfo"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorResponseCode"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseCode": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "InternalServerError",
+        "ServerTimeout",
+        "AuthorizationFailed",
+        "BadRequest",
+        "ClientCertificateThumbprintNotSet",
+        "InvalidRequestContent",
+        "OperationFailed",
+        "HttpMethodNotSupported",
+        "InvalidRequestUri",
+        "MissingTenantId",
+        "InvalidTenantId",
+        "InvalidReservationOrderId",
+        "InvalidReservationId",
+        "ReservationIdNotInReservationOrder",
+        "ReservationOrderNotFound",
+        "InvalidSubscriptionId",
+        "InvalidAccessToken",
+        "InvalidLocationId",
+        "UnauthenticatedRequestsThrottled",
+        "InvalidHealthCheckType",
+        "Forbidden",
+        "BillingScopeIdCannotBeChanged",
+        "AppliedScopesNotAssociatedWithCommerceAccount",
+        "PatchValuesSameAsExisting",
+        "RoleAssignmentCreationFailed",
+        "ReservationOrderCreationFailed",
+        "ReservationOrderNotEnabled",
+        "CapacityUpdateScopesFailed",
+        "UnsupportedReservationTerm",
+        "ReservationOrderIdAlreadyExists",
+        "RiskCheckFailed",
+        "CreateQuoteFailed",
+        "ActivateQuoteFailed",
+        "NonsupportedAccountId",
+        "PaymentInstrumentNotFound",
+        "MissingAppliedScopesForSingle",
+        "NoValidReservationsToReRate",
+        "ReRateOnlyAllowedForEA",
+        "OperationCannotBePerformedInCurrentState",
+        "InvalidSingleAppliedScopesCount",
+        "InvalidFulfillmentRequestParameters",
+        "NotSupportedCountry",
+        "InvalidRefundQuantity",
+        "PurchaseError",
+        "BillingCustomerInputError",
+        "BillingPaymentInstrumentSoftError",
+        "BillingPaymentInstrumentHardError",
+        "BillingTransientError",
+        "BillingError",
+        "FulfillmentConfigurationError",
+        "FulfillmentOutOfStockError",
+        "FulfillmentTransientError",
+        "FulfillmentError",
+        "CalculatePriceFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorResponseCode",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ReservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Order Id of the reservation"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Supported version for this document is 2020-10-01-preview",
+      "required": true,
+      "type": "string"
+    },
+    "ChangeDirectoryParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed to change directory of reservation order",
+      "schema": {
+        "$ref": "#/definitions/ChangeDirectoryRequest"
+      }
+    }
+  }
+}

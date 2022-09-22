@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testcl",
+    "databaseName": "database1",
+    "api-version": "2020-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents/06364798761800000000000000001",
+            "name": "06364798761800000000000000001",
+            "type": "Microsoft.Sql/servers/databases/securityEvents",
+            "properties": {
+              "eventTime": "2017-12-24T10:13:24.729Z",
+              "securityEventType": "SqlInjectionExploit",
+              "subscription": "00000000-1111-2222-3333-444444444444",
+              "server": "testcl",
+              "database": "database1",
+              "clientIp": "10.166.113.220",
+              "applicationName": "myApp",
+              "principalName": "maliciousUser",
+              "securityEventSqlInjectionAdditionalProperties": {
+                "threatId": "1",
+                "statement": "select * from sys.databases where database_id like '' or 1 = 1 --' and family = 'test11'",
+                "statementHighlightOffset": 52,
+                "statementHighlightLength": 13,
+                "errorCode": 0,
+                "errorSeverity": 0,
+                "errorMessage": ""
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents/06364798761800000000000000002",
+            "name": "06364798761800000000000000002",
+            "type": "Microsoft.Sql/servers/databases/securityEvents",
+            "properties": {
+              "eventTime": "2017-12-24T10:11:14.121Z",
+              "securityEventType": "SqlInjectionExploit",
+              "subscription": "00000000-1111-2222-3333-444444444444",
+              "server": "testcl",
+              "database": "database1",
+              "clientIp": "10.166.113.220",
+              "applicationName": "myApp",
+              "principalName": "maliciousUser",
+              "securityEventSqlInjectionAdditionalProperties": {
+                "threatId": "1",
+                "statement": "select * from sys.databases where database_id like '' or 1 = 1 --' and family = 'test10'",
+                "statementHighlightOffset": 52,
+                "statementHighlightLength": 13,
+                "errorCode": 0,
+                "errorSeverity": 0,
+                "errorMessage": ""
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents/06364798761800000000000000003",
+            "name": "06364798761800000000000000003",
+            "type": "Microsoft.Sql/servers/databases/securityEvents",
+            "properties": {
+              "eventTime": "2017-12-24T10:03:17.066Z",
+              "securityEventType": "SqlInjectionExploit",
+              "subscription": "00000000-1111-2222-3333-444444444444",
+              "server": "testcl",
+              "database": "database1",
+              "clientIp": "10.166.113.220",
+              "applicationName": "myApp",
+              "principalName": "maliciousUser",
+              "securityEventSqlInjectionAdditionalProperties": {
+                "threatId": "1",
+                "statement": "select * from sys.databases where database_id like '' or 1 = 1 --' and family = 'test9'",
+                "statementHighlightOffset": 52,
+                "statementHighlightLength": 13,
+                "errorCode": 0,
+                "errorSeverity": 0,
+                "errorMessage": ""
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -3535,6 +3535,125 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/ipAddressAggregates": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets the IP address aggregates for a given service.",
+        "x-ms-examples": {
+          "list_IPAddressAggregatesByService": {
+            "$ref": "./examples/IpAddressAggregates.json"
+          }
+        },
+        "operationId": "list_IPAddressAggregatesByService",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skiptoken",
+            "in": "query",
+            "description": "A continuationtoken value returned in paginated result to load different pages.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of IP addresses.",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregates"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/ipAddressAggregateSettings": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets the IP address aggregate settings.",
+        "x-ms-examples": {
+          "list_IPAddressAggregateSettings": {
+            "$ref": "./examples/IpAddressAggregateSettings.json"
+          }
+        },
+        "operationId": "list_IPAddressAggregateSettings",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IP address aggregate settings.",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregateSetting"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Configuration"
+        ],
+        "description": "Updates the IP address aggregate settings alert thresholds.",
+        "x-ms-examples": {
+          "update_IPAddressAggregateSettings": {
+            "$ref": "./examples/IpAddressAggregateSettingsUpdate.json"
+          }
+        },
+        "operationId": "update_IPAddressAggregateSettings",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "IPAddressAggregateSetting",
+            "in": "body",
+            "description": "The IP address aggregate setting object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregateSetting"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IP AddressAggregate Settings.",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregateSetting"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4939,7 +5058,7 @@
           "type": "string"
         },
         "ipAddress": {
-          "description": "The Ip address corresponding to the last error event.",
+          "description": "The IP address corresponding to the last error event.",
           "type": "string"
         },
         "lastUpdated": {
@@ -5328,6 +5447,135 @@
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
           }
+        }
+      }
+    },
+    "IPAddressAggregate": {
+      "description": "The key value pair for properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the entree",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "The service ID",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "The IP address from where the attempted login originated from.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "When the event occurred",
+          "type": "string"
+        },
+        "firstAuditTimestamp": {
+          "description": "The first audit timestamp",
+          "type": "string"
+        },
+        "lastAuditTimestamp": {
+          "description": "The last audit timestamp",
+          "type": "string"
+        },
+        "extranetLockoutErrorCount": {
+          "description": "The extranet lockout error count",
+          "type": "integer"
+        },
+        "badPasswordErrorCount": {
+          "description": "The bad password error count",
+          "type": "integer"
+        },
+        "uniqueUsernamesAttemptedCount": {
+          "description": "The unique usernames attempted",
+          "type": "integer"
+        },
+        "attemptCountThresholdIsExceeded": {
+          "description": "A value indicating whether the attempt count threshold been exceeded",
+          "type": "boolean"
+        },
+        "timeSpan": {
+          "description": "The duration of the event",
+          "type": "string"
+        },
+        "isWhitelistedIpAddress": {
+          "description": "A value indicating whether the IP address has been whitelisted.",
+          "type": "boolean"
+        },
+        "networkLocation": {
+          "description": "The network location",
+          "type": "string"
+        },
+        "attemptCountThresholdOnTrigger": {
+          "description": "The attempted count threshold on trigger.",
+          "type": "integer"
+        },
+        "attemptThresholdTypeOnTrigger": {
+          "description": "The attempted threshold type on trigger.",
+          "type": "string"
+        },
+        "geographicLocation": {
+          "description": "The geographic location.",
+          "type": "string"
+        }
+      }
+    },
+    "IPAddressAggregates": {
+      "description": "IP address aggregates.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPAddressAggregate"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of IP Aggregate list results if there are any.",
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "The number of results.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
+        }
+      }
+    },
+    "IPAddressAggregateSetting": {
+      "description": "The key value pair for IP aggregate thresholds.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the entree",
+          "type": "string"
+        },
+        "badPasswordAndExtranetLockoutCombinedDailyThreshold": {
+          "description": "This threshold setting defines the per day trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "badPasswordAndExtranetLockoutCombinedHourlyThreshold": {
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "extranetLockoutDailyThreshold": {
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "extranetLockoutHourlyThreshold": {
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "emailNotificationEnabled": {
+          "description": "A value indicating whether email notification has been enabled.",
+          "type": "boolean"
         }
       }
     },

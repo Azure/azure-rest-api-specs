@@ -68,33 +68,87 @@
       }
     },
     "Sku": {
-      "description": "The resource model definition representing SKU",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
-        },
-        "tier": {
-          "type": "string",
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
-        },
-        "size": {
-          "type": "string",
-          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
-        },
-        "family": {
-          "type": "string",
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
-        }
-      },
+      "description": "An ARM Resource SKU.",
       "required": [
         "name"
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the particular SKU",
+          "type": "string"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Capacity of the particular SKU.",
+          "type": "integer"
+        }
+      }
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
     },
     "ResourceIdentity": {
       "description": "Azure Active Directory identity configuration for a resource.",
@@ -109,7 +163,10 @@
         "type": {
           "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {

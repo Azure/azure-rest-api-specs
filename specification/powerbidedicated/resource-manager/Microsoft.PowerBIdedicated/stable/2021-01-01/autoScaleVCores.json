@@ -1,0 +1,460 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-01-01",
+    "title": "PowerBIDedicated",
+    "description": "PowerBI Dedicated Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Power BI dedicated capacities",
+    "x-ms-code-generation-settings": {
+      "name": "PowerBIDedicatedManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBIDedicated/autoScaleVCores/{vcoreName}": {
+      "get": {
+        "description": "Gets details about the specified auto scale v-core.",
+        "x-ms-examples": {
+          "Get details of an auto scale v-core": {
+            "$ref": "./examples/getAutoScaleVCore.json"
+          }
+        },
+        "tags": [
+          "AutoScaleVCores"
+        ],
+        "operationId": "AutoScaleVCores_Get",
+        "parameters": [
+          {
+            "$ref": "./powerbidedicated.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vcoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]+$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./powerbidedicated.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Provisions the specified auto scale v-core based on the configuration specified in the request.",
+        "x-ms-examples": {
+          "Create auto scale v-core": {
+            "$ref": "./examples/createAutoScaleVCore.json"
+          }
+        },
+        "tags": [
+          "AutoScaleVCores"
+        ],
+        "operationId": "AutoScaleVCores_Create",
+        "parameters": [
+          {
+            "$ref": "./powerbidedicated.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vcoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]+$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vCoreParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCore"
+            },
+            "description": "Contains the information used to provision the auto scale v-core."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./powerbidedicated.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes the specified auto scale v-core.",
+        "x-ms-examples": {
+          "Delete an auto scale v-core": {
+            "$ref": "./examples/deleteAutoScaleVCore.json"
+          }
+        },
+        "tags": [
+          "AutoScaleVCores"
+        ],
+        "operationId": "AutoScaleVCores_Delete",
+        "parameters": [
+          {
+            "$ref": "./powerbidedicated.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vcoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]+$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./powerbidedicated.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the current state of the specified auto scale v-core.",
+        "x-ms-examples": {
+          "Update auto scale v-core parameters": {
+            "$ref": "./examples/updateAutoScaleVCore.json"
+          }
+        },
+        "tags": [
+          "AutoScaleVCores"
+        ],
+        "operationId": "AutoScaleVCores_Update",
+        "parameters": [
+          {
+            "$ref": "./powerbidedicated.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vcoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]+$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vCoreUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCoreUpdateParameters"
+            },
+            "description": "Request object that contains the updated information for the auto scale v-core."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./powerbidedicated.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBIDedicated/autoScaleVCores": {
+      "get": {
+        "description": "Gets all the auto scale v-cores for the given resource group.",
+        "x-ms-examples": {
+          "List auto scale v-cores in resource group": {
+            "$ref": "./examples/listAutoScaleVCoresInResourceGroup.json"
+          }
+        },
+        "tags": [
+          "AutoScaleVCores"
+        ],
+        "operationId": "AutoScaleVCores_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "./powerbidedicated.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCoreListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./powerbidedicated.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIDedicated/autoScaleVCores": {
+      "get": {
+        "description": "Lists all the auto scale v-cores for the given subscription.",
+        "x-ms-examples": {
+          "List auto scale v-cores in subscription": {
+            "$ref": "./examples/listAutoScaleVCoresInSubscription.json"
+          }
+        },
+        "tags": [
+          "AutoScaleVCores"
+        ],
+        "operationId": "AutoScaleVCores_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "./powerbidedicated.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./powerbidedicated.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoScaleVCoreListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./powerbidedicated.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoScaleVCore": {
+      "description": "Represents an instance of an auto scale v-core resource.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/AutoScaleVCoreSku",
+          "description": "The SKU of the auto scale v-core resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AutoScaleVCoreProperties",
+          "description": "Properties of an auto scale v-core resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./powerbidedicated.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "sku"
+      ]
+    },
+    "AutoScaleVCoreListResult": {
+      "description": "An array of auto scale v-core resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoScaleVCore"
+          },
+          "description": "An array of auto scale v-core resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutoScaleVCoreUpdateParameters": {
+      "description": "Update request specification",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/AutoScaleVCoreSku",
+          "description": "The SKU of the auto scale v-core resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional provisioning properties."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AutoScaleVCoreMutableProperties",
+          "description": "Properties of the update operation request."
+        }
+      }
+    },
+    "AutoScaleVCoreProperties": {
+      "description": "Properties of an auto scale v-core resource.",
+      "type": "object",
+      "properties": {
+        "capacityObjectId": {
+          "type": "string",
+          "description": "The object ID of the capacity resource associated with the auto scale v-core resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "VCoreProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current deployment state of an auto scale v-core resource. The provisioningState is to indicate states for resource provisioning."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoScaleVCoreMutableProperties"
+        }
+      ]
+    },
+    "AutoScaleVCoreMutableProperties": {
+      "description": "An object that represents a set of mutable auto scale v-core resource properties.",
+      "type": "object",
+      "properties": {
+        "capacityLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity of an auto scale v-core resource."
+        }
+      }
+    },
+    "AutoScaleVCoreSku": {
+      "description": "Represents the SKU name and Azure pricing tier for auto scale v-core resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the SKU level."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "AutoScale"
+          ],
+          "x-ms-enum": {
+            "name": "VCoreSkuTier",
+            "modelAsString": true
+          },
+          "description": "The name of the Azure pricing tier to which the SKU applies."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity of an auto scale v-core resource."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  }
+}

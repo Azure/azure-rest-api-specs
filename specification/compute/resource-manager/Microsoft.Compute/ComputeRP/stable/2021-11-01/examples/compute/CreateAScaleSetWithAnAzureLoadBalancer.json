@@ -1,0 +1,251 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "api-version": "2021-11-01",
+    "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 3,
+        "name": "Standard_D1_v2"
+      },
+      "location": "westus",
+      "properties": {
+        "overprovision": true,
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage"
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "primary": true,
+                  "enableIPForwarding": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        },
+                        "publicIPAddressConfiguration": {
+                          "name": "{vmss-name}",
+                          "properties": {
+                            "publicIPAddressVersion": "IPv4"
+                          }
+                        },
+                        "loadBalancerInboundNatPools": [
+                          {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/{existing-load-balancer-name}/inboundNatPools/{existing-nat-pool-name}"
+                          }
+                        ],
+                        "loadBalancerBackendAddressPools": [
+                          {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/{existing-load-balancer-name}/backendAddressPools/{existing-backend-address-pool-name}"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "upgradePolicy": {
+          "mode": "Manual"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D1_v2"
+        },
+        "name": "{vmss-name}",
+        "properties": {
+          "singlePlacementGroup": true,
+          "overprovision": true,
+          "uniqueId": "ec0b21ca-51ec-414b-9323-f236ffc21479",
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2016-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          },
+                          "loadBalancerInboundNatPools": [
+                            {
+                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/inboundNatPools/lbNatPool"
+                            }
+                          ],
+                          "loadBalancerBackendAddressPools": [
+                            {
+                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/backendAddressPools/lbBackendPool"
+                            }
+                          ],
+                          "privateIPAddressVersion": "IPv4"
+                        }
+                      }
+                    ],
+                    "enableAcceleratedNetworking": false
+                  }
+                }
+              ]
+            }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D1_v2"
+        },
+        "name": "{vmss-name}",
+        "properties": {
+          "singlePlacementGroup": true,
+          "overprovision": true,
+          "uniqueId": "ec0b21ca-51ec-414b-9323-f236ffc21479",
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2016-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          },
+                          "loadBalancerInboundNatPools": [
+                            {
+                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/inboundNatPools/lbNatPool"
+                            }
+                          ],
+                          "loadBalancerBackendAddressPools": [
+                            {
+                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLb/backendAddressPools/lbBackendPool"
+                            }
+                          ],
+                          "privateIPAddressVersion": "IPv4"
+                        }
+                      }
+                    ],
+                    "enableAcceleratedNetworking": false
+                  }
+                }
+              ]
+            }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+      }
+    }
+  }
+}

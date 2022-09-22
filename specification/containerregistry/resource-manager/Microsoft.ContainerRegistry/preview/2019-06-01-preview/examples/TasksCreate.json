@@ -67,7 +67,9 @@
             "updateTriggerEndpoint": "https://user:pass@mycicd.webhook.com?token=foo",
             "updateTriggerPayloadType": "Token"
           }
-        }
+        },
+        "isSystemTask": false,
+        "logTemplate": "acr/tasks:{{.Run.OS}}"
       },
       "location": "eastus",
       "identity": {
@@ -138,7 +140,9 @@
               "updateTriggerEndpoint": null,
               "updateTriggerPayloadType": "Token"
             }
-          }
+          },
+          "isSystemTask": false,
+          "logTemplate": "acr/tasks:{{.Run.OS}}"
         },
         "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
         "name": "myTask",
@@ -213,7 +217,9 @@
               "updateTriggerEndpoint": null,
               "updateTriggerPayloadType": "Token"
             }
-          }
+          },
+          "isSystemTask": false,
+          "logTemplate": "acr/tasks:{{.Run.OS}}"
         },
         "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
         "name": "myTask",
