@@ -927,8 +927,7 @@
             "x-originalName": "callingApp",
             "in": "header",
             "required": true,
-            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'",
-            "x-nullable": true
+            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'"
           },
           {
             "type": "string",
@@ -937,8 +936,7 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request.",
-            "default": "2022-08-17-preview",
-            "x-nullable": true
+            "default": "2022-08-17-preview"
           }
         ],
         "responses": {
@@ -949,18 +947,16 @@
               "$ref": "#/definitions/FacetsResponse"
             }
           },
-          "400": {
-            "x-nullable": false,
-            "description": "In case request malformed",
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "x-nullable": false,
-            "description": "In case internal error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
@@ -1345,24 +1341,21 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of azure marketplace products suggestions and count",
             "schema": {
               "$ref": "#/definitions/SuggestionsResponse"
             }
           },
-          "400": {
-            "x-nullable": false,
-            "description": "In case request malformed",
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "x-nullable": false,
-            "description": "In case internal error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
