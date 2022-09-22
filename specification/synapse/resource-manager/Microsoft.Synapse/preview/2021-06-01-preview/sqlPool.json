@@ -5280,7 +5280,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/DataWarehouseQueries"
+              "$ref": "#/definitions/DataWarehouseQueriesList"
             },
             "description": "OK"
           },
@@ -7807,6 +7807,19 @@
           }
         }
       }
+    },
+    "DataWarehouseQueriesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQueries"
+          },
+          "description": "The response to a list datawarehouse queries."
+        }
+      },
+      "description": "The response to a list datawarehouse queries."
     },
     "DataWarehouseQueries": {
       "description": "The response to a list datawarehouse queries.",
