@@ -26,15 +26,31 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-03
+tag: package-preview-2022-08
 ```
 
 
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.App/preview/2022-08-01/AuthConfigs.json
+  - Microsoft.App/preview/2022-08-01/CommonDefinitions.json
+  - Microsoft.App/preview/2022-08-01/ContainerApps.json
+  - Microsoft.App/preview/2022-08-01/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-08-01/DaprComponents.json
+  - Microsoft.App/preview/2022-08-01/Global.json
+  - Microsoft.App/preview/2022-08-01/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-08-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-08-01/SourceControls.json
+```
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.App/stable/2022-03-01/AuthConfigs.json
   - Microsoft.App/stable/2022-03-01/CommonDefinitions.json
@@ -53,6 +69,7 @@ directive:
   from: AuthConfigs.json
   reason: Use disableWWWAuthenticate to align with AuthSettingV2
 ```
+
 ### Tag: package-2022-01-01-preview
 
 These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
