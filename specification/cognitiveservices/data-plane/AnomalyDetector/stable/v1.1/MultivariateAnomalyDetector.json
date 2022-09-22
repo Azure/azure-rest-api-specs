@@ -15,7 +15,8 @@
     "apiKeyHeader": {
       "type": "apiKey",
       "in": "header",
-      "name": "Ocp-Apim-Subscription-Key"
+      "name": "Ocp-Apim-Subscription-Key",
+      "description": "The secret key for your Azure Anomaly Detector subscription."
     }
   },
   "security": [
@@ -99,14 +100,14 @@
             "type": "integer",
             "default": 0,
             "required": false,
-            "description": "skip indicates how many models will be skipped.",
+            "description": "Skip indicates how many models will be skipped.",
             "name": "skip",
             "in": "query"
           },
           {
             "type": "integer",
             "required": false,
-            "description": "top indicates how many models will be fetched.",
+            "description": "Top indicates how many models will be fetched.",
             "name": "top",
             "in": "query"
           }
@@ -289,7 +290,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Model identifier",
+            "description": "Model identifier.",
             "format": "uuid"
           },
           {
@@ -340,7 +341,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Model identifier",
+            "description": "Model identifier.",
             "format": "uuid"
           },
           {
@@ -381,23 +382,23 @@
           "type": "string",
           "format": "date-time",
           "description": "A required field, indicating the start time of training data, which should be date-time of ISO 8601 format.",
-          "example": "2019-04-01T00:00:00Z"
+          "example": "2022-04-01T00:00:00Z"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "description": "A required field, indicating the end time of training data, which should be date-time of ISO 8601 format.",
-          "example": "2019-04-02T00:00:00Z"
+          "example": "2022-04-02T00:00:00Z"
         },
         "displayName": {
           "type": "string",
-          "description": "An optional field. The name of the model whose maximum length is 24.",
-          "example": "DevOps-MultiAD",
+          "description": "An optional field. The display name of the model whose maximum length is 24 characters.",
+          "example": "MultiAD-Sample",
           "maxLength": 24
         },
         "slidingWindow": {
           "type": "integer",
-          "description": "An optional field, indicating how many previous points will be used to detect whether the timestamp is anomaly or not. ",
+          "description": "An optional field, indicating how many previous timestamps will be used to detect whether the timestamp is anomaly or not. ",
           "example": 20
         },
         "alignPolicy": {
@@ -421,7 +422,7 @@
       "description": "Training result of a model including its status, errors and diagnostics information."
     },
     "DataSchema": {
-      "description": "Data schema for input data source: OneTable or MultiTable. OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default schema is OneTable.",
+      "description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
       "enum": [
         "OneTable",
         "MultiTable"
@@ -433,10 +434,12 @@
         "name": "DataSchema",
         "values": [
           {
-            "value": "OneTable"
+            "value": "OneTable",
+            "description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable."
           },
           {
-            "value": "MultiTable"
+            "value": "MultiTable",
+            "description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
           }
         ]
       }
@@ -567,66 +570,66 @@
           "example": [
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_input"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_1"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_on_timer_output"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_2"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ingestion"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_3"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "data_in_speed"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_4"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "cpu"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_5"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_series_init"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_6"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "F-Link_last_check_point_duration"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_7"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "data_out_speed"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_8"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_output"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_9"
             }
           ],
           "items": {
@@ -641,7 +644,7 @@
       "properties": {
         "epochIds": {
           "type": "array",
-          "description": "Epoch id",
+          "description": "This indicates the number of passes of the entire training dataset the algorithm has completed.",
           "example": [
             10,
             20,
@@ -660,6 +663,7 @@
         },
         "trainLosses": {
           "type": "array",
+          "description": "List of metrics used to assess how the model fits the training data for each epoch.",
           "example": [
             0.6291328072547913,
             0.1671326905488968,
@@ -678,6 +682,7 @@
         },
         "validationLosses": {
           "type": "array",
+          "description": "List of metrics used to assess how the model fits the validation set for each epoch.",
           "example": [
             0.9573427438735962,
             0.3182229995727539,
@@ -696,6 +701,7 @@
         },
         "latenciesInSeconds": {
           "type": "array",
+          "description": "Latency for each epoch. ",
           "example": [
             0.3398594856262207,
             0.3659665584564209,
@@ -723,23 +729,23 @@
         },
         "filledNARatio": {
           "type": "number",
-          "description": "Proportion of NaN values filled of the variable.",
+          "description": "Proportion of missing values that need to be filled by fillNAMethod.",
           "minimum": 0.0,
           "maximum": 1.0
         },
         "effectiveCount": {
           "type": "integer",
-          "description": "Number of effective points counted."
+          "description": "Number of effective data points before applying fillNAMethod."
         },
         "firstTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "First valid timestamp of the variable."
+          "description": "First valid timestamp of input data."
         },
         "lastTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Last valid timestamp of the variable."
+          "description": "Last valid timestamp of input data."
         }
       },
       "type": "object"
@@ -793,13 +799,13 @@
           "type": "string",
           "format": "date-time",
           "description": "Date and time (UTC) when the model was created.",
-          "example": "2020-06-30T00:00:00Z"
+          "example": "2022-11-01T00:00:00Z"
         },
         "lastUpdatedTime": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time (UTC) when the model was last updated.",
-          "example": "2020-06-30T00:00:00Z"
+          "example": "2022-11-01T00:00:00Z"
         },
         "modelInfo": {
           "$ref": "#/definitions/ModelInfo"
@@ -830,13 +836,13 @@
           "type": "string",
           "format": "date-time",
           "description": "A required field, indicating the start time of data for detection, which should be date-time of ISO 8601 format.",
-          "example": "2019-04-01T00:15:00Z"
+          "example": "2022-04-01T00:15:00Z"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "description": "A required field, indicating the end time of data for detection, which should be date-time of ISO 8601 format.",
-          "example": "2019-04-01T00:40:00Z"
+          "example": "2022-04-01T00:40:00Z"
         }
       },
       "type": "object",
@@ -852,6 +858,7 @@
         "resultId": {
           "type": "string",
           "format": "uuid",
+          "description": "Result identifier, which is used to fetch the results of an inference call.",
           "example": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
         },
         "summary": {
@@ -889,66 +896,66 @@
           "example": [
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_input"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_1"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_on_timer_output"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_2"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ingestion"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_3"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "data_in_speed"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_4"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "cpu"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_5"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_series_init"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_6"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "F-Link_last_check_point_duration"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_7"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "data_out_speed"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_8"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2019-04-02T00:00:00Z",
+              "endTime": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2019-04-01T00:00:00Z",
-              "variable": "ad_output"
+              "startTime": "2022-04-01T00:00:00Z",
+              "variable": "variable_9"
             }
           ],
           "items": {
@@ -1000,7 +1007,7 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp for this anomaly.",
-          "example": "2020-01-01T00:00:00Z"
+          "example": "2022-01-01T00:00:00Z"
         },
         "value": {
           "$ref": "#/definitions/AnomalyValue"
@@ -1044,7 +1051,12 @@
         "interpretation": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnomalyInterpretation"
+            "description": "Interpretation contains more details of the anomaly, which will help with root cause analysis.",
+            "allOf": [
+              {
+                "$ref": "#/definitions/AnomalyInterpretation"
+              }
+            ]
           }
         }
       },
@@ -1053,12 +1065,24 @@
     "AnomalyInterpretation": {
       "properties": {
         "variable": {
-          "type": "string"
+          "type": "string",
+          "description": "Variable.",
+          "example": "variable_1"
         },
         "contributionScore": {
-          "type": "number"
+          "type": "number",
+          "description": "This score shows the percentage contributing to the anomalous timestamp. A number between 0 and 1.",
+          "example": [
+            0.3324159383
+          ]
         },
         "correlationChanges": {
+          "example": {
+            "changedVariables": [
+              "variable_2",
+              "variable_3"
+            ]
+          },
           "$ref": "#/definitions/CorrelationChanges"
         }
       },
@@ -1068,7 +1092,11 @@
       "properties": {
         "changedVariables": {
           "type": "array",
-          "description": "correlated variables",
+          "description": "The correlated variables that have correlation changes under an anomaly.",
+          "example": [
+            "variable_2",
+            "variable_3"
+          ],
           "items": {
             "type": "string"
           }
@@ -1084,7 +1112,22 @@
       "properties": {
         "variables": {
           "type": "array",
-          "description": "variables",
+          "description": "Variables",
+          "example": [
+            {
+              "variableName": "Variable_1",
+              "timestamps": [
+                "2022-01-01T00:00:00Z",
+                "2022-01-01T00:01:00Z",
+                "2022-01-01T00:02:00Z"
+              ],
+              "values": [
+                0.4551378545933972,
+                0.7388603950488748,
+                0.201088255984052
+              ]
+            }
+          ],
           "items": {
             "$ref": "#/definitions/VariableValues"
           }
@@ -1106,19 +1149,21 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "variable name",
+          "description": "Variable name.",
           "example": "variable_1"
         },
         "timestamps": {
           "type": "array",
-          "description": "timestamps",
+          "description": "Timestamp",
+          "example": "2022-04-02T00:00:00Z",
           "items": {
             "type": "string"
           }
         },
         "values": {
           "type": "array",
-          "description": "values",
+          "description": "Values of variables.",
+          "example": "1.2",
           "items": {
             "type": "number"
           }
