@@ -141,7 +141,18 @@
       "description": "Vcores capability"
     },
     "ServerVersion": {
-      "type": "string"
+      "type": "string",
+      "description": "The version of a server.",
+      "enum": [
+        "14",
+        "13",
+        "12",
+        "11"
+      ],
+      "x-ms-enum": {
+        "name": "ServerVersion",
+        "modelAsString": true
+      }
     },
     "ServerVersionCapability": {
       "type": "object",
