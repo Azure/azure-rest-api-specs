@@ -5342,7 +5342,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/DataWarehouseQueriesSteps"
+              "$ref": "#/definitions/DataWarehouseQueriesStepsList"
             },
             "description": "OK"
           },
@@ -7933,6 +7933,24 @@
           "description": "Requested ConcurrencySlots",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DataWarehouseQueriesStepsList": {
+      "type": "object",
+      "title": "SQL pool collection",
+      "description": "The response to a list datawarehouse queries.steps",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        },
+        "value": {
+          "type": "array",
+          "description": "Resource properties.",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQueriesSteps"
+          }
         }
       }
     },
