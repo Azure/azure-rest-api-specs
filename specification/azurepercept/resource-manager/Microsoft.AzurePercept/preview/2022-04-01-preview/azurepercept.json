@@ -293,7 +293,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Azure Percept account was successfully updated"
+            "description": "Azure Percept account was accepted"
           },
           "200": {
             "description": "Azure Percept account was successfully updated",
@@ -1385,7 +1385,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The SolutionInstance inside the Azure Percept account was successfully updated."
+            "description": "The SolutionInstance inside the Azure Percept account was accepted."
           },
           "200": {
             "description": "The SolutionInstance inside the Azure Percept account was successfully updated.",
@@ -1822,6 +1822,11 @@
           "description": "Provisioning state of solution resource.",
           "type": "string",
           "readOnly": true
+        },
+        "targetConfig": {
+          "description": "Target configurations definition for the solution components.",
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },

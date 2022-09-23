@@ -181,6 +181,13 @@
                   "priority": 1,
                   "timeToLiveSecs": 1800
                 }
+              },
+              "targetConfig": {
+                "perceptAgentConfigs": {
+                  "appInsightsConnectionStr": "[listAppInsightsConnString()]",
+                  "enableAzureMonitor": true,
+                  "logLevel": "Debug"
+                }
               }
             }
           },
@@ -355,6 +362,13 @@
                   "route": "FROM /messages/modules/filtermodule/outputs/output1 INTO $upstream",
                   "priority": 1,
                   "timeToLiveSecs": 1800
+                }
+              },
+              "targetConfig": {
+                "perceptAgentConfigs": {
+                  "appInsightsConnectionStr": "[listAppInsightsConnString()]",
+                  "enableAzureMonitor": true,
+                  "logLevel": "Debug"
                 }
               }
             }
