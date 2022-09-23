@@ -179,10 +179,6 @@
     }
   },
   "definitions": {
-    "Language": {
-      "type": "string",
-      "description": "Language of the document content. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
-    },
     "GenerationRequest": {
       "type": "object",
       "description": "Question Answers Generation job with documents and parameters.",
@@ -200,7 +196,7 @@
           "$ref": "#/definitions/GenerationParameters"
         }
       }
-    },    
+    },
     "GenerationDocument": {
       "type": "object",
       "required": [
@@ -276,7 +272,7 @@
           "minimum": 1
         }
       }
-    },    
+    },
     "GenerationJobState": {
       "description": "Generation Job state represents the job metadata and any errors and a result object if job succeeded.",
       "allOf": [
@@ -292,7 +288,7 @@
       "description": "Generation Job result represents the job result with extracted documents and question answers generated.",
       "type": "object",
       "properties": {
-        "result": {          
+        "result": {
           "$ref": "#/definitions/GenerationResult"
         }
       }
@@ -346,7 +342,7 @@
         "documentId": {
           "type": "string",
           "description": "A unique, non-empty document identifier, GUID will be assigned if user had not provided Id in job request."
-        }        
+        }
       },
       "description": "Question and Answer generated from the document."
     }
