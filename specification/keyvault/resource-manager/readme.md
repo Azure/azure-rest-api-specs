@@ -40,6 +40,7 @@ input-file:
   - Microsoft.KeyVault/stable/2022-11-01/keys.json
   - Microsoft.KeyVault/stable/2022-11-01/keyvault.json
   - Microsoft.KeyVault/stable/2022-11-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2022-11-01/keysManagedHsm.json
   - Microsoft.KeyVault/stable/2022-11-01/providers.json
   - Microsoft.KeyVault/stable/2022-11-01/secrets.json
 ```
