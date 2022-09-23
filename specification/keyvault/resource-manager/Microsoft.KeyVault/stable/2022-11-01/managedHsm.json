@@ -1340,7 +1340,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MHSMResource"
+          "$ref": "#/definitions/ManagedHsmResource"
         }
       ],
       "description": "Private endpoint connection resource.",
@@ -1445,41 +1445,6 @@
       "description": "A list of private link resources",
       "type": "object"
     },
-    "MHSMResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified identifier of the key vault resource."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the key vault resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type of the key vault resource."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Azure location of the key vault resource."
-        },
-        "tags": {
-          "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tags assigned to the key vault resource."
-        }
-      },
-      "description": "Managed Hsm resource",
-      "x-ms-azure-resource": true,
-      "type": "object"
-    },
     "MHSMPrivateLinkResource": {
       "properties": {
         "properties": {
@@ -1490,7 +1455,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MHSMResource"
+          "$ref": "#/definitions/ManagedHsmResource"
         }
       ],
       "description": "A private link resource",
