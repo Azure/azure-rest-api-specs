@@ -68,7 +68,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Tenant Settings."
@@ -193,7 +193,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Tenant Settings."
@@ -243,7 +243,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "API details."
@@ -434,6 +434,31 @@
                 "value": "graphql",
                 "description": "Imports the API having a GraphQL front end.",
                 "name": "GraphQL"
+              }
+            ]
+          }
+        },
+        "translateRequiredQueryParameters": {
+          "type": "string",
+          "description": "Strategy of translating required query parameters to template ones. By default has value 'template'. Possible values: 'template', 'query'",
+          "enum": [
+            "template",
+            "query"
+          ],
+          "x-ms-client-name": "TranslateRequiredQueryParametersConduct",
+          "x-ms-enum": {
+            "name": "TranslateRequiredQueryParametersConduct",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "template",
+                "description": "Translates required query parameters to template ones. Is a default value",
+                "name": "Template"
+              },
+              {
+                "value": "query",
+                "description": "Leaves required query parameters as they are (no translation done).",
+                "name": "Query"
               }
             ]
           }
@@ -649,7 +674,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "ApiRelease details."
@@ -913,7 +938,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "API Version Set Contract details."
@@ -940,7 +965,25 @@
             "Segment",
             "Query",
             "Header"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "versioningScheme",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Segment",
+                "description": "The API Version is passed in a path segment."
+              },
+              {
+                "value": "Query",
+                "description": "The API Version is passed in a query parameter."
+              },
+              {
+                "value": "Header",
+                "description": "The API Version is passed in a HTTP header."
+              }
+            ]
+          }
         },
         "versionQueryName": {
           "type": "string",
@@ -1092,6 +1135,16 @@
             "authorizationServerId"
           ],
           "description": "Collection of OAuth2 authentication settings included into this API."
+        },
+        "openidAuthenticationSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenIdAuthenticationSettingsContract"
+          },
+          "x-ms-identifiers": [
+            "openidProviderId"
+          ],
+          "description": "Collection of Open ID Connect authentication settings included into this API."
         }
       },
       "description": "API Authentication Settings."
@@ -1127,12 +1180,13 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Authorization contract."
     },
     "AuthorizationContractProperties": {
+      "type": "object",
       "properties": {
         "authorizationType": {
           "type": "string",
@@ -1197,6 +1251,7 @@
       "description": "Authorization details."
     },
     "AuthorizationError": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1210,6 +1265,7 @@
       "description": "Authorization error details."
     },
     "AuthorizationAccessPolicyCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1231,6 +1287,7 @@
       "description": "Paged Authorization Access Policy list representation."
     },
     "AuthorizationAccessPolicyContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1240,12 +1297,13 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Authorization access policy contract."
     },
     "AuthorizationAccessPolicyContractProperties": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -1259,6 +1317,7 @@
       "description": "Authorization Access Policy details."
     },
     "AuthorizationLoginRequestContract": {
+      "type": "object",
       "properties": {
         "postLoginRedirectUrl": {
           "type": "string",
@@ -1268,6 +1327,7 @@
       "description": "Authorization login request contract."
     },
     "AuthorizationLoginResponseContract": {
+      "type": "object",
       "properties": {
         "loginLink": {
           "type": "string",
@@ -1277,6 +1337,7 @@
       "description": "Authorization login response contract."
     },
     "AuthorizationProviderCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1298,6 +1359,7 @@
       "description": "Paged Authorization Provider list representation."
     },
     "AuthorizationProviderContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1307,12 +1369,13 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Authorization Provider contract."
     },
     "AuthorizationProviderContractProperties": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -1332,6 +1395,7 @@
       "description": "Authorization Provider details."
     },
     "AuthorizationProviderOAuth2Settings": {
+      "type": "object",
       "properties": {
         "redirectUrl": {
           "type": "string",
@@ -1345,6 +1409,7 @@
       "description": "OAuth2 settings details"
     },
     "AuthorizationProviderOAuth2GrantTypes": {
+      "type": "object",
       "properties": {
         "authorizationCode": {
           "type": "object",
@@ -1394,7 +1459,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "External OAuth authorization server settings."
@@ -1607,7 +1672,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "External OAuth authorization server settings."
@@ -1799,7 +1864,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Backend details."
@@ -1936,7 +2001,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Reconnect request parameters."
@@ -2123,7 +2188,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Cache details."
@@ -2223,7 +2288,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Certificate details."
@@ -2389,7 +2454,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Diagnostic details."
@@ -2550,7 +2615,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Email Template details."
@@ -2707,7 +2772,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Contract details."
@@ -2959,7 +3024,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Identity Provider details."
@@ -2999,7 +3064,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Identity Provider details."
@@ -3113,7 +3178,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Issue Attachment Contract details."
@@ -3196,7 +3261,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Issue Comment Contract details."
@@ -3233,7 +3298,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Issue Contract details."
@@ -3424,7 +3489,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Logger details."
@@ -3576,7 +3641,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Notification details."
@@ -3663,7 +3728,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "OpenId Connect Provider details."
@@ -3691,6 +3756,14 @@
           "x-ms-secret": true,
           "type": "string",
           "description": "Client Secret of developer console which is the client application."
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "If true, the Open ID Connect provider may be used in the developer portal test console. True by default if no value is provided."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "If true, the Open ID Connect provider will be used in the API documentation in the developer portal. False by default if no value is provided."
         }
       },
       "required": [
@@ -3733,6 +3806,14 @@
           "x-ms-secret": true,
           "type": "string",
           "description": "Client Secret of developer console which is the client application."
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "If true, the Open ID Connect provider may be used in the developer portal test console. True by default if no value is provided."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "If true, the Open ID Connect provider will be used in the API documentation in the developer portal. False by default if no value is provided."
         }
       },
       "description": "Parameters supplied to the Update OpenID Connect Provider operation."
@@ -3770,7 +3851,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "API Operation details."
@@ -3857,7 +3938,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Long Running Git Operation Results."
@@ -4138,7 +4219,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Policy Contract details."
@@ -4198,7 +4279,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Policy description details."
@@ -4237,6 +4318,7 @@
       "description": "Descriptions of APIM policies."
     },
     "PolicyFragmentCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4258,6 +4340,7 @@
       "description": "The response of the get policy fragments operation."
     },
     "PolicyFragmentContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4267,12 +4350,13 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Policy fragment contract details."
     },
     "PolicyFragmentContractProperties": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -4320,7 +4404,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+                "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
               }
             ]
           },
@@ -4365,7 +4449,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The developer portal configuration contract."
@@ -4526,7 +4610,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Delegation settings for a developer portal."
@@ -4580,7 +4664,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Portal Settings for the Developer Portal."
@@ -4635,7 +4719,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Sign-In settings for the Developer Portal."
@@ -4650,7 +4734,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Sign-Up settings for a developer portal."
@@ -4700,7 +4784,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Product details."
@@ -4844,7 +4928,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "NamedValue details."
@@ -4888,7 +4972,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "NamedValue details."
@@ -5102,7 +5186,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Recipient Email details."
@@ -5166,7 +5250,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Recipient User details."
@@ -5643,7 +5727,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "API Schema Contract details."
@@ -5715,7 +5799,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Global Schema Contract details."
@@ -5800,7 +5884,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Subscription details."
@@ -6085,7 +6169,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Tag Contract details."
@@ -6163,7 +6247,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Contract details."
@@ -6271,7 +6355,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Result of Tenant Configuration Sync State."
@@ -6380,7 +6464,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "User details."
@@ -6778,7 +6862,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Gateway details."
@@ -6922,7 +7006,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Gateway hostname configuration details."
@@ -6984,7 +7068,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Gateway certificate authority details."
@@ -7020,7 +7104,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Association entity details."
@@ -7053,7 +7137,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Content type contract details."
@@ -7110,7 +7194,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Content type contract details."
@@ -7152,7 +7236,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Deleted API Management Service information."
@@ -7203,7 +7287,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Portal Revision's contract details."
