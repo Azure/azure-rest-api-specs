@@ -236,6 +236,12 @@
           },
           {
             "in": "query",
+            "name": "$filter",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
             "required": true,
@@ -561,7 +567,9 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!\\s+$).{1,1024}$"
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "query",
@@ -623,7 +631,9 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!\\s+$).{1,1024}$"
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "query",
@@ -707,7 +717,8 @@
             "required": true,
             "type": "string",
             "maxLength": 1024,
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "query",
@@ -718,6 +729,12 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
+            "type": "string"
           },
           {
             "in": "query",
@@ -790,7 +807,8 @@
             "required": true,
             "type": "string",
             "maxLength": 1024,
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "path",
@@ -858,7 +876,9 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!\\s+$).{1,1024}$"
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "path",
@@ -1312,6 +1332,12 @@
           },
           {
             "in": "query",
+            "name": "$filter",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
             "required": true,
@@ -1442,7 +1468,9 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!\\s+$).{1,1024}$"
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "path",
@@ -1510,7 +1538,9 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!\\s+$).{1,1024}$"
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
           },
           {
             "in": "path",
