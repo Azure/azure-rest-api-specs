@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedKubernetesClient",
-    "version": "2022-05-01-preview",
+    "version": "2022-10-01-preview",
     "description": "Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster"
   },
   "schemes": [
@@ -420,6 +420,19 @@
     }
   },
   "definitions": {
+    "KeyValuePair[String,Object]": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "propertyValue": {
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
     "OperationList": {
       "description": "The paginated list of connected cluster API operations.",
       "properties": {
@@ -587,6 +600,10 @@
           "type": "string",
           "description": "The Kubernetes distribution running on this connected cluster."
         },
+        "distributionVersion": {
+          "type": "string",
+          "description": "The Kubernetes distribution version on this connected cluster."
+        },
         "infrastructure": {
           "type": "string",
           "description": "The infrastructure on which the Kubernetes cluster represented by this connected cluster is running on."
@@ -639,6 +656,28 @@
         "privateLinkScopeResourceId": {
           "type": "string",
           "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
+        },
+        "azureHybridBenefit": { 
+          "type": "string", 
+          "description": "Indicates whether Azure Hybrid Benefit is opted in",
+          "enum": [
+            "True",
+            "False",
+            "NotApplicable"
+          ],
+          "default": "NotApplicable",
+          "x-ms-enum": {
+            "name": "AzureHybridBenefit",
+            "modelAsString": true
+          }
+        },
+        "additionalProperties": {
+          "description": "Additional properties of the Connected Cluster",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair[String,Object]"
+          },
+          "readOnly": true
         }
       },
       "description": "Properties of the connected cluster."
@@ -715,7 +754,29 @@
     },
     "ConnectedClusterPatchProperties": {
       "type": "object",
-      "properties": {},
+      "properties": {
+        "distribution": {
+          "type": "string",
+          "description": "Represents the distribution of the connected cluster"
+        },
+        "distributionVersion": {
+          "type": "string",
+          "description": "Represents the Kubernetes distribution version on this connected cluster."
+        },
+        "azureHybridBenefit": {
+          "type": "string", 
+          "description": "Indicates whether Azure Hybrid Benefit is opted in",
+          "enum": [
+            "True",
+            "False",
+            "NotApplicable"
+          ],
+          "x-ms-enum": {
+            "name": "AzureHybridBenefit",
+            "modelAsString": true
+          }
+        }
+      },
       "description": "Properties which can be patched on the connected cluster resource."
     },
     "HybridConnectionConfig": {

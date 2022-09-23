@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-10-01",
+    "api-version": "2022-10-01-preview",
     "subscriptionId": "1bfbb5d0-917e-4346-9026-1d3b344417f5",
     "resourceGroupName": "k8sc-rg",
     "clusterName": "testCluster",
@@ -8,6 +8,11 @@
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
+      },
+      "properties": {
+        "azureHybridBenefit": "NotApplicable",
+        "distribution": "AKS", 
+        "distributionVersion": "1.0"
       }
     }
   },
@@ -35,7 +40,20 @@
           "kubernetesVersion": "1.17.0",
           "totalNodeCount": 2,
           "agentVersion": "0.1.0",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "azureHybridBenefit": "NotApplicable",
+          "distribution": "AKS", 
+          "distributionVersion": "1.0",
+          "additionalProperties": [
+            {
+              "propertyName": "distributionVersion",
+              "propertyValue": "1.0"
+            },
+            {
+              "propertyName": "infrastructureVersion",
+              "propertyValue": "2.0"
+            }            
+          ]
         }
       }
     }
