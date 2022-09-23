@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
-  - Microsoft.LoadTestService/preview/2022-12-01/loadtestservice.json
+  - Microsoft.LoadTestService/stable/2022-12-01/loadtestservice.json
 ```
 
 ### Tag: package-2022-04-15-preview
