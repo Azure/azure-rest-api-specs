@@ -71,6 +71,53 @@
       }
     },
     "/multivariate/models": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "Create and train a multivariate anomaly detection model.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location and ID of the model.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Train a Multivariate Anomaly Detection Model",
+        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
+        "operationId": "CreateMultivariateModel",
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            },
+            "description": "Training request"
+          }
+        ],
+        "x-ms-examples": {
+          "Train Multivariate model": {
+            "$ref": "./examples/TrainModel.json"
+          }
+        }
+      },
       "get": {
         "responses": {
           "200": {
@@ -120,53 +167,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "models"
-        }
-      },
-      "post": {
-        "responses": {
-          "201": {
-            "description": "Create and train a multivariate anomaly detection model.",
-            "schema": {
-              "$ref": "#/definitions/Model"
-            },
-            "headers": {
-              "Location": {
-                "description": "Location and ID of the model.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Train a Multivariate Anomaly Detection Model",
-        "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
-        "operationId": "CreateMultivariateModel",
-        "parameters": [
-          {
-            "name": "body",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ModelInfo"
-            },
-            "description": "Training request"
-          }
-        ],
-        "x-ms-examples": {
-          "Train Multivariate model": {
-            "$ref": "./examples/TrainModel.json"
-          }
         }
       }
     },
@@ -750,38 +750,6 @@
       },
       "type": "object"
     },
-    "ModelList": {
-      "required": [
-        "currentCount",
-        "maxCount",
-        "models"
-      ],
-      "properties": {
-        "models": {
-          "type": "array",
-          "description": "List of models.",
-          "items": {
-            "$ref": "#/definitions/Model"
-          }
-        },
-        "currentCount": {
-          "type": "integer",
-          "description": "Number of trained multivariate models.",
-          "example": 10
-        },
-        "maxCount": {
-          "type": "integer",
-          "description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
-          "example": 20
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to fetch more models."
-        }
-      },
-      "type": "object",
-      "description": "Response of listing models."
-    },
     "Model": {
       "required": [
         "createdTime",
@@ -813,6 +781,38 @@
       },
       "type": "object",
       "description": "Response of getting a model."
+    },
+    "ModelList": {
+      "required": [
+        "currentCount",
+        "maxCount",
+        "models"
+      ],
+      "properties": {
+        "models": {
+          "type": "array",
+          "description": "List of models.",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        },
+        "currentCount": {
+          "type": "integer",
+          "description": "Number of trained multivariate models.",
+          "example": 10
+        },
+        "maxCount": {
+          "type": "integer",
+          "description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
+          "example": 20
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch more models."
+        }
+      },
+      "type": "object",
+      "description": "Response of listing models."
     },
     "DetectionRequest": {
       "required": [
