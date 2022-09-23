@@ -1034,6 +1034,23 @@
               "$ref": "#/definitions/QueryDefinition"
             },
             "description": "Parameters supplied to the CreateOrUpdate Query Config operation."
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N cost data",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "format": "int32"
           }
         ],
         "responses": {
@@ -1052,6 +1069,9 @@
               "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
