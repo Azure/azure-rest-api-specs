@@ -51,7 +51,7 @@
           }
         },
         "summary": "Get Multivariate Anomaly Detection Result",
-        "description": "For asynchronous inference, get multivariate anomaly detection result based on resultId returned by the /models/<string:modelId>/entire/detect api.",
+        "description": "For asynchronous inference, get multivariate anomaly detection result based on resultId returned by the BatchDetectAnomaly api.",
         "operationId": "GetBatchDetectionResult",
         "parameters": [
           {
@@ -171,6 +171,43 @@
       }
     },
     "/multivariate/models/{modelId}": {
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "Delete model successfully. "
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "operationId": "DeleteMultivariateModel",
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Model identifier",
+            "format": "uuid"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
+          }
+        }
+      },
       "get": {
         "responses": {
           "200": {
@@ -208,43 +245,6 @@
         "x-ms-examples": {
           "Get multivariate model": {
             "$ref": "./examples/GetModel.json"
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Delete model successfully. "
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "summary": "Delete Multivariate Model",
-        "description": "Delete an existing multivariate model according to the modelId",
-        "operationId": "DeleteMultivariateModel",
-        "parameters": [
-          {
-            "name": "modelId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Model identifier",
-            "format": "uuid"
-          }
-        ],
-        "x-ms-examples": {
-          "Delete multivariate model": {
-            "$ref": "./examples/DeleteModel.json"
           }
         }
       }
@@ -570,65 +570,65 @@
           "example": [
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_1"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_2"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_3"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_4"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_5"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_6"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_7"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_8"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_9"
             }
           ],
@@ -725,7 +725,7 @@
       "properties": {
         "variable": {
           "type": "string",
-          "description": "Variable name."
+          "description": "Variable name in variable states."
         },
         "filledNARatio": {
           "type": "number",
@@ -740,12 +740,12 @@
         "firstTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "First valid timestamp of input data."
+          "description": "First valid timestamp with value of input data."
         },
         "lastTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Last valid timestamp of input data."
+          "description": "Last valid timestamp with value of input data."
         }
       },
       "type": "object"
@@ -846,7 +846,7 @@
         }
       },
       "type": "object",
-      "description": "Detection request."
+      "description": "Detection request for batch inference. This is an asynchronous inference which will need another API to get detection results."
     },
     "DetectionResult": {
       "required": [
@@ -896,65 +896,65 @@
           "example": [
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_1"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_2"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_3"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_4"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_5"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_6"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_7"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_8"
             },
             {
               "effectiveCount": 1441,
-              "endTime": "2022-04-02T00:00:00Z",
+              "lastTimestamp": "2022-04-02T00:00:00Z",
               "filledNARatio": 0,
-              "startTime": "2022-04-01T00:00:00Z",
+              "firstTimestamp": "2022-04-01T00:00:00Z",
               "variable": "variable_9"
             }
           ],
@@ -1110,10 +1110,10 @@
       "properties": {
         "variables": {
           "type": "array",
-          "description": "Variables",
+          "description": "This contains the inference data, including the name, timestamps(ISO 8601) and values of variables.",
           "example": [
             {
-              "variableName": "Variable_1",
+              "variable": "variable_1",
               "timestamps": [
                 "2022-01-01T00:00:00Z",
                 "2022-01-01T00:01:00Z",
@@ -1140,20 +1140,18 @@
     },
     "VariableValues": {
       "required": [
-        "name",
         "timestamps",
-        "values"
+        "values",
+        "variable"
       ],
       "properties": {
-        "name": {
+        "variable": {
           "type": "string",
-          "description": "Variable name.",
-          "example": "variable_1"
+          "description": "Variable name of last detection request."
         },
         "timestamps": {
           "type": "array",
-          "description": "Timestamp",
-          "example": [ "2022-04-02T00:00:00Z" ],
+          "description": "Timestamps of last detection request",
           "items": {
             "type": "string"
           }
@@ -1161,7 +1159,6 @@
         "values": {
           "type": "array",
           "description": "Values of variables.",
-          "example": [ 1.2 ],
           "items": {
             "type": "number"
           }
