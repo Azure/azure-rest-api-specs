@@ -92,9 +92,6 @@
             "$ref": "#/parameters/type"
           },
           {
-            "$ref": "#/parameters/requestStatus"
-          },
-          {
             "$ref": "#/parameters/keyword"
           }
         ],
@@ -976,13 +973,13 @@
       ]
     },
     "ApprovalRequest": {
+      "description": "The workflow approval request properties.",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowRequest"
         },
         {
           "type": "object",
-          "description": "The workflow approval request.",
           "properties": {
             "approvalId": {
               "type": "string",
@@ -1023,13 +1020,13 @@
       ]
     },
     "TaskRequest": {
+      "description": "The workflow task request properties.",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowRequest"
         },
         {
           "type": "object",
-          "description": "The workflow task request.",
           "properties": {
             "taskRequestId": {
               "type": "string",
@@ -1246,8 +1243,8 @@
       ]
     },
     "WorkflowRun": {
+      "description": "The workflow run properties.",
       "type": "object",
-      "description": "The workflow run.",
       "properties": {
         "id": {
           "type": "string",
@@ -1521,6 +1518,7 @@
       ]
     },
     "WorkflowDefinition": {
+      "description": "The workflow definition property.",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowDefinitionMetadata"
@@ -1829,30 +1827,6 @@
         }
       },
       "description": "Filter workflow runs by workflow run status.",
-      "x-ms-parameter-location": "method"
-    },
-    "requestStatus": {
-      "name": "status",
-      "in": "query",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "pending",
-          "approved",
-          "rejected",
-          "canceled",
-          "notstarted",
-          "inprogress",
-          "completed"
-        ],
-        "x-ms-enum": {
-          "name": "status",
-          "modelAsString": true
-        }
-      },
-      "description": "Filter workflow request by workflow request status.",
       "x-ms-parameter-location": "method"
     }
   }
