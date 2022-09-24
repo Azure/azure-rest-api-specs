@@ -1619,6 +1619,102 @@
         "code",
         "message"
       ]
+    },
+    "RequestEventPayloadWebRequest": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CreateTermRequestWebRequest"
+        },
+        {
+          "$ref": "#/components/schemas/DeleteTermRequestWebRequest"
+        },
+        {
+          "$ref": "#/components/schemas/GrantDataAccessWebRequest"
+        },
+        {
+          "$ref": "#/components/schemas/ImportTermsRequestWebRequest"
+        },
+        {
+          "$ref": "#/components/schemas/UpdateAssetAttributesWebRequest"
+        },
+        {
+          "$ref": "#/components/schemas/UpdateTermRequestWebRequest"
+        }
+      ]
+    },
+    "CreateTermRequestWebRequest": {
+      "required": [
+        "payload"
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteTermRequestWebRequest": {
+      "required": [
+        "glossaryTermId"
+      ],
+      "type": "object",
+      "properties": {
+        "glossaryTermId": {
+          "type": "string"
+        },
+        "forceDeleteChildren": {
+          "type": "boolean"
+        }
+      }
+    },
+    "GrantDataAccessWebRequest": {
+      "required": [
+        "payload"
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string"
+        }
+      }
+    },
+    "ImportTermsRequestWebRequest": {
+      "required": [
+        "fileName",
+        "fileContent"
+      ],
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "fileContent": {
+          "type": "string",
+          "description": "Base64 encoded file content used to import terms in batch."
+        }
+      }
+    },
+    "UpdateTermRequestWebRequest": {
+      "required": [
+        "payload"
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateAssetAttributesWebRequest": {
+      "required": [
+        "payload"
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "object"
+        }
+      }
     }
   },
   "parameters": {
