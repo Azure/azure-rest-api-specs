@@ -26,7 +26,7 @@ These are the global settings for the search.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-08-17-preview
+tag: package-2022-09-25-preview
 ```
 
 ### Tag: package-2022-08-17-preview
