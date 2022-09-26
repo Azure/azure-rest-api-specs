@@ -6791,6 +6791,16 @@
         }
       }
     },
+    "WorkloadNetwork": {
+      "type": "object",
+      "description": "Workload Network",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {}
+    },
     "WorkloadNetworkSegment": {
       "type": "object",
       "description": "NSX Segment",
@@ -6804,6 +6814,25 @@
           "description": "The properties of a Workload Segment proxy resource.",
           "$ref": "#/definitions/WorkloadNetworkSegmentProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkloadNetworkList": {
+      "type": "object",
+      "description": "A list of workload networks",
+      "properties": {
+        "value": {
+          "description": "The items on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WorkloadNetwork"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
