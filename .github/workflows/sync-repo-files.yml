@@ -1,0 +1,22 @@
+ name: sync-common-types-files
+ on: 
+   push:
+     branches:
+       - main
+     paths: 
+       - 'specification/common-types/**'
+   workflow_dispatch:
+ jobs:
+   sync-common-types-files:
+     name: sync-common-types-files
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkoutV2 
+         uses: actions/checkout@v2
+       - name: sync-common-types-files
+         uses: ./
+         with:
+            SOURCE: test-repo-billy/azure-rest-api-specs-pr@main
+            DEST: test-repo-billy/azure-rest-api-specs-pr@RPSaaSMaster
+            FILE_PATH: specification/common-types
+            GITHUB_TOKEN: ${{ secrets.GH_PAT }}
