@@ -11,7 +11,7 @@
         "tags": [
           "Notifications"
         ],
-        "operationId": "Notification_SendMessage",
+        "operationId": "NotificationMessages_SendMessage",
         "consumes": [
           "application/json"
         ],
@@ -34,7 +34,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/SendMessageResponse"
+              "$ref": "#/definitions/SendMessageResult"
             }
           },
           "default": {
@@ -54,6 +54,19 @@
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+    },
+    "CommunicationMessageType": {
+      "description": "The type of message. Supports text, image, template.",
+      "enum": [
+        "text",
+        "image",
+        "template"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationMessageType",
+        "modelAsString": true
+      }
     },
     "MessageTemplate": {
       "description": "The template object used to create templates.",
@@ -87,17 +100,22 @@
         }
       }
     },
-    "MessageType": {
-      "description": "The type of message. Supports text, image, template.",
-      "enum": [
-        "text",
-        "image",
-        "template"
+    "Receipt": {
+      "description": "Receipt of the sending one message.",
+      "required": [
+        "messageId",
+        "to"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MessageType",
-        "modelAsString": true
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "The message id.",
+          "type": "string"
+        },
+        "to": {
+          "description": "The native external platform user identifier of the recipient.",
+          "type": "string"
+        }
       }
     },
     "SendMessageRequest": {
@@ -124,10 +142,10 @@
           ]
         },
         "type": {
-          "$ref": "#/definitions/MessageType"
+          "$ref": "#/definitions/CommunicationMessageType"
         },
         "content": {
-          "description": "External message content.",
+          "description": "Message content.",
           "type": "string",
           "example": "Come on everyone, lets go for lunch together."
         },
@@ -141,37 +159,19 @@
         }
       }
     },
-    "SendMessageResponse": {
+    "SendMessageResult": {
       "description": "Result of the send message operation.",
       "required": [
-        "result"
+        "receipts"
       ],
       "type": "object",
       "properties": {
-        "result": {
-          "description": "The message id.",
+        "receipts": {
+          "description": "Receipts of the send message operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SendMessageResult"
+            "$ref": "#/definitions/Receipt"
           }
-        }
-      }
-    },
-    "SendMessageResult": {
-      "description": "Result of the sending one message.",
-      "required": [
-        "id",
-        "to"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The message id.",
-          "type": "string"
-        },
-        "to": {
-          "description": "The native external platform user identifier of the recipient.",
-          "type": "string"
         }
       }
     }
