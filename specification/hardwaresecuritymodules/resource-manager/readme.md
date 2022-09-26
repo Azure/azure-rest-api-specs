@@ -26,7 +26,7 @@ These are the global settings for the Hardware Security Modules API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-11
+tag: package-2022-08
 ```
 
 
