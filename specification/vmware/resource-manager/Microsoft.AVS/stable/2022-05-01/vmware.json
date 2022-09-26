@@ -4223,6 +4223,9 @@
           },
           "Addons_Get_HCX": {
             "$ref": "./examples/Addons_Get_HCX.json"
+          },
+          "Addons_Get_ArcReg": {
+            "$ref": "./examples/Addons_Get_ArcReg.json"
           }
         }
       },
@@ -4292,6 +4295,9 @@
           },
           "Addons_CreateOrUpdate_HCX": {
             "$ref": "./examples/Addons_CreateOrUpdate_HCX.json"
+          },
+          "Addons_CreateOrUpdate_Arc": {
+            "$ref": "./examples/Addons_CreateOrUpdate_ArcReg.json"
           }
         }
       },
@@ -6176,7 +6182,8 @@
           "enum": [
             "SRM",
             "VR",
-            "HCX"
+            "HCX",
+            "Arc"
           ],
           "x-ms-enum": {
             "name": "AddonType",
@@ -6259,6 +6266,22 @@
       "required": [
         "offer"
       ]
+    },
+    "AddonArcProperties": {
+      "type": "object",
+      "description": "The properties of an Arc addon",
+      "x-ms-discriminator-value": "Arc",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AddonProperties"
+        }
+      ],
+      "properties": {
+        "vCenter": {
+          "description": "The VMware vCenter resource ID",
+          "type": "string"
+        }
+      }
     },
     "AddonList": {
       "type": "object",
