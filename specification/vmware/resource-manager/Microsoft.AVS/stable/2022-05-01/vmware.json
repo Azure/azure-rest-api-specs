@@ -345,6 +345,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sku",
+            "in": "body",
+            "required": false,
+            "description": "The sku to check for trail availability",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
           }
         ],
         "responses": {
@@ -364,6 +373,9 @@
         "x-ms-examples": {
           "Locations_CheckTrialAvailability": {
             "$ref": "./examples/Locations_CheckTrialAvailability.json"
+          },
+          "Locations_CheckTrialAvailabilityWithSku": {
+            "$ref": "./examples/Locations_CheckTrialAvailabilityWithSku.json"
           }
         }
       }
