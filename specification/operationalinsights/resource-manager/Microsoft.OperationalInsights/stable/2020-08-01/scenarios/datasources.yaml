@@ -7,9 +7,9 @@ variables:
   workspaceName:
     type: string
     prefix: oiautorest
-  storageAccountName:
+  storageAccountName: oistorageaccountx
+  storageAccountId:
     type: string
-    prefix: iostorageaccount
 
 prepareSteps:
   - step: StorageAccount_Create
@@ -33,21 +33,17 @@ scenarios:
         prefix: iodatasource
     steps:
       - step: DataSources_Create
-        # exampleFile: ..\examples\DataSourcesCreate.json
-        # requestUpdate:
-        #   - replace: /parameters/properties
-        #     value: {
-        #       "LinkedResourceId": $(storageAccountId)
-        #     }
         operationId: DataSources_CreateOrUpdate
         parameters:
           parameters:
-            kind: AzureActivityLog
+            kind: IISLogs
             properties:
               LinkedResourceId: $(storageAccountId)
-        
       - step: DataSources_ListByWorkspace
         exampleFile: ..\examples\DataSourcesListByWorkspace.json
+        requestUpdate:
+          - replace: /$filter
+            value: $filter=kind eq 'WindowsEvent'
       - step: DataSources_Get
         exampleFile: ..\examples\DataSourcesGet.json
       - step: DataSources_Delete
