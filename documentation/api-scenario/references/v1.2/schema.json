@@ -56,10 +56,11 @@
         "type": {
           "type": "string",
           "enum": [
-            "AzureAD",
+            "AADToken",
+            "AzureKey",
             "None"
           ],
-          "default": "AzureAD"
+          "default": "AADToken"
         }
       },
       "required": [
@@ -70,32 +71,57 @@
           "if": {
             "properties": {
               "type": {
-                "const": "AzureAD"
+                "const": "AADToken"
               }
             }
           },
           "then": {
             "properties": {
               "type": {},
-              "audience": {
+              "scope": {
                 "type": "string",
-                "description": "The resource identifier (application ID URI) of the resource you want, a.k.a., the audience of the token.",
+                "description": "The resource identifier (application ID URI) of the resource you want, affixed with the .default suffix",
                 "examples": [
-                  "https://management.azure.com/",
-                  "https://storage.azure.com/"
+                  "https://management.azure.com/.default",
+                  "https://storage.azure.com/.default"
                 ]
               }
             },
             "required": [
-              "audience"
+              "scope"
             ],
             "additionalProperties": false
           },
           "else": {
-            "properties": {
-              "type": {}
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AzureKey"
+                }
+              }
             },
-            "additionalProperties": false
+            "then": {
+              "properties": {
+                "type": {},
+                "key": {
+                  "type": "string"
+                },
+                "headerName": {
+                  "type": "string",
+                  "default": "Authorization"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalProperties": false
+            },
+            "else": {
+              "properties": {
+                "type": {}
+              },
+              "additionalProperties": false
+            }
           }
         }
       ]
