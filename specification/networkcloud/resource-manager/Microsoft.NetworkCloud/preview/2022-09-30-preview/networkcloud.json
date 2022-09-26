@@ -50,174 +50,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/admissions/resourceGroups/{resourceGroupName}/clusters/{clusterName}/generateCASigningCertificate": {
-      "post": {
-        "description": "Generate a CA signing certificate that can be used to produce certificates for bare metal machine access within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
-        "summary": "Generate a CA signing certificate.",
-        "operationId": "Admissions_GenerateCASigningCertificate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "admissionCASigningCertificateParameters",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/AdmissionCASigningCertificateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AdmissionCertificate"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Generate CA signing certificate": {
-            "$ref": "./examples/Admissions_GenerateCASigningCertificate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/admissions/resourceGroups/{resourceGroupName}/clusters/{clusterName}/generateSshCertificate": {
-      "post": {
-        "description": "Generates a standard access SSH certificate that can be used to access bare metal machines within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
-        "summary": "Generates a SSH certificate with normal user privilege level.",
-        "operationId": "Admissions_GenerateSshCertificate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AdmissionCertificate"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Generate SSH certificate": {
-            "$ref": "./examples/Admissions_GenerateSshCertificate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/admissions/resourceGroups/{resourceGroupName}/clusters/{clusterName}/generateSshSudoCertificate": {
-      "post": {
-        "description": "Generate a super user access SSH certificate that can be used to access bare metal machines within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
-        "summary": "Generates a SSH certificate with super user privilege level.",
-        "operationId": "Admissions_GenerateSshSudoCertificate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AdmissionCertificate"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Generate a SSH sudo certificate": {
-            "$ref": "./examples/Admissions_GenerateSshSudoCertificate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/admissions/resourceGroups/{resourceGroupName}/clusters/{clusterName}/retrieveHostCACertificate": {
-      "post": {
-        "description": "Retrieves the public x.509 certificate for bare metal machine that can be used to add to the known hosts of a jump server within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
-        "summary": "Retrieves the public x.509 certificate for jump server use.",
-        "operationId": "Admissions_RetrieveHostCACertificate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AdmissionCertificate"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve Host CA certificate": {
-            "$ref": "./examples/Admissions_RetrieveHostCACertificate.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/bareMetalMachines": {
       "get": {
         "description": "Get a list of bare metal machines in the provided subscription. The API returns 200 OK when the operation is successful.",
@@ -2330,6 +2162,186 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/admissions/{admissionName}/generateCASigningCertificate": {
+      "post": {
+        "description": "Generate a CA signing certificate that can be used to produce certificates for bare metal machine access within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
+        "summary": "Generate a CA signing certificate.",
+        "operationId": "Admissions_GenerateCASigningCertificate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdmissionNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "admissionCASigningCertificateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AdmissionCASigningCertificateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdmissionCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate CA signing certificate": {
+            "$ref": "./examples/Admissions_GenerateCASigningCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/admissions/{admissionName}/generateSshCertificate": {
+      "post": {
+        "description": "Generates a standard access SSH certificate that can be used to access bare metal machines within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
+        "summary": "Generates a SSH certificate with normal user privilege level.",
+        "operationId": "Admissions_GenerateSshCertificate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdmissionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdmissionCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate SSH certificate": {
+            "$ref": "./examples/Admissions_GenerateSshCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/admissions/{admissionName}/generateSshSudoCertificate": {
+      "post": {
+        "description": "Generate a super user access SSH certificate that can be used to access bare metal machines within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
+        "summary": "Generates a SSH certificate with super user privilege level.",
+        "operationId": "Admissions_GenerateSshSudoCertificate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdmissionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdmissionCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate a SSH sudo certificate": {
+            "$ref": "./examples/Admissions_GenerateSshSudoCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/admissions/{admissionName}/retrieveHostCACertificate": {
+      "post": {
+        "description": "Retrieves the public x.509 certificate for bare metal machine that can be used to add to the known hosts of a jump server within the provided cluster. The API returns 200 OK with a certificate in a JSON response.",
+        "summary": "Retrieves the public x.509 certificate for jump server use.",
+        "operationId": "Admissions_RetrieveHostCACertificate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdmissionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdmissionCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Host CA certificate": {
+            "$ref": "./examples/Admissions_RetrieveHostCACertificate.json"
+          }
         }
       }
     },
@@ -8883,6 +8895,15 @@
     }
   },
   "parameters": {
+    "AdmissionNameParameter": {
+      "pattern": "^default$",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the admissions, use the value default.",
+      "name": "admissionName",
+      "in": "path",
+      "required": true
+    },
     "BareMetalMachineNameParameter": {
       "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$",
       "type": "string",
