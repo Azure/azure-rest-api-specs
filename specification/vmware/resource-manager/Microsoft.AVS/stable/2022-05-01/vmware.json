@@ -5996,6 +5996,19 @@
         "secondaryCircuit": {
           "description": "A secondary expressRoute circuit from a separate AZ. Only present in a stretched private cloud",
           "$ref": "#/definitions/Circuit"
+        },
+        "nsxPublicIpQuotaRaised": {
+          "description": "Flag to indicate whether the private cloud has the quota for provisioned NSX Public IP count raised from 64 to 1024",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "nsxPublicIpQuotaRaisedEnum",
+            "modelAsString": true
+          }
         }
       }
     },
