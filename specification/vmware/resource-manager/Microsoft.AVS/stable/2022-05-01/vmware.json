@@ -8304,6 +8304,38 @@
         }
       },
       "description": "Identity for the virtual machine."
+    },
+    "ClusterZone": {
+      "type": "object",
+      "properties": {
+        "hosts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of hosts belonging to the availability zone in a cluster"
+        },
+        "zone": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Availability zone identifier"
+        }
+      },
+      "description": "Zone and associated hosts info"
+    },
+    "ClusterZoneList": {
+      "type": "object",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "Zone and associated hosts info",
+          "items": {
+            "$ref": "#/definitions/ClusterZone"
+          }
+        }
+      },
+      "description": "List of all zones and associated hosts for a cluster"
     }
   }
 }
