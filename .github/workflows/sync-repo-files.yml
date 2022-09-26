@@ -5,9 +5,11 @@
        - main
      paths: 
        - 'specification/common-types/**'
+   schedule:
+       - cron: '0 8 * * *'
    workflow_dispatch:
  jobs:
-   sync-common-types-files:
+   sync-common-types-files-1:
      name: sync-common-types-files
      runs-on: ubuntu-latest
      steps:
@@ -16,7 +18,20 @@
        - name: sync-common-types-files
          uses: ./
          with:
-            SOURCE: test-repo-billy/azure-rest-api-specs-pr@main
-            DEST: test-repo-billy/azure-rest-api-specs-pr@RPSaaSMaster
+            SOURCE: azure/azure-rest-api-specs@main
+            DEST: azure/azure-rest-api-specs-pr@RPSaaSMaster
+            FILE_PATH: specification/common-types
+            GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+   sync-common-types-files-2:
+     name: sync-common-types-files
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkoutV2 
+         uses: actions/checkout@v2
+       - name: sync-common-types-files
+         uses: ./
+         with:
+            SOURCE: azure/azure-rest-api-specs@main
+            DEST: azure/azure-rest-api-specs-pr@RPSaaSDev
             FILE_PATH: specification/common-types
             GITHUB_TOKEN: ${{ secrets.GH_PAT }}

@@ -432,7 +432,7 @@ function run() {
         const filePath = config_1.default.FILE_PATH;
         const commitMessage = `${config_1.default.COMMIT_PREFIX} Synced local '${filePath}'`;
         const GITHUB_REPOSITORY = `${source.owner}/${source.repo}`;
-        const branchName = `${config_1.default.BRANCH_PREFIX}/${GITHUB_REPOSITORY}/${source.branch}`;
+        const branchName = `${config_1.default.BRANCH_PREFIX}/${dest.owner}/${dest.repo}/${dest.branch}`;
         const pullRequestTitle = `${config_1.default.COMMIT_PREFIX} Synced file(s) with ${GITHUB_REPOSITORY}`;
         const GITHUB_TOKEN = config_1.default.GITHUB_TOKEN;
         const git = new github_1.Git(GITHUB_TOKEN);
