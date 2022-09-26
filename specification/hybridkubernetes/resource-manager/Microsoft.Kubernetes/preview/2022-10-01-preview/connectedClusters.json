@@ -420,22 +420,6 @@
     }
   },
   "definitions": {
-    "KeyValuePair[String,Object]": {
-      "description": "Object to store additional properties of a connected cluster",
-      "type": "object",
-      "properties": {
-        "propertyName": {
-          "description": "Name of the additional property of a connected cluster",
-          "type": "string",
-          "readOnly": true
-        },
-        "propertyValue": {
-          "description": "Value of the additional property of a connected cluster",
-          "type": "object",
-          "readOnly": true
-        }
-      }
-    },
     "OperationList": {
       "description": "The paginated list of connected cluster API operations.",
       "properties": {
@@ -674,11 +658,11 @@
             "modelAsString": true
           }
         },
-        "additionalProperties": {
-          "description": "Additional properties of the Connected Cluster",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyValuePair[String,Object]"
+        "miscellaneousProperties": {
+          "description": "More properties related to the Connected Cluster",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
           "readOnly": true
         }
