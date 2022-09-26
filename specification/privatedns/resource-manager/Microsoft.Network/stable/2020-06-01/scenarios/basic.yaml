@@ -7,11 +7,13 @@ variables:
 
 prepareSteps:
   - step: PrivateZone_Create
-    exampleFile: ../examples/PrivateZonePut.json
-    requestUpdate:
-      - replace: /parameters/location
-        value: $(globalLocation)
-    
+    operationId: PrivateZones_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(globalLocation)
+      tags:
+        key1: value1
+        
 scenarios:
   - scenario: PrivateZone
     description: Microsoft.Network/privateDnsZones
