@@ -7740,6 +7740,14 @@
         "affinityType": {
           "description": "placement policy affinity type",
           "$ref": "#/definitions/AffinityType"
+        },
+        "affinityStrength": {
+          "description": "vm-host placement policy affinity strength (should/must)",
+          "$ref": "#/definitions/AffinityStrength"
+        },
+        "azureHybridBenefitType": {
+          "description": "placement policy azure hybrid benefit opt-in type",
+          "$ref": "#/definitions/AzureHybridBenefitType"
         }
       },
       "required": [
@@ -7835,6 +7843,30 @@
       ],
       "x-ms-enum": {
         "name": "AffinityType",
+        "modelAsString": true
+      }
+    },
+    "AffinityStrength": {
+      "description": "VM-Host placement policy affinity strength (should/must)",
+      "type": "string",
+      "enum": [
+        "Should",
+        "Must"
+      ],
+      "x-ms-enum": {
+        "name": "AffinityStrength",
+        "modelAsString": true
+      }
+    },
+    "AzureHybridBenefitType": {
+      "description": "Placement policy hosts opt-in Azure Hybrid Benefit type",
+      "type": "string",
+      "enum": [
+        "SqlHost",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "AzureHybridBenefitType",
         "modelAsString": true
       }
     },
