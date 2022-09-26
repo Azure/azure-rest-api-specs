@@ -5346,7 +5346,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next page if any",
@@ -5425,7 +5428,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Specifications of the Metrics for Azure Monitoring",
@@ -5433,7 +5439,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -5509,7 +5518,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "enableRegionalMdmAccount": {
           "description": "Whether or not the service is using regional MDM accounts.",
@@ -5891,7 +5903,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IdentitySource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "availability": {
           "description": "Properties describing how the cloud is distributed across availability zones",
@@ -6753,6 +6768,9 @@
           "items": {
             "$ref": "#/definitions/WorkloadNetworkSegmentPortVif"
           },
+          "x-ms-identifiers": [
+            "portName"
+          ],
           "readOnly": true
         },
         "status": {
@@ -8033,7 +8051,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ScriptParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -8113,14 +8134,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptExecutionParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "hiddenParameters": {
           "description": "Parameters that will be hidden/not visible to ARM, such as passwords and credentials",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptExecutionParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "failureReason": {
           "type": "string",
@@ -8342,7 +8369,10 @@
           "description": "Zone and associated hosts info",
           "items": {
             "$ref": "#/definitions/ClusterZone"
-          }
+          },
+          "x-ms-identifiers": [
+            "zone"
+          ]
         }
       },
       "description": "List of all zones and associated hosts for a cluster"
