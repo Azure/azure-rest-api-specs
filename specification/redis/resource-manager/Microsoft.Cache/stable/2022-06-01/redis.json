@@ -2666,6 +2666,16 @@
             "name": "ReplicationRole",
             "modelAsString": false
           }
+        },
+        "geoReplicatedPrimaryHostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified geo subdomain URL which points to geo-primary cache among the linked redis caches."
+        },
+        "geoReplicatedPrimaryHostNameDnsCName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "DNS CName corresponding to geo subdomain URL which points to geo-primary cache among the linked redis caches. This value will be the actual DNS hostname for the Geo Primary cache."
         }
       },
       "required": [
