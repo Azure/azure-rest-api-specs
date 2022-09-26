@@ -17,7 +17,8 @@ combine-operation-files: true
 Generate all API versions currently shipped for this package
 
 
-```yaml $(multiapi) && $(python)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05
@@ -31,6 +32,7 @@ batch:
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
   - tag: package-managedapplications-2018-06
+  - multiapiscript-managedapplications: true
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
@@ -142,6 +144,13 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
+```yaml $(multiapiscript-managedapplications)
+package-name: azure-mgmt-resource#managedapplications
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+perform-load: false
+```
+
 ```yaml $(multiapiscript-links)
 package-name: azure-mgmt-resource#links
 multiapiscript: true
@@ -225,8 +234,8 @@ These settings apply only when `--tag=package-managedapplications-2018-06 --pyth
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
-namespace: azure.mgmt.resource.managedapplications
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+namespace: azure.mgmt.resource.managedapplications.v2018_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2018_06_01
 ```
 
 ### Tag: package-policy-2021-06 and python
