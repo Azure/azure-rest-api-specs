@@ -56,6 +56,7 @@ These settings apply only when `--tag=package-2022-08-preview` is specified on t
 input-file:
 - Microsoft.HardwareSecurityModules/preview/2022-08-31-preview/cloudhsm.json
 - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+```
 
 # Code Generation
 
