@@ -993,10 +993,10 @@
       "type": "object",
       "properties": {
         "subResource": {
-          "description": "Subresource type for vault AzureBackup, AzureBackupSecondary or AzureSiteRecovery",
+          "description": "Subresource type for vault AzureBackup, AzureBackup_secondary or AzureSiteRecovery",
           "enum": [
             "AzureBackup",
-            "AzureBackupSecondary",
+            "AzureBackup_secondary",
             "AzureSiteRecovery"
           ],
           "type": "string",
@@ -1017,7 +1017,7 @@
       "description": "DNSZone information for Microsoft.RecoveryServices",
       "properties": {
         "requiredZoneNames": {
-          "description": "The private link resource Private link DNS zone name.",
+          "description": "The private link resource Private link DNS zone names.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1821,6 +1821,23 @@
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "groupIds": {
+          "description": "Group Ids for the Private Endpoint",
+          "type": "array",
+          "items": {
+            "description": "GroupId for the PrivateEndpointConnection - AzureBackup, AzureBackup_secondary or AzureSiteRecovery",
+            "enum": [
+              "AzureBackup",
+              "AzureBackup_secondary",
+              "AzureSiteRecovery"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "VaultSubResourceType",
+              "modelAsString": true
+            }
+          }
         }
       }
     },
@@ -1833,23 +1850,6 @@
           "description": "Gets or sets id.",
           "readOnly": true,
           "type": "string"
-        },
-        "groupIds": {
-          "description": "Group Ids for the Private Endpoint",
-          "type": "array",
-          "items": {
-            "description": "Subresource type for vault, AzureBackup, AzureBackupSecondary or AzureSiteRecovery",
-            "enum": [
-              "AzureBackup",
-              "AzureBackupSecondary",
-              "AzureSiteRecovery"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "VaultSubResourceType",
-              "modelAsString": true
-            }
-          }
         }
       }
     },
