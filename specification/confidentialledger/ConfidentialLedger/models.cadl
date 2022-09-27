@@ -4,7 +4,7 @@ import "@azure-tools/cadl-azure-core";
 using Cadl.Rest;
 using Azure.Core;
 
-namespace ConfidentialLedgerClient;
+namespace Azure.ConfidentialLedger;
 
 enum ConfidentialLedgerQueryStateKnownValues {
   "Loading",
@@ -32,11 +32,8 @@ enum ConfidentialLedgerUserRoleNameKnownValues {
 model ConfidentialLedgerUserRoleName is string;
 
 @doc("The governance script for the application.")
-@resource("app/governance/constitution")
 model Constitution {
   @doc("SHA256 digest of the constitution script.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   digest: string;
 
   @doc("Contents of the constitution.")
@@ -62,34 +59,20 @@ model ConfidentialLedgerErrorBody {
   message?: string;
 }
 
-@doc("List of members in the consortium.")
-@pagedResult
-model Consortium {
-  @items
-  members: ConsortiumMember[];
-
-  @doc("Path from which to retrieve the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
-
 @doc("Describes a member of the consortium.")
-@resource("app/governance/members")
+@resource("governance/members/{id}")
 model ConsortiumMember {
   @doc("PEM-encoded certificate associated with the member.")
   certificate: string;
 
   @doc("Identifier assigned to the member.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   id: string;
 }
 
 @doc("Information about the enclaves running the Confidential Ledger.")
-@resource("app/enclaveQuotes")
 model ConfidentialLedgerEnclaves {
   @doc("Id of the Confidential Ledger node responding to the request.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   currentNodeId: string;
 
@@ -124,9 +107,8 @@ model PagedCollections {
 }
 
 @doc("Identifier for collections.")
-@resource("app/collections")
+@resource("collections/{collectionId}")
 model Collection {
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   collectionId: string;
 }
@@ -147,11 +129,8 @@ model PagedLedgerEntries {
 }
 
 @doc("An entry in the ledger.")
-@resource("app/transactions")
 model LedgerEntry {
   @doc("Contents of the ledger entry.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   contents: string;
 
   @visibility("read")
@@ -169,10 +148,7 @@ LedgerEntry, it indicates the state from which the entry was read.
 Returned as a result of a write to the Confidential Ledger, the transaction id
 in the response indicates when the write will become durable.
 """)
-@resource("app/transactions")
 model LedgerWriteResult {
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   collectionId: string;
 }
 
@@ -180,11 +156,8 @@ model LedgerWriteResult {
 The result of querying for a ledger entry from an older transaction id. The
 ledger entry is available in the response only if the returned state is Ready.
 """)
-@resource("app/transactions/{transactionId}")
 model LedgerQueryResult {
   @doc("State of a ledger query.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   state: ConfidentialLedgerQueryState;
 
   @doc("""
@@ -195,7 +168,7 @@ query is in Ready state.
 }
 
 @doc("A receipt certifying the transaction at the specified id.")
-@resource("app/transactions/{transactionId}/receipt")
+
 model TransactionReceipt {
   receipt?: ReceiptContents;
 
@@ -206,8 +179,6 @@ model TransactionReceipt {
 A unique identifier for the state of the ledger. If returned as part of a
 LedgerEntry, it indicates the state from which the entry was read.
 """)
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   transactionId: string;
 }
 
@@ -234,7 +205,6 @@ model ReceiptElement {
 }
 
 @doc("Response returned to a query for the transaction status")
-@resource("app/transactions/{transactionId}/status")
 model TransactionStatus {
   @doc("Represents the state of the transaction.")
   state: TransactionState;
@@ -243,17 +213,13 @@ model TransactionStatus {
 A unique identifier for the state of the ledger. If returned as part of a
 LedgerEntry, it indicates the state from which the entry was read.
 """)
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   transactionId: string;
 }
 
 @doc("Details about a Confidential Ledger user.")
-@resource("app/users/{userId}")
+@resource("users/{userId}")
 model LedgerUser {
   @doc("Represents an assignable role.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   assignedRole: ConfidentialLedgerUserRoleName;
 
   @doc("""
@@ -261,7 +227,8 @@ Identifier for the user. This must either be an AAD object id or a certificate
 fingerprint.
 """)
   @visibility("read")
-  userId?: string;
+  @key
+  userId: string;
 }
 
 @doc("An item in the Merkle proof.")

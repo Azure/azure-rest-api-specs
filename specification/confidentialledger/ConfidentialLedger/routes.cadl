@@ -5,127 +5,144 @@ import "./models.cadl";
 using Cadl.Rest;
 using Cadl.Http;
 
-namespace ConfidentialLedgerClient;
+namespace Azure.ConfidentialLedger;
 
+#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
 @summary("Gets the constitution used for governance.")
+@route("governance/constitution")
 @doc("""
 The constitution is a script that assesses and applies proposals from
 consortium members.
 """)
-op GetConstitution is Azure.Core.ResourceRead<Constitution>;
+@get
+op GetConstitution(): Constitution | Azure.Core.Foundations.ErrorResponse;
 
 @summary("Lists the consortium members.")
 @doc("Consortium members can manage the Confidential Ledger.")
 op ListConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
 
+#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
 @doc("""
 A quote is an SGX enclave measurement that can be used to verify the validity
 of a node and its enclave.
 """)
-op GetEnclaveQuotes is Azure.Core.ResourceRead<ConfidentialLedgerEnclaves>;
+@route("enclaveQuotes")
+@get
+op GetEnclaveQuotes is Azure.Core.Foundations.Operation<{}, ConfidentialLedgerEnclaves>;
 
 @summary("Retrieves a list of collection ids present in the Confidential Ledger")
 @doc("Collection ids are user-created collections of ledger entries")
 op ListCollections is Azure.Core.ResourceList<Collection>;
 
-@summary("Gets ledger entries from a collection corresponding to a range.")
-@doc("""
-A collection id may optionally be specified. Only entries in the specified (or
-default) collection will be returned.
-""")
-op ListLedgerEntries is Azure.Core.ResourceList<
-  LedgerEntry,
-  {
-    parameters: {
+interface LedgerEntries {
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  @summary("Gets ledger entries from a collection corresponding to a range.")
+  @doc("""
+  A collection id may optionally be specified. Only entries in the specified (or
+  default) collection will be returned.
+  """)
+  @route("transactions")
+  @get
+  op ListLedgerEntries is Azure.Core.Foundations.Operation<
+    LedgerEntry,
+    {
+      parameters: {
+        @doc("The collection id.")
+        @query
+        collectionId: string;
+  
+        @doc("Specify the first transaction ID in a range.")
+        @query
+        fromTransactionId: string;
+  
+        @doc("Specify the last transaction ID in a range.")
+        @query
+        toTransactionId: string;
+      };
+    }
+  >;
+  
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  @summary("Writes a ledger entry.")
+  @doc("A collection id may optionally be specified.")
+  @route("transactions")
+  @post
+  op CreateLedgerEntry is Azure.Core.Foundations.Operation<
+    LedgerWriteResult,
+    {
+      parameters: {
+        @doc("The collection id.")
+        @query
+        collectionId: string;
+      };
+    }
+  >;  
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  @summary("""
+  Gets the ledger entry at the specified transaction id. A collection id may
+  optionally be specified to indicate the collection from which to fetch the
+  value.
+  """)
+  @doc("""
+  To return older ledger entries, the relevant sections of the ledger must be
+  read from disk and validated. To prevent blocking within the enclave, the
+  response will indicate whether the entry is ready and part of the response, or
+  if the loading is still ongoing.
+  """)
+  @route("transactions/{transactionId}")
+  @get
+  op GetLedgerEntry is Azure.Core.Foundations.Operation<
+    {
       @doc("The collection id.")
       @query
       collectionId: string;
 
-      @doc("Specify the first transaction ID in a range.")
-      @query
-      fromTransactionId: string;
+      @path transactionId: string;
+    },
+    LedgerQueryResult
+  >;
 
-      @doc("Specify the last transaction ID in a range.")
-      @query
-      toTransactionId: string;
-    };
-  }
->;
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  @summary("Gets the current value available in the ledger.")
+  @doc("A collection id may optionally be specified.")
+  op GetCurrentLedgerEntry is Azure.Core.Foundations.Operation<
+    LedgerEntry,
+    {
+      parameters: {
+        @doc("The collection id.")
+        @query
+        collectionId: string;
+      };
+    }
+  >;
 
-@summary("Writes a ledger entry.")
-@doc("A collection id may optionally be specified.")
-op CreateLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
-  LedgerWriteResult,
-  {
-    parameters: {
-      @doc("The collection id.")
-      @query
-      collectionId: string;
-    };
-  }
->;
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
+  @doc("Gets a receipt certifying ledger contents at a particular transaction id.")
+  @route("transactions/{transactionId}/receipt")
+  @get
+  op GetReceipt is Azure.Core.Foundations.Operation<{@path transactionId: string}, TransactionReceipt>;
 
-@summary("""
-Gets the ledger entry at the specified transaction id. A collection id may
-optionally be specified to indicate the collection from which to fetch the
-value.
-""")
-@doc("""
-To return older ledger entries, the relevant sections of the ledger must be
-read from disk and validated. To prevent blocking within the enclave, the
-response will indicate whether the entry is ready and part of the response, or
-if the loading is still ongoing.
-""")
-op GetLedgerEntry is Azure.Core.ResourceRead<
-  LedgerQueryResult,
-  {
-    parameters: {
-      @doc("The collection id.")
-      @query
-      collectionId: string;
-    };
-  }
->;
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  @summary("Gets the status of an entry identified by a transaction id.")
+  @doc("Gets the status of an entry identified by a transaction id.")
+  @route("transactions/{transactionId}/status")
+  @get
+  op GetTransactionStatus is Azure.Core.Foundations.Operation<{@path transactionId: string}, TransactionStatus>;
+}
 
-@summary("Gets a receipt certifying ledger contents at a particular transaction id.")
-@doc("Gets a receipt certifying ledger contents at a particular transaction id.")
-op GetReceipt is Azure.Core.ResourceRead<TransactionReceipt>;
-
-@summary("Gets the status of an entry identified by a transaction id.")
-@doc("Gets the status of an entry identified by a transaction id.")
-op GetTransactionStatus is Azure.Core.ResourceRead<TransactionStatus>;
-
-@summary("Gets the current value available in the ledger.")
-@doc("A collection id may optionally be specified.")
-op GetCurrentLedgerEntry is Azure.Core.ResourceRead<
-  LedgerEntry,
-  {
-    parameters: {
-      @doc("The collection id.")
-      @query
-      collectionId: string;
-    };
-  }
->;
-
-@summary("Deletes a user from the Confidential Ledger.")
-@doc("Deletes a user from the Confidential Ledger.")
-@route("/app/users/{userId}")
-@delete
-op DeleteUser is Azure.Core.Foundations.Operation<
-  {
-    @doc("The user id, either an AAD object ID or certificate fingerprint.")
-    @path
-    userId: string;
-  },
-  void
->;
-
-@summary("Gets a user.")
-@doc("Gets a user.")
-op GetUser is Azure.Core.ResourceRead<LedgerUser>;
-
-@summary("Adds a user or updates a user's fields.")
-@doc("A JSON merge patch is applied for existing users")
-op CreateOrUpdateUser is Azure.Core.ResourceCreateOrUpdate<LedgerUser>;
+interface User {
+  @summary("Deletes a user from the Confidential Ledger.")
+  @doc("Deletes a user from the Confidential Ledger.")
+  DeleteUser is Azure.Core.ResourceDelete<LedgerUser>;
+  
+  @summary("Gets a user.")
+  @doc("Gets a user.")
+  GetUser is Azure.Core.ResourceRead<LedgerUser>;
+  
+  @summary("Adds a user or updates a user's fields.")
+  @doc("A JSON merge patch is applied for existing users")
+  CreateOrUpdateUser is Azure.Core.ResourceCreateOrUpdate<LedgerUser>;
+}

@@ -3,11 +3,11 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("ConfidentialLedgerClient")
+@serviceTitle("Azure Confidential Ledger")
 @serviceVersion("2022-05-13")
 @server(
-  "{ledgerEndpoint}",
-  "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service.",
+  "{ledgerEndpoint}/app",
+  "Confidential Ledger writes and retrieves ledger entries against the Confidential Ledger service.",
   {
     @doc("""
 The Confidential Ledger URL, for example
@@ -17,7 +17,7 @@ https://contoso.confidentialledger.azure.com
   }
 )
 @doc("""
-The ConfidentialLedgerClient writes and retrieves ledger entries against the
+Confidential Ledger writes and retrieves ledger entries against the
 Confidential Ledger service.
 """)
-namespace ConfidentialLedgerClient;
+namespace Azure.ConfidentialLedger;
