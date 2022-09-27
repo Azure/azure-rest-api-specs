@@ -25,6 +25,8 @@ To see additional help and options, run:
 These are the global settings for the Hardware Security Modules API.
 
 ``` yaml
+title: Azure HSM Resource Provider
+description: The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.
 openapi-type: arm
 tag: package-2022-08-preview
 ```
