@@ -69,6 +69,10 @@ service-versions:
 - 2022-06-01-preview
 directive:
 - from: swagger-document
+  where: '$.paths["/testruns/{testRunId}"].patch'
+  transform: >
+    $["operationId"] = "TestRun_CreateAndUpdateTestRun";
+- from: swagger-document
   where: '$.paths.*[?(@.tags=="AppComponent")]'
   transform: >
     $["operationId"] = $["operationId"].replace("AppComponent_", "LoadTestAdministration_");
