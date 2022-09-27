@@ -2670,12 +2670,12 @@
         "geoReplicatedPrimaryHostName": {
           "type": "string",
           "readOnly": true,
-          "description": "Fully qualified geo hostname which points to geo-primary cache among the linked redis caches."
+          "description": "DNS which will always point to current geo-primary cache among the linked redis caches so that Geo failover support can be enabled."
         },
         "primaryHostName": {
           "type": "string",
           "readOnly": true,
-          "description": "DNS corresponding to geo-primary cache among the linked redis caches."
+          "description": "DNS name that resolves to the current geo-primary cache among the linked redis caches."
         }
       },
       "required": [
