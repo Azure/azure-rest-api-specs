@@ -3294,6 +3294,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/validateSecret": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Validate a Secret in the profile.",
+        "operationId": "Validate_Secret",
+        "x-ms-examples": {
+          "Validate_Secret": {
+            "$ref": "./examples/Validate_Secret.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "validateSecretInput",
+            "in": "body",
+            "description": "The Secret source.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateSecretInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateSecretOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics": {
       "get": {
         "tags": [
