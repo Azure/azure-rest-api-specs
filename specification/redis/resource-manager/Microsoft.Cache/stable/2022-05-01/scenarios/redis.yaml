@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  subnetId:
+    type: string
+  name:
+    type: string
+    prefix: redisna
+  
+prepareSteps:
+  - step: NetworkSubnet_Create
+    armTemplate: armtemplate/Create_NetworkAndSubnet.json
+
+scenarios:
+  - scenario: Redis
+    description: Microsoft.Cache/redis
+    steps:
+      - step: Redis_CheckNameAvailability
+        exampleFile: ..\examples\RedisCacheCheckNameAvailability.json
+      - step: Redis_Create
+        exampleFile: ..\examples\RedisCacheCreateDefaultVersion.json
+        requestUpdate:
+          - replace: /parameters/properties/subnetId
+            value: $(subnetId)
+          # - replace: /parameters/properties/staticIP
+          #   value: 10.0.0.5
+
+      - step: Redis_ListBySubscription
+        exampleFile: ..\examples\RedisCacheList.json
+      - step: Redis_ListByResourceGroup
+        exampleFile: ..\examples\RedisCacheListByResourceGroup.json
+      - step: Redis_Get
+        exampleFile: ..\examples\RedisCacheGet.json
+      - step: Redis_ListUpgradeNotifications
+        exampleFile: ..\examples\RedisCacheListUpgradeNotifications.json
+      - step: Redis_Update
+        exampleFile: ..\examples\RedisCacheUpdate.json
+      - step: Redis_RegenerateKey
+        exampleFile: ..\examples\RedisCacheRegenerateKey.json
+      - step: Redis_ListKeys
+        exampleFile: ..\examples\RedisCacheListKeys.json
+      - step: Redis_ForceReboot
+        exampleFile: ..\examples\RedisCacheForceReboot.json
+      - step: Redis_ImportData
+        exampleFile: ..\examples\RedisCacheImport.json
+      - step: Redis_ExportData
+        exampleFile: ..\examples\RedisCacheExport.json
+      - step: Redis_Delete
+        exampleFile: ..\examples\RedisCacheDelete.json
