@@ -570,8 +570,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/AssetAssessments"
             }
           }
         ],
@@ -1868,8 +1867,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/AccountValidation"
             }
           }
         ],
@@ -2303,6 +2301,10 @@
           "enum": [
             "CATALOG_PATH"
           ],
+		  "x-ms-enum": {
+            "name": "definitions",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "type": {
@@ -2405,6 +2407,10 @@
             "DelegatedAuth",
             "ManagedIdentity"
           ],
+		  "x-ms-enum": {
+            "name": "CredentialEntity",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "referenceName": {
@@ -2449,6 +2455,10 @@
             "CATALOG_ASSET",
             "FLOWLET"
           ],
+		  "x-ms-enum": {
+            "name": "DataQualityRules",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "rules": {
@@ -2470,6 +2480,10 @@
             "DSL",
             "SQL"
           ],
+		  "x-ms-enum": {
+            "name": "DataQualityView",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "script": {
@@ -2509,18 +2523,30 @@
             "ENABLED",
             "DISABLED"
           ],
+		  "x-ms-enum": {
+            "name": "DQAlert",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "notificationFrequency": {
           "enum": [
             "IMMEDIATE"
           ],
+		  "x-ms-enum": {
+            "name": "DQAlert",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "notificationType": {
           "enum": [
             "EMAIL"
           ],
+		  "x-ms-enum": {
+            "name": "DQAlert",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "condition": {
@@ -2710,6 +2736,10 @@
             "DRAFT",
             "PUBLISHED"
           ],
+		  "x-ms-enum": {
+            "name": "Rule",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "level": {
@@ -2717,6 +2747,10 @@
             "ASSET",
             "FIELD"
           ],
+		  "x-ms-enum": {
+            "name": "Rule",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "type": {
@@ -2732,6 +2766,10 @@
             "TIMELINESS",
             "REFERENCE"
           ],
+		  "x-ms-enum": {
+            "name": "Rule",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "tags": {
@@ -2855,6 +2893,10 @@
             "TRIGGER_DELETED",
             "PIPELINE_DELETED"
           ],
+          "x-ms-enum": {
+            "name": "ScheduleMetadata",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "runOnce": {
@@ -3127,6 +3169,14 @@
           "$ref": "#/definitions/Collection"
         }
       }
-    }
+    },
+	"AssetAssessments" : {
+	  "type": "object",
+	  "additionalProperties": {}
+	},
+	"AccountValidation" : {
+	  "type": "object",
+	  "additionalProperties": {}
+	}
   }
 }
