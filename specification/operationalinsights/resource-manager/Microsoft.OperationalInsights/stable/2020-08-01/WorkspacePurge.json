@@ -70,6 +70,12 @@
                 "description": "The location from which to request the operation status."
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -111,6 +117,12 @@
             "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
             "schema": {
               "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },

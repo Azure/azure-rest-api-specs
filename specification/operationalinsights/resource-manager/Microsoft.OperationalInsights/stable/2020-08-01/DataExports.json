@@ -259,7 +259,10 @@
         }
       ],
       "description": "The top level data export resource container.",
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ]
     },
     "DataExportListResult": {
       "description": "Result of the request to list data exports.",
@@ -304,7 +307,8 @@
         }
       },
       "required": [
-        "tableNames"
+        "tableNames",
+        "destination"
       ],
       "description": "Data Export properties."
     },
