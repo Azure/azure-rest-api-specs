@@ -2,19 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Engine APIs",
-    "description": "A first party Azure service for migrating data centre workloads.",
+    "description": "A first party Azure service for modernizing workloads.",
     "version": "2022-05-01-preview"
   },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/deployedResources/{deployedResourceName}": {
       "get": {
@@ -37,7 +27,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -49,7 +39,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -94,12 +84,12 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -147,7 +137,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -159,7 +149,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -205,7 +195,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -217,7 +207,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -268,7 +258,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects Name.",
+            "description": "ModernizeProject Name.",
             "required": true,
             "type": "string"
           },
@@ -280,7 +270,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -332,12 +322,12 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -382,7 +372,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -394,7 +384,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -443,7 +433,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -462,7 +452,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -489,11 +479,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}": {
       "get": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
-        "summary": "Gets the migrate data center.",
-        "description": "Gets the details of the migrate data center.",
-        "operationId": "ModernizeProjects_Get",
+        "summary": "Gets the modernize project.",
+        "description": "Gets the details of the modernize project.",
+        "operationId": "ModernizeProject_Get",
         "produces": [
           "application/json"
         ],
@@ -507,19 +497,19 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "Migrate data center name.",
+            "description": "Modernize project name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsModel"
+              "$ref": "#/definitions/ModernizeProjectModel"
             }
           },
           "default": {
@@ -530,18 +520,18 @@
           }
         },
         "x-ms-examples": {
-          "ModernizeProjects_Get": {
-            "$ref": "./examples/ModernizeProjects_Get.json"
+          "ModernizeProject_Get": {
+            "$ref": "./examples/ModernizeProject_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Puts the modernizeProject.",
         "description": "Creates the modernizeProject.",
-        "operationId": "ModernizeProjects_Create",
+        "operationId": "ModernizeProject_Create",
         "consumes": [
           "application/json"
         ],
@@ -558,19 +548,19 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects Name.",
+            "description": "ModernizeProject Name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "ModernizeProjects properties.",
+            "description": "ModernizeProject properties.",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsModel"
+              "$ref": "#/definitions/ModernizeProjectModel"
             }
           }
         ],
@@ -578,7 +568,7 @@
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsModel"
+              "$ref": "#/definitions/ModernizeProjectModel"
             }
           },
           "default": {
@@ -589,18 +579,18 @@
           }
         },
         "x-ms-examples": {
-          "ModernizeProjects_Create": {
-            "$ref": "./examples/ModernizeProjects_Create.json"
+          "ModernizeProject_Create": {
+            "$ref": "./examples/ModernizeProject_Create.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Updates the modernizeProject.",
         "description": "Performs update on the modernizeProject.",
-        "operationId": "ModernizeProjects_Update",
+        "operationId": "ModernizeProject_Update",
         "consumes": [
           "application/json"
         ],
@@ -617,19 +607,19 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects Name.",
+            "description": "ModernizeProject Name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "ModernizeProjects properties.",
+            "description": "ModernizeProject properties.",
             "schema": {
-              "$ref": "#/definitions/UpdateModernizeProjectsModel"
+              "$ref": "#/definitions/UpdateModernizeProjectModel"
             }
           }
         ],
@@ -637,7 +627,7 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsModel"
+              "$ref": "#/definitions/ModernizeProjectModel"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -655,18 +645,18 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ModernizeProjects_Update": {
-            "$ref": "./examples/ModernizeProjects_Update.json"
+          "ModernizeProject_Update": {
+            "$ref": "./examples/ModernizeProject_Update.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Deletes the modernizeProject.",
         "description": "Removes the modernizeProject.",
-        "operationId": "ModernizeProjects_Delete",
+        "operationId": "ModernizeProject_Delete",
         "produces": [
           "application/json"
         ],
@@ -680,12 +670,12 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects Name.",
+            "description": "ModernizeProject Name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -710,8 +700,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ModernizeProjects_Delete": {
-            "$ref": "./examples/ModernizeProjects_Delete.json"
+          "ModernizeProject_Delete": {
+            "$ref": "./examples/ModernizeProject_Delete.json"
           }
         }
       }
@@ -719,11 +709,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/modernizeProjects": {
       "get": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Lists the modernizeProjects.",
         "description": "Gets the list of modernizeProjects in the given subscription.",
-        "operationId": "ModernizeProjects_ListBySubscription",
+        "operationId": "ModernizeProject_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -738,14 +728,14 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsModelCollection"
+              "$ref": "#/definitions/ModernizeProjectModelCollection"
             }
           },
           "default": {
@@ -759,8 +749,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ModernizeProjects_ListBySubscription": {
-            "$ref": "./examples/ModernizeProjects_ListBySubscription.json"
+          "ModernizeProject_ListBySubscription": {
+            "$ref": "./examples/ModernizeProject_ListBySubscription.json"
           }
         }
       }
@@ -768,11 +758,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects": {
       "get": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Lists the modernizeProjects.",
         "description": "Gets the list of modernizeProjects in the given subscription and resource group.",
-        "operationId": "ModernizeProjects_List",
+        "operationId": "ModernizeProject_List",
         "produces": [
           "application/json"
         ],
@@ -790,14 +780,14 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsModelCollection"
+              "$ref": "#/definitions/ModernizeProjectModelCollection"
             }
           },
           "default": {
@@ -811,8 +801,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ModernizeProjects_List": {
-            "$ref": "./examples/ModernizeProjects_List.json"
+          "ModernizeProject_List": {
+            "$ref": "./examples/ModernizeProject_List.json"
           }
         }
       }
@@ -820,11 +810,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/statistics": {
       "get": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Gets the modernizeProject statistics.",
         "description": "Gets the statistics for the modernizeProject.",
-        "operationId": "ModernizeProjectsStatistics_Get",
+        "operationId": "ModernizeProjectStatistics_Get",
         "produces": [
           "application/json"
         ],
@@ -838,19 +828,19 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModernizeProjectsStatisticsModel"
+              "$ref": "#/definitions/ModernizeProjectStatisticsModel"
             }
           },
           "default": {
@@ -861,8 +851,8 @@
           }
         },
         "x-ms-examples": {
-          "ModernizeProjectsStatistics_Get": {
-            "$ref": "./examples/ModernizeProjectsStatistics_Get.json"
+          "ModernizeProjectStatistics_Get": {
+            "$ref": "./examples/ModernizeProjectStatistics_Get.json"
           }
         }
       }
@@ -870,11 +860,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/operations/{operationId}": {
       "get": {
         "tags": [
-          "ModernizeProjects"
+          "ModernizeProject"
         ],
         "summary": "Gets the modernizeProject operation status.",
         "description": "Tracks the results of an asynchronous operation on the modernizeProject.",
-        "operationId": "ModernizeProjectsOperationStatus_Get",
+        "operationId": "ModernizeProjectOperationStatus_Get",
         "produces": [
           "application/json"
         ],
@@ -888,7 +878,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -906,7 +896,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -924,8 +914,8 @@
           }
         },
         "x-ms-examples": {
-          "ModernizeProjectsOperationStatus_Get": {
-            "$ref": "./examples/ModernizeProjectsOperationStatus_Get.json"
+          "ModernizeProjectOperationStatus_Get": {
+            "$ref": "./examples/ModernizeProjectOperationStatus_Get.json"
           }
         }
       }
@@ -951,7 +941,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -963,7 +953,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1008,7 +998,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1025,7 +1015,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1073,7 +1063,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1092,7 +1082,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1137,7 +1127,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1149,7 +1139,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1195,7 +1185,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1207,7 +1197,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1258,7 +1248,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1276,7 +1266,7 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1328,12 +1318,12 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1381,7 +1371,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1393,7 +1383,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1441,7 +1431,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1453,7 +1443,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1513,7 +1503,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1525,7 +1515,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1585,7 +1575,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1597,7 +1587,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1657,7 +1647,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1669,7 +1659,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1705,67 +1695,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/completeMigration": {
-      "post": {
-        "tags": [
-          "WorkloadDeployment"
-        ],
-        "summary": "Performs complete migrate.",
-        "description": "Performs the complete migrate on the workload deployment.",
-        "operationId": "WorkloadDeployment_MigrateComplete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "in": "path",
-            "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workloadDeploymentName",
-            "description": "Workload deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "WorkloadDeployment_MigrateComplete": {
-            "$ref": "./examples/WorkloadDeployment_MigrateComplete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadDeployments/{workloadDeploymentName}/operations/{operationId}": {
       "get": {
         "tags": [
@@ -1787,7 +1716,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1806,7 +1735,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1851,7 +1780,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1863,7 +1792,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1909,7 +1838,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -1921,7 +1850,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1972,7 +1901,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects Name.",
+            "description": "ModernizeProject Name.",
             "required": true,
             "type": "string"
           },
@@ -1984,7 +1913,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2036,12 +1965,12 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2089,7 +2018,7 @@
           {
             "in": "path",
             "name": "modernizeProjectName",
-            "description": "ModernizeProjects name.",
+            "description": "ModernizeProject name.",
             "required": true,
             "type": "string"
           },
@@ -2108,7 +2037,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2132,31 +2061,63 @@
         }
       }
     },
-    "/providers/Microsoft.Migrate/operations": {
-      "get": {
-        "summary": "Get list of operations supported in the API.",
-        "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
-        "operationId": "Operations_List",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/workloadInstances/{workloadInstanceName}/completeMigration": {
+      "post": {
+        "tags": [
+          "WorkloadInstance"
+        ],
+        "summary": "Performs complete migrate.",
+        "description": "Performs the complete migrate on the workload instance.",
+        "operationId": "WorkloadInstance_MigrateComplete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "modernizeProjectName",
+            "description": "ModernizeProject name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workloadInstanceName",
+            "description": "Workload instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK. Returns list of operations.",
-            "schema": {
-              "$ref": "#/definitions/AvailableOperations"
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ArmError"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
+          "WorkloadInstance_MigrateComplete": {
+            "$ref": "./examples/WorkloadInstance_MigrateComplete.json"
           }
         }
       }
@@ -2323,14 +2284,16 @@
       "type": "object",
       "properties": {
         "applicationId": {
-          "description": "Gets the web application id.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web application id.",
+          "type": "string"
         },
         "applicationName": {
-          "description": "Gets the web application name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web application name.",
+          "type": "string"
+        },
+        "applicationScratchPath": {
+          "description": "Gets or sets application scratch path.",
+          "type": "string"
         },
         "webServerId": {
           "description": "Gets the web server id.",
@@ -2500,28 +2463,18 @@
       "properties": {
         "status": {
           "description": "Gets or sets the status of automation artifacts.",
-          "type": "string"
+          "enum": [
+            "NotGenerated",
+            "Generated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomationArtifactStatus",
+            "modelAsString": true
+          }
         },
         "azureFileShareProfile": {
           "$ref": "#/definitions/AzureFileShareHydrationProfile"
-        }
-      }
-    },
-    "AvailableOperations": {
-      "description": "Available operations of the service",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of available operation details",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationDetail"
-          }
-        },
-        "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
         }
       }
     },
@@ -2556,7 +2509,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the application binding.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -2640,48 +2593,12 @@
         }
       }
     },
-    "CloudError": {
-      "x-ms-external": true,
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the Azure Migrate service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Azure Migrate service."
-    },
     "ContainerImageProperties": {
       "description": "Class for container image properties.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the container image.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -2698,6 +2615,18 @@
         },
         "imageName": {
           "description": "Gets or sets the container image name.",
+          "type": "string"
+        },
+        "runId": {
+          "description": "Gets or sets the RunId.",
+          "type": "string"
+        },
+        "runStatus": {
+          "description": "Gets or sets the RunStatus.",
+          "type": "string"
+        },
+        "logLink": {
+          "description": "Gets or sets the log link.",
           "type": "string"
         }
       }
@@ -2819,6 +2748,11 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets the ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deployedResourceId": {
           "description": "Gets or sets the deployed resource id.",
           "type": "string",
           "readOnly": true
@@ -2856,7 +2790,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the directory path.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -2894,7 +2828,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the error.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -2940,11 +2874,6 @@
       "description": "Health error model.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Gets the unique id.",
-          "type": "string",
-          "readOnly": true
-        },
         "affectedResourceType": {
           "description": "Gets or sets the type of affected resource type.",
           "type": "string"
@@ -2962,6 +2891,11 @@
           "items": {
             "$ref": "#/definitions/InnerHealthErrorModel"
           }
+        },
+        "id": {
+          "description": "Gets the ID.",
+          "type": "string",
+          "readOnly": true
         },
         "code": {
           "description": "Gets or sets the error code.",
@@ -3140,7 +3074,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the application.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -3177,7 +3111,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the application.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -3220,14 +3154,16 @@
           "$ref": "#/definitions/IISWebServer"
         },
         "applicationId": {
-          "description": "Gets the web application id.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web application id.",
+          "type": "string"
         },
         "applicationName": {
-          "description": "Gets the web application name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web application name.",
+          "type": "string"
+        },
+        "applicationScratchPath": {
+          "description": "Gets or sets application scratch path.",
+          "type": "string"
         },
         "webServerId": {
           "description": "Gets the web server id.",
@@ -3291,55 +3227,46 @@
       "type": "object",
       "properties": {
         "serverId": {
-          "description": "Gets the web server id.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web server id.",
+          "type": "string"
         },
         "serverName": {
-          "description": "Gets the web server name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web server name.",
+          "type": "string"
         },
         "rootConfigurationLocation": {
-          "description": "Gets the server root configuration location.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the server root configuration location.",
+          "type": "string"
         },
         "version": {
-          "description": "Gets the server version.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the server version.",
+          "type": "string"
         },
         "machines": {
-          "description": "Gets the list of machines.",
+          "description": "Gets or sets the list of machines.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "webApplications": {
-          "description": "Gets the list of web applications.",
+          "description": "Gets or sets the list of web applications.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "displayName": {
-          "description": "Gets the display name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the display name.",
+          "type": "string"
         },
         "serverFqdn": {
-          "description": "Gets the server FQDN.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the server FQDN.",
+          "type": "string"
         },
         "runAsAccountId": {
-          "description": "Gets the run as account id.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the run as account id.",
+          "type": "string"
         },
         "operatingSystemDetails": {
           "$ref": "#/definitions/OperatingSystemDetails"
@@ -3357,6 +3284,14 @@
       "properties": {
         "iisWebApplication": {
           "$ref": "#/definitions/IISWebApplication"
+        },
+        "containerName": {
+          "description": "Gets or sets the container Id.",
+          "type": "string"
+        },
+        "fileshareName": {
+          "description": "Gets or sets the fileshare name.",
+          "type": "string"
         }
       }
     },
@@ -3365,7 +3300,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -3496,8 +3431,7 @@
           "type": "string"
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "TestFabricExtension"
+      "discriminator": "instanceType"
     },
     "MigrateAgentModelProperties": {
       "description": "MigrateAgent model properties.",
@@ -3566,151 +3500,6 @@
         }
       }
     },
-    "ModernizeProjectsModel": {
-      "description": "ModernizeProjects model.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Gets or sets the location of the modernizeProject.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ModernizeProjectsModelProperties"
-        },
-        "id": {
-          "description": "Gets or sets the Id of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets or sets the name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets or sets the type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemDataModel"
-            }
-          ],
-          "readOnly": true
-        },
-        "tags": {
-          "description": "Gets or sets the resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ModernizeProjectsModelCollection": {
-      "description": "ModernizeProjects model collection.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Gets or sets the list of modernizeProjects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModernizeProjectsModel"
-          }
-        },
-        "nextLink": {
-          "description": "Gets or sets the value of next link.",
-          "type": "string"
-        }
-      }
-    },
-    "ModernizeProjectsModelProperties": {
-      "description": "ModernizeProjects properties.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "Gets or sets the provisioning state of the modernizeProject.",
-          "enum": [
-            "Canceled",
-            "Creating",
-            "Deleting",
-            "Deleted",
-            "Failed",
-            "Succeeded",
-            "Updating"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "serviceResourceId": {
-          "description": "Gets or sets the service resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serviceEndpoint": {
-          "description": "Gets or sets the service endpoint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "migrationConfiguration": {
-          "$ref": "#/definitions/MigrationConfiguration"
-        }
-      }
-    },
-    "ModernizeProjectsStatisticsModel": {
-      "description": "ModernizeProjects statistics model.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModernizeProjectsStatisticsModelProperties"
-        }
-      }
-    },
-    "ModernizeProjectsStatisticsModelProperties": {
-      "description": "ModernizeProjects statistics properties.",
-      "type": "object",
-      "properties": {
-        "workloadDeploymentStatistics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkloadDeploymentStatisticsModel"
-            }
-          ],
-          "readOnly": true
-        },
-        "jobStatistics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkflowStatisticsModel"
-            }
-          ],
-          "readOnly": true
-        },
-        "workloadInstanceStatistics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkloadInstanceStatisticsModel"
-            }
-          ],
-          "readOnly": true
-        },
-        "modernizeProjectErrors": {
-          "description": "Gets or sets the list of modernizeProject health errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorModel"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "MigrateModel": {
       "description": "Migrate model.",
       "type": "object",
@@ -3759,7 +3548,7 @@
       }
     },
     "MigrationConfiguration": {
-      "description": "ModernizeProjects properties.",
+      "description": "MigrationConfiguration properties.",
       "type": "object",
       "properties": {
         "storageAccountResourceId": {
@@ -3773,62 +3562,154 @@
         "migrationSolutionResourceId": {
           "description": "Gets or sets the migration solution resource Id.",
           "type": "string"
-        },
-        "linkedAgents": {
-          "description": "Gets or sets the link agents.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     },
-    "OperationDetail": {
-      "description": "Operation detail payload",
+    "ModernizeProjectModel": {
+      "description": "ModernizeProject model.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Gets or sets the Id.",
+        "location": {
+          "description": "Gets or sets the location of the modernizeProject.",
           "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ModernizeProjectModelProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity"
+        },
+        "id": {
+          "description": "Gets or sets the Id of the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "description": "Name of the operation",
-          "type": "string"
+          "description": "Gets or sets the name of the resource.",
+          "type": "string",
+          "readOnly": true
         },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
         },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Display of the operation"
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemDataModel"
+            }
+          ],
+          "readOnly": true
         },
-        "origin": {
-          "description": "Origin of the operation",
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ModernizeProjectModelCollection": {
+      "description": "ModernizeProject model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of modernizeProjects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModernizeProjectModel"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
           "type": "string"
         }
       }
     },
-    "OperationDisplay": {
-      "description": "Operation display payload",
+    "ModernizeProjectModelProperties": {
+      "description": "ModernizeProject properties.",
       "type": "object",
       "properties": {
-        "provider": {
-          "description": "Resource provider of the operation",
-          "type": "string"
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the ModernizeProject.",
+          "enum": [
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Deleted",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
-        "resource": {
-          "description": "Resource of the operation",
-          "type": "string"
+        "serviceResourceId": {
+          "description": "Gets or sets the service resource Id.",
+          "type": "string",
+          "readOnly": true
         },
-        "operation": {
-          "description": "Localized friendly name for the operation",
-          "type": "string"
+        "serviceEndpoint": {
+          "description": "Gets or sets the service endpoint.",
+          "type": "string",
+          "readOnly": true
         },
-        "description": {
-          "description": "Localized friendly description for the operation",
-          "type": "string"
+        "migrationConfiguration": {
+          "$ref": "#/definitions/MigrationConfiguration"
+        }
+      }
+    },
+    "ModernizeProjectStatisticsModel": {
+      "description": "ModernizeProject statistics model.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModernizeProjectStatisticsModelProperties"
+        }
+      }
+    },
+    "ModernizeProjectStatisticsModelProperties": {
+      "description": "ModernizeProject statistics properties.",
+      "type": "object",
+      "properties": {
+        "workloadDeploymentStatistics": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkloadDeploymentStatisticsModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "jobStatistics": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkflowStatisticsModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "workloadInstanceStatistics": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkloadInstanceStatisticsModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "modernizeProjectErrors": {
+          "description": "Gets or sets the list of modernizeProject health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorModel"
+          },
+          "readOnly": true
         }
       }
     },
@@ -3854,113 +3735,34 @@
         }
       }
     },
-    "OperationModel": {
-      "description": "Operation model.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Gets or sets the name of the operation.",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Gets or sets a value indicating whether the action is specific to data plane or\r\ncontrol plane.",
-          "type": "boolean"
-        },
-        "origin": {
-          "description": "Gets or sets the executor of the operation.",
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationModelProperties"
-        }
-      }
-    },
-    "OperationModelProperties": {
-      "description": "Operation model properties.",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Gets or sets the resource provider name.",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Gets or sets resource name.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Gets or sets the operation.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Gets or sets the description.",
-          "type": "string"
-        }
-      }
-    },
     "OperationStatus": {
-      "description": "Operation status REST resource.",
+      "description": "Defines the operation status.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource Id.",
+          "description": "Gets the Id.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Operation name.",
+          "description": "Gets the operation name.",
           "type": "string",
           "readOnly": true
         },
         "status": {
-          "description": "Status of the operation. ARM expects the terminal status to be one of Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.",
+          "description": "Gets the status of the operation. ARM expects the terminal status to be one of\r\nSucceeded/ Failed/ Canceled. All other values imply that the operation is still running.",
           "type": "string",
           "readOnly": true
         },
         "startTime": {
-          "description": "Start time.",
+          "description": "Gets the start time.",
           "type": "string",
           "readOnly": true
         },
         "endTime": {
-          "description": "End time.",
+          "description": "Gets the end time.",
           "type": "string",
           "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/OperationStatusError",
-          "description": "Error stating all error details for the operation.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationStatusProperties",
-          "description": "Custom data.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationStatusError": {
-      "description": "Class for operation status errors.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationStatusProperties": {
-      "description": "Class for operation result properties.",
-      "type": "object",
-      "properties": {
-        "result": {
-          "description": "Result or output of the workflow.",
-          "type": "string"
         }
       }
     },
@@ -3977,6 +3779,35 @@
           "format": "int32",
           "description": "Gets or sets the External Port.",
           "type": "integer"
+        }
+      }
+    },
+    "ResourceIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityTypes",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
         }
       }
     },
@@ -4026,7 +3857,7 @@
     "SecureString": {
       "type": "object",
       "properties": {
-        "length": {
+        "Length": {
           "format": "int32",
           "type": "integer"
         }
@@ -4125,7 +3956,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the task.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -4251,8 +4082,8 @@
         }
       }
     },
-    "UpdateModernizeProjectsModel": {
-      "description": "Update ModernizeProjects model.",
+    "UpdateModernizeProjectModel": {
+      "description": "Update ModernizeProject model.",
       "type": "object",
       "properties": {
         "tags": {
@@ -4264,6 +4095,17 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        }
+      }
     },
     "VMwareMigrateAgentModelCustomProperties": {
       "description": "VMware MigrateAgent model custom properties.",
@@ -4289,7 +4131,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the application configuration.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -4299,6 +4141,14 @@
         },
         "filePath": {
           "description": "Gets or sets the configuration file path.",
+          "type": "string"
+        },
+        "localFilePath": {
+          "description": "Gets or sets the configuration local file path.",
+          "type": "string"
+        },
+        "targetFilePath": {
+          "description": "Gets or sets the configuration target file path.",
           "type": "string"
         },
         "section": {
@@ -4323,7 +4173,8 @@
           "type": "boolean"
         },
         "value": {
-          "$ref": "#/definitions/SecureString"
+          "description": "Gets or sets the configuration value.",
+          "type": "string"
         },
         "identifier": {
           "description": "Gets or sets the identifier for the configuration.",
@@ -4368,7 +4219,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the unique id corresponding to the application framework.",
+          "description": "Gets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -4473,8 +4324,7 @@
           "readOnly": true
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "SampleWorkflow"
+      "discriminator": "instanceType"
     },
     "WorkflowModelProperties": {
       "description": "Workflow model properties.",
@@ -4540,7 +4390,7 @@
         "objectType": {
           "description": "Gets or sets the object type.",
           "enum": [
-            "ModernizeProjects",
+            "ModernizeProject",
             "MigrateAgent",
             "WorkloadInstance",
             "WorkloadDeployment"
@@ -4694,8 +4544,7 @@
           }
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "IISAKSWorkloadDeployment"
+      "discriminator": "instanceType"
     },
     "WorkloadDeploymentModelProperties": {
       "description": "Workload deployment model properties.",
@@ -4722,14 +4571,15 @@
         "status": {
           "description": "Gets or sets the workload deployment status.",
           "enum": [
+            "None",
             "InitialReplication",
             "ImageBuildPending",
-            "ReadyToTestMigrate",
             "TestMigrating",
             "CleanUpPending",
             "ReadyToMigrate",
             "Migrating",
-            "Migrated"
+            "Migrated",
+            "Failed"
           ],
           "type": "string",
           "readOnly": true,
@@ -4738,102 +4588,80 @@
             "modelAsString": true
           }
         },
-        "replicationState": {
+        "statusDescription": {
+          "description": "Gets or sets the workload deployment status description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "replicationStatus": {
           "description": "Gets or sets the workload replication state.",
           "enum": [
-            "NotReplicatedStatesBegin",
-            "EnablingReplication",
-            "EnablingFailed",
-            "DisablingReplication",
-            "MarkedForDeletion",
-            "DisablingFailed",
-            "NotReplicatedStatesEnd",
-            "InitialReplicationStatesBegin",
-            "InitialReplicationInProgress",
-            "InitialReplicationCompleted",
-            "InitialReplicationFailed",
-            "InitialReplicationStatesEnd",
-            "ReplicatedStatesBegin",
-            "Replicated",
-            "ReplicatedStatesEnd"
+            "None",
+            "Scheduled",
+            "InitialSync",
+            "Completed",
+            "Failed",
+            "Disabling",
+            "Disabled"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "ReplicationState",
+            "name": "ClientFacingReplicationStatus",
             "modelAsString": true
           }
         },
-        "replicationStateDescription": {
+        "replicationStatusDescription": {
           "description": "Gets or sets the workload replication state description.",
           "type": "string",
           "readOnly": true
         },
-        "testMigrateState": {
+        "testMigrationStatus": {
           "description": "Gets or sets the test migrate state.",
           "enum": [
             "None",
-            "TestMigrateTransitionStatesBegin",
-            "TestMigrateInitiated",
-            "TestMigrateCompleting",
-            "TestMigrateCompleted",
-            "TestMigrateFailed",
-            "TestMigrateCompletionFailed",
-            "TestMigrateCleanupInitiated",
-            "TestMigrateCleanupCompleting",
-            "MarkedForDeletion",
-            "TestMigrateTransitionStatesEnd"
+            "ImageBuildPending",
+            "ReadyToTestMigrate",
+            "InProgress",
+            "TestMigrated",
+            "Failed",
+            "CleanupInProgress",
+            "CleanedUp"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "TestMigrateState",
+            "name": "ClientFacingTestMigrateStatus",
             "modelAsString": true
           }
         },
-        "testMigrateStateDescription": {
+        "testMigrationStatusDescription": {
           "description": "Gets or sets the Test migrate state description.",
           "type": "string",
           "readOnly": true
         },
-        "migrateState": {
+        "migrationStatus": {
           "description": "Gets or sets the migrate state.",
           "enum": [
             "None",
-            "MigrateTransitionStatesBegin",
-            "MigrateInitiated",
-            "MigrateCompleting",
-            "MigrateCompleted",
-            "MigrateFailed",
-            "MigrateCompletionFailed",
-            "MigrateTransitionStatesEnd",
-            "CommitMigrateStatesBegin",
-            "CommitMigrateInProgressOnPrimary",
-            "CommitMigrateInProgressOnRecovery",
-            "CommitMigrateCompleted",
-            "CommitMigrateFailedOnPrimary",
-            "CommitMigrateFailedOnRecovery",
-            "CommitMigrateStatesEnd",
-            "CancelMigrateStatesBegin",
-            "CancelMigrateInProgressOnPrimary",
-            "CancelMigrateInProgressOnRecovery",
-            "CancelMigrateFailedOnPrimary",
-            "CancelMigrateFailedOnRecovery",
-            "CancelMigrateStatesEnd",
-            "ChangeRecoveryPointStatesBegin",
-            "ChangeRecoveryPointInitiated",
-            "ChangeRecoveryPointCompleted",
-            "ChangeRecoveryPointFailed",
-            "ChangeRecoveryPointStatesEnd"
+            "ImageBuildPending",
+            "ReadyToTestMigrate",
+            "ReadyToMigrate",
+            "TestMigrating",
+            "TestMigrated",
+            "TestMigrateCleanupInProgress",
+            "Migrating",
+            "Migrated",
+            "Failed"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "MigrateState",
+            "name": "ClientFacingMigrateStatus",
             "modelAsString": true
           }
         },
-        "migrateStateDescription": {
+        "migrationStatusDescription": {
           "description": "Gets or sets the migrate state description.",
           "type": "string",
           "readOnly": true
@@ -4893,7 +4721,21 @@
           "description": "Gets or sets the allowed scenarios on the workload deployment.",
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "EnableReplication",
+              "DisableReplication",
+              "CompleteMigration",
+              "BuildContainerImage",
+              "Migrate",
+              "TestMigrate",
+              "TestMigrateCleanup",
+              "UpdateProperties"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WorkloadScenario",
+              "modelAsString": true
+            }
           },
           "readOnly": true
         },
@@ -5044,10 +4886,17 @@
             "name": "WorkloadType",
             "modelAsString": true
           }
+        },
+        "webAppArmId": {
+          "description": "Gets or sets the Web application ARM id.",
+          "type": "string"
+        },
+        "webAppSiteName": {
+          "description": "Gets or sets the Web application site name.",
+          "type": "string"
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "IISWorkload"
+      "discriminator": "instanceType"
     },
     "WorkloadInstanceModelProperties": {
       "description": "Workload instance model properties.",
@@ -5079,6 +4928,14 @@
           "description": "Gets or sets the display name.",
           "type": "string"
         },
+        "sourcePlatform": {
+          "description": "Gets or sets the source platform.",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "Gets or sets the source name.",
+          "type": "string"
+        },
         "replicationHealth": {
           "description": "Gets or sets the replication health of the workload instance.",
           "enum": [
@@ -5096,26 +4953,18 @@
         "replicationState": {
           "description": "Gets or sets the replication state of the workload instance.",
           "enum": [
-            "NotReplicatedStatesBegin",
-            "EnablingReplication",
-            "EnablingFailed",
-            "DisablingReplication",
-            "MarkedForDeletion",
-            "DisablingFailed",
-            "NotReplicatedStatesEnd",
-            "InitialReplicationStatesBegin",
-            "InitialReplicationInProgress",
-            "InitialReplicationCompleted",
-            "InitialReplicationFailed",
-            "InitialReplicationStatesEnd",
-            "ReplicatedStatesBegin",
-            "Replicated",
-            "ReplicatedStatesEnd"
+            "None",
+            "Scheduled",
+            "InitialSync",
+            "Completed",
+            "Failed",
+            "Disabling",
+            "Disabled"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "ReplicationState",
+            "name": "ClientFacingReplicationStatus",
             "modelAsString": true
           }
         },
@@ -5143,6 +4992,10 @@
           },
           "readOnly": true
         },
+        "masterSiteName": {
+          "description": "Gets or Sets the master site name.",
+          "type": "string"
+        },
         "customProperties": {
           "$ref": "#/definitions/WorkloadInstanceModelCustomProperties"
         }
@@ -5168,35 +5021,21 @@
             "modelAsString": true
           }
         },
+        "name": {
+          "description": "Gets or sets the workload instance name.",
+          "type": "string"
+        },
         "displayName": {
           "description": "Gets or sets the display name.",
           "type": "string"
         },
-        "replicationState": {
-          "description": "Gets or sets the replication state of the workload instance.",
-          "enum": [
-            "NotReplicatedStatesBegin",
-            "EnablingReplication",
-            "EnablingFailed",
-            "DisablingReplication",
-            "MarkedForDeletion",
-            "DisablingFailed",
-            "NotReplicatedStatesEnd",
-            "InitialReplicationStatesBegin",
-            "InitialReplicationInProgress",
-            "InitialReplicationCompleted",
-            "InitialReplicationFailed",
-            "InitialReplicationStatesEnd",
-            "ReplicatedStatesBegin",
-            "Replicated",
-            "ReplicatedStatesEnd"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ReplicationState",
-            "modelAsString": true
-          }
+        "sourcePlatform": {
+          "description": "Gets or sets the source platform.",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "Gets or sets the source name.",
+          "type": "string"
         },
         "replicationHealth": {
           "description": "Gets or sets the replication health of the workload instance.",
@@ -5311,7 +5150,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ApiVersionParameter": {
+    "api-version": {
       "in": "query",
       "name": "api-version",
       "description": "Client Api Version.",
@@ -5347,8 +5186,8 @@
       "description": "MigrateAgent Controller."
     },
     {
-      "name": "ModernizeProjects",
-      "description": "ModernizeProjects Controller."
+      "name": "ModernizeProject",
+      "description": "ModernizeProject Controller."
     },
     {
       "name": "Workflow",
