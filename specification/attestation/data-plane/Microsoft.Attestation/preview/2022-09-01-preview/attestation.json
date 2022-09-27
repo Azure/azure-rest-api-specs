@@ -373,46 +373,6 @@
         }
       }
     },
-;begin_INTERNAL
-    "/attest/AzureGuest": {
-      "post": {
-        "tags": [
-          "Attestation"
-        ],
-        "summary": "Attest to an Azure Guest VM.",
-        "description": "Processes an Azure Guest TCG Log, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
-        "operationId": "Attestation_AttestAzureGuest",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Request object containing TCG Logs from the Azure Guest.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AttestAzureGuestRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AttestationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-;end_INTERNAL
     "/attest/Tpm": {
       "post": {
         "tags": [
@@ -428,11 +388,6 @@
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-;begin_INTERNAL
-          {
-            "$ref": "#/parameters/ClientRequestIDParameter"
-          },
-;end_INTERNAL
           {
             "name": "request",
             "in": "body",
@@ -509,7 +464,9 @@
     },
     "/tcbbaseline/{attestationType}": {
       "get": {
-        "tags": ["TcbBaseline"],
+        "tags": [
+          "TcbBaseline"
+        ],
         "summary": "Retrieves the current set Tcb baselines for an attestation type.",
         "operationId": "TcbBaselines_Get",
         "parameters": [
@@ -543,7 +500,9 @@
     },
     "/tcbbaselines/{attestationType}": {
       "get": {
-        "tags": ["TcbBaseline"],
+        "tags": [
+          "TcbBaseline"
+        ],
         "summary": "Retrieves all available Tcb baselines for an attestation type.",
         "operationId": "TcbBaselines_List",
         "parameters": [
@@ -575,136 +534,6 @@
         }
       }
     },
-;begin_INTERNAL
-    "/operations/rehydratetenantsafterdisaster": {
-      "post": {
-        "tags": [
-          "operations"
-        ],
-        "summary": "Reset the state of the attestation service after a BCDR event has occurred. Can only be called by azure administrators.",
-        "operationId": "BCDR_RehydrateTenantsAfterDisaster",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success - All the tenant data has been re-sealed with current attestation service signing key."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServiceHealth": {
-            "parameters": {
-              "instanceUrl": "https://instance.attest.azure.net",
-              "api-version": "2022-08-01"
-            },
-            "responses": {
-              "200": {}
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "operations"
-        ],
-        "summary": "Gets the status of the various tenants in the attestation service after a BCDR event has occurred. Can only be called by azure administrators.",
-        "operationId": "BCDR_GetAttestationTenantSigningState",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success - All the tenant data has been re-sealed with current attestation service signing key.",
-            "schema": {
-              "$ref": "#/definitions/TenantSigningState"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServiceHealth": {
-            "parameters": {
-              "instanceUrl": "https://instance.attest.azure.net",
-              "api-version": "2022-08-01"
-            },
-            "responses": {
-              "200": {
-                "body": [
-                  {
-                    "tenantName": "Tenant1",
-                    "hasSignedState": true
-                  }
-                ]
-              }
-            }
-          }
-        }
-      }
-    },
-    "/servicehealth": {
-      "get": {
-        "tags": [
-          "HealthMonitor"
-        ],
-        "summary": "Retrieves the current health state of the attestation service",
-        "operationId": "HealthStatus_Get",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success - All of the tenant health checks have passed."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServiceHealth": {
-            "parameters": {
-              "instanceUrl": "https://instance.attest.azure.net",
-              "api-version": "2022-08-01"
-            },
-            "responses": {
-              "200": {}
-            }
-          }
-        }
-      }
-    },
-;end_INTERNAL
     "/certs": {
       "get": {
         "tags": [
@@ -1271,13 +1100,6 @@
           "description": "Nonce for incoming request - emitted in the generated attestation token",
           "type": "string"
         }
-;begin_INTERNAL
-        ,
-        "disableSignatureValidation": {
-          "description": "Disables validation of signature in quote response, valid for localhost clients only.",
-          "type": "boolean"
-        }
-;end_INTERNAL
       }
     },
     "AttestOpenEnclaveRequest": {
@@ -1305,13 +1127,6 @@
           "description": "Nonce for incoming request - emitted in the generated attestation token",
           "type": "string"
         }
-;begin_INTERNAL
-        ,
-        "disableSignatureValidation": {
-          "description": "Disables validation of signature in quote response, valid for localhost clients only.",
-          "type": "boolean"
-        }
-;end_INTERNAL
       }
     },
     "TpmAttestationRequest": {
@@ -1335,21 +1150,7 @@
           "format": "base64url"
         }
       }
-    }
-;begin_INTERNAL
-    ,
-    "AttestAzureGuestRequest": {
-      "type": "object",
-      "description": "Attestation request for Azure Guest Gen2 VMs",
-      "properties": {
-        "attestationInfo": {
-          "description": "Attestation client information containing all artifacts required for Guest Attestation.",
-          "type": "string"
-        }
-      }
-    }
-;end_INTERNAL
-    ,
+    },
     "AttestSevSnpVmRequest": {
       "type": "object",
       "description": "Attestation request for AMD SEV SNP Virtual Machine",
@@ -1376,25 +1177,6 @@
         }
       }
     }
-;begin_INTERNAL
-    ,
-    "TenantSigningState": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "tenantName": {
-            "description": "Name of tenant",
-            "type": "string"
-          },
-          "hasSignedState": {
-            "description": "Is the tenant storage signed with the local enclave signing key?",
-            "type": "boolean"
-          }
-        }
-      }
-    }
-;end_INTERNAL
   },
   "parameters": {
     "ApiVersionParameter": {
@@ -1423,12 +1205,6 @@
             "value": "OpenEnclave",
             "description": "OpenEnclave extensions to SGX"
           },
-;begin_INTERNAL
-          {
-            "value": "AzureGuest",
-            "description": "Azure Guest Attestation"
-          },
-;end_INTERNAL
           {
             "value": "SevSnpVm",
             "description": "AMD SEV SNP Virtual Machine"
@@ -1442,23 +1218,9 @@
       "enum": [
         "SgxEnclave",
         "OpenEnclave",
-;begin_INTERNAL
-        "AzureGuest",
-;end_INTERNAL
         "SevSnpVm",
         "Tpm"
       ]
     }
-;begin_INTERNAL
-    ,
-    "ClientRequestIDParameter": {
-      "name": "x-ms-client-request-id",
-      "x-ms-parameter-location": "client",
-      "in": "header",
-      "description": "RequestID sent from the client.",
-      "required": false,
-      "type": "string"
-    }
-;end_INTERNAL
   }
 }
