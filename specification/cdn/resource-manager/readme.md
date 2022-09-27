@@ -28,20 +28,31 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2021-06
+tag: package-preview-2022-05
 ```
 
 
+### Tag: package-preview-2022-05
+
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.Cdn/preview/2022-05-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2022-05-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2022-05-01-preview/cdnwebapplicationfirewall.json
+```
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.Cdn/stable/2021-06-01/afdx.json
   - Microsoft.Cdn/stable/2021-06-01/cdn.json
   - Microsoft.Cdn/stable/2021-06-01/cdnwebapplicationfirewall.json
 ```
+
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
@@ -72,16 +83,6 @@ input-file:
 - Microsoft.Cdn/stable/2019-12-31/cdn.json
 ```
 
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06'
-input-file:
-- Microsoft.Cdn/stable/2019-06-15/cdn.json
-- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
-```
-
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
@@ -95,6 +96,16 @@ directive:
       - $.paths
     suppress:
       - OperationsAPIImplementation
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2019-04
