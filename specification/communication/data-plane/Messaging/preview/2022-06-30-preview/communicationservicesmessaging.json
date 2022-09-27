@@ -68,6 +68,24 @@
         "modelAsString": true
       }
     },
+    "MessageReceipt": {
+      "description": "Receipt of the sending one message.",
+      "required": [
+        "messageId",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "The message id.",
+          "type": "string"
+        },
+        "to": {
+          "description": "The native external platform user identifier of the recipient.",
+          "type": "string"
+        }
+      }
+    },
     "MessageTemplate": {
       "description": "The template object used to create templates.",
       "required": [
@@ -97,24 +115,6 @@
             "Friday",
             "2424"
           ]
-        }
-      }
-    },
-    "Receipt": {
-      "description": "Receipt of the sending one message.",
-      "required": [
-        "messageId",
-        "to"
-      ],
-      "type": "object",
-      "properties": {
-        "messageId": {
-          "description": "The message id.",
-          "type": "string"
-        },
-        "to": {
-          "description": "The native external platform user identifier of the recipient.",
-          "type": "string"
         }
       }
     },
@@ -170,7 +170,7 @@
           "description": "Receipts of the send message operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Receipt"
+            "$ref": "#/definitions/MessageReceipt"
           }
         }
       }
