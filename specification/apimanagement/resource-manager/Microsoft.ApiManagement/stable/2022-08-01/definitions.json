@@ -961,11 +961,24 @@
         "versioningScheme": {
           "type": "string",
           "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
-          "enum": [
-            "Segment",
-            "Query",
-            "Header"
-          ]
+          "x-ms-enum": {
+            "name": "VersioningSchemeFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Segment",
+                "description": "Version identifier will be located in a Segment."
+              },
+              {
+                "value": "",
+                "description": "Version identifier will be located in a Query."
+              },
+              {
+                "value": "Header",
+                "description": "Version identifier will be located in a Header."
+              }
+            ]
+          }
         },
         "versionQueryName": {
           "type": "string",
@@ -5545,6 +5558,7 @@
       "description": "Request Report data."
     },
     "ResolverCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5568,6 +5582,7 @@
       "description": "Paged Resolver list representation."
     },
     "ResolverContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5583,6 +5598,7 @@
       "description": "GraphQL API Resolver details."
     },
     "ResolverEntityBaseContract": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -5605,6 +5621,7 @@
       "description": "GraphQL API Resolver Entity Base Contract details."
     },
     "ResolverResultContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5620,6 +5637,7 @@
       "description": "Long Running Git Resolver Results."
     },
     "ResolverResultContractProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -5672,6 +5690,7 @@
       "description": "Resolver Result."
     },
     "ResolverResultLogItemContract": {
+      "type": "object",
       "properties": {
         "objectType": {
           "type": "string",
@@ -5689,6 +5708,7 @@
       "description": "Log of the entity being created, updated or deleted."
     },
     "ResolverUpdateContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5699,6 +5719,7 @@
       "description": "GraphQL API Resolver Update Contract details."
     },
     "ResolverUpdateContractProperties": {
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
