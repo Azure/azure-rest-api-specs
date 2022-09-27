@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-01-preview",
+    "repeatability-request-id": "8540c0de-899f-5cce-acb5-3ec493af3800",
+    "repeatability-first-sent": "Sun, 06 Nov 1994 08:49:37 GMT",
+    "authorization": "HMAC-SHA256 SignedHeaders=x-ms-date;host;x-ms-content-sha256&Signature=aaaa",
+    "emailMessage": {
+      "headers": [
+        {
+          "name": "ClientCorrelationId",
+          "value": "123"
+        },
+        {
+          "name": "ClientCustomHeaderName",
+          "value": "ClientCustomHeaderValue"
+        }
+      ],
+      "sender": "abc@domain.com",
+      "content": {
+        "subject": "An exciting offer especially for you!",
+        "plainText": "This exciting offer was created especially for you, our most loyal customer.",
+        "html": "<html><head><title>Exciting offer!</title></head><body><h1>This exciting offer was created especially for you, our most loyal customer.</h1></body></html>"
+      },
+      "importance": "normal",
+      "recipients": {
+        "to": [
+          {
+            "email": "john.doe@domain.com",
+            "displayName": "John Doe"
+          },
+          {
+            "email": "jane.doe@domain2.com",
+            "displayName": "Jane Doe"
+          }
+        ],
+        "CC": [
+          {
+            "email": "wendy@someotherdomain.com",
+            "displayName": "Wendy"
+          },
+          {
+            "email": "jimmy@anotherdomain.com",
+            "displayName": "Jimmy Johns"
+          }
+        ],
+        "bCC": [
+          {
+            "email": "bob@anotherdomain.com",
+            "displayName": "Bob"
+          },
+          {
+            "email": "mail@yetanotherdomain.com",
+            "displayName": "Another DisplayName"
+          }
+        ]
+      },
+      "attachments": [
+        {
+          "name": "MyAttachment.pdf",
+          "attachmentType": "pdf",
+          "contentBytesBase64": "TWFueSBoYW5kcyBtYWtlIGxpZ2h0IHdvcmsu"
+        },
+        {
+          "name": "MyAttachment2.docx",
+          "attachmentType": "docx",
+          "contentBytesBase64": "pZ2h0IHdvcmsu5kcyBtYWtlIGxpZ2h0IHdvcmsu"
+        }
+      ],
+      "replyTo": [
+        {
+          "email": "contoso-support@contoso.com",
+          "displayName": "Contoso Support"
+        }
+      ],
+      "disableUserEngagementTracking": true
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Repeatability-Result": "accepted",
+        "Operation-Location": "https://contoso.westus.communications.azure.com//email/status/8540c0de-899f-5cce-acb5-3ec493af3800?api-version=2021-10-01-preview",
+        "Retry-After": 1,
+        "x-ms-request-id": "8540c0de-899f-5cce-acb5-3ec493af3800"
+      }
+    }
+  }
+}
