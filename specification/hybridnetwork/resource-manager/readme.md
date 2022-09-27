@@ -39,7 +39,7 @@ input-file:
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkFunction.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/publisher.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkFunctionDefinition.json
-  - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkFunctionPublisher.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/proxyPublisher.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/operation.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/configurationGroupSchema.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkServiceDesign.json
