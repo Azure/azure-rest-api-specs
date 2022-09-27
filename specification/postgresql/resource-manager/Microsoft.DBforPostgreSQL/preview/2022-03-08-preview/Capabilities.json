@@ -78,6 +78,36 @@
     }
   },
   "definitions": {
+    "StorageTierCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to represent Storage tier capability",
+          "readOnly": true
+        },
+        "tierName": {
+          "type": "string",
+          "description": "Storage tier name",
+          "readOnly": true
+        },
+        "iops": {
+          "type": "string",
+          "description": "Supported IOPS for this storage tier",
+          "readOnly": true
+        },
+        "isBaseline": {
+          "type": "boolean",
+          "description": "Indicates if this is a baseline storage tier or not",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status os this storage tier",
+          "readOnly": true
+        }
+      }
+    },
     "StorageMBCapability": {
       "type": "object",
       "properties": {
@@ -96,6 +126,17 @@
           "type": "integer",
           "format": "int64",
           "description": "storage size in MB",
+          "readOnly": true
+        },
+        "supportedUpgradableTierList": {
+
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTierCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "status": {
