@@ -75,6 +75,8 @@
 - rule:
     type: label
     label: ARMChangesRequested
+    onLabeledAddLabels:
+        - ARMReviewTmp
     onLabeledComments: "Please ensure to respond feedbacks from the ARM API reviewer. When you are ready to continue the ARM API review, please remove `ARMChangesRequested`"
     onLabeledRemoveLabels:
         - WaitForARMFeedback
@@ -83,8 +85,6 @@
 - rule:
     type: unlabeled
     label: ARMChangesRequested
-    onLabeledAddLabels:
-        - ARMReviewTmp
     onUnlabeledAddLabels:
         - WaitForARMFeedback
         - ARMReview
