@@ -275,6 +275,9 @@
           },
           "ApiManagementCreateServiceWithCustomHostnameKeyVault": {
             "$ref": "./examples/ApiManagementCreateServiceWithCustomHostnameKeyVault.json"
+          },
+          "ApiManagementCreateServiceWithNatGatewayEnabled": {
+            "$ref": "./examples/ApiManagementCreateServiceWithNatGatewayEnabled.json"
           }
         },
         "parameters": [
@@ -1086,6 +1089,37 @@
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
         },
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
+        },
+        "outboundPublicIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Outbound public IP address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU."
+        },
         "disableGateway": {
           "type": "boolean",
           "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.",
@@ -1365,6 +1399,37 @@
           "type": "boolean",
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
           "default": false
+        },
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
+        },
+        "outboundPublicIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Outbound public IP address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU."
         },
         "disableGateway": {
           "type": "boolean",
