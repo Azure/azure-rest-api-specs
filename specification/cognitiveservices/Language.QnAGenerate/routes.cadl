@@ -1,0 +1,27 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "./models.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace MicrosoftCognitiveLanguageServiceGenerateQuestionandAnswerpairs;
+
+interface GenerateQuestionAnswersOperations {
+  @summary("Generate Question and Answers from a set of documents.")
+  @doc("Generate Question and Answers from a set of documents.")
+  @route("/generate-questionanswers")
+  @post
+  SubmitJob is Azure.Core.Foundations.Operation<
+    {
+      @doc("Post body of the request.")
+      @body
+      generationRequest: GenerationRequest;
+    },
+    void
+  >;
+
+  @summary("Gets the status of a question answers generation job.")
+  @doc("Gets the status of a question answers generation job.")
+  GetJobStatus is Azure.Core.ResourceRead<GenerationJobState>;
+}

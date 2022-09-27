@@ -1,0 +1,246 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Rest;
+using Azure.Core;
+
+namespace MicrosoftCognitiveLanguageServiceGenerateQuestionandAnswerpairs;
+
+enum DocumentKindKnownValues {
+  "Raw",
+  "URL",
+  Html: "HTML",
+}
+
+@knownValues(DocumentKindKnownValues)
+model DocumentKind is string;
+
+enum ErrorCodeKnownValues {
+  "InvalidRequest",
+  "InvalidArgument",
+  "Unauthorized",
+  "Forbidden",
+  "NotFound",
+  "ProjectNotFound",
+  "OperationNotFound",
+  "AzureCognitiveSearchNotFound",
+  "AzureCognitiveSearchIndexNotFound",
+  "TooManyRequests",
+  "AzureCognitiveSearchThrottling",
+  "AzureCognitiveSearchIndexLimitReached",
+  "InternalServerError",
+  "ServiceUnavailable",
+  "Timeout",
+  "QuotaExceeded",
+  "Conflict",
+  "Warning",
+}
+
+@knownValues(ErrorCodeKnownValues)
+model ErrorCode is string;
+
+enum InnerErrorCodeKnownValues {
+  "InvalidRequest",
+  "InvalidParameterValue",
+  "KnowledgeBaseNotFound",
+  "AzureCognitiveSearchNotFound",
+  "AzureCognitiveSearchThrottling",
+  "ExtractionFailure",
+  "InvalidRequestBodyFormat",
+  "EmptyRequest",
+  "MissingInputDocuments",
+  "InvalidDocument",
+  "ModelVersionIncorrect",
+  "InvalidDocumentBatch",
+  "UnsupportedLanguageCode",
+  "InvalidCountryHint",
+}
+
+@knownValues(InnerErrorCodeKnownValues)
+model InnerErrorCode is string;
+
+enum StateKnownValues {
+  NotStarted: "notStarted",
+  Running: "running",
+  Succeeded: "succeeded",
+  PartiallyCompleted: "partiallyCompleted",
+  Failed: "failed",
+  Cancelled: "cancelled",
+  Cancelling: "cancelling",
+}
+
+@knownValues(StateKnownValues)
+model State is string;
+
+@doc("Question Answers Generation job with documents and parameters.")
+model GenerationRequest {
+  @doc("The set of documents to process as part of question answers generation job.")
+  documents?: GenerationDocument[];
+
+  @doc("""
+Parameters that define max number of question answers to be generated, fetch
+raw contents of documents or not, etc.
+""")
+  parameters?: GenerationParameters;
+}
+
+@doc("An input document to be processed for question answer generation.")
+model GenerationDocument {
+  @doc("A unique, non-empty document identifier.")
+  id: string;
+
+  @doc("The input text, html or URL to process.")
+  content: string;
+
+  @doc("Document type.")
+  documentKind?: DocumentKind;
+
+  @doc("""
+(Optional) This is the 2 letter ISO 639-1 representation of a language. For
+example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\"
+for English as default.
+""")
+  language?: string;
+}
+
+@doc("Parameters for configuring question answers generation and limiting the output.")
+model GenerationParameters {
+  @doc("Enable to fetch raw contents of document in the result.")
+  fetchRawContent?: boolean;
+
+  @doc("""
+Specify this as true - if the documents have marker tags &lt;answer&gt; and
+&lt;/answer&gt; for marked answers. Example: Satya Nadella was born in
+&lt;answer&gt; Hyderabad &lt;/answer&gt; of present-day Telangana, India into a
+Telugu-speaking Hindu family.
+""")
+  useMarkedAnswer?: boolean;
+
+  @doc("Maximum number of question answer pairs to be generated.")
+  maxQACount?: int32;
+}
+
+@doc("Error response.")
+@error
+model ErrorResponse {
+  @doc("The error object.")
+  error: Error;
+}
+
+@doc("The error object.")
+model Error {
+  @doc("One of a server-defined set of error codes.")
+  code: ErrorCode;
+
+  @doc("A human-readable representation of the error.")
+  message: string;
+
+  @doc("The target of the error.")
+  target?: string;
+
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: Error[];
+
+  @doc("""
+An object containing more specific information than the current object about
+the error.
+""")
+  innererror?: InnerErrorModel;
+}
+
+@doc("""
+An object containing more specific information about the error. As per
+Microsoft One API guidelines -
+https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+""")
+model InnerErrorModel {
+  @doc("One of a server-defined set of error codes.")
+  code: InnerErrorCode;
+
+  @doc("Error message.")
+  message: string;
+
+  @doc("Error details.")
+  details?: Record<string>;
+
+  @doc("Error target.")
+  target?: string;
+
+  @doc("""
+An object containing more specific information than the current object about
+the error.
+""")
+  innererror?: InnerErrorModel;
+}
+
+@doc("""
+Generation Job state represents the job metadata and any errors and a result
+object if job succeeded.
+""")
+@resource("generate-questionanswers/jobs/{jobId}")
+model GenerationJobState {
+  ...JobState;
+  ...GenerationJobResult;
+}
+
+model JobState {
+  displayName?: string;
+  createdDateTime: zonedDateTime;
+  expirationDateTime?: zonedDateTime;
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+
+  @key
+  jobId: string;
+  lastUpdatedDateTime: zonedDateTime;
+  status: State;
+  errors?: Error[];
+  nextLink?: string;
+}
+
+@doc("""
+Generation Job result represents the job result with extracted documents and
+question answers generated.
+""")
+model GenerationJobResult {
+  @doc("Result of question answer generation job.")
+  result?: GenerationResult;
+}
+
+@doc("Result of question answer generation job.")
+model GenerationResult {
+  @doc("The set of documents with processed raw contents.")
+  documents?: GenerationDocument[];
+
+  @doc("The set of question and answers generated in the generation job.")
+  value?: GeneratedQA[][];
+}
+
+@doc("Question and Answer generated from the document.")
+model GeneratedQA {
+  @doc("A question generated for a specific answer from a document in the job.")
+  question?: string;
+
+  @doc("""
+Entity or phrase which is the answer to the generated question from a
+particular document in the job.
+""")
+  answer?: string;
+
+  @doc("""
+Confidence score of a question generated against the answer in the document's
+content.
+""")
+  confidenceScore?: float32;
+
+  @doc("""
+Confidence bucket of a question generated against the answer in the document's
+content. Possible values &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;.
+""")
+  confidenceBucket?: string;
+
+  @doc("""
+A unique, non-empty document identifier, GUID will be assigned if user had not
+provided Id in job request.
+""")
+  documentId?: string;
+}
