@@ -110,7 +110,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -182,7 +182,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -234,7 +234,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -285,7 +285,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -341,7 +341,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -390,7 +390,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -447,7 +447,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -486,7 +486,7 @@
         },
         "isDataAction": {
           "description": "Gets or sets a value indicating whether it is a data plane action",
-          "type": "string",
+          "type": "boolean",
           "readOnly": true
         },
         "display": {
@@ -697,15 +697,19 @@
     },
     "DedicatedHsm": {
       "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "#/definitions/DHsmSystemData"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DedicatedHsmProperties",
-          "description": "Properties of the Dedicated HSM"
+          "description": "Properties of the dedicated HSM"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/DedicatedHsmResource"
+          "$ref": "#/definitions/DHsmResource"
         }
       ],
       "required": [
@@ -715,22 +719,6 @@
       ],
       "description": "Resource information with extended details.",
       "type": "object"
-    },
-    "DedicatedHsmResource": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU details"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Dedicated HSM Resource",
-      "type": "object",
-      "x-ms-azure-resource": true
     },
     "DedicatedHsmPatchParameters": {
       "properties": {
@@ -760,6 +748,23 @@
         }
       },
       "description": "List of dedicated HSMs",
+      "type": "object"
+    },
+    "ResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DHsmResource"
+          },
+          "description": "The list of dedicated HSM resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of dedicated HSM resources."
+        }
+      },
+      "description": "List of dedicated HSM resources.",
       "type": "object"
     },
     "DedicatedHsmError": {
@@ -794,6 +799,104 @@
       },
       "description": "The key vault server error.",
       "type": "object"
+    },
+    "DHsmResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Azure Resource Manager resource ID for the dedicated HSM."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the dedicated HSM."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the dedicated HSM."
+        },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the dedicated HSM should be created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU details"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Dedicated Hsm zones."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Dedicated HSM resource",
+      "type": "object",
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "DHsmSystemData": {
+      "description": "Metadata pertaining to creation and last modification of dedicated hsm resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created dedicated hsm resource."
+        },
+        "createdByType": {
+          "description": "The type of identity that created dedicated hsm resource.",
+          "$ref": "#/definitions/IdentityType"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of dedicated hsm resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified dedicated hsm resource."
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified dedicated hsm resource.",
+          "$ref": "#/definitions/IdentityType"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of dedicated hsm resource last modification (UTC)."
+        }
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of identity.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "identityType",
+        "modelAsString": true
+      }
     },
     "OutboundEnvironmentEndpointCollection": {
       "description": "Collection of OutboundEnvironmentEndpoint",
