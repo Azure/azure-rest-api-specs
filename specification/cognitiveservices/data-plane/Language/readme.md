@@ -23,6 +23,10 @@ directive:
   - suppress: R3016
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
+  - suppress: R1047
+    reason: Validation bug.
+  - suppress: XmsEnumChanged
+    reason: Validation bug.
 ```
 
 ### Release 2022-10-01-preview
