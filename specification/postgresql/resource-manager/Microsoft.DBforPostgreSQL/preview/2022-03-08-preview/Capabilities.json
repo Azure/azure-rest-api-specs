@@ -92,7 +92,8 @@
           "readOnly": true
         },
         "iops": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Supported IOPS for this storage tier",
           "readOnly": true
         },
@@ -129,7 +130,6 @@
           "readOnly": true
         },
         "supportedUpgradableTierList": {
-
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageTierCapability"
