@@ -11,7 +11,14 @@ package-name: azure-mgmt-devhub
 namespace: azure.mgmt.devhub
 package-version: 1.0.0b1
 clear-output-folder: true
+```
 
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/devhub/azure-mgmt-devhub/azure/mgmt/devhub
+```
+
+``` yaml $(python)
 directive:
   - from: swagger-document
     where: $.parameters.GitHubOAuthCodeParameter
@@ -27,9 +34,4 @@ directive:
     where: $.parameters.ManagedClusterParameter
     transform: >
       $['x-ms-parameter-location'] = "method";
-```
-
-``` yaml $(python)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/devhub/azure-mgmt-devhub/azure/mgmt/devhub
 ```
