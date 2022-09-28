@@ -699,7 +699,7 @@
       "properties": {
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "#/definitions/DHsmSystemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -709,7 +709,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/DHsmResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "required": [
@@ -755,7 +755,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DHsmResource"
+            "$ref": "#/definitions/Resource"
           },
           "description": "The list of dedicated HSM resources."
         },
@@ -772,13 +772,13 @@
         "error": {
           "description": "The error detail of the operation if any.",
           "readOnly": true,
-          "$ref": "#/definitions/DHsmError"
+          "$ref": "#/definitions/Error"
         }
       },
       "description": "The error exception.",
       "type": "object"
     },
-    "DHsmError": {
+    "Error": {
       "properties": {
         "code": {
           "type": "string",
@@ -794,13 +794,13 @@
           "description": "Contains more specific error that narrows down the cause. May be null.",
           "x-ms-client-name": "innerError",
           "readOnly": true,
-          "$ref": "#/definitions/DHsmError"
+          "$ref": "#/definitions/Error"
         }
       },
       "description": "The key vault server error.",
       "type": "object"
     },
-    "DHsmResource": {
+    "Resource": {
       "properties": {
         "id": {
           "readOnly": true,
@@ -851,7 +851,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "DHsmSystemData": {
+    "SystemData": {
       "description": "Metadata pertaining to creation and last modification of dedicated hsm resource.",
       "type": "object",
       "readOnly": true,
