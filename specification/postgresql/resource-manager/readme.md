@@ -51,7 +51,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Capabilities.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/CheckNameAvailability.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Database.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FirewallRules.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FlexibleServers.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
