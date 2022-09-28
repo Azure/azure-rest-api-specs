@@ -95,7 +95,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -142,7 +145,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "get": {
         "tags": [
@@ -305,7 +311,6 @@
       "description": "The name of the server.",
       "required": true,
       "type": "string",
-      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "DatabaseNameParameter": {
@@ -314,7 +319,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the database.",
-      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
