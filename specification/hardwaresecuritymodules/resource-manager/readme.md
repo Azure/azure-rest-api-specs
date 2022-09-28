@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2018-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-10'
 input-file:
-- Microsoft.HardwareSecurityModules/DedicatedHsm/preview/2018-10-31-preview/dedicatedhsm.json
+- Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
 ```
 
 ### Tag: package-2021-11
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2021-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-11'
 input-file:
-- Microsoft.HardwareSecurityModules/DedicatedHsm/stable/2021-11-30/dedicatedhsm.json
+- Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
 ### Tag: package-2022-08-preview
@@ -56,8 +56,8 @@ These settings apply only when `--tag=package-2022-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-08-preview'
 input-file:
-- Microsoft.HardwareSecurityModules/CloudHsm/preview/2022-08-31-preview/cloudhsm.json
-- Microsoft.HardwareSecurityModules/DedicatedHsm/stable/2021-11-30/dedicatedhsm.json
+- Microsoft.HardwareSecurityModules/preview/2022-08-31-preview/cloudhsm.json
+- Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
 # Code Generation
