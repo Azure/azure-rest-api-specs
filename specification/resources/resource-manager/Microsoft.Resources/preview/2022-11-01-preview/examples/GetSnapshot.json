@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId1",
+    "resourceGroupName": "resourceGroup1",
+    "resourceProviderNamespace": "resourceProvider1",
+    "resourceType": "resourceType1",
+    "resourceName": "resourceName1",
+    "api-version": "2022-09-01",
+    "snapshotId": "snapshotId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId1/resourceGroups/resourceGroup1/providers/resourceProvider1/resourceType1/resourceName1/providers/Microsoft.Resources/snapshots/snapshotId1",
+        "name": "snapshotId1",
+        "type": "Microsoft.Resources/snapshots",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/someSubscriptionId/resourceGroups/someResourceGroupid/providers/Microsoft.Network/networkInterfaces/NetworkInterfacev1"
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "someAdminUsername",
+            "computerName": "v1",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "enableVMAgentPlatformUpdates": false,
+              "patchSettings": {
+                "assessmentMode": "ImageDefault",
+                "patchMode": "AutomaticByOS"
+              },
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Succeeded",
+          "storageProfile": {
+            "dataDisks": [],
+            "imageReference": {
+              "exactVersion": "9200.23817.220805",
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2012-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "deleteOption": "Detach",
+              "diskSizeGB": 127,
+              "name": "firstvmOSDisk",
+              "osType": "Windows",
+              "vhd": {
+                "uri": "http://storageoner7wc724nv74o2.blob.core.windows.net/vhds/firstvmOSDisk.vhd"
+              }
+            }
+          },
+          "timeCreated": "2022-08-15T07:58:21.486774Z",
+          "vmId": "00000000-0000-0000-0000-0000000000"
+        }
+      }
+    }
+  }
+}
