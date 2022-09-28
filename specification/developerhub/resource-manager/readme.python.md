@@ -13,12 +13,12 @@ clear-output-folder: true
 
 directive:
   - from: swagger-document
-    where: $.definitions.parameters.GitHubOAuthCodeParameter
+    where: $.parameters.GitHubOAuthCodeParameter
     transform: >
       $['x-ms-parameter-location'] = "method";
 
   - from: swagger-document
-    where: $.definitions.parameters.GitHubOAuthStateParameter
+    where: $.parameters.GitHubOAuthStateParameter
     transform: >
       $['x-ms-parameter-location'] = "method";
 ```
