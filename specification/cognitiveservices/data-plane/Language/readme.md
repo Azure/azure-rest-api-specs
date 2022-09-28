@@ -29,7 +29,7 @@ directive:
 
 These settings apply only when `--tag=release_2022_10_01_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2022_07_01_preview'
+``` yaml $(tag) == 'release_2022_10_01_preview'
 input-file:
   - preview/2022-10-01-preview/analyzetext.json
   - preview/2022-10-01-preview/analyzeconversations.json
