@@ -1,0 +1,18 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+@serviceTitle("Multivariate Anomaly Detector")
+@server(
+  "{$host}",
+  "Multivariate Time-Series Anomaly Detection API",
+  {
+    @doc("server parameter")
+    $host: string,
+  }
+)
+@doc("Multivariate Time-Series Anomaly Detection API")
+namespace MultivariateAnomalyDetector {};
+
