@@ -98,7 +98,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -163,7 +168,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -204,7 +214,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -987,6 +1002,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the location.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "ServerNameParameter": {
@@ -995,6 +1011,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "MaintenanceWindowNameParameter": {
@@ -1003,6 +1020,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the maintenance window.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "BackupNameParameter": {
@@ -1011,6 +1029,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the backup.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }

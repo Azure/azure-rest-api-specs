@@ -86,7 +86,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -130,7 +135,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -314,6 +324,7 @@
       "description": "The name of the server.",
       "required": true,
       "type": "string",
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "FirewallRuleNameParameter": {
@@ -322,6 +333,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the server firewall rule.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
