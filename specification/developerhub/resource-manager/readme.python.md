@@ -10,6 +10,17 @@ package-name: azure-mgmt-devhub
 namespace: azure.mgmt.devhub
 package-version: 1.0.0b1
 clear-output-folder: true
+
+directive:
+  - from: swagger-document
+    where: $.definitions.parameters.GitHubOAuthCodeParameter
+    transform: >
+      $['x-ms-parameter-location'] = "method";
+
+  - from: swagger-document
+    where: $.definitions.parameters.GitHubOAuthStateParameter
+    transform: >
+      $['x-ms-parameter-location'] = "method";
 ```
 
 ``` yaml $(python)
