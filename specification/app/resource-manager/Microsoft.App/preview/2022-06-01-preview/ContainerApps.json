@@ -409,7 +409,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authtoken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/getAuthtoken": {
       "post": {
         "tags": [
           "ContainerApps"
@@ -1053,6 +1053,7 @@
             "token": {
               "description": "Auth token value.",
               "type": "string",
+              "x-ms-secret": true,
               "readOnly": true
             },
             "expires": {
