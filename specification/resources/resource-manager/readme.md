@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-snapshots-2022-11` is specified on
 
 ``` yaml $(tag) == 'package-snapshots-2022-11'
 input-file:
-- Microsoft.Resources/preview/2022-11-01/snapshots.json
+- Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
 ```
 
 ### Tag: package-changes-2022-05
