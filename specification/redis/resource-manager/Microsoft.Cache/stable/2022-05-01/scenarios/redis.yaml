@@ -12,7 +12,14 @@ variables:
   
 prepareSteps:
   - step: NetworkSubnet_Create
-    armTemplate: armtemplate/Create_NetworkAndSubnet.json
+    armTemplate: templates/Create_NetworkAndSubnet.json
+  - step: Redis_Create
+    exampleFile: ..\examples\RedisCacheCreateDefaultVersion.json
+    requestUpdate:
+      - replace: /parameters/properties/subnetId
+        value: $(subnetId)
+      - replace: /parameters/properties/staticIP
+        value: 10.0.0.5
 
 scenarios:
   - scenario: Redis
@@ -20,22 +27,12 @@ scenarios:
     steps:
       - step: Redis_CheckNameAvailability
         exampleFile: ..\examples\RedisCacheCheckNameAvailability.json
-      - step: Redis_Create
-        exampleFile: ..\examples\RedisCacheCreateDefaultVersion.json
-        requestUpdate:
-          - replace: /parameters/properties/subnetId
-            value: $(subnetId)
-          # - replace: /parameters/properties/staticIP
-          #   value: 10.0.0.5
-
       - step: Redis_ListBySubscription
         exampleFile: ..\examples\RedisCacheList.json
       - step: Redis_ListByResourceGroup
         exampleFile: ..\examples\RedisCacheListByResourceGroup.json
       - step: Redis_Get
         exampleFile: ..\examples\RedisCacheGet.json
-      - step: Redis_ListUpgradeNotifications
-        exampleFile: ..\examples\RedisCacheListUpgradeNotifications.json
       - step: Redis_Update
         exampleFile: ..\examples\RedisCacheUpdate.json
       - step: Redis_RegenerateKey
@@ -44,9 +41,49 @@ scenarios:
         exampleFile: ..\examples\RedisCacheListKeys.json
       - step: Redis_ForceReboot
         exampleFile: ..\examples\RedisCacheForceReboot.json
-      - step: Redis_ImportData
-        exampleFile: ..\examples\RedisCacheImport.json
-      - step: Redis_ExportData
-        exampleFile: ..\examples\RedisCacheExport.json
-      - step: Redis_Delete
-        exampleFile: ..\examples\RedisCacheDelete.json
+        requestUpdate:
+          - remove: /parameters/shardId
+          - remove: /parameters/rebootType
+
+  - scenario: FirewallRule
+    description: Microsoft.Cache/redis/firewallRules
+    variables:
+      cacheName: $(name)
+    steps:
+      - step: FirewallRules_CreateOrUpdate
+        exampleFile: ..\examples\RedisCacheFirewallRuleCreate.json
+        requestUpdate:
+          - replace: /parameters/properties/startIP
+            value: 10.0.1.1
+          - replace: /parameters/properties/endIP
+            value: 10.0.1.4
+      - step: FirewallRules_List
+        exampleFile: ..\examples\RedisCacheFirewallRulesList.json
+      - step: FirewallRules_Get
+        exampleFile: ..\examples\RedisCacheFirewallRuleGet.json
+      - step: FirewallRules_Delete
+        exampleFile: ..\examples\RedisCacheFirewallRuleDelete.json
+
+  - scenario: PatchSchedule
+    description: Microsoft.Cache/redis/patchSchedules
+    variables:
+      cacheName: $(name)
+    steps:
+      - step: PatchSchedules_CreateOrUpdate
+        exampleFile: ..\examples\RedisCachePatchSchedulesCreateOrUpdate.json
+      - step: PatchSchedules_ListByRedisResource
+        exampleFile: ..\examples\RedisCachePatchSchedulesList.json
+      - step: PatchSchedules_Get
+        exampleFile: ..\examples\RedisCachePatchSchedulesGet.json
+      - step: PatchSchedules_Delete
+        exampleFile: ..\examples\RedisCachePatchSchedulesDelete.json
+
+  - scenario: Operation
+    description: Microsoft.Cache/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ..\examples\RedisCacheOperations.json
+
+cleanUpSteps:
+  - step: Redis_Delete
+    exampleFile: ..\examples\RedisCacheDelete.json
