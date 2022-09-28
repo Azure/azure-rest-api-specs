@@ -409,7 +409,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authtoken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/getAuthtoken": {
       "post": {
         "tags": [
           "ContainerApps"
@@ -994,6 +994,11 @@
           "type": "boolean",
           "readOnly": true
         },
+        "conflictWithEnvironmentCustomDomain": {
+          "description": "<code>true</code> if there is a conflict on the Container App's managed environment level custom domain; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "conflictingContainerAppResourceId": {
           "description": "Name of the conflicting Container App on the Managed Environment if it's within the same subscription.",
           "type": "string",
@@ -1053,6 +1058,7 @@
             "token": {
               "description": "Auth token value.",
               "type": "string",
+              "x-ms-secret": true,
               "readOnly": true
             },
             "expires": {
