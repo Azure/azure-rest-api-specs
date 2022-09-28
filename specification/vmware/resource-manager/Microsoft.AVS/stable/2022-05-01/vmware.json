@@ -286,6 +286,21 @@
       },
       "description": "Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing",
       "x-ms-parameter-location": "method"
+    },
+    "workloadNetworkName": {
+      "name": "workloadNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadNetworkName",
+        "modelAsString": true
+      },
+      "description": "Name for the workload network in the private cloud",
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -1956,7 +1971,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/{workloadNetworkName}": {
       "get": {
         "operationId": "WorkloadNetworks_Get",
         "tags": [
@@ -1975,6 +1990,9 @@
           },
           {
             "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/workloadNetworkName"
           }
         ],
         "responses": {
