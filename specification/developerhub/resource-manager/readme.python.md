@@ -22,6 +22,11 @@ directive:
     where: $.parameters.GitHubOAuthStateParameter
     transform: >
       $['x-ms-parameter-location'] = "method";
+      
+  - from: swagger-document
+    where: $.parameters.ManagedClusterParameter
+    transform: >
+      $['x-ms-parameter-location'] = "method";
 ```
 
 ``` yaml $(python)
