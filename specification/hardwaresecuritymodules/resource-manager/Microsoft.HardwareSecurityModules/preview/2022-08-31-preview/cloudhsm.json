@@ -350,45 +350,6 @@
         }
       }
     },
-    "/providers/Microsoft.HardwareSecurityModules/operations": {
-      "get": {
-        "tags": [
-          ""
-        ],
-        "operationId": "Operations_List",
-        "description": "Get a list of Cloud HSM Cluster operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CloudHsmClusterOperationListResult"
-            }
-          },
-          "default": {
-            "description": "The error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateLinkResources": {
       "get": {
         "tags": [
@@ -818,12 +779,6 @@
           "type": "string",
           "readOnly": true,
           "description": "The error message."
-        },
-        "innererror": {
-          "x-ms-client-name": "innerError",
-          "readOnly": true,
-          "description": "The inner error, contains a more specific error code.",
-          "$ref": "#/definitions/Error"
         }
       },
       "type": "object",
