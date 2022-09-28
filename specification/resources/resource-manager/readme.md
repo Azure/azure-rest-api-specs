@@ -963,6 +963,7 @@ batch:
   - package-deploymentscripts: true
   - package-templatespecs: true
   - package-changes: true
+  - package-snapshots: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
