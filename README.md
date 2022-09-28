@@ -174,7 +174,7 @@ Specification files and AutoRest configuration files in one RP folder are better
 
 
 ## Next steps
-The next step in the proces://github.com/Azure/azure-rest-api-specs#common-types) under specification, or under **common-types** folder of service group folder structure. The former supports the entity type sharing cross rp folders, while the latter supports the entity type sharing cross components or services after a spec is completed is to generate SDKs and API reference documentation. If you're a Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.
+The next step in the process after a spec is completed is to generate SDKs and API reference documentation. If you're a Microsoft employee, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk) for more information.
 
 External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
