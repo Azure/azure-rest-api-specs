@@ -30,7 +30,6 @@ input-file:
   - analyzeconversations-authoring.json
   - questionanswering.json
   - questionanswering-authoring.json
-  - questionanswering-generate.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
