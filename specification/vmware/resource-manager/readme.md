@@ -98,6 +98,59 @@ swagger-to-sdk:
 ```
 
 ## Suppression
+
+### AutoRest v2 Suppressions
+``` yaml
+directive:
+  - suppress: pathresourceprovidernamepascalcase
+    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
+    from: vmware.json
+
+  - suppress: TrackedResourceListByImmediateParent
+    reason: list by immediate parent operations are defined
+    from: vmware.json
+    
+  - suppress: TrackedResourceListByResourceGroup
+    reason: the PrivateClouds_List operation is by resource group
+    from: vmware.json
+
+  - suppress: EnumInsteadOfBoolean
+    reason: standard property for Operation
+    from: vmware.json
+    where: $.definitions.Operation.properties.isDataAction
+    
+  - suppress: EnumInsteadOfBoolean
+    reason: standard property for MetricSpecification
+    from: vmware.json
+    where: $.definitions.MetricSpecification.properties.fillGapWithZero
+
+  - suppress: AvoidNestedProperties
+    reason: x-ms-client-flatten not needed for Operation
+    from: vmware.json
+    where: $.definitions.Operation.properties.properties
+
+  - suppress: RequiredReadOnlySystemData
+    reason: systemData is not in this API version
+    from: vmware.json
+
+  - suppress: EnumInsteadOfBoolean
+    reason: standard property defined by Geneva Metrics
+    from: vmware.json
+    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
+
+  - suppress: ParametersOrder
+    reason: Breaking change to update the parameters order
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
+```
+
+### AutoRest v3 Suppressions
 ``` yaml
 suppressions:
     
