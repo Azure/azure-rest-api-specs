@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "accountId": "9af94315-8b88-4b7c-9469-3ac69a406652",
+    "api-version": "2019-09-01",
+    "alertCreateParameter": {
+      "name": "Alert1",
+      "description": "Sample Alert.",
+      "status": "ENABLED",
+      "notificationFrequency": "IMMEDIATE",
+      "notificationType": "EMAIL",
+      "alertingScopes": [
+        {
+          "level": "CATALOG_PATH",
+          "type": "azure_datalake_gen2_path",
+          "id": "https://dqdemosource.dfs.core.windows.net/dqtestcontainer/ADFFlowSinkToOne/MoviesData.parquet"
+        }
+      ],
+      "condition": "score_threshold(GLOBAL_SCORE) < 40"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "06b35e15-4d74-450c-aa0c-8a18468876aa",
+        "name": "Alert1",
+        "description": "Sample Alert.",
+        "status": "ENABLED",
+        "notificationFrequency": "IMMEDIATE",
+        "notificationType": "EMAIL",
+        "condition": "score_threshold(GLOBAL_SCORE) < 40",
+        "alertingScopes": [
+          {
+            "level": "CATALOG_PATH",
+            "type": "azure_datalake_gen2_path",
+            "id": "https://dqdemosource.dfs.core.windows.net/dqtestcontainer/ADFFlowSinkToOne/MoviesData.parquet"
+          }
+        ],
+        "createdOn": "2022-09-07T09:36:58.0828042+00:00",
+        "createdBy": "1c6a45ba-bcab-4606-a57d-be55a0d9554c",
+        "lastUpdatedOn": "2022-09-07T09:36:58.0828042+00:00",
+        "lastUpdatedBy": "1c6a45ba-bcab-4606-a57d-be55a0d9554c",
+        "activatedCount": 0
+      }
+    }
+  }
+}
