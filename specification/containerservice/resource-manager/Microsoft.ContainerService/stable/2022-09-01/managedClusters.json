@@ -1372,6 +1372,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/rotateServiceAccountSigningKeys": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_RotateServiceAccountSigningKeys",
+        "summary": "Rotates the service account signing keys of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Rotate Cluster Service Account Signing Keys": {
+            "$ref": "./examples/ManagedClustersRotateServiceAccountSigningKeys.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/stop": {
       "post": {
         "tags": [
@@ -3769,6 +3812,10 @@
           "title": "The pod identity profile of the Managed Cluster.",
           "description": "See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on AAD pod identity integration."
         },
+        "oidcIssuerProfile": {
+          "$ref": "#/definitions/ManagedClusterOIDCIssuerProfile",
+          "description": "The OIDC issuer profile of the Managed Cluster."
+        },
         "nodeResourceGroup": {
           "type": "string",
           "description": "The name of the resource group containing agent pool nodes."
@@ -4473,6 +4520,21 @@
       },
       "title": "The pod identity profile of the Managed Cluster.",
       "description": "See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on pod identity integration."
+    },
+    "ManagedClusterOIDCIssuerProfile": {
+      "type": "object",
+      "properties": {
+        "issuerURL": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The OIDC issuer url of the Managed Cluster."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the OIDC issuer is enabled."
+        }
+      },
+      "description": "The OIDC issuer profile of the Managed Cluster."
     },
     "ManagedClusterUpgradeProfile": {
       "type": "object",
