@@ -38,11 +38,7 @@
           "description": "Description of the pool setting to be updated",
           "parameters": [
             {
-              "name": "setting-name",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "The name of the account setting. Must be a valid settings option."
+              "$ref": "#/parameters/SettingNameParameter"
             },
             {
               "name": "parameters",
@@ -87,11 +83,7 @@
           "description": "Retrieves the value of a specified, value account setting.",
           "parameters": [
             {
-              "name": "setting-name",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "The name of the account setting. Must be a valid settings option."
+              "$ref": "#/parameters/SettingNameParameter"
             },
             {
               "$ref": "#/parameters/ApiVersionParameter"
@@ -208,6 +200,14 @@
         "required": true,
         "type": "string",
         "description": "Client API version."
+      },
+      "SettingNameParameter":
+      {
+        "name": "setting-name",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the account setting. Must be a valid settings option."
       }
     }
   }
