@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2022-05
+tag: package-2022-08
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -47,14 +47,23 @@ message-format: json
 ```
 
 
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.DataProtection/stable/2022-08-31/dataprotection.json
+```
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.DataProtection/stable/2022-05-01/dataprotection.json
 ```
+
 ### Tag: package-2022-04
 
 These settings apply only when `--tag=package-2022-04` is specified on the command line.
