@@ -307,6 +307,49 @@
     }
   },
   "definitions": {
+    "PartnerDbRg": {
+      "description": "A partner db resource group.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartnerDbRgProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PartnerDbRgProperties": {
+      "description": "Properties of a partner database resource group.",
+      "type": "object",
+      "properties": {
+        "partnerSubscriptionId": {
+          "format": "uuid",
+          "description": "Resource partner subscription Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerResourceGroupName": {
+          "description": "Resource partner resource group name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ReplicationLink": {
       "description": "A replication link.",
       "type": "object",
@@ -354,6 +397,11 @@
         "partnerDatabase": {
           "description": "Resource partner database.",
           "type": "string",
+          "readOnly": true
+        },
+        "partnerDbResourceGroupResource": {
+          "$ref": "#/definitions/PartnerDbRg",
+          "description": "Resource partner database resource group.",
           "readOnly": true
         },
         "partnerLocation": {
