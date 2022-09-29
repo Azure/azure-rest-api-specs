@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-09
+tag: package-2022-10
 ```
 
 ## Suppression
@@ -46,17 +46,29 @@ directive:
 ```
 
 
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-10-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/operations.json
+```
 ### Tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.AzureStackHCI/stable/2022-09-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2022-09-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2022-09-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-09-01/operations.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
