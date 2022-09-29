@@ -1655,6 +1655,18 @@
             "modelAsString": true
           }
         },
+        "publicNetworkAccess": {
+          "description": "property to enable or disable resource provider inbound network traffic from public clients",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
         "monitoringSettings": {
           "description": "Monitoring Settings of the vault",
           "$ref": "#/definitions/MonitoringSettings"
@@ -1809,6 +1821,23 @@
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "groupIds": {
+          "description": "Group Ids for the Private Endpoint",
+          "type": "array",
+          "items": {
+            "description": "GroupId for the PrivateEndpointConnection - AzureBackup, AzureBackup_secondary or AzureSiteRecovery",
+            "enum": [
+              "AzureBackup",
+              "AzureBackup_secondary",
+              "AzureSiteRecovery"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "VaultSubResourceType",
+              "modelAsString": true
+            }
+          }
         }
       }
     },
