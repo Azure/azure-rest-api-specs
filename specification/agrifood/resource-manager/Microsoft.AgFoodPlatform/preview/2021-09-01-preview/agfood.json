@@ -11,7 +11,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Install or Update extension.",
+        "description": "Install or Update extension. Install or Update extension. AdditionalApiProperties are merged patch and if the extension is updated to a new version then the obselete entries will be auto deleted from AdditionalApiProperties.",
         "operationId": "Extensions_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -1208,10 +1208,10 @@
       "description": "Api properties.",
       "type": "object",
       "properties": {
-        "apiFreshnessWindow": {
+        "apiFreshnessWindowInMinutes": {
           "format": "int32",
-          "description": "Iterval in seconds for which the weather data for the api needs to be refreshed.",
-          "maximum": 3600,
+          "description": "Iterval in minutes for which the weather data for the api needs to be refreshed.",
+          "maximum": 10080,
           "minimum": 0,
           "type": "integer"
         }
@@ -1247,6 +1247,14 @@
           "description": "Extension api docs link.",
           "type": "string",
           "readOnly": true
+        },
+        "additionalApiProperties": {
+          "description": "Api Freshness Window.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiProperties"
+          },
+          "readOnly": true
         }
       }
     },
@@ -1270,6 +1278,13 @@
           "description": "The ETag value to implement optimistic concurrency.",
           "type": "string",
           "readOnly": true
+        },
+        "additionalApiProperties": {
+          "description": "Additional api properties.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiProperties"
+          }
         }
       },
       "x-ms-azure-resource": true
@@ -1285,8 +1300,8 @@
           "minLength": 3,
           "type": "string"
         },
-        "apiProperties": {
-          "description": "Api Properties.",
+        "additionalApiProperties": {
+          "description": "Additional Api Properties.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ApiProperties"
