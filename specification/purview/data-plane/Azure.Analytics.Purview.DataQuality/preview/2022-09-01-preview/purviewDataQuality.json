@@ -398,39 +398,6 @@
                       "$ref": "./examples/Rules_Patch.json"
                   }
               }
-          },
-          "delete": {
-              "tags": [
-                  "AssessmentRules"
-              ],
-              "operationId": "DeleteAllRules",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [{
-                      "in": "path",
-                      "name": "accountId",
-                      "required": true,
-                      "type": "string"
-                  }, {
-                      "in": "path",
-                      "name": "assetId",
-                      "required": true,
-                      "type": "string"
-                  }, {
-                      "in": "query",
-                      "name": "api-version",
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Success",
-                      "schema": {
-                          "type": "string"
-                      }
-                  }
-              }
           }
       },
       "/accounts/{accountId}/assets/{assetId}/favourite-fields": {
@@ -1406,7 +1373,7 @@
               ],
               "parameters": [{
                       "in": "path",
-                      "name": "AccountId",
+                      "name": "accountId",
                       "required": true,
                       "type": "string"
                   }, {
