@@ -44,6 +44,7 @@ input-file:
   - Microsoft.SecurityInsights/stable/2022-11-01/DataConnectors.json
   - Microsoft.SecurityInsights/stable/2022-11-01/Incidents.json
   - Microsoft.SecurityInsights/stable/2022-11-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2022-11-01/SecurityMLAnalyticsSettings.json
   - Microsoft.SecurityInsights/stable/2022-11-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2022-11-01/Watchlists.json
   - Microsoft.SecurityInsights/stable/2022-11-01/operations.json
