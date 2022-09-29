@@ -419,6 +419,49 @@
         }
       }
     },
+    "/attest/SevSnpVm": {
+      "post": {
+        "tags": [
+          "Attestation"
+        ],
+        "summary": "Attest to an SEV SNP Virtual Machine.",
+        "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "Attestation_AttestSevSnpVm",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestSevSnpVmRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttestationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest SevSnpVm": {
+            "$ref": "./examples/AttestSevSnpVm.json"
+          }
+        }
+      }
+    },
     "/certs": {
       "get": {
         "tags": [
@@ -464,7 +507,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/OpenIDConfigurationResponse"
             }
           },
           "default": {
@@ -522,6 +565,45 @@
         "policyCertificate": {
           "description": "RFC 7517 Json Web Key describing the certificate.",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "OpenIDConfigurationResponse": {
+      "type": "object",
+      "description": "The response to the OpenID metadata description document API",
+      "properties": {
+        "response_types_supported": {
+          "description": "Types supported in the OpenID metadata API",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id_token_signing_alg_values_supported": {
+          "description": "List of the supported signing algorithms",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "revocation_endpoint": {
+          "description": "Revocation endpoint",
+          "type": "string"
+        },
+        "issuer": {
+          "description": "Issuer tenant base endpoint",
+          "type": "string"
+        },
+        "jwks_uri": {
+          "description": "The URI to retrieve the signing keys",
+          "type": "string"
+        },
+        "claims_supported": {
+          "description": "Set of claims supported by the OpenID metadata endpoint",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -966,6 +1048,32 @@
           "format": "base64url"
         }
       }
+    },
+    "AttestSevSnpVmRequest": {
+      "type": "object",
+      "description": "Attestation request for AMD SEV SNP Virtual Machine",
+      "properties": {
+        "report": {
+          "description": "Hardware rooted report of the virtual machine being attested along with the signing certificate chain and optionally, additional endorsements",
+          "type": "string"
+        },
+        "runtimeData": {
+          "description": "Runtime data provided by the enclave at the time of report generation. The MAA will verify that the run time data is known to the attestation target.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "initTimeData": {
+          "description": "Initialization data provided by the enclave at the time of report generation. The MAA will verify that the init time data is known to the attestation target.",
+          "$ref": "#/definitions/InitTimeData"
+        },
+        "draftPolicyForAttestation": {
+          "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+          "type": "string"
+        },
+        "nonce": {
+          "description": "Nonce for incoming request - emitted in the generated attestation token",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -996,6 +1104,10 @@
             "description": "OpenEnclave extensions to SGX"
           },
           {
+            "value": "SevSnpVm",
+            "description": "AMD SEV SNP Virtual Machine"
+          },
+          {
             "value": "Tpm",
             "description": "Edge TPM Virtualization Based Security"
           }
@@ -1004,6 +1116,7 @@
       "enum": [
         "SgxEnclave",
         "OpenEnclave",
+        "SevSnpVm",
         "Tpm"
       ]
     }
