@@ -2960,7 +2960,7 @@
         "workloadInstanceProperties": {
           "allOf": [
             {
-              "$ref": "#/definitions/WorkloadInstanceProperties"
+              "$ref": "#/definitions/WorkloadInstanceModelProperties"
             }
           ],
           "readOnly": true
@@ -3565,17 +3565,13 @@
     },
     "MigrateAgentModelCustomProperties": {
       "description": "MigrateAgent model custom properties.",
-      "required": [
-        "instanceType"
-      ],
       "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "Gets or sets the instance type.",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateAgentModelCustomProperties"
         }
-      },
-      "discriminator": "instanceType"
+      ],
+      "x-ms-discriminator-value": "TestFabricExtension"
     },
     "MigrateAgentModelProperties": {
       "description": "MigrateAgent model properties.",
@@ -3995,13 +3991,17 @@
       "properties": {
         "secretStoreId": {
           "type": "string"
+        },
+        "InputType": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "SecureString": {
       "type": "object",
       "properties": {
-        "Length": {
+        "length": {
           "format": "int32",
           "type": "integer"
         }
@@ -4436,39 +4436,13 @@
     },
     "WorkflowModelCustomProperties": {
       "description": "Workflow model custom properties.",
-      "required": [
-        "instanceType"
-      ],
       "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "Gets or sets the instance type.",
-          "enum": [
-            "SampleWorkflow",
-            "EnableReplicationWorkflow",
-            "StopReplicationWorkflow",
-            "BuildContainerImageWorkflow",
-            "MigrateWorkflow",
-            "TestMigrateWorkflow",
-            "TestMigrateCleanupWorkflow",
-            "CompleteMigrationWorkflow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkflowType",
-            "modelAsString": true
-          }
-        },
-        "affectedObjectDetails": {
-          "description": "Gets or sets any custom properties of the affected object.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowModelCustomProperties"
         }
-      },
-      "discriminator": "instanceType"
+      ],
+      "x-ms-discriminator-value": "SampleWorkflow"
     },
     "WorkflowModelProperties": {
       "description": "Workflow model properties.",
@@ -4670,25 +4644,13 @@
     },
     "WorkloadDeploymentModelCustomProperties": {
       "description": "Workload deployment model custom properties.",
-      "required": [
-        "instanceType"
-      ],
       "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "Gets or sets the instance type.",
-          "enum": [
-            "IISAKSWorkloadDeployment",
-            "ApacheTomcatAKSWorkloadDeployment"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkloadDeploymentType",
-            "modelAsString": true
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadDeploymentModelCustomProperties"
         }
-      },
-      "discriminator": "instanceType"
+      ],
+      "x-ms-discriminator-value": "IISAKSWorkloadDeployment"
     },
     "WorkloadDeploymentModelProperties": {
       "description": "Workload deployment model properties.",
@@ -4734,29 +4696,6 @@
         },
         "statusDescription": {
           "description": "Gets or sets the workload deployment status description.",
-          "type": "string",
-          "readOnly": true
-        },
-        "replicationStatus": {
-          "description": "Gets or sets the workload replication state.",
-          "enum": [
-            "None",
-            "Scheduled",
-            "InitialSync",
-            "Completed",
-            "Failed",
-            "Disabling",
-            "Disabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ClientFacingReplicationStatus",
-            "modelAsString": true
-          }
-        },
-        "replicationStatusDescription": {
-          "description": "Gets or sets the workload replication state description.",
           "type": "string",
           "readOnly": true
         },
@@ -4828,16 +4767,10 @@
           }
         },
         "workloadInstanceProperties": {
-          "$ref": "#/definitions/WorkloadInstanceProperties"
+          "$ref": "#/definitions/WorkloadInstanceModelProperties"
         },
         "correlationId": {
           "description": "Gets or sets the workload deployment correlation Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastSuccessfulReplicationCycleTime": {
-          "format": "date-time",
-          "description": "Gets or sets the Last successful replication cycle time.",
           "type": "string",
           "readOnly": true
         },
@@ -4882,36 +4815,6 @@
             }
           },
           "readOnly": true
-        },
-        "lastFailedEnableReplicationJob": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkloadJobProperties"
-            }
-          ],
-          "readOnly": true
-        },
-        "lastTestMigrateJob": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkloadJobProperties"
-            }
-          ],
-          "readOnly": true
-        },
-        "replicationHealth": {
-          "description": "Gets or sets workload deployment replication health.",
-          "enum": [
-            "Normal",
-            "Warning",
-            "Critical"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": true
-          }
         },
         "healthErrors": {
           "description": "Gets or sets the list of health errors.",
@@ -5014,38 +4917,22 @@
     },
     "WorkloadInstanceModelCustomProperties": {
       "description": "Workload instance model custom properties.",
-      "required": [
-        "instanceType"
-      ],
       "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "Gets or sets the instance type.",
-          "enum": [
-            "IISWorkload",
-            "ApacheTomcatWorkload"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkloadType",
-            "modelAsString": true
-          }
-        },
-        "webAppArmId": {
-          "description": "Gets or sets the Web application ARM id.",
-          "type": "string"
-        },
-        "webAppSiteName": {
-          "description": "Gets or sets the Web application site name.",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadInstanceModelCustomProperties"
         }
-      },
-      "discriminator": "instanceType"
+      ],
+      "x-ms-discriminator-value": "IISWorkload"
     },
     "WorkloadInstanceModelProperties": {
       "description": "Workload instance model properties.",
       "type": "object",
       "properties": {
+        "Name": {
+          "description": "Gets or sets the workload instance name.",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state of the workload instance.",
           "enum": [
@@ -5112,6 +4999,11 @@
             "modelAsString": true
           }
         },
+        "replicationStatusDescription": {
+          "description": "Gets or sets the workload replication state description.",
+          "type": "string",
+          "readOnly": true
+        },
         "healthErrors": {
           "description": "Gets or sets the list of health errors.",
           "type": "array",
@@ -5142,66 +5034,6 @@
         },
         "customProperties": {
           "$ref": "#/definitions/WorkloadInstanceModelCustomProperties"
-        }
-      }
-    },
-    "WorkloadInstanceProperties": {
-      "description": "Workload instance properties.",
-      "type": "object",
-      "properties": {
-        "workloadInstanceId": {
-          "description": "Gets or sets the workload instance id.",
-          "type": "string"
-        },
-        "instanceType": {
-          "description": "Gets or sets the instance type.",
-          "enum": [
-            "IISWorkload",
-            "ApacheTomcatWorkload"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkloadType",
-            "modelAsString": true
-          }
-        },
-        "name": {
-          "description": "Gets or sets the workload instance name.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Gets or sets the display name.",
-          "type": "string"
-        },
-        "sourcePlatform": {
-          "description": "Gets or sets the source platform.",
-          "type": "string"
-        },
-        "sourceName": {
-          "description": "Gets or sets the source name.",
-          "type": "string"
-        },
-        "replicationHealth": {
-          "description": "Gets or sets the replication health of the workload instance.",
-          "enum": [
-            "Normal",
-            "Warning",
-            "Critical"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": true
-          }
-        },
-        "healthErrors": {
-          "description": "Gets or sets the list of health errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorModel"
-          },
-          "readOnly": true
         }
       }
     },
