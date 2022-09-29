@@ -3964,17 +3964,23 @@
         "groupId": {
           "type": "string",
           "readOnly": true,
-          "description": "The groupId of the Private Link Resources"
+          "description": "The Private link resources GroupId"
         },
         "requiredMembers": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Required Members of the Private Link Resources"
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
         "requiredZoneNames": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Required Zone Names of the Private Link Resources"
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
