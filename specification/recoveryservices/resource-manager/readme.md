@@ -58,12 +58,24 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08'
+``` yaml $(tag) == 'package-2022-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-08-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2022-08-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2022-08-01/vaults.json
   - Microsoft.RecoveryServices/stable/2022-08-01/vaultusages.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-05-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2022-05-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2022-05-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2022-05-01/vaultusages.json
 ```
 
 ### Tag: package-2022-04
