@@ -31,35 +31,6 @@ These settings apply only when `--tag=package-2022-05-01` is specified on the co
 ``` yaml $(tag) == 'package-2022-05-01'
 input-file:
 - Microsoft.AVS/stable/2022-05-01/vmware.json
-directive:
-  - suppress: PathResourceProviderNamePascalCase
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R3027
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    reasons: the PrivateClouds_List operation is by resource group
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason: standard property for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-    reason: standard property for MetricSpecification
-  - suppress: R2001
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    where: $.definitions.Operation.properties.properties
-    reason: x-ms-client-flatten not needed for Operation
-  - suppress: R4009
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    reason: systemData is not in this API version
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2022-05-01/vmware.json
-    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2021-12-01
@@ -69,34 +40,6 @@ These settings apply only when `--tag=package-2021-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2021-12-01'
 input-file:
 - Microsoft.AVS/stable/2021-12-01/vmware.json
-directive:
-  - suppress: R3020
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R3027
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    reasons: the PrivateClouds_List operation is by resource group
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason: standard property for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-    reason: standard property for MetricSpecification
-  - suppress: R2001
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    where: $.definitions.Operation.properties.properties
-    reason: x-ms-client-flatten not needed for Operation
-  - suppress: R4009
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    reason: systemData is not in this API version
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2021-12-01/vmware.json
-    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2021-06-01
@@ -106,35 +49,6 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
 - Microsoft.AVS/stable/2021-06-01/vmware.json
-directive:
-  - suppress: R3020
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R3027
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    reasons: the PrivateClouds_List operation is by resource group
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason: standard property for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-    reason: standard property for MetricSpecification
-  - suppress: R2001
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    where: $.definitions.Operation.properties.properties
-    reason: x-ms-client-flatten not needed for Operation
-  - suppress: R4009
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    reason: systemData is not in this API version
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2021-06-01/vmware.json
-    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2021-01-01-preview
@@ -144,35 +58,6 @@ These settings apply only when `--tag=package-2021-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2021-01-01-preview'
 input-file:
 - Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-directive:
-  - suppress: R3020
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R3027
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    reasons: the PrivateClouds_List operation is by resource group
-  - suppress: R3018
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason: standard property for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-    reason: standard property for MetricSpecification
-  - suppress: R2001
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    where: $.definitions.Operation.properties.properties
-    reason: x-ms-client-flatten not needed for Operation
-  - suppress: R4009
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    reason: systemData is not in this API version
-  - suppress: R3018
-    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2020-07-17-preview
@@ -182,35 +67,6 @@ These settings apply only when `--tag=package-2020-07-17-preview` is specified o
 ``` yaml $(tag) == 'package-2020-07-17-preview'
 input-file:
 - Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-directive:
-  - suppress: R3020
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R3027
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    reasons: the PrivateClouds_List operation is by resource group
-  - suppress: R3018
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason: standard property for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-    reason: standard property for MetricSpecification
-  - suppress: R2001
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    where: $.definitions.Operation.properties.properties
-    reason: x-ms-client-flatten not needed for Operation
-  - suppress: R4009
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    reason: systemData is not in this API version
-  - suppress: R3018
-    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2020-03-20
@@ -220,32 +76,6 @@ These settings apply only when `--tag=package-2020-03-20` is specified on the co
 ``` yaml $(tag) == 'package-2020-03-20'
 input-file:
 - Microsoft.AVS/stable/2020-03-20/vmware.json
-directive:
-  - suppress: R3020
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R3027
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    reasons: the PrivateClouds_List operation is by resource group
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    where: $.definitions.Operation.properties.isDataAction
-    reason: standard property for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    where: $.definitions.MetricSpecification.properties.fillGapWithZero
-    reason: standard property for MetricSpecification
-  - suppress: R2001
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    where: $.definitions.Operation.properties.properties
-    reason: x-ms-client-flatten not needed for Operation
-  - suppress: R3018
-    from: Microsoft.AVS/stable/2020-03-20/vmware.json
-    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
-    reason: standard property defined by Geneva Metrics
 ```
 
 ---
@@ -268,21 +98,15 @@ swagger-to-sdk:
 ```
 
 ## Suppression
-```
-directive:
-  - suppress: SECRET_PROPERTY
-    from:
-      - Microsoft.AVS/stable/2022-05-01/vmware.json
-      - Microsoft.AVS/stable/2021-12-01/vmware.json
-      - Microsoft.AVS/stable/2021-06-01/vmware.json
-      - Microsoft.AVS/preview/2021-01-01-preview/vmware.json
-      - Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-      - Microsoft.AVS/stable/2020-03-20/vmware.json
-    where:
-      - $.definitions.AdminCredentials.properties.nsxtPassword
-      - $.definitions.AdminCredentials.properties.vcenterPassword
-    reason: Secrets are OK to return in a POST response.
-  - suppress: ParametersOrder
+``` yaml
+suppressions:
+    
+  - code: pathresourceprovidernamepascalcase
+    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
+    from: vmware.json
+
+  - code: ParametersOrder
+    reason: Breaking change to update the parameters order
     from: vmware.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
@@ -291,7 +115,18 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
-    reason: It is a breaking change to update the parameters order.
+    
+  # TODO
+  - code: ConsistentPatchProperties
+  - code: DefinitionsPropertiesNamesCamelCase
+  - code: DeleteOperationAsyncResponseValidation
+  - code: IgnoredPropertyNextToRef
+  - code: LroLocationHeader
+  - code: LroPatch202
+  - code: PatchSkuProperty
+  - code: RequiredReadOnlySystemData
+  - code: UnSupportedPatchProperties
+  - code: XmsLongRunningOperationOptions
 ```
 
 ## TypeScript
