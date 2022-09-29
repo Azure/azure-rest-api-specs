@@ -3778,6 +3778,10 @@
           "title": "The network mode Azure CNI is configured with.",
           "description": "This cannot be specified if networkPlugin is anything other than 'azure'."
         },
+        "ebpfDataplane": {
+          "$ref": "#/definitions/EbpfDataplane",
+          "description": "The eBPF dataplane used for building the Kubernetes network."
+        },
         "podCidr": {
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
@@ -6851,6 +6855,23 @@
       },
       "title": "The network mode Azure CNI is configured with.",
       "description": "This cannot be specified if networkPlugin is anything other than 'azure'."
+    },
+    "EbpfDataplane": {
+      "type": "string",
+      "enum": [
+        "cilium"
+      ],
+      "x-ms-enum": {
+        "name": "ebpfDataplane",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "cilium",
+            "description": "Use Cilium for networking in the Kubernetes cluster."
+          }
+        ]
+      },
+      "description": "The eBPF dataplane used for building the Kubernetes network."
     },
     "LoadBalancerSku": {
       "type": "string",
