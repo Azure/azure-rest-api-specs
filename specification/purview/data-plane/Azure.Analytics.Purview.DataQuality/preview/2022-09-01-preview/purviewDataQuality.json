@@ -564,8 +564,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/AssessmentJobDTO"
             }
           }
         ],
@@ -2291,6 +2290,14 @@
           }
         }
       }
+    },
+    "AssessmentJobDTO": {
+        "properties": {
+            "jobId": {
+                "type": "string"
+            }
+        },
+        "type": "object"
     },
     "Asset": {
       "type": "object",
