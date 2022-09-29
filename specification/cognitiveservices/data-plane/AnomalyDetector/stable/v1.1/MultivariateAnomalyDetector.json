@@ -24,6 +24,18 @@
       "apiKeyHeader": []
     }
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -307,7 +319,8 @@
           "Detect anomaly with multivariate Model": {
             "$ref": "./examples/DetectAnomaly.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/multivariate/models/{modelId}:detect-last": {
@@ -1182,6 +1195,25 @@
         }
       },
       "type": "object"
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Anomaly Detector API version (for example, v1.1).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path"
     }
   }
 }

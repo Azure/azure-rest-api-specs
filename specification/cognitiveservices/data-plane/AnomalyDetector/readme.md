@@ -91,19 +91,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-```yaml $(java)
-azure-arm: true
-namespace: com.microsoft.azure.cognitiveservices.anomalydetector
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalydetector
-with-optional-parameters: true
-with-single-async-method: true
-regenerate-manager: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
