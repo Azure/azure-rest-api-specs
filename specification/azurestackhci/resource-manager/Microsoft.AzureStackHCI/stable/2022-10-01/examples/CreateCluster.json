@@ -10,6 +10,9 @@
         "cloudManagementEndpoint": "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com",
         "aadClientId": "24a6e53d-04e5-44d2-b7cc-1b732a847dfc",
         "aadTenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94"
+      },
+      "identity": {
+        "type": "SystemAssigned"
       }
     }
   },
@@ -20,6 +23,11 @@
         "name": "myCluster",
         "type": "Microsoft.AzureStackHCI/clusters",
         "location": "East US",
+        "identity": {
+          "principalId": "87a834db-2e45-409e-911b-e16a44562ec3",
+          "tenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94",
+          "type": "SystemAssigned"
+        },
         "tags": {},
         "systemData": {
           "createdBy": "user1",
