@@ -838,6 +838,14 @@
         "expiryDate": {
           "description": "Certificate expiry date",
           "type": "string"
+        },
+        "eku": {
+          "description": "Enhanced Key Usage of the certificate",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the certificate",
+          "type": "string"
         }
       }
     },
@@ -904,7 +912,10 @@
       "description": "Profile type of the certificate",
       "type": "string",
       "enum": [
-        "PublicTrust"
+        "PublicTrust",
+        "Private Trust-Code Signing",
+        "Private Trust-Policy Signing",
+        "Test"
       ],
       "x-ms-enum": {
         "name": "ProfileType",
@@ -915,6 +926,7 @@
       "description": "Rotation policy of the certificate",
       "type": "string",
       "enum": [
+        "3 Days",
         "30 Days"
       ],
       "x-ms-enum": {
