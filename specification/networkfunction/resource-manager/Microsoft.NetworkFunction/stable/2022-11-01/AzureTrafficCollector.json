@@ -587,7 +587,9 @@
       "properties": {
         "collectorPolicies": {
           "type": "array",
-          "$ref": "#/definitions/ResourceReference",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
           "description": "Collector Policies for Azure Traffic Collector.",
           "readOnly": true
         },
