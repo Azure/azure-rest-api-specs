@@ -35,7 +35,7 @@
           ],
           "operationId": "UpdateSettings",
           "summary": "Updates key vault account setting, stores it, then returns the setting name and value to the client.",
-          "description": "If false, all key management operations must happen through the Managed HSM data plane. If true, allows users to manage keys via the Azure Resource Manager.",
+          "description": "Description of the pool setting to be updated",
           "parameters": [
             {
               "name": "setting-name",
@@ -87,6 +87,13 @@
           "description": "Retrieves the value of a specified, value account setting.",
           "parameters": [
             {
+              "name": "setting-name",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the account setting. Must be a valid settings option."
+            },
+            {
               "$ref": "#/parameters/ApiVersionParameter"
             }
           ],
@@ -103,9 +110,6 @@
                 "$ref": "common.json#/definitions/KeyVaultError"
               }
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           },
           "x-ms-examples": {
             "GetSetting": {
@@ -157,7 +161,7 @@
         "properties": {
           "value": {
             "type": "string",
-            "description": "The account setting value. True if setting is enabled, false if disabled"
+            "description": "The value of the pool setting."
           }
         },
         "description": "The update settings request object.",
@@ -165,6 +169,7 @@
           "value"
         ]
       },
+  
       "Setting": {
         "properties": {
           "name": {
