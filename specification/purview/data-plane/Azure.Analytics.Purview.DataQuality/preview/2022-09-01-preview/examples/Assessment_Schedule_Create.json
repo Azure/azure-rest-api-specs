@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "accountId": "9af94315-8b88-4b7c-9469-3ac69a406652",
+    "runNow": true,
+    "api-version": "2019-09-01",
+    "assementScheduleCreateParameter": {
+      "scheduleId": "",
+      "datasources": [
+        {
+          "datasourceKind": "AdlsGen2",
+          "datasourceName": "AzureDataLakeStorage-Cj9",
+          "includes": [
+            "https://dqdemosource.dfs.core.windows.net/2milliondata"
+          ],
+          "properties": {}
+        }
+      ],
+      "runOnce": true,
+      "scheduleName": "Sample Scheduling Assessment",
+      "description": "Sample Desc."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "scheduleId": "708414d3-abf1-4259-9d6d-55a42bf649dc",
+        "scheduleName": "Sample Scheduling Assessment",
+        "description": "Sample Desc.",
+        "recurrence": null,
+        "datasources": [
+          {
+            "datasourceKind": "AdlsGen2",
+            "datasourceName": "AzureDataLakeStorage-Cj9",
+            "includes": [
+              "https://dqdemosource.dfs.core.windows.net/2milliondata"
+            ],
+            "properties": {},
+            "credentials": null
+          }
+        ],
+        "scheduleStatus": "RUNNING",
+        "runOnce": true
+      }
+    }
+  }
+}
