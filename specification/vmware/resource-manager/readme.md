@@ -197,8 +197,12 @@ suppressions:
     where:
       - $.definitions.PlacementPolicy
 
-  # TODO
   - code: DeleteOperationAsyncResponseValidation
+    reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+    from: vmware.json
+
+  # TODO
   - code: IgnoredPropertyNextToRef
   - code: LroLocationHeader
   - code: LroPatch202
