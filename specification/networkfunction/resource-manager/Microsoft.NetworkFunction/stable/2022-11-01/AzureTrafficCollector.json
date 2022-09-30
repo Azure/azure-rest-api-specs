@@ -546,6 +546,58 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
+      },
+      "patch": {
+        "tags": [
+          "CollectorPolicies"
+        ],
+        "operationId": "CollectorPolicies_UpdateTags",
+        "x-ms-examples": {
+          "Update Collector Policy tags": {
+            "$ref": "./examples/CollectorPolicyUpdateTags.json"
+          }
+        },
+        "description": "Updates the specified Collector Policy tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update Collector Policy tags."
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/azureTrafficCollectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectorPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Collector Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
