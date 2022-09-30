@@ -37,16 +37,26 @@ openapi-type: arm
 tag: package-preview-2022-09
 ```
 
+### Tag: package-preview-2022-09-only
+
+These settings apply only when `--tag=package-preview-2022-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.ContainerService/preview/2022-09-02-preview/managedClusters.json
+```
+
 
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.ContainerService/preview/2022-09-02-preview/managedClusters.json
   - Microsoft.ContainerService/preview/2022-09-02-preview/fleets.json
 ```
+
 ### Tag: package-preview-2022-08-03-only
 
 These settings apply only when `--tag=package-preview-2022-08-03-only` is specified on the command line.
