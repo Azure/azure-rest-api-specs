@@ -86,12 +86,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -157,7 +152,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -342,6 +337,7 @@
       "type": "string",
       "description": "The name of the server firewall rule.",
       "minLength": 1,
+      "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"
     }
   }
