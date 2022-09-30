@@ -867,4 +867,8 @@ directive:
     from: managedClusters.json
     where: $.definitions.ManagedClusterSecurityProfile.properties.customCATrustCertificates      
     reason: customCATrustCertificates contains a widely used acronym, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
+    reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
 ```
