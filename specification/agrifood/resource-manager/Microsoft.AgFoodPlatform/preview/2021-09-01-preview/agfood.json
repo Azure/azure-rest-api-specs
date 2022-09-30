@@ -2065,6 +2065,14 @@
     },
     "SolutionProperties": {
       "description": "Solution resource properties.",
+      "required": [
+        "offerId",
+        "planId",
+        "publisherId",
+        "saasSubscriptionId",
+        "saasSubscriptionName",
+        "termId"
+      ],
       "type": "object",
       "properties": {
         "solutionId": {
@@ -2072,24 +2080,44 @@
           "type": "string",
           "readOnly": true
         },
-        "sku": {
-          "description": "Sku of the Solution.",
-          "type": "string"
-        },
         "applicationName": {
           "description": "Application Name of the Solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerId": {
+          "description": "Partner Id of the Solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "saasSubscriptionId": {
+          "description": "SaaS subscriptionId of the installed SaaS application.",
+          "minLength": 1,
           "type": "string"
         },
-        "provisioningState": {
-          "description": "Provisioning State of the Solution.",
+        "saasSubscriptionName": {
+          "description": "SaaS subscription name of the installed SaaS application.",
+          "minLength": 1,
           "type": "string"
         },
-        "providerId": {
-          "description": "Provider Id of the Solution.",
+        "publisherId": {
+          "description": "SaaS application Publisher Id.",
+          "minLength": 1,
           "type": "string"
         },
-        "resourceUsageId": {
-          "description": "Resource Usage Id of the Solution.",
+        "planId": {
+          "description": "SaaS application Plan Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "offerId": {
+          "description": "SaaS application Offer Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "termId": {
+          "description": "SaaS application Term Id.",
+          "minLength": 1,
           "type": "string"
         }
       },
