@@ -846,5 +846,6 @@ directive:
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
+    where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
     reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
 ```
