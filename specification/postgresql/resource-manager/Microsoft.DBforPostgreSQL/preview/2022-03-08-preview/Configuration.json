@@ -155,7 +155,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Configuration"
+              "$ref": "#/definitions/ConfigurationForUpdate"
             },
             "description": "The required parameters for updating a server configuration."
           }
@@ -164,14 +164,12 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
               "$ref": "#/definitions/Configuration"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "type": "object",
               "$ref": "#/definitions/Configuration"
             }
           },
@@ -328,6 +326,7 @@
       "description": "The properties of a configuration."
     },
     "Configuration": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
@@ -345,6 +344,17 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
+      "description": "Represents a Configuration."
+    },
+    "ConfigurationForUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a configuration."
+        }
+      },
       "description": "Represents a Configuration."
     },
     "ConfigurationListResult": {
