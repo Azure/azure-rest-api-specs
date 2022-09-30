@@ -1120,41 +1120,149 @@
               }
           }
       },
-      "/accounts/{accountId}/assessments/schedules/{scheduleId}/triggerinternal": {
-          "post": {
-              "tags": [
-                  "Scheduling"
-              ],
-              "operationId": "RunScheduledAssessmentsInternal",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [{
-                      "in": "path",
-                      "name": "accountId",
-                      "required": true,
-                      "type": "string"
-                  }, {
-                      "in": "path",
-                      "name": "scheduleId",
-                      "required": true,
-                      "type": "string"
-                  }, {
-                      "in": "query",
-                      "name": "api-version",
-                      "type": "string"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Success",
-                      "schema": {
-                          "type": "string"
-                      }
-                  }
-              }
-          }
-      },
+      "/accounts/{accountId}/assessments/schedules/{scheduleId}": {
+        "put": {
+            "tags": [
+                "Scheduling"
+            ],
+            "operationId": "UpdateScheduledAssessmentsPost",
+            "consumes": [
+                "application/json"
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [{
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "path",
+                    "name": "scheduleId",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "query",
+                    "name": "runNow",
+                    "type": "boolean",
+                    "default": false
+                }, {
+                    "in": "query",
+                    "name": "api-version",
+                    "type": "string"
+                }, {
+                    "in": "body",
+                    "name": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/ScheduleMetadata"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                        "$ref": "#/definitions/ScheduleMetadata"
+                    }
+                }
+            },
+            "x-ms-examples": {
+                "Assessment_Schedule_Put": {
+                    "$ref": "./examples/Assessment_Schedule_Put.json"
+                }
+            }
+        },
+        "get": {
+            "tags": [
+                "Scheduling"
+            ],
+            "operationId": "GetScheduledAssessmentMetadata",
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [{
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "path",
+                    "name": "scheduleId",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "query",
+                    "name": "api-version",
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                        "$ref": "#/definitions/ScheduleMetadata"
+                    }
+                },
+                "404": {
+                    "description": "Not Found",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "500": {
+                    "description": "Server Error",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-examples": {
+                "Assessment_Schedule_GetById": {
+                    "$ref": "./examples/Assessment_Schedule_GetById.json"
+                }
+            }
+        },
+        "delete": {
+            "tags": [
+                "Scheduling"
+            ],
+            "operationId": "DeleteScheduledAssessments",
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [{
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "path",
+                    "name": "scheduleId",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "in": "query",
+                    "name": "api-version",
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-examples": {
+                "Assessment_Schedule_Delete": {
+                    "$ref": "./examples/Assessment_Schedule_Delete.json"
+                }
+            }
+        }
+    },
       "/accounts/{accountId}/assessments/schedules/{scheduleId}/trigger": {
           "post": {
               "tags": [
