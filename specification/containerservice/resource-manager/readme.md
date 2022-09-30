@@ -844,4 +844,7 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    reason: For issuerURL in managedCluster.properties.oidcIssuerProfile, already used in preview API
 ```
