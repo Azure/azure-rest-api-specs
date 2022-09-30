@@ -42,6 +42,12 @@ directive:
       - clusters.json
       - extensions.json
       - operations.json
+      - offers.json
+      - publishers.json
+      - skus.json
+      - updateRuns.json
+      - updateSummaries.json
+      - updates.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
@@ -56,6 +62,12 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-10-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2022-10-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-10-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updates.json
 ```
 ### Tag: package-2022-09
 
