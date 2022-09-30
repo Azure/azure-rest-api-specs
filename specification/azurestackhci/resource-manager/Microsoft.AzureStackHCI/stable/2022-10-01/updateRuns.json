@@ -40,10 +40,10 @@
         "description": "List all Update runs for a specified update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -52,7 +52,7 @@
             "$ref": "#/parameters/UpdateNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -65,7 +65,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -85,10 +85,10 @@
         "description": "List all Update runs for a specified update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -100,7 +100,7 @@
             "$ref": "#/parameters/UpdateRunNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -113,7 +113,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -149,7 +149,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -162,7 +162,7 @@
           "description": "The geo-location where the resource lives"
         },
         "properties": {
-          "description": "Describes Machine Extension Properties.",
+          "description": "Describes Update Run Properties.",
           "$ref": "#/definitions/UpdateRunProperties",
           "x-ms-client-flatten": true
         }
@@ -187,18 +187,6 @@
             "modelAsString": true
           },
           "readOnly": true
-        },
-        "timeStarted": {
-          "description": "Timestamp of the update run was started.",
-          "type": "string",
-          "format": "date-time",
-          "x-ms-client-flatten": true
-        },
-        "lastUpdatedTime": {
-          "description": "Timestamp of the most recently completed step in the update run.",
-          "type": "string",
-          "format": "date-time",
-          "x-ms-client-flatten": true
         },
         "duration": {
           "description": "Duration of the update run.",
