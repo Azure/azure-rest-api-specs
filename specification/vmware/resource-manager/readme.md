@@ -179,8 +179,25 @@ suppressions:
     #   - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
     #   - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
 
-  # TODO
   - code: DefinitionsPropertiesNamesCamelCase
+    reason: Breaking change to update existing property names
+    from: vmware.json
+    where:
+      - $.definitions.Circuit.properties.expressRouteID
+      - $.definitions.Circuit.properties.expressRoutePrivatePeeringID
+      - $.definitions.IdentitySource.properties.baseUserDN
+      - $.definitions.IdentitySource.properties.baseGroupDN
+      - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
+      - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
+      - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
+
+  - code: ArmResourcePropertiesBag
+    reason: Breaking change to update existing property names
+    from: vmware.json
+    where:
+      - $.definitions.PlacementPolicy
+
+  # TODO
   - code: DeleteOperationAsyncResponseValidation
   - code: IgnoredPropertyNextToRef
   - code: LroLocationHeader
