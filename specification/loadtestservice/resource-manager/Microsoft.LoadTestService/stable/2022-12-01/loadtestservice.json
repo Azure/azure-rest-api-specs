@@ -715,7 +715,7 @@
       }
     },
     "QuotaResourceList": {
-      "description": "A list of Quota Bucket details. It contains an URL link to get the next set of results.",
+      "description": "List of quota bucket objects. It contains a URL link to get the next set of results.",
       "type": "object",
       "properties": {
         "value": {
@@ -726,22 +726,22 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "List of Quota Bucket details by the loadtestservice resource provider",
+          "description": "List of quota bucket objects provided by the loadtestservice.",
           "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of Quota Bucket details results (if there are any).",
+          "description": "URL to get the next set of quota bucket objects results (if there are any).",
           "readOnly": true
         }
       }
     },
     "QuotaResource": {
       "type": "object",
-      "description": "Quota Bucket details",
+      "description": "Quota bucket details object.",
       "properties": {
         "properties": {
-          "description": "Quota resource properties",
+          "description": "Quota bucket resource properties.",
           "$ref": "#/definitions/QuotaResourceProperties",
           "x-ms-client-flatten": true
         }
@@ -753,17 +753,17 @@
       ]
     },
     "QuotaResourceProperties": {
-      "description": "Quota resource properties.",
+      "description": "Quota bucket resource properties.",
       "type": "object",
       "properties": {
         "limit": {
-          "description": "Quota Limit of the quota bucket.",
+          "description": "Current quota limit of the quota bucket.",
           "type": "integer",
           "minimum": 0,
           "format": "int32"
         },
         "usage": {
-          "description": "Current Usage of the quota bucket.",
+          "description": "Current quota usage of the quota bucket.",
           "type": "integer",
           "minimum": 0,
           "format": "int32"
@@ -776,11 +776,11 @@
       }
     },
     "CheckQuotaAvailabilityResponse": {
-      "description": "Check Quota Availability Response.",
+      "description": "Check quota availability response object.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Check Quota Availability Response properties",
+          "description": "Check quota availability response properties.",
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "x-ms-client-flatten": true
         }
@@ -792,25 +792,25 @@
       ]
     },
     "CheckQuotaAvailabilityResponseProperties": {
-      "description": "Check Quota Availability Response properties.",
+      "description": "Check quota availability response properties.",
       "type": "object",
       "properties": {
         "isAvailable": {
-          "description": "true if Quota is Available, else false.",
+          "description": "True/False indicating whether the quota request be granted based on availability.",
           "type": "boolean"
         },
         "availabilityStatus": {
-          "description": "availability Status of the quota bucket.",
+          "description": "Message indicating additional details to add to quota support request.",
           "type": "string"
         }
       }
     },
     "QuotaBucketRequest": {
-      "description": "Quota Bucket Request.",
+      "description": "Request object of new quota for a quota bucket.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Quota Bucket Request properties",
+          "description": "New quota request request properties.",
           "$ref": "#/definitions/QuotaBucketRequestProperties",
           "x-ms-client-flatten": true
         }
@@ -822,29 +822,29 @@
       ]
     },
     "QuotaBucketRequestProperties": {
-      "description": "Quota Bucket Request properties.",
+      "description": "New quota request request properties.",
       "type": "object",
       "properties": {
         "currentUsage": {
-          "description": "Current Usage of the quota bucket.",
+          "description": "Current quota usage of the quota bucket.",
           "type": "integer",
           "minimum": 0,
           "format": "int32"
         },
         "currentQuota": {
-          "description": "Current Quota of the quota bucket.",
+          "description": "Current quota limit of the quota bucket.",
           "type": "integer",
           "minimum": 0,
           "format": "int32"
         },
         "newQuota": {
-          "description": "New Requested Quota of the quota bucket.",
+          "description": "New quota limit of the quota bucket.",
           "type": "integer",
           "minimum": 0,
           "format": "int32"
         },
         "dimensions": {
-          "description": "Dimensions for new quota request of the quota bucket.",
+          "description": "Dimensions for new quota request.",
           "type": "object",
           "properties": {
             "subscriptionId": {
