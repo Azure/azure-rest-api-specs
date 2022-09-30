@@ -169,8 +169,17 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
     
-  # TODO
   - code: ConsistentPatchProperties
+    reason: The properties are consistent for the discriminator hierarchy.
+    from: vmware.json
+    # where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
+    # where:
+    #   - $.definitions.PlacementPolicyUpdate.properties.vmMembers
+    #   - $.definitions.PlacementPolicyUpdate.properties.hostMembers
+    #   - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
+    #   - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
+
+  # TODO
   - code: DefinitionsPropertiesNamesCamelCase
   - code: DeleteOperationAsyncResponseValidation
   - code: IgnoredPropertyNextToRef
