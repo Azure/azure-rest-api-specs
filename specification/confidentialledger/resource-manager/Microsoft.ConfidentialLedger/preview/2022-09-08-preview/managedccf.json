@@ -41,7 +41,7 @@
         ],
         "summary": "Retrieves information about a Managed CCF resource.",
         "description": "Retrieves the properties of a Managed CCF app.",
-        "operationId": "Mccf_Get",
+        "operationId": "ManagedCCF_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -72,7 +72,7 @@
         },
         "x-ms-examples": {
           "ManagedCCFGet": {
-            "$ref": "./examples/Mccf_Get.json"
+            "$ref": "./examples/ManagedCCF_Get.json"
           }
         }
       },
@@ -82,7 +82,7 @@
         ],
         "summary": "Deletes a Managed CCF resource.",
         "description": "Deletes an existing Managed CCF.",
-        "operationId": "Mccf_Delete",
+        "operationId": "ManagedCCF_Delete",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -117,7 +117,7 @@
         },
         "x-ms-examples": {
           "ConfidentialLedgerDelete": {
-            "$ref": "./examples/Mccf_Delete.json"
+            "$ref": "./examples/ManagedCCF_Delete.json"
           }
         }
       },
@@ -127,7 +127,7 @@
         ],
         "summary": "Creates a Managed CCF.",
         "description": "Creates a Managed CCF with the specified Managed CCF parameters.",
-        "operationId": "Mccf_Create",
+        "operationId": "ManagedCCF_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -174,7 +174,7 @@
         },
         "x-ms-examples": {
           "ManagedCCFCreate": {
-            "$ref": "./examples/Mccf_Create.json"
+            "$ref": "./examples/ManagedCCF_Create.json"
           }
         }
       },
@@ -184,7 +184,7 @@
         ],
         "summary": "Update Managed CCF properties",
         "description": "Updates properties of Managed CCF",
-        "operationId": "Mccf_Update",
+        "operationId": "ManagedCCF_Update",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -202,7 +202,7 @@
           {
             "name": "ManagedCCF",
             "in": "body",
-            "description": "Managed CCF request body for Updating MCCF App",
+            "description": "Request body for Updating Managed CCF App",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagedCCF"
@@ -225,7 +225,7 @@
         },
         "x-ms-examples": {
           "ManagedCCFUpdate": {
-            "$ref": "./examples/Mccf_Update.json"
+            "$ref": "./examples/ManagedCCF_Update.json"
           }
         }
       }
@@ -237,7 +237,7 @@
         ],
         "summary": "Retrieves information about all Managed CCF resources under the given subscription and resource group",
         "description": "Retrieves the properties of all Managed CCF apps.",
-        "operationId": "Mccf_ListByResourceGroup",
+        "operationId": "ManagedCCF_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -274,7 +274,7 @@
         },
         "x-ms-examples": {
           "ManagedCCFList": {
-            "$ref": "./examples/Mccf_List.json"
+            "$ref": "./examples/ManagedCCF_List.json"
           }
         }
       }
@@ -286,7 +286,7 @@
         ],
         "summary": "Retrieves information about all Managed CCF resources under the given subscription",
         "description": "Retrieves the properties of all Managed CCF.",
-        "operationId": "Mccf_ListBySubscription",
+        "operationId": "ManagedCCF_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -309,7 +309,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (Managed CCF does not exist.)",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -320,45 +320,13 @@
         },
         "x-ms-examples": {
           "ManagedCCFListBySub": {
-            "$ref": "./examples/Mccf_ListBySub.json"
+            "$ref": "./examples/ManagedCCF_ListBySub.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ResourceLocation": {
-      "description": "Location of the Azure Resource",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "The Azure location where the Confidential Ledger is running.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      }
-    },
-    "Tags": {
-      "description": "Tags for Confidential Ledger Resource",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Additional tags for Confidential Ledger",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Object representing ProvisioningState for Confidential Ledger.",
@@ -374,6 +342,35 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      }
+    },
+    "LanguageRuntime": {
+      "type": "string",
+      "description": "Object representing LanguageRuntime for Manged CCF.",
+      "enum": [
+        "CPP",
+        "JS"
+      ],
+      "x-ms-enum": {
+        "name": "LanguageRuntime",
+        "modelAsString": true
+      }
+    },
+    "DeploymentType": {
+      "type": "object",
+      "description": "Object representing DeploymentType for Managed CCF.",
+      "title": "DeploymentType",
+      "properties": {
+        "languageRuntime": {
+          "readOnly": false,
+          "description": "Unique name for the Managed CCF.",
+          "$ref": "#/definitions/LanguageRuntime"
+        },
+        "appSourceUri": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Source Uri containing ManagedCCF code"
+        }
       }
     },
     "ManagedCCFProperties": {
@@ -396,15 +393,16 @@
           "readOnly": true,
           "description": "Endpoint for accessing network identity."
         },
-        "appSourceUri": {
-          "type": "string",
-          "readOnly": false,
-          "description": "Source Uri containing mccf code"
+        "memberIdentityCertificates": {
+          "type": "array",
+          "description": "Public Keys of the member identity certificates",
+          "items": {
+            "type": "string"
+          }
         },
-        "memberIdentityCertificate": {
-          "type": "string",
-          "readOnly": false,
-          "description": "Public Key of the member identity certificate"
+        "deploymentType": {
+          "description": "Deployment Type of Managed CCF",
+          "$ref": "#/definitions/DeploymentType"
         },
         "provisioningState": {
           "description": "Provisioning state of Ledger Resource",
