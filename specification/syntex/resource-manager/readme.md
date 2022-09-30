@@ -40,24 +40,6 @@ input-file:
   - Microsoft.Syntex/preview/2022-09-15-preview/syntex.json
 ```
 
-### Tag: package-2022-06-15-preview
-
-These settings apply only when `--tag=package-2022-06-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-06-15-preview'
-input-file:
-  - Microsoft.Syntex/preview/2022-06-15-preview/syntex.json
-```
-
-### Tag: package-2021-10-20-preview
-
-These settings apply only when `--tag=package-2021-10-20-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-10-20-preview'
-input-file:
-  - Microsoft.Syntex/preview/2021-10-20-preview/syntex.json
-```
-
 ---
 
 # Code Generation
