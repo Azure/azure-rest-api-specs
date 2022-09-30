@@ -1049,11 +1049,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AnalysisIntentProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ChildResource"
         }
       ]
     },
@@ -1104,11 +1107,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AnalysisRunProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ChildResource"
         }
       ]
     },
@@ -1156,11 +1162,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationSnapshotProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ChildResource"
         }
       ]
     },
@@ -1261,11 +1270,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkVerifierProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ]
     },
@@ -1322,6 +1334,14 @@
         "modelAsString": true,
         "name": "ProvisioningState"
       }
+    },
+    "SystemData": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      ]
     }
   },
   "securityDefinitions": {
