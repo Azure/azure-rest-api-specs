@@ -170,6 +170,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
     
   # TODO
+  - code: ConsistentPatchProperties
   - code: DefinitionsPropertiesNamesCamelCase
   - code: DeleteOperationAsyncResponseValidation
   - code: IgnoredPropertyNextToRef
