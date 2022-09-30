@@ -42,10 +42,11 @@ tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.ContainerService/stable/2022-09-01/managedClusters.json
 ```
+
 ### Tag: package-preview-2022-08-03-only
 
 These settings apply only when `--tag=package-preview-2022-08-03-only` is specified on the command line.
