@@ -210,6 +210,13 @@ suppressions:
     #   - $.definitions.PrivateCloudUpdate
     #   - $.definitions.ClusterUpdate
 
+  - code: LroPatch202
+    reason: Breaking change to add response
+    from: vmware.json
+    # where:
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+
   # TODO
   - code: UnSupportedPatchProperties
   - code: XmsLongRunningOperationOptions
