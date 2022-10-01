@@ -203,13 +203,15 @@ suppressions:
     from: vmware.json
 
   # TODO
-  - code: IgnoredPropertyNextToRef
-  - code: LroLocationHeader
-  - code: LroPatch202
   - code: PatchSkuProperty
   - code: RequiredReadOnlySystemData
   - code: UnSupportedPatchProperties
   - code: XmsLongRunningOperationOptions
+
+  # just warnings
+  - code: IgnoredPropertyNextToRef
+  - code: LroLocationHeader
+    from: vmware.json
 ```
 
 ## TypeScript
