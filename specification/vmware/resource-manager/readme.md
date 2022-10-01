@@ -223,13 +223,15 @@ suppressions:
     # where: 
     #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
 
-  # TODO
   - code: XmsLongRunningOperationOptions
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+    from: vmware.json
 
   # just warnings
-  - code: IgnoredPropertyNextToRef
-  - code: LroLocationHeader
-    from: vmware.json
+  # - code: IgnoredPropertyNextToRef
+  # - code: LroLocationHeader
+  #   from: vmware.json
 ```
 
 ## TypeScript
