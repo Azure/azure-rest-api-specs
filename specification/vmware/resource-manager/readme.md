@@ -217,8 +217,13 @@ suppressions:
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
 
-  # TODO
   - code: UnSupportedPatchProperties
+    reason: Breaking change to remove name or type properties
+    from: vmware.json
+    # where: 
+    #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
+
+  # TODO
   - code: XmsLongRunningOperationOptions
 
   # just warnings
