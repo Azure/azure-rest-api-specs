@@ -116,6 +116,9 @@
           "List available updates": {
             "$ref": "./examples/ListUpdates.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -218,6 +221,12 @@
             "create"
           ],
           "description": "The geo-location where the resource lives"
+        },
+        "systemData": {
+          "description": "System data of Updates resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "x-ms-client-flatten": true,
+          "readOnly": true
         },
         "properties": {
           "description": "Update properties",
