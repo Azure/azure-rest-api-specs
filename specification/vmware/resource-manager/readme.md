@@ -172,8 +172,8 @@ suppressions:
   - code: ConsistentPatchProperties
     reason: The properties are consistent for the discriminator hierarchy.
     from: vmware.json
-    # where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
     # where:
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
     #   - $.definitions.PlacementPolicyUpdate.properties.vmMembers
     #   - $.definitions.PlacementPolicyUpdate.properties.hostMembers
     #   - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
@@ -202,9 +202,15 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
     from: vmware.json
 
-  # TODO
   - code: PatchSkuProperty
-  - code: RequiredReadOnlySystemData
+    reason: sku can not be updated
+    from: vmware.json
+    # where:
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+    #   - $.definitions.PrivateCloudUpdate
+    #   - $.definitions.ClusterUpdate
+
+  # TODO
   - code: UnSupportedPatchProperties
   - code: XmsLongRunningOperationOptions
 
