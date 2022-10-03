@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure IoT Central",
     "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale.",
-    "version": "2022-06-30-preview"
+    "version": "2022-10-31-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{subdomain}.{baseDomain}",
@@ -131,11 +131,11 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "The format configuration of the chart",
+          "description": "The format configuration of the bar chart",
           "$ref": "#/definitions/ChartFormatConfiguration"
         },
         "queryRange": {
-          "description": "The query range configuration of the chart",
+          "description": "The query range configuration of the bar chart",
           "$ref": "#/definitions/TimeQueryRangeConfiguration"
         }
       },
@@ -419,6 +419,7 @@
         "count": {
           "description": "The maximum number of data points to query for.",
           "type": "integer",
+          "format": "int32",
           "minimum": 100,
           "maximum": 100,
           "default": 100
@@ -665,6 +666,60 @@
         "date"
       ]
     },
+    "DeploymentManifest": {
+      "description": "The deployment manifest used for edge devices.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the deployment manifest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the deployment manifest.",
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {
+          "description": "Content of the the deployment manifest.",
+          "type": "object"
+        },
+        "etag": {
+          "description": "Etag to prevent conflict when updating the deployment manifest.",
+          "type": "string"
+        },
+        "organizations": {
+          "description": "The organization that deployment manifest belongs to. If not present, the deployment manifest is root-level or personal. Only one organization is supported today, multiple organizations will be supported soon.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "DeploymentManifestCollection": {
+      "description": "The paged results of deployment manifests.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of deployment manifests.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentManifest"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of deployment manifests.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Destination": {
       "description": "The destination definition.",
       "allOf": [
@@ -786,6 +841,32 @@
           "items": {
             "type": "string"
           }
+        },
+        "type": {
+          "description": "The type of the device.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "iotEdge"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "iotEdge",
+                  "name": "IotEdge",
+                  "description": "The edge device type"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "deploymentManifest": {
+          "description": "The deployment manifest assigned to the device.",
+          "$ref": "#/definitions/DeploymentManifest"
         }
       }
     },
@@ -821,12 +902,14 @@
         "connectionTimeout": {
           "description": "Connection timeout in seconds to wait for a disconnected device to come online. Defaults to 0 seconds.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 30
         },
         "responseTimeout": {
           "description": "Response timeout in seconds to wait for a command completion on a device. Defaults to 30 seconds.",
           "type": "integer",
+          "format": "int32",
           "minimum": 5,
           "maximum": 30
         },
@@ -840,6 +923,7 @@
         "responseCode": {
           "description": "The status code of the device command response.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -879,7 +963,7 @@
           "description": "The ID of the device group to display"
         },
         "format": {
-          "description": "The format configuration of the lkv tile",
+          "description": "The format configuration of the device count tile",
           "$ref": "#/definitions/TextFormatConfiguration"
         }
       }
@@ -987,6 +1071,26 @@
         "value"
       ]
     },
+    "DeviceManifestMigrationJobData": {
+      "description": "The edge device manifest migration job definition.",
+      "x-ms-discriminator-value": "deviceManifestMigration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobData"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "manifest": {
+          "description": "The target manifest identifier to which devices will be migrated.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "manifest"
+      ]
+    },
     "DeviceProperties": {
       "description": "Property values associated with the device.",
       "type": "object",
@@ -1075,10 +1179,6 @@
         },
         "capabilityModel": {
           "description": "The capability model utilized by this device template.",
-          "type": "object"
-        },
-        "deploymentManifest": {
-          "description": "Deployment manifest associated to this device template.",
           "type": "object"
         }
       },
@@ -1212,6 +1312,11 @@
         "etag": {
           "description": "ETag used to prevent conflict in enrollment group updates.",
           "type": "string"
+        },
+        "idScope": {
+          "description": "ID scope for connecting to the IoT Central application.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "required": [
@@ -1322,7 +1427,7 @@
       "type": "object",
       "properties": {
         "queryRange": {
-          "description": "The query range configuration of the event chart",
+          "description": "The query range configuration of the event history chart",
           "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
@@ -1439,7 +1544,8 @@
             "properties",
             "deviceLifecycle",
             "deviceTemplateLifecycle",
-            "deviceConnectivity"
+            "deviceConnectivity",
+            "audit"
           ],
           "x-ms-enum": {
             "name": "DestinationSource",
@@ -1469,6 +1575,11 @@
                 "value": "deviceConnectivity",
                 "name": "DeviceConnectivity",
                 "description": "Destination source from device connectivity"
+              },
+              {
+                "value": "audit",
+                "name": "Audit",
+                "description": "Destination source from audit logs"
               }
             ]
           }
@@ -1614,6 +1725,11 @@
         "etag": {
           "description": "ETag used to prevent conflict with multiple uploads",
           "type": "string"
+        },
+        "readAccess": {
+          "description": "The flag indicate if user be able to access device uploaded files from IoT Central portal",
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -1706,7 +1822,7 @@
       "type": "object",
       "properties": {
         "queryRange": {
-          "description": "The query range configuration of the heat map chart",
+          "description": "The query range configuration of the heatmap chart",
           "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
@@ -1979,6 +2095,7 @@
     },
     "JobDeviceStatus": {
       "description": "The job device status definition.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "ID of the device whose job status is being provided.",
@@ -2018,19 +2135,23 @@
       "properties": {
         "total": {
           "description": "The total number of entities targeted by the job.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "pending": {
           "description": "The number of entities for which the job is not yet running.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "completed": {
           "description": "The number of entities for which the job has completed.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "failed": {
           "description": "The number of entities for which the job has failed.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -2097,7 +2218,7 @@
       "discriminator": "type"
     },
     "KpiTileConfiguration": {
-      "description": "Configuration specifying options for kpi tile.",
+      "description": "Configuration specifying options for KPI tile.",
       "x-ms-discriminator-value": "kpi",
       "allOf": [
         {
@@ -2117,7 +2238,7 @@
           "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
-          "description": "The format configuration of the lkv tile",
+          "description": "The format configuration of the KPI tile",
           "$ref": "#/definitions/TextFormatConfiguration"
         }
       },
@@ -2209,7 +2330,7 @@
           "default": true
         },
         "format": {
-          "description": "The format configuration of the lkv tile",
+          "description": "The format configuration of the LKV tile",
           "$ref": "#/definitions/TextFormatConfiguration"
         }
       }
@@ -2220,6 +2341,7 @@
       "properties": {
         "zoomLevel": {
           "type": "integer",
+          "format": "int32",
           "description": "The zoom level of the map",
           "default": 3
         }
@@ -2311,6 +2433,7 @@
         "occurrences": {
           "description": "The number of occurrences after which to end the scheduled job.",
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "maximum": 999
         }
@@ -2884,7 +3007,7 @@
       "type": "object",
       "properties": {
         "queryRange": {
-          "description": "The query range configuration of the state chart",
+          "description": "The query range configuration of the state history chart tile",
           "$ref": "#/definitions/TimeQueryRangeConfiguration"
         },
         "format": {
@@ -2944,6 +3067,7 @@
         },
         "decimalPlaces": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of decimal places being displayed"
         },
         "textSize": {
@@ -2965,6 +3089,11 @@
       "description": "Configuration specifying tile object, including the layout, display name and configuration.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Unique ID of the tile.",
+          "type": "string",
+          "readOnly": true
+        },
         "displayName": {
           "description": "Display name of the tile.",
           "type": "string"
@@ -3714,6 +3843,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/Filter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/OrderBy"
           }
         ],
         "x-ms-pageable": {
@@ -3786,40 +3924,40 @@
           "Create or update a dashboard": {
             "$ref": "./examples/dashboards_create.json"
           },
-          "Create a dashboard with bar chart tile": {
-            "$ref": "./examples/dashboards_create_bar.json"
-          },
-          "Create a dashboard with count tile": {
-            "$ref": "./examples/dashboards_create_count.json"
-          },
-          "Create a dashboard with event history tile": {
-            "$ref": "./examples/dashboards_create_event_history.json"
-          },
-          "Create a dashboard with event tile": {
-            "$ref": "./examples/dashboards_create_event.json"
-          },
-          "Create a dashboard with heatmap chart tile": {
-            "$ref": "./examples/dashboards_create_heatmap.json"
-          },
-          "Create a dashboard with KPI tile": {
+          "Create or update a dashboard with KPI tile": {
             "$ref": "./examples/dashboards_create_kpi.json"
           },
-          "Create a dashboard with line chart tile": {
-            "$ref": "./examples/dashboards_create_line.json"
-          },
-          "Create a dashboard with LKV tile": {
+          "Create or update a dashboard with LKV tile": {
             "$ref": "./examples/dashboards_create_lkv.json"
           },
-          "Create a dashboard with map tile": {
+          "Create or update a dashboard with bar chart tile": {
+            "$ref": "./examples/dashboards_create_bar.json"
+          },
+          "Create or update a dashboard with count tile": {
+            "$ref": "./examples/dashboards_create_count.json"
+          },
+          "Create or update a dashboard with event history tile": {
+            "$ref": "./examples/dashboards_create_event_history.json"
+          },
+          "Create or update a dashboard with event tile": {
+            "$ref": "./examples/dashboards_create_event.json"
+          },
+          "Create or update a dashboard with heatmap chart tile": {
+            "$ref": "./examples/dashboards_create_heatmap.json"
+          },
+          "Create or update a dashboard with line chart tile": {
+            "$ref": "./examples/dashboards_create_line.json"
+          },
+          "Create or update a dashboard with map tile": {
             "$ref": "./examples/dashboards_create_map.json"
           },
-          "Create a dashboard with pie chart tile": {
+          "Create or update a dashboard with pie chart tile": {
             "$ref": "./examples/dashboards_create_pie.json"
           },
-          "Create a dashboard with state history tile": {
+          "Create or update a dashboard with state history tile": {
             "$ref": "./examples/dashboards_create_state_history.json"
           },
-          "Create a dashboard with state tile": {
+          "Create or update a dashboard with state tile": {
             "$ref": "./examples/dashboards_create_state.json"
           }
         },
@@ -4465,6 +4603,225 @@
         }
       }
     },
+    "/deploymentManifests": {
+      "get": {
+        "operationId": "DeploymentManifests_List",
+        "summary": "Get the list of deployment manifests.",
+        "description": "Get the list of deployment manifests.",
+        "x-ms-examples": {
+          "List deployment manifests": {
+            "$ref": "./examples/deploymentManifest_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/Filter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifestCollection"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/deploymentManifests/{deploymentManifestId}": {
+      "get": {
+        "operationId": "DeploymentManifests_Get",
+        "summary": "Get a deployment manifest by ID.",
+        "description": "Get a deployment manifest by ID.",
+        "x-ms-examples": {
+          "Get deployment manifest by ID": {
+            "$ref": "./examples/deploymentManifest_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeploymentManifestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeploymentManifests_Create",
+        "summary": "Create a new deployment manifest.",
+        "description": "Create a new deployment manifest.",
+        "x-ms-examples": {
+          "Create deployment manifest": {
+            "$ref": "./examples/deploymentManifest_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeploymentManifestId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "deployment manifest body.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeploymentManifests_Update",
+        "summary": "Update an existing deployment manifest.",
+        "description": "Update an existing deployment manifest.",
+        "x-ms-examples": {
+          "Update deployment manifest": {
+            "$ref": "./examples/deploymentManifest_update.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeploymentManifestId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "deployment manifest patch body.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            }
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeploymentManifests_Remove",
+        "summary": "Delete a deployment manifest.",
+        "description": "Delete a deployment manifest.",
+        "x-ms-examples": {
+          "Delete deployment manifest": {
+            "$ref": "./examples/deploymentManifest_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeploymentManifestId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/deviceGroups": {
       "get": {
         "operationId": "DeviceGroups_List",
@@ -4482,7 +4839,7 @@
             "$ref": "#/parameters/Filter"
           },
           {
-            "$ref": "#/parameters/Top"
+            "$ref": "#/parameters/MaxPageSize"
           },
           {
             "$ref": "#/parameters/OrderBy"
@@ -4702,7 +5059,7 @@
             "$ref": "#/parameters/DeviceGroupId"
           },
           {
-            "$ref": "#/parameters/Top"
+            "$ref": "#/parameters/MaxPageSize"
           }
         ],
         "x-ms-pageable": {
@@ -4747,7 +5104,7 @@
             "$ref": "#/parameters/Filter"
           },
           {
-            "$ref": "#/parameters/Top"
+            "$ref": "#/parameters/MaxPageSize"
           },
           {
             "$ref": "#/parameters/OrderBy"
@@ -4965,10 +5322,13 @@
             "$ref": "#/parameters/Filter"
           },
           {
-            "$ref": "#/parameters/Top"
+            "$ref": "#/parameters/MaxPageSize"
           },
           {
             "$ref": "#/parameters/OrderBy"
+          },
+          {
+            "$ref": "#/parameters/Expand"
           }
         ],
         "x-ms-pageable": {
@@ -5012,6 +5372,9 @@
           },
           {
             "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/Expand"
           }
         ],
         "responses": {
@@ -5050,6 +5413,9 @@
           },
           {
             "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/Expand"
           },
           {
             "in": "body",
@@ -5103,6 +5469,9 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
+            "$ref": "#/parameters/Expand"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Device patch body.",
@@ -5148,11 +5517,63 @@
           },
           {
             "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/Expand"
           }
         ],
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the IoT Central Service.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/applyDeploymentManifest": {
+      "post": {
+        "operationId": "Devices_ApplyManifest",
+        "summary": "Apply a deployment manifest to an edge device.",
+        "description": "Apply a deployment manifest to an edge device.",
+        "x-ms-examples": {
+          "Apply device deployment manifest": {
+            "$ref": "./examples/devices_applyDeploymentManifest.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Deployment Manifest data.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentManifest"
+            }
           },
           "default": {
             "description": "An error response received from the IoT Central Service.",
@@ -5648,6 +6069,9 @@
             "$ref": "#/parameters/ComponentName"
           },
           {
+            "$ref": "#/parameters/Unmodeled"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
@@ -5655,9 +6079,6 @@
               "$ref": "#/definitions/DeviceProperties"
             },
             "required": true
-          },
-          {
-            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -5704,6 +6125,9 @@
             "$ref": "#/parameters/ComponentName"
           },
           {
+            "$ref": "#/parameters/Unmodeled"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
@@ -5711,9 +6135,6 @@
               "type": "object"
             },
             "required": true
-          },
-          {
-            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -6566,6 +6987,9 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
+            "$ref": "#/parameters/Unmodeled"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
@@ -6573,9 +6997,6 @@
               "$ref": "#/definitions/DeviceProperties"
             },
             "required": true
-          },
-          {
-            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -6620,6 +7041,9 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
+            "$ref": "#/parameters/Unmodeled"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
@@ -6627,9 +7051,6 @@
               "type": "object"
             },
             "required": true
-          },
-          {
-            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -6672,6 +7093,9 @@
             "$ref": "#/parameters/DeviceId"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -7338,7 +7762,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
@@ -7525,6 +7949,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSize"
           }
         ],
         "x-ms-pageable": {
@@ -8144,13 +8571,16 @@
         "operationId": "ScheduledJobs_List",
         "summary": "Get the list of scheduled job definitions in an application",
         "x-ms-examples": {
-          "Get role by ID": {
+          "List scheduled jobs": {
             "$ref": "./examples/scheduledjobs_list.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSize"
           }
         ],
         "x-ms-pageable": {
@@ -8184,7 +8614,7 @@
         "summary": "Get a scheduled job by ID",
         "description": "Get details about a scheduled job by ID.",
         "x-ms-examples": {
-          "Get role by ID": {
+          "Get scheduled job by ID": {
             "$ref": "./examples/scheduledjobs_get.json"
           }
         },
@@ -8222,7 +8652,7 @@
         "summary": "Create or update a scheduled job",
         "description": "Create or update a scheduled job by ID.",
         "x-ms-examples": {
-          "Get role by ID": {
+          "Create a scheduled job": {
             "$ref": "./examples/scheduledjobs_create.json"
           }
         },
@@ -8269,7 +8699,7 @@
         "summary": "Update a scheduled job via patch",
         "description": "Update an existing scheduled job by ID.",
         "x-ms-examples": {
-          "Get role by ID": {
+          "Update Scheduled Job": {
             "$ref": "./examples/scheduledjobs_update.json"
           }
         },
@@ -8319,7 +8749,7 @@
         "summary": "Delete a scheduled job",
         "description": "Delete an existing scheduled job by ID.",
         "x-ms-examples": {
-          "Get role by ID": {
+          "Delete scheduled job": {
             "$ref": "./examples/scheduledjobs_delete.json"
           }
         },
@@ -8355,7 +8785,7 @@
         "operationId": "ScheduledJobs_ListJobs",
         "summary": "Get the list of jobs for a scheduled job definition",
         "x-ms-examples": {
-          "Get role by ID": {
+          "List running job instances": {
             "$ref": "./examples/scheduledjobs_list_jobs.json"
           }
         },
@@ -8365,6 +8795,9 @@
           },
           {
             "$ref": "#/parameters/ScheduledJobId"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSize"
           }
         ],
         "x-ms-pageable": {
@@ -8404,6 +8837,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSize"
           }
         ],
         "x-ms-pageable": {
@@ -8644,6 +9080,16 @@
       "pattern": "^[a-zA-Z0-9:;]*$",
       "required": true
     },
+    "DeploymentManifestId": {
+      "in": "path",
+      "name": "deploymentManifestId",
+      "description": "Unique ID for the deployment manifest.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9:;]*$",
+      "required": true
+    },
     "DestinationId": {
       "in": "path",
       "name": "destinationId",
@@ -8716,6 +9162,16 @@
       },
       "required": true
     },
+    "Expand": {
+      "in": "query",
+      "name": "expand",
+      "description": "The query parameter for including requested entities in response.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "required": false
+    },
     "ExportId": {
       "in": "path",
       "name": "exportId",
@@ -8726,7 +9182,7 @@
     },
     "Filter": {
       "in": "query",
-      "name": "$filter",
+      "name": "filter",
       "description": "An expression on the resource type that selects the resources to be returned.",
       "x-ms-parameter-location": "method",
       "type": "string",
@@ -8738,7 +9194,20 @@
       "description": "Unique ID of the job.",
       "x-ms-parameter-location": "method",
       "type": "string",
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9_-]*$",
       "required": true
+    },
+    "MaxPageSize": {
+      "in": "query",
+      "name": "maxpagesize",
+      "description": "The maximum number of resources to return from one response.",
+      "x-ms-parameter-location": "method",
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 100,
+      "required": false
     },
     "ModuleName": {
       "in": "path",
@@ -8750,7 +9219,7 @@
     },
     "OrderBy": {
       "in": "query",
-      "name": "$orderby",
+      "name": "orderby",
       "description": "An expression that specify the order of the returned resources.",
       "x-ms-parameter-location": "method",
       "type": "string",
@@ -8759,7 +9228,7 @@
     "OrganizationId": {
       "in": "path",
       "name": "organizationId",
-      "description": "Unique ID of the organization.",
+      "description": "Unique ID for the organization.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 48,
@@ -8800,14 +9269,6 @@
       "type": "string",
       "required": true
     },
-    "Top": {
-      "in": "query",
-      "name": "$top",
-      "description": "The maximum number of resources to return from the collection.",
-      "x-ms-parameter-location": "method",
-      "type": "integer",
-      "required": false
-    },
     "Unmodeled": {
       "in": "query",
       "name": "unmodeled",
@@ -8820,7 +9281,7 @@
     "UserId": {
       "in": "path",
       "name": "userId",
-      "description": "Unique ID of the user.",
+      "description": "Unique ID for the user.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 48,

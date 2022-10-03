@@ -75,6 +75,14 @@ These settings apply only when `--tag=package-2022-07-31` is specified on the co
 input-file:
   - Microsoft.IoTCentral/stable/2022-07-31/iotcentral.json
 ```
+
+### Tag: package-2022-10-31-preview
+These settings apply only when `--tag=package-2022-10-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10-31-preview'
+input-file:
+  - Microsoft.IoTCentral/preview/2022-10-31-preview/iotcentral.json
+```
 ---
 
 # Code Generation
