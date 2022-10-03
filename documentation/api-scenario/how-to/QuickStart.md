@@ -146,7 +146,3 @@ After you import Postman collection, you will get such requests. Now you could d
 #### 5. Manual update API Scenario or example
 
 After debug with Postman, you need to rewrite back all the updated values and run `oav run <api-scenario-file> -e <env.json>` again. The result should be successful.
-
-## Feedback
-
-If you have any question, feel free to send email to vscswagger@microsoft.com

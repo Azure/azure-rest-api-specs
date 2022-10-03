@@ -26,7 +26,7 @@ These are the global settings for the networkfunction.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-05-01
+tag: package-2022-08-01
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -47,6 +47,15 @@ These settings apply only when `--tag=package-2022-05-01` is specified on the co
 ```yaml $(tag) == 'package-2022-05-01'
 input-file:
   - Microsoft.NetworkFunction/stable/2022-05-01/AzureTrafficCollector.json
+```
+
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-01'
+input-file:
+  - Microsoft.NetworkFunction/stable/2022-08-01/AzureTrafficCollector.json
 ```
 
 ---

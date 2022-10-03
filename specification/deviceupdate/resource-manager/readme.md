@@ -67,7 +67,7 @@ directive:
     reason: Managed Identity type can be case in-sensitive
   - suppress: BodyTopLevelProperties
     from: deviceupdate.json
-    where: $.definitions.PrivateEndpointConnectionProxy
+    where: $.definitions.PrivateEndpointConnectionProxy.properties
     reason: Internal NRP resource, all properties are top level properties
 ```
 
