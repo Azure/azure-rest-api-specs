@@ -20,6 +20,10 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-preview-2022-08-03
+  - tag: package-preview-2022-08
+  - tag: package-2022-07
+  - tag: package-preview-2022-07
   - tag: package-2022-06
   - tag: package-preview-2022-06
   - tag: package-preview-2022-05
@@ -61,6 +65,46 @@ batch:
   - tag: package-2017-09
   - tag: package-2017-08
   - tag: package-2017-07
+```
+
+### Tag: package-preview-2022-08-03 and go
+
+These settings apply only when `--package-preview-2022-08-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-preview-2022-08-03' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-08-03-preview/$(namespace)
+```
+
+### Tag: package-preview-2022-08 and go
+
+These settings apply only when `--package-preview-2022-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-preview-2022-08' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-08-02-preview/$(namespace)
+```
+
+### Tag: package-2022-07 and go
+
+These settings apply only when `--package-2022-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2022-07' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-07-01/$(namespace)
+```
+
+### Tag: package-preview-2022-07 and go
+
+These settings apply only when `--package-preview-2022-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-preview-2022-07' && $(go)
+namespace: containerservice
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-07-02-preview/$(namespace)
 ```
 
 ### Tag: package-2022-06 and go

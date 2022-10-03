@@ -1225,6 +1225,11 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
+          "x-ms-identifiers": [
+            "tenantId",
+            "objectId",
+            "permissions"
+          ],
           "description": "An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required."
         },
         "vaultUri": {
@@ -1337,6 +1342,11 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
+          "x-ms-identifiers": [
+            "tenantId",
+            "objectId",
+            "permissions"
+          ],
           "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
         },
         "enabledForDeployment": {
@@ -1399,6 +1409,11 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
+          "x-ms-identifiers": [
+            "tenantId",
+            "objectId",
+            "permissions"
+          ],
           "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
         }
       },
@@ -1774,6 +1789,9 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           },
+          "x-ms-identifiers": [
+            "id"
+          ],
           "description": "The list of virtual network rules."
         }
       },
