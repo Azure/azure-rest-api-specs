@@ -11,7 +11,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Install or Update extension. Install or Update extension. AdditionalApiProperties are merged patch and if the extension is updated to a new version then the obselete entries will be auto deleted from AdditionalApiProperties.",
+        "description": "Install or Update extension. AdditionalApiProperties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from AdditionalApiProperties.",
         "operationId": "Extensions_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -1249,7 +1249,7 @@
           "readOnly": true
         },
         "additionalApiProperties": {
-          "description": "Api Freshness Window.",
+          "description": "Additional api properties.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ApiProperties"
@@ -1278,13 +1278,6 @@
           "description": "The ETag value to implement optimistic concurrency.",
           "type": "string",
           "readOnly": true
-        },
-        "additionalApiProperties": {
-          "description": "Additional api properties.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ApiProperties"
-          }
         }
       },
       "x-ms-azure-resource": true
