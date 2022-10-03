@@ -926,6 +926,35 @@
           "description": "Formatted Address property",
           "type": "string",
           "readOnly": true
+        },
+        "intersection": {
+          "$ref": "#/definitions/Intersection"
+        }
+      }
+    },
+    "Intersection": {
+      "description": "The address of the result.",
+      "type": "object",
+      "properties": {
+        "baseStreet": {
+          "description": "Primary street for the location.",
+          "type": "string"
+        },
+        "secondaryStreet1": {
+          "description": "The first intersecting street.",
+          "type": "string"
+        },
+        "secondaryStreet2": {
+          "description": "If any, the second intersecting street.",
+          "type": "string"
+        },
+        "intersectionType": {
+          "description": "Type of intersection.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Complete name of the intersection.",
+          "type": "string"
         }
       }
     },
