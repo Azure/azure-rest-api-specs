@@ -24,7 +24,7 @@ API Scenario is a YAML file defining RESTful API usage scenarios of your service
 - [API Scenario Definition Reference](./references/ApiScenarioDefinition.md)
 - [API Scenario Variable Definition Reference](./references/Variables.md)
 - [API Scenario Runner Reference](./references/Runner.md)
-- [API Scenario JSON Schema](./references/v1.1/schema.json)
+- [API Scenario JSON Schema](./references/v1.2/schema.json)
 
 ## Feedback
 
