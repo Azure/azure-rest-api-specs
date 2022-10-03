@@ -290,6 +290,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/upgrade": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.",
+        "operationId": "AFDProfiles_Upgrade",
+        "x-ms-examples": {
+          "AFDProfiles_CheckHostNameAvailability": {
+            "$ref": "./examples/AFDProfiles_Upgrade.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileUpgradeParameters",
+            "in": "body",
+            "description": "Profile upgrade input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileUpgradeParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/Profile"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}": {
       "get": {
         "tags": [
@@ -3962,6 +4023,45 @@
     }
   },
   "definitions": {
+    "ProfileChangeSkuWafMapping": {
+      "type": "object",
+      "description": "Parameters required for profile upgrade.",
+      "required": [
+        "securityPolicyName",
+        "changeToWafPolicy"
+      ],
+      "properties": {
+        "securityPolicyName": {
+          "description": "The security policy name.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changeToWafPolicy": {
+          "description": "The new waf resource for the security policy to use.",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        }
+      }
+    },
+    "ProfileUpgradeParameters": {
+      "type": "object",
+      "description": "Parameters required for profile upgrade.",
+      "required": [
+        "wafMappingList"
+      ],
+      "properties": {
+        "wafMappingList": {
+          "description": "Waf mapping for the profile upgrade",
+          "type": "array",
+          "items": {
+            "description": "List of waf mappings",
+            "$ref": "#/definitions/ProfileChangeSkuWafMapping"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "AfdPurgeParameters": {
       "type": "object",
       "description": "Parameters required for content purge.",

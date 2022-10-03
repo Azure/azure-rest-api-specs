@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "profileUpgradeParameters": {
+      "properties": {
+        "wafMappingList": [
+          {
+            "securityPolicyName": "securityPolicy1",
+            "changeToWafPolicy": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/waf2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "name": "profile1",
+        "properties": {
+          "extendedProperties": {},
+          "frontDoorId": "id",
+          "originResponseTimeoutSeconds": 60,
+          "provisioningState": "Succeeded",
+          "resourceState": "Enabled"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2022-05-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "name": "profile1",
+        "properties": {
+          "extendedProperties": {},
+          "frontDoorId": "id",
+          "originResponseTimeoutSeconds": 60,
+          "provisioningState": "Succeeded",
+          "resourceState": "Upgrading"
+        }
+      }
+    }
+  }
+}
