@@ -90,7 +90,7 @@
         }
       }
     },
-    "/providers/Microsoft.ElasticSan/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ElasticSan/skus": {
       "get": {
         "tags": [
           "Elastic San Skus"
@@ -98,6 +98,9 @@
         "summary": "List all the available Skus in the region and information related to them",
         "operationId": "Skus_List",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
@@ -1170,6 +1173,9 @@
     "ElasticSan": {
       "type": "object",
       "description": "Response for ElasticSan request.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1192,9 +1198,9 @@
       "type": "object",
       "description": "Elastic San response properties.",
       "required": [
-        "availabilityZones",
         "baseSizeTiB",
-        "extendedCapacitySizeTiB"
+        "extendedCapacitySizeTiB",
+        "sku"
       ],
       "properties": {
         "sku": {
@@ -1317,30 +1323,42 @@
           "description": "List of ResourceType Sku",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceTypeSku"
+            "$ref": "#/definitions/SkuInformation"
           },
           "x-ms-identifiers": [],
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Links to the next set of results",
-          "type": "string",
           "readOnly": true
         }
       }
     },
-    "ResourceTypeSku": {
-      "description": "SkuInformation object",
+    "SkuInformation": {
+      "description": "ElasticSAN SKU and its properties",
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
-        "sku": {
-          "description": "The Sku tier",
+        "name": {
+          "type": "string",
+          "description": "Sku Name",
+          "$ref": "#/definitions/SkuName"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Sku Tier",
+          "$ref": "#/definitions/SkuTier"
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "locations": {
+          "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sku"
+            "type": "string"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
         },
         "locationInfo": {
           "description": "Availability of the SKU for the location/zone",
@@ -1351,124 +1369,32 @@
           "x-ms-identifiers": [],
           "readOnly": true
         },
-        "elasticSan": {
-          "description": "Scalability targets for the San account for a given tier",
-          "type": "object",
-          "$ref": "#/definitions/SanTierInfo"
-        },
-        "volumeGroup": {
-          "description": "Volume Group targets for the San account for a given tier",
-          "type": "object",
-          "$ref": "#/definitions/VolumeGroupTierInfo"
-        },
-        "volume": {
-          "description": "Volume targets for the San account for a given tier",
-          "type": "object",
-          "$ref": "#/definitions/VolumeTierInfo"
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SKUCapability"
+          },
+          "x-ms-identifiers": [],
+          "description": "The capability information in the specified SKU."
         }
       }
     },
-    "SanTierInfo": {
-      "description": "San scalability target",
-      "type": "object",
+    "SKUCapability": {
       "properties": {
-        "maxSizeTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum San account capacity in TiB",
-          "readOnly": true
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of capability."
         },
-        "minSizeTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum San account capacity in TiB",
-          "readOnly": true
-        },
-        "minIncrementSizeTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Increment the San capacity in TiB",
-          "readOnly": true
-        },
-        "iopsPerBaseTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum IOPS per BaseTiB",
-          "readOnly": true
-        },
-        "mbpsPerBaseTiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum MBps per BaseTiB",
-          "readOnly": true
-        },
-        "maxMBps": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum MBps",
-          "readOnly": true
-        },
-        "maxVolumeGroupCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum number of volume groups per San account",
-          "readOnly": true
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A string value to indicate states of given capability."
         }
-      }
-    },
-    "VolumeGroupTierInfo": {
-      "description": "Volume Group scalability target",
-      "type": "object",
-      "properties": {
-        "maxVolumeCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum number of Volumes per Volume Groups per San account",
-          "readOnly": true
-        }
-      }
-    },
-    "VolumeTierInfo": {
-      "description": "Volume scalability target",
-      "type": "object",
-      "properties": {
-        "maxSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum volume capacity in GiB",
-          "readOnly": true
-        },
-        "minSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum volume capacity in GiB",
-          "readOnly": true
-        },
-        "minIncrementSizeGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Increment volume capacity in GiB",
-          "readOnly": true
-        },
-        "iopsPerBaseGiB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum IOPS per GiB",
-          "readOnly": true
-        },
-        "maxIops": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum IOPS",
-          "readOnly": true
-        },
-        "maxMBps": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum MBps",
-          "readOnly": true
-        }
-      }
+      },
+      "description": "The capability information in the specified SKU.",
+      "type": "object"
     },
     "SkuLocationInfo": {
       "description": "The location info.",
@@ -1491,48 +1417,57 @@
     },
     "Sku": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
-          "type": "string",
-          "enum": [
-            "Premium_LRS",
-            "Premium_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "name",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Premium_LRS",
-                "description": "Premium locally redundant storage"
-              },
-              {
-                "value": "Premium_ZRS",
-                "description": "Premium zone redundant storage"
-              }
-            ]
-          },
-          "description": "The sku name."
+          "$ref": "#/definitions/SkuName"
         },
         "tier": {
-          "type": "string",
-          "enum": [
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "tier",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Premium",
-                "description": "Premium Tier"
-              }
-            ]
-          },
-          "description": "The sku tier."
+          "$ref": "#/definitions/SkuTier"
         }
       },
       "description": "The SKU name. Required for account creation; optional for update."
+    },
+    "SkuName": {
+      "type": "string",
+      "enum": [
+        "Premium_LRS",
+        "Premium_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Premium_LRS",
+            "description": "Premium locally redundant storage"
+          },
+          {
+            "value": "Premium_ZRS",
+            "description": "Premium zone redundant storage"
+          }
+        ]
+      },
+      "description": "The sku name."
+    },
+    "SkuTier": {
+      "type": "string",
+      "enum": [
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Premium",
+            "description": "Premium Tier"
+          }
+        ]
+      },
+      "description": "The sku tier."
     },
     "IscsiTargetInfo": {
       "type": "object",
@@ -1611,10 +1546,6 @@
     "VolumeGroupProperties": {
       "type": "object",
       "description": "VolumeGroup response properties.",
-      "required": [
-        "protocolType",
-        "encryption"
-      ],
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
@@ -1659,10 +1590,6 @@
     "VolumeGroupUpdateProperties": {
       "type": "object",
       "description": "VolumeGroup response properties.",
-      "required": [
-        "protocolType",
-        "encryption"
-      ],
       "properties": {
         "protocolType": {
           "description": "Type of storage target",
@@ -1781,9 +1708,6 @@
     "SourceCreationData": {
       "type": "object",
       "description": "Data source used when creating the volume.",
-      "required": [
-        "createSource"
-      ],
       "properties": {
         "createSource": {
           "type": "string",
