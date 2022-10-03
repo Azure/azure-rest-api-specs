@@ -4,6 +4,16 @@
     "title": "Nginx.NginxPlus",
     "version": "2021-05-01-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -42,6 +52,9 @@
             "description": "The name of certificate",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -92,6 +105,9 @@
             "description": "The name of certificate",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -157,6 +173,9 @@
             "description": "The name of certificate",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -306,6 +325,9 @@
             "description": "The name of configuration, only 'default' is supported value due to the singleton of Nginx conf",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -356,6 +378,9 @@
             "description": "The name of configuration, only 'default' is supported value due to the singleton of Nginx conf",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -421,6 +446,9 @@
             "description": "The name of configuration, only 'default' is supported value due to the singleton of Nginx conf",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -467,6 +495,9 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -510,6 +541,9 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -572,6 +606,9 @@
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
             "name": "body",
             "schema": {
@@ -624,6 +661,9 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -664,6 +704,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -706,6 +749,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -786,6 +832,7 @@
         "NotSpecified"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
@@ -882,6 +929,13 @@
           "$ref": "#/definitions/ProvisioningState"
         },
         "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxConfigurationFile"
@@ -1107,6 +1161,25 @@
         }
       }
     },
+    "NginxStorageAccount": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxLogging": {
+      "type": "object",
+      "properties": {
+        "storageAccount": {
+          "$ref": "#/definitions/NginxStorageAccount"
+        }
+      }
+    },
     "NginxDeploymentProperties": {
       "type": "object",
       "properties": {
@@ -1131,6 +1204,9 @@
         },
         "enableDiagnosticsSupport": {
           "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
         }
       }
     },
@@ -1179,6 +1255,9 @@
       "properties": {
         "enableDiagnosticsSupport": {
           "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
         }
       }
     },

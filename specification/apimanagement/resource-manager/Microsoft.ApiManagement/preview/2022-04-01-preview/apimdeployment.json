@@ -275,6 +275,9 @@
           },
           "ApiManagementCreateServiceWithCustomHostnameKeyVault": {
             "$ref": "./examples/ApiManagementCreateServiceWithCustomHostnameKeyVault.json"
+          },
+          "ApiManagementCreateServiceWithNatGatewayEnabled": {
+            "$ref": "./examples/ApiManagementCreateServiceWithNatGatewayEnabled.json"
           }
         },
         "parameters": [
@@ -312,9 +315,6 @@
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
-          },
-          "202": {
-            "description": "Accepted the configuration change when updating the service."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -476,6 +476,55 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/migrateToStv2": {
+      "post": {
+        "tags": [
+          "ApiManagementService"
+        ],
+        "operationId": "ApiManagementService_MigrateToStv2",
+        "description": "Upgrades an API Management service to the Stv2 platform. This change is not reversible. This is long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementMigrateService": {
+            "$ref": "./examples/ApiManagementServiceMigrateToStv2.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully migrated.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementServiceResource"
+            }
+          },
+          "202": {
+            "description": "Migration request submitted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
@@ -1089,6 +1138,37 @@
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
         },
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
+        },
+        "outboundPublicIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Outbound public IP address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU."
+        },
         "disableGateway": {
           "type": "boolean",
           "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.",
@@ -1368,6 +1448,37 @@
           "type": "boolean",
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
           "default": false
+        },
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
+        },
+        "outboundPublicIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Outbound public IP address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU."
         },
         "disableGateway": {
           "type": "boolean",

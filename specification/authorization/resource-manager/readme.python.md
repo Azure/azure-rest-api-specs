@@ -14,9 +14,11 @@ package-version: 1.0.0b1
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-2021-12-01-preview-only
   - tag: package-2021-07-01-preview-only
   - tag: package-2021-03-01-preview-only
   - tag: package-2021-01-01-preview-only
@@ -35,6 +37,15 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/
 perform-load: false
+```
+
+### Tag: package-2021-12-01-preview-only and python
+
+These settings apply only when `--tag=package-2021-12-01-preview-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-preview-only' && $(python)
+namespace: azure.mgmt.authorization.v2021_12_01_preview
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2021_12_01_preview
 ```
 
 ### Tag: package-2021-07-01-preview-only and python
