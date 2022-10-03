@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-01",
+    "version": "2022-10-01-preview",
     "title": "DataProtectionBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -4042,6 +4042,65 @@
       },
       "x-ms-discriminator-value": "AzureOperationalStoreParameters"
     },
+    "KubernetesClusterBackupDatasourceParameters": {
+      "description": "Parameters for Kubernetes Cluster Backup Datasource",
+      "required": [
+        "snapshotVolumes",
+        "includeClusterScopeResources"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "properties": {
+        "snapshotVolumes": {
+          "description": "Gets or sets the volume snapshot property.",
+          "type": "boolean"
+        },
+        "includeClusterScopeResources": {
+          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.",
+          "type": "boolean"
+        },
+        "includedNamespaces": {
+          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedNamespaces": {
+          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "includedResourceTypes": {
+          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedResourceTypes": {
+          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "labelSelectors": {
+          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "x-ms-discriminator-value": "KubernetesClusterBackupDatasourceParameters"
+    },
     "AzureRetentionRule": {
       "allOf": [
         {
@@ -4781,6 +4840,21 @@
             "name": "DataStoreTypes",
             "modelAsString": true
           }
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "BackupDatasourceParameters": {
+      "description": "Parameters for Backup Datasource",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
         }
       },
       "discriminator": "objectType"
@@ -5577,6 +5651,14 @@
             "$ref": "#/definitions/DataStoreParameters"
           },
           "x-ms-identifiers": []
+        },
+        "backupDatasourceParametersList": {
+          "description": "Gets or sets the Backup Data Source Parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupDatasourceParameters"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5666,6 +5748,91 @@
         }
       },
       "x-ms-discriminator-value": "KubernetesPVRestoreCriteria"
+    },
+    "KubernetesClusterRestoreCriteria": {
+      "description": "kubernetes Cluster Backup target info for restore operation",
+      "required": [
+        "includeClusterScopeResources"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "includeClusterScopeResources": {
+          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.",
+          "type": "boolean"
+        },
+        "includedNamespaces": {
+          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedNamespaces": {
+          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "includedResourceTypes": {
+          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedResourceTypes": {
+          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "labelSelectors": {
+          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "persistentVolumeRestoreMode": {
+          "description": "Gets or sets the PV Restore Mode property. This property sets whether volumes needs to be restored.",
+          "enum": [
+            "RestoreWithVolumeData",
+            "RestoreWithoutVolumeData"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PersistentVolumeRestoreMode",
+            "modelAsString": true
+          }
+        },
+        "conflictPolicy": {
+          "description": "Gets or sets the Conflict Policy property. This property sets policy during conflict of resources during restore.",
+          "enum": [
+            "Skip",
+            "Patch"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExistingResourcePolicy",
+            "modelAsString": true
+          }
+        },
+        "namespaceMappings": {
+          "description": "Gets or sets the Namespace Mappings property. This property sets if namespace needs to be change during restore.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
     },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
