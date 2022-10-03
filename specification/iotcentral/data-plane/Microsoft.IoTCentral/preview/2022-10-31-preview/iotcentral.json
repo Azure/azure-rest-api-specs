@@ -693,7 +693,9 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "maxItems": 1,
+          "minItems": 1
         }
       },
       "required": [
@@ -1971,7 +1973,9 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "maxItems": 1,
+          "minItems": 1
         }
       },
       "required": [
@@ -2701,7 +2705,9 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "maxItems": 1,
+          "minItems": 1
         },
         "schedule": {
           "description": "The schedule at which to execute the job.",
@@ -5415,9 +5421,6 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
-            "$ref": "#/parameters/Expand"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Device body.",
@@ -5425,6 +5428,9 @@
               "$ref": "#/definitions/Device"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/Expand"
           }
         ],
         "responses": {
@@ -5469,9 +5475,6 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
-            "$ref": "#/parameters/Expand"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Device patch body.",
@@ -5479,6 +5482,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/Expand"
           }
         ],
         "responses": {
@@ -6069,9 +6075,6 @@
             "$ref": "#/parameters/ComponentName"
           },
           {
-            "$ref": "#/parameters/Unmodeled"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
@@ -6079,6 +6082,9 @@
               "$ref": "#/definitions/DeviceProperties"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -6125,9 +6131,6 @@
             "$ref": "#/parameters/ComponentName"
           },
           {
-            "$ref": "#/parameters/Unmodeled"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
@@ -6135,6 +6138,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -6987,9 +6993,6 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
-            "$ref": "#/parameters/Unmodeled"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Device properties.",
@@ -6997,6 +7000,9 @@
               "$ref": "#/definitions/DeviceProperties"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
@@ -7041,9 +7047,6 @@
             "$ref": "#/parameters/DeviceId"
           },
           {
-            "$ref": "#/parameters/Unmodeled"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
@@ -7051,6 +7054,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/Unmodeled"
           }
         ],
         "responses": {
