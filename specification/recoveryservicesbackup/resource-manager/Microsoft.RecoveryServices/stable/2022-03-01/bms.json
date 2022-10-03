@@ -5496,6 +5496,10 @@
         }
       ],
       "properties": {
+        "newTestField": {
+          "description": "just a test field for swagger generation.",
+          "type": "string"
+        },
         "instantRPDetails": {
           "$ref": "#/definitions/InstantRPAdditionalDetails"
         },
@@ -5506,6 +5510,13 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "tieringPolicy": {
+          "description": "Tiering policy to automatically move RPs to another tier\r\nKey is Target Tier, defined in RecoveryPointTierType enum.\r\nTiering policy specifies the criteria to move RP to the target tier.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TieringPolicy"
+          }
         },
         "instantRpRetentionRangeInDays": {
           "format": "int32",
