@@ -64,7 +64,7 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2022-01-01-preview",
+      "default": "2022-09-01-preview",
       "x-ms-parameter-location": "client"
     },
     "ConversionIdQuery": {
@@ -91,8 +91,7 @@
       "required": false,
       "x-ms-parameter-location": "method",
       "enum": [
-        "facility-2.0",
-        "noontology"
+        "facility-2.0"
       ],
       "x-ms-enum": {
         "name": "OutputOntology",
@@ -141,7 +140,10 @@
         },
         "x-ms-examples": {
           "Create dataset from a converted CAD file provided by conversionId": {
-            "$ref": "./examples/dataset/Dataset_Create.json"
+            "$ref": "./examples/dataset/Dataset_Create_ConversionId.json"
+          },
+          "Create dataset from a zip of geojson files provided by udid": {
+            "$ref": "./examples/dataset/Dataset_Create_Udid.json"
           }
         },
         "parameters": [
