@@ -35,26 +35,8 @@ credential-scopes: 'https://atlas.microsoft.com/.default'
 
 
 ### Tag: package-preview-2022-09
-<<<<<<< HEAD
 
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - preview/2.0/alias.json
-  - preview/2.0/data.json
-  - preview/2022-09-01-preview/dataset.json
-  - preview/2.0/dwgconversion.json
-  - preview/2.0/featurestate.json
-  - preview/1.0/spatial.json
-  - preview/2.0/tileset.json
-  - preview/2.0/wfs.json
-```
-### Tag: 2.0-preview
-=======
->>>>>>> 1fd7be9983d5a8d7a3e6803ab74034bf3e2eaf70
-
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-09-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
@@ -63,7 +45,7 @@ input-file:
   - preview/2022-09-01-preview/mapconfiguration.json
   - preview/2.0/alias.json
   - preview/2.0/data.json
-  - preview/2.0/dataset.json
+  - preview/2022-09-01-preview/dataset.json
   - preview/2.0/dwgconversion.json
   - preview/2.0/featurestate.json
   - preview/2.0/wfs.json
