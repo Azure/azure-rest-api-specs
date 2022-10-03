@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.alertsManagement/smartDetectorAlertRules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartDetectorAlertRules": {
       "get": {
         "tags": [
           "SmartDetectorAlertRules"
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.alertsManagement/smartDetectorAlertRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/smartDetectorAlertRules": {
       "get": {
         "tags": [
           "SmartDetectorAlertRules"
@@ -121,7 +121,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.alertsManagement/smartDetectorAlertRules/{alertRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/smartDetectorAlertRules/{alertRuleName}": {
       "get": {
         "tags": [
           "SmartDetectorAlertRules"
@@ -358,6 +358,7 @@
       "required": [
         "groupIds"
       ],
+      "type": "object",
       "description": "The Action Groups information, used by the alert rule."
     },
     "ThrottlingInformation": {
@@ -368,6 +369,7 @@
           "format": "duration"
         }
       },
+      "type": "object",
       "description": "Optional throttling information for the alert rule."
     },
     "AzureResource": {
@@ -417,9 +419,11 @@
           "description": "The properties of the alert rule."
         }
       },
+      "type": "object",
       "description": "The alert rule information"
     },
     "AlertRulesList": {
+      "type": "object",
       "description": "List of Smart Detector alert rules.",
       "properties": {
         "value": {
@@ -466,6 +470,7 @@
           "minProperties": 1
         }
       },
+      "type": "object",
       "description": "The alert rule patch information"
     },
     "Detector": {
@@ -512,9 +517,9 @@
           "readOnly": true,
           "description": "The Smart Detector parameters definitions.'",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/DetectorParameterDefinition"
-          }
+          },
+		  "x-ms-identifiers": []
         },
         "supportedCadences": {
           "type": "array",
@@ -529,6 +534,7 @@
       "required": [
         "id"
       ],
+      "type": "object",
       "description": "The detector information. By default this is not populated, unless it's specified in expandDetector"
     },
     "AlertRuleProperties": {
@@ -611,6 +617,7 @@
         "scope",
         "actionGroups"
       ],
+      "type": "object",
       "description": "The alert rule properties."
     },
     "AlertRulePatchProperties": {
@@ -660,6 +667,7 @@
           "$ref": "#/definitions/ThrottlingInformation"
         }
       },
+      "type": "object",
       "description": "The alert rule properties."
     },
     "DetectorParameterDefinition": {
