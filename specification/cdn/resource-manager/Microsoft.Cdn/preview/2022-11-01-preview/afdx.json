@@ -186,6 +186,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/validateSecret": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Validate a Secret in the profile.",
+        "operationId": "AFDProfiles_ValidateSecret",
+        "x-ms-examples": {
+          "Validate_Secret": {
+            "$ref": "./examples/AFDProfiles_ValidateSecret.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "validateSecretInput",
+            "in": "body",
+            "description": "The Secret source.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateSecretInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateSecretOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains": {
       "get": {
         "tags": [
@@ -3236,51 +3291,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/validateSecret": {
-      "post": {
-        "tags": [
-          "Secrets"
-        ],
-        "description": "Validate a Secret in the profile.",
-        "operationId": "Validate_Secret",
-        "x-ms-examples": {
-          "Validate_Secret": {
-            "$ref": "./examples/Validate_Secret.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "validateSecretInput",
-            "in": "body",
-            "description": "The Secret source.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidateSecretInput"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ValidateSecretOutput"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
         }
       }
     },
