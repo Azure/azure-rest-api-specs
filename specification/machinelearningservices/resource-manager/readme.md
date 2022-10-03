@@ -40,7 +40,6 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2022-10-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2022-10-01-preview/registries.json
 ```
-
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
