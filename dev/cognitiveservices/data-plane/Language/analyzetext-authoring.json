@@ -200,61 +200,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/:copy": {
-      "post": {
-        "description": "Copies an exising project to another Azure resource.",
-        "operationId": "TextAnalysisAuthoring_CopyProject",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ProjectNamePathParameter"
-          },
-          {
-            "$ref": "#/parameters/TextAnalysisAuthoringArmTokenHeaderParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The copy project info.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectOptions"
-            }
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
-            "headers": {
-              "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Deploy Project": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulDeployProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/authoring/analyze-text/projects/{projectName}/:export": {
       "post": {
         "description": "Triggers a job to export a project's data.",
@@ -421,39 +366,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}": {
-      "get": {
-        "description": "Gets the status of an existing copy project job.",
-        "operationId": "TextAnalysisAuthoring_GetCopyProjectStatus",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ProjectNamePathParameter"
-          },
-          {
-            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
-          }
-        }
       }
     },
     "/authoring/analyze-text/projects/{projectName}/deployments": {
@@ -651,6 +563,49 @@
       "delete": {
         "description": "Deletes a project deployment.",
         "operationId": "TextAnalysisAuthoring_DeleteDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Deployment": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
+      "post": {
+        "description": "Deletes a project deployment from the specified assigned resources.",
+        "operationId": "TextAnalysisAuthoring_DeleteDeployment",
         "consumes": [
           "application/json"
         ],
@@ -667,7 +622,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The options for deleting the deployment. If no body is provided, the deployment will be deleted for all the resources assigned to it.",
+            "description": "The options for deleting the deployment.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TextAnalysisAuthoringDeleteDeploymentOptions"
@@ -700,6 +655,48 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing delete deployment from specific resources job.",
+        "operationId": "TextAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/analyztext-authoring/SuccessfulGetDeploymentStatus.json"
+          }
+        }
       }
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
@@ -983,7 +980,7 @@
         }
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:loadSnapshot": {
+    "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
         "operationId": "TextAnalysisAuthoring_LoadSnapshot",
@@ -1115,7 +1112,7 @@
         }
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/loadSnapshot/jobs/{jobId}": {
+    "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
         "description": "Gets the status for loading a snapshot.",
         "operationId": "TextAnalysisAuthoring_GetLoadSnapshotStatus",
@@ -1153,59 +1150,6 @@
       }
     },
     "/authoring/analyze-text/projects/{projectName}/resources": {
-      "put": {
-        "description": "Assign new Azure resources to a project to allow deploying new deployments to them.",
-        "operationId": "TextAnalysisAuthoring_AssignDeploymentResources",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ProjectNamePathParameter"
-          },
-          {
-            "$ref": "#/parameters/TextAnalysisAuthoringArmTokenHeaderParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The new project resources info.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringAssignDeploymentResourcesOptions"
-            }
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
-            "headers": {
-              "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Deploy Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeployProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "get": {
         "description": "Gets the deployments resources assigned to the project.",
         "operationId": "TextAnalysisAuthoring_GetDeploymentResources",
@@ -1252,10 +1196,12 @@
           "nextLinkName": "nextLink",
           "itemName": "value"
         }
-      },
-      "delete": {
-        "description": "Unassign resources from a project.\r\n            This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
-        "operationId": "TextAnalysisAuthoring_DeleteDeploymentResources",
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/:assign": {
+      "post": {
+        "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "operationId": "TextAnalysisAuthoring_AssignDeploymentResources",
         "consumes": [
           "application/json"
         ],
@@ -1269,10 +1215,62 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The new deployment resources info.",
+            "description": "The new project resources info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeleteDeploymentResourcesOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringAssignDeploymentResourcesOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Deploy Project": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeployProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/:unassign": {
+      "post": {
+        "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
+        "operationId": "TextAnalysisAuthoring_UnassignDeploymentResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The info for the deployment resources to be deleted.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringUnassignDeploymentResourcesOptions"
             }
           },
           {
@@ -1301,17 +1299,13 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeployment.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
-        },
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/resources/jobs/{jobId}": {
+    "/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "description": "Gets the status of an existing deployment resources job.",
-        "operationId": "TextAnalysisAuthoring_GetDeploymentResourcesStatus",
+        "description": "Gets the status of an existing assign deployment resources job.",
+        "operationId": "TextAnalysisAuthoring_GetAssignDeploymentResourcesStatus",
         "produces": [
           "application/json"
         ],
@@ -1328,7 +1322,46 @@
         ],
         "responses": {
           "200": {
-            "description": "The deployment resources job result.",
+            "description": "The assign deployment resources job result.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing unassign deployment resources job.",
+        "operationId": "TextAnalysisAuthoring_GetUnassignDeploymentResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The unassign deployment resources job result.",
             "schema": {
               "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
             }
@@ -1516,7 +1549,7 @@
     },
     "/authoring/analyze-text/projects/global/deployments/resources": {
       "get": {
-        "description": "Gets the deployments to which an Azure resource is assigned.\r\n            This doesn't return deployments belonging to projects owned by this resource.\r\n            It only returns deployments belonging to projects owned by other",
+        "description": "Gets the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "operationId": "TextAnalysisAuthoring_GetResourceDeployments",
         "produces": [
           "application/json"
@@ -1569,7 +1602,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindQueryParameter"
+            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindQueryOptionalParameter"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -1663,15 +1696,15 @@
     "TextAnalysisAuthoringAssignDeploymentResourcesOptions": {
       "description": "Represents the options for assigning Azure resources to a project.",
       "required": [
-        "resourceIds"
+        "resourcesMetadata"
       ],
       "type": "object",
       "properties": {
-        "resourceIds": {
-          "description": "Represents the resource IDs.",
+        "resourcesMetadata": {
+          "description": "Represents the metadata for the resources to be assigned.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/TextAnalysisAuthoringResourceMetadata"
           }
         }
       },
@@ -1824,25 +1857,6 @@
         "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
       },
       "x-ms-client-name": "ConfusionMatrixRow"
-    },
-    "TextAnalysisAuthoringCopyProjectOptions": {
-      "description": "Represents the options for copying an existing project to another Azure resource.",
-      "required": [
-        "targetResourceId",
-        "overwrite"
-      ],
-      "type": "object",
-      "properties": {
-        "targetResourceId": {
-          "description": "Represents the target Azure resource ID.",
-          "type": "string"
-        },
-        "overwrite": {
-          "description": "Represents whether to overwrite an existing project with same name if exists in the target resource.",
-          "type": "boolean"
-        }
-      },
-      "x-ms-client-name": "CopyProjectOptions"
     },
     "TextAnalysisAuthoringCreateDeploymentOptions": {
       "description": "Represents the options for creating or updating a project deployment.",
@@ -2039,23 +2053,6 @@
         }
       },
       "x-ms-client-name": "DeleteDeploymentOptions"
-    },
-    "TextAnalysisAuthoringDeleteDeploymentResourcesOptions": {
-      "description": "Represents the options for deleting assigned Azure resources from a project.",
-      "required": [
-        "resourceIds"
-      ],
-      "type": "object",
-      "properties": {
-        "resourceIds": {
-          "description": "Represents the resource IDs.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-client-name": "DeleteDeploymentResourcesOptions"
     },
     "TextAnalysisAuthoringDeploymentJobState": {
       "description": "Represents the state of a deployment job.",
@@ -2987,7 +2984,7 @@
         "lastDeployedDateTime",
         "deploymentExpirationDate",
         "modelTrainingConfigVersion",
-        "resources"
+        "assignedResources"
       ],
       "type": "object",
       "properties": {
@@ -3018,7 +3015,7 @@
           "description": "Represents model training config version.",
           "type": "string"
         },
-        "resources": {
+        "assignedResources": {
           "description": "Represents the metadata of the assigned Azure resources.",
           "type": "array",
           "items": {
@@ -3250,6 +3247,30 @@
         }
       },
       "x-ms-client-name": "ProjectTrainedModels"
+    },
+    "TextAnalysisAuthoringResourceMetadata": {
+      "description": "Represents metadata for the Azure resource..",
+      "required": [
+        "azureResourceId",
+        "customDomain",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "description": "Represents the Azure resource ID.",
+          "type": "string"
+        },
+        "customDomain": {
+          "description": "Represents the Azure resource custom domain.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Represents the Azure resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ResourceMetadata"
     },
     "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
       "description": "Represents the evaluation summary for a class in a single-label classification project.",
@@ -3609,6 +3630,23 @@
       },
       "x-ms-client-name": "TrainingJobState"
     },
+    "TextAnalysisAuthoringUnassignDeploymentResourcesOptions": {
+      "description": "Represents the options for unassigning Azure resources from a project.",
+      "required": [
+        "assignedResourceIds"
+      ],
+      "type": "object",
+      "properties": {
+        "assignedResourceIds": {
+          "description": "Represents the assigned resource IDs to be unassigned.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "UnassignDeploymentResourcesOptions"
+    },
     "TextAnalysisAuthoringWarning": {
       "description": "Represents a warning that was encountered while executing the request.",
       "required": [
@@ -3630,14 +3668,6 @@
     }
   },
   "parameters": {
-    "TextAnalysisAuthoringArmTokenHeaderParameter": {
-      "in": "header",
-      "name": "armToken",
-      "description": "The user's ARM token.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "TextAnalysisAuthoringStringIndexTypeQueryParameter": {
       "in": "query",
       "name": "stringIndexType",
@@ -3675,10 +3705,46 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "TextAnalysisAuthoringProjectKindQueryParameter": {
+    "TextAnalysisAuthoringProjectKindQueryOptionalParameter": {
       "in": "query",
       "name": "projectKind",
       "description": "The project kind, default value is CustomSingleLabelClassification.",
+      "type": "string",
+      "enum": [
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification",
+        "CustomEntityRecognition",
+        "CustomAbstractiveSummarization"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CustomSingleLabelClassification",
+            "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
+          },
+          {
+            "value": "CustomMultiLabelClassification",
+            "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
+          },
+          {
+            "value": "CustomEntityRecognition",
+            "description": "For building an extraction model to identify your domain categories using your own data."
+          },
+          {
+            "value": "CustomAbstractiveSummarization",
+            "description": "For building an abstractive summarization models which are able to summarize long documents."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TextAnalysisAuthoringProjectKindQueryParameter": {
+      "in": "query",
+      "name": "projectKind",
+      "description": "The project kind.",
+      "required": true,
       "type": "string",
       "enum": [
         "CustomSingleLabelClassification",
