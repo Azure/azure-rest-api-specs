@@ -146,12 +146,21 @@
   "definitions": {
     "Snapshot": {
       "type": "object",
-      "description": "A generic resource snapshot",
+      "description": "A generic resource snapshot with additional metadata",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SnapshotProperties"
+        }
+      }
+    },
+    "SnapshotProperties" : {
+      "description": "The properties of a snapshot",
+      "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
