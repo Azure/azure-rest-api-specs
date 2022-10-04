@@ -110,7 +110,7 @@
           "AttestationProviders"
         ],
         "operationId": "AttestationProviders_Create",
-        "description": "Creates a new Attestation Provider.",
+        "description": "Creates or updates an Attestation Provider.",
         "x-ms-examples": {
           "AttestationProviders_Create": {
             "$ref": "./examples/Create_AttestationProvider.json"
@@ -663,7 +663,10 @@
           "description": "List of supported operations.",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "description": "List of supported operations."
@@ -679,6 +682,10 @@
         "display": {
           "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display object with properties of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -701,6 +708,47 @@
         "description": {
           "type": "string",
           "description": "Description of the operation."
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Microsoft Azure Attestation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Microsoft Azure Attestation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
         }
       }
     },
@@ -761,6 +809,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "description": "List of private endpoint connections associated with the attestation provider."
+        },
+        "tpmAttestationAuthentication": {
+          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
+          "$ref": "#/definitions/TpmAttestationAuthenticationType"
         }
       }
     },
@@ -828,6 +880,10 @@
         "publicNetworkAccess": {
           "description": "Controls whether traffic from the public network is allowed to access the Attestation Provider APIs.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "tpmAttestationAuthentication": {
+          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
+          "$ref": "#/definitions/TpmAttestationAuthenticationType"
         }
       }
     },
@@ -866,6 +922,10 @@
         "policySigningCertificates": {
           "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
+        },
+        "tpmAttestationAuthentication": {
+          "description": "The setting that controls whether authentication is enabled or disabled for TPM Attestation REST APIs.",
+          "$ref": "#/definitions/TpmAttestationAuthenticationType"
         }
       }
     },
@@ -888,6 +948,29 @@
           {
             "value": "Disabled",
             "description": "Disables public network connectivity to the Attestation Provider REST APIs."
+          }
+        ]
+      }
+    },
+    "TpmAttestationAuthenticationType": {
+      "type": "string",
+      "description": "The type for specifying the requirement of authentication for TPM Attestation REST APIs.",
+      "default": "Enabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TpmAttestationAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Enables the requirement of authentication for TPM Attestation REST APIs."
+          },
+          {
+            "value": "Disabled",
+            "description": "Disables the requirement of authentication for TPM Attestation REST APIs."
           }
         ]
       }
