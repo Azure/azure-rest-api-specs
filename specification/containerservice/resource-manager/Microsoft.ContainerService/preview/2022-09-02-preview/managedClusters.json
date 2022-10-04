@@ -3418,7 +3418,7 @@
         "enableCustomCATrust": {
           "type": "boolean",
           "title": "Whether to enable Custom CA Trust feature.",
-          "description": "When set to true, AKS deploys a daemonset and host services to sync custom certificate authorities from a user-provided config map into node trust stores. Defaults to false."
+          "description": "When set to true, AKS adds a label to the node indicating that the feature is enabled and deploys a daemonset along with host services to sync custom certificate authorities from user-provided list of base64 encoded certificates into node trust stores. Defaults to false."
         },
         "nodePublicIPPrefixID": {
           "type": "string",
@@ -6380,6 +6380,10 @@
         "nodeRestriction": {
           "$ref": "#/definitions/ManagedClusterSecurityProfileNodeRestriction",
           "description": "[Node Restriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) settings for the security profile."
+        },
+        "customCATrustCertificates": {
+          "$ref": "#/definitions/ManagedClusterSecurityProfileCustomCATrustCertificates",
+          "description": "[Custom CA Trust Certificates](https://learn.microsoft.com/en-us/azure/aks/custom-certificate-authority) list of up to 10 base64 encoded CAs that will be added to trust store on nodes with Custom CA Trust feature enabled."
         }
       },
       "description": "Security profile for the container service cluster."
@@ -6528,6 +6532,16 @@
         }
       },
       "description": "Node Restriction settings for the security profile."
+    },
+    "ManagedClusterSecurityProfileCustomCATrustCertificates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0,
+      "maxItems": 10,
+      "title": "The list of base64 encoded certificate strings, that will be added to node trust store. At most 10 strings can be provided.",
+      "description": "Certificates will only be added to trust stores on node pools that have enableCustomCATrust field set to true. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. The certificates are applied asynchronously and will be available a short time after the list is updated."
     },
     "ManagedClusterStorageProfileDiskCSIDriver": {
       "type": "object",
