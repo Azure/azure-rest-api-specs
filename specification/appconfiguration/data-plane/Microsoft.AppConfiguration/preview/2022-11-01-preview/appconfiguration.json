@@ -159,12 +159,6 @@
             "type": "string"
           },
           {
-            "name": "snapshot",
-            "in": "query",
-            "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/SyncTokens"
           },
           {
@@ -189,6 +183,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              },
               "enum": [
                 "key",
                 "label",
@@ -201,6 +199,12 @@
               ]
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -255,12 +259,6 @@
             "type": "string"
           },
           {
-            "name": "snapshot",
-            "in": "query",
-            "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/SyncTokens"
           },
           {
@@ -285,6 +283,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              },
               "enum": [
                 "key",
                 "label",
@@ -297,6 +299,12 @@
               ]
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -378,6 +386,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              },
               "enum": [
                 "key",
                 "label",
@@ -667,6 +679,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              },
               "enum": [
                 "key",
                 "label",
@@ -755,6 +771,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "SnapshotFields",
+                "modelAsString": true
+              },
               "enum": [
                 "etag",
                 "name",
@@ -839,7 +859,7 @@
           }
         },
         "x-ms-examples": {
-          "CheckKeyValues": {
+          "CheckSnapshots": {
             "$ref": "./examples/CheckSnapshots.json"
           }
         }
@@ -866,6 +886,13 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the key-value snapshot to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
@@ -876,6 +903,33 @@
             "in": "header",
             "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
             "type": "string"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-ms-enum": {
+                "name": "SnapshotFields",
+                "modelAsString": true
+              },
+              "enum": [
+                "etag",
+                "name",
+                "status",
+                "filters",
+                "composition_type",
+                "created",
+                "expires",
+                "size",
+                "items_count",
+                "tags",
+                "items_link"
+              ]
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
@@ -996,9 +1050,6 @@
         "x-ms-examples": {
           "PutSnapshot": {
             "$ref": "./examples/PutSnapshot.json"
-          },
-          "PutSnapshot_IfNoneMatch": {
-            "$ref": "./examples/PutSnapshot_IfNoneMatch.json"
           }
         }
       },
@@ -1073,15 +1124,6 @@
               },
               "Link": {
                 "description": "Includes links to related resources.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Success",
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
                 "type": "string"
               }
             }
@@ -1221,6 +1263,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "LabelFields",
+                "modelAsString": true
+              },
               "enum": [
                 "name"
               ]
@@ -1298,6 +1344,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "LabelFields",
+                "modelAsString": true
+              },
               "enum": [
                 "name"
               ]
@@ -1535,6 +1585,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              },
               "enum": [
                 "key",
                 "label",
@@ -1625,6 +1679,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true
+              },
               "enum": [
                 "key",
                 "label",
@@ -1722,6 +1780,7 @@
           ],
           "x-nullable": false,
           "x-ms-enum": {
+            "name": "SnapshotStatus",
             "modelAsString": true
           },
           "readOnly": true
@@ -1742,6 +1801,7 @@
           ],
           "x-nullable": false,
           "x-ms-enum": {
+            "name": "CompositionType",
             "modelAsString": true
           }
         },
@@ -1761,11 +1821,13 @@
         "size": {
           "description": "The size in bytes of the snapshot.",
           "type": "integer",
+          "format": "int64",
           "readOnly": true
         },
         "items_count": {
           "description": "The amount of key-values in the snapshot.",
           "type": "integer",
+          "format": "int64",
           "readOnly": true
         },
         "tags": {
@@ -1809,11 +1871,13 @@
           "description": "The desired status of the snapshot.",
           "type": "string",
           "enum": [
+            "provisioning",
             "ready",
             "archived"
           ],
           "x-nullable": false,
           "x-ms-enum": {
+            "name": "SnapshotStatus",
             "modelAsString": true
           }
         }
@@ -1847,6 +1911,7 @@
     },
     "Error": {
       "description": "Azure App Configuration error object.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "The type of the error.",
