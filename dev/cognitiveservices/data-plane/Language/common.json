@@ -16,10 +16,7 @@
           "description": "The error object.",
           "$ref": "#/definitions/Error"
         }
-      },
-      "required": [
-        "error"
-      ]
+      }
     },
     "Error": {
       "type": "object",
@@ -769,7 +766,7 @@
           {
             "value": "mixed",
             "description": "Mixed sentiment."
-          }                   
+          }
         ]
       }
     },
@@ -805,7 +802,8 @@
       "properties": {
         "sentenceCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
@@ -1545,7 +1543,6 @@
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
-      "format": "uri",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
