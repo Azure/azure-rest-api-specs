@@ -32,8 +32,8 @@ These settings apply only when `--tag=release_2022_10_01_preview` is specified o
 ``` yaml $(tag) == 'release_2022_10_01_preview'
 input-file:
   - preview/2022-10-01-preview/analyzetext.json
-  - preview/2022-10-01-preview/analyzeconversations.json
   - preview/2022-10-01-preview/analyzetext-authoring.json
+  - preview/2022-10-01-preview/analyzeconversations.json
   - preview/2022-10-01-preview/analyzeconversations-authoring.json
   - preview/2022-10-01-preview/questionanswering.json
   - preview/2022-10-01-preview/questionanswering-authoring.json
