@@ -3153,7 +3153,7 @@
             },
             "description": "A response containing the Job Schedule.",
             "schema": {
-              "$ref": "#/definitions/JobSchedule"
+              "$ref": "#/definitions/BatchJobSchedule"
             }
           },
           "default": {
@@ -3190,7 +3190,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobScheduleUpdate"
+              "$ref": "#/definitions/BatchJobScheduleUpdate"
             },
             "description": "The parameters for the request."
           },
@@ -3349,7 +3349,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobSchedule"
+              "$ref": "#/definitions/BatchJobSchedule"
             },
             "description": "The parameters for the request."
           },
@@ -3972,7 +3972,7 @@
             "description": "The Job Schedule to be added.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobSchedule"
+              "$ref": "#/definitions/BatchJobSchedule"
             }
           },
           {
@@ -4186,7 +4186,7 @@
             },
             "description": "A response containing the list of Job Schedules.",
             "schema": {
-              "$ref": "#/definitions/JobScheduleListResult"
+              "$ref": "#/definitions/BatchJobScheduleListResult"
             }
           },
           "default": {
@@ -4528,7 +4528,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobUpdate"
+              "$ref": "#/definitions/BatchJobUpdate"
             },
             "description": "The parameters for the request."
           },
@@ -4848,7 +4848,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobDisableParameters"
+              "$ref": "#/definitions/BatchJobDisableParameters"
             },
             "description": "The parameters for the request."
           },
@@ -5161,7 +5161,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/JobTerminateParameters"
+              "$ref": "#/definitions/BatchJobTerminateParameters"
             },
             "description": "The parameters for the request."
           },
@@ -5545,7 +5545,7 @@
             },
             "description": "A response containing the list of Jobs.",
             "schema": {
-              "$ref": "#/definitions/JobListResult"
+              "$ref": "#/definitions/BatchJobListResult"
             }
           },
           "default": {
@@ -5701,7 +5701,7 @@
             },
             "description": "A response containing the list of Jobs.",
             "schema": {
-              "$ref": "#/definitions/JobListResult"
+              "$ref": "#/definitions/BatchJobListResult"
             }
           },
           "default": {
@@ -5848,7 +5848,7 @@
             },
             "description": "A response containing a list of Job Preparation and Job Release Task statuses.",
             "schema": {
-              "$ref": "#/definitions/JobListPreparationAndReleaseTaskStatusResult"
+              "$ref": "#/definitions/BatchJobListPreparationAndReleaseTaskStatusResult"
             }
           },
           "default": {
@@ -5993,7 +5993,7 @@
             "description": "The Pool to be added.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Pool"
+              "$ref": "#/definitions/BatchPool"
             }
           },
           {
@@ -6219,7 +6219,7 @@
             },
             "description": "A response containing the list of Pools.",
             "schema": {
-              "$ref": "#/definitions/PoolListResult"
+              "$ref": "#/definitions/BatchPoolListResult"
             }
           },
           "default": {
@@ -6675,7 +6675,7 @@
             },
             "description": "A response containing the Pool.",
             "schema": {
-              "$ref": "#/definitions/Pool"
+              "$ref": "#/definitions/BatchPool"
             }
           },
           "default": {
@@ -6712,7 +6712,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolUpdate"
+              "$ref": "#/definitions/BatchPoolUpdate"
             },
             "description": "The parameters for the request."
           },
@@ -6982,7 +6982,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolEnableAutoScaleParameters"
+              "$ref": "#/definitions/BatchPoolEnableAutoScaleParameters"
             },
             "description": "The parameters for the request."
           },
@@ -7143,7 +7143,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolEvaluateAutoScaleParameters"
+              "$ref": "#/definitions/BatchPoolEvaluateAutoScaleParameters"
             },
             "description": "The parameters for the request."
           },
@@ -7265,7 +7265,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolResizeParameters"
+              "$ref": "#/definitions/BatchPoolResizeParameters"
             },
             "description": "The parameters for the request."
           },
@@ -7578,7 +7578,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Pool"
+              "$ref": "#/definitions/BatchPool"
             },
             "description": "The parameters for the request."
           },
@@ -8102,7 +8102,7 @@
             },
             "description": "A response containing the list of Tasks.",
             "schema": {
-              "$ref": "#/definitions/TaskListResult"
+              "$ref": "#/definitions/BatchTaskListResult"
             }
           },
           "default": {
@@ -8145,7 +8145,7 @@
             "description": "The Tasks to be added.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TaskCollection"
+              "$ref": "#/definitions/BatchTaskCollection"
             }
           },
           {
@@ -8827,7 +8827,7 @@
             },
             "description": "A response containing the list of subtasks.",
             "schema": {
-              "$ref": "#/definitions/TaskListSubtasksResult"
+              "$ref": "#/definitions/BatchTaskListSubtasksResult"
             }
           },
           "default": {
@@ -11651,7 +11651,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries Tasks without limit. The default value is 0 (no retries)."
+          "description": "Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
         }
       },
       "title": "The execution constraints for a Job."
@@ -11792,7 +11792,7 @@
       "required": [
         "name"
       ],
-      "title": "A HTTP header name-value pair"
+      "title": "An HTTP header name-value pair"
     },
     "ExitConditions": {
       "type": "object",
@@ -12038,7 +12038,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "title": "The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20."
+          "title": "The name of the user Account."
         },
         "password": {
           "type": "string",
@@ -12085,7 +12085,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit."
+          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
         }
       },
       "title": "Execution constraints to apply to a Task."
@@ -12176,7 +12176,7 @@
         },
         "allowLowPriorityNode": {
           "type": "boolean",
-          "title": "Whether the Job Manager Task may run on a low-priority Compute Node.",
+          "title": "Whether the Job Manager Task may run on a Spot/Low-priority Compute Node.",
           "description": "The default value is true."
         }
       },
@@ -12371,7 +12371,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the Task may be retried.",
-          "description": "The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit."
+          "description": "The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
         },
         "waitForSuccess": {
           "type": "boolean",
@@ -12535,7 +12535,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool.",
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool.",
           "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
@@ -12694,7 +12694,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
@@ -12901,7 +12901,7 @@
       ],
       "title": "Resource usage statistics for a Job Schedule."
     },
-    "JobSchedule": {
+    "BatchJobSchedule": {
       "type": "object",
       "properties": {
         "id": {
@@ -12998,13 +12998,13 @@
       },
       "title": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a specification used to create each Job."
     },
-    "JobScheduleListResult": {
+    "BatchJobScheduleListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobSchedule"
+            "$ref": "#/definitions/BatchJobSchedule"
           },
           "title": "The list of Job Schedules."
         },
@@ -13164,7 +13164,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
@@ -13257,13 +13257,13 @@
         "stats": {
           "$ref": "#/definitions/JobStatistics",
           "title": "Resource usage statistics for the entire lifetime of the Job.",
-          "description": "This property is populated only if the Job was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
+          "description": "This property is populated only if the CloudJob was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
           "readOnly": true
         }
       },
       "title": "An Azure Batch Job."
     },
-    "JobListResult": {
+    "BatchJobListResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -13514,7 +13514,7 @@
       },
       "title": "The status of the Job Preparation and Job Release Tasks on a Compute Node."
     },
-    "JobListPreparationAndReleaseTaskStatusResult": {
+    "BatchJobListPreparationAndReleaseTaskStatusResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -14281,7 +14281,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -14333,7 +14333,7 @@
       },
       "description": "The network configuration for a Pool."
     },
-    "Pool": {
+    "BatchPool": {
       "type": "object",
       "properties": {
         "id": {
@@ -14496,8 +14496,8 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low-priority Compute Nodes currently in the Pool.",
-          "description": "Low-priority Compute Nodes which have been preempted are included in this count.",
+          "title": "The number of Spot/Low-priority Compute Nodes currently in the Pool.",
+          "description": "Spot/Low-priority Compute Nodes which have been preempted are included in this count.",
           "readOnly": true
         },
         "targetDedicatedNodes": {
@@ -14512,7 +14512,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool.",
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -14641,7 +14641,7 @@
         "stats": {
           "$ref": "#/definitions/PoolStatistics",
           "title": "Utilization and resource usage statistics for the entire lifetime of the Pool.",
-          "description": "This property is populated only if the Pool was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
+          "description": "This property is populated only if the CloudPool was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
           "readOnly": true
         },
         "mountConfiguration": {
@@ -14682,13 +14682,13 @@
       },
       "title": "The result of listing the applications available in an Account."
     },
-    "PoolListResult": {
+    "BatchPoolListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Pool"
+            "$ref": "#/definitions/BatchPool"
           },
           "title": "The list of Pools."
         },
@@ -15194,7 +15194,7 @@
       "title": "An Azure Batch Task.",
       "description": "Batch will retry Tasks when a recovery operation is triggered on a Node. Examples of recovery operations include (but are not limited to) when an unhealthy Node is rebooted or a Compute Node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all Tasks should be idempotent. This means Tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running Tasks is to use some form of checkpointing."
     },
-    "TaskCollection": {
+    "BatchTaskCollection": {
       "type": "object",
       "properties": {
         "value": {
@@ -15353,7 +15353,7 @@
       },
       "title": "Information about an Azure Batch subtask."
     },
-    "TaskListSubtasksResult": {
+    "BatchTaskListSubtasksResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -15366,7 +15366,7 @@
       },
       "title": "The result of listing the subtasks of a Task."
     },
-    "TaskListResult": {
+    "BatchTaskListResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -15531,7 +15531,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the Compute Node.",
-          "description": "The low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.",
+          "description": "The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.",
           "enum": [
             "idle",
             "rebooting",
@@ -15604,7 +15604,7 @@
               },
               {
                 "value": "preempted",
-                "description": "The low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available."
+                "description": "The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available."
               }
             ]
           }
@@ -15716,7 +15716,7 @@
         },
         "isDedicated": {
           "type": "boolean",
-          "title": "Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a low-priority Compute Node."
+          "title": "Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a Spot/Low-priority Compute Node."
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/ComputeNodeEndpointConfiguration",
@@ -15986,7 +15986,7 @@
       ],
       "title": "The remote login settings for a Compute Node."
     },
-    "JobScheduleUpdate": {
+    "BatchJobScheduleUpdate": {
       "type": "object",
       "properties": {
         "schedule": {
@@ -16010,7 +16010,7 @@
       },
       "title": "The set of changes to be made to a Job Schedule."
     },
-    "JobDisableParameters": {
+    "BatchJobDisableParameters": {
       "type": "object",
       "properties": {
         "disableTasks": {
@@ -16046,7 +16046,7 @@
       ],
       "title": "Options when disabling a Job."
     },
-    "JobTerminateParameters": {
+    "BatchJobTerminateParameters": {
       "type": "object",
       "properties": {
         "terminateReason": {
@@ -16056,7 +16056,7 @@
       },
       "title": "Options when terminating a Job."
     },
-    "JobUpdate": {
+    "BatchJobUpdate": {
       "type": "object",
       "properties": {
         "priority": {
@@ -16074,7 +16074,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "onAllTasksComplete": {
           "title": "The action the Batch service should take when all Tasks in the Job are in the completed state.",
@@ -16102,7 +16102,7 @@
       },
       "title": "The set of changes to be made to a Job."
     },
-    "PoolEnableAutoScaleParameters": {
+    "BatchPoolEnableAutoScaleParameters": {
       "type": "object",
       "properties": {
         "autoScaleFormula": {
@@ -16119,7 +16119,7 @@
       },
       "title": "Options for enabling automatic scaling on a Pool."
     },
-    "PoolEvaluateAutoScaleParameters": {
+    "BatchPoolEvaluateAutoScaleParameters": {
       "type": "object",
       "properties": {
         "autoScaleFormula": {
@@ -16133,7 +16133,7 @@
       ],
       "title": "Options for evaluating an automatic scaling formula on a Pool."
     },
-    "PoolResizeParameters": {
+    "BatchPoolResizeParameters": {
       "type": "object",
       "properties": {
         "targetDedicatedNodes": {
@@ -16144,7 +16144,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool."
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -16160,7 +16160,7 @@
       },
       "title": "Options for changing the size of a Pool."
     },
-    "PoolUpdate": {
+    "BatchPoolUpdate": {
       "type": "object",
       "properties": {
         "startTask": {
@@ -16422,7 +16422,7 @@
             "$ref": "#/definitions/HttpHeader"
           },
           "title": "A list of name-value pairs for headers to be used in uploading output files",
-          "description": "These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://docs.microsoft.com/en-us/rest/api/storageservices/put-blob#request-headers-all-blob-types"
+          "description": "These headers will be specified when uploading files to Azure Storage. For more information, see [Request Headers (All Blob Types)](https://docs.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types)."
         }
       },
       "required": [
@@ -16955,7 +16955,7 @@
         },
         "lowPriority": {
           "$ref": "#/definitions/NodeCounts",
-          "title": "The number of low priority Compute Nodes in each state."
+          "title": "The number of Spot/Low-priority Compute Nodes in each state."
         }
       },
       "required": [
