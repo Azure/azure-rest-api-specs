@@ -451,7 +451,7 @@
           "$ref": "#/definitions/Connection"
         },
         "downloadURL": {
-          "description": "The download URL of the underlying data. It may not be available if the status of the data registry is `Running` or `Failed`. Note that `api-version` is not included.",
+          "description": "The download URL of the underlying data. It may not be available if the status of the data registry is `Running` or `Failed`.",
           "type": "string",
           "format": "uri",
           "readOnly": true
@@ -472,18 +472,6 @@
         },
         "error": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
-        },
-        "registered": {
-          "description": "The registered timestamp.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "The updated timestamp.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
         }
       },
       "required": [
@@ -533,7 +521,7 @@
           "type": "string"
         },
         "linkedResource": {
-          "description": "The linked resource. Need to configure in control plane beforehand. Default is `default-linked-resource`",
+          "description": "The linked resource. Need to configure in control plane beforehand.",
           "type": "string"
         },
         "scope": {
