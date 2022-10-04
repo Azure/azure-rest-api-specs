@@ -1,0 +1,56 @@
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("An Azure Sphere deployment.")
+@parentResource(SyndicationChannel)
+model Deployment is ProxyResource<DeploymentProperties> {
+  @doc("Name of the deployment.")
+  @key("deploymentName")
+  @segment("deployments")
+  @visibility("read")
+  @path()
+  name: string;
+}
+
+@doc("The properties of deployment.")
+model DeploymentProperties is ResourceProperties {
+
+  @doc("The name of the update package to deploy.")
+  @visibility("read", "write")
+  updatePackageName: string;
+
+  @doc("A snapshot of the update package, taken at the time of deployment.")
+  @visibility("read")
+  updatePackageSnapshot?: UpdatePackageProperties;
+
+  @doc("A snapshot of the syndication channel, taken at the time of deployment.")
+  @visibility("read")
+  syndicationChannelSnapshot?: SyndicationChannelProperties;
+
+  @doc("A snapshot of the update package, taken at the time of deployment.")
+  @visibility("read")
+  dependencyUpdatePackages?: UpdatePackageProperties[];
+
+  @doc("A string that uniquely identifies the set of artifacts being deployed.")
+  @visibility("read")
+  versionIdentifier?: string;
+
+  @doc("The ID of the associated ADU deployment.")
+  @visibility("read")
+  aduDeploymentId?: string;
+
+  @doc("The date time that the deployment was created.")
+  @visibility("read")
+  createdDateTimeUtc?: zonedDateTime;
+
+  @doc("The date time that the deployment was successfully deployed.")
+  @visibility("read")
+  deploymentDateTimeUtc?: zonedDateTime;
+}
+
+@armResourceOperations(Deployment)
+interface Deployments extends ProxyResourceOperations<Deployment> {
+}

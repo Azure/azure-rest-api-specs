@@ -1,0 +1,29 @@
+{
+  "operationId": "UpdatePackages_Get",
+  "title": "UpdatePackages_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "updatePackageName": "MyUpdatePackage1",
+    "serialNumber": "active",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The deployment details.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereV2/catalogs/MyCatalog1/updatePackages/MyUpdatePackage1",
+        "name": "MyUpdatePackage1",
+        "type": "Microsoft.AzureSphereV2/catalogs/updatePackages",
+        "properties": {
+          "deploymentState": "Deployed",
+          "artifactNames": [
+            "artifact1"
+          ]
+        },
+        "location": "westus3"
+      }
+    }
+  }
+}

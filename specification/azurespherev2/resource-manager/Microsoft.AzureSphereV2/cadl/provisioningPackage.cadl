@@ -30,8 +30,8 @@ model ProvisioningPackageProperties is ResourceProperties {
   expirationDate?: zonedDateTime;
 }
 
-@armResourceOperations
-interface ProvisioningPackages extends ResourceOperations<ProvisioningPackage, ProvisioningPackageProperties> {
+@armResourceOperations(ProvisioningPackage)
+interface ProvisioningPackages extends ResourceRead<ProvisioningPackage>, ResourceCreate<ProvisioningPackage>, ResourceUpdateNoProperties<ProvisioningPackage>, ResourceDelete<ProvisioningPackage>, ResourceCollectionOperations<ProvisioningPackage> {
   @post
   @doc("Returns the formatted provisioning package.")
   @segment("format")
@@ -55,7 +55,11 @@ model ProvisioningPackageFormatActionResponse {
     @doc("Version of the provisioning package format.")
     version: string;
     @doc("Properties of the provisioning package")
-    properties: {
+    properties: ProvisioningPackageFormatActionResponseProperties;
+}
+
+@doc("Detailed properties of the provisioning package")
+model ProvisioningPackageFormatActionResponseProperties {
         @doc("Name of the catalog where the devices will be provisioned and activated.")
         catalogName: string;
         @doc("The location (region) of the catalog.")
@@ -68,5 +72,4 @@ model ProvisioningPackageFormatActionResponse {
         createdDate: zonedDateTime;
         @doc("An UTC expiration date of the provisioning package defined by the Catalog owner during provisioning package creation. New devices cannot be activated in the catalog after the expiration date.")
         expirationDate: zonedDateTime;
-    }
 }

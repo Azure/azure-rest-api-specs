@@ -1,0 +1,45 @@
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("An Azure Sphere syndication channel.")
+@parentResource(Catalog)
+model SyndicationChannel is TrackedResource<SyndicationChannelProperties> {
+  @doc("Name of the syndication channel")
+  @key("syndicationChannelName")
+  @segment("syndicationChannels")
+  @visibility("read")
+  @path()
+  name: string;
+}
+
+@doc("Compatibility properties for a syndication channel.")
+model CompatibilityProperties {
+    @doc("The manufacturer compatibility value.")
+    manufacturerName: string;
+
+    @doc("The model compatibility value.")
+    modelName: string;
+
+    @doc("Additional compatibility properties.")
+    properties?: Record<string>;
+}
+
+@doc("The properties of SyndicationChannel.")
+model SyndicationChannelProperties is ResourceProperties {
+  @doc("Compatibility data of the syndication channel. This should match the compatibility properties of the associated Device Update compatibility set.")
+  compatibilityData: CompatibilityProperties;
+
+  @doc("The platform. Examples include: imx8ulp, qemuarm64.")
+  @visibility("read", "write")
+  platform: string;
+
+  @doc("Resource IDs of Azure Sphere syndication channels that provide required dependencies for the deployments made to the syndication channel.")
+  dependencyChannels: string[];
+}
+
+@armResourceOperations(SyndicationChannel)
+interface SyndicationChannels extends ResourceOperations<SyndicationChannel, SyndicationChannelProperties> {
+}

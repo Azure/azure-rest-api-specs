@@ -24,11 +24,11 @@ model CertificateProperties is ResourceProperties {
   notAfter: zonedDateTime;
 
   @doc("Base64 representation of the catalog certificate.")
-  certificate: string;
+  certificate: bytes;
 }
 
 // Remove warning for not providing 'delete' options on certificates.
 #suppress "@azure-tools/cadl-azure-resource-manager/no-resource-delete-operation"
-@armResourceOperations
+@armResourceOperations(Certificate)
 interface Certificates extends ResourceRead<Certificate>, ResourceListBySubscription<Certificate>, ResourceListByParent<Certificate> {
 }

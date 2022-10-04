@@ -1,0 +1,50 @@
+{
+  "operationId": "Artifacts_CreateOrUpdate",
+  "title": "Artifacts_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "location": "eastus",
+    "catalogName": "MyCatalog1",
+    "artifactName": "MyArtifact1",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "sasUri": "https://example.com",
+        "sha256Hash": "ABCD",
+        "artifactType": "AreRootFilesystem"
+      }
+    },
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The details of an artifact.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereGen2/catalogs/MyCatalog1/artifacts/MyArtifact1",
+        "name": "MyArtifact1",
+        "type": "Microsoft.AzureSphereGen2/catalogs/artifacts",
+        "location": "eastus",
+        "properties": {
+          "sasUri": "https://example.com",
+          "sha256Hash": "ABCD",
+          "artifactType": "AreRootFilesystem"
+        }
+      }
+    },
+    "201": {
+      "description": "The details of an artifact.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereGen2/catalogs/MyCatalog1/artifacts/MyArtifact1",
+        "name": "MyArtifact1",
+        "type": "Microsoft.AzureSphereGen2/catalogs/artifacts",
+        "location": "eastus",
+        "properties": {
+          "sasUri": "https://example.com",
+          "sha256Hash": "ABCD",
+          "artifactType": "AreRootFilesystem"
+        }
+      }
+    }
+  }
+}

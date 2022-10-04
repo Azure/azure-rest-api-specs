@@ -1,0 +1,45 @@
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("An Azure Sphere update package.")
+@parentResource(Catalog)
+model UpdatePackage is TrackedResource<UpdatePackageProperties> {
+  @doc("Name of the update package.")
+  @key("updatePackageName")
+  @segment("updatePackages")
+  @visibility("read")
+  @path()
+  name: string;
+}
+
+@doc("Options for values on attestation policy.")
+enum DeploymentStateEnum {
+  @doc("The update package has not met the requirements for deployment.")
+  NotReady,
+
+  @doc("The update package meets the requirements for deployment and may be deployed at any time. It has not yet been deployed to any syndication channels.")
+  Ready,
+
+  @doc("The update package has been deployed to at least one syndication channel.")
+  Deployed
+}
+
+@knownValues(DeploymentStateEnum)
+model DeploymentState is string;
+
+@doc("The properties of UpdatePackage.")
+model UpdatePackageProperties is ResourceProperties {
+  @doc("Artifact names.")
+  artifactNames: string[];
+
+  @doc("The deployment state.")
+  @visibility("read")
+  deploymentState?: DeploymentState;
+}
+
+@armResourceOperations(UpdatePackage)
+interface UpdatePackages extends ResourceOperations<UpdatePackage, UpdatePackageProperties> {
+}

@@ -34,8 +34,9 @@ model DeviceRegistrationProperties is ResourceProperties {
   deviceType: string;
 }
 
+
 @armResourceOperations
-interface DeviceRegistrations extends ResourceOperations<DeviceRegistration, DeviceRegistrationProperties> {
+interface DeviceRegistrations extends ResourceRead<DeviceRegistration>, ResourceCreate<DeviceRegistration>, ResourceUpdateNoProperties<DeviceRegistration>, ResourceDelete<DeviceRegistration>, ResourceCollectionOperations<DeviceRegistration> {
   @post
   @doc("Generates an authentication JWT token.")
   @segment("generateAuthToken")
@@ -53,5 +54,5 @@ model DeviceRegistrationGenerateAuthTokenRequest {
 @doc("Output values of the generate auth token response.")
 model DeviceRegistrationGenerateAuthTokenResponse {
     @doc("Base64 encoded device authentication JWT token.")
-    token: string;
+    token: bytes;
 }

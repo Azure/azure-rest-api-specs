@@ -1,0 +1,48 @@
+{
+  "operationId": "Deployments_ListBySyndicationChannel",
+  "title": "Deployments_ListBySyndicationChannel",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "syndicationChannelName": "MySyndicationChannel1",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "List of Azure Sphere deployments by resource group.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereGen2/catalogs/MyCatalog1/syndicationChannels/MySyndicationChannel1/deployments/MyDeployment1",
+            "name": "MyDeployment1",
+            "type": "Microsoft.AzureSphereGen2/catalogs/deployments",
+            "properties": {
+              "updatePackageSnapshot": {
+                "artifactNames": [
+                  "artifact1"
+                ]
+              },
+              "syndicationChannelSnapshot": {
+                "compatibilityData": {
+                  "manufacturerName": "DeviceManufacturer",
+                  "modelName": "DeviceModel"
+                },
+                "platform": "imx8ulp",
+                "dependencyChannels": [
+                  "imx8ulp-daily"
+                ]
+              },
+              "dependencyUpdatePackages": [],
+              "versionIdentifier": "1.0",
+              "aduDeploymentId": "ADU-deployment-id",
+              "createdDateTimeUtc": "2022-06-23T21:25:37.258",
+              "deploymentDateTimeUtc": "2022-06-23T21:25:37.258",
+              "updatePackageName": "MyUpdatePackage1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

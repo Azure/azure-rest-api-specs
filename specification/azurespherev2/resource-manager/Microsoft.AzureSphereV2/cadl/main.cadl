@@ -8,8 +8,12 @@ import "./catalog.cadl";
 import "./provisioningPackage.cadl";
 import "./certificate.cadl";
 import "./deviceRegistration.cadl";
+import "./syndicationChannel.cadl";
+import "./updatePackage.cadl";
+import "./deployment.cadl";
+import "./artifact.cadl";
 
-@armNamespace
+@armProviderNamespace
 @serviceTitle("Azure Sphere V2 Management")
 @serviceVersion("2022-09-01-privatepreview")
 @doc("Use these APIs to manage Azure Sphere V2 in your Azure subscription.")
@@ -24,13 +28,39 @@ using Cadl.Versioning;
 // Common elements:
 
 @doc("Provisioning state of the resource.")
-enum ProvisioningState {
-  Succeeded, Failed, Canceled, Provisioning, Updating, Deleting, Accepted
+enum ProvisioningStateEnum {
+   ...Azure.ResourceManager.ResourceProvisioningStateKV;
+   Provisioning, Updating, Deleting, Accepted
 }
+
+@knownValues(ProvisioningStateEnum)
+model ProvisioningState is string;
 
 @doc("General resource properties.")
 model ResourceProperties {
 	@doc("Resource provisioning state.")
 	@visibility("read")
 	provisioningState?: ProvisioningState;
+}
+
+@doc("The type used for update operations of the {name}.", TResource)
+@friendlyName("{name}Update", TResource)
+model ResourceUpdateModelNoProperties<TResource>
+  is OptionalProperties<UpdateableProperties<OmitProperties<TResource, "Name" | "name">>>;
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "Interface template does not require this."
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "This is an official operations template."
+@doc("Template for resources with no updateable properties")
+interface ResourceUpdateNoProperties<TResource> {
+  @autoRoute
+  @doc("Update a {name}", TResource)
+  @armResourceUpdate(TResource)
+  @patch
+  update(
+    ...ResourceInstanceParameters<TResource>,
+
+    @doc("The resource properties to be updated.")
+    @body
+    properties: ResourceUpdateModelNoProperties<TResource>
+  ): ArmResponse<TResource> | ErrorResponse;
 }

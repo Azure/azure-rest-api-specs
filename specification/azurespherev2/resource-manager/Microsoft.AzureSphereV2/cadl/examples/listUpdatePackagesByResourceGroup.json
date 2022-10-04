@@ -1,0 +1,31 @@
+{
+  "operationId": "UpdatePackages_ListByCatalog",
+  "title": "UpdatePackages_ListByCatalog",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "List of Azure Sphere update packages by resource group.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereGen2/catalogs/MyCatalog1/updatePackages/MyUpdatePackage1",
+            "name": "MyUpdatePackage1",
+            "type": "Microsoft.AzureSphereGen2/catalogs/updatePackages",
+            "location": "eastus",
+            "properties": {
+              "deploymentState": "Deployed",
+              "artifactNames": [
+                "artifact1"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
