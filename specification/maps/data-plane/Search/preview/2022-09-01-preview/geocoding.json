@@ -746,7 +746,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeatureCollectionType"
         },
         "features": {
           "$ref": "#/definitions/Features"
@@ -803,12 +803,12 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "must be Feature",
+          "description": "The type of a feature must be Feature.",
           "enum": [
             "Feature"
           ],
           "x-ms-enum": {
-            "name": "FeaturesItemTypeEnum",
+            "name": "FeatureTypeEnum",
             "modelAsString": true,
             "values": [
               {
@@ -856,7 +856,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeatureCollectionType"
         },
         "features": {
           "$ref": "#/definitions/Features"
@@ -987,8 +987,9 @@
       "type": "string",
       "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
     },
-    "FeatureType": {
+    "FeatureCollectionType": {
       "type": "string",
+      "description": "The type of a FeatureCollection object must be FeatureCollection.",
       "enum": [
         "FeatureCollection"
       ]
