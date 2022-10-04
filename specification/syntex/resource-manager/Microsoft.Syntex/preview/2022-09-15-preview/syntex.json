@@ -293,7 +293,7 @@
           "200": {
             "description": "Describes the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/OperationsListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -320,14 +320,10 @@
       "description": "Document processor details",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": false,
           "description": "Document processor properties.",
@@ -353,11 +349,11 @@
           "properties": {
             "spoTenantUrl": {
               "type": "string",
-              "description": "The URL of an SPO tenant associated with this document processor resource"
+              "description": "The URL of an SharePoint Online (SPO) tenant associated with this document processor resource"
             },
             "spoTenantId": {
               "type": "string",
-              "description": "The Id (GUID) of an SPO tenant associated with this document processor resource"
+              "description": "The Id (GUID) of an SharePoint Online (SPO) tenant associated with this document processor resource"
             }
           }
         }
@@ -374,11 +370,11 @@
         },
         "spoTenantUrl": {
           "type": "string",
-          "description": "The URL of an SPO tenant associated with this document processor resource"
+          "description": "The URL of an SharePoint Online (SPO) tenant associated with this document processor resource"
         },
         "spoTenantId": {
           "type": "string",
-          "description": "The Id (GUID) of an SPO tenant associated with this document processor resource"
+          "description": "The Id (GUID) of an SharePoint Online (SPO) tenant associated with this document processor resource"
         }
       },
       "required": [
@@ -421,30 +417,6 @@
           "readOnly": true
         }
       }
-    },
-    "OperationsListResult": {
-      "type": "object",
-      "description": "Lists the operations available.",
-      "properties": {
-        "value": {
-          "description": "Collection of available operation details",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results (if there are any)."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ErrorResponse": {
       "type": "object",
