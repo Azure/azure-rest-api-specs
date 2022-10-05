@@ -1,0 +1,31 @@
+import "@cadl-lang/versioning";
+
+namespace Azure.Language.TextAnalytics;
+
+@doc("The custom multi-label classification task.")
+model CustomMultiLabelClassificationLROTask
+  extends LROTask<"CustomMultiLabelClassification", CustomMultiLabelClassificationTaskParameters> {}
+
+@doc("The custom multi-label classification task result.")
+model CustomMultiLabelClassificationLROResult
+  extends LROTaskResult<
+    "CustomMultiLabelClassificationLROResults",
+    CustomLabelClassificationResult
+  > {}
+
+@doc("The custom multi-label classification task parameters.")
+model CustomMultiLabelClassificationTaskParameters is CustomTaskParameters;
+
+// TODO: flesh out
+@Versioning.removed(Versions.v2022_05_15_preview)
+model CustomSingleLabelClassficiationResult {}
+
+@Versioning.added(Versions.v2022_05_15_preview)
+@doc("The custom label classification task result.")
+model CustomLabelClassificationResult is CustomResult<ClassificationDocumentResult>;
+
+@doc("The classification document result.")
+model ClassificationDocumentResult is DocumentResult {
+  @doc("The classification result list.")
+  class: ClassificationResult[];
+}

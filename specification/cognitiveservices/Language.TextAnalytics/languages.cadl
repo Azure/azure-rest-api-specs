@@ -1,0 +1,47 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The language detection task parameters.")
+model AnalyzeTextLanguageDetectionInput
+  extends Task<
+    "LanguageDetection",
+    LanguageDetectionTaskParameters,
+    LanguageDetectionAnalysisInput
+  > {}
+
+@doc("The language detection task result.")
+model LanguageDetectionTaskResult
+  extends TaskResult<"LanguageDetectionResults", LanguageDetectionResult> {}
+
+@doc("The language detection task parameters.")
+model LanguageDetectionTaskParameters is PreBuiltTaskParameters;
+
+@doc("The language detection task result.")
+model LanguageDetectionResult is PreBuiltResult<LanguageDetectionDocumentResult>;
+
+@doc("The language detection document result.")
+model LanguageDetectionDocumentResult is DocumentResult {
+  @doc("Detected Language.")
+  detectedLanguage: DetectedLanguage[];
+}
+
+@doc("The language detection task input.")
+model LanguageDetectionAnalysisInput is LanguageAnalysisInput<LanguageInput>;
+
+@doc("Details of a detected language.")
+model DetectedLanguage {
+  @doc("Long name of a detected language (e.g. English, French).")
+  name: string;
+
+  @doc("""
+    A two letter representation of the detected language according to the ISO 639-1 
+    standard (e.g. en, fr).
+    """)
+  iso6391Name: string;
+
+  @doc("""
+    A confidence score between 0 and 1. 
+
+    Scores close to 1 indicate 100% certainty that the identified language is true.
+    """)
+  confidenceScore: float64;
+}

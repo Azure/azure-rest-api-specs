@@ -1,0 +1,28 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The analyze text entity task.")
+model AnalyzeTextEntityRecognitionInput extends Task<"EntityRecognition", EntitiesTaskParameters> {}
+
+@doc("The analyze text entity task result.")
+model EntitiesTaskResult extends TaskResult<"EntityRecognitionResults", EntitiesResult> {}
+
+@doc("The long-running analyze text entity task.")
+model EntitiesLROTask extends LROTask<"EntityRecognition", EntitiesTaskParameters> {}
+
+@doc("The long-running analyze text entity task result.")
+model EntityRecognitionLROResult
+  extends LROTaskResult<"EntityRecognitionLROResults", EntitiesResult> {}
+
+@doc("Supported parameters for an Entity Recognition task.")
+model EntitiesTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+}
+
+@doc("The prebuilt entities task result.")
+model EntitiesResult is PreBuiltResult<EntitiesDocumentResult>;
+
+@doc("The details of the entities document result.")
+model EntitiesDocumentResult is DocumentResult {
+  @doc("Recognized entities in the document.")
+  entities: Entity[];
+}

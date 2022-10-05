@@ -1,0 +1,18 @@
+import "./entities.cadl";
+
+namespace Azure.Language.TextAnalytics;
+
+@doc("Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents")
+model CustomEntitiesLROTask
+  extends LROTask<"CustomEntityRecognition", CustomEntitiesTaskParameters> {}
+@doc("The custom entity recognition task result.")
+model CustomEntityRecognitionLROResult
+  extends LROTaskResult<"CustomEntityRecognitionLROResults", CustomEntitiesResult> {}
+
+@doc("The custom entities task parameters.")
+model CustomEntitiesTaskParameters is CustomTaskParameters {
+  ...StringIndexTypeParameter;
+}
+
+@doc("The custom entities task result.")
+model CustomEntitiesResult is CustomResult<EntitiesDocumentResult>;

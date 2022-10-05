@@ -1,0 +1,205 @@
+// Original Swagger: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/cognitiveservices/data-plane/Language/preview/2022-03-01-preview
+
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+
+import "./customentities.cadl";
+import "./custommultilabel.cadl";
+import "./customsinglelabel.cadl";
+import "./entities.cadl";
+import "./entitylinking.cadl";
+import "./healthcare.cadl";
+import "./keyphrases.cadl";
+import "./languages.cadl";
+import "./pii.cadl";
+import "./sentiment.cadl";
+import "./summarization.cadl";
+import "./primitives.cadl";
+
+using Autorest;
+using Cadl.Http;
+using Cadl.Versioning;
+
+@versionedDependency([[Versions.v2022_05_15_preview, Azure.Core.Versions.v1_0_Preview_1]])
+@versioned(Versions)
+@service({
+  title: "Microsoft Cognitive Language Text Analytics",
+})
+@doc("""
+The language service API is a suite of natural language processing
+(NLP) skills built with best-in-class Microsoft machine learning algorithms.  The
+API can be used to analyze unstructured text for tasks such as sentiment analysis,
+key phrase extraction, language detection and question answering. Further documentation
+can be found in <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0
+""")
+@server(
+  "{Endpoint}/language",
+  "Language Service",
+  {
+    Endpoint: Endpoint,
+  }
+)
+namespace Azure.Language.TextAnalytics;
+
+enum Versions {
+  v2022_03_01_preview: "2022-03-01-preview",
+  v2022_05_15_preview: "2022-05-15-preview",
+}
+
+interface Analyze {
+  // TODO: Security definitions
+  //   "securityDefinitions": {
+  //   "apim_key": {
+  //     "type": "apiKey",
+  //     "description": "A subscription key for a Language service resource.",
+  //     "name": "Ocp-Apim-Subscription-Key",
+  //     "in": "header"
+  //   }
+  // },
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+  @route(":analyze-text")
+  @summary("Request text analysis over a collection of documents.")
+  @doc("Submit a collection of text documents for analysis.  Specify a single unique task to be executed immediately.")
+  // TODO: The other examples
+  @example("./examples/SuccessfulEntityLinkingRequest.json", "Successful Entity Linking Request")
+  // TODO: consumes/produces?
+  @post
+  analyzeText is Azure.Core.Foundations.Operation<
+    ShowStatsParameter & {
+      @doc("The request body") @body body: AnalyzeTextTask;
+    },
+    AnalyzeTextTaskResult
+  >;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+  @route("/analyze-text/jobs")
+  @summary("Submit text analysis job")
+  @doc("Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.")
+  @example(
+    "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json",
+    "Successful Submit Analysis Job Request"
+  )
+  @post
+  submitJob is Azure.Core.Foundations.Operation<AnalyzeTextJobsInput, LongRunningAcceptedResponse>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+  @route("/analyze-text/jobs/{jobId}")
+  @summary("Get analysis status and results")
+  @doc("Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.")
+  @example(
+    "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json",
+    "Successful Get Text Analysis Job Status Request"
+  )
+  @get
+  getJobStatus is Azure.Core.Foundations.Operation<
+    {
+      ...JobIdParameter;
+      ...TopSkipParameters;
+      ...ShowStatsParameter;
+    },
+    AnalyzeTextJobState
+  >;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+  @route("/analyze-text/jobs/{jobId}:cancel")
+  @summary("Cancel a long-running Text Analysis job")
+  @doc("Cancel a long-running Text Analysis job.")
+  @example(
+    "./examples/SuccessfulAnalyzeTextJobsCancelRequest.json",
+    "Successful Job Cancel Request"
+  )
+  @post
+  cancelJob is Azure.Core.Foundations.Operation<JobIdParameter, LongRunningAcceptedResponse>;
+}
+
+@doc("The input of an analyze text job.")
+model AnalyzeTextJobsInput {
+  @doc("Optional display name for the analysis job.")
+  displayName?: string;
+
+  @doc("The analysis input.")
+  analysisInput: MultiLanguageAnalysisInput;
+
+  @doc("The set of tasks to execute on the input documents.")
+  tasks: AnalyzeTextTask[];
+}
+
+@doc("The state of an analyze text job.")
+model AnalyzeTextJobState {
+  ...JobState;
+  ...TasksState;
+  ...AnalyzeTextJobStatistics;
+}
+
+@doc("The state of a job.")
+model JobState {
+  @doc("The display name.")
+  displayName?: string;
+
+  @doc("When the job was created.")
+  createdDateTime: zonedDateTime;
+
+  @doc("When the job expires.")
+  expirationDateTime?: zonedDateTime;
+
+  @doc("When the job was last updated.")
+  lastUpdateDateTime: zonedDateTime;
+
+  @doc("The job ID.")
+  // TODO: uuid
+  jobId: string;
+
+  @doc("The job status.")
+  status: State;
+
+  @doc("The errors encountered while running the job.")
+  errors?: Error[];
+
+  @doc("The next link token.")
+  "@nextLink": string;
+}
+
+@doc("The tasks state.")
+model TasksState {
+  @doc("The tasks state counts.")
+  tasks: TasksStateCounts;
+}
+
+@doc("Task state counts.")
+model TasksStateCounts {
+  @doc("The count of completed tasks.")
+  completed: int32;
+
+  @doc("The count of failed tasks.")
+  failed: int32;
+
+  @doc("The count of in-progress tasks.")
+  inProgress: int32;
+
+  @doc("The total count of tasks.")
+  total: int32;
+
+  @doc("The result items.")
+  items?: AnalyzeTextLROResult[];
+}
+
+@doc("The task state value.")
+@knownValues(TaskStateKV)
+model TaskStateValue is string;
+enum TaskStateKV {
+  notStarted,
+  running,
+  succeeded,
+  failed,
+  cancelled,
+  cancelling,
+}
+
+@doc("Analyze text job statistics.")
+model AnalyzeTextJobStatistics {
+  @doc("The statistics of the job.")
+  statistics?: DocumentRequestStatistics;
+}

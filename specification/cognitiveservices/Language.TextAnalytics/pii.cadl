@@ -1,0 +1,228 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The PII entity recognition task parameters.")
+model AnalyzeTextPiiEntitiesRecognitionInput
+  extends Task<"PiiEntityRecognition", PiiTaskParameters> {}
+
+@doc("The PII entity recognition task result.")
+model PiiTaskResult extends TaskResult<"PiiEntityRecognitionResults", PiiResult> {}
+
+@doc("The long-running PII entity recognition task parameters.")
+model PiiLROTask extends LROTask<"PiiEntityRecognition", PiiTaskParameters> {}
+
+@doc("The long-running PII entity recognition task result.")
+model PiiEntityRecognitionLROResult
+  extends LROTaskResult<"PiiEntityRecognitionLROResults", PiiResult> {}
+
+@doc("Supported parameters for a PII Entities Recognition task.")
+model PiiTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+
+  @doc("If specified, will set the PII domain to include only a subset of the entity categories.")
+  domain?: PiiDomain;
+
+  @doc("Describes the PII categories to return.")
+  piiCategories?: PiiCategories[];
+}
+
+@doc("The PII entity recognition task result.")
+model PiiResult is PreBuiltResult<PiiEntitiesDocumentResult>;
+
+@doc("The PII entity recognition document result.")
+model PiiEntitiesDocumentResult is DocumentResult {
+  @doc("Returns redacted text.")
+  redactedText?: string;
+
+  @doc("Recognized entities in the document.")
+  entities: Entity[];
+}
+
+@doc("The PII categories.")
+@knownValues(PiiCategoryKV)
+model PiiCategories is string;
+enum PiiCategoryKV {
+  ABARoutingNumber,
+  ARNationalIdentityNumber,
+  AUBankAccountNumber,
+  AUDriversLicenseNumber,
+  AUMedicalAccountNumber,
+  AUPassportNumber,
+  AUTaxFileNumber,
+  AUBusinessNumber,
+  AUCompanyNumber,
+  ATIdentityCard,
+  ATTaxIdentificationNumber,
+  ATValueAddedTaxNumber,
+  AzureDocumentDBAuthKey,
+  AzureIAASDatabaseConnectionAndSQLString,
+  AzureIoTConnectionString,
+  AzurePublishSettingPassword,
+  AzureRedisCacheString,
+  AzureSAS,
+  AzureServiceBusString,
+  AzureStorageAccountKey,
+  AzureStorageAccountGeneric,
+  BENationalNumber,
+  BENationalNumberV2,
+  BEValueAddedTaxNumber,
+  BRCPFNumber,
+  BRLegalEntityNumber,
+  BRNationalIDRG,
+  BGUniformCivilNumber,
+  CABankAccountNumber,
+  CADriversLicenseNumber,
+  CAHealthServiceNumber,
+  CAPassportNumber,
+  CAPersonalHealthIdentification,
+  CASocialInsuranceNumber,
+  CLIdentityCardNumber,
+  CNResidentIdentityCardNumber,
+  CreditCardNumber,
+  HRIdentityCardNumber,
+  HRNationalIDNumber,
+  HRPersonalIdentificationNumber,
+  HRPersonalIdentificationOIBNumberV2,
+  CYIdentityCard,
+  CYTaxIdentificationNumber,
+  CZPersonalIdentityNumber,
+  CZPersonalIdentityV2,
+  DKPersonalIdentificationNumber,
+  DKPersonalIdentificationV2,
+  DrugEnforcementAgencyNumber,
+  EEPersonalIdentificationCode,
+  EUDebitCardNumber,
+  EUDriversLicenseNumber,
+  EUGPSCoordinates,
+  EUNationalIdentificationNumber,
+  EUPassportNumber,
+  EUSocialSecurityNumber,
+  EUTaxIdentificationNumber,
+  FIEuropeanHealthNumber,
+  FINationalID,
+  FINationalIDV2,
+  FIPassportNumber,
+  FRDriversLicenseNumber,
+  FRHealthInsuranceNumber,
+  FRNationalID,
+  FRPassportNumber,
+  FRSocialSecurityNumber,
+  FRTaxIdentificationNumber,
+  FRValueAddedTaxNumber,
+  DEDriversLicenseNumber,
+  DEPassportNumber,
+  DEIdentityCardNumber,
+  DETaxIdentificationNumber,
+  DEValueAddedNumber,
+  GRNationalIDCard,
+  GRNationalIDV2,
+  GRTaxIdentificationNumber,
+  HKIdentityCardNumber,
+  HUValueAddedNumber,
+  HUPersonalIdentificationNumber,
+  HUTaxIdentificationNumber,
+  INPermanentAccount,
+  INUniqueIdentificationNumber,
+  IDIdentityCardNumber,
+  InternationalBankingAccountNumber,
+  IEPersonalPublicServiceNumber,
+  IEPersonalPublicServiceNumberV2,
+  ILBankAccountNumber,
+  ILNationalID,
+  ITDriversLicenseNumber,
+  ITFiscalCode,
+  ITValueAddedTaxNumber,
+  JPBankAccountNumber,
+  JPDriversLicenseNumber,
+  JPPassportNumber,
+  JPResidentRegistrationNumber,
+  JPSocialInsuranceNumber,
+  JPMyNumberCorporate,
+  JPMyNumberPersonal,
+  JPResidenceCardNumber,
+  LVPersonalCode,
+  LTPersonalCode,
+  LUNationalIdentificationNumberNatural,
+  LUNationalIdentificationNumberNonNatural,
+  MYIdentityCardNumber,
+  MTIdentityCardNumber,
+  MTTaxIDNumber,
+  NLCitizensServiceNumber,
+  NLCitizensServiceNumberV2,
+  NLTaxIdentificationNumber,
+  NLValueAddedTaxNumber,
+  NZBankAccountNumber,
+  NZDriversLicenseNumber,
+  NZInlandRevenueNumber,
+  NZMinistryOfHealthNumber,
+  NZSocialWelfareNumber,
+  NOIdentityNumber,
+  PHUnifiedMultiPurposeIDNumber,
+  PLIdentityCard,
+  PLNationalID,
+  PLNationalIDV2,
+  PLPassportNumber,
+  PLTaxIdentificationNumber,
+  PLREGONNumber,
+  PTCitizenCardNumber,
+  PTCitizenCardNumberV2,
+  PTTaxIdentificationNumber,
+  ROPersonalNumericalCode,
+  RUPassportNumberDomestic,
+  RUPassportNumberInternational,
+  SANationalID,
+  SGNationalRegistrationIdentityCardNumber,
+  SKPersonalNumber,
+  SITaxIdentificationNumber,
+  SIUniqueMasterCitizenNumber,
+  ZAIdentificationNumber,
+  KRResidentRegistrationNumber,
+  ESDNI,
+  ESSocialSecurityNumber,
+  ESTaxIdentificationNumber,
+  SQLServerConnectionString,
+  SENationalID,
+  SENationalIDV2,
+  SEPassportNumber,
+  SETaxIdentificationNumber,
+  SWIFTCode,
+  CHSocialSecurityNumber,
+  TWNationalID,
+  TWPassportNumber,
+  TWResidentCertificate,
+  THPopulationIdentificationCode,
+  TRNationalIdentificationNumber,
+  UKDriversLicenseNumber,
+  UKElectoralRollNumber,
+  UKNationalHealthNumber,
+  UKNationalInsuranceNumber,
+  UKUniqueTaxpayerNumber,
+  USUKPassportNumber,
+  USBankAccountNumber,
+  USDriversLicenseNumber,
+  USIndividualTaxpayerIdentification,
+  USSocialSecurityNumber,
+  UAPassportNumberDomestic,
+  UAPassportNumberInternational,
+  Organization,
+  Email,
+  URL,
+  Age,
+  PhoneNumber,
+  IPAddress,
+  Date,
+  Person,
+  Address,
+  All,
+  Default,
+}
+
+@doc("The PII domain.")
+@knownValues(PiiDomainKV)
+model PiiDomain is string;
+enum PiiDomainKV {
+  @doc("Indicates that entities in the Personal Health Information domain should be redacted.")
+  phi,
+
+  @doc("Indicates that no domain is specified.")
+  none,
+}

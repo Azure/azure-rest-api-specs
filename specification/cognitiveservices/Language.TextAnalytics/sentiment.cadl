@@ -1,0 +1,154 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The sentiment analysis task parameters.")
+model AnalyzeTextSentimentAnalysisInput
+  extends Task<"SentimentAnalysis", SentimentAnalysisTaskParameters> {}
+
+@doc("The sentiment analysis task result.")
+model SentimentTaskResult extends TaskResult<"SentimentAnalysisResults", SentimentResponse> {}
+
+@doc("The long-running sentiment analysis task parameters.")
+model SentimentAnalysisLROTask
+  extends LROTask<"SentimentAnalysis", SentimentAnalysisTaskParameters> {}
+
+@doc("The long-running sentiment analysis task result.")
+model SentimentLROResult extends LROTaskResult<"SentimentAnalysisLROResults", SentimentResponse> {}
+
+@doc("Supported parameters for a Sentiment Analysis task.")
+model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+
+  @doc("A boolean for opinion mining.")
+  opinionMining?: boolean = false;
+}
+
+@doc("The sentiment analysis task result.")
+model SentimentResponse is PreBuiltResult<SentimentDocumentResult>;
+
+@doc("The sentiment analysis document result.")
+model SentimentDocumentResult is DocumentResult {
+  @doc("Predicted sentiment for document.")
+  sentiment: DocumentSentimentValue;
+
+  @doc("Sentence level sentiment analysis.")
+  sentences: SentenceSentiment[];
+
+  @doc("Document level sentiment confidence scores between 0 and 1 for each sentiment class.")
+  confidenceScores: SentimentConfidenceScorePerLabel;
+}
+
+@doc("The setnence sentiment details.")
+model SentenceSentiment {
+  @doc("The sentence text.")
+  text: string;
+
+  @doc("The predicted sentiment for the sentence.")
+  sentiment: SentenceSentimentValue;
+
+  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
+  confidenceScores: SentimentConfidenceScorePerLabel;
+
+  @doc("The sentence offset from the start of the document.")
+  offset: int32;
+
+  @doc("The length of the sentence.")
+  length: int32;
+
+  @doc("The array of sentence targets for the sentence.")
+  targets?: SentenceTarget[];
+
+  @doc("The array of assessments for the sentence.")
+  assessements?: SentenceAssessment[];
+}
+
+@doc("The sentiment confidence score details")
+model SentimentConfidenceScorePerLabel {
+  ...TargetConfidenceScoreLabel;
+
+  @doc("The neutral score.")
+  neutral: float64;
+}
+
+@doc("A sentence assessment.")
+model SentenceAssessment {
+  @doc("Assessment sentiment in the sentence.")
+  sentiment: TokenSentimentValue;
+
+  @doc("Assessment sentiment confidence scores in the sentence.")
+  confidenceScores: TargetConfidenceScoreLabel;
+
+  @doc("The assessment offset from the start of the sentence.")
+  offset: int32;
+
+  @doc("The length of the assessment.")
+  length: int32;
+
+  @doc("The assessment text detected.")
+  text: string;
+
+  @doc("The indicator representing if the assessment is negated.")
+  isNegated: boolean;
+}
+
+@doc("A sentence target.")
+model SentenceTarget {
+  @doc("Targeted sentiment in the sentence.")
+  sentiment: TokenSentimentValue;
+
+  @doc("Target sentiment confidence scores for the target in the sentence.")
+  confidenceScores: TargetConfidenceScoreLabel;
+
+  @doc("The target offset from the start of the sentence.")
+  offset: int32;
+
+  @doc("The length of the target.")
+  length: int32;
+
+  @doc("The target text detected.")
+  text: string;
+
+  @doc("The array of either assessment or target objects which is related to the target.")
+  relations: TargetRelation[];
+}
+
+@doc("A target relation.")
+model TargetRelation {
+  @doc("The type related to the target.")
+  relationType: TargetRelationType;
+
+  @doc("The JSON pointer indicating the linked object.")
+  ref: string;
+}
+
+@doc("The target confidence score.")
+model TargetConfidenceScoreLabel {
+  @doc("The positive score.")
+  positive: float64;
+
+  @doc("The negative score.,")
+  negative: float64;
+}
+
+enum TargetRelationType {
+  assessment,
+  target,
+}
+
+enum DocumentSentimentValue {
+  positive,
+  neutral,
+  negative,
+  mixed,
+}
+
+enum SentenceSentimentValue {
+  positive,
+  neutral,
+  negative,
+}
+
+enum TokenSentimentValue {
+  positive,
+  neutral,
+  mixed,
+}

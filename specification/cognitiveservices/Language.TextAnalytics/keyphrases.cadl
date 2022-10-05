@@ -1,0 +1,27 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The keyphrase extraction task parameters.")
+model AnalyzeTextKeyPhraseExtractionInput
+  extends Task<"KeyPhraseExtraction", KeyPhraseTaskParameters> {}
+
+@doc("The keyphrase extraction task result.")
+model KeyPhraseTaskResult extends TaskResult<"KeyPhraseExtractionResults", KeyPhraseResult> {}
+
+@doc("The long-running keyphrase extraction task.")
+model KeyPhraseLROTask extends LROTask<"KeyPhraseExtraction", KeyPhraseTaskParameters> {}
+
+@doc("The long-running keyphrase extraction task result.")
+model KeyPhraseExtractionLROResult
+  extends LROTaskResult<"KeyPhraseExtractionLROResults", KeyPhraseResult> {}
+
+@doc("The keyphrase extraction task parameters.")
+model KeyPhraseTaskParameters is PreBuiltTaskParameters;
+
+@doc("The keyphrase extraction task result.")
+model KeyPhraseResult is PreBuiltResult<KeyPhrasesDocumentResult>;
+
+@doc("The keyphrase document task result.")
+model KeyPhrasesDocumentResult is DocumentResult {
+  @doc("A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.")
+  keyPhrases: string[];
+}

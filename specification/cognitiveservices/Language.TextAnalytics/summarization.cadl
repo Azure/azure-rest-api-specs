@@ -1,0 +1,55 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The extractive summarization task parameters.")
+model ExtractiveSummarizationLROTask
+  extends LROTask<"ExtractiveSummarization", ExtractiveSummarizationTaskParameters> {}
+
+@doc("The extractive summarization task result.")
+model ExtractiveSummarizationLROResult
+  extends LROTaskResult<"ExtractiveSummarizationLROResults", ExtractiveSummarizationResult> {}
+
+@doc("Supported parameters for an Extractive Summarization task.")
+model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+
+  @doc("The sentence count.")
+  sentenceCount?: int32 = 3;
+
+  @doc("The sorting criteria.")
+  sortBy?: ExtractiveSummarizationSortingCriteria;
+}
+
+@doc("The extractive summarization task result.")
+model ExtractiveSummarizationResult is PreBuiltResult<ExtractiveSummaryDocumentResult>;
+
+@doc("The extractive summarization document result.")
+model ExtractiveSummaryDocumentResult is DocumentResult {
+  @doc("The extracted sentences.")
+  sentences: ExtractedSummarySentence[];
+}
+
+@doc("The extractive summarization sorting criteria.")
+@knownValues(ExtractiveSummarizationSortingCriteriaKV)
+model ExtractiveSummarizationSortingCriteria is string;
+enum ExtractiveSummarizationSortingCriteriaKV {
+  @doc("Indicates that results should be sorted in order of appearance in the text.")
+  Offset,
+
+  @doc("Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.")
+  Rank,
+}
+
+@doc("An extracted summary sentence.")
+model ExtractedSummarySentence {
+  @doc("The extracted sentence text.")
+  text: string;
+
+  @doc("A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance.")
+  rankScore: float64;
+
+  @doc("The sentence offset from the start of the document, based on the value of the parameter StringIndexType.")
+  offset: int32;
+
+  @doc("The length of the sentence.")
+  length: int32;
+}

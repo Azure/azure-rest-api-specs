@@ -1,0 +1,67 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The entity linking task parameters.")
+model AnalyzeTextEntityLinkingInput extends Task<"EntityLinking", EntityLinkingTaskParameters> {}
+
+@doc("The entity linking task result.")
+model EntityLinkingTaskResult extends TaskResult<"EntityLinkingResults", EntityLinkingResult> {}
+
+@doc("The long-running entity linking task.")
+model EntityLinkingLROTask extends LROTask<"EntityLinking", EntityLinkingTaskParameters> {}
+
+@doc("The long-running entity linking task result.")
+model EntityLinkingLROResult
+  extends LROTaskResult<"EntityLinkingLROResults", EntityLinkingResult> {}
+
+@doc("Supported parameters for an Entity Linking task.")
+model EntityLinkingTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+}
+
+@doc("The entity linking result.")
+model EntityLinkingResult is PreBuiltResult<LinkedEntitiesDocumentResult>;
+
+@doc("The linked entities document result.")
+model LinkedEntitiesDocumentResult is DocumentResult {
+  @doc("Recognized well known entities in the document.")
+  entities: LinkedEntity[];
+}
+
+@doc("A linked entity.")
+model LinkedEntity {
+  @doc("Entity Linking formal name.")
+  name: string;
+
+  @doc("List of instances this entity appears in the text.")
+  matches: Match[];
+
+  @doc("Language used in the data source.")
+  language: string;
+
+  @doc("Unique identifier of the recognized entity from the data source.")
+  id?: string;
+
+  @doc("URL for the entity's page from the data source.")
+  url: string;
+
+  @doc("Data source used to extract entity linking, such as Wiki/Bing etc.")
+  dataSource: string;
+
+  @doc("Bing Entity Search API unique identifier of the recognized entity.")
+  bingId?: string;
+}
+
+@doc("Details about a match.")
+model Match {
+  @doc("If a well known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.")
+  confidenceScore: float64;
+
+  @doc("Entity text as appears in the request.")
+  text: string;
+
+  @doc("Start position for the entity match text")
+  offset: int32;
+
+  @doc("Length for the entity match text.")
+  length: int32;
+}

@@ -1,0 +1,446 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("The list of documents sent for analysis.")
+model LanguageAnalysisInput<TDocument> {
+  @doc("Collection of documents to analyze.")
+  documents: TDocument[];
+}
+
+@doc("The common parameters for language analysis inputs.")
+model LanguageInputCommonParameters {
+  @doc("A unique, non-empty document identifier.")
+  id: string;
+
+  @doc("The input text to process.")
+  text: string;
+}
+
+@doc("A multi-language input.")
+model MultiLanguageInput is LanguageInputCommonParameters {
+  @doc("""
+    This is the 2 letter ISO 639-1 representation of a language. 
+
+    For example, use "en" for English; "es" for Spanish etc. z,an
+    If not set, use "en" for English as default."
+    """)
+  language?: string;
+}
+
+// TODO: SingleLanguageInput?
+@doc("A language input.")
+model LanguageInput is LanguageInputCommonParameters {
+  @doc("""
+    This is the 2 letter ISO 639-1 representation of a language. 
+
+    For example, use "en" for English; "es" for Spanish etc. z,an
+    If not set, use "en" for English as default."
+    """)
+  countryHint?: string;
+}
+
+@doc("A multi-language analysis input.")
+model MultiLanguageAnalysisInput is LanguageAnalysisInput<MultiLanguageInput>;
+
+@doc("An analyze text task.")
+@discriminator("kind")
+model AnalyzeTextTask {}
+
+@doc("A generic task.")
+@Private.isTaggedWith(
+  TParameters,
+  "ParameterType",
+  "Parameters must be declared either `is PreBuiltTaskParameters` or `is CustomTaskParameters`."
+)
+model Task<TDiscriminator, TParameters, TAnalysisInput = MultiLanguageAnalysisInput>
+  extends AnalyzeTextTask {
+  kind: TDiscriminator;
+  analysisInput?: TAnalysisInput;
+  parameters?: TParameters;
+}
+
+@doc("An analyze text task result.")
+@discriminator("kind")
+model AnalyzeTextTaskResult {}
+
+@doc("A generic task result.")
+@Private.isTaggedWith(
+  TResult,
+  "ResultType",
+  "Result must be declared either `is PreBuiltResult` or `is CustomResult`."
+)
+model TaskResult<TDiscriminator, TResult> extends AnalyzeTextTaskResult {
+  @doc("The task kind.")
+  kind: TDiscriminator;
+
+  @doc("The task result.")
+  results: TResult;
+}
+
+@doc("An analyze text task that is long-running.")
+@discriminator("kind")
+model AnalyzeTextLROTask {
+  ...TaskIdentifier;
+}
+
+@doc("A generic long-running task.")
+model LROTask<TDiscriminator, TParameters> extends AnalyzeTextLROTask {
+  @doc("The task kind.")
+  kind: TDiscriminator;
+
+  @doc("The task parameters.")
+  parameters?: TParameters;
+}
+
+@doc("The result of a long-running analyze text operation.")
+@discriminator("kind")
+model AnalyzeTextLROResult {
+  ...TaskIdentifier;
+  ...TaskState;
+}
+
+@doc("A generic long-running task result.")
+@Private.isTaggedWith(
+  TResult,
+  "ResultType",
+  "Result must be declared either `is PreBuiltResult` or `is CustomResult`."
+)
+model LROTaskResult<TDiscriminator, TResult> extends AnalyzeTextLROResult {
+  @doc("The task kind.")
+  kind: TDiscriminator;
+
+  @doc("The results of the task.")
+  results: TResult[];
+}
+
+@doc("The task identifier.")
+model TaskIdentifier {
+  @doc("The task name.")
+  taskName: string;
+}
+
+@doc("The task state.")
+model TaskState {
+  @doc("Wehn the task was last updated.")
+  lastUpdateDateTime: zonedDateTime;
+
+  @doc("The task status.")
+  status: State;
+}
+
+@doc("The task state values.")
+@knownValues(StateKV)
+model State is string;
+enum StateKV {
+  notStarted,
+  running,
+  succeeded,
+  partiallySucceeded,
+  failed,
+  cancelled,
+  cancelling,
+}
+
+@Private.tag("ParameterType")
+@doc("Parameters object for a text analysis task using custom models.")
+model CustomTaskParameters {
+  ...LoggingOptOutParameter;
+
+  @doc("The project name.")
+  projectName: string;
+
+  @doc("The deployment name.")
+  deploymentName: string;
+}
+
+@Private.tag("ParameterType")
+@doc("Parameters object for a text analysis task using pre-built models.")
+model PreBuiltTaskParameters {
+  ...LoggingOptOutParameter;
+
+  @doc("This field indicates which model is used for scoring.")
+  modelVersion?: string = "latest";
+}
+
+@doc("The loggingOptOut parameter.")
+model LoggingOptOutParameter {
+  @doc("If set to true, you opt-out of having your text input logged for troubleshooting.")
+  loggingOptOut?: boolean = false;
+}
+
+@doc("A generic prebuilt result.")
+@Private.tag("ResultType")
+@Private.isTaggedWith(TDocument, "DocumentResult", "Document must be declared `is DocumentResult`.")
+model PreBuiltResult<TDocument> {
+  @doc("Response by document.")
+  documents: TDocument[];
+
+  @doc("Errors by document id.")
+  errors: DocumentError[];
+
+  @doc("If showStats=true was specified in the request this field will contain information about the request payload.")
+  statistics?: DocumentRequestStatistics;
+
+  @doc("This field indicates which model is used for scoring.")
+  modelVersion: string;
+}
+
+@doc("A generic custom result.")
+@Private.tag("ResultType")
+@Private.isTaggedWith(TDocument, "DocumentResult", "Document must be declared `is DocumentResult`.")
+model CustomResult<TDocument> {
+  @doc("Errors by document id.")
+  errors: DocumentError[];
+
+  @doc("The document request statistics.")
+  statistics?: DocumentRequestStatistics;
+
+  @doc("Response by document")
+  documents: TDocument[];
+
+  @doc("This field indicates the project name for the model.")
+  projectName: string;
+
+  @doc("This field indicates the deployment name for the model.")
+  deploymentName: string;
+}
+
+@Versioning.renamedFrom(Versions.v2022_05_15_preview, "RequestStatistics")
+@doc("Document request statistics.")
+model DocumentRequestStatistics {
+  @doc("Number of documents submitted in the request.")
+  documentsCount: int32;
+
+  @doc("Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.")
+  validDocumentsCount: int32;
+
+  @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
+  erroneousDocumentsCount: int32;
+
+  @Versioning.added(Versions.v2022_05_15_preview)
+  @doc("Number of transactions for the request.")
+  transactionsCount: int64;
+}
+
+@doc("The endpoint to use.")
+model Endpoint is string;
+
+@doc("The jobId parameter.")
+@friendlyName("JobId")
+model JobIdParameter {
+  // TODO: uuid format?
+  @doc("Job ID.")
+  @key
+  @path
+  jobId: string;
+}
+
+@doc("The showStats parameter.")
+@friendlyName("ShowStats")
+model ShowStatsParameter {
+  @doc("If set to true, response will contain request and document level statistics.")
+  @query
+  showStats?: boolean;
+}
+
+@doc("The stringIndexType parameter.")
+model StringIndexTypeParameter {
+  @doc("""
+    Specifies the method used to interpret string offsets.
+    
+    Defaults to grapheme clusters according to Unicode v8.0.0.
+    For additional information see https://aka.ms/text-analytics-offsets
+    """)
+  stringIndexType?: StringIndexType;
+}
+
+@doc("The string index type.")
+@knownValues(StringIndexTypeKV)
+model StringIndexType is string;
+enum StringIndexTypeKV {
+  @doc("Returned offset and length values will correspond to grapheme clusters according to Unicode 8.0.0.")
+  TextElement_v8,
+
+  @doc("Returned offset and length values will correspond to Unicode code points.")
+  UnicodeCodePoint,
+
+  @doc("Returned offset and length values will correspond to UTF-16 code units.")
+  Utf16CodeUnit,
+}
+
+@doc("The top and skip query parameters.")
+model TopSkipParameters {
+  ...Azure.Core.TopQueryParameter;
+  ...Azure.Core.SkipQueryParameter;
+}
+
+@doc("A classification result.")
+model ClassificationResult {
+  @doc("Classification type.")
+  category: string;
+
+  @doc("Confidence score between 0 and 1 of the recognized class.")
+  confidenceScore: float64;
+}
+
+@doc("An entity.")
+model Entity {
+  @doc("Entity text as appears in the request.")
+  text: string;
+
+  @doc("Entity type.")
+  category: string;
+
+  @doc("Entity sub type.")
+  subcategory?: string;
+
+  @doc("""
+    Start position for the entity text. 
+    Use of different 'stringIndexType' values can affect the offset returned.
+    """)
+  offset: int32;
+
+  @doc("""
+    Length for the entity text. 
+    Use of different 'stringIndexType' values can affect the length returned.
+    """)
+  length: int32;
+
+  @doc("Confidence score between 0 and 1 of the extracted entity.")
+  confidenceScore: float64;
+}
+
+@doc("A document result.")
+@Private.tag("DocumentResult")
+model DocumentResult {
+  @doc("Unique, non-empty document identifier.")
+  id: string;
+
+  @doc("Warnings encountered while processing document.")
+  warnings: DocumentWarning[];
+
+  @doc("If showStats=true was specified in the request this field will contain information about the document payload.")
+  statistics: DocumentStatistics[];
+}
+
+@doc("Document statistics.")
+model DocumentStatistics {
+  @doc("Number of text elements recognized in the document.")
+  charactersCount: int32;
+
+  @doc("Number of transactions for the document.")
+  transactionsCount: int32;
+}
+
+@doc("A document warning.")
+model DocumentWarning {
+  @doc("Warning code.")
+  code: WarningCode;
+
+  @doc("Warning message.")
+  message: string;
+
+  @doc("A JSON pointer reference indicating the target object.")
+  targetRef?: string;
+}
+
+@doc("A warning code.")
+@knownValues(WarningCodeKV)
+model WarningCode is string;
+enum WarningCodeKV {
+  LongWordsInDocument,
+  DocumentTruncated,
+}
+
+@doc("A document error.")
+model DocumentError {
+  @doc("Document id.")
+  id: string;
+
+  @doc("Document error.")
+  error: Error;
+}
+
+@doc("Unexpected error")
+@error
+model ErrorResponse {
+  @doc("Document error.")
+  error: Error;
+}
+
+@doc("An error template.")
+model ErrorTemplate<T> {
+  @doc("Error message.")
+  message: string;
+
+  @doc("Error code.")
+  code: T;
+
+  @doc("Error details.")
+  details?: Record<string>;
+
+  @doc("Error target.")
+  target?: string;
+
+  @doc("Inner error contains more specific information.")
+  innererror?: InnerError;
+}
+
+@doc("An error.")
+model Error is ErrorTemplate<ErrorCode>;
+
+@doc("An inner error.")
+model InnerError is ErrorTemplate<InnerErrorCode>;
+
+@doc("An error code.")
+@knownValues(ErrorCodeKV)
+model ErrorCode is string;
+enum ErrorCodeKV {
+  InvalidRequest,
+  InvalidArgument,
+  Unauthorized,
+  Forbidden,
+  NotFound,
+  ProjectNotFound,
+  OperationNotFound,
+  AzureCognitiveServiceNotFound,
+  AzureCognitiveSearchIndexNotFound,
+  TooManyRequests,
+  AzureCognitiveSearchThrottling,
+  AzureCognitiveSearchIndexLimitReached,
+  InternalServerError,
+  ServiceUnavailable,
+}
+
+@doc("An inner error code.")
+@knownValues(InnerErrorCodeKV)
+model InnerErrorCode is string;
+enum InnerErrorCodeKV {
+  InvalidRequest,
+  InvalidParameterValue,
+  KnowledgeBaseNotFound,
+  AzureCognitiveSearchNotFound,
+  AzureCognitiveSearchThrottling,
+  ExtractionFailure,
+  InvalidRequestBodyFormat,
+  EmptyRequest,
+  MissingInputDocuments,
+  InvalidDocument,
+  ModelVersionIncorrect,
+  InvalidDocumentBatch,
+  UnsupportedLanguageCode,
+  InvalidCountryHint,
+}
+
+@doc("A successful call results with an Operation-Location header used to check the status of the operation.")
+model LongRunningAcceptedResponse {
+  @doc("The status code.")
+  @statusCode
+  statusCode: 202;
+
+  @doc("The location to poll for status of the operation.")
+  @header("Operation-Location")
+  operationLocation: string;
+}
+
+alias Response<T> = (OkResponse & Body<T>) | ErrorResponse;
+alias LongRunningResponse = LongRunningAcceptedResponse | ErrorResponse;

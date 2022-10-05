@@ -1,0 +1,197 @@
+namespace Azure.Language.TextAnalytics;
+
+@doc("A long-running healthcare task.")
+model HealthcareLROTask extends LROTask<"Healthcare", HealthcareTaskParameters> {}
+
+@doc("A long-running healthcare task result.")
+model HealthcareLROResult extends LROTaskResult<"HealthcareLROResults", HealthcareResult> {}
+
+@doc("Supported parameters for a Healthcare task.")
+model HealthcareTaskParameters is PreBuiltTaskParameters {
+  ...StringIndexTypeParameter;
+
+  @Versioning.added(Versions.v2022_05_15_preview)
+  @doc("The FHIR version.")
+  fhirVersion?: FhirVersion;
+}
+
+@doc("A healthcare document result.")
+model HealthcareResult is PreBuiltResult<HealthcareEntitiesDocumentResult>;
+
+@doc("The healthcare document result details.")
+model HealthcareEntitiesDocumentResult is DocumentResult {
+  @doc("Healthcare entities.")
+  entities: HealthcareEntity[];
+
+  @doc("Healthcare entity relations.")
+  relations: HealthcareRelation[];
+
+  @Versioning.added(Versions.v2022_05_15_preview)
+  @doc("The FHIR bundle.")
+  fhirBundle?: Record<string>;
+}
+
+@doc("""
+  Every relation is an entity graph of a certain relationType, where all entities
+  are connected and have specific roles within the relation context.
+  """)
+model HealthcareRelation {
+  @doc("The entities in the relation.")
+  entities: HealthcareRelationEntity[];
+
+  @doc("Type of relation.")
+  relationType: HealthcareRelationType;
+}
+
+@doc("A healthcare relation type.")
+@knownValues(HealthcareRelationTypeKV)
+model HealthcareRelationType is string;
+enum HealthcareRelationTypeKV {
+  Abbreviation,
+  DirectionOfBodyStructure,
+  DirectionOfCondition,
+  DirectionOfExamination,
+  DirectionOfTreatment,
+  DosageOfMedication,
+  FormOfMedication,
+  FrequencyOfMedication,
+  FrequencyOfTreatment,
+  QualifierOfCondition,
+  RelationOfExamination,
+  RouteOfMedication,
+  TimeOfCondition,
+  TimeOfEvent,
+  TimeOfExamination,
+  TimeOfMedication,
+  TimeOfTreatment,
+  UnitOfCondition,
+  UnitOfExamination,
+  ValueOfCondition,
+  ValueOfExamination,
+}
+
+@doc("A healthcare relation entity.")
+model HealthcareRelationEntity {
+  @doc("Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .")
+  ref: string;
+
+  @doc("""
+    Role of entity in the relationship.    
+
+    For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their 
+    roles in parenthesis: CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma 
+    (Diagnosis).
+    """)
+  role: string;
+}
+
+@doc("A healthcare entity.")
+model HealthcareEntity {
+  @doc("Entity text as appears in the request.")
+  text: string;
+
+  @doc("Healthcare Entity Category.")
+  category: HealthcareEntityCategory;
+
+  @doc("Entity sub type")
+  subcategory?: string;
+
+  @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
+  offset: int32;
+
+  @doc("Length for the entity text. Use of different 'stringIndexType' values can affect the length returned.")
+  length: int32;
+
+  @doc("Confidence score between 0 and 1 of the extracted entity.")
+  confidenceScore: float64;
+
+  @doc("The healthcare assertion.")
+  assertion?: HealthcareAssertion;
+
+  @doc("Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.")
+  name?: string;
+
+  @doc("Entity references in known data sources.")
+  links?: HealthcareEntityLink[];
+}
+
+@doc("The healthcare entity category.")
+@knownValues(HealthcareEntityCategoryKV)
+model HealthcareEntityCategory is string;
+enum HealthcareEntityCategoryKV {
+  BODY_STRUCTURE,
+  AGE,
+  GENDER,
+  EXAMINATION_NAME,
+  DATE,
+  DIRECTION,
+  FREQUENCY,
+  MEASUREMENT_VALUE,
+  MEASUREMENT_UNIT,
+  RELATIONAL_OPERATOR,
+  TIME,
+  GENE_OR_PROTEIN,
+  VARIANT,
+  ADMINISTRATIVE_EVENT,
+  CARE_ENVIRONMENT,
+  HEALTHCARE_PROFESSION,
+  DIAGNOSIS,
+  SYMPTOM_OR_SIGN,
+  CONDITION_QUALIFIER,
+  MEDICATION_CLASS,
+  MEDICATION_NAME,
+  DOSAGE,
+  MEDICATION_FORM,
+  MEDICATION_ROUTE,
+  FAMILY_RELATION,
+  TREATMENT_NAME,
+}
+
+@doc("The healthcare assertion details.")
+model HealthcareAssertion {
+  @doc("Describes any conditionality on the entity.")
+  conditionality?: Conditionality;
+
+  @doc("Describes the entities certainty and polarity.")
+  certainty?: Certainty;
+
+  @doc("Describes if the entity is the subject of the text or if it describes someone else.")
+  association?: Association;
+}
+
+@doc("The healtcare entity link details.")
+model HealthcareEntityLink {
+  @doc("Entity Catalog. Examples include: UMLS, CHV, MSH, etc.")
+  dataSource: string;
+
+  @doc("Entity id in the given source catalog.")
+  id: string;
+}
+
+enum Conditionality {
+  hypothetical,
+  conditional,
+}
+
+enum Certainty {
+  positive,
+  positivePossible,
+  neutralPossible,
+  negativePossible,
+  negative,
+}
+
+@doc("The association value.")
+@knownValues(AssociationKV)
+model Association is string;
+enum AssociationKV {
+  subject,
+  other,
+}
+
+@doc("The FHIR version.")
+@knownValues(FhirVersionKV)
+model FhirVersion is string;
+enum FhirVersionKV {
+  "4.0.1",
+}

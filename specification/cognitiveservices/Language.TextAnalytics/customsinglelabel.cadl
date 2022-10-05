@@ -1,0 +1,20 @@
+import "./custommultilabel.cadl";
+
+namespace Azure.Language.TextAnalytics;
+
+@doc("The custom single label classification task.")
+model CustomSingleLabelClassificationLROTask
+  extends LROTask<
+    "CustomSingleLabelClassification",
+    CustomSingleLabelClassificationTaskParameters
+  > {}
+
+@doc("The custom single label classification task result.")
+model CustomSingleLabelClassificationLROResult
+  extends LROTaskResult<
+    "CustomSingleLabelClassificationLROResults",
+    CustomLabelClassificationResult
+  > {}
+
+@doc("The custom single label classification task parameters.")
+model CustomSingleLabelClassificationTaskParameters is CustomTaskParameters;
