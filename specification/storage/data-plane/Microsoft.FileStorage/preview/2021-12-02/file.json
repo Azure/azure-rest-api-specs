@@ -5657,7 +5657,7 @@
       ],
       "properties": {
         "Name": {
-          "type": "string"
+          "$ref": "#/definitions/StringEncoded"
         },
         "FileId": {
           "type": "string"
@@ -5685,7 +5685,7 @@
       ],
       "properties": {
         "Name": {
-          "type": "string"
+          "$ref": "#/definitions/StringEncoded"
         },
         "FileId": {
           "type": "string"
@@ -5697,6 +5697,24 @@
           "type": "string"
         },
         "PermissionKey": {
+          "type": "string"
+        }
+      }
+    },
+    "StringEncoded": {
+      "type": "object",
+      "properties": {
+        "Encoded": {
+          "xml": {
+            "name": "Encoded",
+            "attribute": true
+          },
+          "type": "boolean"
+        },
+        "content": {
+          "xml": {
+            "x-ms-text": true
+          },
           "type": "string"
         }
       }
@@ -5758,8 +5776,7 @@
           "description": "XSMB service handle ID"
         },
         "Path": {
-          "type": "string",
-          "description": "File or directory name including full path starting from share root"
+          "$ref": "#/definitions/StringEncoded"
         },
         "FileId": {
           "type": "string",
@@ -5870,6 +5887,12 @@
             "attribute": true
           }
         },
+        "Encoded": {
+          "type": "boolean",
+          "xml": {
+            "attribute": true
+          }
+        },
         "DirectoryPath": {
           "type": "string",
           "xml": {
@@ -5877,7 +5900,7 @@
           }
         },
         "Prefix": {
-          "type": "string"
+          "$ref": "#/definitions/StringEncoded"
         },
         "Marker": {
           "type": "string"
