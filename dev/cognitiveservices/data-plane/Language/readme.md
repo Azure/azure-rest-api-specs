@@ -36,7 +36,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml $(tag) == 'release_2022-07-01-preview'
+``` yaml $(tag) == 'release_2022-10-01-preview'
 input-file:
   - analyzetext.json
   - analyzetext-authoring.json
