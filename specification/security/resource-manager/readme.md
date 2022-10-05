@@ -1,6 +1,7 @@
 # Security Center
 
 > see https://aka.ms/autorest
+
 This is the AutoRest configuration file for Security.
 
 ---
@@ -10,9 +11,11 @@ This is the AutoRest configuration file for Security.
 To build the SDK for Security, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
+
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
@@ -154,6 +157,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 input-file:
   - Microsoft.Security/preview/2021-08-01-preview/standards.json
   - Microsoft.Security/preview/2021-08-01-preview/assignments.json
+
 override-info:
   title: SecurityCenter
 ```
@@ -199,6 +203,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -247,6 +252,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -304,6 +310,7 @@ input-file:
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -318,6 +325,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -340,6 +348,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -356,6 +365,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -378,6 +388,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/settings.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -393,6 +404,7 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -408,6 +420,7 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
 - Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2019-01-01-preview/assessments.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -420,6 +433,7 @@ These settings apply only when `--tag=package-2020-01-preview-python-only` is sp
 ``` yaml $(tag) == 'package-2020-01-preview-python-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -433,6 +447,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -445,6 +460,7 @@ These settings apply only when `--tag=package-2017-08-only` is specified on the 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -457,6 +473,7 @@ These settings apply only when `--tag=package-2018-06-only` is specified on the 
 ``` yaml $(tag) == 'package-2018-06-only'
 input-file:
 - Microsoft.Security/stable/2018-06-01/pricings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -469,6 +486,7 @@ These settings apply only when `--tag=package-2019-01-python-only` is specified 
 ``` yaml $(tag) == 'package-2019-01-python-only'
 input-file:
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -482,6 +500,7 @@ These settings apply only when `--tag=package-2019-01-only` is specified on the 
 input-file:
 - Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -496,6 +515,7 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -513,6 +533,7 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotAlerts.json
 - Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
 - Microsoft.Security/stable/2019-08-01/iotRecommendations.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -525,6 +546,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -549,6 +571,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -574,6 +597,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/alerts.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -588,6 +612,7 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -612,6 +637,7 @@ These settings apply only when `--tag=package-2021-01-only` is specified on the 
 ``` yaml $(tag) == 'package-2021-01-only'
 input-file:
 - Microsoft.Security/stable/2021-01-01/alerts.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -624,6 +650,7 @@ These settings apply only when `--tag=package-2021-05-preview-only` is specified
 ``` yaml $(tag) == 'package-2021-05-preview-only'
 input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -646,9 +673,12 @@ These settings apply only when `--tag=package-2021-10-preview-only` is specified
 ``` yaml $(tag) == 'package-2021-10-preview-only'
 input-file:
   - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
+
 # Needed when there is more than one input file
+
 override-info:
   title: SecurityCenter
+
 ```
 
 ### Tag: package-2021-06-only
@@ -660,6 +690,7 @@ input-file:
 - Microsoft.Security/stable/2021-06-01/settings.json
 - Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
 - Microsoft.Security/stable/2021-06-01/assessments.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -697,6 +728,7 @@ These settings apply only when `--tag=package-2022-01-preview-only` is specified
 input-file:
   - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
   - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json  
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -709,6 +741,7 @@ These settings apply only when `--tag=package-2022-01-only` is specified on the 
 ``` yaml $(tag) == 'package-2022-01-only'
 input-file:
 - Microsoft.Security/stable/2022-01-01/alerts.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
