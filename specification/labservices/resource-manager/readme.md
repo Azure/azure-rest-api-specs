@@ -26,15 +26,32 @@ These are the global settings for the LabServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-11
+tag: package-2022-08
 ```
 
 
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.LabServices/stable/2022-08-01/Images.json
+  - Microsoft.LabServices/stable/2022-08-01/LabPlans.json
+  - Microsoft.LabServices/stable/2022-08-01/LabServices.json
+  - Microsoft.LabServices/stable/2022-08-01/Labs.json
+  - Microsoft.LabServices/stable/2022-08-01/OperationResults.json
+  - Microsoft.LabServices/stable/2022-08-01/Schedules.json
+  - Microsoft.LabServices/stable/2022-08-01/Skus.json
+  - Microsoft.LabServices/stable/2022-08-01/Usages.json
+  - Microsoft.LabServices/stable/2022-08-01/Users.json
+  - Microsoft.LabServices/stable/2022-08-01/VirtualMachines.json
+```
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-11'
+``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - Microsoft.LabServices/preview/2021-11-15-preview/Images.json
   - Microsoft.LabServices/preview/2021-11-15-preview/LabPlans.json
@@ -47,6 +64,7 @@ input-file:
   - Microsoft.LabServices/preview/2021-11-15-preview/Usages.json
   - Microsoft.LabServices/preview/2021-11-15-preview/Skus.json
 ```
+
 ### Tag: package-preview-2021-10
 
 These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.

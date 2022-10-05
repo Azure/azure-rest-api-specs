@@ -17,6 +17,13 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 modelerfour:
   lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.CorsRule
+    transform: $['properties']['allowedMethods']['items']['x-ms-enum']['name'] = 'CorsRuleAllowedMethodsItem'
+  - from: swagger-document
+    where: $.definitions.ActiveDirectoryProperties
+    transform: $['properties']['accountType']['x-ms-enum']['name'] = 'ActiveDirectoryPropertiesAccountType'
 ```
 
 ### Go multi-api

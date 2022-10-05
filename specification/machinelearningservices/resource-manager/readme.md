@@ -31,7 +31,7 @@ tag: package-2022-10
 
 ### Tag: package-2022-10
 
-### Tag: package-2022-10 
+### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
