@@ -844,4 +844,8 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where: $.definitions.ManagedClusterSecurityProfile.properties.customCATrustCertificates      
+    reason: customCATrustCertificates contains a widely used acronym, no camel case restriction needed.
 ```
