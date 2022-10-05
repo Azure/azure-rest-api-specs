@@ -8580,6 +8580,20 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+    "A2AExtendedLocationDetails": {
+      "description": "ExtendedLocation details data.",
+      "type": "object",
+      "properties": {
+        "primaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The primary ExtendedLocation."
+        },
+        "recoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The recovery ExtendedLocation."
+        }
+      }
+    },
     "A2APolicyCreationInput": {
       "description": "A2A Policy creation input.",
       "required": [
@@ -10318,6 +10332,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AZoneDetails"
+          }
+        },
+        "extendedLocations": {
+          "description": "The ExtendedLocations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AExtendedLocationDetails"
           }
         }
       },
@@ -19840,6 +19861,14 @@
         "recoveryZone": {
           "description": "The recovery zone.",
           "type": "string"
+        },
+        "primaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The primary extended location."
+        },
+        "recoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The recovery extended location."
         }
       },
       "x-ms-discriminator-value": "A2A"
