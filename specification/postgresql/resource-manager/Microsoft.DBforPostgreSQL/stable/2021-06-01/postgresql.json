@@ -1391,6 +1391,7 @@
       "type": "string",
       "description": "The version of a server.",
       "enum": [
+        "14",
         "13",
         "12",
         "11"
@@ -1487,6 +1488,14 @@
         },
         "sourceServerResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+              }
+            ]
+          },
           "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore'.",
           "x-ms-mutability": [
             "create"
@@ -1735,6 +1744,14 @@
         },
         "delegatedSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "default": "",
           "description": "delegated subnet arm resource id.",
           "x-ms-mutability": [
@@ -1744,6 +1761,14 @@
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          },
           "default": "",
           "description": "private dns zone arm resource id.",
           "x-ms-mutability": [

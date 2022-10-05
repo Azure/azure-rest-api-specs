@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 multiapi: true
 batch:
+  - tag: package-2022-10-01-only
   - tag: package-2022-06-01-only
   - tag: package-2022-04-01-only
   - tag: package-2022-02-01-preview-only
@@ -33,7 +34,7 @@ batch:
   - tag: package-2019-06-01-only
   - tag: package-2019-03-01-only
   - tag: package-2018-11-27-preview-only
-  - tag: package-2018-09-01-only
+  - tag: package-2018-09-01-python-only
   - tag: package-2018-06-01-preview-only
   - tag: package-2018-04-16-only
   - tag: package-2018-03-01-only
@@ -52,6 +53,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
 perform-load: false
+```
+
+### Tag: package-2022-10-01-only and python
+
+These settings apply only when `--tag=package-2022-10-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-10-01-only'
+namespace: $(python-base-namespace).v2022_10_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2022_10_01
 ```
 
 ### Tag: package-2022-06-01-only and python
@@ -203,12 +214,12 @@ namespace: $(python-base-namespace).v2018_11_27_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2018_11_27_preview
 ```
 
-### Tag: package-2018-09-01-only and python
+### Tag: package-2018-09-01-python-only and python
 
-These settings apply only when `--tag=package-2018-09-01-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2018-09-01-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2018-09-01-only'
+``` yaml $(tag) == 'package-2018-09-01-python-only'
 namespace: $(python-base-namespace).v2018_09_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2018_09_01
 ```

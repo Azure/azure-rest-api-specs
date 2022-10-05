@@ -715,7 +715,7 @@
         "tags": [
           "Device and deployment management"
         ],
-        "description": "Deletes a device class.",
+        "description": "Deletes a device class. Device classes are created automatically when Device Update-enabled devices are connected to the hub but are not automatically cleaned up since they are referenced by DeviceClassSubgroups. If the user has deleted all DeviceClassSubgroups for a device class they can also delete the device class to remove the records from the system and to stop checking the compatibility of this device class with new updates. If a device is ever reconnected for this device class it will be re-created.",
         "operationId": "DeviceManagement_DeleteDeviceClass",
         "x-ms-examples": {
           "DeviceManagement_DeleteDeviceClass": {
@@ -1022,6 +1022,7 @@
             "in": "query",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "orderBy",
             "description": "Orders the set of groups returned. You can order by any combination of groupId, device count, created date, subgroupsWithNewUpdatesAvailableCount, subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount."
           },
           {
@@ -1090,7 +1091,7 @@
         "tags": [
           "Device and deployment management"
         ],
-        "description": "Deletes a device group.",
+        "description": "Deletes a device group. This group is automatically created when a Device Update-enabled device is connected to the hub and reports its properties. Groups, subgroups, and deployments are not automatically cleaned up but are retained for history purposes. Users can call this method to delete a group if they do not need to retain any of the history of the group and no longer need it. If a device is ever connected again for this group after the group was deleted it will be automatically re-created but there will be no history.",
         "operationId": "DeviceManagement_DeleteGroup",
         "x-ms-examples": {
           "DeviceManagement_DeleteGroup": {
@@ -1127,10 +1128,10 @@
           "Device and deployment management"
         ],
         "description": "Get device group update compliance information such as how many devices are on their latest update, how many need new updates, and how many are in progress on receiving a new update.",
-        "operationId": "DeviceManagement_GetGroupUpdateCompliance",
+        "operationId": "DeviceManagement_GetUpdateComplianceForGroup",
         "x-ms-examples": {
-          "DeviceManagement_GetGroupUpdateCompliance": {
-            "$ref": "./examples/DeviceManagement_GetGroupUpdateCompliance.json"
+          "DeviceManagement_GetUpdateComplianceForGroup": {
+            "$ref": "./examples/DeviceManagement_GetUpdateComplianceForGroup.json"
           }
         },
         "parameters": [
@@ -1184,7 +1185,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property."
+            "description": "Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property. This filter is deprecated and should not be used."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1237,6 +1238,7 @@
             "in": "query",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "orderBy",
             "description": "Orders the set of deployments returned. You can order by start date."
           }
         ],
@@ -1474,7 +1476,10 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/DeviceClassSubgroupFilter"
+        "x-ms-odata": "#/definitions/DeviceClassSubgroupFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}": {
@@ -1483,10 +1488,10 @@
           "Device and deployment management"
         ],
         "description": "Gets device class subgroup details.",
-        "operationId": "DeviceManagement_GetDeviceClassSubgroupDetails",
+        "operationId": "DeviceManagement_GetDeviceClassSubgroup",
         "x-ms-examples": {
           "DeviceManagement_GetGroupUpdateCompliance": {
-            "$ref": "./examples/DeviceManagement_GetDeviceClassSubgroupDetails.json"
+            "$ref": "./examples/DeviceManagement_GetDeviceClassSubgroup.json"
           }
         },
         "parameters": [
@@ -1526,7 +1531,7 @@
         "operationId": "DeviceManagement_DeleteDeviceClassSubgroup",
         "x-ms-examples": {
           "DeviceManagement_DeleteDeviceClassSubgroup": {
-            "$ref": "./examples/DeviceManagement_DeleteDeviceclassSubgroup.json"
+            "$ref": "./examples/DeviceManagement_DeleteDeviceClassSubgroup.json"
           }
         },
         "parameters": [
@@ -1604,10 +1609,10 @@
           "Device and deployment management"
         ],
         "description": "Get the best available update for a device class subgroup and a count of how many devices need this update.",
-        "operationId": "DeviceManagement_ListBestUpdatesForDeviceClassSubgroup",
+        "operationId": "DeviceManagement_GetBestUpdatesForDeviceClassSubgroup",
         "x-ms-examples": {
           "DeviceManagement_ListBestUpdatesForDeviceClassSubgroup": {
-            "$ref": "./examples/DeviceManagement_ListBestUpdatesForDeviceClassSubgroup.json"
+            "$ref": "./examples/DeviceManagement_GetBestUpdatesForDeviceClassSubgroup.json"
           }
         },
         "parameters": [
@@ -1670,6 +1675,7 @@
             "in": "query",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "orderBy",
             "description": "Orders the set of deployments returned. You can order by start date."
           }
         ],
@@ -1702,7 +1708,7 @@
         "operationId": "DeviceManagement_GetDeploymentForDeviceClassSubgroup",
         "x-ms-examples": {
           "DeviceManagement_GetDeploymentForDeviceClassSubgroup": {
-            "$ref": "./examples/DeviceManagement_GetDeploymentForDeviceclassSubgroup.json"
+            "$ref": "./examples/DeviceManagement_GetDeploymentForDeviceClassSubgroup.json"
           }
         },
         "parameters": [
@@ -1742,10 +1748,10 @@
           "Deployment management"
         ],
         "description": "Deletes a device class subgroup deployment.",
-        "operationId": "DeviceManagement_DeleteDeviceClassSubgroupDeployment",
+        "operationId": "DeviceManagement_DeleteDeploymentForDeviceClassSubgroup",
         "x-ms-examples": {
-          "DeviceManagement_DeleteDeviceClassSubgroupDeployment": {
-            "$ref": "./examples/DeviceManagement_DeleteDeviceclassSubgroupDeployment.json"
+          "DeviceManagement_DeleteDeploymentForDeviceClassSubgroup": {
+            "$ref": "./examples/DeviceManagement_DeleteDeploymentForDeviceClassSubgroup.json"
           }
         },
         "parameters": [
@@ -1919,10 +1925,10 @@
           "Device and deployment management"
         ],
         "description": "Gets a list of devices in a deployment along with their state. Useful for getting a list of failed devices.",
-        "operationId": "DeviceManagement_ListDevicesForDeviceClassSubgroupDeployment",
+        "operationId": "DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment",
         "x-ms-examples": {
-          "DeviceManagement_ListDevicesForDeviceClassSubgroupDeployment": {
-            "$ref": "./examples/DeviceManagement_ListDevicesForDeviceClassSubgroupDeployment.json"
+          "DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment": {
+            "$ref": "./examples/DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment.json"
           }
         },
         "parameters": [
@@ -2080,11 +2086,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_CollectLogs",
-        "description": "Start the device diagnostics log collection operation on specified devices.",
+        "operationId": "DeviceManagement_StartLogCollection",
+        "description": "Start the device diagnostics log collection on specified devices.",
         "x-ms-examples": {
-          "DeviceManagement_CollectLogs": {
-            "$ref": "./examples/DeviceManagement_CollectLogs.json"
+          "DeviceManagement_StartLogCollection": {
+            "$ref": "./examples/DeviceManagement_StartLogCollection.json"
           }
         },
         "parameters": [
@@ -2092,26 +2098,26 @@
             "$ref": "#/parameters/InstanceIdParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/LogCollectionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "logCollectionRequest",
+            "name": "logCollection",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperation"
+              "$ref": "#/definitions/LogCollection"
             },
-            "description": "The deployment properties."
+            "description": "The log collection properties."
           }
         ],
         "responses": {
           "201": {
-            "description": "Operation created.",
+            "description": "Log collection created.",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperation"
+              "$ref": "#/definitions/LogCollection"
             }
           },
           "default": {
@@ -2126,11 +2132,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_GetLogCollectionOperation",
-        "description": "Get the device diagnostics log collection operation",
+        "operationId": "DeviceManagement_GetLogCollection",
+        "description": "Get the device diagnostics log collection",
         "x-ms-examples": {
-          "DeviceManagement_GetLogCollectionOperation": {
-            "$ref": "./examples/DeviceManagement_GetLogCollectionOperation.json"
+          "DeviceManagement_GetLogCollection": {
+            "$ref": "./examples/DeviceManagement_GetLogCollection.json"
           }
         },
         "parameters": [
@@ -2138,7 +2144,7 @@
             "$ref": "#/parameters/InstanceIdParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/LogCollectionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2148,7 +2154,7 @@
           "200": {
             "description": "Operation resource",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperation"
+              "$ref": "#/definitions/LogCollection"
             }
           },
           "default": {
@@ -2165,11 +2171,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_ListLogCollectionOperations",
-        "description": "Get all device diagnostics log collection operations",
+        "operationId": "DeviceManagement_ListLogCollections",
+        "description": "Get all device diagnostics log collections",
         "x-ms-examples": {
-          "DeviceManagement_ListLogCollectionOperations": {
-            "$ref": "./examples/DeviceManagement_ListLogCollectionOperations.json"
+          "DeviceManagement_ListLogCollections": {
+            "$ref": "./examples/DeviceManagement_ListLogCollections.json"
           }
         },
         "parameters": [
@@ -2182,9 +2188,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of all device diagnostics operations",
+            "description": "List of all log collections",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperationList"
+              "$ref": "#/definitions/LogCollectionList"
             }
           },
           "default": {
@@ -2204,11 +2210,11 @@
         "tags": [
           "Device and deployment management"
         ],
-        "operationId": "DeviceManagement_GetLogCollectionOperationDetailedStatus",
-        "description": "Get device diagnostics log collection operation with detailed status",
+        "operationId": "DeviceManagement_GetLogCollectionDetailedStatus",
+        "description": "Get log collection with detailed status",
         "x-ms-examples": {
-          "DeviceManagement_GetLogCollectionOperationDetailedStatus": {
-            "$ref": "./examples/DeviceManagement_GetLogCollectionOperationDetailedStatus.json"
+          "DeviceManagement_GetLogCollectionDetailedStatus": {
+            "$ref": "./examples/DeviceManagement_GetLogCollectionDetailedStatus.json"
           }
         },
         "parameters": [
@@ -2279,7 +2285,10 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/DeviceHealthFilter"
+        "x-ms-odata": "#/definitions/DeviceHealthFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
@@ -3228,6 +3237,20 @@
       },
       "description": "Device filter."
     },
+    "DeviceClassSubgroupFilter": {
+      "type": "object",
+      "properties": {
+        "compatPropertyName": {
+          "type": "string",
+          "description": "The name of the compat property to use in the filter. E.g. compatProperties/manufacturer"
+        },
+        "compatPropertyValue": {
+          "type": "string",
+          "description": "The value the compat property to use in the filter. E.g. Contoso"
+        }
+      },
+      "description": "Device class subgroups filter. Filters device class subgroups based on device class compat property names and values"
+    },
     "DevicesList": {
       "description": "The list of devices.",
       "type": "object",
@@ -3427,15 +3450,15 @@
         },
         "createdDateTime": {
           "type": "string",
-          "description": "Date and time when the deviceclass subgroup was created."
+          "description": "Date and time when the device class subgroup was created."
         },
         "deviceCount": {
           "type": "integer",
-          "description": "The number of devices in the deviceclass subgroup."
+          "description": "The number of devices in the device class subgroup."
         },
         "deploymentId": {
           "type": "string",
-          "description": "The active deployment Id for the deviceclass subgroup."
+          "description": "The active deployment Id for the device class subgroup."
         }
       },
       "required": [
@@ -3443,7 +3466,7 @@
         "groupId",
         "createdDateTime"
       ],
-      "description": "Device class subgroup details."
+      "description": "Device class subgroup details. A device class subgroup is a subset of devices in a group that share the same device class id."
     },
     "DeviceClassSubgroupsList": {
       "description": "The list of device class subgroups within a group.",
@@ -3470,7 +3493,7 @@
       "properties": {
         "deploymentId": {
           "type": "string",
-          "description": "The deployment identifier."
+          "description": "The caller-provided deployment identifier."
         },
         "startDateTime": {
           "type": "string",
@@ -3479,18 +3502,18 @@
         },
         "update": {
           "$ref": "#/definitions/UpdateInfo",
-          "description": "Update information."
+          "description": "Update information for the update in the deployment."
         },
         "groupId": {
           "type": "string",
-          "description": "The group identity"
+          "description": "The group identity for the devices the deployment is intended to update."
         },
         "deviceClassSubgroups": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The device class subgroups for the deployment."
+          "description": "The device class subgroups the deployment is compatible with and subgroup deployments have been created for. This is not provided by the caller during CreateOrUpdateDeployment but is automatically determined by Device Update"
         },
         "isCanceled": {
           "type": "boolean",
@@ -4038,12 +4061,13 @@
       ],
       "description": "Device Update agent id"
     },
-    "LogCollectionOperation": {
+    "LogCollection": {
       "type": "object",
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The diagnostics operation id."
+          "description": "The log collection id.",
+          "x-ms-client-name": "logCollectionId"
         },
         "deviceList": {
           "type": "array",
@@ -4083,7 +4107,8 @@
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The device diagnostics operation id."
+          "description": "The device diagnostics operation id.",
+          "x-ms-client-name": "logCollectionId"
         },
         "createdDateTime": {
           "type": "string",
@@ -4111,15 +4136,15 @@
       },
       "description": "Device diagnostics operation detailed status"
     },
-    "LogCollectionOperationList": {
-      "description": "The list of diagnostics operations with server paging support.",
+    "LogCollectionList": {
+      "description": "The list of log collections with server paging support.",
       "type": "object",
       "properties": {
         "value": {
           "description": "The collection of pageable items.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LogCollectionOperation"
+            "$ref": "#/definitions/LogCollection"
           }
         },
         "nextLink": {
@@ -4131,8 +4156,8 @@
         "value"
       ]
     },
-    "LogCollectionOperationDetailedStatusList": {
-      "description": "The list of diagnostics operations with detailed status, with server paging support.",
+    "LogCollectionDetailedStatusList": {
+      "description": "The list of log collections with detailed status, with server paging support.",
       "type": "object",
       "properties": {
         "value": {
@@ -4332,7 +4357,7 @@
       "name": "endpoint",
       "in": "path",
       "required": true,
-      "format": "uri",
+      "format": "url",
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "description": "Account endpoint.",
@@ -4405,6 +4430,17 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "LogCollectionIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "Log collection identifier.",
+      "minLength": 1,
+      "maxLength": 256,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "logCollectionId"
     },
     "DeviceIdParameter": {
       "name": "deviceId",

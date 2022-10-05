@@ -3967,7 +3967,7 @@
         "tags": [
           "managedPrivateEndpoints"
         ],
-        "operationId": "managedPrivateEndpoints_CreateOrUpdate",
+        "operationId": "ManagedPrivateEndpoints_CreateOrUpdate",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Create": {
             "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
@@ -5778,13 +5778,18 @@
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "description": "Linked service reference type.",
           "enum": [
             "LinkedServiceReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
