@@ -265,7 +265,7 @@
           {
             "in": "query",
             "name": "partyId",
-            "description": "Id of the farmer.",
+            "description": "Id of the party.",
             "required": true,
             "type": "string"
           },
@@ -312,6 +312,58 @@
         "x-ms-examples": {
           "ApplicationData_CreateCascadeDeleteJob": {
             "$ref": "./examples/ApplicationData_CreateCascadeDeleteJob.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApplicationData"
+        ],
+        "description": "Get cascade delete job for application data resource.",
+        "operationId": "ApplicationData_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationData_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/ApplicationData_GetCascadeDeleteJobDetails.json"
           }
         }
       }
@@ -697,6 +749,62 @@
             "$ref": "./examples/ApplicationData_CreateOrUpdate.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationData"
+        ],
+        "description": "Deletes a specified application data resource under a particular party.",
+        "operationId": "ApplicationData_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "ID of the associated party resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "applicationDataId",
+            "description": "ID of the application data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationData_Delete": {
+            "$ref": "./examples/ApplicationData_Delete.json"
+          }
+        }
       }
     },
     "/parties/{partyId}/attachments": {
@@ -730,7 +838,7 @@
           {
             "in": "query",
             "name": "resourceTypes",
-            "description": "Resource Types of the resource.\r\ni.e. Farmer, Farm, Field, SeasonalField, Boundary, ApplicationData, HarvestData, TillageData, PlantingData, PlantTissueAnalysis.",
+            "description": "Resource Types of the resource.\r\ni.e. Party, Farm, Field, SeasonalField, Boundary, ApplicationData, HarvestData, TillageData, PlantingData, PlantTissueAnalysis.",
             "type": "array",
             "items": {
               "type": "string"
@@ -2404,6 +2512,333 @@
         }
       }
     },
+    "/crops": {
+      "get": {
+        "tags": [
+          "Crops"
+        ],
+        "description": "Returns a paginated list of crop resources.",
+        "operationId": "Crops_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "phenotypes",
+            "description": "Crop phenotypes of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "breedingMethods",
+            "description": "Breeding method of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CropListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Crops_List": {
+            "$ref": "./examples/Crops_List.json"
+          }
+        }
+      }
+    },
+    "/crops/{cropId}": {
+      "get": {
+        "tags": [
+          "Crops"
+        ],
+        "description": "Gets a specified crop resource.",
+        "operationId": "Crops_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropId",
+            "description": "Id of the crop.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Crop"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Crops_Get": {
+            "$ref": "./examples/Crops_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Crops"
+        ],
+        "description": "Creates or updates a crop resource.",
+        "operationId": "Crops_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropId",
+            "description": "Id of the crop resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "crop",
+            "description": "Crop resource payload to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Crop"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Crop"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Crop"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Crops_CreateOrUpdate": {
+            "$ref": "./examples/Crops_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Crops"
+        ],
+        "description": "Deletes Crop for given crop id.",
+        "operationId": "Crops_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropId",
+            "description": "Id of crop to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Crops_Delete": {
+            "$ref": "./examples/Crops_Delete.json"
+          }
+        }
+      }
+    },
     "/sensor-partners/{sensorPartnerId}/device-data-models": {
       "get": {
         "tags": [
@@ -3216,6 +3651,599 @@
         }
       }
     },
+    "/farms": {
+      "get": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Returns a paginated list of farm resources across all parties.",
+        "operationId": "Farms_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Farms_List": {
+            "$ref": "./examples/Farms_List.json"
+          }
+        }
+      }
+    },
+    "/farms/cascade-delete/{jobId}": {
+      "put": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Create a cascade delete job for specified farm.",
+        "operationId": "Farms_CreateCascadeDeleteJob",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Job ID supplied by end user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "partyId",
+            "description": "ID of the associated party.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "farmId",
+            "description": "ID of the farm to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Farms_CreateCascadeDeleteJob": {
+            "$ref": "./examples/Farms_CreateCascadeDeleteJob.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Get a cascade delete job for specified farm.",
+        "operationId": "Farms_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Farms_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/Farms_GetCascadeDeleteJobDetails.json"
+          }
+        }
+      }
+    },
+    "/parties/{partyId}/farms": {
+      "get": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Returns a paginated list of farm resources under a particular party.",
+        "operationId": "Farms_ListByPartyId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "Id of the associated party.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Farms_ListByPartyId": {
+            "$ref": "./examples/Farms_ListByPartyId.json"
+          }
+        }
+      }
+    },
+    "/parties/{partyId}/farms/{farmId}": {
+      "get": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Gets a specified farm resource under a particular party.",
+        "operationId": "Farms_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "ID of the associated party resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "farmId",
+            "description": "ID of the farm resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Farm"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Farms_Get": {
+            "$ref": "./examples/Farms_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Creates or updates a farm resource under a particular party.",
+        "operationId": "Farms_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "Id of the associated party resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "farmId",
+            "description": "Id of the farm resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "farm",
+            "description": "Farm resource payload to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Farm"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Farm"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Farm"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Farms_CreateOrUpdate": {
+            "$ref": "./examples/Farms_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Farms"
+        ],
+        "description": "Deletes a specified farm resource under a particular party.",
+        "operationId": "Farms_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "Id of the party.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "farmId",
+            "description": "Id of the farm.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Farms_Delete": {
+            "$ref": "./examples/Farms_Delete.json"
+          }
+        }
+      }
+    },
     "/fields": {
       "get": {
         "tags": [
@@ -3489,7 +4517,7 @@
         "tags": [
           "Fields"
         ],
-        "description": "Returns a paginated list of field resources under a particular farmer.",
+        "description": "Returns a paginated list of field resources under a particular party.",
         "operationId": "Fields_ListByPartyId",
         "produces": [
           "application/json"
@@ -3649,7 +4677,7 @@
           {
             "in": "path",
             "name": "partyId",
-            "description": "Id of the associated farmer.",
+            "description": "Id of the associated party.",
             "required": true,
             "type": "string"
           },
@@ -3711,7 +4739,7 @@
           {
             "in": "path",
             "name": "partyId",
-            "description": "Id of the associated farmer resource.",
+            "description": "Id of the associated party resource.",
             "required": true,
             "type": "string"
           },
@@ -4193,6 +5221,58 @@
             "$ref": "./examples/HarvestData_CreateCascadeDeleteJob.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "HarvestData"
+        ],
+        "description": "Get cascade delete job for harvest data resource.",
+        "operationId": "HarvestData_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "HarvestData_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/HarvestData_GetCascadeDeleteJobDetails.json"
+          }
+        }
       }
     },
     "/parties/{partyId}/harvest-data": {
@@ -4630,6 +5710,62 @@
         "x-ms-examples": {
           "HarvestData_CreateOrUpdate": {
             "$ref": "./examples/HarvestData_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HarvestData"
+        ],
+        "description": "Deletes a specified harvest data resource under a particular party.",
+        "operationId": "HarvestData_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "ID of the associated party resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "harvestDataId",
+            "description": "ID of the harvest data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "HarvestData_Delete": {
+            "$ref": "./examples/HarvestData_Delete.json"
           }
         }
       }
@@ -6791,6 +7927,128 @@
         }
       }
     },
+    "/model-inference/models/microsoft-sensor-placement/infer-data/{jobId}": {
+      "put": {
+        "tags": [
+          "ModelInference"
+        ],
+        "description": "Create a Sensor Placement Model job.",
+        "operationId": "ModelInference_CreateSensorPlacementModelJob",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "JobId provided by user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "job",
+            "description": "Job parameters supplied by user.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SensorPlacementModelJob"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SensorPlacementModelJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ModelInference_CreateSensorPlacementModelJob": {
+            "$ref": "./examples/ModelInference_CreateSensorPlacementModelJob.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ModelInference"
+        ],
+        "description": "Get Sensor Placement Model job's details.",
+        "operationId": "ModelInference_GetSensorPlacementModelJob",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SensorPlacementModelJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "ModelInference_GetSensorPlacementModelJob": {
+            "$ref": "./examples/ModelInference_GetSensorPlacementModelJob.json"
+          }
+        }
+      }
+    },
     "/model-inference/models/microsoft-soil-moisture/infer-data/{jobId}": {
       "put": {
         "tags": [
@@ -7079,7 +8337,7 @@
           "NutrientAnalyses"
         ],
         "description": "Returns a paginated list of nutrient analysis resources under a particular party.",
-        "operationId": "NutrientAnalyses_ListByPartyIdId",
+        "operationId": "NutrientAnalyses_ListByPartyId",
         "produces": [
           "application/json"
         ],
@@ -7234,8 +8492,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "NutrientAnalyses_ListByPartyIdId": {
-            "$ref": "./examples/NutrientAnalyses_ListByPartyIdId.json"
+          "NutrientAnalyses_ListByPartyId": {
+            "$ref": "./examples/NutrientAnalyses_ListByPartyId.json"
           }
         }
       }
@@ -8980,6 +10238,62 @@
             "$ref": "./examples/PlantingData_CreateOrUpdate.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "PlantingData"
+        ],
+        "description": "Deletes a specified planting data resource under a particular party.",
+        "operationId": "PlantingData_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "ID of the associated party resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "plantingDataId",
+            "description": "ID of the planting data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "PlantingData_Delete": {
+            "$ref": "./examples/PlantingData_Delete.json"
+          }
+        }
       }
     },
     "/planting-data": {
@@ -9304,6 +10618,58 @@
             "$ref": "./examples/PlantingData_CreateCascadeDeleteJob.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "PlantingData"
+        ],
+        "description": "Get cascade delete job for planting data resource.",
+        "operationId": "PlantingData_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "PlantingData_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/PlantingData_GetCascadeDeleteJobDetails.json"
+          }
+        }
       }
     },
     "/parties/{partyId}/plant-tissue-analyses": {
@@ -9346,8 +10712,8 @@
           },
           {
             "in": "query",
-            "name": "cropVarietiesIds",
-            "description": "Crop varieties ids of the plant tissue analyses.",
+            "name": "cropProductsIds",
+            "description": "Crop products ids of the plant tissue analyses.",
             "type": "array",
             "items": {
               "type": "string"
@@ -9714,8 +11080,8 @@
           },
           {
             "in": "query",
-            "name": "cropVarietiesIds",
-            "description": "Crop varieties ids of the plant tissue analyses.",
+            "name": "cropProductsIds",
+            "description": "Crop products ids of the plant tissue analyses.",
             "type": "array",
             "items": {
               "type": "string"
@@ -11752,8 +13118,8 @@
           },
           {
             "in": "query",
-            "name": "cropVarietyIds",
-            "description": "CropVarietyIds of the resource.",
+            "name": "cropProductIds",
+            "description": "CropProductIds of the resource.",
             "type": "array",
             "items": {
               "type": "string"
@@ -12130,8 +13496,8 @@
           },
           {
             "in": "query",
-            "name": "cropVarietyIds",
-            "description": "CropVarietyIds of the resource.",
+            "name": "cropProductIds",
+            "description": "CropProductIds of the resource.",
             "type": "array",
             "items": {
               "type": "string"
@@ -14955,7 +16321,7 @@
           {
             "in": "path",
             "name": "partyId",
-            "description": "ID of the associated farmer resource.",
+            "description": "ID of the associated party resource.",
             "required": true,
             "type": "string"
           },
@@ -15005,7 +16371,7 @@
         "tags": [
           "TillageData"
         ],
-        "description": "Creates or updates an tillage data resource under a particular farmer.",
+        "description": "Creates or updates an tillage data resource under a particular party.",
         "operationId": "TillageData_CreateOrUpdate",
         "consumes": [
           "application/merge-patch+json"
@@ -15017,7 +16383,7 @@
           {
             "in": "path",
             "name": "partyId",
-            "description": "ID of the associated farmer.",
+            "description": "ID of the associated party.",
             "required": true,
             "type": "string"
           },
@@ -15075,6 +16441,62 @@
         "x-ms-examples": {
           "TillageData_CreateOrUpdate": {
             "$ref": "./examples/TillageData_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TillageData"
+        ],
+        "description": "Deletes a specified tillage data resource under a particular party.",
+        "operationId": "TillageData_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "partyId",
+            "description": "ID of the associated party resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "tillageDataId",
+            "description": "ID of the tillage data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "TillageData_Delete": {
+            "$ref": "./examples/TillageData_Delete.json"
           }
         }
       }
@@ -15387,6 +16809,58 @@
             "$ref": "./examples/TillageData_CreateCascadeDeleteJob.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "TillageData"
+        ],
+        "description": "Get cascade delete job for tillage data resource.",
+        "operationId": "TillageData_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "TillageData_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/TillageData_GetCascadeDeleteJobDetails.json"
+          }
+        }
       }
     },
     "/weather": {
@@ -15482,7 +16956,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/WeatherDataListResponse"
+              "$ref": "#/definitions/WeatherDataPartyBasedListResponse"
             }
           },
           "default": {
@@ -16670,7 +18144,7 @@
             "Field",
             "SeasonalField",
             "Boundary",
-            "FarmOperationApplicationData",
+            "ApplicationData",
             "HarvestData",
             "TillageData",
             "PlantingData",
@@ -16985,7 +18459,7 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         "partyId": {
-          "description": "Farmer Id.",
+          "description": "Party Id.",
           "type": "string",
           "readOnly": true
         },
@@ -17089,7 +18563,6 @@
         "source": "string",
         "parentId": "string",
         "parentType": "string",
-        "isPrimary": false,
         "type": "string",
         "geometry": {
           "type": "Polygon",
@@ -17403,12 +18876,144 @@
         }
       }
     },
+    "Crop": {
+      "description": "Schema of crop resource.",
+      "type": "object",
+      "properties": {
+        "phenotype": {
+          "description": "Crop phenotype.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "breedingMethod": {
+          "description": "Breeding Method.",
+          "enum": [
+            "VARIETY",
+            "HYBRID",
+            "UNKNOWN"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BreedingMethod",
+            "modelAsString": true
+          }
+        },
+        "measurements": {
+          "description": "Measurements.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Measure"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "id": {
+          "description": "Unique resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z."
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z."
+        },
+        "source": {
+          "description": "Source of the resource.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of the resource.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "Created by user/tenant id.",
+          "maxLength": 50,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Modified by user/tenant id.",
+          "maxLength": 50,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
+    "CropListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Crop"
+          }
+        },
+        "skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
     "CropProduct": {
-      "description": "Schema of crop variety resource.",
+      "description": "Schema of crop product resource.",
       "type": "object",
       "properties": {
         "cropIds": {
-          "description": "Ids of the crops it belongs to.\r\nNote: A maximum of 25 crops can be associated with a cropVariety.",
+          "description": "Ids of the crops it belongs to.\r\nNote: A maximum of 25 crops can be associated with a cropProduct.",
           "uniqueItems": true,
           "type": "array",
           "items": {
@@ -17416,19 +19021,19 @@
           }
         },
         "brand": {
-          "description": "CropVariety Brand.",
+          "description": "CropProduct Brand.",
           "maxLength": 100,
           "minLength": 0,
           "type": "string"
         },
         "product": {
-          "description": "CropVariety product.",
+          "description": "CropProduct product.",
           "maxLength": 100,
           "minLength": 0,
           "type": "string"
         },
         "trait": {
-          "description": "CropVariety trait.",
+          "description": "CropProduct trait.",
           "maxLength": 100,
           "minLength": 0,
           "type": "string"
@@ -17437,7 +19042,7 @@
           "$ref": "#/definitions/Measure"
         },
         "treatments": {
-          "description": "CropVariety treatments.",
+          "description": "CropProduct treatments.",
           "type": "array",
           "items": {
             "type": "string"
@@ -18606,7 +20211,7 @@
         "resourceType": {
           "description": "Resource type associated with the record.",
           "enum": [
-            "Farmer",
+            "Party",
             "Farm",
             "Field",
             "SeasonalField",
@@ -18738,7 +20343,7 @@
         "resourceType": {
           "description": "Associated Resource type for this attachment.",
           "enum": [
-            "Farmer",
+            "Party",
             "Farm",
             "Field",
             "SeasonalField",
@@ -20658,8 +22263,8 @@
           "minLength": 2,
           "type": "string"
         },
-        "farmerId": {
-          "description": "Farmer ID which belongs to the scene.",
+        "partyId": {
+          "description": "Party ID which belongs to the scene.",
           "type": "string"
         },
         "id": {
@@ -22243,141 +23848,6 @@
         }
       }
     },
-    "WeatherData": {
-      "description": "Schema of weather data.",
-      "required": [
-        "boundaryId",
-        "dateTime",
-        "extensionId",
-        "extensionVersion",
-        "farmerId",
-        "granularity",
-        "location",
-        "weatherDataType"
-      ],
-      "type": "object",
-      "properties": {
-        "farmerId": {
-          "description": "Farmer ID.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "boundaryId": {
-          "description": "Boundary ID.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "extensionId": {
-          "description": "ID of the weather extension.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/Location"
-        },
-        "dateTime": {
-          "format": "date-time",
-          "description": "Date-time of the weather data, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string"
-        },
-        "unitSystemCode": {
-          "description": "Unit System like US/SI etc.",
-          "type": "string"
-        },
-        "extensionVersion": {
-          "description": "Version of the weather data extension.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "weatherDataType": {
-          "description": "Type of weather data (forecast/historical).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "granularity": {
-          "description": "Granularity of weather data (daily/hourly).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "cloudCover": {
-          "$ref": "#/definitions/Measure"
-        },
-        "dewPoint": {
-          "$ref": "#/definitions/Measure"
-        },
-        "growingDegreeDay": {
-          "$ref": "#/definitions/Measure"
-        },
-        "precipitation": {
-          "$ref": "#/definitions/Measure"
-        },
-        "pressure": {
-          "$ref": "#/definitions/Measure"
-        },
-        "relativeHumidity": {
-          "$ref": "#/definitions/Measure"
-        },
-        "soilMoisture": {
-          "$ref": "#/definitions/Measure"
-        },
-        "soilTemperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "temperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "visibility": {
-          "$ref": "#/definitions/Measure"
-        },
-        "wetBulbTemperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windChill": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windDirection": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windGust": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windSpeed": {
-          "$ref": "#/definitions/Measure"
-        },
-        "id": {
-          "description": "Weather data ID.",
-          "type": "string"
-        },
-        "eTag": {
-          "description": "The ETag value to implement optimistic concurrency.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-12-31T11:10:21Z."
-        },
-        "modifiedDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-12-31T11:10:21Z."
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {},
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
     "WeatherDataDeleteJob": {
       "description": "Schema of weather data delete job.",
       "required": [
@@ -22748,7 +24218,142 @@
         }
       }
     },
-    "WeatherDataListResponse": {
+    "WeatherDataPartyBased": {
+      "description": "Schema of weather data.",
+      "required": [
+        "boundaryId",
+        "dateTime",
+        "extensionId",
+        "extensionVersion",
+        "granularity",
+        "location",
+        "partyId",
+        "weatherDataType"
+      ],
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party ID.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundaryId": {
+          "description": "Boundary ID.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "extensionId": {
+          "description": "ID of the weather extension.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "dateTime": {
+          "format": "date-time",
+          "description": "Date-time of the weather data, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "unitSystemCode": {
+          "description": "Unit System like US/SI etc.",
+          "type": "string"
+        },
+        "extensionVersion": {
+          "description": "Version of the weather data extension.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "weatherDataType": {
+          "description": "Type of weather data (forecast/historical).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "granularity": {
+          "description": "Granularity of weather data (daily/hourly).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "cloudCover": {
+          "$ref": "#/definitions/Measure"
+        },
+        "dewPoint": {
+          "$ref": "#/definitions/Measure"
+        },
+        "growingDegreeDay": {
+          "$ref": "#/definitions/Measure"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/Measure"
+        },
+        "pressure": {
+          "$ref": "#/definitions/Measure"
+        },
+        "relativeHumidity": {
+          "$ref": "#/definitions/Measure"
+        },
+        "soilMoisture": {
+          "$ref": "#/definitions/Measure"
+        },
+        "soilTemperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "temperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "visibility": {
+          "$ref": "#/definitions/Measure"
+        },
+        "wetBulbTemperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windChill": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windDirection": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windGust": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windSpeed": {
+          "$ref": "#/definitions/Measure"
+        },
+        "id": {
+          "description": "Weather data ID.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z."
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z."
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
+    "WeatherDataPartyBasedListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "required": [
         "value"
@@ -22759,7 +24364,7 @@
           "description": "List of requested objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WeatherData"
+            "$ref": "#/definitions/WeatherDataPartyBased"
           }
         },
         "skipToken": {
