@@ -137,9 +137,6 @@
               }
             }
           },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
           "x-ms-examples": {
             "GetSettings": {
               "$ref": "./examples/ListSettings-example.json"
@@ -171,6 +168,16 @@
           "value": {
             "type": "string",
             "description": "The value of the pool setting."
+          },
+          "type": {
+            "type": {
+              "enum": [
+                "boolean",
+                "string",
+                "integer",
+                "float"
+              ],
+            "description": "The type specifier of the value."
           }
         },
         "required": [
