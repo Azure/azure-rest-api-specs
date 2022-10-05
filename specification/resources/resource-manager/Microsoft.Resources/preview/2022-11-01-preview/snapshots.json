@@ -168,7 +168,8 @@
         },
         "content": {
           "description": "The actual ARM Resource",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         }
       }
     },
@@ -183,6 +184,9 @@
         "value": {
           "description": "The list of snapshots",
           "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ],
           "items": {
             "$ref": "#/definitions/Snapshot"
           }
