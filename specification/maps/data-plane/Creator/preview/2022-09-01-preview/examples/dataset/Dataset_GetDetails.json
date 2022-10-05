@@ -2,7 +2,7 @@
   "parameters": {
     "geography": "us",
     "api-version": "2022-09-01-preview",
-    "datasetId": "[datasetId]"
+    "datasetId": "{datasetId}"
   },
   "responses": {
     "200": {
@@ -11,12 +11,17 @@
         "Access-Control-Expose-Headers": "Resource-Location"
       },
       "body": {
-        "created": "2021-05-21T01:02:03.456Z",
-        "datasetId": "[datasetId]",
-        "description": "Some description or comment about the dataset",
+        "created": "2021-05-21T03:04:05.678Z",
+        "datasetId": "{datasetId}",
+        "description": "Some other description or comment for the dataset.",
         "datasetSources": {
-          "conversionId": "15d21452-c9bb-27b6-5e79-743ca5c3205d",
-          "appendDatasetId": "6a49a490-1d9c-4f05-bf1e-51998fbc4733"
+          "conversionIds": [
+            "{conversionId}"
+          ],
+          "udids": [
+            "{udid}"
+          ],
+          "appendDatasetId": "{appendDatasetId}"
         },
         "featureCounts": {
           "directoryInfo": 2,
