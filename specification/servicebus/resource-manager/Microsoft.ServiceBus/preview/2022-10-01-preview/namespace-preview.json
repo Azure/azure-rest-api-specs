@@ -778,10 +778,10 @@
           },
           "default": "Enabled"
         },
-        "partitions": {
+        "premiumMessagingPartitions": {
           "format": "int32",
           "type": "integer",
-          "description": "The number of partitions of a Service Bus namespace. This property is only applicable to Premium SKU namespaces. The default value is 1 and possible values are 1 and 4"
+          "description": "The number of partitions of a Service Bus namespace. This property is only applicable to Premium SKU namespaces. The default value is 1 and possible values are 1, 2 and 4"
         }
       },
       "description": "Properties of the namespace."
@@ -875,7 +875,7 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The specified messaging units for the tier. For Premium tier, capacity are 1,2 and 4."
+          "description": "Messaging units for your service bus premium namespace. Valid capacities are {1, 2, 4, 8, 16} multiples of your properties.premiumMessagingPartitions setting. For example, If properties.premiumMessagingPartitions is 1 then possible capacity values are 1, 2, 4, 8, and 16. If properties.premiumMessagingPartitions is 4 then possible capacity values are 4, 8, 16, 32 and 64"
         }
       },
       "required": [
