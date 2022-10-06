@@ -13,45 +13,32 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys/{keyName}": {
       "put": {
         "tags": [
-          "MHSMKeys"
+          "ManagedHsmKeys"
         ],
-        "operationId": "MHSMKeys_CreateIfNotExist",
+        "operationId": "ManagedHsmKeys_CreateIfNotExist",
         "description": "Creates the first version of a new key if it does not exist. If it already exists, then the existing key is returned without any write operations being performed. This API does not create subsequent versions, and does not update existing keys.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group which contains the specified managed HSM."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the managed HSM which contains the key to be created."
+            "$ref": "#/parameters/ManagedHSMName"
           },
           {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,127}$",
-            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagedHSMKeyName"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MHSMKeyCreateParameters"
+              "$ref": "#/definitions/ManagedHsmKeyCreateParameters"
             },
             "description": "The parameters used to create the specified key."
           }
@@ -60,7 +47,7 @@
           "200": {
             "description": "The created key.",
             "schema": {
-              "$ref": "#/definitions/MHSMKey"
+              "$ref": "#/definitions/ManagedHsmKey"
             }
           },
           "default": {
@@ -84,45 +71,32 @@
       },
       "get": {
         "tags": [
-          "MHSMKeys"
+          "ManagedHsmKeys"
         ],
-        "operationId": "MHSMKeys_Get",
+        "operationId": "ManagedHsmKeys_Get",
         "description": "Gets the current version of the specified key from the specified managed HSM.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group which contains the specified managed HSM."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the vault which contains the key to be retrieved."
+            "$ref": "#/parameters/ManagedHSMName"
           },
           {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,127}$",
-            "description": "The name of the key to be retrieved."
+            "$ref": "#/parameters/ManagedHSMKeyName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The retrieved key.",
             "schema": {
-              "$ref": "#/definitions/MHSMKey"
+              "$ref": "#/definitions/ManagedHsmKey"
             }
           },
           "default": {
@@ -148,37 +122,29 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys": {
       "get": {
         "tags": [
-          "MHSMKeys"
+          "ManagedHsmKeys"
         ],
-        "operationId": "MHSMKeys_List",
+        "operationId": "ManagedHsmKeys_List",
         "description": "Lists the keys in the specified managed HSM.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group which contains the specified managed HSM."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the managed HSM which contains the keys to be retrieved."
+            "$ref": "#/parameters/ManagedHSMName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The retrieved page of keys.",
             "schema": {
-              "$ref": "#/definitions/MHSMKeyListResult"
+              "$ref": "#/definitions/ManagedHsmKeyListResult"
             }
           },
           "default": {
@@ -207,53 +173,35 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys/{keyName}/versions/{keyVersion}": {
       "get": {
         "tags": [
-          "MHSMKeys"
+          "ManagedHsmKeys"
         ],
-        "operationId": "MHSMKeys_GetVersion",
+        "operationId": "ManagedHsmKeys_GetVersion",
         "description": "Gets the specified version of the specified key in the specified managed HSM.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group which contains the specified managed HSM."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the managed HSM which contains the key version to be retrieved."
+            "$ref": "#/parameters/ManagedHSMName"
           },
           {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,127}$",
-            "description": "The name of the key version to be retrieved."
+            "$ref": "#/parameters/ManagedHSMKeyName"
           },
           {
-            "name": "keyVersion",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{32}$",
-            "description": "The version of the key to be retrieved."
+            "$ref": "#/parameters/ManagedHSMKeyVersion"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The retrieved key version.",
             "schema": {
-              "$ref": "#/definitions/MHSMKey"
+              "$ref": "#/definitions/ManagedHsmKey"
             }
           },
           "default": {
@@ -279,45 +227,32 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys/{keyName}/versions": {
       "get": {
         "tags": [
-          "MHSMKeys"
+          "ManagedHsmKeys"
         ],
-        "operationId": "MHSMKeys_ListVersions",
+        "operationId": "ManagedHsmKeys_ListVersions",
         "description": "Lists the versions of the specified key in the specified managed HSM.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group which contains the specified managed HSM."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the managed HSM which contains the key versions to be retrieved."
+            "$ref": "#/parameters/ManagedHSMName"
           },
           {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,127}$",
-            "description": "The name of the key versions to be retrieved."
+            "$ref": "#/parameters/ManagedHSMKeyName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The retrieved page of key versions.",
             "schema": {
-              "$ref": "#/definitions/MHSMKeyListResult"
+              "$ref": "#/definitions/ManagedHsmKeyListResult"
             }
           },
           "default": {
@@ -345,10 +280,10 @@
     }
   },
   "definitions": {
-    "MHSMKeyProperties": {
+    "ManagedHsmKeyProperties": {
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/MHSMKeyAttributes",
+          "$ref": "#/definitions/ManagedHsmKeyAttributes",
           "description": "The attributes of the key."
         },
         "kty": {
@@ -417,18 +352,18 @@
           "readOnly": true
         },
         "rotationPolicy": {
-          "$ref": "#/definitions/MHSMRotationPolicy",
+          "$ref": "#/definitions/ManagedHsmRotationPolicy",
           "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
         },
         "release_policy": {
-          "$ref": "#/definitions/MHSMKeyReleasePolicy",
+          "$ref": "#/definitions/ManagedHsmKeyReleasePolicy",
           "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
         }
       },
       "description": "The properties of the key.",
       "type": "object"
     },
-    "MHSMKeyAttributes": {
+    "ManagedHsmKeyAttributes": {
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -482,7 +417,7 @@
       "description": "The object attributes managed by the Azure Key Vault service.",
       "type": "object"
     },
-    "MHSMKeyCreateParameters": {
+    "ManagedHsmKeyCreateParameters": {
       "properties": {
         "tags": {
           "type": "object",
@@ -492,7 +427,7 @@
           "description": "The tags that will be assigned to the key."
         },
         "properties": {
-          "$ref": "#/definitions/MHSMKeyProperties",
+          "$ref": "#/definitions/ManagedHsmKeyProperties",
           "description": "The properties of the key to be created."
         }
       },
@@ -503,11 +438,11 @@
       "x-ms-azure-resource": true,
       "type": "object"
     },
-    "MHSMKey": {
+    "ManagedHsmKey": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MHSMKeyProperties",
+          "$ref": "#/definitions/ManagedHsmKeyProperties",
           "description": "The properties of the key."
         }
       },
@@ -522,12 +457,12 @@
       "description": "The key resource.",
       "type": "object"
     },
-    "MHSMKeyListResult": {
+    "ManagedHsmKeyListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MHSMKey"
+            "$ref": "#/definitions/ManagedHsmKey"
           },
           "description": "The key resources."
         },
@@ -539,16 +474,16 @@
       "description": "The page of keys.",
       "type": "object"
     },
-    "MHSMRotationPolicy": {
+    "ManagedHsmRotationPolicy": {
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/MHSMKeyRotationPolicyAttributes",
+          "$ref": "#/definitions/ManagedHsmKeyRotationPolicyAttributes",
           "description": "The attributes of key rotation policy."
         },
         "lifetimeActions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MHSMLifetimeAction"
+            "$ref": "#/definitions/ManagedHsmLifetimeAction"
           },
           "x-ms-identifiers": [],
           "description": "The lifetimeActions for key rotation action."
@@ -556,7 +491,7 @@
       },
       "type": "object"
     },
-    "MHSMKeyRotationPolicyAttributes": {
+    "ManagedHsmKeyRotationPolicyAttributes": {
       "properties": {
         "created": {
           "type": "integer",
@@ -577,20 +512,20 @@
       },
       "type": "object"
     },
-    "MHSMLifetimeAction": {
+    "ManagedHsmLifetimeAction": {
       "properties": {
         "trigger": {
-          "$ref": "#/definitions/MHSMTrigger",
+          "$ref": "#/definitions/ManagedHsmTrigger",
           "description": "The trigger of key rotation policy lifetimeAction."
         },
         "action": {
-          "$ref": "#/definitions/MHSMAction",
+          "$ref": "#/definitions/ManagedHsmAction",
           "description": "The action of key rotation policy lifetimeAction."
         }
       },
       "type": "object"
     },
-    "MHSMTrigger": {
+    "ManagedHsmTrigger": {
       "properties": {
         "timeAfterCreate": {
           "type": "string",
@@ -603,7 +538,7 @@
       },
       "type": "object"
     },
-    "MHSMAction": {
+    "ManagedHsmAction": {
       "properties": {
         "type": {
           "type": "string",
@@ -620,7 +555,7 @@
       },
       "type": "object"
     },
-    "MHSMKeyReleasePolicy": {
+    "ManagedHsmKeyReleasePolicy": {
       "properties": {
         "contentType": {
           "description": "Content type and version of key release policy",
@@ -650,6 +585,29 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ManagedHSMName": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Managed HSM Pool within the specified resource group."
+    },
+    "ManagedHSMKeyName": {
+      "name": "keyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{1,127}$",
+      "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
+    },
+    "ManagedHSMKeyVersion": {
+      "name": "keyVersion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{32}$",
+      "description": "The version of the key to be retrieved."
     }
   },
   "securityDefinitions": {
