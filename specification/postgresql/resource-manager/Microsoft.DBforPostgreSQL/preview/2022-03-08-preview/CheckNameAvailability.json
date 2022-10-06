@@ -48,17 +48,17 @@
         "description": "Check the availability of name for resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "nameAvailabilityRequest",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
             },
             "description": "The required parameters for checking if resource name is available."
           }
@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -93,20 +93,20 @@
         "description": "Check the availability of name for resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationNameParameter"
+            "$ref": "common-types.json#/parameters/LocationNameParameter"
           },
           {
             "name": "nameAvailabilityRequest",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
             },
             "description": "The required parameters for checking if resource name is available."
           }
@@ -121,7 +121,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -129,23 +129,6 @@
     }
   },
   "definitions": {
-    "NameAvailabilityRequest": {
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Resource name to verify."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type used for verification."
-        }
-      },
-      "description": "Request from client to check resource name availability."
-    },
     "NameAvailability": {
       "type": "object",
       "properties": {
@@ -184,28 +167,7 @@
         }
       },
       "description": "Represents a resource name availability."
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "An error response from the Batch service."
     }
   },
-  "parameters": {
-    "LocationNameParameter": {
-      "name": "locationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the location.",
-      "minLength": 1,
-      "pattern": "^[-\\w\\._]+$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

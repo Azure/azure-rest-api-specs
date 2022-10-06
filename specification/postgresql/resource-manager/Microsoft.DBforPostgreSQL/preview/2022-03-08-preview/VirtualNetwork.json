@@ -48,13 +48,13 @@
         "description": "Get virtual network subnet usage for a given vNet resource id.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationNameParameter"
+            "$ref": "common-types.json#/parameters/LocationNameParameter"
           },
           {
             "name": "parameters",
@@ -76,7 +76,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -126,38 +126,17 @@
         "subnetName": {
           "type": "string",
           "readOnly": true,
-          "description": "name of the subnet"
+          "description": "Name of the delegated subnet for which IP addresses are in use"
         },
         "usage": {
           "type": "integer",
           "format": "int64",
           "readOnly": true,
-          "description": "Number of used delegated subnets"
+          "description": "Number of IP addresses used by the delegated subnet"
         }
       },
       "description": "Delegated subnet usage data."
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "An error response from the Batch service."
     }
   },
-  "parameters": {
-    "LocationNameParameter": {
-      "name": "locationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the location.",
-      "minLength": 1,
-      "pattern": "^[-\\w\\._]+$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
