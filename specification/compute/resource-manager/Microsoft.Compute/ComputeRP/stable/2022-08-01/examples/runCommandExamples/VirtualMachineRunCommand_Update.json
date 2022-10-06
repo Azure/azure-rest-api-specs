@@ -8,28 +8,8 @@
     "runCommand": {
       "properties": {
         "source": {
-          "script": "Write-Host Hello World!"
-        },
-        "parameters": [
-          {
-            "name": "param1",
-            "value": "value1"
-          },
-          {
-            "name": "param2",
-            "value": "value2"
-          }
-        ],
-        "asyncExecution": false,
-        "runAsUser": "user1",
-        "runAsPassword": "<runAsPassword>",
-        "timeoutInSeconds": 3600,
-        "outputBlobUri": "Base URI of a storage append blob(without SAS token) OR SAS URI with read, append, create, write access.",
-        "errorBlobUri": "Base URI of a storage append blob(without SAS token) OR SAS URI with read, append, create, write access.",
-        "outputBlobManagedIdentity": {
-          "clientId": "GUID. Needed only when outputBlobUri does not contain SAS token and user-assigned managed Identity is used. Use empty outputBlobManagedIdentity (like errorBlobManagedIdentity in this example) for system-assigned managed identity."
-        },
-        "errorBlobManagedIdentity": {}
+          "script": "Write-Host Script Source Updated!"
+        }
       }
     }
   },
@@ -61,9 +41,7 @@
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Updating",
-          "outputBlobUri": "Base URI of a storage append blob(without SAS token)",
-          "errorBlobUri": "Base URI of a storage append blob(without SAS token)"
+          "provisioningState": "Updating"
         }
       }
     }

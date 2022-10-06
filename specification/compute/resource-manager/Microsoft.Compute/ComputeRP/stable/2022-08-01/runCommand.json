@@ -1086,20 +1086,6 @@
       ],
       "description": "The List Virtual Machine operation response."
     },
-    "RunCommandManagedIdentity": {
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client Id (GUID value) of the user-assigned managed identity. ObjectId should not be used if this is provided."
-        },
-        "objectId": {
-          "type": "string",
-          "description": "Object Id (GUID value) of the user-assigned managed identity. ClientId should not be used if this is provided."
-        }
-      },
-      "type": "object",
-      "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
-    },
     "RunCommandResult": {
       "properties": {
         "value": {
@@ -1177,18 +1163,14 @@
         },
         "scriptUri": {
           "type": "string",
-          "description": "Specifies the script download location. It can be either SAS URI of an Azure storage blob with read access or public URI."
+          "description": "Specifies the script download location."
         },
         "commandId": {
           "type": "string",
           "description": "Specifies a commandId of predefined built-in script."
-        },
-        "scriptUriManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
         }
       },
-      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId."
+      "description": "Describes the script sources for run command."
     },
     "VirtualMachineRunCommandProperties": {
       "properties": {
@@ -1236,19 +1218,11 @@
         },
         "outputBlobUri": {
           "type": "string",
-          "description": "Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter. "
+          "description": "Specifies the Azure storage blob where script output stream will be uploaded."
         },
         "errorBlobUri": {
           "type": "string",
-          "description": "Specifies the Azure storage blob where script error stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter."
-        },
-        "outputBlobManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
-        },
-        "errorBlobManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
+          "description": "Specifies the Azure storage blob where script error stream will be uploaded."
         },
         "provisioningState": {
           "readOnly": true,
