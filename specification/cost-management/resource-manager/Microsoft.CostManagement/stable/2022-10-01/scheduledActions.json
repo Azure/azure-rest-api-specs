@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CostManagementClient",
-    "version": "2022-10-01"
+    "version": "2022-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -94,10 +94,10 @@
         },
         "x-ms-examples": {
           "ScheduledActionsListByScope": {
-            "$ref": "./examples/scheduledActions-list-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledActions-list-shared.json"
           },
           "ScheduledActionsListByScopeFilterByViewId": {
-            "$ref": "./examples/scheduledActions-listWithFilter-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledActions-listWithFilter-shared.json"
           }
         },
         "parameters": [
@@ -143,7 +143,7 @@
         "description": "Create or update a private scheduled action.",
         "x-ms-examples": {
           "CreateOrUpdatePrivateScheduledAction": {
-            "$ref": "./examples/scheduledAction-createOrUpdate-private.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-createOrUpdate-private.json"
           }
         },
         "parameters": [
@@ -195,7 +195,7 @@
         },
         "x-ms-examples": {
           "PrivateScheduledAction": {
-            "$ref": "./examples/scheduledAction-get-private.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-get-private.json"
           }
         },
         "parameters": [
@@ -232,7 +232,7 @@
         },
         "x-ms-examples": {
           "PrivateScheduledActionDelete": {
-            "$ref": "./examples/scheduledAction-delete-private.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-delete-private.json"
           }
         },
         "parameters": [
@@ -268,10 +268,10 @@
         "description": "Create or update a shared scheduled action within the given scope.",
         "x-ms-examples": {
           "CreateOrUpdateScheduledActionByScope": {
-            "$ref": "./examples/scheduledAction-createOrUpdate-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-createOrUpdate-shared.json"
           },
           "CreateOrUpdateInsightAlertScheduledActionByScope": {
-            "$ref": "./examples/scheduledAction-insightAlert-createOrUpdate-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-insightAlert-createOrUpdate-shared.json"
           }
         },
         "parameters": [
@@ -326,7 +326,7 @@
         },
         "x-ms-examples": {
           "ScheduledActionByScope": {
-            "$ref": "./examples/scheduledAction-get-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-get-shared.json"
           }
         },
         "parameters": [
@@ -366,7 +366,7 @@
         },
         "x-ms-examples": {
           "ScheduledActionDeleteByScope": {
-            "$ref": "./examples/scheduledAction-delete-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-delete-shared.json"
           }
         },
         "parameters": [
@@ -405,7 +405,7 @@
         "description": "Execute a private scheduled action.",
         "x-ms-examples": {
           "ScheduledActionExecute": {
-            "$ref": "./examples/scheduledAction-execute-private.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-execute-private.json"
           }
         },
         "parameters": [
@@ -438,7 +438,7 @@
         "description": "Execute a shared scheduled action within the given scope.",
         "x-ms-examples": {
           "ScheduledActionExecuteByScope": {
-            "$ref": "./examples/scheduledAction-execute-shared.json"
+            "$ref": "./examples/scheduledActions/scheduledAction-execute-shared.json"
           }
         },
         "parameters": [
@@ -474,7 +474,7 @@
         "description": "Checks availability and correctness of the name for a scheduled action.",
         "x-ms-examples": {
           "ScheduledActionCheckNameAvailability": {
-            "$ref": "./examples/checkNameAvailability-private-scheduledAction.json"
+            "$ref": "./examples/scheduledActions/checkNameAvailability-private-scheduledAction.json"
           }
         },
         "parameters": [
@@ -516,7 +516,7 @@
         "description": "Checks availability and correctness of the name for a scheduled action within the given scope.",
         "x-ms-examples": {
           "ScheduledActionCheckNameAvailabilityByScope": {
-            "$ref": "./examples/checkNameAvailability-shared-scheduledAction.json"
+            "$ref": "./examples/scheduledActions/checkNameAvailability-shared-scheduledAction.json"
           }
         },
         "parameters": [
@@ -621,10 +621,6 @@
         "modelAsString": true
       }
     },
-    "Language":{
-      "type": "string",
-      "description": "Language in which the email is localized, for ex: 'Fr'. When the specified language is not supported, it will be defaulted to english. The supported languages are cs (Czech), da (Danish), de (German), en (English), es (Spanish), fr (French), hu (Hungarian), id (Indonesian), it (Lithuanian), ja (Japanese), ko (Korean), nb (Norwegian Bokmål), nl (Dutch), pl (Polish), pt (Portuguese), ru (Russian), sv (Swedish), tr (Turkish), zh (Chinese) "
-    },
     "NotificationProperties": {
       "type": "object",
       "description": "The properties of the scheduled action notification.",
@@ -643,27 +639,15 @@
           "minItems": 1,
           "maxItems": 20
         },
-        "language": {
-          "description": "Locale of the email.",
-          "$ref": "#/definitions/Language"
-        },
         "message": {
           "description": "Optional message to be added in the email. Length is limited to 250 characters.",
           "type": "string"
-        },
-        "regionalFormat":{
-          "description": "Regional format of the email.",
-          "$ref": "#/definitions/RegionalFormat"
         },
         "subject": {
           "description": "Subject of the email. Length is limited to 70 characters.",
           "type": "string"
         }
       }
-    },
-    "RegionalFormat":{
-      "type": "string",
-      "description": "Language for formatting the date/time and currency values in the email. For ex: 'fr'. Defaulted to English, when the specified regional format is not supported. "
     },
     "ScheduledActionProxyResource": {
       "description": "The Resource model definition.",
@@ -783,7 +767,7 @@
         "notification": {
           "description": "Notification properties based on scheduled action kind.",
           "$ref": "#/definitions/NotificationProperties"
-        },        
+        },
         "schedule": {
           "description": "Schedule of the scheduled action.",
           "$ref": "#/definitions/ScheduleProperties"
@@ -807,7 +791,6 @@
       "description": "Status of the scheduled action.",
       "enum": [
         "Enabled",
-        "Expired",
         "Disabled"
       ],
       "x-ms-enum": {
@@ -823,11 +806,6 @@
             "value": "Enabled",
             "description": "Scheduled action is saved and will be executed.",
             "name": "Enabled"
-          },
-          {
-            "value": "Expired",
-            "description": "Scheduled action is expired.",
-            "name": "Expired"
           }
         ]
       }
