@@ -84,11 +84,7 @@
         "description": "Gets the status of operation.",
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region the operation is in."
+            "$ref": "#/parameters/LocationParameter"
           },
           {
             "name": "operationId",
@@ -1196,23 +1192,7 @@
       "description": "SKU parameters supplied to the create RedisEnterprise operation.",
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)",
-          "enum": [
-            "Enterprise_E10",
-            "Enterprise_E20",
-            "Enterprise_E50",
-            "Enterprise_E100",
-            "EnterpriseFlash_F300",
-            "EnterpriseFlash_F700",
-            "EnterpriseFlash_F1500"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        },
+        "name": { "$ref": "#/definitions/SkuName" },
         "capacity": {
           "type": "integer",
           "format": "int32",
@@ -1751,6 +1731,7 @@
       "title": "Region Sku Details",
       "description": "List of details about all the available SKUs",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "value": {
           "type": "array",
@@ -1765,6 +1746,7 @@
     "LocationInfo": {
       "type": "object",
       "description": "Information about location (for example: features that it supports)",
+      "readOnly": true,
       "properties": {
         "location": {
           "type": "string",
@@ -1784,6 +1766,16 @@
       "type": "object",
       "title": "Sku Detail",
       "description": "Information about Sku",
+      "properties": {
+        "name": { "$ref": "#/definitions/SkuName" }
+      },
+      "readOnly": true
+    },
+    "SkuName": {
+      "type": "object",
+      "title": "Sku Name",
+      "description": "Sku Name",
+      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
@@ -1808,6 +1800,7 @@
       "type": "object",
       "title": "Capability",
       "description": "Information about the features the location supports",
+      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
@@ -1823,6 +1816,7 @@
       "title": "Region Sku Detail",
       "description": "Details about the location requested and the available skus in the location",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "resourceType": {
           "type": "string",
@@ -1876,7 +1870,7 @@
     "LocationParameter": {
       "name": "location",
       "in": "path",
-      "description": "The location of the resource",
+      "description": "The region the operation is in",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
