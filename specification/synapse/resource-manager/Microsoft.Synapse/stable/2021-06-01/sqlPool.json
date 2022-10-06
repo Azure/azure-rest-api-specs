@@ -375,6 +375,9 @@
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -437,6 +440,9 @@
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -704,6 +710,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get the result of an operation on a SQL Analytics pool": {
             "$ref": "./examples/GetLocationHeaderResultWithSqlPool.json"
@@ -1467,7 +1474,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
