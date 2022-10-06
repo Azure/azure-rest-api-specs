@@ -604,7 +604,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
         "description": "Deletes a project deployment from the specified assigned resources.",
-        "operationId": "ConversationalAnalysisAuthoring_DeleteDeployment",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeploymentFromResources",
         "consumes": [
           "application/json"
         ],
@@ -650,7 +650,7 @@
         },
         "x-ms-examples": {
           "Successful Delete Deployment": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeployment.json"
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeploymentFromResources.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1150,8 +1150,8 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "description": "Gets the deployments resources assigned to the project.",
-        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentResources",
+        "description": "Lists the deployments resources assigned to the project.",
+        "operationId": "ConversationalAnalysisAuthoring_ListDeploymentResources",
         "produces": [
           "application/json"
         ],
@@ -1187,8 +1187,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Swap Deployments Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSwapDeploymentsStatus.json"
+          "Successful List Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeploymentResources.json"
           }
         },
         "x-ms-pageable": {
@@ -1242,8 +1242,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Deploy Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeployProject.json"
+          "Successful Assign Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulAssignDeploymentResources.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1294,8 +1294,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Delete Deployment": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeployment.json"
+          "Successful Unassign Deployment Resources": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulUnassignDeploymentResources.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1334,8 +1334,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json"
+          "Successful Get Assign Deployment Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetAssignDeploymentResourcesStatus.json"
           }
         }
       }
@@ -1373,8 +1373,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json"
+          "Successful Get Unassign Deployment Resources Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetUnassignDeploymentResourcesStatus.json"
           }
         }
       }
@@ -1548,8 +1548,8 @@
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "description": "Gets the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
-        "operationId": "ConversationalAnalysisAuthoring_GetResourceDeployments",
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
+        "operationId": "ConversationalAnalysisAuthoring_ListAssignedResourceDeployments",
         "produces": [
           "application/json"
         ],
@@ -1571,7 +1571,7 @@
           "200": {
             "description": "The assigned deployments metadata for the resource.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedOwnerDeploymentsMetadata"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata"
             }
           },
           "default": {
@@ -1582,8 +1582,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Swap Deployments Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSwapDeploymentsStatus.json"
+          "Successful List Assigned Resource Deployments": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListAssignedResourceDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -1772,12 +1772,12 @@
     "ConversationalAnalysisAuthoringAssignedDeploymentResource": {
       "description": "Represents the assigned deployment resource.",
       "required": [
-        "resourceId",
+        "azureResourceId",
         "region"
       ],
       "type": "object",
       "properties": {
-        "resourceId": {
+        "azureResourceId": {
           "description": "The resource ID.",
           "type": "string"
         },
@@ -1810,29 +1810,6 @@
         }
       },
       "x-ms-client-name": "AssignedDeploymentResources"
-    },
-    "ConversationalAnalysisAuthoringAssignedOwnerDeploymentsMetadata": {
-      "description": "Represents the metadata for deployments assigned to an owner.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of retrieved assigned project deployments.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata"
-          }
-        },
-        "nextLink": {
-          "description": "The next page link.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "x-ms-client-name": "AssignedOwnerDeploymentsMetadata"
     },
     "ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata": {
       "description": "Represents the metadata for an assigned deployment",
@@ -1881,6 +1858,29 @@
         }
       },
       "x-ms-client-name": "AssignedProjectDeploymentsMetadata"
+    },
+    "ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata": {
+      "description": "Represents the metadata for deployments assigned to a resource.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of retrieved assigned project deployments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "AssignedResourceDeploymentsMetadata"
     },
     "ConversationalAnalysisAuthoringCompositionSetting": {
       "enum": [
