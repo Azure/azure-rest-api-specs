@@ -1835,7 +1835,7 @@
         },
         "proxy": {
           "$ref": "#/definitions/BackendProxyContract",
-          "description": "Backend Proxy Contract Properties"
+          "description": "Backend gateway Contract Properties"
         },
         "tls": {
           "$ref": "#/definitions/BackendTlsProperties",
@@ -4282,7 +4282,7 @@
               },
               {
                 "value": "rawxml-link",
-                "description": "The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service."
+                "description": "The policy document is not XML encoded and is hosted on a http endpoint accessible from the API Management service."
               }
             ]
           },
@@ -4332,7 +4332,7 @@
           "items": {
             "$ref": "#/definitions/PolicyDescriptionContract"
           },
-          "description": "Descriptions of APIM policies."
+          "description": "Descriptions of API Management policies."
         },
         "count": {
           "type": "integer",
@@ -4341,7 +4341,7 @@
           "description": "Total record count number."
         }
       },
-      "description": "Descriptions of APIM policies."
+      "description": "Descriptions of API Management policies."
     },
     "PolicyFragmentCollection": {
       "type": "object",
@@ -4672,7 +4672,7 @@
           "items": {
             "$ref": "#/definitions/PortalSettingsContract"
           },
-          "description": "Descriptions of APIM policies."
+          "description": "Descriptions of API Management policies."
         },
         "count": {
           "type": "integer",
@@ -4681,7 +4681,7 @@
           "description": "Total record count number."
         }
       },
-      "description": "Descriptions of APIM policies."
+      "description": "Descriptions of API Management policies."
     },
     "PortalSettingsContract": {
       "properties": {
@@ -5399,7 +5399,7 @@
         "callCountFailed": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of calls failed due to proxy or backend errors. This includes calls returning HttpStatusCode.BadRequest(400) and any Code between HttpStatusCode.InternalServerError (500) and 600"
+          "description": "Number of calls failed due to gateway or backend errors. This includes calls returning HttpStatusCode.BadRequest(400) and any Code between HttpStatusCode.InternalServerError (500) and 600"
         },
         "callCountOther": {
           "type": "integer",
@@ -5858,7 +5858,7 @@
             "values": [
               {
                 "value": "xml",
-                "description": "Xml schema type.",
+                "description": "XML schema type.",
                 "name": "Xml"
               },
               {
