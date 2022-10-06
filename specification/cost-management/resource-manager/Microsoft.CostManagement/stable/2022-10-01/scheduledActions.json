@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CostManagementClient",
-    "version": "2022-06-01-preview"
+    "version": "2022-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -45,15 +45,15 @@
         },
         "x-ms-examples": {
           "PrivateScheduledActionsList": {
-            "$ref": "./examples/scheduledActions-list-private.json"
+            "$ref": "./examples/scheduledActions/scheduledActions-list-private.json"
           },
           "PrivateScheduledActionsListFilterByViewId": {
-            "$ref": "./examples/scheduledActions-listWithFilter-private.json"
+            "$ref": "./examples/scheduledActions/scheduledActions-listWithFilter-private.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -105,7 +105,7 @@
             "$ref": "#/parameters/scopeParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -151,7 +151,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scheduledAction",
@@ -203,7 +203,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -240,7 +240,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -282,7 +282,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scheduledAction",
@@ -337,7 +337,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -377,7 +377,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -413,7 +413,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -449,7 +449,7 @@
             "$ref": "#/parameters/scheduledActionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -479,7 +479,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "checkNameAvailabilityRequest",
@@ -524,7 +524,7 @@
             "$ref": "#/parameters/scopeParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "checkNameAvailabilityRequest",
@@ -621,6 +621,14 @@
         "modelAsString": true
       }
     },
+    "Language": {
+      "type": "string",
+      "description": "Language in which the email is localized, for ex: 'Fr'. When the specified language is not supported, it will be defaulted to english. The supported languages are cs (Czech), da (Danish), de (German), en (English), es (Spanish), fr (French), hu (Hungarian), id (Indonesian), it (Lithuanian), ja (Japanese), ko (Korean), nb (Norwegian Bokmål), nl (Dutch), pl (Polish), pt (Portuguese), ru (Russian), sv (Swedish), tr (Turkish), zh (Chinese) "
+    },
+    "NotificationEmail": {
+      "type": "string",
+      "description": "Email address of the point of contact that should get the unsubscribe requests and notification emails."
+    },
     "NotificationProperties": {
       "type": "object",
       "description": "The properties of the scheduled action notification.",
@@ -639,9 +647,17 @@
           "minItems": 1,
           "maxItems": 20
         },
+        "language": {
+          "description": "Locale of the email.",
+          "$ref": "#/definitions/Language"
+        },
         "message": {
           "description": "Optional message to be added in the email. Length is limited to 250 characters.",
           "type": "string"
+        },
+        "regionalFormat": {
+          "description": "Regional format of the email.",
+          "$ref": "#/definitions/RegionalFormat"
         },
         "subject": {
           "description": "Subject of the email. Length is limited to 70 characters.",
@@ -649,24 +665,13 @@
         }
       }
     },
+    "RegionalFormat": {
+      "type": "string",
+      "description": "Language for formatting the date/time and currency values in the email. For ex: 'fr'. Defaulted to English, when the specified regional format is not supported. "
+    },
     "ScheduledActionProxyResource": {
       "description": "The Resource model definition.",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
         "eTag": {
           "type": "string",
           "readOnly": true,
@@ -675,14 +680,13 @@
         "kind": {
           "$ref": "#/definitions/ScheduledActionKind",
           "description": "Kind of the scheduled action."
-        },
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "#/definitions/systemData"
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "type": "object",
       "x-ms-azure-resource": true
     },
@@ -768,6 +772,10 @@
           "description": "Notification properties based on scheduled action kind.",
           "$ref": "#/definitions/NotificationProperties"
         },
+        "notificationEmail": {
+          "description": "Email address of the point of contact that should get the unsubscribe requests and notification emails.",
+          "$ref": "#/definitions/NotificationEmail"
+        },
         "schedule": {
           "description": "Schedule of the scheduled action.",
           "$ref": "#/definitions/ScheduleProperties"
@@ -791,6 +799,7 @@
       "description": "Status of the scheduled action.",
       "enum": [
         "Enabled",
+        "Expired",
         "Disabled"
       ],
       "x-ms-enum": {
@@ -806,6 +815,11 @@
             "value": "Enabled",
             "description": "Scheduled action is saved and will be executed.",
             "name": "Enabled"
+          },
+          {
+            "value": "Expired",
+            "description": "Scheduled action is expired.",
+            "name": "Expired"
           }
         ]
       }
@@ -889,59 +903,6 @@
         }
       }
     },
-    "systemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
     "WeeksOfMonth": {
       "type": "string",
       "description": "Weeks of month.",
@@ -959,13 +920,6 @@
     }
   },
   "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request."
-    },
     "scopeParameter": {
       "name": "scope",
       "in": "path",
