@@ -472,35 +472,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/skus": {
-      "get": {
-        "summary": "List all SKUs.",
-        "description": "List all SKUs.",
-        "operationId": "ListSkus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SkuInfos"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
       "post": {
         "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
