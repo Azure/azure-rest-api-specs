@@ -2634,6 +2634,10 @@
           "type": "string",
           "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
         },
+        "identity":{
+          "description": "The  identity of the profile.",
+          "$ref": "#/definitions/MsiIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
@@ -6806,6 +6810,68 @@
         }
       },
       "type": "object"
+    },
+    "UserIdentityProperties": {
+      "description": "UserIdentityProperties",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
+        }
+      }
+    },
+    "MsiIdentity": {
+      "description": "The Identity",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemUserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The MSI data plane URL used for Managed Identity."
+        },
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The system assigned identity used for Managed Identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id used for Managed Identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties",
+            "description": "The properties of user identity."
+          }
+        }
+      },
+      "required": [
+        "type",
+        "userAssignedIdentities"
+      ]
     },
     "OptimizationType": {
       "description": "Specifies what scenario the customer wants this CDN endpoint to optimize, e.g. Download, Media services. With this information we can apply scenario driven optimization.",
