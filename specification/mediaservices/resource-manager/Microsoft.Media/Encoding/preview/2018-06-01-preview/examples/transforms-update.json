@@ -1,16 +1,19 @@
 {
   "parameters": {
-    "api-version": "2018-07-01",
+    "api-version": "2018-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contosoresources",
     "accountName": "contosomedia",
-    "transformName": "transformToUpdate",
+    "transformName": "TransformToUpdate",
     "parameters": {
       "properties": {
         "description": "Example transform to illustrate update.",
+        "created": "0001-01-01T00:00:00-05:00",
+        "lastModified": "0001-01-01T00:00:00-05:00",
         "outputs": [
           {
-            "relativePriority": "High",
+            "relativePriority": null,
+            "onError": null,
             "preset": {
               "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
               "presetName": "H264MultipleBitrate720p"
@@ -23,17 +26,17 @@
   "responses": {
     "200": {
       "body": {
-        "name": "transformToUpdate",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/transformToUpdate",
+        "name": "TransformToUpdate",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/TransformToUpdate",
         "type": "Microsoft.Media/mediaservices/transforms",
         "properties": {
-          "created": "2019-05-29T17:01:44.2001108-07:00",
+          "created": "2018-03-05T23:52:19.9109582-05:00",
           "description": "Example transform to illustrate update.",
-          "lastModified": "2019-05-29T17:01:44.2761137-07:00",
+          "lastModified": "2018-03-05T23:52:19.9149613-05:00",
           "outputs": [
             {
               "onError": "StopProcessingJob",
-              "relativePriority": "High",
+              "relativePriority": "Normal",
               "preset": {
                 "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
                 "presetName": "H264MultipleBitrate720p"

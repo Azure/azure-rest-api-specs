@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "api-version": "2018-07-01",
+    "api-version": "2018-03-30-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contosoresources",
     "accountName": "contosomedia",
-    "transformName": "exampleTransform",
+    "transformName": "ExampleTransform",
     "jobName": "job1",
     "parameters": {
       "properties": {
@@ -17,11 +17,7 @@
             "@odata.type": "#Microsoft.Media.JobOutputAsset",
             "assetName": "job1-OutputAsset"
           }
-        ],
-        "correlationData": {
-          "key1": "value1",
-          "Key 2": "Value 2"
-        }
+        ]
       }
     }
   },
@@ -29,31 +25,35 @@
     "201": {
       "body": {
         "name": "job1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/ExampleTransform/jobs/job1",
         "type": "Microsoft.Media/mediaservices/transforms/jobs",
         "properties": {
-          "created": "2018-08-08T16:29:58.2188352Z",
+          "created": "2018-03-05T23:52:20.0364205Z",
           "state": "Queued",
+          "description": null,
           "input": {
-            "@odata.type": "#Microsoft.Media.JobInputAsset",
-            "files": [],
-            "assetName": "job1-InputAsset"
+            "@odata.type": "#Microsoft.Media.JobInputs",
+            "label": null,
+            "inputs": [
+              {
+                "@odata.type": "#Microsoft.Media.JobInputAsset",
+                "label": null,
+                "files": [],
+                "assetName": "job1-InputAsset"
+              }
+            ]
           },
-          "lastModified": "2018-08-08T16:29:58.2188352Z",
+          "lastModified": "2018-03-05T23:52:20.0364205Z",
           "outputs": [
             {
               "@odata.type": "#Microsoft.Media.JobOutputAsset",
+              "error": null,
               "state": "Queued",
               "progress": 0,
-              "label": "BuiltInStandardEncoderPreset_0",
               "assetName": "job1-OutputAsset"
             }
           ],
-          "priority": "Normal",
-          "correlationData": {
-            "key1": "value1",
-            "Key 2": "Value 2"
-          }
+          "priority": "Normal"
         }
       }
     }
