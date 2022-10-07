@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-08-01-preview"
+    "version": "2022-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1298,6 +1298,10 @@
           },
           "x-ms-identifiers": [],
           "description": "Service endpoints for subnets in the cluster."
+        },
+        "fasterZonalUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether to use a maximum of 3 UD per zone instead of 5 for Cross Az Node types for faster deployments."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1896,7 +1900,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-08-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-10-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

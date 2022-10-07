@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-08-01-preview"
+    "version": "2022-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -178,6 +178,9 @@
         "x-ms-examples": {
           "Reimage nodes": {
             "$ref": "./examples/ReimageNodes_example.json"
+          },
+          "Reimage all nodes By upgrade domain": {
+            "$ref": "./examples/ReimageNodes_UD_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -706,9 +709,6 @@
     },
     "NodeTypeActionParameters": {
       "type": "object",
-      "required": [
-        "nodes"
-      ],
       "properties": {
         "nodes": {
           "description": "List of node names from the node type.",
@@ -720,6 +720,27 @@
         "force": {
           "description": "Force the action to go through.",
           "type": "boolean"
+        },
+        "updateType": {
+          "description": "Specifies the way the operation will be performed.",
+          "enum": [
+            "Default",
+            "ByUpgradeDomain"
+          ],
+          "x-ms-enum": {
+            "name": "updateType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "The operation will proceed in all specified nodes at the same time."
+              },
+              {
+                "value": "ByUpgradeDomain",
+                "description": "The operation will proceed one upgrade domain at a time, checking the health in between each to continue."
+              }
+            ]
+          }
         }
       },
       "description": "Parameters for Node type action."
@@ -1541,7 +1562,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-08-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-10-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
