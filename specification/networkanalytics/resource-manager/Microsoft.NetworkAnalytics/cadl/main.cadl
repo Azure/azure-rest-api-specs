@@ -3,11 +3,8 @@ import "@azure-tools/cadl-providerhub";
 import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-azure-resource-manager";
 import "@azure-tools/cadl-autorest";
-
-@armNamespace
-@serviceTitle("Microsoft.NetworkAnalytics")
-@serviceVersion("2022-01-01-preview")
-namespace Microsoft.NetworkAnalytics;
+import "@cadl-lang/versioning";
+using Cadl.Versioning;
 
 using Cadl.Http;
 using Cadl.Rest;
@@ -15,12 +12,18 @@ using Azure.ResourceManager;
 using Autorest;
 using OpenAPI;
 
+@armProviderNamespace()
+@serviceTitle("Microsoft.NetworkAnalytics")
+@serviceVersion("2022-11-15-preview")
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+namespace Microsoft.NetworkAnalytics;
+
 
 @doc("A NetworkAnalyticsProviderHub resource")
-model AnalyticsStorageResources is TrackedResource < StorageProperties > {
+model DataLakeHouseResources is TrackedResource < StorageProperties > {
     @doc("Storage resource Properties")
     @key("storageName")
-    @segment("analyticsStorage")
+    @segment("dataLakeHouses")
     @path
     name: string;
 }
@@ -30,14 +33,16 @@ model StorageProperties {
     @doc("StorageProperties")
     @visibility("read")
     provisioningState ?: ProvisioningState;
-    @visibility("create")
     @doc("Managed Resource Group Configuration.")
-    managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
+    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+    @visibility("create")
+    @doc("unique Identifier Name")
+    uniqueIdentifierName: string;
     @doc("Common Storage Account Properties.")
     commonStorageAccountProperties: CommonStorageAccountProperties;
     @visibility("create")
     @doc("Bronze Storage Account Properties.")
-    bronzeStorageAccountProperties: BronzeStorageAccountProperties;
+    bronzeStorageAccountProperties?: BronzeStorageAccountProperties;
     @doc("Azure DataExplorer Cluster Properties.")
     azureDataExplorerProperties: AzureDataExplorerProperties;
 }
@@ -66,21 +71,15 @@ model ManagedResourceGroupConfiguration {
 @doc("Common Storage Account Properties.")
 model CommonStorageAccountProperties {
     @visibility("create")
-    @doc("unique Identifier Name")
-    uniqueIdentifierName: string;
-    @visibility("create")
-    @doc("system Identity Name")
-    systemIdentityName: string;
-    @visibility("create")
     @doc("Allow or disallow public network access to Storage Account.")
-    publicNetworkAccess: string;
+    publicNetworkAccess?: string;
     @doc("Network rule set")
     networkacls ?: NetworkAcls;
     @visibility("create")
     @doc("Blob Services")
     blobServices: BlobServices;
     @doc("Private End Point")
-    privateEndPoint: PrivateEndPoint;
+    privateEndPoint?: PrivateEndPoint;
 }
 
 @doc("Configuration for BronzeAccount")
@@ -91,30 +90,20 @@ model BronzeStorageAccountProperties {
 
 @doc("ADx Properties")
 model AzureDataExplorerProperties {
-    @doc("ADx Name")
-    @visibility("create")
-    name: string;
-    @visibility("create")
-    @doc("ADx location")
-    location: string;
     @visibility("create")
     @doc("Virtual Network Configuration")
-    virtualNetworkConfiguration: VirtualNetworkConfiguration;
+    virtualNetworkConfiguration?: VirtualNetworkConfiguration;
     @doc("Kusto Cluster Principal Assignments")
     kustoClusterPrincipalAssignments: KustoClusterPrincipalAssignments;
 }
 
-
 @doc("ADx Role assignments")
 model KustoClusterPrincipalAssignments {
-    @doc("Kusto cluster name")
-    name: string;
-    @doc("The principal ID of resource identity")
-    principalId: string;
+    @visibility("create")
+    @doc("system Identity Name")
+    systemIdentityName?: string;
     @doc("Kusto roles")
     role: string;
-    @doc("The tenant ID of resource.")
-    tenantId: string;
     @doc("Principal type.")
     principalType: string;
 }
@@ -190,7 +179,6 @@ model BlobServices {
     restorePolicy: RestorePolicy;
 }
 
-
 @doc("Virtual Network Configuration")
 model VirtualNetworkConfiguration {
     @doc("Resource ID of a subnet")
@@ -202,4 +190,5 @@ model VirtualNetworkConfiguration {
 }
 
 @armResourceOperations
-interface Storage extends ResourceOperations<AnalyticsStorageResources, StorageProperties> { }
+interface Storage extends ResourceOperations<DataLakeHouseResources, StorageProperties> { }
+

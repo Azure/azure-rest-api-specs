@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.NetworkAnalytics",
-    "version": "2022-01-01-preview",
+    "version": "2022-11-15-preview",
     "x-cadl-generated": [
       {
         "emitter": "@azure-tools/cadl-autorest"
@@ -29,9 +29,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -66,7 +66,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -78,17 +78,20 @@
         "x-ms-examples": {
           "Operations": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations with required config": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/analyticsStorage": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
       "get": {
         "tags": [
           "Storage"
         ],
         "operationId": "Storage_ListBySubscription",
-        "description": "List AnalyticsStorageResources resources by subscription ID",
+        "description": "List DataLakeHouseResources resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -101,11 +104,11 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResourcesListResult"
+              "$ref": "#/definitions/DataLakeHouseResourcesListResult"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -115,19 +118,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List AnalyticsStorageResources resources by subscription ID": {
+          "List DataLakeHouseResources resources by subscription ID": {
             "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "List DataLakeHouseResources resources by subscription ID with required config": {
+            "$ref": "./examples/Storage_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/analyticsStorage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
       "get": {
         "tags": [
           "Storage"
         ],
         "operationId": "Storage_ListByResourceGroup",
-        "description": "List AnalyticsStorageResources resources by resource group",
+        "description": "List DataLakeHouseResources resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -143,11 +149,11 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResourcesListResult"
+              "$ref": "#/definitions/DataLakeHouseResourcesListResult"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -157,19 +163,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List AnalyticsStorageResources resources by resource group": {
+          "List DataLakeHouseResources resources by resource group": {
             "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "List DataLakeHouseResources resources by resource group with required config": {
+            "$ref": "./examples/Storage_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/analyticsStorage/{storageName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses/{storageName}": {
       "get": {
         "tags": [
           "Storage"
         ],
         "operationId": "Storage_Get",
-        "description": "Get a AnalyticsStorageResources",
+        "description": "Get a DataLakeHouseResources",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -181,26 +190,29 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+            "$ref": "#/parameters/DataLakeHouseResources.storageName"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResources"
+              "$ref": "#/definitions/DataLakeHouseResources"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get a AnalyticsStorageResources": {
+          "Get a DataLakeHouseResources": {
             "$ref": "./examples/Storage_Get_MaximumSet_Gen.json"
+          },
+          "Get a DataLakeHouseResources with required config": {
+            "$ref": "./examples/Storage_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -209,7 +221,7 @@
           "Storage"
         ],
         "operationId": "Storage_CreateOrUpdate",
-        "description": "Create a AnalyticsStorageResources",
+        "description": "Create a DataLakeHouseResources",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -221,7 +233,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+            "$ref": "#/parameters/DataLakeHouseResources.storageName"
           },
           {
             "name": "resource",
@@ -229,7 +241,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResources"
+              "$ref": "#/definitions/DataLakeHouseResources"
             }
           }
         ],
@@ -237,7 +249,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResources"
+              "$ref": "#/definitions/DataLakeHouseResources"
             }
           },
           "201": {
@@ -250,19 +262,22 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResources"
+              "$ref": "#/definitions/DataLakeHouseResources"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Create a AnalyticsStorageResources": {
+          "Create a DataLakeHouseResources": {
             "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Create a DataLakeHouseResources with required config": {
+            "$ref": "./examples/Storage_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -275,7 +290,7 @@
           "Storage"
         ],
         "operationId": "Storage_Update",
-        "description": "Update a AnalyticsStorageResources",
+        "description": "Update a DataLakeHouseResources",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -287,7 +302,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+            "$ref": "#/parameters/DataLakeHouseResources.storageName"
           },
           {
             "name": "properties",
@@ -295,7 +310,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResourcesUpdate"
+              "$ref": "#/definitions/DataLakeHouseResourcesUpdate"
             }
           }
         ],
@@ -303,19 +318,22 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AnalyticsStorageResources"
+              "$ref": "#/definitions/DataLakeHouseResources"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Update a AnalyticsStorageResources": {
+          "Update a DataLakeHouseResources": {
             "$ref": "./examples/Storage_Update_MaximumSet_Gen.json"
+          },
+          "Update a DataLakeHouseResources with required config": {
+            "$ref": "./examples/Storage_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -324,7 +342,7 @@
           "Storage"
         ],
         "operationId": "Storage_Delete",
-        "description": "Delete a AnalyticsStorageResources",
+        "description": "Delete a DataLakeHouseResources",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -336,7 +354,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AnalyticsStorageResources.storageName"
+            "$ref": "#/parameters/DataLakeHouseResources.storageName"
           }
         ],
         "responses": {
@@ -357,15 +375,18 @@
             "description": "Resource deleted successfully."
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Delete a AnalyticsStorageResources": {
+          "Delete a DataLakeHouseResources": {
             "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
+          },
+          "Delete a DataLakeHouseResources with required config": {
+            "$ref": "./examples/Storage_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -376,91 +397,9 @@
     }
   },
   "definitions": {
-    "AnalyticsStorageResources": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StorageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "A NetworkAnalyticsProviderHub resource",
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "AnalyticsStorageResourcesListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AnalyticsStorageResources"
-          },
-          "x-cadl-name": "AnalyticsStorageResources[]",
-          "description": "The AnalyticsStorageResources items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "description": "The response of a AnalyticsStorageResources list operation.",
-      "required": [
-        "value"
-      ]
-    },
-    "AnalyticsStorageResourcesUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/AnalyticsStorageResourcesUpdateProperties"
-        }
-      },
-      "description": "The type used for update operations of the AnalyticsStorageResources."
-    },
-    "AnalyticsStorageResourcesUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "commonStorageAccountProperties": {
-          "$ref": "#/definitions/CommonStorageAccountProperties",
-          "description": "Common Storage Account Properties."
-        },
-        "azureDataExplorerProperties": {
-          "$ref": "#/definitions/AzureDataExplorerProperties",
-          "description": "Azure DataExplorer Cluster Properties."
-        }
-      },
-      "description": "The updatable properties of the AnalyticsStorageResources."
-    },
     "AzureDataExplorerProperties": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "ADx Name"
-        },
-        "location": {
-          "type": "string",
-          "description": "ADx location"
-        },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
           "description": "Virtual Network Configuration"
@@ -472,9 +411,6 @@
       },
       "description": "ADx Properties",
       "required": [
-        "name",
-        "location",
-        "virtualNetworkConfiguration",
         "kustoClusterPrincipalAssignments"
       ]
     },
@@ -507,14 +443,6 @@
     "CommonStorageAccountProperties": {
       "type": "object",
       "properties": {
-        "uniqueIdentifierName": {
-          "type": "string",
-          "description": "unique Identifier Name"
-        },
-        "systemIdentityName": {
-          "type": "string",
-          "description": "system Identity Name"
-        },
         "publicNetworkAccess": {
           "type": "string",
           "description": "Allow or disallow public network access to Storage Account."
@@ -534,12 +462,86 @@
       },
       "description": "Common Storage Account Properties.",
       "required": [
-        "uniqueIdentifierName",
-        "systemIdentityName",
-        "publicNetworkAccess",
-        "blobServices",
-        "privateEndPoint"
+        "blobServices"
       ]
+    },
+    "DataLakeHouseResources": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "A NetworkAnalyticsProviderHub resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataLakeHouseResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeHouseResources"
+          },
+          "x-cadl-name": "DataLakeHouseResources[]",
+          "description": "The DataLakeHouseResources items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DataLakeHouseResources>"
+        }
+      },
+      "description": "The response of a DataLakeHouseResources list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DataLakeHouseResourcesUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataLakeHouseResourcesUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the DataLakeHouseResources."
+    },
+    "DataLakeHouseResourcesUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed Resource Group Configuration."
+        },
+        "commonStorageAccountProperties": {
+          "$ref": "#/definitions/CommonStorageAccountProperties",
+          "description": "Common Storage Account Properties."
+        },
+        "azureDataExplorerProperties": {
+          "$ref": "#/definitions/AzureDataExplorerProperties",
+          "description": "Azure DataExplorer Cluster Properties."
+        }
+      },
+      "description": "The updatable properties of the DataLakeHouseResources."
     },
     "IPRules": {
       "type": "object",
@@ -561,21 +563,13 @@
     "KustoClusterPrincipalAssignments": {
       "type": "object",
       "properties": {
-        "name": {
+        "systemIdentityName": {
           "type": "string",
-          "description": "Kusto cluster name"
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID of resource identity"
+          "description": "system Identity Name"
         },
         "role": {
           "type": "string",
           "description": "Kusto roles"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of resource."
         },
         "principalType": {
           "type": "string",
@@ -584,10 +578,7 @@
       },
       "description": "ADx Role assignments",
       "required": [
-        "name",
-        "principalId",
         "role",
-        "tenantId",
         "principalType"
       ]
     },
@@ -754,6 +745,10 @@
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
           "description": "Managed Resource Group Configuration."
         },
+        "uniqueIdentifierName": {
+          "type": "string",
+          "description": "unique Identifier Name"
+        },
         "commonStorageAccountProperties": {
           "$ref": "#/definitions/CommonStorageAccountProperties",
           "description": "Common Storage Account Properties."
@@ -769,9 +764,8 @@
       },
       "description": "Details of the NetworkAnalytics Storage.",
       "required": [
-        "managedResourceGroupConfiguration",
+        "uniqueIdentifierName",
         "commonStorageAccountProperties",
-        "bronzeStorageAccountProperties",
         "azureDataExplorerProperties"
       ]
     },
@@ -821,7 +815,7 @@
     }
   },
   "parameters": {
-    "AnalyticsStorageResources.storageName": {
+    "DataLakeHouseResources.storageName": {
       "name": "storageName",
       "in": "path",
       "required": true,
