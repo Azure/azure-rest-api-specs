@@ -99,11 +99,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -148,11 +144,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
             "name": "checkHostNameAvailabilityInput",
@@ -203,11 +195,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
             "name": "validateSecretInput",
@@ -307,11 +295,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
             "name": "profileUpgradeParameters",
@@ -6073,6 +6057,16 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
+    },
+    "profileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group."
     }
   }
 }

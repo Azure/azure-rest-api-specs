@@ -2746,6 +2746,10 @@
       "type": "object",
       "description": "The JSON object containing profile update parameters.",
       "properties": {
+        "identity": {
+          "description": "The  identity of the profile.",
+          "$ref": "#/definitions/MsiIdentity"
+        },
         "originResponseTimeoutSeconds": {
           "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
           "type": "integer",
@@ -6841,7 +6845,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "IdentityType",
+            "name": "MsiIdentityType",
             "modelAsString": true
           }
         },
