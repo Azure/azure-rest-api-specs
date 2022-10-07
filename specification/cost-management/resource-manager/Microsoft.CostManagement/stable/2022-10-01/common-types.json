@@ -105,13 +105,39 @@
           "description": "Operation id: {provider}/{resource}/{operation}.",
           "type": "string",
           "readOnly": true
+        },
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.CostManagement.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Dimensions, Query.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Operation description",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
-        }
-      ]
+      }
     },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
