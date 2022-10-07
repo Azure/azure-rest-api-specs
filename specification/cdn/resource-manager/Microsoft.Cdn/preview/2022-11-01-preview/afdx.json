@@ -298,7 +298,7 @@
         "description": "Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.",
         "operationId": "AFDProfiles_Upgrade",
         "x-ms-examples": {
-          "AFDProfiles_CheckHostNameAvailability": {
+          "AFDProfiles_Upgrade": {
             "$ref": "./examples/AFDProfiles_Upgrade.json"
           }
         },
@@ -348,6 +348,10 @@
               "$ref": "#/definitions/AfdErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -5607,7 +5611,11 @@
             "PT5M",
             "PT1H",
             "P1D"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "MetricsGranularity",
+            "modelAsString": true
+          }
         },
         "series": {
           "type": "array",
@@ -5624,7 +5632,11 @@
                   "bytes",
                   "bitsPerSecond",
                   "milliSeconds"
-                ]
+                ],
+                "x-ms-enum": {
+                  "name": "MetricsSeriesUnit",
+                  "modelAsString": true
+                }
               },
               "groups": {
                 "type": "array",
@@ -5832,7 +5844,11 @@
             "PT5M",
             "PT1H",
             "P1D"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "WafMetricsSeriesUnit",
+            "modelAsString": true
+          }
         },
         "series": {
           "type": "array",
@@ -5846,7 +5862,11 @@
                 "type": "string",
                 "enum": [
                   "count"
-                ]
+                ],
+                "x-ms-enum": {
+                  "name": "WafMetricsSeriesUnit",
+                  "modelAsString": true
+                }
               },
               "groups": {
                 "type": "array",
