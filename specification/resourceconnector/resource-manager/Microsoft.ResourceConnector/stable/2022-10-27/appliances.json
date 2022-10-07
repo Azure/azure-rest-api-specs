@@ -541,6 +541,28 @@
     }
   },
   "definitions": {
+    "ArtifactProfile": {
+      "description": "Appliance ArtifactProfile definition.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "Endpoint is the URL to upload artifacts to.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ArtifactType": {
+      "description": "Appliance ArtifactType definition.",
+      "type": "string",
+      "enum": [
+        "LogsArtifactType"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": true
+      }
+    },
     "HybridConnectionConfig": {
       "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
       "type": "object",
@@ -633,7 +655,8 @@
       "enum": [
         "SSHCustomerUser",
         "ManagementCAKey",
-        "LogsKey"
+        "LogsKey",
+        "ScopedAccessKey"
       ],
       "x-ms-enum": {
         "name": "SSHKeyType",
@@ -842,6 +865,14 @@
       "description": "The List Cluster Keys Results appliance.",
       "type": "object",
       "properties": {
+        "artifactProfiles": {
+          "description": "Map of artifacts that contains a list of ArtifactProfile used to upload artifacts such as logs.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/ArtifactProfile"
+          }
+        },
         "kubeconfigs": {
           "description": "The list of appliance kubeconfigs.",
           "type": "array",
@@ -1012,6 +1043,15 @@
             "PreparingForUpgrade",
             "UpgradePrerequisitesCompleted",
             "PreUpgrade",
+            "UpgradingKVAIO",
+            "WaitingForKVAIO",
+            "ImagePending",
+            "ImageProvisioning",
+            "ImageProvisioned",
+            "ImageDownloading",
+            "ImageDownloaded",
+            "ImageDeprovisioning",
+            "ImageUnknown",
             "UpdatingCloudOperator",
             "WaitingForCloudOperator",
             "UpdatingCAPI",
