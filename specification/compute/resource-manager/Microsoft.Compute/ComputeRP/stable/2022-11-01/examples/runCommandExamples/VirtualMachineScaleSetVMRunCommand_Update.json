@@ -9,7 +9,10 @@
     "runCommand": {
       "properties": {
         "source": {
-          "script": "Write-Host Script Source Updated!"
+          "scriptUri": "Base URI of a storage append blob(without SAS token) OR SAS URI with read access.",
+          "scriptUriManagedIdentity": {
+            "objectId": "GUID. Needed only when scriptUri does not contain SAS token and user-assigned managed Identity is used. Use empty scriptManagedIdentity for system-assigned managed identity."
+          }
         }
       }
     }
@@ -27,7 +30,7 @@
         },
         "properties": {
           "source": {
-            "script": "Write-Host Script Source Updated!"
+            "scriptUri": "Base URI of a storage append blob(without SAS token)."
           },
           "parameters": [
             {
@@ -42,7 +45,9 @@
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Updating"
+          "provisioningState": "Updating",
+          "outputBlobUri": "Base URI of a storage append blob(without SAS token)",
+          "errorBlobUri": "Base URI of a storage append blob(without SAS token)"
         }
       }
     }
