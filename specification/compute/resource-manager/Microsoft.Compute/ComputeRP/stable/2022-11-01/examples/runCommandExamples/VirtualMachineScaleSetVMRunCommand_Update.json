@@ -9,9 +9,9 @@
     "runCommand": {
       "properties": {
         "source": {
-          "scriptUri": "Base URI of a storage append blob(without SAS token) OR SAS URI with read access.",
+          "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1",
           "scriptUriManagedIdentity": {
-            "objectId": "GUID. Needed only when scriptUri does not contain SAS token and user-assigned managed Identity is used. Use empty scriptManagedIdentity for system-assigned managed identity."
+            "objectId": "4231e4d2-33e4-4e23-96b2-17888afa6072"
           }
         }
       }
@@ -30,7 +30,7 @@
         },
         "properties": {
           "source": {
-            "scriptUri": "Base URI of a storage append blob(without SAS token)."
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
           },
           "parameters": [
             {
@@ -46,8 +46,8 @@
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
           "provisioningState": "Updating",
-          "outputBlobUri": "Base URI of a storage append blob(without SAS token)",
-          "errorBlobUri": "Base URI of a storage append blob(without SAS token)"
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
     }

@@ -17,7 +17,7 @@
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
             "properties": {
               "source": {
-                "script": "Write-Host Hello World!"
+                "script": "Write-Host Hello World! ; Remove-Item C:\test\testFile.txt"
               },
               "parameters": [
                 {
@@ -33,8 +33,8 @@
               "runAsUser": "user1",
               "timeoutInSeconds": 0,
               "provisioningState": "Succeeded",
-              "outputBlobUri": "Base URI of a storage append blob(without SAS token)",
-              "errorBlobUri": "Base URI of a storage append blob(without SAS token)"
+              "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+              "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
             }
           }
         ]
