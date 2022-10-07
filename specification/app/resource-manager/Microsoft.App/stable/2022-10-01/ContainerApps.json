@@ -568,8 +568,25 @@
               "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
               "description": "Workload profile type to pin for container app execution."
             },
+            "appState": {
+              "description": "Current state of the app. Controls if the app is enabled or disabled.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AppState",
+                "modelAsString": true
+              }
+            },
             "latestRevisionName": {
               "description": "Name of the latest revision of the Container App.",
+              "type": "string",
+              "readOnly": true
+            },
+            "latestReadyRevisionName": {
+              "description": "Name of the latest ready revision of the Container App.",
               "type": "string",
               "readOnly": true
             },
