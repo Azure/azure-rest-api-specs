@@ -1185,6 +1185,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus": {
+      "get": {
+        "tags": [
+          "SKU"
+        ],
+        "operationId": "Skus_List",
+        "description": "Gets information about skus in specified location for the given subscription id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "SkusList": {
+            "$ref": "./examples/RedisEnterpriseSkusList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request succeeded, response body contains the requested details.",
+            "schema": {
+              "$ref": "#/definitions/RegionSkuDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -1192,7 +1234,9 @@
       "description": "SKU parameters supplied to the create RedisEnterprise operation.",
       "type": "object",
       "properties": {
-        "name": { "$ref": "#/definitions/SkuName" },
+        "name": {
+          "$ref": "#/definitions/SkuName"
+        },
         "capacity": {
           "type": "integer",
           "format": "int32",
@@ -1767,15 +1811,16 @@
       "title": "Sku Detail",
       "description": "Information about Sku",
       "properties": {
-        "name": { "$ref": "#/definitions/SkuName" }
+        "name": {
+          "$ref": "#/definitions/SkuName"
+        }
       },
       "readOnly": true
     },
     "SkuName": {
-      "type": "object",
+      "type": "string",
       "title": "Sku Name",
       "description": "Sku Name",
-      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
