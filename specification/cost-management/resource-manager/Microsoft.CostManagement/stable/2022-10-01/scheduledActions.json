@@ -599,11 +599,11 @@
     },
     "FileDestination": {
       "type": "object",
-      "description": "Destination of the view data. This is optional. Currently only csv format is supported.",
+      "description": "Destination of the view data. This is optional. Currently only CSV format is supported.",
       "properties": {
         "fileFormats": {
           "type": "array",
-          "description": "Destination of the view data. Currently only csv format is supported.",
+          "description": "Destination of the view data. Currently only CSV format is supported.",
           "items": {
             "$ref": "#/definitions/FileFormat"
           }
@@ -612,7 +612,7 @@
     },
     "FileFormat": {
       "type": "string",
-      "description": "Destination of the view data. Currently only csv format is supported.",
+      "description": "Destination of the view data. Currently only csCSVv format is supported.",
       "enum": [
         "Csv"
       ],
@@ -623,7 +623,7 @@
     },
     "Language": {
       "type": "string",
-      "description": "Language in which the email is localized, for ex: 'Fr'. When the specified language is not supported, it will be defaulted to english. The supported languages are cs (Czech), da (Danish), de (German), en (English), es (Spanish), fr (French), hu (Hungarian), id (Indonesian), it (Lithuanian), ja (Japanese), ko (Korean), nb (Norwegian Bokmål), nl (Dutch), pl (Polish), pt (Portuguese), ru (Russian), sv (Swedish), tr (Turkish), zh (Chinese) "
+      "description": "Language in which the email is localized, for ex: 'Fr'. When the specified language is not supported, email will be in english. The supported languages are cs (Czech), da (Danish), de (German), en (English), es (Spanish), fr (French), hu (Hungarian), id (Indonesian), it (Lithuanian), ja (Japanese), ko (Korean), nb (Norwegian Bokmål), nl (Dutch), pl (Polish), pt (Portuguese), ru (Russian), sv (Swedish), tr (Turkish), zh (Chinese) "
     },
     "NotificationEmail": {
       "type": "string",
@@ -656,7 +656,7 @@
           "type": "string"
         },
         "regionalFormat": {
-          "description": "Regional format of the email.",
+          "description": "Regional format used for formatting date/time and currency values in the email.",
           "$ref": "#/definitions/RegionalFormat"
         },
         "subject": {
