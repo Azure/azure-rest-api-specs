@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-07-01",
+    "api-version": "2022-05-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contosoresources",
     "accountName": "contosomedia"
@@ -14,9 +14,9 @@
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncode",
             "type": "Microsoft.Media/mediaservices/transforms",
             "properties": {
-              "created": "2018-07-26T19:11:48.9717921-07:00",
+              "created": "2022-10-05T22:15:50.6384311Z",
               "description": "A sample Transform using the Standard Encoder with a built in preset.",
-              "lastModified": "2018-07-26T19:11:48.9717921-07:00",
+              "lastModified": "2022-10-05T22:15:50.6384311Z",
               "outputs": [
                 {
                   "onError": "StopProcessingJob",
@@ -27,25 +27,18 @@
                   }
                 }
               ]
-            }
+            },
+            "systemData": {}
           },
           {
             "name": "sampleEncodeAndVideoIndex",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex",
             "type": "Microsoft.Media/mediaservices/transforms",
             "properties": {
-              "created": "2018-07-26T19:11:48.9767793-07:00",
+              "created": "2022-10-05T22:15:50.8418794Z",
               "description": "A sample Transform using the Standard Encoder with a built-in preset, as well as the Video Analyzer.",
-              "lastModified": "2018-07-26T19:11:48.9767793-07:00",
+              "lastModified": "2022-10-05T22:15:50.8418794Z",
               "outputs": [
-                {
-                  "onError": "StopProcessingJob",
-                  "relativePriority": "Normal",
-                  "preset": {
-                    "@odata.type": "#Microsoft.Media.VideoAnalyzerPreset",
-                    "insightsToExtract": "AllInsights"
-                  }
-                },
                 {
                   "onError": "StopProcessingJob",
                   "relativePriority": "Normal",
@@ -53,9 +46,19 @@
                     "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
                     "presetName": "AdaptiveStreaming"
                   }
+                },
+                {
+                  "onError": "StopProcessingJob",
+                  "relativePriority": "Normal",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.VideoAnalyzerPreset",
+                    "mode": "Standard",
+                    "insightsToExtract": "AllInsights"
+                  }
                 }
               ]
-            }
+            },
+            "systemData": {}
           }
         ]
       }
