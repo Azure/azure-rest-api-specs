@@ -77,17 +77,31 @@
         }
       }
     },
+    "RoutesetsList": {
+      "description": "The response model for the Routeset List API. Returns the list of all routesets.",
+      "type": "object",
+      "properties": {
+        "routesets": {
+          "description": "The list of all routesets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Routeset"
+          }
+        },
+        "nextLink": {
+          "description": "If present, the location of the next page of data.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Routeset": {
       "description": "Detailed information for the routeset.",
       "type": "object",
       "properties": {
         "routesetId": {
           "description": "The unique ID of the routeset.",
-          "type": "string",
-          "readOnly": true
-        },
-        "ontology": {
-          "description": "The ontology of the source dataset. For more information about Azure Maps Creator ontologies, see the [Facility Ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) article.",
           "type": "string",
           "readOnly": true
         },
@@ -101,18 +115,13 @@
           "type": "string",
           "readOnly": true
         },
-        "facilityDetails": {
+        "facilities": {
           "description": "The facility information and building level ordinal numbers.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FacilityDetails"
           },
           "x-ms-identifiers": [],
-          "readOnly": true
-        },
-        "creationMode": {
-          "description": "The ontology used to generate the routeset.",
-          "type": "string",
           "readOnly": true
         },
         "created": {
@@ -237,7 +246,7 @@
           "200": {
             "description": "List routeset request completed successfully. The response body contains a list of all routesets.",
             "schema": {
-              "$ref": "#/definitions/Routeset"
+              "$ref": "#/definitions/RoutesetsList"
             }
           },
           "default": {
@@ -252,13 +261,10 @@
         "operationId": "routesetGet",
         "x-ms-examples": {
           "Get details for a previously created dataset": {
-            "$ref": "./examples/wayfind/Routeset_GetDetails.json"
+            "$ref": "./examples/wayfind/Routeset_Get.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/RoutesetId"
-          },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
@@ -267,6 +273,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/RoutesetId"
           }
         ],
         "responses": {
