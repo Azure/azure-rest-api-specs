@@ -73,6 +73,10 @@ tag: package-templatespecs-2022-02
 tag: package-changes-2022-05
 ```
 
+``` yaml $(package-snapshots)
+tag: package-snapshots-2022-11
+```
+
 ### Tag: package-policy-2022-06
 
 These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.
@@ -90,8 +94,6 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
-``` yaml $(package-snapshots)
-tag: package-snapshots-2022-11
 ```
 
 ### Tag: package-snapshots-2022-11
