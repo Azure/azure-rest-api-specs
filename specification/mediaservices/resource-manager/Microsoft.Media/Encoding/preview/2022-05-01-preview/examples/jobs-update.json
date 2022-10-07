@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-07-01",
+    "api-version": "2022-05-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contosoresources",
     "accountName": "contosomedia",
@@ -9,6 +9,16 @@
     "parameters": {
       "properties": {
         "description": "Example job to illustrate update.",
+        "input": {
+          "@odata.type": "#Microsoft.Media.JobInputAsset",
+          "assetName": "job1-InputAsset"
+        },
+        "outputs": [
+          {
+            "@odata.type": "#Microsoft.Media.JobOutputAsset",
+            "assetName": "job1-OutputAsset"
+          }
+        ],
         "priority": "High"
       }
     }
@@ -20,7 +30,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job1",
         "type": "Microsoft.Media/mediaservices/transforms/jobs",
         "properties": {
-          "created": "2018-08-08T16:29:58.3218119Z",
+          "created": "2021-06-01T00:00:00Z",
           "state": "Queued",
           "description": "Example job to illustrate update.",
           "input": {
@@ -29,23 +39,23 @@
               {
                 "@odata.type": "#Microsoft.Media.JobInputAsset",
                 "files": [],
-                "assetName": "job1 input"
+                "assetName": "job1-InputAsset"
               }
             ]
           },
-          "lastModified": "2018-08-08T16:29:58.3368364Z",
+          "lastModified": "2022-10-05T22:15:54.2311151Z",
           "outputs": [
             {
               "@odata.type": "#Microsoft.Media.JobOutputAsset",
               "state": "Queued",
               "progress": 0,
-              "label": "example-custom-label",
-              "assetName": "job1 output"
+              "assetName": "job1-OutputAsset"
             }
           ],
           "priority": "High",
           "correlationData": {}
-        }
+        },
+        "systemData": {}
       }
     }
   }
