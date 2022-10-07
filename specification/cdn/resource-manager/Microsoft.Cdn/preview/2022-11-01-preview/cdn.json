@@ -2635,7 +2635,7 @@
           "description": "Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile."
         },
         "identity": {
-          "description": "The  identity of the profile.",
+          "description": "The identity of the profile.",
           "$ref": "#/definitions/MsiIdentity"
         },
         "properties": {
@@ -2735,6 +2735,10 @@
             "type": "string"
           }
         },
+        "identity": {
+          "description": "The identity of the profile.",
+          "$ref": "#/definitions/MsiIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfilePropertiesUpdateParameters"
@@ -2746,10 +2750,6 @@
       "type": "object",
       "description": "The JSON object containing profile update parameters.",
       "properties": {
-        "identity": {
-          "description": "The  identity of the profile.",
-          "$ref": "#/definitions/MsiIdentity"
-        },
         "originResponseTimeoutSeconds": {
           "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns.",
           "type": "integer",
