@@ -90,6 +90,17 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+``` yaml $(package-snapshots)
+tag: package-snapshots-2022-11
+```
+
+### Tag: package-snapshots-2022-11
+
+These settings apply only when `--tag=package-snapshots-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-snapshots-2022-11'
+input-file:
+- Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
 ```
 
 ### Tag: package-changes-2022-05
@@ -913,6 +924,13 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: 'Duplicate Operations API causes generation issues'
+  - from: snapshots.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: TopLevelResourcesListBySubscription
+    from: snapshots.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
@@ -966,6 +984,7 @@ batch:
   - package-deploymentscripts: true
   - package-templatespecs: true
   - package-changes: true
+  - package-snapshots: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
