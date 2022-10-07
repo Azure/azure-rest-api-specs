@@ -241,6 +241,72 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/upgrade": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.",
+        "operationId": "AFDProfiles_Upgrade",
+        "x-ms-examples": {
+          "AFDProfiles_Upgrade": {
+            "$ref": "./examples/AFDProfiles_Upgrade.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "name": "profileUpgradeParameters",
+            "in": "body",
+            "description": "Profile upgrade input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileUpgradeParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "./cdn.json#/definitions/Profile"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./cdn.json#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "Azure-AsyncOperation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains": {
       "get": {
         "tags": [
@@ -287,72 +353,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/upgrade": {
-      "post": {
-        "tags": [
-          "AFDProfiles"
-        ],
-        "description": "Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.",
-        "operationId": "AFDProfiles_Upgrade",
-        "x-ms-examples": {
-          "AFDProfiles_Upgrade": {
-            "$ref": "./examples/AFDProfiles_Upgrade.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/profileNameParameter"
-          },
-          {
-            "name": "profileUpgradeParameters",
-            "in": "body",
-            "description": "Profile upgrade input.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProfileUpgradeParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "./cdn.json#/definitions/Profile"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "azure-asyncoperation": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "./cdn.json#/definitions/Profile"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-asyncoperation"
         }
       }
     },
