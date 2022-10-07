@@ -708,7 +708,7 @@
         },
         "x-ms-examples": {
           "Successful Get Deployment Status": {
-            "$ref": "./examples/analyztext-authoring/SuccessfulGetDeploymentStatus.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
           }
         }
       }
@@ -749,8 +749,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
+          "Successful Get Delete Deployment From Resources Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeleteDeploymentFromResourcesStatus.json"
           }
         }
       }
@@ -1029,6 +1029,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Load Snapshot": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulLoadSnapshot.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1159,6 +1164,11 @@
             "schema": {
               "$ref": "common.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Load Snapshot Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetLoadSnapshotStatus.json"
           }
         }
       }
@@ -2997,8 +3007,7 @@
         "lastTrainedDateTime",
         "lastDeployedDateTime",
         "deploymentExpirationDate",
-        "modelTrainingConfigVersion",
-        "assignedResources"
+        "modelTrainingConfigVersion"
       ],
       "type": "object",
       "properties": {
@@ -3200,8 +3209,7 @@
         "lastTrainedDateTime",
         "lastTrainingDurationInSeconds",
         "modelExpirationDate",
-        "modelTrainingConfigVersion",
-        "hasSnapshot"
+        "modelTrainingConfigVersion"
       ],
       "type": "object",
       "properties": {
@@ -3645,7 +3653,7 @@
       "x-ms-client-name": "TrainingJobState"
     },
     "TextAnalysisAuthoringUnassignDeploymentResourcesOptions": {
-      "description": "Represents the options for unassigning Azure resources from a project.",
+      "description": "Represents the options to unassign Azure resources from a project.",
       "required": [
         "assignedResourceIds"
       ],
