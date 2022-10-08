@@ -1237,42 +1237,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.CostManagement/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Lists all of the available cost management REST API operations.",
-        "x-ms-examples": {
-          "OperationList": {
-            "$ref": "./examples/OperationList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common-types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -2301,67 +2265,6 @@
         "type": {
           "description": "The type of column.",
           "type": "string"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of cost management operations supported by the Microsoft.CostManagement resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Cost management REST API operation.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Operation id: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.CostManagement.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Dimensions, Query.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Operation description",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       }
     },
