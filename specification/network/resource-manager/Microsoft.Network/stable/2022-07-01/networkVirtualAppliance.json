@@ -262,6 +262,9 @@
         "x-ms-examples": {
           "Create NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualAppliancePut.json"
+          },
+          "Create SaaS NetworkVirtualAppliance": {
+            "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -826,7 +829,7 @@
           "format": "int64",
           "minimum": 0,
           "maximum": 4294967295,
-          "description": "VirtualAppliance ASN."
+          "description": "VirtualAppliance ASN. Microsoft private, public and IANA reserved ASN are not supported."
         },
         "sshPublicKey": {
           "type": "string",
@@ -861,6 +864,19 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState"
+        },
+        "deploymentType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The deployment type. PartnerManaged for the SaaS NVA"
+        },
+        "delegation": {
+          "description": "The delegation for the Virtual Appliance",
+          "$ref": "#/definitions/DelegationProperties"
+        },
+        "partnerManagedResource": {
+          "description": "The delegation for the Virtual Appliance",
+          "$ref": "#/definitions/PartnerManagedResourceProperties"
         }
       },
       "description": "Network Virtual Appliance definition."
@@ -1170,6 +1186,65 @@
         }
       },
       "description": "Properties of the Inbound Security Rules resource."
+    },
+    "DelegationProperties": {
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The service name to which the NVA is delegated."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Properties of the delegation."
+    },
+    "PartnerManagedResourceProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "PaloAltoNetworks.Cloudngfw/firewalls"
+              }
+            ]
+          },
+          "description": "The partner managed resource id."
+        },
+        "internalLoadBalancerId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/loadBalancers"
+              }
+            ]
+          },
+          "description": "The partner managed ILB resource id"
+        },
+        "standardLoadBalancerId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/loadBalancers"
+              }
+            ]
+          },
+          "description": "The partner managed SLB resource id"
+        }
+      },
+      "description": "Properties of the partner managed resource."
     }
   }
 }
