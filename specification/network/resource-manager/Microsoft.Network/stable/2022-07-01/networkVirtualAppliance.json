@@ -1192,7 +1192,7 @@
       "properties": {
         "serviceName": {
           "type": "string",
-          "description": "The service name to which nva is delegated."
+          "description": "The service name to which the NVA is delegated."
         },
         "provisioningState": {
           "readOnly": true,
@@ -1208,18 +1208,39 @@
           "readOnly": true,
           "type": "string",
           "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "PaloAltoNetworks.Cloudngfw/firewalls"
+              }
+            ]
+          },
           "description": "The partner managed resource id."
         },
         "internalLoadBalancerId": {
           "readOnly": true,
           "type": "string",
           "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/loadBalancers"
+              }
+            ]
+          },
           "description": "The partner managed ILB resource id"
         },
         "standardLoadBalancerId": {
           "readOnly": true,
           "type": "string",
           "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/loadBalancers"
+              }
+            ]
+          },
           "description": "The partner managed SLB resource id"
         }
       },
