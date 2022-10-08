@@ -131,6 +131,22 @@
           "readOnly": true
         }
       }
+    },
+    "CostManagementProxyResource": {
+      "description": "The Resource model definition.",
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
     }
   }
 }
