@@ -42,6 +42,7 @@ input-file:
   - Microsoft.CostManagement/stable/2022-10-01/common-types.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2022-10-01/scheduledActions.json
 ```
 ### Tag: package-preview-2022-10
 
