@@ -1331,7 +1331,6 @@
           "type": "object",
           "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
           "additionalProperties": {
-            "type": "object",
             "$ref": "#/definitions/ReportConfigAggregation"
           },
           "x-ms-identifiers": [
@@ -1360,7 +1359,6 @@
           "x-ms-identifiers": []
         },
         "filter": {
-          "type": "object",
           "description": "Has filter expression to use in the report.",
           "$ref": "#/definitions/ReportConfigFilter"
         }
@@ -1597,7 +1595,6 @@
         },
         "query": {
           "description": "Query body configuration. Required.",
-          "type": "object",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReportConfigDefinition"
         },
@@ -2259,22 +2256,18 @@
       "properties": {
         "type": {
           "description": "The type of the forecast.",
-          "type": "string",
           "$ref": "#/definitions/ForecastType"
         },
         "timeframe": {
           "description": "The time frame for pulling data for the forecast. If custom, then a specific time period must be provided.",
-          "type": "string",
           "$ref": "#/definitions/ForecastTimeframe"
         },
         "timePeriod": {
           "description": "Has time period for pulling data for the forecast.",
-          "type": "object",
           "$ref": "#/definitions/ForecastTimePeriod"
         },
         "dataset": {
           "description": "Has definition for data in this forecast.",
-          "type": "object",
           "$ref": "#/definitions/ForecastDataset"
         },
         "includeActualCost": {
@@ -2342,7 +2335,6 @@
       "properties": {
         "granularity": {
           "description": "The granularity of rows in the forecast.",
-          "type": "string",
           "$ref": "#/definitions/GranularityType"
         },
         "configuration": {
@@ -2353,14 +2345,12 @@
           "description": "Dictionary of aggregation expression to use in the forecast. The key of each item in the dictionary is the alias for the aggregated column. forecast can have up to 2 aggregation clauses.",
           "type": "object",
           "additionalProperties": {
-            "type": "object",
             "$ref": "#/definitions/ForecastAggregation"
           },
           "maxItems": 2
         },
         "filter": {
           "description": "Has filter expression to use in the forecast.",
-          "type": "object",
           "$ref": "#/definitions/ForecastFilter"
         }
       },
@@ -2584,7 +2574,6 @@
           "type": "object",
           "description": "Dictionary of aggregation expression to use in the query. The key of each item in the dictionary is the alias for the aggregated column. Query can have up to 2 aggregation clauses.",
           "additionalProperties": {
-            "type": "object",
             "$ref": "#/definitions/QueryAggregation"
           },
           "maxItems": 2
@@ -2602,7 +2591,6 @@
           "maxItems": 2
         },
         "filter": {
-          "type": "object",
           "description": "The filter expression to use in the query. Please reference our Query API REST documentation for how to properly format the filter.",
           "$ref": "#/definitions/QueryFilter"
         }
@@ -2627,7 +2615,6 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "type": "object",
           "description": "The properties of the resource generated.",
           "$ref": "#/definitions/ReportURL"
         }
