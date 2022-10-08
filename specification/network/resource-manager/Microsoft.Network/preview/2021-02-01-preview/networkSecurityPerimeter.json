@@ -902,6 +902,460 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LinkNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspLinks"
+        ],
+        "operationId": "NspLinks_Get",
+        "description": "Gets the specified NSP link.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP link.",
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinksGet": {
+            "$ref": "./examples/NspLinkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspLinks"
+        ],
+        "operationId": "NspLinks_CreateOrUpdate",
+        "description": "Creates or updates a NSP link.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            },
+            "description": "Parameters that hold the NspLink resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing access rule is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            }
+          },
+          "201": {
+            "description": "Create - Returns the NspLink resource created.",
+            "schema": {
+              "$ref": "#/definitions/NspLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinksPut": {
+            "$ref": "./examples/NspLinkPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspLinks"
+        ],
+        "operationId": "NspLinks_Delete",
+        "description": "Deletes an NSP Link.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "location": {
+                "description": "location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkDelete": {
+            "$ref": "./examples/NspLinkDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links": {
+      "get": {
+        "tags": [
+          "NspLinks"
+        ],
+        "operationId": "NspLinks_List",
+        "description": "Lists the NSP Links in the specified network security perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP links.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesList": {
+            "$ref": "./examples/NspLinkList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}/reconcile": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LinkNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NspLinkReconcile"
+        ],
+        "operationId": "NspLinkReconcile_Post",
+        "description": "Reconcile NSP link",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLinkReconcile"
+            },
+            "description": "Parameters for NSP link reconcile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP link.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReconcile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReconcile": {
+            "$ref": "./examples/NspLinkReconcile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LinkReferenceNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspLinkReferences"
+        ],
+        "operationId": "NspLinkReferences_Get",
+        "description": "Gets the specified NSP linkReference.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the NSP linkReference.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReferencesGet": {
+            "$ref": "./examples/NspLinkReferenceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspLinkReferences"
+        ],
+        "operationId": "NspLinkReferences_CreateOrUpdate",
+        "description": "Creates or updates a NSP linkReference.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLinkReference"
+            },
+            "description": "Parameters that hold the NspLinkReference resource to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing access rule is updated. Returns the resource.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReferencesPut": {
+            "$ref": "./examples/NspLinkReferencePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspLinkReferences"
+        ],
+        "operationId": "NspLinkReferences_Delete",
+        "description": "Deletes an NSP LinkReference.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "202": {
+            "description": "Delete in progress.",
+            "headers": {
+              "location": {
+                "description": "location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReferenceDelete": {
+            "$ref": "./examples/NspLinkReferenceDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences": {
+      "get": {
+        "tags": [
+          "NspLinkReferences"
+        ],
+        "operationId": "NspLinkReferences_List",
+        "description": "Lists the NSP LinkReferences in the specified network security perimeter.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP linkreferences.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReferenceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspProfilesList": {
+            "$ref": "./examples/NspLinkReferenceList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}/reconcile": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LinkReferenceNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NspLinkReferenceReconcile"
+        ],
+        "operationId": "NspLinkReferenceReconcile_Post",
+        "description": "Reconcile NSP linkReference",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLinkReferenceReconcile"
+            },
+            "description": "Parameters for NSP linkReference reconcile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP linkReference.",
+            "schema": {
+              "$ref": "#/definitions/NspLinkReferenceReconcile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLinkReferenceReconcile": {
+            "$ref": "./examples/NspLinkReferenceReconcile.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1343,6 +1797,259 @@
       "type": "object",
       "properties": {},
       "description": "Request object for NSP reconcile."
+    },
+    "NspLink": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspLinkProperties",
+          "description": "Properties of the network security perimeter link"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the link resource that is unique within a perimeter. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the network security perimeter link in ARM id format."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The network security perimeter link resource"
+    },
+    "NspLinkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLink"
+          },
+          "description": "Gets a page of NSP Link"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP link. Contains a list of NSP link and a URL link to get the next set of results."
+    },
+    "NspLinkProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPProvisioningState",
+          "description": "The provisioning state of the NSP Link resource."
+        },
+        "autoApprovedRemotePerimeterId": {
+          "type": "string",
+          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. Used when the NSP admin have access to approve connections on the remote NSP resource."
+        },
+        "manualApprovedRemotePerimeterId": {
+          "type": "string",
+          "description": "Perimeter ARM Id for the remote NSP with which the link gets created. Used when the NSP admin does not have access to approve connections on the remote NSP resource."
+        },
+        "remotePerimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP Guid with which the link gets created."
+        },
+        "localInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Local Inbound profile names to which Inbound is allowed. Use '*' to allow inbound to all profiles.",
+          "default": ["*"]
+        },
+        "localOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Local Outbound profile names from which Outbound is allowed. Use '*' to allow outbound from all profiles.",
+          "default": ["*"]
+        },
+        "remoteInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Remote Inbound profile names to which Inbound is allowed. Use '*' to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
+          "default": ["*"]
+        },
+        "remoteOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Remote Outbound profile names from which Outbound is allowed. Use '*' to allow outbound from all profiles. This property can only be updated in auto-approval mode.",
+          "default": ["*"]
+        },
+        "description": {
+          "type": "string",
+          "description": "A message passed to the owner of the remote NSP link resource with this connection request. Restricted to 140 chars."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The NSP link state.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "nspLinkStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties of NSP Link."
+    },
+    "NspLinkReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP link reconcile."
+    },
+    "NspLinkReference": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspLinkReferenceProperties",
+          "description": "Properties of the network security perimeter linkReference"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the linkReference resource that is unique within a perimeter. This name can be used to access the resource."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier of the network security perimeter linkReference in ARM id format."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The network security perimeter linkReference resource"
+    },
+    "NspLinkReferenceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLinkReference"
+          },
+          "description": "Gets a page of NSP LinkReference"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP linkReference. Contains a list of NSP linkReference and a URL link to get the next set of results."
+    },
+    "NspLinkReferenceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NSPProvisioningState",
+          "description": "The provisioning state of the NSP LinkReference resource."
+        },
+        "remotePerimeterId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Perimeter ARM Id for the remote NSP with which the link is created."
+        },
+        "remotePerimeterGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP Guid with which the link is created."
+        },
+        "localInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Local Inbound profile names to which Inbound is allowed. Use '*' to allow inbound to all profiles.",
+          "default": ["*"]
+        },
+        "localOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Local Outbound profile names from which Outbound is allowed. Use '*' to allow outbound from all profiles.",
+          "default": ["*"]
+        },
+        "remoteInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Remote Inbound profile names to which Inbound is allowed. '*' value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from remote perimeter.",
+          "default": ["*"]
+        },
+        "remoteOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Remote Outbound profile names from which Outbound is allowed. '*' value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from remote perimeter.",
+          "default": ["*"]
+        },
+        "description": {
+          "type": "string",
+          "description": "A message can be send to the remote NSP link admin with the connection response. Restricted to 140 chars."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The NSP linkReference state.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "nspLinkStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties of NSP LinkReference."
+    },
+    "NspLinkReferenceReconcile": {
+      "type": "object",
+      "properties": {},
+      "description": "Request object for NSP linkReference reconcile."
     }
   },
   "parameters": {
@@ -1386,6 +2093,22 @@
       "description": "The name of the NSP association.",
       "x-ms-parameter-location": "method"
     },
+    "LinkNameParameter": {
+      "name": "linkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP link.",
+      "x-ms-parameter-location": "method"
+    },
+    "LinkReferenceNameParameter": {
+      "name": "linkReferenceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP linkReference.",
+      "x-ms-parameter-location": "method"
+    },
     "ListTopParameter": {
       "name": "$top",
       "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
@@ -1403,14 +2126,6 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "NetworkSecurityPerimeterProfileParameter": {
-      "name": "networkSecurityPerimeterProfile",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the network security perimeter profile.",
       "x-ms-parameter-location": "method"
     },
     "LocationParameter": {
