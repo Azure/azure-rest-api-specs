@@ -437,8 +437,7 @@
           "final-state-via": "location"
         }
       }
-    }
-  },
+    },
   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
     "post": {
       "tags": [
@@ -498,7 +497,8 @@
         "final-state-via": "azure-async-operation"
       }
     }
-  },
+  }
+},
   "definitions": {
     "AzureFirewallIPConfigurationPropertiesFormat": {
       "properties": {
@@ -1243,6 +1243,11 @@
           "description": "Rules to filter packet captures."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "Packet capture parameters on azure firewall."
     },
     "AzureFirewallPacketCaptureFlags": {
