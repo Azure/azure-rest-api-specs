@@ -5,41 +5,42 @@
     "resourceGroupName": "rg1",
     "azureFirewallName": "azureFirewall1",
     "parameters": {
-        "properties": {
-            "durationInSeconds": 300,
-            "numberOfPacketsToCapture": 5000,
-            "SASURL": "someSASURL",
-            "fileName": "azureFirewallPacketCapture",
-            "protocol": "ANY",
-            "flags": [
-                "tcp-syn",
-                "tcp-fin"
-            ], 
-            "filterRules": [
-                {
-                    "source": [
-                      "20.1.1.0"
-                    ],
-                    "destination": [
-                      "20.1.2.0"
-                    ],
-                    "destinationPorts": "4500"
-                },
-                {
-                    "source": [
-                      "10.1.1.0", "10.1.1.1"
-                    ],
-                    "destination": [
-                      "10.1.2.0"
-                    ],
-                    "destinationPorts": [
-                        "123",
-                        "80"
-                    ]
-                }
+      "properties": {
+        "durationInSeconds": 300,
+        "numberOfPacketsToCapture": 5000,
+        "SASURL": "someSASURL",
+        "fileName": "azureFirewallPacketCapture",
+        "protocol": "ANY",
+        "flags": [
+          "tcp-syn",
+          "tcp-fin"
+        ],
+        "filters": [
+          {
+            "sources": [
+              "20.1.1.0"
+            ],
+            "destinations": [
+              "20.1.2.0"
+            ],
+            "destinationPorts": "4500"
+          },
+          {
+            "sources": [
+              "10.1.1.0",
+              "10.1.1.1"
+            ],
+            "destinations": [
+              "10.1.2.0"
+            ],
+            "destinationPorts": [
+              "123",
+              "80"
             ]
-        }
+          }
+        ]
       }
+    }
   },
   "responses": {
     "202": {}
