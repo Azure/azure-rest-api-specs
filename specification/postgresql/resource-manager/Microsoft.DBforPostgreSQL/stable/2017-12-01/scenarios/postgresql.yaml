@@ -1,0 +1,168 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serverName:
+    type: string
+    prefix: pgservers
+  adminPassword:
+    type: secureString
+  location:
+    type: string
+
+prepareSteps:
+  - step: Servers_Create
+    exampleFile: ..\examples\ServerCreate.json
+    requestUpdate:
+      - replace: /parameters/properties/administratorLoginPassword
+        value: $(adminPassword)
+      - replace: /parameters/sku
+        value: {
+          "name": "GP_Gen5_8",
+          "tier": "GeneralPurpose",
+          "family": "Gen5"
+        }
+
+scenarios:
+  - scenario: Servers
+    description: Microsoft.DBforPostgreSQL/servers
+    steps:
+      - step: Servers_List
+        exampleFile: ..\examples\ServerList.json
+      - step: Servers_ListByResourceGroup
+        exampleFile: ..\examples\ServerListByResourceGroup.json
+      - step: Servers_Get
+        exampleFile: ..\examples\ServerGet.json
+      - step: Servers_Update
+        exampleFile: ..\examples\ServerUpdate.json
+        requestUpdate:
+          - replace: /parameters/properties/administratorLoginPassword
+            value: $(adminPassword)
+      - step: Servers_Restart
+        exampleFile: ..\examples\ServerRestart.json
+    
+  - scenario: Replicas
+    description: Microsoft.DBforPostgreSQL/servers/replicas
+    steps:
+      - step: Replicas_ListByServer
+        exampleFile: ..\examples\ReplicasListByServer.json
+
+  - scenario: FirewallRules
+    description: Microsoft.DBforPostgreSQL/servers/firewallRules
+    steps:
+      - step: FirewallRules_CreateOrUpdate
+        exampleFile: ..\examples\FirewallRuleCreate.json
+      - step: FirewallRules_ListByServer
+        exampleFile: ..\examples\FirewallRuleListByServer.json
+      - step: FirewallRules_Get
+        exampleFile: ..\examples\FirewallRuleGet.json
+      - step: FirewallRules_Delete
+        exampleFile: ..\examples\FirewallRuleDelete.json
+
+  - scenario: VirtualNetworkRules
+    description: Microsoft.DBforPostgreSQL/servers/virtualNetworkRules
+    steps:
+      - step: VirtualNetwork_Create
+        armTemplate: templates/Create_VirtualNetworkAndSubnet.json
+      - step: VirtualNetworkRules_CreateOrUpdate
+        exampleFile: ..\examples\VirtualNetworkRulesCreateOrUpdate.json
+        requestUpdate:
+          - replace: /parameters/properties/virtualNetworkSubnetId
+            value: $(subnetId)
+          - replace: /parameters/properties/ignoreMissingVnetServiceEndpoint
+            value: true
+      - step: VirtualNetworkRules_ListByServer
+        exampleFile: ..\examples\VirtualNetworkRulesList.json
+      - step: VirtualNetworkRules_Get
+        exampleFile: ..\examples\VirtualNetworkRulesGet.json
+      - step: VirtualNetworkRules_Delete
+        exampleFile: ..\examples\VirtualNetworkRulesDelete.json
+
+  - scenario: Databases
+    description: Microsoft.DBforPostgreSQL/servers/databases
+    steps:
+      - step: Databases_CreateOrUpdate
+        exampleFile: ..\examples\DatabaseCreate.json
+      - step: Databases_ListByServer
+        exampleFile: ..\examples\DatabaseListByServer.json
+      - step: Databases_Get
+        exampleFile: ..\examples\DatabaseGet.json
+      - step: Databases_Delete
+        exampleFile: ..\examples\DatabaseDelete.json
+
+  - scenario: Configurations
+    description: Microsoft.DBforPostgreSQL/servers/configurations
+    steps:
+      - step: Configurations_CreateOrUpdate
+        exampleFile: ..\examples\ConfigurationCreateOrUpdate.json
+      - step: Configurations_ListByServer
+        exampleFile: ..\examples\ConfigurationListByServer.json
+      - step: Configurations_Get
+        exampleFile: ..\examples\ConfigurationGet.json
+
+  - scenario: ServerParameters
+    description: Microsoft.DBforPostgreSQL/servers/updateConfigurations
+    steps:
+      - step: ServerParameters_ListUpdateConfigurations
+        operationId: ServerParameters_ListUpdateConfigurations
+        parameters:
+          value:
+            value:
+              - name: array_nulls
+                properties:
+                  value: on
+              - name: backslash_quote
+                properties:
+                  value: on
+
+  - scenario: LogFiles
+    description: Microsoft.DBforPostgreSQL/servers/logFiles
+    steps:
+      - step: LogFiles_ListByServer
+        exampleFile: ..\examples\LogFileListByServer.json
+
+  - scenario: ServerAdministrators
+    description: Microsoft.DBforPostgreSQL/servers/administrators/activeDirectory
+    steps:
+      - step: ServerAdministrators_CreateOrUpdate
+        exampleFile: ..\examples\ServerAdminCreateUpdate.json
+      - step: ServerAdministrators_List
+        exampleFile: ..\examples\ServerAdminList.json
+      - step: ServerAdministrators_Get
+        exampleFile: ..\examples\ServerAdminGet.json
+      - step: ServerAdministrators_Delete
+        exampleFile: ..\examples\ServerAdminDelete.json
+
+  - scenario: RecoverableServers
+    description: Microsoft.DBforPostgreSQL/servers/recoverableServers
+    steps:
+      - step: RecoverableServers_Get
+        exampleFile: ..\examples\RecoverableServersGet.json
+
+  - scenario: ServerBasedPerformanceTier
+    description: Microsoft.DBforPostgreSQL/servers/performanceTiers
+    steps:
+      - step: ServerBasedPerformanceTier_List
+        exampleFile: ..\examples\PerformanceTiersListByServer.json
+
+  - scenario: LocationBasedPerformanceTier
+    description: Microsoft.DBforPostgreSQL/locations/performanceTiers
+    steps:
+      - step: LocationBasedPerformanceTier_List
+        exampleFile: ..\examples\PerformanceTiersListByLocation.json
+
+  - scenario: CheckNameAvailability
+    description: Microsoft.DBforPostgreSQL/checkNameAvailability
+    steps:
+      - step: CheckNameAvailability_Execute
+        exampleFile: ..\examples\CheckNameAvailability.json
+
+  - scenario: Operations
+    description: Microsoft.DBforPostgreSQL/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ..\examples\OperationList.json
+
+cleanUpSteps:
+  - step: Servers_Delete
+    exampleFile: ..\examples\ServerDelete.json

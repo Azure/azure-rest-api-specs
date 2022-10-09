@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "virtualNetworksName": {
+        "type": "string",
+        "defaultValue": "pgvnet"
+      },
+      "subnetName": {
+        "type": "string",
+        "defaultValue": "pgsubnet"
+      },
+      "location": {
+        "type": "string"
+      }
+    },
+    "resources": [
+      {
+        "name": "[parameters('virtualNetworksName')]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "location": "[parameters('location')]",
+        "tags": {},
+        "apiVersion": "2021-05-01",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('subnetName')]",
+              "properties": {
+                "addressPrefix": "10.0.0.0/24"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "outputs": {
+      "subnetId": {
+        "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworksName'), parameters('subnetName'))]",
+        "type": "string"
+      }
+    }
+  }
