@@ -1210,6 +1210,7 @@
       "description": "List of SNAT IP Prefixes learnt by firewall to not SNAT"
     },
     "FirewallPacketCaptureParameters": {
+      "type": "object",
       "properties": {
         "durationInSeconds": {
           "type": "string",
@@ -1232,7 +1233,10 @@
           "description": "The protocol of packets to capture"
         },
         "flags": {
-          "$ref": "#/definitions/AzureFirewallPacketCaptureFlags",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureFlags"
+          },
           "description": "The tcp-flag type to be captured. Used with protocol TCP"
         },
         "filters": {
@@ -1246,6 +1250,7 @@
       "description": "Packet capture parameters on azure firewall."
     },
     "AzureFirewallPacketCaptureFlags": {
+      "type": "object",
       "properties": {
         "type": {
           "description": "Flags to capture",
@@ -1271,6 +1276,7 @@
       }
     },
     "AzureFirewallCaptureRule": {
+      "type": "object",
       "properties": {
         "sources": {
           "type": "array",
