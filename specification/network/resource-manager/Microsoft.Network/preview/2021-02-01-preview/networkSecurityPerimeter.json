@@ -1019,6 +1019,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NspLinkDelete": {
             "$ref": "./examples/NspLinkDelete.json"
@@ -1243,6 +1244,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NspLinkReferenceDelete": {
             "$ref": "./examples/NspLinkReferenceDelete.json"
@@ -1872,7 +1874,8 @@
             "type": "string"
           },
           "description": "Local Inbound profile names to which Inbound is allowed. Use '*' to allow inbound to all profiles.",
-          "default": ["*"]
+          "default": "[*]",
+          "uniqueItems": true
         },
         "localOutboundProfiles": {
           "type": "array",
@@ -1880,7 +1883,8 @@
             "type": "string"
           },
           "description": "Local Outbound profile names from which Outbound is allowed. Use '*' to allow outbound from all profiles.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "remoteInboundProfiles": {
           "type": "array",
@@ -1888,7 +1892,8 @@
             "type": "string"
           },
           "description": "Remote Inbound profile names to which Inbound is allowed. Use '*' to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "remoteOutboundProfiles": {
           "type": "array",
@@ -1896,7 +1901,8 @@
             "type": "string"
           },
           "description": "Remote Outbound profile names from which Outbound is allowed. Use '*' to allow outbound from all profiles. This property can only be updated in auto-approval mode.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "description": {
           "type": "string",
@@ -1996,7 +2002,8 @@
             "type": "string"
           },
           "description": "Local Inbound profile names to which Inbound is allowed. Use '*' to allow inbound to all profiles.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "localOutboundProfiles": {
           "type": "array",
@@ -2004,7 +2011,8 @@
             "type": "string"
           },
           "description": "Local Outbound profile names from which Outbound is allowed. Use '*' to allow outbound from all profiles.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "remoteInboundProfiles": {
           "type": "array",
@@ -2013,7 +2021,8 @@
           },
           "readOnly": true,
           "description": "Remote Inbound profile names to which Inbound is allowed. '*' value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from remote perimeter.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "remoteOutboundProfiles": {
           "type": "array",
@@ -2022,7 +2031,8 @@
           },
           "readOnly": true,
           "description": "Remote Outbound profile names from which Outbound is allowed. '*' value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from remote perimeter.",
-          "default": ["*"]
+          "default": "[ * ]",
+          "uniqueItems": true
         },
         "description": {
           "type": "string",
