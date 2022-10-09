@@ -438,67 +438,67 @@
         }
       }
     },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
-    "post": {
-      "tags": [
-        "AzureFirewalls"
-      ],
-      "operationId": "AzureFirewalls_PacketCapture",
-      "description": "Runs a packet capture on AzureFirewall.",
-      "parameters": [
-        {
-          "name": "resourceGroupName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the resource group."
-        },
-        {
-          "name": "azureFirewallName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the Azure Firewall."
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/FirewallPacketCaptureParameters"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
+      "post": {
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "operationId": "AzureFirewalls_PacketCapture",
+        "description": "Runs a packet capture on AzureFirewall.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
-          "description": "Parameters supplied to update azure firewall tags."
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "Accepted and the operation will complete asynchronously."
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "./network.json#/definitions/CloudError"
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure Firewall."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPacketCaptureParameters"
+            },
+            "description": "Parameters supplied to update azure firewall tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Run Azure Firewall Packet Capture": {
+            "$ref": "./examples/AzureFirewallPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
-      },
-      "x-ms-examples": {
-        "Run Azure Firewall Packet Capture": {
-          "$ref": "./examples/AzureFirewallPacketCapture.json"
-        }
-      },
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
       }
     }
-  }
-},
+  },
   "definitions": {
     "AzureFirewallIPConfigurationPropertiesFormat": {
       "properties": {
