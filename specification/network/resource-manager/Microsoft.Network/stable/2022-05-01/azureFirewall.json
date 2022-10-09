@@ -494,7 +494,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     }
@@ -1269,7 +1269,11 @@
         "tcp-push",
         "tcp-act",
         "tcp-urg"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "AzureFirewallPacketCaptureFlagsType",
+        "modelAsString": true
+      }
     },
     "AzureFirewallCaptureRule": {
       "properties": {
