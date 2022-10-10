@@ -1,6 +1,5 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
-import "./form_recognizer.cadl";
 import "./models_v3.cadl";
 
 using Cadl.Http;
@@ -10,7 +9,7 @@ using Azure.Core;
 
 namespace FormRecognizer.v3;
 
-@added(APIVersions.v3)
+// @added(APIVersions.v3)
 interface Analysis {
   @post
   @route("documentModels/{modelId}:analyze")
