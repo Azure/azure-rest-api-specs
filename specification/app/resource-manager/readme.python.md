@@ -34,4 +34,8 @@ directive:
   - from: ContainerApps.json
     where: $.definitions.TrafficWeight.properties.latestRevision
     transform: $['default'] = 'False'
+
+  - from: ContainerApps.json
+    where: $.definitions.Ingress.properties.allowInsecure
+    transform: $['default'] = 'False'
 ```
