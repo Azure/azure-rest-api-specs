@@ -432,6 +432,7 @@
             "Single"
           ],
           "type": "string",
+          "default": "Single",
           "x-ms-enum": {
             "name": "ActiveRevisionsMode",
             "modelAsString": true
@@ -561,7 +562,8 @@
       "properties": {
         "enabled": {
           "description": "Boolean indicating if the Dapr side car is enabled",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "appId": {
           "description": "Dapr application identifier",
@@ -574,6 +576,7 @@
             "grpc"
           ],
           "type": "string",
+          "default": "http",
           "x-ms-enum": {
             "name": "appProtocol",
             "modelAsString": true
@@ -616,7 +619,8 @@
           "x-ms-enum": {
             "name": "IngressTransportMethod",
             "modelAsString": true
-          }
+          },
+          "default": "auto"
         },
         "traffic": {
           "description": "Traffic weights for app's revisions",
@@ -640,7 +644,8 @@
         },
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
-          "type": "boolean"
+          "type": "boolean",
+          "default": "false"
         }
       }
     },
