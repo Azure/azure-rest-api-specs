@@ -193,8 +193,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Authorization provider was successfully updated.",
+          "201": {
+            "description": "Authorization provider was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
             },
@@ -205,8 +205,8 @@
               }
             }
           },
-          "201": {
-            "description": "Authorization provider was successfully updated.",
+          "200": {
+            "description": "The existing Authorization provider was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
             },
@@ -223,6 +223,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -437,8 +441,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Authorization was successfully updated.",
+          "201": {
+            "description": "Authorization was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationContract"
             },
@@ -449,8 +453,8 @@
               }
             }
           },
-          "201": {
-            "description": "Authorization was successfully updated.",
+          "200": {
+            "description": "The existing Authorization was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationContract"
             },
@@ -467,6 +471,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -750,8 +758,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Authorization access policy was successfully updated.",
+          "201": {
+            "description": "Authorization access policy was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
             },
@@ -762,8 +770,8 @@
               }
             }
           },
-          "201": {
-            "description": "Authorization access policy was successfully updated.",
+          "200": {
+            "description": "The existing Authorization access policy was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
             },
@@ -780,6 +788,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
