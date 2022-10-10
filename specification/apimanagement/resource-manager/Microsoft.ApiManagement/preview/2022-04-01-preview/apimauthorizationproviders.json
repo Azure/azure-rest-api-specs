@@ -198,7 +198,14 @@
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
             },
-            "201": {
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
             "description": "Authorization provider was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
@@ -435,7 +442,14 @@
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationContract"
             },
-            "201": {
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
             "description": "Authorization was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationContract"
@@ -741,7 +755,14 @@
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
             },
-            "201": {
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
             "description": "Authorization access policy was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
