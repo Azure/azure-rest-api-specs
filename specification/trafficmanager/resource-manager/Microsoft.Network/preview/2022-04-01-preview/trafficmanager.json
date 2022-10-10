@@ -1078,6 +1078,18 @@
             "description": "Custom header name and value."
           },
           "description": "List of custom headers."
+        },
+        "alwaysServe": {
+          "type": "string",
+          "description": "If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AlwaysServe",
+            "modelAsString": true
+          }
         }
       },
       "description": "Class representing a Traffic Manager endpoint properties."
