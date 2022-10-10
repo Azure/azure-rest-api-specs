@@ -1489,7 +1489,7 @@
                   "200": {
                       "description": "Success",
                       "schema": {
-                          "type": "string"
+                          "$ref": "#/definitions/ViewSchemaResponse"
                       }
                   }
               },
@@ -2711,6 +2711,17 @@
               }
           }
       },
+	  "ViewColumn": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
       "ViewEntry": {
           "type": "object",
           "properties": {
@@ -2725,6 +2736,17 @@
                   "type": "integer"
               }
           }
+      },
+      "ViewSchemaResponse": {
+        "type": "object",
+        "properties": {
+          "outputSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ViewColumn"
+            }
+          }
+        }
       },
       "ViewSource": {
           "type": "object",
