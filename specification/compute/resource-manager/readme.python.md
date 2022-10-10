@@ -98,6 +98,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-07-02-only'
 namespace: azure.mgmt.compute.v2022_07_02
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_07_02
+```
 
 ### Tag: package-2022-04-04-only
 
@@ -117,6 +118,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-03-03-only'
 namespace: azure.mgmt.compute.v2022_03_03
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_03_03
+```
 
 ### Tag: package-2022-03-02-only
 
