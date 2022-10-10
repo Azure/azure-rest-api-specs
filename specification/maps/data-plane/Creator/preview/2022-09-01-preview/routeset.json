@@ -106,7 +106,7 @@
           "readOnly": true
         },
         "datasetId": {
-          "description": "The ID of the dataset used to create the routeset.",
+          "description": "The ID of the dataset used to create this routeset.",
           "type": "string",
           "readOnly": true
         },
@@ -143,11 +143,11 @@
       "default": "2022-09-01-preview",
       "x-ms-parameter-location": "client"
     },
-    "DatasetId": {
+    "RouteDatasetId": {
       "name": "datasetId",
       "type": "string",
       "in": "query",
-      "description": "The ID of the dataset used to create the routeset.",
+      "description": "The ID of the dataset from which to create the routeset(s). A routeset is created for each facility in the dataset.",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -208,7 +208,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/DatasetId"
+            "$ref": "#/parameters/RouteDatasetId"
           },
           {
             "$ref": "#/parameters/Description"
