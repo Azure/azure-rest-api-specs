@@ -527,19 +527,6 @@ model DocumentModelSummary {
 @resource("documentModels")
 model DocumentModelDetails {
     ...DocumentModelSummary,
-    // spread model summary
-    // @key
-    // modelId: DocumentModelId,
-    // @doc("Document model description.")
-    // @maxLength(4096)
-    // description?: string,
-    // @doc("Date and time (UTC) when the document model was created.")
-    // @format("date-time")
-    // createdDateTime: string,
-    // @doc("API version used to create this document model.")
-    // apiVersion?: string,
-    // @doc("List of key-value tag attributes associated with the document model.")
-    // tags?: Record<string>,
     @doc("Supported document types.")
     docTypes?: Record<DocumentTypeDetails>,
 }
