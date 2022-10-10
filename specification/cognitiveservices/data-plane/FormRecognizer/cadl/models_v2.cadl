@@ -1,0 +1,857 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+import "./form_recognizer.cadl";
+
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+
+// API version enum needs to be contained within the namespace, it would be nice to be able to extract it 
+// outside the namespace for use in other places
+@added(APIVersions.v2_0)
+@removed(APIVersions.v3)
+namespace FormRecognizer.v2;
+
+enum TextStyleKnownValues {
+  Other: "other",
+  Handwriting: "handwriting",
+}
+
+@knownValues(TextStyleKnownValues)
+model TextStyle is string;
+
+enum SelectionMarkStateKnownValues {
+  Selected: "selected",
+  Unselected: "unselected",
+}
+
+@knownValues(SelectionMarkStateKnownValues)
+model SelectionMarkState is string;
+
+enum KeyValueTypeKnownValues {
+  String: "string",
+  SelectionMark: "selectionMark",
+}
+
+@added(APIVersions.v2_1)
+@knownValues(KeyValueTypeKnownValues)
+model KeyValueType is string;
+
+enum FieldValueSelectionMarkKnownValues {
+  Selected: "selected",
+  Unselected: "unselected",
+}
+
+@knownValues(FieldValueSelectionMarkKnownValues)
+model FieldValueSelectionMark is string;
+
+enum LocaleKnownValues {
+  EnAU: "en-AU",
+  EnCA: "en-CA",
+  EnGB: "en-GB",
+  EnIN: "en-IN",
+  EnUS: "en-US",
+}
+
+@added(APIVersions.v2_1)
+@knownValues(LocaleKnownValues)
+model Locale is string;
+
+// FIXME: this is ugly, most values were added in v2.1. Is there a better way to do this?
+enum LanguageKnownValues {
+  @added(APIVersions.v2_1)
+  Af: "af",
+  @added(APIVersions.v2_1)
+  Ast: "ast",
+  @added(APIVersions.v2_1)
+  Bi: "bi",
+  @added(APIVersions.v2_1)
+  Br: "br",
+  @added(APIVersions.v2_1)
+  Ca: "ca",
+  @added(APIVersions.v2_1)
+  Ceb: "ceb",
+  @added(APIVersions.v2_1)
+  Ch: "ch",
+  @added(APIVersions.v2_1)
+  Co: "co",
+  @added(APIVersions.v2_1)
+  Crh: "crh",
+  @added(APIVersions.v2_1)
+  Cs: "cs",
+  @added(APIVersions.v2_1)
+  Csb: "csb",
+  @added(APIVersions.v2_1)
+  Da: "da",
+  @added(APIVersions.v2_1)
+  De: "de",
+  En: "en",
+  Es: "es",
+  @added(APIVersions.v2_1)
+  Et: "et",
+  @added(APIVersions.v2_1)
+  Eu: "eu",
+  @added(APIVersions.v2_1)
+  Fi: "fi",
+  @added(APIVersions.v2_1)
+  Fil: "fil",
+  @added(APIVersions.v2_1)
+  Fj: "fj",
+  @added(APIVersions.v2_1)
+  Fr: "fr",
+  @added(APIVersions.v2_1)
+  Fur: "fur",
+  @added(APIVersions.v2_1)
+  Fy: "fy",
+  @added(APIVersions.v2_1)
+  Ga: "ga",
+  @added(APIVersions.v2_1)
+  Gd: "gd",
+  @added(APIVersions.v2_1)
+  Gil: "gil",
+  @added(APIVersions.v2_1)
+  Gl: "gl",
+  @added(APIVersions.v2_1)
+  Gv: "gv",
+  @added(APIVersions.v2_1)
+  Hni: "hni",
+  @added(APIVersions.v2_1)
+  Hsb: "hsb",
+  @added(APIVersions.v2_1)
+  Ht: "ht",
+  @added(APIVersions.v2_1)
+  Hu: "hu",
+  @added(APIVersions.v2_1)
+  Ia: "ia",
+  @added(APIVersions.v2_1)
+  Id: "id",
+  @added(APIVersions.v2_1)
+  It: "it",
+  @added(APIVersions.v2_1)
+  Iu: "iu",
+  @added(APIVersions.v2_1)
+  Ja: "ja",
+  @added(APIVersions.v2_1)
+  Jv: "jv",
+  @added(APIVersions.v2_1)
+  Kaa: "kaa",
+  @added(APIVersions.v2_1)
+  Kac: "kac",
+  @added(APIVersions.v2_1)
+  Kea: "kea",
+  @added(APIVersions.v2_1)
+  Kha: "kha",
+  @added(APIVersions.v2_1)
+  Kl: "kl",
+  @added(APIVersions.v2_1)
+  Ko: "ko",
+  @added(APIVersions.v2_1)
+  Ku: "ku",
+  @added(APIVersions.v2_1)
+  Kw: "kw",
+  @added(APIVersions.v2_1)
+  Lb: "lb",
+  @added(APIVersions.v2_1)
+  Ms: "ms",
+  @added(APIVersions.v2_1)
+  Mww: "mww",
+  @added(APIVersions.v2_1)
+  Nap: "nap",
+  @added(APIVersions.v2_1)
+  Nl: "nl",
+  @added(APIVersions.v2_1)
+  No: "no",
+  @added(APIVersions.v2_1)
+  Oc: "oc",
+  @added(APIVersions.v2_1)
+  Pl: "pl",
+  @added(APIVersions.v2_1)
+  Pt: "pt",
+  @added(APIVersions.v2_1)
+  Quc: "quc",
+  @added(APIVersions.v2_1)
+  Rm: "rm",
+  @added(APIVersions.v2_1)
+  Sco: "sco",
+  @added(APIVersions.v2_1)
+  Sl: "sl",
+  @added(APIVersions.v2_1)
+  Sq: "sq",
+  @added(APIVersions.v2_1)
+  Sv: "sv",
+  @added(APIVersions.v2_1)
+  Sw: "sw",
+  @added(APIVersions.v2_1)
+  Tet: "tet",
+  @added(APIVersions.v2_1)
+  Tr: "tr",
+  @added(APIVersions.v2_1)
+  Tt: "tt",
+  @added(APIVersions.v2_1)
+  Uz: "uz",
+  @added(APIVersions.v2_1)
+  Vo: "vo",
+  @added(APIVersions.v2_1)
+  Wae: "wae",
+  @added(APIVersions.v2_1)
+  Yua: "yua",
+  @added(APIVersions.v2_1)
+  Za: "za",
+  @added(APIVersions.v2_1)
+  ZhHans: "zh-Hans",
+  @added(APIVersions.v2_1)
+  ZhHant: "zh-Hant",
+  @added(APIVersions.v2_1)
+  Zu: "zu",
+}
+
+@knownValues(LanguageKnownValues)
+model Language is string;
+
+enum Enum6KnownValues {
+  Full: "full",
+}
+
+@knownValues(Enum6KnownValues)
+model Enum6 is string;
+
+enum Enum7KnownValues {
+  Summary: "summary",
+}
+
+@knownValues(Enum7KnownValues)
+model Enum7 is string;
+
+enum ModelStatus {
+  Creating: "creating",
+  Ready: "ready",
+  Invalid: "invalid",
+}
+
+enum TrainStatus {
+  Succeeded: "succeeded",
+  PartiallySucceeded: "partiallySucceeded",
+  Failed: "failed",
+}
+
+enum ContentType {
+  ApplicationPdf: "application/pdf",
+  @added(APIVersions.v2_1)
+  ImageBmp: "image/bmp",
+  ImageJpeg: "image/jpeg",
+  ImagePng: "image/png",
+  ImageTiff: "image/tiff",
+}
+
+enum OperationStatus {
+  NotStarted: "notStarted",
+  Running: "running",
+  Succeeded: "succeeded",
+  Failed: "failed",
+}
+
+enum LengthUnit {
+  Pixel: "pixel",
+  Inch: "inch",
+}
+
+enum FieldValueType {
+  String: "string",
+  Date: "date",
+  Time: "time",
+  PhoneNumber: "phoneNumber",
+  Number: "number",
+  Integer: "integer",
+  Array: "array",
+  Object: "object",
+  @added(APIVersions.v2_1)
+  SelectionMark: "selectionMark",
+  @added(APIVersions.v2_1)
+  CountryRegion: "countryRegion",
+}
+
+enum ReadingOrder {
+  Basic: "basic",
+  Natural: "natural",
+}
+
+@doc("Request parameter to train a new custom model.")
+model TrainRequest {
+  @doc("Source path containing the training documents.")
+  source: string;
+
+  @doc("Filter to apply to the documents in the source path for training.")
+  sourceFilter?: TrainSourceFilter;
+
+  @doc("Use label file for training a model.")
+  useLabelFile?: boolean;
+
+  
+  @added(APIVersions.v2_1)
+  @doc("Optional user defined model name (max length: 1024).")
+  modelName?: string;
+}
+
+@doc("Filter to apply to the documents in the source path for training.")
+model TrainSourceFilter {
+  @doc("""
+A case-sensitive prefix string to filter documents in the source path for
+training. For example, when using a Azure storage blob Uri, use the prefix to
+restrict sub folders for training.
+""")
+  prefix?: string;
+
+  @doc("""
+A flag to indicate if sub folders within the set of prefix folders will also
+need to be included when searching for content to be preprocessed.
+""")
+  includeSubFolders?: boolean;
+}
+
+// @error
+// model ErrorResponse {
+//   error: ErrorInformation;
+// }
+
+model ErrorInformation {
+  code: string;
+  message: string;
+}
+
+@doc("Response to the get custom model operation.")
+@resource("custom/models/{modelId}")
+model Model {
+  @doc("Basic custom model information.")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  modelInfo: ModelInfo;
+
+  @doc("Keys extracted by the custom model.")
+  keys?: KeysResult;
+
+  @doc("Training result for custom model.")
+  trainResult?: TrainResult;
+
+  @added(APIVersions.v2_1)
+  @doc("Training result for composed model.")
+  composedTrainResults?: TrainResult[];
+}
+
+@doc("Basic custom model information.")
+model ModelInfo {
+  @doc("Model identifier.")
+  modelId: string;
+
+  @doc("Status of the model.")
+  status: ModelStatus;
+
+  @doc("Date and time (UTC) when the model was created.")
+  createdDateTime: zonedDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: zonedDateTime;
+
+
+  @added(APIVersions.v2_1)
+  @doc("Optional user defined model name (max length: 1024).")
+  modelName?: string;
+
+  @added(APIVersions.v2_1)
+  @doc("Optional model attributes.")
+  attributes?: Attributes;
+}
+
+@added(APIVersions.v2_1)
+@doc("Optional model attributes.")
+model Attributes {
+  @doc("Is this model composed? (default: false).")
+  isComposed?: boolean;
+}
+
+@doc("Keys extracted by the custom model.")
+model KeysResult {
+  @doc("Object mapping clusterIds to a list of keys.")
+  clusters: Record<string[]>;
+}
+
+@doc("Custom model training result.")
+model TrainResult {
+  @doc("""
+List of the documents used to train the model and any errors reported in each
+document.
+""")
+  trainingDocuments: TrainingDocumentInfo[];
+
+  @doc("""
+List of fields used to train the model and the train operation error reported
+by each.
+""")
+  fields?: FormFieldsReport[];
+
+  @doc("Average accuracy.")
+  averageModelAccuracy?: float32;
+
+  @added(APIVersions.v2_1)
+  @doc("Model identifier.")
+  modelId?: string;
+
+  @doc("Errors returned during the training operation.")
+  errors?: ErrorInformation[];
+}
+
+@doc("Report for a custom model training document.")
+model TrainingDocumentInfo {
+  @doc("Training document name.")
+  documentName: string;
+
+  @doc("Total number of pages trained.")
+  pages: int32;
+
+  @doc("List of errors.")
+  errors: ErrorInformation[];
+
+  @doc("Status of the training operation.")
+  status: TrainStatus;
+}
+
+@doc("Report for a custom model training field.")
+model FormFieldsReport {
+  @doc("Training field name.")
+  fieldName: string;
+
+  @doc("Estimated extraction accuracy for this field.")
+  accuracy: float32;
+}
+
+@doc("Uri or local path to source data.")
+model SourcePath {
+  @doc("File source path.")
+  source?: string;
+}
+
+@doc("Status and result of the queued analyze operation.")
+// FIXME: not a resource in that sense
+@resource("custom/models/{modelId}/analyzeResults/{resultId}")
+model AnalyzeOperationResult {
+  @doc("Operation status.")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  status: OperationStatus;
+
+  @doc("Date and time (UTC) when the analyze operation was submitted.")
+  createdDateTime: zonedDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: zonedDateTime;
+
+  @doc("Results of the analyze operation.")
+  analyzeResult?: AnalyzeResultV2;
+}
+
+@doc("Analyze operation result.")
+model AnalyzeResultV2 {
+  @doc("Version of schema used for this result.")
+  version: string;
+
+  @doc("Text extracted from the input.")
+  readResults: ReadResult[];
+
+  @doc("Page-level information extracted from the input.")
+  pageResults?: PageResult[];
+
+  @doc("Document-level information extracted from the input.")
+  documentResults?: DocumentResult[];
+
+  @doc("List of errors reported during the analyze operation.")
+  errors?: ErrorInformation[];
+}
+
+@doc("Text extracted from a page in the input document.")
+model ReadResult {
+  @doc("The 1-based page number in the input document.")
+  page: int32;
+
+  @doc("""
+The general orientation of the text in clockwise direction, measured in degrees
+between (-180, 180].
+""")
+  angle: float32;
+
+  @doc("The width of the image/PDF in pixels/inches, respectively.")
+  width: float32;
+
+  @doc("The height of the image/PDF in pixels/inches, respectively.")
+  height: float32;
+
+  @doc("""
+The unit used by the width, height and boundingBox properties. For images, the
+unit is \"pixel\". For PDF, the unit is \"inch\".
+""")
+  unit: LengthUnit;
+
+  @doc("""
+When includeTextDetails is set to true, a list of recognized text lines. The
+maximum number of lines returned is 300 per page. The lines are sorted top to
+bottom, left to right, although in certain cases proximity is treated with
+higher priority. As the sorting order depends on the detected text, it may
+change across images and OCR version updates. Thus, business logic should be
+built upon the actual line location instead of order.
+""")
+  lines?: TextLine[];
+
+  @added(APIVersions.v2_1)
+  @doc("List of selection marks extracted from the page.")
+  selectionMarks?: SelectionMark[];
+
+  @removed(APIVersions.v2_1)
+  @doc("The detected language on the page overall.")
+  language?: Language,
+}
+
+@doc("An object representing an extracted text line.")
+model TextLine {
+  @doc("The text content of the line.")
+  text: string;
+
+  @doc("Bounding box of an extracted line.")
+  boundingBox: float32[];
+
+  @doc("List of words in the text line.")
+  words: TextWord[];
+
+  @removed(APIVersions.v2_1)
+  @doc("The detected language on the page overall.")
+  language?: Language,
+
+  @added(APIVersions.v2_1)
+  @doc("Text appearance properties.")
+  appearance?: Appearance;
+}
+
+@doc("An object representing a word.")
+model TextWord {
+  @doc("The text content of the word.")
+  text: string;
+
+  @doc("Bounding box of an extracted word.")
+  boundingBox: float32[];
+
+  @doc("Confidence value.")
+  confidence?: float32;
+}
+
+@added(APIVersions.v2_1)
+@doc("An object representing the appearance of the text line.")
+model Appearance {
+  @doc("An object representing the style of the text line.")
+  style: Style;
+}
+
+@added(APIVersions.v2_1)
+@doc("An object representing the style of the text line.")
+model Style {
+  @doc("The text line style name, including handwriting and other.")
+  name: TextStyle;
+
+  @doc("The confidence of text line style.")
+  confidence: float32;
+}
+
+@added(APIVersions.v2_1)
+@doc("Information about the extracted selection mark.")
+model SelectionMark {
+  @doc("Bounding box of the selection mark.")
+  boundingBox: float32[];
+
+  @doc("Confidence value.")
+  confidence: float32;
+
+  @doc("State of the selection mark.")
+  state: SelectionMarkState;
+}
+
+@doc("Extracted information from a single page.")
+model PageResult {
+  @doc("Page number.")
+  page: int32;
+
+  @doc("Cluster identifier.")
+  clusterId?: int32;
+
+  @doc("List of key-value pairs extracted from the page.")
+  keyValuePairs?: KeyValuePair[];
+
+  @doc("List of data tables extracted from the page.")
+  tables?: DataTable[];
+}
+
+@doc("Information about the extracted key-value pair.")
+model KeyValuePair {
+  @doc("A user defined label for the key/value pair entry.")
+  label?: string;
+
+  @doc("Information about the extracted key in a key-value pair.")
+  key: KeyValueElement;
+
+  @doc("Information about the extracted value in a key-value pair.")
+  value: KeyValueElement;
+
+  @doc("Confidence value.")
+  confidence: float32;
+}
+
+@doc("Information about the extracted key or value in a key-value pair.")
+model KeyValueElement {
+  // FIXME: why did auto generation added a language param here?
+  // @doc("The detected language on the page overall.")
+  // language?: Language,
+
+  @added(APIVersions.v2_1)
+  @doc("Semantic data type of the key value element.")
+  type?: KeyValueType;
+
+  @doc("The text content of the key or value.")
+  text: string;
+
+  @doc("Bounding box of the key or value.")
+  boundingBox?: float32[];
+
+  @doc("""
+When includeTextDetails is set to true, a list of references to the text
+elements constituting this key or value.
+""")
+  elements?: string[];
+}
+
+@doc("Information about the extracted table contained in a page.")
+model DataTable {
+  @doc("Number of rows.")
+  rows: int32;
+
+  @doc("Number of columns.")
+  columns: int32;
+
+  @doc("List of cells contained in the table.")
+  cells: DataTableCell[];
+
+  @added(APIVersions.v2_1)
+  @doc("Bounding box of the table.")
+  boundingBox: float32[];
+}
+
+@doc("Information about the extracted cell in a table.")
+model DataTableCell {
+  @doc("Row index of the cell.")
+  rowIndex: int32;
+
+  @doc("Column index of the cell.")
+  columnIndex: int32;
+
+  @doc("Number of rows spanned by this cell.")
+  rowSpan?: int32;
+
+  @doc("Number of columns spanned by this cell.")
+  columnSpan?: int32;
+
+  @doc("Text content of the cell.")
+  text: string;
+
+  @doc("Bounding box of the cell.")
+  boundingBox: float32[];
+
+  @doc("Confidence value.")
+  confidence: float32;
+
+  @doc("""
+When includeTextDetails is set to true, a list of references to the text
+elements constituting this table cell.
+""")
+  elements?: string[];
+
+  @doc("Is the current cell a header cell?")
+  isHeader?: boolean;
+
+  @doc("Is the current cell a footer cell?")
+  isFooter?: boolean;
+}
+
+@doc("A set of extracted fields corresponding to the input document.")
+model DocumentResult {
+  @doc("Document type.")
+  docType: string;
+
+  // FIXME: auto generation marked this as optional but x-nullable was false.
+  @added(APIVersions.v2_1)
+  @doc("Model identifier.")
+  modelId: string;
+
+  @doc("First and last page number where the document is found.")
+  pageRange: int32[];
+
+  @added(APIVersions.v2_1)
+  @doc("Predicted document type confidence.")
+  docTypeConfidence?: float32;
+
+  @doc("Dictionary of named field values.")
+  fields: Record<FieldValue>;
+}
+
+@doc("Recognized field value.")
+model FieldValue {
+  @doc("Type of field value.")
+  type: FieldValueType;
+
+  @doc("String value.")
+  valueString?: string;
+
+  @doc("Date value.")
+  valueDate?: plainDate;
+
+  @doc("Time value.")
+  valueTime?: plainTime;
+
+  @doc("Phone number value.")
+  valuePhoneNumber?: string;
+
+  @doc("Floating point value.")
+  valueNumber?: float32;
+
+  @doc("Integer value.")
+  valueInteger?: int32;
+
+  @doc("Array of field values.")
+  valueArray?: FieldValue[];
+
+  @doc("Dictionary of named field values.")
+  valueObject?: Record<FieldValue>;
+
+  @added(APIVersions.v2_1)
+  @doc("Selection mark value.")
+  valueSelectionMark?: FieldValueSelectionMark;
+
+  @added(APIVersions.v2_1)
+  @doc("3-letter country code (ISO 3166-1 alpha-3).")
+  valueCountryRegion?: string;
+
+  @doc("Text content of the extracted field.")
+  text?: string;
+
+  @doc("Bounding box of the field value, if appropriate.")
+  boundingBox?: float32[];
+
+  @doc("Confidence score.")
+  confidence?: float32;
+
+  @doc("""
+When includeTextDetails is set to true, a list of references to the text
+elements constituting this field.
+""")
+  elements?: string[];
+
+  @doc("The 1-based page number in the input document.")
+  page?: int32;
+}
+
+@doc("""
+Request parameter to copy an existing custom model from the source resource to
+a target resource referenced by the resource ID.
+""")
+model CopyRequest {
+  @doc("""
+Azure Resource Id of the target Form Recognizer resource where the model is
+copied to.
+""")
+  targetResourceId: string;
+
+  @doc("""
+Location of the target Azure resource. A valid Azure region name supported by
+Cognitive Services.
+""")
+  targetResourceRegion: string;
+
+  @doc("Entity that encodes claims to authorize the copy request.")
+  copyAuthorization: CopyAuthorizationResult;
+}
+
+@doc("Request parameter that contains authorization claims for copy operation.")
+@resource("custom/models/copyAuthorization")
+model CopyAuthorizationResult {
+  @doc("Model identifier.")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  modelId: string;
+
+  @doc("Token claim used to authorize the request.")
+  accessToken: string;
+
+  @doc("""
+The time when the access token expires. The date is represented as the number
+of seconds from 1970-01-01T0:0:0Z UTC until the expiration time.
+""")
+  expirationDateTimeTicks: int32;
+}
+
+@doc("Status and result of the queued copy operation.")
+@resource("custom/models/{modelId}/copyResults/{resultId}")
+model CopyOperationResult {
+  @doc("Operation status.")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  status: OperationStatus;
+
+  @doc("Date and time (UTC) when the copy operation was submitted.")
+  createdDateTime: zonedDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: zonedDateTime;
+
+  @doc("Results of the copy operation.")
+  copyResult?: CopyResult;
+}
+
+@doc("Custom model copy result.")
+model CopyResult {
+  @doc("Identifier of the target model.")
+  modelId: string;
+
+  @doc("Errors returned during the copy operation.")
+  errors?: ErrorInformation[];
+}
+
+@added(APIVersions.v2_1)
+@doc("Request contract for compose operation.")
+model ComposeRequest {
+  @doc("List of model ids to compose.")
+  modelIds: string[];
+
+  @doc("Optional user defined model name (max length: 1024).")
+  modelName?: string;
+}
+
+@doc("Response to the list custom models operation.")
+@pagedResult
+// @resource("custom/models")
+model Models {
+  @doc("Summary of all trained custom models.")
+  summary?: ModelsSummary;
+
+  @doc("Collection of trained custom models.")
+  @items
+  modelList?: ModelInfo[];
+
+  @doc("Link to the next page of custom models.")
+  @nextLink
+  nextLink?: string;
+}
+
+@doc("Summary of all trained custom models.")
+model ModelsSummary {
+  @doc("Current count of trained custom models.")
+  count: int32;
+
+  @doc("Max number of models that can be trained for this account.")
+  limit: int32;
+
+  @doc("Date and time (UTC) when the summary was last updated.")
+  lastUpdatedDateTime: zonedDateTime;
+}

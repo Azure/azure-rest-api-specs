@@ -1,0 +1,440 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "./models_v2.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+using Cadl.Versioning;
+
+alias TVersion = string;
+
+// FIXME: this needs to be able to switch between v2.0 and v2.1
+@route("/v2.1")
+// FIXME: do we want the v3 swagger representation to exclude the v2 endpoints? If so, 
+// would the removed decorator satisfy this use case?
+// @removed(APIVersions.v3)
+namespace FormRecognizer.v2 {
+  // FIXME: in v2.1 this operation was marked as an LRO
+  @post
+  @route("/custom/models")
+  @summary("Train Custom Model")
+  @doc("""
+  Create and train a custom model. The request must include a source parameter
+  that is either an externally accessible Azure storage blob container Uri
+  (preferably a Shared Access Signature Uri) or valid path to a data folder in a
+  locally mounted drive. When local paths are specified, they must follow the
+  Linux/Unix path format and be an absolute path rooted to the input mount
+  configuration setting value e.g., if '{Mounts:Input}' configuration setting
+  value is '/input' then a valid source path would be '/input/contosodataset'.
+  All data to be trained is expected to be under the source folder or sub folders
+  under it. Models are trained using documents that are of the following content
+  type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or
+  'image/bmp'. Other type of content is ignored.
+  """)
+  op TrainCustomModelAsync is Azure.Core.Foundations.Operation<
+    {
+      @doc("Training request parameters.")
+      @body
+      trainRequest: TrainRequest;
+    },
+    void
+  >;
+
+  @summary("Get Custom Model")
+  @doc("Get detailed information about a custom model.")
+  op GetCustomModel is Azure.Core.ResourceRead<
+    Model,
+    {
+      parameters: {
+        @doc("Include list of extracted keys in model information.")
+        @query
+        includeKeys: boolean;
+      };
+    }
+  >;
+
+  @summary("Delete Custom Model")
+  @doc("""
+  Mark model for deletion. Model artifacts will be permanently removed within a
+  predetermined period.
+  """)
+  op DeleteCustomModel is Azure.Core.ResourceDelete<Model>;
+
+  @summary("Analyze Form")
+  @doc("""
+  Extract key-value pairs, tables, and semantic values from a given document. The
+  input document must be of one of the supported content types -
+  'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'.
+  Alternatively, use 'application/json' type to specify the location (Uri or
+  local path) of the document to be analyzed.
+  """)
+  @route("/custom/models/{modelId}/analyze")
+  @post
+  op AnalyzeWithCustomModel is Azure.Core.Foundations.Operation<
+    {
+      @doc("Model identifier.")
+      @path
+      modelId: string;
+
+      @doc("Include text lines and element references in the result.")
+      @query
+      includeTextDetails: boolean;
+
+      @added(APIVersions.v2_1)
+      @doc("""
+  Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
+  pages you want to get OCR result. For a range of pages, use a hyphen. Separate
+  each page or range with a comma.
+  """)
+      @query
+      pages: string[];
+
+      @doc("Upload file type")
+      @header
+      "Content-Type": ContentType;
+
+      @doc(".json, .pdf, .jpg, .png, .tiff or .bmp type file stream.")
+      @body
+      fileStream: bytes;
+    },
+    void
+  >;
+
+  // @summary("Get Analyze Form Result")
+  // @doc("Obtain current status and the result of the analyze form operation.")
+  // op GetAnalyzeFormResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  @summary("Copy Custom Model")
+  @doc("""
+  Copy custom model stored in this resource (the source) to user specified target
+  Form Recognizer resource.
+  """)
+  @route("/custom/models/{modelId}/copy")
+  @post
+  op CopyCustomModel is Azure.Core.Foundations.Operation<
+    {
+      @doc("Model identifier.")
+      @path
+      modelId: string;
+
+      @doc("Copy request parameters.")
+      @body
+      copyRequest: CopyRequest;
+    },
+    void
+  >;
+
+  @summary("Get Custom Model Copy Result")
+  @doc("Obtain current status and the result of a custom model copy operation.")
+  op GetCustomModelCopyResult is Azure.Core.ResourceRead<CopyOperationResult>;
+
+  @summary("Generate Copy Authorization")
+  @doc("Generate authorization to copy a model into the target Form Recognizer resource.")
+  op GenerateModelCopyAuthorization is Azure.Core.ResourceCreateWithServiceProvidedName<CopyAuthorizationResult>;
+
+  @added(APIVersions.v2_1)
+  @summary("Compose trained with labels models into one composed model.")
+  @doc("""
+  Compose request would include list of models ids.
+  It would validate what all
+  models either trained with labels model or composed model.
+  It would validate
+  limit of models put together.
+  """)
+  @route("/custom/models/compose")
+  @post
+  op ComposeCustomModelsAsync is Azure.Core.Foundations.Operation<
+    {
+      @doc("Compose models")
+      @body
+      composeRequest: ComposeRequest;
+
+      @doc("Accept header")
+      @header
+      Accept: "application/json, text/json";
+    },
+    void
+  >;
+
+  @added(APIVersions.v2_1)
+  @summary("Analyze Business Card")
+  @doc("""
+  Extract field text and semantic values from a given business card document. The
+  input document must be of one of the supported content types -
+  'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'.
+  Alternatively, use 'application/json' type to specify the location (Uri) of the
+  document to be analyzed.
+  """)
+  @route("/prebuilt/businessCard/analyze")
+  @post
+  op AnalyzeBusinessCardAsync is Azure.Core.Foundations.Operation<
+    {
+      @doc("Include text lines and element references in the result.")
+      @query
+      includeTextDetails: boolean;
+
+      @doc("""
+  Locale of the input document. Supported locales include: en-AU, en-CA, en-GB,
+  en-IN, en-US(default).
+  """)
+      @query
+      locale: Locale;
+
+      @doc("""
+  Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
+  pages you want to get OCR result. For a range of pages, use a hyphen. Separate
+  each page or range with a comma.
+  """)
+      @query
+      pages: string[];
+
+      @doc("Upload file type")
+      @header
+      "Content-Type": ContentType;
+
+      @doc(".json, .pdf, .jpg, .png, .tiff or .bmp type file stream.")
+      @body
+      fileStream: bytes;
+    },
+    void
+  >;
+
+  // @summary("Get Analyze Business Card Result")
+  // @doc("Track the progress and obtain the result of the analyze business card operation.")
+  // op GetAnalyzeBusinessCardResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  @added(APIVersions.v2_1)
+  @summary("Analyze Invoice Document")
+  @doc("""
+  Extract field text and semantic values from a given invoice document. The input
+  document must be of one of the supported content types - 'application/pdf',
+  'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use
+  'application/json' type to specify the location (Uri) of the document to be
+  analyzed.
+  """)
+  @route("/prebuilt/invoice/analyze")
+  @post
+  op AnalyzeInvoiceAsync is Azure.Core.Foundations.Operation<
+    {
+      @doc("Include text lines and element references in the result.")
+      @query
+      includeTextDetails: boolean;
+
+      @doc("""
+  Locale of the input document. Supported locales include: en-AU, en-CA, en-GB,
+  en-IN, en-US(default).
+  """)
+      @query
+      locale: Locale;
+
+      @doc("""
+  Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
+  pages you want to get OCR result. For a range of pages, use a hyphen. Separate
+  each page or range with a comma.
+  """)
+      @query
+      pages: string[];
+
+      @doc("Upload file type")
+      @header
+      "Content-Type": ContentType;
+
+      @doc(".json, .pdf, .jpg, .png, .tiff or .bmp type file stream.")
+      @body
+      fileStream: bytes;
+    },
+    void
+  >;
+
+  // @summary("Get Analyze Invoice Result")
+  // @doc("Track the progress and obtain the result of the analyze invoice operation.")
+  // op GetAnalyzeInvoiceResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  @added(APIVersions.v2_1)
+  @summary("Analyze ID Document")
+  @doc("""
+  Extract field text and semantic values from a given ID document. The input
+  document must be of one of the supported content types - 'application/pdf',
+  'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use
+  'application/json' type to specify the location (Uri) of the document to be
+  analyzed.
+  """)
+  @route("/prebuilt/idDocument/analyze")
+  @post
+  op AnalyzeIdDocumentAsync is Azure.Core.Foundations.Operation<
+    {
+      @doc("Include text lines and element references in the result.")
+      @query
+      includeTextDetails: boolean;
+
+      @doc("""
+  Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
+  pages you want to get OCR result. For a range of pages, use a hyphen. Separate
+  each page or range with a comma.
+  """)
+      @query
+      pages: string[];
+
+      @doc("Upload file type")
+      @header
+      "Content-Type": ContentType;
+
+      @doc(".json, .pdf, .jpg, .png, .tiff or .bmp type file stream.")
+      @body
+      fileStream: bytes;
+    },
+    void
+  >;
+
+  // @summary("Get Analyze ID Document Result")
+  // @doc("Track the progress and obtain the result of the analyze ID operation.")
+  // op GetAnalyzeIdDocumentResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  @summary("Analyze Receipt")
+  @doc("""
+  Extract field text and semantic values from a given receipt document. The input
+  document must be of one of the supported content types - 'application/pdf',
+  'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use
+  'application/json' type to specify the location (Uri) of the document to be
+  analyzed.
+  """)
+  @route("/prebuilt/receipt/analyze")
+  @post
+  op AnalyzeReceiptAsync is Azure.Core.Foundations.Operation<
+    {
+      @doc("Include text lines and element references in the result.")
+      @query
+      includeTextDetails: boolean;
+
+      @added(APIVersions.v2_1)
+      @doc("""
+  Locale of the input document. Supported locales include: en-AU, en-CA, en-GB,
+  en-IN, en-US(default).
+  """)
+      @query
+      locale: Locale;
+
+      // FIXME auto generated this doesnt include the pattern
+      @added(APIVersions.v2_1)
+      @doc("""
+  Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
+  pages you want to get OCR result. For a range of pages, use a hyphen. Separate
+  each page or range with a comma.
+  """)
+      @query
+      pages: string[];
+
+      @doc("Upload file type")
+      @header
+      "Content-Type": ContentType;
+
+      @doc(".json, .pdf, .jpg, .png, .tiff or .bmp type file stream.")
+      @body
+      fileStream: bytes;
+    },
+    void
+  >;
+
+  // @summary("Get Analyze Receipt Result")
+  // @doc("Track the progress and obtain the result of the analyze receipt operation.")
+  // op GetAnalyzeReceiptResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  @summary("Analyze Layout")
+  @doc("""
+  Extract text and layout information from a given document. The input document
+  must be of one of the supported content types - 'application/pdf',
+  'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use
+  'application/json' type to specify the location (Uri or local path) of the
+  document to be analyzed.
+  """)
+  @route("/layout/analyze")
+  @post
+  op AnalyzeLayoutAsync is Azure.Core.Foundations.Operation<
+    {
+      @added(APIVersions.v2_1)
+      @doc("""
+  Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
+  pages you want to get OCR result. For a range of pages, use a hyphen. Separate
+  each page or range with a comma.
+  """)
+      @query
+      pages: string[];
+
+      @added(APIVersions.v2_1)
+      @doc("""
+  Currently, only Afrikaans (‘af’), Albanian (‘sq’), Asturian (‘ast’), Basque
+  (‘eu’), Bislama (‘bi’), Breton (‘br’), Catalan (‘ca’), Cebuano (‘ceb’),
+  Chamorro (‘ch’), Cornish (‘kw’), Corsican (‘co’), Crimean Tatar - Latin
+  script(‘crh’), Czech (‘cs’), Danish (‘da’), Dutch (‘nl’), English ('en'),
+  Estonian (‘et’), Fijian (‘fj’), Filipino (‘fil’), Finnish (‘fi’), French
+  (‘fr’), Friulian (‘fur’), Galician (‘gl’), German (‘de’), Gilbertese (‘gil’),
+  Greenlandic (‘kl’), Haitian Creole (‘ht’), Hani (‘hni’), Hmong Daw (‘mww’),
+  Hungarian (‘hu’), Indonesian (‘id’), Interlingua (‘ia’), Inuktitut (‘iu’),
+  Irish (‘ga’), Italian (‘it’), Japanese (‘ja’), Javanese (‘jv’), Kabuverdianu
+  (‘kea’), Kachin (‘kac’), Kara-Kalpak (‘kaa’), Kashubian (‘csb’), Khasi (‘kha’),
+  Korean (‘ko’), Kurdish - Latin script (‘ku’), K’iche’ (‘quc’), Luxembourgish
+  (‘lb’), Malay (‘ms’), Manx (‘gv’), Neapolitan (‘nap’), Norwegian (‘no’),
+  Occitan (‘oc’), Polish (‘pl’), Portuguese (‘pt’), Romansh (‘rm’), Scots
+  (‘sco’), Scottish Gaelic (‘gd’), simplified Chinese (‘zh-Hans’), Slovenian
+  (‘sl’), Spanish (‘es’), Swahili (‘sw’), Swedish (‘sv’), Tatar - Latin script
+  (‘tt’), Tetum (‘tet’), traditional Chinese (‘zh-Hant’), Turkish (‘tr’), Upper
+  Sorbian (‘hsb’), Uzbek (‘uz’), Volapük (‘vo’), Walser (‘wae’), Western Frisian
+  (‘fy’), Yucatec Maya (‘yua’), Zhuang (‘za’) and Zulu (‘zu’) are supported
+  (print – seventy-three languages and handwritten – English only). Layout
+  supports auto language identification and multi language documents, so only
+  provide a language code if you would like to force the documented to be
+  processed as that specific language.
+  """)
+      @query
+      language: Language;
+
+      @added(APIVersions.v2_1)
+      @doc("""
+  Reading order algorithm to sort the text lines returned. Supported reading
+  orders include: basic(default), natural.
+  """)
+      @query
+      readingOrder: ReadingOrder;
+
+      @doc("Upload file type")
+      @header
+      "Content-Type": ContentType;
+
+      @doc(".json, .pdf, .jpg, .png, .tiff or .bmp type file stream.")
+      @body
+      fileStream: bytes;
+    },
+    void
+  >;
+
+  @summary("Get Analyze Layout Result")
+  @doc("Track the progress and obtain the result of the analyze layout operation")
+  op GetAnalyzeLayoutResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  // @summary("List Custom Models")
+  // @doc("Get information about all custom models")
+  // op ListCustomModels is Azure.Core.ResourceList<
+  //   ModelInfo,
+  //   {
+  //     parameters: {
+  //       @doc("Specify whether to return summary or full list of models.")
+  //       @query
+  //       "op": Enum6;
+  //     };
+  //   }
+  // >;
+
+  // @summary("Get Custom Models")
+  // @doc("Get information about all custom models")
+  // op GetCustomModels is Azure.Core.ResourceRead<
+  //   Models,
+  //   {
+  //     parameters: {
+  //       @doc("Specify whether to return summary or full list of models.")
+  //       @query
+  //       "op": Enum7;
+  //     };
+  //   }
+  // >;
+
+}

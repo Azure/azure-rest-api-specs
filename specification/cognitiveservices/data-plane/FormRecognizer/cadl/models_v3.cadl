@@ -1,0 +1,647 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+
+@added(APIVersions.v3)
+namespace FormRecognizer.v3;
+
+enum APIVersionsV3 {
+    "2022-08-31",
+}
+
+enum StringIndexTypeValues {
+    textElements: "textElements",
+    unicodeCodePoint: "unicodeCodePoint",
+    utf16CodeUnit: "utf16CodeUnit",
+}
+
+@doc("Method used to compute string offset and length.")
+@knownValues(StringIndexTypeValues)
+model StringIndexType is string;
+
+alias AnalysisContentTypes =
+| "application/json"
+| "application/octet-stream"
+| "application/pdf"
+| "image/jpeg"
+| "image/png"
+| "image/tiff"
+| "image/bmp"
+| "image/heif";
+
+@doc("Document analysis parameters.")
+model AnalyzeDocumentRequest {
+    @doc("Document URL to analyze")
+    // TODO: does this format do anything?
+    @format("uri")
+    urlSource?: string,
+    @doc("Base64 encoding of the document to analyze")
+    @format(bytes)
+    base64Source?: string,
+}
+
+enum LengthUnitValues {pixel, inch}
+
+@knownValues(LengthUnitValues)
+model LengthUnit is string;
+
+model Point {
+    @doc("x-axis point")
+    x: int64,
+    @doc("y-axis point")
+    y: int64
+}
+
+@doc("Bounding polygon on a specific page of the input.")
+model BoundingRegion {
+    @doc("Bounding polygon on the page, or the entire page if not specified.")
+    polygon: Point[],
+    @doc("1-based page number of page containing the bounding region.")
+    @minValue(1)
+    pageNumber: int32,
+}
+
+enum ParagraphRoleValues {
+    pageHeader,
+    pageFooter,
+    pageNumber,
+    title,
+    sectionHeading,
+    footnote,
+}
+
+@knownValues(ParagraphRoleValues)
+model ParagraphRole is string;
+
+
+@doc("Error response object.")
+@error
+model ErrorResponse {
+    error: Error;
+}
+
+model Error {
+    code: string;
+    message: string;
+    target?: string;
+    details?: Error[];
+    innerError?: InnerError;
+}
+
+model InnerError {
+    code: string;
+    message?: string;
+    innerError?: InnerError;
+}
+
+@doc("Request is queued successfully.")
+model AcceptedResponse {
+    @statusCode statusCode: 202;
+    @doc("URL used to track the progress and obtain the result of the analyze operation.")
+    @header "Operation-Location": string;
+}
+
+@doc("A paragraph object consisting with contiguous lines generally with common alignment and spacing.")
+model DocumentParagraph {
+    @doc("Semantic role of the paragraph.")
+    role?: ParagraphRole,
+    @doc("Concatenated content of the paragraph in reading order.")
+    content: string,
+    @doc("Bounding regions covering the paragraph.")
+    boundingRegions?: BoundingRegion[],
+    ...Spans,
+}
+
+@doc("An object representing the location and content of a table cell.")
+model DocumentTableCell {
+    kind?: DocumentTableCellKind,
+    @doc("Row index of the cell.")
+    rowIndex: int32,
+    @doc("Column index of the cell.")
+    columnIndex: int32,
+    @doc("Number of rows spanned by this cell.")
+    @minValue(1)
+    // FIXME default value is 1
+    rowSpan?: int32,
+    @doc("Number of columns spanned by this cell.")
+    @minValue(1)
+    // FIXME default value is 1
+    columnSpan?: int32,
+    @doc("Concatenated content of the table cell in reading order.")
+    content: string,
+    @doc("Bounding regions covering the table cell.")
+    boundingRegions?: BoundingRegion[],
+    ...Spans,
+}
+
+@doc("A table object consisting table cells arranged in a rectangular layout.")
+model DocumentTable {
+    @doc("Number of rows in the table.")
+    @minValue(1)
+    rowCount: int32,
+    @doc("Number of columns in the table.")
+    @minValue(1)
+    columnCount: int32,
+    @doc("Cells contained within the table.")
+    cells: DocumentTableCell[],
+    @doc("Bounding regions covering the table.")
+    boundingRegions?: BoundingRegion[],
+    ...Spans,
+}
+
+@doc("An object representing a form field with distinct field label (key) and field value (may be empty).")
+model DocumentKeyValuePair {
+    @doc("Field label of the key-value pair.")
+    key: DocumentKeyValueElement,
+    @doc("Field value of the key-value pair.")
+    value?: DocumentKeyValueElement,
+    @doc("Confidence of correctly extracting the key-value pair.")
+    confidence: Confidence,
+}
+
+@doc("An object representing the field key or value in a key-value pair.")
+model DocumentKeyValueElement {
+    @doc("Concatenated content of the key-value element in reading order.")
+    content: string,
+    @doc("Bounding regions covering the key-value element.")
+    boundingRegions?: BoundingRegion[],
+    ...Spans,
+}
+
+@doc("An object representing observed text styles.")
+model DocumentStyle {
+    @doc("Is content handwritten?")
+    isHandwritten?: boolean,
+    ...Spans,
+    @doc("Confidence of correctly identifying the style.")
+    confidence: Confidence,
+}
+
+@doc("An object representing the detected language for a given text span.")
+model DocumentLanguage {
+    @doc("Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"zh-Hans\").")
+    locale: string,
+    ...Spans,
+    @doc("Confidence of correctly identifying the language.")
+    confidence: Confidence,
+}
+
+enum DocumentFieldTypeValues {
+    string: "string",
+    date: "date",
+    time: "time",
+    phoneNumber: "phoneNumber",
+    number: "number",
+    integer: "integer",
+    selectionMark: "selectionMark",
+    countryRegion: "countryRegion",
+    signature: "signature",
+    array: "array",
+    object: "object",
+    currency: "currency",
+    address: "address"
+}
+
+@doc("Semantic data type of the field value.")
+@knownValues(DocumentFieldTypeValues)
+model DocumentFieldType is string;
+
+enum DocumentSignatureTypeValues {
+    signed,
+    unsigned
+}
+
+@knownValues(DocumentSignatureTypeValues)
+model DocumentSignatureType is string;
+
+@doc("Currency field value.")
+model CurrencyValue {
+    @doc("Currency amount.")
+    amount: float64,
+    @doc("Currency symbol label, if any.")
+    currencySymbol?: string,
+}
+
+@doc("Address field value.")
+model AddressValue {
+    @doc("House or building number.")
+    houseNumber?: string,
+    @doc("Post office box number.")
+    poBox?: string,
+    @doc("Street name.")
+    road?: string,
+    @doc("Name of city, town, village, etc.")
+    city?: string,
+    @doc("First-level administrative division.")
+    state?: string,
+    @doc("Postal code used for mail sorting.")
+    postalCode?: string,
+    @doc("Country/region.")
+    countryRegion?: string,
+    @doc("Street-level address, excluding city, state, countryRegion, and postalCode.")
+    streetAddress?: string,
+}
+
+@doc("TODO")
+model DocumentField {
+    @doc("Data type of the field value.")
+    type: DocumentFieldType,
+    valueString?: string,
+    // TODO check format
+    @format("date")
+    valueDate?: string,
+    @format("time")
+    valueTime?: string,
+    valuePhoneNumber?: string,
+    valueNumber?: float32,
+    valueInteger?: int64,
+    valueSelectionMark?: DocumentSelectionMarkState,
+    valueSignature?: DocumentSignatureType,
+    valueCountryRegion?: string,
+    valueArray?: DocumentField[],
+    valueObject?: Record<DocumentField>,
+    valueCurrency?: CurrencyValue,
+    valueAddress?: AddressValue,
+    content?: string,
+    boundingRegions?: BoundingRegion[],
+    ...Spans,
+    confidence?: Confidence,
+}
+
+@doc("An object describing the location and semantic content of a document.")
+model Document {
+    @doc("Document type.")
+    @minLength(2)
+    @maxLength(64)
+    docType: string;
+    @doc("Bounding regions covering the document.")
+    boundingRegions?: BoundingRegion[];
+    ...Spans;
+    @doc("Dictionary of named field values.")
+    fields?: Record<DocumentField>;
+    @doc("Confidence of correctly extracting the document.")
+    confidence: Confidence;
+}
+
+model DocumentModelId {
+    @doc("Unique document model name.")
+    @pattern("[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}")
+    modelId: string,
+}
+
+// TODO: specify param location on method
+model QueryAPIVersion {
+    @query
+    @doc("Requested API version.")
+    @knownValues(APIVersionsV3)
+    "api-version": string,
+}
+
+@doc("Document analysis result.")
+model AnalyzeResult {
+    @doc("API version used to produce this result.")
+    apiVersion: APIVersionsV3, //model as string
+    ...DocumentModelId,
+    @doc("Model description.")
+    @maxLength(4096)
+    modelDescription?: string,
+    @doc("Method used to compute string offset and length.")
+    stringIndexType: StringIndexType,
+    @doc("Concatenate string representation of all textual and visual elements in reading order.")
+    content: string,
+    @doc("Analyzed pages.")
+    pages: DocumentPage[],
+    @doc("Extracted paragraphs.")
+    paragraphs?: DocumentParagraph[],
+    @doc("Extracted tables.")
+    tables?: DocumentTable[],
+    @doc("Extracted key-value pairs.")
+    keyValuePairs?: DocumentKeyValuePair[],
+    @doc("Extracted font styles.")
+    styles?: DocumentStyle[],
+    @doc("Detected languages.")
+    languages?: DocumentLanguage[],
+    @doc("Extracted documents.")
+    documents: Document[],
+}
+
+@doc("Contiguous region of the concatenated content property, specified as an offset and length.")
+model DocumentSpan {
+    @doc("Zero-based index of the content represented by the span.")
+    @minValue(0)
+    offset: int32,
+    @doc("Number of characters in the content represented by the span.")
+    @minValue(0)
+    length: int32,
+}
+
+@doc("Location in the reading order concatenated content.")
+model Spans {
+    spans: DocumentSpan[],
+}
+
+@doc("Prediction confidence.")
+model Confidence {
+    @minValue(0)
+    @maxValue(1)
+    confidence: float64,
+}
+
+@doc("Bounding polygon, with coordinates specified relative to the top-left of the page. The numbers represent the x, y values of the polygon vertices, clockwise from the left (-180 degrees inclusive) relative to the element orientation.")
+model BoundingPolygon {
+    polygon: float64[],
+}
+
+@doc("A word object consisting of a contiguous sequence of characters. For non-space delimited languages, such as Chinese, Japanese, and Korean, each character is represented as its own word.")
+model DocumentWord {
+    @doc("Text content of the word.")
+    content: string,
+    @doc("Location of the word in the reading order concatenated content.")
+    span: DocumentSpan,
+    // TODO: the following 2 fields currently follow swagger def, but might be better as spreads
+    @doc("Confidence of correctly extracting the word.")
+    confidence: Confidence,
+    @doc("Bounding polygon of the word.")
+    polygon?: BoundingPolygon,
+}
+
+enum SelectionMarkState {selected, unselected}
+
+@doc("State of the selection mark.")
+@knownValues(SelectionMarkState)
+model DocumentSelectionMarkState is string;
+
+enum DocumentTableCellKindValues {
+    "content",
+    "rowHeader",
+    "columnHeader",
+    "stubHead",
+    "description",
+}
+
+@doc("Table cell kind.")
+// FIXME: content should be marked as default?
+@knownValues(DocumentTableCellKindValues)
+model DocumentTableCellKind is string;
+
+@doc("A selection mark object representing check boxes, radio buttons, and other elements indicating a selection.")
+model DocumentSelectionMark {
+    @doc("State of the selection mark.")
+    state: DocumentSelectionMarkState,
+    @doc("Bounding polygon of the selection mark.")
+    polygon?: BoundingPolygon,
+    @doc("Location of the selection mark in the reading order concatenated content.")
+    span: DocumentSpan,
+    @doc("Confidence of correctly extracting the selection mark.")
+    confidence: Confidence,
+}
+
+@doc("A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.")
+model DocumentLine {
+    @doc("Concatenated content of the contained elements in reading order.")
+    content: string,
+    @doc("Bounding polygon of the line.")
+    polygon?: BoundingPolygon,
+    ...Spans
+}
+
+@doc("Content and layout elements extracted from a page from the input.")
+model DocumentPage {
+    kind?: Kind,
+    @doc("1-based page number in the input document.")
+    @minValue(1)
+    pageNumber: int32,
+    @doc("The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].")
+    @minValue(-180)
+    @maxValue(180)
+    // TODO should add exclusiveMinimum: true?
+    angle?: float64,
+    @doc("The width of the image/PDF in pixels/inches, respectively.")
+    @minValue(0)
+    width?: float64,
+    @doc("The height of the image/PDF in pixels/inches, respectively.")
+    @minValue(0)
+    height?: float64,
+    @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
+    unit?: LengthUnit,
+    ...Spans,
+    @doc("Extracted words from the page.")
+    words?: DocumentWord[],
+    @doc("Extracted selection marks from the page.")
+    selectionMarks?: DocumentSelectionMark[],
+    @doc("Extracted lines from the page, potentially containing both textual and visual elements.")
+    lines?: DocumentLine[],
+}
+
+enum KindValues {
+    "document",
+    "sheet",
+    "slide",
+    "image",
+}
+
+@knownValues(KindValues)
+model Kind is string;
+
+enum AnalyzeResultOperationStatusValues {
+    notStarted,
+    running,
+    failed,
+    succeeded,
+}
+
+@doc("Operation status.")
+@knownValues(AnalyzeResultOperationStatusValues)
+model AnalyzeResultOperationStatus is string;
+
+@doc("Status and result of the analyze operation.")
+model AnalyzeResultOperation {
+    status: AnalyzeResultOperationStatus,
+    @doc("Date and time (UTC) when the analyze operation was submitted.")
+    @format("date-time")
+    createdDateTime: string,
+    @doc("Date and time (UTC) when the status was last updated.")
+    @format("date-time")
+    lastUpdatedDateTime: string,
+    @doc("Encountered error during document analysis.")
+    error: Error,
+    analyzeResult: AnalyzeResult,
+}
+
+enum DocumentBuildModeValues {
+    template, neural
+}
+
+@doc("Custom document model build mode.")
+@knownValues(DocumentBuildModeValues)
+model DocumentBuildMode is string;
+
+@doc("Description of the field semantic schema using a JSON Schema style syntax.")
+model DocumentFieldSchema {
+    type: DocumentFieldType,
+    @doc("Field description.")
+    description?: string,
+    @doc("Example field content.")
+    example?: string,
+    @doc("Field type schema of each array element.")
+    items?: DocumentFieldSchema,
+    @doc("Named sub-fields of the object field.")
+    properties?: Record<DocumentFieldSchema>,
+}
+
+@doc("Document type info.")
+model DocumentTypeDetails {
+    @doc("Document model description.")
+    @maxLength(4096)
+    description?: string,
+    @doc("Custom document model build mode.")
+    buildMode?: DocumentBuildMode,
+    @doc("Description of the document semantic schema using a JSON Schema style syntax.")
+    fieldSchema: Record<DocumentFieldSchema>,
+    @doc("Estimated confidence for each field.")
+    fieldConfidence?: Record<numeric>,
+}
+
+@doc("Document model summary.")
+@resource("documentModels")
+model DocumentModelSummary {
+    @key
+    modelId: DocumentModelId,
+    @doc("Document model description.")
+    @maxLength(4096)
+    description?: string,
+    @doc("Date and time (UTC) when the document model was created.")
+    @format("date-time")
+    createdDateTime: string,
+    @doc("API version used to create this document model.")
+    apiVersion?: string,
+    @doc("List of key-value tag attributes associated with the document model.")
+    tags?: Record<string>,
+}
+
+@doc("Document model info.")
+@resource("documentModels")
+model DocumentModelDetails {
+    ...DocumentModelSummary,
+    // spread model summary
+    // @key
+    // modelId: DocumentModelId,
+    // @doc("Document model description.")
+    // @maxLength(4096)
+    // description?: string,
+    // @doc("Date and time (UTC) when the document model was created.")
+    // @format("date-time")
+    // createdDateTime: string,
+    // @doc("API version used to create this document model.")
+    // apiVersion?: string,
+    // @doc("List of key-value tag attributes associated with the document model.")
+    // tags?: Record<string>,
+    @doc("Supported document types.")
+    docTypes?: Record<DocumentTypeDetails>,
+}
+
+@doc("Azure Blob Storage content.")
+model AzureBlobContentSource {
+    @doc("Azure Blob Storage container URL.")
+    @format("uri")
+    containerUrl: string,
+    @doc("Blob name prefix.")
+    prefix?: string,
+}
+
+@doc("A component of a composed document model.")
+model ComponentDocumentModelDetails {
+    modelId: DocumentModelId,
+}
+
+@doc("Authorization to copy a document model to the specified target resource and modelId.")
+model CopyAuthorization {
+    // FIXME needs x-ms-resource = true
+    @doc("ID of the target Azure resource where the document model should be copied to.")
+    targetResourceId: string,
+    @doc("Location of the target Azure resource where the document model should be copied to.")
+    targetResourceRegion: string,
+    @doc("Identifier of the target document model.")
+    targetModelId: string,
+    @doc("URL of the copied document model in the target account.")
+    targetModelLocation: string,
+    @doc("Token used to authorize the request.")
+    accessToken: string,
+    @doc("Date/time when the access token expires.")
+    @format("date-time")
+    expirationDateTime: string,
+}
+
+enum OperationStatusValues {
+    notStarted,
+    running,
+    failed,
+    succeeded,
+    canceled,
+}
+
+@knownValues(OperationStatusValues)
+model OperationStatus is string;
+
+@doc("Operation summary.")
+@resource("{operationId}")
+model OperationSummary {
+    @key
+    operationId: string,
+    status: OperationStatus,
+}
+
+@doc("List Operations response object.")
+@pagedResult
+model GetOperationsResponse {
+    @doc("List of operations.")
+    value: OperationSummary[],
+    @doc("Link to the next page of operations.")
+    newLink?: string,
+}
+
+@doc("Get Operation response object.")
+@discriminator("kind")
+@resource("operations")
+model OperationDetails {
+    @key
+    operationId: string,
+    status: OperationStatus,
+    @doc("Operation progress (0-100).")
+    @minValue(0)
+    @maxValue(100)
+    percentCompleted?: int32,
+    @doc("Date and time (UTC) when the operation was created.")
+    @format("date-time")
+    createdDateTime: string,
+    @doc("Date and time (UTC) when the status was last updated.")
+    @format("date-time")
+    lastUpdatedDateTime: string,
+    @doc("Type of operation.")
+    kind: string,
+    @doc("URL of the resource targeted by this operation.")
+    resourceLocation: string,
+    @doc("API version used to create this operation.")
+    apiVersion?: string,
+    @doc("List of key-value tag attributes associated with the document model.")
+    tags?: Record<string>,
+    @doc("Encountered error.")
+    error: Error,
+}
+
+@doc("Details regarding custom document models.")
+model CustomDocumentModelsDetails {
+    @doc("Number of custom document models in the current resource.")
+    count: int32,
+    @doc("Maximum number of custom document models supported in the current resource.")
+    limit: int32,
+}
+
+@doc("General information regarding the current resource.")
+model ResourceDetails {
+    customDocumentModels: CustomDocumentModelsDetails,
+}
