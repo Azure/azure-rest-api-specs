@@ -3,7 +3,7 @@
     type: checkbox
     keywords:
       - "WaitForARMFeedback"
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)"
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||BreakingChangeReviewRequired)"
     onCheckedLabels:
       - WaitForARMFeedback
       - ARMReview
@@ -76,6 +76,13 @@
     label: ARMChangesRequested
     onLabeledComments: "Please ensure to respond feedbacks from the ARM API reviewer. When you are ready to continue the ARM API review, please remove `ARMChangesRequested`"
     onLabeledRemoveLabels:
+        - WaitForARMFeedback
+
+- rule:
+    type: label
+    label: Approved-BreakingChange
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    onLabeledAddLabels:
         - WaitForARMFeedback
       
         
