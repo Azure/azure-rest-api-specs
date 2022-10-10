@@ -1548,7 +1548,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "common-types.json#/definitions/CostManagementProxyResource"
+          "$ref": "common-types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1705,10 +1705,25 @@
         }
       }
     },
-    "CostManagementResource": {
+    "Resource": {
       "description": "The Resource model definition.",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
         "location": {
           "readOnly": true,
           "type": "string",
@@ -1719,6 +1734,11 @@
           "type": "string",
           "description": "SKU of the resource."
         },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ETag of the resource."
+        },
         "tags": {
           "readOnly": true,
           "type": "object",
@@ -1728,11 +1748,6 @@
           "description": "Resource tags."
         }
       },
-      "allOf": [
-        {
-          "$ref": "common-types.json#/definitions/CostManagementProxyResource"
-        }
-      ],
       "x-ms-azure-resource": true
     },
     "DimensionsListResult": {
@@ -1754,7 +1769,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CostManagementResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1847,7 +1862,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "common-types.json#/definitions/CostManagementProxyResource"
+          "$ref": "common-types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2135,7 +2150,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CostManagementResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2195,7 +2210,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CostManagementResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2626,7 +2641,6 @@
       "properties": {
         "reportUrl": {
           "description": "The CSV file from the reportUrl blob link consists of reservation usage data with the following schema at daily granularity",
-          "type": "string",
           "$ref": "#/definitions/ReservationReportSchema"
         },
         "validUntil": {
