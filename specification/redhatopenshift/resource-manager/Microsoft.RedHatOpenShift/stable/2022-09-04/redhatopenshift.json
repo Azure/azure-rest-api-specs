@@ -159,7 +159,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -209,7 +210,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -259,7 +261,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -309,7 +312,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -402,7 +406,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -447,7 +452,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -508,7 +514,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -554,7 +561,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -617,7 +625,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -664,7 +673,8 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -711,14 +721,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the MachinePool resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -763,14 +775,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the MachinePool resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -785,6 +799,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachinePool"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/MachinePool"
             }
@@ -824,14 +844,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the MachinePool resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -876,14 +898,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the MachinePool resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -945,14 +969,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the Secret resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -997,14 +1023,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the Secret resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -1019,6 +1047,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Secret"
             }
@@ -1058,14 +1092,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the Secret resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -1110,14 +1146,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the Secret resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -1179,14 +1217,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncIdentityProvider resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -1231,14 +1271,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncIdentityProvider resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -1253,6 +1295,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncIdentityProvider"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SyncIdentityProvider"
             }
@@ -1292,14 +1340,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncIdentityProvider resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -1344,14 +1394,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncIdentityProvider resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -1413,14 +1465,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncSet resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -1465,14 +1519,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncSet resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
@@ -1487,6 +1543,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SyncSet"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SyncSet"
             }
@@ -1526,14 +1588,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncSet resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -1578,14 +1642,16 @@
             "in": "path",
             "description": "The name of the OpenShift cluster resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "childResourceName",
             "in": "path",
             "description": "The name of the SyncSet resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
