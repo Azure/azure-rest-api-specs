@@ -193,8 +193,20 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Authorization provider was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "Authorization provider was successfully updated.",
+            "description": "The existing Authorization provider was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
             },
@@ -425,8 +437,20 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Authorization was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "Authorization was successfully updated.",
+            "description": "The existing Authorization was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationContract"
             },
@@ -726,8 +750,20 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Authorization access policy was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "Authorization access policy was successfully updated.",
+            "description": "The existing Authorization access policy was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
             },
