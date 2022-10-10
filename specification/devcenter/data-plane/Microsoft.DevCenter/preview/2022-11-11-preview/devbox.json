@@ -742,7 +742,7 @@
           }
         ],
         "description": "Lists upcoming actions on a Dev Box.",
-        "operationId": "ScheduledActions_GetScheduledActionsByDevBox",
+        "operationId": "DevBoxes_ListScheduledActions",
         "responses": {
           "200": {
             "description": "OK",
@@ -764,7 +764,7 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_GetScheduledActionsByDevBox": {
+          "DevBoxes_ListScheduledActions": {
             "$ref": "./examples/ScheduledActions_List.json"
           }
         },
@@ -797,7 +797,7 @@
           }
         ],
         "description": "Gets a Scheduled Action.",
-        "operationId": "ScheduledActions_GetScheduledActionByDevBox",
+        "operationId": "DevBoxes_GetScheduledAction",
         "responses": {
           "200": {
             "description": "OK",
@@ -819,7 +819,7 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_GetScheduledActionByDevBox": {
+          "DevBoxes_GetScheduledAction": {
             "$ref": "./examples/ScheduledActions_Get.json"
           }
         }
@@ -848,7 +848,7 @@
           }
         ],
         "description": "Skips a Scheduled Action.",
-        "operationId": "ScheduledActions_SkipScheduledAction",
+        "operationId": "DevBoxes_SkipScheduledAction",
         "responses": {
           "204": {
             "description": "No content"
@@ -867,7 +867,7 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_SkipScheduledAction": {
+          "DevBoxes_SkipScheduledAction": {
             "$ref": "./examples/ScheduledActions_Skip.json"
           }
         }
@@ -899,7 +899,7 @@
           }
         ],
         "description": "Delays a Scheduled Action.",
-        "operationId": "ScheduledActions_DelayScheduledAction",
+        "operationId": "DevBoxes_DelayScheduledAction",
         "responses": {
           "200": {
             "description": "OK",
@@ -921,7 +921,7 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_DelayScheduledAction": {
+          "DevBoxes_DelayScheduledAction": {
             "$ref": "./examples/ScheduledActions_Delay.json"
           }
         }
@@ -1308,7 +1308,7 @@
     },
     "ScheduledActionListResult": {
       "type": "object",
-      "description": "The Scheduled Acion list result",
+      "description": "The Scheduled Action list result",
       "properties": {
         "value": {
           "description": "Current page of results",
@@ -1424,6 +1424,8 @@
       "name": "scheduledActionId",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+      "maxLength": 36,
       "x-ms-parameter-location": "method"
     },
     "DelayUntilParameterName": {
