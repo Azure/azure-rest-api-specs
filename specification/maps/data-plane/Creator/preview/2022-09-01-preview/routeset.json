@@ -160,7 +160,15 @@
     },
     "QueryRoutesetId": {
       "name": "routesetId",
-      "description": "The ID of the routeset to query from.",
+      "description": "The ID of the routeset to query for.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DeleteRoutesetId": {
+      "name": "routesetId",
+      "description": "The ID of the routeset to delete.",
       "type": "string",
       "in": "path",
       "required": true,
@@ -304,7 +312,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/RoutesetId"
+            "$ref": "#/parameters/DeleteRoutesetId"
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
