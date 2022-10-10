@@ -45,7 +45,7 @@
           "recommendations"
         ],
         "description": "Gets a list of all recommendations.",
-        "operationId": "Get_Recommendations",
+        "operationId": "GetRecommendations_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -64,10 +64,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "items": {
-                "$ref": "#/definitions/Recommendation"
-              },
-              "type": "array"
+              "$ref": "#/definitions/RecommendationList"
             }
           },
           "default": {
@@ -154,6 +151,7 @@
             "$ref": "#/parameters/RecommendationPatch"
           }
         ],
+        "x-ms-long-running-operation": true,
         "responses": {
           "202": {
             "description": "OK",
@@ -286,6 +284,19 @@
       ],
       "type": "object"
     },
+    "RecommendationList": {
+      "description": "A list of recommendations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          },
+          "description": "An list of recommendations"
+        }
+      },
+      "type": "object"
+    },
     "Content": {
       "description": "Content section of the recommendation.",
       "properties": {
@@ -352,37 +363,16 @@
     "RecommendationPatch": {
       "description": "Recommendation Fields to update.",
       "properties": {
-        "op": {
-          "description": "The patch operation to be performed on the recommendation.",
-          "enum": [
-            "replace"
-          ],
+        "state": {
+          "description": "State of the recommendation.",
+          "$ref": "#/definitions/RecommendationState"
+        },
+        "hideUntilTimeUtc": {
+          "description": "The time stamp (UTC) when the recommendation should be displayed again.",
           "type": "string",
-          "x-ms-enum": {
-            "name": "Op",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "replace",
-                "description": "Replace action of patch."
-              }
-            ]
-          }
-        },
-        "path": {
-          "description": "The field to update.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Value to update the field with.",
-          "type": "string"
+          "format": "date-time"
         }
       },
-      "required": [
-        "op",
-        "path",
-        "value"
-      ],
       "type": "object"
     },
     "RecommendationCategory": {
