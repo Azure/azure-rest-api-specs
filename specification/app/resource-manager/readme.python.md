@@ -16,26 +16,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/appcontainers/azure-mgmt-appcontainers/azure/mgmt/appcontainers
 ```
-
-``` yaml $(python)
-directive:
-  - from: CommonDefinitions.json
-    where: $.definitions.DaprComponent.properties.ignoreErrors
-    transform: $['default'] = 'False'
-
-  - from: ContainerApps.json
-    where: $.definitions.Dapr.properties.enabled
-    transform: $['default'] = 'False'
-
-  - from: ContainerApps.json
-    where: $.definitions.Ingress.properties.external
-    transform: $['default'] = 'False'
-
-  - from: ContainerApps.json
-    where: $.definitions.TrafficWeight.properties.latestRevision
-    transform: $['default'] = 'False'
-
-  - from: ContainerApps.json
-    where: $.definitions.Ingress.properties.allowInsecure
-    transform: $['default'] = 'False'
-```
