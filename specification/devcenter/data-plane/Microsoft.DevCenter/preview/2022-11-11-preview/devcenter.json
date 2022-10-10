@@ -5,16 +5,11 @@
     "title": "DevCenter"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{tenantId}-{devCenter}.{devCenterDnsSuffix}",
+    "hostTemplate": "{devCenterUri}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "devcenter.json#/parameters/TenantIdParameterName"
-      },
-      {
-        "$ref": "devcenter.json#/parameters/DevCenterParameterName"
-      },
-      {
-        "$ref": "devcenter.json#/parameters/DevCenterDnsSuffixParameterName"
+        "$ref": "devcenter.json#/parameters/DevCenterUriParameterName"
       }
     ]
   },
@@ -63,7 +58,7 @@
             "$ref": "#/parameters/TopParameter"
           }
         ],
-        "operationId": "Projects_ListByDevCenter",
+        "operationId": "DevCenter_ListProjects",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -79,7 +74,7 @@
           }
         },
         "x-ms-examples": {
-          "Project_ListByDevCenter": {
+          "DevCenter_ListProjects": {
             "$ref": "./examples/Projects_ListByDevCenter.json"
           }
         },
@@ -96,13 +91,13 @@
         "description": "Gets a project.",
         "parameters": [
           {
-            "$ref": "#/parameters/ProjectNameParameter"
+            "$ref": "#/parameters/ProjectNameMethodParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "operationId": "Projects_Get",
+        "operationId": "DevCenter_GetProject",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -118,7 +113,7 @@
           }
         },
         "x-ms-examples": {
-          "Project_Get": {
+          "DevCenter_GetProject": {
             "$ref": "./examples/Projects_Get.json"
           }
         }
@@ -239,6 +234,17 @@
       "description": "The DevCenter Project upon which to execute operations.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "in": "path",
+      "x-ms-parameter-location": "client"
+    },
+    "ProjectNameMethodParameter": {
+      "name": "projectName",
+      "description": "The DevCenter Project upon which to execute operations.",
+      "required": true,
+      "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
@@ -281,38 +287,13 @@
       "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
       "x-ms-parameter-location": "method"
     },
-    "TenantIdParameterName": {
-      "name": "tenantId",
-      "description": "The tenant to operate on.",
+    "DevCenterUriParameterName": {
+      "name": "devCenterUri",
+      "description": "The DevCenter-specific URI to operate on.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
-      "minLength": 36,
-      "maxLength": 36,
       "in": "path",
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "DevCenterParameterName": {
-      "name": "devCenter",
-      "description": "The DevCenter to operate on.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63,
-      "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "DevCenterDnsSuffixParameterName": {
-      "name": "devCenterDnsSuffix",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "devcenter.azure.com",
-      "x-ms-skip-url-encoding": true,
-      "description": "The DNS suffix used as the base for all devcenter requests.",
       "x-ms-parameter-location": "client"
     }
   }

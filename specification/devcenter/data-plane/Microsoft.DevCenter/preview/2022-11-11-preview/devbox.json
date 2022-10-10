@@ -6,16 +6,11 @@
     "description": "DevBox API."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{tenantId}-{devCenter}.{devCenterDnsSuffix}",
+    "hostTemplate": "{devCenterUri}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "devcenter.json#/parameters/TenantIdParameterName"
-      },
-      {
-        "$ref": "devcenter.json#/parameters/DevCenterParameterName"
-      },
-      {
-        "$ref": "devcenter.json#/parameters/DevCenterDnsSuffixParameterName"
+        "$ref": "devcenter.json#/parameters/DevCenterUriParameterName"
       }
     ]
   },
@@ -67,7 +62,7 @@
           }
         ],
         "description": "Lists available pools",
-        "operationId": "Pools_List",
+        "operationId": "DevBoxes_ListPools",
         "responses": {
           "200": {
             "description": "OK",
@@ -89,7 +84,7 @@
           }
         },
         "x-ms-examples": {
-          "listPools": {
+          "DevBoxes_ListPools": {
             "$ref": "./examples/Pools_List.json"
           }
         },
@@ -116,7 +111,7 @@
           }
         ],
         "description": "Gets a pool",
-        "operationId": "Pools_Get",
+        "operationId": "DevBoxes_GetPool",
         "responses": {
           "200": {
             "description": "OK",
@@ -138,7 +133,7 @@
           }
         },
         "x-ms-examples": {
-          "Pools_Get": {
+          "DevBoxes_GetPool": {
             "$ref": "./examples/Pools_Get.json"
           }
         }
@@ -167,7 +162,7 @@
           }
         ],
         "description": "Lists available schedules for a pool.",
-        "operationId": "Schedules_List",
+        "operationId": "DevBoxes_ListSchedulesByPool",
         "responses": {
           "200": {
             "description": "OK",
@@ -189,7 +184,7 @@
           }
         },
         "x-ms-examples": {
-          "listSchedules": {
+          "DevBoxes_ListSchedulesByPool": {
             "$ref": "./examples/Schedules_List.json"
           }
         },
@@ -219,7 +214,7 @@
           }
         ],
         "description": "Gets a schedule.",
-        "operationId": "Schedules_Get",
+        "operationId": "DevBoxes_GetScheduleByPool",
         "responses": {
           "200": {
             "description": "OK",
@@ -241,7 +236,7 @@
           }
         },
         "x-ms-examples": {
-          "Schedule_Get": {
+          "DevBoxes_GetScheduleByPool": {
             "$ref": "./examples/Schedules_Get.json"
           }
         }
@@ -264,7 +259,7 @@
           }
         ],
         "description": "Lists Dev Boxes that the caller has access to in the DevCenter.",
-        "operationId": "DevBoxes_List",
+        "operationId": "DevCenter_ListAllDevBoxes",
         "responses": {
           "200": {
             "description": "OK",
@@ -286,7 +281,7 @@
           }
         },
         "x-ms-examples": {
-          "DevBox_List": {
+          "DevCenter_ListAllDevBoxes": {
             "$ref": "./examples/DevBoxes_List.json"
           }
         },
@@ -316,7 +311,7 @@
           }
         ],
         "description": "Lists Dev Boxes in the Dev Center for a particular user.",
-        "operationId": "DevBoxes_ListByUser",
+        "operationId": "DevCenter_ListAllDevBoxesByUser",
         "responses": {
           "200": {
             "description": "OK",
@@ -338,7 +333,7 @@
           }
         },
         "x-ms-examples": {
-          "DevBox_ListByUserByProject": {
+          "DevCenter_ListAllDevBoxesByUser": {
             "$ref": "./examples/DevBoxes_ListByUserByProject.json"
           }
         },
@@ -371,7 +366,7 @@
           }
         ],
         "description": "Lists Dev Boxes in the project for a particular user.",
-        "operationId": "DevBoxes_ListByProject",
+        "operationId": "DevBoxes_ListDevBoxesByUser",
         "responses": {
           "200": {
             "description": "OK",
@@ -393,7 +388,7 @@
           }
         },
         "x-ms-examples": {
-          "DevBox_ListByUserByProject": {
+          "DevBoxes_ListDevBoxesByUser": {
             "$ref": "./examples/DevBoxes_ListByUserByProject.json"
           }
         },
@@ -423,7 +418,7 @@
           }
         ],
         "description": "Gets a Dev Box",
-        "operationId": "DevBoxes_Get",
+        "operationId": "DevBoxes_GetDevBoxByUser",
         "responses": {
           "200": {
             "description": "OK",
@@ -445,7 +440,7 @@
           }
         },
         "x-ms-examples": {
-          "getDevBoxForUser": {
+          "DevBoxes_GetDevBoxByUser": {
             "$ref": "./examples/DevBoxes_Get.json"
           }
         }
@@ -478,7 +473,7 @@
           }
         ],
         "description": "Creates or updates a Dev Box.",
-        "operationId": "DevBoxes_Create",
+        "operationId": "DevBoxes_CreateDevBox",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -510,7 +505,7 @@
           }
         },
         "x-ms-examples": {
-          "createDevBox": {
+          "DevBoxes_CreateDevBox": {
             "$ref": "./examples/DevBoxes_Create.json"
           }
         }
@@ -534,15 +529,9 @@
           }
         ],
         "description": "Deletes a Dev Box.",
-        "operationId": "DevBoxes_Delete",
+        "operationId": "DevBoxes_DeleteDevBox",
         "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DevBox"
-            }
-          },
           "202": {
             "description": "The request was accepted",
             "headers": {
@@ -569,7 +558,7 @@
           }
         },
         "x-ms-examples": {
-          "deleteDevBox": {
+          "DevBoxes_DeleteDevBox": {
             "$ref": "./examples/DevBoxes_Delete.json"
           }
         }
@@ -595,18 +584,12 @@
           }
         ],
         "description": "Starts a Dev Box",
-        "operationId": "DevBoxes_Start",
+        "operationId": "DevBoxes_StartDevBox",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DevBox"
-            }
-          },
           "202": {
             "description": "The request was accepted",
             "headers": {
@@ -630,7 +613,7 @@
           }
         },
         "x-ms-examples": {
-          "startDevBoxForUser": {
+          "DevBoxes_StartDevBox": {
             "$ref": "./examples/DevBoxes_Start.json"
           }
         }
@@ -656,18 +639,12 @@
           }
         ],
         "description": "Stops a Dev Box",
-        "operationId": "DevBoxes_Stop",
+        "operationId": "DevBoxes_StopDevBox",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DevBox"
-            }
-          },
           "202": {
             "description": "The request was accepted",
             "headers": {
@@ -691,7 +668,7 @@
           }
         },
         "x-ms-examples": {
-          "stopDevBoxForUser": {
+          "DevBoxes_StopDevBox": {
             "$ref": "./examples/DevBoxes_Stop.json"
           }
         }
@@ -739,8 +716,213 @@
           }
         },
         "x-ms-examples": {
-          "DevBox_GetRemoteConnection": {
+          "DevBoxes_GetRemoteConnection": {
             "$ref": "./examples/DevBoxes_GetRemoteConnection.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions": {
+      "get": {
+        "tags": [
+          "Scheduled Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameterName"
+          }
+        ],
+        "description": "Lists upcoming actions on a Dev Box.",
+        "operationId": "ScheduledActions_GetScheduledActionsByDevBox",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_GetScheduledActionsByDevBox": {
+            "$ref": "./examples/ScheduledActions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ScheduledAction"
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions/{scheduledActionId}": {
+      "get": {
+        "tags": [
+          "Scheduled Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameterName"
+          },
+          {
+            "$ref": "#/parameters/ScheduledActionIdParameterName"
+          }
+        ],
+        "description": "Gets a Scheduled Action.",
+        "operationId": "ScheduledActions_GetScheduledActionByDevBox",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_GetScheduledActionByDevBox": {
+            "$ref": "./examples/ScheduledActions_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions/{scheduledActionId}:skip": {
+      "post": {
+        "tags": [
+          "Scheduled Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameterName"
+          },
+          {
+            "$ref": "#/parameters/ScheduledActionIdParameterName"
+          }
+        ],
+        "description": "Skips a Scheduled Action.",
+        "operationId": "ScheduledActions_SkipScheduledAction",
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_SkipScheduledAction": {
+            "$ref": "./examples/ScheduledActions_Skip.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions/{scheduledActionId}:delay": {
+      "post": {
+        "tags": [
+          "Scheduled Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameterName"
+          },
+          {
+            "$ref": "#/parameters/ScheduledActionIdParameterName"
+          },
+          {
+            "$ref": "#/parameters/DelayUntilParameterName"
+          }
+        ],
+        "description": "Delays a Scheduled Action.",
+        "operationId": "ScheduledActions_DelayScheduledAction",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_DelayScheduledAction": {
+            "$ref": "./examples/ScheduledActions_Delay.json"
           }
         }
       }
@@ -1123,6 +1305,86 @@
         "name": "LocalAdminStatus",
         "modelAsString": true
       }
+    },
+    "ScheduledActionListResult": {
+      "type": "object",
+      "description": "The Scheduled Acion list result",
+      "properties": {
+        "value": {
+          "description": "Current page of results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduledAction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduledAction": {
+      "type": "object",
+      "description": "An upcoming Scheduled Action.",
+      "properties": {
+        "id": {
+          "description": "Uniquely identifies the action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionType": {
+          "description": "The action that will be taken.",
+          "$ref": "#/definitions/ScheduledActionType",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The frequency of this scheduled action.",
+          "$ref": "#/definitions/ScheduledActionReason",
+          "readOnly": true
+        },
+        "scheduledTime": {
+          "description": "The target time the action will be triggered (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "originalScheduledTime": {
+          "description": "The original scheduled time for the action (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "scheduleId": {
+          "description": "The schedule id that is triggering this scheduled action",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduledActionType": {
+      "description": "The scheduled action types.",
+      "type": "string",
+      "enum": [
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledActionType",
+        "modelAsString": true
+      }
+    },
+    "ScheduledActionReason": {
+      "description": "The reason for the scheduled action.",
+      "type": "string",
+      "enum": [
+        "Schedule"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledActionReason",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -1154,6 +1416,23 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The name of a Dev Box.",
+      "x-ms-parameter-location": "method"
+    },
+    "ScheduledActionIdParameterName": {
+      "description": "The scheduled action id.",
+      "in": "path",
+      "name": "scheduledActionId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DelayUntilParameterName": {
+      "name": "delayUntil",
+      "description": "The delayed action time (UTC).",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "in": "query",
       "x-ms-parameter-location": "method"
     }
   }
