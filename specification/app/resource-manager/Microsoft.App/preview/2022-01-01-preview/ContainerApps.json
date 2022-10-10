@@ -523,7 +523,7 @@
               "$ref": "./CommonDefinitions.json#/definitions/Template",
               "description": "Container App versioned application definition."
             },
-            "outboundIPAddresses": {
+            "outboundIpAddresses": {
               "description": "Outbound IP Addresses for container app.",
               "type": "array",
               "items": {
@@ -844,6 +844,11 @@
         },
         "hasConflictOnManagedEnvironment": {
           "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "conflictWithEnvironmentCustomDomain": {
+          "description": "<code>true</code> if there is a conflict on the Container App's managed environment level custom domain; otherwise, <code>false</code>.",
           "type": "boolean",
           "readOnly": true
         },
