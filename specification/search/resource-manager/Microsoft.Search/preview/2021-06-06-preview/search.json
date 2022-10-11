@@ -2605,6 +2605,132 @@
       },
       "type": "object",
       "description": "The details of the user assigned managed identity assigned to the search service."
+    },
+    "NetworkSecurityPerimeterConfiguration" : {
+      "properties": {
+        "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the network security perimeter configuration."
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "type": "object",
+      "description": "The configuration details of a Network Security Perimeter Association with a search service."
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "properties": {
+        "provisioningState":{
+          "enum": [
+            "Accepted",
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the resource association."
+            },
+            "accessMode": {
+              "enum": [
+                "Learning",
+                "Audit",
+                "Enforced"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ResourceAssociationAccessMode",
+                "modelAsString": true
+              },
+              "description": "Access Mode of teh resource association"
+            }
+          },
+          "type": "object",
+          "readOnly": true,
+          "description": "Details about a resource association."
+        },
+        "profile":{
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the profile."
+            },
+            "accessRulesVersion": {
+              "type": "string",
+              "description": "Current access rules version."
+            },
+            "accessRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NspAccessRule"
+              }
+            }
+          },
+          "description": "Details abou thte current network security perimeter profile."
+        }
+      },
+      "type": "object",
+      "description": "Properties of a NetworkSecuirtyPerimeterConfiguration"
+    },
+    "NspAccessRule": {
+      "properties":{
+        "properties":{
+          "$ref": "#/definitions/NspAccessRuleProperties",
+          "name": {
+            "type": "string",
+            "description": "The name of the access rule."
+          }
+        }
+      },
+      "type": "object",
+      "description": "Details for Access Rule in a Network Security Perimeter Profile."
+    },
+    "NspAccessRuleProperties": {
+      "properties": {
+        "direction": {
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NspAccessRuleDirection",
+            "modelAsString": true
+          },
+          "description": "Direction of an Access Rule."
+        },
+        "addressPrefixes": {
+          "items": {
+            "description": "IP address prefix",
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Address prefixes in the CIDR format for inbound rules."
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id for the network security perimeter.",
+        }
+      }
     }
   },
   "parameters": {
