@@ -11,8 +11,6 @@ prepareSteps:
     parameters:
       parameters:
         location: $(globalLocation)
-      tags:
-        key1: value1
         
 scenarios:
   - scenario: PrivateZone
@@ -51,14 +49,16 @@ scenarios:
       virtualNetworkLinkName: scenario_vnetlink
     steps:
       - step: NetworkAndSubnet_Create
-        armTemplate: armtemplate/Create_NetworkAndSubnet.json
+        armTemplate: templates/Create_NetworkAndSubnet.json
       - step: VirtualNetworkLink_Create
-        exampleFile: ../examples/VirtualNetworkLinkPut.json
-        requestUpdate:
-          - replace: /parameters/properties/virtualNetwork/id
-            value: $(virtaulNetworkId)
-          - replace: /parameters/location
-            value: Global
+        operationId: VirtualNetworkLinks_CreateOrUpdate
+        parameters:
+          parameters:
+            location: $(globalLocation)
+            properties:
+              virtualNetwork: 
+                id: $(virtaulNetworkId)
+              registrationEnabled: false
       - step: VirtualNetworkLink_Update
         exampleFile: ../examples/VirtualNetworkLinkPatch.json
       - step: VirtualNetworkLink_Get
