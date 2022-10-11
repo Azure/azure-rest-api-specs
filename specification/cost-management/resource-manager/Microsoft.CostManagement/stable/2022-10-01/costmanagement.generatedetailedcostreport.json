@@ -39,7 +39,7 @@
           "UsageDetails"
         ],
         "operationId": "GenerateDetailedCostReport_CreateOperation",
-        "description": "Generates the detailed cost report for provided date range, billing period(Only enterprise customers) or Invoice Id asynchronously at a certain scope. Call returns a 202 with header Azure-Consumption-AsyncOperation providing a link to the operation created. A call on the operation will provide the status and if the operation is completed the blob file where generated detailed cost report is being stored.",
+        "description": "Generates the detailed cost report for provided date range, billing period(only enterprise customers) or Invoice ID asynchronously at a certain scope. Call returns a 202 with header Azure-Consumption-AsyncOperation providing a link to the operation created. A call on the operation will provide the status and if the operation is completed the blob file where generated detailed cost report is being stored.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -240,15 +240,15 @@
           "$ref": "#/definitions/GenerateDetailedCostReportTimePeriod"
         },
         "billingPeriod": {
-          "description": "Billing Period in YearMonth(e.g. 202008) format. Only for legacy enterprise customers can use this. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
+          "description": "Billing period in YearMonth(e.g. 202008) format. Only for legacy enterprise customers can use this. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
           "type": "string"
         },
         "invoiceId": {
-          "description": "Invoice Id for PayAsYouGo customers and Modern billing profile scope. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
+          "description": "Invoice ID for PayAsYouGo customers and billing profile scope. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
           "type": "string"
         },
         "customerId": {
-          "description": "Customer Id for Modern (Invoice Id and billing profile is also required for this).",
+          "description": "Customer ID for Modern (Invoice Id and billing profile is also required for this).",
           "type": "string"
         }
       }
@@ -274,7 +274,7 @@
       "description": "The status of the long running operation for cost detailed report.",
       "properties": {
         "id": {
-          "description": "The id of the long running operation.",
+          "description": "The ID of the long running operation.",
           "type": "string"
         },
         "name": {
@@ -327,7 +327,8 @@
       "properties": {
         "downloadUrl": {
           "description": "The URL to download the generated report.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "validTill": {
           "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
