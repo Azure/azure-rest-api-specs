@@ -48,7 +48,7 @@
             "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -98,7 +98,7 @@
             "description": "The id returned as part of the backup request"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -143,7 +143,7 @@
             "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -193,7 +193,7 @@
             "description": "The Job Id returned part of the restore operation"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -245,7 +245,7 @@
             "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -426,15 +426,6 @@
         }
       },
       "description": "Restore operation"
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

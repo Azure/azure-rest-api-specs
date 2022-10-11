@@ -50,7 +50,7 @@
             "description": "The parameters to update an account setting."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -85,7 +85,7 @@
             "$ref": "#/parameters/SettingNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -119,7 +119,7 @@
         "description": "Retrieves a list of all the available account settings that can be configured.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -202,14 +202,6 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version.",
-      "x-ms-parameter-location": "client"
-    },
     "SettingNameParameter": {
       "name": "setting-name",
       "in": "path",

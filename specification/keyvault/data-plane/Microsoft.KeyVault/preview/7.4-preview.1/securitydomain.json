@@ -77,7 +77,7 @@
             "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -118,7 +118,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           }
         ],
         "operationId": "HSMSecurityDomain_TransferKey",
@@ -370,15 +370,6 @@
         "n",
         "e"
       ]
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }
