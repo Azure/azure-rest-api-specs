@@ -29,14 +29,6 @@ openapi-type: arm
 tag: package-2022-10-preview
 ```
 
-### Suppression
-
-``` yaml
-directive:
-  - suppress: R4007
-    reason: DefaultErrorResponseSchema - we will be Implementing in new API version
-```
-
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
