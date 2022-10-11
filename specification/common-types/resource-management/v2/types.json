@@ -286,10 +286,6 @@
       "description": "The error detail.",
       "type": "object",
       "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetail"
-        },
         "code": {
           "readOnly": true,
           "type": "string",
@@ -336,18 +332,6 @@
         "error": {
           "description": "The error object.",
           "$ref": "#/definitions/ErrorDetail"
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
-          "description": "The error details."
         }
       }
     },
