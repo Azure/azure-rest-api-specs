@@ -12,7 +12,7 @@ interface Analysis {
   @summary("Analyze document")
   @doc("Analyzes document with document model.")
   // NOTE: this operation needs to be able to return a 202 response and the error response should be customized as well
-  op analyze is Azure.Core.Foundations.LongRunningOperation<AnalyzeResult, CustomAnalyzeParameters>;
+  op analyze is Azure.Core.Foundations.LongRunningOperation<AnalyzeResult>;
   // NOTE: the code below outputs the behavior that the service has defined today
   // op analyze(
   //   ...QueryAPIVersion,
@@ -34,6 +34,9 @@ interface Analysis {
   @summary("Get analyze result")
   @doc("Gets the result of document analysis.")
   @tag("Analysis")
+  // NOTE: get AnalyzeResult does not seem like a Resource action to me, since AnalyzeResult is 
+  // not information related to a persisted resource but more so the result of running the 
+  // analysis on a specific document
   op getAnalyzeResult(
     @doc("Unique document model name.")
     @pattern("[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}")
@@ -49,26 +52,29 @@ interface Analysis {
 // cause conflicts. Due to this also going to group the /info route here for now
 // @route("documentModels")
 interface DocumentModelAdministration {
-  // FIXME: this doesnt output current service behavior
-  // @doc("Builds a custom document analysis model.")
-  // @route("documentModels:build")
-  // op buildDocumentModel is LongRunningResourceCreateOrReplace<DocumentModelDetails>;
-  @post
+  // FIXME: this doesnt output current service behavior, similar issues to analyze op
+  // plus the route is incorrect. I need to be able to override the default route used in the 
+  // Azure.Core op
   @doc("Builds a custom document analysis model.")
-  @route(":build") // resourcecollectionaction
-  op build(
-    ...QueryAPIVersion,
-    modelId: DocumentModelId,
-    @doc("Document model description.")
-    @maxLength(4096)
-    description?: string,
-    @doc("Custom document model build mode.")
-    buildMode: DocumentBuildMode,
-    @doc("Azure Blob Storage location containing the training data.")
-    azureBlobSource?: AzureBlobContentSource,
-    @doc("List of key-value tag attributes associated with the document model.")
-    tags?: Record<string>,
-  ): AcceptedResponse | ErrorResponse;
+  @route("documentModels:build")
+  op buildDocumentModel is LongRunningResourceCreateOrReplace<DocumentModelDetails>;
+  // NOTE: the code below outputs the behavior that the service has defined today
+  // @post
+  // @doc("Builds a custom document analysis model.")
+  // @route(":build") // resourcecollectionaction
+  // op build(
+  //   ...QueryAPIVersion,
+  //   modelId: DocumentModelId,
+  //   @doc("Document model description.")
+  //   @maxLength(4096)
+  //   description?: string,
+  //   @doc("Custom document model build mode.")
+  //   buildMode: DocumentBuildMode,
+  //   @doc("Azure Blob Storage location containing the training data.")
+  //   azureBlobSource?: AzureBlobContentSource,
+  //   @doc("List of key-value tag attributes associated with the document model.")
+  //   tags?: Record<string>,
+  // ): AcceptedResponse | ErrorResponse;
 
   @post
   @summary("Compose document model")
