@@ -280,7 +280,10 @@
         },
         "sourceInfo": {
           "description": "The source info for the summary",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "searchKey": {
           "description": "The search key is used to optimize query performance when using summaries for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.",
