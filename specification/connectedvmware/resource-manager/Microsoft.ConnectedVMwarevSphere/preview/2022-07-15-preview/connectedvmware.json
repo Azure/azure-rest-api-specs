@@ -4130,6 +4130,22 @@
           "type": "string",
           "readOnly": true
         },
+        "datastoreIds": {
+          "description": "Gets or sets the datastore ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkIds": {
+          "description": "Gets or sets the network ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "statuses": {
           "description": "The resource status information.",
           "readOnly": true,
@@ -5457,6 +5473,22 @@
           "type": "string",
           "readOnly": true
         },
+        "datastoreIds": {
+          "description": "Gets or sets the datastore ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkIds": {
+          "description": "Gets or sets the network ARM ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -5579,6 +5611,18 @@
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
+          "readOnly": true
+        },
+        "capacityGB": {
+          "description": "Gets or sets Maximum capacity of this datastore in GBs.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "freeSpaceGB": {
+          "description": "Gets or sets Available space of this datastore in GBs.",
+          "format": "int64",
+          "type": "integer",
           "readOnly": true
         },
         "provisioningState": {
@@ -6444,6 +6488,16 @@
           "description": "Gets or sets os name.",
           "type": "string"
         },
+        "toolsVersionStatus": {
+          "description": "Gets or sets the current version status of VMware Tools installed in the guest operating system.",
+          "type": "string",
+          "readOnly": true
+        },
+        "toolsVersion": {
+          "description": "Gets or sets the current version of VMware Tools.",
+          "type": "string",
+          "readOnly": true
+        },
         "folderPath": {
           "description": "Gets or sets the folder path of the template.",
           "type": "string"
@@ -6537,6 +6591,10 @@
         "moName": {
           "description": "Gets or sets the vCenter Managed Object name for the resource.",
           "type": "string"
+        },
+        "inventoryType": {
+          "description": "The inventory type.",
+          "$ref": "#/definitions/InventoryType"
         }
       }
     },
