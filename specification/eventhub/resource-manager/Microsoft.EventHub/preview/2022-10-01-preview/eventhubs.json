@@ -282,9 +282,9 @@
           }
         },
         "retentionTimeInHours": {
-          "format": "int32",
+          "format": "int64",
           "type": "integer",
-          "description": "Number of hours to retain the events for this Event Hub. This value is only used when cleanupPolicy is Delete"
+          "description": "Number of hours to retain the events for this Event Hub. This value is only used when cleanupPolicy is Delete. If cleanupPolicy is Compaction the returned value of this property is Long.MaxValue "
         },
         "tombstoneRetentionTimeInHours": {
           "format": "int32",
