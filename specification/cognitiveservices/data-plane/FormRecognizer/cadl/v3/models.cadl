@@ -304,26 +304,40 @@ model QueryAPIVersion {
 model AnalyzeResult {
     @doc("API version used to produce this result.")
     apiVersion: APIVersionsV3, //model as string
-    ...DocumentModelId,
+    // FIXME: when using Azure.Core.Foundations.LongRunningOperation<AnalyzeResult>
+    // spreading DocumentModelId causes an error saying that modelId doesnt exist.
+    // ...DocumentModelId,
+    @path
+    @doc("Unique document model name.")
+    @pattern("[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}")
+    modelId: string,
     @doc("Model description.")
     @maxLength(4096)
     modelDescription?: string,
     @doc("Method used to compute string offset and length.")
     stringIndexType: StringIndexType,
+    @visibility("read")
     @doc("Concatenate string representation of all textual and visual elements in reading order.")
     content: string,
+    @visibility("read")
     @doc("Analyzed pages.")
     pages: DocumentPage[],
+    @visibility("read")
     @doc("Extracted paragraphs.")
     paragraphs?: DocumentParagraph[],
+    @visibility("read")
     @doc("Extracted tables.")
     tables?: DocumentTable[],
+    @visibility("read")
     @doc("Extracted key-value pairs.")
     keyValuePairs?: DocumentKeyValuePair[],
+    @visibility("read")
     @doc("Extracted font styles.")
     styles?: DocumentStyle[],
+    @visibility("read")
     @doc("Detected languages.")
     languages?: DocumentLanguage[],
+    @visibility("read")
     @doc("Extracted documents.")
     documents: Document[],
 }

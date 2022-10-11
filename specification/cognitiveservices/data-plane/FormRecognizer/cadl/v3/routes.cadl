@@ -1,35 +1,33 @@
 import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
 import "./models.cadl";
 
 using Cadl.Http;
 using Cadl.Rest;
-using Cadl.Versioning;
 using Azure.Core;
 
 namespace FormRecognizer.v3;
 
-// @added(APIVersions.v3)
 interface Analysis {
-  @post
   @route("documentModels/{modelId}:analyze")
   @summary("Analyze document")
   @doc("Analyzes document with document model.")
-  // op analyze is Azure.Core.Foundations.LongRunningOperation<{
-  op analyze(
-    ...QueryAPIVersion,
-    @header contentType: AnalysisContentTypes,
-    @path modelId: string,
-    @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
-    @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
-    @query pages: string,
-    @doc("Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").")
-    @query locale: string,
-    // FIXME: how do you specify a default string index type enum value
-    @doc("Method used to compute string offset and length.")
-    @query stringIndexType: StringIndexType,
-    @body body: bytes //FIXME | AnalyzeDocumentRequest
-  ): AcceptedResponse | ErrorResponse;
+  // NOTE: this operation needs to be able to return a 202 response and the error response should be customized as well
+  op analyze is Azure.Core.Foundations.LongRunningOperation<AnalyzeResult, CustomAnalyzeParameters>;
+  // NOTE: the code below outputs the behavior that the service has defined today
+  // op analyze(
+  //   ...QueryAPIVersion,
+  //   @header contentType: AnalysisContentTypes,
+  //   @path modelId: string,
+  //   @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+  //   @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
+  //   @query pages: string,
+  //   @doc("Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").")
+  //   @query locale: string,
+  //   // FIXME: how do you specify a default string index type enum value
+  //   @doc("Method used to compute string offset and length.")
+  //   @query stringIndexType: StringIndexType,
+  //   @body body: bytes //FIXME | AnalyzeDocumentRequest
+  // ): AcceptedResponse | ErrorResponse;
 
   @get
   @route("documentModels/{modelId}/analyzeResults/{resultId}")
