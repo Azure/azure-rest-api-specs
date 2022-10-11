@@ -12,7 +12,7 @@ interface Analysis {
   @summary("Analyze document")
   @doc("Analyzes document with document model.")
   // NOTE: this operation needs to be able to return a 202 response and the error response should be customized as well
-  op analyze is Azure.Core.Foundations.LongRunningOperation<AnalyzeResult>;
+  op analyze is Foundations.LongRunningOperation<AnalyzeResult>;
   // NOTE: the code below outputs the behavior that the service has defined today
   // op analyze(
   //   ...QueryAPIVersion,
@@ -57,7 +57,8 @@ interface DocumentModelAdministration {
   // Azure.Core op
   @doc("Builds a custom document analysis model.")
   @route("documentModels:build")
-  op buildDocumentModel is LongRunningResourceCreateOrReplace<DocumentModelDetails>;
+  op buildDocumentModel is Foundations.LongRunningOperation<DocumentModelDetails>;
+  // op buildDocumentModel is LongRunningResourceCreateOrReplace<DocumentModelDetails>;
   // NOTE: the code below outputs the behavior that the service has defined today
   // @post
   // @doc("Builds a custom document analysis model.")
