@@ -17,6 +17,10 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 modelerfour:
   lenient-model-deduplication: true
+directive:
+- rename-model:
+    from: 'CostManagementOperation'
+    to: 'OperationForCostManagement'
 ```
 
 ### Go multi-api
