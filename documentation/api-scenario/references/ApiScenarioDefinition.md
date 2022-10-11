@@ -81,7 +81,6 @@ It defines one API scenario that could go through on its own.
 ```yaml
 scenario: quickStart
 description: Quick start with AppConfiguration ConfigurationStores
-shareScope: true
 steps:
   - step: Operations_CheckNameAvailability
     operationId: Operations_CheckNameAvailability
@@ -101,13 +100,6 @@ variables:
 - **description**
   - **Type:** Optional, String
   - Description for this API scenario.
-- **shareScope**
-  - **Type:** Optional, Boolean or String
-  - **Default:** true
-  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other scenarios.  If true or the same string value for different API scenario, they share the same scope, which means:
-    - These API scenarios will run under the same scope (e.g. ResourceGroup).
-    - **prepareSteps** and **cleanUpSteps** will run only once in the scope. The variables will be shared.
-  - By default all the API scenario in one definition file will be launched in the same scope.  If shareScope is false, the API scenarios will not share anything with others in the same file.
 - **variables**
   - **Type:** Optional, Map of Strings or Variables
   - See [Variables](./Variables.md)
