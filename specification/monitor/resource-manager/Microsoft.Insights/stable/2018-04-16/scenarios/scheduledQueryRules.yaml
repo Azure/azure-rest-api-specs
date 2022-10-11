@@ -7,7 +7,7 @@ variables:
 
 prepareSteps:
   - step: WorkSpace_Create
-    armTemplate: armtemplate/Create_OperationalInsightsWorkspaces.json
+    armTemplate: templates/Create_OperationalInsightsWorkspaces.json
 
 scenarios:
   - scenario: ScheduledQueryRule
@@ -42,7 +42,6 @@ scenarios:
               schedule:
                 frequencyInMinutes: 15
                 timeWindowInMinutes: 15
-
       - step: ScheduledQueryRules_ListBySubscription
         operationId: ScheduledQueryRules_ListBySubscription
       - step: ScheduledQueryRules_ListByResourceGroup

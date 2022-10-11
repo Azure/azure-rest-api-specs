@@ -6,11 +6,11 @@ variables:
 
 prepareSteps:
   - step: StorageAccount_Create
-    armTemplate: armtemplate/Create_StorageAccount.json
+    armTemplate: templates/Create_StorageAccount.json
 
 scenarios:
-  - scenario: ActionGroups
-    description: Microsoft.Insights/actionGroups
+  - scenario: LogProfiles
+    description: Microsoft.Insights/logprofiles
     variables:
       logProfileName: logprofilena
     steps:

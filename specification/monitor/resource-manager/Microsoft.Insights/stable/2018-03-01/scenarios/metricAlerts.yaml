@@ -9,11 +9,11 @@ variables:
 
 prepareSteps:
   - step: VirtualNetwork_Create
-    armTemplate: armtemplate/Create_NetworkAndSubnet.json
+    armTemplate: templates/Create_NetworkAndSubnet.json
   - step: NetworkInterface_Create
-    armTemplate: armtemplate/Create_NetworkInterface.json
+    armTemplate: templates/Create_NetworkInterface.json
   - step: VirtualMachine_Create
-    armTemplate: armtemplate/Create_VirtualMachine.json
+    armTemplate: templates/Create_VirtualMachine.json
 
 scenarios:
   - scenario: MetricAlert

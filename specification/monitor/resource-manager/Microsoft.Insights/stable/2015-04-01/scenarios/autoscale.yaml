@@ -10,11 +10,11 @@ variables:
 
 prepareSteps:
   - step: NetworkAndSubnet_Create
-    armTemplate: armtemplate/Create_NetworkAndSubnet.json
+    armTemplate: templates/Create_NetworkAndSubnet.json
   - step: NetworkInterface_Create
-    armTemplate: armtemplate/Create_NetworkInterface.json
+    armTemplate: templates/Create_NetworkInterface.json
   - step: VMSS_Create
-    armTemplate: armtemplate/Create_VMSS.json
+    armTemplate: templates/Create_VMSS.json
 
 scenarios:
   - scenario: AutoscaleSettings
@@ -42,11 +42,5 @@ scenarios:
         exampleFile: ..\examples\listAutoscaleSetting.json
       - step: AutoscaleSettings_Get
         exampleFile: ..\examples\getAutoscaleSetting.json
-
-      - step: EventCategories_List
-        exampleFile: ..\..\2015-04-01\examples\GetEventCategories.json
-      - step: Operations_List
-        exampleFile: ..\..\2015-04-01\examples\OperationList.json
-
       - step: AutoscaleSettings_Delete
         exampleFile: ..\examples\deleteAutoscaleSetting.json
