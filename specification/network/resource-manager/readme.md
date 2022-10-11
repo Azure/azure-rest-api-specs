@@ -31,7 +31,6 @@ openapi-type: arm
 tag: package-2022-05
 ```
 
-
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
