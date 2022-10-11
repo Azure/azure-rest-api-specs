@@ -286,13 +286,6 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "header",
-            "name": "format",
-            "description": "The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.",
-            "type": "string",
-            "x-ms-parameter-location": "method"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "The project data to import.",
@@ -300,6 +293,13 @@
             "schema": {
               "$ref": "#/definitions/TextAnalysisAuthoringExportedProject"
             }
+          },
+          {
+            "in": "header",
+            "name": "format",
+            "description": "The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -3172,7 +3172,7 @@
       "properties": {
         "confidenceThreshold": {
           "format": "float",
-          "description": "The threshold of the class with the highest confidence, at which the prediction will automatically be changed to \"None\".",
+          "description": "The threshold of the class with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive.",
           "type": "number"
         }
       },

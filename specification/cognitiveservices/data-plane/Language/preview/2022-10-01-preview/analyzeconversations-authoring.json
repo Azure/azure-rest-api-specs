@@ -2523,7 +2523,7 @@
       "type": "object",
       "properties": {
         "expressions": {
-          "description": "The regex expressions of the regex component.",
+          "description": "The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedEntityRegexExpression"
@@ -2533,7 +2533,7 @@
       "x-ms-client-name": "ExportedEntityRegex"
     },
     "ConversationalAnalysisAuthoringExportedEntityRegexExpression": {
-      "description": "Represents a regex expression inside a regex component.",
+      "description": "Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions",
       "type": "object",
       "properties": {
         "regexKey": {
@@ -3291,7 +3291,7 @@
       "properties": {
         "confidenceThreshold": {
           "format": "float",
-          "description": "The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\".",
+          "description": "The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive.",
           "type": "number"
         }
       },
