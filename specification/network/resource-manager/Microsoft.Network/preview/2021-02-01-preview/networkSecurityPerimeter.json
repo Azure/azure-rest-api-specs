@@ -1178,43 +1178,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "NspLinkReferences"
-        ],
-        "operationId": "NspLinkReferences_CreateOrUpdate",
-        "description": "Updates a NSP linkReference.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NspLinkReference"
-            },
-            "description": "Parameters that hold the NspLinkReference resource to be created/updated."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated - Existing NSP linkReference is updated. Returns the resource.",
-            "schema": {
-              "$ref": "#/definitions/NspLinkReference"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReferencesPut": {
-            "$ref": "./examples/NspLinkReferencePut.json"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "NspLinkReferences"
@@ -1858,15 +1821,7 @@
         },
         "autoApprovedRemotePerimeterId": {
           "type": "string",
-          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. Used when the NSP admin have access to approve connections on the remote NSP resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "manualApprovedRemotePerimeterId": {
-          "type": "string",
-          "description": "Perimeter ARM Id for the remote NSP with which the link gets created. Used when the NSP admin does not have access to approve connections on the remote NSP resource.",
+          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. Used when the NSP admin have access on the remote NSP resource.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2060,11 +2015,12 @@
         },
         "description": {
           "type": "string",
-          "description": "A message can be send to the remote NSP link admin with the connection response. Restricted to 140 chars."
+          "readOnly": true,
+          "description": "A message sent by the remote NSP link admin for connection request. In case of Auto-approved flow, it is default to 'Auto Approved'."
         },
         "status": {
           "type": "string",
-          "description": "The NSP linkReference state.",
+          "description": "The NSP linkReference state. It cannot be changed if link is created in auto-approval mode.",
           "enum": [
             "Approved",
             "Pending",
@@ -2159,6 +2115,14 @@
       "in": "query",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterProfileParameter": {
+      "name": "networkSecurityPerimeterProfile",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network security perimeter profile.",
       "x-ms-parameter-location": "method"
     },
     "LocationParameter": {
