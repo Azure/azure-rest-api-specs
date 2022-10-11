@@ -4,7 +4,7 @@ These settings apply only when `--tag=package-2022-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-01-preview'
 test-resources:
-  - Microsoft.ServiceBus/preview/2022-01-01-preview/scenarios/disasterrecoveryconfigs.yaml
+  - Microsoft.ServiceBus/preview/2022-01-01-preview/scenarios/disasterRecoveryConfigs.yaml
   - Microsoft.ServiceBus/preview/2022-01-01-preview/scenarios/migrationconfigs.yaml
   - Microsoft.ServiceBus/preview/2022-01-01-preview/scenarios/namespaces.yaml
   - Microsoft.ServiceBus/preview/2022-01-01-preview/scenarios/queues.yaml
