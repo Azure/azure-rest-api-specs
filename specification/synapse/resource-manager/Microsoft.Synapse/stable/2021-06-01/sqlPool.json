@@ -134,6 +134,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a SQL Analytics pool": {
             "$ref": "./examples/UpdateSqlPool.json"
@@ -189,7 +190,8 @@
             "description": "Accepted"
           },
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "default": {
             "schema": {
@@ -246,13 +248,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
@@ -368,11 +370,14 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -430,11 +435,14 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -548,7 +556,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -613,7 +622,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -679,13 +689,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
@@ -700,6 +710,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get the result of an operation on a SQL Analytics pool": {
             "$ref": "./examples/GetLocationHeaderResultWithSqlPool.json"
@@ -1463,7 +1474,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -1545,7 +1556,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -5343,7 +5354,11 @@
         "collation": {
           "type": "string",
           "description": "Collation mode",
-          "default": ""
+          "default": "",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sourceDatabaseId": {
           "type": "string",
@@ -5369,7 +5384,11 @@
         "restorePointInTime": {
           "type": "string",
           "description": "Snapshot time to restore",
-          "format": "date-time"
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -5432,6 +5451,7 @@
         "properties": {
           "title": "Metadata Sync Config properties",
           "description": "Metadata Sync Config properties",
+          "type": "object",
           "properties": {
             "enabled": {
               "type": "boolean",
@@ -5448,6 +5468,7 @@
       }
     },
     "GeoBackupPolicyProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -5473,6 +5494,7 @@
       "description": "The properties of the geo backup policy."
     },
     "GeoBackupPolicy": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GeoBackupPolicyProperties",
@@ -5501,6 +5523,7 @@
       "description": "A database geo backup policy."
     },
     "GeoBackupPolicyListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5513,6 +5536,7 @@
       "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
+      "type": "object",
       "properties": {
         "aggregationFunction": {
           "description": "The function that is used to aggregate each query's metrics.",
@@ -5590,12 +5614,14 @@
             "$ref": "#/definitions/QueryStatistic"
           },
           "description": "The list of queries.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryStatistic": {
+      "type": "object",
       "properties": {
         "queryId": {
           "description": "The id of the query",
@@ -5608,12 +5634,14 @@
             "$ref": "#/definitions/QueryInterval"
           },
           "description": "The list of query intervals.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryInterval": {
+      "type": "object",
       "properties": {
         "intervalStartTime": {
           "description": "The start time of the measurement interval (ISO8601 format).",
@@ -5633,12 +5661,14 @@
             "$ref": "#/definitions/QueryMetric"
           },
           "description": "The list of query metrics during this interval.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryMetric": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the metric",
@@ -5674,13 +5704,15 @@
       "description": "A database query."
     },
     "TopQueriesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TopQueries"
           },
-          "description": "The list of top queries."
+          "description": "The list of top queries.",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5793,6 +5825,7 @@
       }
     },
     "ReplicationLinkProperties": {
+      "type": "object",
       "properties": {
         "isTerminationAllowed": {
           "readOnly": true,
@@ -5880,6 +5913,7 @@
       "description": "Represents the properties of a Sql pool replication link."
     },
     "ReplicationLink": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -5905,6 +5939,7 @@
       "description": "Represents a Sql pool replication link."
     },
     "ReplicationLinkListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5934,7 +5969,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "minDurationInMinutes": {
           "format": "int32",
@@ -5986,7 +6022,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6038,6 +6075,7 @@
       }
     },
     "TransparentDataEncryptionProperties": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -6054,6 +6092,7 @@
       "description": "Represents the properties of a database transparent data encryption."
     },
     "TransparentDataEncryption": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -6301,6 +6340,7 @@
       }
     },
     "SqlPoolUsage": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -6344,13 +6384,15 @@
       "description": "The Sql pool usages."
     },
     "SqlPoolUsageListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolUsage"
           },
-          "description": "The list of usages for the Sql pool."
+          "description": "The list of usages for the Sql pool.",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
@@ -6847,7 +6889,8 @@
           "items": {
             "$ref": "#/definitions/VulnerabilityAssessmentScanError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "storageContainerPath": {
           "description": "The scan results storage container path.",
@@ -6903,14 +6946,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators.",
@@ -6984,7 +7035,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentRuleBaselineItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7217,6 +7269,7 @@
       }
     },
     "DataMaskingPolicyProperties": {
+      "type": "object",
       "properties": {
         "dataMaskingState": {
           "type": "string",
@@ -7256,6 +7309,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7382,6 +7436,7 @@
       }
     },
     "DataMaskingRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7407,6 +7462,7 @@
       "description": "Represents a Sql pool data masking rule."
     },
     "DataMaskingRuleProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -7487,6 +7543,7 @@
       "description": "The properties of a Sql pool data masking rule."
     },
     "DataMaskingRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
