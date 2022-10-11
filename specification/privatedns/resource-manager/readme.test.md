@@ -4,5 +4,5 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 test-resources:
-  - Microsoft.Network/stable/2020-06-01/scenarios/basic.yaml
+  - Microsoft.Network/stable/2020-06-01/scenarios/privatedns.yaml
 ```
