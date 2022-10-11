@@ -26,15 +26,31 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-06
+tag: package-preview-2023-09
 ```
 
 
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.App/preview/2023-09-12/AuthConfigs.json
+  - Microsoft.App/preview/2023-09-12/CommonDefinitions.json
+  - Microsoft.App/preview/2023-09-12/ContainerApps.json
+  - Microsoft.App/preview/2023-09-12/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-09-12/DaprComponents.json
+  - Microsoft.App/preview/2023-09-12/Global.json
+  - Microsoft.App/preview/2023-09-12/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-09-12/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-09-12/SourceControls.json
+```
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-06'
+``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.App/preview/2022-06-01-preview/AuthConfigs.json
   - Microsoft.App/preview/2022-06-01-preview/CommonDefinitions.json
