@@ -172,7 +172,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/IpFirewallRuleInfo"
+              "$ref": "#/definitions/IpAllFirewallRuleInfo"
             },
             "description": "OK"
           },
@@ -319,6 +319,22 @@
   },
   "definitions": {
     "IpFirewallRuleInfo": {
+      "description": "IP firewall rule",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IpFirewallRuleProperties",
+          "description": "IP firewall rule properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IpAllFirewallRuleInfo": {
       "description": "IP firewall rule",
       "type": "object",
       "allOf": [
