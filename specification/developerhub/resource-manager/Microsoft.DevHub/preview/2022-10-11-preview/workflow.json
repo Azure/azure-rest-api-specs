@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-11-preview",
+    "version": "2022-09-16-preview",
     "title": "DeveloperHubServiceClient",
     "description": "The AKS Developer Hub Service Client"
   },
@@ -580,6 +580,9 @@
         },
         "authStatus": {
           "$ref": "#/definitions/AuthorizationStatus"
+        },
+        "artifactGenerationProperties": {
+          "$ref": "#/definitions/ArtifactGenerationProperties"
         }
       }
     },
@@ -627,7 +630,7 @@
             "description": "Pull Request merged into repository."
           },
           {
-            "value": "removed",
+            "value": "merged",
             "description": "Workflow no longer found within repository."
           }
         ]
@@ -661,6 +664,46 @@
           },
           "title": "Manifest override values.",
           "description": "Manifest override values."
+        }
+      }
+    },
+    "ArtifactGenerationProperties": {
+      "type": "object",
+      "properties": {
+        "generationLanguage": {
+          "$ref": "#/definitions/GenerationLanguage"
+        },
+        "languageVersion": {
+          "type": "string",
+          "description": "The version of the language image used for execution in the generated dockerfile."
+        },
+        "builderVersion": {
+          "type": "string",
+          "description": "The version of the language image used for building the code in the generated dockerfile."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port the application is exposed on."
+        },
+        "appName": {
+          "type": "string",
+          "description": "The name of the app."
+        },
+        "enableDockerfileGeneration": {
+          "type": "boolean",
+          "description": "Whether to enable generation of Dockerfile."
+        },
+        "enableManifestGeneration": {
+          "type": "boolean",
+          "description": "Whether to enable generation of deployment and ingress manifests."
+        },
+        "dockerfileOutputDirectory": {
+          "type": "string",
+          "description": "The directory to output the generated Dockerfile to."
+        },
+        "manifestOutputDirectory": {
+          "type": "string",
+          "description": "The directory to output the generated manifests to."
         }
       }
     },
@@ -713,6 +756,83 @@
         ]
       },
       "description": "Determines the authorization status of requests."
+    },
+    "GenerationLanguage": {
+      "type": "string",
+      "enum": [
+        "clojure",
+        "csharp",
+        "erlang",
+        "go",
+        "gomodule",
+        "gradle",
+        "java",
+        "javascript",
+        "php",
+        "python",
+        "ruby",
+        "rust",
+        "swift"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "clojure",
+            "description": "clojure language"
+          },
+          {
+            "value": "csharp",
+            "description": "csharp language"
+          },
+          {
+            "value": "erlang",
+            "description": "erlang language"
+          },
+          {
+            "value": "go",
+            "description": "go language"
+          },
+          {
+            "value": "gomodule",
+            "description": "gomodule language"
+          },
+          {
+            "value": "gradle",
+            "description": "gradle language"
+          },
+          {
+            "value": "java",
+            "description": "java language"
+          },
+          {
+            "value": "javascript",
+            "description": "javascript language"
+          },
+          {
+            "value": "php",
+            "description": "php language"
+          },
+          {
+            "value": "python",
+            "description": "python language"
+          },
+          {
+            "value": "ruby",
+            "description": "ruby language"
+          },
+          {
+            "value": "rust",
+            "description": "rust language"
+          },
+          {
+            "value": "swift",
+            "description": "swift language"
+          }
+        ]
+      },
+      "description": "The programming language used."
     },
     "WorkflowRun": {
       "type": "object",
