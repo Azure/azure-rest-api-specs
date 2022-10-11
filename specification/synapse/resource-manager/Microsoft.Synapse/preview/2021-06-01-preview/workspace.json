@@ -915,10 +915,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-              }
+              "$ref": "#/definitions/TrustedServiceByPassConfigurationList"
             },
             "description": "OK"
           },
@@ -1736,6 +1733,18 @@
           },
           "x-ms-client-flatten": true
         }
+      }
+    },
+    "TrustedServiceByPassConfigurationList": {
+      "type": "object",
+      "title": "Trusted Service By Pass Configuration properties",
+      "description": "Trusted Service By Pass Configuration",
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+        },
+        "description": "The list of Sql pool data masking rules."
       }
     },
     "CheckDefaultStorageAccountStatusProperties": {
