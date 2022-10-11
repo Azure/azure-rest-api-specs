@@ -464,7 +464,9 @@
     },
     "/tcbbaselines/{attestationType}": {
       "get": {
-        "tags": ["TcbBaseline"],
+        "tags": [
+          "TcbBaseline"
+        ],
         "summary": "Retrieves the current set Tcb baselines or all available Tcb baselines for an attestation type.",
         "operationId": "TcbBaselines_Get",
         "parameters": [
@@ -475,7 +477,12 @@
             "$ref": "#/parameters/AttestationType"
           },
           {
-            "$ref": "#/parameters/ProvideCurrentTcbInPolicy"
+            "name": "provideCurrentTcbInPolicy",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method",
+            "description": "If set to true, return the current tcb baseline set in attestation policy, otherwise return the full set of supported baselines"
           }
         ],
         "responses": {
@@ -721,10 +728,25 @@
     },
     "TcbBaseline": {
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "TEE specific Tcb baseline used in attestation, and baseline details including baseline identifier, release date and minimum required software version"
+      "description": "TEE specific Tcb baseline used in attestation, and baseline details including baseline identifier, release date and minimum required software version",
+      "properties": {
+        "tcbEvaluationDataNumber": {
+          "description": "A monotonically increasing sequence number changed when Intel updates the content of the TCB evaluation data set. SGX TEE specific property",
+          "type": "string"
+        },
+        "tcbReleaseDate": {
+          "description": "Date and time when the Tcb is released. SGX TEE specific property",
+          "type": "string"
+        },
+        "minimumPswLinuxVersion": {
+          "description": "Minimum Linux PSW version required to support the corresponding Tcb baseline. SGX TEE specific property",
+          "type": "string"
+        },
+        "minimumPswWindowsVersion": {
+          "description": "Minimum Windows PSW version required to support the corresponding Tcb baseline. SGX TEE specific property",
+          "type": "string"
+        }
+      }
     },
     "TcbBaselineResult": {
       "type": "object",
@@ -1140,13 +1162,6 @@
       "required": true,
       "type": "string",
       "description": "Client API version. Current version is 2022-09-01-preview"
-    },
-    "ProvideCurrentTcbInPolicy": {
-      "name": "provideCurrentTcbInPolicy",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Specifies the Tcb baseline is current baseline set in attestation policy if set to true. Default is false"
     },
     "AttestationType": {
       "description": "Specifies the trusted execution environment to be used to validate the evidence",
