@@ -284,22 +284,6 @@ input-file:
 
 ---
 
-## Suppression
-
-``` yaml
-directive:
-  - suppress: TrackedResourceGetOperation
-    from: vaults.json
-    where: $.definitions.RecoveryServicesTrackedResource
-    reason: GET, PUT and PATCH operations are available on "Vault" type which inherits the RecoveryServicesTrackedResource type, hence these errors are false alarms
-  - suppress: TrackedResourcePatchOperation
-    from: vaults.json
-    where: $.definitions.RecoveryServicesTrackedResource
-    reason: GET, PUT and PATCH operations are available on "Vault" type which inherits the RecoveryServicesTrackedResource type, hence these errors are false alarms
-```
-
----
-
 # Code Generation
 
 ## Swagger to SDK
