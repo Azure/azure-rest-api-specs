@@ -40,22 +40,23 @@ interface LedgerEntries {
   A collection id may optionally be specified. Only entries in the specified (or
   default) collection will be returned.
   """)
-  listLedgerEntries is Azure.Core.Foundations.ResourceList<
+  listLedgerEntries is Azure.Core.ResourceList<
     LedgerEntry,
     {
-      @doc("The collection id.")
-      @query
-      collectionId: string;
+      parameters: {
+        @doc("The collection id.")
+        @query
+        collectionId: string;
 
-      @doc("Specify the first transaction ID in a range.")
-      @query
-      fromTransactionId: string;
+        @doc("Specify the first transaction ID in a range.")
+        @query
+        fromTransactionId: string;
 
-      @doc("Specify the last transaction ID in a range.")
-      @query
-      toTransactionId: string;
-    },
-    PagedLedgerEntries
+        @doc("Specify the last transaction ID in a range.")
+        @query
+        toTransactionId: string;
+      }
+    }
   >;
   
   @summary("Writes a ledger entry.")
