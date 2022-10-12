@@ -42,6 +42,7 @@ input-file:
   - Microsoft.KeyVault/preview/7.4-preview.1/rbac.json
   - Microsoft.KeyVault/preview/7.4-preview.1/secrets.json
   - Microsoft.KeyVault/preview/7.4-preview.1/securitydomain.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/settings.json
   - Microsoft.KeyVault/preview/7.4-preview.1/storage.json
 ```
 
