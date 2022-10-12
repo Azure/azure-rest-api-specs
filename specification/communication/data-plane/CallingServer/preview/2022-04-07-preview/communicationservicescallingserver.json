@@ -2,8 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-04-07-preview",
-    "title": "Azure Communication Service ServerCalling APIs",
-    "description": "Azure Communication Service ServerCalling APIs"
+    "title": "Azure Communication Service ServerCalling APIs"
   },
   "schemes": [
     "https"
@@ -689,7 +688,7 @@
         "operationId": "Content_Recording",
         "parameters": [
           {
-            "name": "startCallRecordingRequest",
+            "name": "startCallRecording",
             "in": "body",
             "description": "The request body of start call recording request.",
             "required": true,
@@ -875,8 +874,8 @@
           "$ref": "#/definitions/CallSource",
           "description": "The source of the call."
         },
-        "subject": {
-          "description": "The subject.",
+        "operationContext": {
+          "description": "A customer set value used to track the answering of a call.",
           "type": "string"
         },
         "callbackUri": {
@@ -1097,10 +1096,6 @@
         },
         "callConnectionState": {
           "$ref": "#/definitions/CallConnectionStateModel"
-        },
-        "subject": {
-          "description": "The subject.",
-          "type": "string"
         },
         "callbackUri": {
           "description": "The callback URI.",
@@ -1742,6 +1737,10 @@
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers to set the context for creating a new call. This property will be null for answering a call.",
+          "type": "string"
         }
       }
     },
@@ -1758,6 +1757,10 @@
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers to set the context for creating a new call. This property will be null for answering a call.",
           "type": "string"
         }
       }
@@ -1917,6 +1920,27 @@
         }
       }
     },
+    "PlayCanceled": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
     "RecognitionType": {
       "description": "Determines the sub-type of the recognize operation.\r\nIn case of cancel operation the this field is not set and is returned empty",
       "enum": [
@@ -1994,6 +2018,27 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        }
+      }
+    },
+    "RecognizeCanceled": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
         }
       }
     },
