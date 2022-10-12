@@ -113,77 +113,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listImageComponentIds": {
-      "post": {
-        "operationId": "Catalogs_ListImageComponentIds",
-        "summary": "Retrieves a set of image identifiers with corresponding component identifiers.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "description": "Catalog name",
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "description": "ComponentIds for images request",
-            "schema": {
-              "$ref": "#/definitions/ListImageComponentIdsRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/SkipTokenParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response to the action call for list of component identifiers for the given image identifiers.",
-            "schema": {
-              "$ref": "#/definitions/AzureSpherePage_ImageComponent"
-            }
-          },
-          "default": {
-            "description": "An Azure Sphere Error",
-            "schema": {
-              "$ref": "#/definitions/AzureSphereErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "tags": [
-          "Catalogs"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Return the list of component identifiers for the provided image identifiers": {
-            "$ref": "./examples/PostListComponentIdsForImages.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/claimDevices": {
       "post": {
         "operationId": "Catalogs_ClaimDevices",
@@ -2853,72 +2782,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups": {
-      "get": {
-        "operationId": "DeviceGroups_ListByProducts",
-        "summary": "List all DeviceGroup by productName",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogParameter"
-          },
-          {
-            "$ref": "#/parameters/ProductParameter"
-          },
-          {
-            "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/SkipTokenParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              }
-            },
-            "description": "Typed response envelope for ARM operations.",
-            "schema": {
-              "$ref": "#/definitions/Page_DeviceGroup"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "tags": [
-          "DeviceGroups"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get device groups in a catalog": {
-            "$ref": "./examples/GetDeviceGroups.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images": {
       "get": {
         "operationId": "Images_ListByCatalogs",
@@ -3041,6 +2904,72 @@
         "x-ms-examples": {
           "Get deployments in a catalog": {
             "$ref": "./examples/GetDeployments.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups": {
+      "get": {
+        "operationId": "DeviceGroups_ListByProducts",
+        "summary": "List all DeviceGroup by productName",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string"
+              }
+            },
+            "description": "Typed response envelope for ARM operations.",
+            "schema": {
+              "$ref": "#/definitions/Page_DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "tags": [
+          "DeviceGroups"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get device groups in a catalog": {
+            "$ref": "./examples/GetDeviceGroups.json"
           }
         }
       }
@@ -3191,23 +3120,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
         }
-      ]
-    },
-    "ListImageComponentIdsRequest": {
-      "type": "object",
-      "properties": {
-        "imageIdentifiers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-adl-name": "string[]",
-          "description": "List of image identifiers to be queried for component identifiers."
-        }
-      },
-      "description": "Request of the action to list component identifiers for a list of image identifiers.",
-      "required": [
-        "imageIdentifiers"
       ]
     },
     "ClaimDevicesRequest": {
@@ -3430,6 +3342,10 @@
         "image": {
           "type": "string",
           "description": "Base64 representation of the image"
+        },
+        "regionalDataBoundary": {
+          "$ref": "#/definitions/RegionalDataBoundary",
+          "description": "Regional data boundary for an image"
         }
       },
       "description": "Request to the action call to upload an image.",
@@ -3564,28 +3480,6 @@
         }
       },
       "description": "Response of the count for elements."
-    },
-    "AzureSpherePage_ImageComponent": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageComponent"
-          },
-          "description": "List of elements",
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "imageIdentifier"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "A link to be used in the next page call.",
-          "readOnly": true
-        }
-      },
-      "description": "Azure Sphere page of elements."
     },
     "ProvisioningState": {
       "type": "string",
@@ -3763,6 +3657,17 @@
         "modelAsString": true
       }
     },
+    "RegionalDataBoundary": {
+      "type": "string",
+      "enum": [
+        "None",
+        "EU"
+      ],
+      "x-ms-enum": {
+        "name": "RegionalDataBoundary",
+        "modelAsString": true
+      }
+    },
     "ProxyResource_ImageProperties": {
       "type": "object",
       "properties": {
@@ -3926,23 +3831,6 @@
       },
       "description": "Paged response"
     },
-    "Page_DeviceGroup": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceGroup"
-          },
-          "description": "The items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "description": "Paged response"
-    },
     "Page_Image": {
       "type": "object",
       "properties": {
@@ -3967,6 +3855,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Deployment"
+          },
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "Paged response"
+    },
+    "Page_DeviceGroup": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceGroup"
           },
           "description": "The items on this page"
         },
@@ -4010,22 +3915,6 @@
         }
       },
       "description": "Paged response"
-    },
-    "ImageComponent": {
-      "type": "object",
-      "properties": {
-        "imageIdentifier": {
-          "type": "string",
-          "description": "Image identifier",
-          "readOnly": true
-        },
-        "componentIdentifier": {
-          "type": "string",
-          "description": "Component identifier",
-          "readOnly": true
-        }
-      },
-      "description": "Image identifier with the component identifier."
     },
     "DeviceInsight": {
       "type": "object",
@@ -4123,7 +4012,11 @@
         },
         "allowCrashDumpsCollection": {
           "type": "boolean",
-          "description": "Flag to define if the user allows for crash dump collection"
+          "description": "Flag to define if the user allows for crash dump collection."
+        },
+        "regionalDataBoundary": {
+          "$ref": "#/definitions/RegionalDataBoundary",
+          "description": "Regional data boundary for the device group."
         },
         "currentDeployment": {
           "$ref": "#/definitions/Deployment",
@@ -4148,6 +4041,10 @@
         "uriMessage": {
           "type": "string",
           "description": "Message for uri of the image"
+        },
+        "regionalDataBoundary": {
+          "$ref": "#/definitions/RegionalDataBoundary",
+          "description": "Regional data boundary for an image"
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadataResponse",
