@@ -8,6 +8,9 @@ variables:
   namespaceName2:
     type: string
     prefix: sbnamespacetwomc
+  postMigrationName:
+    type: string
+    prefix: postmigrationna
 
 prepareSteps:
   - step: Namespace_Create
@@ -29,10 +32,6 @@ prepareSteps:
 scenarios:
   - scenario: MigrationConfig
     description: Microsoft.ServiceBus/namespaces/migrationConfigurations
-    variables:
-      postMigrationName:
-        type: string
-        prefix: postmigrationna
     steps:
     - step: MigrationConfig_Create
       exampleFile: ../examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json

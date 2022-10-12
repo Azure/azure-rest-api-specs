@@ -5,6 +5,18 @@ variables:
   namespaceName: 
     type: string
     prefix: sbnamespacet
+  topicName:
+    type: string
+    prefix: topicna
+  authorizationRuleName:
+    type: string
+    prefix: topicauthrule
+  subscriptionName:
+    type: string
+    prefix: subscriptionna
+  ruleName: 
+    type: string
+    prefix: rulena
 
 prepareSteps:
   - step: Namespace_Create
@@ -13,19 +25,6 @@ prepareSteps:
 scenarios:
   - scenario: Topic
     description: Microsoft.ServiceBus/namespaces/topics
-    variables:
-      topicName:
-        type: string
-        prefix: topicna
-      authorizationRuleName:
-        type: string
-        prefix: topicauthrule
-      subscriptionName:
-        type: string
-        prefix: subscriptionna
-      ruleName: 
-        type: string
-        prefix: rulena
     steps:
     - step: Topic_Create
       exampleFile: ../examples/Topics/SBTopicCreate.json

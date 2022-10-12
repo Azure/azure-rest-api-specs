@@ -5,6 +5,12 @@ variables:
   namespaceName: 
     type: string
     prefix: sbnamespaceq
+  queueName:
+    type: string
+    prefix: queuena
+  authorizationRuleName:
+    type: string
+    prefix: queueauthrule
 
 prepareSteps:
   - step: Namespace_Create
@@ -13,13 +19,6 @@ prepareSteps:
 scenarios:
   - scenario: Queue
     description: Microsoft.ServiceBus/namespaces/queues
-    variables:
-      queueName:
-        type: string
-        prefix: queuena
-      authorizationRuleName:
-        type: string
-        prefix: queueauthrule
     steps:
     - step: Queue_Create
       exampleFile: ../examples/Queues/SBQueueCreate.json

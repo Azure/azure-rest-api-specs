@@ -8,6 +8,12 @@ variables:
   primaryNamespaceName: 
     type: string
     prefix: sbnamespacetwodrc
+  alias:
+    type: string
+    prefix: sbalias
+  authorizationRuleName:
+    type: string
+    prefix: sbauthrule
 
 prepareSteps:
   - step: Namespace_Create
@@ -34,13 +40,6 @@ prepareSteps:
 scenarios:
   - scenario: DisasterRecoveryConfig
     description: Microsoft.ServiceBus/namespaces/disasterRecoveryConfigs
-    variables:
-      alias:
-        type: string
-        prefix: sbalias
-      authorizationRuleName:
-        type: string
-        prefix: sbauthrule
     steps:
     - step: Namespace_CreateAuthorizationRule
       exampleFile: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleCreate.json

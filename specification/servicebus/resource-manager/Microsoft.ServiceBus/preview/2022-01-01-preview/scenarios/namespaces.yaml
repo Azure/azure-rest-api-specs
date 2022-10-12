@@ -1,16 +1,17 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
+variables:
+  namespaceName: 
+    type: string
+    prefix: sbnamespace
+  authorizationRuleName:
+    type: string
+    prefix: sbauthrule
+
 scenarios:
   - scenario: Namespace
     description: Microsoft.ServiceBus/namespaces
-    variables:
-      namespaceName: 
-        type: string
-        prefix: sbnamespace
-      authorizationRuleName:
-        type: string
-        prefix: sbauthrule
     steps:
       - step: Namespace_CheckNameAvailability
         exampleFile: ../examples/NameSpaces/SBNameSpaceCheckNameAvailability.json
