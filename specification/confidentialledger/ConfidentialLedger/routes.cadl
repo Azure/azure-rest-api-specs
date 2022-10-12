@@ -5,7 +5,7 @@ import "./models.cadl";
 using Cadl.Rest;
 using Cadl.Http;
 
-namespace Azure.Security.ConfidentialLedger;
+namespace Azure.ConfidentialLedger;
 
 #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
 @summary("Gets the constitution used for governance.")
@@ -43,19 +43,17 @@ interface LedgerEntries {
   listLedgerEntries is Azure.Core.Foundations.ResourceList<
     LedgerEntry,
     {
-      parameters: {
-        @doc("The collection id.")
-        @query
-        collectionId: string;
-  
-        @doc("Specify the first transaction ID in a range.")
-        @query
-        fromTransactionId: string;
-  
-        @doc("Specify the last transaction ID in a range.")
-        @query
-        toTransactionId: string;
-      }
+      @doc("The collection id.")
+      @query
+      collectionId: string;
+
+      @doc("Specify the first transaction ID in a range.")
+      @query
+      fromTransactionId: string;
+
+      @doc("Specify the last transaction ID in a range.")
+      @query
+      toTransactionId: string;
     },
     PagedLedgerEntries
   >;
