@@ -1299,9 +1299,9 @@
           "x-ms-identifiers": [],
           "description": "Service endpoints for subnets in the cluster."
         },
-        "fasterZonalUpdates": {
-          "type": "boolean",
-          "description": "Indicates whether to use a maximum of 3 UD per zone instead of 5 for Cross Az Node types for faster deployments."
+        "zonalUpdateMode": {
+          "$ref": "#/definitions/ZonalUpdateMode",
+          "description": "Indicates the update mode for Cross Az clusters."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1547,6 +1547,28 @@
         }
       },
       "description": "VM Sizes properties."
+    },
+    "ZonalUpdateMode": {
+      "type": "string",
+      "description": "Indicates the update mode for Cross Az clusters.",
+      "enum": [
+        "Default",
+        "Fast"
+      ],
+      "x-ms-enum": {
+        "name": "ZonalUpdateMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Default",
+            "description": "The cluster will 5 upgrade domains for Cross Az Node types."
+          },
+          {
+            "value": "Fast",
+            "description": "The cluster will use a maximum of 3 upgrade domains per zone instead of 5 for Cross Az Node types for faster deployments."
+          }
+        ]
+      }
     },
     "AvailableOperationDisplay": {
       "type": "object",
