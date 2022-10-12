@@ -28,10 +28,9 @@ prepareSteps:
           adminUserEnabled: true
 
 scenarios:
-  - scenario: ContainerRegister_Build
-    description: Container Registry Build Test
+  - scenario: AgentPools
+    description: Microsoft.ContainerRegistry/registries/agentPools
     steps:
-    # Agent Pool
       - step: AgentPools_Create
         exampleFile: ..\examples\AgentPoolsCreate.json
       - step: AgentPools_List
@@ -42,8 +41,12 @@ scenarios:
         exampleFile: ..\examples\AgentPoolsUpdate.json
       - step: AgentPools_GetQueueStatus
         exampleFile: ..\examples\AgentPoolsGetQueueStatus.json
-      
-      # Task
+      - step: AgentPools_Delete
+        exampleFile: ..\examples\AgentPoolsDelete.json
+        
+  - scenario: Tasks
+    description: Microsoft.ContainerRegistry/registries/tasks
+    steps:
       - step: Tasks_Create
         exampleFile: ..\examples\TasksCreate.json
         requestUpdate:
@@ -115,5 +118,3 @@ scenarios:
         exampleFile: ..\examples\RunsUpdate.json
       - step: Tasks_Delete
         exampleFile: ..\examples\TasksDelete.json
-      - step: AgentPools_Delete
-        exampleFile: ..\examples\AgentPoolsDelete.json

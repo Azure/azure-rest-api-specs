@@ -24,18 +24,41 @@ variables:
     type: string
     prefix: importpipe
 
+prepareSteps:
+  - step: Registries_Create
+    exampleFile: ..\examples\RegistryCreate.json
+    requestUpdate:
+      - replace: /registry/sku/name
+        value: Premium
+  - step: ScopeMaps_Create
+    exampleFile: ..\examples\ScopeMapCreate.json
+    requestUpdate:
+      - replace: /scopeMapCreateParameters/properties/actions
+        value: [
+          "repositories/myrepository/content/write",
+          "repositories/myrepository/content/delete"
+        ]
+    outputVariables:
+      scopeMapId:
+        type: string
+        fromResponse: /id
+  - step: Tokens_Create
+    exampleFile: ..\examples\TokenCreate.json
+    requestUpdate:
+      - remove: /tokenCreateParameters/properties/credentials
+      - replace: /tokenCreateParameters/properties/scopeMapId
+        value: $(scopeMapId)
+    outputVariables:
+      tokenId:
+        type: string
+        fromResponse: /id
+
 scenarios:
   - scenario: ContainerRegister
     description: Microsoft.ContainerRegistry/registries
     steps:
-      # Registry
       - step: Registries_CheckNameAvailability
         exampleFile: ..\examples\RegistryCheckNameAvailable.json
-      - step: Registries_Create
-        exampleFile: ..\examples\RegistryCreate.json
-        requestUpdate:
-          - replace: /registry/sku/name
-            value: Premium
       - step: Registries_List
         exampleFile: ..\examples\RegistryList.json
       - step: Registries_Get
@@ -49,8 +72,17 @@ scenarios:
         requestUpdate:
           - replace: /registryUpdateParameters/sku/name
             value: Premium
+      - step: Registries_ListPrivateLinkResources
+        exampleFile: ..\examples\RegistryListPrivateLinkResources.json
+      - step: Registries_GetPrivateLinkResource
+        exampleFile: ..\examples\RegistryGetPrivateLinkResource.json
+        requestUpdate:
+          - replace: /groupName
+            value: registry
         
-      # Webhook
+  - scenario: Webhooks
+    description: Microsoft.ContainerRegistry/registries/webhooks
+    steps:
       - step: Webhooks_Create
         exampleFile: ..\examples\WebhookCreate.json
         requestUpdate:
@@ -70,33 +102,29 @@ scenarios:
         exampleFile: ..\examples\WebhookPing.json
       - step: Webhooks_ListEvents
         exampleFile: ..\examples\WebhookListEvents.json
+      - step: Webhooks_Delete
+        exampleFile: ..\examples\WebhookDelete.json
 
-      # Replication
+  - scenario: Replications
+    description: Microsoft.ContainerRegistry/registries/replications
+    steps:
       - step: Replications_Create
-        exampleFile: ..\examples\ReplicationCreate.json
-        requestUpdate:
-          - replace: /replication/location
-            value: westus2 # use other location
+        operationId: Replications_Create
+        parameters:
+          replication:
+            location: westus2
       - step: Replications_List
         exampleFile: ..\examples\ReplicationList.json
       - step: Replications_Get
         exampleFile: ..\examples\ReplicationGet.json
       - step: Replications_Update
         exampleFile: ..\examples\ReplicationUpdate.json
+      - step: Replications_Delete
+        exampleFile: ..\examples\ReplicationDelete.json
 
-      # # ScopeMaps
-      - step: ScopeMaps_Create
-        exampleFile: ..\examples\ScopeMapCreate.json
-        requestUpdate:
-          - replace: /scopeMapCreateParameters/properties/actions
-            value: [
-              "repositories/myrepository/content/write",
-              "repositories/myrepository/content/delete"
-            ]
-        outputVariables:
-          scopeMapId:
-            type: string
-            fromResponse: /id
+  - scenario: ScopeMaps
+    description: Microsoft.ContainerRegistry/registries/scopeMaps
+    steps:
       - step: ScopeMaps_List
         exampleFile: ..\examples\ScopeMapList.json
       - step: ScopeMaps_Get
@@ -110,17 +138,9 @@ scenarios:
               "repositories/myrepository/content/read"
             ]
 
-      # Token
-      - step: Tokens_Create
-        exampleFile: ..\examples\TokenCreate.json
-        requestUpdate:
-          - remove: /tokenCreateParameters/properties/credentials
-          - replace: /tokenCreateParameters/properties/scopeMapId
-            value: $(scopeMapId)
-        outputVariables:
-          tokenId:
-            type: string
-            fromResponse: /id
+  - scenario: Tokens
+    description: Microsoft.ContainerRegistry/registries/tokens
+    steps:
       - step: Tokens_List
         exampleFile: ..\examples\TokenList.json
       - step: Tokens_Get
@@ -132,7 +152,9 @@ scenarios:
           - replace: /tokenUpdateParameters/properties/scopeMapId
             value: $(scopeMapId)
       
-      # Credentials
+  - scenario: RegistryCredentials
+    description: Microsoft.ContainerRegistry/registries/generateCredentials
+    steps:
       - step: Registries_GenerateCredentials
         exampleFile: ..\examples\RegistryGenerateCredentials.json
         requestUpdate:
@@ -144,15 +166,21 @@ scenarios:
       - step: Registries_ListCredentials
         exampleFile: ..\examples\RegistryListCredentials.json
 
-      # ExportPipeline
+  - scenario: ExportPipelines
+    description: Microsoft.ContainerRegistry/registries/exportPipelines
+    steps:
       - step: ExportPipelines_Create
         exampleFile: ..\examples\ExportPipelineCreate.json
       - step: ExportPipelines_List
         exampleFile: ..\examples\ExportPipelineList.json
       - step: ExportPipelines_Get
         exampleFile: ..\examples\ExportPipelineGet.json
+      - step: ExportPipelines_Delete
+        exampleFile: ..\examples\ExportPipelineDelete.json
 
-      # ImportPipeline
+  - scenario: ImportPipelines
+    description: Microsoft.ContainerRegistry/registries/importPipelines
+    steps:
       - step: ImportPipelines_Create
         exampleFile: ..\examples\ImportPipelineCreate.json
         requestUpdate:
@@ -163,29 +191,19 @@ scenarios:
         exampleFile: ..\examples\ImportPipelineList.json
       - step: ImportPipelines_Get
         exampleFile: ..\examples\ImportPipelineGet.json
-
-      - step: Operations_List
-        exampleFile: ..\examples\OperationList.json
-      - step: Registries_ListPrivateLinkResources
-        exampleFile: ..\examples\RegistryListPrivateLinkResources.json
-      - step: Registries_GetPrivateLinkResource
-        exampleFile: ..\examples\RegistryGetPrivateLinkResource.json
-        requestUpdate:
-          - replace: /groupName
-            value: registry
-      
-      # Delete Resource
       - step: ImportPipelines_Delete
         exampleFile: ..\examples\ImportPipelineDelete.json
-      - step: ExportPipelines_Delete
-        exampleFile: ..\examples\ExportPipelineDelete.json
-      - step: Tokens_Delete
-        exampleFile: ..\examples\TokenDelete.json
-      - step: ScopeMaps_Delete
-        exampleFile: ..\examples\ScopeMapDelete.json
-      - step: Replications_Delete
-        exampleFile: ..\examples\ReplicationDelete.json
-      - step: Webhooks_Delete
-        exampleFile: ..\examples\WebhookDelete.json
-      - step: Registries_Delete
-        exampleFile: ..\examples\RegistryDelete.json
+        
+  - scenario: Operations
+    description: Microsoft.ContainerRegistry/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ..\examples\OperationList.json
+      
+cleanUpSteps:
+  - step: Tokens_Delete
+    exampleFile: ..\examples\TokenDelete.json
+  - step: ScopeMaps_Delete
+    exampleFile: ..\examples\ScopeMapDelete.json
+  - step: Registries_Delete
+    exampleFile: ..\examples\RegistryDelete.json
