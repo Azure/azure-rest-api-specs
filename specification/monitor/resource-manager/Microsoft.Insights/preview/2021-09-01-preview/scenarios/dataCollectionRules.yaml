@@ -11,6 +11,9 @@ variables:
     type: string
   azureClientSecret:
     type: string
+  dataCollectionRuleName:
+    type: string
+    prefix: datacollectionrulena
 
 prepareSteps:
   - step: WorkSpaces_Create
@@ -22,9 +25,6 @@ scenarios:
   - scenario: DataCollectionRule
     description: Microsoft.Insights/dataCollectionRules
     variables:
-      dataCollectionRuleName:
-        type: string
-        prefix: datacollectionrulena
       associationName: myAssociation
     steps:
       - step: DataCollectionRules_Create

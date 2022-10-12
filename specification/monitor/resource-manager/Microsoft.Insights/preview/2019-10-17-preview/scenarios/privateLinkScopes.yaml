@@ -1,13 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
+variables:
+  scopeName:
+    type: string
+    prefix: linkscopena
+
 scenarios:
   - scenario: PrivateLinkScope
     description: microsoft.insights/privateLinkScopes
-    variables:
-      scopeName:
-        type: string
-        prefix: linkscopena
     steps:
       - step: PrivateLinkScopes_Create
         operationId: PrivateLinkScopes_CreateOrUpdate

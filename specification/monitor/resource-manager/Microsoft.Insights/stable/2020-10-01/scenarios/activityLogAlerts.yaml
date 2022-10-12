@@ -1,13 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
+variables:
+  activityLogAlertName:
+    type: string
+    prefix: activitylogalertna
+
 scenarios:
   - scenario: ActivityLogAlert
     description: Microsoft.Insights/activityLogAlerts
-    variables:
-      activityLogAlertName:
-        type: string
-        prefix: activitylogalertna
     steps:
       - step: ActivityLogAlerts_Create
         operationId: ActivityLogAlerts_CreateOrUpdate

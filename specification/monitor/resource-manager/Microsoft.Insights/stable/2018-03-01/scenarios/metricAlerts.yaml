@@ -6,6 +6,9 @@ variables:
     type: string
   adminPassword:
     type: secureString
+  ruleName:
+    type: string
+    prefix: metricalertna
 
 prepareSteps:
   - step: VirtualNetwork_Create
@@ -18,10 +21,6 @@ prepareSteps:
 scenarios:
   - scenario: MetricAlert
     description: Microsoft.Insights/metricAlerts
-    variables:
-      ruleName:
-        type: string
-        prefix: metricalertna
     steps:
       - step: MetricAlerts_Create
         operationId: MetricAlerts_CreateOrUpdate

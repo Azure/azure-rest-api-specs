@@ -4,6 +4,9 @@ scope: ResourceGroup
 variables:
   location:
     type: string
+  ruleName:
+    type: string
+    prefix: schedulequeryrulena
 
 prepareSteps:
   - step: WorkSpace_Create
@@ -12,10 +15,6 @@ prepareSteps:
 scenarios:
   - scenario: ScheduledQueryRule
     description: Microsoft.Insights/scheduledQueryRules
-    variables:
-      ruleName:
-        type: string
-        prefix: schedulequeryrulena
     steps:
       - step: ScheduledQueryRules_Create
         operationId: ScheduledQueryRules_CreateOrUpdate
@@ -24,6 +23,7 @@ scenarios:
             location: $(location)
             properties:
               action: 
+                odata.type: Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction
                 severity: 1
                 trigger:
                   threshold: 3

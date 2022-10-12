@@ -1,13 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
 scope: ResourceGroup
 
+variables:
+  actionGroupName:
+    type: string
+    prefix: actiongroupna
+
 scenarios:
   - scenario: ActionGroups
     description: Microsoft.Insights/actionGroups
-    variables:
-      actionGroupName:
-        type: string
-        prefix: actiongroupna
     steps:
       - step: ActionGroups_Create
         operationId: ActionGroups_CreateOrUpdate

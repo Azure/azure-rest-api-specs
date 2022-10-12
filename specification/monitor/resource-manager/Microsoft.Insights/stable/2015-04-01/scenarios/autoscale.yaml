@@ -7,6 +7,9 @@ variables:
     value: eastus
   adminPassword:
     type: secureString
+  autoscaleSettingName:
+    type: string
+    prefix: autoscalesettingna
 
 prepareSteps:
   - step: NetworkAndSubnet_Create
@@ -19,10 +22,6 @@ prepareSteps:
 scenarios:
   - scenario: AutoscaleSettings
     description: Microsoft.Insights/autoscalesettings
-    variables:
-      autoscaleSettingName:
-        type: string
-        prefix: autoscalesettingna
     steps:
       - step: AutoscaleSettings_Create
         exampleFile: ..\examples\createOrUpdateAutoscaleSetting.json
@@ -44,3 +43,15 @@ scenarios:
         exampleFile: ..\examples\getAutoscaleSetting.json
       - step: AutoscaleSettings_Delete
         exampleFile: ..\examples\deleteAutoscaleSetting.json
+
+  - scenario: EventCategories
+    description: Microsoft.Insights/eventcategories
+    steps:
+      - step: EventCategories_List
+        exampleFile: ..\examples\GetEventCategories.json
+
+  - scenario: Operations
+    description: Microsoft.Insights/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ..\examples\OperationList.json

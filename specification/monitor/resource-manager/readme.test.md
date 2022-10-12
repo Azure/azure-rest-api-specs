@@ -13,6 +13,4 @@ test-resources:
   - Microsoft.Insights/stable/2020-10-01/scenarios/activityLogAlerts.yaml
   - Microsoft.Insights/stable/2022-06-01/scenarios/actionGroups.yaml
   - Microsoft.Insights/stable/2015-04-01/scenarios/autoscale.yaml
-  - Microsoft.Insights/stable/2015-04-01/scenarios/eventCategories.yaml
-  - Microsoft.Insights/stable/2015-04-01/scenarios/operations.yaml
 ```
