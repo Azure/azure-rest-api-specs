@@ -4,6 +4,6 @@ These settings apply only when `--tag=package-2022-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-02-preview'
 test-resources:
-  - Microsoft.ContainerRegistry/preview/2022-02-01-preview/scenarios/basic.yaml
-  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/scenarios/basic2.yaml
+  - Microsoft.ContainerRegistry/preview/2022-02-01-preview/scenarios/containerregistry.yaml
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/scenarios/containerregistry_build.yaml
 ```
