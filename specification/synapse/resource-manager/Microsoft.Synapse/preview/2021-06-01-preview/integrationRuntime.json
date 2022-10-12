@@ -1377,12 +1377,12 @@
         }
       ],
       "properties": {
-        "provisioningState": {
+        "state": {
           "description": "Integration runtime state, only valid for managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeState",
           "readOnly": true
         },
-        "state": {
+        "provisioningState": {
           "description": "Integration runtime state, only valid for managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeState",
           "readOnly": true
@@ -2281,15 +2281,7 @@
           "description": "OS Type, 1- Windows; 2- Linux",
           "readOnly": true,
           "type": "integer",
-          "format": "int32",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeOSTypeMode",
-            "modelAsString": true
-          }
+          "format": "int32"          
         },
         "targetFramework": {
           "description": "Target framework type, 0 - DotNetFramework ; 1 - DotNetCore ",
