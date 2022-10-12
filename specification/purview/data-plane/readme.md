@@ -121,6 +121,13 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 input-file:
 - Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
 ```
+
+``` yaml
+openapi-type: data-plane
+tag: package-2022-09-01-preview
+title: PurviewDataQualityClient
+```
+
 ### Tag: package-2022-09-01-preview
 
 These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
