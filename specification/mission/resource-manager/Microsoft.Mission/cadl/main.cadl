@@ -76,7 +76,7 @@ model enclaveCore{
 }
 
 @doc("Virtual Enclave properties")
-model virtualEnclaveProperties is resourceBaseProperties{
+model virtualEnclaveProperties{
   @doc("Virtual Enclave Resource Group Id.")
   enclaveResourcesGroupId?: string;
 
@@ -88,6 +88,10 @@ model virtualEnclaveProperties is resourceBaseProperties{
 
   @doc("Virtual Enclave Administrators Object Id.")
   enclaveAdministratorsObjectId?: string;
+
+  @doc("Provisioning State.")
+  @visibility("read")
+  provisioningState?: provisioningState;
 }
 
 @knownValues(provisioningStateEnum)
@@ -107,16 +111,8 @@ enum provisioningStateEnum {
   Deleted,
 }
 
-@doc("Resource Properties")
-model resourceBaseProperties{
-
-  @doc("Provisioning State.")
-  @visibility("read")
-  provisioningState?: provisioningState;
-}
-
 @doc("Mission Resource")
-model missionResource is TrackedResource<resourceBaseProperties> {
+model missionResource is TrackedResource<virtualEnclaveProperties> {
   @key("virtualEnclave")
   @segment("virtualEnclaves")
   @path

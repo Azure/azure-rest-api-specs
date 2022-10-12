@@ -485,8 +485,12 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/resourceBaseProperties",
+          "$ref": "#/definitions/virtualEnclaveProperties",
           "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-client-flatten": true
         }
       },
@@ -579,16 +583,32 @@
         "modelAsString": true
       }
     },
-    "resourceBaseProperties": {
+    "virtualEnclaveProperties": {
       "type": "object",
       "properties": {
+        "enclaveResourcesGroupId": {
+          "type": "string",
+          "description": "Virtual Enclave Resource Group Id."
+        },
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/enclaveVirtualNetwork",
+          "description": "Virtual Enclave Virtual Network."
+        },
+        "enclaveCore": {
+          "$ref": "#/definitions/enclaveCore",
+          "description": "Virtual Enclave Core."
+        },
+        "enclaveAdministratorsObjectId": {
+          "type": "string",
+          "description": "Virtual Enclave Administrators Object Id."
+        },
         "provisioningState": {
           "$ref": "#/definitions/provisioningState",
           "description": "Provisioning State.",
           "readOnly": true
         }
       },
-      "description": "Resource Properties"
+      "description": "Virtual Enclave properties"
     }
   },
   "parameters": {
