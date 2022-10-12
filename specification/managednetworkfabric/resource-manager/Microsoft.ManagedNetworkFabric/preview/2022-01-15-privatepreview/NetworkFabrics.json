@@ -1068,7 +1068,7 @@
           "type": "object",
           "description": "Configuration used to setup CE-PE connectivity.",
           "properties": {
-            "mpBgpConfiguration": {
+            "layer3Configuration": {
               "type": "object",
               "description": "Multi Protocol Border Gateway Protocol configuration. This BGP configuration enables exchange of routes using mp-BGP for multiple isolation domains with single peering.",
               "allOf": [
@@ -1544,6 +1544,9 @@
             },
             {
               "$ref": "#/definitions/VpnPatchParameters"
+            },
+            {
+              "$ref": "#/definitions/NetworkFabricPatchableProperties"
             }
           ]
         },
