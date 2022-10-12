@@ -94,7 +94,19 @@
                 "option": "Local"
               },
               "encryptionSettings": {
-                "enabled": "false"
+                "enabled": "true",
+                "diskEncryptionKey": {
+                  "sourceVault": {
+                    "id": "/subscriptions/8d10da13-8125-4ba9-a717-bf7490507b3d/resourceGroups/macikgo-test-may-23/providers/Microsoft.KeyVault/vaults/test-kv"
+                  },
+                  "secretUrl": "https://test-disk.vault.azure.net/secrets/F825A67F-42B8-4F01-8BB5-A99223A9FD05/8e820e1f85be483ab51c028aa710acfc"
+                },
+                "keyEncryptionKey": {
+                  "sourceVault": {
+                    "id": "/subscriptions/8d10da13-8125-4ba9-a717-bf7490507b3d/resourceGroups/macikgo-test-may-23/providers/Microsoft.KeyVault/vaults/test-kv"
+                  },
+                  "keyUrl": "https://test-key.vault.azure.net/secrets/F825A67F-42B8-4F01-8BB5-A99223A9FD05/8e820e1f85be483ab51c028aa710acfc"
+                }
               },
               "image": {
                 "uri": ""
@@ -134,7 +146,10 @@
           "vmId": "02aab8a4-74ef-476e-8182-f6d2ba4166a6",
           "vmScaleSetName": "crpteste9vflji9",
           "vmSize": "Standard_A3",
-          "zone": ""
+          "zone": "",
+          "additionalCapabilities": {
+            "hibernationEnabled": "true"
+          }
         }
       }
     }

@@ -772,6 +772,46 @@
         "enabled": {
           "type": "string",
           "description": "This specifies whether or not disk encryption is enabled on the VM."
+        },
+        "diskEncryptionKey": {
+          "type": "object",
+          "description": "This is the key used for encrypting the disk.",
+          "properties": {
+              "sourceVault": {
+                  "type": "object",
+                  "description": "This specifies keyvault used to store the encryption key.",
+                  "properties": {
+                      "id": {
+                          "type": "string",
+                          "description": "This specifies the resource ID of the keyvault."
+                      }
+                  }
+              }, 
+              "secretUrl": {
+                  "type": "string",
+                  "description": "This specifies the secret Url of the key stored in keyvault."
+              }
+          }
+        },
+        "keyEncryptionKey": {
+          "type": "object",
+          "description": "This is the key used for encrypting the disk encryption key.",
+          "properties": {
+              "sourceVault": {
+                  "type": "object",
+                  "description": "This specifies keyvault used to store the encryption key.",
+                  "properties": {
+                      "id": {
+                          "type": "string",
+                          "description": "This specifies the resource ID of the keyvault."
+                      }
+                  }
+              }, 
+              "keyUrl": {
+                  "type": "string",
+                  "description": "This specifies the secret Url of the key stored in keyvault."
+              }
+          }
         }
       }
     },
