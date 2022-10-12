@@ -1,0 +1,27 @@
+{
+  "name": "Microsoft.AutonomousDevelopmentPlatform",
+  "author": "adp_iot_all@microsoft.com",
+  "description": "Microsoft.AutonomousDevelopmentPlatform API definitions",
+  "type": "module",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "npm run build-internal && npm run build-public",
+    "build-internal": "pwsh ./BuildInternal.ps1",
+    "build-public": "pwsh ./BuildPublic.ps1",
+    "format": "npx cadl format *.cadl",
+    "refreshVSToken": "vsts-npm-auth -config .npmrc"
+  },
+  "dependencies": {
+    "@cadl-lang/openapi": "~0.12.0",
+    "@cadl-lang/rest": "~0.17.0",
+    "@azure-tools/cadl-autorest": "~0.20.0",
+    "@azure-tools/cadl-azure-core": "~0.7.0",
+    "@azure-tools/cadl-azure-resource-manager": "~0.10.0",
+    "@cadl-lang/versioning": "0.8.0"
+  },
+  "devDependencies": {
+    "@cadl-lang/compiler": "~0.35.0"
+  }
+}

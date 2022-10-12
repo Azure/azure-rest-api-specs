@@ -108,6 +108,11 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
+``` yaml
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)

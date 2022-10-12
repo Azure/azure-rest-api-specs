@@ -3,12 +3,17 @@
   "info": {
     "title": "adp",
     "version": "2022-09-01-preview",
-    "description": "Microsoft.AutonomousDevelopmentPlatform resource management API."
+    "description": "Microsoft.AutonomousDevelopmentPlatform resource management API.",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
+  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
@@ -25,9 +30,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -54,20 +59,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -86,14 +91,14 @@
         "tags": [
           "checkNameAvailability"
         ],
-        "operationId": "checkNameAvailability_post",
+        "operationId": "CheckNameAvailability_Post",
         "description": "Checks the resource name is available.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -113,9 +118,9 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -135,10 +140,10 @@
         "description": "List Workspace resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -149,9 +154,9 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -174,13 +179,13 @@
         "description": "List Workspace resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -191,9 +196,9 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -216,13 +221,13 @@
         "description": "Get a Workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/Workspace.workspaceName"
@@ -236,9 +241,9 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -256,13 +261,13 @@
         "description": "Create a Workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/Workspace.workspaceName"
@@ -286,14 +291,21 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -315,13 +327,13 @@
         "description": "Update a Workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/Workspace.workspaceName"
@@ -344,9 +356,9 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "202": {
@@ -371,13 +383,13 @@
         "description": "Delete a Workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/Workspace.workspaceName"
@@ -388,15 +400,22 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted."
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "204": {
             "description": "Resource deleted successfully."
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -427,95 +446,15 @@
         "modelAsString": true
       }
     },
-    "Azure.ResourceManager.ManagedIdentityProperties": {
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The Active Directory tenant id of the principal.",
-          "readOnly": true
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier of this principal.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.UserAssignedIdentity"
-          },
-          "description": "The identities assigned to this resource by the user."
-        }
-      },
-      "description": "The properties of the managed service identities assigned to this resource.",
-      "required": [
-        "type"
-      ]
-    },
-    "Azure.ResourceManager.ManagedIdentityType": {
-      "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned"
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned,UserAssigned"
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.ManagedServiceIdentity": {
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "description": "The managed service identities envelope."
-    },
-    "Azure.ResourceManager.UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      },
-      "description": "A managed identity assigned by the user.",
-      "required": [
-        "clientId",
-        "principalId"
-      ]
     },
     "AzureSku": {
       "type": "object",
@@ -670,16 +609,6 @@
         "userAssignedIdentityResourceId"
       ]
     },
-    "ManagedIdentity": {
-      "type": "object",
-      "properties": {},
-      "description": "The managed identity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties"
-        }
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning State",
@@ -775,31 +704,15 @@
           ],
           "x-ms-client-flatten": true
         },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System metadata for this resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "pattern": "^[a-z0-9][-a-z0-9]{0,45}$",
-          "maxLength": 46,
-          "readOnly": false,
-          "x-ms-parameter-location": "method"
-        },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "description": "Microsoft.AutonomousDevelopmentPlatform Workspace",
-      "required": [
-        "properties",
-        "name"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -812,11 +725,12 @@
             "$ref": "#/definitions/Workspace"
           },
           "x-cadl-name": "Workspace[]",
-          "description": "The items on this page"
+          "description": "The Workspace items on this page"
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<Workspace>"
         }
       },
       "description": "The response of a Workspace list operation.",
@@ -846,8 +760,8 @@
         "storageAccountCount": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
-          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
+          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5.",
+          "minimum": 1
         },
         "dataCatalog": {
           "$ref": "#/definitions/DataCatalog",
@@ -878,6 +792,7 @@
           "additionalProperties": {
             "type": "string"
           },
+          "x-cadl-name": "Record<string>",
           "description": "Resource tags."
         },
         "properties": {
@@ -913,8 +828,8 @@
         "storageAccountCount": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
-          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5."
+          "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5.",
+          "minimum": 1
         },
         "dataCatalog": {
           "$ref": "#/definitions/DataCatalog",
@@ -933,6 +848,7 @@
       "name": "workspaceName",
       "in": "path",
       "required": true,
+      "description": "Workspace Name",
       "pattern": "^[a-z0-9][-a-z0-9]{0,45}$",
       "maxLength": 46,
       "type": "string",
