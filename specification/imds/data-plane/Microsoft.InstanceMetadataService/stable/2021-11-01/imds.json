@@ -387,7 +387,17 @@
         "zone": {
           "type": "string",
           "description": "This is the availability zone of the VM."
-        }
+        },
+        "additionalCapabilities": {
+          "type": "object",
+          "description": "These are additional capabilities defined for VM.",
+          "properties": {
+              "hibernationEnabled": {
+                  "type": "string",
+                  "description": "This specifies if hibernation is enabled for VM."
+              }
+          }
+      }
       },
       "description": "Compute Metadata"
     },
