@@ -1208,6 +1208,127 @@
         }
       },
       "description": "List of SNAT IP Prefixes learnt by firewall to not SNAT"
+    },
+    "FirewallPacketCaptureParametersFormat": {
+      "type": "object",
+      "properties": {
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 30,
+          "exclusiveMaximum": false,
+          "minimum": 1800,
+          "exclusiveMinimum": false,
+          "description": "Duration of packet capture in seconds."
+        },
+        "numberOfPacketsToCapture": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 90000,
+          "exclusiveMaximum": false,
+          "minimum": 100,
+          "exclusiveMinimum": false,
+          "description": "Number of packets to be captured."
+        },
+        "sasUrl": {
+          "type": "string",
+          "description": "Upload capture location"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of file to be uploaded to sasURL"
+        },
+        "protocol": {
+          "$ref": "#/definitions/AzureFirewallNetworkRuleProtocol",
+          "description": "The protocol of packets to capture"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureFlags"
+          },
+          "description": "The tcp-flag type to be captured. Used with protocol TCP",
+          "x-ms-identifiers": []
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureRule"
+          },
+          "description": "Rules to filter packet captures.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Packet capture parameters on azure firewall."
+    },
+    "AzureFirewallPacketCaptureFlags": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Flags to capture",
+          "$ref": "#/definitions/AzureFirewallPacketCaptureFlagsType"
+        }
+      },
+      "description": "Properties of the AzureFirewallRCAction."
+    },
+    "AzureFirewallPacketCaptureFlagsType": {
+      "type": "string",
+      "description": "The flags type to be captured.",
+      "enum": [
+        "tcp-fin",
+        "tcp-syn",
+        "tcp-rst",
+        "tcp-push",
+        "tcp-act",
+        "tcp-urg"
+      ],
+      "x-ms-enum": {
+        "name": "AzureFirewallPacketCaptureFlagsType",
+        "modelAsString": true
+      }
+    },
+    "AzureFirewallPacketCaptureRule": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "List of source IP addresses/subnets to be captured.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of destination IP addresses/subnets to be captured.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of ports to be captured.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Group of src/dest ips and ports to be captured."
+    },
+    "FirewallPacketCaptureParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirewallPacketCaptureParametersFormat",
+          "description": "Properties of the azure firewall."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Azure Firewall Packet Capture Parameters resource."
     }
   }
 }
