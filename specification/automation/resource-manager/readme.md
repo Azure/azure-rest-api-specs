@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for Automation.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,21 +15,56 @@ To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 =======
+
 ### Basic Information
+
 These are the global settings for the Automation API.
 
 ``` yaml
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2022-08-08
+tag: package-preview-2022-10
 ```
 
+
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.Automation/preview/2022-10-12.11/account.json
+  - Microsoft.Automation/preview/2022-10-12.11/certificate.json
+  - Microsoft.Automation/preview/2022-10-12.11/connection.json
+  - Microsoft.Automation/preview/2022-10-12.11/connectionType.json
+  - Microsoft.Automation/preview/2022-10-12.11/credential.json
+  - Microsoft.Automation/preview/2022-10-12.11/dscConfiguration.json
+  - Microsoft.Automation/preview/2022-10-12.11/dscNodeConfiguration.json
+  - Microsoft.Automation/preview/2022-10-12.11/hybridRunbookWorker.json
+  - Microsoft.Automation/preview/2022-10-12.11/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/preview/2022-10-12.11/job.json
+  - Microsoft.Automation/preview/2022-10-12.11/jobSchedule.json
+  - Microsoft.Automation/preview/2022-10-12.11/linkedWorkspace.json
+  - Microsoft.Automation/preview/2022-10-12.11/module.json
+  - Microsoft.Automation/preview/2022-10-12.11/operations.json
+  - Microsoft.Automation/preview/2022-10-12.11/python2package.json
+  - Microsoft.Automation/preview/2022-10-12.11/python3package.json
+  - Microsoft.Automation/preview/2022-10-12.11/runbook.json
+  - Microsoft.Automation/preview/2022-10-12.11/schedule.json
+  - Microsoft.Automation/preview/2022-10-12.11/softwareUpdateConfigurationMachineRun.json
+  - Microsoft.Automation/preview/2022-10-12.11/softwareUpdateConfigurationRun.json
+  - Microsoft.Automation/preview/2022-10-12.11/sourceControl.json
+  - Microsoft.Automation/preview/2022-10-12.11/sourceControlSyncJob.json
+  - Microsoft.Automation/preview/2022-10-12.11/sourceControlSyncJobStreams.json
+  - Microsoft.Automation/preview/2022-10-12.11/variable.json
+```
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
@@ -54,7 +91,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/watcher.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
-
 
 ### Tag: package-2017-05-preview
 
@@ -394,7 +430,9 @@ input-file:
 ```
 
 ---
+
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -534,6 +572,7 @@ directive:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -554,7 +593,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -611,8 +649,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
