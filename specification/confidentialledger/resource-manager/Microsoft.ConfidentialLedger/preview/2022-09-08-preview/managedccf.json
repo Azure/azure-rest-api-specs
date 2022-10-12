@@ -373,6 +373,41 @@
         }
       }
     },
+    "CertificateTags": {
+      "description": "Tags for Managed CCF Certificates",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Additional tags for Managed CCF Certificates",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MemberIdentityCertificate": {
+      "type": "object",
+      "description": "Object representing MemberIdentityCertificate for Managed CCF.",
+      "title": "MemberIdentityCertificate",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Member Identity Certificate"
+        },
+        "encryptionkey": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Member Identity Certificate Encryption Key"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/CertificateTags"
+          }
+        }
+      }
+    },
     "ManagedCCFProperties": {
       "type": "object",
       "description": "Additional Managed CCF properties.",
@@ -395,10 +430,11 @@
         },
         "memberIdentityCertificates": {
           "type": "array",
-          "description": "Public Keys of the member identity certificates",
+          "description": "List of member identity certificates for  Managed CCF",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/MemberIdentityCertificate"
+          },
+          "x-ms-identifiers": []
         },
         "deploymentType": {
           "description": "Deployment Type of Managed CCF",
