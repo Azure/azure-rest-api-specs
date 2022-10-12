@@ -11,6 +11,8 @@ Please look to the files `Microsoft.ConfidentialLedger/stable/2022-05-13/confide
 
 > see https://aka.ms/autorest
 
+## Configuration
+
 ### Tag: package-0.1-preview-ledger
 
 These settings apply only when `--tag=package-0.1-preview-ledger` is specified on the command line.
