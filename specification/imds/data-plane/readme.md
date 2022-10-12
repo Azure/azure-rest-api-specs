@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 input-file:
   - Microsoft.InstanceMetadataService/stable/2021-11-01/imds.json
 ```
-### Tag: package-2018-02-1
+### Tag: package-2018-02-01
 
 These settings apply only when `--tag=package-2018-02-01` is specified on the command line.
 
