@@ -576,7 +576,7 @@ directive:
 
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/*/imds.json
+    from: Microsoft.InstanceMetadataService/stable/2021-11-01/imds.json
     where:
       - $.definitions.IdentityTokenResponse.properties.access_token
       - $.definitions.IdentityTokenResponse.properties.expires_in
