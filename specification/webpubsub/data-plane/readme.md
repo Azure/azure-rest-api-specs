@@ -39,13 +39,13 @@ directive:
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
 ```
 
-### Tag: package-2022-10-01-preview
+### Tag: package-2022-11-01
 
-These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10-01-preview'
+```yaml $(tag) == 'package-2022-11-01'
 input-file:
-  - WebPubSub/preview/2022-10-01-preview/webpubsub.json
+  - WebPubSub/stable/2022-11-01/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
