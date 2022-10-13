@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  configStoreName:
+    type: string
+    prefix: configstor
+  privateEndpointConnectionName:
+    type: string
+    prefix: privateend
+  keyValueName:
+    type: string
+    prefix: keyvaluena
+scenarios:
+  - scenario: GeneratedScenario
+    steps:
+      - operationId: Operations_CheckNameAvailability
+        step: Operations_CheckNameAvailability
+        exampleFile: ../examples/CheckNameAvailable.json
+      - operationId: Operations_RegionalCheckNameAvailability
+        step: Operations_RegionalCheckNameAvailability
+        exampleFile: ../examples/RegionalCheckNameAvailable.json
+      - operationId: ConfigurationStores_Create
+        step: ConfigurationStores_Create
+        exampleFile: ../examples/ConfigurationStoresCreate.json
+      - operationId: ConfigurationStores_List
+        step: ConfigurationStores_List
+        exampleFile: ../examples/ConfigurationStoresList.json
+      - operationId: ConfigurationStores_ListByResourceGroup
+        step: ConfigurationStores_ListByResourceGroup
+        exampleFile: ../examples/ConfigurationStoresListByResourceGroup.json
+      - operationId: ConfigurationStores_ListDeleted
+        step: ConfigurationStores_ListDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresList.json
+      - operationId: ConfigurationStores_GetDeleted
+        step: ConfigurationStores_GetDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresGet.json
+      - operationId: ConfigurationStores_Get
+        step: ConfigurationStores_Get
+        exampleFile: ../examples/ConfigurationStoresGet.json
+      - operationId: ConfigurationStores_Update
+        step: ConfigurationStores_Update
+        exampleFile: ../examples/ConfigurationStoresUpdate.json
+      - operationId: ConfigurationStores_PurgeDeleted
+        step: ConfigurationStores_PurgeDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresPurge.json
+      - operationId: ConfigurationStores_ListKeys
+        step: ConfigurationStores_ListKeys
+        exampleFile: ../examples/ConfigurationStoresListKeys.json
+      - operationId: ConfigurationStores_RegenerateKey
+        step: ConfigurationStores_RegenerateKey
+        exampleFile: ../examples/ConfigurationStoresRegenerateKey.json
+      - operationId: PrivateEndpointConnections_CreateOrUpdate
+        step: PrivateEndpointConnections_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresCreatePrivateEndpointConnection.json
+      - operationId: PrivateEndpointConnections_ListByConfigurationStore
+        step: PrivateEndpointConnections_ListByConfigurationStore
+        exampleFile: ../examples/ConfigurationStoresListPrivateEndpointConnections.json
+      - operationId: PrivateEndpointConnections_Get
+        step: PrivateEndpointConnections_Get
+        exampleFile: ../examples/ConfigurationStoresGetPrivateEndpointConnection.json
+      - operationId: KeyValues_CreateOrUpdate
+        step: KeyValues_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresCreateKeyValue.json
+      - operationId: KeyValues_ListByConfigurationStore
+        step: KeyValues_ListByConfigurationStore
+        exampleFile: ../examples/ConfigurationStoresListKeyValues.json
+      - operationId: KeyValues_Get
+        step: KeyValues_Get
+        exampleFile: ../examples/ConfigurationStoresGetKeyValue.json
+      - operationId: Operations_List
+      - operationId: PrivateLinkResources_ListByConfigurationStore
+        step: PrivateLinkResources_ListByConfigurationStore
+        exampleFile: ../examples/PrivateLinkResourcesListByConfigurationStore.json
+      - operationId: PrivateLinkResources_Get
+        variables:
+          groupName:
+            type: string
+            prefix: groupname
+        step: PrivateLinkResources_Get
+        exampleFile: ../examples/PrivateLinkResourceGet.json
+      - operationId: KeyValues_Delete
+        step: KeyValues_Delete
+        exampleFile: ../examples/ConfigurationStoresDeleteKeyValue.json
+      - operationId: PrivateEndpointConnections_Delete
+        step: PrivateEndpointConnections_Delete
+        exampleFile: ../examples/ConfigurationStoresDeletePrivateEndpointConnection.json
+      - operationId: ConfigurationStores_Delete
+        step: ConfigurationStores_Delete
+        exampleFile: ../examples/ConfigurationStoresDelete.json
