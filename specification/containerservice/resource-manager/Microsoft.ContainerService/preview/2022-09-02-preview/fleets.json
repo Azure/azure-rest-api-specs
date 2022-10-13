@@ -91,6 +91,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Creates or update a fleet resource": {
             "$ref": "./examples/Fleets_CreateOrUpdate.json"
@@ -216,7 +219,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -385,6 +393,9 @@
           "Create a fleet member resource. Joins an existing cluster to the fleet": {
             "$ref": "./examples/FleetMembers_Create.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -462,7 +473,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -632,7 +648,10 @@
             "read",
             "create"
           ],
-          "description": "DNS prefix used to create the FQDN for the Fleet hub."
+          "description": "DNS prefix used to create the FQDN for the Fleet hub.",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][a-zA-Z0-9-]{0,52}[a-zA-Z0-9]$",
+          "minLength": 1,
+          "maxLength": 54
         },
         "fqdn": {
           "readOnly": true,
