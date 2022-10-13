@@ -26,7 +26,7 @@ These are the global settings for the Web PubSub Service API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-10-01
+tag: package-2022-11-01
 ```
 
 ### Suppression
