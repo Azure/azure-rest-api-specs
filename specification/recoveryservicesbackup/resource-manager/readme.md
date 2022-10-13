@@ -55,7 +55,7 @@ message-format: json
 ```
 
 
-### Tag: package-preview-2022-09
+### Tag: package-2022-09-preview
 
 These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
 
