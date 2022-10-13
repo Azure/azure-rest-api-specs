@@ -29,9 +29,6 @@ title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2022-09-preview
-csharp-sdks-folder: ./Generated/CSharp
-python-sdks-folder: ./Generated/Python
-go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
