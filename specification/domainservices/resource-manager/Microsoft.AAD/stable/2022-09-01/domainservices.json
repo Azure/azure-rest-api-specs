@@ -27,7 +27,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Aad/operations": {
+    "/providers/Microsoft.AAD/operations": {
       "get": {
         "tags": [
           "DomainServices"
@@ -63,7 +63,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Aad/domainServices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
       "get": {
         "tags": [
           "DomainServices"
@@ -103,7 +103,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aad/domainServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
       "get": {
         "tags": [
           "DomainServices"
@@ -146,7 +146,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aad/domainServices/{domainServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
       "put": {
         "tags": [
           "DomainServices"
@@ -355,6 +355,7 @@
   "definitions": {
     "Resource": {
       "description": "The Resource model definition.",
+      "type":"object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -400,6 +401,7 @@
     },
     "DomainService": {
       "description": "Domain service.",
+      "type":"object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -414,6 +416,7 @@
       ]
     },
     "DomainServiceListResult": {
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
@@ -432,6 +435,7 @@
     },
     "DomainServiceProperties": {
       "description": "Properties of the Domain Service.",
+      "type":"object",
       "properties": {
         "version": {
           "readOnly": true,
@@ -532,6 +536,7 @@
     },
     "ReplicaSet": {
       "description": "Replica Set Definition",
+      "type":"object",
       "properties": {
         "replicaSetId": {
           "readOnly": true,
@@ -598,6 +603,7 @@
     },
     "LdapsSettings": {
       "description": "Secure LDAP Settings",
+      "type":"object",
       "properties": {
         "ldaps": {
           "type": "string",
@@ -653,6 +659,7 @@
     },
     "HealthMonitor": {
       "description": "Health Monitor Description",
+      "type":"object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -673,6 +680,7 @@
     },
     "HealthAlert": {
       "description": "Health Alert Description",
+      "type":"object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -715,6 +723,7 @@
     },
     "NotificationSettings": {
       "description": "Settings for notification",
+      "type":"object",
       "properties": {
         "notifyGlobalAdmins": {
           "type": "string",
@@ -752,6 +761,7 @@
     },
     "ResourceForestSettings": {
       "description": "Settings for Resource Forest",
+      "type":"object",
       "properties": {
         "settings": {
           "type": "array",
@@ -768,6 +778,7 @@
     },
     "ForestTrust": {
       "description": "Forest Trust Setting",
+      "type":"object",
       "properties": {
         "trustedDomainFqdn": {
           "type": "string",
@@ -794,6 +805,7 @@
     },
     "MigrationProperties": {
       "description": "Migration Properties",
+      "type":"object",
       "properties": {
         "oldSubnetId": {
           "readOnly": true,
@@ -814,6 +826,7 @@
     },
     "MigrationProgress": {
       "description": "Migration Progress",
+      "type":"object",
       "properties": {
         "completionPercentage": {
           "type": "number",
@@ -828,6 +841,7 @@
     },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
+      "type":"object",
       "properties": {
         "ntlmV1": {
           "type": "string",
@@ -950,6 +964,7 @@
     },
     "ConfigDiagnostics": {
       "description": "Configuration Diagnostics",
+      "type":"object",
       "properties": {
         "lastExecuted": {
           "type": "string",
@@ -967,6 +982,7 @@
     },
     "ConfigDiagnosticsValidatorResult": {
       "description": "Config Diagnostics validator result data",
+      "type":"object",
       "properties": {
         "validatorId": {
           "type": "string",
@@ -1004,6 +1020,7 @@
     },
     "ConfigDiagnosticsValidatorResultIssue": {
       "description": "Specific issue for a particular config diagnostics validator",
+      "type":"object",
       "properties": {
         "id": {
           "type": "string",
@@ -1020,6 +1037,7 @@
       }
     },
     "CloudError": {
+      "type":"object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -1030,6 +1048,7 @@
       "description": "An error response from the Domain Services."
     },
     "CloudErrorBody": {
+      "type":"object",
       "x-ms-external": true,
       "properties": {
         "code": {
