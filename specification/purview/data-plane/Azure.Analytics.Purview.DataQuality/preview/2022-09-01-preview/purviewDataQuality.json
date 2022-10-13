@@ -2157,6 +2157,17 @@
         "credentialProperties": {}
       }
     },
+    "DataTypeProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DataQualityRules": {
       "type": "object",
       "properties": {
@@ -2182,10 +2193,7 @@
         "schemaReference": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+            "$ref": "#/definitions/DataTypeProperties"
           }
         },
         "dataSourceType": {
