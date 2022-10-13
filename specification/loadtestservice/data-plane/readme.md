@@ -23,7 +23,16 @@ These are the global settings for the loadtestservice.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-06-01-preview
+tag: package-2022-11-01
+```
+
+### Tag: package-2021-11-01
+
+These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-01'
+input-file:
+  - Microsoft.LoadTestService/stable/2022-11-01/loadtestservice.json
 ```
 
 ### Tag: package-2022-06-01-preview
@@ -44,6 +53,8 @@ input-file:
   - Microsoft.LoadTestService/preview/2021-07-01-preview/loadtestservice.json
 ```
 
+
+
 ### Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -51,7 +62,7 @@ Please also specify `--azure-sdk-for-java-folder=<path to the root directory of 
 
 ```yaml $(java)
 input-file:
-  - Microsoft.LoadTestService/preview/2022-06-01-preview/loadtestservice.json
+  - Microsoft.LoadTestService/stable/2022-11-01/loadtestservice.json
 java: true
 regenerate-pom: false
 title: LoadTestingClient
@@ -66,7 +77,7 @@ namespace: com.azure.developer.loadtesting
 partial-update: true
 output-folder: $(azure-sdk-for-java-folder)/sdk/loadtestservice/azure-developer-loadtesting
 service-versions:
-- 2022-06-01-preview
+- 2022-11-01
 directive:
 - from: swagger-document
   where: '$.paths["/testruns/{testRunId}"].patch'
