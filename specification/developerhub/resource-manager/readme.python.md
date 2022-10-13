@@ -17,21 +17,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/devhub/azure-mgmt-devhub/azure/mgmt/devhub
 ```
-
-``` yaml $(python)
-directive:
-  - from: swagger-document
-    where: $.parameters.GitHubOAuthCodeParameter
-    transform: >
-      $['x-ms-parameter-location'] = "method";
-
-  - from: swagger-document
-    where: $.parameters.GitHubOAuthStateParameter
-    transform: >
-      $['x-ms-parameter-location'] = "method";
-      
-  - from: swagger-document
-    where: $.parameters.ManagedClusterParameter
-    transform: >
-      $['x-ms-parameter-location'] = "method";
-```
