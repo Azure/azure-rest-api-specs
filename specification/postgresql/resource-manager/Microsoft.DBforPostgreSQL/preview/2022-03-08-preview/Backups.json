@@ -131,7 +131,14 @@
       "properties": {
         "backupType": {
           "type": "string",
-          "description": "Backup type."
+          "description": "Backup type.",
+          "enum": [
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
         },
         "completedTime": {
           "type": "string",
