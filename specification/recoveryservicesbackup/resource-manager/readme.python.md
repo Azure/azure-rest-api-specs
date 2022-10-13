@@ -34,7 +34,7 @@ output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservice
 
 ### Tag: package-2022-09-preview and python
 
-These settings apply only when `--tag=package-2022-09-preview --python` is specified on the command line.
+These settings apply only when `--package-2022-09-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2022-09-preview'
