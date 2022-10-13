@@ -54,6 +54,8 @@ input-file:
   - Microsoft.Workloads/preview/2022-10-15-preview/operations.json
   - Microsoft.Workloads/preview/2022-10-15-preview/phpWorkloads.json
   - Microsoft.Workloads/preview/2022-10-15-preview/skus.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/connectors.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/backupTypes.json
 ```
 
 ### Tag: package-2021-12-01-preview
