@@ -84,6 +84,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2022-04-01-preview/apimusers.json
   - Microsoft.ApiManagement/preview/2022-04-01-preview/definitions.json
 ```
+
 ### Tag: package-preview-2021-12
 
 These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
