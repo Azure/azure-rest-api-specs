@@ -269,6 +269,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "paginationHelper",
+            "description": "Helper object for pagination",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaginationHelper"
+            }
           }
         ],
         "responses": {
@@ -5357,6 +5366,26 @@
           "items": {
             "$ref": "#/definitions/ScalingHostPoolReference"
           }
+        }
+      }
+    },
+    "PaginationHelper": {
+      "type": "object",
+      "description": "Helper properties for pagination",
+      "properties": {
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items per page."
+        },
+        "isDescending": {
+          "type": "boolean",
+          "description": "Indicates whether the collection is descending."
+        },
+        "initialSkip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Initial number of items to skip."
         }
       }
     }
