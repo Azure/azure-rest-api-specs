@@ -52,6 +52,7 @@ input-file:
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/replicationusages.json
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/vaults.json
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/vaultusages.json
+```
 
 ### Tag: package-2022-09
 
