@@ -270,6 +270,185 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/putDraft": {
+      "post": {
+        "tags": [
+          "FirewallPolicies",
+          "FirewallPoliciesDrafts"
+        ],
+        "operationId": "FirewallPolicies_CreateOrUpdateDraft",
+        "description": "Creates or updates the draft version of the specified Firewall Policy.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            },
+            "description": "Parameters supplied to the create or update Firewall Policy operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting FirewallPolicy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation returns the resulting FirewallPolicy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FirewallPolicy Draft": {
+            "$ref": "./examples/FirewallPolicyPutDraft.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/getDraft": {
+      "post": {
+        "tags": [
+          "FirewallPolicies",
+          "FirewallPoliciesDrafts"
+        ],
+        "operationId": "FirewallPolicies_GetDraft",
+        "description": "Gets the current draft version of the specified Firewall Policy.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a Firewall Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyGetDraft.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/deployDraft": {
+      "post": {
+        "tags": [
+          "FirewallPolicies",
+          "FirewallPoliciesDrafts"
+        ],
+        "operationId": "FirewallPolicies_DeployDraft",
+        "description": "Sets the current live Firewall Policy body to the body of the current state of the draft Firewall Policy",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a Firewall Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyDeployDraft.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies": {
       "get": {
         "tags": [
@@ -563,6 +742,151 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/putDraft": {
+      "post": {
+        "tags": [
+          "FirewallPolicyRuleCollectionGroups",
+          "FirewallPolicyRuleCollectionGroupsDrafts"
+        ],
+        "operationId": "FirewallPolicyRuleCollectionGroups_CreateOrUpdateDraft",
+        "description": "Creates or updates a new draft version of the specified Firewall Policy Rule Collection Group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "name": "ruleCollectionGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            },
+            "description": "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FirewallPolicyRuleCollectionGroupDraft": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupPutDraft.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/getDraft": {
+      "post": {
+        "tags": [
+          "FirewallPolicyRuleCollectionGroups",
+          "FirewallPolicyRuleCollectionGroupsDrafts"
+        ],
+        "operationId": "FirewallPolicyRuleCollectionGroups_GetDraft",
+        "description": "Get the current draft version of the specified Firewall Policy Rule Collection Group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "name": "ruleCollectionGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            },
+            "description": "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
         }
       }
     },
