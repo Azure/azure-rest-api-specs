@@ -256,11 +256,13 @@
       "properties": {
         "charset": {
           "type": "string",
-          "description": "The charset of the database."
+          "description": "The charset of the database.",
+          "pattern": "^[a-zA-Z]+\\w*$"
         },
         "collation": {
           "type": "string",
-          "description": "The collation of the database."
+          "description": "The collation of the database.",
+          "pattern": "^[a-zA-Z\\-]+([. ]|\\w)*$"
         }
       },
       "description": "The properties of a database."
