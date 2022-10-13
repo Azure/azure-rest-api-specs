@@ -1,12 +1,15 @@
 import "@cadl-lang/rest";
 import "./routes.cadl";
+import "./client.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
 using Azure.Core;
 
-@serviceTitle("Azure Confidential Ledger")
-@serviceVersion("2022-05-13")
+@service({
+  title: "Azure Confidential Ledger",
+  serviceVersion: "2022-05-13"
+})
 @server(
   "{endpoint}/app",
   "Confidential Ledger writes and retrieves ledger entries against the Confidential Ledger service.",
@@ -22,7 +25,4 @@ https://contoso.confidentialledger.azure.com
 Confidential Ledger writes and retrieves ledger entries against the
 Confidential Ledger service.
 """)
-@client(Clients.ConfidentialLedgerClient)
 namespace Azure.ConfidentialLedger;
-
-enum Clients { ConfidentialLedgerClient };
