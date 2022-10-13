@@ -10,80 +10,109 @@ variables:
   keyValueName:
     type: string
     prefix: keyvaluena
+  groupName: configurationStores
+
+prepareSteps:
+  - step: createVirtualNetwork
+    operationId: VirtualNetworks_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md
+    parameters:
+      virtualNetworkName: $(configStoreName)-vnet
+      parameters:
+        location: $(location)
+        properties:
+          addressSpace:
+            addressPrefixes:
+              - 10.0.0.0/16
+          subnets:
+            - name: subnet-1
+              properties:
+                addressPrefix: 10.0.0.0/24
+    outputVariables:
+      subnetId:
+        type: string
+        fromResponse: /properties/subnets/0/id
+
+  - step: createPublicIPAddress
+    operationId: PublicIPAddresses_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md
+    parameters:
+      publicIpAddressName: $(configStoreName)-ip
+      parameters:
+        location: $(location)
+
 scenarios:
   - scenario: GeneratedScenario
     steps:
-      - operationId: Operations_CheckNameAvailability
-        step: Operations_CheckNameAvailability
+      - step: Operations_List
+        operationId: Operations_List
+      - step: Operations_CheckNameAvailability
         exampleFile: ../examples/CheckNameAvailable.json
-      - operationId: Operations_RegionalCheckNameAvailability
-        step: Operations_RegionalCheckNameAvailability
+      - step: Operations_RegionalCheckNameAvailability
         exampleFile: ../examples/RegionalCheckNameAvailable.json
-      - operationId: ConfigurationStores_Create
-        step: ConfigurationStores_Create
+      - step: ConfigurationStores_Create
         exampleFile: ../examples/ConfigurationStoresCreate.json
-      - operationId: ConfigurationStores_List
-        step: ConfigurationStores_List
-        exampleFile: ../examples/ConfigurationStoresList.json
-      - operationId: ConfigurationStores_ListByResourceGroup
-        step: ConfigurationStores_ListByResourceGroup
-        exampleFile: ../examples/ConfigurationStoresListByResourceGroup.json
-      - operationId: ConfigurationStores_ListDeleted
-        step: ConfigurationStores_ListDeleted
-        exampleFile: ../examples/DeletedConfigurationStoresList.json
-      - operationId: ConfigurationStores_GetDeleted
-        step: ConfigurationStores_GetDeleted
-        exampleFile: ../examples/DeletedConfigurationStoresGet.json
-      - operationId: ConfigurationStores_Get
-        step: ConfigurationStores_Get
-        exampleFile: ../examples/ConfigurationStoresGet.json
-      - operationId: ConfigurationStores_Update
-        step: ConfigurationStores_Update
-        exampleFile: ../examples/ConfigurationStoresUpdate.json
-      - operationId: ConfigurationStores_PurgeDeleted
-        step: ConfigurationStores_PurgeDeleted
-        exampleFile: ../examples/DeletedConfigurationStoresPurge.json
-      - operationId: ConfigurationStores_ListKeys
-        step: ConfigurationStores_ListKeys
-        exampleFile: ../examples/ConfigurationStoresListKeys.json
-      - operationId: ConfigurationStores_RegenerateKey
-        step: ConfigurationStores_RegenerateKey
-        exampleFile: ../examples/ConfigurationStoresRegenerateKey.json
-      - operationId: PrivateEndpointConnections_CreateOrUpdate
-        step: PrivateEndpointConnections_CreateOrUpdate
-        exampleFile: ../examples/ConfigurationStoresCreatePrivateEndpointConnection.json
-      - operationId: PrivateEndpointConnections_ListByConfigurationStore
-        step: PrivateEndpointConnections_ListByConfigurationStore
-        exampleFile: ../examples/ConfigurationStoresListPrivateEndpointConnections.json
-      - operationId: PrivateEndpointConnections_Get
-        step: PrivateEndpointConnections_Get
-        exampleFile: ../examples/ConfigurationStoresGetPrivateEndpointConnection.json
-      - operationId: KeyValues_CreateOrUpdate
-        step: KeyValues_CreateOrUpdate
-        exampleFile: ../examples/ConfigurationStoresCreateKeyValue.json
-      - operationId: KeyValues_ListByConfigurationStore
-        step: KeyValues_ListByConfigurationStore
-        exampleFile: ../examples/ConfigurationStoresListKeyValues.json
-      - operationId: KeyValues_Get
-        step: KeyValues_Get
-        exampleFile: ../examples/ConfigurationStoresGetKeyValue.json
-      - operationId: Operations_List
-      - operationId: PrivateLinkResources_ListByConfigurationStore
-        step: PrivateLinkResources_ListByConfigurationStore
-        exampleFile: ../examples/PrivateLinkResourcesListByConfigurationStore.json
-      - operationId: PrivateLinkResources_Get
-        variables:
-          groupName:
+        outputVariables:
+          configurationStoreId:
             type: string
-            prefix: groupname
-        step: PrivateLinkResources_Get
+            fromResponse: /id
+      - step: ConfigurationStores_List
+        exampleFile: ../examples/ConfigurationStoresList.json
+      - step: ConfigurationStores_ListByResourceGroup
+        exampleFile: ../examples/ConfigurationStoresListByResourceGroup.json
+      - step: ConfigurationStores_ListDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresList.json
+      - step: ConfigurationStores_Get
+        exampleFile: ../examples/ConfigurationStoresGet.json
+      - step: ConfigurationStores_Update
+        exampleFile: ../examples/ConfigurationStoresUpdate.json
+      - step: ConfigurationStores_ListKeys
+        exampleFile: ../examples/ConfigurationStoresListKeys.json
+        outputVariables:
+          keyId:
+            fromResponse: /value/0/id
+      - step: ConfigurationStores_RegenerateKey
+        exampleFile: ../examples/ConfigurationStoresRegenerateKey.json
+        requestUpdate:
+          - replace: /regenerateKeyParameters/id
+            value: $(keyId)
+      - step: KeyValues_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresCreateKeyValue.json
+      - step: KeyValues_Get
+        exampleFile: ../examples/ConfigurationStoresGetKeyValue.json
+      - step: createPrivateEndpoints
+        operationId: PrivateEndpoints_CreateOrUpdate
+        readmeTag: ../../../../../../network/resource-manager/readme.md
+        parameters:
+          privateEndpointName: $(privateEndpointConnectionName)-endpoint
+          parameters:
+            location: $(location)
+            properties:
+              subnet:
+                id: $(subnetId)
+              privateLinkServiceConnections:
+                - name: $(privateEndpointConnectionName)
+                  properties:
+                    privateLinkServiceId: $(configurationStoreId)
+                    groupIds:
+                      - $(groupName)
+      - step: PrivateEndpointConnections_Update
+        exampleFile: ../examples/ConfigurationStoresCreatePrivateEndpointConnection.json
+      - step: PrivateEndpointConnections_ListByConfigurationStore
+        exampleFile: ../examples/ConfigurationStoresListPrivateEndpointConnections.json
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ../examples/ConfigurationStoresGetPrivateEndpointConnection.json
+      - step: PrivateLinkResources_ListByConfigurationStore
+        exampleFile: ../examples/PrivateLinkResourcesListByConfigurationStore.json
+      - step: PrivateLinkResources_Get
         exampleFile: ../examples/PrivateLinkResourceGet.json
-      - operationId: KeyValues_Delete
-        step: KeyValues_Delete
-        exampleFile: ../examples/ConfigurationStoresDeleteKeyValue.json
-      - operationId: PrivateEndpointConnections_Delete
-        step: PrivateEndpointConnections_Delete
+      - step: PrivateEndpointConnections_Delete
         exampleFile: ../examples/ConfigurationStoresDeletePrivateEndpointConnection.json
-      - operationId: ConfigurationStores_Delete
-        step: ConfigurationStores_Delete
+      - step: KeyValues_Delete
+        exampleFile: ../examples/ConfigurationStoresDeleteKeyValue.json
+      - step: ConfigurationStores_Delete
         exampleFile: ../examples/ConfigurationStoresDelete.json
+      - step: ConfigurationStores_GetDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresGet.json
+      - step: ConfigurationStores_PurgeDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresPurge.json
