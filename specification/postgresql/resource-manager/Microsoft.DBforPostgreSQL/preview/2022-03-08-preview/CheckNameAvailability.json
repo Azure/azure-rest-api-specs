@@ -132,16 +132,6 @@
     "NameAvailability": {
       "type": "object",
       "properties": {
-        "message": {
-          "type": "string",
-          "description": "Error Message.",
-          "readOnly": true
-        },
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Indicates whether the resource name is available.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "name of the PostgreSQL server.",
@@ -151,22 +141,14 @@
           "type": "string",
           "description": "type of the server",
           "readOnly": true
-        },
-        "reason": {
-          "type": "string",
-          "description": "The name availability reason.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "x-ms-enum": {
-            "name": "Reason",
-            "modelAsString": true
-          },
-          "readOnly": true
         }
       },
-      "description": "Represents a resource name availability."
+      "description": "Represents a resource name availability.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/CheckNameAvailabilityResponse"
+        }
+      ]
     }
   },
   "parameters": {}
