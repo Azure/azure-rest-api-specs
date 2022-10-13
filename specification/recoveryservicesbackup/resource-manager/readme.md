@@ -59,7 +59,7 @@ message-format: json
 
 These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+```yaml $(tag) == 'package-2022-09-preview'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-09-01-preview/bms.json
 ```
