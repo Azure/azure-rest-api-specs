@@ -915,10 +915,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-              }
+              "$ref": "#/definitions/TrustedServiceByPassConfigurationList"
             },
             "description": "OK"
           },
@@ -975,10 +972,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
-              }
+              "$ref": "#/definitions/CheckDefaultStorageAccountStatusList"
             },
             "description": "OK"
           },
@@ -1261,7 +1255,12 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1708,6 +1707,24 @@
       ],
       "description": "The response to a list restorable dropped Sql pools request"
     },
+    "TrustedServiceByPassConfigurationList": {
+      "type": "object",
+      "title": "Trusted Service By Pass Configuration properties",
+      "description": "List of Trusted Service By Pass Configuration",
+      "properties": {
+        "value": {
+          "description": "Properties of the Check Default Storage Account Status.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
+        }
+      }
+    },
     "TrustedServiceByPassConfiguration": {
       "type": "object",
       "title": "Trusted Service By Pass Configuration properties",
@@ -1751,6 +1768,23 @@
           "description": "Endpoint ResourceId.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "CheckDefaultStorageAccountStatusList": {
+      "description": "List of Workspace Check Default Storage Account Status.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Workspace Check Default Storage Account Status.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
         }
       }
     },
