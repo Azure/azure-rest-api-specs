@@ -59,8 +59,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/ResourcesHistoryResult"
             }
           },
           "default": {
@@ -82,6 +81,10 @@
     }
   },
   "definitions": {
+    "ResourcesHistoryResult" : {
+      "type": "object",
+      "additionalProperties": {}
+    },
     "ResourcesHistoryRequest": {
       "description": "Describes a history request to be executed.",
       "type": "object",
