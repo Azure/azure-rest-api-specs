@@ -756,10 +756,10 @@
         "x-ms-examples": {
           "Search test with filters": {
             "$ref": "./examples/ListLoadTestSearch.json"
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -987,10 +987,10 @@
         "x-ms-examples": {
           "Get all uploaded files to a test": {
             "$ref": "./examples/GetAllTestFiles.json"
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1310,10 +1310,10 @@
         "x-ms-examples": {
           "Search test runs with filters": {
             "$ref": "./examples/ListTestRunsSearch.json"
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1546,7 +1546,11 @@
             "enum": [
               "Data",
               "Metadata"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ResultType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
@@ -1685,7 +1689,11 @@
           "enum": [
             "AKV_CERT_URI"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CertificateType",
+            "modelAsString": true
+          }
         },
         "name": {
           "description": "Name of the certificate.",
@@ -1802,7 +1810,11 @@
             "USER_PROPERTIES",
             "ADDITIONAL_ARTIFACTS"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": true
+          }
         },
         "expireTime": {
           "format": "date-time",
@@ -1817,7 +1829,11 @@
             "VALIDATION_FAILURE",
             "VALIDATION_INITIATED"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FileStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1967,7 +1983,11 @@
             "BytesPerSecond",
             "CountPerSecond"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1984,7 +2004,11 @@
             "PT5M",
             "PT1H"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TimeGrain",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2024,7 +2048,11 @@
             "Percentile95",
             "Percentile99"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AggregationType",
+            "modelAsString": true
+          }
         },
         "supportedAggregationTypes": {
           "description": "the collection of what aggregation types are supported.",
@@ -2045,7 +2073,11 @@
             "BytesPerSecond",
             "CountPerSecond"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": true
+          }
         },
         "metricAvailabilities": {
           "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain.",
@@ -2220,7 +2252,11 @@
             "requests",
             "requests_per_sec"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PFMetrics",
+            "modelAsString": true
+          }
         },
         "aggregate": {
           "description": "The aggregation function to be applied on the client metric. Allowed functions - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’, ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec, ‘count’ - for requests",
@@ -2235,7 +2271,11 @@
             "min",
             "max"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PFAgFunc",
+            "modelAsString": true
+          }
         },
         "condition": {
           "description": "The comparison operator. Supported types ‘>’, ‘<’ ",
@@ -2256,7 +2296,11 @@
             "stop",
             "continue"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PFAction",
+            "modelAsString": true
+          }
         },
         "actualValue": {
           "format": "double",
@@ -2272,7 +2316,11 @@
             "failed"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PFResult",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2355,7 +2403,11 @@
             "AKV_SECRET_URI",
             "SECRET_VALUE"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecretType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2575,7 +2627,11 @@
             "FAILED"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PFTestResult",
+            "modelAsString": true
+          }
         },
         "testRunId": {
           "description": "Unique test run name as identifier",
@@ -2620,7 +2676,11 @@
             "VALIDATION_FAILURE"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         },
         "startDateTime": {
           "format": "date-time",
