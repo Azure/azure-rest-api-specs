@@ -176,9 +176,6 @@
               "$ref": "#/definitions/DataRegistry"
             }
           },
-          "404": {
-            "description": "Resource not found."
-          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -239,12 +236,6 @@
               "$ref": "#/definitions/DataRegistry"
             }
           },
-          "409": {
-            "description": "Resource conflicted: The request is conflicted with the processing job.",
-            "schema": {
-              "$ref": "#/definitions/DataRegistry"
-            }
-          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -301,15 +292,6 @@
               "$ref": "#/definitions/DataRegistry"
             }
           },
-          "404": {
-            "description": "Resource not ready or not found."
-          },
-          "409": {
-            "description": "Resource conflicted: The request is conflicted with the processing job.",
-            "schema": {
-              "$ref": "#/definitions/DataRegistry"
-            }
-          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
@@ -353,9 +335,6 @@
         "responses": {
           "204": {
             "description": "Data registry unregister request completed successfully. The data registry was unregistered in Azure Maps Service."
-          },
-          "404": {
-            "description": "Resource not ready."
           },
           "default": {
             "description": "An unexpected error occurred.",
@@ -409,9 +388,6 @@
                 "description": "The content-type for the Download API response."
               }
             }
-          },
-          "404": {
-            "description": "Resource not ready or not found."
           },
           "default": {
             "description": "An unexpected error occurred.",
@@ -590,6 +566,12 @@
           "items": {
             "$ref": "#/definitions/DataRegistry"
           },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of data registries.",
+          "type": "string",
+          "format": "uri",
           "readOnly": true
         }
       }
