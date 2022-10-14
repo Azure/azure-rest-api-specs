@@ -4,8 +4,6 @@
 
 This is the AutoRest configuration file for EnterpriseKnowledgeGraphService.
 
-
-
 ---
 
 ### Java multi-api
@@ -15,6 +13,15 @@ batch:
   - tag: package-2018-12-03
 ```
 
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.EnterpriseKnowledgeGraph/stable/2023-09-03/EnterpriseKnowledgeGraphSwagger.json
+```
 ### Tag: package-2018-12-03 and java
 
 These settings apply only when `--tag=package-2018-12-03 --java` is specified on the command line.
@@ -28,8 +35,8 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
 ## Getting Started
+
 To build the SDK for EnterpriseKnowledgeGraphService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -37,18 +44,18 @@ To build the SDK for EnterpriseKnowledgeGraphService, simply [Install AutoRest](
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the EnterpriseKnowledgeGraphService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-12-03
+tag: package-2023-09
 ```
 
 ### Tag: package-2018-12-03
@@ -63,6 +70,7 @@ directive:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -92,6 +100,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/enterpriseknowledgegraphservice/Microsoft.Azure.Management.EnterpriseKnowledgeGraphService/src/Generated
   clear-output-folder: true
 ```
-
-
-
