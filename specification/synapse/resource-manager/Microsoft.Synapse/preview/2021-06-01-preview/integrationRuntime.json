@@ -1383,6 +1383,11 @@
         }
       ],
       "properties": {
+        "provisioningState": {
+          "description": "Integration runtime state, only valid for managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeState",
+          "readOnly": true
+        },
         "state": {
           "description": "Integration runtime state, only valid for managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeState",
@@ -2273,7 +2278,7 @@
           "description": "The estimated time when the self-hosted integration runtime will be updated.",
           "type": "string",
           "format": "date-time",
-          "readOnly": true
+          
         },
         "serviceRegion": {
           "description": "The service region of the integration runtime",
@@ -2286,6 +2291,18 @@
             "description": "The newer versions",
             "type": "string"
           }
+        },
+        "osType": {
+          "description": "OS Type, 1- Windows; 2- Linux",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true          
+        },
+        "targetFramework": {
+          "description": "Target framework type, 0 - DotNetFramework ; 1 - DotNetCore ",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
         }
       }
     },
