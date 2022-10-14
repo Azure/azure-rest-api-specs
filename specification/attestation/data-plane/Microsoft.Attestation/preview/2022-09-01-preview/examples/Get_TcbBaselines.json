@@ -2,30 +2,35 @@
   "parameters": {
     "instanceUrl": "https://instance.attest.azure.net",
     "api-version": "2022-09-01-preview",
-    "attestationType": "SgxEnclave",
-    "provideCurrentTcbInPolicy": false
+    "attestationType": "SgxEnclave"
   },
   "responses": {
     "200": {
       "body": {
         "tcbBaselines": [
           {
-            "tcbEvaluationDataNumber": "azuredefault (Currently 10)",
+            "tcbIdentifier": "azuredefault",
+            "tcbEvaluationDataNumber": 10,
             "tcbReleaseDate": "2020-11-11T00:00:00",
             "minimumPswLinuxVersion": "2.9",
-            "minimumPswWindowsVersion": "2.7.101.2"
+            "minimumPswWindowsVersion": "2.7.101.2",
+            "isSelectedTcb": true
           },
           {
-            "tcbEvaluationDataNumber": "11",
+            "tcbIdentifier": "11",
+            "tcbEvaluationDataNumber": 11,
             "tcbReleaseDate": "2021-06-09T00:00:00",
             "minimumPswLinuxVersion": "2.13.3",
-            "minimumPswWindowsVersion": "2.13.100.2"
+            "minimumPswWindowsVersion": "2.13.100.2",
+            "isSelectedTcb": false
           },
           {
-            "tcbEvaluationDataNumber": "10",
+            "tcbIdentifier": "10",
+            "tcbEvaluationDataNumber": 10,
             "tcbReleaseDate": "2020-11-11T00:00:00",
             "minimumPswLinuxVersion": "2.9",
-            "minimumPswWindowsVersion": "2.7.101.2"
+            "minimumPswWindowsVersion": "2.7.101.2",
+            "isSelectedTcb": false
           }
         ]
       }

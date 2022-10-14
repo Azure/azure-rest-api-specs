@@ -475,14 +475,6 @@
           },
           {
             "$ref": "#/parameters/AttestationType"
-          },
-          {
-            "name": "provideCurrentTcbInPolicy",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "x-ms-parameter-location": "method",
-            "description": "If set to true, return the current tcb baseline set in attestation policy, otherwise return the full set of supported baselines"
           }
         ],
         "responses": {
@@ -502,9 +494,6 @@
         "x-ms-examples": {
           "Get TcbBaselines": {
             "$ref": "./examples/Get_TcbBaselines.json"
-          },
-          "Get Current TcbBaseline": {
-            "$ref": "./examples/Get_Current_TcbBaseline.json"
           }
         }
       }
@@ -733,9 +722,13 @@
       "type": "object",
       "description": "TEE specific Tcb baseline used in attestation, and baseline details including baseline identifier, release date and minimum required software version",
       "properties": {
+        "tcbIdentifier": {
+          "description": "The Tcb baseline Identifier used in attestation policy",
+          "type": "string"
+        },
         "tcbEvaluationDataNumber": {
           "description": "A monotonically increasing sequence number changed when Intel updates the content of the TCB evaluation data set. SGX TEE specific property",
-          "type": "string"
+          "type": "number"
         },
         "tcbReleaseDate": {
           "description": "Date and time when the Tcb is released. SGX TEE specific property",
@@ -748,6 +741,10 @@
         "minimumPswWindowsVersion": {
           "description": "Minimum Windows PSW version required to support the corresponding Tcb baseline. SGX TEE specific property",
           "type": "string"
+        },
+        "isSelectedTcb": {
+          "description": "The corresponding Tcb baseline is set in attestation policy and is used in attestation request if set to true",
+          "type": "boolean"
         }
       }
     },
