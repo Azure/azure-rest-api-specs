@@ -181,7 +181,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ApprovalResponseComment",
+            "name": "approvalResponseComment",
             "in": "body",
             "required": true,
             "description": "The request body of reassigning an approval request.",
@@ -230,7 +230,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ApprovalResponseComment",
+            "name": "approvalResponseComment",
             "in": "body",
             "required": true,
             "description": "The request body of reassigning an approval request.",
@@ -279,7 +279,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ApprovalReassignCommand",
+            "name": "approvalReassignCommand",
             "in": "body",
             "required": true,
             "description": "The request body of reassigning an approval request.",
@@ -423,7 +423,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "TaskReassignCommand",
+            "name": "taskReassignCommand",
             "in": "body",
             "required": true,
             "description": "The request body of reassigning a task request.",
@@ -582,12 +582,12 @@
             "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "name": "requestEventPayloadWebRequest",
+            "name": "requestPayload",
             "in": "body",
             "required": true,
             "description": "The request event payload to trigger workflow run.",
             "schema": {
-              "$ref": "#/definitions/RequestEventPayloadWebRequest"
+              "$ref": "#/definitions/RequestPayload"
             }
           },
           {
@@ -686,7 +686,7 @@
             "$ref": "#/parameters/x-ms-client-request-id"
           },
           {
-            "$ref": "#/parameters/workflowType"
+            "$ref": "#/parameters/scenarioType"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -929,12 +929,22 @@
       ]
     },
     "WorkflowRequest": {
+      "title": "WorkflowRequest",
+      "discriminator": "type",
       "type": "object",
       "description": "The workflow request properties.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "The workflow request type, e.g. approval request or task request."
+          "description": "The workflow request type, e.g. approval request or task request.",
+          "enum": [
+            "approval",
+            "task"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
         },
         "workflowRunId": {
           "type": "string",
@@ -958,21 +968,22 @@
           "format": "date-time",
           "description": "The last update time of a workflow request."
         },
-        "requestEventPayload": {
-          "type": "object",
-          "description": "Workflow request event details."
+        "requestPayload": {
+          "$ref": "#/definitions/RequestPayload"
         }
       },
       "required": [
+        "type",
         "workflowRunId",
         "workflowDefinitionId",
         "requestorId",
         "submittedTime",
         "lastUpdatedTime",
-        "requestEventPayload"
+        "requestPayload"
       ]
     },
     "ApprovalRequest": {
+      "x-ms-discriminator-value": "approval",
       "description": "The workflow approval request properties.",
       "allOf": [
         {
@@ -1020,6 +1031,7 @@
       ]
     },
     "TaskRequest": {
+      "x-ms-discriminator-value": "task",
       "description": "The workflow task request properties.",
       "allOf": [
         {
@@ -1087,51 +1099,26 @@
     "TaskStatus": {
       "title": "TaskStatus",
       "type": "object",
+      "description": "Task request status.",
       "properties": {
-        "value": {
+        "status": {
           "type": "string",
-          "description": "Task status value."
-        },
-        "statusType": {
-          "type": "string",
-          "description": "Task status type."
+          "enum": [
+            "Not Started",
+            "In Progress",
+            "Completed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         }
-      },
-      "required": [
-        "value",
-        "statusType"
-      ]
+      }
     },
     "TaskChangeHistory": {
       "title": "TaskChangeHistory",
-      "type": "object",
-      "properties": {
-        "updatedBy": {
-          "type": "string",
-          "description": "The person(GUID) who updated a task."
-        },
-        "comment": {
-          "type": "string",
-          "description": "The comment of a updated task."
-        },
-        "updatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The updated time of task status change history."
-        },
-        "oldStatus": {
-          "$ref": "#/definitions/TaskStatus"
-        },
-        "newStatus": {
-          "$ref": "#/definitions/TaskStatus"
-        }
-      },
-      "required": [
-        "updatedBy",
-        "updatedTime",
-        "oldStatus",
-        "newStatus"
-      ]
+      "type": "object"
     },
     "ApprovalResponseComment": {
       "title": "ApprovalResponseComment",
@@ -1263,13 +1250,11 @@
           "type": "string",
           "description": "The person(GUID) who triggered the workflow run."
         },
-        "requestEventPayload": {
-          "type": "object",
-          "description": "Workflow run request event details."
+        "requestPayload": {
+          "$ref": "#/definitions/RequestPayload"
         },
         "status": {
-          "type": "object",
-          "description": "Workflow run status."
+          "$ref": "#/definitions/WorkflowRunStatus"
         },
         "definition": {
           "type": "object",
@@ -1277,6 +1262,18 @@
         },
         "detail": {
           "$ref": "#/definitions/WorkflowRunDetail"
+        },
+        "endTime":{
+          "type":"string",
+          "description": "The time of workflow run completed."
+        },
+        "cancelTime":{
+          "type":"string",
+          "description": "The time of workflow run be canceled."
+        },
+        "cancelComment":{
+          "type":"string",
+          "description": "The comment when cancel a workflow run."
         }
       },
       "required": [
@@ -1284,7 +1281,7 @@
         "workflowDefinitionId",
         "startTime",
         "requestor",
-        "requestEventPayload",
+        "requestPayload",
         "status"
       ]
     },
@@ -1303,6 +1300,29 @@
         "trigger",
         "actions"
       ]
+    },
+    "WorkflowRunStatus": {
+      "title": "WorkflowRunStatus",
+      "type": "object",
+      "description": "Workflow run status.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Completed",
+            "NotStarted",
+            "Canceling",
+            "CancellationFailed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "TriggerDetail": {
       "title": "TriggerDetail",
@@ -1350,10 +1370,15 @@
         "status"
       ]
     },
-    "RequestEventPayloadWebRequest": {
-      "title": "RequestEventPayloadWebRequest",
+    "RequestPayload": {
+      "title": "RequestPayload",
+      "discriminator": "requestType",
       "type": "object",
       "properties": {
+        "targetValue": {
+          "type": "string",
+          "description": "The target value which need involve workflow to operate."
+        },
         "requestType": {
           "type": "string",
           "description": "The request type of a workflow run.",
@@ -1369,10 +1394,104 @@
             "name": "requestType",
             "modelAsString": true
           }
-        },
+        }
+      },
+      "required": [
+        "requestType"
+      ]
+    },
+    "CreateTermRequestWebRequest": {
+      "x-ms-discriminator-value": "CreateTermRequest",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestPayload"
+        }
+      ],
+      "type": "object",
+      "properties": {
         "payload": {
-          "type": "object",
-          "description": "The request payload which need to involve workflow to operate."
+          "type": "object"
+        }
+      }
+    },
+    "DeleteTermRequestWebRequest": {
+      "x-ms-discriminator-value": "DeleteTermRequest",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestPayload"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "glossaryTermId": {
+          "type": "string"
+        },
+        "forceDeleteChildren": {
+          "type": "boolean"
+        }
+      }
+    },
+    "GrantDataAccessWebRequest": {
+      "x-ms-discriminator-value": "GrantDataAccessRequest",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestPayload"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "ImportTermsRequestWebRequest": {
+      "x-ms-discriminator-value": "ImportTermsRequest",
+      "required": [
+        "fileName",
+        "fileContent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestPayload"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "fileContent": {
+          "type": "string",
+          "description": "Base64 encoded file content used to import terms in batch."
+        }
+      }
+    },
+    "UpdateTermRequestWebRequest": {
+      "x-ms-discriminator-value": "UpdateTermRequest",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestPayload"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "UpdateAssetAttributesWebRequest": {
+      "x-ms-discriminator-value": "UpdateAssetAttributesRequest",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestPayload"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "object"
         }
       }
     },
@@ -1415,15 +1534,11 @@
           "type": "string",
           "description": "The GUID of workflow definition."
         },
-        "workflowType": {
-          "$ref": "#/definitions/WorkflowTypeDetail"
+        "scenarioType": {
+          "$ref": "#/definitions/scenarioTypeDetail"
         },
-        "associatedEntityIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The associated entity guid list."
+        "boundScopes": {
+          "$ref": "#/definitions/boundScopes"
         },
         "createdTime": {
           "type": "string",
@@ -1458,7 +1573,7 @@
       },
       "required": [
         "id",
-        "workflowType",
+        "scenarioType",
         "createdTime",
         "createdBy",
         "lastUpdateTime",
@@ -1468,54 +1583,22 @@
         "description"
       ]
     },
-    "WorkflowTypeDetail": {
-      "title": "WorkflowTypeDetail",
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The workflow Type.",
-          "enum": [
-            "ApprovalWorkflow"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          }
-        },
-        "category": {
-          "type": "string",
-          "description": "The workflow type category.",
-          "enum": [
-            "DataCatalog",
-            "Governance"
-          ],
-          "x-ms-enum": {
-            "name": "category",
-            "modelAsString": true
-          }
-        },
-        "action": {
-          "type": "string",
-          "description": "The workflow action.",
-          "enum": [
-            "CreateTerm",
-            "UpdateTerm",
-            "DeleteTerm",
-            "ImportTerms",
-            "GrantDataAccess",
-            "UpdateAssetAttributes"
-          ],
-          "x-ms-enum": {
-            "name": "action",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "category",
-        "action"
-      ]
+    "scenarioTypeDetail": {
+      "title": "scenarioTypeDetail",
+      "type": "string",
+      "description": "The workflow scenario type.",
+      "enum": [
+        "CreateTerm",
+        "UpdateTerm",
+        "DeleteTerm",
+        "ImportTerms",
+        "GrantDataAccess",
+        "UpdateAssetAttributes"
+      ],
+      "x-ms-enum": {
+        "name": "scenarioTypeDetail",
+        "modelAsString": true
+      }
     },
     "WorkflowDefinition": {
       "description": "The workflow definition property.",
@@ -1543,15 +1626,11 @@
       "type": "object",
       "description": "The workflow definition create or update payload.",
       "properties": {
-        "workflowType": {
-          "$ref": "#/definitions/WorkflowTypeDetail"
+        "scenarioType": {
+          "$ref": "#/definitions/scenarioTypeDetail"
         },
-        "associatedEntityIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The associated entity guid list."
+        "boundScopes": {
+          "$ref": "#/definitions/boundScopes"
         },
         "workflowName": {
           "type": "string",
@@ -1571,12 +1650,79 @@
         }
       },
       "required": [
-        "workflowType",
-        "associatedEntityIds",
+        "scenarioType",
+        "boundScopes",
         "workflowName",
         "isEnabled",
         "description"
       ]
+    },
+    "boundScopes": {
+      "type": "array",
+      "description": "The associated entities object list.",
+      "items": {
+        "$ref": "#/definitions/GatewayReferenceObject"
+      }
+    },
+    "GatewayReferenceObject": {
+      "title": "GatewayReferenceObject",
+      "discriminator": "type",
+      "type":"object",
+      "properties": {
+        "type": {
+          "type":"string",
+          "description": "",
+          "enum": [
+            "PathReference",
+            "CollectionReference"
+          ],
+          "x-ms-enum":{
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CollectionReference": {
+      "x-ms-discriminator-value": "CollectionReference",
+      "required": [
+        "referenceName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayReferenceObject"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "type": "string"
+        }
+      }
+    },
+    "PathReference": {
+      "x-ms-discriminator-value": "PathReference",
+      "required": [
+        "referenceName",
+        "referenceSource"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayReferenceObject"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "type": "string"
+        },
+        "referenceSource": {
+          "type": "string"
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Default error response model",
@@ -1619,102 +1765,6 @@
         "code",
         "message"
       ]
-    },
-    "RequestEventPayloadWebRequest": {
-      "oneOf": [
-        {
-          "$ref": "#/components/schemas/CreateTermRequestWebRequest"
-        },
-        {
-          "$ref": "#/components/schemas/DeleteTermRequestWebRequest"
-        },
-        {
-          "$ref": "#/components/schemas/GrantDataAccessWebRequest"
-        },
-        {
-          "$ref": "#/components/schemas/ImportTermsRequestWebRequest"
-        },
-        {
-          "$ref": "#/components/schemas/UpdateAssetAttributesWebRequest"
-        },
-        {
-          "$ref": "#/components/schemas/UpdateTermRequestWebRequest"
-        }
-      ]
-    },
-    "CreateTermRequestWebRequest": {
-      "required": [
-        "payload"
-      ],
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "string"
-        }
-      }
-    },
-    "DeleteTermRequestWebRequest": {
-      "required": [
-        "glossaryTermId"
-      ],
-      "type": "object",
-      "properties": {
-        "glossaryTermId": {
-          "type": "string"
-        },
-        "forceDeleteChildren": {
-          "type": "boolean"
-        }
-      }
-    },
-    "GrantDataAccessWebRequest": {
-      "required": [
-        "payload"
-      ],
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "string"
-        }
-      }
-    },
-    "ImportTermsRequestWebRequest": {
-      "required": [
-        "fileName",
-        "fileContent"
-      ],
-      "type": "object",
-      "properties": {
-        "fileName": {
-          "type": "string"
-        },
-        "fileContent": {
-          "type": "string",
-          "description": "Base64 encoded file content used to import terms in batch."
-        }
-      }
-    },
-    "UpdateTermRequestWebRequest": {
-      "required": [
-        "payload"
-      ],
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "string"
-        }
-      }
-    },
-    "UpdateAssetAttributesWebRequest": {
-      "required": [
-        "payload"
-      ],
-      "type": "object",
-      "properties": {
-        "payload": {
-          "type": "object"
-        }
-      }
     }
   },
   "parameters": {
@@ -1857,8 +1907,8 @@
       "description": "Filter items by workflow definition id list.",
       "x-ms-parameter-location": "method"
     },
-    "workflowType": {
-      "name": "workflowType",
+    "scenarioType": {
+      "name": "scenarioType",
       "in": "query",
       "required": false,
       "type": "string",
@@ -1873,7 +1923,7 @@
         "UpdateAssetAttributes"
       ],
       "x-ms-enum": {
-        "name": "workflowType",
+        "name": "scenarioType",
         "modelAsString": true
       }
     },

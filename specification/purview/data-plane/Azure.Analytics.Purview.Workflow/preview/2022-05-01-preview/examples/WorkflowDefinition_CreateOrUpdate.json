@@ -6,13 +6,13 @@
     "workflowDefinitionCreateOrUpdateCommand": {
       "workflowName": "Create glossary term",
       "description": "",
-      "workflowType": {
-        "category": "DataCatalog",
-        "type": "ApprovalWorkflow",
-        "action": "CreateTerm"
-      },
-      "associatedEntityIds": [
-        "420af98a-a15a-4241-b76c-cf37e2c3a8fd"
+      "scenarioType": "CreateTerm",
+      "boundScopes": [
+        {
+          "type": "PathReference",
+          "referenceSource": "Catalog",
+          "referenceName": "/catalog/api/atlas/v2/glossary/04dc91ea-c4d4-4d31-a212-e3ff5cae4feb"
+        }
       ],
       "isEnabled": true,
       "definition": {
@@ -101,12 +101,14 @@
     "200": {
       "body": {
         "id": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
-        "workflowType": {
-          "type": "ApprovalWorkflow",
-          "category": "DataCatalog",
-          "action": "CreateTerm"
-        },
-        "associatedEntityIds": [],
+        "scenarioType": "CreateTerm",
+        "boundScopes": [
+          {
+            "type": "PathReference",
+            "referenceSource": "Catalog",
+            "referenceName": "/catalog/api/atlas/v2/glossary/04dc91ea-c4d4-4d31-a212-e3ff5cae4feb"
+          }
+        ],
         "createdTime": "2022-05-30T08:35:49.690711398Z",
         "createdBy": "d95bd15c-fbc9-46a8-b02b-83e80262ffc9",
         "lastUpdateTime": "2022-05-30T08:35:49.690711398Z",
