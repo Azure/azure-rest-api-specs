@@ -915,7 +915,10 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/TrustedServiceByPassConfigurationList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
+              }
             },
             "description": "OK"
           },
@@ -972,7 +975,10 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/CheckDefaultStorageAccountStatusList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
+              }
             },
             "description": "OK"
           },
@@ -1707,24 +1713,6 @@
       ],
       "description": "The response to a list restorable dropped Sql pools request"
     },
-    "TrustedServiceByPassConfigurationList": {
-      "type": "object",
-      "title": "Trusted Service By Pass Configuration properties",
-      "description": "List of Trusted Service By Pass Configuration",
-      "properties": {
-        "nextLink": {
-          "description": "Link to the next page of results",
-          "type": "string"
-        },
-        "value": {
-          "description": "Properties of the Check Default Storage Account Status.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-          }
-        }
-      }
-    },
     "TrustedServiceByPassConfiguration": {
       "type": "object",
       "title": "Trusted Service By Pass Configuration properties",
@@ -1768,23 +1756,6 @@
           "description": "Endpoint ResourceId.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "CheckDefaultStorageAccountStatusList": {
-      "description": "List of Workspace Check Default Storage Account Status.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "Link to the next page of results",
-          "type": "string"
-        },
-        "value": {
-          "description": "Workspace Check Default Storage Account Status.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
-          }
         }
       }
     },
