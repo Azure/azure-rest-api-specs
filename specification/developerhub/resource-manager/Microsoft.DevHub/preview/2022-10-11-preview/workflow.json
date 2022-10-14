@@ -630,7 +630,7 @@
             "description": "Pull Request merged into repository."
           },
           {
-            "value": "merged",
+            "value": "removed",
             "description": "Workflow no longer found within repository."
           }
         ]
@@ -689,13 +689,14 @@
           "type": "string",
           "description": "The name of the app."
         },
-        "enableDockerfileGeneration": {
-          "type": "boolean",
-          "description": "Whether to enable generation of Dockerfile."
+        "manifestType": {
+          "$ref": "#/definitions/ManifestType"
         },
-        "enableManifestGeneration": {
-          "type": "boolean",
-          "description": "Whether to enable generation of deployment and ingress manifests."
+        "dockerfileGenerationMode": {
+          "$ref": "#/definitions/DockerfileGenerationMode"
+        },
+        "ManifestGenerationMode": {
+          "$ref": "#/definitions/ManifestGenerationMode"
         },
         "dockerfileOutputDirectory": {
           "type": "string",
@@ -711,7 +712,8 @@
       "type": "string",
       "enum": [
         "helm",
-        "kube"
+        "kube",
+        "kustomize"
       ],
       "x-ms-enum": {
         "name": "ManifestType",
@@ -719,11 +721,15 @@
         "values": [
           {
             "value": "helm",
-            "description": "Repositories using helm"
+            "description": "Manifests using helm"
           },
           {
             "value": "kube",
-            "description": "Repositories using kubernetes manifests"
+            "description": "Standard Kubernetes manifests"
+          },
+          {
+            "value": "kustomize",
+            "description": "Manifests using kustomize"
           }
         ]
       },
@@ -738,7 +744,7 @@
       ],
       "readOnly": true,
       "x-ms-enum": {
-        "name": "ManifestType",
+        "name": "AuthorizationStatus",
         "modelAsString": true,
         "values": [
           {
@@ -833,6 +839,52 @@
         ]
       },
       "description": "The programming language used."
+    },
+    "ManifestGenerationMode": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ManifestGenerationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enabled",
+            "description": "Manifests will be generated"
+          },
+          {
+            "value": "disabled",
+            "description": "Manifests will not be generated"
+          }
+        ]
+      },
+      "description": "The mode of generation to be used for generating Dockerfiles."
+    },
+    "DockerfileGenerationMode": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "DockerfileGenerationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enabled",
+            "description": "Dockerfiles will be generated"
+          },
+          {
+            "value": "disabled",
+            "description": "Dockerfiles will not be generated"
+          }
+        ]
+      },
+      "description": "The mode of generation to be used for generating Dockerfiles."
     },
     "WorkflowRun": {
       "type": "object",
