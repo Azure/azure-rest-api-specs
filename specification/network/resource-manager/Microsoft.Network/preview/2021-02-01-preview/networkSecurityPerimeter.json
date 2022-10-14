@@ -926,10 +926,10 @@
           "NspLinks"
         ],
         "operationId": "NspLinks_Get",
-        "description": "Gets the specified NSP link.",
+        "description": "Gets the specified NSP link resource.",
         "responses": {
           "200": {
-            "description": "OK - Returns information about the NSP link.",
+            "description": "OK - Returns NSP link resource.",
             "schema": {
               "$ref": "#/definitions/NspLink"
             }
@@ -952,7 +952,7 @@
           "NspLinks"
         ],
         "operationId": "NspLinks_CreateOrUpdate",
-        "description": "Creates or updates a NSP link.",
+        "description": "Creates or updates NSP link resource.",
         "parameters": [
           {
             "name": "parameters",
@@ -995,7 +995,7 @@
           "NspLinks"
         ],
         "operationId": "NspLinks_Delete",
-        "description": "Deletes an NSP Link.",
+        "description": "Deletes an NSP Link resource.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
@@ -1036,7 +1036,7 @@
           "NspLinks"
         ],
         "operationId": "NspLinks_List",
-        "description": "Lists the NSP Links in the specified network security perimeter.",
+        "description": "Lists the NSP Link resources in the specified network security perimeter.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1062,7 +1062,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the list of NSP links.",
+            "description": "OK - Returns the list of NSP link resources.",
             "schema": {
               "$ref": "#/definitions/NspLinkListResult"
             }
@@ -1104,7 +1104,7 @@
           "NspLinkReconcile"
         ],
         "operationId": "NspLinkReconcile_Post",
-        "description": "Reconcile NSP link",
+        "description": "Reconcile NSP link resource.",
         "responses": {
           "200": {
             "description": "OK"
@@ -1146,10 +1146,10 @@
           "NspLinkReferences"
         ],
         "operationId": "NspLinkReferences_Get",
-        "description": "Gets the specified NSP linkReference.",
+        "description": "Gets the specified NSP linkReference resource.",
         "responses": {
           "200": {
-            "description": "OK - Returns information about the NSP linkReference.",
+            "description": "OK - Returns the NSP linkReference resource.",
             "schema": {
               "$ref": "#/definitions/NspLinkReference"
             }
@@ -1172,7 +1172,7 @@
           "NspLinkReferences"
         ],
         "operationId": "NspLinkReferences_Delete",
-        "description": "Deletes an NSP LinkReference.",
+        "description": "Deletes an NSP LinkReference resource.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
@@ -1213,7 +1213,7 @@
           "NspLinkReferences"
         ],
         "operationId": "NspLinkReferences_List",
-        "description": "Lists the NSP LinkReferences in the specified network security perimeter.",
+        "description": "Lists the NSP LinkReference resources in the specified network security perimeter.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1239,7 +1239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the list of NSP linkReferences.",
+            "description": "OK - Returns the list of NSP linkReference resources.",
             "schema": {
               "$ref": "#/definitions/NspLinkReferenceListResult"
             }
@@ -1281,7 +1281,7 @@
           "NspLinkReferenceReconcile"
         ],
         "operationId": "NspLinkReferenceReconcile_Post",
-        "description": "Reconcile NSP linkReference",
+        "description": "Reconcile NSP linkReference resource.",
         "responses": {
           "200": {
             "description": "OK"
@@ -1747,7 +1747,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLinkProperties",
-          "description": "Properties of the network security perimeter link"
+          "description": "Properties of the network security perimeter link resource."
         }
       },
       "allOf": [
@@ -1765,14 +1765,14 @@
           "items": {
             "$ref": "#/definitions/NspLink"
           },
-          "description": "Gets a page of NSP Link"
+          "description": "Gets a page of NSP Link resources."
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "Result of the request to list NSP link. Contains a list of NSP link and a URL link to get the next set of results."
+      "description": "Result of the request to list NSP link resources. Contains a list of NSP link resources and a URL link to get the next set of results."
     },
     "NspLinkProperties": {
       "type": "object",
@@ -1831,7 +1831,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A message passed to the owner of the remote NSP link resource with this connection request. Restricted to 140 chars."
+          "description": "A message passed to the owner of the remote NSP link resource with this connection request. In case of Auto-approved flow, it is default to 'Auto Approved'. Restricted to 140 chars."
         },
         "status": {
           "type": "string",
@@ -1857,7 +1857,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLinkReferenceProperties",
-          "description": "Properties of the network security perimeter linkReference"
+          "description": "Properties of the network security perimeter linkReference resource."
         }
       },
       "allOf": [
@@ -1875,14 +1875,14 @@
           "items": {
             "$ref": "#/definitions/NspLinkReference"
           },
-          "description": "Gets a page of NSP LinkReference"
+          "description": "Gets a page of NSP LinkReference resources."
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "Result of the request to list NSP linkReference. Contains a list of NSP linkReference and a URL link to get the next set of results."
+      "description": "Result of the request to list NSP linkReference resources. Contains a list of NSP linkReference resources and a URL link to get the next set of results."
     },
     "NspLinkReferenceProperties": {
       "type": "object",
@@ -1955,7 +1955,7 @@
           }
         }
       },
-      "description": "Properties of NSP LinkReference."
+      "description": "Properties of NSP LinkReference resource."
     }
   },
   "parameters": {
