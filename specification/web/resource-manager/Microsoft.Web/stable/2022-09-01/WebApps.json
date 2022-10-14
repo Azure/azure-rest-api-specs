@@ -29699,27 +29699,29 @@
         "properties": {
           "description": "Additional workflow properties.",
           "type": "object",
-          "files": {
-            "description": "Gets or sets the files.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            }
-          },
-          "flowState": {
-            "description": "Gets or sets the state of the workflow.",
-            "enum": [
-              "NotSpecified",
-              "Completed",
-              "Enabled",
-              "Disabled",
-              "Deleted",
-              "Suspended"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "WorkflowState",
-              "modelAsString": false
+          "properties":{
+            "files": {
+              "description": "Gets or sets the files.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            },
+            "flowState": {
+              "description": "Gets or sets the state of the workflow.",
+              "enum": [
+                "NotSpecified",
+                "Completed",
+                "Enabled",
+                "Disabled",
+                "Deleted",
+                "Suspended"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WorkflowState",
+                "modelAsString": false
+              }
             }
           },
           "health": {
