@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Content Moderator Client",
-    "version": "2022-09-30-preview",
+    "version": "2022-11-30-preview",
     "description": "Detect harmful content"
   },
   "securityDefinitions": {
@@ -400,58 +400,16 @@
           "Term List Management"
         ],
         "operationId": "ListManagementTermLists_Update",
-        "description": "Updates an Term List.",
-        "summary": "Update Metadata of Term List By listId",
+        "description": "Updates an term list by listId, , if listId not exists, create a new term list",
+        "summary": "Upsert Term List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "name": "updateTermListRequest",
+            "name": "request",
             "in": "body",
             "description": "Properties of the term list.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TermList"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TermList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorCode"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/lists/termlists": {
-      "post": {
-        "tags": [
-          "Term List Management"
-        ],
-        "operationId": "ListManagementTermLists_Create",
-        "summary": "Create New Term List",
-        "description": "Creates a Term List",
-        "parameters": [
-          {
-            "name": "createTermListRequest",
-            "in": "body",
-            "description": "Request to create term list",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TermList"
@@ -482,7 +440,9 @@
         "produces": [
           "application/json"
         ]
-      },
+      }
+    },
+    "/lists/termlists": {
       "get": {
         "tags": [
           "Term List Management"
@@ -702,10 +662,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Term"
-              }
+              "$ref": "#/definitions/Term"
             }
           },
           "default": {
@@ -757,6 +714,7 @@
         ],
         "description": "Returns the details of the image list with list Id equal to list Id passed.",
         "operationId": "ListManagementImageLists_GetDetails",
+        "summary": "Get Image List by listId",
         "produces": [
           "application/json"
         ],
@@ -786,6 +744,7 @@
         ],
         "description": "Deletes image list with the list Id equal to list Id passed.",
         "operationId": "ListManagementImageLists_Delete",
+        "summary": "Delete Image List by listId",
         "produces": [
           "application/json"
         ],
@@ -795,11 +754,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "string"
-            }
+          "204": {
+            "description": "OK"
           },
           "default": {
             "description": "Error response.",
@@ -815,6 +771,7 @@
         ],
         "description": "Updates an image list with list Id equal to list Id passed.",
         "operationId": "ListManagementImageLists_Update",
+        "summary": "Upsert Image List",
         "consumes": [
           "application/json"
         ],
@@ -826,57 +783,24 @@
             "$ref": "#/parameters/ListId"
           },
           {
-            "name": "Content-Type",
-            "description": "The content type.",
-            "required": true,
-            "type": "string",
-            "in": "header"
-          },
-          {
-            "name": "image-body",
+            "name": "request",
             "in": "body",
-            "description": "Schema of the image body.",
+            "description": "Properties of the image list.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "Name": {
-                  "description": "Image List Name.",
-                  "type": "string"
-                },
-                "Description": {
-                  "description": "Description for image list.",
-                  "type": "string"
-                },
-                "category": {
-                  "description": "Category name for image list.",
-                  "type": "string",
-                  "enum": [
-                    "HateSpeech",
-                    "SelfHarm",
-                    "Sexual",
-                    "Violence",
-                    "Unknown"
-                  ]
-                },
-                "method": {
-                  "description": "Detection method for image list.",
-                  "enum": [
-                    "Exact",
-                    "Semantic"
-                  ],
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ImageList"
             },
             "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageList"
+          "201": {
+            "description": "Image list created successfully",
+            "headers": {
+              "ImageList-Location": {
+                "type": "string",
+                "description": "URL used to get the created image list."
+              }
             }
           },
           "default": {
@@ -889,93 +813,22 @@
       }
     },
     "/lists/imagelists": {
-      "post": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImageLists_Create",
-        "description": "Creates an image list.",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "description": "The content type.",
-            "required": true,
-            "type": "string",
-            "in": "header"
-          },
-          {
-            "name": "image-body",
-            "in": "body",
-            "description": "Schema of the image body.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Name": {
-                  "description": "Image List Name.",
-                  "type": "string"
-                },
-                "Description": {
-                  "description": "Description for image list.",
-                  "type": "string"
-                },
-                "category": {
-                  "description": "Category name for image list.",
-                  "type": "string",
-                  "enum": [
-                    "HateSpeech",
-                    "SelfHarm",
-                    "Sexual",
-                    "Violence",
-                    "Unknown"
-                  ]
-                },
-                "method": {
-                  "description": "Detection method for image list.",
-                  "enum": [
-                    "Exact",
-                    "Semantic"
-                  ],
-                  "type": "string"
-                }
-              }
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorCode"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
       "get": {
         "tags": [
           "Image List Management"
         ],
         "operationId": "ListManagementImageLists_GetAllImageLists",
         "description": "Gets all the Image Lists.",
+        "summary": "Get All Image Lists",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ImageLists"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImageList"
+              }
             }
           },
           "default": {
@@ -997,19 +850,20 @@
         ],
         "operationId": "ListManagementImage_AddImage",
         "description": "Add an image to the list with list Id equal to list Id passed.",
+        "summary": "Add Images to Image List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "name": "image-data",
+            "name": "request",
             "in": "body",
-            "description": "Raw image data.",
+            "description": "Image meta data.",
             "required": true,
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ImageData"
+                "$ref": "#/definitions/ImageInList"
               }
             },
             "x-ms-parameter-location": "method"
@@ -1020,10 +874,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageIds"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response.",
@@ -1042,6 +893,7 @@
         ],
         "operationId": "ListManagementImage_DeleteAllImages",
         "description": "Deletes all images from the list with list Id equal to list Id passed.",
+        "summary": "Delete All Images by listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -1049,10 +901,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Deleted",
-            "schema": {
-              "type": "string"
-            }
+            "description": "Deleted"
           },
           "default": {
             "description": "Error response.",
@@ -1071,6 +920,7 @@
         ],
         "operationId": "ListManagementImage_GetAllImageIds",
         "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
+        "summary": "Get All Images by listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -1078,14 +928,14 @@
           {
             "name": "skip",
             "in": "query",
-            "description": "How many terms will be skipped.",
+            "description": "How many images will be skipped.",
             "required": false,
             "type": "integer"
           },
           {
             "name": "top",
             "in": "query",
-            "description": "How many terms will be fetched.",
+            "description": "How many images will be fetched.",
             "required": false,
             "type": "integer"
           }
@@ -1094,7 +944,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ImageResponse"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImageInList"
+              }
             }
           },
           "default": {
@@ -1114,32 +967,20 @@
         ],
         "operationId": "ListManagementImage_UpdateImage",
         "description": "Update images to the list with list Id equal to list Id passed.",
+        "summary": "Update Images To Image List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "name": "image-update-body",
+            "name": "request",
             "in": "body",
             "description": "Schema of the image update body.",
             "required": true,
             "schema": {
               "type": "array",
               "items": {
-                "properties": {
-                  "imageId": {
-                    "description": "Image ID.",
-                    "type": "string"
-                  },
-                  "Description": {
-                    "description": "Description for image.",
-                    "type": "string"
-                  },
-                  "source": {
-                    "description": "Raw image source.",
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/definitions/ImageInList"
               }
             },
             "x-ms-parameter-location": "method"
@@ -1150,10 +991,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageIds"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response.",
@@ -1174,6 +1012,7 @@
         ],
         "description": "Returns the details of the image with list Id equal to list Id and image Id equal to image Id passed.",
         "operationId": "ListManagementImage_GetDetails",
+        "summary": "Get Image By ImageId and ListId",
         "produces": [
           "application/json"
         ],
@@ -1186,7 +1025,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ImageSingleResponse"
+              "$ref": "#/definitions/ImageInList"
             }
           },
           "default": {
@@ -1203,6 +1042,7 @@
         ],
         "operationId": "ListManagementImage_DeleteImage",
         "description": "Deletes an image from the list with list Id and image Id passed.",
+        "summary": "Delete Image By imageId and listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -1213,10 +1053,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Deleted.",
-            "schema": {
-              "type": "string"
-            }
+            "description": "Deleted."
           },
           "default": {
             "description": "Error response.",
@@ -1883,39 +1720,52 @@
         }
       }
     },
+    "ImageListMatchMethod": {
+      "description": "Detection method for image list.",
+      "enum": [
+        "Exact",
+        "Semantic"
+      ],
+      "type": "string"
+    },
     "ImageList": {
       "description": "Image List Properties.",
       "properties": {
-        "ListId": {
-          "description": "Image List Id.",
+        "listId": {
+          "description": "Image list Id.",
           "type": "string"
         },
-        "Name": {
-          "description": "Image List Name.",
+        "name": {
+          "description": "Image list name.",
           "type": "string"
         },
-        "Description": {
-          "description": "Description for image list.",
+        "description": {
+          "description": "Description for term list.",
           "type": "string"
         },
-        "Category": {
-          "description": "Category name for image list.",
+        "method": {
+          "$ref": "#/definitions/ImageListMatchMethod"
+        }
+      }
+    },
+    "ImageInList": {
+      "description": "Image data",
+      "required": [
+        "imageId",
+        "imageUri"
+      ],
+      "properties": {
+        "imageId": {
+          "description": "Image id",
+          "type": "string"
+        },
+        "description": {
+          "description": "Image data description",
+          "type": "string"
+        },
+        "imageUri": {
           "type": "string",
-          "enum": [
-            "HateSpeech",
-            "SelfHarm",
-            "Sexual",
-            "Violence",
-            "Unknown"
-          ]
-        },
-        "Method": {
-          "description": "Detection method for image list.",
-          "enum": [
-            "Exact",
-            "Semantic"
-          ],
-          "type": "string"
+          "format": "url"
         }
       }
     },
@@ -1923,98 +1773,6 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ImageList"
-      }
-    },
-    "ImageStatus": {
-      "description": "Image property.",
-      "properties": {
-        "ImageId": {
-          "description": "Image Id.",
-          "type": "string"
-        },
-        "Status": {
-          "description": "Image status.",
-          "type": "string",
-          "enum": [
-            "Pending",
-            "Ready",
-            "Failed"
-          ]
-        }
-      }
-    },
-    "ImageResponse": {
-      "description": "Image properties.",
-      "properties": {
-        "ListId": {
-          "description": "List Id.",
-          "type": "string"
-        },
-        "BlobUrl": {
-          "description": "Blob URL to save the image data.",
-          "type": "string"
-        }
-      }
-    },
-    "ImageData": {
-      "description": "Image data",
-      "properties": {
-        "description": {
-          "description": "Image data description",
-          "type": "string"
-        },
-        "source": {
-          "description": "",
-          "type": "string"
-        }
-      }
-    },
-    "ImageIds": {
-      "description": "Image IDs.",
-      "properties": {
-        "imageIds": {
-          "description": "Image IDs.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "imageId": {
-                "description": "Image ID.",
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "ImageSingleResponse": {
-      "description": "Single image response.",
-      "properties": {
-        "blobURL": {
-          "description": "Blob URL to save the image.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Image status.",
-          "type": "string",
-          "enum": [
-            "Pending",
-            "Ready",
-            "Failed"
-          ]
-        },
-        "imageId": {
-          "description": "Image ID.",
-          "type": "string"
-        },
-        "listId": {
-          "description": "List ID.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Image description.",
-          "type": "string"
-        }
       }
     }
   },
@@ -2068,7 +1826,7 @@
       "x-ms-parameter-location": "method"
     },
     "ImageId": {
-      "name": "ImageId",
+      "name": "imageId",
       "in": "path",
       "description": "Id of the image.",
       "required": true,
