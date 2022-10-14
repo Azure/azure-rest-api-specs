@@ -1105,23 +1105,9 @@
         ],
         "operationId": "NspLinkReconcile_Post",
         "description": "Reconcile NSP link",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NspLinkReconcile"
-            },
-            "description": "Parameters for NSP link reconcile"
-          }
-        ],
         "responses": {
           "200": {
-            "description": "Reconcile NSP link.",
-            "schema": {
-              "$ref": "#/definitions/NspLinkReconcile"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1296,23 +1282,9 @@
         ],
         "operationId": "NspLinkReferenceReconcile_Post",
         "description": "Reconcile NSP linkReference",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NspLinkReferenceReconcile"
-            },
-            "description": "Parameters for NSP linkReference reconcile"
-          }
-        ],
         "responses": {
           "200": {
-            "description": "Reconcile NSP linkReference.",
-            "schema": {
-              "$ref": "#/definitions/NspLinkReferenceReconcile"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1776,21 +1748,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLinkProperties",
           "description": "Properties of the network security perimeter link"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the link resource that is unique within a perimeter. This name can be used to access the resource."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Identifier of the network security perimeter link in ARM id format."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1825,9 +1782,9 @@
           "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the NSP Link resource."
         },
-        "autoApprovedRemotePerimeterId": {
+        "autoApprovedRemotePerimeterResourceId": {
           "type": "string",
-          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. Used when the NSP admin have access on the remote NSP resource.",
+          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. It should be used when the NSP admin have Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP resource.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1852,7 +1809,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
           "uniqueItems": true
         },
         "remoteInboundProfiles": {
@@ -1869,7 +1826,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Remote Outbound profile names from which Outbound is allowed. In current version, it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "description": "Remote Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
           "uniqueItems": true
         },
         "description": {
@@ -1894,11 +1851,6 @@
       },
       "description": "Properties of NSP Link resource."
     },
-    "NspLinkReconcile": {
-      "type": "object",
-      "properties": {},
-      "description": "Request object for NSP link reconcile."
-    },
     "NspLinkReference": {
       "type": "object",
       "properties": {
@@ -1906,21 +1858,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLinkReferenceProperties",
           "description": "Properties of the network security perimeter linkReference"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the linkReference resource that is unique within a perimeter. This name can be used to access the resource."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Identifier of the network security perimeter linkReference in ARM id format."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1955,7 +1892,7 @@
           "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the NSP LinkReference resource."
         },
-        "remotePerimeterId": {
+        "remotePerimeterResourceId": {
           "readOnly": true,
           "type": "string",
           "description": "Perimeter ARM Id for the remote NSP with which the link is created."
@@ -2019,11 +1956,6 @@
         }
       },
       "description": "Properties of NSP LinkReference."
-    },
-    "NspLinkReferenceReconcile": {
-      "type": "object",
-      "properties": {},
-      "description": "Request object for NSP linkReference reconcile."
     }
   },
   "parameters": {
