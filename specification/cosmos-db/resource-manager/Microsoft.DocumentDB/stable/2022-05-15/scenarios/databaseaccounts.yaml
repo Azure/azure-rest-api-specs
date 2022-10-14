@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+scenarios:
+  - scenario: DatabaseAccount
+    description: Microsoft.DocumentDB/databaseAccounts
+    variables:
+      accountName: databaseaccountcosmos
+    steps:
+      - step: DatabaseAccount_Create
+        exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+        requestUpdate:
+          - replace: /createUpdateParameters/properties/locations
+            value: [
+              {
+                "failoverPriority": "2",
+                "locationName": "southcentralus",
+                "is_zone_redundant": False
+              },
+              {
+                "locationName": "eastus",
+                "failoverPriority": "1"
+              },
+              {
+                "locationName": "westus",
+                "failoverPriority": "0"
+              }
+            ]
+      - step: DatabaseAccount_CheckNameExists
+        exampleFile: ../examples/CosmosDBDatabaseAccountCheckNameExists.json
+      - step: DatabaseAccount_Get
+        exampleFile: ../examples/CosmosDBDatabaseAccountGet.json
+      - step: DatabaseAccount_List
+        exampleFile: ../examples/CosmosDBDatabaseAccountList.json
+      - step: DatabaseAccount_ListByResourceGroup
+        exampleFile: ../examples/CosmosDBDatabaseAccountListByResourceGroup.json
+      - step: DatabaseAccount_ListKeys
+        exampleFile: ../examples/CosmosDBDatabaseAccountListKeys.json
+      - step: DatabaseAccount_ListConnectionStrings
+        exampleFile: ../examples/CosmosDBDatabaseAccountListConnectionStrings.json
+      - step: DatabaseAccount_GetReadOnlyKeys
+        operationId: DatabaseAccounts_GetReadOnlyKeys
+      - step: DatabaseAccount_ListReadOnlyKeys
+        operationId: DatabaseAccounts_ListReadOnlyKeys
+      - step: DatabaseAccount_ListMetricDefinitions
+        exampleFile: ../examples/CosmosDBDatabaseAccountGetMetricDefinitions.json
+      - step: DatabaseAccount_FailoverPriorityChange
+        exampleFile: ../examples/CosmosDBDatabaseAccountFailoverPriorityChange.json
+        requestUpdate:
+          - add: /failoverParameters/failoverPolicies/2
+            value: {
+                "failoverPriority": "2",
+                "locationName": "southcentralus"
+            } 
+      - step: DatabaseAccount_RegenerateKey
+        exampleFile: ../examples/CosmosDBDatabaseAccountRegenerateKey.json 
+      - step: DatabaseAccount_Update
+        operationId: DatabaseAccounts_Update
+        parameters:
+          updateParameters:
+            tags:
+              dept: finance
+      - step: DatabaseAccount_Delete
+        exampleFile: ../examples/CosmosDBDatabaseAccountDelete.json

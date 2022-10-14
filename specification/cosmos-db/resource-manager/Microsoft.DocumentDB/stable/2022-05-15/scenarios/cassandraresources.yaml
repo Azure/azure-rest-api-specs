@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  accountName: databaseaccountcassandra
+  keyspaceName:
+    type: string
+    prefix: cassandrakeyspace
+
+prepareSteps:
+  - step: DatabaseAccount_Create
+    exampleFile: ../examples/CosmosDBDatabaseAccountCreateMin.json
+    requestUpdate:
+      - replace: /createUpdateParameters/properties/locations/0/locationName
+        value: eastus
+      - add: /createUpdateParameters/properties/capabilities
+        value: [
+         "name": "EnableCassandra"
+        ]
+
+scenarios:
+  - scenario: CassandraResources
+    description: Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces
+    steps:
+      - step: CassandraResources_CreateCassandraKeyspace
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceCreateUpdate.json
+        requestUpdate:
+          - add: /createUpdateCassandraKeyspaceParameters/properties/options/throughput
+            value: 2000
+      - step: CassandraResources_GetCassandraKeyspace
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceGet.json
+      - step: CassandraResources_ListCassandraKeyspaces
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceList.json
+      - step: CassandraResources_UpdateCassandraKeyspaceThroughput
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceThroughputUpdate.json
+      - step: CassandraResources_GetCassandraKeyspaceThroughput
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceThroughputGet.json
+      - step: CassandraResources_MigrateCassandraKeyspaceToAutoscale
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceMigrateToAutoscale.json
+      - step: CassandraResources_MigrateCassandraKeyspaceToManualThroughput
+        exampleFile: ../examples/CosmosDBCassandraKeyspaceMigrateToManualThroughput.json
+
+#     Cassandra Table
+      - step: CassandraResources_CreateCassandraTable
+        exampleFile: ../examples/CosmosDBCassandraTableCreateUpdate.json
+        requestUpdate:
+          - add: /createUpdateCassandraTableParameters/properties/options/throughput
+            value: 2000
+          - remove: /createUpdateCassandraTableParameters/properties/resource/schema/clusterKeys
+      - step: CassandraResources_GetCassandraTable
+        exampleFile: ../examples/CosmosDBCassandraTableGet.json
+      - step: CassandraResources_ListCassandraTables
+        exampleFile: ../examples/CosmosDBCassandraTableList.json
+      - step: CassandraResources_UpdateCassandraTableThroughput
+        exampleFile: ../examples/CosmosDBCassandraTableThroughputUpdate.json
+      - step: CassandraResources_GetCassandraTableThroughput
+        exampleFile: ../examples/CosmosDBCassandraTableThroughputGet.json
+      - step: CassandraResources_MigrateCassandraTableToAutoscale
+        exampleFile: ../examples/CosmosDBCassandraTableMigrateToAutoscale.json
+      - step: CassandraResources_MigrateCassandraTableToManualThroughput
+        exampleFile: ../examples/CosmosDBCassandraTableMigrateToManualThroughput.json
+      - step: CassandraResources_DeleteCassandraTable
+        exampleFile: ../examples/CosmosDBCassandraTableDelete.json
