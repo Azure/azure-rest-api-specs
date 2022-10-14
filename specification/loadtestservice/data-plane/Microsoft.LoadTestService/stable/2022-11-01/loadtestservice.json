@@ -1556,41 +1556,6 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "metricTimespan.startTime",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "metricTimespan.endTime",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "aggregations",
-            "type": "array",
-            "items": {
-              "description": "The aggregation type of the metric.",
-              "enum": [
-                "Average",
-                "Count",
-                "Minimum",
-                "Maximum",
-                "None",
-                "Total",
-                "Percentile90",
-                "Percentile95",
-                "Percentile99"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "application",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/ApiVersion"
           },
           {
@@ -1770,18 +1735,23 @@
       }
     },
     "Error": {
+      "description": "Error from a REST request.",
       "type": "object",
       "properties": {
         "code": {
+          "description": "The error code.",
           "type": "string"
         },
         "message": {
+          "description": "The error message.",
           "type": "string"
         },
         "target": {
+          "description": "The error target.",
           "type": "string"
         },
         "details": {
+          "description": "Additional details and inner errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Error"
@@ -1801,6 +1771,7 @@
       }
     },
     "ErrorResponseBody": {
+      "description": "The definition of an error object.",
       "type": "object",
       "properties": {
         "error": {
