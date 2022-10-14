@@ -6,7 +6,7 @@
     "version": "2022-11-01"
   },
   "paths": {
-    "/appcomponents/{name}": {
+    "/app-components/{name}": {
       "patch": {
         "tags": [
           "AppComponent"
@@ -23,7 +23,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique name of the app component, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name of the app component, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -88,7 +88,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique name of the app component, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name of the app component, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -127,7 +127,7 @@
           "AppComponent"
         ],
         "summary": "Get app Component details by unique name.",
-        "operationId": "AppComponent_GetByTestOrTestRun",
+        "operationId": "AppComponent_Get",
         "produces": [
           "application/json"
         ],
@@ -135,7 +135,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique name of the app component, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name of the app component, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -167,19 +167,19 @@
           }
         },
         "x-ms-examples": {
-          "Get an app component by a test or test run": {
-            "$ref": "./examples/GetAppComponentByTestOrTestRun.json"
+          "Get an app component by an unique name": {
+            "$ref": "./examples/GetAppComponent.json"
           }
         }
       }
     },
-    "/appcomponents": {
+    "/app-components": {
       "get": {
         "tags": [
           "AppComponent"
         ],
-        "summary": "Get app component for a test or a test run by unique its name.",
-        "operationId": "AppComponent_Get",
+        "summary": "Get an app component for a test or a test run by its name.",
+        "operationId": "AppComponent_GetByTestOrTestRun",
         "produces": [
           "application/json"
         ],
@@ -221,8 +221,8 @@
           }
         },
         "x-ms-examples": {
-          "Get an app component by an unique name": {
-            "$ref": "./examples/GetAppComponent.json"
+          "Get an app component by a test or test run": {
+            "$ref": "./examples/GetAppComponentByTestOrTestRun.json"
           }
         }
       }
@@ -244,7 +244,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for server metrics, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -309,7 +309,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for server metrics, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -341,7 +341,7 @@
           }
         },
         "x-ms-examples": {
-          "Get server metrics by an unique namea": {
+          "Get server metrics by an unique name": {
             "$ref": "./examples/GetServerMetrics.json"
           }
         }
@@ -359,7 +359,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for server metrics, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -442,7 +442,7 @@
           }
         },
         "x-ms-examples": {
-          "Get server metrics configuration by  test or test run": {
+          "Get server metrics configuration by a test or test run": {
             "$ref": "./examples/GetServerMetricsByTestOrTestRun.json"
           }
         }
@@ -783,7 +783,7 @@
           {
             "in": "path",
             "name": "fileId",
-            "description": "Unique name for test file, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for test file, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -856,7 +856,7 @@
           {
             "in": "path",
             "name": "fileId",
-            "description": "Unique name for test file, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for test file, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -909,7 +909,7 @@
           {
             "in": "path",
             "name": "fileId",
-            "description": "Unique name for test file, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for test file, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1012,7 +1012,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1062,7 +1062,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1127,7 +1127,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1179,7 +1179,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1189,7 +1189,7 @@
           {
             "in": "path",
             "name": "fileId",
-            "description": "Unique name for test run file, must be a valid URL character ^[a-z0-9_-]*$",
+            "description": "Unique name for test run file, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1335,7 +1335,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1387,7 +1387,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1439,7 +1439,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1501,7 +1501,7 @@
           {
             "in": "path",
             "name": "testRunId",
-            "description": "Unique name for the load test run, must be a valid URL character ^[a-z0-9_-]*$.",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "maxLength": 50,
@@ -1614,8 +1614,7 @@
       "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "required": [
         "resourceId",
-        "resourceName",
-        "resourceType"
+        "resourceName"
       ],
       "type": "object",
       "properties": {
@@ -1624,11 +1623,11 @@
           "type": "string"
         },
         "resourceName": {
-          "description": "Azure resource name",
+          "description": "Azure resource name, required while creating the app component.",
           "type": "string"
         },
         "resourceType": {
-          "description": "Azure resource type",
+          "description": "Azure resource type, required while creating the app component.",
           "type": "string"
         },
         "displayName": {
@@ -2907,17 +2906,13 @@
     "TestIdQueryParameter": {
       "in": "query",
       "name": "testId",
-      "description": "Unique name for the load test, must be a valid URL character ^[a-z0-9_-]*$.",
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 2,
-      "pattern": "^[a-z0-9_-]*$",
-      "x-ms-parameter-location": "method"
+      "description": "Unique name of an existing load test.",
+      "type": "string"
     },
     "TestIdPathParameter": {
       "in": "path",
       "name": "testId",
-      "description": "Unique name for the load test, must be a valid URL character ^[a-z0-9_-]*$.",
+      "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
       "required": true,
       "type": "string",
       "maxLength": 50,
