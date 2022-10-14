@@ -17,15 +17,15 @@
       "apim_key": []
     }
   ],
-  "basePath": "/contentmoderator/moderate",
+  "basePath": "/contentmoderator",
   "paths": {
-    "/text/detect": {
+    "/moderate/text/detect": {
       "post": {
         "tags": [
-          "Text"
+          "Text Moderation"
         ],
         "summary": "Text Detect",
-        "description": "A sync API for harmful content detection",
+        "description": "A sync API for harmful content detection for text",
         "operationId": "Text_Detect",
         "consumes": [
           "application/json"
@@ -36,7 +36,7 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/Locale"
+            "$ref": "#/parameters/Language"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -66,6 +66,1171 @@
           }
         }
       }
+    },
+    "/moderate/text/batchDetect": {
+      "post": {
+        "tags": [
+          "Text Moderation"
+        ],
+        "summary": "Text Batch Detect",
+        "description": "An async API for harmful content detection for image batch",
+        "operationId": "Text_BatchDetect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "textBatchDetectRequest",
+            "in": "body",
+            "description": "The detection request of the image batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextBatchDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully",
+            "headers": {
+              "Results-Location": {
+                "type": "string",
+                "description": "URL used to track the progress and obtain the result of the batch detect operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/moderate/text/batchDetect/detectResults/{resultId}": {
+      "get": {
+        "tags": [
+          "Text Moderation"
+        ],
+        "summary": "Get Text Batch Detect Results",
+        "description": "An API to get harmful content detection results for text batch",
+        "operationId": "Text_BatchDetect_Results",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/TextBatchDetectResultsResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/moderate/image/detect": {
+      "post": {
+        "tags": [
+          "Image Moderation"
+        ],
+        "summary": "Image Detect",
+        "description": "A sync API for harmful content detection for image",
+        "operationId": "Image_Detect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "imageDetectRequest",
+            "in": "body",
+            "description": "The detection request of the image",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/ImageDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/moderate/image/batchDetect": {
+      "post": {
+        "tags": [
+          "Image Moderation"
+        ],
+        "summary": "Image Batch Detect",
+        "description": "An async API for harmful content detection for image batch",
+        "operationId": "Image_BatchDetect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "imageBatchDetectRequest",
+            "in": "body",
+            "description": "The detection request of the image batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageBatchDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully",
+            "headers": {
+              "Results-Location": {
+                "type": "string",
+                "description": "URL used to track the progress and obtain the result of the batch detect operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/moderate/image/batchDetect/detectResults/{resultId}": {
+      "get": {
+        "tags": [
+          "Image Moderation"
+        ],
+        "summary": "Get Image Batch Detect Results",
+        "description": "An API to get harmful content detection results for image batch",
+        "operationId": "Image_BatchDetect_Results",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/ImageBatchDetectResultsResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/moderate/imageWithText/detect": {
+      "post": {
+        "tags": [
+          "ImageWithText Moderation"
+        ],
+        "summary": "ImageWithText Detect",
+        "description": "A sync API for harmful content detection for image-with-text",
+        "operationId": "Image_With_Text_Detect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "imageWithTextDetectRequest",
+            "in": "body",
+            "description": "The detection request of the image-with-text",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageWithTextDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/ImageWithTextDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/lists/termlists/{listId}": {
+      "get": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTermLists_GetDetails",
+        "description": "Returns list Id details of the term list with list Id equal to list Id passed.",
+        "summary": "Get Term List By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TermList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTermLists_Delete",
+        "description": "Deletes term list with the list Id equal to list Id passed.",
+        "summary": "Delete Term List By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTermLists_Update",
+        "description": "Updates an Term List.",
+        "summary": "Update Metadata of Term List By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "updateTermListRequest",
+            "in": "body",
+            "description": "Properties of the term list.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermList"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TermList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/lists/termlists": {
+      "post": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTermLists_Create",
+        "summary": "Create New Term List",
+        "description": "Creates a Term List",
+        "parameters": [
+          {
+            "name": "createTermListRequest",
+            "in": "body",
+            "description": "Request to create term list",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermList"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Term list created successfully",
+            "headers": {
+              "TermList-Location": {
+                "type": "string",
+                "description": "URL used to get the created term list."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTermLists_GetAllTermLists",
+        "description": "gets all the Term Lists",
+        "summary": "Get All Term Lists",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TermList"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/lists/termlists/{listId}/terms": {
+      "post": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementImage_AddTerm",
+        "description": "Add a term to the list with list Id equal to list Id passed.",
+        "summary": "Add Terms To Term List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "addTermsRequest",
+            "in": "body",
+            "description": "Raw term data.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Term"
+              }
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Terms added successfully"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTerm_DeleteAllTerms",
+        "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
+        "summary": "Delete All Terms By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTerm_GetAllTerms",
+        "description": "Gets all terms from the list with list Id equal to the list Id passed.",
+        "summary": "Get All Terms By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "How many terms will be skipped.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "How many terms will be fetched.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Term"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTerm_UpdateTerm",
+        "description": "Update terms to the list with list Id equal to list Id passed.",
+        "summary": "Update Terms To Term List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "updateTermsRequest",
+            "in": "body",
+            "description": "Schema of the term update body.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Term"
+              }
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/lists/termlists/{listId}/terms/{termId}": {
+      "get": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTerm_AddTerm",
+        "description": "Returns the details of the term with list Id equal to list Id and image Id equal to image Id passed.",
+        "summary": "Get Term By TermId and ListId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Term"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Term List Management"
+        ],
+        "operationId": "ListManagementTerm_DeleteTerm",
+        "description": "Deletes a term from the list with list Id equal to the list Id passed.",
+        "summary": "Delete Term By TermId and ListId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "$ref": "#/parameters/TermId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/lists/imagelists/{listId}": {
+      "get": {
+        "tags": [
+          "Image List Management"
+        ],
+        "description": "Returns the details of the image list with list Id equal to list Id passed.",
+        "operationId": "ListManagementImageLists_GetDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Image List Management"
+        ],
+        "description": "Deletes image list with the list Id equal to list Id passed.",
+        "operationId": "ListManagementImageLists_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Image List Management"
+        ],
+        "description": "Updates an image list with list Id equal to list Id passed.",
+        "operationId": "ListManagementImageLists_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
+          },
+          {
+            "name": "image-body",
+            "in": "body",
+            "description": "Schema of the image body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "description": "Image List Name.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description for image list.",
+                  "type": "string"
+                },
+                "category": {
+                  "description": "Category name for image list.",
+                  "type": "string",
+                  "enum": [
+                    "HateSpeech",
+                    "SelfHarm",
+                    "Sexual",
+                    "Violence",
+                    "Unknown"
+                  ]
+                },
+                "method": {
+                  "description": "Detection method for image list.",
+                  "enum": [
+                    "Exact",
+                    "Semantic"
+                  ],
+                  "type": "string"
+                }
+              }
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/lists/imagelists": {
+      "post": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImageLists_Create",
+        "description": "Creates an image list.",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
+          },
+          {
+            "name": "image-body",
+            "in": "body",
+            "description": "Schema of the image body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "description": "Image List Name.",
+                  "type": "string"
+                },
+                "Description": {
+                  "description": "Description for image list.",
+                  "type": "string"
+                },
+                "category": {
+                  "description": "Category name for image list.",
+                  "type": "string",
+                  "enum": [
+                    "HateSpeech",
+                    "SelfHarm",
+                    "Sexual",
+                    "Violence",
+                    "Unknown"
+                  ]
+                },
+                "method": {
+                  "description": "Detection method for image list.",
+                  "enum": [
+                    "Exact",
+                    "Semantic"
+                  ],
+                  "type": "string"
+                }
+              }
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImageLists_GetAllImageLists",
+        "description": "Gets all the Image Lists.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageLists"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/lists/imagelists/{listId}/images": {
+      "post": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImage_AddImage",
+        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "image-data",
+            "in": "body",
+            "description": "Raw image data.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImageData"
+              }
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageIds"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImage_DeleteAllImages",
+        "description": "Deletes all images from the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImage_GetAllImageIds",
+        "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "How many terms will be skipped.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "How many terms will be fetched.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImage_UpdateImage",
+        "description": "Update images to the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "image-update-body",
+            "in": "body",
+            "description": "Schema of the image update body.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "imageId": {
+                    "description": "Image ID.",
+                    "type": "string"
+                  },
+                  "Description": {
+                    "description": "Description for image.",
+                    "type": "string"
+                  },
+                  "source": {
+                    "description": "Raw image source.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageIds"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/lists/imagelists/{listId}/images/{imageId}": {
+      "get": {
+        "tags": [
+          "Image List Management"
+        ],
+        "description": "Returns the details of the image with list Id equal to list Id and image Id equal to image Id passed.",
+        "operationId": "ListManagementImage_GetDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageSingleResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Image List Management"
+        ],
+        "operationId": "ListManagementImage_DeleteImage",
+        "description": "Deletes an image from the list with list Id and image Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "$ref": "#/parameters/ImageId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -76,11 +1241,26 @@
         "HateSpeech",
         "SelfHarm",
         "Sexual",
-        "Violence"
+        "Violence",
+        "Unknown"
       ],
       "x-ms-enum": {
         "name": "TextCategory",
         "modelAsString": false
+      }
+    },
+    "TextListMatchResult": {
+      "description": "The result of custom list match",
+      "type": "object",
+      "properties": {
+        "listId": {
+          "description": "The id of matched custom list",
+          "type": "string"
+        },
+        "term": {
+          "description": "The matched term",
+          "$ref": "#/definitions/Term"
+        }
       }
     },
     "TextDetectDiagnosis": {
@@ -108,6 +1288,13 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "listMatchResults": {
+          "description": "The detail of list match",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextListMatchResult"
           }
         }
       }
@@ -143,6 +1330,13 @@
           "items": {
             "$ref": "#/definitions/TextDetectDiagnosis"
           }
+        },
+        "listMatchResults": {
+          "description": "The details of list match",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextListMatchResult"
+          }
         }
       }
     },
@@ -163,6 +1357,17 @@
           "items": {
             "$ref": "#/definitions/TextCategory"
           }
+        },
+        "lists": {
+          "description": "The k-v pairs of <category, list id array>",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "listId"
+            }
+          }
         }
       }
     },
@@ -181,6 +1386,89 @@
         }
       }
     },
+    "TextBatchDetectRequest": {
+      "description": "The detection request of the text batch",
+      "type": "object",
+      "required": [
+        "textBatchUri"
+      ],
+      "properties": {
+        "textBatchUri": {
+          "description": "The blob uri of text files need to be scanned",
+          "type":"string",
+          "format": "uri"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be detected, if not assigned, all the categories will be detected",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          }
+        }
+      }
+    },
+    "TextBatchDetectResultsResponse": {
+      "description": "Status and result of the batch detection.",
+      "type": "object",
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
+      "properties": {
+        "status": {
+          "description": "Batch detection status.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "TextBatchDetectStatus",
+            "modelAsString": false
+          }
+        },
+        "createdDateTime": {
+          "description": "Date and time (UTC) when the batch detection was submitted.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedDateTime": {
+          "description": "Date and time (UTC) when the status was last updated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "results": {
+          "description": "Batch detection results",
+          "type":"array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "textFileName": {
+                "description": "File name of individual image",
+                "type": "string"
+              },
+              "value": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/TextDetectResult"
+                  }
+              },
+              "error": {
+                "description": "Error encountered when processing individual image",
+                "$ref": "#/definitions/ErrorCode"
+              }
+            }
+          }
+        },
+        "error": {
+          "description": "Error encountered during batch detection",
+          "$ref": "#/definitions/ErrorCode"
+        }
+      }
+    },
     "ErrorCode": {
       "type": "object",
       "properties": {
@@ -188,6 +1476,543 @@
           "type": "string"
         },
         "code": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageCategory": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Adult",
+        "Racy",
+        "Underage",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ImageCategory",
+        "modelAsString": false
+      }
+    },
+    "Image": {
+      "description": "The content or url of image",
+      "type":"object",
+      "properties": {
+        "content": {
+          "description": "Base64 encoding of image",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The blob uri of image",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ImageDetectRequest": {
+      "description": "The detection request of the image",
+      "type": "object",
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "description": "The image needs to be scanned",
+          "$ref": "#/definitions/Image"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be detected, if not assigned, all the categories will be detected",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        }
+      }
+    },
+    "ImageListMatchResult": {
+      "description": "The result of custom list match",
+      "type": "object",
+      "properties": {
+        "listId": {
+          "description": "The id of matched custom list",
+          "type": "string"
+        },
+        "imageId": {
+          "description": "The id of matched image",
+          "type": "string"
+        }
+      }
+    },
+    "ImageDetectDiagnosis": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "left",
+        "top",
+        "detected"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The width of the diagnosis rectangle, in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The height of the diagnosis rectangle, in pixels."
+        },
+        "left": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The distance from the left edge if the image to the left edge of the diagnosis rectangle, in pixels."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The distance from the top edge if the image to the top edge of the diagnosis rectangle, in pixels."
+        },
+        "detected": {
+          "type": "boolean",
+          "description": "Whether this category is detected in diagnosis rectangle"
+        },
+        "score": {
+          "description": "The score of detection result",
+          "type": "number",
+          "format": "float"
+        },
+        "diagnosisDetail": {
+          "description": "The additional fields of model output",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listMatchResults": {
+          "description": "The detail of list match",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageListMatchResult"
+          }
+        }
+      }
+    },
+    "ImageDetectResult": {
+      "type": "object",
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageCategory"
+        },
+        "detected": {
+          "description": "Whether this category is detected in this input image",
+          "type": "boolean"
+        },
+        "score": {
+          "description": "The score of detection result",
+          "type": "number",
+          "format": "float"
+        },
+        "modelOutputDetail": {
+          "description": "The additional fields of model output",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "diagnoses": {
+          "description": "The diagnoses array, each element contains detection result in diagnosis rectangle",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDetectDiagnosis"
+          }
+        },
+        "listMatchDetails": {
+          "description": "The details of list match",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageListMatchResult"
+          }
+        }
+      }
+    },
+    "ImageDetectResponse": {
+      "description": "The detection response of the image",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ImageDetectResult"
+            }
+        }
+      }
+    },
+    "ImageBatchDetectRequest": {
+      "description": "The detection request of the image batch",
+      "type": "object",
+      "required": [
+        "imageBatchUri"
+      ],
+      "properties": {
+        "imageBatchUri": {
+          "description": "The blob uri of images need to be scanned",
+          "type":"string",
+          "format": "uri"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be detected, if not assigned, all the categories will be detected",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        }
+      }
+    },
+    "ImageBatchDetectResultsResponse": {
+      "description": "Status and result of the batch detection.",
+      "type": "object",
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
+      "properties": {
+        "status": {
+          "description": "Batch detection status.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ImageBatchDetectStatus",
+            "modelAsString": false
+          }
+        },
+        "createdDateTime": {
+          "description": "Date and time (UTC) when the batch detection was submitted.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedDateTime": {
+          "description": "Date and time (UTC) when the status was last updated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "results": {
+          "description": "Batch detection results",
+          "type":"array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "imageFileName": {
+                "description": "File name of individual image",
+                "type": "string"
+              },
+              "value": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/ImageDetectResult"
+                  }
+              },
+              "error": {
+                "description": "Error encountered when processing individual image",
+                "$ref": "#/definitions/ErrorCode"
+              }
+            }
+          }
+        },
+        "error": {
+          "description": "Error encountered during batch detection",
+          "$ref": "#/definitions/ErrorCode"
+        }
+      }
+    },
+    "ImageWithTextCategory": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ImageWithTextCategory",
+        "modelAsString": false
+      }
+    },
+    "ImageWithText": {
+      "description": "The image and text",
+      "type": "object",
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "text": {
+          "description": "Text associated with the image",
+          "type": "string"
+        }
+      }
+    },
+    "ImageWithTextDetectRequest": {
+      "description": "The detection request of the image-with-text",
+      "type": "object",
+      "required": [
+        "imageWithText"
+      ],
+      "properties": {
+        "image": {
+          "description": "The image needs to be scanned",
+          "$ref": "#/definitions/ImageWithText"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be detected, if not assigned, all the categories will be detected",
+          "items": {
+            "$ref": "#/definitions/ImageWithTextCategory"
+          }
+        }
+      }
+    },
+    "ImageWithTextDetectResult": {
+      "type": "object",
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageWithTextCategory"
+        },
+        "detected": {
+          "description": "Whether this category is detected in this input image-with-text",
+          "type": "boolean"
+        },
+        "score": {
+          "description": "The score of detection result",
+          "type": "number",
+          "format": "float"
+        },
+        "modelOutputDetail": {
+          "description": "The additional fields of model output",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImageWithTextDetectResponse": {
+      "description": "The detection response of the image-with-text",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ImageWithTextDetectResult"
+            }
+        }
+      }
+    },
+    "TermListMatchMethod": {
+      "description": "Detection method for term list.",
+      "enum": [
+        "Exact",
+        "Semantic"
+      ],
+      "type": "string"
+    },
+    "TermList": {
+      "description": "Term List.",
+      "required": [
+        "listId",
+        "method"
+      ],
+      "properties": {
+        "listId": {
+          "description": "Term list Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Term list name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for term list.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/TermListMatchMethod"
+        },
+        "language": {
+          "description": "language hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
+          "type": "string"
+        }
+      }
+    },
+    "Term": {
+      "description": "Term data",
+      "required": [
+        "termId",
+        "term"
+      ],
+      "properties": {
+        "termId": {
+          "description": "Term id",
+          "type": "string"
+        },
+        "description": {
+          "description": "Image data description",
+          "type": "string"
+        },
+        "term": {
+          "description": "Term content.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageList": {
+      "description": "Image List Properties.",
+      "properties": {
+        "ListId": {
+          "description": "Image List Id.",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Image List Name.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description for image list.",
+          "type": "string"
+        },
+        "Category": {
+          "description": "Category name for image list.",
+          "type": "string",
+          "enum": [
+            "HateSpeech",
+            "SelfHarm",
+            "Sexual",
+            "Violence",
+            "Unknown"
+          ]
+        },
+        "Method": {
+          "description": "Detection method for image list.",
+          "enum": [
+            "Exact",
+            "Semantic"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "ImageLists": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ImageList"
+      }
+    },
+    "ImageStatus": {
+      "description": "Image property.",
+      "properties": {
+        "ImageId": {
+          "description": "Image Id.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Image status.",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Ready",
+            "Failed"
+          ]
+        }
+      }
+    },
+    "ImageResponse": {
+      "description": "Image properties.",
+      "properties": {
+        "ListId": {
+          "description": "List Id.",
+          "type": "string"
+        },
+        "BlobUrl": {
+          "description": "Blob URL to save the image data.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageData": {
+      "description": "Image data",
+      "properties": {
+        "description": {
+          "description": "Image data description",
+          "type": "string"
+        },
+        "source": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "ImageIds": {
+      "description": "Image IDs.",
+      "properties": {
+        "imageIds": {
+          "description": "Image IDs.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "imageId": {
+                "description": "Image ID.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ImageSingleResponse": {
+      "description": "Single image response.",
+      "properties": {
+        "blobURL": {
+          "description": "Blob URL to save the image.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Image status.",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Ready",
+            "Failed"
+          ]
+        },
+        "imageId": {
+          "description": "Image ID.",
+          "type": "string"
+        },
+        "listId": {
+          "description": "List ID.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Image description.",
           "type": "string"
         }
       }
@@ -203,9 +2028,9 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
-    "Locale": {
-      "name": "locale",
-      "description": "Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
+    "Language": {
+      "name": "language",
+      "description": "Language hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
       "required": false,
       "type": "string",
       "in": "query",
@@ -225,6 +2050,38 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "client"
+    },
+    "ResultId": {
+      "name": "resultId",
+      "description": "Batch detect operation result ID.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "ListId": {
+      "name": "listId",
+      "in": "path",
+      "description": "List Id of the list.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ImageId": {
+      "name": "ImageId",
+      "in": "path",
+      "description": "Id of the image.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TermId": {
+      "name": "termId",
+      "in": "path",
+      "description": "Id of the image.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "x-ms-parameterized-host": {
