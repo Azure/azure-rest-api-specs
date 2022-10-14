@@ -72,7 +72,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last execution of each export.",
+            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last run of each export.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -136,7 +136,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last 10 executions of the export.",
+            "description": "May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last 10 runs of the export.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -285,8 +285,8 @@
         "tags": [
           "Exports"
         ],
-        "operationId": "Exports_Execute",
-        "description": "The operation to execute an export.",
+        "operationId": "Exports_Run",
+        "description": "The operation to run an export.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -339,8 +339,8 @@
         "tags": [
           "Exports"
         ],
-        "operationId": "Exports_GetExecutionHistory",
-        "description": "The operation to get the execution history of an export for the defined scope and export name.",
+        "operationId": "Exports_GetRunHistory",
+        "description": "The operation to get the run history of an export for the defined scope and export name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -379,7 +379,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExportExecutionListResult"
+              "$ref": "#/definitions/ExportRunListResult"
             }
           },
           "default": {
@@ -462,15 +462,15 @@
           "$ref": "#/definitions/ExportDefinition"
         },
         "runHistory": {
-          "description": "If requested, has the most recent execution history for the export.",
-          "$ref": "#/definitions/ExportExecutionListResult"
+          "description": "If requested, has the most recent run history for the export.",
+          "$ref": "#/definitions/ExportRunListResult"
         },
         "partitionData": {
-          "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for modern commerce scopes.",
+          "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for Microsoft Customer Agreement commerce scopes.",
           "type": "boolean"
         },
         "nextRunTimeEstimate": {
-          "description": "If the export has an active schedule, provides an estimate of the next execution time.",
+          "description": "If the export has an active schedule, provides an estimate of the next run time.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -680,22 +680,22 @@
         "to"
       ]
     },
-    "ExportExecutionListResult": {
-      "description": "Result of listing the execution history of an export.",
+    "ExportRunListResult": {
+      "description": "Result of listing the run history of an export.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of export executions.",
+          "description": "A list of export runs.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ExportExecution"
+            "$ref": "#/definitions/ExportRun"
           }
         }
       }
     },
-    "ExportExecution": {
-      "description": "An export execution.",
+    "ExportRun": {
+      "description": "An export run.",
       "type": "object",
       "allOf": [
         {
@@ -705,17 +705,17 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExportExecutionProperties",
-          "title": "Export execution properties"
+          "$ref": "#/definitions/ExportRunProperties",
+          "title": "Export run properties"
         }
       }
     },
-    "ExportExecutionProperties": {
-      "description": "The properties of the export execution.",
+    "ExportRunProperties": {
+      "description": "The properties of the export run.",
       "type": "object",
       "properties": {
         "executionType": {
-          "description": "The type of the export execution.",
+          "description": "The type of the export run.",
           "type": "string",
           "enum": [
             "OnDemand",
@@ -727,7 +727,7 @@
           }
         },
         "status": {
-          "description": "The last known status of the export execution.",
+          "description": "The last known status of the export run.",
           "type": "string",
           "enum": [
             "Queued",
@@ -744,21 +744,21 @@
           }
         },
         "submittedBy": {
-          "description": "The identifier for the entity that executed the export. For OnDemand executions it is the user email. For scheduled executions it is 'System'.",
+          "description": "The identifier for the entity that triggered the export. For on-demand runs it is the user email. For scheduled runs it is 'System'.",
           "type": "string"
         },
         "submittedTime": {
-          "description": "The time when export was queued to be executed.",
+          "description": "The time when export was queued to be run.",
           "type": "string",
           "format": "date-time"
         },
         "processingStartTime": {
-          "description": "The time when export was picked up to be executed.",
+          "description": "The time when export was picked up to be run.",
           "type": "string",
           "format": "date-time"
         },
         "processingEndTime": {
-          "description": "The time when the export execution finished.",
+          "description": "The time when the export run finished.",
           "type": "string",
           "format": "date-time"
         },
@@ -767,7 +767,7 @@
           "type": "string"
         },
         "runSettings": {
-          "description": "The export settings that were in effect for this execution.",
+          "description": "The export settings that were in effect for this run.",
           "$ref": "#/definitions/CommonExportProperties"
         },
         "error": {
