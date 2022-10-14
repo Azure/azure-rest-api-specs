@@ -12,7 +12,7 @@
           "AppComponent"
         ],
         "summary": "Associate an app component (Azure resource) to a test or test run.",
-        "operationId": "AppComponent_CreateOrUpdateAppComponents",
+        "operationId": "AppComponent_CreateOrUpdate",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -80,7 +80,7 @@
           "AppComponent"
         ],
         "summary": "Delete an app component.",
-        "operationId": "AppComponent_DeleteAppComponent",
+        "operationId": "AppComponent_Delete",
         "produces": [
           "application/json"
         ],
@@ -127,7 +127,7 @@
           "AppComponent"
         ],
         "summary": "Get app Component details by unique name.",
-        "operationId": "AppComponent_GetAppComponentByName",
+        "operationId": "AppComponent_GetByTestOrTestRun",
         "produces": [
           "application/json"
         ],
@@ -179,7 +179,7 @@
           "AppComponent"
         ],
         "summary": "Get app component for a test or a test run by unique its name.",
-        "operationId": "AppComponent_GetAppComponent",
+        "operationId": "AppComponent_Get",
         "produces": [
           "application/json"
         ],
@@ -233,7 +233,7 @@
           "ServerMetrics"
         ],
         "summary": "Configure server metrics for a test or test run",
-        "operationId": "ServerMetrics_CreateOrUpdateServerMetricsConfig",
+        "operationId": "ServerMetrics_CreateOrUpdate",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -301,7 +301,7 @@
           "ServerMetrics"
         ],
         "summary": "Get server metrics configuration by its name.",
-        "operationId": "ServerMetrics_GetServerMetricsByName",
+        "operationId": "ServerMetrics_Get",
         "produces": [
           "application/json"
         ],
@@ -341,8 +341,8 @@
           }
         },
         "x-ms-examples": {
-          "Get server metrics configuration by an unique name": {
-            "$ref": "./examples/GetServerMetricsByName.json"
+          "Get server metrics by a test or test run": {
+            "$ref": "./examples/GetServerMetrics.json"
           }
         }
       },
@@ -351,7 +351,7 @@
           "ServerMetrics"
         ],
         "summary": "Delete server metrics configuration by its name",
-        "operationId": "ServerMetrics_DeleteServerMetrics",
+        "operationId": "ServerMetrics_Delete",
         "produces": [
           "application/json"
         ],
@@ -400,7 +400,7 @@
           "ServerMetrics"
         ],
         "summary": "Get server metrics configuration for a test or test run by its name.",
-        "operationId": "ServerMetrics_GetServerMetrics",
+        "operationId": "ServerMetrics_GetByTestOrTestRun",
         "produces": [
           "application/json"
         ],
@@ -442,8 +442,8 @@
           }
         },
         "x-ms-examples": {
-          "Get server metrics by a test or test run": {
-            "$ref": "./examples/GetServerMetrics.json"
+          "Get server metrics configuration by an unique name": {
+            "$ref": "./examples/GetServerMetricsByName.json"
           }
         }
       }
@@ -454,7 +454,7 @@
           "ServerMetrics"
         ],
         "summary": "Get all default server metrics configuration for supported resource types.",
-        "operationId": "ServerMetrics_GetServerDefaultMetrics",
+        "operationId": "ServerMetrics_GetDefaultMetrics",
         "produces": [
           "application/json"
         ],
@@ -538,7 +538,7 @@
           "Test"
         ],
         "summary": "Create a new test or update an existing test.",
-        "operationId": "Test_CreateOrUpdateTest",
+        "operationId": "Test_CreateOrUpdate",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -599,7 +599,7 @@
           "Test"
         ],
         "summary": "Delete a test by its name.",
-        "operationId": "Test_DeleteLoadTest",
+        "operationId": "Test_Delete",
         "produces": [
           "application/json"
         ],
@@ -639,7 +639,7 @@
           "Test"
         ],
         "summary": "Get load test details by test name",
-        "operationId": "Test_GetLoadTest",
+        "operationId": "Test_Get",
         "produces": [
           "application/json"
         ],
@@ -684,7 +684,7 @@
           "Test"
         ],
         "summary": "Get all load tests by the fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
-        "operationId": "Test_ListLoadTestSearch",
+        "operationId": "Test_List",
         "produces": [
           "application/json"
         ],
@@ -769,7 +769,7 @@
           "Test"
         ],
         "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten. File should be provided in the request body as multipart/form-data.",
-        "operationId": "Test_UploadTestFile",
+        "operationId": "Test_UploadFile",
         "consumes": [
           "multipart/form-data"
         ],
@@ -798,7 +798,11 @@
               "JMX_FILE",
               "USER_PROPERTIES",
               "ADDITIONAL_ARTIFACTS"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "fileType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -841,7 +845,7 @@
           "Test"
         ],
         "summary": "Get test file by the file name.",
-        "operationId": "Test_GetTestFile",
+        "operationId": "Test_GetFile",
         "produces": [
           "application/json"
         ],
@@ -894,7 +898,7 @@
           "Test"
         ],
         "summary": "Delete file by the file name for a test",
-        "operationId": "Test_DeleteTestFile",
+        "operationId": "Test_DeleteFile",
         "produces": [
           "application/json"
         ],
@@ -946,7 +950,7 @@
           "Test"
         ],
         "summary": "Get all test files.",
-        "operationId": "Test_GetAllTestFiles",
+        "operationId": "Test_GetAllFiles",
         "produces": [
           "application/json"
         ],
@@ -1000,7 +1004,7 @@
           "TestRun"
         ],
         "summary": "Delete a test run by its name.",
-        "operationId": "TestRun_DeleteTestRun",
+        "operationId": "TestRun_Delete",
         "produces": [
           "application/json"
         ],
@@ -1047,7 +1051,7 @@
           "TestRun"
         ],
         "summary": "Create and start a new test run with the given name.",
-        "operationId": "TestRun_CreateOrUpdateTestRun",
+        "operationId": "TestRun_CreateOrUpdate",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1115,7 +1119,7 @@
           "TestRun"
         ],
         "summary": "Get test run details by name.",
-        "operationId": "TestRun_GetTestRun",
+        "operationId": "TestRun_Get",
         "produces": [
           "application/json"
         ],
@@ -1167,7 +1171,7 @@
           "TestRun"
         ],
         "summary": "Get test run file by file name.",
-        "operationId": "TestRun_GetTestRunFile",
+        "operationId": "TestRun_GetFile",
         "produces": [
           "application/json"
         ],
@@ -1229,7 +1233,7 @@
           "TestRun"
         ],
         "summary": "Get all test runs with given filters",
-        "operationId": "TestRun_ListTestRunsSearch",
+        "operationId": "TestRun_List",
         "produces": [
           "application/json"
         ],
@@ -1323,7 +1327,7 @@
           "TestRun"
         ],
         "summary": "Stop test run by name.",
-        "operationId": "TestRun_StopTestRun",
+        "operationId": "TestRun_Stop",
         "produces": [
           "application/json"
         ],
@@ -1521,7 +1525,11 @@
               "PT1M",
               "PT5M",
               "PT1H"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "interval",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
@@ -1548,7 +1556,7 @@
               "Metadata"
             ],
             "x-ms-enum": {
-              "name": "ResultType",
+              "name": "resultType",
               "modelAsString": true
             }
           },
@@ -1744,6 +1752,10 @@
     },
     "Error": {
       "description": "Error from a REST request.",
+      "required": [
+        "code",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1780,6 +1792,9 @@
     },
     "ErrorResponseBody": {
       "description": "The definition of an error object.",
+      "required": [
+        "error"
+      ],
       "type": "object",
       "properties": {
         "error": {
@@ -2028,8 +2043,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name and the display name of the metric, i.e. it is a localizable string.",
-          "type": "string"
+          "$ref": "#/definitions/LocalizableString"
         },
         "namespace": {
           "description": "The namespace the metric belongs to.",
