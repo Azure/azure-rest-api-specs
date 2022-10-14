@@ -29673,32 +29673,57 @@
       "description": "Workflow properties definition.",
       "type": "object",
       "properties": {
-        "files": {
-          "description": "Gets or sets the files.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "flowState": {
-          "description": "Gets or sets the state of the workflow.",
-          "enum": [
-            "NotSpecified",
-            "Completed",
-            "Enabled",
-            "Disabled",
-            "Deleted",
-            "Suspended"
-          ],
+        "id": {
           "type": "string",
-          "x-ms-enum": {
-            "name": "WorkflowState",
-            "modelAsString": false
-          }
+          "readOnly": true,
+          "description": "The resource id."
         },
-        "health": {
-          "$ref": "#/definitions/WorkflowHealth",
-          "description": "Gets or sets workflow health."
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The resource kind."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "properties": {
+          "files": {
+            "description": "Gets or sets the files.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "flowState": {
+            "description": "Gets or sets the state of the workflow.",
+            "enum": [
+              "NotSpecified",
+              "Completed",
+              "Enabled",
+              "Disabled",
+              "Deleted",
+              "Suspended"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WorkflowState",
+              "modelAsString": false
+            }
+          },
+          "health": {
+            "$ref": "#/definitions/WorkflowHealth",
+            "description": "Gets or sets workflow health."
+          }
         }
       }
     },
