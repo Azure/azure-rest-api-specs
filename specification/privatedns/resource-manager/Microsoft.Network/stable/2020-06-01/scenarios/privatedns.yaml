@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  privateZoneName: scenario_privatezone.com
+  globalLocation: Global
+
+prepareSteps:
+  - step: PrivateZone_Create
+    operationId: PrivateZones_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(globalLocation)
+        
+scenarios:
+  - scenario: PrivateZone
+    description: Microsoft.Network/privateDnsZones
+    steps:
+      - step: PrivateZone_Update
+        exampleFile: ../examples/PrivateZonePatch.json
+      - step: PrivateZone_Get
+        exampleFile: ../examples/PrivateZoneGet.json
+      - step: PrivateZone_ListBySubscription
+        exampleFile: ../examples/PrivateZoneListInSubscription.json
+      - step: PrivateZone_ListByResourceGroup
+        exampleFile: ../examples/PrivateZoneListInResourceGroup.json
+
+  - scenario: RecordSet
+    description: Microsoft.Network/privateDnsZones/{recordType}/{relativeRecordSetName}
+    variables: 
+      relativeRecordSetName: scenario_recordset
+    steps:
+      - step: RecordSet_Create
+        exampleFile: ../examples/RecordSetAPut.json
+      - step: RecordSet_Update
+        exampleFile: ../examples/RecordSetAPatch.json
+      - step: RecordSet_Get
+        exampleFile: ../examples/RecordSetAGet.json
+      - step: RecordSet_ListByType
+        exampleFile: ../examples/RecordSetAList.json
+      - step: RecordSet_List
+        exampleFile: ../examples/RecordSetALLList.json
+      - step: RecordSet_Delete
+        exampleFile: ../examples/RecordSetADelete.json
+
+  - scenario: VirtualNetworkLink
+    description: Microsoft.Network/privateDnsZones/virtualNetworkLinks
+    variables:
+      virtualNetworkLinkName: scenario_vnetlink
+    steps:
+      - step: NetworkAndSubnet_Create
+        armTemplate: templates/Create_NetworkAndSubnet.json
+      - step: VirtualNetworkLink_Create
+        operationId: VirtualNetworkLinks_CreateOrUpdate
+        parameters:
+          parameters:
+            location: $(globalLocation)
+            properties:
+              virtualNetwork: 
+                id: $(virtaulNetworkId)
+              registrationEnabled: false
+      - step: VirtualNetworkLink_Update
+        exampleFile: ../examples/VirtualNetworkLinkPatch.json
+      - step: VirtualNetworkLink_Get
+        exampleFile: ../examples/VirtualNetworkLinkGet.json
+      - step: VirtualNetworkLink_List
+        exampleFile: ../examples/VirtualNetworkLinkList.json
+      - step: VirtualNetworkLink_Delete
+        exampleFile: ../examples/VirtualNetworkLinkDelete.json
