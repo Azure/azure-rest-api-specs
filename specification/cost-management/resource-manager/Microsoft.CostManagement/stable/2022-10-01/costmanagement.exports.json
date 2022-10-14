@@ -285,7 +285,7 @@
         "tags": [
           "Exports"
         ],
-        "operationId": "Exports_Run",
+        "operationId": "Exports_Execute",
         "description": "The operation to run an export.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -339,7 +339,7 @@
         "tags": [
           "Exports"
         ],
-        "operationId": "Exports_GetRunHistory",
+        "operationId": "Exports_GetExecutionHistory",
         "description": "The operation to get the run history of an export for the defined scope and export name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -379,7 +379,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExportRunListResult"
+              "$ref": "#/definitions/ExportExecutionListResult"
             }
           },
           "default": {
@@ -463,7 +463,7 @@
         },
         "runHistory": {
           "description": "If requested, has the most recent run history for the export.",
-          "$ref": "#/definitions/ExportRunListResult"
+          "$ref": "#/definitions/ExportExecutionListResult"
         },
         "partitionData": {
           "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for Microsoft Customer Agreement commerce scopes.",
