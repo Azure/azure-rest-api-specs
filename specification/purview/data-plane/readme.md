@@ -29,7 +29,6 @@ openapi-type: data-plane
 tag: package-preview-2022-03
 ```
 
-
 ### Tag: package-preview-2022-03
 
 These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
@@ -38,6 +37,7 @@ These settings apply only when `--tag=package-preview-2022-03` is specified on t
 input-file:
   - Azure.Analytics.Purview.Catalog/preview/2022-03-01-preview/purviewcatalog.json
 ```
+
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
@@ -138,8 +138,9 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 input-file:
 - Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
 ```
----
 
+---
+---
 # Code Generation
 
 ## C#
