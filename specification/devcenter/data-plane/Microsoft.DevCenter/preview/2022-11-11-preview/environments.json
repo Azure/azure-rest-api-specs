@@ -10,7 +10,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "devcenter.json#/parameters/DevCenterUriParameterName"
+        "$ref": "devcenter.json#/parameters/EndpointParameter"
       }
     ]
   },
@@ -107,7 +107,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           }
         ],
         "operationId": "Environments_ListEnvironmentsByUser",
@@ -157,7 +157,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
@@ -200,7 +200,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
@@ -274,7 +274,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
@@ -326,7 +326,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
@@ -387,7 +387,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
@@ -454,7 +454,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
@@ -504,115 +504,6 @@
           "Environments_CustomEnvironmentAction": {
             "$ref": "./examples/Environments_CustomAction.json"
           }
-        }
-      }
-    },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/artifacts": {
-      "parameters": [
-        {
-          "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "Environment Artifacts"
-        ],
-        "description": "Lists the artifacts for an environment",
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          }
-        ],
-        "operationId": "Environments_ListArtifactsByEnvironment",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_ListArtifactsByEnvironment": {
-            "$ref": "./examples/Artifacts_ListByEnvironment.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/artifacts/{artifactPath}": {
-      "parameters": [
-        {
-          "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "Environment Artifacts"
-        ],
-        "description": "Lists the artifacts for an environment at a specified path, or returns the file at the path.",
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/UserIdParameterName"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ArtifactPathParameter"
-          }
-        ],
-        "operationId": "Environments_ListArtifactsByEnvironmentAndPath",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_ListArtifactsByEnvironmentAndPath": {
-            "$ref": "./examples/Artifacts_ListByPath.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -873,70 +764,6 @@
       },
       "required": [
         "actionId"
-      ]
-    },
-    "Artifact": {
-      "description": "Properties of an Artifact",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Artifact identifier",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Artifact name",
-          "readOnly": true
-        },
-        "isDirectory": {
-          "type": "boolean",
-          "description": "Whether artifact is a directory",
-          "readOnly": true
-        },
-        "downloadUri": {
-          "type": "string",
-          "description": "Uri where the file contents can be downloaded",
-          "readOnly": true,
-          "format": "uri"
-        },
-        "fileSize": {
-          "type": "number",
-          "description": "Size of file in bytes, if the artifact is a file",
-          "readOnly": true
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time the artifact was created",
-          "readOnly": true
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time the artifact was last modified",
-          "readOnly": true
-        }
-      }
-    },
-    "ArtifactListResult": {
-      "description": "Results of the artifact list operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Current page of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Artifact"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "EnvironmentUpdateProperties": {
@@ -1405,25 +1232,6 @@
     }
   },
   "parameters": {
-    "ActionIdentifierParameter": {
-      "name": "actionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The unique id of the action.",
-      "x-ms-parameter-location": "method"
-    },
-    "ArtifactPathParameter": {
-      "name": "artifactPath",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63,
-      "description": "The path of the artifact.",
-      "x-ms-parameter-location": "method"
-    },
     "EnvironmentNameParameter": {
       "name": "environmentName",
       "in": "path",
@@ -1440,9 +1248,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.:]{2,216}$",
       "minLength": 3,
-      "maxLength": 63,
+      "maxLength": 216,
       "description": "The unique id of the catalog item.",
       "x-ms-parameter-location": "method"
     },
@@ -1451,7 +1259,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[0-9]{1,20}.[0-9]{1,20}.[0-9]{1,20}$",
+      "pattern": "^[0-9]{1,20}.[0-9]{1,20}.[0-9]{1,20}$|^latest$",
       "minLength": 3,
       "maxLength": 63,
       "description": "The version of the catalog item.",
