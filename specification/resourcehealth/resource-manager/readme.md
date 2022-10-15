@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ResourceHealth.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ResourceHealth, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for ResourceHealth, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05-01
+tag: package-preview-2022-07
 ```
 
 
+### Tag: package-preview-2022-07
+
+These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-07'
+input-file:
+  - Microsoft.ResourceHealth/preview/2022-07-01/ResourceHealth.json
+```
 ### Tag: package-2017-07
 
 These settings apply only when `--tag=package-2017-07` is specified on the command line.
@@ -38,7 +46,6 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 input-file:
 - Microsoft.ResourceHealth/stable/2017-07-01/resourcehealth.json
 ```
-
 
 ### Tag: package-2015-01
 
@@ -86,8 +93,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -142,6 +149,7 @@ batch:
   - tag: package-2020-05-01-preview
   - tag: package-2018-07-01
   - tag: package-2020-05-01
+  - tag: package-preview-2022-07
 ```
 
 ### Tag: package-2017-07 and java
@@ -169,6 +177,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2018-08-preview and java
 
 These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
@@ -181,6 +190,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2020-05-01-preview and java
 
 These settings apply only when `--tag=package-2020-05-01-preview --java` is specified on the command line.
@@ -193,6 +203,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2018-07-01 and java
 
 These settings apply only when `--tag=package-2018-07-01 --java` is specified on the command line.
@@ -219,5 +230,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-preview-2022-07 and java
 
+These settings apply only when `--tag=package-preview-2022-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
+``` yaml $(tag) == 'package-preview-2022-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resourcehealth.v2022_07_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2022_07_preview
+regenerate-manager: true
+generate-interface: true
+```
