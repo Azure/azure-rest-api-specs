@@ -139,7 +139,7 @@
           {
             "name": "redirectCallRequest",
             "in": "body",
-            "description": "The refirect call request.",
+            "description": "The redirect call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedirectCallRequest"
@@ -2220,6 +2220,7 @@
       "description": "The endpoint of the Azure Communication resource.",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
@@ -2263,8 +2264,6 @@
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
-    "type": "string",
-    "format": "url",
     "useSchemePrefix": false,
     "parameters": [
       {
