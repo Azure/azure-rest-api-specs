@@ -127,7 +127,7 @@
           {
             "name": "redirectCallRequest",
             "in": "body",
-            "description": "",
+            "description": "The refirect call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedirectCallRequest"
@@ -387,14 +387,14 @@
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "playRequest",
             "in": "body",
-            "description": "",
+            "description": "play request payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PlayRequest"
@@ -2143,6 +2143,8 @@
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
+    "type": "string",
+    "format": "url",
     "useSchemePrefix": false,
     "parameters": [
       {
