@@ -24,7 +24,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2022-04-07-preview
 ```
@@ -36,8 +36,7 @@ These settings apply only when `--tag=package-2022-04-07-preview` is specified o
 ```yaml $(tag) == 'package-2022-04-07-preview'
 input-file:
   - preview/2022-04-07-preview/communicationservicescallautomation.json
-title:
-  Azure Communication Services
+title: Azure Communication Services
 ```
 
 ---
