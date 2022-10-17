@@ -1708,8 +1708,10 @@
       "description": "The response to a list restorable dropped Sql pools request"
     },
     "TrustedServiceByPassConfigurationList": {
-      "description": "List of Trusted Service By Pass Configuration",
       "type": "object",
+      "x-ms-azure-resource": true,
+      "title": "Trusted Service By Pass Configuration properties",
+      "description": "List of Trusted Service By Pass Configuration",
       "properties": {
         "value": {
           "description": "Properties of the Check Default Storage Account Status.",
@@ -1725,20 +1727,24 @@
       "title": "Trusted Service By Pass Configuration properties",
       "description": "Trusted Service By Pass Configuration",
       "properties": {
-        "type": "object",
         "properties": {
-          "trustedServiceBypassConfigurationInfo": {
-            "description": "Trusted Service By pass Configuration Info",
-            "type": "object",
-            "properties": {
-              "trustedServiceBypassEnabled": {
-                "description": "Trusted Service By pass Enabled",
-                "type": "boolean"
+          "title": "Trusted Service By Pass Configuration properties",
+          "description": "Trusted Service By Pass Configuration properties",
+          "type": "object",
+          "properties": {
+            "trustedServiceBypassConfigurationInfo": {
+              "description": "Trusted Service By pass Configuration Info",
+              "type": "object",
+              "properties": {
+                "trustedServiceBypassEnabled": {
+                  "description": "Trusted Service By pass Enabled",
+                  "type": "boolean"
+                }
               }
             }
-          }
-        },
-        "x-ms-client-flatten": true
+          },
+          "x-ms-client-flatten": true
+        }
       },
       "allOf": [
         {
