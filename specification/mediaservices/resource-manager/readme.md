@@ -71,6 +71,7 @@ These settings apply only when `--tag=package-preview-2022-05` is specified on t
 input-file:
   - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
   - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Accounts/preview/2020-02-01/MediaGraphs.json
   - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
   - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
   - Microsoft.Media/Encoding/preview/2022-05-01-preview/Encoding.json
