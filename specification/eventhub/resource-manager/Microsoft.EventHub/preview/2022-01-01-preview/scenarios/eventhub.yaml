@@ -23,22 +23,30 @@ variables:
   applicationGroupName:
     type: string
     prefix: applicatio
+
+prepareSteps:
+  - step: Namespaces_CreateOrUpdate
+    operationId: Namespaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        sku:
+          name: Premium
+          tier: Premium
+  - step: StorageAccount_Create
+    armTemplate: templates/Create_StorageAccount.json
+  - step: EventHubs_CreateOrUpdate
+    exampleFile: ..\examples\EventHubs\EHEventHubCreate.json
+    requestUpdate:
+      - replace: /parameters/properties/captureDescription/destination/properties/storageAccountResourceId
+        value: $(storageAccountId)
+
 scenarios:
   - scenario: Namespace
     description: Microsoft.EventHub/namespaces
     steps:
       - step: Namespaces_CheckNameAvailability
         exampleFile: ..\examples\NameSpaces\EHNameSpaceCheckNameAvailability.json
-      - step: Operations_List
-        exampleFile: ..\examples\EHOperations_List.json
-      - step: Namespaces_CreateOrUpdate
-        operationId: Namespaces_CreateOrUpdate
-        parameters:
-          parameters:
-            location: $(location)
-            sku:
-              name: Premium
-              tier: Premium
       - step: Namespaces_List
         exampleFile: ..\examples\NameSpaces\EHNameSpaceList.json
       - step: Namespaces_ListAuthorizationRules
@@ -71,14 +79,9 @@ scenarios:
       - step: Namespaces_DeleteAuthorizationRule
         exampleFile: ..\examples\NameSpaces\EHNameSpaceAuthorizationRuleDelete.json
 
-      # Eventhub
-      - step: StorageAccount_Create
-        armTemplate: armtemplate/Create_StorageAccount.json
-      - step: EventHubs_CreateOrUpdate
-        exampleFile: ..\examples\EventHubs\EHEventHubCreate.json
-        requestUpdate:
-          - replace: /parameters/properties/captureDescription/destination/properties/storageAccountResourceId
-            value: $(storageAccountId)
+  - scenario: EventHubs
+    description: Microsoft.EventHub/namespaces/eventhubs
+    steps:
       - step: EventHubs_ListByNamespace
         exampleFile: ..\examples\EventHubs\EHEventHubListByNameSpace.json
       - step: EventHubs_ListAuthorizationRules
@@ -93,22 +96,36 @@ scenarios:
         exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleListKey.json
       - step: EventHubs_RegenerateKeys
         exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleRegenerateKey.json
+      - step: EventHubs_DeleteAuthorizationRule
+        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleDelete.json
+
+  - scenario: ConsumerGroups
+    description: Microsoft.EventHub/namespaces/eventhubs/consumergroups
+    steps:
       - step: ConsumerGroups_CreateOrUpdate
         exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupCreate.json
       - step: ConsumerGroups_ListByEventHub
         exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupListByEventHub.json
       - step: ConsumerGroups_Get
         exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupGet.json
-      - step: EventHubs_DeleteAuthorizationRule
-        exampleFile: ..\examples\EventHubs\EHEventHubAuthorizationRuleDelete.json
-      - step: EventHubs_Delete
-        exampleFile: ..\examples\EventHubs\EHEventHubDelete.json
+      - step: ConsumerGroups_Delete
+        exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupDelete.json
+
+  - scenario: ApplicationGroup
+    description: Microsoft.EventHub/namespaces/applicationGroups
+    steps:
       - step: ApplicationGroup_CreateOrUpdateApplicationGroup
         exampleFile: ..\examples\ApplicationGroup\ApplicationGroupCreate.json
       - step: ApplicationGroup_ListByNamespace
         exampleFile: ..\examples\ApplicationGroup\ApplicationGroupListByNamespace.json
       - step: ApplicationGroup_Get
         exampleFile: ..\examples\ApplicationGroup\ApplicationGroupGet.json
+      - step: ApplicationGroup_Delete
+        exampleFile: ..\examples\ApplicationGroup\ApplicationGroupDelete.json
+
+  - scenario: SchemaRegistry
+    description: Microsoft.EventHub/namespaces/schemagroups
+    steps:
       - step: SchemaRegistry_CreateOrUpdate
         exampleFile: ..\examples\SchemaRegistry\SchemaRegistryCreate.json
       - step: SchemaRegistry_ListByNamespace
@@ -117,9 +134,15 @@ scenarios:
         exampleFile: ..\examples\SchemaRegistry\SchemaRegistryGet.json
       - step: SchemaRegistry_Delete
         exampleFile: ..\examples\SchemaRegistry\SchemaRegistryDelete.json
-      - step: ConsumerGroups_Delete
-        exampleFile: ..\examples\ConsumerGroup\EHConsumerGroupDelete.json
-      - step: ApplicationGroup_Delete
-        exampleFile: ..\examples\ApplicationGroup\ApplicationGroupDelete.json
-      - step: Namespaces_Delete
-        exampleFile: ..\examples\NameSpaces\EHNameSpaceDelete.json
+
+  - scenario: Operations
+    description: Microsoft.EventHub/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ..\examples\EHOperations_List.json
+
+cleanUpSteps:
+  - step: EventHubs_Delete
+    exampleFile: ..\examples\EventHubs\EHEventHubDelete.json
+  - step: Namespaces_Delete
+    exampleFile: ..\examples\NameSpaces\EHNameSpaceDelete.json
