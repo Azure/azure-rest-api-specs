@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-27",
+    "version": "2022-04-15-preview",
     "title": "appliances",
     "description": "The appliances Rest API spec."
   },
@@ -107,43 +107,6 @@
         "x-ms-examples": {
           "List Appliances by subscription": {
             "$ref": "./examples/AppliancesListBySubscription.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceConnector/telemetryconfig": {
-      "get": {
-        "tags": [
-          "appliances"
-        ],
-        "operationId": "Appliances_GetTelemetryConfig",
-        "summary": "Gets the telemetry config.",
-        "description": "Gets the telemetry config.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/applianceGetTelemetryConfigResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTelemetryConfig Appliance": {
-            "$ref": "./examples/TelemetryConfig.json"
           }
         }
       }
@@ -390,6 +353,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/listClusterCustomerUserCredential": {
+      "post": {
+        "tags": [
+          "appliances"
+        ],
+        "operationId": "Appliances_ListClusterCustomerUserCredential",
+        "summary": "Returns the cluster customer user credential.",
+        "description": "Returns the cluster customer user credentials for the dedicated appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/applianceListClusterCustomerUserCredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListClusterCustomerUserCredentialAppliance": {
+            "$ref": "./examples/AppliancesListClusterCustomerUserCredential.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/listClusterUserCredential": {
       "post": {
         "tags": [
@@ -429,49 +435,6 @@
         "x-ms-examples": {
           "ListClusterUserCredentialAppliance": {
             "$ref": "./examples/AppliancesListClusterUserCredential.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/listkeys": {
-      "post": {
-        "tags": [
-          "appliances"
-        ],
-        "operationId": "Appliances_ListKeys",
-        "summary": "Gets the management config.",
-        "description": "Returns the cluster customer credentials for the dedicated appliance.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/applianceListKeysResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListKeys Appliance": {
-            "$ref": "./examples/AppliancesListKeys.json"
           }
         }
       }
@@ -541,28 +504,6 @@
     }
   },
   "definitions": {
-    "ArtifactProfile": {
-      "description": "Appliance ArtifactProfile definition.",
-      "type": "object",
-      "properties": {
-        "endpoint": {
-          "description": "Endpoint is the URL to upload artifacts to.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ArtifactType": {
-      "description": "Appliance ArtifactType definition.",
-      "type": "string",
-      "enum": [
-        "LogsArtifactType"
-      ],
-      "x-ms-enum": {
-        "name": "ArtifactType",
-        "modelAsString": true
-      }
-    },
     "HybridConnectionConfig": {
       "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
       "type": "object",
@@ -622,30 +563,13 @@
       "description": "Appliance SSHKey definition.",
       "type": "object",
       "properties": {
-        "certificate": {
-          "description": "Certificate associated with the public key if the key is signed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "creationTimeStamp": {
-          "description": "Certificate creation timestamp (Unix).",
-          "type": "integer",
-          "readOnly": true
-        },
-        "expirationTimeStamp": {
-          "description": "Certificate expiration timestamp (Unix).",
-          "type": "integer",
-          "readOnly": true
-        },
         "privateKey": {
-          "description": "Private Key.",
-          "type": "string",
-          "readOnly": true
+          "description": "User Private Key.",
+          "type": "string"
         },
         "publicKey": {
-          "description": "Public Key.",
-          "type": "string",
-          "readOnly": true
+          "description": "User Public Key.",
+          "type": "string"
         }
       }
     },
@@ -653,10 +577,7 @@
       "description": "Appliance SSHKeyType definition.",
       "type": "string",
       "enum": [
-        "SSHCustomerUser",
-        "ManagementCAKey",
-        "LogsKey",
-        "ScopedAccessKey"
+        "SSHCustomerUser"
       ],
       "x-ms-enum": {
         "name": "SSHKeyType",
@@ -830,14 +751,26 @@
         }
       }
     },
-    "applianceGetTelemetryConfigResult": {
-      "description": "The Get Telemetry Config Result appliance.",
+    "applianceListClusterCustomerUserCredentialResults": {
+      "description": "The List Cluster Customer User Credential Results appliance.",
       "type": "object",
       "properties": {
-        "telemetryInstrumentationKey": {
-          "description": "Telemetry instrumentation key.",
-          "type": "string",
-          "readOnly": true
+        "kubeconfigs": {
+          "description": "The list of appliance kubeconfigs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/applianceCredentialKubeconfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "sshKeys": {
+          "description": "Map of Customer User Public and Private SSH Keys",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/SSHKey"
+          }
         }
       }
     },
@@ -858,37 +791,6 @@
             "$ref": "#/definitions/applianceCredentialKubeconfig"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "applianceListKeysResults": {
-      "description": "The List Cluster Keys Results appliance.",
-      "type": "object",
-      "properties": {
-        "artifactProfiles": {
-          "description": "Map of artifacts that contains a list of ArtifactProfile used to upload artifacts such as logs.",
-          "type": "object",
-          "readOnly": true,
-          "additionalProperties": {
-            "$ref": "#/definitions/ArtifactProfile"
-          }
-        },
-        "kubeconfigs": {
-          "description": "The list of appliance kubeconfigs.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/applianceCredentialKubeconfig"
-          },
-          "x-ms-identifiers": []
-        },
-        "sshKeys": {
-          "description": "Map of Customer User Public, Private SSH Keys and Certificate when available.",
-          "type": "object",
-          "readOnly": true,
-          "additionalProperties": {
-            "$ref": "#/definitions/SSHKey"
-          }
         }
       }
     },
@@ -1027,7 +929,7 @@
           "readOnly": true
         },
         "publicKey": {
-          "description": "Certificates pair used to download MSI certificate from HIS. Can only be set once.",
+          "description": "Certificates pair used to download MSI certificate from HIS",
           "type": "string"
         },
         "status": {
@@ -1043,15 +945,6 @@
             "PreparingForUpgrade",
             "UpgradePrerequisitesCompleted",
             "PreUpgrade",
-            "UpgradingKVAIO",
-            "WaitingForKVAIO",
-            "ImagePending",
-            "ImageProvisioning",
-            "ImageProvisioned",
-            "ImageDownloading",
-            "ImageDownloaded",
-            "ImageDeprovisioning",
-            "ImageUnknown",
             "UpdatingCloudOperator",
             "WaitingForCloudOperator",
             "UpdatingCAPI",
