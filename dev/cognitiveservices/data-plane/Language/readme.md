@@ -30,7 +30,6 @@ input-file:
   - analyzeconversations-authoring.json
   - questionanswering.json
   - questionanswering-authoring.json
-  - questionanswering-generate.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
@@ -58,7 +57,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
 ```
 
