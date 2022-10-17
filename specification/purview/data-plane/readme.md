@@ -22,12 +22,13 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the Azure Purview API.
+These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
 openapi-type: data-plane
 tag: package-preview-2022-03
 ```
+
 
 ### Tag: package-preview-2022-03
 
@@ -37,7 +38,6 @@ These settings apply only when `--tag=package-preview-2022-03` is specified on t
 input-file:
   - Azure.Analytics.Purview.Catalog/preview/2022-03-01-preview/purviewcatalog.json
 ```
-
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
@@ -45,6 +45,14 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
 - Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
+```
+
+These are the global settings for the Purview Scanning API.
+
+``` yaml
+openapi-type: data-plane
+tag: package-2018-12-01-preview
+title: PurviewScanningClient
 ```
 
 ### Tag: package-2022-02-01-preview
@@ -80,6 +88,14 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These are the global settings for the Purview API.
+
+``` yaml
+openapi-type: data-plane
+tag: package-2021-07-01-preview
+title: PurviewMetadataPolicyClient
+```
+
 ### Tag: package-2021-07-01-preview
 
 These settings apply only when `--tag=package-2021-07-01-preview` is specified on the command line.
@@ -91,6 +107,12 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+``` yaml
+openapi-type: data-plane
+tag: package-2022-09-01-preview
+title: PurviewDataQualityClient
+```
+
 ### Tag: package-2022-09-01-preview
 
 These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
@@ -100,6 +122,12 @@ input-file:
 - Azure.Analytics.Purview.DataQuality/preview/2022-09-01-preview/purviewDataQuality.json
 modelerfour:
   lenient-model-deduplication: true
+```
+
+``` yaml
+openapi-type: data-plane
+tag: package-2021-09-01-preview
+title: PurviewShareClient
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -191,3 +219,4 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
 ```
+
