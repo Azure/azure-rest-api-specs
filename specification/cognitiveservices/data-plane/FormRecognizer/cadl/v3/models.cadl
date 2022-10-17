@@ -1,16 +1,9 @@
-import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
 using Cadl.Rest;
-using Cadl.Versioning;
-using Azure.Core;
 
 namespace FormRecognizer.v3;
-
-enum APIVersionsV3 {
-    "2022-08-31",
-}
 
 enum StringIndexTypeValues {
     textElements: "textElements",
@@ -39,8 +32,7 @@ model AnalyzeDocumentRequest {
     @format("uri")
     urlSource?: string,
     @doc("Base64 encoding of the document to analyze")
-    @format(bytes)
-    base64Source?: string,
+    base64Source?: bytes,
 }
 
 enum LengthUnitValues {pixel, inch}
@@ -292,18 +284,16 @@ model DocumentModelId {
     modelId: string,
 }
 
-// TODO: specify param location on method
 model QueryAPIVersion {
     @query
     @doc("Requested API version.")
-    @knownValues(APIVersionsV3)
     "api-version": string,
 }
 
 @doc("Document analysis result.")
 model AnalyzeResult {
     @doc("API version used to produce this result.")
-    apiVersion: APIVersionsV3, //model as string
+    apiVersion: string,
     // FIXME: when using Azure.Core.Foundations.LongRunningOperation<AnalyzeResult>
     // spreading DocumentModelId causes an error saying that modelId doesnt exist.
     // ...DocumentModelId,
@@ -382,18 +372,21 @@ model DocumentWord {
     polygon?: BoundingPolygon,
 }
 
-enum SelectionMarkState {selected, unselected}
+enum DocumentSelectionMarkStateValues {
+    selected,
+    unselected,
+}
 
 @doc("State of the selection mark.")
-@knownValues(SelectionMarkState)
+@knownValues(DocumentSelectionMarkStateValues)
 model DocumentSelectionMarkState is string;
 
 enum DocumentTableCellKindValues {
-    "content",
-    "rowHeader",
-    "columnHeader",
-    "stubHead",
-    "description",
+    content,
+    rowHeader,
+    columnHeader,
+    stubHead,
+    description,
 }
 
 @doc("Table cell kind.")
@@ -523,13 +516,16 @@ model DocumentTypeDetails {
 @resource("documentModels")
 model DocumentModelSummary {
     @key
+    @doc("Document model ID")
     modelId: DocumentModelId,
     @doc("Document model description.")
     @maxLength(4096)
     description?: string,
+    @visibility("read")
     @doc("Date and time (UTC) when the document model was created.")
     @format("date-time")
     createdDateTime: string,
+    @visibility("read")
     @doc("API version used to create this document model.")
     apiVersion?: string,
     @doc("List of key-value tag attributes associated with the document model.")
@@ -540,6 +536,7 @@ model DocumentModelSummary {
 @resource("documentModels")
 model DocumentModelDetails {
     ...DocumentModelSummary,
+    @visibility("read")
     @doc("Supported document types.")
     docTypes?: Record<DocumentTypeDetails>,
 }
@@ -588,29 +585,19 @@ enum OperationStatusValues {
 model OperationStatus is string;
 
 @doc("Operation summary.")
-@resource("{operationId}")
+@resource("operations")
 model OperationSummary {
     @key
     operationId: string,
     status: OperationStatus,
 }
 
-@doc("List Operations response object.")
-@pagedResult
-model GetOperationsResponse {
-    @doc("List of operations.")
-    value: OperationSummary[],
-    @doc("Link to the next page of operations.")
-    newLink?: string,
-}
 
 @doc("Get Operation response object.")
 @discriminator("kind")
 @resource("operations")
 model OperationDetails {
-    @key
-    operationId: string,
-    status: OperationStatus,
+    ...OperationSummary,
     @doc("Operation progress (0-100).")
     @minValue(0)
     @maxValue(100)
