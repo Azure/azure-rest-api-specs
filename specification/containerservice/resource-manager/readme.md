@@ -34,7 +34,27 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-08-03
+tag: package-preview-2022-09
+```
+
+### Tag: package-preview-2022-09-only
+
+These settings apply only when `--tag=package-preview-2022-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-09-only'
+input-file:
+  - Microsoft.ContainerService/preview/2022-09-02-preview/managedClusters.json
+```
+
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.ContainerService/preview/2022-09-02-preview/managedClusters.json
+  - Microsoft.ContainerService/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-08-03-only
@@ -835,4 +855,8 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where: $.definitions.ManagedClusterSecurityProfile.properties.customCATrustCertificates      
+    reason: customCATrustCertificates contains a widely used acronym, no camel case restriction needed.
 ```
