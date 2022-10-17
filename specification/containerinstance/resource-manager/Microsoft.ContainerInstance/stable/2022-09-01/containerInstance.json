@@ -1452,6 +1452,13 @@
               "x-ms-identifiers": [
                 "name"
               ]
+            },
+            "extensions" : {
+              "type": "array",
+              "description": "extensions used by virtual kubelet",
+              "items": {
+                "$ref": "#/definitions/DeploymentExtensionSpec"
+              }
             }
           },
           "required": [
@@ -1460,6 +1467,37 @@
           ]
         }
       }
+    },
+    "DeploymentExtensionSpec": {
+      "description": "Extension sidecars to be added to the deployment.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension."
+        },
+        "extensionType": {
+          "type": "string",
+          "description": "Type of extension to be added."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the extension being used."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Setttings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "Protected settings for the extension."
+        }
+      },
+      "required": [
+        "name",
+        "extensionType",
+        "version"
+      ]
     },
     "ContainerGroupIdentity": {
       "description": "Identity for the container group.",
