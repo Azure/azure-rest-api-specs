@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "476f61a4-952c-422a-b4db-568a828f35df",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "packageName": "contoso-package2",
+    "testResultName": "Windows-10-1909-Test-Id",
+    "analysisResultName": "powerAutomateExecution",
+    "api-version": "2022-10-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "powerAutomateExecution",
+        "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package2/testResults/Windows-10-1909-Test-Id/analysisResults/powerAutomateExecution",
+        "type": "Microsoft.TestBase/testBaseAccounts/packages/testResults/analysisResults",
+        "properties": {
+          "grade": "Fail",
+          "analysisResultType": "PowerAutomateExecution",
+          "powerAutomateExecutionResults": [
+            {
+              "id": "6e118b45-35a9-4d71-b16f-1cb0c1d62c0b-1",
+              "functionName": "main",
+              "startTime": "2022-03-24T09:07:24.851Z",
+              "endTime": "2022-03-24T09:07:24.851Z",
+              "index": 5,
+              "insideErrorHandling": false,
+              "localizedModuleName": "Wait",
+              "name": "Wait",
+              "status": "Succeeded",
+              "systemActionName": "Wait",
+              "systemModuleName": "Wait",
+              "workFlowId": "219f4c9e-741a-4472-8b81-1250315e96ed",
+              "scriptName": "testScript"
+            },
+            {
+              "id": "275a3cae-93f6-4f4f-a6e1-204c52c4b83f",
+              "functionName": "main",
+              "startTime": "2022-03-24T09:07:24.851Z",
+              "endTime": "2022-03-24T09:07:24.851Z",
+              "index": 5,
+              "insideErrorHandling": false,
+              "localizedModuleName": "Mouse and keyboard",
+              "name": "Send keys",
+              "status": "Failed",
+              "systemActionName": "SendKeys",
+              "systemModuleName": "MouseAndKeyboard",
+              "workFlowId": "219f4c9e-741a-4472-8b81-1250315e96ed",
+              "error": {
+                "code": "00001",
+                "correlationId": "228f4f9e-751a-3372-9b91-1250315e96ed",
+                "message": "failed to send keys"
+              },
+              "scriptName": "testScript"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
