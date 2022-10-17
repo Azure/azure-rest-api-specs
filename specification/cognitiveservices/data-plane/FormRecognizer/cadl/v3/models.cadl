@@ -557,7 +557,7 @@ model ComponentDocumentModelDetails {
 
 @doc("Authorization to copy a document model to the specified target resource and modelId.")
 model CopyAuthorization {
-    // FIXME needs x-ms-resource = true
+    @key
     @doc("ID of the target Azure resource where the document model should be copied to.")
     targetResourceId: string,
     @doc("Location of the target Azure resource where the document model should be copied to.")
