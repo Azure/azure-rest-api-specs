@@ -1453,12 +1453,15 @@
                 "name"
               ]
             },
-            "extensions" : {
+            "extensions": {
               "type": "array",
               "description": "extensions used by virtual kubelet",
               "items": {
                 "$ref": "#/definitions/DeploymentExtensionSpec"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             }
           },
           "required": [
@@ -1486,7 +1489,7 @@
         },
         "settings": {
           "type": "object",
-          "description": "Setttings for the extension."
+          "description": "Settings for the extension."
         },
         "protectedSettings": {
           "type": "object",
