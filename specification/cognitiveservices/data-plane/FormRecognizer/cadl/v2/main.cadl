@@ -1,2 +1,21 @@
-import "./routes_v2.cadl";
-import "./routes_v3.cadl";
+import "./routes.cadl";
+
+using Cadl.Http;
+using Cadl.Versioning;
+
+@doc("Extracts content, layout, and structured data from documents.")
+@service({title: "Form Recognizer Client", version: "v2.1"})
+@server("https://{endpoint}/formrecognizer/{api_version}", "Regional endpoint", {
+  @doc("Form Recognizer resource endpoint")
+  endpoint: string,
+  @doc("api version")
+  api_version: APIVersions,
+})
+
+@versioned(APIVersions)
+namespace FormRecognizer;
+
+enum APIVersions {
+    v2_1,
+    v2_0
+}

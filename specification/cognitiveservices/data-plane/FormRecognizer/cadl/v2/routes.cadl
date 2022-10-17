@@ -1,6 +1,6 @@
 import "@azure-tools/cadl-azure-core";
 import "@cadl-lang/rest";
-import "./models_v2.cadl";
+import "./models.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
@@ -9,7 +9,7 @@ using Cadl.Versioning;
 alias TVersion = string;
 
 // FIXME: this needs to be able to switch between v2.0 and v2.1
-@route("/v2.1")
+// @route("/v2.1")
 // FIXME: do we want the v3 swagger representation to exclude the v2 endpoints? If so, 
 // would the removed decorator satisfy this use case?
 // @removed(APIVersions.v3)
@@ -42,23 +42,32 @@ namespace FormRecognizer.v2 {
 
   @summary("Get Custom Model")
   @doc("Get detailed information about a custom model.")
-  op GetCustomModel is Azure.Core.ResourceRead<
-    Model,
-    {
-      parameters: {
-        @doc("Include list of extracted keys in model information.")
-        @query
-        includeKeys: boolean;
-      };
-    }
-  >;
+  // op GetCustomModel is Azure.Core.ResourceRead<
+  //   Model,
+  //   {
+  //     parameters: {
+  //       @doc("Include list of extracted keys in model information.")
+  //       @query
+  //       includeKeys: boolean;
+  //     };
+  //   }
+  // >;
+  @route("custom/models/{modelId}")
+  op GetCustomModel(
+    @path
+    @format("uuid")
+    modelId: string,
+    @doc("Include list of extracted keys in model information.")
+    @query
+    includeKeys: boolean;
+  ): Model | ErrorResponse;
 
   @summary("Delete Custom Model")
   @doc("""
   Mark model for deletion. Model artifacts will be permanently removed within a
   predetermined period.
   """)
-  op DeleteCustomModel is Azure.Core.ResourceDelete<Model>;
+  op DeleteCustomModel is Azure.Core.ResourceDelete<ModelInfo>;
 
   @summary("Analyze Form")
   @doc("""
@@ -99,10 +108,6 @@ namespace FormRecognizer.v2 {
     },
     void
   >;
-
-  // @summary("Get Analyze Form Result")
-  // @doc("Obtain current status and the result of the analyze form operation.")
-  // op GetAnalyzeFormResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
 
   @summary("Copy Custom Model")
   @doc("""
@@ -201,7 +206,20 @@ namespace FormRecognizer.v2 {
 
   // @summary("Get Analyze Business Card Result")
   // @doc("Track the progress and obtain the result of the analyze business card operation.")
-  // op GetAnalyzeBusinessCardResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+  // op GetAnalyzeResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
+
+  @route("{modelId}/analyzeResult")
+  @summary("Get Analyze Business Card Result")
+  @doc("Track the progress and obtain the result of the analyze business card operation.")
+  op GetAnalyzeResult(
+    @path
+    @doc("Model Id")
+    modelId: string,
+    @path
+    @doc("Analyze operation result identifier.")
+    @format("uuid")
+    resultId: string,
+  ): AnalyzeOperationResult | ErrorResponse;
 
   @added(APIVersions.v2_1)
   @summary("Analyze Invoice Document")
@@ -246,10 +264,6 @@ namespace FormRecognizer.v2 {
     void
   >;
 
-  // @summary("Get Analyze Invoice Result")
-  // @doc("Track the progress and obtain the result of the analyze invoice operation.")
-  // op GetAnalyzeInvoiceResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
-
   @added(APIVersions.v2_1)
   @summary("Analyze ID Document")
   @doc("""
@@ -285,10 +299,6 @@ namespace FormRecognizer.v2 {
     },
     void
   >;
-
-  // @summary("Get Analyze ID Document Result")
-  // @doc("Track the progress and obtain the result of the analyze ID operation.")
-  // op GetAnalyzeIdDocumentResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
 
   @summary("Analyze Receipt")
   @doc("""
@@ -334,10 +344,6 @@ namespace FormRecognizer.v2 {
     },
     void
   >;
-
-  // @summary("Get Analyze Receipt Result")
-  // @doc("Track the progress and obtain the result of the analyze receipt operation.")
-  // op GetAnalyzeReceiptResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
 
   @summary("Analyze Layout")
   @doc("""
@@ -407,10 +413,6 @@ namespace FormRecognizer.v2 {
     void
   >;
 
-  @summary("Get Analyze Layout Result")
-  @doc("Track the progress and obtain the result of the analyze layout operation")
-  op GetAnalyzeLayoutResult is Azure.Core.ResourceRead<AnalyzeOperationResult>;
-
   // @summary("List Custom Models")
   // @doc("Get information about all custom models")
   // op ListCustomModels is Azure.Core.ResourceList<
@@ -436,5 +438,13 @@ namespace FormRecognizer.v2 {
   //     };
   //   }
   // >;
-
+  
+  @route("custom/models")
+  @summary("Get Custom Models")
+  @doc("Get information about all custom models")
+  op GetCustomModels(
+    @doc("Specify whether to return summary or full list of models.")
+    @query
+    "op": Enum6
+  ): Models | ErrorResponse;
 }

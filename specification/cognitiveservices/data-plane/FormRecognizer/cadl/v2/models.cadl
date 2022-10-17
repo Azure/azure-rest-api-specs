@@ -1,6 +1,5 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
-import "./form_recognizer.cadl";
 
 using Cadl.Rest;
 using Cadl.Versioning;
@@ -9,7 +8,6 @@ using Azure.Core;
 // API version enum needs to be contained within the namespace, it would be nice to be able to extract it 
 // outside the namespace for use in other places
 @added(APIVersions.v2_0)
-@removed(APIVersions.v3)
 namespace FormRecognizer.v2;
 
 enum TextStyleKnownValues {
@@ -210,17 +208,11 @@ model Language is string;
 
 enum Enum6KnownValues {
   Full: "full",
+  Summary: "summary",
 }
 
 @knownValues(Enum6KnownValues)
 model Enum6 is string;
-
-enum Enum7KnownValues {
-  Summary: "summary",
-}
-
-@knownValues(Enum7KnownValues)
-model Enum7 is string;
 
 enum ModelStatus {
   Creating: "creating",
@@ -308,10 +300,10 @@ need to be included when searching for content to be preprocessed.
   includeSubFolders?: boolean;
 }
 
-// @error
-// model ErrorResponse {
-//   error: ErrorInformation;
-// }
+@error
+model ErrorResponse {
+  error: ErrorInformation;
+}
 
 model ErrorInformation {
   code: string;
@@ -324,6 +316,7 @@ model Model {
   @doc("Basic custom model information.")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
+  @visibility("read")
   modelInfo: ModelInfo;
 
   @doc("Keys extracted by the custom model.")
@@ -337,8 +330,10 @@ model Model {
   composedTrainResults?: TrainResult[];
 }
 
+@resource("custom/models")
 @doc("Basic custom model information.")
 model ModelInfo {
+  @key
   @doc("Model identifier.")
   modelId: string;
 
@@ -431,11 +426,10 @@ model SourcePath {
 
 @doc("Status and result of the queued analyze operation.")
 // FIXME: not a resource in that sense
-@resource("custom/models/{modelId}/analyzeResults/{resultId}")
+// @resource("{modelId}/analyzeResults")
 model AnalyzeOperationResult {
   @doc("Operation status.")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   status: OperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
