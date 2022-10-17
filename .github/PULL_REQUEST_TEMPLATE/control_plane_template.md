@@ -1,6 +1,6 @@
 ## ARM API Information (Control Plane)
 
-Read through to follow AML API Release Schedules [API Release Schedules]https://msdata.visualstudio.com/Vienna/_wiki/wikis/vienna-wiki/39761/AML-API-Release-Schedules)
+Read through to follow AML API Release Schedules [API Release Schedules](https://aka.ms/AMLAPIReleases)
 
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow.
 </i>
