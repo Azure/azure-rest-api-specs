@@ -27,19 +27,43 @@
     }
   },
   "definitions": {
-    "Preset": {
-      "discriminator": "@odata.type",
+    "CmafFormat": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiBitrateFormat"
+        }
+      ],
+      "description": "A CMAF based output format.",
       "properties": {
-        "@odata.type": {
+        "streamingFormat": {
+          "enum": [
+            "HlsAndDash",
+            "Hls",
+            "Dash"
+          ],
           "type": "string",
-          "description": "The discriminator for derived types."
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "StreamingFormatType",
+            "values": [
+              {
+                "description": "HLS and DASH streaming are both supported in this format. HLS manifest files(master and variants manifest files) and DASH media presentation description file are included in the output. This is the default streaming format.",
+                "value": "HlsAndDash"
+              },
+              {
+                "description": "HLS streaming is supported in this format. HLS manifest files(master and variants manifest files) are included in the output.",
+                "value": "Hls"
+              },
+              {
+                "description": "DASH streaming is supported in this format. DASH media presentation description file is included in the output.",
+                "value": "Dash"
+              }
+            ]
+          }
         }
       },
       "type": "object",
-      "required": [
-        "@odata.type"
-      ],
-      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
+      "x-ms-discriminator-value": "#Microsoft.Media.CmafFormat"
     },
     "Codec": {
       "discriminator": "@odata.type",
@@ -124,6 +148,31 @@
       },
       "type": "object",
       "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
+    },
+    "DDAudio": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Audio"
+        }
+      ],
+      "description": "Describes Dolby Digital Audio Codec (AC3) audio encoding settings. The current implementation for Dolby Digital Audio support are: Audio channel numbers at 1((mono), 2(stereo), 6(5.1side); Audio sampling frequency rates at: 32K/44.1K/48K Hz; Audio bitrate values as AC3 specification supports: 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 320000, 384000, 448000, 512000, 576000, 640000 bps.",
+      "properties": {},
+      "type": "object",
+      "x-ms-discriminator-value": "#Microsoft.Media.DDAudio"
+    },
+    "Preset": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
     },
     "Layer": {
       "properties": {
@@ -362,7 +411,6 @@
           "items": {
             "$ref": "#/definitions/H265Layer"
           },
-          "x-ms-identifiers": [],
           "description": "The collection of output H.265 layers to be produced by the encoder."
         }
       },
@@ -553,7 +601,6 @@
           "items": {
             "$ref": "#/definitions/TrackDescriptor"
           },
-          "x-ms-identifiers": [],
           "description": "The list of TrackDescriptors which define the metadata and selection of tracks in the input."
         }
       },
@@ -851,7 +898,7 @@
         },
         "filenamePattern": {
           "type": "string",
-          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename."
+          "description": "The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string \"Audio\" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename."
         }
       },
       "type": "object",
@@ -1039,9 +1086,6 @@
           "items": {
             "$ref": "#/definitions/Overlay"
           },
-          "x-ms-identifiers": [
-            "inputLabel"
-          ],
           "description": "The properties of overlays to be applied to the input video. These could be audio, image or video overlays."
         }
       },
@@ -1224,7 +1268,6 @@
           "items": {
             "$ref": "#/definitions/H264Layer"
           },
-          "x-ms-identifiers": [],
           "description": "The collection of output H.264 layers to be produced by the encoder."
         },
         "rateControlMode": {
@@ -1275,7 +1318,6 @@
           "items": {
             "$ref": "#/definitions/JpgLayer"
           },
-          "x-ms-identifiers": [],
           "description": "A collection of output JPEG image layers to be produced by the encoder."
         },
         "spriteColumn": {
@@ -1316,7 +1358,6 @@
           "items": {
             "$ref": "#/definitions/OutputFile"
           },
-          "x-ms-identifiers": [],
           "description": "The list of output files to produce.  Each entry in the list is a set of audio and video layer labels to be muxed together ."
         }
       },
@@ -1363,7 +1404,6 @@
           "items": {
             "$ref": "#/definitions/PngLayer"
           },
-          "x-ms-identifiers": [],
           "description": "A collection of output PNG image layers to be produced by the encoder."
         }
       },
@@ -1400,6 +1440,7 @@
             "H264SingleBitrate1080p",
             "AdaptiveStreaming",
             "AACGoodQualityAudio",
+            "DDGoodQualityAudio",
             "ContentAwareEncodingExperimental",
             "ContentAwareEncoding",
             "CopyAllBitrateNonInterleaved",
@@ -1433,7 +1474,11 @@
               },
               {
                 "value": "AACGoodQualityAudio",
-                "description": "Produces a single MP4 file containing only stereo audio encoded at 192 kbps."
+                "description": "Produces a single MP4 file containing only AAC stereo audio encoded at 192 kbps."
+              },
+              {
+                "value": "DDGoodQualityAudio",
+                "description": "Produces a single MP4 file containing only DD(Digital Dolby) stereo audio encoded at 192 kbps."
               },
               {
                 "value": "ContentAwareEncodingExperimental",
@@ -1476,8 +1521,8 @@
                 "description": "Produces an MP4 file where the video is encoded with H.265 codec at 3500 kbps and a picture height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
               },
               {
-                "value": "H265SingleBitrate4K",
-                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 9500 kbps and a picture height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
+                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 9500 kbps and a picture height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.",
+                "value": "H265SingleBitrate4K"
               }
             ],
             "modelAsString": true
@@ -1508,7 +1553,6 @@
           "items": {
             "$ref": "#/definitions/Codec"
           },
-          "x-ms-identifiers": [],
           "description": "The list of codecs to be used when encoding the input video."
         },
         "formats": {
@@ -1516,7 +1560,6 @@
           "items": {
             "$ref": "#/definitions/Format"
           },
-          "x-ms-identifiers": [],
           "description": "The list of outputs to be produced by the encoder."
         }
       },
@@ -1794,7 +1837,6 @@
           "items": {
             "$ref": "#/definitions/TransformOutput"
           },
-          "x-ms-identifiers": [],
           "description": "An array of one or more TransformOutputs that the Transform should generate."
         }
       },
@@ -1807,7 +1849,7 @@
     "Transform": {
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1817,7 +1859,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
@@ -1871,7 +1913,6 @@
           "items": {
             "$ref": "#/definitions/InputDefinition"
           },
-          "x-ms-identifiers": [],
           "description": "Defines a list of InputDefinitions. For each InputDefinition, it defines a list of track selections and related metadata."
         }
       },
@@ -1945,7 +1986,6 @@
           "items": {
             "$ref": "#/definitions/JobInput"
           },
-          "x-ms-identifiers": [],
           "description": "List of inputs to a Job."
         }
       },
@@ -2097,7 +2137,8 @@
             "UploadTransientError",
             "ConfigurationUnsupported",
             "ContentMalformed",
-            "ContentUnsupported"
+            "ContentUnsupported",
+            "IdentityUnsupported"
           ],
           "x-ms-enum": {
             "name": "JobErrorCode",
@@ -2137,6 +2178,10 @@
               {
                 "value": "ContentUnsupported",
                 "description": "There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files."
+              },
+              {
+                "description": "There was an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support.",
+                "value": "IdentityUnsupported"
               }
             ],
             "modelAsString": true
@@ -2157,7 +2202,8 @@
             "Download",
             "Upload",
             "Configuration",
-            "Content"
+            "Content",
+            "Account"
           ],
           "x-ms-enum": {
             "name": "JobErrorCategory",
@@ -2181,6 +2227,10 @@
               {
                 "value": "Content",
                 "description": "The error is related to data in the input files."
+              },
+              {
+                "description": "The error is related to account information.",
+                "value": "Account"
               }
             ],
             "modelAsString": true
@@ -2218,9 +2268,6 @@
           "items": {
             "$ref": "#/definitions/JobErrorDetail"
           },
-          "x-ms-identifiers": [
-            "code"
-          ],
           "description": "An array of details about specific errors that led to this reported error.",
           "readOnly": true
         }
@@ -2341,7 +2388,6 @@
           "items": {
             "$ref": "#/definitions/JobOutput"
           },
-          "x-ms-identifiers": [],
           "description": "The outputs for the Job."
         },
         "priority": {
@@ -2413,7 +2459,6 @@
           "items": {
             "$ref": "#/definitions/JobInputClip"
           },
-          "x-ms-identifiers": [],
           "description": "JobInputs that make up the timeline."
         }
       },
@@ -2423,7 +2468,7 @@
     "Job": {
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2433,7 +2478,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource.",
           "readOnly": true
         }
@@ -2522,6 +2567,10 @@
           "description": "The minimum height of output video layers. Example: set MinHeight as 360 to avoid output layers of smaller resolutions like 180P.",
           "format": "int32",
           "type": "integer"
+        },
+        "outputFormat": {
+          "$ref": "#/definitions/Format",
+          "description": "Sets the output format type. Only Mp4Format and CmafFormat are supported in current implementation. Example: set OutputFormat as CmafFormat to produce audio/video stream variant and manifest files for streaming."
         }
       },
       "type": "object"
@@ -2577,7 +2626,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2641,10 +2690,13 @@
               "$ref": "#/definitions/Transform"
             }
           },
+          "404": {
+            "description": "NotFound"
+          },
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2695,7 +2747,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2749,7 +2801,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2794,7 +2846,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2850,7 +2902,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2930,10 +2982,13 @@
               "$ref": "#/definitions/Job"
             }
           },
+          "404": {
+            "description": "NotFound"
+          },
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2985,7 +3040,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3046,7 +3101,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3098,7 +3153,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3158,7 +3213,7 @@
           "default": {
             "description": "Detailed error information.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3227,7 +3282,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The version of the API to be used with the client request."
+      "description": "The Version of the API to be used with the client request."
     }
   }
 }
