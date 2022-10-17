@@ -21587,6 +21587,23 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "Application settings of the app.",
+            "required": false,
+            "x-ms-secret": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          {
+            "name": "files",
+            "in": "body",
+            "description": "Files of the app.",
+            "required": false,
+            "type": "object"
           }
         ],
         "responses": {
@@ -21638,6 +21655,23 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "Application settings of the app.",
+            "required": false,
+            "x-ms-secret": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+            }
+          },
+          {
+            "name": "files",
+            "in": "body",
+            "description": "Files of the app.",
+            "required": false,
+            "type": "object"
           }
         ],
         "responses": {
@@ -21693,10 +21727,6 @@
             "schema": {
               "$ref": "#/definitions/WorkflowEnvelopeCollection"
             }
-          },
-          "404": {
-            "description": "Workflow with an ID of {workflowName} is not running.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
