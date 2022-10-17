@@ -5298,9 +5298,27 @@
         "includeDeleted": {
           "type": "boolean",
           "description": "For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded."
+        },
+        "Creation-Time": {
+          "$ref": "#/definitions/BlobInventoryPolicyFilterTime",
+          "description": "*************"
+        },
+        "Last-Modified": {
+          "$ref": "#/definitions/BlobInventoryPolicyFilterTime",
+          "description": "*************"
         }
       },
       "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
+    },
+    "BlobInventoryPolicyFilterTime": {
+      "properties": {
+        "LastNDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "*************"
+        }
+      },
+      "description": "***"
     },
     "ErrorResponseBody": {
       "properties": {
