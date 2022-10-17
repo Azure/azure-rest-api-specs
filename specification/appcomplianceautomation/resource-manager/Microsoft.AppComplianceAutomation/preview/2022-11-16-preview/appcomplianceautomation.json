@@ -984,13 +984,15 @@
     "SnapshotDownloadRequest": {
       "type": "object",
       "description": "Snapshot's download query properties.",
+      "required": [
+        "downloadType"
+      ],
       "properties": {
         "reportCreatorTenantId": {
           "description": "Tenant id.",
           "type": "string"
         },
         "downloadType": {
-          "required": true,
           "description": "Indicates the download type.",
           "x-ms-parameter-location": "method",
           "enum": [
