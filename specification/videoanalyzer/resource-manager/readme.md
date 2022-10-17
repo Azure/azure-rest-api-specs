@@ -38,10 +38,6 @@ directive:
   - from: VideoAnalyzers.json
     reason: Patch response is 202.
     suppress: LongRunningResponseStatusCode
-
-  - from: VideoAnalyzers.json
-    reason: Patch response is 202.
-    suppress: TrackedResourcePatchOperation
 ```
 
 ### Tag: package-preview-2021-11
