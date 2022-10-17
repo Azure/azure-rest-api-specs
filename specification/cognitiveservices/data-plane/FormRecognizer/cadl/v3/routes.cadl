@@ -1,40 +1,35 @@
-import "@cadl-lang/rest";
 import "./models.cadl";
 
 using Cadl.Http;
-using Cadl.Rest;
 using Azure.Core;
 
 namespace FormRecognizer.v3;
 
 interface Analysis {
+  @pollingOperation
   @route("documentModels/{modelId}:analyze")
   @summary("Analyze document")
   @doc("Analyzes document with document model.")
-  // NOTE: this operation needs to be able to return a 202 response and the error response should be customized as well
-  op analyze is Foundations.LongRunningOperation<AnalyzeResult>;
-  // NOTE: the code below outputs the behavior that the service has defined today
-  // op analyze(
-  //   ...QueryAPIVersion,
-  //   @header contentType: AnalysisContentTypes,
-  //   @path modelId: string,
-  //   @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
-  //   @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
-  //   @query pages: string,
-  //   @doc("Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").")
-  //   @query locale: string,
-  //   // FIXME: how do you specify a default string index type enum value
-  //   @doc("Method used to compute string offset and length.")
-  //   @query stringIndexType: StringIndexType,
-  //   @body body: bytes //FIXME | AnalyzeDocumentRequest
-  // ): AcceptedResponse | ErrorResponse;
+  op analyze is Foundations.LongRunningOperation<{
+    @header contentType: AnalysisContentTypes,
+    @path modelId: string,
+    @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+    @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
+    @query pages: string,
+    @doc("Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").")
+    @query locale: string,
+    // FIXME: how do you specify a default string index type enum value
+    @doc("Method used to compute string offset and length.")
+    @query stringIndexType: StringIndexType,
+    @body body: bytes //FIXME | AnalyzeDocumentRequest
+  }>;
 
   @get
   @route("documentModels/{modelId}/analyzeResults/{resultId}")
   @summary("Get analyze result")
   @doc("Gets the result of document analysis.")
   @tag("Analysis")
-  // NOTE: get AnalyzeResult does not seem like a Resource action to me, since AnalyzeResult is 
+  // NOTE: get AnalyzeResult does not seem to be a Resource action, since AnalyzeResult is 
   // not information related to a persisted resource but more so the result of running the 
   // analysis on a specific document
   op getAnalyzeResult(
@@ -51,49 +46,41 @@ interface Analysis {
 // but the built in azure core operations create the route for you and 
 // cause conflicts. Due to this also going to group the /info route here for now
 // @route("documentModels")
-interface DocumentModelAdministration {
-  // FIXME: this doesnt output current service behavior, similar issues to analyze op
-  // plus the route is incorrect. I need to be able to override the default route used in the 
-  // Azure.Core op
+interface DocumentModels {
+  @pollingOperation
   @doc("Builds a custom document analysis model.")
   @route("documentModels:build")
-  op buildDocumentModel is Foundations.LongRunningOperation<DocumentModelDetails>;
-  // op buildDocumentModel is LongRunningResourceCreateOrReplace<DocumentModelDetails>;
-  // NOTE: the code below outputs the behavior that the service has defined today
-  // @post
-  // @doc("Builds a custom document analysis model.")
-  // @route(":build") // resourcecollectionaction
-  // op build(
-  //   ...QueryAPIVersion,
-  //   modelId: DocumentModelId,
-  //   @doc("Document model description.")
-  //   @maxLength(4096)
-  //   description?: string,
-  //   @doc("Custom document model build mode.")
-  //   buildMode: DocumentBuildMode,
-  //   @doc("Azure Blob Storage location containing the training data.")
-  //   azureBlobSource?: AzureBlobContentSource,
-  //   @doc("List of key-value tag attributes associated with the document model.")
-  //   tags?: Record<string>,
-  // ): AcceptedResponse | ErrorResponse;
-
-  @post
-  @summary("Compose document model")
-  @doc("Creates a new document model from document types of existing document models.")
-  @route("documentModels:compose")
-  op composeDocumentModel(
-    ...QueryAPIVersion,
+  op build is Foundations.LongRunningOperation<{
+    @doc("Document model ID")
     modelId: DocumentModelId,
     @doc("Document model description.")
     @maxLength(4096)
     description?: string,
-    @doc("List of component document models to compose.")
-    // how to annotate with unique items?
-    componentModels: ComponentDocumentModelDetails[],
     @doc("List of key-value tag attributes associated with the document model.")
     tags?: Record<string>,
-  ): AcceptedResponse | ErrorResponse;
+    @doc("Build mode")
+    buildMode: DocumentBuildMode,
+    @doc("Azure Blob Storage location containing the training data.")
+    azureBlobSource?: AzureBlobContentSource,
+  }>;
 
+  @pollingOperation
+  @doc("Creates a new document model from document types of existing document models.")
+  @route("documentModels:compose")
+  op compose is Foundations.LongRunningOperation<
+  {
+    @doc("List of component document models to compose.")
+    modelId: DocumentModelId,
+    @doc("List of component document models to compose.")
+    componentModels: DocumentModelId[],
+    @doc("Document model description.")
+    @maxLength(4096)
+    description?: string,
+    @doc("List of key-value tag attributes associated with the document model.")
+    tags?: Record<string>,
+  }>;
+
+  // NOTE: the code below outputs the behavior that the service has defined today
   @post
   @summary("Generate copy authorization")
   @doc("Generates authorization to copy a document model to this location with specified modelId and optional description.")
@@ -108,17 +95,18 @@ interface DocumentModelAdministration {
     tags?: Record<string>,
   ): CopyAuthorization | ErrorResponse;
 
-  @post
+  // NOTE: the code below outputs the behavior that the service has defined today
+  @pollingOperation
   @summary("Copy document model")
   @doc("Copies document model to the target resource, region, and modelId.")
   @route("documentModels/{modelId}:copyTo")
-  op copyDocumentModelTo(
-    ...QueryAPIVersion,
-    @pattern("[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}")
-    @path modelId: string,
-    ...CopyAuthorization
-  ): AcceptedResponse | ErrorResponse;
+  op copyDocumentModelTo is Foundations.LongRunningOperation<{
+    ...DocumentModelId,
+    ...CopyAuthorization,
+  }>;
 
+  // FIXME: the service doesnt return a model that includes a resource key
+  // the resource in this instance is the Form Recognizer resource that is being queried
   // @route("info")
   // op getResourceDetails is ResourceRead<ResourceDetails>;
   @summary("Get resource info")
@@ -128,29 +116,23 @@ interface DocumentModelAdministration {
     ...QueryAPIVersion
   ): ResourceDetails | ErrorResponse;
 
-
-  // FIXME: ops below need to be improved to correctly specify what the service is doing
-
   @summary("List document models")
   @doc("List all document models")
   op getDocumentModels is ResourceList<DocumentModelSummary>;
 
-  op getDocumentModel is ResourceRead<DocumentModelDetails>; // has docTypes
+  @doc("Get a document model")
+  op getDocumentModel is ResourceRead<DocumentModelDetails>;
   
+  @doc("Delete a document model")
   op deleteDocumentModel is ResourceDelete<DocumentModelSummary>;
 }
 
+// FIXME need to customize ErrorResponse to the one defined in this spec
 interface Operations {
   @summary("List operations")
   @doc("Lists all operations.")
-  // FIXME ResourceList doesnt produce the route that this operation needs, 
-  // how to specify this as a paged operation result
-  @route("operations")
-  op getOperations(
-    ...QueryAPIVersion
-  ): GetOperationsResponse | ErrorResponse;
+  op getOperations is ResourceList<OperationSummary>;
 
-  // FIXME need to customize ErrorResponse to the one defined in this spec
   @summary("Get operation")
   @doc("Gets operation info.")
   op getOperation is ResourceRead<OperationDetails>;
