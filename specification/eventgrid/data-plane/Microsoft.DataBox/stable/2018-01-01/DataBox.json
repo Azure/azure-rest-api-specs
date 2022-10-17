@@ -1,0 +1,65 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure Data Box events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Data Box events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "DataBoxCopyStartedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event.",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Serial Number of the device associated with the event, separated by comma delimiter incase of multiple",
+          "type": "string"
+        },
+        "stageDetails": {
+          "$ref": "#/definitions/StageDetail"
+        }
+      }
+    },
+    "DataBoxCopyCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event.",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Serial Number of the device associated with the event, separated by comma delimiter incase of multiple",
+          "type": "string"
+        },
+        "stageDetails": {
+          "$ref": "#/definitions/StageDetail"
+        }
+      }
+    },
+    "DataBoxOrderCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event.",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Serial Number of the device associated with the event, separated by comma delimiter incase of multiple",
+          "type": "string"
+        },
+        "stageDetails": {
+          "$ref": "#/definitions/StageDetail"
+        }
+      }
+    },
+    "StageDetail": {
+      "description": "Metadata related to the stage detail",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the current Stage",
+          "type": "string"
+        },
+        "time": {
+          "description": "The time at which the stage happened.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
