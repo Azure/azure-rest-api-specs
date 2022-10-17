@@ -1,11 +1,9 @@
-import "@cadl-lang/rest";
 import "./routes.cadl";
 
 using Cadl.Http;
 
 @doc("Extracts content, layout, and structured data from documents.")
-@serviceTitle("Form Recognizer Client")
-@serviceVersion("2022-08-31")
+@service({title: "Form Recognizer Client", version: "2022-08-31"})
 @server("https://{endpoint}/formrecognizer", "Regional endpoint", {
   @doc("Form Recognizer resource endpoint")
   endpoint: string,
