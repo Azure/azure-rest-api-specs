@@ -856,6 +856,7 @@
   },
   "definitions": {
     "CreateCallRequest": {
+      "description": "The request payload for creating the call.",
       "required": [
         "targets",
         "source",
@@ -927,6 +928,7 @@
       }
     },
     "CallSource": {
+      "description": "The caller.",
       "required": [
         "identifier"
       ],
@@ -934,7 +936,7 @@
       "properties": {
         "callerId": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The alternate identity of the source of the call if dialing out to a pstn number"
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited. \r\nRequired only when calling a PSTN callee."
         },
         "displayName": {
           "description": "Display name of the call if dialing out to a pstn number",
@@ -981,6 +983,7 @@
       }
     },
     "MediaStreamingConfiguration": {
+      "description": "Configuration of Media streaming.",
       "required": [
         "transportUrl",
         "transportType",
@@ -1073,6 +1076,7 @@
       }
     },
     "CallConnectionProperties": {
+      "description": "Properties of a call connection",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1085,7 +1089,7 @@
         },
         "source": {
           "$ref": "#/definitions/CallSource",
-          "description": "The source of the call."
+          "description": "The source of the call, which is the caller."
         },
         "targets": {
           "description": "The targets of the call.",
@@ -1177,7 +1181,7 @@
       }
     },
     "TransferToParticipantRequest": {
-      "description": "The transfer call to participant request.",
+      "description": "The request payload for transferring call to a participant.",
       "required": [
         "targetParticipant"
       ],
@@ -1196,12 +1200,13 @@
           "type": "string"
         },
         "operationContext": {
-          "description": "The operation context.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         }
       }
     },
     "TransferCallResponse": {
+      "description": "The response payload for transferring the call.",
       "type": "object",
       "properties": {
         "operationContext": {
@@ -1408,20 +1413,24 @@
       }
     },
     "GetParticipantsResponse": {
+      "description": "The response payload for getting participants of the call.",
       "type": "object",
       "properties": {
         "values": {
+          "description": "List of the current participants in the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsCallParticipant"
           }
         },
         "nextLink": {
+          "description": "Continue of the list of participants",
           "type": "string"
         }
       }
     },
     "AcsCallParticipant": {
+      "description": "Contract model of an ACS call participant",
       "type": "object",
       "properties": {
         "identifier": {
@@ -1435,6 +1444,7 @@
       }
     },
     "AddParticipantsRequest": {
+      "description": "The request payload for adding participants to the call.",
       "required": [
         "participantsToAdd"
       ],
@@ -1442,7 +1452,7 @@
       "properties": {
         "sourceCallerId": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The source caller Id that's shown to the PSTN participant being invited. Required only when inviting a PSTN participant."
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited. \r\nRequired only when inviting a PSTN participant."
         },
         "participantsToAdd": {
           "description": "The participants to invite.",
@@ -1459,15 +1469,17 @@
           "type": "integer"
         },
         "operationContext": {
-          "description": "The operation context.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         }
       }
     },
     "AddParticipantsResponse": {
+      "description": "The response payload for adding participants to the call.",
       "type": "object",
       "properties": {
         "participants": {
+          "description": "List of current participants in the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsCallParticipant"
@@ -1487,19 +1499,20 @@
       "type": "object",
       "properties": {
         "participantsToRemove": {
-          "description": "The participants to invite.",
+          "description": "The participants to be removed from the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
         "operationContext": {
-          "description": "The operation context.",
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         }
       }
     },
     "RemoveParticipantsResponse": {
+      "description": "The response payload for removing participants of the call.",
       "type": "object",
       "properties": {
         "operationContext": {
@@ -1569,11 +1582,11 @@
         "recordingFormatType": {
           "$ref": "#/definitions/RecordingFormatType"
         },
-        "channelAffinity": {
-          "description": "The channel affinity of call recording.",
+        "audioChannelParticipantOrdering": {
+          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected.  Channel to participant mapping details can be found in the metadata of the recording.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ChannelAffinity"
+            "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         }
       }
@@ -1607,21 +1620,6 @@
         }
       }
     },
-    "ChannelAffinity": {
-      "description": "Channel affinity for a participant",
-      "type": "object",
-      "properties": {
-        "channel": {
-          "format": "int32",
-          "description": "Channel number to which bitstream from a particular participant will be written.",
-          "type": "integer"
-        },
-        "participant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The identifier for the participant whose bitstream will be written to the channel \r\nrepresented by the channel number."
-        }
-      }
-    },
     "RecordingState": {
       "enum": [
         "active",
@@ -1645,6 +1643,7 @@
       }
     },
     "AddParticipantsFailed": {
+      "description": "The failed to add participants event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1668,7 +1667,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
         },
         "participants": {
-          "description": "The list of participants.",
+          "description": "The list of participants in the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
@@ -1693,6 +1692,7 @@
       }
     },
     "AddParticipantsSucceeded": {
+      "description": "The participants successfully added event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1716,6 +1716,7 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
         },
         "participants": {
+          "description": "The list of participants in the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
@@ -1724,6 +1725,7 @@
       }
     },
     "CallConnected": {
+      "description": "The call connected event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1745,6 +1747,7 @@
       }
     },
     "CallDisconnected": {
+      "description": "The call disconnected event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1766,6 +1769,7 @@
       }
     },
     "CallTransferAccepted": {
+      "description": "The call transfer accepted event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1791,6 +1795,7 @@
       }
     },
     "CallTransferFailed": {
+      "description": "The call transfer failed event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1816,6 +1821,7 @@
       }
     },
     "ParticipantsUpdated": {
+      "description": "The participants updated in a call event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1831,7 +1837,7 @@
           "type": "string"
         },
         "participants": {
-          "description": "The list of participants.",
+          "description": "The list of participants in the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
