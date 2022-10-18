@@ -1568,37 +1568,11 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "description": "The content of the error."
         }
       },
       "description": "An error returned by the Azure Resource Manager",
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message"
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "Error details"
-        }
-      },
-      "description": "The content of an error returned by the Azure Resource Manager",
       "x-ms-external": true
     }
   },
