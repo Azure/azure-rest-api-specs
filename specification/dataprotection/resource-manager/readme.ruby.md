@@ -13,6 +13,7 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2022-10-preview
+  - tag: package-preview-2022-09
   - tag: package-2021-06-preview
   - tag: package-2021-02-preview
   - tag: package-2022-03
@@ -55,5 +56,15 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2022-10-preview' && $(ruby)
 namespace: "Azure::DataProtection::Mgmt::V2022_10_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_data_protection/lib
+```
+
+### Tag: package-preview-2022-09 and ruby
+
+These settings apply only when `--tag=package-preview-2022-09 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-09' && $(ruby)
+namespace: "Azure::DataProtection::Mgmt::V2022_09_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_data_protection/lib
 ```
