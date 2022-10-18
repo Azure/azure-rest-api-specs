@@ -45,7 +45,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RegulatoryPackageCreateResponse"
+              "$ref": "#/definitions/RegulatoryPackageUpsertResponse"
             }
           },
           "default": {
@@ -203,7 +203,7 @@
         "tags": [
           "Regulatory Packages Management"
         ],
-        "summary": "Submits a Regulatory Package by its ID, to be reviewed by the Service Desk.",
+        "summary": "Submits a regulatory package by its ID, to be reviewed by the Service Desk.",
         "operationId": "RegulatoryPackages_Submit",
         "consumes": [
           "application/json"
@@ -338,7 +338,6 @@
       }
     },
     "/regulatoryPackages/{regulatoryPackageId}/attachments": {
-      
       "get": {
         "tags": [
           "Regulatory Packages Management"
@@ -390,28 +389,13 @@
         }
       }
     },
-    "RegulatoryPackageCreateResponse": {
+    "RegulatoryPackageUpsertResponse": {
       "description": "Regulatory package create response",
       "type": "object",
       "properties": {
         "RegulatoryPackageId": {
           "description": "The regulatory package's ID",
           "type": "string"
-        }
-      }
-    },
-    "RegulatoryPackageUpdateRequest": {
-      "description": "Regulatory package Update Request",
-      "type": "object",
-      "properties": {
-        "RegulatoryPackageId": {
-          "description": "The regulatory package ID.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Represents the phone number type, e.g. TollFree, Geographic.",
-          "type": "object",
-          "$ref": "#/definitions/RegulatoryPackageDetails"
         }
       }
     },
