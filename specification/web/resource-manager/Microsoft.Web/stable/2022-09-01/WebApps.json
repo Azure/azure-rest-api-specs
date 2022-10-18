@@ -21589,22 +21589,13 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "appSettings",
+            "name": "workflowArtifacts",
             "in": "body",
-            "description": "Application settings of the app.",
+            "description": "Application settings and files of the workflow.",
             "required": false,
             "x-ms-secret": true,
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          {
-            "name": "files",
-            "in": "body",
-            "description": "Files of the app.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/WorkflowFiles"
+              "$ref": "#/definitions/WorkflowArtifacts"
             }
           }
         ],
@@ -21659,22 +21650,13 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "appSettings",
+            "name": "workflowArtifacts",
             "in": "body",
-            "description": "Application settings of the app.",
+            "description": "Application settings and files of the workflow.",
             "required": false,
             "x-ms-secret": true,
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          {
-            "name": "files",
-            "in": "body",
-            "description": "Files of the app.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/WorkflowFiles"
+              "$ref": "#/definitions/WorkflowArtifacts"
             }
           }
         ],
@@ -29502,6 +29484,20 @@
           "$ref": "#/definitions/WorkflowResource"
         }
       ]
+    },
+    "WorkflowArtifacts": {
+      "type": "object",
+      "properties": {
+        "appSettings": {
+          "$ref": "./CommonDefinitions.json#/definitions/StringDictionary",
+          "description": "Application settings of the workflow."
+        },
+        "files": {
+          "$ref": "#/definitions/WorkflowFiles",
+          "description": "Files of the app."
+        }
+      },
+      "description": "The workflow filter."
     },
     "WorkflowFilter": {
       "type": "object",
