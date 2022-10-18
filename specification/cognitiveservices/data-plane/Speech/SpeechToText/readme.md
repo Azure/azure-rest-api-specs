@@ -66,4 +66,13 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: LongRunningOperationsWithLongRunningExtension
     reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
+``
+### Tag: package-v3.1
+
+These settings apply only when `--tag=package-v3.1` is specified on the command line.
+
+```yaml $(tag) == 'package-v3.1'
+input-file:
+  - stable/v3.1/speechtotext.json
 ```
+`
