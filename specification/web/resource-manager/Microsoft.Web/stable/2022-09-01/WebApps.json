@@ -21840,10 +21840,6 @@
               "$ref": "#/definitions/WorkflowEnvelope"
             }
           },
-          "404": {
-            "description": "Error retrieving connections.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -21885,10 +21881,6 @@
             "schema": {
               "$ref": "#/definitions/WorkflowEnvelopeCollection"
             }
-          },
-          "404": {
-            "description": "Workflow with an ID of {workflowName} is not running.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -21987,10 +21979,6 @@
             "schema": {
               "$ref": "#/definitions/WorkflowEnvelope"
             }
-          },
-          "404": {
-            "description": "Error retrieving connections.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -29729,7 +29717,7 @@
         "properties": {
           "description": "Additional workflow properties.",
           "type": "object",
-          "properties":{
+          "properties": {
             "files": {
               "description": "Gets or sets the files.",
               "type": "object",
@@ -29752,11 +29740,11 @@
                 "name": "WorkflowState",
                 "modelAsString": false
               }
+            },
+            "health": {
+              "$ref": "#/definitions/WorkflowHealth",
+              "description": "Gets or sets workflow health."
             }
-          },
-          "health": {
-            "$ref": "#/definitions/WorkflowHealth",
-            "description": "Gets or sets workflow health."
           }
         }
       }
