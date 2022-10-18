@@ -7,7 +7,7 @@ Configuration for generating SpeechToText SDK.
 The current release for the SpeechToText is `release_3_1`.
 
 ``` yaml
-tag: package-v3.1
+tag: release_3_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -71,11 +71,10 @@ directive:
 ---
 
 ## SpeechToText 3.1
-### Tag: package-v3.1
 
-These settings apply only when `--tag=package-v3.1` is specified on the command line.
+These settings apply only when `--tag=release_3_1` is specified on the command line.
 
-```yaml $(tag) == 'package-v3.1'
+```yaml $(tag) == 'release_3_1'
 input-file:
   - stable/v3.1/speechtotext.json
 ```
