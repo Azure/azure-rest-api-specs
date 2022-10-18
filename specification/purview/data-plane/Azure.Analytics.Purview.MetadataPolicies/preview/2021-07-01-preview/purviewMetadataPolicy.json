@@ -531,9 +531,9 @@
       "type": "string",
       "x-ms-client-name": "ApiVersion"
     },
-    "Endpoint": {
+    "endpoint": {
       "in": "path",
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
       "required": true,
       "type": "string",
@@ -553,11 +553,11 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/endpoint"
       }
     ]
   },

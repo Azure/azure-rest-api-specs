@@ -1,0 +1,397 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview data Policies Service REST API Document",
+    "version": "2022-02-01-preview"
+  },
+  "paths": {
+    "/devopsPolicies/{policyName}": {
+      "delete": {
+        "tags": [
+          "DevopsPolicy"
+        ],
+        "description": "Deletes a devops policy for a given policy name.",
+        "operationId": "DevopsPolicy_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyName",
+            "description": "The name of the policy to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsPolicy_Delete": {
+            "$ref": "./examples/DevopsPolicy_Delete.json"
+          }
+        }
+      }
+    },
+    "/devopsPolicies": {
+      "put": {
+        "tags": [
+          "DevopsPolicy"
+        ],
+        "description": "Creates/Updates a Devops policy",
+        "operationId": "DevopsPolicy_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The body of the Devops policy which needs to be created or updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevopsPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created a policy",
+            "schema": {
+              "$ref": "#/definitions/DevopsPolicy"
+            }
+          },
+          "200": {
+            "description": "Updated a policy",
+            "schema": {
+              "$ref": "#/definitions/DevopsPolicy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsPolicy_CreateOrUpdate": {
+            "$ref": "./examples/DevopsPolicy_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DevopsPolicy"
+        ],
+        "description": "List Devops policies",
+        "operationId": "DevopsPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "Filter System.String.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DevopsPolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "x-ms-examples": {
+          "DevopsPolicy_List": {
+            "$ref": "./examples/DevopsPolicy_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataFabricPolicyContentDetails": {
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "type": "string"
+        },
+        "identificationHash": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "The error model for policy",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code",
+          "minLength": 1,
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message",
+          "minLength": 1,
+          "type": "string"
+        },
+        "target": {
+          "description": "The error target",
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "The error response model for policy",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "DevopsPolicy": {
+      "required": [
+        "decisionRules",
+        "scope"
+      ],
+      "type": "object",
+      "properties": {
+        "policyName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
+        "policyDetails": {
+          "$ref": "#/definitions/DataFabricPolicyContentDetails"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "decisionRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevopsPolicyDecisionRule"
+          }
+        },
+        "scope": {
+          "$ref": "#/definitions/DevopsPolicyScope"
+        }
+      }
+    },
+    "DevopsPolicyList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevopsPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "DevopsPolicyDecisionRule": {
+      "required": [
+        "effect",
+        "purviewRoleName"
+      ],
+      "type": "object",
+      "properties": {
+        "effect": {
+          "description": "The effect for rule",
+          "enum": [
+            "NotApplicable",
+            "Deny",
+            "Permit",
+            "Indeterminate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
+        },
+        "purviewRoleName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "principals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "principalGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceAzurePath": {
+          "type": "string"
+        }
+      }
+    },
+    "DevopsPolicyScope": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of reference",
+          "default": "DataSourceReference",
+          "type": "string"
+        },
+        "referenceName": {
+          "description": "The name of reference",
+          "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "basePath": "/policyStore",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
