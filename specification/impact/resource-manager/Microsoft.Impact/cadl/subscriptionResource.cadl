@@ -1,0 +1,82 @@
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using OpenAPI;
+using Autorest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Internal;
+
+
+namespace Microsoft.Impact;
+
+model SubscriptionResourceInstanceParameters<TResource> {
+  ...SubscriptionScope<TResource>;
+  ...KeysOf<TResource>;
+}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a building block"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "This is a building block"
+interface SubscriptionResourceRead<TResource> {
+  @autoRoute
+  @doc("Get a {name}", TResource)
+  @get
+  @armResourceRead(TResource)
+  get(...SubscriptionResourceInstanceParameters<TResource>): ArmResponse<TResource> | ErrorResponse;
+}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a building block"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "This is a building block"
+interface SubscriptionResourceCreate<TResource> {
+  @autoRoute
+  @doc("Create a {name}", TResource)
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("azure-async-operation")
+  @armResourceCreateOrUpdate(TResource)
+  @put
+  createOrUpdate(
+    ...SubscriptionResourceInstanceParameters<TResource>,
+
+    @doc("Resource create parameters.")
+    @body
+    resource: TResource
+  ): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
+}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a building block"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "This is a building block"
+interface SubscriptionResourceUpdate<TResource, TProperties> {
+  @autoRoute
+  @doc("Update a {name}", TResource)
+  @armResourceUpdate(TResource)
+  @patch
+  update(
+    ...SubscriptionResourceInstanceParameters<TResource>,
+
+    @doc("The resource properties to be updated.")
+    @body
+    properties: ResourceUpdateModel<TResource, TProperties>
+  ): ArmResponse<TResource> | ErrorResponse;
+}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a building block"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "This is a building block"
+interface SubscriptionResourceDelete<TResource> {
+  @autoRoute
+  @doc("Delete a {name}", TResource)
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("azure-async-operation")
+  @armResourceDelete(TResource)
+  @delete
+  delete(...SubscriptionResourceInstanceParameters<TResource>):
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedResponse
+    | ArmDeletedNoContentResponse
+    | ErrorResponse;
+}

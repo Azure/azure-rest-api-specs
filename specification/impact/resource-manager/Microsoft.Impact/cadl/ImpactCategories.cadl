@@ -1,0 +1,92 @@
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "./subscriptionResource.cadl";
+
+namespace Microsoft.Impact;
+
+using Cadl.Http;
+using Cadl.Rest;
+using OpenAPI;
+using Azure.ResourceManager;
+
+@doc("ImpactCategory resource")
+model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
+  @pattern("^.*$")
+  @key("impactCategoryName")
+  @segment("impactCategories")
+  @doc("Name of the impact category")
+  @visibility("Read")
+  @path
+  name: string;  
+}
+
+
+@doc("Impact category properties.")
+model ImpactCategoryProperties  is ResourceProperties{
+
+  @doc("Unique ID of the category")
+  @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
+  categoryId: string;
+
+  @doc("Unique ID of the parent category")
+  @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
+  parentCategoryId?: string;
+
+  @doc("Description of the category")
+  description? : string;
+
+  @doc("The workloadImpact properties which are required when reporting with the impact category")
+  @extension("x-ms-identifiers",[])
+  requiredImpactProperties?:RequiredImpactProperties[];
+}
+
+@doc("Required impact properties")
+model RequiredImpactProperties{
+@doc("Name of the property")
+name: string;
+@doc("Allowed values values for the property")
+allowedValues? : string[];
+}
+
+
+@doc("ResourceType parameter for filtering")
+model ResourceTypeParameter {
+  @query
+  @minLength(1)
+  @doc("Filter by resource type")
+  resourceType: string;
+}
+
+@doc("CategoryName parameter type")
+model CategoryNameParameter {
+  @query
+  @minLength(1)
+  @doc("Filter by category name ")
+  categoryName?: string;
+}
+
+
+@doc("Impact category subscription scope with query parameters")
+model ImpactCategorySubscriptionScopeWithQueryParameters{
+  ...SubscriptionScope<ImpactCategory>; 
+  ...CategoryNameParameter;
+  ...ResourceTypeParameter;
+
+}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+@armResourceOperations
+interface ImpactCategories extends SubscriptionResourceRead<ImpactCategory>  {
+
+  @autoRoute
+  @doc("List {name} resources by subscription ID", ImpactCategory)
+  @list(ImpactCategory)
+  @segmentOf(ImpactCategory)
+  @armResourceList(ImpactCategory)
+  @get
+  listBySubscription(...ImpactCategorySubscriptionScopeWithQueryParameters): ArmResponse<ResourceListResult<ImpactCategory>> | ErrorResponse;
+}
