@@ -706,7 +706,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -1438,7 +1438,10 @@
         "id": {
           "description": "The id of the managed virtual network.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },

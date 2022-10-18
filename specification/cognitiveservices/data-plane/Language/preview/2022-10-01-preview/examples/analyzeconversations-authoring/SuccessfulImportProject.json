@@ -2,7 +2,7 @@
   "parameters": {
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-07-01-preview",
+    "api-version": "2022-10-01-preview",
     "projectName": "EmailApp",
     "body": {
       "projectFileVersion": "2022-05-01",
@@ -30,6 +30,18 @@
         "entities": [
           {
             "category": "Sender"
+          },
+          {
+            "category": "Number",
+            "regex": {
+              "expressions": [
+                {
+                  "regexKey": "UK Phone numbers",
+                  "language": "en-us",
+                  "regexPattern": "/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$/"
+                }
+              ]
+            }
           }
         ],
         "utterances": [
