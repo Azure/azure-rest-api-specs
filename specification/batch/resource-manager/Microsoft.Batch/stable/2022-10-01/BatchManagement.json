@@ -3,7 +3,7 @@
   "info": {
     "title": "BatchManagementClient",
     "description": "The Batch Management Client.",
-    "version": "2022-06-01"
+    "version": "2022-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1252,8 +1252,10 @@
         "tags": [
           "Certificate"
         ],
+        "deprecated": true,
         "operationId": "Certificate_ListByBatchAccount",
-        "description": "Lists all of the certificates in the specified account.",
+        "summary": "Lists all of the certificates in the specified account.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-examples": {
           "ListCertificates": {
             "$ref": "./examples/CertificateList.json"
@@ -1322,8 +1324,10 @@
         "tags": [
           "Certificate"
         ],
+        "deprecated": true,
         "operationId": "Certificate_Create",
-        "description": "Creates a new certificate inside the specified account.",
+        "summary": "Creates a new certificate inside the specified account.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-examples": {
           "CreateCertificate - Minimal Pfx": {
             "$ref": "./examples/CertificateCreate_Minimal.json"
@@ -1400,8 +1404,10 @@
         "tags": [
           "Certificate"
         ],
+        "deprecated": true,
         "operationId": "Certificate_Update",
-        "description": "Updates the properties of an existing certificate.",
+        "summary": "Updates the properties of an existing certificate.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-examples": {
           "UpdateCertificate": {
             "$ref": "./examples/CertificateUpdate.json"
@@ -1465,8 +1471,10 @@
         "tags": [
           "Certificate"
         ],
+        "deprecated": true,
         "operationId": "Certificate_Delete",
-        "description": "Deletes the specified certificate.",
+        "summary": "Deletes the specified certificate.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-examples": {
           "CertificateDelete": {
             "$ref": "./examples/CertificateDelete.json"
@@ -1526,8 +1534,10 @@
         "tags": [
           "Certificate"
         ],
+        "deprecated": true,
         "operationId": "Certificate_Get",
-        "description": "Gets information about the specified certificate.",
+        "summary": "Gets information about the specified certificate.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-examples": {
           "Get Certificate": {
             "$ref": "./examples/CertificateGet.json"
@@ -1580,9 +1590,10 @@
         "tags": [
           "Certificate"
         ],
+        "deprecated": true,
         "operationId": "Certificate_CancelDeletion",
         "summary": "Cancels a failed deletion of a certificate from the specified account.",
-        "description": "If you try to delete a certificate that is being used by a pool or compute node, the status of the certificate changes to deleteFailed. If you decide that you want to continue using the certificate, you can use this operation to set the status of the certificate back to active. If you intend to delete the certificate, you do not need to run this operation after the deletion failed. You must make sure that the certificate is not being used by any resources, and then you can try again to delete the certificate.",
+        "description": "If you try to delete a certificate that is being used by a pool or compute node, the status of the certificate changes to deleteFailed. If you decide that you want to continue using the certificate, you can use this operation to set the status of the certificate back to active. If you intend to delete the certificate, you do not need to run this operation after the deletion failed. You must make sure that the certificate is not being used by any resources, and then you can try again to delete the certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-examples": {
           "CertificateCancelDeletion": {
             "$ref": "./examples/CertificateCancelDeletion.json"
@@ -1970,9 +1981,6 @@
                 "format": "int32"
               }
             }
-          },
-          "204": {
-            "description": "The operation was successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2509,7 +2517,7 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_ListOutboundNetworkDependenciesEndpoints",
-        "description": "Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to mark the affected nodes as unusable. For more information about creating a pool inside of a virtual network, see https://docs.microsoft.com/azure/batch/batch-virtual-network",
+        "description": "Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to mark the affected nodes as unusable. For more information about creating a pool inside of a virtual network, see https://docs.microsoft.com/en-us/azure/batch/batch-virtual-network.",
         "x-ms-examples": {
           "ListOutboundNetworkDependencies": {
             "$ref": "./examples/BatchAccountListOutboundNetworkDependenciesEndpoints.json"
@@ -2998,7 +3006,7 @@
         },
         "allowedAuthenticationModes": {
           "readOnly": true,
-          "x-nullable": false,
+          "x-nullable": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthenticationMode"
@@ -3661,7 +3669,11 @@
         "data": {
           "type": "string",
           "title": "The base64-encoded contents of the certificate.",
-          "description": "The maximum size is 10KB."
+          "description": "The maximum size is 10KB.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "password": {
           "type": "string",
@@ -3948,7 +3960,7 @@
           "type": "string",
           "title": "Description of the private Connection state"
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "title": "Action required on the private connection state",
           "readOnly": true
@@ -4109,7 +4121,7 @@
         "currentDedicatedNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of compute nodes currently in the pool.",
+          "title": "The number of dedicated compute nodes currently in the pool.",
           "readOnly": true
         },
         "currentLowPriorityNodes": {
@@ -4198,7 +4210,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of certificates to be installed on each compute node in the pool.",
-          "description": "For Windows compute nodes, the Batch service installs the certificates to the specified certificate store and location. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory."
+          "description": "For Windows compute nodes, the Batch service installs the certificates to the specified certificate store and location. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackages": {
           "type": "array",
@@ -4229,6 +4241,17 @@
           "x-ms-identifiers": [],
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
+        },
+        "targetNodeCommunicationMode": {
+          "title": "The desired node communication mode for the pool.",
+          "description": "If omitted, the default value is Default.",
+          "$ref": "#/definitions/NodeCommunicationMode"
+        },
+        "currentNodeCommunicationMode": {
+          "title": "The current state of the pool communication mode.",
+          "$ref": "#/definitions/NodeCommunicationMode",
+          "x-nullable": true,
+          "readOnly": true
         }
       },
       "description": "Pool properties."
@@ -4351,7 +4374,11 @@
         "nodeDeallocationOption": {
           "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
           "description": "If omitted, the default value is Requeue.",
-          "$ref": "#/definitions/ComputeNodeDeallocationOption"
+          "$ref": "#/definitions/ComputeNodeDeallocationOption",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       },
       "title": "Fixed scale settings for the pool."
@@ -4458,7 +4485,8 @@
       "required": [
         "id"
       ],
-      "title": "A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool."
+      "title": "A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool.",
+      "description": "Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
     },
     "ApplicationPackageReference": {
       "type": "object",
@@ -4556,6 +4584,33 @@
         "evaluationTime"
       ],
       "title": "The results and errors from an execution of a pool autoscale formula."
+    },
+    "NodeCommunicationMode": {
+      "type": "string",
+      "title": "Determines how a pool communicates with the Batch service.",
+      "enum": [
+        "Default",
+        "Classic",
+        "Simplified"
+      ],
+      "x-ms-enum": {
+        "name": "NodeCommunicationMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Default",
+            "description": "The node communication mode is automatically set by the Batch service."
+          },
+          {
+            "value": "Classic",
+            "description": "Nodes using the Classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags."
+          },
+          {
+            "value": "Simplified",
+            "description": "Nodes using the Simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required."
+          }
+        ]
+      }
     },
     "VirtualMachineConfiguration": {
       "type": "object",
@@ -4980,7 +5035,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "title": "The name of the user account."
+          "title": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20."
         },
         "password": {
           "type": "string",
@@ -5410,7 +5465,7 @@
             "description": "Setting up RBAC for Azure Batch VNets"
           }
         },
-        "dynamicVNetAssignmentScope": {
+        "dynamicVnetAssignmentScope": {
           "type": "string",
           "title": "The scope of dynamic vnet assignment.",
           "enum": [
@@ -5750,8 +5805,8 @@
             "$ref": "#/definitions/CloudErrorBody"
           },
           "x-ms-identifiers": [
-            "code",
-            "message"
+            "message",
+            "target"
           ],
           "description": "A list of additional details about the error."
         }
@@ -6059,7 +6114,7 @@
     "CIFSMountConfiguration": {
       "type": "object",
       "properties": {
-        "username": {
+        "userName": {
           "type": "string",
           "title": "The user to use for authentication against the CIFS file system."
         },
@@ -6083,7 +6138,6 @@
         }
       },
       "required": [
-        "username",
         "source",
         "password",
         "relativeMountPath"
@@ -6120,7 +6174,6 @@
       "required": [
         "accountName",
         "azureFileUrl",
-        "accountKey",
         "relativeMountPath"
       ],
       "title": "Information used to connect to an Azure Fileshare."
