@@ -720,3 +720,26 @@
       ]
     }
   }
+
+
+  "nodeName": {
+    "name": "nodeName",
+    "description": "The integration runtime node name.",
+    "in": "path",
+    "required": true,
+    "type": "string",
+    "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$",
+    "minLength": 1,
+    "maxLength": 150,
+    "x-ms-parameter-location": "method"
+  }
+
+  "CacheNameParameter": {
+    "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
+    "in": "path",
+    "name": "cacheName",
+    "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+    "required": true,
+    "type": "string",
+    "x-ms-parameter-location": "method"
+  },

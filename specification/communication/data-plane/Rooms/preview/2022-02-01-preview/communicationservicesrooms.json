@@ -18,11 +18,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "The id of the room requested",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -69,11 +65,8 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "The id of the room requested",
-            "required": true,
-            "type": "string"
+
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -133,11 +126,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "The id of the room to be deleted",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -179,11 +168,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "The id of the room to get participants from",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -231,11 +216,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "Room id to add participants.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -292,11 +273,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "The room id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -353,11 +330,8 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "roomId",
-            "description": "Room id to remove the participants from.",
-            "required": true,
-            "type": "string"
+
+            "$ref": "#/parameters/RoomId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -497,6 +471,14 @@
             "$ref": "#/definitions/RoomParticipant"
           },
           "x-ms-identifiers": []
+        },
+        "metadata": {
+          "description":"Metadata of the room.",
+          "type": "object",
+          "example": {
+              "Purpose": "PatientConsult",
+              "RoomName": "friendly name"
+          }
         }
       }
     },
@@ -526,6 +508,14 @@
             "$ref": "#/definitions/RoomParticipant"
           },
           "x-ms-identifiers": []
+        },
+        "metadata": {
+          "description":"Metadata of the room.",
+          "type": "object",
+          "example": {
+              "Purpose": "PatientConsult",
+              "RoomName": "friendly name"
+          }
         }
       }
     },
@@ -599,6 +589,17 @@
     }
   },
   "parameters": {
+    "RoomId": {
+      "name": "roomId",
+      "description": "The id of a room.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{5,79}$",
+      "minLength": 6,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
     "ApiVersionParameter": {
       "in": "query",
       "name": "api-version",

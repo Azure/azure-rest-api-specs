@@ -3,30 +3,32 @@
     "endpoint": "https://contoso.communication.azure.com/",
     "api-version": "2022-02-01",
     "roomId": "MyRoomId",
-    "createRoomRequest": {
-      "validFrom": "2022-05-30T00:00:00Z",
-      "validUntil": "2022-06-30T00:00:00Z",
-      "roomJoinPolicy": "InviteOnly",
-      "participants": [
-        {
-          "communicationIdentifier": {
-            "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222",
-            "communicationUser": {
-              "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222"
-            }
-          },
-          "role": "Presenter"
+    "validFrom": "2022-05-30T00:00:00Z",
+    "validUntil": "2022-06-30T00:00:00Z",
+    "roomJoinPolicy": "InviteOnly",
+    "participants": [
+      {
+        "communicationIdentifier": {
+          "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222",
+          "communicationUser": {
+            "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000222"
+          }
         },
-        {
-          "communicationIdentifier": {
-            "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333",
-            "communicationUser": {
-              "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333"
-            }
-          },
-          "role": "Attendee"
-        }
-      ]
+        "role": "Presenter"
+      },
+      {
+        "communicationIdentifier": {
+          "rawId": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333",
+          "communicationUser": {
+            "id": "8:acs:db75ed0c-e801-41a3-99a4-66a0a119a06c_00000010-ce28-064a-83fe-084822000333"
+          }
+        },
+        "role": "Attendee"
+      }
+    ],
+    "metadata": {
+      "Purpose": "PatientConsult",
+      "RoomName": "friendly name"
     }
   },
   "responses": {
@@ -56,7 +58,11 @@
             },
             "role": "Attendee"
           }
-        ]
+        ],
+        "metadata": {
+          "Purpose": "PatientConsult",
+          "RoomName": "friendly name"
+        }
       }
     }
   }
