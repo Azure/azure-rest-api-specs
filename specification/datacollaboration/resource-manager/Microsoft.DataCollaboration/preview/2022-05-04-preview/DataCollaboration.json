@@ -5498,8 +5498,8 @@
       },
       "x-ms-discriminator-value": "Boolean"
     },
-    "BooleanPipelineRunParameterAssignment": {
-      "description": "Pipeline run boolean parameter assignment",
+    "BooleanPipelineRunComputationParameterAssignment": {
+      "description": "Pipeline run boolean computation parameter assignment",
       "required": [
         "value",
         "pipelineParameterId",
@@ -5508,7 +5508,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineRunParameterAssignment"
+          "$ref": "#/definitions/PipelineRunComputationParameterAssignment"
         }
       ],
       "properties": {
@@ -7725,8 +7725,8 @@
       },
       "x-ms-discriminator-value": "DateTimeOptionsSet"
     },
-    "DateTimePipelineRunParameterAssignment": {
-      "description": "Pipeline run DateTime parameter assignment",
+    "DateTimePipelineRunComputationParameterAssignment": {
+      "description": "Pipeline run DateTime computation parameter assignment",
       "required": [
         "value",
         "pipelineParameterId",
@@ -7735,7 +7735,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineRunParameterAssignment"
+          "$ref": "#/definitions/PipelineRunComputationParameterAssignment"
         }
       ],
       "properties": {
@@ -8109,8 +8109,8 @@
       },
       "x-ms-discriminator-value": "FloatOptionsSet"
     },
-    "FloatPipelineRunParameterAssignment": {
-      "description": "Pipeline run float parameter assignment",
+    "FloatPipelineRunComputationParameterAssignment": {
+      "description": "Pipeline run float computation parameter assignment",
       "required": [
         "value",
         "pipelineParameterId",
@@ -8119,7 +8119,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineRunParameterAssignment"
+          "$ref": "#/definitions/PipelineRunComputationParameterAssignment"
         }
       ],
       "properties": {
@@ -8258,8 +8258,8 @@
       },
       "x-ms-discriminator-value": "IntegerOptionsSet"
     },
-    "IntegerPipelineRunParameterAssignment": {
-      "description": "Pipeline run integer parameter assignment",
+    "IntegerPipelineRunComputationParameterAssignment": {
+      "description": "Pipeline run integer computation parameter assignment",
       "required": [
         "value",
         "pipelineParameterId",
@@ -8268,7 +8268,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineRunParameterAssignment"
+          "$ref": "#/definitions/PipelineRunComputationParameterAssignment"
         }
       ],
       "properties": {
@@ -9102,30 +9102,8 @@
         }
       }
     },
-    "PipelineRunList": {
-      "description": "List response for get pipeline run.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type DataTransferObjects.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PipelineRun"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "PipelineRunParameterAssignment": {
-      "description": "Pipeline run parameter assignment",
+    "PipelineRunComputationParameterAssignment": {
+      "description": "Pipeline run computation parameter assignment",
       "required": [
         "pipelineParameterId",
         "parameterType"
@@ -9154,6 +9132,52 @@
       },
       "discriminator": "parameterType"
     },
+    "PipelineRunList": {
+      "description": "List response for get pipeline run.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PipelineRunParameterAssignments": {
+      "description": "The parameters assignments for a pipeline run.",
+      "type": "object",
+      "properties": {
+        "pipelineRunComputationParameterAssignments": {
+          "description": "Pipeline run computation parameters assignments",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRunComputationParameterAssignment"
+          },
+          "x-ms-identifiers": []
+        },
+        "pipelineRunStepParameterAssignments": {
+          "description": "Pipeline run step parameters assignments",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRunStepParameterAssignment"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "PipelineRunParameters": {
       "description": "The parameters for a pipeline run.",
       "type": "object",
@@ -9171,22 +9195,8 @@
           }
         },
         "pipelineRunParameterAssignments": {
-          "description": "Pipeline run parameters assignments",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PipelineRunParameterAssignment"
-          },
-          "x-ms-identifiers": []
-        },
-        "pipelineRunStepParameterAssignments": {
-          "description": "Pipeline run step parameters assignments",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PipelineRunStepParameterAssignment"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/PipelineRunParameterAssignments",
+          "description": "Pipeline run parameters assignments"
         }
       }
     },
@@ -10134,8 +10144,8 @@
       },
       "x-ms-discriminator-value": "StringOptionsSet"
     },
-    "StringPipelineRunParameterAssignment": {
-      "description": "Pipeline run string parameter assignment",
+    "StringPipelineRunComputationParameterAssignment": {
+      "description": "Pipeline run string computation parameter assignment",
       "required": [
         "value",
         "pipelineParameterId",
@@ -10144,7 +10154,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineRunParameterAssignment"
+          "$ref": "#/definitions/PipelineRunComputationParameterAssignment"
         }
       ],
       "properties": {
