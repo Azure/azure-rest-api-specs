@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
   "pipelineName": "automation - sdk - test",
-    "sdkRepositoryMappings": {
+  "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
       "integrationRepository": "azure-sdk/azure-sdk-for-go",
       "mainRepository": "Azure/azure-sdk-for-go",
@@ -59,9 +59,9 @@
         "azure-sdk-for-net": {
           "mainRepository": "openapi-env-test/azure-sdk-for-net"
         },
-        "azure-sdk-for-python": {	
-          "mainRepository": "openapi-env-test/azure-sdk-for-python",	
-          "mainBranch": "dw-dpg-test"	
+        "azure-sdk-for-python": {
+          "mainRepository": "openapi-env-test/azure-sdk-for-python",
+          "mainBranch": "dw-dpg-test"
         },
         "azure-sdk-for-js": {
           "mainRepository": "openapi-env-test/azure-sdk-for-js",
@@ -77,5 +77,11 @@
         }
       }
     }
+  },
+  "cadlEmitterToSdkRepositoryMapping": {
+    "@azure-tools/cadl-python": "azure-sdk-for-python",
+    "@azure-tools/cadl-java": "azure-sdk-for-java",
+    "@azure-tools/cadl-csharp": "azure-sdk-for-net",
+    "@azure-tools/cadl-typescript": "azure-sdk-for-js"
   }
 }
