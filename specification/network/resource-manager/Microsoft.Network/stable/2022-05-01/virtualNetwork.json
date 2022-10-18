@@ -1261,6 +1261,78 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/ddosProtectionStatus": {
+      "post": {
+        "operationId": "VirtualNetworks_ListDdosProtectionStatus",
+        "description": "Gets the Ddos Protection Status of all IP Addresses under the Virtual Network",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The max number of ip addresses to return."
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The skipToken that is given with nextLink."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the Ddos Protection Status of all IP Addresses under this Virtual Network.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkDdosProtectionStatusResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Ddos Protection Status of a Virtual Network": {
+            "$ref": "./examples/VirtualNetworkGetDdosProtectionStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2107,6 +2179,24 @@
         }
       ],
       "description": "Network Intent Policy resource."
+    },
+    "VirtualNetworkDdosProtectionStatusResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./publicIpAddress.json#/definitions/PublicIpDdosProtectionStatusResult"
+          },
+          "x-ms-identifiers": [],
+          "description": "The Ddos Protection Status Result for each public ip under a virtual network."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for GetVirtualNetworkDdosProtectionStatusOperation."
     }
   }
 }

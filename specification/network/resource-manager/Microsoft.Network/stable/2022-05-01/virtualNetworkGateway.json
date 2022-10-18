@@ -2775,6 +2775,13 @@
           "$ref": "#/definitions/VpnClientConfiguration",
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
+        "virtualNetworkGatewayPolicyGroups": {
+          "type": "array",
+          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the available VirtualNetworkGatewayPolicyGroup for the gateway.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroup"
+          }
+        },
         "bgpSettings": {
           "$ref": "#/definitions/BgpSettings",
           "description": "Virtual network gateway's BGP speaker settings."
@@ -3010,6 +3017,13 @@
         "aadIssuer": {
           "type": "string",
           "description": "The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VngClientConnectionConfiguration"
+          },
+          "description": "per ip address pool connection policy for virtual network gateway P2S client."
         }
       },
       "description": "VpnClientConfiguration for P2S client."
@@ -3492,6 +3506,10 @@
         "expressRouteGatewayBypass": {
           "type": "boolean",
           "description": "Bypass ExpressRoute Gateway for data forwarding."
+        },
+        "enablePrivateLinkFastPath": {
+          "type": "boolean",
+          "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
         }
       },
       "required": [
@@ -3620,6 +3638,150 @@
         "pfsGroup"
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection."
+    },
+    "VngClientConnectionConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
+          "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
+        },
+        "virtualNetworkGatewayPolicyGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of references to virtualNetworkGatewayPolicyGroups"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the VngClientConnectionConfiguration resource."
+        }
+      },
+      "required": [
+        "vpnClientAddressPool",
+        "virtualNetworkGatewayPolicyGroups"
+      ],
+      "description": "Properties of VngClientConnectionConfiguration."
+    },
+    "VngClientConnectionConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VngClientConnectionConfigurationProperties",
+          "description": "Properties of the vpn client root certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A vpn client connection configuration for client connection configuration."
+    },
+    "VirtualNetworkGatewayPolicyGroupProperties": {
+      "type": "object",
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Shows if this is a Default VirtualNetworkGatewayPolicyGroup or not."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority for VirtualNetworkGatewayPolicyGroup."
+        },
+        "policyMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupMember"
+          },
+          "description": "Multiple PolicyMembers for VirtualNetworkGatewayPolicyGroup.",
+          "x-ms-identifiers": []
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of references to vngClientConnectionConfigurations."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the VirtualNetworkGatewayPolicyGroup resource."
+        }
+      },
+      "required": [
+        "priority",
+        "policyMembers",
+        "isDefault"
+      ],
+      "description": "Properties of VirtualNetworkGatewayPolicyGroup."
+    },
+    "VirtualNetworkGatewayPolicyGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupProperties",
+          "description": "Properties of tVirtualNetworkGatewayPolicyGroup."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Parameters for VirtualNetworkGatewayPolicyGroup."
+    },
+    "VirtualNetworkGatewayPolicyGroupMember": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the VirtualNetworkGatewayPolicyGroupMember."
+        },
+        "attributeType": {
+          "type": "string",
+          "description": "The Vpn Policy member attribute type.",
+          "enum": [
+            "CertificateGroupId",
+            "AADGroupId",
+            "RadiusAzureGroupId"
+          ],
+          "x-ms-enum": {
+            "name": "VpnPolicyMemberAttributeType",
+            "modelAsString": true
+          }
+        },
+        "attributeValue": {
+          "type": "string",
+          "description": "The value of Attribute used for this VirtualNetworkGatewayPolicyGroupMember."
+        }
+      },
+      "description": "Vpn Client Connection configuration PolicyGroup member",
+      "type": "object"
     },
     "TrafficSelectorPolicy": {
       "properties": {
@@ -3899,6 +4061,10 @@
         "expressRouteGatewayBypass": {
           "type": "boolean",
           "description": "Bypass ExpressRoute Gateway for data forwarding."
+        },
+        "enablePrivateLinkFastPath": {
+          "type": "boolean",
+          "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
         }
       },
       "required": [

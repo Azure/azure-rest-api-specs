@@ -20,6 +20,7 @@
           "routingWeight": 1,
           "enableInternetSecurity": false,
           "expressRouteGatewayBypass": false,
+          "enablePrivateLinkFastPath": false,
           "routingConfiguration": {
             "associatedRouteTable": {
               "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable1"
@@ -41,8 +42,11 @@
                 }
               ]
             },
-            "vnetRoutes": {
-              "staticRoutes": []
+            "inboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
+            },
+            "outboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
             }
           }
         }

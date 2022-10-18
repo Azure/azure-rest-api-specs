@@ -47,6 +47,9 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
         }
       ],
       "post": {
@@ -100,6 +103,9 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
         }
       ],
       "post": {
@@ -314,6 +320,17 @@
       "required": true,
       "type": "string",
       "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTopParameter": {
+      "name": "$top",
+      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
       "x-ms-parameter-location": "method"
     }
   }
