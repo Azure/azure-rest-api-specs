@@ -7941,20 +7941,25 @@
       "required": [
         "tenantId",
         "principalId",
+        "applicationId",
         "password"
       ],
       "properties": {
+        "applicationId": {
+          "description": "The application ID, also known as client ID, of the service principal.",
+          "type": "string"
+        },
         "password": {
           "description": "The password of the service principal.",
           "type": "string",
           "x-ms-secret": true
         },
         "principalId": {
-          "description": "The GUID of the service principal that is used as a username.",
+          "description": "The principal ID, also known as the object ID, of the service principal.",
           "type": "string"
         },
         "tenantId": {
-          "description": "The GUID of the tenant in which the service principal is created.",
+          "description": "The tenant ID, also known as the directory ID, of the tenant in which the service principal is created.",
           "type": "string"
         }
       }
