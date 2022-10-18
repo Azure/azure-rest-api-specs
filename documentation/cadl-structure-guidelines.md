@@ -105,7 +105,7 @@ While this would permit services from importing any service library described in
 We treat the shared library as a sibling with other packages within the service family. This is similar to what we currently do for services that have a "Shared" package and would allow an arbitrary number of shared packages.
 
 ```
--> cadl
+-> specification
    -> communication
       -> Communication.Chat         (data-plane)
       -> Communication.Calling      (data-plane)
@@ -116,7 +116,7 @@ We treat the shared library as a sibling with other packages within the service 
 Here's an example of how Cognitive Services might use multiple shared libraries:
 
 ```
--> cadl
+-> specification
    -> cognitiveservices
       -> Language.TextAnalytics  (data-plane)
       -> Language.QnA            (data-plane)
@@ -125,3 +125,33 @@ Here's an example of how Cognitive Services might use multiple shared libraries:
       -> Vision.CustomVision     (data-plane)
       -> Vision.Shared           (shared)
 ```
+
+# Spec Versioning
+
+Cadl has a versioning library which allows a single spec to represent multiple versions through projections. Service teams have GA service versions as well as public and private Preview service versions. The versioning library is currently optimized for the kinds of changes allowed between GA service releases: long-lived, stable, backward compatible changes. Preview versions are shorter-lived and often have wildly breaking changes from one version to the next, for which the versioning library is not optimized.
+
+### Goals
+
+Our versioning story should account for the following key goals:
+
+- It should require minimal effort for a service team to convert a preview spec to a GA one.
+- It should be easy to retire a preview spec.
+- It should be able to model all supported preview versions.
+- It must be possible to fork a spec that has breaking changes that exceed the expressiveness of the versioning library decorators.
+- It must be possible to maintain the Swagger representation of each Cadl version on the `main` branch of the `azure-rest-api-specs` repo.
+
+### Service Folder
+
+The service folder contains the Cadl files for the service package. Services transitioning to Cadl may simply begin by modeling their versioned Cadl from their latest stable Swagger. Existing services DO NOT need to model past service versions unless a business rationale exists. Future versions should be added to the spec using the necessary versioning decorators. The inital version in the spec need not feature version annotations since it is considered the baseline (i.e. it makes no implications about prior versions since it does not know about them).
+
+### Working in Feature Branches
+
+Feature branches enable diffing the proposed change directly against the main branch. Feature branches should be used for either GA or preview API version development. On the feature branch, the service team should directly modify the cadl within the service folder as this works well with GitHub's diffing strategy.
+
+### Publishing Specs
+
+The purest approach to publish a spec is to merge the PR that modifies the Cadl spec in the service folder. This is the simplest experience for projecting the Cadl and generating artifacts, including server-side codegen.
+
+In the event that a major break makes it infeasible to continue using a spec with version annotations, the spec could be reset to some base version (likely the breaking one) and continue versioning from there. The commit hash or tag that represented the spec prior to the reset would need to be tracked in order to regenerate older versions of the spec. At this point, if an update was needed to an older version of the spec no longer represented on the latest commit on `main`, we would need a servicing branch and update the hash pointers to the commit on that servicing branch.
+
+This option is only suitable for _public_ previews. Private previews should live solely in a branch (in either the public or private repo) until/unless they become a public preview.
