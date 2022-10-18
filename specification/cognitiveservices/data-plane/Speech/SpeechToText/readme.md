@@ -4,10 +4,10 @@
 
 Configuration for generating SpeechToText SDK.
 
-The current release for the SpeechToText is `release_3_0`.
+The current release for the SpeechToText is `release_3_1`.
 
 ``` yaml
-tag: release_3_0
+tag: package-v3.1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -66,7 +66,11 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: LongRunningOperationsWithLongRunningExtension
     reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
-``
+```
+
+---
+
+## SpeechToText 3.1
 ### Tag: package-v3.1
 
 These settings apply only when `--tag=package-v3.1` is specified on the command line.
@@ -75,4 +79,12 @@ These settings apply only when `--tag=package-v3.1` is specified on the command 
 input-file:
   - stable/v3.1/speechtotext.json
 ```
-`
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
+```
