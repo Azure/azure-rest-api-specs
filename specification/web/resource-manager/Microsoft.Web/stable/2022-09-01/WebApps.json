@@ -21603,7 +21603,9 @@
             "in": "body",
             "description": "Files of the app.",
             "required": false,
-            "type": "object"
+            "scema": {
+              "$ref": "#/definitions/WorkflowFiles"
+            }
           }
         ],
         "responses": {
@@ -21671,7 +21673,9 @@
             "in": "body",
             "description": "Files of the app.",
             "required": false,
-            "type": "object"
+            "scema": {
+              "$ref": "#/definitions/WorkflowFiles"
+            }
           }
         ],
         "responses": {
@@ -29720,10 +29724,7 @@
           "properties": {
             "files": {
               "description": "Gets or sets the files.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "object"
-              }
+              "$ref": "#/definitions/WorkflowFiles"
             },
             "flowState": {
               "description": "Gets or sets the state of the workflow.",
@@ -29768,6 +29769,13 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "WorkflowFiles": {
+      "description": "Gets or sets the files.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "WorkflowHealth": {
