@@ -670,6 +670,7 @@
       "description": "The communication resource, for example https://resourcename.communication.azure.com.",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
@@ -688,8 +689,6 @@
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
-    "type": "string",
-    "format": "url",
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
