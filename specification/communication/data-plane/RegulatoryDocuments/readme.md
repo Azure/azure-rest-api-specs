@@ -29,7 +29,7 @@ openapi-type: data-plane
 tag: package-2022-11-30-preview
 ```
 
-### Tag: package-RegulatoryPackages-2022-11-30-preview
+### Tag: package-regulatoryPackages-2022-11-30-preview
 
 These settings apply only when `--tag=package-regulatoryPackages-2022-11-30-preview` is specified on the command line.
 
@@ -37,14 +37,14 @@ These settings apply only when `--tag=package-regulatoryPackages-2022-11-30-prev
 input-file:
   - preview/2022-11-30-preview/regulatoryPackages.json
 title:
-  Azure Communication Services Phone Numbers Regulatory package
+  Azure Communication Services Phone Numbers Regulatory Package
 ```
 
 ## Supression
 ``` yaml
 directive:
   - from:
-    - regulatoryPackages.json
+    - regulatorypackages.json
 ```
 
 ---

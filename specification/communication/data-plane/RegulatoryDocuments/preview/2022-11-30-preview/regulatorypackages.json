@@ -263,6 +263,13 @@
             "type": "string"
           },
           {
+            "in": "path",
+            "name": "attachmentId",
+            "description": "The regulatory package attachment ID",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "The regulatory package attachment.",
@@ -297,7 +304,7 @@
           "Regulatory Packages Management"
         ],
         "summary": "Gets a file attachment by its attachment ID for a regulatory package.",
-        "operationId": "RegulatoryPackage_UploadAttachment",
+        "operationId": "RegulatoryPackage_GetAttachment",
         "consumes": [
           "application/json"
         ],
@@ -351,6 +358,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
