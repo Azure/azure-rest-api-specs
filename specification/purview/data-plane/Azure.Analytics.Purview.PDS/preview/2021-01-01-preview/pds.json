@@ -576,19 +576,24 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the purview account."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the purview account."
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "Region where purview account is created."
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "Tenant id of the purview account."
         },
         "gatewayEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "Purview account gateway endpoint."
         }
       }
     },
@@ -596,13 +601,15 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Top level property representing consent is enabled or disabled for the requested resource. No need to check individual properties if this is false."
         },
         "properties": {
           "$ref": "#/definitions/Properties"
         },
         "excludedScopes": {
           "type": "array",
+          "description": "Child scopes that need to be excluded. This is only valid if the consent is true for requested resource.",
           "items": {
             "type": "string"
           }
@@ -624,16 +631,20 @@
       "type": "object",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Service error code."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "Detailed error message."
         },
         "details": {
           "type": "array",
+          "description": "Granular errors (if any).",
           "items": {
             "$ref": "#/definitions/ErrorModel"
           }
@@ -652,26 +663,32 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the policy element."
         },
         "scopes": {
           "type": "array",
+          "description": "List of scopes included in this policy.",
           "items": {
             "type": "string"
           }
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Kind of policy element. Possible values: policy/policySet/attributeRule."
         },
         "updatedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Time at which this policy element is last updated."
         },
         "version": {
           "format": "int64",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1.",
           "type": "integer"
         },
         "elementJson": {
-          "type": "string"
+          "type": "string",
+          "description": "Policy element serialized json payload."
         }
       }
     },
@@ -679,29 +696,36 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the policy element."
         },
         "scopes": {
           "type": "array",
+          "description": "List of scopes included in this policy.",
           "items": {
             "type": "string"
           }
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Kind of policy element. Possible values: policy/policySet/attributeRule."
         },
         "updatedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Time at which this policy element is last updated."
         },
         "version": {
           "format": "int64",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1.",
           "type": "integer"
         },
         "elementJson": {
-          "type": "string"
+          "type": "string",
+          "description": "Policy element serialized json payload."
         },
         "eventType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of event. Possible values are: Microsoft.Purview/PolicyElements/Write,Microsoft.Purview/PolicyElements/Delete."
         }
       }
     },
@@ -710,13 +734,16 @@
       "properties": {
         "count": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Count of elements in payload."
         },
         "syncToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to store this value and keep updating if PDS returns a new value. Call this API with the most recent value recieved."
         },
         "elements": {
           "type": "array",
+          "description": "List of created/updated policy elements.",
           "items": {
             "$ref": "#/definitions/PolicyElementEventModel"
           }
@@ -728,19 +755,23 @@
       "properties": {
         "count": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Count of elements in payload."
         },
         "syncToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to pass this value while fetching records using policyEvents API."
         },
         "elements": {
           "type": "array",
+          "description": "List of policy elements.",
           "items": {
             "$ref": "#/definitions/PolicyElement"
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link with skip token to fetch next set of records. This is used in case of pagination."
         }
       }
     },
@@ -748,13 +779,16 @@
       "type": "object",
       "properties": {
         "metadata": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Boolean value representing that the requested resource is enabled for metadata discovery by purview."
         },
         "classification": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Boolean value representing that the requested resource is enabled for classifying data by purview."
         },
         "dataUseGovernance": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Boolean value representing that the requested resource is enabled for data use governance managed by purview."
         }
       }
     }
