@@ -1,54 +1,54 @@
 {
-    "parameters": {
-      "subscriptionId": "0a6ec948-5a62-437d-b9df-934dc7c1b722",
-      "resourceGroupName": "mediaresources",
-      "accountName": "slitestmedia10",
-      "liveEventName": "myLiveEvent1",
-      "api-version": "2022-11-01"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "value": [
-            {
-              "state": "Stopped",
-              "healthStatus": "",
-              "healthDescription": [
-                ""
-              ],
-              "lastUpdatedTime": "2022-10-05T18:45:13",
-              "ingestion": {
-                "streamName": "myStream",
-                "beginTime": "2022-09-29T01:05:53",
-                "endTime": "2022-09-29T01:26:09",
-                "endReason": "MPE_CLIENT_TERMINATED_SESSION",
-                "ingestInterruptions": [
-                  {
-                    "begin": "2022-09-29T01:08:17",
-                    "end": "2022-09-29T01:20:57",
-                    "durationInSec": 760,
-                    "reason": "MPE_CLIENT_TERMINATED_SESSION"
-                  }
-                ]
-              },
-              "trackStatus": [
+  "parameters": {
+    "subscriptionId": "0a6ec948-5a62-437d-b9df-934dc7c1b722",
+    "resourceGroupName": "mediaresources",
+    "accountName": "slitestmedia10",
+    "liveEventName": "myLiveEvent1",
+    "api-version": "2022-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "state": "Stopped",
+            "healthStatus": "",
+            "healthDescription": [
+              ""
+            ],
+            "lastUpdatedTime": "2022-10-05T18:45:13",
+            "ingestion": {
+              "streamName": "myStream",
+              "beginTime": "2022-09-29T01:05:53",
+              "endTime": "2022-09-29T01:26:09",
+              "endReason": "MPE_CLIENT_TERMINATED_SESSION",
+              "ingestInterruptions": [
                 {
-                  "trackId": "audio_128000",
-                  "expectedBitrate": 128000,
-                  "incomingBitrate": 0,
-                  "ingestDrift": ""
-                },
-                {
-                  "trackId": "video_2025000",
-                  "expectedBitrate": 2025000,
-                  "incomingBitrate": 0,
-                  "ingestDrift": ""
+                  "begin": "2022-09-29T01:08:17",
+                  "end": "2022-09-29T01:20:57",
+                  "durationInSec": 760,
+                  "reason": "MPE_CLIENT_TERMINATED_SESSION"
                 }
               ]
-            }
-          ]
-        }
-      },
-      "304": {}
-    }
+            },
+            "trackStatus": [
+              {
+                "trackId": "audio_128000",
+                "expectedBitrate": 128000,
+                "incomingBitrate": 0,
+                "ingestDrift": ""
+              },
+              {
+                "trackId": "video_2025000",
+                "expectedBitrate": 2025000,
+                "incomingBitrate": 0,
+                "ingestDrift": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "304": {}
   }
+}
