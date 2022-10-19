@@ -1544,8 +1544,11 @@
       ],
       "properties": {
         "experimentalOptions": {
-          "$ref": "#/definitions/ODataTypedValueDictionary_1OfString",
-          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself",
+          "type": "object"
         },
         "filters": {
           "$ref": "#/definitions/Filters",
