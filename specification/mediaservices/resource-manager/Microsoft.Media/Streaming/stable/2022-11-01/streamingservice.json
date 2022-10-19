@@ -486,6 +486,153 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/status": {
+      "get": {
+        "tags": [
+          "LiveEvents"
+        ],
+        "summary": "Get status of one live event",
+        "description": "Gets status telemetry of a live event.",
+        "operationId": "LiveEvents_Status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/LiveEventName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveEventStatusGetResult"
+            }
+          },
+          "304": {
+            "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get status of a LiveEvent": {
+            "$ref": "examples/liveevent-status.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/streamEvents": {
+      "get": {
+        "tags": [
+          "LiveEvents"
+        ],
+        "summary": "Get stream events of one live event",
+        "description": "Get stream events telemetry of a live event.",
+        "operationId": "LiveEvents_StreamEvents",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/LiveEventName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveEventStreamEventsGetResult"
+            }
+          },
+          "304": {
+            "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get status of a LiveEvent": {
+            "$ref": "examples/liveevent-stream-events.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/trackIngestHeartbeat": {
+      "get": {
+        "tags": [
+          "LiveEvents"
+        ],
+        "summary": "Get track events of one live event",
+        "description": "Get track ingest heartbeat events telemetry of a live event.",
+        "operationId": "LiveEvents_TrackIngestHeartbeat",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/LiveEventName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LiveEventTrackIngestHeartbeatGetResult"
+            }
+          },
+          "304": {
+            "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get status of a LiveEvent": {
+            "$ref": "examples/liveevent-track-events.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEventOperations/{operationId}": {
       "get": {
         "tags": [
@@ -2439,6 +2586,171 @@
         }
       },
       "description": "The status of an async operation.",
+      "type": "object"
+    },
+    "IngestInterruption": {
+      "properties": {
+        "begin": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "durationInSec": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Ingestion": {
+      "properties": {
+        "streamName": {
+          "type": "string"
+        },
+        "beginTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        },
+        "endReason": {
+          "type": "string"
+        },
+        "ingestInterruptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestInterruption"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "TrackStatus": {
+      "properties": {
+        "trackId": {
+          "type": "string"
+        },
+        "expectedBitrate": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "incomingBitrate": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ingestDrift": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Status": {
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "healthStatus": {
+          "type": "string"
+        },
+        "healthDescription": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string"
+        },
+        "ingestion": {
+          "$ref": "#/definitions/Ingestion"
+        },
+        "trackStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrackStatus"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "LiveEventStatusGetResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Status"
+          },
+          "description": "The result of the Get live event status."
+        }
+      },
+      "type": "object"
+    },
+    "StreamEvent": {
+      "properties": {
+        "eventType": {
+          "type": "string"
+        },
+        "eventTime": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Specific data entry for a specific event type."
+        }
+      },
+      "type": "object"
+    },
+    "LiveEventStreamEventsGetResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamEvent"
+          },
+          "description": "The result of the Get live event stream events."
+        }
+      },
+      "type": "object"
+    },
+    "TrackEvent": {
+      "properties": {
+        "eventType": {
+          "type": "string"
+        },
+        "eventTime": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Specific data entry for a specific event type."
+        }
+      },
+      "type": "object"
+    },
+    "LiveEventTrackIngestHeartbeatGetResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrackEvent"
+          },
+          "description": "The result of the Get live event track events."
+        }
+      },
       "type": "object"
     }
   },
