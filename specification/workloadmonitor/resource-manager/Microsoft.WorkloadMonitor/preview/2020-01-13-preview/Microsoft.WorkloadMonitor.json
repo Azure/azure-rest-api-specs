@@ -329,7 +329,8 @@
       ],
       "x-ms-enum": {
         "name": "api-version"
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "subscriptionId": {
       "in": "path",
@@ -369,7 +370,10 @@
       "required": true,
       "type": "string",
       "description": "The name of the virtual machine.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "monitorId": {
       "in": "path",
@@ -451,6 +455,7 @@
     },
     "HealthMonitor": {
       "title": "Information about the monitor’s current health status.",
+      "type": "object",
       "properties": {
         "properties": {
           "description": "Properties of the monitor's health status.",
@@ -640,7 +645,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": ["OperationList"]
         },
         "nextLink": {
           "description": "Link to next page if the list is too long.",
@@ -662,10 +668,6 @@
           "description": "The name of the operation being performed on this particular object.",
           "type": "string",
           "example": "Microsoft.WorkloadMonitor/monitors/read"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
         },
         "display": {
           "description": "The localized display information for this particular operation or action.",
@@ -727,7 +729,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ErrorDetails"
-              }
+              },
+              "x-ms-identifiers": ["details"]
             }
           }
         }
