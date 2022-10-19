@@ -354,7 +354,10 @@
       "required": true,
       "type": "string",
       "description": "The provider name (ex: Microsoft.Compute for virtual machines).",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "resourceCollectionName": {
       "in": "path",
@@ -362,7 +365,10 @@
       "required": true,
       "type": "string",
       "description": "The resource collection name (ex: virtualMachines for virtual machines).",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "resourceName": {
       "in": "path",
@@ -371,7 +377,7 @@
       "type": "string",
       "description": "The name of the virtual machine.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "^[A-Za-z0-9]*$",
       "minLength": 3,
       "maxLength": 63
     },
@@ -646,7 +652,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": ["OperationList"]
+          "x-ms-identifiers": ["#/definitions/Operation"]
         },
         "nextLink": {
           "description": "Link to next page if the list is too long.",
@@ -730,7 +736,7 @@
               "items": {
                 "$ref": "#/definitions/ErrorDetails"
               },
-              "x-ms-identifiers": ["details"]
+              "x-ms-identifiers": ["#/definitions/ErrorDetails"]
             }
           }
         }
