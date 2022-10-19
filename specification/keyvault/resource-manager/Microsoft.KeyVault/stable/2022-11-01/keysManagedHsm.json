@@ -451,7 +451,7 @@
       ],
       "allOf": [
         {
-          "$ref": "./managedHsm.json#/definitions/ManagedHsmResource"
+          "$ref": "#/definitions/ProxyResourceWithoutSystemData"
         }
       ],
       "description": "The key resource.",
@@ -569,6 +569,29 @@
         }
       },
       "type": "object"
+    },
+    "ProxyResourceWithoutSystemData": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
