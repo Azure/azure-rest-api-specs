@@ -3253,12 +3253,12 @@
       "description": "Details of estimated savings.",
       "properties": {
         "onDemandCost": {
-          "description": "The cost without reservation.",
+          "description": "The cost without reservation. Includes hardware and software cost.",
           "type": "number",
           "readOnly": true
         },
         "overageCost": {
-          "description": "The difference between total reservation cost and reservation cost.",
+          "description": "Hardware and software cost of the resources not covered by the reservation.",
           "type": "number",
           "readOnly": true
         },
@@ -3268,12 +3268,12 @@
           "readOnly": true
         },
         "reservationCost": {
-          "description": "The exact cost of the estimated usage using reservation.",
+          "description": "Hardware cost of the resources covered by the reservation.",
           "type": "number",
           "readOnly": true
         },
         "totalReservationCost": {
-          "description": "The cost of the suggested quantity.",
+          "description": "Reservation cost + software cost of the resources covered by the reservation + overage cost.",
           "type": "number",
           "readOnly": true
         },
@@ -3300,7 +3300,7 @@
           "readOnly": true
         },
         "onDemandRate": {
-          "description": "On demand rate of the resource.",
+          "description": "On demand rate of the resource. Includes only hardware rate i.e, software rate is not included.",
           "type": "number",
           "readOnly": true
         },
