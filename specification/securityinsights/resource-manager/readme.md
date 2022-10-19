@@ -57,6 +57,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/Watchlists.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/DynamicSummaries.json
 ```
 ### Tag: package-preview-2022-10
 
