@@ -349,7 +349,7 @@
         },
         "x-ms-examples": {
           "Upload attachment": {
-            "$ref": "./examples/UploadAttachmentRegulatoryPackage.json"
+            "$ref": "./examples/GetRegulatoryPackageAttachment.json"
           }
         }
       }
@@ -395,7 +395,7 @@
         },
         "x-ms-examples": {
           "Upload attachment": {
-            "$ref": "./examples/UploadAttachmentRegulatoryPackage.json"
+            "$ref": "./examples/GetRegulatoryPackageAttachments.json"
           }
         }
       }
@@ -601,6 +601,7 @@
     },
     "RegulatoryPackageAttachments": {
       "description": "The wrapper around the list of attachments.",
+      "type": "object",
       "required": [
         "value"
       ],
@@ -620,6 +621,7 @@
     },
     "RegulatoryPackageNote": {
       "description": "A single note sent from Service Desk to the customer.",
+      "type": "object",
       "properties": {
         "message": {
           "description": "The message in the note.",
@@ -634,6 +636,7 @@
     },
     "RegulatoryPackageNotes": {
       "description": "The wrapper around the list of notes for the Regulatory Package",
+      "type": "object",
       "required": [
         "value"
       ],
@@ -658,7 +661,8 @@
       "name": "api-version",
       "description": "Version of API to invoke.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "Endpoint": {
       "in": "path",
@@ -684,6 +688,8 @@
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
+    "type": "string",
+    "format": "url",
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
