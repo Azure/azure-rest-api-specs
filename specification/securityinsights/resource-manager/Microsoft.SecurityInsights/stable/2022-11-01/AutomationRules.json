@@ -14,7 +14,7 @@
         "tags": [
           "automationRules"
         ],
-        "description": "Gets the automation rule",
+        "description": "Gets the automation rule.",
         "operationId": "AutomationRules_Get",
         "produces": [
           "application/json"
@@ -60,7 +60,7 @@
         "tags": [
           "automationRules"
         ],
-        "description": "Creates or updates the automation rule",
+        "description": "Creates or updates the automation rule.",
         "operationId": "AutomationRules_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -123,7 +123,7 @@
         "tags": [
           "automationRules"
         ],
-        "description": "Delete the automation rule",
+        "description": "Delete the automation rule.",
         "operationId": "AutomationRules_Delete",
         "produces": [
           "application/json"
@@ -177,7 +177,7 @@
         "tags": [
           "automationRules"
         ],
-        "description": "Gets all automation rules",
+        "description": "Gets all automation rules.",
         "operationId": "AutomationRules_List",
         "produces": [
           "application/json"
@@ -194,6 +194,18 @@
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
           }
         ],
         "responses": {
@@ -223,7 +235,7 @@
   },
   "definitions": {
     "ActionType": {
-      "description": "The type of the automation rule action",
+      "description": "The type of the automation rule action.",
       "enum": [
         "ModifyProperties",
         "RunPlaybook"
@@ -264,7 +276,7 @@
       }
     },
     "AutomationRuleAction": {
-      "description": "Describes an automation rule action",
+      "description": "Describes an automation rule action.",
       "required": [
         "actionType",
         "order"
@@ -282,7 +294,7 @@
       "discriminator": "actionType"
     },
     "AutomationRuleCondition": {
-      "description": "Describes an automation rule condition",
+      "description": "Describes an automation rule condition.",
       "required": [
         "conditionType"
       ],
@@ -295,7 +307,7 @@
       "discriminator": "conditionType"
     },
     "AutomationRuleModifyPropertiesAction": {
-      "description": "Describes an automation rule action to modify an object's properties.",
+      "description": "Describes an automation rule action to modify an object's properties",
       "type": "object",
       "allOf": [
         {
@@ -322,13 +334,13 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "The display name of the automation rule",
+          "description": "The display name of the automation rule.",
           "type": "string",
           "maxLength": 500
         },
         "order": {
           "format": "int32",
-          "description": "The order of execution of the automation rule",
+          "description": "The order of execution of the automation rule.",
           "type": "integer",
           "minimum": 1,
           "maximum": 1000
@@ -337,7 +349,7 @@
           "$ref": "#/definitions/AutomationRuleTriggeringLogic"
         },
         "actions": {
-          "description": "The actions to execute when the automation rule is triggered",
+          "description": "The actions to execute when the automation rule is triggered.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleAction"
@@ -347,13 +359,13 @@
         },
         "lastModifiedTimeUtc": {
           "format": "date-time",
-          "description": "The last time the automation rule was updated",
+          "description": "The last time the automation rule was updated.",
           "type": "string",
           "readOnly": true
         },
         "createdTimeUtc": {
           "format": "date-time",
-          "description": "The time the automation rule was created",
+          "description": "The time the automation rule was created.",
           "type": "string",
           "readOnly": true
         },
@@ -365,6 +377,115 @@
           "readOnly": true,
           "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
         }
+      }
+    },
+    "AutomationRulePropertyArrayChangedConditionSupportedArrayType": {
+      "enum": [
+        "Alerts",
+        "Labels",
+        "Tactics",
+        "Comments"
+      ],
+      "type": "string",
+      "example": "Alerts",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayChangedConditionSupportedArrayType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Alerts",
+            "description": "Evaluate the condition on the alerts"
+          },
+          {
+            "value": "Labels",
+            "description": "Evaluate the condition on the labels"
+          },
+          {
+            "value": "Tactics",
+            "description": "Evaluate the condition on the tactics"
+          },
+          {
+            "value": "Comments",
+            "description": "Evaluate the condition on the comments"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayChangedConditionSupportedChangeType": {
+      "enum": [
+        "Added"
+      ],
+      "type": "string",
+      "example": "Added",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyArrayChangedConditionSupportedChangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Added",
+            "description": "Evaluate the condition on items added to the array"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyArrayChangedValuesCondition": {
+      "type": "object",
+      "properties": {
+        "arrayType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedConditionSupportedArrayType"
+        },
+        "changeType": {
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedConditionSupportedChangeType"
+        }
+      }
+    },
+    "AutomationRulePropertyChangedConditionSupportedChangedType": {
+      "enum": [
+        "ChangedFrom",
+        "ChangedTo"
+      ],
+      "type": "string",
+      "example": "ChangedFrom",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyChangedConditionSupportedChangedType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ChangedFrom",
+            "description": "Evaluate the condition on the previous value of the property"
+          },
+          {
+            "value": "ChangedTo",
+            "description": "Evaluate the condition on the updated value of the property"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyChangedConditionSupportedPropertyType": {
+      "enum": [
+        "IncidentSeverity",
+        "IncidentStatus",
+        "IncidentOwner"
+      ],
+      "type": "string",
+      "example": "IncidentSeverity",
+      "x-ms-enum": {
+        "name": "AutomationRulePropertyChangedConditionSupportedPropertyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IncidentSeverity",
+            "description": "Evaluate the condition on the incident severity"
+          },
+          {
+            "value": "IncidentStatus",
+            "description": "Evaluate the condition on the incident status"
+          },
+          {
+            "value": "IncidentOwner",
+            "description": "Evaluate the condition on the incident owner"
+          }
+        ]
       }
     },
     "AutomationRulePropertyConditionSupportedOperator": {
@@ -420,7 +541,7 @@
       }
     },
     "AutomationRulePropertyConditionSupportedProperty": {
-      "description": "The property to evaluate in an automation rule property condition",
+      "description": "The property to evaluate in an automation rule property condition.",
       "enum": [
         "IncidentTitle",
         "IncidentDescription",
@@ -430,6 +551,7 @@
         "IncidentTactics",
         "IncidentLabel",
         "IncidentProviderName",
+        "IncidentUpdatedBySource",
         "AccountAadTenantId",
         "AccountAadUserId",
         "AccountName",
@@ -439,6 +561,7 @@
         "AccountObjectGuid",
         "AccountUPNSuffix",
         "AlertProductNames",
+        "AlertAnalyticRuleIds",
         "AzureResourceResourceId",
         "AzureResourceSubscriptionId",
         "CloudApplicationAppId",
@@ -516,6 +639,10 @@
             "description": "The provider name of the incident"
           },
           {
+            "value": "IncidentUpdatedBySource",
+            "description": "The update source of the incident"
+          },
+          {
             "value": "AccountAadTenantId",
             "description": "The account Azure Active Directory tenant id"
           },
@@ -550,6 +677,10 @@
           {
             "value": "AlertProductNames",
             "description": "The name of the product of the alert"
+          },
+          {
+            "value": "AlertAnalyticRuleIds",
+            "description": "The analytic rule ids of the alert"
           },
           {
             "value": "AzureResourceResourceId",
@@ -702,6 +833,26 @@
         ]
       }
     },
+    "AutomationRulePropertyValuesChangedCondition": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "$ref": "#/definitions/AutomationRulePropertyChangedConditionSupportedPropertyType"
+        },
+        "changeType": {
+          "$ref": "#/definitions/AutomationRulePropertyChangedConditionSupportedChangedType"
+        },
+        "operator": {
+          "$ref": "#/definitions/AutomationRulePropertyConditionSupportedOperator"
+        },
+        "propertyValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "AutomationRulePropertyValuesCondition": {
       "type": "object",
       "properties": {
@@ -751,7 +902,7 @@
       }
     },
     "AutomationRuleTriggeringLogic": {
-      "description": "Describes automation rule triggering logic",
+      "description": "Describes automation rule triggering logic.",
       "required": [
         "isEnabled",
         "triggersOn",
@@ -760,7 +911,7 @@
       "type": "object",
       "properties": {
         "isEnabled": {
-          "description": "Determines whether the automation rule is enabled or disabled",
+          "description": "Determines whether the automation rule is enabled or disabled.",
           "type": "boolean"
         },
         "expirationTimeUtc": {
@@ -775,7 +926,7 @@
           "$ref": "#/definitions/triggersWhen"
         },
         "conditions": {
-          "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object",
+          "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object.",
           "type": "array",
           "maxItems": 50,
           "items": {
@@ -789,7 +940,9 @@
     },
     "ConditionType": {
       "enum": [
-        "Property"
+        "Property",
+        "PropertyChanged",
+        "PropertyArrayChanged"
       ],
       "type": "string",
       "example": "Property",
@@ -800,6 +953,14 @@
           {
             "value": "Property",
             "description": "Evaluate an object property value"
+          },
+          {
+            "value": "PropertyChanged",
+            "description": "Evaluate an object property changed value"
+          },
+          {
+            "value": "PropertyArrayChanged",
+            "description": "Evaluate an object array property changed value"
           }
         ]
       }
@@ -820,14 +981,14 @@
           "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
         },
         "classificationComment": {
-          "description": "Describes the reason the incident was closed",
+          "description": "Describes the reason the incident was closed.",
           "type": "string"
         },
         "owner": {
           "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo"
         },
         "labels": {
-          "description": "List of labels to add to the incident",
+          "description": "List of labels to add to the incident.",
           "type": "array",
           "x-ms-identifiers": [
             "labelName"
@@ -845,15 +1006,49 @@
       ],
       "properties": {
         "logicAppResourceId": {
-          "description": "The resource id of the playbook resource",
+          "description": "The resource id of the playbook resource.",
           "type": "string"
         },
         "tenantId": {
           "format": "uuid",
-          "description": "The tenant id of the playbook resource",
+          "description": "The tenant id of the playbook resource.",
           "type": "string"
         }
       }
+    },
+    "PropertyArrayChangedConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates an array property's value change",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyArrayChangedValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyArrayChanged",
+      "x-ms-client-flatten": true
+    },
+    "PropertyChangedConditionProperties": {
+      "description": "Describes an automation rule condition that evaluates a property's value change",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/AutomationRulePropertyValuesChangedCondition"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyChanged",
+      "x-ms-client-flatten": true
     },
     "PropertyConditionProperties": {
       "description": "Describes an automation rule condition that evaluates a property's value",
@@ -874,7 +1069,8 @@
     },
     "triggersOn": {
       "enum": [
-        "Incidents"
+        "Incidents",
+        "Alerts"
       ],
       "type": "string",
       "example": "Incidents",
@@ -885,13 +1081,18 @@
           {
             "value": "Incidents",
             "description": "Trigger on Incidents"
+          },
+          {
+            "value": "Alerts",
+            "description": "Trigger on Alerts"
           }
         ]
       }
     },
     "triggersWhen": {
       "enum": [
-        "Created"
+        "Created",
+        "Updated"
       ],
       "type": "string",
       "example": "Created",
@@ -902,6 +1103,10 @@
           {
             "value": "Created",
             "description": "Trigger on created objects"
+          },
+          {
+            "value": "Updated",
+            "description": "Trigger on updated objects"
           }
         ]
       }
