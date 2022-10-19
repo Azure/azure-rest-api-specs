@@ -393,9 +393,10 @@
       "description": "Regulatory package create response",
       "type": "object",
       "properties": {
-        "RegulatoryPackageId": {
+        "regulatoryPackage": {
           "description": "The regulatory package's ID",
-          "type": "string"
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackage"
         }
       }
     },
@@ -493,12 +494,12 @@
     "RegulatoryPackage": {
       "description": "The regulatory package",
       "required": [
-        "RegulatoryPackageId",
+        "regulatoryPackageId",
         "details"
       ],
       "type": "object",
       "properties": {
-        "RegulatoryPackageId": {
+        "regulatoryPackageId": {
           "description": "The ID of the regulatory package.",
           "type": "string"
         },
