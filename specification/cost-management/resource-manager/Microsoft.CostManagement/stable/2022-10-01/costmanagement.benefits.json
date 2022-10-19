@@ -74,7 +74,7 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingScopeBenefitRecommendationParameter"
@@ -116,7 +116,7 @@
         "operationId": "BenefitRecommendation_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingScopeBenefitRecommendationParameter"
@@ -159,7 +159,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -212,7 +212,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -273,7 +273,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -325,7 +325,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -408,12 +408,14 @@
         "firstConsumptionDate": {
           "type": "string",
           "description": "The first usage date used for looking back for computing the recommendation.",
-          "readOnly": true
+          "readOnly": true,
+          "format": "date-time"
         },
         "lastConsumptionDate": {
           "type": "string",
           "description": "The last usage date used for looking back for computing the recommendation.",
-          "readOnly": true
+          "readOnly": true,
+          "format": "date-time"
         },
         "lookBackPeriod": {
           "description": "The number of days of usage used to look back for computing the recommendation.",
