@@ -31,11 +31,11 @@ tag: package-2022-11-30-preview
 
 ### Tag: package-RegulatoryPackages-2022-11-30-preview
 
-These settings apply only when `--tag=package-RegulatoryPackages-2022-11-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-regulatoryPackages-2022-11-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-RegulatoryPackages-2022-11-30-preview'
+```yaml $(tag) == 'package-regulatoryPackages-2022-11-30-preview'
 input-file:
-  - preview/2022-11-30-preview/RegulatoryPackages.json
+  - preview/2022-11-30-preview/regulatoryPackages.json
 title:
   Azure Communication Services Phone Numbers Regulatory package
 ```
@@ -44,7 +44,7 @@ title:
 ``` yaml
 directive:
   - from:
-    - RegulatoryPackages.json
+    - regulatoryPackages.json
 ```
 
 ---
