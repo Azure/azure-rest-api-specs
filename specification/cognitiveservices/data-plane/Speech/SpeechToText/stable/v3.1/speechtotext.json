@@ -3845,7 +3845,25 @@
         "Uncommitted",
         "Latest"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BlockKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Committed",
+            "description": "A data block from the committed block list."
+          },
+          {
+            "value": "Uncommitted",
+            "description": "A data block from the uncommitted block list."
+          },
+          {
+            "value": "Latest",
+            "description": "A data block from the uncommitted block list, if present, otherwise from the committed block list."
+          }
+        ]
+      }
     },
     "CommitBlocksEntry": {
       "title": "CommitBlocksEntry",
