@@ -641,14 +641,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}": {
       "put": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_Create",
-        "summary": "Create SouthBoundNetwork.",
-        "description": "Implements SouthBoundNetwork PUT method.",
+        "operationId": "InternalNetworks_Create",
+        "summary": "Create InternalNetwork.",
+        "description": "Implements InternalNetwork PUT method.",
         "consumes": [
           "application/json"
         ],
@@ -674,10 +674,10 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "required": true,
             "type": "string",
-            "description": "Name of the SouthBoundNetwork"
+            "description": "Name of the InternalNetwork"
           },
           {
             "in": "body",
@@ -714,21 +714,21 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_Create_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Create_MaximumSet_Gen.json"
+          "InternalNetworks_Create_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Create_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_Create_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Create_MinimumSet_Gen.json"
+          "InternalNetworks_Create_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Create_MinimumSet_Gen.json"
           }
         }
       },
       "get": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_Get",
-        "summary": "Gets a SouthBoundNetworks.",
-        "description": "Implements SouthBoundNetworks GET method.",
+        "operationId": "InternalNetworks_Get",
+        "summary": "Gets a InternalNetworks.",
+        "description": "Implements InternalNetworks GET method.",
         "produces": [
           "application/json"
         ],
@@ -751,7 +751,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the InternalNetwork"
@@ -772,21 +772,21 @@
           }
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_Get_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Get_MaximumSet_Gen.json"
+          "InternalNetworks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Get_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_Get_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Get_MinimumSet_Gen.json"
+          "InternalNetworks_Get_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Get_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_Update",
-        "summary": "Updates a SouthBoundNetworks.",
-        "description": "API to update certain properties of the SouthBoundNetworks resource.",
+        "operationId": "InternalNetworks_Update",
+        "summary": "Updates a InternalNetworks.",
+        "description": "API to update certain properties of the InternalNetworks resource.",
         "consumes": [
           "application/json"
         ],
@@ -812,7 +812,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the InternalNetwork"
@@ -852,21 +852,21 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_Update_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Update_MaximumSet_Gen.json"
+          "InternalNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Update_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_Update_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Update_MinimumSet_Gen.json"
+          "InternalNetworks_Update_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_Delete",
-        "summary": "Deletes a SouthBoundNetworks.",
-        "description": "Implements SouthBoundNetworks DELETE method.",
+        "operationId": "InternalNetworks_Delete",
+        "summary": "Deletes a InternalNetworks.",
+        "description": "Implements InternalNetworks DELETE method.",
         "produces": [
           "application/json"
         ],
@@ -889,7 +889,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the InternalNetwork"
@@ -917,20 +917,20 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Delete_MaximumSet_Gen.json"
+          "InternalNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Delete_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_Delete_MinimumSet_Gen.json"
+          "InternalNetworks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Delete_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks": {
       "get": {
-        "operationId": "SouthBoundNetworks_List",
-        "summary": "List all SouthBoundNetworks within an isolation domain.",
-        "description": "Implements SouthBoundNetworks list by resource group GET method.",
+        "operationId": "InternalNetworks_List",
+        "summary": "List all InternalNetworks within an isolation domain.",
+        "description": "Implements InternalNetworks list by resource group GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -953,7 +953,7 @@
           "200": {
             "description": "Lists all NetworkInterfaces under the resource group.",
             "schema": {
-              "$ref": "#/definitions/SouthBoundNetworksList"
+              "$ref": "#/definitions/InternalNetworksList"
             }
           },
           "default": {
@@ -967,22 +967,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_List_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_List_MaximumSet_Gen.json"
+          "InternalNetworks_List_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_List_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_List_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_List_MinimumSet_Gen.json"
+          "InternalNetworks_List_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_List_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}/updateAdminState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateAdminState": {
       "post": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_updateAdminState",
-        "description": "Update Administrative state of  SouthBoundNetworks on resources referred by their resource ids.",
+        "operationId": "InternalNetworks_updateAdminState",
+        "description": "Update Administrative state of  InternalNetworks on resources referred by their resource ids.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
           {
@@ -1003,7 +1003,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "description": "Name of the InternalNetwork.",
             "required": true,
             "type": "string"
@@ -1040,21 +1040,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_updateAdminState_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateAdminState_MaximumSet_Gen.json"
+          "InternalNetworks_updateAdminState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateAdminState_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_updateAdminState_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateAdminState_MinimumSet_Gen.json"
+          "InternalNetworks_updateAdminState_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateAdminState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}/updateBgpState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateBgpState": {
       "post": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_updateBgpState",
+        "operationId": "InternalNetworks_updateBgpState",
         "description": "Update BGP state for internalNetwork. Allowed only on edge devices.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1076,7 +1076,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "description": "Name of the InternalNetwork.",
             "required": true,
             "type": "string"
@@ -1113,21 +1113,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_updateBgpState_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateBgpState_MaximumSet_Gen.json"
+          "InternalNetworks_updateBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBgpState_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_updateBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateBgpState_MinimumSet_Gen.json"
+          "InternalNetworks_updateBgpState_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBgpState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}/updateBfdForBgpState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateBfdForBgpState": {
       "post": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_updateBfdForBgpState",
+        "operationId": "InternalNetworks_updateBfdForBgpState",
         "description": "Update BfdForBgp for internalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1149,7 +1149,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "description": "Name of the InternalNetwork.",
             "required": true,
             "type": "string"
@@ -1186,21 +1186,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_updateBfdForBgpState_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
+          "InternalNetworks_updateBfdForBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_updateBfdForBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateBfdForBgpState_MinimumSet_Gen.json"
+          "InternalNetworks_updateBfdForBgpState_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBfdForBgpState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}/clearIpv6Neighbors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/clearIpv6Neighbors": {
       "post": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_clearIpv6Neighbors",
+        "operationId": "InternalNetworks_clearIpv6Neighbors",
         "description": "clearIpv6Neighbors for internalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1222,7 +1222,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "description": "Name of the InternalNetwork.",
             "required": true,
             "type": "string"
@@ -1259,21 +1259,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
+          "InternalNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_clearIpv6Neighbors_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_clearIpv6Neighbors_MinimumSet_Gen.json"
+          "InternalNetworks_clearIpv6Neighbors_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_clearIpv6Neighbors_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}/clearArpEntries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/clearArpEntries": {
       "post": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_clearArpEntries",
+        "operationId": "InternalNetworks_clearArpEntries",
         "description": "clearArpEntries for internalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1295,7 +1295,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "description": "Name of the InternalNetwork.",
             "required": true,
             "type": "string"
@@ -1332,21 +1332,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_clearArpEntries_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_clearArpEntries_MaximumSet_Gen.json"
+          "InternalNetworks_clearArpEntries_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_clearArpEntries_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_clearArpEntries_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_clearArpEntries_MinimumSet_Gen.json"
+          "InternalNetworks_clearArpEntries_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_clearArpEntries_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/southBoundNetworks/{southBoundNetworkName}/updateBfdForStaticRoutesState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateBfdForStaticRoutesState": {
       "post": {
         "tags": [
-          "SouthBoundNetworks"
+          "InternalNetworks"
         ],
-        "operationId": "SouthBoundNetworks_updateBfdForStaticRoutesState",
+        "operationId": "InternalNetworks_updateBfdForStaticRoutesState",
         "description": "Update BfdForStaticRoutes for internalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1368,7 +1368,7 @@
           },
           {
             "in": "path",
-            "name": "southBoundNetworkName",
+            "name": "internalNetworkName",
             "description": "Name of the InternalNetwork.",
             "required": true,
             "type": "string"
@@ -1405,21 +1405,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "SouthBoundNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen.json"
+          "InternalNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen.json"
           },
-          "SouthBoundNetworks_updateBfdForStaticRoutesState_MinimumSet_Gen": {
-            "$ref": "./examples/SouthBoundNetworks_updateBfdForStaticRoutesState_MinimumSet_Gen.json"
+          "InternalNetworks_updateBfdForStaticRoutesState_MinimumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBfdForStaticRoutesState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks/{northBoundNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}": {
       "put": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_Create",
+        "operationId": "ExternalNetworks_Create",
         "summary": "Create ExternalNetwork.",
         "description": "Implements ExternalNetwork PUT method.",
         "consumes": [
@@ -1447,7 +1447,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the ExternalNetwork"
@@ -1487,21 +1487,21 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_Create_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Create_MaximumSet_Gen.json"
+          "ExternalNetworks_Create_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Create_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_Create_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Create_MinimumSet_Gen.json"
+          "ExternalNetworks_Create_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Create_MinimumSet_Gen.json"
           }
         }
       },
       "get": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_Get",
-        "summary": "Gets a NorthBoundNetwork.",
-        "description": "Implements NorthBoundNetworks GET method.",
+        "operationId": "ExternalNetworks_Get",
+        "summary": "Gets a ExternalNetwork.",
+        "description": "Implements ExternalNetworks GET method.",
         "produces": [
           "application/json"
         ],
@@ -1524,7 +1524,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the ExternalNetwork"
@@ -1545,21 +1545,21 @@
           }
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_Get_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Get_MaximumSet_Gen.json"
+          "ExternalNetworks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Get_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_Get_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Get_MinimumSet_Gen.json"
+          "ExternalNetworks_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Get_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_Update",
-        "summary": "Updates a NorthBoundNetworks.",
-        "description": "API to update certain properties of the NorthBoundNetworks resource.",
+        "operationId": "ExternalNetworks_Update",
+        "summary": "Updates a ExternalNetworks.",
+        "description": "API to update certain properties of the ExternalNetworks resource.",
         "consumes": [
           "application/json"
         ],
@@ -1585,7 +1585,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the ExternalNetwork"
@@ -1625,21 +1625,21 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_Update_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Update_MaximumSet_Gen.json"
+          "ExternalNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Update_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_Update_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Update_MinimumSet_Gen.json"
+          "ExternalNetworks_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_Delete",
-        "summary": "Deletes a NorthBoundNetworks.",
-        "description": "Implements NorthBoundNetworks DELETE method.",
+        "operationId": "ExternalNetworks_Delete",
+        "summary": "Deletes a ExternalNetworks.",
+        "description": "Implements ExternalNetworks DELETE method.",
         "produces": [
           "application/json"
         ],
@@ -1662,7 +1662,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "required": true,
             "type": "string",
             "description": "Name of the ExternalNetwork"
@@ -1690,20 +1690,20 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Delete_MaximumSet_Gen.json"
+          "ExternalNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Delete_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_Delete_MinimumSet_Gen.json"
+          "ExternalNetworks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Delete_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks": {
       "get": {
-        "operationId": "NorthBoundNetworks_List",
-        "summary": "List all North Bound Networks within an isolation domain.",
-        "description": "Implements North Bound Networks list by resource group GET method.",
+        "operationId": "ExternalNetworks_List",
+        "summary": "List all External Networks within an isolation domain.",
+        "description": "Implements External Networks list by resource group GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1726,7 +1726,7 @@
           "200": {
             "description": "Lists all NetworkInterfaces under the resource group.",
             "schema": {
-              "$ref": "#/definitions/NorthBoundNetworksList"
+              "$ref": "#/definitions/ExternalNetworksList"
             }
           },
           "default": {
@@ -1740,21 +1740,21 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_List_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_List_MaximumSet_Gen.json"
+          "ExternalNetworks_List_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_List_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_List_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_List_MinimumSet_Gen.json"
+          "ExternalNetworks_List_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_List_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks/{northBoundNetworkName}/updateAdminState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/updateAdminState": {
       "post": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_updateAdminState",
+        "operationId": "ExternalNetworks_updateAdminState",
         "description": "Update Administrative State for externalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1776,7 +1776,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "description": "Name of the ExternalNetwork.",
             "required": true,
             "type": "string"
@@ -1813,21 +1813,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_updateAdminState_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_updateAdminState_MaximumSet_Gen.json"
+          "ExternalNetworks_updateAdminState_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateAdminState_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_updateAdminState_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_updateAdminState_MinimumSet_Gen.json"
+          "ExternalNetworks_updateAdminState_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateAdminState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks/{northBoundNetworkName}/updateBgpState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/updateBgpState": {
       "post": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_updateBgpState",
+        "operationId": "ExternalNetworks_updateBgpState",
         "description": "Update BGP for externalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1849,7 +1849,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "description": "Name of the ExternalNetwork.",
             "required": true,
             "type": "string"
@@ -1886,21 +1886,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_updateBgpState_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_updateBgpState_MaximumSet_Gen.json"
+          "ExternalNetworks_updateBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateBgpState_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_updateBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_updateBgpState_MinimumSet_Gen.json"
+          "ExternalNetworks_updateBgpState_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateBgpState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks/{northBoundNetworkName}/updateBfdForBgpState": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/updateBfdForBgpState": {
       "post": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_updateBfdForBgpState",
+        "operationId": "ExternalNetworks_updateBfdForBgpState",
         "description": "Update BfdForBgp for externalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1922,7 +1922,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "description": "Name of the ExternalNetwork.",
             "required": true,
             "type": "string"
@@ -1959,21 +1959,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_updateBfdForBgpState_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
+          "ExternalNetworks_updateBfdForBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_updateBfdForBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_updateBfdForBgpState_MinimumSet_Gen.json"
+          "ExternalNetworks_updateBfdForBgpState_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateBfdForBgpState_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks/{northBoundNetworkName}/clearIpv6Neighbors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/clearIpv6Neighbors": {
       "post": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_clearIpv6Neighbors",
+        "operationId": "ExternalNetworks_clearIpv6Neighbors",
         "description": "clearIpv6Neighbors for externalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -1995,7 +1995,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "description": "Name of the ExternalNetwork.",
             "required": true,
             "type": "string"
@@ -2032,21 +2032,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
+          "ExternalNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_clearIpv6Neighbors_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_clearIpv6Neighbors_MinimumSet_Gen.json"
+          "ExternalNetworks_clearIpv6Neighbors_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_clearIpv6Neighbors_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/northBoundNetworks/{northBoundNetworkName}/clearArpEntries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/clearArpEntries": {
       "post": {
         "tags": [
-          "NorthBoundNetworks"
+          "ExternalNetworks"
         ],
-        "operationId": "NorthBoundNetworks_clearArpEntries",
+        "operationId": "ExternalNetworks_clearArpEntries",
         "description": "clearArpEntries for externalNetwork.",
         "summary": "Implements the operation to the underlying hardware.",
         "parameters": [
@@ -2068,7 +2068,7 @@
           },
           {
             "in": "path",
-            "name": "northBoundNetworkName",
+            "name": "externalNetworkName",
             "description": "Name of the ExternalNetwork.",
             "required": true,
             "type": "string"
@@ -2105,11 +2105,11 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "NorthBoundNetworks_clearArpEntries_MaximumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_clearArpEntries_MaximumSet_Gen.json"
+          "ExternalNetworks_clearArpEntries_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_clearArpEntries_MaximumSet_Gen.json"
           },
-          "NorthBoundNetworks_clearArpEntries_MinimumSet_Gen": {
-            "$ref": "./examples/NorthBoundNetworks_clearArpEntries_MinimumSet_Gen.json"
+          "ExternalNetworks_clearArpEntries_MinimumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_clearArpEntries_MinimumSet_Gen.json"
           }
         }
       }
@@ -2343,13 +2343,13 @@
       },
       "x-ms-azure-resource": true
     },
-    "NorthBoundNetworksList": {
+    "ExternalNetworksList": {
       "type": "object",
-      "description": "List of NorthBoundNetworks.",
+      "description": "List of ExternalNetworks.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of NorthBoundNetworks resources.",
+          "description": "List of ExternalNetworks resources.",
           "items": {
             "$ref": "#/definitions/ExternalNetwork"
           }
@@ -2360,13 +2360,13 @@
         }
       }
     },
-    "SouthBoundNetworksList": {
+    "InternalNetworksList": {
       "type": "object",
-      "description": "List of SouthBoundNetworks.",
+      "description": "List of InternalNetworks.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of SouthBoundNetworks resources.",
+          "description": "List of InternalNetworks resources.",
           "items": {
             "$ref": "#/definitions/InternalNetwork"
           }
@@ -2383,7 +2383,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "North Bound Network Patch properties.",
+          "description": "External Network Patch properties.",
           "allOf": [
             {
               "$ref": "./common.json#/definitions/AnnotationResource"
@@ -2422,7 +2422,7 @@
         "mtu": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum Transmission Unit (MTU) for the NorthBoundNetwork."
+          "description": "Maximum Transmission Unit (MTU) for the ExternalNetwork."
         },
         "vlanId": {
           "type": "integer",
