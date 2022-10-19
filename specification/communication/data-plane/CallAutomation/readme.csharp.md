@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.CommunicationServices
-  output-folder: $(csharp-sdks-folder)/communicationservices/management/Microsoft.CommunicationServices/GeneratedProtocol
+  namespace: Azure.Communication.CallAutomation
+  output-folder: $(csharp-sdks-folder)/communication/Azure.Communication.CallAutomation/src/Generated
 ```
