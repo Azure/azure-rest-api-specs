@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchServiceClient",
-    "version": "2022-01-01.15.0",
+    "version": "2022-10-01.16.0",
     "description": "A client for issuing REST requests to the Azure Batch service."
   },
   "x-ms-parameterized-host": {
@@ -887,6 +887,7 @@
     },
     "/certificates": {
       "post": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -897,6 +898,7 @@
           }
         },
         "summary": "Adds a Certificate to the specified Account.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -996,6 +998,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1009,6 +1012,7 @@
           }
         },
         "summary": "Lists all of the Certificates that have been added to the specified Account.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1135,6 +1139,7 @@
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete": {
       "post": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1145,7 +1150,7 @@
           }
         },
         "summary": "Cancels a failed deletion of a Certificate from the specified Account.",
-        "description": "If you try to delete a Certificate that is being used by a Pool or Compute Node, the status of the Certificate changes to deleteFailed. If you decide that you want to continue using the Certificate, you can use this operation to set the status of the Certificate back to active. If you intend to delete the Certificate, you do not need to run this operation after the deletion failed. You must make sure that the Certificate is not being used by any resources, and then you can try again to delete the Certificate.",
+        "description": "If you try to delete a Certificate that is being used by a Pool or Compute Node, the status of the Certificate changes to deleteFailed. If you decide that you want to continue using the Certificate, you can use this operation to set the status of the Certificate back to active. If you intend to delete the Certificate, you do not need to run this operation after the deletion failed. You must make sure that the Certificate is not being used by any resources, and then you can try again to delete the Certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1252,6 +1257,7 @@
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})": {
       "delete": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1262,7 +1268,7 @@
           }
         },
         "summary": "Deletes a Certificate from the specified Account.",
-        "description": "You cannot delete a Certificate if a resource (Pool or Compute Node) is using it. Before you can delete a Certificate, you must therefore make sure that the Certificate is not associated with any existing Pools, the Certificate is not installed on any Nodes (even if you remove a Certificate from a Pool, it is not removed from existing Compute Nodes in that Pool until they restart), and no running Tasks depend on the Certificate. If you try to delete a Certificate that is in use, the deletion fails. The Certificate status changes to deleteFailed. You can use Cancel Delete Certificate to set the status back to active if you decide that you want to continue using the Certificate.",
+        "description": "You cannot delete a Certificate if a resource (Pool or Compute Node) is using it. Before you can delete a Certificate, you must therefore make sure that the Certificate is not associated with any existing Pools, the Certificate is not installed on any Nodes (even if you remove a Certificate from a Pool, it is not removed from existing Compute Nodes in that Pool until they restart), and no running Tasks depend on the Certificate. If you try to delete a Certificate that is in use, the deletion fails. The Certificate status changes to deleteFailed. You can use Cancel Delete Certificate to set the status back to active if you decide that you want to continue using the Certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1363,6 +1369,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1372,7 +1379,8 @@
             "$ref": "./examples/CertificateGet.json"
           }
         },
-        "description": "Gets information about the specified Certificate.",
+        "summary": "Gets information about the specified Certificate.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -11423,7 +11431,8 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "title": "The ID of the application to deploy."
+          "title": "The ID of the application to deploy.",
+          "description": "When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName})."
         },
         "version": {
           "type": "string",
@@ -12033,7 +12042,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "title": "The name of the user Account."
+          "title": "The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20."
         },
         "password": {
           "type": "string",
@@ -12460,6 +12469,7 @@
         "thumbprint",
         "thumbprintAlgorithm"
       ],
+      "description": "Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
       "title": "A reference to a Certificate to be installed on Compute Nodes in a Pool."
     },
     "MetadataItem": {
@@ -12568,7 +12578,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "A list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -12576,7 +12586,7 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "The list of Packages to be installed on each Compute Node in the Pool.",
-          "description": "Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool."
+          "description": "When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool."
         },
         "applicationLicenses": {
           "type": "array",
@@ -12608,6 +12618,11 @@
           },
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
+        },
+        "targetNodeCommunicationMode": {
+          "title": "The desired node communication mode for the pool.",
+          "description": "If omitted, the default value is Default.",
+          "$ref": "#/definitions/NodeCommunicationMode"
         }
       },
       "required": [
@@ -14397,6 +14412,33 @@
       },
       "description": "The network configuration for a Pool."
     },
+    "NodeCommunicationMode": {
+      "type": "string",
+      "title": "Determines how a pool communicates with the Batch service.",
+      "enum": [
+        "default",
+        "classic",
+        "simplified"
+      ],
+      "x-ms-enum": {
+        "name": "NodeCommunicationMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "default",
+            "description": "The node communication mode is automatically set by the Batch service."
+          },
+          {
+            "value": "classic",
+            "description": "Nodes using the classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags."
+          },
+          {
+            "value": "simplified",
+            "description": "Nodes using the simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required."
+          }
+        ]
+      }
+    },
     "CloudPool": {
       "type": "object",
       "properties": {
@@ -14579,7 +14621,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -14639,6 +14681,17 @@
           "title": "The identity of the Batch pool, if configured.",
           "description": "The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "$ref": "#/definitions/BatchPoolIdentity"
+        },
+        "targetNodeCommunicationMode": {
+          "title": "The desired node communication mode for the pool.",
+          "description": "If omitted, the default value is Default.",
+          "$ref": "#/definitions/NodeCommunicationMode"
+        },
+        "currentNodeCommunicationMode": {
+          "title": "The current state of the pool communication mode.",
+          "$ref": "#/definitions/NodeCommunicationMode",
+          "x-nullable": true,
+          "readOnly": true
         }
       },
       "title": "A Pool in the Azure Batch service."
@@ -14725,7 +14778,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -14733,7 +14786,7 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "The list of Packages to be installed on each Compute Node in the Pool.",
-          "description": "Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool."
+          "description": "When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool."
         },
         "applicationLicenses": {
           "type": "array",
@@ -14776,6 +14829,11 @@
           },
           "title": "Mount storage using specified file system for the entire lifetime of the pool.",
           "description": "Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system."
+        },
+        "targetNodeCommunicationMode": {
+          "title": "The desired node communication mode for the pool.",
+          "description": "If omitted, the default value is Default.",
+          "$ref": "#/definitions/NodeCommunicationMode"
         }
       },
       "required": [
@@ -15853,7 +15911,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of Certificates installed on the Compute Node.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "errors": {
           "type": "array",
@@ -16400,7 +16458,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "A list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "This list replaces any existing Certificate references configured on the Pool. If you specify an empty collection, any existing Certificate references are removed from the Pool. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "This list replaces any existing Certificate references configured on the Pool. If you specify an empty collection, any existing Certificate references are removed from the Pool. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -16417,6 +16475,11 @@
           },
           "title": "A list of name-value pairs associated with the Pool as metadata.",
           "description": "This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool."
+        },
+        "targetNodeCommunicationMode": {
+          "title": "The desired node communication mode for the pool.",
+          "description": "This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default.",
+          "$ref": "#/definitions/NodeCommunicationMode"
         }
       },
       "required": [
@@ -16440,7 +16503,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "A list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool. If omitted, any existing Certificate references are left unchanged. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool. If omitted, any existing Certificate references are left unchanged. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -16457,6 +16520,11 @@
           },
           "title": "A list of name-value pairs associated with the Pool as metadata.",
           "description": "If this element is present, it replaces any existing metadata configured on the Pool. If you specify an empty collection, any metadata is removed from the Pool. If omitted, any existing metadata is left unchanged."
+        },
+        "targetNodeCommunicationMode": {
+          "title": "The desired node communication mode for the pool.",
+          "description": "If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged.",
+          "$ref": "#/definitions/NodeCommunicationMode"
         }
       },
       "title": "The set of changes to be made to a Pool."
@@ -16699,7 +16767,7 @@
             "$ref": "#/definitions/HttpHeader"
           },
           "title": "A list of name-value pairs for headers to be used in uploading output files",
-          "description": "These headers will be specified when uploading files to Azure Storage. For more information, see [Request Headers (All Blob Types)](https://docs.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types)."
+          "description": "These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://docs.microsoft.com/en-us/rest/api/storageservices/put-blob#request-headers-all-blob-types"
         }
       },
       "required": [
