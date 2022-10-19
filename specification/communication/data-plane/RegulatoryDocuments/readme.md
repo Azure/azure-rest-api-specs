@@ -33,9 +33,9 @@ tag: package-2022-11-30-preview
 
 These settings apply only when `--tag=package-regulatoryPackages-2022-11-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-regulatoryPackages-2022-11-30-preview'
+```yaml $(tag) == 'package-regulatorypackages-2022-11-30-preview'
 input-file:
-  - preview/2022-11-30-preview/regulatoryPackages.json
+  - preview/2022-11-30-preview/regulatorypackages.json
 title:
   Azure Communication Services Phone Numbers Regulatory Package
 ```
