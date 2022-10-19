@@ -283,8 +283,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageAttachment"
+            }
           },
           "default": {
             "description": "Failure",
@@ -560,8 +563,7 @@
       "description": "The regulatory package attachment.",
       "required": [
         "fileName",
-        "fileType",
-        "fileContent"
+        "fileType"
       ],
       "type": "object",
       "properties": {
@@ -569,7 +571,7 @@
           "description": "The attachment ID",
           "type": "string"
         },
-        "name": {
+        "friendlyName": {
           "description": "Friendly name of Regulatory Package",
           "type": "string"
         },
