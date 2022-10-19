@@ -355,7 +355,7 @@
       "type": "string",
       "description": "The provider name (ex: Microsoft.Compute for virtual machines).",
       "x-ms-parameter-location": "method",
-      "pattern": "^[A-Za-z0-9]*$",
+      "pattern": "^[A-Za-z0-9.]*$",
       "minLength": 3,
       "maxLength": 63
     },
@@ -652,7 +652,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": ["#/definitions/Operation"]
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to next page if the list is too long.",
@@ -736,7 +736,7 @@
               "items": {
                 "$ref": "#/definitions/ErrorDetails"
               },
-              "x-ms-identifiers": ["#/definitions/ErrorDetails"]
+              "x-ms-identifiers": []
             }
           }
         }
