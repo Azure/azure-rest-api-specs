@@ -227,7 +227,7 @@
         }
       }
     },
-    "/serverMetricsConfig/{name}": {
+    "/server-metrics-config/{name}": {
       "patch": {
         "tags": [
           "ServerMetrics"
@@ -260,7 +260,7 @@
             "description": "Server metrics configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerMetricsModel"
+              "$ref": "#/definitions/ServerMetrics"
             }
           }
         ],
@@ -268,13 +268,13 @@
           "200": {
             "description": "The server metrics are updated.",
             "schema": {
-              "$ref": "#/definitions/ServerMetricsModel"
+              "$ref": "#/definitions/ServerMetrics"
             }
           },
           "201": {
             "description": "The server metrics are created.",
             "schema": {
-              "$ref": "#/definitions/ServerMetricsModel"
+              "$ref": "#/definitions/ServerMetrics"
             }
           },
           "default": {
@@ -324,7 +324,7 @@
           "200": {
             "description": "Requested server metrics",
             "schema": {
-              "$ref": "#/definitions/ServerMetricsModel"
+              "$ref": "#/definitions/ServerMetrics"
             }
           },
           "default": {
@@ -394,7 +394,7 @@
         }
       }
     },
-    "/serverMetricsConfig": {
+    "/server-metrics-config": {
       "get": {
         "tags": [
           "ServerMetrics"
@@ -425,7 +425,7 @@
           "200": {
             "description": "Requested server metrics",
             "schema": {
-              "$ref": "#/definitions/ServerMetricsModel"
+              "$ref": "#/definitions/ServerMetrics"
             }
           },
           "default": {
@@ -448,7 +448,7 @@
         }
       }
     },
-    "/serverMetricsConfig/default": {
+    "/server-metrics-config/default": {
       "get": {
         "tags": [
           "ServerMetrics"
@@ -467,7 +467,7 @@
           "200": {
             "description": "The requested default server metrics",
             "schema": {
-              "$ref": "#/definitions/DefaultServerMetricsConfigListModel"
+              "$ref": "#/definitions/DefaultServerMetricsConfigList"
             }
           },
           "default": {
@@ -490,7 +490,7 @@
         }
       }
     },
-    "/serverMetricsConfig/supportedResourceTypes": {
+    "/server-metrics-config/supportedResourceTypes": {
       "get": {
         "tags": [
           "ServerMetrics"
@@ -532,7 +532,7 @@
         }
       }
     },
-    "/loadtests/{testId}": {
+    "/tests/{testId}": {
       "patch": {
         "tags": [
           "Test"
@@ -558,7 +558,7 @@
             "description": "Load test model",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestModel20221101"
+              "$ref": "#/definitions/Test"
             }
           }
         ],
@@ -566,13 +566,13 @@
           "200": {
             "description": "The test was updated.",
             "schema": {
-              "$ref": "#/definitions/TestModel20221101"
+              "$ref": "#/definitions/Test"
             }
           },
           "201": {
             "description": "The test was created.",
             "schema": {
-              "$ref": "#/definitions/TestModel20221101"
+              "$ref": "#/definitions/Test"
             }
           },
           "default": {
@@ -655,7 +655,7 @@
           "200": {
             "description": "The requested test.",
             "schema": {
-              "$ref": "#/definitions/TestModel20221101"
+              "$ref": "#/definitions/Test"
             }
           },
           "default": {
@@ -678,7 +678,7 @@
         }
       }
     },
-    "/loadtests/sortAndFilter": {
+    "/tests": {
       "get": {
         "tags": [
           "Test"
@@ -737,7 +737,7 @@
           "200": {
             "description": "The requested tests.",
             "schema": {
-              "$ref": "#/definitions/TestModel20221101ResourceList"
+              "$ref": "#/definitions/TestResourceList"
             }
           },
           "default": {
@@ -763,7 +763,7 @@
         }
       }
     },
-    "/loadtests/{testId}/files/{fileId}": {
+    "/tests/{testId}/files/{fileId}": {
       "put": {
         "tags": [
           "Test"
@@ -793,6 +793,7 @@
           {
             "in": "query",
             "name": "fileType",
+            "description": "File type",
             "type": "string",
             "enum": [
               "JMX_FILE",
@@ -810,6 +811,7 @@
           {
             "in": "formData",
             "name": "file",
+            "description": "The file to be uploaded as multipart form-data.",
             "required": true,
             "type": "file"
           }
@@ -818,7 +820,7 @@
           "201": {
             "description": "The test artifact is uploaded.",
             "schema": {
-              "$ref": "#/definitions/FileUrl20221101"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -871,7 +873,7 @@
           "200": {
             "description": "The requested test file url.",
             "schema": {
-              "$ref": "#/definitions/FileUrl20221101"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -944,7 +946,7 @@
         }
       }
     },
-    "/loadtests/{testId}/files": {
+    "/tests/{testId}/files": {
       "get": {
         "tags": [
           "Test"
@@ -998,7 +1000,7 @@
         }
       }
     },
-    "/testruns/{testRunId}": {
+    "/test-runs/{testRunId}": {
       "delete": {
         "tags": [
           "TestRun"
@@ -1084,7 +1086,7 @@
             "description": "Load test run model",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestRunModel20221101"
+              "$ref": "#/definitions/TestRun"
             }
           }
         ],
@@ -1092,7 +1094,7 @@
           "200": {
             "description": "The test run is updated.",
             "schema": {
-              "$ref": "#/definitions/TestRunModel20221101"
+              "$ref": "#/definitions/TestRun"
             }
           },
           "default": {
@@ -1142,7 +1144,7 @@
           "200": {
             "description": "The requested test run details",
             "schema": {
-              "$ref": "#/definitions/TestRunModel20221101"
+              "$ref": "#/definitions/TestRun"
             }
           },
           "default": {
@@ -1165,7 +1167,7 @@
         }
       }
     },
-    "/testruns/{testRunId}/files/{fileId}": {
+    "/test-runs/{testRunId}/files/{fileId}": {
       "get": {
         "tags": [
           "TestRun"
@@ -1204,7 +1206,7 @@
           "200": {
             "description": "The URL for the requested test run file",
             "schema": {
-              "$ref": "#/definitions/FileUrl20221101"
+              "$ref": "#/definitions/FileUrl"
             }
           },
           "default": {
@@ -1227,7 +1229,7 @@
         }
       }
     },
-    "/testruns/sortAndFilter": {
+    "/test-runs": {
       "get": {
         "tags": [
           "TestRun"
@@ -1295,7 +1297,7 @@
           "200": {
             "description": "The requested test runs",
             "schema": {
-              "$ref": "#/definitions/TestRunModel20221101ResourceList"
+              "$ref": "#/definitions/TestRunResourceList"
             }
           },
           "default": {
@@ -1321,7 +1323,7 @@
         }
       }
     },
-    "/testruns/{testRunId}:stop": {
+    "/test-runs/{testRunId}:stop": {
       "post": {
         "tags": [
           "TestRun"
@@ -1350,7 +1352,7 @@
           "200": {
             "description": "The requested test run is stopped. Call GET /testruns/{testRunId} to check the status.",
             "schema": {
-              "$ref": "#/definitions/TestRunModel20221101"
+              "$ref": "#/definitions/TestRun"
             }
           },
           "default": {
@@ -1373,7 +1375,7 @@
         }
       }
     },
-    "/testRuns/{testRunId}/metricNamespaces": {
+    "/test-runs/{testRunId}/metricNamespaces": {
       "get": {
         "tags": [
           "TestRun"
@@ -1425,7 +1427,7 @@
         }
       }
     },
-    "/testRuns/{testRunId}/metricDefinitions": {
+    "/test-runs/{testRunId}/metricDefinitions": {
       "get": {
         "tags": [
           "TestRun"
@@ -1484,7 +1486,7 @@
         }
       }
     },
-    "/testRuns/{testRunId}/metrics": {
+    "/test-runs/{testRunId}/metrics": {
       "post": {
         "tags": [
           "TestRun"
@@ -1573,6 +1575,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "Metric metadata filter to fetch the set of metric",
             "schema": {
               "$ref": "#/definitions/MetricRequestPayload"
             }
@@ -1613,8 +1616,7 @@
     "AppComponent": {
       "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "required": [
-        "resourceId",
-        "resourceName"
+        "resourceId"
       ],
       "type": "object",
       "properties": {
@@ -1671,7 +1673,7 @@
           "type": "string"
         },
         "name": {
-          "description": "AppComponent name",
+          "description": "Unique name of the app component",
           "type": "string",
           "readOnly": true
         },
@@ -1684,7 +1686,7 @@
         }
       }
     },
-    "CertificateMetadata20221101": {
+    "CertificateMetadata": {
       "type": "object",
       "properties": {
         "value": {
@@ -1708,23 +1710,7 @@
         }
       }
     },
-    "DefaultServerMetricsConfigListModel": {
-      "description": "Default server metrics config",
-      "type": "object",
-      "properties": {
-        "defaultMetrics": {
-          "description": "Default metrics collection {resourceType : list of metrics config} (Refer for metrics structure: https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition)",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DefaultServerMetricsConfigModel"
-            }
-          }
-        }
-      }
-    },
-    "DefaultServerMetricsConfigModel": {
+    "DefaultServerMetricsConfig": {
       "description": "Metrics config model",
       "type": "object",
       "properties": {
@@ -1746,6 +1732,22 @@
         "displayDescription": {
           "description": "Metric display description",
           "type": "string"
+        }
+      }
+    },
+    "DefaultServerMetricsConfigList": {
+      "description": "Default server metrics config",
+      "type": "object",
+      "properties": {
+        "defaultMetrics": {
+          "description": "Default metrics collection {resourceType : list of metrics config} (Refer for metrics structure: https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition)",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DefaultServerMetricsConfig"
+            }
+          }
         }
       }
     },
@@ -1778,7 +1780,7 @@
         }
       }
     },
-    "ErrorDetails20221101": {
+    "ErrorDetails": {
       "description": "Error details if there is any failure in load test run",
       "type": "object",
       "properties": {
@@ -1801,7 +1803,7 @@
         }
       }
     },
-    "FileUrl20221101": {
+    "FileUrl": {
       "description": "FileUrl Model.",
       "type": "object",
       "properties": {
@@ -1832,7 +1834,7 @@
         },
         "expireTime": {
           "format": "date-time",
-          "description": "Expiry time of the file",
+          "description": "Expiry time of the file (ISO 8601 literal format)",
           "type": "string"
         },
         "validationStatus": {
@@ -1861,7 +1863,7 @@
           "description": "List of file URLs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FileUrl20221101"
+            "$ref": "#/definitions/FileUrl"
           }
         },
         "nextLink": {
@@ -1870,34 +1872,34 @@
         }
       }
     },
-    "InputTestArtifacts20221101": {
+    "InputTestArtifacts": {
       "description": "The input artifacts for the test.",
       "type": "object",
       "properties": {
         "configUrl": {
-          "$ref": "#/definitions/FileUrl20221101"
+          "$ref": "#/definitions/FileUrl"
         },
         "testScriptUrl": {
-          "$ref": "#/definitions/FileUrl20221101"
+          "$ref": "#/definitions/FileUrl"
         },
         "userPropUrl": {
-          "$ref": "#/definitions/FileUrl20221101"
+          "$ref": "#/definitions/FileUrl"
         },
         "inputArtifactsZipFileurl": {
-          "$ref": "#/definitions/FileUrl20221101"
+          "$ref": "#/definitions/FileUrl"
         },
         "additionalUrls": {
           "description": "Additional supported files for the test run",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FileUrl20221101"
+            "$ref": "#/definitions/FileUrl"
           },
           "readOnly": true
         }
       },
       "readOnly": true
     },
-    "LoadTestConfig20221101": {
+    "LoadTestConfig": {
       "description": "The load test configuration.",
       "type": "object",
       "properties": {
@@ -1934,7 +1936,7 @@
       }
     },
     "MetadataFilter": {
-      "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata A, B and C. - Return all time series of where C is equals to c1 or c2, the MetadataFilter value will be {C, [c1,c2]}",
+      "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata like SamplerName, Error. To retreive all the time series data where SamplerName is equals to HTTPRequest1 or HTTPRequest2, the MetadataFilter value will be {\"SamplerName\", [\"HTTPRequest2\", \"HTTPRequest2\"}",
       "type": "object",
       "properties": {
         "name": {
@@ -2213,34 +2215,34 @@
         },
         "vusers": {
           "format": "int32",
-          "description": "No of virtual users ",
+          "description": "No of virtual users",
           "type": "integer"
         },
         "rampUpTime": {
           "format": "int32",
-          "description": "ramp up time",
+          "description": "Ramp up time",
           "type": "integer"
         },
         "duration": {
           "format": "int32",
-          "description": "duration",
+          "description": "Test run duration",
           "type": "integer"
         }
       }
     },
-    "OutputTestArtifacts20221101": {
+    "OutputTestArtifacts": {
       "description": "The output artifacts for the test run.",
       "type": "object",
       "properties": {
         "resultUrl": {
-          "$ref": "#/definitions/FileUrl20221101"
+          "$ref": "#/definitions/FileUrl"
         },
         "logsUrl": {
-          "$ref": "#/definitions/FileUrl20221101"
+          "$ref": "#/definitions/FileUrl"
         }
       }
     },
-    "PassFailCriteria20221101": {
+    "PassFailCriteria": {
       "description": "Pass fail criteria for a test.",
       "type": "object",
       "properties": {
@@ -2248,12 +2250,12 @@
           "description": "Map of id and pass fail metrics { id  : pass fail metrics }.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/PassFailMetric20221101"
+            "$ref": "#/definitions/PassFailMetric"
           }
         }
       }
     },
-    "PassFailMetric20221101": {
+    "PassFailMetric": {
       "type": "object",
       "properties": {
         "clientmetric": {
@@ -2337,7 +2339,7 @@
         }
       }
     },
-    "ResourceMetricModel": {
+    "ResourceMetric": {
       "description": "Associated metric definition for particular metrics of the azure resource ( Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
       "required": [
         "aggregation",
@@ -2403,7 +2405,7 @@
         }
       }
     },
-    "SecretMetadata20221101": {
+    "SecretMetadata": {
       "type": "object",
       "properties": {
         "value": {
@@ -2424,7 +2426,7 @@
         }
       }
     },
-    "ServerMetricsModel": {
+    "ServerMetrics": {
       "description": "Server metrics configuration model",
       "type": "object",
       "properties": {
@@ -2445,7 +2447,7 @@
           "description": "Metrics collection {metric id : metrics object} (Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition for metric id).",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/ResourceMetricModel"
+            "$ref": "#/definitions/ResourceMetric"
           }
         }
       }
@@ -2462,37 +2464,22 @@
         }
       }
     },
-    "TestArtifacts20221101": {
-      "required": [
-        "inputArtifacts"
-      ],
-      "type": "object",
-      "properties": {
-        "inputArtifacts": {
-          "$ref": "#/definitions/InputTestArtifacts20221101"
-        },
-        "outputArtifacts": {
-          "$ref": "#/definitions/OutputTestArtifacts20221101"
-        }
-      },
-      "readOnly": true
-    },
-    "TestModel20221101": {
+    "Test": {
       "description": "Load test model",
       "type": "object",
       "properties": {
         "passFailCriteria": {
-          "$ref": "#/definitions/PassFailCriteria20221101"
+          "$ref": "#/definitions/PassFailCriteria"
         },
         "secrets": {
-          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
+          "description": "Secrets can be stored in an Azure Key Vault or any other secret store.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/SecretMetadata20221101"
+            "$ref": "#/definitions/SecretMetadata"
           }
         },
         "certificate": {
-          "$ref": "#/definitions/CertificateMetadata20221101"
+          "$ref": "#/definitions/CertificateMetadata"
         },
         "environmentVariables": {
           "description": "Environment variables which are defined as a set of <name,value> pairs.",
@@ -2502,10 +2489,10 @@
           }
         },
         "loadTestConfig": {
-          "$ref": "#/definitions/LoadTestConfig20221101"
+          "$ref": "#/definitions/LoadTestConfig"
         },
         "inputArtifacts": {
-          "$ref": "#/definitions/InputTestArtifacts20221101"
+          "$ref": "#/definitions/InputTestArtifacts"
         },
         "testId": {
           "description": "Unique test name as identifier.",
@@ -2566,7 +2553,22 @@
         }
       }
     },
-    "TestModel20221101ResourceList": {
+    "TestArtifacts": {
+      "required": [
+        "inputArtifacts"
+      ],
+      "type": "object",
+      "properties": {
+        "inputArtifacts": {
+          "$ref": "#/definitions/InputTestArtifacts"
+        },
+        "outputArtifacts": {
+          "$ref": "#/definitions/OutputTestArtifacts"
+        }
+      },
+      "readOnly": true
+    },
+    "TestResourceList": {
       "description": "List of Resources",
       "required": [
         "value"
@@ -2577,7 +2579,7 @@
           "description": "List of Resources",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TestModel20221101"
+            "$ref": "#/definitions/Test"
           }
         },
         "nextLink": {
@@ -2586,22 +2588,22 @@
         }
       }
     },
-    "TestRunModel20221101": {
+    "TestRun": {
       "description": "Load test run model",
       "type": "object",
       "properties": {
         "passFailCriteria": {
-          "$ref": "#/definitions/PassFailCriteria20221101"
+          "$ref": "#/definitions/PassFailCriteria"
         },
         "secrets": {
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/SecretMetadata20221101"
+            "$ref": "#/definitions/SecretMetadata"
           }
         },
         "certificate": {
-          "$ref": "#/definitions/CertificateMetadata20221101"
+          "$ref": "#/definitions/CertificateMetadata"
         },
         "environmentVariables": {
           "description": "Environment variables which are defined as a set of <name,value> pairs.",
@@ -2614,7 +2616,7 @@
           "description": "Error details if there is any failure in load test run",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDetails20221101"
+            "$ref": "#/definitions/ErrorDetails"
           },
           "readOnly": true
         },
@@ -2622,15 +2624,15 @@
           "description": "Test run statistics.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/TestRunStatisticsModel"
+            "$ref": "#/definitions/TestRunStatistics"
           },
           "readOnly": true
         },
         "loadTestConfig": {
-          "$ref": "#/definitions/LoadTestConfig20221101"
+          "$ref": "#/definitions/LoadTestConfig"
         },
         "testArtifacts": {
-          "$ref": "#/definitions/TestArtifacts20221101"
+          "$ref": "#/definitions/TestArtifacts"
         },
         "testResult": {
           "description": "Test result for pass/Fail criteria used during the test run.",
@@ -2764,7 +2766,7 @@
         }
       }
     },
-    "TestRunModel20221101ResourceList": {
+    "TestRunResourceList": {
       "description": "List of Resources",
       "required": [
         "value"
@@ -2775,7 +2777,7 @@
           "description": "List of Resources",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TestRunModel20221101"
+            "$ref": "#/definitions/TestRun"
           }
         },
         "nextLink": {
@@ -2784,7 +2786,7 @@
         }
       }
     },
-    "TestRunStatisticsModel": {
+    "TestRunStatistics": {
       "description": "Test run statistics.",
       "type": "object",
       "properties": {
@@ -2879,7 +2881,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "An array of data points representing the metric values. This is only returned if a result type of data is specified.",
+          "description": "An array of data points representing the metric values. This is only returned if a result type of \"Data\" is specified.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricValue"
@@ -2942,6 +2944,13 @@
       "description": "Azure Active Directory OAuth2 Flow"
     }
   },
+  "security": [
+    {
+      "oauth2": [
+        "https://cnt-prod.loadtesting.azure.com/.default"
+      ]
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
     "useSchemePrefix": true,
