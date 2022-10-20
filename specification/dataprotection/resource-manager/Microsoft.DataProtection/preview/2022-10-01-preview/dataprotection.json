@@ -1013,6 +1013,48 @@
         }
       }
     },
+    "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
+      "get": {
+        "tags": [
+          "BackupInstancesExtensionRouting"
+        ],
+        "description": "Gets a list backup instances associated with a tracked resource",
+        "operationId": "BackupInstancesExtensionRouting_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List BackupInstances associated with an azure resource": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}": {
       "get": {
         "tags": [
@@ -2415,6 +2457,158 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances": {
+      "get": {
+        "tags": [
+          "DeletedBackupInstances"
+        ],
+        "description": "Gets deleted backup instances belonging to a backup vault",
+        "operationId": "DeletedBackupInstances_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedBackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DeletedBackupInstances in a Vault": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/ListDeletedBackupInstances.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances/{backupInstanceName}": {
+      "get": {
+        "tags": [
+          "DeletedBackupInstances"
+        ],
+        "description": "Gets a deleted backup instance with name in a backup vault",
+        "operationId": "DeletedBackupInstances_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "backupInstanceName",
+            "description": "The name of the deleted backup instance",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedBackupInstanceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DeletedBackupInstance": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/GetDeletedBackupInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances/{backupInstanceName}/undelete": {
+      "post": {
+        "tags": [
+          "DeletedBackupInstances"
+        ],
+        "operationId": "DeletedBackupInstances_Undelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "backupInstanceName",
+            "description": "The name of the deleted backup instance",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Undelete Deleted BackupInstance": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/UndeleteDeletedBackupInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/resourceGuards": {
       "get": {
         "tags": [
@@ -3354,6 +3548,267 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies": {
+      "get": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxies": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
+      "get": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
+      "post": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_UnlockDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnlockDelete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4042,65 +4497,6 @@
       },
       "x-ms-discriminator-value": "AzureOperationalStoreParameters"
     },
-    "KubernetesClusterBackupDatasourceParameters": {
-      "description": "Parameters for Kubernetes Cluster Backup Datasource",
-      "required": [
-        "snapshotVolumes",
-        "includeClusterScopeResources"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupDatasourceParameters"
-        }
-      ],
-      "properties": {
-        "snapshotVolumes": {
-          "description": "Gets or sets the volume snapshot property. This property if enabled will take volume snapshots during restore.",
-          "type": "boolean"
-        },
-        "includeClusterScopeResources": {
-          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.",
-          "type": "boolean"
-        },
-        "includedNamespaces": {
-          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "excludedNamespaces": {
-          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "includedResourceTypes": {
-          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "excludedResourceTypes": {
-          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "labelSelectors": {
-          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "x-ms-discriminator-value": "KubernetesClusterBackupDatasourceParameters"
-    },
     "AzureRetentionRule": {
       "allOf": [
         {
@@ -4371,6 +4767,10 @@
           "$ref": "#/definitions/ResourceMoveDetails",
           "description": "Resource move details for backup vault",
           "readOnly": true
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings",
+          "description": "Security Settings"
         },
         "storageSettings": {
           "description": "Storage Settings",
@@ -4844,21 +5244,6 @@
       },
       "discriminator": "objectType"
     },
-    "BackupDatasourceParameters": {
-      "description": "Parameters for Backup Datasource",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "Type of the specific object - used for deserializing",
-          "type": "string",
-          "readOnly": false
-        }
-      },
-      "discriminator": "objectType"
-    },
     "Day": {
       "description": "Day of the week",
       "properties": {
@@ -4874,6 +5259,85 @@
       },
       "title": "Day",
       "type": "object"
+    },
+    "DeletedBackupInstance": {
+      "description": "Deleted Backup Instance",
+      "required": [
+        "dataSourceInfo",
+        "policyInfo"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupInstance"
+        }
+      ],
+      "properties": {
+        "deletionInfo": {
+          "$ref": "#/definitions/DeletionInfo",
+          "description": "Deletion info of Backup Instance",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedBackupInstanceResource": {
+      "description": "Deleted Backup Instance",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeletedBackupInstance",
+          "description": "DeletedBackupInstanceResource properties"
+        }
+      }
+    },
+    "DeletedBackupInstanceResourceList": {
+      "description": "List of DeletedBackupInstance resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedBackupInstanceResource"
+          }
+        }
+      }
+    },
+    "DeletionInfo": {
+      "description": "Deletion Info",
+      "type": "object",
+      "properties": {
+        "deletionTime": {
+          "description": "Specifies time of deletion",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingEndDate": {
+          "description": "Specifies billing end date",
+          "type": "string",
+          "readOnly": true
+        },
+        "scheduledPurgeTime": {
+          "description": "Specifies purge time",
+          "type": "string",
+          "readOnly": true
+        },
+        "deleteActivityID": {
+          "description": "Delete activity ID for troubleshooting purpose",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "DeleteOption": {
       "description": "Delete Option",
@@ -5033,6 +5497,25 @@
       },
       "type": "object",
       "x-ms-azure-resource": true
+    },
+    "ImmutabilitySettings": {
+      "description": "Immutability Settings at vault level",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Immutability state",
+          "enum": [
+            "Disabled",
+            "Unlocked",
+            "Locked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImmutabilityState",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "DppProxyResource": {
       "properties": {
@@ -5590,6 +6073,10 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
+        },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings",
+          "description": "Security Settings"
         }
       }
     },
@@ -5649,14 +6136,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataStoreParameters"
-          },
-          "x-ms-identifiers": []
-        },
-        "backupDatasourceParametersList": {
-          "description": "Gets or sets the Backup Data Source Parameters",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BackupDatasourceParameters"
           },
           "x-ms-identifiers": []
         }
@@ -5748,91 +6227,6 @@
         }
       },
       "x-ms-discriminator-value": "KubernetesPVRestoreCriteria"
-    },
-    "KubernetesClusterRestoreCriteria": {
-      "description": "kubernetes Cluster Backup target info for restore operation",
-      "required": [
-        "includeClusterScopeResources"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ItemLevelRestoreCriteria"
-        }
-      ],
-      "properties": {
-        "includeClusterScopeResources": {
-          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.",
-          "type": "boolean"
-        },
-        "includedNamespaces": {
-          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "excludedNamespaces": {
-          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "includedResourceTypes": {
-          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "excludedResourceTypes": {
-          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "labelSelectors": {
-          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "persistentVolumeRestoreMode": {
-          "description": "Gets or sets the PV Restore Mode property. This property sets whether volumes needs to be restored.",
-          "enum": [
-            "RestoreWithVolumeData",
-            "RestoreWithoutVolumeData"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PersistentVolumeRestoreMode",
-            "modelAsString": true
-          }
-        },
-        "conflictPolicy": {
-          "description": "Gets or sets the Conflict Policy property. This property sets policy during conflict of resources during restore.",
-          "enum": [
-            "Skip",
-            "Patch"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ExistingResourcePolicy",
-            "modelAsString": true
-          }
-        },
-        "namespaceMappings": {
-          "description": "Gets or sets the Namespace Mappings property. This property sets if namespace needs to be change during restore.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
     },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
@@ -6248,6 +6642,56 @@
         }
       }
     },
+    "SecuritySettings": {
+      "description": "Class containing security settings of vault",
+      "type": "object",
+      "properties": {
+        "softDeleteSettings": {
+          "$ref": "#/definitions/SoftDeleteSettings"
+        },
+        "immutabilitySettings": {
+          "$ref": "#/definitions/ImmutabilitySettings"
+        }
+      }
+    },
+    "SoftDeleteSettings": {
+      "description": "Soft delete related settings",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "State of soft delete",
+          "enum": [
+            "Off",
+            "On",
+            "AlwaysOn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SoftDeleteState",
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "Soft Delete is turned off for the BackupVault",
+                "value": "Off"
+              },
+              {
+                "description": "Soft Delete is enabled for the BackupVault but can be turned off",
+                "value": "On"
+              },
+              {
+                "description": "Soft Delete is permanently enabled for the BackupVault and the setting cannot be changed",
+                "value": "AlwaysOn"
+              }
+            ]
+          }
+        },
+        "retentionDurationInDays": {
+          "description": "Soft delete retention duration",
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
     "SourceLifeCycle": {
       "description": "Source LifeCycle",
       "properties": {
@@ -6562,7 +7006,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "ResourceGuardProvisioningState",
             "modelAsString": true
           }
         },
@@ -6641,6 +7085,95 @@
           }
         }
       }
+    },
+    "ResourceGuardOperationDetail": {
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "type": "string"
+        },
+        "defaultResourceRequest": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardProxyBase": {
+      "type": "object",
+      "properties": {
+        "resourceGuardResourceId": {
+          "type": "string"
+        },
+        "resourceGuardOperationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardOperationDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "lastUpdatedTime": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardProxyBaseResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceGuardProxyBase",
+          "description": "ResourceGuardProxyBaseResource properties"
+        }
+      }
+    },
+    "ResourceGuardProxyBaseResourceList": {
+      "description": "List of ResourceGuardProxyBase resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+          }
+        }
+      }
+    },
+    "UnlockDeleteRequest": {
+      "description": "Request body of unlock delete API.",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceToBeDeleted": {
+          "type": "string"
+        }
+      }
+    },
+    "UnlockDeleteResponse": {
+      "description": "Response of Unlock Delete API.",
+      "type": "object",
+      "properties": {
+        "unlockDeleteExpiryTime": {
+          "description": "This is the time when unlock delete privileges will get expired.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -6673,6 +7206,14 @@
       "description": "Client Api Version.",
       "required": true,
       "type": "string"
+    },
+    "ResourceId": {
+      "name": "resourceId",
+      "in": "path",
+      "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
