@@ -53,4 +53,4 @@ These settings apply only when `--tag=package-2022-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-09-01-preview'
 input-file:
-  - Products/preview/2022-09-01-preview/offer.json
+  - Products/preview/2022-09-01-preview/product.json
