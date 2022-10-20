@@ -11,6 +11,12 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   clear-output-folder: true
+
+  directive:
+  - from: securityContacts.json
+    where: $.definitions.SecurityContactProperties.properties.alertNotifications.properties.state
+    transform: > 
+        $['x-ms-enum']['name'] = 'stateEnum';
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)
