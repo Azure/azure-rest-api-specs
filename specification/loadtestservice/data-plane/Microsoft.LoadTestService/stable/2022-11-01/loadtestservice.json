@@ -802,7 +802,21 @@
             ],
             "x-ms-enum": {
               "name": "fileType",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "JMX_FILE",
+                  "description": "If file is jmx script"
+                },
+                {
+                  "value": "USER_PROPERTIES",
+                  "description": "If file is user properties"
+                },
+                {
+                  "value": "ADDITIONAL_ARTIFACTS",
+                  "description": "If file is not any of other supported type"
+                }
+              ]
             }
           },
           {
@@ -1530,7 +1544,29 @@
             ],
             "x-ms-enum": {
               "name": "interval",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "PT5S",
+                  "description": "5 seconds"
+                },
+                {
+                  "value": "PT10S",
+                  "description": "10 seconds"
+                },
+                {
+                  "value": "PT1M",
+                  "description": "1 minute"
+                },
+                {
+                  "value": "PT5M",
+                  "description": "5 minutes"
+                },
+                {
+                  "value": "PT1H",
+                  "description": "1 hour"
+                }
+              ]
             }
           },
           {
@@ -1559,7 +1595,17 @@
             ],
             "x-ms-enum": {
               "name": "resultType",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Data",
+                  "description": "Retrieve metric data"
+                },
+                {
+                  "value": "Metadata",
+                  "description": "Retrieve metric meta data includes dimensions value"
+                }
+              ]
             }
           },
           {
@@ -1701,7 +1747,13 @@
           "type": "string",
           "x-ms-enum": {
             "name": "CertificateType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AKV_CERT_URI",
+                "description": "If the certificate is stored in an Azure Key Vault"
+              }
+            ]
           }
         },
         "name": {
@@ -1829,7 +1881,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "FileType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "JMX_FILE",
+                "description": "If file is jmx script"
+              },
+              {
+                "value": "USER_PROPERTIES",
+                "description": "If file is user properties"
+              },
+              {
+                "value": "ADDITIONAL_ARTIFACTS",
+                "description": "If file is not any of other supported type"
+              }
+            ]
           }
         },
         "expireTime": {
@@ -1848,7 +1914,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "FileStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NOT_VALIDATED",
+                "description": "File is not validated."
+              },
+              {
+                "value": "VALIDATION_SUCCESS",
+                "description": "File is validated."
+              },
+              {
+                "value": "VALIDATION_FAILURE",
+                "description": "File validation is failed."
+              },
+              {
+                "value": "VALIDATION_INITIATED",
+                "description": "File validation is in progress."
+              }
+            ]
           }
         }
       }
@@ -1933,7 +2017,7 @@
       }
     },
     "MetadataFilter": {
-      "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata like SamplerName, Error. To retreive all the time series data where SamplerName is equals to HTTPRequest1 or HTTPRequest2, the MetadataFilter value will be {\"SamplerName\", [\"HTTPRequest2\", \"HTTPRequest2\"}",
+      "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata like SamplerName, Error. To retrieve all the time series data where SamplerName is equals to HTTPRequest1 or HTTPRequest2, the MetadataFilter value will be {\"SamplerName\", [\"HTTPRequest2\", \"HTTPRequest2\"}",
       "type": "object",
       "properties": {
         "name": {
@@ -1999,7 +2083,41 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MetricUnit",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "No unit specified"
+              },
+              {
+                "value": "Percent",
+                "description": "Percentage"
+              },
+              {
+                "value": "Count",
+                "description": "Value count"
+              },
+              {
+                "value": "Seconds",
+                "description": "Seconds"
+              },
+              {
+                "value": "Milliseconds",
+                "description": "Milliseconds"
+              },
+              {
+                "value": "Bytes",
+                "description": "Bytes"
+              },
+              {
+                "value": "BytesPerSecond",
+                "description": "Bytes per second"
+              },
+              {
+                "value": "CountPerSecond",
+                "description": "Count per second"
+              }
+            ]
           }
         }
       }
@@ -2020,7 +2138,29 @@
           "type": "string",
           "x-ms-enum": {
             "name": "TimeGrain",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PT5S",
+                "description": "5 seconds"
+              },
+              {
+                "value": "PT10S",
+                "description": "10 seconds"
+              },
+              {
+                "value": "PT1M",
+                "description": "1 minute"
+              },
+              {
+                "value": "PT5M",
+                "description": "5 minutes"
+              },
+              {
+                "value": "PT1H",
+                "description": "1 hour"
+              }
+            ]
           }
         }
       }
@@ -2063,7 +2203,45 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AggregationType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Average",
+                "description": "Average value"
+              },
+              {
+                "value": "Count",
+                "description": "Total count"
+              },
+              {
+                "value": "Minimum",
+                "description": "Lowest value in the given interval"
+              },
+              {
+                "value": "Maximum",
+                "description": "Largest value, in the given interval"
+              },
+              {
+                "value": "None",
+                "description": "Aggregation will be average in this case"
+              },
+              {
+                "value": "Total",
+                "description": "Total sum"
+              },
+              {
+                "value": "Percentile90",
+                "description": "90th percentile"
+              },
+              {
+                "value": "Percentile95",
+                "description": "95th percentile"
+              },
+              {
+                "value": "Percentile99",
+                "description": "99th percentile"
+              }
+            ]
           }
         },
         "supportedAggregationTypes": {
@@ -2088,7 +2266,41 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MetricUnit",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "No unit specified"
+              },
+              {
+                "value": "Percent",
+                "description": "Percentage"
+              },
+              {
+                "value": "Count",
+                "description": "Value count"
+              },
+              {
+                "value": "Seconds",
+                "description": "Seconds"
+              },
+              {
+                "value": "Milliseconds",
+                "description": "Milliseconds"
+              },
+              {
+                "value": "Bytes",
+                "description": "Bytes"
+              },
+              {
+                "value": "BytesPerSecond",
+                "description": "Bytes per second"
+              },
+              {
+                "value": "CountPerSecond",
+                "description": "Count per second"
+              }
+            ]
           }
         },
         "metricAvailabilities": {
@@ -2267,7 +2479,29 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PFMetrics",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "response_time_ms",
+                "description": "Pass fail criteria for response time metric"
+              },
+              {
+                "value": "latency",
+                "description": "Pass fail criteria for response time metric"
+              },
+              {
+                "value": "error",
+                "description": "Pass fail criteria for error metric"
+              },
+              {
+                "value": "requests",
+                "description": "Pass fail criteria for total requests"
+              },
+              {
+                "value": "requests_per_sec",
+                "description": "Pass fail criteria for request rate."
+              }
+            ]
           }
         },
         "aggregate": {
@@ -2286,7 +2520,45 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PFAgFunc",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "count",
+                "description": "Criteria applies for count value"
+              },
+              {
+                "value": "percentage",
+                "description": "Criteria applies for given percentage value"
+              },
+              {
+                "value": "avg",
+                "description": "Criteria applies for avg value"
+              },
+              {
+                "value": "p50",
+                "description": "Criteria applies for 50th percentile value"
+              },
+              {
+                "value": "p90",
+                "description": "Criteria applies for 90th percentile value"
+              },
+              {
+                "value": "p95",
+                "description": "Criteria applies for 95th percentile value"
+              },
+              {
+                "value": "p99",
+                "description": "Criteria applies for 99th percentile value"
+              },
+              {
+                "value": "min",
+                "description": "Criteria applies for minimum value"
+              },
+              {
+                "value": "max",
+                "description": "Criteria applies for maximum value"
+              }
+            ]
           }
         },
         "condition": {
@@ -2311,7 +2583,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PFAction",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "stop",
+                "description": "Test run will stop if pass fail criteria metric is not passed."
+              },
+              {
+                "value": "continue",
+                "description": "Test will continue to run even if pass fail metric criteria metric gets failed"
+              }
+            ]
           }
         },
         "actualValue": {
@@ -2331,7 +2613,21 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "PFResult",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "passed",
+                "description": "Given pass fail criteria metric has passed."
+              },
+              {
+                "value": "undetermined",
+                "description": "Given pass fail criteria metric couldn't determine."
+              },
+              {
+                "value": "failed",
+                "description": "Given pass fail criteria metric has failed."
+              }
+            ]
           }
         }
       }
@@ -2418,7 +2714,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SecretType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AKV_SECRET_URI",
+                "description": "If the secret is stored in an Azure Key Vault"
+              },
+              {
+                "value": "SECRET_VALUE",
+                "description": "If the Plain text secret value provided"
+              }
+            ]
           }
         }
       }
@@ -2469,7 +2775,7 @@
           "$ref": "#/definitions/PassFailCriteria"
         },
         "secrets": {
-          "description": "Secrets can be stored in an Azure Key Vault or any other secret store.",
+          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SecretMetadata"
@@ -2636,7 +2942,21 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "PFTestResult",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PASSED",
+                "description": "Passfail criteria has passed."
+              },
+              {
+                "value": "NOT_APPLICABLE",
+                "description": "Passfail criteria is not applicable."
+              },
+              {
+                "value": "FAILED",
+                "description": "Pass fail criteria has failed."
+              }
+            ]
           }
         },
         "testRunId": {
@@ -2685,7 +3005,73 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "Status",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ACCEPTED",
+                "description": "Test run request is accepted"
+              },
+              {
+                "value": "NOTSTARTED",
+                "description": "Test run is not yet started."
+              },
+              {
+                "value": "PROVISIONING",
+                "description": "Test run is getting provision"
+              },
+              {
+                "value": "PROVISIONED",
+                "description": "Test run is provisioned"
+              },
+              {
+                "value": "CONFIGURING",
+                "description": "Test run is getting configure"
+              },
+              {
+                "value": "CONFIGURED",
+                "description": "Test run configuration is done"
+              },
+              {
+                "value": "EXECUTING",
+                "description": "Test run has started executing"
+              },
+              {
+                "value": "EXECUTED",
+                "description": "Test run has exceuted"
+              },
+              {
+                "value": "DEPROVISIONING",
+                "description": "Test run is getting deprovision"
+              },
+              {
+                "value": "DEPROVISIONED",
+                "description": "Test run request is deprovisioned"
+              },
+              {
+                "value": "DONE",
+                "description": "Test run request is finished"
+              },
+              {
+                "value": "CANCELLING",
+                "description": "Test run request is getting cancelled"
+              },
+              {
+                "value": "CANCELLED",
+                "description": "Test run request is cancelled"
+              },
+              {
+                "value": "FAILED",
+                "description": "Test run request is failed"
+              },
+              {
+                "value": "VALIDATION_SUCCESS",
+                "description": "Test run JMX file is validated"
+              },
+              {
+                "value": "VALIDATION_FAILURE",
+                "description": "Test run JMX file validation is failed"
+              }
+            ]
           }
         },
         "startDateTime": {
@@ -2925,7 +3311,7 @@
     "oauth2": {
       "type": "oauth2",
       "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
         "https://cnt-prod.loadtesting.azure.com/.default": "OAuth2 scope for Azure Load Test Service"
       },
