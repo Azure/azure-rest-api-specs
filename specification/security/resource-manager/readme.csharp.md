@@ -13,10 +13,10 @@ csharp:
   clear-output-folder: true
 
   directive:
-    - from: securityContacts.json
-        where: $.definitions
-        transform: >
-        $.SecurityContactProperties.properties.alertNotifications.properties.state['x-ms-enum']['name'] = 'stateEnum';
+  - from: securityContacts.json
+    where: $.definitions.SecurityContactProperties.properties.alertNotifications.properties.state
+    transform: > 
+        $['x-ms-enum']['name'] = 'stateEnum';
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)
@@ -24,10 +24,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management.SecurityCenter/src/Generated
 
   directive:
-    - from: securityContacts.json
-        where: $.definitions
-        transform: >
-        $.SecurityContactProperties.properties.alertNotifications.properties.state['x-ms-enum']['name'] = 'stateEnum';
+  - from: securityContacts.json
+    where: $.definitions.SecurityContactProperties.properties.alertNotifications.properties.state
+    transform: > 
+        $['x-ms-enum']['name'] = 'stateEnum';
 ```
 
 ## Batch settings
