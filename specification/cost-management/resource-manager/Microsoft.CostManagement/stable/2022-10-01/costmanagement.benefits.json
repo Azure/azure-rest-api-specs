@@ -162,7 +162,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/grainParameter"
@@ -215,7 +215,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/billingProfileIdParameter"
@@ -927,14 +927,6 @@
       "name": "$filter",
       "in": "query",
       "description": "Can be used to filter benefitRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Shared'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last60Days'; properties/term with allowed values ['P1Y', 'P3Y'] and default value 'P3Y'; kind with default value 'SavingsPlan'; properties/armSkuName with allowed values ['Compute', 'SQL'] - if mentioned kind SavingsPlan is applied implicitly; properties/subscriptionId; properties/resourceGroup",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "billingAccountIdParameter": {
-      "description": "Billing account ID",
-      "in": "path",
-      "name": "billingAccountId",
-      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
