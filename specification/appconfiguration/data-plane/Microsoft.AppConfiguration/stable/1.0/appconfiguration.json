@@ -1218,10 +1218,6 @@
       "description": "Used to select what fields are present in the returned resource(s).",
       "type": "array",
       "items": {
-        "x-ms-enum": {
-          "name": "SettingFields",
-          "modelAsString": true
-        },
         "type": "string",
         "enum": [
           "key",
@@ -1233,9 +1229,10 @@
           "locked",
           "etag"
         ],
-        "x-ms-parameter-location": "method",
-        "collectionFormat": "csv"
-      }
+        "x-ms-client-name": "SettingFields"
+      },
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
     },
     "SelectName": {
         "name": "$Select",
@@ -1243,14 +1240,11 @@
         "description": "Used to select what fields are present in the returned resource(s).",
         "type": "array",
         "items": {
-          "x-ms-enum": {
-            "name": "LabelField",
-            "modelAsString": true
-          },
           "type": "string",
           "enum": [
             "name"
-          ]
+          ],
+          "x-ms-client-name": "LabelField"
         },
         "x-ms-parameter-location": "method",
         "collectionFormat": "csv"
