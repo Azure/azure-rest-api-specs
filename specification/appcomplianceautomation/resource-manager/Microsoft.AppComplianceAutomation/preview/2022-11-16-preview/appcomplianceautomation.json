@@ -34,52 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "AppComplianceAutomation"
-        ],
-        "description": "Query the ongoing operation status.",
-        "operationId": "OperationResults_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "202": {
-            "description": "Accepted. The request is still running."
-          },
-          "204": {
-            "description": "No Content. For Delete operation results."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "OperationResults_Get": {
-            "$ref": "./examples/OperationResults_Get.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.AppComplianceAutomation/operations": {
       "get": {
         "tags": [
@@ -124,7 +78,7 @@
         "tags": [
           "AppComplianceAutomation"
         ],
-        "description": "Get the AppComplianceAutomation report list.",
+        "description": "Get the AppComplianceAutomation report list for the tenant.",
         "operationId": "Reports_List",
         "parameters": [
           {
@@ -294,6 +248,9 @@
               "$ref": "#/definitions/ReportResource"
             }
           },
+          "202": {
+            "description": "Long running operation support."
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -327,7 +284,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response indicates the resource is already deleted."
+            "description": "Success. The response indicates the resource has been deleted."
           },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
@@ -464,13 +421,13 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "#/parameters/ReportCreatorTenantIdParameter"
-          },
-          {
-            "$ref": "#/parameters/DownloadTypeParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferGuidParameter"
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the query operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapshotDownloadRequest"
+            }
           }
         ],
         "responses": {
@@ -516,17 +473,17 @@
       "description": "The overview of the compliance result for one report.",
       "type": "object",
       "properties": {
-        "passed": {
+        "passedCount": {
           "format": "int32",
           "type": "integer",
           "description": "The count of all passed full automation control."
         },
-        "failed": {
+        "failedCount": {
           "format": "int32",
           "type": "integer",
           "description": "The count of all failed full automation control."
         },
-        "manual": {
+        "manualCount": {
           "format": "int32",
           "type": "integer",
           "description": "The count of all manual control."
@@ -835,9 +792,17 @@
           "readOnly": true
         },
         "isPass": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
           "readOnly": true,
-          "description": "Indicates whether all the resource(s) are compliant."
+          "description": "Indicates whether all the resource(s) are compliant.",
+          "x-ms-enum": {
+            "name": "IsPass",
+            "modelAsString": true
+          }
         },
         "policyId": {
           "description": "The policy id mapping to this assessment.",
@@ -1026,6 +991,40 @@
         }
       }
     },
+    "SnapshotDownloadRequest": {
+      "type": "object",
+      "description": "Snapshot's download request.",
+      "required": [
+        "downloadType"
+      ],
+      "properties": {
+        "reportCreatorTenantId": {
+          "description": "Tenant id.",
+          "type": "string"
+        },
+        "downloadType": {
+          "description": "Indicates the download type.",
+          "x-ms-parameter-location": "method",
+          "enum": [
+            "ComplianceReport",
+            "CompliancePdfReport",
+            "ComplianceDetailedPdfReport",
+            "ResourceList"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DownloadType",
+            "modelAsString": true
+          }
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "The offerGuid which mapping to the reports.",
+          "x-ms-parameter-location": "method",
+          "minLength": 1
+        }
+      }
+    },
     "SnapshotProperties": {
       "type": "object",
       "description": "Snapshot's properties.",
@@ -1180,7 +1179,8 @@
             "sasUri": {
               "description": "uri of compliance pdf report",
               "type": "string",
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-secret": true
             }
           }
         },

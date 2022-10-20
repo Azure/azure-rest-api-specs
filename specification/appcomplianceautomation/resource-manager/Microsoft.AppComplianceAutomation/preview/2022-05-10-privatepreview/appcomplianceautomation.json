@@ -34,52 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "AppComplianceAutomation"
-        ],
-        "description": "Query the ongoing operation status.",
-        "operationId": "OperationResults_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "202": {
-            "description": "Accepted. The request is still running."
-          },
-          "204": {
-            "description": "No Content. For Delete operation results."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "OperationResults_Get": {
-            "$ref": "./examples/OperationResults_Get.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.AppComplianceAutomation/operations": {
       "get": {
         "tags": [
