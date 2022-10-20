@@ -2442,6 +2442,66 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/rpUnbilledPrefixes": {
+      "get": {
+        "tags": [
+          "RpUnbilledPrefixes"
+        ],
+        "description": "Lists all of the RP unbilled prefixes for the specified peering",
+        "operationId": "RpUnbilledPrefixes_List",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The Azure resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The peering name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "consolidate",
+            "in": "query",
+            "description": "Flag to enable consolidation prefixes",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RpUnbilledPrefixListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all the RP unbilled prefixes advertised at a particular peering location": {
+            "$ref": "./examples/ListRpUnbilledPrefixes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -3724,18 +3784,18 @@
       }
     },
     "ConnectionMonitorTestListResult": {
-      "description": "The paginated list of [T].",
+      "description": "The paginated list of Connection Monitor Tests.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of [T].",
+          "description": "The list of Connection Monitor Tests.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTest"
           }
         },
         "nextLink": {
-          "description": "The link to fetch the next page of [T].",
+          "description": "The link to fetch the next page of Connection Monitor Tests.",
           "type": "string"
         }
       }
@@ -4134,6 +4194,50 @@
         "nextLink": {
           "description": "The link to fetch the next page of peering services.",
           "type": "string"
+        }
+      }
+    },
+    "RpUnbilledPrefixListResult": {
+      "description": "The paginated list of RP unbilled prefixes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of RP unbilled prefixes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RpUnbilledPrefix"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of RP unbilled prefixes.",
+          "type": "string"
+        }
+      }
+    },
+    "RpUnbilledPrefix": {
+      "description": "The Routing Preference unbilled prefix",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "prefix": {
+          "description": "The prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureRegion": {
+          "description": "The Azure region.",
+          "type": "string",
+          "readOnly": true
+        },
+        "peerAsn": {
+          "format": "int32",
+          "description": "The peer ASN.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
