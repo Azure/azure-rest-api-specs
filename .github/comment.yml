@@ -18,6 +18,11 @@
 
 - rule:
     type: label
+    label: SuppressionReviewRequired
+    onLabeledComments: "Hi @${PRAuthor}, one or multiple validation error/warning suppression(s) is detected in your PR. Please follow the [Swagger-Suppression-Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) to get approval."
+
+- rule:
+    type: label
     repoAllowList:
       - Azure/azure-rest-api-specs-pr
     variables:
