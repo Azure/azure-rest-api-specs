@@ -50,6 +50,7 @@ input-file:
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsCertificates.json
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-06-01-preview/AvailableWorkloadProfiles.json
   - Microsoft.App/preview/2022-06-01-preview/BillingMeters.json
 directive:
 - suppress: R3018
