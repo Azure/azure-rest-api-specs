@@ -50,6 +50,7 @@
   ],
   "definitions": {
     "Point": {
+      "description": "A point within the facility.",
       "type": "object",
       "properties": {
         "latitude": {
@@ -130,9 +131,16 @@
       "description": "The object returned by this Wayfinding Path request.",
       "type": "object",
       "properties": {
-        "noResultsExplanation": {
+        "noResultExplanation": {
           "type": "string",
-          "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why."
+          "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why.",
+          "enum": [
+            "NoExplanation"
+          ],
+          "x-ms_enum": {
+            "name": "noResultExplanation",
+            "modelAsString": true
+          }
         },
         "paths": {
           "description": "An array of wayfinding path results.  An empty array will be returned if no results were found.",
@@ -207,17 +215,25 @@
     },
     "AvoidFeatures": {
       "name": "avoidFeatures",
-      "description": "To avoid certain types of connectors in the resulting path. Valid features that can be avoided are: 'elevators' and 'stairs'. Multiple comma separated values can be selected.",
+      "description": "To avoid certain types of connectors in the resulting path. Multiple comma separated values can be selected.",
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": [
+          "stairs",
+          "elevators"
+        ],
+        "x-ms_enum": {
+          "name": "avoidFeatures",
+          "modelAsString": true
+        }
       },
       "in": "query",
       "x-ms-parameter-location": "client"
     },
     "MinWidth": {
       "name": "minWidth",
-      "description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a width of 1.0, the searched path will avoid openings less than 1 meters wide.",
+      "description": "The minimum radius (in meters) of openings in the resulting path. For example, if you specified a minimum radius width of 0.5, the searched path will avoid openings less than 1 meters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by the same distance.",
       "type": "number",
       "in": "query",
       "default": "0.0",
