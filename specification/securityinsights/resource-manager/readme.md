@@ -53,6 +53,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/SecurityMLAnalyticsSettings.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/Settings.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2022-11-01-preview/Recommendations.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/ThreatIntelligence.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/Watchlists.json
   - Microsoft.SecurityInsights/preview/2022-11-01-preview/dataConnectors.json
