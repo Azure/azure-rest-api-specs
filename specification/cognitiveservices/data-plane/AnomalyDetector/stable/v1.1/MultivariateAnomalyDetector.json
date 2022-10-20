@@ -25,14 +25,11 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
+    "hostTemplate": "{Endpoint}/anomalydetector",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
-      },
-      {
-        "$ref": "#/parameters/ApiVersion"
       }
     ]
   },
@@ -40,7 +37,7 @@
     "https"
   ],
   "paths": {
-    "/multivariate/detect-batch/{resultId}": {
+    "/{ApiVersion}/multivariate/detect-batch/{resultId}": {
       "get": {
         "responses": {
           "200": {
@@ -67,6 +64,9 @@
         "operationId": "GetBatchDetectionResult",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "name": "resultId",
             "in": "path",
             "required": true,
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/multivariate/models": {
+    "/{ApiVersion}/multivariate/models": {
       "post": {
         "responses": {
           "201": {
@@ -114,6 +114,9 @@
         "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
         "operationId": "CreateMultivariateModel",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
             "name": "body",
             "required": true,
@@ -156,6 +159,9 @@
         "operationId": "ListMultivariateModel",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "type": "integer",
             "default": 0,
             "required": false,
@@ -182,7 +188,7 @@
         }
       }
     },
-    "/multivariate/models/{modelId}": {
+    "/{ApiVersion}/multivariate/models/{modelId}": {
       "delete": {
         "responses": {
           "204": {
@@ -205,6 +211,9 @@
         "description": "Delete an existing multivariate model according to the modelId",
         "operationId": "DeleteMultivariateModel",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
             "name": "modelId",
             "in": "path",
@@ -246,6 +255,9 @@
         "operationId": "GetMultivariateModel",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
@@ -261,7 +273,7 @@
         }
       }
     },
-    "/multivariate/models/{modelId}:detect-batch": {
+    "/{ApiVersion}/multivariate/models/{modelId}:detect-batch": {
       "post": {
         "responses": {
           "202": {
@@ -298,6 +310,9 @@
         "operationId": "BatchDetectAnomaly",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
@@ -323,7 +338,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/multivariate/models/{modelId}:detect-last": {
+    "/{ApiVersion}/multivariate/models/{modelId}:detect-last": {
       "post": {
         "responses": {
           "200": {
@@ -349,6 +364,9 @@
         "description": "Submit multivariate anomaly detection task with the modelId of trained model and inference data, and the inference data should be put into request body in a JSON format. The request will complete synchronously and return the detection immediately in the response body.",
         "operationId": "LastDetectAnomaly",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
             "name": "modelId",
             "in": "path",
@@ -1211,6 +1229,7 @@
       "name": "ApiVersion",
       "description": "Anomaly Detector API version (for example, v1.1).",
       "x-ms-parameter-location": "client",
+      "x-ms-api-version": true,
       "required": true,
       "type": "string",
       "in": "path"
