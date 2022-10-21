@@ -1594,7 +1594,27 @@
         {
           "$ref": "#/definitions/AuthInfoBase"
         }
-      ]
+      ],
+      "properties": {
+        "permissions": {
+          "description": "Permissions of the accessKey. `Read` and `Write` are for Azure Cosmos DB and Azure App Configuration, `Listen`, `Send` and `Manage` are for Azure Event Hub and Azure Service Bus.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Read",
+              "Write",
+              "Listen",
+              "Send",
+              "Manage"
+            ],
+            "x-ms-enum": {
+              "name": "accessKeyPermissions",
+              "modelAsString": true
+            }
+          }
+        }
+      }
     },
     "SecretAuthInfo": {
       "x-ms-discriminator-value": "secret",
