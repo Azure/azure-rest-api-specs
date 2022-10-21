@@ -16,14 +16,14 @@ enum StringIndexTypeValues {
 model StringIndexType is string;
 
 alias AnalysisContentTypes =
-| "application/json"
-| "application/octet-stream"
-| "application/pdf"
-| "image/jpeg"
-| "image/png"
-| "image/tiff"
-| "image/bmp"
-| "image/heif";
+| "application/json";
+// | "application/octet-stream"
+// | "application/pdf"
+// | "image/jpeg"
+// | "image/png"
+// | "image/tiff"
+// | "image/bmp"
+// | "image/heif";
 
 @doc("Document analysis parameters.")
 model AnalyzeDocumentRequest {
@@ -239,8 +239,7 @@ model AddressValue {
 
 @doc("TODO")
 model DocumentField {
-    @doc("Data type of the field value.")
-    type: DocumentFieldType,
+    ...DocumentFieldTypeModel,
     valueString?: string,
     // TODO check format
     @format("date")
@@ -250,7 +249,7 @@ model DocumentField {
     valuePhoneNumber?: string,
     valueNumber?: float32,
     valueInteger?: int64,
-    valueSelectionMark?: DocumentSelectionMarkState,
+    // valueSelectionMark?: DocumentSelectionMarkState,
     valueSignature?: DocumentSignatureType,
     valueCountryRegion?: string,
     valueArray?: DocumentField[],
@@ -372,14 +371,14 @@ model DocumentWord {
     polygon?: BoundingPolygon,
 }
 
-enum DocumentSelectionMarkStateValues {
-    selected,
-    unselected,
-}
+// enum DocumentSelectionMarkStateValues {
+//     selected,
+//     unselected,
+// }
 
-@doc("State of the selection mark.")
-@knownValues(DocumentSelectionMarkStateValues)
-model DocumentSelectionMarkState is string;
+// @doc("State of the selection mark.")
+// @knownValues(DocumentSelectionMarkStateValues)
+// model DocumentSelectionMarkState is string;
 
 enum DocumentTableCellKindValues {
     content,
@@ -396,8 +395,8 @@ model DocumentTableCellKind is string;
 
 @doc("A selection mark object representing check boxes, radio buttons, and other elements indicating a selection.")
 model DocumentSelectionMark {
-    @doc("State of the selection mark.")
-    state: DocumentSelectionMarkState,
+    // @doc("State of the selection mark.")
+    // state: DocumentSelectionMarkState,
     @doc("Bounding polygon of the selection mark.")
     polygon?: BoundingPolygon,
     @doc("Location of the selection mark in the reading order concatenated content.")
@@ -437,8 +436,8 @@ model DocumentPage {
     ...Spans,
     @doc("Extracted words from the page.")
     words?: DocumentWord[],
-    @doc("Extracted selection marks from the page.")
-    selectionMarks?: DocumentSelectionMark[],
+    // @doc("Extracted selection marks from the page.")
+    // selectionMarks?: DocumentSelectionMark[],
     @doc("Extracted lines from the page, potentially containing both textual and visual elements.")
     lines?: DocumentLine[],
 }
@@ -486,9 +485,13 @@ enum DocumentBuildModeValues {
 @knownValues(DocumentBuildModeValues)
 model DocumentBuildMode is string;
 
+model DocumentFieldTypeModel {
+    type: DocumentFieldType
+}
+
 @doc("Description of the field semantic schema using a JSON Schema style syntax.")
 model DocumentFieldSchema {
-    type: DocumentFieldType,
+    ...DocumentFieldTypeModel,
     @doc("Field description.")
     description?: string,
     @doc("Example field content.")
