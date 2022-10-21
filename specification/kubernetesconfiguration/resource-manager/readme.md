@@ -28,7 +28,7 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-2022-11
 ```
 
 ---

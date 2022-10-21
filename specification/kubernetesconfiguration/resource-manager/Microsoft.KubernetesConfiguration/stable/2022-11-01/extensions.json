@@ -45,6 +45,9 @@
         "x-ms-examples": {
           "Create Extension": {
             "$ref": "./examples/CreateExtension.json"
+          },
+          "Create Extension with Plan": {
+            "$ref": "./examples/CreateExtensionWithPlan.json"
           }
         },
         "parameters": [
@@ -600,6 +603,12 @@
                   }
                 }
               }
+            },
+            "isSystemExtension": {
+              "readOnly": true,
+              "description": "Flag to note if this extension is a system extension",
+              "type": "boolean",
+              "default": false
             }
           }
         },
@@ -615,12 +624,6 @@
         "plan": {
           "description": "The plan information.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Plan"
-        },
-        "isSystemExtension": {
-          "readOnly": true,
-          "description": "Flag to note if this extension is a system extension",
-          "type": "boolean",
-          "default": false
         }
       },
       "allOf": [
