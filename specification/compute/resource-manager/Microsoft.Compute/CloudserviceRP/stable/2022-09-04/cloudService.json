@@ -2050,7 +2050,7 @@
         }
       }
     },
-    "LoadBalancerFrontendIPConfigurationProperties": {
+    "LoadBalancerFrontendIpConfigurationProperties": {
       "description": "Describes a cloud service IP Configuration",
       "type": "object",
       "properties": {
@@ -2068,7 +2068,7 @@
         }
       }
     },
-    "LoadBalancerFrontendIPConfiguration": {
+    "LoadBalancerFrontendIpConfiguration": {
       "description": "Specifies the frontend IP to be used for the load balancer. Only IPv4 frontend IP address is supported. Each load balancer configuration must have exactly one frontend IP configuration.",
       "type": "object",
       "properties": {
@@ -2077,7 +2077,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationProperties",
+          "$ref": "#/definitions/LoadBalancerFrontendIpConfigurationProperties",
           "description": "Properties of load balancer frontend ip configuration."
         }
       },
@@ -2090,11 +2090,11 @@
       "description": "Describes the properties of the load balancer configuration.",
       "type": "object",
       "properties": {
-        "frontendIPConfigurations": {
+        "frontendIpConfigurations": {
           "description": "Specifies the frontend IP to be used for the load balancer. Only IPv4 frontend IP address is supported. Each load balancer configuration must have exactly one frontend IP configuration.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LoadBalancerFrontendIPConfiguration"
+            "$ref": "#/definitions/LoadBalancerFrontendIpConfiguration"
           },
           "x-ms-identifiers": [
             "name"
@@ -2102,7 +2102,7 @@
         }
       },
       "required": [
-        "frontendIPConfigurations"
+        "frontendIpConfigurations"
       ]
     },
     "LoadBalancerConfiguration": {
@@ -2337,6 +2337,13 @@
         },
         "systemData": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SystemData"
+        },
+        "zones": {
+          "description": "List of logical availability zone of the resource. List should contain only 1 zone where cloud service should be provisioned. This field is optional.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-azure-resource": true,
