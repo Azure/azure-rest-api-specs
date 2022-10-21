@@ -32,7 +32,7 @@
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
         "description": "This operation generates a model with an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "DetectEntireSeries",
+        "operationId": "DetectUnivariateEntireSeries",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -84,7 +84,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "This operation generates a model using the points that you sent into the API, and based on all data to determine whether the last point is anomalous.",
-        "operationId": "DetectLastPoint",
+        "operationId": "DetectUnivariateLastPoint",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -136,7 +136,7 @@
       "post": {
         "summary": "Detect change point for the entire series",
         "description": "Evaluate change point score of every series point",
-        "operationId": "DetectChangePoint",
+        "operationId": "DetectUnivariateChangePoint",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
