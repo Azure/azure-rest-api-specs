@@ -40,7 +40,12 @@ These settings apply only when `--tag=package-2022-11` is specified on the comma
 ```yaml $(tag) == 'package-2022-11'
 input-file:
   - Microsoft.CostManagement/stable/2022-11-01/common-types.json
-  - Microsoft.CostManagement/stable/2022-11-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2022-11-01/benefitAsyncApis.json
+  - Microsoft.CostManagement/stable/2022-05-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2020-08-01-preview/costmanagement.insights.json
 ```
 ### Tag: package-preview-2022-10-05
 
