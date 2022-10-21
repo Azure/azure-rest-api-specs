@@ -77,31 +77,22 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "DeleteMode": {
-      "name": "deleteMode",
-      "description": "Mode of deletion. Default is `soft`",
+    "OperationIdHeader": {
+      "name": "Operation-Id",
+      "description": "The caller provided operationId, in GUID format.",
       "type": "string",
-      "in": "query",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "in": "header",
       "required": false,
-      "enum": [
-        "soft",
-        "hard"
-      ],
-      "default": "soft",
-      "x-ms-enum": {
-        "name": "DeleteMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "soft",
-            "description": "Delete the data registry without deleting the underlying content stored in customer's storage account."
-          },
-          {
-            "value": "hard",
-            "description": "Delete the data registry as well as the underlying content stored in customer's storage account."
-          }
-        ]
-      },
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdQuery": {
+      "name": "operationId",
+      "description": "The ID to query the status for the data register request.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "in": "path",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
@@ -214,6 +205,9 @@
             "$ref": "#/parameters/UserDataId"
           },
           {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
             "name": "dataRegistry",
             "in": "body",
             "description": "The data registry to be registered.",
@@ -226,68 +220,32 @@
         "responses": {
           "200": {
             "description": "Resource replacing: The request has been accepted for processing.",
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the status monitor for the operation."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/DataRegistry"
             }
           },
           "201": {
             "description": "Resource creating: The request has been accepted for processing.",
-            "schema": {
-              "$ref": "#/definitions/DataRegistry"
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
-            },
             "headers": {
-              "x-ms-error-code": {
+              "Operation-Id": {
                 "type": "string",
-                "description": "Error code for specific error that occurred."
+                "description": "ID of the status monitor for the operation."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
               }
             },
-            "x-ms-error-response": true
-          }
-        }
-      },
-      "patch": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThe Data Registry Update API allows the caller to update a previously registered data registry.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. Geofences are registered using the [Register or Replace API](https://docs.microsoft.com/rest/api/maps/data-registry/register-or-replace), for use in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\nThis API is a synchronous API but may eventually transition into `Failed` state even if the API returns `200 OK`. You can use [Get Data Registry API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-data-registry) to get the updated status.\n\n## Submit Patch Request\n\nTo update a data registry you will use a `PATCH` request. The request body will contain an object representing a patch to the data registry, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396). The path will contain the `udid` of the data registry to be update.\n\nFor example, to just change the connection object of a data registry that were previously registered without changing other properties of the data registry, set the `udid` in the query parameter and the new connection object in the body.",
-        "operationId": "DataRegistries_Update",
-        "x-ms-examples": {
-          "Update an existing udid with new blob path": {
-            "$ref": "./examples/DataRegistries_UpdateBlobPath.json"
-          },
-          "Update an existing udid with new system assigned managed identity": {
-            "$ref": "./examples/DataRegistries_UpdateMSI.json"
-          }
-        },
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/UserDataId"
-          },
-          {
-            "name": "dataRegistryPatch",
-            "in": "body",
-            "description": "The object for updating a given data registry",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataRegistryPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource updating: It is still possible that the data registry eventually transitions to `Failed` state. Please check [DataRegistry Get API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get) for the updated status",
             "schema": {
               "$ref": "#/definitions/DataRegistry"
             }
@@ -327,9 +285,6 @@
           },
           {
             "$ref": "#/parameters/UserDataId"
-          },
-          {
-            "$ref": "#/parameters/DeleteMode"
           }
         ],
         "responses": {
@@ -404,6 +359,58 @@
           }
         }
       }
+    },
+    "/dataRegistries/operations/{operationId}": {
+      "get": {
+        "description": "The endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis path will be obtained from a call to [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). While in progress, a HTTP `200 OK` response will be returned with `Retry-After` header - followed by a HTTP `200 OK` with no extra header once completed.",
+        "operationId": "DataRegistries_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/DataRegistries_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which is failed": {
+            "$ref": "./examples/DataRegistries_GetOperationFailed.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/DataRegistries_GetOperationCompleted.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the long running operation",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "description": "Recommended minimum number of seconds to wait before next check."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -454,22 +461,6 @@
         "dataFormat",
         "connection"
       ]
-    },
-    "DataRegistryPatch": {
-      "description": "An object for patching a given data registry.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description to be given to the data registry. The max length is 1024 characters.",
-          "type": "string"
-        },
-        "dataFormat": {
-          "$ref": "#/definitions/DataFormat"
-        },
-        "connection": {
-          "$ref": "#/definitions/ConnectionPatch"
-        }
-      }
     },
     "Connection": {
       "description": "A Connection object representing how Azure Maps Service accesses customer's resources and the scope of it.",
@@ -624,6 +615,23 @@
             "description": "The request has successfully completed."
           }
         ]
+      }
+    },
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The operationId",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus"
+        },
+        "error": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
+        }
       }
     }
   }
