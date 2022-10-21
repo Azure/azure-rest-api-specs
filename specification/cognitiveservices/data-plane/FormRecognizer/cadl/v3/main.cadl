@@ -3,8 +3,15 @@ import "./routes.cadl";
 using Cadl.Http;
 
 @doc("Extracts content, layout, and structured data from documents.")
-@service({title: "Form Recognizer Client", version: "2022-08-31"})
-@server("https://{endpoint}/formrecognizer", "Regional endpoint", {
+@useAuth(BearerAuth | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@service(
+  {
+    title: "Form Recognizer Client",
+    version: "2022-08-31",
+  },
+)
+@server("https://{endpoint}/formrecognizer", "Regional endpoint",
+{
   @doc("Form Recognizer resource endpoint")
   endpoint: string,
 })
