@@ -40,12 +40,13 @@ tag: package-preview-2022-05
 ```
 
 
-### Tag: package-preview-2022-05
+### Tag: package-2022-05-01-privatepreview
 
-These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+These settings apply only when `--tag=package-2022-05-01-privatepreview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+```yaml $(tag) == 'package-2022-05-01-privatepreview'
 input-file:
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Databases.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/PrivateDnsZone.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/postgresql.json
