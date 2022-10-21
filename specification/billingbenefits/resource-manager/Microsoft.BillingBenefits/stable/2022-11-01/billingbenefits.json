@@ -2,19 +2,24 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-11-01",
-    "title": "billingbenefits",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "billingbenefitsClient"
-    }
+    "title": "Benefits RP",
+    "description": "Azure Benefits RP let users create and manage benefits like savings plan."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -29,33 +34,473 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/operations": {
-      "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}": {
+      "put": {
+        "description": "Create a savings plan.",
+        "operationId": "SavingsPlanOrderAlias_Create",
+        "tags": [
+          "Savings plan order aliases"
+        ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+          "SavingsPlanOrderAliasCreate": {
+            "$ref": "./examples/SavingsPlanOrderAliasCreate.json"
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SavingsPlanOrderAliasNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanOrderAliasRequestParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "The request is being processed.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a savings plan.",
+        "operationId": "SavingsPlanOrderAlias_Get",
+        "tags": [
+          "Savings plan order aliases"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanOrderAliasGet": {
+            "$ref": "./examples/SavingsPlanOrderAliasGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderAliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}": {
+      "get": {
+        "description": "Get a savings plan order.",
+        "operationId": "SavingsPlanOrder_Get",
+        "tags": [
+          "Savings plan order"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanOrderGet": {
+            "$ref": "./examples/SavingsPlanOrderGet.json"
+          },
+          "SavingsPlanOrderWithExpandedPaymentsGet": {
+            "$ref": "./examples/SavingsPlanOrderExpandedGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/elevate": {
+      "post": {
+        "description": "Elevate as owner on savings plan order based on billing permissions.",
+        "operationId": "SavingsPlanOrder_Elevate",
+        "tags": [
+          "Savings plan order"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanOrderElevate": {
+            "$ref": "./examples/SavingsPlanOrderElevate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders": {
+      "get": {
+        "description": "List all Savings plan orders.",
+        "operationId": "SavingsPlanOrder_List",
+        "tags": [
+          "Savings plan order"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SavingsPlanOrderList": {
+            "$ref": "./examples/SavingsPlanOrderList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderModelList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans": {
+      "get": {
+        "description": "List savings plans in an order.",
+        "operationId": "SavingsPlansInOrder_List",
+        "tags": [
+          "Savings plan"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SavingsPlansInOrderList": {
+            "$ref": "./examples/SavingsPlansInOrderList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModelList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlans": {
+      "get": {
+        "description": "List savings plans.",
+        "operationId": "SavingsPlans_List",
+        "tags": [
+          "Savings plan"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SavingsPlansList": {
+            "$ref": "./examples/SavingsPlansList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModelList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}": {
+      "get": {
+        "description": "Get savings plan.",
+        "operationId": "SavingsPlan_Get",
+        "tags": [
+          "Savings plan"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanGet": {
+            "$ref": "./examples/SavingsPlanGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModel"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update savings plan.",
+        "operationId": "SavingsPlan_Update",
+        "tags": [
+          "Savings plan"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanUpdate": {
+            "$ref": "./examples/SavingsPlanUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanUpdateRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanModel"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/validate": {
+      "post": {
+        "description": "Validate savings plan patch.",
+        "operationId": "SavingsPlanUpdate_Validate",
+        "tags": [
+          "Savings plan"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanValidateUpdate": {
+            "$ref": "./examples/SavingsPlanValidateUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanUpdateValidateRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanValidateResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/validate": {
+      "post": {
+        "description": "Validate savings plan purchase.",
+        "operationId": "SavingsPlanPurchase_Validate",
+        "tags": [
+          "Savings plan"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanValidatePurchase": {
+            "$ref": "./examples/SavingsPlanValidatePurchase.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanPurchaseValidateRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanValidateResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/operations": {
+      "get": {
+        "summary": "Get operations.",
+        "description": "List all the operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Benefits operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "List all the operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -63,70 +508,665 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "Sku": {
+      "type": "object",
+      "description": "The SKU to be applied for this resource",
       "properties": {
-        "sampleProperty": {
+        "name": {
           "type": "string",
-          "description": "Sample property of type string"
+          "description": "Name of the SKU to be applied"
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "SavingsPlanOrderAliasModel": {
+      "type": "object",
+      "description": "Savings plan order alias",
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "sku": {
+          "description": "Savings plan SKU",
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "description": "Savings plan order alias properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavingsPlanOrderAliasProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "SystemData of Savings plan order alias.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SavingsPlanOrderAliasProperties": {
+      "type": "object",
+      "description": "Savings plan properties",
+      "properties": {
+        "displayName": {
+          "$ref": "#/definitions/DisplayName"
+        },
+        "savingsPlanOrderId": {
+          "type": "string",
+          "description": "Identifier of the savings plan created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "BillingScopeId": {
+      "type": "string",
+      "description": "Subscription that will be charged for purchasing SavingsPlan"
+    },
+    "BillingProfileId": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Fully-qualified identifier of the billing profile where the savings plan is applied. Present only for Field-led or Customer-led customers."
+    },
+    "CustomerId": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers."
+    },
+    "BillingAccountId": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "readOnly": true,
+      "enum": [
+        "PendingBilling",
+        "ConfirmedBilling",
+        "Creating",
+        "Failed",
+        "Created",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "BillingPlan": {
+      "type": "string",
+      "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.",
+      "enum": [
+        "P1M"
+      ],
+      "x-ms-enum": {
+        "name": "BillingPlan",
+        "modelAsString": true
+      }
+    },
+    "BenefitTerm": {
+      "type": "string",
+      "description": "Represent SavingsPlan term in ISO 8601 format.",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "SavingsPlanTerm",
+        "modelAsString": true
+      }
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "AppliedScopeType": {
+      "type": "string",
+      "description": "Type of the Applied Scope.",
+      "enum": [
+        "Single",
+        "Shared",
+        "ManagementGroup"
+      ],
+      "x-ms-enum": {
+        "name": "AppliedScopeType",
+        "modelAsString": true
+      }
+    },
+    "AppliedScopeProperties": {
+      "type": "object",
+      "description": "Properties specific to applied scope type. Not required if not applicable.",
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+        "tenantId": {
+          "$ref": "#/definitions/TenantId"
         },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
+        "managementGroupId": {
+          "$ref": "#/definitions/ManagementGroupId"
         },
-        "details": {
-          "description": "Internal error details.",
+        "subscriptionId": {
+          "$ref": "#/definitions/SubscriptionId"
+        },
+        "resourceGroupId": {
+          "$ref": "#/definitions/ResourceGroupId"
+        }
+      }
+    },
+    "TenantId": {
+      "type": "string",
+      "description": "Tenant ID where the savings plan should apply benefit."
+    },
+    "ManagementGroupId": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the management group where the benefit must be applied."
+    },
+    "SubscriptionId": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the subscription."
+    },
+    "ResourceGroupId": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the resource group."
+    },
+    "Commitment": {
+      "type": "object",
+      "description": "Commitment towards the benefit.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Price"
+        }
+      ],
+      "properties": {
+        "grain": {
+          "type": "string",
+          "description": "Commitment grain.",
+          "enum": [
+            "Hourly"
+          ],
+          "x-ms-enum": {
+            "name": "CommitmentGrain",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SavingsPlanId": {
+      "type": "string",
+      "description": "Identifier of the savings plan",
+      "readOnly": true
+    },
+    "ExpiryDate": {
+      "type": "string",
+      "description": "Provisioning state",
+      "readOnly": true,
+      "format": "date"
+    },
+    "SavingsPlanModelList": {
+      "type": "object",
+      "properties": {
+        "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
+            "$ref": "#/definitions/SavingsPlanModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "SavingsPlanModel": {
+      "type": "object",
+      "description": "Savings plan",
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "description": "Savings plan SKU",
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "description": "Savings plan properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavingsPlanModelProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "SystemData of Savings plan.",
           "readOnly": true
+        }
+      }
+    },
+    "SavingsPlanModelProperties": {
+      "type": "object",
+      "description": "Savings plan properties",
+      "properties": {
+        "displayName": {
+          "$ref": "#/definitions/DisplayName"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "billingProfileId": {
+          "$ref": "#/definitions/BillingProfileId"
+        },
+        "customerId": {
+          "$ref": "#/definitions/CustomerId"
+        },
+        "billingAccountId": {
+          "$ref": "#/definitions/BillingAccountId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "expiryDate": {
+          "$ref": "#/definitions/ExpiryDate"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        },
+        "effectiveDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the savings plan starts providing benefit from.",
+          "readOnly": true
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "SavingsPlanOrderModelList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanOrderModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "SavingsPlanOrderModel": {
+      "type": "object",
+      "description": "Savings plan order",
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "description": "Savings plan SKU",
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "description": "Savings plan order properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavingsPlanOrderModelProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "SystemData of Savings plan order.",
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlanOrderModelProperties": {
+      "type": "object",
+      "description": "Savings plan order properties",
+      "properties": {
+        "displayName": {
+          "$ref": "#/definitions/DisplayName"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "billingProfileId": {
+          "$ref": "#/definitions/BillingProfileId"
+        },
+        "customerId": {
+          "$ref": "#/definitions/CustomerId"
+        },
+        "billingAccountId": {
+          "$ref": "#/definitions/BillingAccountId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "expiryDate": {
+          "$ref": "#/definitions/ExpiryDate"
+        },
+        "planInformation": {
+          "$ref": "#/definitions/BillingPlanInformation"
+        },
+        "savingsPlans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanId"
+          }
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "SavingsPlanUpdateRequest": {
+      "type": "object",
+      "description": "Savings plan patch request",
+      "properties": {
+        "displayName": {
+          "$ref": "#/definitions/DisplayName"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 3-letter currency code for the currency used by this purchase record."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "BillingPlanInformation": {
+      "type": "object",
+      "description": "Information describing the type of billing plan for this savings plan.",
+      "properties": {
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount of money to be paid for the Order. Tax is not included."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the billing plan has started."
+        },
+        "nextPaymentDueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          }
+        }
+      }
+    },
+    "PaymentDetail": {
+      "type": "object",
+      "description": "Information about payment related to a savings plan order.",
+      "properties": {
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the payment needs to be done."
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the transaction is completed. Is null when it is scheduled."
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount in pricing currency. Tax not included."
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount charged in Billing currency. Tax not included. Is null for future payments"
+        },
+        "billingAccount": {
+          "type": "string",
+          "description": "Shows the Account that is charged for this payment."
+        },
+        "status": {
+          "$ref": "#/definitions/PaymentStatus"
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "PaymentStatus": {
+      "type": "string",
+      "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Scheduled",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "PaymentStatus",
+        "modelAsString": true
+      }
+    },
+    "ExtendedStatusInfo": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "Status code providing additional information."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message giving detailed information about the status code."
+        }
+      }
+    },
+    "SavingsPlanPurchaseValidateRequest": {
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "SavingsPlanUpdateValidateRequest": {
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanUpdateRequest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "SavingsPlanValidateResponse": {
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanValidResponseProperty"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
+        }
+      }
+    },
+    "SavingsPlanValidResponseProperty": {
+      "type": "object",
+      "description": "Benefit scope response property",
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Indicates if the provided input was valid"
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "Failure reason code if the provided input was invalid"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Failure reason if the provided input was invalid"
         }
       }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
+    "SavingsPlanOrderAliasNameParameter": {
+      "name": "savingsPlanOrderAliasName",
+      "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "description": "Name of the savings plan"
     },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
+    "SavingsPlanOrderAliasRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
       "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
+      "description": "Request body for creating a savings plan order alias",
+      "schema": {
+        "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+      }
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "description": "The api-version to be used by the service",
+      "type": "string"
+    },
+    "ExpandParameter": {
+      "name": "$expand",
+      "description": "May be used to expand the planInformation.",
+      "in": "query",
+      "x-ms-parameter-location": "client",
+      "required": false,
+      "type": "string"
+    },
+    "SavingsPlanOrderIdParameter": {
+      "name": "savingsPlanOrderId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "Order ID of the savings plan"
+    },
+    "SavingsPlanIdParameter": {
+      "name": "savingsPlanId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "ID of the savings plan"
+    },
+    "SavingsPlanUpdateRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for patching a savings plan order alias",
+      "schema": {
+        "$ref": "#/definitions/SavingsPlanUpdateRequest"
+      }
+    },
+    "SavingsPlanPurchaseValidateRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for patching a savings plan order alias",
+      "schema": {
+        "$ref": "#/definitions/SavingsPlanPurchaseValidateRequest"
+      }
+    },
+    "SavingsPlanUpdateValidateRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for patching a savings plan order alias",
+      "schema": {
+        "$ref": "#/definitions/SavingsPlanUpdateValidateRequest"
+      }
     }
   }
 }
