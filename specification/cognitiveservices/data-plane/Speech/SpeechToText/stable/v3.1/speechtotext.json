@@ -61,7 +61,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            -Example:\r\n              ```filter=createdDateTime gt 2022-02-01T11:00:00Z and displayName eq 'My dataset'```",
+            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            -Example:\r\n             filter=createdDateTime gt 2022-02-01T11:00:00Z and displayName eq 'My dataset'",
             "type": "string"
           }
         ],
@@ -74,7 +74,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -181,7 +182,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -239,7 +241,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -299,7 +302,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets the list of uploaded blocks for this dataset.",
-        "operationId": "Datasets_GetDatasetBlocks",
+        "operationId": "Datasets_GetBlocks",
         "produces": [
           "application/json"
         ],
@@ -322,7 +325,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -574,7 +578,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n- Supported properties: name, createdDateTime, kind.\r\n- Operators:\r\n  - eq, ne are supported for all properties.\r\n  - gt, ge, lt, le are supported for createdDateTime.\r\n  - and, or, not are supported.\r\n- Example:```filter=name eq 'myaudio.wav' and kind eq 'Audio'```",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav' and kind eq 'Audio'",
             "type": "string"
           }
         ],
@@ -587,7 +591,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -718,7 +723,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            - Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n            - Example:```filter=locale eq 'en-US'```",
+            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=locale eq 'en-US'",
             "type": "string"
           }
         ],
@@ -731,7 +736,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -835,7 +841,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -929,7 +936,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -988,7 +996,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1391,7 +1400,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'My evaluation'",
             "type": "string"
           }
         ],
@@ -1404,7 +1413,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1510,7 +1520,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav' and kind eq 'Audio'",
             "type": "string"
           }
         ],
@@ -1523,7 +1533,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1626,7 +1637,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1684,7 +1696,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1792,7 +1805,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
             "type": "string"
           }
         ],
@@ -1805,7 +1818,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1900,7 +1914,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available base models.\r\n            <ul><li><b>Supported properties: </b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available base models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
             "type": "string"
           }
         ],
@@ -1958,7 +1972,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2019,7 +2034,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2294,7 +2310,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav' and kind eq 'Audio'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav' and kind eq 'Audio'",
             "type": "string"
           }
         ],
@@ -2307,7 +2323,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2435,7 +2452,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available projects.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, locale.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My test'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available projects.\r\n            - Supported properties: displayName, description, createdDateTime, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'My test'",
             "type": "string"
           }
         ],
@@ -2674,7 +2691,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'My evaluation'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example\r\n              filter=displayName eq 'My evaluation'",
             "type": "string"
           }
         ],
@@ -2687,7 +2704,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2737,7 +2755,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
             "type": "string"
           }
         ],
@@ -2750,7 +2768,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2800,7 +2819,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=locale eq 'en-US'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=locale eq 'en-US'",
             "type": "string"
           }
         ],
@@ -2813,7 +2832,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2863,7 +2883,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties: </b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=status eq 'NotStarted' or status eq 'Running'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              - Operators:\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
             "type": "string"
           }
         ],
@@ -2876,7 +2896,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2926,7 +2947,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
             "type": "string"
           }
         ],
@@ -2939,7 +2960,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3015,7 +3037,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=createdDateTime gt 2022-02-01T11:00:00Z```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
             "type": "string"
           }
         ],
@@ -3028,7 +3050,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3144,7 +3167,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3202,7 +3226,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3287,7 +3312,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available files.\r\n            <ul><li><b>Supported properties:</b> name, createdDateTime, kind.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=name eq 'myaudio.wav.json' and kind eq 'Transcription'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav.json' and kind eq 'Transcription'",
             "type": "string"
           }
         ],
@@ -3300,7 +3325,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3397,7 +3423,7 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            <ul><li><b>Supported properties:</b> displayName, description, createdDateTime, lastActionDateTime, status and webUrl.</li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n              </li><li><b>Example:</b>```filter=displayName eq 'test'```</li></ul>",
+            "description": "A filtering expression for selecting a subset of the available hooks.\r\n            Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and webUrl.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'test'",
             "type": "string"
           }
         ],
@@ -3410,7 +3436,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3515,7 +3542,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3574,7 +3602,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3655,7 +3684,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3700,7 +3730,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3727,7 +3758,7 @@
           "Service Health:"
         ],
         "summary": "Returns the overall health of the service and optionally of the different subcomponents.",
-        "operationId": "HealthStatus_Get",
+        "operationId": "ServiceHealth_Get",
         "produces": [
           "application/json"
         ],
@@ -6127,12 +6158,14 @@
       "type": "object",
       "properties": {
         "committedBlocks": {
+          "description": "The block description of blocks already committed.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResponseBlock"
           }
         },
         "uncommittedBlocks": {
+          "description": "The block description of blocks not committed to the blob.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResponseBlock"
@@ -6381,7 +6414,7 @@
     "sasValidityQueryParameter": {
       "in": "query",
       "name": "sasValidityInSeconds",
-      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.\r\n            When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
+      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours. When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
@@ -6403,10 +6436,10 @@
   },
   "security": [
     {
-      "api_key": []
+      "api_key": [ ]
     },
     {
-      "token": []
+      "token": [ ]
     }
   ],
   "schemes": [
