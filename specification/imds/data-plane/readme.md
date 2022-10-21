@@ -27,15 +27,15 @@ These are the global settings for the Instance Metadata Service API.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2021-11
+tag: package-2021-11-15
 ```
 
 
-### Tag: package-2021-11
+### Tag: package-2021-11-15
 
-These settings apply only when `--tag=package-2021-11` is specified on the command line.
+These settings apply only when `--tag=package-2021-11-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11'
+```yaml $(tag) == 'package-2021-11-15'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2021-11-15/imds.json
 ```
@@ -650,6 +650,8 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-03-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-05-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-10-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-11-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-11-15/imds.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
