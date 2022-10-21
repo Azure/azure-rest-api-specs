@@ -600,9 +600,9 @@ directive:
       - $.definitions.IdentityErrorResponse.properties.error_description
 
    - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2021-11-15/imds.json
-    where:
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2021-11-15/imds.json
+     where:
       - $.definitions.IdentityTokenResponse.properties.access_token
       - $.definitions.IdentityTokenResponse.properties.expires_in
       - $.definitions.IdentityTokenResponse.properties.expires_on
