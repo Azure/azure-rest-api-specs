@@ -70,7 +70,7 @@
     "/text:batchAnalyze": {
       "post": {
         "tags": [
-          "Text Moderation"
+          "Text Analysis"
         ],
         "summary": "Text Batch Analyze",
         "description": "An async API for harmful content analysis for image batch",
@@ -121,7 +121,7 @@
     "/text/results/{resultId}": {
       "get": {
         "tags": [
-          "Text Moderation"
+          "Text Analysis"
         ],
         "summary": "Get Text Batch Analyze Results",
         "description": "An API to get harmful content analysis results for text batch",
@@ -157,10 +157,10 @@
         }
       }
     },
-    "/moderate/image/analyze": {
+    "/image:analyze": {
       "post": {
         "tags": [
-          "Image Moderation"
+          "Image Analysis"
         ],
         "summary": "Image Analyze",
         "description": "A sync API for harmful content analysis for image",
@@ -177,7 +177,7 @@
             "$ref": "#/parameters/QueryApiVersion"
           },
           {
-            "name": "imageDetectRequest",
+            "name": "request",
             "in": "body",
             "description": "The analysis request of the image",
             "required": true,
@@ -202,10 +202,10 @@
         }
       }
     },
-    "/moderate/image/batchDetect": {
+    "/image:batchAnalyze": {
       "post": {
         "tags": [
-          "Image Moderation"
+          "Image Analysis"
         ],
         "summary": "Image Batch Analyze",
         "description": "An async API for harmful content analysis for image batch",
@@ -250,10 +250,10 @@
         }
       }
     },
-    "/moderate/image/batchDetect/detectResults/{resultId}": {
+    "/image/results/{resultId}": {
       "get": {
         "tags": [
-          "Image Moderation"
+          "Image Analysis"
         ],
         "summary": "Get Image Batch Analyze Results",
         "description": "An API to get harmful content analysis results for image batch",
@@ -278,54 +278,6 @@
             "description": "Status 200",
             "schema": {
               "$ref": "#/definitions/ImageBatchDetectResultsResponse"
-            }
-          },
-          "default": {
-            "description": "Client error or server error (4xx or 5xx)",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/moderate/imageWithText/analyze": {
-      "post": {
-        "tags": [
-          "ImageWithText Moderation"
-        ],
-        "summary": "ImageWithText Analyze",
-        "description": "A sync API for harmful content analysis for image-with-text",
-        "operationId": "Image_With_Text_Detect",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/Language"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "name": "imageWithTextDetectRequest",
-            "in": "body",
-            "description": "The analysis request of the image-with-text",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageWithTextDetectRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status 200",
-            "schema": {
-              "$ref": "#/definitions/ImageWithTextDetectResponse"
             }
           },
           "default": {
@@ -1096,7 +1048,7 @@
         "category": {
           "$ref": "#/definitions/TextCategory"
         },
-        "lists": {
+        "listIds": {
           "type": "array",
           "items": {
             "type": "string",
@@ -1228,20 +1180,9 @@
         },
         "categories": {
           "type": "array",
-          "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.",
           "items": {
-            "$ref": "#/definitions/TextCategory"
-          }
-        },
-        "lists": {
-          "description": "The k-v pairs of <category, list id array>",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "description": "listId"
-            }
+            "$ref": "#/definitions/TextCategoryConfig"
           }
         }
       }
@@ -1289,22 +1230,31 @@
                 "description": "File name of individual image",
                 "type": "string"
               },
-              "value": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/TextDetectResult"
-                  }
+              "hateSpeechResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "selfHarmResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "sexualResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "violenceResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "customResult": {
+                "$ref": "#/definitions/TextDetectResult"
               },
               "error": {
                 "description": "Error encountered when processing individual image",
-                "$ref": "#/definitions/ErrorResponse"
+                "$ref": "#/definitions/Error"
               }
             }
           }
         },
         "error": {
           "description": "Error encountered during batch analysis",
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "#/definitions/Error"
         }
       }
     },
@@ -1386,6 +1336,25 @@
         "modelAsString": false
       }
     },
+    "ImageCategoryConfig": {
+      "type": "object",
+      "description": "Configuration for category",
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageCategory"
+        },
+        "listIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "listId"
+          }
+        }
+      }
+    },
     "Image": {
       "description": "The content or url of image",
       "type":"object",
@@ -1416,7 +1385,7 @@
           "type": "array",
           "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
           "items": {
-            "$ref": "#/definitions/ImageCategory"
+            "$ref": "#/definitions/ImageCategoryConfig"
           }
         }
       }
@@ -1499,30 +1468,19 @@
         "category": {
           "$ref": "#/definitions/ImageCategory"
         },
-        "analyzed": {
-          "description": "Whether this category is analyzed in this input image",
+        "detected": {
+          "description": "Whether this category is detected in this input image",
           "type": "boolean"
         },
-        "score": {
-          "description": "The score of analysis result",
+        "confidenceScore": {
+          "description": "The confidence score of analysis result",
           "type": "number",
           "format": "float"
         },
-        "modelOutputDetail": {
-          "description": "The additional fields of model output",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "riskLevel": {
+          "$ref": "#/definitions/RiskLevel"
         },
-        "diagnoses": {
-          "description": "The diagnoses array, each element contains analysis result in diagnosis rectangle",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageDetectDiagnosis"
-          }
-        },
-        "listMatchDetails": {
+        "listMatchResults": {
           "description": "The details of list match",
           "type": "array",
           "items": {
@@ -1534,15 +1492,18 @@
     "ImageDetectResponse": {
       "description": "The analysis response of the image",
       "type": "object",
-      "required": [
-        "value"
-      ],
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-              "$ref": "#/definitions/ImageDetectResult"
-            }
+        "adultResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "racyResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "underageResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "customResult": {
+          "$ref": "#/definitions/ImageDetectResult"
         }
       }
     },
@@ -1562,7 +1523,7 @@
           "type": "array",
           "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
           "items": {
-            "$ref": "#/definitions/ImageCategory"
+            "$ref": "#/definitions/ImageCategoryConfig"
           }
         }
       }
@@ -1610,22 +1571,28 @@
                 "description": "File name of individual image",
                 "type": "string"
               },
-              "value": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/ImageDetectResult"
-                  }
+              "adultResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "racyResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "underageResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "customResult": {
+                "$ref": "#/definitions/ImageDetectResult"
               },
               "error": {
                 "description": "Error encountered when processing individual image",
-                "$ref": "#/definitions/ErrorResponse"
+                "$ref": "#/definitions/Error"
               }
             }
           }
         },
         "error": {
           "description": "Error encountered during batch analysis",
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "#/definitions/Error"
         }
       }
     },
