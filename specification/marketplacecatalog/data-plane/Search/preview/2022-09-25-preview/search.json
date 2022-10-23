@@ -367,22 +367,21 @@
           },
           {
             "type": "array",
-            "name": "vmImageGenerations",
-            "in": "query",
-            "description": "Products that contains any of the given vm generations, If no value provided, this filter is ignored. See Azure support for generation 2 VMs - Azure Virtual Machines | Microsoft Docs, Possible values, 1,2. Such as '1'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
             "name": "vmArchitectureTypes",
             "in": "query",
             "description": "Products that contains any of the given Virtual Machine image architecture types, If no value provided, this filter is ignored. 1-x64, 2-ARM. Such as '1'",
             "collectionFormat": "csv",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -818,22 +817,21 @@
           },
           {
             "type": "array",
-            "name": "vmImageGenerations",
-            "in": "query",
-            "description": "Products that contains any of the given vm generations, If no value provided, this filter is ignored. See Azure support for generation 2 VMs - Azure Virtual Machines | Microsoft Docs, Possible values, 1,2. Such as '1'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
             "name": "vmArchitectureTypes",
             "in": "query",
             "description": "Products that contains any of the given Virtual Machine image architecture types, If no value provided, this filter is ignored. 1-x64, 2-ARM. Such as '1'",
             "collectionFormat": "csv",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -1249,22 +1247,21 @@
           },
           {
             "type": "array",
-            "name": "vmImageGenerations",
-            "in": "query",
-            "description": "Products that contains any of the given vm generations, If no value provided, this filter is ignored. See Azure support for generation 2 VMs - Azure Virtual Machines | Microsoft Docs, Possible values, 1,2. Such as '1'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
             "name": "vmArchitectureTypes",
             "in": "query",
             "description": "Products that contains any of the given Virtual Machine image architecture types, If no value provided, this filter is ignored. 1-x64, 2-ARM. Such as '1'",
             "collectionFormat": "csv",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -1405,6 +1402,31 @@
       ],
       "x-ms-enum": {
         "name": "RatingBucket",
+        "modelAsString": true
+      }
+    },
+    "VmArchitectureType": {
+      "type": "string",
+      "description": "Virtual Machine image architecture types and generations",
+      "enum": [
+        "X64Gen1",
+        "X64Gen2",
+        "Arm64"
+      ],
+      "x-ms-enum": {
+        "name": "VmArchitectureType",
+        "modelAsString": true
+      }
+    },
+    "VmImageGeneration": {
+      "type": "string",
+      "description": "Virtual Machine image architecture types",
+      "enum": [
+        "Gen1",
+        "Gen2"
+      ],
+      "x-ms-enum": {
+        "name": "VmImageGeneration",
         "modelAsString": true
       }
     },
@@ -1672,16 +1694,16 @@
         },
         "vmImageGenerations": {
           "type": "array",
-          "description": "Array of vm generations to search by, see Azure support for generation 2 VMs - Azure Virtual Machines | Microsoft Docs, Possible values, 1,2. Such as '1'",
+          "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/VmImageGeneration"
           }
         },
         "vmArchitectureTypes": {
           "type": "array",
-          "description": "Array of Virtual Machine image architecture types to search by, 1-x64, 2-ARM. Such as '1'",
+          "description": "Array of Virtual Machine image architecture types and generation: \n - `Gen1`: Generation 1 architecture type.\n - `Gen2`: Generation 2 architecture type.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/VmArchitectureType"
           }
         },
         "vmSecurityTypes": {
