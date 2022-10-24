@@ -33,17 +33,17 @@ azure-validator: false
 ---
 
 
-### Tag: package-2022-11
+### Tag: package-2022-11-01
 
-These settings apply only when `--tag=package-2022-11` is specified on the command line.
+These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11'
+```yaml $(tag) == 'package-2022-11-01'
 input-file:
   - Microsoft.CostManagement/stable/2022-11-01/common-types.json
   - Microsoft.CostManagement/stable/2022-11-01/benefitAsyncApis.json
   - Microsoft.CostManagement/stable/2022-05-01/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
-  - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
+  - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
   - Microsoft.CostManagement/preview/2020-08-01-preview/costmanagement.insights.json
 ```

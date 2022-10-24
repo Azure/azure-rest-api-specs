@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CostManagementClient",
-    "version": "2022-06-01-preview"
+    "version": "2022-11-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -435,20 +435,6 @@
               "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
             }
           },
-          "202": {
-            "description": "Accepted. Request will be processed. Use the location header to check the status.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "format": "int32",
-                "type": "integer"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -494,20 +480,6 @@
               "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
             }
           },
-          "202": {
-            "description": "Accepted. Request will be processed. Use the location header to check the status.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "format": "int32",
-                "type": "integer"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -548,20 +520,6 @@
             "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
             "schema": {
               "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
-            }
-          },
-          "202": {
-            "description": "Accepted. Request will be processed. Use the location header to check the status.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "format": "int32",
-                "type": "integer"
-              }
             }
           },
           "default": {
@@ -609,20 +567,6 @@
               "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
             }
           },
-          "202": {
-            "description": "Accepted. Request will be processed. Use the location header to check the status.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "format": "int32",
-                "type": "integer"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -663,20 +607,6 @@
             "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
             "schema": {
               "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
-            }
-          },
-          "202": {
-            "description": "Accepted. Request will be processed. Use the location header to check the status.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "format": "int32",
-                "type": "integer"
-              }
             }
           },
           "default": {
@@ -722,20 +652,6 @@
             "description": "The status of the generation of the benefit utilization summaries report.",
             "schema": {
               "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
-            }
-          },
-          "202": {
-            "description": "Accepted. Request will be processed. Use the location header to check the status.",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "format": "int32",
-                "type": "integer"
-              }
             }
           },
           "default": {
@@ -901,7 +817,7 @@
     "benefitsAsyncOperationIdParameter": {
       "description": "Operation id of the report being generated",
       "in": "path",
-      "name": "benefitsAsyncOperationId",
+      "name": "operationId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
