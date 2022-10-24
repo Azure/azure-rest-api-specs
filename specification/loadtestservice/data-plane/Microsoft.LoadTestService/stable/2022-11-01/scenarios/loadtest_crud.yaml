@@ -1,0 +1,112 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  # resourceGroupName: apiTest-r5jahq
+  loadTestName:
+    type: string
+    prefix: loadtest
+    # loadtestp5ftwn
+
+prepareSteps:
+  - operationId: LoadTests_CreateOrUpdate
+    readmeTag: ../../../../../resource-manager/readme.md
+    parameters:
+      LoadTestResource:
+        location: $(location)
+        identity:
+          type: SystemAssigned
+  - operationId: LoadTests_Get
+    readmeTag: ../../../../../resource-manager/readme.md
+    outputVariables:
+      dataPlaneURI:
+        type: string
+        fromResponse: /properties/dataPlaneURI
+
+scenarios:
+  - scenario: SimpleScenario
+    variables:
+      Endpoint: $(dataPlaneURI)
+    authentication:
+      type: AADToken
+      scope: https://loadtest.azure-dev.com/.default
+    steps:
+      - operationId: ServerMetrics_GetDefaultMetrics
+  - scenario: GeneratedScenario
+    authentication:
+      type: AADToken
+      scope: https://loadtest.azure-dev.com/.default
+    variables:
+      Endpoint: $(dataPlaneURI)
+      testId:
+        type: string
+        prefix: testid
+      testRunId:
+        type: string
+        prefix: testrunid
+      name:
+        type: string
+        prefix: name
+      fileId:
+        type: string
+        prefix: fileid
+    steps:
+      # file not supported
+      # - operationId: Test_UploadFile
+      #   exampleFile: ../examples/UploadTestFile.json
+      - operationId: Test_List
+        exampleFile: ../examples/ListLoadTestSearch.json
+      - operationId: Test_Get
+        exampleFile: ../examples/GetLoadTest.json
+      - operationId: Test_GetAllFiles
+        exampleFile: ../examples/GetAllTestFiles.json
+      - operationId: Test_GetFile
+        exampleFile: ../examples/GetTestFile.json
+      - operationId: Test_CreateOrUpdate
+        exampleFile: ../examples/CreateOrUpdateTest.json
+      - operationId: AppComponent_GetByTestOrTestRun
+        exampleFile: ../examples/GetAppComponentByTestOrTestRun.json
+      - operationId: AppComponent_Delete
+        exampleFile: ../examples/DeleteAppComponent.json
+      - operationId: AppComponent_Get
+        exampleFile: ../examples/GetAppComponent.json
+      - operationId: AppComponent_CreateOrUpdate
+        exampleFile: ../examples/CreateOrUpdateAppComponents.json
+      - operationId: ServerMetrics_GetByTestOrTestRun
+        exampleFile: ../examples/GetServerMetricsByTestOrTestRun.json
+      - operationId: ServerMetrics_GetDefaultMetrics
+        exampleFile: ../examples/GetServerDefaultMetrics.json
+      - operationId: ServerMetrics_ListSupportedResourceType
+        exampleFile: ../examples/ListSupportedResourceType.json
+      - operationId: ServerMetrics_Delete
+        exampleFile: ../examples/DeleteServerMetrics.json
+      - operationId: ServerMetrics_Get
+        exampleFile: ../examples/GetServerMetrics.json
+      - operationId: ServerMetrics_CreateOrUpdate
+        exampleFile: ../examples/CreateOrUpdateServerMetricsConfig.json
+      - operationId: TestRun_List
+        exampleFile: ../examples/ListTestRunsSearch.json
+      - operationId: TestRun_Delete
+        exampleFile: ../examples/DeleteTestRun.json
+      - operationId: TestRun_Get
+        exampleFile: ../examples/GetTestRun.json
+      - operationId: TestRun_CreateOrUpdate
+        exampleFile: ../examples/CreateAndUpdateTestRun.json
+      - operationId: TestRun_GetFile
+        exampleFile: ../examples/GetTestRunFile.json
+      - operationId: TestRun_MetricDefinitions
+        exampleFile: ../examples/GetTestRunMetricsDefinitions.json
+      - operationId: TestRun_MetricNamespaces
+        exampleFile: ../examples/GetTestRunMetricsNamespaces.json
+      - operationId: TestRun_Metrics
+        exampleFile: ../examples/GetTestRunMetrics.json
+      - operationId: TestRun_Stop
+        exampleFile: ../examples/StopTestRun.json
+      - operationId: Test_DeleteFile
+        exampleFile: ../examples/DeleteTestFile.json
+      - operationId: Test_Delete
+        exampleFile: ../examples/DeleteLoadTest.json
+
+cleanUpSteps:
+  - operationId: LoadTests_Delete
+    readmeTag: ../../../../../resource-manager/readme.md
