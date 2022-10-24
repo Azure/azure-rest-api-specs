@@ -107,9 +107,6 @@ directive:
     from: operations.json
     reason: unnecessary check
 
-  - suppress: ResourceNameRestriction
-    from: componentPolicyStates.json
-    reason: unnecessary check
 ```
 
 ``` yaml !$(python)
