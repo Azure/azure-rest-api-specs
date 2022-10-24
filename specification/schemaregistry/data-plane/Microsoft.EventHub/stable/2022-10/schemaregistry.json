@@ -85,7 +85,7 @@
             "$ref": "./examples/OperationSchema_GetById.json"
           }
         },
-        "operationId": "SchemaGroups_GetSchemaById",
+        "operationId": "SchemaGroups_GetSchema",
         "produces": [
           "application/json; serialization=Avro",
           "application/schema+json",
@@ -489,14 +489,14 @@
       "type": "object",
       "description": "Object received from the registry containing the list of schema groups and link to next batch page.",
       "properties": {
-        "value": {
+        "schemaGroups": {
           "type": "array",
           "description": "Array of schema groups.",
           "items": {
             "$ref": "#/definitions/SchemaGroup"
           }
         },
-        "NextLink": {
+        "nextLink": {
           "type": "string",
           "description": "URl to next batch of schema groups"
         }
@@ -510,14 +510,14 @@
       "type": "object",
       "description": "Object received from the registry containing the list of schema versions and link to next batch page.",
       "properties": {
-        "Value": {
+        "schemaVersions": {
           "type": "array",
           "description": "Array of schema version integers.",
           "items": {
             "$ref": "#/definitions/SchemaVersion"
           }
         },
-        "NextLink": {
+        "nextLink": {
           "type": "string",
           "description": "URl to next batch of schema versions"
         }
