@@ -98,8 +98,9 @@ The structure should appear like so:
 |    |       |           \---examples
 |    |       \---readme.md
 |    \---playfab
-|        +---Microsoft.Playfab
-|        |   \---playfab.cadl    
+|        +---Playfab
+|        |   \---cadl-project.yaml  
+|        |   \---main.cadl  
 |        \--resource-manager
 |            +---Microsoft.Playfab
 |            |   +---stable
