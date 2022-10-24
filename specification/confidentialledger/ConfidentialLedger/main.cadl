@@ -1,6 +1,6 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
 import "./routes.cadl";
-import "./client.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
@@ -8,8 +8,8 @@ using Azure.Core;
 
 @service({
   title: "Azure Confidential Ledger",
-  serviceVersion: "2022-05-13"
 })
+@Versioning.versioned(Versions)
 @server(
   "{endpoint}/app",
   "Confidential Ledger writes and retrieves ledger entries against the Confidential Ledger service.",
@@ -26,3 +26,8 @@ Confidential Ledger writes and retrieves ledger entries against the
 Confidential Ledger service.
 """)
 namespace Azure.ConfidentialLedger;
+
+enum Versions {
+  v2022_05_23: "2022-05-23",
+  latest: "2022-05-23",
+}
