@@ -48,7 +48,7 @@ Because the first rule is to avoid breaking changes and because we want APIs to 
 
 ## Coding Style
 
-REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) or [Cadl](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/cadl-structure-guidelines.md)format.
+REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) or [Cadl](https://aka.ms/cadl/rpaas-start)format.
 
 The REST API should also adhere to the conventions documented in the [Azure API Style Guide](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md).
 
