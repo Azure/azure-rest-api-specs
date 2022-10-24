@@ -3493,6 +3493,11 @@
           "format": "date-time",
           "readOnly": true
         },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
         "scope": {
           "description": "Shared (corresponds to integer 2) or single (corresponds to integer 1) recommendation.",
           "type": "integer",
@@ -3512,14 +3517,10 @@
           "type": "string",
           "readOnly": true
         },
-        "resourceType": {
-          "description": "The Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        },
         "subscriptionId": {
-          "description": "The Azure subscription ID.",
+          "description": "Subscription ID",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         }
       }
