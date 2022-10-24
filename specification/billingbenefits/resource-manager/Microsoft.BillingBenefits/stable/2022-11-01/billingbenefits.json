@@ -316,8 +316,11 @@
           "Savings plan"
         ],
         "x-ms-examples": {
-          "SavingsPlanGet": {
-            "$ref": "./examples/SavingsPlanGet.json"
+          "SavingsPlanItemGet": {
+            "$ref": "./examples/SavingsPlanItemGet.json"
+          },
+          "SavingsPlanItemWithExpandedRenewPropertiesGet": {
+            "$ref": "./examples/SavingsPlanItemExpandedGet.json"
           }
         },
         "parameters": [
@@ -329,6 +332,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
@@ -601,6 +607,17 @@
       "readOnly": true,
       "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
     },
+    "ReservedResourceType": {
+      "type": "string",
+      "description": "The type of the resource that is being reserved.",
+      "enum": [
+        "ComputeSavingsPlan"
+      ],
+      "x-ms-enum": {
+        "name": "ReservedResourceType",
+        "modelAsString": true
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state",
@@ -692,6 +709,11 @@
       "type": "string",
       "description": "Fully-qualified identifier of the resource group."
     },
+    "Renew": {
+      "type": "boolean",
+      "default": false,
+      "description": "Setting this to true will automatically purchase a new savings plan on the expiration date time."
+    },
     "Commitment": {
       "type": "object",
       "description": "Commitment towards the benefit.",
@@ -714,16 +736,73 @@
         }
       }
     },
+    "Utilization": {
+      "readOnly": true,
+      "type": "object",
+      "description": "Savings plan utilization",
+      "properties": {
+        "trend": {
+          "description": "The number of days trend for a savings plan",
+          "readOnly": true,
+          "type": "string"
+        },
+        "aggregates": {
+          "description": "The array of aggregates of a savings plan's utilization",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtilizationAggregates"
+          }
+        }
+      }
+    },
+    "UtilizationAggregates": {
+      "description": "The aggregate values of savings plan utilization",
+      "type": "object",
+      "properties": {
+        "grain": {
+          "description": "The grain of the aggregate",
+          "readOnly": true,
+          "type": "number"
+        },
+        "grainUnit": {
+          "description": "The grain unit of the aggregate",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The aggregate value",
+          "readOnly": true,
+          "type": "number"
+        },
+        "valueUnit": {
+          "description": "The aggregate value unit",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
     "SavingsPlanId": {
       "type": "string",
       "description": "Identifier of the savings plan",
       "readOnly": true
     },
-    "ExpiryDate": {
+    "EffectiveDateTime": {
       "type": "string",
-      "description": "Provisioning state",
+      "format": "date-time",
+      "description": "DateTime of the savings plan starts providing benefit from.",
+      "readOnly": true
+    },
+    "ExpiryDateTime": {
+      "type": "string",
+      "description": "Expiry date time",
       "readOnly": true,
-      "format": "date"
+      "format": "date-time"
+    },
+    "PurchaseDateTime": {
+      "type": "string",
+      "description": "Date time when the savings plan was purchased",
+      "readOnly": true,
+      "format": "date-time"
     },
     "SavingsPlanModelList": {
       "type": "object",
@@ -756,6 +835,14 @@
           "description": "Savings plan SKU",
           "$ref": "#/definitions/Sku"
         },
+        "location": {
+          "type": "string",
+          "description": "The location where billing benefits apply to."
+        },
+        "etag": {
+          "type": "integer",
+          "format": "int32"
+        },
         "properties": {
           "description": "Savings plan properties",
           "x-ms-client-flatten": true,
@@ -777,6 +864,11 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "displayProvisioningState": {
+          "description": "The provisioning state of the savings plan for display, e.g. Succeeded",
+          "type": "string",
+          "readOnly": true
         },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
@@ -802,6 +894,11 @@
         "appliedScopeType": {
           "$ref": "#/definitions/AppliedScopeType"
         },
+        "userFriendlyAppliedScopeType": {
+          "description": "The applied scope type of the savings plan for display, e.g. Shared",
+          "type": "string",
+          "readOnly": true
+        },
         "appliedScopeProperties": {
           "$ref": "#/definitions/AppliedScopeProperties"
         },
@@ -809,13 +906,30 @@
           "$ref": "#/definitions/Commitment"
         },
         "effectiveDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DateTime of the savings plan starts providing benefit from.",
-          "readOnly": true
+          "$ref": "#/definitions/EffectiveDateTime"
+        },
+        "expiryDateTime": {
+          "$ref": "#/definitions/ExpiryDateTime"
+        },
+        "purchaseDateTime": {
+          "$ref": "#/definitions/PurchaseDateTime"
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "utilization": {
+          "$ref": "#/definitions/Utilization"
+        },
+        "renewProperties": {
+          "type": "object",
+          "properties": {
+            "purchaseProperties": {
+              "$ref": "#/definitions/PurchaseRequest"
+            }
+          }
         }
       }
     },
@@ -855,6 +969,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SavingsPlanOrderModelProperties"
         },
+        "etag": {
+          "type": "integer",
+          "format": "int32"
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "SystemData of Savings plan order.",
@@ -890,8 +1008,8 @@
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
         },
-        "expiryDate": {
-          "$ref": "#/definitions/ExpiryDate"
+        "expiryDateTime": {
+          "$ref": "#/definitions/ExpiryDateTime"
         },
         "planInformation": {
           "$ref": "#/definitions/BillingPlanInformation"
@@ -1085,6 +1203,60 @@
           "description": "Failure reason if the provided input was invalid"
         }
       }
+    },
+    "PurchaseRequest": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PurchaseRequestProperties"
+        }
+      }
+    },
+    "PurchaseRequestProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the savings plan"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the savings plan"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        },
+        "effectiveDateTime": {
+          "$ref": "#/definitions/EffectiveDateTime"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the SKUs that are part of the savings plan. Must be greater than zero."
+        },
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType"
+        }
+      }
     }
   },
   "parameters": {
@@ -1116,7 +1288,7 @@
     },
     "ExpandParameter": {
       "name": "$expand",
-      "description": "May be used to expand the planInformation.",
+      "description": "May be used to expand the detail information of some properties.",
       "in": "query",
       "x-ms-parameter-location": "client",
       "required": false,
