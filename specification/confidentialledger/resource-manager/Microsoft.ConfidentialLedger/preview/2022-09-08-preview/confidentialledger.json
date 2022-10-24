@@ -444,8 +444,9 @@
         }
       }
     },
-    "Resource": {
+    "AclResource": {
       "description": "An Azure resource.",
+      "x-ms-client-name": "Resource",
       "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
@@ -665,7 +666,7 @@
       "description": "Confidential Ledger. Contains the properties of Confidential Ledger Resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/AclResource"
         },
         {
           "$ref": "#/definitions/ResourceLocation"
