@@ -106,10 +106,6 @@ directive:
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: operations.json
     reason: unnecessary check
-
-  - suppress: LRO_RESPONSE_HEADER
-    from: policyStates.json
-    reason: unnecessary check
 ```
 
 ``` yaml !$(python)
