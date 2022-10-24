@@ -509,7 +509,7 @@
       ],
       "properties": {
         "resourceId": {
-          "description": "Resource Id.",
+          "description": "Resource Id - e.g. \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1\".",
           "type": "string"
         },
         "resourceType": {
@@ -578,7 +578,7 @@
         },
         "timeZone": {
           "type": "string",
-          "description": "Report collection trigger time's time zone."
+          "description": "Report collection trigger time's time zone, the available list can be obtained by executing \"Get-TimeZone -ListAvailable\" in PowerShell.\r\nAn example of valid timezone id is \"Pacific Standard Time\"."
         },
         "triggerTime": {
           "format": "date-time",
@@ -631,7 +631,7 @@
     },
     "ReportResource": {
       "type": "object",
-      "description": "A class represent a AppComplianceAutomation report resource.",
+      "description": "A class represent an AppComplianceAutomation report resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1143,7 +1143,7 @@
           "readOnly": true
         },
         "resourceId": {
-          "description": "The resource Id.",
+          "description": "The resource Id - e.g. \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1\".",
           "type": "string",
           "readOnly": true
         }
@@ -1209,7 +1209,7 @@
         },
         "controlId": {
           "type": "string",
-          "description": "The control Id.",
+          "description": "The control Id - e.g. \"1\".",
           "readOnly": true
         },
         "controlName": {
@@ -1225,6 +1225,10 @@
         },
         "complianceState": {
           "type": "string",
+          "enum": [
+            "Healthy",
+            "Unhealthy"
+          ],
           "description": "The compliance result's status.",
           "readOnly": true
         },
@@ -1260,11 +1264,11 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "The compliance result mapped resource Id.",
+          "description": "The compliance result mapped resource Id - e.g. \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1\".",
           "readOnly": true
         },
         "statusChangeDate": {
-          "description": "The compliance result last changed date. For unavailable date, set it as N/A.",
+          "description": "The compliance result last changed date - e.g. \"2022-10-24T02:55:16.3274379Z\". For unavailable date, set it as \"N/A\".",
           "type": "string",
           "readOnly": true
         }
@@ -1276,7 +1280,7 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Cancelled",
+        "Canceled",
         "Creating",
         "Deleting",
         "Updating"
