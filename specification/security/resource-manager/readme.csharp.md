@@ -12,22 +12,20 @@ csharp:
   payload-flattening-threshold: 2
   clear-output-folder: true
 
-  directive:
+directive:
   - from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.alertNotifications.properties.state
-    transform: > 
-        $['x-ms-enum']['name'] = 'stateEnum';
+    transform: >
+        $['x-ms-enum']['name'] = 'SecurityAlertNotificationState';
+  - from: securityContacts.json
+    where: $.definitions.SecurityContactProperties.properties.notificationsByRole.properties.state
+    transform: >
+        $['x-ms-enum']['name'] = 'SecurityAlertNotificationByRoleState';
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)
   namespace: Microsoft.Azure.Management.Security
   output-folder: $(csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management.SecurityCenter/src/Generated
-
-  directive:
-  - from: securityContacts.json
-    where: $.definitions.SecurityContactProperties.properties.alertNotifications.properties.state
-    transform: > 
-        $['x-ms-enum']['name'] = 'stateEnum';
 ```
 
 ## Batch settings
