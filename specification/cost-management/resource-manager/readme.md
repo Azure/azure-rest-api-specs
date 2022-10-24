@@ -39,7 +39,6 @@ These settings apply only when `--tag=package-2022-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-11-01'
 input-file:
-  - Microsoft.CostManagement/stable/2022-11-01/common-types.json
   - Microsoft.CostManagement/stable/2022-11-01/benefitAsyncApis.json
   - Microsoft.CostManagement/stable/2022-05-01/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.exports.json
