@@ -130,16 +130,6 @@ Here's an example of how Cognitive Services might use multiple shared libraries:
 
 Cadl has a versioning library which allows a single spec to represent multiple versions through projections. Service teams have GA service versions as well as public and private Preview service versions. The versioning library is currently optimized for the kinds of changes allowed between GA service releases: long-lived, stable, backward compatible changes. Preview versions are shorter-lived and often have wildly breaking changes from one version to the next, for which the versioning library is not optimized.
 
-### Goals
-
-Our versioning story should account for the following key goals:
-
-- It should require minimal effort for a service team to convert a preview spec to a GA one.
-- It should be easy to retire a preview spec.
-- It should be able to model all supported preview versions.
-- It must be possible to fork a spec that has breaking changes that exceed the expressiveness of the versioning library decorators.
-- It must be possible to maintain the Swagger representation of each Cadl version on the `main` branch of the `azure-rest-api-specs` repo.
-
 ### Service Folder
 
 The service folder contains the Cadl files for the service package. Services transitioning to Cadl may simply begin by modeling their versioned Cadl from their latest stable Swagger. Existing services DO NOT need to model past service versions unless a business rationale exists. Future versions should be added to the spec using the necessary versioning decorators. The inital version in the spec need not feature version annotations since it is considered the baseline (i.e. it makes no implications about prior versions since it does not know about them).

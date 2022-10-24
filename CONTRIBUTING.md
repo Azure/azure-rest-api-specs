@@ -48,7 +48,7 @@ Because the first rule is to avoid breaking changes and because we want APIs to 
 
 ## Coding Style
 
-REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) or [Cadl](https://aka.ms/cadl/rpaas-start)format.
+REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) or [Cadl](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/cadl-structure-guidelines.md)format.
 
 The REST API should also adhere to the conventions documented in the [Azure API Style Guide](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md).
 
@@ -60,7 +60,7 @@ See the [README.md](./README.md) for a description of the directory structure to
 
 ## Pull Requests
 
-If you want to contribute to the repository, follow these steps:  
+If you want to contribute to the repository, follow these steps:
   1. Fork the repository and create a new branch for your changes.
   2. If you are introducing a new api-version, create a new directory for that api-version and copy all the files from the previous version into the new directory. Make this the very first commit in your branch and then make your changes in subsequent commits.
   3. Use the [linting tools](#coding-style) to check your changes for compliance with the OpenAPI v2 standard, the Azure REST API Guidelines and that Azure API Style Guide.
