@@ -28,6 +28,13 @@
       }
     }
   },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "paths": {
     "/$schemaGroups": {
       "get": {
@@ -78,7 +85,7 @@
             "$ref": "./examples/OperationSchema_GetById.json"
           }
         },
-        "operationId": "Schema_GetById",
+        "operationId": "SchemaGroups_GetSchemaById",
         "produces": [
           "application/json; serialization=Avro",
           "application/schema+json",
@@ -361,19 +368,6 @@
               }
             }
           },
-          "415": {
-            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
             "headers": {
@@ -464,19 +458,6 @@
               }
             }
           },
-          "415": {
-            "description": "Unsupported Media Type - Content type of the supplied schema is unsupported by schema group.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An error response received from the Azure Schema Registry service.",
             "headers": {
@@ -506,14 +487,18 @@
     },
     "SchemaGroups": {
       "type": "object",
-      "description": "Array received from the registry containing the list of schema groups.",
+      "description": "Object received from the registry containing the list of schema groups and link to next batch page.",
       "properties": {
-        "schemaGroups": {
+        "value": {
           "type": "array",
           "description": "Array of schema groups.",
           "items": {
             "$ref": "#/definitions/SchemaGroup"
           }
+        },
+        "NextLink": {
+          "type": "string",
+          "description": "URl to next batch of schema groups"
         }
       }
     },
@@ -523,14 +508,18 @@
     },
     "SchemaVersions": {
       "type": "object",
-      "description": "Array received from the registry containing the list of versions for specific schema.",
+      "description": "Object received from the registry containing the list of schema versions and link to next batch page.",
       "properties": {
-        "schemaVersions": {
+        "Value": {
           "type": "array",
-          "description": "Array of schema groups.",
+          "description": "Array of schema version integers.",
           "items": {
             "$ref": "#/definitions/SchemaVersion"
           }
+        },
+        "NextLink": {
+          "type": "string",
+          "description": "URl to next batch of schema versions"
         }
       }
     },
@@ -551,11 +540,12 @@
       ]
     },
     "ErrorDetail": {
+      "type": "object",
       "description": "Error response returned from Azure Schema Registry service.",
       "properties": {
         "code": {
           "type": "string",
-          "description": "Type of error."
+          "description": "Server-defined error code."
         },
         "message": {
           "type": "string",
