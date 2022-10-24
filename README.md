@@ -38,6 +38,8 @@ The structure of the directory should strictly follow these rules:
     >   -   For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
 
     RP folders may contain resoure manager or data plane Cadl specs. Cadl is a language for describing cloud service APIs and generating other API description languages, client and service code, documentation, and other assets. Explore more by visiting the tutorial in the CADL repo: [Cadl tutorial](http://aka.ms/cadlTutorial). You can also ask questions for providing feedback in the internal Teams channel [Cadl Discussion](https://teams.microsoft.com/l/channel/19%3a906c1efbbec54dc8949ac736633e6bdf%40thread.skype/Cadl%2520Discussion%2520%25F0%259F%2590%25AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47).
+    
+    For more information about the structure of Cadl files in the repo see [Cadl repo structure](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/cadl-structure-guidelines.md).
 
 
 4. **'resource-manager' and 'data-plane' Folders**: the RPs can put specs in one of two categories: `resource-manager` (for ARM resources) and `data-plane` (for everything else). There should be an AutoRest configuration file (`readme.md`) for the RP inside both of these folders when present.
