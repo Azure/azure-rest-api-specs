@@ -23,16 +23,16 @@
     "application/json"
   ],
   "paths": {
-    "/workspace": {
+    "/integrationRuntimes": {
       "get": {
         "tags": [
-          "Workspace"
+          "IntegrationRuntimes"
         ],
-        "operationId": "Workspace_Get",
-        "description": "Get Workspace",
+        "operationId": "IntegrationRuntimes_List",
+        "description": "List Integration Runtimes",
         "x-ms-examples": {
-          "Get Workspace Information": {
-            "$ref": "./examples/Workspace_Get.json"
+          "List Integration Runtimes": {
+            "$ref": "./examples/IntegrationRuntimes_List.json"
           }
         },
         "parameters": [
@@ -44,7 +44,43 @@
           "200": {
             "description": "Success response.",
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/Workspace"
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/integrationRuntimes/{integrationRuntimeName}": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_Get",
+        "description": "Get Integration Runtime",
+        "x-ms-examples": {
+          "Get Integration Runtime": {
+            "$ref": "./examples/IntegrationRuntimes_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeResource"
             }
           },
           "default": {
@@ -75,6 +111,14 @@
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client",
       "format": "url"
+    },
+    "IntegrationRuntimeNameParameter": {
+      "name": "integrationRuntimeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Integration Runtime name",
+      "x-ms-parameter-location": "method"
     }
   }
 }
