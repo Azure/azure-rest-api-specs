@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2022-04-01-preview",
+    "version": "2022-08-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users."
   },
   "host": "management.azure.com",
@@ -214,6 +214,11 @@
         "responses": {
           "202": {
             "description": "Accepted. The response indicates the alert is refreshing.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AlertOperationResult"
             }
@@ -259,6 +264,11 @@
         "responses": {
           "202": {
             "description": "Accepted. The response indicates the alerts are refreshing.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AlertOperationResult"
             }
@@ -621,6 +631,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GetAlertIncidents": {
@@ -1242,7 +1255,7 @@
         "reason": {
           "type": "string",
           "readOnly": true,
-          "description": "The reason."
+          "description": "The reason for the incident."
         }
       },
       "x-ms-discriminator-value": "DuplicateRoleCreatedAlertIncident",
