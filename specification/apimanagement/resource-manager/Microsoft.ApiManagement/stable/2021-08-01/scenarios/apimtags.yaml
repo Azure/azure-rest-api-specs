@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicetags
+  tagId:
+    type: string
+    prefix: tagsid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: Tags
+    description: Microsoft.ApiManagement/service/tags
+    steps:
+      - step: Tag_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateTag.json
+        requestUpdate:
+          - replace: /parameters/properties/displayName
+            value: $(tagId)
+      - step: Tag_ListByService
+        exampleFile: ..\examples\ApiManagementListTags.json
+      - step: Tag_GetEntityState
+        exampleFile: ..\examples\ApiManagementHeadTag.json
+      - step: Tag_Get
+        exampleFile: ..\examples\ApiManagementGetTag.json
+      - step: Tag_Update
+        exampleFile: ..\examples\ApiManagementUpdateTag.json
+        requestUpdate:
+          - replace: /parameters/properties/displayName
+            value: update_$(tagId)
+      - step: Tag_Delete
+        exampleFile: ..\examples\ApiManagementDeleteTag.json

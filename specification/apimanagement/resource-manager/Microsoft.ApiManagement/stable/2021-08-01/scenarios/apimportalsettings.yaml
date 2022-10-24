@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicesetting
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: PortalSettings
+    description: Microsoft.ApiManagement/service/portalsettings
+    steps:
+      - step: PortalSettings_ListByService
+        exampleFile: ..\examples\ApiManagementListPortalSettings.json
+        
+  - scenario: SignInSettings
+    description: Microsoft.ApiManagement/service/portalsettings/signin
+    steps:
+      - step: SignInSettings_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementPortalSettingsPutSignIn.json
+      - step: SignInSettings_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadSignInSettings.json
+      - step: SignInSettings_Get
+        exampleFile: ..\examples\ApiManagementPortalSettingsGetSignIn.json
+      - step: SignInSettings_Update
+        exampleFile: ..\examples\ApiManagementPortalSettingsUpdateSignIn.json
+        
+  - scenario: SignUpSettings
+    description: Microsoft.ApiManagement/service/portalsettings/signup
+    steps:
+      - step: SignUpSettings_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementPortalSettingsPutSignUp.json
+      - step: SignUpSettings_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadSignUpSettings.json
+      - step: SignUpSettings_Get
+        exampleFile: ..\examples\ApiManagementPortalSettingsGetSignUp.json
+      - step: SignUpSettings_Update
+        exampleFile: ..\examples\ApiManagementPortalSettingsUpdateSignUp.json
+
+  - scenario: DelegationSettings
+    description: Microsoft.ApiManagement/service/portalsettings/delegation
+    steps:
+      - step: DelegationSettings_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementPortalSettingsPutDelegation.json
+      - step: DelegationSettings_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadDelegationSettings.json
+      - step: DelegationSettings_Get
+        exampleFile: ..\examples\ApiManagementPortalSettingsGetDelegation.json
+      - step: DelegationSettings_Update
+        exampleFile: ..\examples\ApiManagementPortalSettingsUpdateDelegation.json
+      - step: DelegationSettings_ListSecrets
+        exampleFile: ..\examples\ApiManagementListSecretsPortalSettingsValidationKey.json

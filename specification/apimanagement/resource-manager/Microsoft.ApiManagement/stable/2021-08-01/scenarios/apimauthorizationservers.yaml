@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: serviceauth
+  authsid:
+    type: string
+    prefix: authsid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+        
+scenarios:
+  - scenario: AuthorizationServer
+    description: Microsoft.ApiManagement/service/authorizationServers
+    steps:
+      - step: AuthorizationServer_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateAuthorizationServer.json
+      - step: AuthorizationServer_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadAuthorizationServer.json
+      - step: AuthorizationServer_ListByService
+        exampleFile: ..\examples\ApiManagementListAuthorizationServers.json
+      - step: AuthorizationServer_Get
+        exampleFile: ..\examples\ApiManagementGetAuthorizationServer.json
+      - step: AuthorizationServer_Update
+        exampleFile: ..\examples\ApiManagementUpdateAuthorizationServer.json
+      - step: AuthorizationServer_ListSecrets
+        exampleFile: ..\examples\ApiManagementAuthorizationServerListSecrets.json
+      - step: AuthorizationServer_Delete
+        exampleFile: ..\examples\ApiManagementDeleteAuthorizationServer.json

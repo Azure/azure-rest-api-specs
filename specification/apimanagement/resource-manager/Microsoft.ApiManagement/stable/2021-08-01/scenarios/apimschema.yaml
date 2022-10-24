@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: serviceschema
+  schemaId:
+    type: string
+    prefix: globalschemaid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: GlobalSchema
+    description: Microsoft.ApiManagement/service/schemas
+    steps:
+      - step: GlobalSchema_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateGlobalSchema1.json
+      - step: GlobalSchema_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadGlobalSchema.json
+      - step: GlobalSchema_ListByService
+        exampleFile: ..\examples\ApiManagementListGlobalSchemas.json
+      - step: GlobalSchema_Get
+        exampleFile: ..\examples\ApiManagementGetGlobalSchema1.json
+      - step: GlobalSchema_Delete
+        exampleFile: ..\examples\ApiManagementDeleteGlobalSchema.json

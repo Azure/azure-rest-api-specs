@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: serviceopenid
+  opid:
+    type: string
+    prefix: opid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: OpenidConnectProvider
+    description: Microsoft.ApiManagement/service/openidConnectProviders
+    steps:
+      - step: OpenIdConnectProvider_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateOpenIdConnectProvider.json
+      - step: OpenIdConnectProvider_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadOpenIdConnectProvider.json
+      - step: OpenIdConnectProvider_ListByService
+        exampleFile: ..\examples\ApiManagementListOpenIdConnectProviders.json
+      - step: OpenIdConnectProvider_Get
+        exampleFile: ..\examples\ApiManagementGetOpenIdConnectProvider.json
+      - step: OpenIdConnectProvider_Update
+        exampleFile: ..\examples\ApiManagementUpdateOpenIdConnectProvider.json
+      - step: OpenIdConnectProvider_ListSecrets
+        exampleFile: ..\examples\ApiManagementOpenidConnectProviderListSecrets.json
+      - step: OpenIdConnectProvider_Delete
+        exampleFile: ..\examples\ApiManagementDeleteOpenIdConnectProvider.json

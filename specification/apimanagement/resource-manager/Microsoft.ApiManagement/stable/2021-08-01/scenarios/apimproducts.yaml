@@ -1,0 +1,126 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: serviceproduct
+  productId:
+    type: string
+    prefix: productid
+  apiId:
+    type: string
+    prefix: productapiid
+  groupId:
+    type: string
+    prefix: productgroupid
+  tagId:
+    type: string
+    prefix: producttagid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+  - step: Product_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateProduct.json
+        
+scenarios:
+  - scenario: Product
+    description: Microsoft.ApiManagement/service/products
+    steps:
+      - step: Product_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadProduct.json
+      - step: Product_ListByService
+        exampleFile: ..\examples\ApiManagementListProducts.json
+      - step: Product_Get
+        exampleFile: ..\examples\ApiManagementGetProduct.json
+      - step: Product_ListByTags
+        exampleFile: ..\examples\ApiManagementListProductsByTags.json
+      - step: Product_Update
+        exampleFile: ..\examples\ApiManagementUpdateProduct.json
+
+  - scenario: ProductApi
+    description: Microsoft.ApiManagement/service/products/apis
+    steps:
+      - step: Api_CreateOrUpdate
+        operationId: Api_CreateOrUpdate
+        parameters:
+          parameters:
+            properties:
+              format: openapi-link
+              value: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml
+              path: petstore
+      - step: ProductApi_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateProductApi.json
+      - step: ProductApi_CheckEntityExists
+        exampleFile: ..\examples\ApiManagementHeadProductApi.json
+      - step: ProductApi_ListByProduct
+        exampleFile: ..\examples\ApiManagementListProductApis.json
+      - step: ProductApi_Delete
+        exampleFile: ..\examples\ApiManagementDeleteProductApi.json
+
+  - scenario: ProductGroup
+    description: Microsoft.ApiManagement/service/products/groups
+    steps:
+      - step: Group_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateGroup.json
+        requestUpdate:
+          - replace: /parameters/properties/displayName
+            value: $(groupId)
+      - step: ProductGroup_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateProductGroup.json
+      - step: ProductGroup_CheckEntityExists
+        exampleFile: ..\examples\ApiManagementHeadProductGroup.json
+      - step: ProductGroup_ListByProduct
+        exampleFile: ..\examples\ApiManagementListProductGroups.json
+      - step: ProductGroup_Delete
+        exampleFile: ..\examples\ApiManagementDeleteProductGroup.json
+
+  - scenario: ProductPolicy
+    description: Microsoft.ApiManagement/service/products/policies
+    steps:
+      - step: ProductPolicy_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateProductPolicy.json
+        requestUpdate:
+          - remove: /parameters/properties/value
+      - step: ProductPolicy_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadProductPolicy.json
+      - step: ProductPolicy_ListByProduct
+        exampleFile: ..\examples\ApiManagementListProductPolicies.json
+      - step: ProductPolicy_Get
+        exampleFile: ..\examples\ApiManagementGetProductPolicy.json
+      - step: ProductPolicy_Delete
+        exampleFile: ..\examples\ApiManagementDeleteProductPolicy.json
+
+  - scenario: ProductTag
+    description: Microsoft.ApiManagement/service/products/tags
+    steps:
+      - step: Tag_CreateOrUpdate
+        operationId: Tag_CreateOrUpdate
+        parameters:
+          parameters:
+            properties:
+              displayName: $(tagId)
+      - step: Tag_AssignToProduct
+        exampleFile: ..\examples\ApiManagementCreateProductTag.json
+      - step: Tag_GetEntityStateByProduct
+        exampleFile: ..\examples\ApiManagementHeadProductTag.json
+      - step: Tag_GetByProduct
+        exampleFile: ..\examples\ApiManagementGetProductTag.json
+      - step: Tag_ListByProduct
+        exampleFile: ..\examples\ApiManagementListProductTags.json
+      - step: Tag_DetachFromProduct
+        exampleFile: ..\examples\ApiManagementDeleteProductTag.json
+
+  - scenario: ProductSubscriptions
+    description: Microsoft.ApiManagement/service/products/subscriptions
+    steps:
+      - step: ProductSubscriptions_List
+        exampleFile: ..\examples\ApiManagementListProductSubscriptions.json
+
+cleanUpSteps:
+  - step: Product_Delete
+    exampleFile: ..\examples\ApiManagementDeleteProduct.json

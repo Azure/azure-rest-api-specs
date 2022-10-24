@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicenamed
+  namedValueId:
+    type: string
+    prefix: namedvalue
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: NamedValue
+    description: Microsoft.ApiManagement/service/namedValues
+    steps:
+      - step: NamedValue_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateNamedValue.json
+      - step: NamedValue_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadNamedValue.json
+      - step: NamedValue_ListByService
+        exampleFile: ..\examples\ApiManagementListNamedValues.json
+      - step: NamedValue_Get
+        exampleFile: ..\examples\ApiManagementGetNamedValue.json
+      - step: NamedValue_Update
+        exampleFile: ..\examples\ApiManagementUpdateNamedValue.json
+      - step: NamedValue_ListValue
+        exampleFile: ..\examples\ApiManagementNamedValueListValue.json
+      - step: NamedValue_Delete
+        exampleFile: ..\examples\ApiManagementDeleteNamedValue.json

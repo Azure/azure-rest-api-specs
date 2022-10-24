@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: serviceapiversionsets
+  versionSetId:
+    type: string
+    prefix: versionset
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+        
+scenarios:
+  - scenario: ApiVersionSet
+    description: Microsoft.ApiManagement/service/apiVersionSets
+    steps:
+      - step: ApiVersionSet_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateApiVersionSet.json
+      - step: ApiVersionSet_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApiVersionSet.json
+      - step: ApiVersionSet_ListByService
+        exampleFile: ..\examples\ApiManagementListApiVersionSets.json
+      - step: ApiVersionSet_Get
+        exampleFile: ..\examples\ApiManagementGetApiVersionSet.json
+      - step: ApiVersionSet_Update
+        exampleFile: ..\examples\ApiManagementUpdateApiVersionSet.json
+      - step: ApiVersionSet_Delete
+        exampleFile: ..\examples\ApiManagementDeleteApiVersionSet.json

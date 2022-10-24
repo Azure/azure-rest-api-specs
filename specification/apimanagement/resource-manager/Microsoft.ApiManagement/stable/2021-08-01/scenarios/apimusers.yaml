@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: serviceuser
+  userId:
+    type: string
+    prefix: userid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: User
+    description: Microsoft.ApiManagement/service/users
+    steps:
+      - step: User_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateUser.json
+      - step: User_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadUser.json
+      - step: User_ListByService
+        exampleFile: ..\examples\ApiManagementListUsers.json
+      - step: User_Get
+        exampleFile: ..\examples\ApiManagementGetUser.json
+      - step: User_Update
+        exampleFile: ..\examples\ApiManagementUpdateUser.json
+      - step: User_GenerateSsoUrl
+        exampleFile: ..\examples\ApiManagementUserGenerateSsoUrl.json
+      - step: UserGroup_List
+        exampleFile: ..\examples\ApiManagementListUserGroups.json
+      - step: UserSubscription_List
+        exampleFile: ..\examples\ApiManagementListUserSubscriptions.json
+      - step: UserIdentities_List
+        exampleFile: ..\examples\ApiManagementListUserIdentities.json
+      - step: UserConfirmationPassword_Send
+        exampleFile: ..\examples\ApiManagementUserConfirmationPasswordSend.json
+      - step: User_Delete
+        exampleFile: ..\examples\ApiManagementDeleteUser.json

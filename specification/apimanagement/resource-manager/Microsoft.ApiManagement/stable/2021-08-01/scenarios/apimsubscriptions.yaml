@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicesub
+  sid:
+    type: string
+    prefix: sid
+  productId:
+    type: string
+    prefix: subproductid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+  - step: Product_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateProduct.json
+    outputVariables:
+      subproductId:
+        type: string
+        fromResponse: /id
+
+scenarios:
+  - scenario: Subscription
+    description: Microsoft.ApiManagement/service/subscriptions
+    steps:
+      - step: Subscription_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateSubscription.json
+        requestUpdate:
+          - replace: /parameters/properties/scope
+            value: $(subproductId)
+          - remove: /parameters/properties/ownerId
+      - step: Subscription_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadSubscription.json
+      - step: Subscription_List
+        exampleFile: ..\examples\ApiManagementListSubscriptions.json
+      - step: Subscription_Get
+        exampleFile: ..\examples\ApiManagementGetSubscription.json
+      - step: Subscription_Update
+        exampleFile: ..\examples\ApiManagementUpdateSubscription.json
+      - step: Subscription_RegeneratePrimaryKey
+        exampleFile: ..\examples\ApiManagementSubscriptionRegeneratePrimaryKey.json
+      - step: Subscription_RegenerateSecondaryKey
+        exampleFile: ..\examples\ApiManagementSubscriptionRegenerateSecondaryKey.json
+      - step: Subscription_ListSecrets
+        exampleFile: ..\examples\ApiManagementSubscriptionListSecrets.json
+      - step: Subscription_Delete
+        exampleFile: ..\examples\ApiManagementDeleteSubscription.json
+
+  - scenario: ApiManagementSkus
+    description: Microsoft.ApiManagement/skus
+    steps:
+      - step: ApiManagementSkus_List
+        exampleFile: ..\examples\ApiManagementListSku.json
+
+  - scenario: TenantSettings
+    description: Microsoft.ApiManagement/service/settings
+    steps:
+      - step: TenantSettings_ListByService
+        exampleFile: ..\examples\ApiManagementListTenantSettings.json
+      - step: TenantSettings_Get
+        exampleFile: ..\examples\ApiManagementGetTenantSettings.json

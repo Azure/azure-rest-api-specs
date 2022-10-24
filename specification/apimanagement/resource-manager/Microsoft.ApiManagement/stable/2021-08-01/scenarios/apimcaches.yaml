@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicecache
+  cacheId:
+    type: string
+    prefix: cacheid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: Cache
+    description: Microsoft.ApiManagement/service/caches
+    steps:
+      - step: Cache_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateCache.json
+      - step: Cache_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadCache.json
+      - step: Cache_Get
+        exampleFile: ..\examples\ApiManagementGetCache.json
+      - step: Cache_ListByService
+        exampleFile: ..\examples\ApiManagementListCaches.json
+      - step: Cache_Update
+        exampleFile: ..\examples\ApiManagementUpdateCache.json
+        requestUpdate:
+          - replace: /parameters/properties/description
+            value: update cache description
+          - remove: /parameters/properties/useFromLocation
+      - step: Cache_Delete
+        exampleFile: ..\examples\ApiManagementDeleteCache.json

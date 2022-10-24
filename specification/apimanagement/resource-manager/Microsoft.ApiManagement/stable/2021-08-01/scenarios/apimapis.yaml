@@ -1,0 +1,209 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicenam
+  apiId:
+    type: string
+    prefix: apiid
+  tagId:
+    type: string
+    prefix: tagid
+  tagOperationId:
+    type: string
+    prefix: tagoperation
+  diagnosticId:
+    type: string
+    prefix: diagnostic
+  releaseId:
+    type: string
+    prefix: releaseid
+  tagDescriptionId:
+    type: string
+    prefix: tagdescrip
+  schemaId:
+    type: string
+    prefix: schemaid
+  operationId:
+    type: string
+    prefix: operationi
+  issueId:
+    type: string
+    prefix: issueid
+  attachmentId:
+    type: string
+    prefix: attachment
+  commentId:
+    type: string
+    prefix: commentid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+  - step: Api_CreateOrUpdate
+    operationId: Api_CreateOrUpdate
+    parameters:
+      parameters:
+        properties:
+          format: openapi-link
+          value: https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml
+          path: petstore
+  - step: ApiOperation_CreateOrUpdate
+    operationId: ApiOperation_CreateOrUpdate
+    parameters:
+      parameters:
+        properties:
+          displayName: example operation
+          method: GET
+          urlTemplate: /operation/customers/{uid}
+          templateParameters:
+            - name: uid
+              type: string
+              description: user id
+
+scenarios:
+  - scenario: Api
+    description: Microsoft.ApiManagement/service/apis
+    steps:
+      - step: Api_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApi.json
+      - step: Api_ListByService
+        exampleFile: ..\examples\ApiManagementListApis.json
+      - step: Api_ListByTags
+        exampleFile: ..\examples\ApiManagementListApisByTags.json
+      - step: Api_Get
+        exampleFile: ..\examples\ApiManagementGetApiContract.json
+      - step: Api_Update
+        exampleFile: ..\examples\ApiManagementUpdateApi.json
+
+  - scenario: Tag 
+    description: Microsoft.ApiManagement/service/apis/tags
+    steps:
+      - step: Tag_CreateOrUpdate
+        operationId: Tag_CreateOrUpdate
+        parameters:
+          parameters:
+            properties:
+              displayName: tag2
+      - step: Tag_AssignToApi
+        exampleFile: ..\examples\ApiManagementCreateApiTag.json
+      - step: Tag_GetEntityStateByApi
+        exampleFile: ..\examples\ApiManagementHeadApiTag.json
+      - step: Tag_GetByApi
+        exampleFile: ..\examples\ApiManagementGetApiTag.json
+      - step: Tag_Delete
+        exampleFile: ..\examples\ApiManagementDeleteTag.json
+
+  - scenario: ApiRelease
+    description: Microsoft.ApiManagement/service/apis/releases
+    steps:
+      - step: ApiRelease_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateApiRelease.json
+      - step: ApiRelease_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApiRelease.json
+      - step: ApiRelease_ListByService
+        exampleFile: ..\examples\ApiManagementListApiReleases.json
+      - step: ApiRelease_Get
+        exampleFile: ..\examples\ApiManagementGetApiRelease.json
+      - step: ApiRelease_Update
+        exampleFile: ..\examples\ApiManagementUpdateApiRelease.json
+      - step: ApiRelease_Delete
+        exampleFile: ..\examples\ApiManagementDeleteApiRelease.json
+
+  - scenario: ApiPolicy
+    description: Microsoft.ApiManagement/service/apis/policies
+    steps:
+      - step: ApiPolicy_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateApiPolicy.json
+      - step: ApiPolicy_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApiPolicy.json
+      - step: ApiPolicy_ListByApi
+        exampleFile: ..\examples\ApiManagementListApiPolicies.json
+      - step: ApiPolicy_Get
+        exampleFile: ..\examples\ApiManagementGetApiPolicy.json
+      - step: ApiPolicy_Delete
+        exampleFile: ..\examples\ApiManagementDeleteApiPolicy.json
+
+  - scenario: ApiSchema
+    description: Microsoft.ApiManagement/service/apis/schemas
+    steps:
+      - step: ApiSchema_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateApiSchema.json
+      - step: ApiSchema_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApiSchema.json
+      - step: ApiSchema_ListByApi
+        exampleFile: ..\examples\ApiManagementListApiSchemas.json
+      - step: ApiSchema_Get
+        exampleFile: ..\examples\ApiManagementGetApiSchema.json
+      - step: ApiSchema_Delete
+        exampleFile: ..\examples\ApiManagementDeleteApiSchema.json
+
+  - scenario: ApiOperation
+    description: Microsoft.ApiManagement/service/apis/operations
+    steps:
+      - step: ApiOperation_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApiOperation.json
+      - step: ApiOperation_ListByApi
+        exampleFile: ..\examples\ApiManagementListApiOperations.json
+      - step: ApiOperation_Get
+        exampleFile: ..\examples\ApiManagementGetApiOperation.json
+      - step: ApiOperation_Update
+        operationId: ApiOperation_Update
+        parameters:
+          If-Match: "*"
+          parameters:
+            properties:
+              description: update description
+
+  - scenario: OperationsTag
+    description: Microsoft.ApiManagement/service/apis/operations/tags
+    steps:
+      - step: Tag_CreateOrUpdate
+        operationId: Tag_CreateOrUpdate
+        parameters:
+          tagId: $(tagOperationId)
+          parameters:
+            properties:
+              displayName: tagoperation1
+      - step: Tag_AssignToOperation
+        operationId: Tag_AssignToOperation
+        parameters:
+          tagId: $(tagOperationId)
+      - step: Tag_GetEntityStateByOperation
+        operationId: Tag_GetEntityStateByOperation
+        parameters:
+          tagId: $(tagOperationId)
+      - step: Tag_GetByOperation
+        operationId: Tag_GetByOperation
+        parameters:
+          tagId: $(tagOperationId)
+      - step: Tag_Delete
+        operationId: Tag_Delete
+        parameters:
+          If-Match: "*"
+          tagId: $(tagOperationId)
+
+  - scenario: ApiOperationPolicy
+    description: Microsoft.ApiManagement/service/apis/operations/policies
+    steps:
+      - step: ApiOperationPolicy_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateApiOperationPolicy.json
+      - step: ApiOperationPolicy_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadApiOperationPolicy.json
+      - step: ApiOperationPolicy_ListByOperation
+        exampleFile: ..\examples\ApiManagementListApiOperationPolicies.json
+      - step: ApiOperationPolicy_Get
+        exampleFile: ..\examples\ApiManagementGetApiOperationPolicy.json
+      - step: ApiOperationPolicy_Delete
+        exampleFile: ..\examples\ApiManagementDeleteApiOperationPolicy.json
+
+cleanUpSteps:
+  - step: ApiOperation_Delete
+    exampleFile: ..\examples\ApiManagementDeleteApiOperation.json
+  - step: Api_Delete
+    exampleFile: ..\examples\ApiManagementDeleteApi.json

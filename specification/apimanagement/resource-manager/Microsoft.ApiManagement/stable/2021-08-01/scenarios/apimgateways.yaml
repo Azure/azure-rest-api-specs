@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicegateway
+  gatewayId:
+    type: string
+    prefix: gatewayid
+  hcId:
+    type: string
+    prefix: hcid
+  location: 
+    type: string
+    
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ..\examples\ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Premium
+
+scenarios:
+  - scenario: Gateway
+    description: Microsoft.ApiManagement/service/gateways
+    steps:
+      - step: Gateway_CreateOrUpdate
+        exampleFile: ..\examples\ApiManagementCreateGateway.json
+      - step: Gateway_GetEntityTag
+        exampleFile: ..\examples\ApiManagementHeadGateway.json
+      - step: Gateway_ListByService
+        exampleFile: ..\examples\ApiManagementListGateways.json
+      - step: Gateway_Get
+        exampleFile: ..\examples\ApiManagementGetGateway.json
+      - step: Gateway_Update
+        exampleFile: ..\examples\ApiManagementUpdateGateway.json
+      - step: Gateway_ListKeys
+        exampleFile: ..\examples\ApiManagementGatewayListKeys.json
+      - step: Gateway_RegenerateKey
+        exampleFile: ..\examples\ApiManagementGatewayRegenerateKey.json
+      - step: Gateway_GenerateToken
+        exampleFile: ..\examples\ApiManagementGatewayGenerateToken.json
+      - step: Gateway_Delete
+        exampleFile: ..\examples\ApiManagementDeleteGateway.json
+
+  - scenario: OutboundNetworkDependenciesEndpoints
+    description: Microsoft.ApiManagement/service/outboundNetworkDependenciesEndpoints
+    steps:
+      - step: OutboundNetworkDependenciesEndpoints_ListByService
+        exampleFile: ..\examples\ApiManagementServiceGetOutboundNetworkDependenciesEndpoints.json
+
+  - scenario: NetworkStatus
+    description: Microsoft.ApiManagement/service/networkstatus
+    steps:
+      - step: NetworkStatus_ListByLocation
+        exampleFile: ..\examples\ApiManagementServiceGetNetworkStatusByLocation.json
+        requestUpdate:
+          - replace: /locationName
+            value: $(location)
+        
+      - step: NetworkStatus_ListByService
+        exampleFile: ..\examples\ApiManagementServiceGetNetworkStatus.json
