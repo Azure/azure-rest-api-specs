@@ -106,6 +106,10 @@ directive:
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: operations.json
     reason: unnecessary check
+
+  - suppress: ResourceNameRestriction
+    from: componentPolicyStates.json
+    reason: unnecessary check
 ```
 
 ``` yaml !$(python)
