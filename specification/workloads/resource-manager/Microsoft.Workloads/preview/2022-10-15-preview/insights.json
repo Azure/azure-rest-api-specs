@@ -1,0 +1,812 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "description": "Workloads Insights Resource Provider APIs",
+    "version": "2022-10-15-preview",
+    "contact": {
+      "email": "aioperations@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/insights": {
+      "get": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_List",
+        "summary": "Gets a list of Workloads Insight instances in the specified subscription.",
+        "description": "Gets a list of Workloads Insight instances in the specified subscription. The operations returns various properties of each instance.",
+        "x-ms-examples": {
+          "List all Workloads Insights instances in a subscription": {
+            "$ref": "./examples/insights/insights_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InsightInstanceResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/insights": {
+      "get": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_ListByResourceGroup",
+        "summary": "Gets a list of Workloads Insight instances.",
+        "description": "Gets a list of Workloads Insight instances in the specified subscription and resource group. The operations returns various properties of each instance.",
+        "x-ms-examples": {
+          "List all Workloads Insights instances in a resource group": {
+            "$ref": "./examples/insights/insights_ListByRG.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InsightInstanceResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/insights/{instanceName}": {
+      "get": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_Get",
+        "summary": "Gets properties of Workloads Insights instance.",
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Gets properties of Workloads Insights instance for the specified subscription, resource group and instance name.",
+        "x-ms-examples": {
+          "Get properties of Workloads Insights instance": {
+            "$ref": "./examples/insights/insights_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InsightInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Creates a new Workloads Insights instance.",
+        "description": "Creates a Workloads Insights instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Creates a new Workloads Insights instance": {
+            "$ref": "./examples/insights/insights_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightInstanceRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workload Insights Instance was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/InsightInstance"
+            }
+          },
+          "201": {
+            "description": "Workload Insights Instance will be created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/InsightInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_Delete",
+        "x-ms-long-running-operation": true,
+        "summary": "Deletes a Workload Insights instance.",
+        "description": "Deletes a Workloads Insights instance for the specified subscription, resource group and instance name.",
+        "x-ms-examples": {
+          "Deletes a Workload Insights instance": {
+            "$ref": "./examples/insights/insights_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted Workload Insights Instance.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Deleting Workload Insights Instance."
+          },
+          "204": {
+            "description": "Workload Insights Instance does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Insights"
+        ],
+        "operationId": "Insights_Update",
+        "summary": "Patches tags field of Workload Insights instance.",
+        "description": "Patches the tags field of Workload Insights instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Update Tags field of a Workload Insights instance": {
+            "$ref": "./examples/insights/insights_PatchTags.json"
+          },
+          "Delete Tags field of a Workload Insights instance": {
+            "$ref": "./examples/insights/insights_PatchTags_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightInstanceUpdateRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InsightInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InsightInstanceResponseList": {
+      "description": "The response from the List Workloads Insights Instances operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Workloads Insights instances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightInstance"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of instances.",
+          "type": "string"
+        }
+      }
+    },
+    "InsightInstance": {
+      "description": "Workloads Insights Instance info on Azure (ARM properties and Workloads Insights Instance properties).",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Insight Instance properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InsightInstanceProperties"
+        }
+      }
+    },
+    "InsightInstanceProperties": {
+      "description": "Insight Instance properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/InsightProvisioningState"
+        },
+        "errors": {
+          "description": "Defines the workload insight instance errors.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InsightError"
+            }
+          ],
+          "readOnly": true
+        },
+        "workloadType": {
+          "description": "Type of the workload instance.",
+          "type": "string"
+        },
+        "workloadProvider": {
+          "description": "The telemetry provider for the workload instance.",
+          "type": "string"
+        },
+        "resourcesDiscoveryDataFeeds": {
+          "description": "Datafeed for resource discovery of the workload instance.",
+          "$ref": "#/definitions/DataFeeds"
+        },
+        "telemetryDataFeeds": {
+          "description": "Datafeed for telemetry data from the workload instance.",
+          "$ref": "#/definitions/DataFeeds"
+        },
+        "outputDataStores": {
+          "description": "DataStore to push insights for the workload instance.",
+          "$ref": "#/definitions/OutputDataStores"
+        }
+      }
+    },
+    "DataFeeds": {
+      "description": "The list of dataFeeds for an instance.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataFeed"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
+    "DataFeed": {
+      "description": "DataFeed for an instance.",
+      "type": "object",
+      "discriminator": "dataFeedType",
+      "required": [
+        "name",
+        "dataFeedType",
+        "dataFeedClass"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the datafeed.",
+          "type": "string"
+        },
+        "dataFeedType": {
+          "description": "Type of the datafeed, ex Log Analytics.",
+          "type": "string",
+          "enum": [
+            "AzureLogAnalyticsDataFeed"
+          ],
+          "x-ms-enum": {
+            "name": "dataFeedType",
+            "modelAsString": true
+          }
+        },
+        "dataFeedClass": {
+          "description": "Classification of the datafeed, ex Raw, Anomaly",
+          "type": "string",
+          "enum": [
+            "Raw",
+            "Anomaly"
+          ],
+          "x-ms-enum": {
+            "name": "dataFeedClass",
+            "modelAsString": true
+          }
+        },
+        "trigger": {
+          "description": "Trigger for the datafeed.",
+          "$ref": "#/definitions/Trigger"
+        },
+        "schema": {
+          "description": "Schema for the datafeed.",
+          "$ref": "#/definitions/DataFeedSchema"
+        }
+      }
+    },
+    "AzureLogAnalyticsDataFeed": {
+      "description": "Azure LogAnalytics datafeed.",
+      "type": "object",
+      "required": [
+        "details",
+        "trigger"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeed"
+        }
+      ],
+      "properties": {
+        "details": {
+          "description": "Details of Azure LogAnalytics datafeed.",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Kusto query to pull data from Log Analytics",
+              "type": "string"
+            }
+          }
+        },
+        "dataStore": {
+          "$ref": "#/definitions/AzureLogAnalyticsDataStore"
+        }
+      }
+    },
+    "Trigger": {
+      "description": "Trigger of the datafeed.",
+      "type": "object",
+      "discriminator": "triggerType",
+      "required": [
+        "triggerType"
+      ],
+      "properties": {
+        "triggerType": {
+          "description": "Trigger type for fetching the datafeed.",
+          "type": "string",
+          "enum": [
+            "ScheduleTrigger"
+          ],
+          "x-ms-enum": {
+            "name": "triggerType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ScheduleTrigger": {
+      "description": "Schedule trigger of the datafeed.",
+      "type": "object",
+      "required": [
+        "granularity",
+        "value",
+        "startFrom"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "granularity": {
+          "description": "Ingestion frequency granularity.",
+          "type": "string",
+          "default": "seconds",
+          "enum": [
+            "seconds"
+          ],
+          "x-ms-enum": {
+            "name": "granularity",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Value of the ingestion granularity.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 60,
+          "maximum": 31536000
+        },
+        "startFrom": {
+          "description": "Time from when the datafeed ingestion should begin.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "DataFeedSchema": {
+      "description": "Schema of the dataFeed.",
+      "type": "object",
+      "properties": {
+        "datasets": {
+          "description": "List of dataset in the datafeed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Dataset": {
+      "description": "Dataset in the datafeed.",
+      "type": "object",
+      "discriminator": "datasetType",
+      "required": [
+        "name",
+        "datasetType",
+        "impactCategory",
+        "resourceIdColumns",
+        "timestampColumn"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the dataset.",
+          "type": "string"
+        },
+        "impactCategory": {
+          "description": "Category of impact generated from the data.",
+          "type": "string"
+        },
+        "datasetType": {
+          "description": "Type of the dataset.",
+          "type": "string",
+          "enum": [
+            "StaticDataset"
+          ],
+          "x-ms-enum": {
+            "name": "datasetType",
+            "modelAsString": true
+          }
+        },
+        "resourceIdColumns": {
+          "description": "Resource identifier columns.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnDetail"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "dimensionColumns": {
+          "description": "List of dimension columns.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnDetail"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "timestampColumn": {
+          "description": "Timestamp column.",
+          "$ref": "#/definitions/ColumnDetail"
+        }
+      }
+    },
+    "StaticDataset": {
+      "description": "Static Dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ]
+    },
+    "ColumnDetail": {
+      "description": "Detail of the dataset column.",
+      "type": "object",
+      "required": [
+        "name",
+        "columnType"
+      ],
+      "properties": {
+        "name": {
+          "description": "Column name.",
+          "type": "string"
+        },
+        "alias": {
+          "description": "Column Alias.",
+          "type": "string"
+        },
+        "columnType": {
+          "description": "Column type.",
+          "type": "string",
+          "default": "string",
+          "enum": [
+            "string",
+            "integer",
+            "timestamp",
+            "date-time",
+            "date"
+          ],
+          "x-ms-enum": {
+            "name": "columnType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DataStore": {
+      "description": "Output data store for the datafeed.",
+      "type": "object",
+      "discriminator": "dataStoreType",
+      "required": [
+        "dataStoreType"
+      ],
+      "properties": {
+        "dataStoreType": {
+          "description": "Type of the data store.",
+          "type": "string",
+          "enum": [
+            "AzureLogAnalyticsDataStore"
+          ],
+          "x-ms-enum": {
+            "name": "dataStoreType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OutputDataStores": {
+      "description": "The list of output datastores.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataStore"
+      },
+      "x-ms-identifiers": []
+    },
+    "AzureLogAnalyticsDataStore": {
+      "description": "Azure Analytics in data store.",
+      "type": "object",
+      "required": [
+        "workspaceArmId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ],
+      "properties": {
+        "workspaceArmId": {
+          "description": "The ARM ID of the Log Analytics Workspace.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "InsightInstanceUpdateRequest": {
+      "description": "Workload insight instance update request",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InsightProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Failed",
+        "Succeeded",
+        "Deleting",
+        "Migrating"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadInsightProvisioningState",
+        "modelAsString": true
+      },
+      "description": "Defines the provisioning states."
+    },
+    "InsightError": {
+      "description": "Standard error object.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Server-defined set of error codes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Human-readable representation of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "innerError": {
+          "description": "Object containing more specific information than  the current object about the error.",
+          "type": "object",
+          "properties": {
+            "innerError": {
+              "$ref": "#/definitions/InsightError"
+            }
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "InsightInstanceNameParameter": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Workload Insights instance name.",
+      "x-ms-parameter-location": "method"
+    },
+    "InsightInstanceRequestParameter": {
+      "name": "insightInstanceRequestParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/InsightInstance"
+      },
+      "description": "Request body representing a Workload Insight instance",
+      "x-ms-parameter-location": "method"
+    },
+    "InsightInstanceUpdateRequestParameter": {
+      "name": "insightInstanceUpdateRequestParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/InsightInstanceUpdateRequest"
+      },
+      "description": "Request body representing Workload Insight instance update.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
