@@ -28,10 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2022-06-01-preview
-csharp-sdks-folder: ./Generated/CSharp
-python-sdks-folder: ./Generated/Python
-go-sdk-folder: ./Generated/Golang
+tag: package-2022-09-preview
 license-header: MICROSOFT_MIT
 ```
 
@@ -40,7 +37,7 @@ tag: package-passivestamp-2021-11-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2022-06-01-preview
+tag: package-2022-09-preview
 ```
 
 ### Validations
@@ -54,11 +51,20 @@ semantic-validator: true
 message-format: json
 ```
 
+
+### Tag: package-2022-09-preview
+
+These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-preview'
+input-file:
+  - Microsoft.RecoveryServices/preview/2022-09-01-preview/bms.json
+```
 ### Tag: package-2022-06-01-preview
 
 These settings apply only when `--tag=package-2022-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-06-01-preview'
+``` yaml $(tag) == 'package-2022-06-01-preview'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-06-01-preview/bms.json
 ```
@@ -67,10 +73,11 @@ input-file:
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-03-01/bms.json
 ```
+
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.

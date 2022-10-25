@@ -253,13 +253,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": ""
           },
@@ -417,6 +417,15 @@
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
         },
+        "isAutotuneEnabled": {
+          "type": "boolean",
+          "title": "Enable Autotune",
+          "description": "Whether autotune is required or not.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
           "description": "Whether session level packages enabled."
@@ -437,7 +446,12 @@
         "nodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of nodes in the Big Data pool."
+          "description": "The number of nodes in the Big Data pool.",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
@@ -447,8 +461,9 @@
           "description": "List of custom libraries/packages associated with the spark pool.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LibraryInfo"
-          }
+            "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",
@@ -509,7 +524,11 @@
         "minNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of nodes the Big Data pool can support."
+          "description": "The minimum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "enabled": {
           "type": "boolean",
@@ -518,7 +537,11 @@
         "maxNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of nodes the Big Data pool can support."
+          "description": "The maximum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -549,51 +572,20 @@
         "minExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of executors alloted"
+          "description": "The minimum number of executors alloted",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "maxExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of executors alloted"
-        }
-      }
-    },
-    "LibraryInfo": {
-      "type": "object",
-      "description": "Library/package information of a Big Data pool powered by Apache Spark",
-      "title": "Information about a library/package created at the workspace level.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the library."
-        },
-        "path": {
-          "type": "string",
-          "description": "Storage blob path of library."
-        },
-        "containerName": {
-          "type": "string",
-          "description": "Storage blob container name."
-        },
-        "uploadedTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last update time of the library.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the library."
-        },
-        "provisioningStatus": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning status of the library/package."
-        },
-        "creatorId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Creator Id of the library/package."
+          "description": "The maximum number of executors alloted",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -647,7 +639,11 @@
           "x-ms-enum": {
             "name": "ConfigurationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     }
