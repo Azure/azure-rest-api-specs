@@ -4,7 +4,7 @@
     "resourceGroupName": "rg1",
     "clusterRp": "Microsoft.Kubernetes",
     "clusterResourceName": "connectedClusters",
-    "extensionName": "ClusterMonitor",
+    "extensionName": "azureVote",
     "api-version": "2022-11-01",
     "clusterName": "clusterName1"
   },
@@ -13,9 +13,9 @@
       "headers": {},
       "description": "Details of the Kubernetes Extension's current status.",
       "body": {
-        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
         "type": "Microsoft.KubernetesConfiguration/extensions",
-        "name": "ClusterMonitor",
+        "name": "azureVote",
         "systemData": {
           "createdBy": "string",
           "createdByType": "Application",
@@ -24,8 +24,13 @@
           "lastModifiedByType": "Application",
           "lastModifiedAt": "2021-09-08T05:10:57.027Z"
         },
+        "plan": {
+          "name": "azure-vote-standard",
+          "publisher": "Microsoft",
+          "product": "azure-vote-standard-offer-id"
+        },
         "properties": {
-          "extensionType": "azuremonitor-containers",
+          "extensionType": "azure-vote",
           "autoUpgradeMinorVersion": false,
           "releaseTrain": "Preview",
           "version": "0.1.4",
