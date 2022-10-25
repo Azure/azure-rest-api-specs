@@ -26,7 +26,7 @@ openapi-type: data-plane
 tag: package-2022-11-01
 ```
 
-### Tag: package-2021-11-01
+### Tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
 
