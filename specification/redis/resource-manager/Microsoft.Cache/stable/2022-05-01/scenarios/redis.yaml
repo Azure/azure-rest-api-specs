@@ -9,17 +9,22 @@ variables:
   name:
     type: string
     prefix: redisna
-  
+  privateEndpointName:
+    type: string
+    prefix: redisprivateendpoint
+    
 prepareSteps:
   - step: NetworkSubnet_Create
     armTemplate: templates/Create_NetworkAndSubnet.json
   - step: Redis_Create
     exampleFile: ..\examples\RedisCacheCreateDefaultVersion.json
     requestUpdate:
-      - replace: /parameters/properties/subnetId
-        value: $(subnetId)
-      - replace: /parameters/properties/staticIP
-        value: 10.0.0.5
+      - remove: /parameters/properties/subnetId
+      - remove: /parameters/properties/staticIP
+    outputVariables:
+      redisId:
+        type: string
+        fromResponse: /id
 
 scenarios:
   - scenario: Redis
@@ -83,6 +88,31 @@ scenarios:
     steps:
       - step: Operations_List
         exampleFile: ..\examples\RedisCacheOperations.json
+
+  - scenario: PrivateEndpointConnections
+    description: Microsoft.Cache/redis/privateEndpointConnections
+    variables:
+      cacheName: $(name)
+    steps:
+      - step: PrivateEndpoint_Create
+        armTemplate: templates/Create_PrivateEndpoint.json
+      - step: PrivateEndpointConnections_List
+        exampleFile: ..\examples\RedisCacheListPrivateEndpointConnections.json
+        outputVariables:
+          privateEndpointConnectionName:
+            type: string
+            fromResponse: /value/0/name
+      - step: PrivateEndpointConnections_Put
+        exampleFile: ..\examples\RedisCachePutPrivateEndpointConnection.json
+        requestUpdate:
+          - replace: /properties/properties/privateLinkServiceConnectionState/status
+            value: Rejected
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ..\examples\RedisCacheGetPrivateEndpointConnection.json
+      - step: PrivateLinkResources_ListByRedisCache
+        exampleFile: ..\examples\RedisCacheListPrivateLinkResources.json
+      - step: PrivateEndpointConnections_Delete
+        exampleFile: ..\examples\RedisCacheDeletePrivateEndpointConnection.json
 
 cleanUpSteps:
   - step: Redis_Delete
