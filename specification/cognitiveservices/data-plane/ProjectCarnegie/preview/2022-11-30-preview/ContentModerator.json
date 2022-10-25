@@ -118,7 +118,7 @@
         }
       }
     },
-    "/text/results/{resultId}": {
+    "/text/analyzeResults/{resultId}": {
       "get": {
         "tags": [
           "Text Analysis"
@@ -250,7 +250,7 @@
         }
       }
     },
-    "/image/results/{resultId}": {
+    "/image/analyzeResults/{resultId}": {
       "get": {
         "tags": [
           "Image Analysis"
@@ -289,14 +289,14 @@
         }
       }
     },
-    "/lists/termlists/{listId}": {
+    "/textLists/{listId}": {
       "get": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
-        "operationId": "ListManagementTermLists_GetDetails",
-        "description": "Returns list Id details of the term list with list Id equal to list Id passed.",
-        "summary": "Get Term List By listId",
+        "operationId": "ListManagementTextLists_GetDetails",
+        "description": "Returns list Id details of the Text List with list Id equal to list Id passed.",
+        "summary": "Get Text List By listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -306,7 +306,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TermList"
+              "$ref": "#/definitions/TextList"
             }
           },
           "default": {
@@ -322,11 +322,11 @@
       },
       "delete": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
-        "operationId": "ListManagementTermLists_Delete",
-        "description": "Deletes term list with the list Id equal to list Id passed.",
-        "summary": "Delete Term List By listId",
+        "operationId": "ListManagementTextLists_Delete",
+        "description": "Deletes Text List with the list Id equal to list Id passed.",
+        "summary": "Delete Text List By listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -349,11 +349,11 @@
       },
       "put": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
-        "operationId": "ListManagementTermLists_Update",
-        "description": "Updates an term list by listId, , if listId not exists, create a new term list",
-        "summary": "Upsert Term List",
+        "operationId": "ListManagementTextLists_Update",
+        "description": "Updates an Text List by listId, , if listId not exists, create a new Text List",
+        "summary": "Upsert Text List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -361,10 +361,10 @@
           {
             "name": "request",
             "in": "body",
-            "description": "Properties of the term list.",
+            "description": "Properties of the Text List.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TermList"
+              "$ref": "#/definitions/TextList"
             },
             "x-ms-parameter-location": "method"
           }
@@ -374,11 +374,11 @@
         ],
         "responses": {
           "201": {
-            "description": "Term list created successfully",
+            "description": "Text List created successfully",
             "headers": {
-              "TermList-Location": {
+              "TextList-Location": {
                 "type": "string",
-                "description": "URL used to get the created term list."
+                "description": "URL used to get the created Text List."
               }
             }
           },
@@ -394,21 +394,21 @@
         ]
       }
     },
-    "/lists/termlists": {
+    "/textLists": {
       "get": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
-        "operationId": "ListManagementTermLists_GetAllTermLists",
-        "description": "gets all the Term Lists",
-        "summary": "Get All Term Lists",
+        "operationId": "ListManagementTextLists_GetAllTextLists",
+        "description": "gets all the Text Lists",
+        "summary": "Get All Text Lists",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/TermList"
+                "$ref": "#/definitions/TextList"
               }
             }
           },
@@ -426,27 +426,27 @@
         ]
       }
     },
-    "/lists/termlists/{listId}/terms": {
+    "/textLists/{listId}/text": {
       "post": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
         "operationId": "ListManagementImage_AddTerm",
         "description": "Add a term to the list with list Id equal to list Id passed.",
-        "summary": "Add Terms To Term List",
+        "summary": "Add Text To Text List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "name": "addTermsRequest",
+            "name": "request",
             "in": "body",
             "description": "Raw term data.",
             "required": true,
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Term"
+                "$ref": "#/definitions/TextListItem"
               }
             },
             "x-ms-parameter-location": "method"
@@ -457,7 +457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Terms added successfully"
+            "description": "Text added successfully"
           },
           "default": {
             "description": "Error response.",
@@ -472,11 +472,11 @@
       },
       "delete": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
         "operationId": "ListManagementTerm_DeleteAllTerms",
         "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
-        "summary": "Delete All Terms By listId",
+        "summary": "Delete All Text By listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -501,11 +501,11 @@
       },
       "get": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
         "operationId": "ListManagementTerm_GetAllTerms",
         "description": "Gets all terms from the list with list Id equal to the list Id passed.",
-        "summary": "Get All Terms By listId",
+        "summary": "Get All Text By listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -531,7 +531,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Term"
+                "$ref": "#/definitions/TextListItem"
               }
             }
           },
@@ -550,11 +550,11 @@
       },
       "put": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
         "operationId": "ListManagementTerm_UpdateTerm",
         "description": "Update terms to the list with list Id equal to list Id passed.",
-        "summary": "Update Terms To Term List",
+        "summary": "Update Text To Text List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -567,7 +567,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Term"
+                "$ref": "#/definitions/TextListItem"
               }
             },
             "x-ms-parameter-location": "method"
@@ -578,9 +578,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response.",
@@ -594,14 +592,14 @@
         ]
       }
     },
-    "/lists/termlists/{listId}/terms/{termId}": {
+    "/textLists/{listId}/text/{textId}": {
       "get": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
         "operationId": "ListManagementTerm_AddTerm",
         "description": "Returns the details of the term with list Id equal to list Id and image Id equal to image Id passed.",
-        "summary": "Get Term By TermId and ListId",
+        "summary": "Get Text By textId and ListId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -614,7 +612,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Term"
+              "$ref": "#/definitions/TextListItem"
             }
           },
           "default": {
@@ -630,17 +628,17 @@
       },
       "delete": {
         "tags": [
-          "Term List Management"
+          "Text List Management"
         ],
         "operationId": "ListManagementTerm_DeleteTerm",
         "description": "Deletes a term from the list with list Id equal to the list Id passed.",
-        "summary": "Delete Term By TermId and ListId",
+        "summary": "Delete Text By TextId and ListId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "$ref": "#/parameters/TermId"
+            "$ref": "#/parameters/TextId"
           }
         ],
         "responses": {
@@ -1166,17 +1164,37 @@
         }
       }
     },
+    "TextBatchItem": {
+      "description": "One item of text batch",
+      "type": "object",
+      "required": [
+        "textId",
+        "uri"
+      ],
+      "properties": {
+        "textId": {
+          "description": "Id of text batch item",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Uri of text batch item, it should be a blob url of text file that contains content to analyze",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
     "TextBatchDetectRequest": {
       "description": "The analysis request of the text batch",
       "type": "object",
       "required": [
-        "textBatchUri"
+        "textBatch"
       ],
       "properties": {
-        "textBatchUri": {
-          "description": "The blob uri of text files need to be scanned",
-          "type":"string",
-          "format": "uri"
+        "textBatch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextBatchItem"
+          }
         },
         "categories": {
           "type": "array",
@@ -1226,8 +1244,8 @@
           "items": {
             "type": "object",
             "properties": {
-              "textFileName": {
-                "description": "File name of individual image",
+              "textId": {
+                "description": "Id for text batch item",
                 "type": "string"
               },
               "hateSpeechResult": {
@@ -1507,17 +1525,37 @@
         }
       }
     },
+    "ImageBatchItem": {
+      "description": "One item of image batch",
+      "type": "object",
+      "required": [
+        "imageId",
+        "uri"
+      ],
+      "properties": {
+        "imageId": {
+          "description": "Id of image batch item",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Uri of image batch item, it should be a blob url of image file to analyze",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
     "ImageBatchDetectRequest": {
       "description": "The analysis request of the image batch",
       "type": "object",
       "required": [
-        "imageBatchUri"
+        "imageBatch"
       ],
       "properties": {
-        "imageBatchUri": {
-          "description": "The blob uri of images need to be scanned",
-          "type":"string",
-          "format": "uri"
+        "imageBatch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageBatchItem"
+          }
         },
         "categories": {
           "type": "array",
@@ -1567,8 +1605,8 @@
           "items": {
             "type": "object",
             "properties": {
-              "imageFileName": {
-                "description": "File name of individual image",
+              "imageId": {
+                "description": "imageId of individual image in batch",
                 "type": "string"
               },
               "adultResult": {
@@ -1685,60 +1723,59 @@
         }
       }
     },
-    "TermListMatchMethod": {
-      "description": "Detection method for term list.",
+    "TextListMatchMethod": {
+      "description": "Detection method for Text List.",
       "enum": [
         "Exact",
         "Semantic"
       ],
       "type": "string"
     },
-    "TermList": {
-      "description": "Term List.",
+    "TextList": {
+      "description": "Text List.",
       "required": [
-        "listId",
-        "method"
+        "listId"
       ],
       "properties": {
         "listId": {
-          "description": "Term list Id.",
+          "description": "Text List Id.",
           "type": "string"
         },
         "name": {
-          "description": "Term list name.",
+          "description": "Text List name.",
           "type": "string"
         },
         "description": {
-          "description": "Description for term list.",
+          "description": "Description for Text List.",
           "type": "string"
         },
-        "method": {
-          "$ref": "#/definitions/TermListMatchMethod"
-        },
-        "language": {
+        "defaultLanguage": {
           "description": "language hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
           "type": "string"
         }
       }
     },
-    "Term": {
-      "description": "Term data",
+    "TextListItem": {
+      "description": "Text data",
       "required": [
-        "termId",
-        "term"
+        "textId",
+        "text"
       ],
       "properties": {
-        "termId": {
-          "description": "Term id",
+        "textId": {
+          "description": "Text id",
           "type": "string"
         },
         "description": {
           "description": "Image data description",
           "type": "string"
         },
-        "term": {
-          "description": "Term content.",
+        "text": {
+          "description": "Text content.",
           "type": "string"
+        },
+        "language": {
+          "$ref": "#parameters/Language"
         }
       }
     },
@@ -1762,7 +1799,7 @@
           "type": "string"
         },
         "description": {
-          "description": "Description for term list.",
+          "description": "Description for Text List.",
           "type": "string"
         },
         "method": {
@@ -1873,10 +1910,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "TermId": {
-      "name": "termId",
+    "TextId": {
+      "name": "textId",
       "in": "path",
-      "description": "Id of the image.",
+      "description": "Id of the text in list.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
