@@ -484,22 +484,26 @@
       "type": "object",
       "properties": {
         "policyName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of policy"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of policy"
         },
         "systemData": {
           "$ref": "#/definitions/SystemData"
         },
         "decisionRules": {
           "type": "array",
+          "description": "Array of decisionRules for the policy",
           "items": {
             "$ref": "#/definitions/DevopsPolicyDecisionRule"
           }
         },
         "scope": {
-          "$ref": "#/definitions/DevopsPolicyScope"
+          "$ref": "#/definitions/DevopsPolicyScope",
+          "description": "Scope section for the policy"
         }
       }
     },
@@ -511,12 +515,14 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of policies",
           "items": {
             "$ref": "#/definitions/DevopsPolicy"
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Pagination link"
         }
       }
     },
@@ -524,24 +530,30 @@
       "type": "object",
       "properties": {
         "createdBy": {
-          "type": "string"
+          "type": "string",
+          "description": "Created by"
         },
         "createdByType": {
-          "type": "string"
+          "type": "string",
+          "description": "Created by type"
         },
         "createdAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "Created at"
         },
         "lastModifiedBy": {
-          "type": "string"
+          "type": "string",
+          "description": "last modified by"
         },
         "lastModifiedByType": {
-          "type": "string"
+          "type": "string",
+          "description": "last modified by type"
         },
         "lastModifiedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "last modified at"
         }
       }
     }
@@ -557,10 +569,11 @@
     },
     "endpoint": {
       "in": "path",
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }
