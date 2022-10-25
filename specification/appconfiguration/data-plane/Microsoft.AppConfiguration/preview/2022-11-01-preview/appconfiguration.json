@@ -184,10 +184,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "KeyValueFields",
-                "modelAsString": true
-              },
               "enum": [
                 "key",
                 "label",
@@ -284,10 +280,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "KeyValueFields",
-                "modelAsString": true
-              },
               "enum": [
                 "key",
                 "label",
@@ -389,10 +381,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "KeyValueFields",
-                "modelAsString": true
-              },
               "enum": [
                 "key",
                 "label",
@@ -668,10 +656,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "KeyValueFields",
-                "modelAsString": true
-              },
               "enum": [
                 "key",
                 "label",
@@ -1252,10 +1236,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "LabelFields",
-                "modelAsString": true
-              },
               "enum": [
                 "name"
               ]
@@ -1333,10 +1313,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "LabelFields",
-                "modelAsString": true
-              },
               "enum": [
                 "name"
               ]
@@ -1574,10 +1550,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "KeyValueFields",
-                "modelAsString": true
-              },
               "enum": [
                 "key",
                 "label",
@@ -1668,10 +1640,6 @@
             "type": "array",
             "items": {
               "type": "string",
-              "x-ms-enum": {
-                "name": "KeyValueFields",
-                "modelAsString": true
-              },
               "enum": [
                 "key",
                 "label",
@@ -1717,7 +1685,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The name of the key."
         }
       }
     },
@@ -1725,32 +1694,40 @@
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "description": "The key of the key-value."
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "The label the key-value belongs to."
         },
         "content_type": {
-          "type": "string"
+          "type": "string",
+          "description": "The content type of the value stored within the key-value."
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "The value of the key-value."
         },
         "last_modified": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "A date representing the last time the key-value was modified."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "The tags of the key-value"
         },
         "locked": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether the key-value is locked."
         },
         "etag": {
-          "type": "string"
+          "type": "string",
+          "description": "A value representing the current state of the resource."
         }
       }
     },
@@ -1823,7 +1800,7 @@
           "readOnly": true
         },
         "tags": {
-          "description": "The tags of the snapshot..",
+          "description": "The tags of the snapshot.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1897,7 +1874,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The name of the label."
         }
       }
     },
