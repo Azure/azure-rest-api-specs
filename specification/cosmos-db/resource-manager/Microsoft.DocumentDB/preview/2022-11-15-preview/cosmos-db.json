@@ -9092,6 +9092,10 @@
         "createMode": {
           "description": "Enum to indicate the mode of resource creation.",
           "$ref": "#/definitions/CreateMode"
+        },
+        "materializedViewDefinition": {
+          "$ref": "#/definitions/MaterializedViewDefinition",
+          "description": "The configuration for defining Materialized View. This must be specified for creating a Materialized View container."
         }
       },
       "required": [
@@ -9420,6 +9424,24 @@
         "clientEncryptionKeyId",
         "encryptionType",
         "encryptionAlgorithm"
+      ]
+    },
+    "MaterializedViewDefinition": {
+      "type": "object",
+      "description": "Materialized View definition for the container.",
+      "properties": {
+        "sourceCollectionId": {
+          "description": "Name of the Cosmos DB SQL source container",
+          "type": "string"
+        },
+        "definition": {
+          "description": "Definition for the SQL Materialized view",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceCollectionId",
+        "definition"
       ]
     },
     "SqlStoredProcedureResource": {
