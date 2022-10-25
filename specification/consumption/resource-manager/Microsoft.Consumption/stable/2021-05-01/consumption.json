@@ -972,7 +972,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+    "/{scopeReservationDetails}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservationDetails"
@@ -1059,7 +1059,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/{scopeReservationRecommendationDetails}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -1119,7 +1119,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+    "/{scopeReservationRecommendationDetails}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -1481,6 +1481,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
