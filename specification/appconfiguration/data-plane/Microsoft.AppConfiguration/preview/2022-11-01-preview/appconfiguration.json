@@ -18,7 +18,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.keyset+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -122,7 +121,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -142,7 +144,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.kvset+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -318,7 +319,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -338,7 +342,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -418,10 +421,6 @@
               "ETag": {
                 "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
-              },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
-                "type": "string"
               }
             }
           },
@@ -460,7 +459,6 @@
         ],
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -518,10 +516,6 @@
               "ETag": {
                 "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
-              },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
-                "type": "string"
               }
             }
           },
@@ -550,7 +544,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -593,10 +586,6 @@
               },
               "ETag": {
                 "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
                 "type": "string"
               }
             }
@@ -708,15 +697,14 @@
               "ETag": {
                 "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
-              },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
-                "type": "string"
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -742,7 +730,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.snapshotset+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -790,6 +777,21 @@
               ]
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "description": "Used to filter returned snapshots by their status property.",
+            "type": "string",
+            "enum": [
+              "provisioning",
+              "ready",
+              "archived"
+            ],
+            "x-ms-enum": {
+              "name": "SnapshotStatus",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -855,7 +857,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -875,7 +880,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -947,10 +951,6 @@
                 "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
               },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
-                "type": "string"
-              },
               "Link": {
                 "description": "Includes links to related resources.",
                 "type": "string"
@@ -981,14 +981,13 @@
           "Snapshots"
         ],
         "summary": "Creates a key-value snapshot.",
-        "operationId": "PutSnapshot",
+        "operationId": "CreateSnapshot",
         "consumes": [
           "application/vnd.microsoft.appconfig.snapshot+json",
           "application/json"
         ],
         "produces": [
           "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -997,7 +996,8 @@
             "in": "path",
             "description": "The name of the key-value snapshot to create.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "entity",
@@ -1016,7 +1016,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/Snapshot"
@@ -1028,10 +1028,6 @@
               },
               "ETag": {
                 "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
                 "type": "string"
               },
               "Link": {
@@ -1048,8 +1044,8 @@
           }
         },
         "x-ms-examples": {
-          "PutSnapshot": {
-            "$ref": "./examples/PutSnapshot.json"
+          "CreateSnapshot": {
+            "$ref": "./examples/CreateSnapshot.json"
           }
         }
       },
@@ -1064,7 +1060,6 @@
         ],
         "produces": [
           "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -1116,10 +1111,6 @@
               },
               "ETag": {
                 "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
                 "type": "string"
               },
               "Link": {
@@ -1191,10 +1182,6 @@
                 "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
               },
-              "Last-Modified": {
-                "description": "A UTC datetime that specifies the last time the resource was modified.",
-                "type": "string"
-              },
               "Link": {
                 "description": "Includes links to related resources.",
                 "type": "string"
@@ -1202,7 +1189,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -1228,7 +1218,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.labelset+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -1366,7 +1355,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -1386,7 +1378,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -1464,7 +1455,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -1544,7 +1534,6 @@
         "consumes": [],
         "produces": [
           "application/vnd.microsoft.appconfig.kvset+json",
-          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -1708,7 +1697,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
