@@ -786,6 +786,11 @@
       "description": "Identifier of the savings plan",
       "readOnly": true
     },
+    "SubscriptionName": {
+      "type": "string",
+      "description": "Subscription name",
+      "readOnly": true
+    },
     "EffectiveDateTime": {
       "type": "string",
       "format": "date-time",
@@ -888,9 +893,6 @@
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
         },
-        "expiryDate": {
-          "$ref": "#/definitions/ExpiryDate"
-        },
         "appliedScopeType": {
           "$ref": "#/definitions/AppliedScopeType"
         },
@@ -922,6 +924,9 @@
         },
         "utilization": {
           "$ref": "#/definitions/Utilization"
+        },
+        "subscriptionName": {
+          "$ref": "#/definitions/SubscriptionName"
         },
         "renewProperties": {
           "type": "object",
