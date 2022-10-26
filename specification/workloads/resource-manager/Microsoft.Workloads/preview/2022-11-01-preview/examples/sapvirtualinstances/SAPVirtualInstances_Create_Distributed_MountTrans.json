@@ -11,11 +11,18 @@
         "environment": "Prod",
         "sapProduct": "S4HANA",
         "configuration": {
-          "configurationType": "Deployment",
+          "configurationType": "DeploymentWithOSConfig",
           "appLocation": "eastus",
           "infrastructureConfiguration": {
             "deploymentType": "ThreeTier",
             "appResourceGroup": "X00-RG",
+            "storageConfiguration": {
+              "transportFileShareConfiguration": {
+                "configurationType": "Mount",
+                "id": "fileshareID",
+                "privateEndpointId": "pe-arm-id"
+              }
+            },
             "centralServer": {
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
               "virtualMachineConfiguration": {
@@ -31,12 +38,9 @@
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
+                    "sshKeyPair": {
+                      "publicKey": "abc",
+                      "privateKey": "xyz"
                     }
                   }
                 }
@@ -58,12 +62,9 @@
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
+                    "sshKeyPair": {
+                      "publicKey": "abc",
+                      "privateKey": "xyz"
                     }
                   }
                 }
@@ -86,18 +87,18 @@
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
+                    "sshKeyPair": {
+                      "publicKey": "abc",
+                      "privateKey": "xyz"
                     }
                   }
                 }
               },
               "instanceCount": 1
             }
+          },
+          "osSapConfiguration": {
+            "sapFqdn": "xyz.test.com"
           }
         }
       }
@@ -123,11 +124,18 @@
           "environment": "Prod",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "Deployment",
+            "configurationType": "DeploymentWithOSConfig",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
               "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "storageConfiguration": {
+                "transportFileShareConfiguration": {
+                  "configurationType": "Mount",
+                  "id": "fileshareID",
+                  "privateEndpointId": "pe-arm-id"
+                }
+              },
               "centralServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
@@ -143,12 +151,8 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
@@ -170,12 +174,8 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
@@ -198,18 +198,17 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
                 },
                 "instanceCount": 1
               }
+            },
+            "osSapConfiguration": {
+              "sapFqdn": "xyz.test.com"
             }
           },
           "status": "Unknown",
@@ -238,11 +237,18 @@
           "environment": "Prod",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "Deployment",
+            "configurationType": "DeploymentWithOSConfig",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
               "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "storageConfiguration": {
+                "transportFileShareConfiguration": {
+                  "configurationType": "Mount",
+                  "id": "fileshareID",
+                  "privateEndpointId": "pe-arm-id"
+                }
+              },
               "centralServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
@@ -258,12 +264,8 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
@@ -285,12 +287,8 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
@@ -313,18 +311,17 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
                 },
                 "instanceCount": 1
               }
+            },
+            "osSapConfiguration": {
+              "sapFqdn": "xyz.test.com"
             }
           },
           "status": "Unknown",
