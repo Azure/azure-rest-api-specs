@@ -25,11 +25,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalydetector",
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   },
@@ -37,7 +40,7 @@
     "https"
   ],
   "paths": {
-    "/{ApiVersion}/multivariate/detect-batch/{resultId}": {
+    "/multivariate/detect-batch/{resultId}": {
       "get": {
         "responses": {
           "200": {
@@ -61,11 +64,8 @@
         },
         "summary": "Get Multivariate Anomaly Detection Result",
         "description": "For asynchronous inference, get multivariate anomaly detection result based on resultId returned by the BatchDetectAnomaly api.",
-        "operationId": "GetMultivariateBatchDetectionResult",
+        "operationId": "GetBatchDetectionResult",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
           {
             "name": "resultId",
             "in": "path",
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/{ApiVersion}/multivariate/models": {
+    "/multivariate/models": {
       "post": {
         "responses": {
           "201": {
@@ -112,11 +112,8 @@
         },
         "summary": "Train a Multivariate Anomaly Detection Model",
         "description": "Create and train a multivariate anomaly detection model. The request must include a source parameter to indicate an externally accessible Azure blob storage URI.There are two types of data input: An URI pointed to an Azure blob storage folder which contains multiple CSV files, and each CSV file contains two columns, timestamp and variable. Another type of input is an URI pointed to a CSV file in Azure blob storage, which contains all the variables and a timestamp column.",
-        "operationId": "CreateAndTrainMultivariateModel",
+        "operationId": "CreateMultivariateModel",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
           {
             "name": "body",
             "required": true,
@@ -156,11 +153,8 @@
         },
         "summary": "List Multivariate Models",
         "description": "List models of a resource.",
-        "operationId": "ListMultivariateModels",
+        "operationId": "ListMultivariateModel",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
           {
             "type": "integer",
             "default": 0,
@@ -188,7 +182,7 @@
         }
       }
     },
-    "/{ApiVersion}/multivariate/models/{modelId}": {
+    "/multivariate/models/{modelId}": {
       "delete": {
         "responses": {
           "204": {
@@ -211,9 +205,6 @@
         "description": "Delete an existing multivariate model according to the modelId",
         "operationId": "DeleteMultivariateModel",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
           {
             "name": "modelId",
             "in": "path",
@@ -255,9 +246,6 @@
         "operationId": "GetMultivariateModel",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
             "name": "modelId",
             "in": "path",
             "required": true,
@@ -273,7 +261,7 @@
         }
       }
     },
-    "/{ApiVersion}/multivariate/models/{modelId}:detect-batch": {
+    "/multivariate/models/{modelId}:detect-batch": {
       "post": {
         "responses": {
           "202": {
@@ -307,11 +295,8 @@
         },
         "summary": "Detect Multivariate Anomaly",
         "description": "Submit multivariate anomaly detection task with the modelId of trained model and inference data, the input schema should be the same with the training request. The request will complete asynchronously and return a resultId to query the detection result.The request should be a source link to indicate an externally accessible Azure storage Uri, either pointed to an Azure blob storage folder, or pointed to a CSV file in Azure blob storage.",
-        "operationId": "DetectMultivariateBatchAnomaly",
+        "operationId": "BatchDetectAnomaly",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
           {
             "name": "modelId",
             "in": "path",
@@ -338,7 +323,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{ApiVersion}/multivariate/models/{modelId}:detect-last": {
+    "/multivariate/models/{modelId}:detect-last": {
       "post": {
         "responses": {
           "200": {
@@ -362,11 +347,8 @@
         },
         "summary": "Detect anomalies in the last point of the request body",
         "description": "Submit multivariate anomaly detection task with the modelId of trained model and inference data, and the inference data should be put into request body in a JSON format. The request will complete synchronously and return the detection immediately in the response body.",
-        "operationId": "DetectMultivariateLastAnomaly",
+        "operationId": "LastDetectAnomaly",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
           {
             "name": "modelId",
             "in": "path",
