@@ -40,13 +40,13 @@
         "description": "Lists the current availability status for all the resources in the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ExpandParameter"
@@ -85,13 +85,13 @@
         "description": "Lists the current availability status for all the resources in the resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -133,7 +133,7 @@
         "description": "Lists available operations for the resourcehealth resource provider",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -151,7 +151,7 @@
           }
         },
         "x-ms-examples": {
-          "GetHealthHistoryByResource": {
+          "GetOperationsList": {
             "$ref": "./examples/Operations_List.json"
           }
         }
@@ -174,7 +174,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -221,7 +221,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -253,9 +253,717 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/impactedResources": {
+      "get": {
+        "tags": [
+          "EventImpactedResources"
+        ],
+        "operationId": "ImpactedResources_ListBySubscriptionIdAndEventId",
+        "description": "Lists impacted resources in the subscription by an event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of impacted resources in the subscription by an event.",
+            "schema": {
+              "$ref": "#/definitions/eventImpactedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListImpactedResourcesBySubscriptionId": {
+            "$ref": "./examples/ImpactedResources_ListBySubscriptionId_ListByEventId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/impactedResources/{impactedResourceName}": {
+      "get": {
+        "tags": [
+          "EventImpactedResources"
+        ],
+        "operationId": "ImpactedResources_Get",
+        "description": "Gets the specific impacted resource in the subscription by an event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ImpactedResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of Impacted Resource.",
+            "schema": {
+              "$ref": "#/definitions/eventImpactedResource"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImpactedResourcesGet": {
+            "$ref": "./examples/ImpactedResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "Events_ListBySubscriptionId",
+        "description": "Lists service health events in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryStartTimeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of current service health events in the subscription",
+            "schema": {
+              "$ref": "#/definitions/events"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListEventsBySubscriptionId": {
+            "$ref": "./examples/Events_ListBySubscriptionId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event_GetBySubscriptionIdAndTrackingId",
+        "description": "Service health event in the subscription by event tracking id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryStartTimeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Health Event in the subscription requested by tracking id.",
+            "schema": {
+              "$ref": "#/definitions/event"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SecurityAdvisoriesEventBySubscriptionIdAndTrackingId": {
+            "$ref": "./examples/Event_GetBySubscriptionIdAndTrackingId.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "Events_ListByTenantId",
+        "description": "Lists current service health events in the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryStartTimeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of service health events in the tenant",
+            "schema": {
+              "$ref": "#/definitions/events"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListEventsByTenantId": {
+            "$ref": "./examples/Events_ListByTenantId.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event_GetByTenantIdAndTrackingId",
+        "description": "Service health event in the tenant by event tracking id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryStartTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Health Event in the subscription requested by tracking id.",
+            "schema": {
+              "$ref": "#/definitions/event"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventByTenantIdAndTrackingId": {
+            "$ref": "./examples/Event_GetByTenantIdAndTrackingId.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "Events_ListBySingleResource",
+        "description": "Lists current service health events for given resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of current service health events for given resource",
+            "schema": {
+              "$ref": "#/definitions/events"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListEventsBySingleResource": {
+            "$ref": "./examples/Events_ListBySingleResource.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "events": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/event"
+          },
+          "description": "The list of event."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of events. Call ListNext() with this URI to fetch the next page of events."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List events operation response."
+    },
+    "event": {
+      "type": "object",
+      "description": "Service health event",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of event.",
+          "properties": {
+            "eventType": {
+              "type": "string",
+              "description": "Type of event.",
+              "enum": [
+                "ServiceIssue",
+                "PlannedMaintenance",
+                "HealthAdvisory",
+                "RCA",
+                "EmergingIssues",
+                "SecurityAdvisory"
+              ],
+              "x-ms-enum": {
+                "name": "EventTypeValues",
+                "modelAsString": true
+              }
+            },
+            "eventSource": {
+              "type": "string",
+              "description": "Source of event.",
+              "enum": [
+                "ResourceHealth",
+                "ServiceHealth"
+              ],
+              "x-ms-enum": {
+                "name": "EventSourceValues",
+                "modelAsString": true
+              }
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of event.",
+              "enum": [
+                "Active",
+                "Resolved"
+              ],
+              "x-ms-enum": {
+                "name": "EventStatusValues",
+                "modelAsString": true
+              }
+            },
+            "title": {
+              "type": "string",
+              "description": "Title text of event."
+            },
+            "summary": {
+              "type": "string",
+              "description": "Summary text of event."
+            },
+            "header": {
+              "type": "string",
+              "description": "Header text of event."
+            },
+            "level": {
+              "type": "string",
+              "description": "Level of insight.",
+              "enum": [
+                "Critical",
+                "Warning"
+              ],
+              "x-ms-enum": {
+                "name": "LevelValues",
+                "modelAsString": true
+              }
+            },
+            "eventLevel": {
+              "type": "string",
+              "description": "Level of event.",
+              "enum": [
+                "Critical",
+                "Error",
+                "Warning",
+                "Informational"
+              ],
+              "x-ms-enum": {
+                "name": "EventLevelValues",
+                "modelAsString": true
+              }
+            },
+            "externalIncidentId": {
+              "type": "string",
+              "description": "The id of the Incident"
+            },
+            "article": {
+              "type": "object",
+              "description": "Article of event.",
+              "properties": {
+                "articleContent": {
+                  "type": "string",
+                  "description": "Article content of event."
+                }
+              }
+            },
+            "links": {
+              "type": "array",
+              "x-ms-identifiers": [],
+              "description": "Useful links of event.",
+              "items": {
+                "$ref": "#/definitions/link"
+              }
+            },
+            "impactStartTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event started.",
+              "format": "date-time"
+            },
+            "impactMitigationTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event resolved.",
+              "format": "date-time"
+            },
+            "impact": {
+              "type": "array",
+              "x-ms-identifiers": [],
+              "description": "List services impacted by the service health event.",
+              "items": {
+                "$ref": "#/definitions/impact"
+              }
+            },
+            "recommendedActions": {
+              "type": "object",
+              "description": "Recommended actions of event.",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Recommended action title for the service health event."
+                },
+                "actions": {
+                  "type": "array",
+                  "x-ms-identifiers": [],
+                  "description": "Recommended actions for the service health event.",
+                  "items": {
+                    "type": "object",
+                    "description": "Recommended action for the service health event.",
+                    "properties": {
+                      "groupId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Recommended action group Id for the service health event."
+                      },
+                      "actionText": {
+                        "type": "string",
+                        "description": "Recommended action text"
+                      }
+                    }
+                  }
+                },
+                "localeCode": {
+                  "type": "string",
+                  "description": "Recommended action locale for the service health event."
+                }
+              }
+            },
+            "faqs": {
+              "type": "array",
+              "x-ms-identifiers": [],
+              "description": "Frequently asked questions for the service health event.",
+              "items": {
+                "$ref": "#/definitions/faq"
+              }
+            },
+            "isHIR": {
+              "type": "boolean",
+              "description": "It provides information if the event is High incident rate event or not."
+            },
+            "enableMicrosoftSupport": {
+              "type": "boolean",
+              "description": "Tells if we want to enable or disable Microsoft Support for this event."
+            },
+            "description": {
+              "type": "string",
+              "description": "Contains the communication message for the event, that could include summary, root cause and other details."
+            },
+            "platformInitiated": {
+              "type": "boolean",
+              "description": "Is true if the event is platform initiated."
+            },
+            "enableChatWithUs": {
+              "type": "boolean",
+              "description": "Tells if we want to enable or disable Microsoft Support for this event."
+            },
+            "priority": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Priority level of the event. Has value from 0 to 23. 0 is the highest priority. Service issue events have higher priority followed by planned maintenance and health advisory. Critical events have higher priority followed by error, warning and informational. Furthermore, active events have higher priority than resolved."
+            },
+            "lastUpdateTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event was last updated.",
+              "format": "date-time"
+            },
+            "hirStage": {
+              "type": "string",
+              "description": "Stage for HIR Document"
+            },
+            "additionalInformation": {
+              "type": "object",
+              "description": "Additional information",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Additional information Message"
+                }
+              }
+            },
+            "duration": {
+              "type": "integer",
+              "description": "duration in seconds",
+              "format": "int32"
+            },
+            "impactType": {
+              "type": "string",
+              "description": "The type of the impact"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "link": {
+      "type": "object",
+      "description": "Useful links for service health event.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of link.",
+          "enum": [
+            "Button",
+            "Hyperlink"
+          ],
+          "x-ms-enum": {
+            "name": "LinkTypeValues",
+            "modelAsString": true
+          }
+        },
+        "displayText": {
+          "type": "object",
+          "description": "Display text of link.",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Display text of link."
+            },
+            "localizedValue": {
+              "type": "string",
+              "description": "Localized display text of link."
+            }
+          }
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "It provides the name of portal extension to produce link for given service health event."
+        },
+        "bladeName": {
+          "type": "string",
+          "description": "It provides the name of portal extension blade to produce link for given service health event."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "It provides a map of parameter name and value for portal extension blade to produce lik for given service health event."
+        }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "description": "Azure service impacted by the service health event.",
+      "properties": {
+        "impactedService": {
+          "type": "string",
+          "description": "Impacted service name."
+        },
+        "impactedRegions": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "description": "List regions impacted by the service health event.",
+          "items": {
+            "$ref": "#/definitions/impactedServiceRegion"
+          }
+        }
+      }
+    },
+    "impactedServiceRegion": {
+      "type": "object",
+      "description": "Azure region impacted by the service health event.",
+      "properties": {
+        "impactedRegion": {
+          "type": "string",
+          "description": "Impacted region name."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of event in the region.",
+          "enum": [
+            "Active",
+            "Resolved"
+          ],
+          "x-ms-enum": {
+            "name": "EventStatusValues",
+            "modelAsString": true
+          }
+        },
+        "impactedSubscriptions": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "description": "List subscription impacted by the service health event.",
+          "items": {
+            "type": "string",
+            "description": "Subscription impacted by the service health event."
+          }
+        },
+        "impactedTenants": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "description": "List tenant impacted by the service health event.",
+          "items": {
+            "type": "string",
+            "description": "Tenant impacted by the service health event."
+          }
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "It provides the Timestamp for when the last update for the service health event.",
+          "format": "date-time"
+        },
+        "updates": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "description": "List of updates for given service health event.",
+          "items": {
+            "$ref": "#/definitions/update"
+          }
+        }
+      }
+    },
+    "update": {
+      "type": "object",
+      "description": "Update for service health event.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Summary text for the given update for the service health event."
+        },
+        "updateDateTime": {
+          "type": "string",
+          "description": "It provides the Timestamp for the given update for the service health event.",
+          "format": "date-time"
+        }
+      }
+    },
+    "faq": {
+      "type": "object",
+      "description": "Frequently asked question for the service health event",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "FAQ question for the service health event."
+        },
+        "answer": {
+          "type": "string",
+          "description": "FAQ answer for the service health event."
+        },
+        "localeCode": {
+          "type": "string",
+          "description": "FAQ locale for the service health event."
+        }
+      }
+    },
     "impactedResourceStatus": {
       "type": "object",
       "description": "impactedResource with health status",
@@ -310,7 +1018,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -458,19 +1166,23 @@
             },
             "recommendedActions": {
               "type": "array",
-              "x-ms-identifiers": [],
               "description": "Lists actions the user can take based on the current availabilityState of the resource.",
               "items": {
                 "$ref": "#/definitions/recommendedAction"
-              }
+              },
+              "x-ms-identifiers": [
+                "action"
+              ]
             },
             "serviceImpactingEvents": {
               "type": "array",
-              "x-ms-identifiers": [],
               "description": "Lists the service impacting events that may be affecting the health of the resource.",
               "items": {
                 "$ref": "#/definitions/serviceImpactingEvent"
-              }
+              },
+              "x-ms-identifiers": [
+                "correlationId"
+              ]
             }
           }
         }
@@ -481,10 +1193,12 @@
       "properties": {
         "value": {
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations available in the resourcehealth resource provider."
         }
       },
@@ -632,6 +1346,83 @@
         }
       }
     },
+    "eventImpactedResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventImpactedResource"
+          },
+          "description": "The list of eventImpactedResources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of events. Call ListNext() with this URI to fetch the next page of impacted resource."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List of eventImpactedResources operation response."
+    },
+    "eventImpactedResource": {
+      "type": "object",
+      "description": "Impacted resource for an event.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of impacted resource.",
+          "properties": {
+            "targetResourceType": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource type within Microsoft cloud."
+            },
+            "targetResourceId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Identity for resource within Microsoft cloud."
+            },
+            "targetRegion": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Impacted resource region name."
+            },
+            "info": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/keyValueItem"
+              },
+              "description": "Additional information.",
+              "x-ms-identifiers": []
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "keyValueItem": {
+      "type": "object",
+      "description": "Key value tuple.",
+      "properties": {
+        "key": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Key of tuple."
+        },
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value of tuple."
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error details.",
       "type": "object",
@@ -655,19 +1446,13 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
+    "QueryStartTimeParameter": {
+      "name": "queryStartTime",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Specifies from when to return events, based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020",
+      "x-ms-parameter-location": "method"
     },
     "IssueNameParameter": {
       "name": "issueName",
@@ -706,6 +1491,22 @@
       "required": false,
       "type": "string",
       "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
+      "x-ms-parameter-location": "method"
+    },
+    "EventTrackingIdParameter": {
+      "name": "eventTrackingId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Event Id which uniquely identifies ServiceHealth event.",
+      "x-ms-parameter-location": "method"
+    },
+    "ImpactedResourceNameParameter": {
+      "name": "impactedResourceName",
+      "in": "path",
+      "description": "Name of the Impacted Resource.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
