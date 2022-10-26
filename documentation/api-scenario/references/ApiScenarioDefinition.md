@@ -44,15 +44,20 @@ scenarios:
 
 - **scope**
   - **Type:** Required, Enum
-  - **Enum:** ResourceGroup, Subscription, Tenant
-  - Now only "ResourceGroup" is supported.
-    - **ResourceGroup:** All of the following API scenario and steps should be under some resourceGroup. It means:
+  - **Enum:** ResourceGroup, Subscription, Tenant, None
+    - **ResourceGroup:** All scenarios and steps should be executed under some resourceGroup. It means:
       - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
       - The consumer SHOULD set the following variables:
         - **subscriptionId**
         - **resourceGroupName**
         - **location**
       - For details of how variables work please see [Variables](./Variables.md)
+    - **Subscription:** All scenarios and steps will be executed under some subscription. It means:
+      - No resource group need to be created.
+      - The consumer SHOULD set the following variables:
+        - **subscriptionId**
+    - **Tenant:** All scenarios and steps will be executed under tenant scope.
+    - **None:** None of the assumptions above will be made. Use this if the scenario is for data-plane APIs.
 - **variables**
   - **Type:** Optional, Map of Strings or Variables
   - See [Variables](./Variables.md)
@@ -76,7 +81,6 @@ It defines one API scenario that could go through on its own.
 ```yaml
 scenario: quickStart
 description: Quick start with AppConfiguration ConfigurationStores
-shareScope: true
 steps:
   - step: Operations_CheckNameAvailability
     operationId: Operations_CheckNameAvailability
@@ -96,13 +100,6 @@ variables:
 - **description**
   - **Type:** Optional, String
   - Description for this API scenario.
-- **shareScope**
-  - **Type:** Optional, Boolean or String
-  - **Default:** true
-  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other scenarios.  If true or the same string value for different API scenario, they share the same scope, which means:
-    - These API scenarios will run under the same scope (e.g. ResourceGroup).
-    - **prepareSteps** and **cleanUpSteps** will run only once in the scope. The variables will be shared.
-  - By default all the API scenario in one definition file will be launched in the same scope.  If shareScope is false, the API scenarios will not share anything with others in the same file.
 - **variables**
   - **Type:** Optional, Map of Strings or Variables
   - See [Variables](./Variables.md)

@@ -358,6 +358,9 @@
         "x-ms-examples": {
           "Analyze Custom Hostname": {
             "$ref": "./examples/ContainerApps_ListCustomHostNameAnalysis.json"
+          },
+          "Analyse Custom Hostname Error Response": {
+            "$ref": "./examples/ContainerApps_ListCustomHostNameAnalysisErrorResponse.json"
           }
         }
       }
@@ -479,7 +482,8 @@
                 "InProgress",
                 "Succeeded",
                 "Failed",
-                "Canceled"
+                "Canceled",
+                "Deleting"
               ],
               "type": "string",
               "readOnly": true,
@@ -519,7 +523,7 @@
               "$ref": "./CommonDefinitions.json#/definitions/Template",
               "description": "Container App versioned application definition."
             },
-            "outboundIPAddresses": {
+            "outboundIpAddresses": {
               "description": "Outbound IP Addresses for container app.",
               "type": "array",
               "items": {
@@ -788,12 +792,63 @@
           }
         },
         "customDomainVerificationFailureInfo": {
-          "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse",
           "description": "Raw failure information if DNS verification fails.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "description": "Details or the error",
+              "items": {
+                "description": "Detailed errors.",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              },
+              "x-ms-identifiers": [
+                "code"
+              ]
+            }
+          },
           "readOnly": true
         },
         "hasConflictOnManagedEnvironment": {
           "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "conflictWithEnvironmentCustomDomain": {
+          "description": "<code>true</code> if there is a conflict on the Container App's managed environment level custom domain; otherwise, <code>false</code>.",
           "type": "boolean",
           "readOnly": true
         },
