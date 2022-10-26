@@ -1,0 +1,984 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CostManagementClient",
+    "description": "CostManagement management client provides access to CostManagement resources for Azure Enterprise Subscriptions.",
+    "version": "2022-10-01"
+  },
+  "tags": [
+    {
+      "name": "Benefits API",
+      "description": "APIs for getting benefit recommendations and benefit utilization summaries."
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{billingScope}/providers/Microsoft.CostManagement/benefitRecommendations": {
+      "get": {
+        "tags": [
+          "BenefitRecommendations"
+        ],
+        "description": "List of recommendations for purchasing benefit (reservation or savings plan).",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
+        },
+        "x-ms-examples": {
+          "BenefitRecommendationsBillingAccountList": {
+            "$ref": "./examples/BenefitRecommendationsByBillingAccount.json"
+          }
+        },
+        "operationId": "BenefitRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/benefitRecommendationsFilterParameter"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "May be used to order the recommendations by: properties/armSkuName. This implicitly filters the results by the corresponding benefit type.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "May be used to expand the properties by: properties/usage, properties/allRecommendationDetails",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingScopeBenefitRecommendationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/benefitRecommendationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{billingScope}/providers/Microsoft.CostManagement/benefitRecommendations/{recommendationId}": {
+      "get": {
+        "tags": [
+          "BenefitRecommendations"
+        ],
+        "description": "Details of a benefit plan recommendation for what-if analysis.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
+        },
+        "x-ms-examples": {
+          "BenefitRecommendationById": {
+            "$ref": "./examples/BenefitRecommendationsByRecommendationId.json"
+          }
+        },
+        "operationId": "BenefitRecommendation_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingScopeBenefitRecommendationParameter"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The ID of the recommendation.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/benefitRecommendationModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummaries"
+        ],
+        "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
+        "description": "Lists benefit utilization summaries for the provided billingAccount. This API provides benefit utilization summaries only for enrollment accounts.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitType, properties/benefitId, properties/benefitOrderId and properties/usageDate. properties/benefitType is defaulted to savingsPlan.",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-BillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummaries"
+        ],
+        "operationId": "BenefitUtilizationSummaries_ListByBillingProfileId",
+        "description": "Lists benefit utilization summaries for billingProfile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitType, properties/benefitId, properties/benefitOrderId and properties/usageDate. properties/benefitType is defaulted to savingsPlan.",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingProfile": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-BillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummaries"
+        ],
+        "operationId": "BenefitUtilizationSummaries_ListBySavingsPlanOrder",
+        "description": "Lists the savings plan utilization summaries for daily or monthly grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-SavingsPlanOrderId-Daily.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Supports filtering by properties/usageDate.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummaries"
+        ],
+        "operationId": "BenefitUtilizationSummaries_ListBySavingsPlanId",
+        "description": "Lists the savings plan utilization summaries for daily or monthly grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummariesMonthlyWithSavingsPlanId": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-SavingsPlanId-Monthly.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Supports filtering by properties/usageDate.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "benefitRecommendationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of benefit recommendations.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/benefitRecommendationModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (URL) to the next page of results.",
+          "readOnly": true,
+          "format": "uri"
+        }
+      },
+      "description": "Result of listing benefit recommendations."
+    },
+    "benefitRecommendationModel": {
+      "type": "object",
+      "description": "benefit plan recommendation details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/benefitRecommendationProperties"
+        }
+      }
+    },
+    "benefitRecommendationProperties": {
+      "type": "object",
+      "description": "The properties of the benefit plan recommendation.",
+      "discriminator": "scope",
+      "properties": {
+        "firstConsumptionDate": {
+          "type": "string",
+          "description": "The first usage date used for looking back for computing the recommendation.",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "lastConsumptionDate": {
+          "type": "string",
+          "description": "The last usage date used for looking back for computing the recommendation.",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "lookBackPeriod": {
+          "description": "The number of days of usage used to look back for computing the recommendation.",
+          "$ref": "#/definitions/LookBackPeriod"
+        },
+        "totalHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total hours for which the cost is covered. Its equal to number of records in a property 'properties/usage/charges'.",
+          "readOnly": true
+        },
+        "usage": {
+          "type": "object",
+          "description": "The additional details about the usage which are considered while computing benefit recommendations.",
+          "$ref": "#/definitions/recommendationUsageDetails"
+        },
+        "armSkuName": {
+          "description": "ARM SKU name. For example, Standard_D1_V2 for Reservations and Compute_Savings_Plan for SavingsPlan.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "Term period of the benefit. For example, P1Y or P3Y.",
+          "$ref": "#/definitions/Term"
+        },
+        "commitmentGranularity": {
+          "description": "Grain of the proposed commitment amount. For example, hourly, monthly etc.",
+          "$ref": "#/definitions/Grain"
+        },
+        "currencyCode": {
+          "type": "string",
+          "description": "An ISO 4217 currency code identifier for the costs and savings amounts.",
+          "readOnly": true
+        },
+        "costWithoutBenefit": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The current cost without benefit corresponds to 'totalHours' property in a given look-back period.",
+          "readOnly": true
+        },
+        "recommendationDetails": {
+          "type": "object",
+          "description": "The details of the proposed recommendation.",
+          "$ref": "#/definitions/allSavingsBenefitDetails"
+        },
+        "allRecommendationDetails": {
+          "type": "object",
+          "description": "The list of all benefit recommendations.",
+          "readOnly": true,
+          "$ref": "#/definitions/allSavingsList"
+        },
+        "scope": {
+          "description": "Scope of the benefit. For example, Single or Shared.",
+          "$ref": "#/definitions/RecommendationScope"
+        }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "singleScopeBenefitRecommendationProperties": {
+      "type": "object",
+      "description": "The properties of the benefit plan recommendation when scope is 'Single'.",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID that this single scope recommendation is for. Applicable only if recommendation is for 'Single' scope.",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group that this single scope recommendation is for. Applicable only if recommendation is for 'Single' scope and 'ResourceGroup' request scope.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/benefitRecommendationProperties"
+        }
+      ]
+    },
+    "sharedScopeBenefitRecommendationProperties": {
+      "type": "object",
+      "description": "The properties of the benefit plan recommendation when scope is 'Shared'.",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/benefitRecommendationProperties"
+        }
+      ]
+    },
+    "recommendationUsageDetails": {
+      "type": "object",
+      "description": "The additional details about the usage which are considered while computing benefit recommendations.",
+      "properties": {
+        "usageGrain": {
+          "description": "The grain of the usage. For example, hourly or monthly etc.",
+          "$ref": "#/definitions/Grain"
+        },
+        "charges": {
+          "type": "array",
+          "description": "current cost without benefit i.e. charges at the specified grain.",
+          "readOnly": true,
+          "items": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      }
+    },
+    "allSavingsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of benefit recommendations.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/allSavingsBenefitDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (URL) to the next page of results.",
+          "readOnly": true,
+          "format": "uri"
+        }
+      },
+      "description": "Result of listing benefit recommendations."
+    },
+    "allSavingsBenefitDetails": {
+      "description": "The properties of the benefit plan recommendation details for a saving.",
+      "type": "object",
+      "properties": {
+        "overageCost": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The difference between total cost and benefit cost.",
+          "readOnly": true
+        },
+        "benefitCost": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The exact cost of the estimated usage using plan. It's equal to (commitmentAmount * totalHours)",
+          "readOnly": true
+        },
+        "totalCost": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The cost of the suggested commitment.",
+          "readOnly": true
+        },
+        "savingsAmount": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The amount saved by purchasing the recommended quantity of benefit.",
+          "readOnly": true
+        },
+        "savingsPercentage": {
+          "type": "number",
+          "format": "decimal",
+          "description": "The savings in percentage by purchasing the recommended quantity of benefit.",
+          "readOnly": true
+        },
+        "coveragePercentage": {
+          "description": "Expected coverage at this commitment.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "commitmentAmount": {
+          "description": "The commitment amount for the benefit.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "averageUtilizationPercentage": {
+          "description": "Estimated average utilization percentage at this commitment.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "wastageCost": {
+          "description": "Wastage cost at this commitment.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "BenefitKind": {
+      "type": "string",
+      "description": "Kind/type of the benefit.",
+      "enum": [
+        "IncludedQuantity",
+        "Reservation",
+        "SavingsPlan"
+      ],
+      "x-ms-enum": {
+        "name": "benefitKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IncludedQuantity",
+            "description": "Benefit is IncludedQuantity.",
+            "name": "IncludedQuantity"
+          },
+          {
+            "value": "Reservation",
+            "description": "Benefit is Reservation.",
+            "name": "Reservation"
+          },
+          {
+            "value": "SavingsPlan",
+            "description": "Benefit is SavingsPlan.",
+            "name": "SavingsPlan"
+          }
+        ]
+      }
+    },
+    "RecommendationScope": {
+      "type": "string",
+      "description": "Kind of the recommendation scope.",
+      "enum": [
+        "Single",
+        "Shared"
+      ],
+      "x-ms-enum": {
+        "name": "scope",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Single",
+            "description": "Single scope recommendation.",
+            "name": "Single"
+          },
+          {
+            "value": "Shared",
+            "description": "Shared scope recommendation.",
+            "name": "Shared"
+          }
+        ]
+      }
+    },
+    "Grain": {
+      "type": "string",
+      "description": "Grain which corresponds to value.",
+      "enum": [
+        "Hourly",
+        "Daily",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "grain",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Hourly",
+            "description": "Hourly grain corresponds to value per hour.",
+            "name": "Hourly"
+          },
+          {
+            "value": "Daily",
+            "description": "Hourly grain corresponds to value per day.",
+            "name": "Daily"
+          },
+          {
+            "value": "Monthly",
+            "description": "Hourly grain corresponds to value per month.",
+            "name": "Monthly"
+          }
+        ]
+      }
+    },
+    "Term": {
+      "type": "string",
+      "description": "Grain which corresponds to value.",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "term",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "P1Y",
+            "description": "Benefit term is 1 year.",
+            "name": "P1Y"
+          },
+          {
+            "value": "P3Y",
+            "description": "Benefit term is 3 years.",
+            "name": "P3Y"
+          }
+        ]
+      }
+    },
+    "LookBackPeriod": {
+      "type": "string",
+      "description": "The number of days used to look back.",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "lookBackPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Last7Days",
+            "description": "7 days used to look back.",
+            "name": "Last7Days"
+          },
+          {
+            "value": "Last30Days",
+            "description": "30 days used to look back.",
+            "name": "Last30Days"
+          },
+          {
+            "value": "Last60Days",
+            "description": "60 days used to look back.",
+            "name": "Last60Days"
+          }
+        ]
+      }
+    },
+    "BenefitResource": {
+      "type": "object",
+      "description": "The benefit resource model definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Reservation or SavingsPlan.",
+          "$ref": "#/definitions/BenefitKind"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BenefitUtilizationSummariesListResult": {
+      "description": "Result of listing benefit utilization summaries.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of benefit utilization summaries.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BenefitUtilizationSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (URL) to the next page of results.",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        }
+      }
+    },
+    "BenefitUtilizationSummary": {
+      "description": "Benefit utilization summary resource.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Reservation, SavingsPlan or IncludedQuantity.",
+          "$ref": "#/definitions/BenefitKind"
+        }
+      }
+    },
+    "BenefitUtilizationSummaryProperties": {
+      "description": "The properties of a benefit utilization summary.",
+      "type": "object",
+      "properties": {
+        "armSkuName": {
+          "description": "ARM SKU name. For example, Standard_D1_V2 for reservations and ComputeSavingsPlan for savings plan.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitId": {
+          "description": "The benefit ID is the identifier of a benefit within a benefit order.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitOrderId": {
+          "description": "The benefit order ID is the identifier for a benefit purchase. Each benefit order ID represents a single purchase transaction. For example: A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitType": {
+          "description": "The benefit type. For example, reservation or savings plan",
+          "$ref": "#/definitions/BenefitKind"
+        },
+        "usageDate": {
+          "description": "Date corresponding to the utilization record. If the grain of data is monthly, it will be first day of month.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "IncludedQuantityUtilizationSummary": {
+      "description": "Included Quantity utilization summary resource.",
+      "x-ms-discriminator-value": "IncludedQuantity",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitUtilizationSummary"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IncludedQuantityUtilizationSummaryProperties",
+          "title": "Benefit utilization summary for benefit kind Included Quantity."
+        }
+      }
+    },
+    "IncludedQuantityUtilizationSummaryProperties": {
+      "type": "object",
+      "description": "Included Quantity utilization summary properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitUtilizationSummaryProperties"
+        }
+      ],
+      "properties": {
+        "utilizationPercentage": {
+          "description": "This is the utilized percentage for the benefit ID.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlanUtilizationSummary": {
+      "description": "Savings plan utilization summary resource.",
+      "x-ms-discriminator-value": "SavingsPlan",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitUtilizationSummary"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavingsPlanUtilizationSummaryProperties",
+          "title": "Benefit utilization Summary for benefit kind savings plan."
+        }
+      }
+    },
+    "SavingsPlanUtilizationSummaryProperties": {
+      "type": "object",
+      "description": "Savings plan utilization summary properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitUtilizationSummaryProperties"
+        }
+      ],
+      "properties": {
+        "avgUtilizationPercentage": {
+          "description": "This is the average utilization percentage for the benefit ID.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "minUtilizationPercentage": {
+          "description": "This is the minimum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4, utilization was 10%, this field will return 10% for that day",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "maxUtilizationPercentage": {
+          "description": "This is the maximum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4, utilization was 100%, this field will return 100% for that day.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "billingScopeBenefitRecommendationParameter": {
+      "name": "billingScope",
+      "in": "path",
+      "description": "The scope associated with benefit recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "benefitRecommendationsFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Can be used to filter benefitRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Shared'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last60Days'; properties/term with allowed values ['P1Y', 'P3Y'] and default value 'P3Y'; kind with default value 'SavingsPlan'; properties/armSkuName with allowed values ['Compute', 'SQL'] - if mentioned kind SavingsPlan is applied implicitly; properties/subscriptionId; properties/resourceGroup",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "savingsPlanOrderIdParameter": {
+      "description": "Savings plan order ID.",
+      "in": "path",
+      "name": "savingsPlanOrderId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "savingsPlanIdParameter": {
+      "description": "Savings plan ID.",
+      "in": "path",
+      "name": "savingsPlanId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "grainParameter": {
+      "description": "Daily or monthly grain.",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "name": "grainParameter",
+      "enum": [
+        "Hourly",
+        "Daily",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "grainParameter",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Hourly",
+            "description": "Hourly grain corresponds to value per hour.",
+            "name": "Hourly"
+          },
+          {
+            "value": "Daily",
+            "description": "Hourly grain corresponds to value per day.",
+            "name": "Daily"
+          },
+          {
+            "value": "Monthly",
+            "description": "Hourly grain corresponds to value per month.",
+            "name": "Monthly"
+          }
+        ]
+      }
+    }
+  }
+}
