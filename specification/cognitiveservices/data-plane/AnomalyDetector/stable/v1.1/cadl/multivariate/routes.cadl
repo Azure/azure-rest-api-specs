@@ -1,0 +1,139 @@
+// NOTES:
+// Need to fix errors, missing x-ms-error-code
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "./models.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace AnomalyDetector.Multivariate;
+
+@route("/multivariate/detect-batch/{resultId}")
+@summary("Get Multivariate Anomaly Detection Result")
+@doc("""
+For asynchronous inference, get multivariate anomaly detection result based on
+resultId returned by the BatchDetectAnomaly api.
+""")
+op GetMultivariateBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
+
+
+@post
+@route("/multivariate/models")
+@summary("Train a Multivariate Anomaly Detection Model")
+@doc("""
+Create and train a multivariate anomaly detection model. The request must
+include a source parameter to indicate an externally accessible Azure blob
+storage URI.There are two types of data input: An URI pointed to an Azure blob
+storage folder which contains multiple CSV files, and each CSV file contains
+two columns, timestamp and variable. Another type of input is an URI pointed to
+a CSV file in Azure blob storage, which contains all the variables and a
+timestamp column.
+""")
+// op CreateMultivariateModel is Azure.Core.ResourceCreateWithServiceProvidedName<
+//   Model,
+//   {
+//     parameters: {
+//       @doc("Api Version")
+//       @query
+//       ApiVersion: "v1.1";
+//     };
+//   }
+// >;
+// FIXME: this should be a created response code
+op CreateAndTrainMultivariateModel(
+  ...ModelInfo,
+): {
+  @statusCode statusCode: 201,
+  ...Model
+  } | Azure.Core.Foundations.ErrorResponse;
+
+// FIXME: Using ResourceList returns the list of models in the `value` property, but the service defined
+// the property as `models`.
+@get
+@route("/multivariate/models")
+@summary("List Multivariate Models")
+@doc("List models of a resource.")
+// op ListMultivariateModel is Azure.Core.ResourceList<
+//   Model,
+//   {
+//     parameters: {
+//       // FIXME: tell Jose that these were generated as required but are marked as false in the swagger
+//       @doc("Skip indicates how many models will be skipped.")
+//       @query
+//       skip?: int32;
+
+//       @doc("Top indicates how many models will be fetched.")
+//       @query
+//       top?: int32;
+//     },
+//     response: ModelList,
+//   }
+// >;
+// FIXME: how to specify it's a paged result?
+op ListMultivariateModel(
+  @doc("Skip indicates how many models will be skipped.")
+  @query
+  skip?: int32;
+
+  @doc("Top indicates how many models will be fetched.")
+  @query
+  top?: int32;
+): ModelList | Azure.Core.Foundations.ErrorResponse;
+
+
+@summary("Delete Multivariate Model")
+@doc("Delete an existing multivariate model according to the modelId")
+op DeleteMultivariateModel is Azure.Core.ResourceDelete<Model>;
+
+@summary("Get Multivariate Model")
+@doc("""
+Get detailed information of multivariate model, including the training status
+and variables used in the model.
+""")
+op GetMultivariateModel is Azure.Core.ResourceRead<Model>;
+
+@route("/multivariate/models/{modelId}:detect-batch")
+@summary("Detect Multivariate Anomaly")
+@doc("""
+Submit multivariate anomaly detection task with the modelId of trained model
+and inference data, the input schema should be the same with the training
+request. The request will complete asynchronously and return a resultId to
+query the detection result.The request should be a source link to indicate an
+externally accessible Azure storage Uri, either pointed to an Azure blob
+storage folder, or pointed to a CSV file in Azure blob storage.
+""")
+op DetectMultivariateBatchAnomaly is Azure.Core.Foundations.LongRunningOperation<
+  {
+    @doc("Model identifier")
+    @format("uuid")
+    @path
+    modelId: string,
+    ...DetectionRequest,
+  },
+  {
+    @statusCode statusCode: 202,
+    @doc("Id of the detection result.")
+    @header "Operation-Id": string,
+    ...DetectionResult,
+  }
+>;
+
+@route("/multivariate/models/{modelId}:detect-last")
+@summary("Detect anomalies in the last point of the request body")
+@doc("""
+Submit multivariate anomaly detection task with the modelId of trained model
+and inference data, and the inference data should be put into request body in a
+JSON format. The request will complete synchronously and return the detection
+immediately in the response body.
+""")
+op DetectMultivariateLastAnomaly is Azure.Core.Foundations.Operation<
+  {
+    @doc("Model identifier")
+    @format("uuid")
+    @path
+    modelId: string,
+    ...LastDetectionRequest,
+  },
+  LastDetectionResult
+>;
