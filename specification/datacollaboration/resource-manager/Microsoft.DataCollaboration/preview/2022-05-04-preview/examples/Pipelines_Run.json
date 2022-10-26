@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "SampleResourceGroup",
+    "workspaceName": "Workspace1",
+    "pipelineName": "Pipeline1",
+    "pipelineRunParameters": {
+      "pipelineRunMode": "Test",
+      "pipelineRunParameterAssignments": {
+        "pipelineRunComputationParameterAssignments": [
+          {
+            "parameterType": "String",
+            "value": "Date",
+            "pipelineParameterId": "5e2b76d9-b273-4865-8329-209649895cd8"
+          }
+        ],
+        "pipelineRunStepParameterAssignments": [
+          {
+            "parameterType": "BoundDataDescriptor",
+            "value": {
+              "parameterValueType": "DataAsset",
+              "dataAssetId": "d83b8ff9-599c-4006-8d9c-74abd3e0ff38"
+            },
+            "pipelineParameterId": "df44be10-fe4e-41f6-8803-f3a7dcea8b97"
+          }
+        ]
+      }
+    },
+    "api-version": "2022-05-04-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "startTime": "2019-06-30T02:37:48.4979104Z",
+          "pipelineRunStatus": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "John Smith",
+          "createdByType": "User",
+          "createdAt": "2018-11-14T04:47:52.9614956Z",
+          "lastModifiedBy": "John Smith",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1/pipelineRuns/7458d4c4-6941-46aa-bfe6-2d47ff7f247a",
+        "name": "PipelineRun1",
+        "type": "Microsoft.DataCollaboration/workspaces/pipelines/pipelineRuns"
+      }
+    },
+    "202": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd",
+        "x-ms-long-running-operation": true,
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2018-11-01-preview"
+      },
+      "body": {
+        "properties": {
+          "startTime": "2019-06-30T02:37:48.4979104Z",
+          "pipelineRunStatus": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "John Smith",
+          "createdByType": "User",
+          "createdAt": "2018-11-14T04:47:52.9614956Z",
+          "lastModifiedBy": "John Smith",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelines/Pipeline1/pipelineRuns/7458d4c4-6941-46aa-bfe6-2d47ff7f247a",
+        "name": "PipelineRun1",
+        "type": "Microsoft.DataCollaboration/workspaces/pipelines/pipelineRuns"
+      }
+    }
+  }
+}

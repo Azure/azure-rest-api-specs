@@ -1,5 +1,5 @@
 # DataCollaboration
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for DataCollaboration.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for DataCollaboration.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for DataCollaboration, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the DataCollaboration API.
 
 ``` yaml
@@ -36,6 +36,15 @@ These settings apply only when `--tag=package-2020-05-04-preview` is specified o
 ``` yaml $(tag) == 'package-2020-05-04-preview'
 input-file:
 - Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
+```
+
+### Tag: package-2022-05-04-preview
+
+These settings apply only when `--tag=package-2022-05-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-04-preview'
+input-file:
+- Microsoft.DataCollaboration/preview/2022-05-04-preview/DataCollaboration.json
 ```
 
 ## Suppressions
@@ -66,7 +75,7 @@ swagger-to-sdk:
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -111,3 +120,9 @@ python:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.DataCollaboration/preview/2022-05-04-preview/DataCollaboration.json
+  - $(this-folder)/Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
