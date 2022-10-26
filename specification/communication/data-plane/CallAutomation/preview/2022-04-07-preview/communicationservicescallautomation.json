@@ -2,8 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-04-07-preview",
-    "title": "Azure Communication Service Call Automation APIs",
-    "description": "Azure Communication Service Call Automation APIs"
+    "title": "Azure Communication Service ServerCalling APIs"
   },
   "schemes": [
     "https"
@@ -51,12 +50,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "201": {
             "description": "Returns the create call response.",
             "schema": {
@@ -107,12 +100,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the answer call response.",
             "schema": {
@@ -139,7 +126,7 @@
           {
             "name": "redirectCallRequest",
             "in": "body",
-            "description": "The redirect call request.",
+            "description": "",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedirectCallRequest"
@@ -163,12 +150,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "204": {
             "description": "Returns the redirect call response."
           }
@@ -216,12 +197,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "204": {
             "description": "Returns the reject call response."
           }
@@ -253,12 +228,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the get call response.",
             "schema": {
@@ -292,12 +261,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "204": {
             "description": "Returns the hangup call response."
           }
@@ -343,12 +306,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "204": {
             "description": "Returns the terminate call response."
           }
@@ -403,12 +360,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the transfer call response.",
             "schema": {
@@ -430,19 +381,19 @@
         ],
         "summary": "Plays audio to participants in the call.",
         "description": "Plays audio to participants in the call.",
-        "operationId": "Content_Play",
+        "operationId": "CallConnections_Play",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The call connection id.",
+            "description": "",
             "required": true,
             "type": "string"
           },
           {
             "name": "playRequest",
             "in": "body",
-            "description": "play request payload.",
+            "description": "",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PlayRequest"
@@ -453,19 +404,13 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the play audio response."
           }
         },
         "x-ms-examples": {
           "Plays audio to participants in the call.": {
-            "$ref": "./examples/Content_Play.json"
+            "$ref": "./examples/CallConnections_Play.json"
           }
         }
       }
@@ -477,7 +422,7 @@
         ],
         "summary": "Cancel all media operations in a call.",
         "description": "Cancel all media operations in a call.",
-        "operationId": "Content_CancelAllMediaOperations",
+        "operationId": "CallConnections_CancelAllMediaOperations",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -491,19 +436,13 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the cancel all media operations response."
           }
         },
         "x-ms-examples": {
           "Cancel all media operations in a call.": {
-            "$ref": "./examples/Content_CancelAllMediaOperations.json"
+            "$ref": "./examples/CallConnections_CancelAllMediaOperations.json"
           }
         }
       }
@@ -515,7 +454,7 @@
         ],
         "summary": "Recognize media from call.",
         "description": "Recognize media from call.",
-        "operationId": "Content_Recognize",
+        "operationId": "CallConnections_Recognize",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -538,19 +477,13 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the recognize response."
           }
         },
         "x-ms-examples": {
           "Recognize media from call.": {
-            "$ref": "./examples/Content_Recognize.json"
+            "$ref": "./examples/CallConnections_Recognize.json"
           }
         }
       }
@@ -576,12 +509,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the get participants response.",
             "schema": {
@@ -639,12 +566,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the add participant response.",
             "schema": {
@@ -702,12 +623,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the remove participant response.",
             "schema": {
@@ -750,12 +665,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the get participant response.",
             "schema": {
@@ -773,10 +682,10 @@
     "/calling/recordings": {
       "post": {
         "tags": [
-          "Content_Recording"
+          "Recording_Recording"
         ],
         "summary": "Start recording the call.",
-        "operationId": "Content_Recording",
+        "operationId": "Recording_StartRecording",
         "parameters": [
           {
             "name": "startCallRecording",
@@ -805,12 +714,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the start call recording response.",
             "schema": {
@@ -820,7 +723,7 @@
         },
         "x-ms-examples": {
           "Start recording the call.": {
-            "$ref": "./examples/Content_Recording.json"
+            "$ref": "./examples/Recording_StartRecording.json"
           }
         }
       }
@@ -828,10 +731,10 @@
     "/calling/recordings/{recordingId}": {
       "get": {
         "tags": [
-          "Content_Recording"
+          "Recording_Recording"
         ],
         "summary": "Get call recording properties.",
-        "operationId": "ServerCalls_GetRecordingProperties",
+        "operationId": "Recording_GetRecordingProperties",
         "parameters": [
           {
             "name": "recordingId",
@@ -845,12 +748,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the recording properties.",
             "schema": {
@@ -860,16 +757,16 @@
         },
         "x-ms-examples": {
           "Get call recording properties.": {
-            "$ref": "./examples/ServerCalls_GetRecordingProperties.json"
+            "$ref": "./examples/Recording_GetRecordingProperties.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Content_Recording"
+          "Recording_Recording"
         ],
         "summary": "Stop recording the call.",
-        "operationId": "ServerCalls_StopRecording",
+        "operationId": "Recording_StopRecording",
         "parameters": [
           {
             "name": "recordingId",
@@ -883,19 +780,13 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "204": {
             "description": "Returns the stop call recording response."
           }
         },
         "x-ms-examples": {
           "Stop recording the call.": {
-            "$ref": "./examples/ServerCalls_StopRecording.json"
+            "$ref": "./examples/Recording_StopRecording.json"
           }
         }
       }
@@ -903,10 +794,10 @@
     "/calling/recordings/{recordingId}:pause": {
       "post": {
         "tags": [
-          "Content_Recording"
+          "Recording_Recording"
         ],
         "summary": "Pause recording the call.",
-        "operationId": "ServerCalls_PauseRecording",
+        "operationId": "Recording_PauseRecording",
         "parameters": [
           {
             "name": "recordingId",
@@ -920,19 +811,13 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the pause call recording response."
           }
         },
         "x-ms-examples": {
           "Pause recording the call.": {
-            "$ref": "./examples/ServerCalls_PauseRecording.json"
+            "$ref": "./examples/Recording_PauseRecording.json"
           }
         }
       }
@@ -940,10 +825,10 @@
     "/calling/recordings/{recordingId}:resume": {
       "post": {
         "tags": [
-          "Content_Recording"
+          "Recording_Recording"
         ],
         "summary": "Resume recording the call.",
-        "operationId": "ServerCalls_ResumeRecording",
+        "operationId": "Recording_ResumeRecording",
         "parameters": [
           {
             "name": "recordingId",
@@ -957,19 +842,13 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "Returns the resume call recording response."
           }
         },
         "x-ms-examples": {
           "Resume recording the call.": {
-            "$ref": "./examples/ServerCalls_ResumeRecording.json"
+            "$ref": "./examples/Recording_ResumeRecording.json"
           }
         }
       }
@@ -2220,7 +2099,6 @@
       "description": "The endpoint of the Azure Communication resource.",
       "required": true,
       "type": "string",
-      "format": "uri",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
@@ -2267,14 +2145,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
-        "description": "The endpoint of the Azure Communication resource.",
-        "required": true,
-        "type": "string",
-        "format": "url",
-        "in": "path",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   }
