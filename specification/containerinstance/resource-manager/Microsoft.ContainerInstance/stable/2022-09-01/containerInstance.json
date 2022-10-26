@@ -1474,23 +1474,30 @@
           "type": "string",
           "description": "Name of the extension."
         },
-        "extensionType": {
-          "type": "string",
-          "description": "Type of extension to be added."
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the extension being used."
-        },
-        "settings": {
+        "properties":{
           "type": "object",
-          "description": "Settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "Protected settings for the extension."
+        "x-ms-client-flatten": true,
+          "description": "Extension specific properties",
+          "properties": {
+            "extensionType": {
+              "type": "string",
+              "description": "Type of extension to be added."
+            },
+            "version": {
+              "type": "string",
+              "description": "Version of the extension being used."
+            },
+            "settings": {
+              "type": "object",
+              "description": "Settings for the extension."
+            },
+            "protectedSettings": {
+              "type": "object",
+              "description": "Protected settings for the extension."
+            }
         }
-      },
+      }
+    },
       "required": [
         "name",
         "extensionType",
