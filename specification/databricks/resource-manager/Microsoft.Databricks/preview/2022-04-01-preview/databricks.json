@@ -48,10 +48,10 @@
           "Get a workspace with custom parameters": {
             "$ref": "./examples/WorkspaceGetParameters.json"
           },
-            "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
-              "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
-            }
-          },
+          "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupName"
@@ -153,52 +153,52 @@
           "Update a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionUpdate.json"
           }
-          },
-          "parameters": [
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Workspace"
-              },
-              "description": "Parameters supplied to the create or update a workspace."
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/WorkspaceName"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Created - Returns information about the workspace, including provisioning status.",
-              "schema": {
-                "$ref": "#/definitions/Workspace"
-              }
-            },
-            "201": {
-              "description": "Created - Returns information about the workspace, including provisioning status.",
-              "schema": {
-                "$ref": "#/definitions/Workspace"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-long-running-operation": true
         },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "Parameters supplied to the create or update a workspace."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created - Returns information about the workspace, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the workspace, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "patch": {
         "tags": [
           "Workspaces"
