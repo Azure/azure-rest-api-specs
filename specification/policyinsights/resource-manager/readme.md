@@ -98,14 +98,7 @@ directive:
   - suppress: MISSING_REQUIRED_PARAMETER
     from: policyStates.json
     reason: unnecessary check
-  
-  - suppress: MISSING_REQUIRED_PARAMETER
-    from: operations.json
-    reason: unnecessary check
-  
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: operations.json
-    reason: unnecessary check
+
 ```
 
 ``` yaml !$(python)
