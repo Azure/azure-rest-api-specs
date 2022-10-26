@@ -4031,6 +4031,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -4256,6 +4259,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -4508,6 +4514,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -4767,6 +4776,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -4987,6 +4999,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -5250,6 +5265,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -5483,6 +5501,9 @@
           },
           {
             "$ref": "#/parameters/Expand"
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -7505,6 +7526,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -7889,6 +7913,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -8388,6 +8415,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -8728,6 +8758,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -8991,6 +9024,9 @@
               "type": "object"
             },
             "required": true
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
           }
         ],
         "responses": {
@@ -9191,6 +9227,14 @@
       "in": "query",
       "name": "filter",
       "description": "An expression on the resource type that selects the resources to be returned.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": false
+    },
+    "IfMatch": {
+      "in": "header",
+      "name": "If-Match",
+      "description": "Only perform the operation if the entity's etag matches one of the etags provided or * is provided.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": false
