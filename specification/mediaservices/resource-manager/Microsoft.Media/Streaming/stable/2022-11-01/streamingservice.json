@@ -493,7 +493,10 @@
         ],
         "summary": "Get status of one live event",
         "description": "Gets status telemetry of a live event.",
-        "operationId": "LiveEvents_Status",
+        "operationId": "LiveEvents_Status_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -542,7 +545,10 @@
         ],
         "summary": "Get stream events of one live event",
         "description": "Get stream events telemetry of a live event.",
-        "operationId": "LiveEvents_StreamEvents",
+        "operationId": "LiveEvents_StreamEvents_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -578,20 +584,23 @@
           }
         },
         "x-ms-examples": {
-          "Get status of a LiveEvent": {
+          "Get stream events of a LiveEvent": {
             "$ref": "examples/liveevent-stream-events.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/trackIngestHeartbeat": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/trackIngestHeartbeats": {
       "get": {
         "tags": [
           "LiveEvents"
         ],
         "summary": "Get track events of one live event",
         "description": "Get track ingest heartbeat events telemetry of a live event.",
-        "operationId": "LiveEvents_TrackIngestHeartbeat",
+        "operationId": "LiveEvents_TrackIngestHeartbeats_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -613,7 +622,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LiveEventTrackIngestHeartbeatGetResult"
+              "$ref": "#/definitions/LiveEventTrackIngestHeartbeatsGetResult"
             }
           },
           "304": {
@@ -627,7 +636,7 @@
           }
         },
         "x-ms-examples": {
-          "Get status of a LiveEvent": {
+          "Get track ingest heart beats of a LiveEvent": {
             "$ref": "examples/liveevent-track-events.json"
           }
         }
@@ -2604,6 +2613,7 @@
           "type": "string"
         }
       },
+      "description": "The live event ingest interruption data.",
       "type": "object"
     },
     "Ingestion": {
@@ -2628,6 +2638,7 @@
           "x-ms-identifiers": []
         }
       },
+      "description": "The live event ingestion telemetry data.",
       "type": "object"
     },
     "TrackStatus": {
@@ -2647,6 +2658,7 @@
           "type": "string"
         }
       },
+      "description": "The live event track status.",
       "type": "object"
     },
     "Status": {
@@ -2677,6 +2689,7 @@
           "x-ms-identifiers": []
         }
       },
+      "description": "The live event status.",
       "type": "object"
     },
     "LiveEventStatusGetResult": {
@@ -2690,6 +2703,7 @@
           "description": "The result of the Get live event status."
         }
       },
+      "description": "The live event status get result.",
       "type": "object"
     },
     "StreamEvent": {
@@ -2712,6 +2726,7 @@
           "description": "Specific data entry for a specific event type."
         }
       },
+      "description": "The live event stream event.",
       "type": "object"
     },
     "LiveEventStreamEventsGetResult": {
@@ -2725,6 +2740,7 @@
           "description": "The result of the Get live event stream events."
         }
       },
+      "description": "The live event stream event get result.",
       "type": "object"
     },
     "TrackEvent": {
@@ -2743,9 +2759,10 @@
           "description": "Specific data entry for a specific event type."
         }
       },
+      "description": "The live event track event.",
       "type": "object"
     },
-    "LiveEventTrackIngestHeartbeatGetResult": {
+    "LiveEventTrackIngestHeartbeatsGetResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -2756,6 +2773,7 @@
           "description": "The result of the Get live event track events."
         }
       },
+      "description": "The live event track ingest heart beats get result.",
       "type": "object"
     }
   },
