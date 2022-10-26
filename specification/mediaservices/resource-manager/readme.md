@@ -81,7 +81,7 @@ input-file:
 
 These settings apply only when `--tag=package-metadata-2022-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-metadata-2022-08'
+```yaml $(tag) == 'package-metadata-2022-08'
 input-file:
   - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
   - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
@@ -96,7 +96,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-08'
+```yaml $(tag) == 'package-2022-08'
 input-file:
   - Microsoft.Media/Metadata/stable/2021-11-01/AccountFilters.json
   - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
