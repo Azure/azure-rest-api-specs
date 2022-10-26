@@ -21,7 +21,7 @@ directive:
     where: $.definitions.SecurityContactProperties.properties.notificationsByRole.properties.state
     transform: >
         $['x-ms-enum']['name'] = 'SecurityAlertNotificationByRoleState';
-  - from: types.json
+  - from: common/v1/types.json
     where: $.parameters.AscLocation
     transform: >
         $['x-ms-parameter-location'] = 'client';
