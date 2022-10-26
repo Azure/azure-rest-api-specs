@@ -2600,16 +2600,20 @@
     "IngestInterruption": {
       "properties": {
         "begin": {
+          "description": "UTC time of interruption start, encoder disconnected.",
           "type": "string"
         },
         "end": {
+          "description": "UTC time of interruption end, encoder re-connected.",
           "type": "string"
         },
         "durationInSec": {
+          "description": "Duration of interruption in seconds.",
           "type": "integer",
           "format": "int32"
         },
         "reason": {
+          "description": "Interruption reason.",
           "type": "string"
         }
       },
@@ -2619,15 +2623,19 @@
     "Ingestion": {
       "properties": {
         "streamName": {
+          "description": "Ingestion stream name.",
           "type": "string"
         },
         "beginTime": {
+          "description": "Ingestion begin time in UTC.",
           "type": "string"
         },
         "endTime": {
+          "description": "Ingestion end time in UTC. Empty if it's not stopped yet.",
           "type": "string"
         },
         "endReason": {
+          "description": "End reason.",
           "type": "string"
         },
         "ingestInterruptions": {
@@ -2635,7 +2643,8 @@
           "items": {
             "$ref": "#/definitions/IngestInterruption"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "description": "IngestInterruption entry list."
         }
       },
       "description": "The live event ingestion telemetry data.",
@@ -2644,17 +2653,21 @@
     "TrackStatus": {
       "properties": {
         "trackId": {
+          "description": "Track Id.",
           "type": "string"
         },
         "expectedBitrate": {
+          "description": "Expected bitrate for this track.",
           "type": "integer",
           "format": "int64"
         },
         "incomingBitrate": {
+          "description": "Average incoming bitrate for last 20 seconds when live event is running.",
           "type": "integer",
           "format": "int64"
         },
         "ingestDrift": {
+          "description": "Current ingest drift value in seconds for last 1 min.",
           "type": "string"
         }
       },
@@ -2664,24 +2677,30 @@
     "Status": {
       "properties": {
         "state": {
+          "descritpion": "Current state of the live event. Running | Stopped.",
           "type": "string"
         },
         "healthStatus": {
+          "descritpion": "Health status of last 20 sec.",
           "type": "string"
         },
         "healthDescription": {
+          "description": "List of strings justifying the health status.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "lastUpdatedTime": {
+          "description": "Last updated UTC time of this status.",
           "type": "string"
         },
         "ingestion": {
+          "description": "Ingestions entry list.",
           "$ref": "#/definitions/Ingestion"
         },
         "trackStatus": {
+          "description": "Track status entry list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrackStatus"
@@ -2709,12 +2728,15 @@
     "StreamEvent": {
       "properties": {
         "eventType": {
+          "description": "The type of the stream event.",
           "type": "string"
         },
         "eventTime": {
+          "description": "The time event raised.",
           "type": "string"
         },
         "level": {
+          "description": "Event level. 1: Critical, 2: Error, 3: Warning, 4: Information.",
           "type": "integer",
           "format": "int32"
         },
@@ -2723,7 +2745,7 @@
           "additionalProperties": {
             "type": "object"
           },
-          "description": "Specific data entry for a specific event type."
+          "description": "Event data based on event type."
         }
       },
       "description": "The live event stream event.",
@@ -2746,9 +2768,11 @@
     "TrackEvent": {
       "properties": {
         "eventType": {
+          "description": "The type of the stream event.",
           "type": "string"
         },
         "eventTime": {
+          "description": "The time event raised.",
           "type": "string"
         },
         "data": {
@@ -2756,7 +2780,7 @@
           "additionalProperties": {
             "type": "object"
           },
-          "description": "Specific data entry for a specific event type."
+          "description": "Event data based on event type."
         }
       },
       "description": "The live event track event.",
