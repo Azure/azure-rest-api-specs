@@ -233,6 +233,29 @@
       },
       "description": "Paged API list representation."
     },
+    "DocumentationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentationContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Documentation list representation."
+    },
     "ApiContract": {
       "properties": {
         "properties": {
@@ -7746,6 +7769,58 @@
       "additionalProperties": {
         "type": "string"
       }
+    },
+    "DocumentationContract": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "documentation title."
+            },
+            "content": {
+              "type": "string",
+              "description": "Markdown documentation content."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Markdown documentation details."
+    },
+    "WikiDocumentationContract": {
+      "properties": {
+        "documentationId": {
+          "type": "string",
+          "description": "Documentation Identifier"
+        }
+      },
+      "description": "Wiki documentation details."
+    },
+    "WikiContract": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "documents": {
+              "type": "array",
+              "description": "Collection wiki documents included into this wiki.",
+              "items": {
+                "$ref": "#/definitions/WikiDocumentationContract"
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Wiki properties"
     }
   },
   "parameters": {}
