@@ -401,11 +401,11 @@
         "tags": [
           "ScheduledActions"
         ],
-        "operationId": "ScheduledActions_Execute",
-        "description": "Execute a private scheduled action.",
+        "operationId": "ScheduledActions_Run",
+        "description": "Processes a private scheduled action.",
         "x-ms-examples": {
-          "ScheduledActionExecute": {
-            "$ref": "./examples/scheduledActions/scheduledAction-execute-private.json"
+          "ScheduledActionSendNow": {
+            "$ref": "./examples/scheduledActions/scheduledAction-sendNow-private.json"
           }
         },
         "parameters": [
@@ -434,11 +434,11 @@
         "tags": [
           "ScheduledActions"
         ],
-        "operationId": "ScheduledActions_ExecuteByScope",
-        "description": "Execute a shared scheduled action within the given scope.",
+        "operationId": "ScheduledActions_RunByScope",
+        "description": "Runs a shared scheduled action within the given scope.",
         "x-ms-examples": {
-          "ScheduledActionExecuteByScope": {
-            "$ref": "./examples/scheduledActions/scheduledAction-execute-shared.json"
+          "ScheduledActionRunByScope": {
+            "$ref": "./examples/scheduledActions/scheduledAction-sendNow-shared.json"
           }
         },
         "parameters": [
@@ -786,12 +786,12 @@
         "values": [
           {
             "value": "Disabled",
-            "description": "Scheduled action is saved but will not be executed.",
+            "description": "Scheduled action is saved but will not be run.",
             "name": "Disabled"
           },
           {
             "value": "Enabled",
-            "description": "Scheduled action is saved and will be executed.",
+            "description": "Scheduled action is saved and will be run.",
             "name": "Enabled"
           },
           {
