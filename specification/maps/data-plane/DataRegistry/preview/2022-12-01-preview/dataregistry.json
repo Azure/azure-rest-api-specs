@@ -425,11 +425,57 @@
           "description": "The description to be given to the data registry. The max length is 1024 characters.",
           "type": "string"
         },
+        "kind": {
+          "description": "Data registry kind.",
+          "type": "string",
+          "enum": [
+            "AzureBlob"
+          ],
+          "x-ms-enum": {
+            "name": "DataRegistryKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlob",
+                "description": "Connection to Azure Blob."
+              }
+            ]
+          }
+        },
+        "azureBlob": {
+          "$ref": "#/definitions/AzureBlob"
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus"
+        },
+        "error": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
+        }
+      },
+      "required": [
+        "dataFormat",
+        "connection"
+      ]
+    },
+    "AzureBlob": {
+      "description": "Azure Blob connection details.",
+      "type": "object",
+      "properties": {
         "dataFormat": {
           "$ref": "#/definitions/DataFormat"
         },
-        "connection": {
-          "$ref": "#/definitions/Connection"
+        "msiClientId": {
+          "description": "Client ID of managed identity. Use system assigned identity if not provided.",
+          "type": "string"
+        },
+        "linkedResource": {
+          "description": "The linked resource. Need to configure in Azure Maps control plane beforehand.",
+          "type": "string"
+        },
+        "blobUrl": {
+          "description": "The blob URL.",
+          "type": "string",
+          "format": "uri"
         },
         "downloadURL": {
           "description": "The download URL of the underlying data. It may not be available if the status of the data registry is `Running` or `Failed`.",
@@ -447,103 +493,13 @@
           "description": "The content MD5 of the content.",
           "type": "string",
           "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/LongRunningOperationStatus"
-        },
-        "error": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
         }
       },
       "required": [
         "dataFormat",
-        "connection"
+        "linkedResource",
+        "blobUrl"
       ]
-    },
-    "Connection": {
-      "description": "A Connection object representing how Azure Maps Service accesses customer's resources and the scope of it.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Connection type.",
-          "type": "string",
-          "enum": [
-            "AzureBlobFile"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AzureBlobFile",
-                "description": "Connection to Azure Blob File."
-              }
-            ]
-          }
-        },
-        "msiClientId": {
-          "description": "ClientId of MSI. Use system assigned identity if not provided.",
-          "type": "string"
-        },
-        "linkedResource": {
-          "description": "The linked resource. Need to configure in control plane beforehand.",
-          "type": "string"
-        },
-        "scope": {
-          "$ref": "#/definitions/ConnectionScope"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ConnectionPatch": {
-      "description": "A ConnectionPatch object represents a patch to a Connection object, in [JSON Merge Patch (RFC7396)](https://datatracker.ietf.org/doc/html/rfc7396).",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Connection type.",
-          "type": "string",
-          "enum": [
-            "AzureBlobFile"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AzureBlobFile",
-                "description": "Connection to Azure Blob File."
-              }
-            ]
-          }
-        },
-        "msiClientId": {
-          "description": "ClientId of MSI. Use system assigned identity if not provided.",
-          "type": "string"
-        },
-        "linkedResource": {
-          "description": "The linked resource. Need to configure in control plane first.",
-          "type": "string"
-        },
-        "scope": {
-          "$ref": "#/definitions/ConnectionScope"
-        }
-      }
-    },
-    "ConnectionScope": {
-      "description": "The scope within the specified linked resource Azure Maps Service can access.",
-      "type": "object",
-      "properties": {
-        "containerName": {
-          "description": "The container name where the blob file is stored. Required when type is `AzureBlobFile`.",
-          "type": "string"
-        },
-        "blobPath": {
-          "description": "The path to the blob file. Required when type is `AzureBlobFile`.",
-          "type": "string"
-        }
-      }
     },
     "DataRegistryList": {
       "description": "The response model for the DataRegistry List API. Returns a list of all the previously registered data.",

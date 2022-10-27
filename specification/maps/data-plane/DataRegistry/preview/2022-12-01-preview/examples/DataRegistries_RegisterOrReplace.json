@@ -5,15 +5,12 @@
     "udid": "29a92cab-74af-49e7-a326-66898220aa9d",
     "dataRegistry": {
       "description": "Contoso Geofence GeoJSON",
-      "dataFormat": "geojson",
-      "connection": {
-        "type": "AzureBlobFile",
+      "kind": "AzureBlob",
+      "azureBlob": {
+        "dataFormat": "geojson",
         "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
         "linkedResource": "my-storage-account",
-        "scope": {
-          "containerName": "my-container",
-          "blobPath": "/my/blob/path.json"
-        }
+        "blobUrl": "https://mystorageaccount.blob.core.windows.net/my-container/my/blob/path.json"
       }
     }
   },
@@ -26,18 +23,15 @@
       "body": {
         "udid": "29a92cab-74af-49e7-a326-66898220aa9d",
         "description": "Contoso Geofence GeoJSON",
-        "dataFormat": "geojson",
-        "connection": {
-          "type": "AzureBlobFile",
+        "kind": "AzureBlob",
+        "azureBlob": {
+          "dataFormat": "geojson",
           "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
           "linkedResource": "my-storage-account",
-          "scope": {
-            "containerName": "my-container",
-            "blobPath": "/my/blob/path.json"
-          }
+          "blobUrl": "https://mystorageaccount.blob.core.windows.net/my-container/my/blob/path.json",
+          "downloadURL": "https://us.atlas.microsoft.com/dataRegistries/29a92cab-74af-49e7-a326-66898220aa9d/content?api-version=2022-12-01-preview",
+          "sizeInBytes": 1339,
         },
-        "downloadURL": "https://us.atlas.microsoft.com/dataRegistries/29a92cab-74af-49e7-a326-66898220aa9d/content?api-version=2022-12-01-preview",
-        "sizeInBytes": 1339,
         "status": "Running"
       }
     },
@@ -49,18 +43,15 @@
       "body": {
         "udid": "29a92cab-74af-49e7-a326-66898220aa9d",
         "description": "Contoso Geofence GeoJSON",
-        "dataFormat": "geojson",
-        "connection": {
-          "type": "AzureBlobFile",
+        "kind": "AzureBlob",
+        "azureBlob": {
+          "dataFormat": "geojson",
           "msiClientId": "3263cad5-ed8b-4829-b72b-3d1ba556e373",
           "linkedResource": "my-storage-account",
-          "scope": {
-            "containerName": "my-container",
-            "blobPath": "/my/blob/path.json"
-          }
+          "blobUrl": "https://mystorageaccount.blob.core.windows.net/my-container/my/blob/path.json",
+          "downloadURL": "https://us.atlas.microsoft.com/dataRegistries/29a92cab-74af-49e7-a326-66898220aa9d/content?api-version=2022-12-01-preview",
+          "sizeInBytes": 1339,
         },
-        "downloadURL": "https://us.atlas.microsoft.com/dataRegistries/29a92cab-74af-49e7-a326-66898220aa9d/content?api-version=2022-12-01-preview",
-        "sizeInBytes": 1339,
         "status": "Running"
       }
     }
