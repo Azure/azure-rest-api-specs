@@ -290,6 +290,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -432,6 +438,7 @@
             "Single"
           ],
           "type": "string",
+          "default": "Single",
           "x-ms-enum": {
             "name": "ActiveRevisionsMode",
             "modelAsString": true
@@ -521,7 +528,7 @@
               "$ref": "./CommonDefinitions.json#/definitions/Template",
               "description": "Container App versioned application definition."
             },
-            "outboundIPAddresses": {
+            "outboundIpAddresses": {
               "description": "Outbound IP Addresses for container app.",
               "type": "array",
               "items": {
@@ -561,7 +568,8 @@
       "properties": {
         "enabled": {
           "description": "Boolean indicating if the Dapr side car is enabled",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "appId": {
           "description": "Dapr application identifier",
@@ -574,6 +582,7 @@
             "grpc"
           ],
           "type": "string",
+          "default": "http",
           "x-ms-enum": {
             "name": "appProtocol",
             "modelAsString": true
@@ -616,7 +625,8 @@
           "x-ms-enum": {
             "name": "IngressTransportMethod",
             "modelAsString": true
-          }
+          },
+          "default": "auto"
         },
         "traffic": {
           "description": "Traffic weights for app's revisions",
@@ -640,7 +650,8 @@
         },
         "allowInsecure": {
           "description": "Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -837,6 +848,11 @@
         },
         "hasConflictOnManagedEnvironment": {
           "description": "<code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "conflictWithEnvironmentCustomDomain": {
+          "description": "<code>true</code> if there is a conflict on the Container App's managed environment level custom domain; otherwise, <code>false</code>.",
           "type": "boolean",
           "readOnly": true
         },
