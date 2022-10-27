@@ -9,39 +9,35 @@ variables:
     type: string
   azureClientSecret:
     type: string
-  
+  location:
+    type: string
+
 prepareSteps:
   - step: ManagedClusters_CreateOrUpdate
-    exampleFile: ..\examples\ManagedClustersCreate_Update.json
-    requestUpdate:
-      - remove: /parameters/identity
-      - remove: /parameters/sku
-      - remove: /parameters/tags
-      - replace: /parameters/properties
-        value: {
-          "dnsPrefix": "dnsprefix1",
-          "agentPoolProfiles": [
-            {
-              "name": "nodepool1",
-              "count": 3,
-              "maxPods": 110,
-              "minCount": 1,
-              "maxCount": 10,
-              "vmSize": "Standard_DS2_v2",
-              "osType": "Linux",
-              "type": "VirtualMachineScaleSets",
-              "enableNodePublicIP": true,
-              "enableAutoScaling": true,
-              "mode": "System"
-            }
-          ],
-          "servicePrincipalProfile": {
-            "clientId": $(azureClientId),
-            "secret": $(azureClientSecret)
-          },
-        }
+    operationId: ManagedClusters_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          dnsPrefix: dnsprefix1
+          agentPoolProfiles:
+            - name: nodepool1
+              count: 3
+              maxPods: 110
+              minCount: 1
+              maxCount: 10
+              vmSize: Standard_DS2_v2
+              osType: Linux
+              type: VirtualMachineScaleSets
+              enableNodePublicIP: true
+              enableAutoScaling: true
+              mode: System
+          servicePrincipalProfile:
+            clientId: $(azureClientId)
+            secret: $(azureClientSecret)
+
   - step: AgentPools_CreateOrUpdate
-    exampleFile: ..\examples\AgentPoolsCreate_Update.json
+    exampleFile: ../examples/AgentPoolsCreate_Update.json
     requestUpdate:
       - replace: /parameters/properties/vmSize
         value: Standard_DS2_v2
@@ -52,7 +48,7 @@ prepareSteps:
         type: string
         fromResponse: /id
   - step: Snapshots_CreateOrUpdate
-    exampleFile: ..\examples\SnapshotsCreate.json
+    exampleFile: ../examples/SnapshotsCreate.json
     requestUpdate:
       - replace: /parameters/properties/creationData/sourceResourceId
         value: $(agentpoolId)
@@ -62,21 +58,21 @@ scenarios:
     description: Microsoft.ContainerService/managedClusters
     steps:
       - step: ManagedClusters_GetOSOptions
-        exampleFile: ..\examples\ContainerServiceGetOSOptions.json
+        exampleFile: ../examples/ContainerServiceGetOSOptions.json
       - step: ManagedClusters_List
-        exampleFile: ..\examples\ManagedClustersList.json
+        exampleFile: ../examples/ManagedClustersList.json
       - step: ManagedClusters_ListByResourceGroup
-        exampleFile: ..\examples\ManagedClustersListByResourceGroup.json
+        exampleFile: ../examples/ManagedClustersListByResourceGroup.json
       - step: ManagedClusters_ListOutboundNetworkDependenciesEndpoints
-        exampleFile: ..\examples\OutboundNetworkDependenciesEndpointsList.json
+        exampleFile: ../examples/OutboundNetworkDependenciesEndpointsList.json
       - step: ManagedClusters_Get
-        exampleFile: ..\examples\ManagedClustersGet.json
+        exampleFile: ../examples/ManagedClustersGet.json
       - step: ManagedClusters_GetUpgradeProfile
-        exampleFile: ..\examples\ManagedClustersGetUpgradeProfile.json
+        exampleFile: ../examples/ManagedClustersGetUpgradeProfile.json
       - step: ManagedClusters_UpdateTags
-        exampleFile: ..\examples\ManagedClustersUpdateTags.json
+        exampleFile: ../examples/ManagedClustersUpdateTags.json
       - step: ManagedClusters_GetAccessProfile
-        exampleFile: ..\examples\ManagedClustersGetAccessProfile.json
+        exampleFile: ../examples/ManagedClustersGetAccessProfile.json
       - step: ManagedClusters_ListClusterUserCredentials
         operationId: ManagedClusters_ListClusterUserCredentials
       - step: ManagedClusters_ListClusterAdminCredentials
@@ -84,7 +80,7 @@ scenarios:
       - step: ManagedClusters_ListClusterMonitoringUserCredentials
         operationId: ManagedClusters_ListClusterMonitoringUserCredentials
       - step: ManagedClusters_RunCommand
-        exampleFile: ..\examples\RunCommandRequest.json
+        exampleFile: ../examples/RunCommandRequest.json
         requestUpdate:
           - replace: /requestPayload/command
             value: kubectl version
@@ -93,55 +89,55 @@ scenarios:
             type: string
             fromResponse: /id
       - step: ManagedClusters_GetCommandResult
-        exampleFile: ..\examples\RunCommandResultSucceed.json
+        exampleFile: ../examples/RunCommandResultSucceed.json
         requestUpdate:
           - replace: /commandId
             value: $(commandId)
       - step: ManagedClusters_Start
-        exampleFile: ..\examples\ManagedClustersStart.json
+        exampleFile: ../examples/ManagedClustersStart.json
       
   - scenario: AgentPools
     description: Microsoft.ContainerService/managedClusters/agentPools
     steps:
       - step: AgentPools_List
-        exampleFile: ..\examples\AgentPoolsList.json
+        exampleFile: ../examples/AgentPoolsList.json
       - step: AgentPools_GetUpgradeProfile
-        exampleFile: ..\examples\AgentPoolsGetUpgradeProfile.json
+        exampleFile: ../examples/AgentPoolsGetUpgradeProfile.json
       - step: AgentPools_Get
-        exampleFile: ..\examples\AgentPoolsGet.json
+        exampleFile: ../examples/AgentPoolsGet.json
       - step: AgentPools_GetAvailableAgentPoolVersions
-        exampleFile: ..\examples\AgentPoolsGetAgentPoolAvailableVersions.json
+        exampleFile: ../examples/AgentPoolsGetAgentPoolAvailableVersions.json
       - step: AgentPools_UpgradeNodeImageVersion
-        exampleFile: ..\examples\AgentPoolsUpgradeNodeImageVersion.json
+        exampleFile: ../examples/AgentPoolsUpgradeNodeImageVersion.json
 
   - scenario: Snapshots
     description: Microsoft.ContainerService/snapshots
     steps:
       - step: Snapshots_List
-        exampleFile: ..\examples\SnapshotsList.json
+        exampleFile: ../examples/SnapshotsList.json
       - step: Snapshots_ListByResourceGroup
-        exampleFile: ..\examples\SnapshotsListByResourceGroup.json
+        exampleFile: ../examples/SnapshotsListByResourceGroup.json
       - step: Snapshots_Get
-        exampleFile: ..\examples\SnapshotsGet.json
+        exampleFile: ../examples/SnapshotsGet.json
 
   - scenario: MaintenanceConfigurations
     description: Microsoft.ContainerService/managedClusters/maintenanceConfigurations
     steps:
       - step: MaintenanceConfigurations_CreateOrUpdate
-        exampleFile: ..\examples\MaintenanceConfigurationsCreate_Update.json
+        exampleFile: ../examples/MaintenanceConfigurationsCreate_Update.json
       - step: MaintenanceConfigurations_ListByManagedCluster
-        exampleFile: ..\examples\MaintenanceConfigurationsList.json
+        exampleFile: ../examples/MaintenanceConfigurationsList.json
       - step: MaintenanceConfigurations_Get
-        exampleFile: ..\examples\MaintenanceConfigurationsGet.json
+        exampleFile: ../examples/MaintenanceConfigurationsGet.json
       - step: MaintenanceConfigurations_Delete
-        exampleFile: ..\examples\MaintenanceConfigurationsDelete.json
+        exampleFile: ../examples/MaintenanceConfigurationsDelete.json
 
 cleanUpSteps:
   - step: Snapshots_Delete
-    exampleFile: ..\examples\SnapshotsDelete.json
+    exampleFile: ../examples/SnapshotsDelete.json
   - step: AgentPools_Delete
-    exampleFile: ..\examples\AgentPoolsDelete.json
+    exampleFile: ../examples/AgentPoolsDelete.json
   - step: ManagedClusters_Stop
-    exampleFile: ..\examples\ManagedClustersStop.json
+    exampleFile: ../examples/ManagedClustersStop.json
   - step: ManagedClusters_Delete
-    exampleFile: ..\examples\ManagedClustersDelete.json
+    exampleFile: ../examples/ManagedClustersDelete.json
