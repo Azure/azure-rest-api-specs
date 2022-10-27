@@ -15,12 +15,12 @@ scenarios:
       logProfileName: logprofilena
     steps:
       - step: LogProfiles_CreateOrUpdate
-        exampleFile: ..\examples\createOrUpdateLogProfile.json
+        exampleFile: ../examples/createOrUpdateLogProfile.json
         requestUpdate:
           - replace: /parameters/properties/storageAccountId
             value: $(storageAccountId)
           - remove: /parameters/properties/serviceBusRuleId
       - step: LogProfiles_List
-        exampleFile: ..\examples\listLogProfile.json
+        exampleFile: ../examples/listLogProfile.json
       - step: LogProfiles_Delete
-        exampleFile: ..\examples\deleteLogProfile.json
+        exampleFile: ../examples/deleteLogProfile.json

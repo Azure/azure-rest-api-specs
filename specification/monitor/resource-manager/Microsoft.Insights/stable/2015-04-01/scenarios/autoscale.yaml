@@ -24,7 +24,7 @@ scenarios:
     description: Microsoft.Insights/autoscalesettings
     steps:
       - step: AutoscaleSettings_Create
-        exampleFile: ..\examples\createOrUpdateAutoscaleSetting.json
+        exampleFile: ../examples/createOrUpdateAutoscaleSetting.json
         requestUpdate:
           - replace: /parameters/properties/targetResourceUri
             value: $(vmssId)
@@ -32,26 +32,26 @@ scenarios:
           - remove: /parameters/properties/profiles/0/rules
           - remove: /parameters/properties/profiles/1
       - step: AutoscaleSettings_Update
-        exampleFile: ..\examples\patchAutoscaleSetting.json
+        exampleFile: ../examples/patchAutoscaleSetting.json
         requestUpdate:
           - remove: /autoscaleSettingResource/properties
       - step: AutoscaleSettings_ListBySubscription
-        exampleFile: ..\examples\listAutoscaleSettingBySubscription.json
+        exampleFile: ../examples/listAutoscaleSettingBySubscription.json
       - step: AutoscaleSettings_ListByResourceGroup
-        exampleFile: ..\examples\listAutoscaleSetting.json
+        exampleFile: ../examples/listAutoscaleSetting.json
       - step: AutoscaleSettings_Get
-        exampleFile: ..\examples\getAutoscaleSetting.json
+        exampleFile: ../examples/getAutoscaleSetting.json
       - step: AutoscaleSettings_Delete
-        exampleFile: ..\examples\deleteAutoscaleSetting.json
+        exampleFile: ../examples/deleteAutoscaleSetting.json
 
   - scenario: EventCategories
     description: Microsoft.Insights/eventcategories
     steps:
       - step: EventCategories_List
-        exampleFile: ..\examples\GetEventCategories.json
+        exampleFile: ../examples/GetEventCategories.json
 
   - scenario: Operations
     description: Microsoft.Insights/operations
     steps:
       - step: Operations_List
-        exampleFile: ..\examples\OperationList.json
+        exampleFile: ../examples/OperationList.json

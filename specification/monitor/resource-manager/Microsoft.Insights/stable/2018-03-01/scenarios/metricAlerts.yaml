@@ -58,7 +58,7 @@ scenarios:
       - step: MetricAlerts_ListByResourceGroup
         operationId: MetricAlerts_ListByResourceGroup
       - step: MetricAlerts_Get
-        exampleFile: ..\examples\getMetricAlertSingleResource.json
+        exampleFile: ../examples/getMetricAlertSingleResource.json
       - step: MetricAlerts_Update
         operationId: MetricAlerts_Update
         parameters:
@@ -66,12 +66,12 @@ scenarios:
             tags:
               tag1: value1
       - step: MetricAlertsStatus_List
-        exampleFile: ..\examples\getMetricAlertStatus.json
+        exampleFile: ../examples/getMetricAlertStatus.json
         outputVariables:
           statusName:
             type: string
             fromResponse: /value/0/name
       - step: MetricAlertsStatus_ListByName
-        exampleFile: ..\examples\getMetricAlertStatusByName.json
+        exampleFile: ../examples/getMetricAlertStatusByName.json
       - step: MetricAlerts_Delete
-        exampleFile: ..\examples\deleteMetricAlert.json
+        exampleFile: ../examples/deleteMetricAlert.json

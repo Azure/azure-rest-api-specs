@@ -28,7 +28,7 @@ scenarios:
       associationName: myAssociation
     steps:
       - step: DataCollectionRules_Create
-        exampleFile: ..\examples\DataCollectionRulesCreate.json
+        exampleFile: ../examples/DataCollectionRulesCreate.json
         requestUpdate:
           - replace: /body/properties/destinations/logAnalytics/0/workspaceResourceId
             value: $(workspaceId)
@@ -38,27 +38,27 @@ scenarios:
             type: string
             fromResponse: /id
       - step: DataCollectionRules_ListBySubscription
-        exampleFile: ..\examples\DataCollectionRulesListBySubscription.json
+        exampleFile: ../examples/DataCollectionRulesListBySubscription.json
       - step: DataCollectionRules_ListByResourceGroup
-        exampleFile: ..\examples\DataCollectionRulesListByResourceGroup.json
+        exampleFile: ../examples/DataCollectionRulesListByResourceGroup.json
       - step: DataCollectionRules_Get
-        exampleFile: ..\examples\DataCollectionRulesGet.json
+        exampleFile: ../examples/DataCollectionRulesGet.json
       - step: DataCollectionRules_Update
-        exampleFile: ..\examples\DataCollectionRulesUpdate.json
+        exampleFile: ../examples/DataCollectionRulesUpdate.json
 
       - step: DataCollectionRuleAssociations_Create
-        exampleFile: ..\examples\DataCollectionRuleAssociationsCreate.json
+        exampleFile: ../examples/DataCollectionRuleAssociationsCreate.json
         requestUpdate:
           - replace: /body/properties/dataCollectionRuleId
             value: $(dataCollectionRuleId)
       - step: DataCollectionRuleAssociations_ListByResource
-        exampleFile: ..\examples\DataCollectionRuleAssociationsListByResource.json
+        exampleFile: ../examples/DataCollectionRuleAssociationsListByResource.json
       - step: DataCollectionRuleAssociations_ListByRule
-        exampleFile: ..\examples\DataCollectionRuleAssociationsListByRule.json
+        exampleFile: ../examples/DataCollectionRuleAssociationsListByRule.json
       - step: DataCollectionRuleAssociations_Get
-        exampleFile: ..\examples\DataCollectionRuleAssociationsGet.json
+        exampleFile: ../examples/DataCollectionRuleAssociationsGet.json
       - step: DataCollectionRuleAssociations_Delete
-        exampleFile: ..\examples\DataCollectionRuleAssociationsDelete.json
+        exampleFile: ../examples/DataCollectionRuleAssociationsDelete.json
 
       - step: DataCollectionRules_Delete
-        exampleFile: ..\examples\DataCollectionRulesDelete.json
+        exampleFile: ../examples/DataCollectionRulesDelete.json
