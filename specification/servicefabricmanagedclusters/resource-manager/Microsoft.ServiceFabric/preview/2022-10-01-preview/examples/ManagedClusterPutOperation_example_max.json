@@ -104,7 +104,26 @@
             "ipTagType": "FirstPartyUsage",
             "tag": "SQL"
           }
-        ]
+        ],
+        "auxiliarySubnets": [
+          {
+            "name": "testSubnet1",
+            "enableIpv6": true,
+            "privateEndpointNetworkPolicies": "enabled",
+            "privateLinkServiceNetworkPolicies": "enabled",
+            "networkSecurityGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/networkSecurityGroups/sn1"
+          }
+        ],
+        "serviceEndpoints": [
+          {
+            "service": "Microsoft.Storage",
+            "locations": [
+              "eastus2",
+              "usnorth"
+            ]
+          }
+        ],
+        "useCustomVNet": true
       }
     }
   },
@@ -243,7 +262,8 @@
                 "usnorth"
               ]
             }
-          ]
+          ],
+          "useCustomVNet": true
         }
       }
     },
@@ -382,7 +402,8 @@
                 "usnorth"
               ]
             }
-          ]
+          ],
+          "useCustomVNet": true
         }
       }
     }
