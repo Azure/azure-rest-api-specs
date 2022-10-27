@@ -13,8 +13,7 @@
                         "resource": "Search Services",
                         "operation": "List all available operations",
                         "description": "Lists all of the available operations of the Microsoft.Search provider."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/register/action",
@@ -23,8 +22,7 @@
                         "resource": "Search Services",
                         "operation": "Register the Search Resource Provider",
                         "description": "Registers the subscription for the search resource provider and enables the creation of search services."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/write",
@@ -33,8 +31,7 @@
                         "resource": "Search Services",
                         "operation": "Set Search Service",
                         "description": "Creates or updates the search service."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/read",
@@ -43,8 +40,7 @@
                         "resource": "Search Services",
                         "operation": "Get Search Service",
                         "description": "Reads the search service."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/delete",
@@ -53,8 +49,7 @@
                         "resource": "Search Services",
                         "operation": "Delete Search Service",
                         "description": "Deletes the search service."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/start/action",
@@ -63,8 +58,7 @@
                         "resource": "Search Services",
                         "operation": "Start Search Service",
                         "description": "Starts the search service."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/stop/action",
@@ -73,8 +67,7 @@
                         "resource": "Search Services",
                         "operation": "Stop Search Service",
                         "description": "Stops the search service."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/listAdminKeys/action",
@@ -83,8 +76,7 @@
                         "resource": "Search Services",
                         "operation": "Get Admin Key",
                         "description": "Reads the admin keys."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/regenerateAdminKey/action",
@@ -93,8 +85,7 @@
                         "resource": "Search Services",
                         "operation": "Regenerate Admin Key",
                         "description": "Regenerates the admin key."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/listQueryKeys/action",
@@ -103,8 +94,7 @@
                         "resource": "API Keys",
                         "operation": "Get Query Keys",
                         "description": "Returns the list of query API keys for the given Azure Search service."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/createQueryKey/action",
@@ -113,8 +103,7 @@
                         "resource": "Search Services",
                         "operation": "Create Query Key",
                         "description": "Creates the query key."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/deleteQueryKey/delete",
@@ -123,8 +112,7 @@
                         "resource": "API Keys",
                         "operation": "Delete Query Key",
                         "description": "Deletes the query key."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/checkNameAvailability/action",
@@ -133,8 +121,7 @@
                         "resource": "Service Name Availability",
                         "operation": "Check Service Name Availability",
                         "description": "Checks availability of the service name."
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/diagnosticSettings/read",
@@ -143,8 +130,7 @@
                         "resource": "Diagnostic Settings",
                         "operation": "Get Diagnostic Setting",
                         "description": "Gets the diganostic setting read for the resource"
-                    },
-                    "origin": "system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/diagnosticSettings/write",
@@ -153,8 +139,7 @@
                         "resource": "Diagnostic Settings",
                         "operation": "Set Diagnostic Setting",
                         "description": "Creates or updates the diganostic setting for the resource"
-                    },
-                    "origin": "system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/metricDefinitions/read",
@@ -163,52 +148,6 @@
                         "resource": "The metric definitions for the search service",
                         "operation": "Read search service metric definitions",
                         "description": "Gets the available metrics for the search service"
-                    },
-                    "origin": "system",
-                    "properties": {
-                        "serviceSpecification": {
-                            "metricSpecifications": [
-                                {
-                                    "name": "SearchLatency",
-                                    "displayName": "Search Latency",
-                                    "displayDescription": "Average search latency for the search service",
-                                    "unit": "Seconds",
-                                    "aggregationType": "Average",
-                                    "availabilities": [
-                                        {
-                                            "timeGrain": "PT1M",
-                                            "blobDuration": "PT1H"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "name": "SearchQueriesPerSecond",
-                                    "displayName": "Search queries per second",
-                                    "displayDescription": "Search queries per second for the search service",
-                                    "unit": "CountPerSecond",
-                                    "aggregationType": "Average",
-                                    "availabilities": [
-                                        {
-                                            "timeGrain": "PT1M",
-                                            "blobDuration": "PT1H"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "name": "ThrottledSearchQueriesPercentage",
-                                    "displayName": "Throttled search queries percentage",
-                                    "displayDescription": "Percentage of search queries that were throttled for the search service",
-                                    "unit": "Percent",
-                                    "aggregationType": "Average",
-                                    "availabilities": [
-                                        {
-                                            "timeGrain": "PT1M",
-                                            "blobDuration": "PT1H"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
                     }
                 },
                 {
@@ -218,18 +157,6 @@
                         "resource": "The log definition for the search service",
                         "operation": "Read search service log definitions",
                         "description": "Gets the available logs for the search service"
-                    },
-                    "origin": "system",
-                    "properties": {
-                        "serviceSpecification": {
-                            "logSpecifications": [
-                                {
-                                    "name": "OperationLogs",
-                                    "displayName": "Operation Logs",
-                                    "blobDuration": "PT1H"
-                                }
-                            ]
-                        }
                     }
                 },
                 {
@@ -239,8 +166,7 @@
                         "resource": "Private Endpoint Connection Proxy",
                         "operation": "Validate Private Endpoint Connection Proxy",
                         "description": "Validates a private endpoint connection create call from NRP side"
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/write",
@@ -249,8 +175,7 @@
                         "resource": "Private Endpoint Connection Proxy",
                         "operation": "Create Private Endpoint Connection Proxy",
                         "description": "Creates a private endpoint connection proxy with the specified parameters or updates the properties or tags for the specified private endpoint connection proxy"
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/read",
@@ -259,8 +184,7 @@
                         "resource": "Private Endpoint Connection Proxy",
                         "operation": "Get Private Endpoint Connection Proxy",
                         "description": "Returns the list of private endpoint connection proxies or gets the properties for the specified private endpoint connection proxy"
-                    },
-                    "origin": "user,system"
+                    }
                 },
                 {
                     "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/delete",
@@ -269,8 +193,7 @@
                         "resource": "Private Endpoint Connection Proxy",
                         "operation": "Delete Private Endpoint Connection Proxy",
                         "description": "Deletes an existing private endpoint connection proxy"
-                    },
-                    "origin": "user,system"
+                    }
                 }
             ]
         }
