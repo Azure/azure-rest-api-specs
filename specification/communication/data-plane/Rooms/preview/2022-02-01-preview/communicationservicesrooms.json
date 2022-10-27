@@ -273,17 +273,15 @@
             "$ref": "./examples/Rooms_GetParticipants.json"
           }
         }
-      }
-    },
-    "/rooms/{roomId}/participants:add": {
-      "post": {
+      },
+      "patch": {
         "tags": [
           "Participants"
         ],
-        "summary": "Adds participants to a room. If participants already exist, no change occurs.",
-        "operationId": "Rooms_AddParticipants",
+        "summary": "Upsert participants to a room",
+        "operationId": "Rooms_PatchParticipants",
         "consumes": [
-          "application/json"
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
@@ -292,7 +290,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "Room id to add participants.",
+            "description": "Room id to patch participants.",
             "required": true,
             "type": "string"
           },
@@ -301,19 +299,19 @@
           },
           {
             "in": "body",
-            "name": "addParticipantsRequest",
-            "description": "Participants to be added to the room.",
+            "name": "patchParticipantsRequest",
+            "description": "Participants to be patched to the room.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddParticipantsRequest"
+              "$ref": "#/definitions/PatchParticipantsRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The participants were successfully added. The action returns an updated list of participants.",
+            "description": "The participants were successfully added. The action returns an empty object.",
             "schema": {
-              "$ref": "#/definitions/ParticipantsCollection"
+              "type": "object"
             }
           },
           "default": {
@@ -332,128 +330,6 @@
         "x-ms-examples": {
           "Add participants": {
             "$ref": "./examples/Rooms_AddParticipants.json"
-          }
-        }
-      }
-    },
-    "/rooms/{roomId}/participants:update": {
-      "post": {
-        "tags": [
-          "Participants"
-        ],
-        "summary": "Update participants in a room.",
-        "operationId": "Rooms_UpdateParticipants",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "roomId",
-            "description": "The room id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "updateParticipantsRequest",
-            "description": "Participants in a room to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateParticipantsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The participants were successfully updated. The action returns an updated list of participants.",
-            "schema": {
-              "$ref": "#/definitions/ParticipantsCollection"
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update participant": {
-            "$ref": "./examples/Rooms_UpdateParticipants.json"
-          }
-        }
-      }
-    },
-    "/rooms/{roomId}/participants:remove": {
-      "post": {
-        "tags": [
-          "Participants"
-        ],
-        "summary": "Remove participants from a room.",
-        "operationId": "Rooms_RemoveParticipants",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "roomId",
-            "description": "Room id to remove the participants from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "removeParticipantsRequest",
-            "description": "Participants in a room to be removed.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RemoveParticipantsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The participants were successfully deleted. The action returns an updated list of participants.",
-            "schema": {
-              "$ref": "#/definitions/ParticipantsCollection"
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Remove participant": {
-            "$ref": "./examples/Rooms_RemoveParticipants.json"
           }
         }
       }
@@ -495,12 +371,13 @@
     "RoomParticipant": {
       "description": "A participant of the room.",
       "required": [
-        "communicationIdentifier"
+        "rawId"
       ],
       "type": "object",
       "properties": {
-        "communicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+        "rawId": {
+          "description": "Raw id of the identifier. Optional in requests, required in responses.",
+          "type": "string"
         },
         "role": {
           "$ref": "#/definitions/RoleType"
@@ -577,14 +454,6 @@
         },
         "roomJoinPolicy": {
           "$ref": "#/definitions/RoomJoinPolicy"
-        },
-        "participants": {
-          "description": "Collection of room participants.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoomParticipant"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -606,66 +475,24 @@
         },
         "roomJoinPolicy": {
           "$ref": "#/definitions/RoomJoinPolicy"
-        },
-        "participants": {
-          "description": "Collection of room participants.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoomParticipant"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
-    "AddParticipantsRequest": {
-      "description": "Participants to be added to the room.",
-      "required": [
-        "participants"
-      ],
+    "PatchParticipantsRequest": {
+      "description": "Participants to be patched in the room.",
       "type": "object",
-      "properties": {
-        "participants": {
-          "description": "Participants to add to a room.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoomParticipant"
+      "additionalProperties": {
+        "$ref": "#/definitions/RoomParticipant"
+      },
+      "example": {
+          "rawId1": {
+            "rawId1": "string",
+            "role": "Presenter"
           },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "UpdateParticipantsRequest": {
-      "description": "Participants to be updated in a room.",
-      "required": [
-        "participants"
-      ],
-      "type": "object",
-      "properties": {
-        "participants": {
-          "description": "Participants to update in a room.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoomParticipant"
+          "rawId2": {
+            "role": "Attendee"
           },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "RemoveParticipantsRequest": {
-      "description": "Participants to be removed from a room.",
-      "required": [
-        "participants"
-      ],
-      "type": "object",
-      "properties": {
-        "participants": {
-          "description": "Participants to be removed from a room.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoomParticipant"
-          },
-          "x-ms-identifiers": []
-        }
+          "rawId3": null
       }
     },
     "ParticipantsCollection": {
