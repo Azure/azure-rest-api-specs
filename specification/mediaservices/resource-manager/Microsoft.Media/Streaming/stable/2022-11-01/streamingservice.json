@@ -2597,7 +2597,7 @@
       "description": "The status of an async operation.",
       "type": "object"
     },
-    "IngestInterruption": {
+    "LiveEventIngestInterruption": {
       "properties": {
         "begin": {
           "description": "UTC time of interruption start, encoder disconnected.",
@@ -2620,7 +2620,7 @@
       "description": "The live event ingest interruption data.",
       "type": "object"
     },
-    "Ingestion": {
+    "LiveEventIngestion": {
       "properties": {
         "streamName": {
           "description": "Ingestion stream name.",
@@ -2641,16 +2641,16 @@
         "ingestInterruptions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IngestInterruption"
+            "$ref": "#/definitions/LiveEventIngestInterruption"
           },
           "x-ms-identifiers": [],
-          "description": "IngestInterruption entry list."
+          "description": "The list of ingest interruptions."
         }
       },
       "description": "The live event ingestion telemetry data.",
       "type": "object"
     },
-    "TrackStatus": {
+    "LiveEventTrackStatus": {
       "properties": {
         "trackId": {
           "description": "Track Id.",
@@ -2674,14 +2674,14 @@
       "description": "The live event track status.",
       "type": "object"
     },
-    "Status": {
+    "LiveEventStatus": {
       "properties": {
         "state": {
-          "descritpion": "Current state of the live event. Running | Stopped.",
+          "description": "Current state of the live event. Running | Stopped.",
           "type": "string"
         },
         "healthStatus": {
-          "descritpion": "Health status of last 20 sec.",
+          "description": "The health status over the last 20 seconds.",
           "type": "string"
         },
         "healthDescription": {
@@ -2696,14 +2696,14 @@
           "type": "string"
         },
         "ingestion": {
-          "description": "Ingestions entry list.",
-          "$ref": "#/definitions/Ingestion"
+          "description": "The list of ingestions.",
+          "$ref": "#/definitions/LiveEventIngestion"
         },
         "trackStatus": {
           "description": "Track status entry list.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrackStatus"
+            "$ref": "#/definitions/LiveEventTrackStatus"
           },
           "x-ms-identifiers": []
         }
@@ -2716,7 +2716,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Status"
+            "$ref": "#/definitions/LiveEventStatus"
           },
           "x-ms-identifiers": [],
           "description": "The result of the Get live event status."
@@ -2725,7 +2725,7 @@
       "description": "The live event status get result.",
       "type": "object"
     },
-    "StreamEvent": {
+    "LiveEventStreamEvent": {
       "properties": {
         "eventType": {
           "description": "The type of the stream event.",
@@ -2756,7 +2756,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StreamEvent"
+            "$ref": "#/definitions/LiveEventStreamEvent"
           },
           "x-ms-identifiers": [],
           "description": "The result of the Get live event stream events."
@@ -2765,7 +2765,7 @@
       "description": "The live event stream event get result.",
       "type": "object"
     },
-    "TrackEvent": {
+    "LiveEventTrackEvent": {
       "properties": {
         "eventType": {
           "description": "The type of the stream event.",
@@ -2791,7 +2791,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrackEvent"
+            "$ref": "#/definitions/LiveEventTrackEvent"
           },
           "x-ms-identifiers": [],
           "description": "The result of the Get live event track events."
