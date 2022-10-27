@@ -118,11 +118,6 @@ python:
 ```
 
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.DataCollaboration/preview/2022-05-04-preview/DataCollaboration.json
