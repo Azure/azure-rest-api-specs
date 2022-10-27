@@ -710,7 +710,6 @@
   },
   "definitions": {
     "Workspace": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -739,7 +738,6 @@
       "description": "Information about workspace."
     },
     "WorkspaceProperties": {
-      "type": "object",
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
@@ -853,7 +851,6 @@
       "description": "The workspace properties."
     },
     "TrackedResource": {
-      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -887,7 +884,6 @@
       ]
     },
     "Resource": {
-      "type": "object",
       "description": "The core properties of ARM resources",
       "properties": {
         "id": {
@@ -909,7 +905,6 @@
       "x-ms-azure-resource": true
     },
     "Sku": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -963,7 +958,6 @@
       }
     },
     "ManagedIdentityConfiguration": {
-      "type": "object",
       "description": "The Managed Identity details for storage account.",
       "properties": {
         "principalId": {
@@ -1000,7 +994,6 @@
       }
     },
     "WorkspaceCustomBooleanParameter": {
-      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1017,7 +1010,6 @@
       "description": "The value which should be used for this field."
     },
     "WorkspaceCustomObjectParameter": {
-      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1034,7 +1026,6 @@
       "description": "The value which should be used for this field."
     },
     "WorkspaceCustomStringParameter": {
-      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1051,7 +1042,6 @@
       "description": "The Value."
     },
     "WorkspaceCustomParameters": {
-      "type": "object",
       "properties": {
         "amlWorkspaceId": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
@@ -1128,7 +1118,6 @@
       "readOnly": true
     },
     "CreatedBy": {
-      "type": "object",
       "properties": {
         "oid": {
           "type": "string",
@@ -1151,7 +1140,6 @@
       "description": "Provides details of the entity that created/updated the workspace."
     },
     "WorkspaceEncryptionParameter": {
-      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1165,7 +1153,6 @@
       "description": "The object that contains details of encryption used on the workspace."
     },
     "Encryption": {
-      "type": "object",
       "properties": {
         "keySource": {
           "type": "string",
@@ -1180,7 +1167,7 @@
           },
           "default": "Default"
         },
-        "KeyName": {
+        "keyName": {
           "type": "string",
           "description": "The name of KeyVault key."
         },
@@ -1198,7 +1185,6 @@
       "description": "The object that contains details of encryption used on the workspace."
     },
     "EncryptionEntitiesDefinition": {
-      "type": "object",
       "properties": {
         "managedServices": {
           "type": "object",
@@ -1214,7 +1200,6 @@
       "description": "Encryption entities for databricks workspace resource."
     },
     "EncryptionV2": {
-      "type": "object",
       "properties": {
         "keySource": {
           "type": "string",
@@ -1228,7 +1213,6 @@
           }
         },
         "keyVaultProperties": {
-          "type": "object",
           "properties": {
             "keyVaultUri": {
               "type": "string",
@@ -1305,7 +1289,6 @@
       "description": "The object that contains details of encryption used on the workspace."
     },
     "WorkspaceProviderAuthorization": {
-      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1404,7 +1387,6 @@
       ]
     },
     "WorkspaceListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1429,7 +1411,6 @@
           "type": "string"
         },
         "display": {
-          "type": "object",
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
