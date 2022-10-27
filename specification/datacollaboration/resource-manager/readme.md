@@ -27,7 +27,6 @@ These are the global settings for the DataCollaboration API.
 ``` yaml
 openapi-type: arm
 tag: package-2022-05-04-preview
-tag: package-2020-05-04-preview
 ```
 
 ### Tag: package-2022-05-04-preview
