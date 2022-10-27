@@ -973,6 +973,11 @@
           "$ref": "#/definitions/HardwareProfile",
           "readOnly": true
         },
+        "hibernateSupport": {
+          "description": "Indicates whether hibernate is enabled/disabled or unknown.",
+          "$ref": "#/definitions/HibernateSupport",
+          "readOnly": true
+        },
         "storageProfile": {
           "description": "Storage settings for Dev Box created in this pool",
           "$ref": "#/definitions/StorageProfile",
@@ -1106,6 +1111,11 @@
             "read",
             "create"
           ]
+        },
+        "hibernateSupport": {
+          "description": "Indicates whether hibernate is enabled/disabled or unknown.",
+          "$ref": "#/definitions/HibernateSupport",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The current provisioning state of the Dev Box.",
@@ -1292,6 +1302,19 @@
       "description": "The power states of a Dev Box.",
       "x-ms-enum": {
         "name": "PowerState",
+        "modelAsString": true
+      }
+    },
+    "HibernateSupport": {
+      "description": "Indicates whether hibernate is enabled/disabled.",
+      "enum": [
+        "Unknown",
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HibernateSupport",
         "modelAsString": true
       }
     },
