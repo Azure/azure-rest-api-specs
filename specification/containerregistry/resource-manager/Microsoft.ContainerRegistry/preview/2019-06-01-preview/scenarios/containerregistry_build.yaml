@@ -32,23 +32,23 @@ scenarios:
     description: Microsoft.ContainerRegistry/registries/agentPools
     steps:
       - step: AgentPools_Create
-        exampleFile: ..\examples\AgentPoolsCreate.json
+        exampleFile: ../examples/AgentPoolsCreate.json
       - step: AgentPools_List
-        exampleFile: ..\examples\AgentPoolsList.json
+        exampleFile: ../examples/AgentPoolsList.json
       - step: AgentPools_Get
-        exampleFile: ..\examples\AgentPoolsGet.json
+        exampleFile: ../examples/AgentPoolsGet.json
       - step: AgentPools_Update
-        exampleFile: ..\examples\AgentPoolsUpdate.json
+        exampleFile: ../examples/AgentPoolsUpdate.json
       - step: AgentPools_GetQueueStatus
-        exampleFile: ..\examples\AgentPoolsGetQueueStatus.json
+        exampleFile: ../examples/AgentPoolsGetQueueStatus.json
       - step: AgentPools_Delete
-        exampleFile: ..\examples\AgentPoolsDelete.json
+        exampleFile: ../examples/AgentPoolsDelete.json
         
   - scenario: Tasks
     description: Microsoft.ContainerRegistry/registries/tasks
     steps:
       - step: Tasks_Create
-        exampleFile: ..\examples\TasksCreate.json
+        exampleFile: ../examples/TasksCreate.json
         requestUpdate:
           - remove: /taskCreateParameters/identity
           - remove: /taskCreateParameters/properties/step/arguments
@@ -70,51 +70,51 @@ scenarios:
           - replace: /taskCreateParameters/properties/step/contextPath
             value: https://github.com/SteveLasker/node-helloworld
       - step: Tasks_List
-        exampleFile: ..\examples\TasksList.json
+        exampleFile: ../examples/TasksList.json
       - step: Tasks_Get
-        exampleFile: ..\examples\TasksGet.json
+        exampleFile: ../examples/TasksGet.json
       - step: Tasks_Update
-        exampleFile: ..\examples\TasksUpdate_QuickTask.json
+        exampleFile: ../examples/TasksUpdate_QuickTask.json
         requestUpdate:
           - remove: /taskUpdateParameters/properties
       - step: Tasks_GetDetails
-        exampleFile: ..\examples\TasksGetDetails.json
+        exampleFile: ../examples/TasksGetDetails.json
 
       # Task Run
       - step: TaskRuns_Create
-        exampleFile: ..\examples\TaskRunsCreate.json
+        exampleFile: ../examples/TaskRunsCreate.json
         outputVariables:
           runId:
             type: string
             fromResponse: /properties/runResult/properties/runId
       - step: TaskRuns_List
-        exampleFile: ..\examples\TaskRunsList.json
+        exampleFile: ../examples/TaskRunsList.json
       - step: TaskRuns_Get
-        exampleFile: ..\examples\TaskRunsGet.json
+        exampleFile: ../examples/TaskRunsGet.json
       - step: TaskRuns_Update
-        exampleFile: ..\examples\TaskRunsUpdate.json
+        exampleFile: ../examples/TaskRunsUpdate.json
       - step: TaskRuns_GetDetails
-        exampleFile: ..\examples\TaskRunsGetDetails.json
+        exampleFile: ../examples/TaskRunsGetDetails.json
       - step: Registries_GetBuildSourceUploadUrl
-        exampleFile: ..\examples\RegistriesGetBuildSourceUploadUrl.json
+        exampleFile: ../examples/RegistriesGetBuildSourceUploadUrl.json
 
       # Runs
       - step: Runs_List
-        exampleFile: ..\examples\RunsList.json
+        exampleFile: ../examples/RunsList.json
         requestUpdate:
           - remove: /$filter
       - step: Runs_Get
-        exampleFile: ..\examples\RunsGet.json
+        exampleFile: ../examples/RunsGet.json
       - step: Runs_Cancel
-        exampleFile: ..\examples\RunsCancel.json
+        exampleFile: ../examples/RunsCancel.json
       - step: Runs_GetLogSasUrl
-        exampleFile: ..\examples\RunsGetLogSasUrl.json
+        exampleFile: ../examples/RunsGetLogSasUrl.json
       - step: Registries_ScheduleRun
-        exampleFile: ..\examples\RegistriesScheduleRun.json
+        exampleFile: ../examples/RegistriesScheduleRun.json
         
       - step: TaskRuns_Delete
-        exampleFile: ..\examples\TaskRunsDelete.json
+        exampleFile: ../examples/TaskRunsDelete.json
       - step: Runs_Update
-        exampleFile: ..\examples\RunsUpdate.json
+        exampleFile: ../examples/RunsUpdate.json
       - step: Tasks_Delete
-        exampleFile: ..\examples\TasksDelete.json
+        exampleFile: ../examples/TasksDelete.json
