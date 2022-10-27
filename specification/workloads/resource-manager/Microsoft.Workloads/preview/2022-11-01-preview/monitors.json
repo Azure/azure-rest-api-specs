@@ -215,6 +215,9 @@
         ],
         "operationId": "monitors_Delete",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "summary": "Deletes a SAP monitor.",
         "description": "Deletes a SAP monitor with the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
@@ -501,6 +504,9 @@
         ],
         "operationId": "ProviderInstances_Delete",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "summary": "Deletes a provider instance.",
         "description": "Deletes a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
@@ -932,6 +938,10 @@
         },
         "sslHostNameInCertificate": {
           "description": "Gets or sets the hostname(s) in the SSL certificate.",
+          "type": "string"
+        },
+        "sapSid": {
+          "description": "Gets or sets the SAP System Identifier.",
           "type": "string"
         }
       },
