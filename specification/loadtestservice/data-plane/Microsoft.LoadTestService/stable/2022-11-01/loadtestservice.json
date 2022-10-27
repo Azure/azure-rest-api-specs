@@ -6,532 +6,6 @@
     "version": "2022-11-01"
   },
   "paths": {
-    "/app-components/{name}": {
-      "patch": {
-        "tags": [
-          "AppComponent"
-        ],
-        "summary": "Associate an app component (Azure resource) to a test or test run.",
-        "operationId": "AppComponent_CreateOrUpdate",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Unique name of the app component, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "App Component model.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AppComponentsMap"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The App Component is updated.",
-            "schema": {
-              "$ref": "#/definitions/AppComponentsMap"
-            }
-          },
-          "201": {
-            "description": "The App Component is created.",
-            "schema": {
-              "$ref": "#/definitions/AppComponentsMap"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update an app component": {
-            "$ref": "./examples/CreateOrUpdateAppComponents.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "AppComponent"
-        ],
-        "summary": "Delete an app component.",
-        "operationId": "AppComponent_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Unique name of the app component, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The App Component is deleted."
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an app component": {
-            "$ref": "./examples/DeleteAppComponent.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "AppComponent"
-        ],
-        "summary": "Get app Component details by unique name.",
-        "operationId": "AppComponent_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Unique name of the app component, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested app components",
-            "schema": {
-              "$ref": "#/definitions/AppComponentsMap"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an app component by an unique name": {
-            "$ref": "./examples/GetAppComponent.json"
-          }
-        }
-      }
-    },
-    "/app-components": {
-      "get": {
-        "tags": [
-          "AppComponent"
-        ],
-        "summary": "Get an app component for a test or a test run by its name.",
-        "operationId": "AppComponent_GetByTestOrTestRun",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/TestIdQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "testRunId",
-            "description": "Required testRunId, if testId field is not provided",
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested App Components.",
-            "schema": {
-              "$ref": "#/definitions/AppComponentsMap"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an app component by a test or test run": {
-            "$ref": "./examples/GetAppComponentByTestOrTestRun.json"
-          }
-        }
-      }
-    },
-    "/server-metrics-config/{name}": {
-      "patch": {
-        "tags": [
-          "ServerMetrics"
-        ],
-        "summary": "Configure server metrics for a test or test run",
-        "operationId": "ServerMetrics_CreateOrUpdate",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Unique name for server metrics, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Server metrics configuration model.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerMetrics"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The server metrics are updated.",
-            "schema": {
-              "$ref": "#/definitions/ServerMetrics"
-            }
-          },
-          "201": {
-            "description": "The server metrics are created.",
-            "schema": {
-              "$ref": "#/definitions/ServerMetrics"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update server metrics configuration": {
-            "$ref": "./examples/CreateOrUpdateServerMetricsConfig.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "ServerMetrics"
-        ],
-        "summary": "Get server metrics configuration by its name.",
-        "operationId": "ServerMetrics_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Unique name for server metrics, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Requested server metrics",
-            "schema": {
-              "$ref": "#/definitions/ServerMetrics"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get server metrics by an unique name": {
-            "$ref": "./examples/GetServerMetrics.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ServerMetrics"
-        ],
-        "summary": "Delete server metrics configuration by its name",
-        "operationId": "ServerMetrics_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Unique name for server metrics, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The server metrics configuration is deleted."
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a server metrics configuration": {
-            "$ref": "./examples/DeleteServerMetrics.json"
-          }
-        }
-      }
-    },
-    "/server-metrics-config": {
-      "get": {
-        "tags": [
-          "ServerMetrics"
-        ],
-        "summary": "Get server metrics configuration for a test or test run by its name.",
-        "operationId": "ServerMetrics_GetByTestOrTestRun",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/TestIdQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "testRunId",
-            "description": "Required testRunId, if testId field is not provided",
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 2,
-            "pattern": "^[a-z0-9_-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Requested server metrics",
-            "schema": {
-              "$ref": "#/definitions/ServerMetrics"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get server metrics configuration by a test or test run": {
-            "$ref": "./examples/GetServerMetricsByTestOrTestRun.json"
-          }
-        }
-      }
-    },
-    "/server-metrics-config/default": {
-      "get": {
-        "tags": [
-          "ServerMetrics"
-        ],
-        "summary": "Get all default server metrics configuration for supported resource types.",
-        "operationId": "ServerMetrics_GetDefaultMetrics",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested default server metrics",
-            "schema": {
-              "$ref": "#/definitions/DefaultServerMetricsConfigList"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get default server metrics configuration": {
-            "$ref": "./examples/GetServerDefaultMetrics.json"
-          }
-        }
-      }
-    },
-    "/server-metrics-config/supportedResourceTypes": {
-      "get": {
-        "tags": [
-          "ServerMetrics"
-        ],
-        "summary": "Get all supported resource types for adding an app component(Azure resource types).",
-        "operationId": "ServerMetrics_ListSupportedResourceType",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The supported resource types and metrics for server side metrics",
-            "schema": {
-              "$ref": "#/definitions/SupportedResourceType"
-            }
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get list of supported resource types for configuring server metrics": {
-            "$ref": "./examples/ListSupportedResourceType.json"
-          }
-        }
-      }
-    },
     "/tests/{testId}": {
       "patch": {
         "tags": [
@@ -1011,6 +485,218 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/tests/{testId}/app-components": {
+      "patch": {
+        "tags": [
+          "Test"
+        ],
+        "summary": "Associate an app component (collection of azure resources) to a test",
+        "operationId": "Test_CreateOrUpdateAppComponent",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "App Component model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestAppComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The app component is updated.",
+            "schema": {
+              "$ref": "#/definitions/TestAppComponent"
+            }
+          },
+          "201": {
+            "description": "The app component is created.",
+            "schema": {
+              "$ref": "#/definitions/TestAppComponent"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update app component for a test": {
+            "$ref": "./examples/CreateOrUpdateTestAppComponent.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "summary": "Get associated app component (collection of azure resources) for the given test.",
+        "operationId": "Test_GetAppComponent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested app component.",
+            "schema": {
+              "$ref": "#/definitions/TestAppComponent"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an app component for a test": {
+            "$ref": "./examples/GetTestAppComponent.json"
+          }
+        }
+      }
+    },
+    "/tests/{testId}/server-metrics-config": {
+      "patch": {
+        "tags": [
+          "Test"
+        ],
+        "summary": "Configure server metrics to a test",
+        "operationId": "Test_CreateOrUpdateServerMetricsConfig",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Server metrics configuration model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestServerMetricsConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The server metrics config is updated.",
+            "schema": {
+              "$ref": "#/definitions/TestServerMetricsConfig"
+            }
+          },
+          "201": {
+            "description": "The server metrics config is created.",
+            "schema": {
+              "$ref": "#/definitions/TestServerMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configure server metrics config for a test": {
+            "$ref": "./examples/CreateOrUpdateTestServerMetricsConfig.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "summary": "Get server metrics configuration for the given test.",
+        "operationId": "Test_GetServerMetricsConfig",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Requested server metrics",
+            "schema": {
+              "$ref": "#/definitions/TestServerMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get server metrics configuration for a test": {
+            "$ref": "./examples/GetTestServerMetricsConfig.json"
+          }
         }
       }
     },
@@ -1656,10 +1342,250 @@
           }
         }
       }
+    },
+    "/test-runs/{testRunId}/app-components": {
+      "patch": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Associate an app component (collection of azure resources) to a test run",
+        "operationId": "TestRun_CreateOrUpdateAppComponent",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "testRunId",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "App Component model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunAppComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The app component is updated.",
+            "schema": {
+              "$ref": "#/definitions/TestRunAppComponent"
+            }
+          },
+          "201": {
+            "description": "The app component is created.",
+            "schema": {
+              "$ref": "#/definitions/TestRunAppComponent"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update app component for a test run": {
+            "$ref": "./examples/CreateOrUpdateTestRunAppComponent.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get associated app component (collection of azure resources) for the given test run.",
+        "operationId": "TestRun_GetAppComponent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "testRunId",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested app component.",
+            "schema": {
+              "$ref": "#/definitions/TestRunAppComponent"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an app component for a test run": {
+            "$ref": "./examples/GetTestRunAppComponent.json"
+          }
+        }
+      }
+    },
+    "/test-runs/{testRunId}/server-metrics-config": {
+      "patch": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Configure server metrics to a test run",
+        "operationId": "TestRun_CreateOrUpdateServerMetricsConfig",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "testRunId",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Server metrics configuration model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunServerMetricsConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The server metrics config is updated.",
+            "schema": {
+              "$ref": "#/definitions/TestRunServerMetricsConfig"
+            }
+          },
+          "201": {
+            "description": "The server metrics config is created.",
+            "schema": {
+              "$ref": "#/definitions/TestRunServerMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configure server metrics config for a test run": {
+            "$ref": "./examples/CreateOrUpdateTestRunServerMetricsConfig.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get server metrics configuration for the given test run.",
+        "operationId": "TestRun_GetServerMetricsConfig",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "testRunId",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Requested server metrics",
+            "schema": {
+              "$ref": "#/definitions/TestRunServerMetricsConfig"
+            }
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get server metrics configuration for a test run": {
+            "$ref": "./examples/GetTestRunServerMetricsConfig.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "AppComponent": {
+    "AzureResourceMetadata": {
       "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "required": [
         "resourceId"
@@ -1698,40 +1624,6 @@
         }
       }
     },
-    "AppComponentsMap": {
-      "description": "App Components model",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Azure Load Testing resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "testId": {
-          "description": "[Required, if testRunId is not given] Load test unique name",
-          "type": "string"
-        },
-        "testRunId": {
-          "description": "[Required if testId is not given] Load test run unique name",
-          "type": "string"
-        },
-        "name": {
-          "description": "Unique name of the app component",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "AppComponents collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } ",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AppComponent"
-          }
-        }
-      }
-    },
     "CertificateMetadata": {
       "type": "object",
       "properties": {
@@ -1759,47 +1651,6 @@
         "name": {
           "description": "Name of the certificate.",
           "type": "string"
-        }
-      }
-    },
-    "DefaultServerMetricsConfig": {
-      "description": "Metrics config model",
-      "type": "object",
-      "properties": {
-        "metricnamespace": {
-          "description": "Metric namespace",
-          "type": "string"
-        },
-        "aggregation": {
-          "description": "Metric aggregation",
-          "type": "string"
-        },
-        "name": {
-          "$ref": "#/definitions/LocalizableString"
-        },
-        "unit": {
-          "description": "Metric unit",
-          "type": "string"
-        },
-        "displayDescription": {
-          "description": "Metric display description",
-          "type": "string"
-        }
-      }
-    },
-    "DefaultServerMetricsConfigList": {
-      "description": "Default server metrics config",
-      "type": "object",
-      "properties": {
-        "defaultMetrics": {
-          "description": "Default metrics collection {resourceType : list of metrics config} (Refer for metrics structure: https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition)",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DefaultServerMetricsConfig"
-            }
-          }
         }
       }
     },
@@ -1909,7 +1760,8 @@
             "NOT_VALIDATED",
             "VALIDATION_SUCCESS",
             "VALIDATION_FAILURE",
-            "VALIDATION_INITIATED"
+            "VALIDATION_INITIATED",
+            "VALIDATION_NOT_REQUIRED"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1931,6 +1783,10 @@
               {
                 "value": "VALIDATION_INITIATED",
                 "description": "File validation is in progress."
+              },
+              {
+                "value": "VALIDATION_NOT_REQUIRED",
+                "description": "Validation is not required."
               }
             ]
           }
@@ -2017,7 +1873,7 @@
       }
     },
     "MetadataFilter": {
-      "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata like SamplerName, Error. To retrieve all the time series data where SamplerName is equals to HTTPRequest1 or HTTPRequest2, the MetadataFilter value will be {\"SamplerName\", [\"HTTPRequest2\", \"HTTPRequest2\"}",
+      "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata like SamplerName, Error. To retrieve all the time series data where SamplerName is equals to HTTPRequest1 or HTTPRequest2, the MetadataFilter value will be {\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}",
       "type": "object",
       "properties": {
         "name": {
@@ -2357,6 +2213,7 @@
       "type": "object",
       "properties": {
         "filters": {
+          "description": "The MetadataFilter is used to reduce the set of metric data returned. Example: Metric contains metadata like SamplerName, Error. To retrieve all the time series data where SamplerName is equals to HTTPRequest1 or HTTPRequest2, the MetadataFilter value will be {\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetadataFilter"
@@ -2729,44 +2586,6 @@
         }
       }
     },
-    "ServerMetrics": {
-      "description": "Server metrics configuration model",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Server metrics configuration model.",
-          "type": "string",
-          "readOnly": true
-        },
-        "testId": {
-          "description": "[Required, if test run Id is not given] Load test unique name.",
-          "type": "string"
-        },
-        "testRunId": {
-          "description": "[Required, if test Id is not given] Load test run unique name.",
-          "type": "string"
-        },
-        "metrics": {
-          "description": "Metrics collection {metric id : metrics object} (Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition for metric id).",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ResourceMetric"
-          }
-        }
-      }
-    },
-    "SupportedResourceType": {
-      "description": "Supported azure resource types for App Component like Microsoft.LoadTestService/loadtests, Microsoft.ClassicCompute, Microsoft.ClassicStorage etc. (Refer for full list of available resource types in azure : https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types, some of them we are supporting for server side metrics configuration).",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "Test": {
       "description": "Load test model",
       "type": "object",
@@ -2834,23 +2653,71 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "The created DateTime(ISO 8601 literal format) of the test model.",
+          "description": "The creation datetime(ISO 8601 literal format).",
           "type": "string",
           "readOnly": true
         },
         "createdBy": {
-          "description": "The user that created the test model.",
+          "description": "The user that created.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedDateTime": {
           "format": "date-time",
-          "description": "The last Modified DateTime(ISO 8601 literal format) of the test model.",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "The user that last modified the test model.",
+          "description": "The user that last modified.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TestAppComponent": {
+      "description": "Test app component",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "testId": {
+          "description": "Test identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } ",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureResourceMetadata"
+          }
+        },
+        "resourceId": {
+          "description": "Fully qualified resource Id e.g /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The creation datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The user that created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The user that last modified.",
           "type": "string",
           "readOnly": true
         }
@@ -3121,23 +2988,71 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "The created DateTime(ISO 8601 literal format) of the test model.",
+          "description": "The creation datetime(ISO 8601 literal format).",
           "type": "string",
           "readOnly": true
         },
         "createdBy": {
-          "description": "The user that created the test model.",
+          "description": "The user that created.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedDateTime": {
           "format": "date-time",
-          "description": "The last Modified DateTime(ISO 8601 literal format) of the test model.",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "The user that last modified the test model.",
+          "description": "The user that last modified.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TestRunAppComponent": {
+      "description": "Test run app component",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "testRunId": {
+          "description": "Test run identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } ",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureResourceMetadata"
+          }
+        },
+        "resourceId": {
+          "description": "Fully qualified resource Id e.g /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The creation datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The user that created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The user that last modified.",
           "type": "string",
           "readOnly": true
         }
@@ -3157,6 +3072,51 @@
         "nextLink": {
           "description": "Link for the next list of resources in case of paginated results, if applicable",
           "type": "string"
+        }
+      }
+    },
+    "TestRunServerMetricsConfig": {
+      "description": "Test run server metrics configuration",
+      "type": "object",
+      "properties": {
+        "testRunId": {
+          "description": "Test run identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "metrics": {
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition for metric id).",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceMetric"
+          }
+        },
+        "resourceId": {
+          "description": "Fully qualified resource Id e.g /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The creation datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The user that created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The user that last modified.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3249,6 +3209,51 @@
         }
       },
       "readOnly": true
+    },
+    "TestServerMetricsConfig": {
+      "description": "Test server metrics configuration",
+      "type": "object",
+      "properties": {
+        "testId": {
+          "description": "Test identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "metrics": {
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer : https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition for metric id).",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceMetric"
+          }
+        },
+        "resourceId": {
+          "description": "Fully qualified resource Id e.g /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The creation datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The user that created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "format": "date-time",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The user that last modified.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "TimeSeriesElement": {
       "description": "The time series returned when a data query is performed.",
