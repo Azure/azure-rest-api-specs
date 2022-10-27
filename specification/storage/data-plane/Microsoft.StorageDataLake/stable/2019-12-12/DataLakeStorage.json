@@ -1172,6 +1172,11 @@
               "x-ms-version": {
                 "description": "The version of the REST protocol used to process the request.",
                 "type": "string"
+              },
+              "x-ms-lease-renewed": {
+                "x-ms-client-name": "LeaseRenewed",
+                "type": "boolean",
+                "description": "If the lease was auto-renewed with this request"
               }
             }
           },
@@ -1428,6 +1433,39 @@
             "description": "Valid only for append calls. This parameter allows the caller to flush during an append call. Default value is \"false\" , if \"true\" the data will be flushed with the append call. Note that when using flush=true, the following headers are not supported - \"x-ms-cache-control\", \"x-ms-content-encoding\", \"x-ms-content-type\", \"x-ms-content-language\", \"x-ms-content-md5\", \"x-ms-content-disposition\". To set these headers during flush, please use action=flush",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Starting with version 2020-08-04 in append and flush operations. Append supports 'acquire', 'auto-renew' and 'acquire-release' action. If 'acquire' it will acquire the lease. If 'auto-renew' it will renew the lease. If 'acquire-release' it will acquire & complete the operation & release the lease once operation is done. 'Release' action is only supported in flush operation. If 'true', will release the lease on the file using the lease id info from x-ms-lease-id header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "acquire",
+              "auto-renew",
+              "release",
+              "acquire-release"
+            ],
+            "x-ms-enum": {
+              "name": "PathLeaseAction",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "x-ms-lease-duration",
+            "in": "header",
+            "description": "The lease duration is required to acquire a lease, and specifies the duration of the lease in seconds.  The lease duration must be between 15 and 60 seconds or -1 for infinite lease.",
+            "format": "int32",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "x-ms-proposed-lease-id",
+            "in": "header",
+            "description": "Required when \"x-ms-lease-action\" is \"acquire\" or \"change\".  A lease will be acquired with this lease ID if the operation is successful.",
+            "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
+            "required": false,
+            "type": "string"
           }
         ]
       },
