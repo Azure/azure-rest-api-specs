@@ -183,7 +183,7 @@
         }
       },
       "put": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThe Data Registry Register API allows the caller to register their data content uploaded to Azure Storage Account in the Azure Maps Service with customer provided udid, restricted in GUID format; or to replace an existing udid with another data registry.\n\nYou can use this API in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Register or Replace Request\n\nTo register or replace your data registry you will use a `PUT` request. The request body will contain the connection object.\n\nFor example, to register a collection of geofences  in `GeoJSON` format, set connection object representing how Azure Maps can access your geojson file. and `dataFormat` to _geojson_ in the request body.\n\nThe Data Registry Register or Replace API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThe Data Registry Register API allows the caller to register their data content uploaded to Azure Storage Account in the Azure Maps Service with customer provided udid, restricted in GUID format; or to replace an existing udid with another data registry.\n\nYou can use this API in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Register or Replace Request\n\nTo register or replace your data registry you will use a `PUT` request.\n\nFor example, to register a collection of geofences  in `GeoJSON` format, set Azure blob data registry object representing how Azure Maps accesses your geojson file. and `dataFormat` to _geojson_ in the request body.\n\nThe Data Registry Register or Replace API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "DataRegistries_RegisterOrReplace",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -437,7 +437,7 @@
             "values": [
               {
                 "value": "AzureBlob",
-                "description": "Connection to Azure Blob."
+                "description": "Azure Blob"
               }
             ]
           }
@@ -451,14 +451,10 @@
         "error": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
         }
-      },
-      "required": [
-        "dataFormat",
-        "connection"
-      ]
+      }
     },
     "AzureBlob": {
-      "description": "Azure Blob connection details.",
+      "description": "Azure blob data registry details.",
       "type": "object",
       "properties": {
         "dataFormat": {
@@ -474,13 +470,11 @@
         },
         "blobUrl": {
           "description": "The blob URL.",
-          "type": "string",
-          "format": "url"
+          "type": "string"
         },
         "downloadURL": {
           "description": "The download URL of the underlying data. It may not be available if the status of the data registry is `Running` or `Failed`.",
           "type": "string",
-          "format": "url",
           "readOnly": true
         },
         "sizeInBytes": {
@@ -516,7 +510,6 @@
         "nextLink": {
           "description": "The URL to get the next set of data registries.",
           "type": "string",
-          "format": "url",
           "readOnly": true
         }
       }
