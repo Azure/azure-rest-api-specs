@@ -2,7 +2,7 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: datacollaboration
@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2020-05-04-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2020-05-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/datacollaboration/mgmt/2020-05-04-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-05-04-preview/$(namespace)
 ```
 
 ### Tag: package-2022-05-04-preview and go
@@ -32,5 +32,5 @@ These settings apply only when `--tag=package-2022-05-04-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2022-05-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/datacollaboration/mgmt/2022-05-04-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-05-04-preview/$(namespace)
 ```
