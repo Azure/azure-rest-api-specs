@@ -511,6 +511,65 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.BillingBenefits/calculateMigrationCost": {
+      "post": {
+        "summary": "Calculates the refund amounts in EA account and price of the corresponding new purchases in MCA account.",
+        "description": "Calculates price for migrating `SavingsPlans` from EA to MCA account.\n",
+        "operationId": "CalculateMigrationCost_Post",
+        "x-ms-examples": {
+          "CalculateMigrationCost": {
+            "$ref": "./examples/CalculateMigrationCost.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CalculateMigrationCostRequestParameter"
+          }
+        ],
+        "tags": [
+          "Migration"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CalculateMigrationCostOperationResultResponse"
+            }
+          },
+          "202": {
+            "description": "The request is accepted and is being processed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1262,6 +1321,118 @@
           "$ref": "#/definitions/ReservedResourceType"
         }
       }
+    },
+    "CalculateMigrationCostRequest": {
+      "type": "object",
+      "properties": {
+        "sourceBillingAccountId": {
+          "type": "string",
+          "description": "Fully Qualified BillingAccountId"
+        },
+        "destinationBillingProfileId": {
+          "type": "string",
+          "description": "Fully Qualified BillingProfileId"
+        }
+      }
+    },
+    "CalculateMigrationCostOperationResultResponse": {
+      "type": "object",
+      "description": "CalculateMigrationCost operation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "It should match what is used to GET the operation result."
+        },
+        "name": {
+          "type": "string",
+          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "CalculateMigrationCostOperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculateMigrationCostResponseProperties"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationResultError"
+        }
+      }
+    },
+    "CalculateMigrationCostResponseProperties": {
+      "type": "object",
+      "description": "Calculate Migration Cost response properties",
+      "properties": {
+        "netPayable": {
+          "$ref": "#/definitions/Price"
+        },
+        "refundsTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "purchasesTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "savingsPlansToPurchase": {
+          "type": "array",
+          "description": "Details of the savings plans being purchased",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanToPurchaseCalculateExchange"
+          },
+          "x-ms-identifiers": []
+        },
+        "savingsPlansToExchange": {
+          "type": "array",
+          "description": "Details of the reservations being returned",
+          "items": {
+            "$ref": "#/definitions/SavingsPlansToExchange"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SavingsPlansToExchange": {
+      "type": "object",
+      "description": "SavingsPlan refund details",
+      "properties": {
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified id of the SavingsPlan being returned."
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        },
+        "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformation"
+        }
+      }
+    },
+    "BillingInformation": {
+      "type": "object",
+      "description": "billing information",
+      "properties": {
+        "billingCurrencyTotalPaidAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyProratedAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyRemainingCommitmentAmount": {
+          "$ref": "#/definitions/Price"
+        }
+      }
     }
   },
   "parameters": {
@@ -1343,6 +1514,16 @@
       "description": "Request body for patching a savings plan order alias",
       "schema": {
         "$ref": "#/definitions/SavingsPlanUpdateValidateRequest"
+      }
+    },
+    "CalculateMigrationCostRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for migrating all savings plan order into mca account",
+      "schema": {
+        "$ref": "#/definitions/CalculateMigrationCostRequest"
       }
     }
   }
