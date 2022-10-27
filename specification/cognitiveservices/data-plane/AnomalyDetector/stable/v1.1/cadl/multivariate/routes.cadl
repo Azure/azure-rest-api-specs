@@ -15,7 +15,8 @@ namespace AnomalyDetector.Multivariate;
 For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
 """)
-op GetMultivariateBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
+// FIXME different name in swagger
+op GetBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
 
 
 @post
@@ -41,7 +42,8 @@ timestamp column.
 //   }
 // >;
 // FIXME: this should be a created response code
-op CreateAndTrainMultivariateModel(
+// FIXME: Swagger defines a different name so this might have to be a client.cadl change
+op CreateMultivariateModel(
   ...ModelInfo,
 ): {
   @statusCode statusCode: 201,
@@ -71,7 +73,7 @@ op CreateAndTrainMultivariateModel(
 //   }
 // >;
 // FIXME: how to specify it's a paged result?
-op ListMultivariateModel(
+op ListMultivariateModels(
   @doc("Skip indicates how many models will be skipped.")
   @query
   skip?: int32;
@@ -103,7 +105,8 @@ query the detection result.The request should be a source link to indicate an
 externally accessible Azure storage Uri, either pointed to an Azure blob
 storage folder, or pointed to a CSV file in Azure blob storage.
 """)
-op DetectMultivariateBatchAnomaly is Azure.Core.Foundations.LongRunningOperation<
+// FIXME different name in swagger
+op BatchDetectAnomaly is Azure.Core.Foundations.LongRunningOperation<
   {
     @doc("Model identifier")
     @format("uuid")
@@ -127,7 +130,8 @@ and inference data, and the inference data should be put into request body in a
 JSON format. The request will complete synchronously and return the detection
 immediately in the response body.
 """)
-op DetectMultivariateLastAnomaly is Azure.Core.Foundations.Operation<
+// FIXME different name in swagger
+op LastDetectAnomaly is Azure.Core.Foundations.Operation<
   {
     @doc("Model identifier")
     @format("uuid")
