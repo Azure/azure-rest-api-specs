@@ -84,7 +84,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DownloadURL"
+              "$ref": "common-types.json#/definitions/DownloadURL"
             }
           },
           "default": {
@@ -144,7 +144,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DownloadURL"
+              "$ref": "common-types.json#/definitions/DownloadURL"
             }
           },
           "default": {
@@ -153,26 +153,6 @@
               "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "DownloadURL": {
-      "description": "The URL to download the generated report.",
-      "type": "object",
-      "properties": {
-        "expiryTime": {
-          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "downloadUrl": {
-          "description": "The URL to download the generated report.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-secret": true
         }
       }
     }
