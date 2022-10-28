@@ -290,13 +290,55 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDate, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "description": "May be used to sort order by reservation properties.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refreshSummary",
+            "description": "To indicate whether to refresh the roll up counts of the savings plans group by provisioning states",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "The number of savings plans to skip from the list before returning results",
+            "in": "query",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "selectedState",
+            "description": "The selected provisioning state",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "description": "To number of savings plans to return",
+            "in": "query",
+            "required": false,
+            "type": "number"
           }
         ],
         "responses": {
           "200": {
             "description": "The request is completed.",
             "schema": {
-              "$ref": "#/definitions/SavingsPlanModelList"
+              "$ref": "#/definitions/SavingsPlanModelListResult"
             }
           },
           "default": {
@@ -749,6 +791,10 @@
         },
         "resourceGroupId": {
           "$ref": "#/definitions/ResourceGroupId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Applied scope display name"
         }
       }
     },
@@ -868,18 +914,31 @@
       "readOnly": true,
       "format": "date-time"
     },
-    "SavingsPlanModelList": {
+    "BenefitStartTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "This is the DateTime when the savings plan benefit started."
+    },
+    "SavingsPlanModelListResult": {
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of savings plans.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/SavingsPlanModel"
           }
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "Url to get the next page."
+        },
+        "additionalProperties": {
+          "description": "The roll out count summary of the savings plans",
+          "type": "array",
+          "$ref": "#/definitions/SavingsPlanSummary"
         }
       }
     },
@@ -898,14 +957,6 @@
         "sku": {
           "description": "Savings plan SKU",
           "$ref": "#/definitions/Sku"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location where billing benefits apply to."
-        },
-        "etag": {
-          "type": "integer",
-          "format": "int32"
         },
         "properties": {
           "description": "Savings plan properties",
@@ -975,6 +1026,9 @@
         "purchaseDateTime": {
           "$ref": "#/definitions/PurchaseDateTime"
         },
+        "benefitStartTime": {
+          "$ref": "#/definitions/BenefitStartTime"
+        },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
         },
@@ -1033,10 +1087,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SavingsPlanOrderModelProperties"
         },
-        "etag": {
-          "type": "integer",
-          "format": "int32"
-        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "SystemData of Savings plan order.",
@@ -1074,6 +1124,9 @@
         },
         "expiryDateTime": {
           "$ref": "#/definitions/ExpiryDateTime"
+        },
+        "benefitStartTime": {
+          "$ref": "#/definitions/BenefitStartTime"
         },
         "planInformation": {
           "$ref": "#/definitions/BillingPlanInformation"
@@ -1164,10 +1217,6 @@
         "billingCurrencyTotal": {
           "$ref": "#/definitions/Price",
           "description": "Amount charged in Billing currency. Tax not included. Is null for future payments"
-        },
-        "billingAccount": {
-          "type": "string",
-          "description": "Shows the Account that is charged for this payment."
         },
         "status": {
           "$ref": "#/definitions/PaymentStatus"
@@ -1287,10 +1336,6 @@
           "type": "string",
           "description": "Friendly name of the savings plan"
         },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the savings plan"
-        },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
         },
@@ -1311,14 +1356,6 @@
         },
         "renew": {
           "$ref": "#/definitions/Renew"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Quantity of the SKUs that are part of the savings plan. Must be greater than zero."
-        },
-        "reservedResourceType": {
-          "$ref": "#/definitions/ReservedResourceType"
         }
       }
     },
@@ -1431,6 +1468,71 @@
         },
         "billingCurrencyRemainingCommitmentAmount": {
           "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "SavingsPlanSummary": {
+      "type": "object",
+      "description": "Savings plans list summary",
+      "properties": {
+        "name": {
+          "description": "This property has value 'summary'",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/SavingsPlanSummaryCount"
+        }
+      }
+    },
+    "SavingsPlanSummaryCount": {
+      "description": "The roll up count summary of savings plans in each state",
+      "type": "object",
+      "properties": {
+        "succeededCount": {
+          "description": "The number of savings plans in Succeeded state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "failedCount": {
+          "description": "The number of savings plans in Failed state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "expiringCount": {
+          "description": "The number of savings plans in Expiring state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "expiredCount": {
+          "description": "The number of savings plans in Expired state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "pendingCount": {
+          "description": "The number of savings plans in Pending state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "cancelledCount": {
+          "description": "The number of savings plans in Cancelled state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "processingCount": {
+          "description": "The number of savings plans in Processing state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "noBenefitCount": {
+          "description": "The number of savings plans in No Benefit state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "warningCount": {
+          "description": "The number of savings plans in Warning state",
+          "readOnly": true,
+          "type": "number"
         }
       }
     }

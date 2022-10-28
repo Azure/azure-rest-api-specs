@@ -1,6 +1,11 @@
 {
   "parameters": {
-    "api-version": "2022-11-01"
+    "api-version": "2022-11-01",
+    "$filter": "(properties%2farchived+eq+false)",
+    "$orderby": "properties/displayName asc",
+    "$skiptoken": "50",
+    "refreshsummary": "true",
+    "take": "1"
   },
   "responses": {
     "200": {
@@ -61,6 +66,22 @@
                 ]
               },
               "subscriptionName": "Azure subscription 1"
+            }
+          }
+        ],
+        "additionalProperties": [
+          {
+            "name": "summary",
+            "value": {
+              "noBenefitCount": 0,
+              "warningCount": 0,
+              "succeededCount": 1,
+              "failedCount": 0,
+              "expiringCount": 0,
+              "expiredCount": 0,
+              "pendingCount": 0,
+              "cancelledCount": 0,
+              "processingCount": 0
             }
           }
         ]
