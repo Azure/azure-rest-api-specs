@@ -1587,14 +1587,12 @@
   "definitions": {
     "AzureResourceMetadata": {
       "description": "An Azure resource object (Refer azure generic resource model : https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
-      "required": [
-        "resourceId"
-      ],
       "type": "object",
       "properties": {
         "resourceId": {
           "description": "fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceName": {
           "description": "Azure resource name, required while creating the app component.",
@@ -1625,6 +1623,7 @@
       }
     },
     "CertificateMetadata": {
+      "description": "Certificates are stored in Azure Key Vault. The certificate name and identifier should be provided.",
       "type": "object",
       "properties": {
         "value": {
@@ -1794,6 +1793,7 @@
       }
     },
     "FileUrlList": {
+      "description": "Collection of file urls.",
       "type": "object",
       "properties": {
         "value": {
@@ -1906,14 +1906,6 @@
       "description": "The result data of a query.",
       "type": "object",
       "properties": {
-        "displayDescription": {
-          "description": "Detailed description of this metric.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The Metric Id.",
-          "type": "string"
-        },
         "name": {
           "$ref": "#/definitions/LocalizableString"
         },
@@ -2272,7 +2264,7 @@
       }
     },
     "OptionalLoadTestConfig": {
-      "description": "Quick start load test config",
+      "description": "Optional load test config",
       "type": "object",
       "properties": {
         "endpointUrl": {
@@ -2322,6 +2314,7 @@
       }
     },
     "PassFailMetric": {
+      "description": "Pass fail metric",
       "type": "object",
       "properties": {
         "clientmetric": {
@@ -2538,6 +2531,10 @@
       "description": "The response to a metrics query.",
       "type": "object",
       "properties": {
+        "testRunId": {
+          "description": "Test run indentifier",
+          "type": "string"
+        },
         "interval": {
           "description": "The interval (window size) for which the metric data was returned in. This may be adjusted in the future and returned back from what was originally requested. This is not present if a metadata request was made.",
           "type": "string"
@@ -2556,6 +2553,7 @@
       }
     },
     "SecretMetadata": {
+      "description": "Enviornment variable or secret",
       "type": "object",
       "properties": {
         "value": {
@@ -2714,6 +2712,7 @@
       }
     },
     "TestArtifacts": {
+      "description": "Collection of test artifacts",
       "type": "object",
       "properties": {
         "inputArtifacts": {
