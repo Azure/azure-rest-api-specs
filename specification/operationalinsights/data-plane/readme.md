@@ -61,6 +61,15 @@ directive:
     transform: $.operationId = "Query"
 ```
 
+``` yaml $(tag) == '20221027'
+input-file:
+- Microsoft.OperationalInsights/preview/2022-10-27_Preview/OperationalInsights.json
+directive:
+  - reason: Include resource centric query.
+    add-operation: Query_ResourceGet
+    add-operation: Query_ResourcePost
+```
+
 ---
 
 # Code Generation
