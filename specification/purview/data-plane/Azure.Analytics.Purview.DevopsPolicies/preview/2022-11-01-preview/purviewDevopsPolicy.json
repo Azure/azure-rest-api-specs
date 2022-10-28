@@ -386,8 +386,7 @@
         "effect": {
           "description": "The effect for rule",
           "enum": [
-            "Permit",
-            "Deny"
+            "Permit"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -485,11 +484,13 @@
       "properties": {
         "policyName": {
           "type": "string",
-          "description": "The name of policy"
+          "description": "The name of policy",
+          "readOnly": true
         },
         "id": {
           "type": "string",
-          "description": "Id of policy"
+          "description": "Id of policy",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData"
@@ -528,6 +529,7 @@
     },
     "SystemData": {
       "type": "object",
+      "readOnly": true,
       "properties": {
         "createdBy": {
           "type": "string",
