@@ -1,8 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure OpenAI API version 2022-06-01-preview",
-    "version": "2022-06-01-preview"
+    "title": "Azure OpenAI API version 2022-12-01",
+    "description": "Authoring APIs for creating and managing fine tuned OpenAI models, and creating and managing deployments of OpenAI models.",
+    "version": "2022-12-01"
   },
   "paths": {
     "/deployments": {
@@ -1323,6 +1324,10 @@
         },
         "hyperparams": {
           "$ref": "#/definitions/HyperParameters"
+        },
+        "suffix": {
+          "description": "The suffix used to identify the fine-tuned model.",
+          "type": "string"
         }
       }
     },
@@ -1351,6 +1356,10 @@
         },
         "hyperparams": {
           "$ref": "#/definitions/HyperParameters"
+        },
+        "suffix": {
+          "description": "The suffix used to identify the fine-tuned model.",
+          "type": "string"
         }
       }
     },
@@ -1774,7 +1783,7 @@
       "description": "The requested API version.",
       "required": true,
       "type": "string",
-      "default": "2022-06-01-preview",
+      "default": "2022-12-01",
       "x-ms-parameter-location": "client"
     }
   },
