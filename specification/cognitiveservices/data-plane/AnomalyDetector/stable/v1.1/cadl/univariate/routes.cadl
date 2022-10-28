@@ -17,20 +17,9 @@ interface Univariate {
   are used to determine whether it is an anomaly. The entire detection can give
   user an overall status of the time series.
   """)
-  // op DetectEntireSeries is Azure.Core.ResourceCreateWithServiceProvidedName<
-  //   EntireDetectResponse,
-  //   {
-  //     parameters: {
-  //       @doc("Api Version")
-  //       @query
-  //       ApiVersion: "v1.1";
-  //     };
-  //   }
-  // >;
+  // FIXME: use this operation definition once errors can be modified
+  // op DetectEntireSeries is Azure.Core.Foundations.Operation<DetectRequest, EntireDetectResponse>;
   op DetectEntireSeries(
-    // @doc("Api Version")
-    // @path
-    // ApiVersion: "v1.1",
     ...DetectRequest,
   ): EntireDetectResponse | AnomalyDetectorError;
 
@@ -41,16 +30,8 @@ interface Univariate {
   This operation generates a model using the points that you sent into the API,
   and based on all data to determine whether the last point is anomalous.
   """)
-  // op DetectLastPoint is Azure.Core.ResourceCreateWithServiceProvidedName<
-  //   LastDetectResponse,
-  //   {
-  //     parameters: {
-  //       @doc("Api Version")
-  //       @query
-  //       ApiVersion: "v1.1";
-  //     };
-  //   }
-  // >;
+  // FIXME: use this operation definition once errors can be modified
+  // op DetectLastPoint is Azure.Core.Foundations.Operation<DetectRequest, LastDetectResponse>;
   op DetectLastPoint(
     ...DetectRequest,
   ): LastDetectResponse | AnomalyDetectorError;
@@ -59,20 +40,9 @@ interface Univariate {
   @route("timeseries/changepoint/detect")
   @summary("Detect change point for the entire series")
   @doc("Evaluate change point score of every series point")
-  // op DetectChangePoint is Azure.Core.ResourceCreateWithServiceProvidedName<
-  //   ChangePointDetectResponse,
-  //   {
-  //     parameters: {
-  //       @doc("Api Version")
-  //       @query
-  //       ApiVersion: "v1.1";
-  //     };
-  //   }
-  // >;
+  // FIXME: use this operation definition once errors can be modified
+  // op DetectChangePoint is Azure.Core.Foundations.Operation<ChangePointDetectRequest, ChangePointDetectResponse>;
   op DetectChangePoint(
-    // @doc("Api Version")
-    // @path
-    // ApiVersion: "v1.1",
     ...ChangePointDetectRequest,
   ): ChangePointDetectResponse | AnomalyDetectorError;
 }
