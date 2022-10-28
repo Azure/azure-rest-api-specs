@@ -142,11 +142,11 @@
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to fetch the data registry of a given udid registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). If Azure Maps cannot access the underlying content or integrity check is not passed, `status` will be `Failed` and error detail is returned.\n\n## Submit Get Data Registry Request\n\nTo fetch the data registry of a given udid you will issue a `GET` request with no additional parameters.",
         "operationId": "DataRegistries_GetDataRegistry",
         "x-ms-examples": {
-          "Get the data registry of a given valid udid": {
-            "$ref": "./examples/DataRegistries_GetDataRegistryValid.json"
+          "Get the data registry of a completed udid": {
+            "$ref": "./examples/DataRegistries_GetDataRegistryCompleted.json"
           },
-          "Get the data registry of a given invalid udid": {
-            "$ref": "./examples/DataRegistries_GetDataRegistryInvalid.json"
+          "Get the data registry of a failed udid": {
+            "$ref": "./examples/DataRegistries_GetDataRegistryFailed.json"
           }
         },
         "parameters": [
