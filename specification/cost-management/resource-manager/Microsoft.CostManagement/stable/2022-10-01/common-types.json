@@ -157,6 +157,24 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "DownloadURL": {
+      "description": "The URL to download the generated report.",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "downloadUrl": {
+          "description": "The URL to download the generated report.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
     }
   },
   "parameters": {
