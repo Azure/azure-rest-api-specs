@@ -5103,7 +5103,7 @@
               },
               {
                 "value": "node-image",
-                "description": "Automatically upgrade the node image to the latest version available. Consider using nodeOSUpgradeChannel NodeImage as that will let you mix other upgrade channel with node os patching"
+                "description": "Automatically upgrade the node image to the latest version available. Consider using nodeOSUpgradeChannel instead as that allows you to configure node OS patching separate from Kubernetes version patching"
               },
               {
                 "value": "none",
@@ -5120,10 +5120,10 @@
             "Unmanaged",
             "None",
             "SecurityPatch",
-            "NodeImage",
+            "NodeImage"
           ],
           "x-ms-enum": {
-            "name": "nodeOSUpgradeChannel",
+            "name": "NodeOSUpgradeChannel",
             "modelAsString": true,
             "values": [
               {
@@ -5136,7 +5136,7 @@
               },
               {
                 "value": "SecurityPatch",
-                "description": "AKS will update the nodes VHD with patches from the image maintainer labelled "security only" on a regular basis. Where possible, patches will also be applied without reimaging to existing nodes. Some patches, such as kernel patches, cannot be applied to existing nodes without disruption. For such patches, the VHD will be updated, and machines will be rolling reimaged to that VHD following maintenance windows and surge settings. This option incurs the extra cost of hosting the VHDs in your node resource group."
+                "description": "AKS will update the nodes VHD with patches from the image maintainer labelled \"security only\" on a regular basis. Where possible, patches will also be applied without reimaging to existing nodes. Some patches, such as kernel patches, cannot be applied to existing nodes without disruption. For such patches, the VHD will be updated, and machines will be rolling reimaged to that VHD following maintenance windows and surge settings. This option incurs the extra cost of hosting the VHDs in your node resource group."
               },
               {
                 "value": "NodeImage",
@@ -5144,8 +5144,8 @@
               }
             ]
           },
-          "title": "Node OS Upgrade Channel",
-          "description": "Manner in which the OS on your nodes is updated. The default is unmanaged, but may change to either NodeImage or SecurityPatch at GA."
+          "title": "Manner in which the OS on your nodes is updated",
+          "description": "The default is Unmanaged, but may change to either NodeImage or SecurityPatch at GA."
         }
       },
       "description": "Auto upgrade profile for a managed cluster."
