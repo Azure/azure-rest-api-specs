@@ -289,7 +289,7 @@
         }
       }
     },
-    "/textLists/{listId}": {
+    "/text/lists/{listId}": {
       "get": {
         "tags": [
           "Text List Management"
@@ -394,7 +394,7 @@
         ]
       }
     },
-    "/textLists": {
+    "/text/lists": {
       "get": {
         "tags": [
           "Text List Management"
@@ -406,9 +406,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TextList"
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                  "$ref": "#/definitions/TextList"
+                  }
+                }
               }
             }
           },
@@ -426,79 +431,7 @@
         ]
       }
     },
-    "/textLists/{listId}/text": {
-      "post": {
-        "tags": [
-          "Text List Management"
-        ],
-        "operationId": "ListManagementImage_AddTerm",
-        "description": "Add a term to the list with list Id equal to list Id passed.",
-        "summary": "Add Text To Text List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Raw term data.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TextListItem"
-              }
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Text added successfully"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Text List Management"
-        ],
-        "operationId": "ListManagementTerm_DeleteAllTerms",
-        "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
-        "summary": "Delete All Text By listId",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
+    "/text/lists/{listId}/item": {
       "get": {
         "tags": [
           "Text List Management"
@@ -529,9 +462,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TextListItem"
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TextListItem"
+                  }
+                }
               }
             }
           },
@@ -547,52 +485,9 @@
         "produces": [
           "application/json"
         ]
-      },
-      "put": {
-        "tags": [
-          "Text List Management"
-        ],
-        "operationId": "ListManagementTerm_UpdateTerm",
-        "description": "Update terms to the list with list Id equal to list Id passed.",
-        "summary": "Update Text To Text List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          },
-          {
-            "name": "updateTermsRequest",
-            "in": "body",
-            "description": "Schema of the term update body.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TextListItem"
-              }
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
       }
     },
-    "/textLists/{listId}/text/{textId}": {
+    "/text/lists/{listId}/item/{itemId}": {
       "get": {
         "tags": [
           "Text List Management"
@@ -603,6 +498,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
+          },
+          {
+            "$ref": "#/parameters/ItemId"
           }
         ],
         "consumes": [
@@ -632,13 +530,13 @@
         ],
         "operationId": "ListManagementTerm_DeleteTerm",
         "description": "Deletes a term from the list with list Id equal to the list Id passed.",
-        "summary": "Delete Text By TextId and ListId",
+        "summary": "Delete Text By itemId and listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "$ref": "#/parameters/TextId"
+            "$ref": "#/parameters/ItemId"
           }
         ],
         "responses": {
@@ -655,165 +553,35 @@
         "produces": [
           "application/json"
         ]
-      }
-    },
-    "/lists/imagelists/{listId}": {
-      "get": {
-        "tags": [
-          "Image List Management"
-        ],
-        "description": "Returns the details of the image list with list Id equal to list Id passed.",
-        "operationId": "ListManagementImageLists_GetDetails",
-        "summary": "Get Image List by listId",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Image List Management"
-        ],
-        "description": "Deletes image list with the list Id equal to list Id passed.",
-        "operationId": "ListManagementImageLists_Delete",
-        "summary": "Delete Image List by listId",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
       },
       "put": {
         "tags": [
-          "Image List Management"
+          "Text List Management"
         ],
-        "description": "Updates an image list with list Id equal to list Id passed.",
-        "operationId": "ListManagementImageLists_Update",
-        "summary": "Upsert Image List",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "ListManagementTerm_UpdateTerm",
+        "description": "Upsert text to the list with list Id equal to list Id passed.",
+        "summary": "Upsert Text To Text List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
           },
           {
-            "name": "request",
-            "in": "body",
-            "description": "Properties of the image list.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageList"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Image list created successfully",
-            "headers": {
-              "ImageList-Location": {
-                "type": "string",
-                "description": "URL used to get the created image list."
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/lists/imagelists": {
-      "get": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImageLists_GetAllImageLists",
-        "description": "Gets all the Image Lists.",
-        "summary": "Get All Image Lists",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ImageList"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/lists/imagelists/{listId}/images": {
-      "post": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImage_AddImage",
-        "description": "Add an image to the list with list Id equal to list Id passed.",
-        "summary": "Add Images to Image List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
+            "$ref": "#/parameters/ItemId"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "Image meta data.",
+            "description": "Schema of the term update body.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ImageInList"
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TextListItem"
+                  }
+                }
               }
             },
             "x-ms-parameter-location": "method"
@@ -832,187 +600,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImage_DeleteAllImages",
-        "description": "Deletes all images from the list with list Id equal to list Id passed.",
-        "summary": "Delete All Images by listId",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImage_GetAllImageIds",
-        "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
-        "summary": "Get All Images by listId",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "How many images will be skipped.",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "How many images will be fetched.",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ImageInList"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "put": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImage_UpdateImage",
-        "description": "Update images to the list with list Id equal to list Id passed.",
-        "summary": "Update Images To Image List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Schema of the image update body.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ImageInList"
-              }
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/lists/imagelists/{listId}/images/{imageId}": {
-      "get": {
-        "tags": [
-          "Image List Management"
-        ],
-        "description": "Returns the details of the image with list Id equal to list Id and image Id equal to image Id passed.",
-        "operationId": "ListManagementImage_GetDetails",
-        "summary": "Get Image By ImageId and ListId",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageInList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Image List Management"
-        ],
-        "operationId": "ListManagementImage_DeleteImage",
-        "description": "Deletes an image from the list with list Id and image Id passed.",
-        "summary": "Delete Image By imageId and listId",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ListId"
-          },
-          {
-            "$ref": "#/parameters/ImageId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
         },
         "produces": [
           "application/json"
@@ -1758,20 +1345,20 @@
     "TextListItem": {
       "description": "Text data",
       "required": [
-        "textId",
+        "itemId",
         "text"
       ],
       "properties": {
-        "textId": {
-          "description": "Text id",
+        "itemId": {
+          "description": "Item id",
           "type": "string"
         },
         "description": {
-          "description": "Image data description",
+          "description": "Text data description",
           "type": "string"
         },
         "text": {
-          "description": "Text content.",
+          "description": "Text list item content.",
           "type": "string"
         },
         "language": {
@@ -1910,10 +1497,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "TextId": {
-      "name": "textId",
+    "ItemId": {
+      "name": "itemId",
       "in": "path",
-      "description": "Id of the text in list.",
+      "description": "Id of the item in list.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
