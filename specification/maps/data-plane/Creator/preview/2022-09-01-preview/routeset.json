@@ -67,7 +67,7 @@
           "readOnly": true
         },
         "levelOrdinals": {
-          "description": "The level identifiers within this facility",
+          "description": "The level identifiers within this facility.",
           "type": "array",
           "items": {
             "type": "number"
@@ -187,7 +187,7 @@
     "/routesets": {
       "post": {
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create special data structures consumed by the Azure Maps Wayfinding service to discover the shortest paths within a facility.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "routesetCreate",
+        "operationId": "Routeset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -237,7 +237,7 @@
           }
         ],
         "x-ms-pageable": {
-          "itemName": "tilesets",
+          "itemName": "routesets",
           "nextLinkName": "nextLink"
         },
         "responses": {
