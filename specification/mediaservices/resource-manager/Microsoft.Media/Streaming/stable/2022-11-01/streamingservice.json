@@ -2607,10 +2607,10 @@
           "description": "UTC time of interruption end, encoder re-connected.",
           "type": "string"
         },
-        "durationInSec": {
-          "description": "Duration of interruption in seconds.",
-          "type": "integer",
-          "format": "int32"
+        "duration": {
+          "format": "duration",
+          "type": "string",
+          "description": "Duration of interruption in seconds. ISO 8601 time. For example, use PT1H30M to indicate 1 hour and 30 minutes."
         },
         "reason": {
           "description": "Interruption reason.",
@@ -2626,11 +2626,11 @@
           "description": "Ingestion stream name.",
           "type": "string"
         },
-        "beginTime": {
+        "begin": {
           "description": "Ingestion begin time in UTC.",
           "type": "string"
         },
-        "endTime": {
+        "end": {
           "description": "Ingestion end time in UTC. Empty if it's not stopped yet.",
           "type": "string"
         },
@@ -2677,8 +2677,26 @@
     "LiveEventStatus": {
       "properties": {
         "state": {
-          "description": "Current state of the live event. Running | Stopped.",
-          "type": "string"
+          "type": "string",
+          "description": "Current state of the live event. See https://go.microsoft.com/fwlink/?linkid=2139012 for more information.",
+          "enum": [
+            "Stopped",
+            "Running"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventState",
+            "values": [
+              {
+                "value": "Stopped",
+                "description": "This is the initial state of the live event after creation (unless autostart was set to true.) No billing occurs in this state. In this state, the live event properties can be updated but streaming is not allowed."
+              },
+              {
+                "value": "Running",
+                "description": "The live event resources have been allocated, ingest and preview URLs have been generated, and it is capable of receiving live streams. At this point, billing is active. You must explicitly call Stop on the live event resource to halt further billing."
+              }
+            ],
+            "modelAsString": true
+          }
         },
         "healthStatus": {
           "description": "The health status over the last 20 seconds.",
@@ -2725,6 +2743,131 @@
       "description": "The live event status get result.",
       "type": "object"
     },
+    "LiveEventStreamEventData": {
+      "properties": {
+        "trackName": {
+          "description": "",
+          "type": "string"
+        },
+        "streamId": {
+          "description": "",
+          "type": "string"
+        },
+        "trackId": {
+          "description": "",
+          "type": "integer",
+          "format": "int32"
+        },
+        "mediaType": {
+          "description": "",
+          "type": "string"
+        },
+        "bitrate": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mediaTimestamp": {
+          "description": "",
+          "type": "string"
+        },
+        "timescale": {
+          "description": "",
+          "type": "string"
+        },
+        "previousFragmentTimestamp": {
+          "description": "Previous fragment timestamp in timescale.",
+          "type": "string"
+        },
+        "previousFragmentDuration": {
+          "description": "Previous fragment duration in timescale.",
+          "type": "string"
+        },
+        "currentFragmentTimestamp": {
+          "description": "",
+          "type": "string"
+        },
+        "fragmentOneTimestamp": {
+          "description": "",
+          "type": "string"
+        },
+        "fragmentOneDuration": {
+          "description": "",
+          "type": "string"
+        },
+        "fragmentTwoTimestamp": {
+          "description": "",
+          "type": "string"
+        },
+        "fragmentTwoDuration": {
+          "description": "",
+          "type": "string"
+        },
+        "fragmentDropReason": {
+          "description": "",
+          "type": "string"
+        },
+        "discontinuityGap": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "streamName": {
+          "description": "",
+          "type": "string"
+        },
+        "resultCode": {
+          "description": "",
+          "type": "string"
+        },
+        "resultMessage": {
+          "description": "",
+          "type": "string"
+        },
+        "duration": {
+          "description": "",
+          "type": "string"
+        },
+        "resolution": {
+          "description": "Width x Height (only for video) ",
+          "type": "string"
+        },
+        "minTime": {
+          "description": "",
+          "type": "string"
+        },
+        "minTimeMediaType": {
+          "description": "",
+          "type": "string"
+        },
+        "maxTime": {
+          "description": "",
+          "type": "string"
+        },
+        "maxTimeMediaType": {
+          "description": "",
+          "type": "string"
+        },
+        "timescaleOfMinTime": {
+          "description": "",
+          "type": "string"
+        },
+        "timescaleOfMaxTime": {
+          "description": "",
+          "type": "string"
+        },
+        "remoteIp": {
+          "description": "",
+          "type": "string"
+        },
+        "remotePort": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "description": "The live event stream event data.",
+      "type": "object"
+    },
     "LiveEventStreamEvent": {
       "properties": {
         "eventType": {
@@ -2741,11 +2884,8 @@
           "format": "int32"
         },
         "data": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "Event data based on event type."
+          "description": "Event data based on event type.",
+          "$ref": "#/definitions/LiveEventStreamEventData"
         }
       },
       "description": "The live event stream event.",
@@ -2765,6 +2905,81 @@
       "description": "The live event stream event get result.",
       "type": "object"
     },
+    "LiveEventTrackEventData": {
+      "properties": {
+        "trackName": {
+          "description": "",
+          "type": "string"
+        },
+        "trackType": {
+          "description": "",
+          "type": "string"
+        },
+        "bitrate": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "incomingBitrate": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "lastTimestamp": {
+          "description": "",
+          "type": "string"
+        },
+        "timescale": {
+          "description": "",
+          "type": "string"
+        },
+        "overlapCount": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "discontinuityCount": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "nonincreasingCount": {
+          "description": "",
+          "type": "integer",
+          "format": "int64"
+        },
+        "unexpectedBitrate": {
+          "description": "",
+          "type": "boolean"
+        },
+        "state": {
+          "description": "",
+          "type": "string"
+        },
+        "healthy": {
+          "description": "",
+          "type": "boolean"
+        },
+        "lastFragmentArrivalTime": {
+          "description": "",
+          "type": "string"
+        },
+        "ingestDriftValue": {
+          "description": "",
+          "type": "string"
+        },
+        "transcriptionState": {
+          "description": "",
+          "type": "string"
+        },
+        "transcriptionLanguage": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "description": "The live event track ingest heart beat event data.",
+      "type": "object"
+    },
     "LiveEventTrackEvent": {
       "properties": {
         "eventType": {
@@ -2776,11 +2991,8 @@
           "type": "string"
         },
         "data": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "Event data based on event type."
+          "description": "Event data.",
+          "$ref": "#/definitions/LiveEventTrackEventData"
         }
       },
       "description": "The live event track event.",
