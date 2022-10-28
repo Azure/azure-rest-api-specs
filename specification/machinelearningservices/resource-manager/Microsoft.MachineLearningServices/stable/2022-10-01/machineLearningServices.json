@@ -3160,7 +3160,10 @@
         "computeLocation": {
           "description": "Location for the underlying compute",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -3222,7 +3225,10 @@
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -5550,7 +5556,7 @@
       "description": "Script reference",
       "properties": {
         "scriptSource": {
-          "description": "The storage source of the script: inline, workspace.",
+          "description": "The storage source of the script: workspace.",
           "type": "string"
         },
         "scriptData": {
