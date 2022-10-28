@@ -486,14 +486,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/status": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/getStatus": {
+      "post": {
         "tags": [
           "LiveEvents"
         ],
         "summary": "Get status of one live event",
         "description": "Gets status telemetry of a live event.",
-        "operationId": "LiveEventsStatus_List",
+        "operationId": "LiveEvents_GetStatus",
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -518,8 +518,11 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LiveEventStatusGetResult"
+              "$ref": "#/definitions/LiveEventGetStatusResult"
             }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
           },
           "304": {
             "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
@@ -531,21 +534,22 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get status of a LiveEvent": {
-            "$ref": "examples/liveevent-status.json"
+            "$ref": "examples/liveevent-get-status.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/streamEvents": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/getStreamEvents": {
+      "post": {
         "tags": [
           "LiveEvents"
         ],
         "summary": "Get stream events of one live event",
         "description": "Get stream events telemetry of a live event.",
-        "operationId": "LiveEventStreamEvents_List",
+        "operationId": "LiveEvents_GetStreamEvents",
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -570,8 +574,11 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LiveEventStreamEventsGetResult"
+              "$ref": "#/definitions/LiveEventGetStreamEventsResult"
             }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
           },
           "304": {
             "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
@@ -583,21 +590,22 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get stream events of a LiveEvent": {
-            "$ref": "examples/liveevent-stream-events.json"
+            "$ref": "examples/liveevent-get-stream-events.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/trackIngestHeartbeats": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/getTrackIngestHeartbeats": {
+      "post": {
         "tags": [
           "LiveEvents"
         ],
         "summary": "Get track events of one live event",
         "description": "Get track ingest heartbeat events telemetry of a live event.",
-        "operationId": "LiveEventTrackIngestHeartbeats_List",
+        "operationId": "LiveEvents_GetTrackIngestHeartbeats",
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -622,8 +630,11 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LiveEventTrackIngestHeartbeatsGetResult"
+              "$ref": "#/definitions/LiveEventGetTrackIngestHeartbeatsResult"
             }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
           },
           "304": {
             "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
@@ -635,9 +646,10 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get track ingest heart beats of a LiveEvent": {
-            "$ref": "examples/liveevent-track-events.json"
+            "$ref": "examples/liveevent-get-track-events.json"
           }
         }
       }
@@ -2729,7 +2741,7 @@
       "description": "The live event status.",
       "type": "object"
     },
-    "LiveEventStatusGetResult": {
+    "LiveEventGetStatusResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -2737,10 +2749,10 @@
             "$ref": "#/definitions/LiveEventStatus"
           },
           "x-ms-identifiers": [],
-          "description": "The result of the Get live event status."
+          "description": "The result of the get live event status."
         }
       },
-      "description": "The live event status get result.",
+      "description": "Get live event status result.",
       "type": "object"
     },
     "LiveEventStreamEventData": {
@@ -2878,10 +2890,19 @@
           "description": "The time event raised.",
           "type": "string"
         },
-        "level": {
-          "description": "Event level. 1: Critical, 2: Error, 3: Warning, 4: Information.",
-          "type": "integer",
-          "format": "int32"
+        "eventLevel": {
+          "description": "Event level.",
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Error",
+            "Warning",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "EventLevel",
+            "modelAsString": true
+          }
         },
         "data": {
           "description": "Event data based on event type.",
@@ -2891,7 +2912,7 @@
       "description": "The live event stream event.",
       "type": "object"
     },
-    "LiveEventStreamEventsGetResult": {
+    "LiveEventGetStreamEventsResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -2899,10 +2920,10 @@
             "$ref": "#/definitions/LiveEventStreamEvent"
           },
           "x-ms-identifiers": [],
-          "description": "The result of the Get live event stream events."
+          "description": "The result of the get live event stream events."
         }
       },
-      "description": "The live event stream event get result.",
+      "description": "Get live event stream events result.",
       "type": "object"
     },
     "LiveEventTrackEventData": {
@@ -2998,7 +3019,7 @@
       "description": "The live event track event.",
       "type": "object"
     },
-    "LiveEventTrackIngestHeartbeatsGetResult": {
+    "LiveEventGetTrackIngestHeartbeatsResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -3006,10 +3027,10 @@
             "$ref": "#/definitions/LiveEventTrackEvent"
           },
           "x-ms-identifiers": [],
-          "description": "The result of the Get live event track events."
+          "description": "The result of the get live event track events."
         }
       },
-      "description": "The live event track ingest heart beats get result.",
+      "description": "Get live event track ingest heart beats result.",
       "type": "object"
     }
   },
