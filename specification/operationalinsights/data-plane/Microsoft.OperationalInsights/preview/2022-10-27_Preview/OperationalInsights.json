@@ -183,6 +183,78 @@
         }
       }
     },
+    "/{resourceId}/query": {
+      "get": {
+        "operationId": "Query_ResourceGet",
+        "summary": "Execute an Analytics query using resource URI",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/la-get-resource-centric-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/timespanParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Query_ResourceExecute",
+        "summary": "Execute an Analytics query using resource ID",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/la-post-resource-centric-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/queryBody"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
     "/$batch": {
       "post": {
         "operationId": "Query_Batch",
@@ -1435,13 +1507,21 @@
           "type": "string",
           "enum": [
             "/query"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "path",
+            "modelAsString": true
+          }
         },
         "method": {
           "type": "string",
           "enum": [
             "POST"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "methodType",
+            "modelAsString": true
+          }
         },
         "workspace": {
           "description": "Workspace Id to be included in the query",
@@ -1474,7 +1554,8 @@
           "type": "string"
         },
         "status": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "body": {
           "type": "object",
