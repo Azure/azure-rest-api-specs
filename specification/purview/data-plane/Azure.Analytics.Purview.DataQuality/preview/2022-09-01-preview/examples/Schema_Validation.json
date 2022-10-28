@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "accountId": "9af94315-8b88-4b7c-9469-3ac69a406652",
+    "api-version": "2022-09-01",
+    "schemaValidationParameter": {
+      "type": "schema",
+      "properties": {
+        "query": "SELECT A.CustomerName AS CustomerName1,B.CustomerName AS CustomerName2,A.City FROM CustomerData A,CustomerData B WHERE A.CustomerID <> B.CustomerID ;",
+        "inputSchemas": {
+          "CustomerData": {
+            "CustomerID": "string",
+            "CustomerName": "string",
+            "ContactName": "string",
+            "Address": "string",
+            "City": "string",
+            "PostalCode": "string",
+            "Country": "string"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outputSchema": [
+          {
+            "name": "CustomerName1",
+            "type": "string"
+          },
+          {
+            "name": "CustomerName2",
+            "type": "string"
+          },
+          {
+            "name": "City",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  }
+}
