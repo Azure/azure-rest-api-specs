@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-05-19_Preview",
+    "version": "2022-10-27_Preview",
     "title": "Azure Log Analytics",
     "description": "This API exposes Azure Log Analytics query capabilities",
     "termsOfService": "https://dev.loganalytics.io/tos",
@@ -52,10 +52,10 @@
         "description": "Executes an Analytics query for data",
         "x-ms-examples": {
           "simple-query": {
-            "$ref": "examples/oms-get-example.json"
+            "$ref": "examples/la-get-example.json"
           },
           "cross-workspace": {
-            "$ref": "examples/oms-get-cross-workspace-example.json"
+            "$ref": "examples/la-get-cross-workspace-example.json"
           }
         },
         "parameters": [
@@ -90,10 +90,10 @@
         "description": "Executes an Analytics query for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
-            "$ref": "examples/oms-post-example.json"
+            "$ref": "examples/la-post-example.json"
           },
           "cross-workspace": {
-            "$ref": "examples/oms-post-cross-workspace-example.json"
+            "$ref": "examples/la-post-cross-workspace-example.json"
           }
         },
         "parameters": [
@@ -222,6 +222,80 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/{resourceId}/query": {
+      "get": {
+        "operationId": "Query_ResourceGet",
+        "summary": "Execute an Analytics query using resource URI",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/la-get-resource-centric-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/timespanParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Query_ResourceExecute",
+        "summary": "Execute an Analytics query using resource ID",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "simple-query": {
+            "$ref": "examples/la-post-resource-centric-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/queryBody"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+  },
   "parameters": {
     "workspaceId": {
       "name": "workspaceId",
@@ -258,6 +332,15 @@
         "$ref": "#/definitions/queryBody"
       },
       "x-ms-parameter-location": "method"
+    },
+    "ResourceIdParameter": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "timespanParam": {
       "name": "timespan",
