@@ -1,5 +1,7 @@
 // NOTES:
-// Need to fix errors, missing x-ms-error-code
+// Need to fix errors, missing x-ms-error-code header, Azure.Core.Foundations.Error requires details which
+// is not defined by the service
+
 import "@azure-tools/cadl-azure-core";
 import "@cadl-lang/rest";
 import "./models.cadl";
@@ -9,13 +11,13 @@ using Cadl.Http;
 
 namespace AnomalyDetector.Multivariate;
 
-@route("/multivariate/detect-batch/{resultId}")
 @summary("Get Multivariate Anomaly Detection Result")
 @doc("""
 For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
 """)
 // FIXME different name in swagger
+// Error must be modified to include header and definition specific to AnomalyDetector service
 op GetBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
 
 
@@ -41,14 +43,15 @@ timestamp column.
 //     };
 //   }
 // >;
-// FIXME: this should be a created response code
 // FIXME: Swagger defines a different name so this might have to be a client.cadl change
 op CreateMultivariateModel(
   ...ModelInfo,
 ): {
   @statusCode statusCode: 201,
+  @doc("Location and ID of the model.")
+  @header Location: string,
   ...Model
-  } | Azure.Core.Foundations.ErrorResponse;
+  } | ErrorResponse;
 
 // FIXME: Using ResourceList returns the list of models in the `value` property, but the service defined
 // the property as `models`.
@@ -72,7 +75,7 @@ op CreateMultivariateModel(
 //     response: ModelList,
 //   }
 // >;
-// FIXME: how to specify it's a paged result?
+// FIXME: how to specify it's a paged result?/value field added
 op ListMultivariateModels(
   @doc("Skip indicates how many models will be skipped.")
   @query
@@ -81,19 +84,41 @@ op ListMultivariateModels(
   @doc("Top indicates how many models will be fetched.")
   @query
   top?: int32;
-): ModelList | Azure.Core.Foundations.ErrorResponse;
+): ModelList | ErrorResponse;
 
 
 @summary("Delete Multivariate Model")
 @doc("Delete an existing multivariate model according to the modelId")
-op DeleteMultivariateModel is Azure.Core.ResourceDelete<Model>;
+// FIXME: this should be the operation definition once path API version parameters 
+// are supported and error responses can be modified
+// op DeleteMultivariateModel is Azure.Core.ResourceDelete<Model>;
+@delete
+@route("/multivariate/models/{modelId}")
+op DeleteMultivariateModel(
+  @doc("Model identifier.")
+  @path
+  modelId: string,
+): {
+  @doc("Delete model successfully.")
+  @statusCode
+  statusCode: 204
+  } | ErrorResponse;
 
 @summary("Get Multivariate Model")
 @doc("""
 Get detailed information of multivariate model, including the training status
 and variables used in the model.
 """)
-op GetMultivariateModel is Azure.Core.ResourceRead<Model>;
+// FIXME: this should be the operation definition once path API version parameters 
+// are supported and error responses can be modified
+// op GetMultivariateModel is Azure.Core.ResourceRead<Model>;
+@get
+@route("/multivariate/models/{modelId}")
+op GetMultivariateModel(
+  @doc("Model identifier.")
+  @path
+  modelId: string,
+): Model | ErrorResponse;
 
 @route("/multivariate/models/{modelId}:detect-batch")
 @summary("Detect Multivariate Anomaly")
@@ -106,21 +131,36 @@ externally accessible Azure storage Uri, either pointed to an Azure blob
 storage folder, or pointed to a CSV file in Azure blob storage.
 """)
 // FIXME different name in swagger
-op BatchDetectAnomaly is Azure.Core.Foundations.LongRunningOperation<
-  {
-    @doc("Model identifier")
-    @format("uuid")
-    @path
-    modelId: string,
-    ...DetectionRequest,
-  },
-  {
-    @statusCode statusCode: 202,
-    @doc("Id of the detection result.")
-    @header "Operation-Id": string,
-    ...DetectionResult,
-  }
->;
+// FIXME: this should be the operation definition once path API version parameters 
+// are supported and error responses can be modified
+// op BatchDetectAnomaly is Azure.Core.Foundations.LongRunningOperation<
+//   {
+//     @doc("Model identifier")
+//     @format("uuid")
+//     @path
+//     modelId: string,
+//     ...DetectionRequest,
+//   },
+//   {
+//     @statusCode statusCode: 202,
+//     @doc("Id of the detection result.")
+//     @header "Operation-Id": string,
+//     ...DetectionResult,
+//   }
+// >;
+op BatchDetectAnomaly(
+  @doc("Model identifier.")
+  @path
+  modelId: string,
+  ...DetectionRequest,
+): {
+  @statusCode statusCode: 202,
+  @doc("Id of the detection result.")
+  @header "Operation-Id": string,
+  @doc("Location of the detection result.")
+  @header "Operation-Location": string,
+  ...DetectionResult,
+} | ErrorResponse;
 
 @route("/multivariate/models/{modelId}:detect-last")
 @summary("Detect anomalies in the last point of the request body")
@@ -131,13 +171,23 @@ JSON format. The request will complete synchronously and return the detection
 immediately in the response body.
 """)
 // FIXME different name in swagger
-op LastDetectAnomaly is Azure.Core.Foundations.Operation<
-  {
-    @doc("Model identifier")
-    @format("uuid")
-    @path
-    modelId: string,
-    ...LastDetectionRequest,
-  },
-  LastDetectionResult
->;
+// FIXME: this should be the operation definition once path API version parameters 
+// are supported and error responses can be modified
+// op LastDetectAnomaly is Azure.Core.Foundations.Operation<
+//   {
+//     @doc("Model identifier")
+//     @format("uuid")
+//     @path
+//     modelId: string,
+//     ...LastDetectionRequest,
+//   },
+//   LastDetectionResult
+// >;
+op LastDetectAnomaly(
+  @doc("Model identifier.")
+  @path
+  modelId: string,
+  ...LastDetectionRequest,
+): {
+  ...LastDetectionResult,
+} | ErrorResponse;
