@@ -4104,7 +4104,7 @@
         "maintenanceWindow": {
           "type": "object",
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window for the maintenance configuration." 
+          "description": "Maintenance window for the maintenance configuration."
         }
       },
       "description": "Properties used to configure planned maintenance for a Managed Cluster."
@@ -4126,18 +4126,18 @@
         },
         "utcOffset": {
           "type": "string",
-          "pattern": "^(-|\\+)[0-9]{2}:[0-9]{2}$", 
+          "pattern": "^(-|\\+)[0-9]{2}:[0-9]{2}$",
           "description": "The UTC offset in format +/-HH:mm. For example, '+05:30' for IST and '-07:00' for PST. If not specified, the default is '+00:00'."
         },
         "startDate": {
           "type": "string",
           "format": "date",
-          "description": "The date the maintenance window activates. If the current date is before this date, the maintenance window is inactive and will not be used for upgrades. If not specified, the maintenance window will be active right away." 
+          "description": "The date the maintenance window activates. If the current date is before this date, the maintenance window is inactive and will not be used for upgrades. If not specified, the maintenance window will be active right away."
         },
         "startTime": {
           "type": "string",
           "pattern": "^\\d{2}:\\d{2}$",
-          "description": "The start time of the maintenance window. Accepted values are from '00:00' to '23:59'. 'utcOffset' applies to this field. For example: '02:00' with 'utcOffset: +02:00' means UTC time '00:00'." 
+          "description": "The start time of the maintenance window. Accepted values are from '00:00' to '23:59'. 'utcOffset' applies to this field. For example: '02:00' with 'utcOffset: +02:00' means UTC time '00:00'."
         },
         "notAllowedDates": {
           "type": "array",
@@ -4152,7 +4152,7 @@
       "required": [
         "schedule",
         "durationHours",
-        "startTime" 
+        "startTime"
       ]
     },
     "Schedule": {
@@ -4170,7 +4170,7 @@
         "relativeMonthly": {
           "$ref": "#/definitions/RelativeMonthlySchedule"
         }
-      }, 
+      },
       "description": "One and only one of the schedule types should be specified. Choose either 'daily', 'weekly', 'absoluteMonthly' or 'relativeMonthly' for your maintenance schedule."
     },
     "DailySchedule": {
@@ -4252,7 +4252,7 @@
             "Third",
             "Fourth",
             "Last"
-          ], 
+          ],
           "x-ms-enum": {
             "name": "type",
             "modelAsString": true,
@@ -4270,8 +4270,8 @@
                 "description": "Third."
               },
               {
-                "value": "Fouth",
-                "description": "Fouth."
+                "value": "Fourth",
+                "description": "Fourth."
               },
               {
                 "value": "Last",
@@ -4280,7 +4280,7 @@
             ]
           },
           "title": "The week index.",
-          "description": "Specifies on which instance of the allowed days specified in daysOfWeek the maintenance occurs." 
+          "description": "Specifies on which instance of the allowed days specified in daysOfWeek the maintenance occurs."
         },
         "dayOfWeek": {
           "$ref": "#/definitions/WeekDay",
@@ -4309,7 +4309,7 @@
         }
       },
       "title": "A date range.",
-      "description": "For example, between '2022-12-23' and '2023-01-05'.", 
+      "description": "For example, between '2022-12-23' and '2023-01-05'.",
       "required": [
         "start",
         "end"
