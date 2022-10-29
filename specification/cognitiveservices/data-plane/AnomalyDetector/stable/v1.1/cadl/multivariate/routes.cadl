@@ -1,7 +1,8 @@
 // NOTES:
 // Need to fix errors, missing x-ms-error-code header, Azure.Core.Foundations.Error requires details which
 // is not defined by the service
-
+// - Cannot add x-ms-error-code header into an inline error object. Also apparently cannot add it to a model that 
+// spreads the original error.
 import "@azure-tools/cadl-azure-core";
 import "@cadl-lang/rest";
 import "./models.cadl";
