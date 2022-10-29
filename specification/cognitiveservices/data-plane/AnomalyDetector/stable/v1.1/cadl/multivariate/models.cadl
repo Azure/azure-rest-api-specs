@@ -1,6 +1,7 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
+using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
@@ -42,7 +43,7 @@ enum ModelStatus {
 }
 
 @doc("Detection results for the given resultId.")
-@resource("multivariate/detect-batch/{resultId}")
+@resource("multivariate/detect-batch")
 model DetectionResult {
   @doc("Result identifier, which is used to fetch the results of an inference call.")
   @key
@@ -73,6 +74,10 @@ will need another API to get detection results.
 
 @error
 model ErrorResponse {
+  @header
+  @doc("Error code.")
+  "x-ms-error-code": string,
+
   @doc("The error code.")
   code: string;
 
