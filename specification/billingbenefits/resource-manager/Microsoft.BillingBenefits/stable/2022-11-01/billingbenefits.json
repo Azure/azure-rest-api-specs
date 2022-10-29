@@ -554,6 +554,42 @@
         }
       }
     },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}/audit": {
+      "post": {
+        "description": "Audit savings plan purchase.",
+        "operationId": "SavingsPlanOrderAlias_Audit",
+        "tags": [
+          "Savings plan order aliases"
+        ],
+        "x-ms-examples": {
+          "SavingsPlanOrderAliasAudit": {
+            "$ref": "./examples/SavingsPlanOrderAliasAudit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SavingsPlanOrderAliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SavingsPlanOrderAliasAuditRequestParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The request is completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.BillingBenefits/calculateMigrationCost": {
       "post": {
         "summary": "Calculates the refund amounts in EA account and price of the corresponding new purchases in MCA account.",
@@ -640,6 +676,10 @@
         "sku": {
           "description": "Savings plan SKU",
           "$ref": "#/definitions/Sku"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Resource provider kind"
         },
         "properties": {
           "description": "Savings plan order alias properties",
@@ -792,7 +832,7 @@
         "resourceGroupId": {
           "$ref": "#/definitions/ResourceGroupId"
         },
-        "displayName": {
+        "appliedScopeDisplayName": {
           "type": "string",
           "description": "Applied scope display name"
         }
@@ -889,11 +929,6 @@
     "SavingsPlanId": {
       "type": "string",
       "description": "Identifier of the savings plan",
-      "readOnly": true
-    },
-    "SubscriptionName": {
-      "type": "string",
-      "description": "Subscription name",
       "readOnly": true
     },
     "EffectiveDateTime": {
@@ -1037,9 +1072,6 @@
         },
         "utilization": {
           "$ref": "#/definitions/Utilization"
-        },
-        "subscriptionName": {
-          "$ref": "#/definitions/SubscriptionName"
         },
         "renewProperties": {
           "type": "object",
@@ -1223,6 +1255,15 @@
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "internalProperties": {
+          "type": "object",
+          "properties": {
+            "purchaseRecordId": {
+              "description": "Purchase record Id",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -1262,10 +1303,6 @@
           "items": {
             "$ref": "#/definitions/SavingsPlanOrderAliasModel"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Url to get the next page."
         }
       }
     },
@@ -1277,10 +1314,6 @@
           "items": {
             "$ref": "#/definitions/SavingsPlanUpdateRequest"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Url to get the next page."
         }
       }
     },
@@ -1315,6 +1348,59 @@
           "type": "string",
           "description": "Failure reason if the provided input was invalid"
         }
+      }
+    },
+    "SavingsPlanOrderAliasAuditRequest": {
+      "type": "object",
+      "description": "Request to audit savings plan purchase",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanOrderAliasAuditRequestProperties"
+        }
+      }
+    },
+    "SavingsPlanOrderAliasAuditRequestProperties": {
+      "type": "object",
+      "description": "Properties to audit savings plan purchase",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "description": "Order ID of the savings plan in guid form"
+        },
+        "pricingCurrencyTotal": {
+          "type": "array",
+          "description": "Amount shown in the UX during savings plan purchase",
+          "items": {
+            "$ref": "#/definitions/PricingCurrencyTotal"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PricingCurrencyTotal": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Price"
+        }
+      ],
+      "properties": {
+        "duration": {
+          "$ref": "#/definitions/PricingCurrencyDuration"
+        }
+      }
+    },
+    "PricingCurrencyDuration": {
+      "type": "string",
+      "description": "Represents either billing plan or savings plan term in ISO 8601 format.",
+      "enum": [
+        "P1M",
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "PricingCurrencyDuration",
+        "modelAsString": true
       }
     },
     "PurchaseRequest": {
@@ -1372,6 +1458,20 @@
         }
       }
     },
+    "OperationResultError": {
+      "type": "object",
+      "description": "Required if status == failed or status == canceled.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Required if status == failed or status == cancelled. If status == failed, provide an invariant error code used for error troubleshooting, aggregation, and analysis."
+        },
+        "message": {
+          "type": "string",
+          "description": "Required if status == failed. Localized. If status == failed, provide an actionable error message indicating what error occurred, and what the user can do to address the issue."
+        }
+      }
+    },
     "CalculateMigrationCostOperationResultResponse": {
       "type": "object",
       "description": "CalculateMigrationCost operation result",
@@ -1410,6 +1510,10 @@
       "type": "object",
       "description": "Calculate Migration Cost response properties",
       "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "The session id of this calculate migration cost operation."
+        },
         "netPayable": {
           "$ref": "#/definitions/Price"
         },
@@ -1434,6 +1538,102 @@
             "$ref": "#/definitions/SavingsPlansToExchange"
           },
           "x-ms-identifiers": []
+        },
+        "policyResult": {
+          "$ref": "#/definitions/CalculateMigrationCostPolicyErrors"
+        }
+      }
+    },
+    "CalculateMigrationCostPolicyErrors": {
+      "type": "object",
+      "description": "Calculate migrationCost policy Errors",
+      "properties": {
+        "policyErrors": {
+          "type": "array",
+          "description": "Calculate migrationCost policy Errors",
+          "items": {
+            "$ref": "#/definitions/CalculateMigrationCostPolicyError"
+          }
+        }
+      }
+    },
+    "CalculateMigrationCostPolicyError": {
+      "type": "object",
+      "description": "error details",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "SavingsPlanToPurchaseCalculateExchange": {
+      "type": "object",
+      "description": "Savings Plan purchase details",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanPurchaseRequest"
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "paymentSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          }
+        }
+      }
+    },
+    "SavingsPlanPurchaseRequest": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavingsPlanPurchaseRequestProperties"
+        }
+      }
+    },
+    "SavingsPlanPurchaseRequestProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the Savings Plan"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to purchase. Must be greater than zero."
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
         }
       }
     },
@@ -1447,6 +1647,14 @@
         },
         "commitment": {
           "$ref": "#/definitions/Commitment"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be exchanged. Must be greater than zero."
+        },
+        "billingPlans": {
+          "$ref": "#/definitions/BillingPlan"
         },
         "billingRefundAmount": {
           "$ref": "#/definitions/Price"
@@ -1544,7 +1752,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the savings plan"
+      "description": "Name of the savings plan order alias"
     },
     "SavingsPlanOrderAliasRequestParameter": {
       "name": "body",
@@ -1603,7 +1811,7 @@
       "in": "body",
       "x-ms-parameter-location": "method",
       "required": true,
-      "description": "Request body for patching a savings plan order alias",
+      "description": "Request body for validating the purchase of a savings plan",
       "schema": {
         "$ref": "#/definitions/SavingsPlanPurchaseValidateRequest"
       }
@@ -1613,7 +1821,7 @@
       "in": "body",
       "x-ms-parameter-location": "method",
       "required": true,
-      "description": "Request body for patching a savings plan order alias",
+      "description": "Request body for validateing a savings plan patch request",
       "schema": {
         "$ref": "#/definitions/SavingsPlanUpdateValidateRequest"
       }
@@ -1626,6 +1834,16 @@
       "description": "Request body for migrating all savings plan order into mca account",
       "schema": {
         "$ref": "#/definitions/CalculateMigrationCostRequest"
+      }
+    },
+    "SavingsPlanOrderAliasAuditRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for auditing a savings plan order alias",
+      "schema": {
+        "$ref": "#/definitions/SavingsPlanOrderAliasAuditRequest"
       }
     }
   }

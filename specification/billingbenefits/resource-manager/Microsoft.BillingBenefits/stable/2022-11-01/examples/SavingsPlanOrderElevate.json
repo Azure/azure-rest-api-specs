@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000",
+    "api-version": "2022-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.BillingBenefits/savingsPlanOrders",
+        "name": "20000000-0000-0000-0000-000000000000",
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        },
+        "properties": {
+          "displayName": "ComputeSavingsPlan_2021-07-01",
+          "provisioningState": "Created",
+          "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1367109",
+          "term": "P1Y",
+          "billingPlan": "P1M",
+          "expiryDateTime": "2022-07-29T22:02:08.124Z",
+          "savingsPlans": [
+            "/providers/Microsoft.BillingBenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000"
+          ],
+          "planInformation": {
+            "pricingCurrencyTotal": {
+              "currencyCode": "USD",
+              "amount": 133414.8
+            },
+            "startDate": "2021-07-29",
+            "nextPaymentDueDate": "2021-08-29",
+            "transactions": [
+              {
+                "dueDate": "2021-07-29",
+                "paymentDate": "2021-07-29",
+                "status": "Succeeded",
+                "pricingCurrencyTotal": {
+                  "currencyCode": "USD",
+                  "amount": 11117.9
+                },
+                "billingCurrencyTotal": {
+                  "currencyCode": "USD",
+                  "amount": 11117.9
+                },
+                "billingAccount": "23456"
+              },
+              {
+                "dueDate": "2021-08-29",
+                "paymentDate": "2021-08-29",
+                "status": "Failed",
+                "pricingCurrencyTotal": {
+                  "currencyCode": "USD",
+                  "amount": 11117.9
+                },
+                "billingCurrencyTotal": {
+                  "currencyCode": "USD",
+                  "amount": 11117.9
+                },
+                "extendedStatusInfo": {
+                  "statusCode": "PaymentDeclined",
+                  "message": "Credit card charge failed."
+                },
+                "billingAccount": "23456"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
