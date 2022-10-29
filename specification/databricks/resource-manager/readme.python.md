@@ -18,3 +18,7 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/databricks/azure-mgmt-databricks/azure/mgmt/databricks
 ```
 
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
