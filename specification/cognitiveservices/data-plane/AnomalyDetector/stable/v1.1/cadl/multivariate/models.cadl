@@ -47,6 +47,7 @@ enum ModelStatus {
 model DetectionResult {
   @doc("Result identifier, which is used to fetch the results of an inference call.")
   @key
+  @format("uuid")
   resultId: string;
 
   @doc("Multivariate anomaly detection status.")
@@ -90,6 +91,8 @@ model VariableState {
   variable?: string;
 
   @doc("Proportion of missing values that need to be filled by fillNAMethod.")
+  @minValue(0.0)
+  @maxValue(1.0)
   filledNARatio?: float32;
 
   @doc("Number of effective data points before applying fillNAMethod.")
@@ -152,23 +155,28 @@ model AnomalyValue {
 Indicates the significance of the anomaly. The higher the severity, the more
 significant the anomaly is.
 """)
+  @minValue(0.0)
+  @maxValue(1.0)
   severity: float32;
 
   @doc("""
 Raw anomaly score of severity, will help indicate the degree of abnormality as
 well.
 """)
+  @minValue(0.0)
+  @maxValue(2.0)
   score: float32;
-  interpretation?: AnomalyValueInterpretationItem[];
+  interpretation?: AnomalyInterpretation[];
 }
 
-@doc("""
-Interpretation contains more details of the anomaly, which will help with root
-cause analysis.
-""")
-model AnomalyValueInterpretationItem {
-  ...AnomalyInterpretation;
-}
+// FIXME: why was this generated?
+// @doc("""
+// Interpretation contains more details of the anomaly, which will help with root
+// cause analysis.
+// """)
+// model AnomalyValueInterpretationItem {
+//   ...AnomalyInterpretation;
+// }
 
 model AnomalyInterpretation {
   @doc("Variable.")
@@ -221,6 +229,7 @@ date-time of ISO 8601 format.
 An optional field. The display name of the model whose maximum length is 24
 characters.
 """)
+  @maxLength(24)
   displayName?: string;
 
   @doc("""
@@ -294,6 +303,7 @@ epoch.
 model Model {
   @doc("Model identifier.")
   @key
+  @format("uuid")
   modelId: string;
 
   @doc("Date and time (UTC) when the model was created.")
