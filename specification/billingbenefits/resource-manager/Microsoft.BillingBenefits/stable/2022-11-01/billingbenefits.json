@@ -34,6 +34,43 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.BillingBenefits/operations": {
+      "get": {
+        "summary": "Get operations.",
+        "description": "List all the operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Benefits operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "List all the operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}": {
       "put": {
         "description": "Create a savings plan.",
@@ -517,43 +554,6 @@
         }
       }
     },
-    "/providers/Microsoft.BillingBenefits/operations": {
-      "get": {
-        "summary": "Get operations.",
-        "description": "List all the operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "OperationsGet": {
-            "$ref": "./examples/OperationsGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "tags": [
-          "Benefits operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "List all the operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}/audit": {
       "post": {
         "description": "Audit savings plan purchase.",
@@ -896,7 +896,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UtilizationAggregates"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -974,6 +975,22 @@
           "description": "The roll out count summary of the savings plans",
           "type": "array",
           "$ref": "#/definitions/SavingsPlanSummary"
+        }
+      }
+    },
+    "SavingsPlanModelList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page."
         }
       }
     },
@@ -1178,6 +1195,15 @@
       "type": "object",
       "description": "Savings plan patch request",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
+        }
+      }
+    },
+    "SavingsPlanUpdateRequestProperties": {
+      "type": "object",
+      "description": "Savings plan patch request",
+      "properties": {
         "displayName": {
           "$ref": "#/definitions/DisplayName"
         },
@@ -1186,6 +1212,12 @@
         },
         "appliedScopeProperties": {
           "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewProperties"
         }
       }
     },
@@ -1224,7 +1256,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1299,6 +1332,22 @@
         }
       }
     },
+    "RenewSource": {
+      "type": "string",
+      "description": "SavingsPlan Id of the SavingsPlan from which this SavingsPlan is renewed."
+    },
+    "RenewDestination": {
+      "type": "string",
+      "description": "SavingsPlan Id of the SavingsPlan which is purchased because of renew."
+    },
+    "RenewProperties": {
+      "type": "object",
+      "properties": {
+        "purchaseProperties": {
+          "$ref": "#/definitions/SavingsPlanModel"
+        }
+      }
+    },
     "SavingsPlanPurchaseValidateRequest": {
       "type": "object",
       "properties": {
@@ -1316,8 +1365,9 @@
         "benefits": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SavingsPlanUpdateRequest"
-          }
+            "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1328,7 +1378,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SavingsPlanValidResponseProperty"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1557,7 +1608,8 @@
           "description": "Calculate migrationCost policy Errors",
           "items": {
             "$ref": "#/definitions/CalculateMigrationCostPolicyError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1590,7 +1642,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
