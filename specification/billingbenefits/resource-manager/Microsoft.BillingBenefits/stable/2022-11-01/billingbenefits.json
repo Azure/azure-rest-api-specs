@@ -1085,7 +1085,10 @@
         "additionalProperties": {
           "description": "The roll out count summary of the savings plans",
           "type": "array",
-          "$ref": "#/definitions/SavingsPlanSummary"
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SavingsPlanSummary"
+          }
         }
       }
     },
