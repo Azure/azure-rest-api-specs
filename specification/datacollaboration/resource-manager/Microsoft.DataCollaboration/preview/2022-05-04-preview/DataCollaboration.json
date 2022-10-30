@@ -3124,19 +3124,16 @@
             "in": "path",
             "description": "The name of the reference.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 3,
+            "pattern": "^[\\w_-]+$"
           },
           {
             "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OperationResponse"
-            }
-          },
           "202": {
             "description": "Accepted"
           },
