@@ -26,7 +26,16 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10-preview
+tag: package-2022-06
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
+input-file:
+- Microsoft.EventGrid/stable/2022-06-15/EventGrid.json
 ```
 
 ### Tag: package-2021-10-preview
@@ -213,7 +222,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

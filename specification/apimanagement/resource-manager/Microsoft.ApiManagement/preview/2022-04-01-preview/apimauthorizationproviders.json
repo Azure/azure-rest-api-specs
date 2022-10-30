@@ -48,7 +48,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -67,10 +67,10 @@
             "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -107,7 +107,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -116,10 +116,10 @@
             "$ref": "./apimanagement.json#/parameters/AuthorizationProviderIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -165,7 +165,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -186,15 +186,27 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
+          "201": {
+            "description": "Authorization provider was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "Authorization provider was successfully updated.",
+            "description": "The existing Authorization provider was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationProviderContract"
             },
@@ -226,7 +238,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -238,10 +250,10 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -277,7 +289,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -299,10 +311,10 @@
             "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -339,7 +351,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -351,10 +363,10 @@
             "$ref": "./apimanagement.json#/parameters/AuthorizationIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -394,7 +406,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -418,15 +430,27 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
+          "201": {
+            "description": "Authorization was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "Authorization was successfully updated.",
+            "description": "The existing Authorization was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationContract"
             },
@@ -458,7 +482,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -473,10 +497,10 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -484,7 +508,7 @@
             "description": "Authorization was successfully deleted."
           },
           "204": {
-            "description": "The authorization server settings were successfully deleted."
+            "description": "The authorization resource was not found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -509,7 +533,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -530,10 +554,10 @@
             "description": "Create parameters."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -558,7 +582,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations/{authorizationId}/accesspolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations/{authorizationId}/accessPolicies": {
       "get": {
         "tags": [
           "AuthorizationAccessPolicy"
@@ -572,7 +596,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -597,10 +621,10 @@
             "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -623,7 +647,7 @@
         "x-ms-odata": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations/{authorizationId}/accesspolicies/{authorizationAccessPolicyId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations/{authorizationId}/accessPolicies/{authorizationAccessPolicyId}": {
       "get": {
         "tags": [
           "AuthorizationAccessPolicy"
@@ -637,7 +661,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -652,10 +676,10 @@
             "$ref": "./apimanagement.json#/parameters/AuthorizationAccessPolicyIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -692,7 +716,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -719,15 +743,27 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
+          "201": {
+            "description": "Authorization access policy was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "Authorization access policy was successfully updated.",
+            "description": "The existing Authorization access policy was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AuthorizationAccessPolicyContract"
             },
@@ -759,7 +795,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -777,10 +813,10 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {

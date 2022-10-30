@@ -6136,7 +6136,8 @@
           "type": "array",
           "description": "An array that contains the Resource Ids for Network Acl Bypass for the Cosmos DB account.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           }
         }
       }
@@ -7847,6 +7848,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}."
         },
         "ignoreMissingVNetServiceEndpoint": {

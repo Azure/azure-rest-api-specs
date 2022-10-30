@@ -48,7 +48,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -88,16 +88,16 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -133,7 +133,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -148,10 +148,10 @@
             "description": "Parameters supplied to the Restore API Management service from backup operation."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -197,7 +197,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -212,10 +212,10 @@
             "description": "Parameters supplied to the ApiManagementService_Backup operation."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -275,11 +275,14 @@
           },
           "ApiManagementCreateServiceWithCustomHostnameKeyVault": {
             "$ref": "./examples/ApiManagementCreateServiceWithCustomHostnameKeyVault.json"
+          },
+          "ApiManagementCreateServiceWithNatGatewayEnabled": {
+            "$ref": "./examples/ApiManagementCreateServiceWithNatGatewayEnabled.json"
           }
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -294,10 +297,10 @@
             "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -341,7 +344,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -356,10 +359,10 @@
             "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -400,16 +403,16 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -440,16 +443,16 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -475,6 +478,55 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/migrateToStv2": {
+      "post": {
+        "tags": [
+          "ApiManagementService"
+        ],
+        "operationId": "ApiManagementService_MigrateToStv2",
+        "description": "Upgrades an API Management service to the Stv2 platform. For details refer to https://aka.ms/apim-migrate-stv2. This change is not reversible. This is long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementMigrateService": {
+            "$ref": "./examples/ApiManagementServiceMigrateToStv2.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully migrated.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementServiceResource"
+            }
+          },
+          "202": {
+            "description": "Migration request submitted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
       "get": {
         "tags": [
@@ -489,13 +541,13 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -531,10 +583,10 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -570,16 +622,16 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -622,10 +674,10 @@
             "description": "Parameters supplied to the CheckNameAvailability operation."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -658,10 +710,10 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -694,7 +746,7 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
@@ -709,10 +761,10 @@
             "description": "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -974,7 +1026,7 @@
         },
         "defaultSslBinding": {
           "type": "boolean",
-          "description": "Specify true to setup the certificate associated with this Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this will be the certificate that will be challenged. The property is useful if a service has multiple custom hostname enabled and it needs to decide on the default ssl certificate. The setting only applied to Proxy Hostname Type.",
+          "description": "Specify true to setup the certificate associated with this Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this will be the certificate that will be challenged. The property is useful if a service has multiple custom hostname enabled and it needs to decide on the default ssl certificate. The setting only applied to gateway Hostname Type.",
           "default": false
         },
         "negotiateClientCertificate": {
@@ -1085,6 +1137,37 @@
           "type": "string",
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
+        },
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
+        },
+        "outboundPublicIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Outbound public IPV4 address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU on stv2 platform."
         },
         "disableGateway": {
           "type": "boolean",
@@ -1366,6 +1449,37 @@
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
           "default": false
         },
+        "natGatewayState": {
+          "type": "string",
+          "description": "Property can be used to enable NAT Gateway for this API Management service.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "NatGatewayState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Nat Gateway is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Nat Gateway is disabled for the service."
+              }
+            ]
+          }
+        },
+        "outboundPublicIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Outbound public IPV4 address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU on stv2 platform."
+        },
         "disableGateway": {
           "type": "boolean",
           "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region.",
@@ -1536,7 +1650,7 @@
           "description": "Managed service identity of the Api Management service."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
         },
