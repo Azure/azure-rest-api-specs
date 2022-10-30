@@ -6,12 +6,12 @@
     "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{ledgerUri}",
+    "hostTemplate": "{ledgerEndpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "ledgerUri",
+        "name": "ledgerEndpoint",
         "description": "The Confidential Ledger URL, for example https://contoso.confidentialledger.azure.com",
         "required": true,
         "type": "string",
@@ -31,7 +31,7 @@
   "paths": {
     "/app/governance/constitution": {
       "get": {
-        "operationId": "ConfidentialLedger_GetConstitution",
+        "operationId": "GetConstitution",
         "x-ms-examples": {
           "GetConstitution": {
             "$ref": "./examples/ledger/GetConstitution.json"
@@ -62,13 +62,17 @@
     },
     "/app/governance/members": {
       "get": {
-        "operationId": "ConfidentialLedger_GetConsortiumMembers",
+        "operationId": "ListConsortiumMembers",
         "x-ms-examples": {
-          "GetConsortiumMembers": {
-            "$ref": "./examples/ledger/GetConsortiumMembers.json"
+          "ListConsortiumMembers": {
+            "$ref": "./examples/ledger/ListConsortiumMembers.json"
           }
         },
-        "summary": "Gets the consortium members.",
+        "x-ms-pageable": {
+          "itemName": "members",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Lists the consortium members.",
         "description": "Consortium members can manage the Confidential Ledger.",
         "parameters": [
           {
@@ -93,7 +97,7 @@
     },
     "/app/enclaveQuotes": {
       "get": {
-        "operationId": "ConfidentialLedger_GetEnclaveQuotes",
+        "operationId": "GetEnclaveQuotes",
         "x-ms-examples": {
           "GetEnclaveQuotes": {
             "$ref": "./examples/ledger/GetEnclaveQuotes.json"
@@ -124,11 +128,15 @@
     },
     "/app/collections": {
       "get": {
-        "operationId": "ConfidentialLedger_ListCollections",
+        "operationId": "ListCollections",
         "x-ms-examples": {
           "GetCollectionIds": {
             "$ref": "./examples/ledger/ListCollections.json"
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "collections",
+          "nextLinkName": "nextLink"
         },
         "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
         "description": "Collection ids are user-created collections of ledger entries",
@@ -141,7 +149,7 @@
           "200": {
             "description": "List of collections",
             "schema": {
-              "$ref": "#/definitions/CollectionArray"
+              "$ref": "#/definitions/PagedCollections"
             }
           },
           "default": {
@@ -155,9 +163,9 @@
     },
     "/app/transactions": {
       "get": {
-        "operationId": "ConfidentialLedger_ListLedgerEntries",
+        "operationId": "ListLedgerEntries",
         "x-ms-examples": {
-          "GetLedgerEntries": {
+          "ListLedgerEntries": {
             "$ref": "./examples/ledger/ListLedgerEntries.json"
           }
         },
@@ -197,10 +205,10 @@
         }
       },
       "post": {
-        "operationId": "ConfidentialLedger_PostLedgerEntry",
+        "operationId": "CreateLedgerEntry",
         "x-ms-examples": {
-          "PostLedgerEntry": {
-            "$ref": "./examples/ledger/PostLedgerEntry.json"
+          "CreateLedgerEntry": {
+            "$ref": "./examples/ledger/CreateLedgerEntry.json"
           }
         },
         "summary": "Writes a ledger entry.",
@@ -246,7 +254,7 @@
     },
     "/app/transactions/{transactionId}": {
       "get": {
-        "operationId": "ConfidentialLedger_GetLedgerEntry",
+        "operationId": "GetLedgerEntry",
         "x-ms-examples": {
           "GetLedgerEntry": {
             "$ref": "./examples/ledger/GetLedgerEntry.json"
@@ -283,7 +291,7 @@
     },
     "/app/transactions/{transactionId}/receipt": {
       "get": {
-        "operationId": "ConfidentialLedger_GetReceipt",
+        "operationId": "GetReceipt",
         "x-ms-examples": {
           "GetReceipt": {
             "$ref": "./examples/ledger/GetReceipt.json"
@@ -316,7 +324,7 @@
     },
     "/app/transactions/{transactionId}/status": {
       "get": {
-        "operationId": "ConfidentialLedger_GetTransactionStatus",
+        "operationId": "GetTransactionStatus",
         "x-ms-examples": {
           "GetTransactionStatus": {
             "$ref": "./examples/ledger/GetTransactionStatus.json"
@@ -349,7 +357,7 @@
     },
     "/app/transactions/current": {
       "get": {
-        "operationId": "ConfidentialLedger_GetCurrentLedgerEntry",
+        "operationId": "GetCurrentLedgerEntry",
         "x-ms-examples": {
           "GetCurrentLedgerEntry": {
             "$ref": "./examples/ledger/GetCurrentLedgerEntry.json"
@@ -383,7 +391,7 @@
     },
     "/app/users/{userId}": {
       "delete": {
-        "operationId": "ConfidentialLedger_DeleteUser",
+        "operationId": "DeleteUser",
         "x-ms-examples": {
           "DeleteUser": {
             "$ref": "./examples/ledger/DeleteUser.json"
@@ -411,7 +419,7 @@
         }
       },
       "get": {
-        "operationId": "ConfidentialLedger_GetUser",
+        "operationId": "GetUser",
         "x-ms-examples": {
           "GetUser": {
             "$ref": "./examples/ledger/GetUser.json"
@@ -442,7 +450,7 @@
         }
       },
       "patch": {
-        "operationId": "ConfidentialLedger_CreateOrUpdateUser",
+        "operationId": "CreateOrUpdateUser",
         "x-ms-examples": {
           "CreateOrUpdateUser": {
             "$ref": "./examples/ledger/CreateOrUpdateUser.json"
@@ -510,6 +518,10 @@
           "items": {
             "$ref": "#/definitions/ConsortiumMember"
           }
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -606,7 +618,7 @@
           "description": "Contents of the ledger entry."
         },
         "collectionId": {
-          "$ref": "#/definitions/Collection",
+          "type": "string",
           "readOnly": true
         },
         "transactionId": {
@@ -680,7 +692,7 @@
       ],
       "properties": {
         "collectionId": {
-          "$ref": "#/definitions/Collection"
+          "type": "string"
         }
       },
       "type": "object"
@@ -823,14 +835,27 @@
         "collectionId": {
           "type": "string"
         }
-      }
-    },
-    "CollectionArray": {
-      "description": "A list of identifiers for ledger collections.",
-      "items": {
-        "$ref": "#/definitions/Collection"
       },
-      "type": "array"
+      "type": "object"
+    },
+    "PagedCollections": {
+      "description": "Paginated collections returned in response to a query.",
+      "type": "object",
+      "required": [
+        "collections"
+      ],
+      "properties": {
+        "collections": {
+          "items": {
+            "$ref": "#/definitions/Collection"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
     },
     "TransactionId": {
       "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
@@ -947,7 +972,8 @@
       "required": true,
       "description": "The user id, either an AAD object ID or certificate fingerprint.",
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

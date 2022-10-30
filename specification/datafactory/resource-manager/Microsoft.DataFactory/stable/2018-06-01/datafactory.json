@@ -3967,7 +3967,7 @@
         "tags": [
           "managedPrivateEndpoints"
         ],
-        "operationId": "managedPrivateEndpoints_CreateOrUpdate",
+        "operationId": "ManagedPrivateEndpoints_CreateOrUpdate",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Create": {
             "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
@@ -5233,6 +5233,10 @@
         "lastCommitId": {
           "description": "Last commit id.",
           "type": "string"
+        },
+        "disablePublish": {
+          "description": "Disable manual publish operation in ADF studio to favor automated publish.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -5277,7 +5281,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "description": "GitHub Enterprise host name. For example: `https://github.mydomain.com`",
           "type": "string"
         },
         "clientId": {
@@ -5778,13 +5782,18 @@
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "description": "Linked service reference type.",
           "enum": [
             "LinkedServiceReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
