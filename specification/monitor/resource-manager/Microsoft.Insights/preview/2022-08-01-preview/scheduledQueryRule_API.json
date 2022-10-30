@@ -330,6 +330,21 @@
         }
       }
     },
+    "RuleResolveConfiguration": {
+      "type": "object",
+      "description": "TBD. Relevant only for rules of the kind LogAlert.",
+      "properties": {
+        "autoResolved": {
+          "type": "boolean",
+          "description": "The flag that indicates whether or not to auto resolve a fired alert."
+        },
+        "timeToResolve": {
+          "type": "string",
+          "format": "duration",
+          "description": "The duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format."
+        }
+      }
+    },
     "ScheduledQueryRuleProperties": {
       "type": "object",
       "properties": {
@@ -444,6 +459,11 @@
         "autoMitigate": {
           "type": "boolean",
           "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
+        },
+        "ruleResolveConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/RuleResolveConfiguration",
+          "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of the kind LogAlert."
         }
       },
       "description": "scheduled query rule Definition"
