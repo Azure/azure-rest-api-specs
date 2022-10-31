@@ -63,7 +63,7 @@
             "$ref": "#/parameters/TopParameter"
           }
         ],
-        "operationId": "Projects_ListByDevCenter",
+        "operationId": "DevCenter_ListProjects",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -79,7 +79,7 @@
           }
         },
         "x-ms-examples": {
-          "Project_ListByDevCenter": {
+          "DevCenter_ListProjects": {
             "$ref": "./examples/Projects_ListByDevCenter.json"
           }
         },
@@ -96,13 +96,13 @@
         "description": "Gets a project.",
         "parameters": [
           {
-            "$ref": "#/parameters/ProjectNameParameter"
+            "$ref": "#/parameters/ProjectNameMethodParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "operationId": "Projects_Get",
+        "operationId": "DevCenter_GetProject",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -118,7 +118,7 @@
           }
         },
         "x-ms-examples": {
-          "Project_Get": {
+          "DevCenter_GetProject": {
             "$ref": "./examples/Projects_Get.json"
           }
         }
@@ -235,6 +235,17 @@
   },
   "parameters": {
     "ProjectNameParameter": {
+      "name": "projectName",
+      "description": "The DevCenter Project upon which to execute operations.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "in": "path",
+      "x-ms-parameter-location": "client"
+    },
+    "ProjectNameMethodParameter": {
       "name": "projectName",
       "description": "The DevCenter Project upon which to execute operations.",
       "required": true,
