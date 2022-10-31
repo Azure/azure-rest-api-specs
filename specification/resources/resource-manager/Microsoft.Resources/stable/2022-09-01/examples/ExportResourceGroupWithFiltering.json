@@ -2,12 +2,12 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "my-resource-group",
-    "api-version": "2022-11-01",
+    "api-version": "2022-09-01",
     "parameters": {
       "resources": [
-        "*"
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group/providers/My.RP/myResourceType/myFirstResource"
       ],
-      "options": "IncludeParameterDefaultValue,IncludeComments"
+      "options": "SkipResourceNameParameterization"
     }
   },
   "responses": {
@@ -22,14 +22,6 @@
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "parameters": {
-            "myResourceType_myFirstResource_name": {
-              "defaultValue": "myFirstResource",
-              "type": "String"
-            },
-            "myResourceType_mySecondResource_name": {
-              "defaultValue": "mySecondResource",
-              "type": "String"
-            },
             "myResourceType_myFirstResource_secret": {
               "defaultValue": null,
               "type": "SecureString"
@@ -40,27 +32,13 @@
             {
               "type": "My.RP/myResourceType",
               "apiVersion": "2019-01-01",
-              "name": "[parameters('myResourceType_myFirstResource_name')]",
+              "name": "myFirstResource",
               "location": "West US",
               "properties": {
                 "secret": "[parameters('myResourceType_myFirstResource_secret')]"
               }
-            },
-            {
-              "type": "My.RP/myResourceType",
-              "apiVersion": "2019-01-01",
-              "name": "[parameters('myResourceType_mySecondResource_name')]",
-              "location": "West US",
-              "properties": {
-                "customProperty": "hello!"
-              }
             }
           ]
-        },
-        "error": {
-          "code": "ExportTemplateCompletedWithErrors",
-          "message": "Export template operation completed with errors. Some resources were not exported. Please see details for more information.",
-          "details": []
         }
       }
     }

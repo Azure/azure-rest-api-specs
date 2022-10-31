@@ -1,10 +1,10 @@
 {
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000001",
-    "resourceGroupName": "my-resource-group",
     "deploymentName": "my-deployment",
-    "api-version": "2022-11-01",
+    "api-version": "2022-09-01",
     "parameters": {
+      "location": "westus",
       "properties": {
         "templateLink": {
           "uri": "https://example.com/exampleTemplate.json"
@@ -60,6 +60,17 @@
                 "tags": {
                   "myOtherNewTag": "another new tag value"
                 }
+              }
+            },
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group2",
+              "changeType": "Create",
+              "after": {
+                "apiVersion": "2019-03-01",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group2",
+                "type": "Microsoft.Resources/resourceGroups",
+                "name": "my-resource-group2",
+                "location": "{location3}"
               }
             }
           ]

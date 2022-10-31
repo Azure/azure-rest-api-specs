@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "groupId": "my-management-group-id",
+    "scope": "providers/Microsoft.Management/managementGroups/my-management-group-id",
     "deploymentName": "my-deployment",
-    "api-version": "2022-11-01",
+    "api-version": "2022-09-01",
     "parameters": {
       "location": "eastus",
       "properties": {
@@ -11,6 +11,10 @@
         },
         "parameters": {},
         "mode": "Incremental"
+      },
+      "tags": {
+        "tagKey1": "tag-value-1",
+        "tagKey2": "tag-value-2"
       }
     }
   },
@@ -72,6 +76,10 @@
               "resourceName": "location-lock"
             }
           ]
+        },
+        "tags": {
+          "tagKey1": "tag-value-1",
+          "tagKey2": "tag-value-2"
         }
       }
     },
@@ -132,6 +140,10 @@
               "resourceName": "location-lock"
             }
           ]
+        },
+        "tags": {
+          "tagKey1": "tag-value-1",
+          "tagKey2": "tag-value-2"
         }
       }
     }

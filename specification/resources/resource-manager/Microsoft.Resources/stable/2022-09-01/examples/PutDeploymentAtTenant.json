@@ -1,8 +1,7 @@
 {
   "parameters": {
-    "scope": "providers/Microsoft.Management/managementGroups/my-management-group-id",
-    "deploymentName": "my-deployment",
-    "api-version": "2022-11-01",
+    "deploymentName": "tenant-dep01",
+    "api-version": "2022-09-01",
     "parameters": {
       "location": "eastus",
       "properties": {
@@ -21,8 +20,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/my-deployment",
-        "name": "my-deployment",
+        "id": "/providers/Microsoft.Resources/deployments/tenant-dep01",
+        "name": "tenant-dep01",
         "type": "Microsoft.Resources/deployments",
         "location": "eastus",
         "properties": {
@@ -66,12 +65,12 @@
             {
               "dependsOn": [
                 {
-                  "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
+                  "id": "/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
                   "resourceType": "Microsoft.Authorization/policyDefinitions",
                   "resourceName": "policy-definition-name"
                 }
               ],
-              "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyAssignments/location-lock",
+              "id": "/providers/Microsoft.Authorization/policyAssignments/location-lock",
               "resourceType": "Microsoft.Authorization/policyAssignments",
               "resourceName": "location-lock"
             }
@@ -85,8 +84,8 @@
     },
     "201": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/my-deployment",
-        "name": "my-deployment",
+        "id": "/providers/Microsoft.Resources/deployments/tenant-dep01",
+        "name": "tenant-dep01",
         "type": "Microsoft.Resources/deployments",
         "location": "eastus",
         "properties": {
@@ -130,12 +129,12 @@
             {
               "dependsOn": [
                 {
-                  "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
+                  "id": "/providers/Microsoft.Authorization/policyDefinitions/policy-definition-name",
                   "resourceType": "Microsoft.Authorization/policyDefinitions",
                   "resourceName": "policy-definition-name"
                 }
               ],
-              "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Authorization/policyAssignments/location-lock",
+              "id": "/providers/Microsoft.Authorization/policyAssignments/location-lock",
               "resourceType": "Microsoft.Authorization/policyAssignments",
               "resourceName": "location-lock"
             }

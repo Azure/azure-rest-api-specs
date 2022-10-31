@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "my-resource-group",
     "deploymentName": "my-deployment",
-    "api-version": "2022-11-01",
+    "api-version": "2022-09-01",
     "parameters": {
       "properties": {
         "templateLink": {
@@ -12,8 +12,7 @@
         "parameters": {},
         "mode": "Complete",
         "onErrorDeployment": {
-          "type": "SpecificDeployment",
-          "deploymentName": "name-of-deployment-to-use"
+          "type": "LastSuccessful"
         }
       }
     }
@@ -86,8 +85,8 @@
             }
           ],
           "onErrorDeployment": {
-            "type": "SpecificDeployment",
-            "deploymentName": "name-of-deployment-to-use"
+            "type": "LastSuccessful",
+            "deploymentName": "{nameOfLastSuccesfulDeployment}"
           }
         }
       }
@@ -159,8 +158,8 @@
             }
           ],
           "onErrorDeployment": {
-            "type": "SpecificDeployment",
-            "deploymentName": "name-of-deployment-to-use"
+            "type": "LastSuccessful",
+            "deploymentName": "{nameOfLastSuccesfulDeployment}"
           }
         }
       }
