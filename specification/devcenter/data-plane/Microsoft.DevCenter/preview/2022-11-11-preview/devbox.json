@@ -636,6 +636,9 @@
           },
           {
             "$ref": "#/parameters/DevBoxNameParameterName"
+          },
+          {
+            "$ref": "#/parameters/HibernateParameter"
           }
         ],
         "description": "Stops a Dev Box",
@@ -722,10 +725,10 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions": {
       "get": {
         "tags": [
-          "Scheduled Actions"
+          "Upcoming Actions"
         ],
         "parameters": [
           {
@@ -742,12 +745,12 @@
           }
         ],
         "description": "Lists upcoming actions on a Dev Box.",
-        "operationId": "DevBoxes_ListScheduledActions",
+        "operationId": "DevBoxes_ListUpcomingActions",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ScheduledActionListResult"
+              "$ref": "#/definitions/UpcomingActionsListResult"
             }
           },
           "default": {
@@ -764,20 +767,20 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_ListScheduledActions": {
-            "$ref": "./examples/ScheduledActions_List.json"
+          "DevBoxes_ListUpcomingActions": {
+            "$ref": "./examples/UpcomingActions_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ScheduledAction"
+        "x-ms-odata": "#/definitions/UpcomingAction"
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions/{scheduledActionId}": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}": {
       "get": {
         "tags": [
-          "Scheduled Actions"
+          "Upcoming Actions"
         ],
         "parameters": [
           {
@@ -793,16 +796,16 @@
             "$ref": "#/parameters/DevBoxNameParameterName"
           },
           {
-            "$ref": "#/parameters/ScheduledActionIdParameterName"
+            "$ref": "#/parameters/UpcomingActionIdParameterName"
           }
         ],
-        "description": "Gets a Scheduled Action.",
-        "operationId": "DevBoxes_GetScheduledAction",
+        "description": "Gets an Upcoming Action.",
+        "operationId": "DevBoxes_GetUpcomingAction",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/UpcomingAction"
             }
           },
           "default": {
@@ -819,16 +822,16 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_GetScheduledAction": {
-            "$ref": "./examples/ScheduledActions_Get.json"
+          "DevBoxes_GetUpcomingAction": {
+            "$ref": "./examples/UpcomingActions_Get.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions/{scheduledActionId}:skip": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}:skip": {
       "post": {
         "tags": [
-          "Scheduled Actions"
+          "Upcoming Actions"
         ],
         "parameters": [
           {
@@ -844,11 +847,11 @@
             "$ref": "#/parameters/DevBoxNameParameterName"
           },
           {
-            "$ref": "#/parameters/ScheduledActionIdParameterName"
+            "$ref": "#/parameters/UpcomingActionIdParameterName"
           }
         ],
-        "description": "Skips a Scheduled Action.",
-        "operationId": "DevBoxes_SkipScheduledAction",
+        "description": "Skips an Upcoming Action.",
+        "operationId": "DevBoxes_SkipUpcomingAction",
         "responses": {
           "204": {
             "description": "No content"
@@ -867,16 +870,16 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_SkipScheduledAction": {
-            "$ref": "./examples/ScheduledActions_Skip.json"
+          "DevBoxes_SkipUpcomingAction": {
+            "$ref": "./examples/UpcomingActions_Skip.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/scheduledActions/{scheduledActionId}:delay": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}:delay": {
       "post": {
         "tags": [
-          "Scheduled Actions"
+          "Upcoming Actions"
         ],
         "parameters": [
           {
@@ -892,19 +895,19 @@
             "$ref": "#/parameters/DevBoxNameParameterName"
           },
           {
-            "$ref": "#/parameters/ScheduledActionIdParameterName"
+            "$ref": "#/parameters/UpcomingActionIdParameterName"
           },
           {
             "$ref": "#/parameters/DelayUntilParameterName"
           }
         ],
-        "description": "Delays a Scheduled Action.",
-        "operationId": "DevBoxes_DelayScheduledAction",
+        "description": "Delays an Upcoming Action.",
+        "operationId": "DevBoxes_DelayUpcomingAction",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/UpcomingAction"
             }
           },
           "default": {
@@ -921,8 +924,8 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_DelayScheduledAction": {
-            "$ref": "./examples/ScheduledActions_Delay.json"
+          "DevBoxes_DelayUpcomingAction": {
+            "$ref": "./examples/UpcomingActions_Delay.json"
           }
         }
       }
@@ -1306,9 +1309,8 @@
       }
     },
     "HibernateSupport": {
-      "description": "Indicates whether hibernate is enabled/disabled.",
+      "description": "Indicates whether hibernate is supported and enabled or disabled. Unknown hibernate support is represented as null.",
       "enum": [
-        "Unknown",
         "Disabled",
         "Enabled"
       ],
@@ -1329,15 +1331,15 @@
         "modelAsString": true
       }
     },
-    "ScheduledActionListResult": {
+    "UpcomingActionListResult": {
       "type": "object",
-      "description": "The Scheduled Action list result",
+      "description": "The Upcoming Action list result",
       "properties": {
         "value": {
           "description": "Current page of results",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScheduledAction"
+            "$ref": "#/definitions/UpcomingAction"
           }
         },
         "nextLink": {
@@ -1349,9 +1351,9 @@
         "value"
       ]
     },
-    "ScheduledAction": {
+    "UpcomingAction": {
       "type": "object",
-      "description": "An upcoming Scheduled Action.",
+      "description": "An upcoming Action.",
       "properties": {
         "id": {
           "description": "Uniquely identifies the action.",
@@ -1360,12 +1362,12 @@
         },
         "actionType": {
           "description": "The action that will be taken.",
-          "$ref": "#/definitions/ScheduledActionType",
+          "$ref": "#/definitions/UpcomingActionType",
           "readOnly": true
         },
         "reason": {
-          "description": "The frequency of this scheduled action.",
-          "$ref": "#/definitions/ScheduledActionReason",
+          "description": "The reason for this action.",
+          "$ref": "#/definitions/UpcomingActionReason",
           "readOnly": true
         },
         "scheduledTime": {
@@ -1380,32 +1382,32 @@
           "readOnly": true,
           "format": "date-time"
         },
-        "scheduleId": {
-          "description": "The schedule id that is triggering this scheduled action",
+        "sourceId": {
+          "description": "The id of the resource which triggered this action",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "ScheduledActionType": {
-      "description": "The scheduled action types.",
+    "UpcomingActionType": {
+      "description": "The upcoming action types.",
       "type": "string",
       "enum": [
         "Stop"
       ],
       "x-ms-enum": {
-        "name": "ScheduledActionType",
+        "name": "UpcomingActionType",
         "modelAsString": true
       }
     },
-    "ScheduledActionReason": {
-      "description": "The reason for the scheduled action.",
+    "UpcomingActionReason": {
+      "description": "The reason for the upcoming action.",
       "type": "string",
       "enum": [
         "Schedule"
       ],
       "x-ms-enum": {
-        "name": "ScheduledActionReason",
+        "name": "UpcomingActionReason",
         "modelAsString": true
       }
     }
@@ -1441,10 +1443,10 @@
       "description": "The name of a Dev Box.",
       "x-ms-parameter-location": "method"
     },
-    "ScheduledActionIdParameterName": {
-      "description": "The scheduled action id.",
+    "UpcomingActionIdParameterName": {
+      "description": "The upcoming action id.",
       "in": "path",
-      "name": "scheduledActionId",
+      "name": "upcomingActionId",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
@@ -1458,6 +1460,14 @@
       "type": "string",
       "format": "date-time",
       "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "HibernateParameter": {
+      "name": "hibernate",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Optional parameter to hibernate the dev box.",
       "x-ms-parameter-location": "method"
     }
   }
