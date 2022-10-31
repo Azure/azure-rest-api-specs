@@ -616,7 +616,11 @@
       "properties": {
         "tags": {
           "description": "Resource tags.",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -690,7 +694,8 @@
             },
             "resourceId": {
               "type": "string",
-              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId"
+              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId",
+              "x-nullable": true
             }
           }
         },
