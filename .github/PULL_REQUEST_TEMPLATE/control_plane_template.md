@@ -2,6 +2,7 @@
 
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow.
 </i>
+Azure 1st Party Service can try out the [Shift Left](https://aka.ms/ShiftLeft) experience to initiate API design review from ADO code repo.  If you are interested, may request engineering support by filling in with the form https://aka.ms/ShiftLeftSupportForm.
 
 ### Changelog
 Add a changelog entry for this PR by answering the following questions:
@@ -32,7 +33,7 @@ If any further question about AME onboarding or validation tools, please view th
 > - All removals
 
 Otherwise your PR may be subject to ARM review requirements. Complete the following:
-- [ ] Check this box if any of the following apply to the PR so that label "WaitForARMFeedback" will be added automatically to begin ARM API Review. Failure to comply may result in delays to the manifest.
+- [ ] Check this box if any of the following apply to the PR so that the label "ARMReview" and "WaitForARMFeedback" will be added by bot to kick off ARM API Review.  Missing to check this box in the following scenario may result in delays to the ARM manifest review and deployment.
   - Adding a new service
   - Adding new API(s)
   - Adding a new API version

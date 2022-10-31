@@ -64,7 +64,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}": {
       "get": {
         "tags": [
           "DaprComponents"
@@ -86,7 +86,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
@@ -138,7 +138,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
@@ -200,7 +200,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
@@ -232,7 +232,7 @@
         "x-ms-long-running-operation": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{name}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets": {
       "post": {
         "tags": [
           "DaprComponents"
@@ -254,7 +254,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
@@ -331,6 +331,7 @@
             },
             "ignoreErrors": {
               "description": "Boolean describing if the component errors are ignores",
+              "default": false,
               "type": "boolean"
             },
             "initTimeout": {
@@ -388,21 +389,38 @@
       }
     },
     "DaprSecretsCollection": {
-      "description": "Dapr component Secrets Collection ARM resource.",
+      "description": "Dapr component Secrets Collection for ListSecrets Action",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of secrets used by a Dapr component",
+          "description": "Collection of secrets for ListSecrets Action",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+            "$ref": "#/definitions/DaprSecret"
           },
           "x-ms-identifiers": [
             "name"
           ]
+        }
+      }
+    },
+    "DaprSecret": {
+      "description": "Dapr component Secret for ListSecrets Action",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-secret": true,
+          "readOnly": true
         }
       }
     }

@@ -498,14 +498,14 @@
           "type": "string",
           "readOnly": true
         },
-        "failedDateUtc": {
+        "targetFailedTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the failed date time.",
           "readOnly": true,
           "x-nullable": true
         },
-        "completedDateUtc": {
+        "targetCompletedTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the completed date time.",
@@ -602,25 +602,25 @@
           "type": "string",
           "readOnly": true
         },
-        "createdDateUtc": {
+        "createdDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the created date time.",
           "readOnly": true
         },
-        "lastActionDateUtc": {
+        "lastActionDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the last action date time.",
           "readOnly": true
         },
-        "startDateUtc": {
+        "startDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the start date time.",
           "readOnly": true
         },
-        "stopDateUtc": {
+        "stopDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the stop date time.",
@@ -636,6 +636,9 @@
               "items": {
                 "$ref": "#/definitions/stepStatus"
               },
+              "x-ms-identifiers": [
+                "stepName"
+              ],
               "readOnly": true
             }
           },
@@ -647,12 +650,12 @@
       "description": "Model that represents the a list of branches and branch statuses.",
       "type": "object",
       "properties": {
-        "name": {
+        "stepName": {
           "description": "The name of the step.",
           "type": "string",
           "readOnly": true
         },
-        "id": {
+        "stepId": {
           "description": "The id of the step.",
           "type": "string",
           "readOnly": true
@@ -668,6 +671,9 @@
           "items": {
             "$ref": "#/definitions/branchStatus"
           },
+          "x-ms-identifiers": [
+            "branchName"
+          ],
           "readOnly": true
         }
       }
@@ -676,12 +682,12 @@
       "description": "Model that represents the a list of actions and action statuses.",
       "type": "object",
       "properties": {
-        "name": {
+        "branchName": {
           "description": "The name of the branch status.",
           "type": "string",
           "readOnly": true
         },
-        "id": {
+        "branchId": {
           "description": "The id of the branch status.",
           "type": "string",
           "readOnly": true
@@ -697,6 +703,9 @@
           "items": {
             "$ref": "#/definitions/actionStatus"
           },
+          "x-ms-identifiers": [
+            "actionId"
+          ],
           "readOnly": true
         }
       }
@@ -705,12 +714,12 @@
       "type": "object",
       "description": "Model that represents the an action and its status.",
       "properties": {
-        "name": {
+        "actionName": {
           "description": "The name of the action status.",
           "type": "string",
           "readOnly": true
         },
-        "id": {
+        "actionId": {
           "description": "The id of the action status.",
           "type": "string",
           "readOnly": true
