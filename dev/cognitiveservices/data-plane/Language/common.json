@@ -810,58 +810,7 @@
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
-        },
-        "phraseControls": {
-          "type": "array",
-          "description": "Control the phrases to be used in the summary.",
-          "items": {
-            "$ref": "#/definitions/PhraseControl"
-          }
         }
-      }
-    },
-    "PhraseControl": {
-      "type": "object",
-      "description": "Control the phrases to be used in the summary.",
-      "required": [
-        "targetPhrase",
-        "strategy"
-      ],
-      "properties": {
-        "targetPhrase": {
-          "type": "string",
-          "description": "The target phrase to control."
-        },
-        "strategy": {
-          "$ref": "#/definitions/PhraseControlStrategy"
-        }
-      }
-    },
-    "PhraseControlStrategy": {
-      "enum": [
-        "encourage",
-        "discourage",
-        "disallow"
-      ],
-      "type": "string",
-      "description": "The strategy to use in phrase control.",
-      "x-ms-enum": {
-        "modelAsString": false,
-        "name": "PhraseControlStrategy",
-        "values": [
-          {
-            "value": "encourage",
-            "description": "The model will have higher probability to select the target phrase in the summary if there are multiple alternates."
-          },
-          {
-            "value": "discourage",
-            "description": "The model will have lower probability to select the target phrase in the summary if there are multiple alternates."
-          },
-          {
-            "value": "disallow",
-            "description": "The model will avoid to select the target phrase in the summary."
-          }
-        ]
       }
     },
     "SummaryContext": {
