@@ -41,7 +41,6 @@ input-file:
   - Microsoft.ApiManagement/stable/2022-08-01/apimapis.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimapisByTags.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimapiversionsets.json
-  - Microsoft.ApiManagement/stable/2022-08-01/apimauthorizationproviders.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimauthorizationservers.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimauthorizationproviders.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimbackends.json

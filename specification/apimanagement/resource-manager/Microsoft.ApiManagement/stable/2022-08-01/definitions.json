@@ -961,21 +961,26 @@
         "versioningScheme": {
           "type": "string",
           "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
+          "enum": [
+            "Segment",
+            "Query",
+            "Header"
+          ],
           "x-ms-enum": {
-            "name": "VersioningSchemeFormat",
+            "name": "versioningScheme",
             "modelAsString": true,
             "values": [
               {
                 "value": "Segment",
-                "description": "Version identifier will be located in a Segment."
+                "description": "The API Version is passed in a path segment."
               },
               {
-                "value": "",
-                "description": "Version identifier will be located in a Query."
+                "value": "Query",
+                "description": "The API Version is passed in a query parameter."
               },
               {
                 "value": "Header",
-                "description": "Version identifier will be located in a Header."
+                "description": "The API Version is passed in a HTTP header."
               }
             ]
           }
@@ -5635,7 +5640,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "GraphQL API Resolver details."
@@ -5674,7 +5679,7 @@
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Long Running Git Resolver Results."
