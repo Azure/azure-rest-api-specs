@@ -39,7 +39,7 @@ model NewRelicMonitorResource is TrackedResource<MonitorProperties> {
 
 @armResourceOperations
 interface Monitors extends ResourceOperations<NewRelicMonitorResource,MonitorProperties> {
-  @get
+  @post
   @doc("List the resources currently being monitored by the NewRelic monitor resource.")
   @segment("monitoredResources")
   @armResourceAction(NewRelicMonitorResource)
