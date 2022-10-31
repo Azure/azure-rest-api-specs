@@ -2,10 +2,18 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go) && $(track2)
-  license-header: MICROSOFT_MIT_NO_VERSION
-  azure-arm: true
+```yaml $(go) && !$(track2)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resourceconnector/armresourceconnector
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
 
 ### Go multi-api
@@ -13,16 +21,6 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go) && $(multiapi)
 batch:
   - tag: package-2022-10-27 
-```
-
-### Tag: package-2020-09-15-privatepreview and go
-
-These settings apply only when `--tag=package-2020-09-15-privatepreview --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2020-09-15-privatepreview' && $(go)
-namespace: resourceconnector
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-09-15-privatepreview/$(namespace)
 ```
 
 ### Tag: package-2021-10-31-preview and go
@@ -52,5 +50,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2022-10-27' && $(go)
 namespace: resourceconnector
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-10-27/$(namespace)
+output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2022-10-27/$(namespace)
 ```

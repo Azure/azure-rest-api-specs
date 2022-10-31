@@ -40,7 +40,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -90,7 +90,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/ruleNameParameter"
@@ -117,6 +117,9 @@
             "schema": {
               "$ref": "#/definitions/IpFirewallRuleInfo"
             },
+            "description": ""
+          },
+          "202": {
             "description": ""
           },
           "default": {
@@ -160,7 +163,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/ruleNameParameter"
@@ -169,7 +172,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/IpFirewallRuleInfo"
             },
             "description": "OK"
           },
@@ -217,7 +220,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/ruleNameParameter"
@@ -241,7 +244,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Create an IP firewall rule": {
+          "Get IP firewall rule": {
             "$ref": "./examples/GetIpFirewallRule.json"
           }
         }
@@ -266,7 +269,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "description": "Replace all IP firewall rules request",
@@ -351,7 +354,12 @@
       "properties": {
         "endIpAddress": {
           "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -371,7 +379,12 @@
         },
         "startIpAddress": {
           "description": "The start IP address of the firewall rule. Must be IPv4 format",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -404,14 +417,6 @@
     }
   },
   "parameters": {
-    "workspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the workspace",
-      "x-ms-parameter-location": "method"
-    },
     "ruleNameParameter": {
       "type": "string",
       "in": "path",

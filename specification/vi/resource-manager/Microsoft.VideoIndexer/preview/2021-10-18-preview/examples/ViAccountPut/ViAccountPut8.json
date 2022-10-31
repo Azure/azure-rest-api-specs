@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "accountName": "contosto-videoanalyzer",
+    "resourceGroupName": "contosto-videoanalyzer-rg",
+    "api-version": "2021-10-18-preview",
+    "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
+    "parameters": {
+      "location": "NorthEurope",
+      "properties": {
+        "mediaServices": {
+          "resourceId": "/subscriptions/24237b72-8546-4da5-b204-8c3cb76dd930/resourceGroups/uratzmon-rg/providers/Microsoft.Media/mediaservices/talshoham"
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "subscriptions/24237b72-8546-4da5-b204-8c3cb76dd930/resourceGroups/uratzmon-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/talshoham": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
+        "name": "contosto-videoanalyzer",
+        "location": "NorthEurope",
+        "type": "Microsoft.VideoIndexer/accounts",
+        "tags": {},
+        "properties": {}
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "UserAssignedIdentity is empty. Trace id:'9677927b-ae6b-496g-1df8-9ec3048b4bf2'"
+        }
+      }
+    },
+    "404": {
+      "body": {}
+    },
+    "409": {
+      "body": {}
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use this REST APIs to perform connectivity troubleshoot operations in API Management deployments.",
+    "version": "2021-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/connectivityCheck": {
+      "post": {
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "PerformConnectivityCheck"
+        ],
+        "operationId": "PerformConnectivityCheckAsync",
+        "description": "Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.",
+        "x-ms-examples": {
+          "TCP Connectivity Check": {
+            "$ref": "./examples/ApiManagementPerformConnectivityCheck.json"
+          },
+          "HTTP Connectivity Check": {
+            "$ref": "./examples/ApiManagementPerformConnectivityCheckHttpConnect.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "connectivityCheckRequestParams",
+            "description": "Connectivity Check request parameters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ConnectivityCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request was accepted and is currently running. Location header contains the URL where the status of the long running operation can be checked and the result eventually retrieved."
+          },
+          "200": {
+            "description": "Connectivity Check Request was completed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ConnectivityCheckResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  }
+}

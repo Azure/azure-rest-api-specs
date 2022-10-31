@@ -10,6 +10,6 @@ input-file:
     - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
     - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
     - Microsoft.Compute.Admin/stable/2021-03-30/ScaleUnits.json
-    - Microsoft.Compute.Admin/stable/2021-04-01/Disks.json
-    - Microsoft.Compute.Admin/stable/2021-04-01/DiskMigrationJobs.json
+    - Microsoft.Compute.Admin/stable/2021-09-01/Disks.json
+    - Microsoft.Compute.Admin/stable/2021-09-01/DiskMigrationJobs.json
 ```

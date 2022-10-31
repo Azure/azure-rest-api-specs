@@ -2408,7 +2408,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The maximum number of results to return. If null is passed, returns all resources."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2921,7 +2921,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The maximum number of results to return. If null is passed, returns all resources."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4976,6 +4976,12 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
@@ -6374,6 +6380,21 @@
         }
       },
       "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {

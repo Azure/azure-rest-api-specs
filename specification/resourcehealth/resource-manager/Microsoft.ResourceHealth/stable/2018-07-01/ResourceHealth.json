@@ -418,6 +418,82 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.ResourceHealth/metadata": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Metadata_List",
+        "description": "Gets the list of metadata entities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/Metadata_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/metadata/{name}": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Metadata_GetEntity",
+        "description": "Gets the list of metadata entities.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of metadata entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/Metadata_GetEntity.json"
+          }
+        }
+      }
     }
   },
   "definitions": {

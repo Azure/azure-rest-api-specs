@@ -1,0 +1,174 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "PostgresInstanceSku": {
+      "description": "The resource model definition representing SKU for Azure Database for PostgresSQL - Azure Arc",
+      "type": "object",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Hyperscale"
+          ],
+          "x-ms-enum": {
+            "name": "PostgresInstanceSkuTier",
+            "modelAsString": false
+          },
+          "default": "Hyperscale",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonSku"
+        }
+      ]
+    },
+    "PostgresInstanceProperties": {
+      "description": "Postgres Instance properties.",
+      "type": "object",
+      "properties": {
+        "dataControllerId": {
+          "type": "string",
+          "description": "The data controller id"
+        },
+        "admin": {
+          "type": "string",
+          "description": "The instance admin"
+        },
+        "basicLoginInformation": {
+          "$ref": "./common.json#/definitions/BasicLoginInformation",
+          "description": "Username and password for basic authentication."
+        },
+        "k8sRaw": {
+          "type": "object",
+          "description": "The raw kubernetes information"
+        },
+        "lastUploadedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date from Kubernetes cluster. Defaults to current date time"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the Azure Arc-enabled PostgreSQL instance."
+        }
+      }
+    },
+    "PostgresInstance": {
+      "description": "A Postgres Instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/PostgresInstanceProperties",
+          "x-ms-client-flatten": false,
+          "description": "null"
+        },
+        "sku": {
+          "$ref": "#/definitions/PostgresInstanceSku",
+          "description": "Resource sku."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PostgresInstanceUpdate": {
+      "description": "An update to a Postgres Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PostgresInstanceProperties",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "PostgresInstanceListResult": {
+      "description": "A list of PostgresInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostgresInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the Azure subscription",
+      "x-ms-parameter-location": "client"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure resource group",
+      "x-ms-parameter-location": "method"
+    },
+    "location": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure region to use for the request",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-operationalinsights"
   output-folder: "$(typescript-sdks-folder)/sdk/operationalinsights/arm-operationalinsights"
-  clear-output-folder: true
   override-client-name: OperationalInsightsManagementClient
   generate-metadata: true
 ```

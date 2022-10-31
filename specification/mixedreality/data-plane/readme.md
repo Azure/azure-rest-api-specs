@@ -39,6 +39,33 @@ openapi-type: data-plane
 tag: package-2021-01-01
 ```
 
+### Tag: package-0.3-preview.2
+
+These settings apply only when `--tag=package-0.3-preview.2` is specified on the command line.
+
+``` yaml $(tag) == 'package-0.3-preview.2'
+input-file:
+- Microsoft.MixedReality/preview/0.3-preview.2/mr-aoa.json
+```
+
+### Tag: package-0.3-preview.1
+
+These settings apply only when `--tag=package-0.3-preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'package-0.3-preview.1'
+input-file:
+- Microsoft.MixedReality/preview/0.3-preview.1/mr-aoa.json
+```
+
+### Tag: package-0.3-preview.0
+
+These settings apply only when `--tag=package-0.3-preview.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-0.3-preview.0'
+input-file:
+- Microsoft.MixedReality/preview/0.3-preview.0/mr-aoa.json
+```
+
 ### Tag: package-0.2-preview.1
 
 These settings apply only when `--tag=package-0.2-preview.1` is specified on the command line.

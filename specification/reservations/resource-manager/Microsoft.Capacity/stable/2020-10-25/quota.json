@@ -88,7 +88,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Create or update the quota (service limits) of a resource to the requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
+        "description": "Create or update the quota (service limits) of a resource to the requested value.\n Steps:\r\n  1. Make the Get request to get the quota information for specific resource.\r\n  2. To increase the quota, update the limit field in the response from Get request to new value.\r\n  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
           "Quotas_Request_PutForCompute": {
@@ -103,7 +103,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -135,7 +135,7 @@
           "200": {
             "description": "OK. Returns details of the quota request.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
@@ -156,7 +156,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Update the quota (service limits) of this resource to the requested value.\n\r  • To get the quota information for specific resource, send a GET request.\n\r  • To increase the quota, update the limit field from the GET response to a new value.\n\r  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • To update the quota. use the PATCH operation.",
+        "description": "Update the quota (service limits) of this resource to the requested value.\r\n  • To get the quota information for specific resource, send a GET request.\r\n  • To increase the quota, update the limit field from the GET response to a new value.\r\n  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • To update the quota. use the PATCH operation.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
@@ -165,7 +165,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -197,7 +197,7 @@
           "200": {
             "description": "OK. Returns details of the quota request.",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+              "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
           },
           "201": {
@@ -350,7 +350,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field                    | Supported operators  \n|---------------------|------------------------\n\r\n|requestSubmitTime | ge, le, eq, gt, lt\n"
+            "description": "| Field | Supported operators |\r\n|---------------------|------------------------|\r\n|requestSubmitTime | ge, le, eq, gt, lt |"
           },
           {
             "$ref": "#/parameters/TopQueryParameter"
@@ -402,6 +402,21 @@
       "description": "Quota properties.",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "The quota request ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the quota request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+        },
         "properties": {
           "description": "Quota properties for the resource.",
           "$ref": "#/definitions/QuotaProperties"
@@ -414,11 +429,13 @@
       "properties": {
         "limit": {
           "description": "Quota properties.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "currentValue": {
           "description": "Current usage value for the resource.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "unit": {
@@ -513,6 +530,7 @@
         "limit": {
           "description": "Quota (resource limit).",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "name": {
@@ -748,6 +766,7 @@
         "Failed",
         "InProgress"
       ],
+      "type": "string",
       "x-ms-enum": {
         "name": "QuotaRequestState",
         "modelAsString": true
@@ -762,6 +781,7 @@
         "shared",
         "serviceSpecific"
       ],
+      "type": "string",
       "x-ms-enum": {
         "name": "ResourceType",
         "modelAsString": true

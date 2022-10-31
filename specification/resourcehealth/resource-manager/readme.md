@@ -26,7 +26,7 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-07
+tag: package-2020-05-01
 ```
 
 
@@ -101,11 +101,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-ruby
     after_scripts:
     - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcehealth']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

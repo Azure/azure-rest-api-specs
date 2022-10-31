@@ -27,14 +27,38 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-08-01
+tag: package-preview-2022-03
+```
+
+
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/common.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/dataControllers.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/operations.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/postgresInstances.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2022-03-01-preview/sqlServerInstances.json
+```
+### Tag: package-2021-11-01
+
+These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11-01'
+input-file:
+  - Microsoft.AzureArcData/stable/2021-11-01/azurearcdata.json
 ```
 
 ### Tag: package-2021-08-01
 
 These settings apply only when `--tag=package-2021-08-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08-01'
+``` yaml $(tag) == 'package-2021-08-01'
 input-file:
   - Microsoft.AzureArcData/stable/2021-08-01/azurearcdata.json
 ```
@@ -43,7 +67,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-07-01'
+``` yaml $(tag) == 'package-preview-2021-07-01'
 input-file:
   - Microsoft.AzureArcData/preview/2021-07-01-preview/azurearcdata.json
 ```
@@ -52,7 +76,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06-01'
+``` yaml $(tag) == 'package-preview-2021-06-01'
 input-file:
   - Microsoft.AzureArcData/preview/2021-06-01-preview/azurearcdata.json
 ```
@@ -77,8 +101,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurearcdata']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js azurearcdata/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Go
@@ -100,7 +123,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

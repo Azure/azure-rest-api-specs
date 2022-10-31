@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2021-04-04-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "spacecraftName": "AQUA",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AQUA",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/spacecrafts/AQUA",
+        "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "noradId": "27424",
+          "authorizationStatus": "Allowed",
+          "authorizationStatusExtended": "string",
+          "titleLine": "AQUA",
+          "tleLine1": "1 27424U 02022A   20195.59202355  .00000039  00000-0  18634-4 0  9991",
+          "tleLine2": "2 27424  98.2098 135.8486 0000176  28.4050 144.5909 14.57108832967671",
+          "links": [
+            {
+              "centerFrequencyMHz": 2106.4063,
+              "bandwidthMHz": 0.036,
+              "direction": "uplink",
+              "polarization": "RHCP"
+            },
+            {
+              "centerFrequencyMHz": 8125,
+              "bandwidthMHz": 150,
+              "direction": "downlink",
+              "polarization": "RHCP"
+            }
+          ]
+        },
+        "type": "Microsoft.Orbital/spacecrafts"
+      }
+    }
+  }
+}

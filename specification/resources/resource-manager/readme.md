@@ -26,6 +26,11 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
+tag: package-changes-2022-05
+```
+
+``` yaml $(package-privatelinks)
+tag: package-privatelinks-2020-05
 ```
 
 ``` yaml $(package-features)
@@ -37,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2021-06
+tag: package-policy-2022-06
 ```
 
 ``` yaml $(package-resources)
@@ -61,7 +66,61 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-05
+tag: package-templatespecs-2022-02
+```
+
+``` yaml $(package-changes)
+tag: package-changes-2022-05
+```
+
+``` yaml $(package-snapshots)
+tag: package-snapshots-2022-11
+```
+
+### Tag: package-policy-2022-06
+
+These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2022-06'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2022-06-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-snapshots-2022-11
+
+These settings apply only when `--tag=package-snapshots-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-snapshots-2022-11'
+input-file:
+- Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
+```
+
+### Tag: package-changes-2022-05
+
+These settings apply only when `--tag=package-changes-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-05'
+input-file:
+- Microsoft.Resources/stable/2022-05-01/changes.json
+```
+
+### Tag: package-changes-2022-03-01-preview
+
+These settings apply only when `--tag=package-changes-2022-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2022-03-01-preview'
+input-file:
+- Microsoft.Resources/preview/2022-03-01-preview/changes.json
 ```
 
 ### Tag: package-policy-2021-06
@@ -75,6 +134,8 @@ input-file:
 - Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
 - Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
 
 # Needed when there is more than one input file
 override-info:
@@ -333,6 +394,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-templatespecs-2022-02
+
+These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2022-02'
+input-file:
+- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
 ```
 
 ### Tag: package-templatespecs-2021-05
@@ -690,6 +760,18 @@ directive:
     from: policyExemptions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyVariables.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyVariableValues.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: BodyTopLevelProperties
+    from: policyAssignments.json
+    where: $.definitions.PolicyAssignment.properties
+    reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties
@@ -817,6 +899,12 @@ directive:
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
+    from: policyVariables.json
+    reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyVariableValues.json
+    reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: RequiredReadOnlySystemData
@@ -831,6 +919,23 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: privateLinks.json
     reason: The resource is managed in a management group level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListBySubscription
+    from: changes.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - from: snapshots.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
+  - suppress: TopLevelResourcesListBySubscription
+    from: snapshots.json
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+  - suppress: RequiredReadOnlySystemData
+    from: changes.json
+    reason: System Metadata from a change resource perspective is irrelevant
 ```
 
 ---
@@ -844,13 +949,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 ## Python
 
@@ -879,6 +985,8 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-changes: true
+  - package-snapshots: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -897,5 +1005,4 @@ input-file:
 override-info:
   title: PolicyClient
 ```
-
 

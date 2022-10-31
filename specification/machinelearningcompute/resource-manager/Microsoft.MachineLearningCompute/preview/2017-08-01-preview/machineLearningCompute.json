@@ -602,6 +602,9 @@
           "items": {
             "$ref": "#/definitions/ErrorResponseWrapper"
           },
+          "x-ms-identifiers": [
+            "/error/code"
+          ],
           "readOnly": true
         },
         "clusterType": {
@@ -701,7 +704,10 @@
           "description": "The system services deployed to the cluster",
           "items": {
             "$ref": "#/definitions/SystemService"
-          }
+          },
+          "x-ms-identifiers": [
+            "publicIpAddress"
+          ]
         },
         "masterCount": {
           "type": "integer",
@@ -1176,7 +1182,10 @@
           "description": "An array of error detail objects.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       },
       "required": [
@@ -1211,7 +1220,10 @@
           "description": "An array of available operations.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

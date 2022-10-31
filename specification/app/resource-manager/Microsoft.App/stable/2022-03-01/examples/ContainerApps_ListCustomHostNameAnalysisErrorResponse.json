@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerApp0",
+    "customHostname": "my.name.corp",
+    "api-version": "2022-03-03"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "isHostnameAlreadyVerified": false,
+        "customDomainVerificationTest": "Failed",
+        "customDomainVerificationFailureInfo": {
+          "code": "InvalidCustomHostNameValidation",
+          "message": "A TXT record pointing from my.name.corp to AF365AD7C598B96CFCB1EA1A803A44A8F861436767173A251F6E9B7027FF078E was not found."
+        },
+        "hasConflictOnManagedEnvironment": false,
+        "cNameRecords": [],
+        "txtRecords": [
+          "652modgx8o8y2t0ahxci"
+        ],
+        "aRecords": [
+          "40.112.243.18"
+        ],
+        "alternateTxtRecords": [
+          "7301B614D78FC456A5F1F9002CF1A31B6116D7AC5DEDC128C5DE6CCC90F3BE1C"
+        ]
+      }
+    }
+  }
+}

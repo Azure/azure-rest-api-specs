@@ -26,7 +26,34 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-2022-02
+```
+
+### Tag: package-2022-02
+
+These settings apply only when `--tag=package-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02'
+input-file:
+- Microsoft.DataBox/stable/2022-02-01/databox.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+- Microsoft.DataBox/stable/2021-12-01/databox.json
+```
+
+### Tag: package-2021-08-preview
+
+These settings apply only when `--tag=package-2021-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-preview'
+input-file:
+- Microsoft.DataBox/preview/2021-08-01-preview/databox.json
 ```
 
 ### Tag: package-2021-05
@@ -94,7 +121,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -105,6 +132,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

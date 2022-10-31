@@ -65,7 +65,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkspaceSku"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -139,6 +142,7 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuZoneDetails"
           },
+          "x-ms-identifiers": [],
           "description": "Details of capabilities available to a SKU in specific zones."
         }
       }
@@ -159,6 +163,9 @@
           "items": {
             "$ref": "#/definitions/SKUCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "A list of capabilities that are available for the SKU in the specified list of zones."
         }
       },
@@ -182,6 +189,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
           },
+          "x-ms-identifiers": [
+            "location"
+          ],
           "description": "A list of locations and availability zones in those locations where the SKU is available."
         },
         "tier": {
@@ -204,6 +214,9 @@
           "items": {
             "$ref": "#/definitions/SKUCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "restrictions": {
@@ -211,6 +224,7 @@
           "items": {
             "$ref": "#/definitions/Restriction"
           },
+          "x-ms-identifiers": [],
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       }

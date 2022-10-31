@@ -1,0 +1,1055 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2021-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityConnectors": {
+      "get": {
+        "x-ms-examples": {
+          "List all security connectors of a specified subscription": {
+            "$ref": "./examples/SecurityConnectors/GetSecurityConnectorsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Lists all the security connectors in the specified subscription. Use the 'nextLink' property in the response to get the next page of security connectors for the specified subscription.",
+        "operationId": "SecurityConnectors_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnectorsList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors": {
+      "get": {
+        "x-ms-examples": {
+          "List all security connectors of a specified resource group": {
+            "$ref": "./examples/SecurityConnectors/GetSecurityConnectorsResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Lists all the security connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security connectors for the specified resource group.",
+        "operationId": "SecurityConnectors_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnectorsList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Retrieve a security connector": {
+            "$ref": "./examples/SecurityConnectors/GetSecurityConnectorSingleResource_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Retrieves details of a specific security connector",
+        "operationId": "SecurityConnectors_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a security connector": {
+            "$ref": "./examples/SecurityConnectors/PutSecurityConnector_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Creates or updates a security connector. If a security connector is already created and a subsequent request is issued for the same security connector id, then it will be updated.",
+        "operationId": "SecurityConnectors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnector"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update a security connector": {
+            "$ref": "./examples/SecurityConnectors/PatchSecurityConnector_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "description": "Updates a security connector",
+        "operationId": "SecurityConnectors_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityConnector"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security connector": {
+            "$ref": "./examples/SecurityConnectors/DeleteSecurityConnector_example.json"
+          }
+        },
+        "tags": [
+          "SecurityConnectors"
+        ],
+        "operationId": "SecurityConnectors_Delete",
+        "description": "Deletes a security connector.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/securityConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was deleted successfully"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityConnectorsList": {
+      "type": "object",
+      "description": "List of security connectors response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of security connectors under the given scope.",
+          "items": {
+            "$ref": "#/definitions/SecurityConnector"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "SecurityConnector": {
+      "type": "object",
+      "description": "The security connector resource.",
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security connector data",
+          "$ref": "#/definitions/SecurityConnectorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SecurityConnectorProperties": {
+      "type": "object",
+      "description": "A set of properties that defines the security connector configuration.",
+      "properties": {
+        "hierarchyIdentifier": {
+          "type": "string",
+          "description": "The multi cloud resource identifier (account id in case of AWS connector, project number in case of GCP connector)."
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "The multi cloud resource's cloud name.",
+          "enum": [
+            "Azure",
+            "AWS",
+            "GCP",
+            "Github"
+          ],
+          "x-ms-enum": {
+            "name": "cloudName",
+            "modelAsString": true
+          }
+        },
+        "offerings": {
+          "type": "array",
+          "description": "A collection of offerings for the security connector.",
+          "items": {
+            "$ref": "#/definitions/cloudOffering"
+          },
+          "x-ms-identifiers": []
+        },
+        "environmentData": {
+          "type": "object",
+          "description": "The security connector environment data.",
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      }
+    },
+    "EnvironmentData": {
+      "type": "object",
+      "description": "The security connector environment data.",
+      "discriminator": "environmentType",
+      "required": [
+        "environmentType"
+      ],
+      "properties": {
+        "environmentType": {
+          "type": "string",
+          "description": "The type of the environment data.",
+          "enum": [
+            "AwsAccount",
+            "GcpProject",
+            "GithubScope"
+          ],
+          "x-ms-enum": {
+            "name": "environmentType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AWSEnvironmentData": {
+      "type": "object",
+      "description": "The aws connector environment data",
+      "x-ms-discriminator-value": "AwsAccount",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "organizationalData": {
+          "type": "object",
+          "description": "The AWS account's organizational data",
+          "$ref": "#/definitions/AwsOrganizationalData"
+        }
+      }
+    },
+    "AwsOrganizationalData": {
+      "type": "object",
+      "description": "The awsOrganization data ",
+      "discriminator": "organizationMembershipType",
+      "required": [
+        "organizationMembershipType"
+      ],
+      "properties": {
+        "organizationMembershipType": {
+          "type": "string",
+          "description": "The multi cloud account's membership type in the organization",
+          "enum": [
+            "Member",
+            "Organization"
+          ],
+          "x-ms-enum": {
+            "name": "organizationMembershipType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AwsOrganizationalDataMaster": {
+      "type": "object",
+      "description": "The awsOrganization data for the master account",
+      "x-ms-discriminator-value": "Organization",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AwsOrganizationalData"
+        }
+      ],
+      "properties": {
+        "stacksetName": {
+          "type": "string",
+          "description": "If the multi cloud account is of membership type organization, this will be the name of the onboarding stackset"
+        },
+        "excludedAccountIds": {
+          "type": "array",
+          "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
+          "items": {
+            "type": "string",
+            "description": "account IDs"
+          }
+        }
+      }
+    },
+    "AwsOrganizationalDataMember": {
+      "type": "object",
+      "description": "The awsOrganization data for the member account",
+      "x-ms-discriminator-value": "Member",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AwsOrganizationalData"
+        }
+      ],
+      "properties": {
+        "parentHierarchyId": {
+          "type": "string",
+          "description": "If the multi cloud account is not of membership type organization, this will be the ID of the account's parent"
+        }
+      }
+    },
+    "GcpProjectEnvironmentData": {
+      "type": "object",
+      "description": "The GCP project connector environment data",
+      "x-ms-discriminator-value": "GcpProject",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "organizationalData": {
+          "type": "object",
+          "description": "The Gcp project's organizational data",
+          "$ref": "#/definitions/GcpOrganizationalData"
+        },
+        "projectDetails": {
+          "type": "object",
+          "description": "The Gcp project's details",
+          "$ref": "#/definitions/GcpProjectDetails"
+        }
+      }
+    },
+    "GcpProjectDetails": {
+      "type": "object",
+      "description": "The details about the project represented by the security connector",
+      "properties": {
+        "projectNumber": {
+          "type": "string",
+          "description": "The unique GCP Project number"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The GCP Project id"
+        },
+        "workloadIdentityPoolId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The GCP workload identity federation pool id"
+        }
+      }
+    },
+    "GcpOrganizationalData": {
+      "type": "object",
+      "description": "The gcpOrganization data",
+      "discriminator": "organizationMembershipType",
+      "required": [
+        "organizationMembershipType"
+      ],
+      "properties": {
+        "organizationMembershipType": {
+          "type": "string",
+          "description": "The multi cloud account's membership type in the organization",
+          "enum": [
+            "Member",
+            "Organization"
+          ],
+          "x-ms-enum": {
+            "name": "organizationMembershipType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "GcpOrganizationalDataOrganization": {
+      "type": "object",
+      "description": "The gcpOrganization data for the parent account",
+      "x-ms-discriminator-value": "Organization",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GcpOrganizationalData"
+        }
+      ],
+      "properties": {
+        "excludedProjectNumbers": {
+          "type": "array",
+          "description": "If the multi cloud account is of membership type organization, list of accounts excluded from offering",
+          "items": {
+            "type": "string",
+            "description": "account IDs"
+          }
+        },
+        "serviceAccountEmailAddress": {
+          "type": "string",
+          "description": "The service account email address which represents the organization level permissions container."
+        },
+        "workloadIdentityProviderId": {
+          "type": "string",
+          "description": "The GCP workload identity provider id which represents the permissions required to auto provision security connectors"
+        }
+      }
+    },
+    "GcpOrganizationalDataMember": {
+      "type": "object",
+      "description": "The gcpOrganization data for the member account",
+      "x-ms-discriminator-value": "Member",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GcpOrganizationalData"
+        }
+      ],
+      "properties": {
+        "parentHierarchyId": {
+          "type": "string",
+          "description": "If the multi cloud account is not of membership type organization, this will be the ID of the project's parent"
+        }
+      }
+    },
+    "GithubScopeEnvironmentData": {
+      "type": "object",
+      "description": "The github scope connector's environment data",
+      "x-ms-discriminator-value": "GithubScope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {}
+    },
+    "cloudOffering": {
+      "type": "object",
+      "description": "The security offering details",
+      "discriminator": "offeringType",
+      "required": [
+        "offeringType"
+      ],
+      "properties": {
+        "offeringType": {
+          "type": "string",
+          "description": "The type of the security offering.",
+          "enum": [
+            "CspmMonitorAws",
+            "DefenderForContainersAws",
+            "DefenderForServersAws",
+            "InformationProtectionAws",
+            "CspmMonitorGcp",
+            "CspmMonitorGithub",
+            "DefenderForServersGcp",
+            "DefenderForContainersGcp"
+          ],
+          "x-ms-enum": {
+            "name": "offeringType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The offering description.",
+          "readOnly": true
+        }
+      }
+    },
+    "cspmMonitorAwsOffering": {
+      "type": "object",
+      "description": "The CSPM monitoring for AWS offering",
+      "x-ms-discriminator-value": "CspmMonitorAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "nativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        }
+      }
+    },
+    "defenderForContainersAwsOffering": {
+      "type": "object",
+      "description": "The Defender for Containers AWS offering",
+      "x-ms-discriminator-value": "DefenderForContainersAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "kubernetesService": {
+          "type": "object",
+          "description": "The kubernetes service connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "kubernetesScubaReader": {
+          "type": "object",
+          "description": "The kubernetes to scuba connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "cloudWatchToKinesis": {
+          "type": "object",
+          "description": "The cloudwatch to kinesis connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "kinesisToS3": {
+          "type": "object",
+          "description": "The kinesis to s3 connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        }
+      }
+    },
+    "defenderForServersAwsOffering": {
+      "type": "object",
+      "description": "The Defender for Servers AWS offering",
+      "x-ms-discriminator-value": "DefenderForServersAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "defenderForServers": {
+          "type": "object",
+          "description": "The Defender for servers connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "arcAutoProvisioning": {
+          "type": "object",
+          "description": "The ARC autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is arc auto provisioning enabled"
+            },
+            "servicePrincipalSecretMetadata": {
+              "type": "object",
+              "description": "Metadata of Service Principal secret for autoprovisioning",
+              "properties": {
+                "expiryDate": {
+                  "type": "string",
+                  "description": "expiration date of service principal secret"
+                },
+                "parameterStoreRegion": {
+                  "type": "string",
+                  "description": "region of parameter store where secret is kept"
+                },
+                "parameterNameInStore": {
+                  "type": "string",
+                  "description": "name of secret resource in parameter store"
+                }
+              }
+            }
+          }
+        },
+        "vaAutoProvisioning": {
+          "type": "object",
+          "description": "The Vulnerability Assessment autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Vulnerability Assessment auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Vulnerability Assessment autoprovisioning",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'",
+                  "enum": [
+                    "Qualys",
+                    "TVM"
+                  ],
+                  "x-ms-enum": {
+                    "name": "type",
+                    "modelAsString": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "mdeAutoProvisioning": {
+          "type": "object",
+          "description": "The Microsoft Defender for Endpoint autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Endpoint auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Endpoint autoprovisioning",
+              "properties": {}
+            }
+          }
+        },
+        "subPlan": {
+          "type": "object",
+          "description": "configuration for the servers offering subPlan",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The available sub plans",
+              "enum": [
+                "P1",
+                "P2"
+              ],
+              "x-ms-enum": {
+                "name": "subPlan",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "informationProtectionAwsOffering": {
+      "type": "object",
+      "description": "The information protection for AWS offering",
+      "x-ms-discriminator-value": "InformationProtectionAws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "informationProtection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        }
+      }
+    },
+    "cspmMonitorGcpOffering": {
+      "type": "object",
+      "description": "The CSPM monitoring for GCP offering",
+      "x-ms-discriminator-value": "CspmMonitorGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "nativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The GCP workload identity provider id for the offering"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this offering"
+            }
+          }
+        }
+      }
+    },
+    "defenderForServersGcpOffering": {
+      "type": "object",
+      "description": "The Defender for Servers GCP offering configurations",
+      "x-ms-discriminator-value": "DefenderForServersGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "defenderForServers": {
+          "type": "object",
+          "description": "The Defender for servers connection configuration",
+          "properties": {
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The workload identity provider id in GCP for this feature"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this feature"
+            }
+          }
+        },
+        "arcAutoProvisioning": {
+          "type": "object",
+          "description": "The ARC autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for ARC autoprovisioning",
+              "properties": {
+                "clientId": {
+                  "type": "string",
+                  "description": "The Azure service principal client id for agent onboarding"
+                },
+                "agentOnboardingServiceAccountNumericId": {
+                  "type": "string",
+                  "description": "The agent onboarding service account numeric id"
+                }
+              }
+            }
+          }
+        },
+        "vaAutoProvisioning": {
+          "type": "object",
+          "description": "The Vulnerability Assessment autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Vulnerability Assessment auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Vulnerability Assessment autoprovisioning",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'",
+                  "enum": [
+                    "Qualys",
+                    "TVM"
+                  ],
+                  "x-ms-enum": {
+                    "name": "type",
+                    "modelAsString": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "mdeAutoProvisioning": {
+          "type": "object",
+          "description": "The Microsoft Defender for Endpoint autoprovisioning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Endpoint auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Endpoint autoprovisioning",
+              "properties": {}
+            }
+          }
+        },
+        "subPlan": {
+          "type": "object",
+          "description": "configuration for the servers offering subPlan",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The available sub plans",
+              "enum": [
+                "P1",
+                "P2"
+              ],
+              "x-ms-enum": {
+                "name": "subPlan",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "defenderForContainersGcpOffering": {
+      "type": "object",
+      "description": "The containers GCP offering",
+      "x-ms-discriminator-value": "DefenderForContainersGcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "nativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this offering"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The GCP workload identity provider id for this offering"
+            }
+          }
+        },
+        "dataPipelineNativeCloudConnection": {
+          "type": "object",
+          "description": "The native cloud connection configuration",
+          "properties": {
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The data collection service account email address in GCP for this offering"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The data collection GCP workload identity provider id for this offering"
+            }
+          }
+        },
+        "auditLogsAutoProvisioningFlag": {
+          "type": "boolean",
+          "description": "Is audit logs data collection enabled"
+        },
+        "defenderAgentAutoProvisioningFlag": {
+          "type": "boolean",
+          "description": "Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled"
+        },
+        "policyAgentAutoProvisioningFlag": {
+          "type": "boolean",
+          "description": "Is Policy Kubernetes agent auto provisioning enabled"
+        }
+      }
+    },
+    "cspmMonitorGithubOffering": {
+      "type": "object",
+      "description": "The CSPM monitoring for github offering",
+      "x-ms-discriminator-value": "CspmMonitorGithub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    }
+  },
+  "parameters": {
+    "securityConnectorName": {
+      "name": "securityConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The security connector name.",
+      "x-ms-parameter-location": "method"
+    },
+    "securityConnectorInBody": {
+      "name": "securityConnector",
+      "in": "body",
+      "required": true,
+      "description": "The security connector resource",
+      "schema": {
+        "$ref": "#/definitions/SecurityConnector"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

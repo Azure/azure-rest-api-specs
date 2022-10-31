@@ -407,7 +407,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScaleOutScaleUnitParameters"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "awaitStorageConvergence": {
           "description": "Flag indicates if the operation should wait for storage to converge before returning.",
@@ -463,7 +464,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeploymentJsonPhysicalNodeParameters"
-          }
+          },
+          "x-ms-identifiers": [
+            "bmcIpAddress"
+          ]
         },
         "torSwitchBgpAsn": {
           "description": "The ASN for the cluster's rack TOR.",
@@ -525,6 +529,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }

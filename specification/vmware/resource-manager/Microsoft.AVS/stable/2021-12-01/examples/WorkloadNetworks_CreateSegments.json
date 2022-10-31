@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "segmentId": "segment1",
+    "workloadNetworkSegment": {
+      "properties": {
+        "displayName": "segment1",
+        "connectedGateway": "/infra/tier-1s/gateway",
+        "subnet": {
+          "dhcpRanges": [
+            "40.20.0.0-40.20.0.1"
+          ],
+          "gatewayAddress": "40.20.20.20/16"
+        },
+        "revision": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/segments/segment1",
+        "name": "segment1",
+        "properties": {
+          "displayName": "segment1",
+          "connectedGateway": "/infra/tier-1s/gateway",
+          "subnet": {
+            "dhcpRanges": [
+              "40.20.0.0-40.20.0.1"
+            ],
+            "gatewayAddress": "40.20.20.20/16"
+          },
+          "portVif": [],
+          "status": "SUCCESS",
+          "revision": 1
+        },
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/segments"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/segments/segment1",
+        "name": "segment1",
+        "properties": {
+          "displayName": "segment1",
+          "connectedGateway": "/infra/tier-1s/gateway",
+          "subnet": {
+            "dhcpRanges": [
+              "40.20.0.0-40.20.0.1"
+            ],
+            "gatewayAddress": "40.20.20.20/16"
+          },
+          "portVif": [],
+          "status": "SUCCESS",
+          "revision": 1
+        },
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/segments"
+      }
+    }
+  }
+}

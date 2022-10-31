@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-automanage"
   output-folder: "$(typescript-sdks-folder)/sdk/automanage/arm-automanage"
-  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1,0 +1,251 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "dmstestresource",
+    "jobName": "TJx-637505258985313014",
+    "api-version": "2021-12-01",
+    "$expand": "details",
+    "x-ms-client-request-id": [
+      "bdcc8e76-b662-42a4-93fd-5554809712d7"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26614.01",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ImportToAzure",
+          "isCancellable": false,
+          "isDeletable": false,
+          "isShippingAddressEditable": false,
+          "isPrepareToShipEnabled": true,
+          "status": "DataCopy",
+          "startTime": "2021-03-14T23:49:49.5177298+00:00",
+          "error": {
+            "code": "SsemUserCopyErrorWaitingForAction",
+            "message": "Job has an error in copy stage and is waiting for customer action.  Please review the error and select one of the actions provided in the job's properties.details.actions",
+            "target": "CopyIntervention",
+            "details": [],
+            "additionalInfo": []
+          },
+          "details": {
+            "copyProgress": [
+              {
+                "storageAccountName": "databoxbvttestaccount",
+                "transferType": "ImportToAzure",
+                "dataAccountType": "StorageAccount",
+                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                "bytesProcessed": 2000,
+                "totalBytesToProcess": 2000,
+                "filesProcessed": 100,
+                "totalFilesToProcess": 110,
+                "invalidFilesProcessed": 10,
+                "invalidFileBytesUploaded": 10,
+                "renamedContainerCount": 60,
+                "filesErroredOut": 0,
+                "directoriesErroredOut": 0,
+                "invalidDirectoriesProcessed": 0,
+                "isEnumerationInProgress": false
+              },
+              {
+                "transferType": "ImportToAzure",
+                "dataAccountType": "ManagedDisk",
+                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat3198inh0-9)inh(il(h)_fyoin)(upf(yLASD0-FJ(hal-DSNWP0JDS0P3-0SJ94",
+                "bytesProcessed": 2000,
+                "totalBytesToProcess": 2000,
+                "filesProcessed": 100,
+                "totalFilesToProcess": 110,
+                "invalidFilesProcessed": 10,
+                "invalidFileBytesUploaded": 10,
+                "renamedContainerCount": 60,
+                "filesErroredOut": 0,
+                "directoriesErroredOut": 0,
+                "invalidDirectoriesProcessed": 0,
+                "isEnumerationInProgress": false
+              }
+            ],
+            "expectedDataSizeInTeraBytes": 0,
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-14T23:49:53.81509+00:00"
+              },
+              {
+                "stageName": "DevicePrepared",
+                "displayName": "Processed",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-15T00:05:18.7350971+00:00"
+              },
+              {
+                "stageName": "Dispatched",
+                "displayName": "Dispatched",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-15T00:25:19+00:00"
+              },
+              {
+                "stageName": "Delivered",
+                "displayName": "Delivered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-15T00:25:26+00:00"
+              },
+              {
+                "stageName": "PickedUp",
+                "displayName": "Picked up",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-15T00:30:22+00:00"
+              },
+              {
+                "stageName": "AtAzureDC",
+                "displayName": "Received",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-15T00:30:29+00:00"
+              },
+              {
+                "stageName": "DataCopy",
+                "displayName": "Data copy in progress",
+                "stageStatus": "WaitingForCustomerAction",
+                "stageTime": "2021-03-15T00:45:26.2679756+00:00"
+              },
+              {
+                "stageName": "Completed",
+                "displayName": "Completed",
+                "stageStatus": "None"
+              }
+            ],
+            "contactDetails": {
+              "contactName": "Andrew Tribone",
+              "phone": "1234567890",
+              "phoneExtension": "1234",
+              "emailList": [
+                "ssemmail@microsoft.com",
+                "vishwamdir@microsoft.com"
+              ],
+              "notificationPreference": [
+                {
+                  "stageName": "DevicePrepared",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Dispatched",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Delivered",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "PickedUp",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "AtAzureDC",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "DataCopy",
+                  "sendNotification": true
+                }
+              ]
+            },
+            "shippingAddress": {
+              "streetAddress1": "164 TOWNSEND ST",
+              "streetAddress2": "UNIT 1",
+              "city": "San Francisco",
+              "stateOrProvince": "CA",
+              "country": "US",
+              "postalCode": "94107",
+              "companyName": "Microsoft",
+              "addressType": "None"
+            },
+            "deliveryPackage": {
+              "trackingUrl": "https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=6f00fcce-1eec-4ee7-99a8-0acc68efd1c7",
+              "carrierName": "Ups",
+              "trackingId": "6f00fcce-1eec-4ee7-99a8-0acc68efd1c7"
+            },
+            "returnPackage": {
+              "trackingUrl": "https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=79148759-b772-4a90-933b-da5ae5ac6ebb",
+              "carrierName": "Ups",
+              "trackingId": "79148759-b772-4a90-933b-da5ae5ac6ebb"
+            },
+            "dataImportDetails": [
+              {
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                  "dataAccountType": "StorageAccount"
+                }
+              },
+              {
+                "accountDetails": {
+                  "resourceGroupId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/akvenkat3198inh0-9)inh(il(h)_fyoin)(upf(yLASD0-FJ(hal-DSNWP0JDS0P3-0SJ94",
+                  "stagingStorageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/manageddisktest/providers/Microsoft.Storage/storageAccounts/sojainmanageddisk",
+                  "dataAccountType": "ManagedDisk"
+                }
+              }
+            ],
+            "jobDetailsType": "DataBox",
+            "preferences": {
+              "encryptionPreferences": {
+                "doubleEncryption": "Disabled"
+              }
+            },
+            "copyLogDetails": [
+              {
+                "accountName": "databoxbvttestaccount",
+                "copyLogLink": "databoxcopylog/strtrinidad01_ZTS18520041_CopyLog_8425fb8f9c2b447288caa4dd6f5d34bb.xml",
+                "copyLogDetailsType": "DataBox"
+              },
+              {
+                "accountName": "akvenkat3198inh0-9)inh(il(h)_fyoin)(upf(yLASD0-FJ(hal-DSNWP0JDS0P3-0SJ94",
+                "copyLogLink": "databoxcopylog/strtrinidad01_ZTS18520041_CopyLog_8425fb8f9c2b447288caa4dd6f5d34bb.xml",
+                "copyLogDetailsType": "DataBox"
+              }
+            ],
+            "reverseShipmentLabelSasKey": "https://wusbeta.blob.core.windows.net/10dcd296-ed09-4037-ac19-2f16c4866452/ReverseShipment/79148759-b772-4a90-933b-da5ae5ac6ebb.PDF?sv=2018-03-28&sr=b&sig=bNtVcKRfYq1kiz0vxxSV%2FIZodCK8nUsCPu6MYK%2B6Erk%3D&st=2021-06-21T15%3A35%3A29Z&se=2021-06-21T16%3A05%3A29Z&sp=r",
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            },
+            "actions": [
+              "MoveToCleanUpDevice"
+            ],
+            "lastMitigationActionOnJob": {
+              "actionDateTimeInUtc": "2021-05-12T05:00:22.5047578Z",
+              "isPerformedByCustomer": true,
+              "customerResolution": "MoveToCleanUpDevice"
+            }
+          },
+          "deliveryType": "NonScheduled",
+          "isCancellableWithoutFee": false
+        },
+        "systemData": {
+          "createdBy": "5ff6737b-7c50-45d1-b2cb-63a6cd723138",
+          "createdByType": "Application",
+          "createdAt": "2021-03-14T23:49:48.349255+00:00",
+          "lastModifiedBy": "5ff6737b-7c50-45d1-b2cb-63a6cd723138",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-03-14T23:49:48.349255+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "defaultTagsKey": "defaultTagsValue"
+        },
+        "sku": {
+          "name": "DataBox"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "name": "TJx-637505258985313014",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/dmstestresource/providers/Microsoft.DataBox/jobs/TJx-637505258985313014",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}
