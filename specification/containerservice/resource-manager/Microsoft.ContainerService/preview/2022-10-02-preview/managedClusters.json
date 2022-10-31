@@ -903,7 +903,7 @@
         ],
         "operationId": "AgentPools_AbortLatestOperation",
         "summary": "Aborts last operation running on agent pool.",
-        "description": "Aborting last running operation on agent pool. We return a 204 no content code here to indicate that the operation has been accepted and an abort will be attempted but is not guaranteed to complete successfully. Please look up the provisioning state of the agent pool to keep track of whether it changes to Canceled. A canceled provisioning state indicates that the abort was successful",
+        "description": "Aborts the currently running operation on the agent pool. The Agent Pool will be moved to a Canceling state and eventually to a Canceled state when cancellation finishes. If the operation completes before cancelation can take place, an error is returned.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -926,8 +926,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -936,6 +948,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Abort operation on agent pool": {
             "$ref": "./examples/AgentPoolsAbortOperation.json"
@@ -1418,7 +1431,7 @@
         ],
         "operationId": "ManagedClusters_AbortLatestOperation",
         "summary": "Aborts last operation running on managed cluster.",
-        "description": "Aborting last running operation on managed cluster.  We return a 204 no content code here to indicate that the operation has been accepted and an abort will be attempted but is not guaranteed to complete successfully. Please look up the provisioning state of the managed cluster to keep track of whether it changes to Canceled. A canceled provisioning state indicates that the abort was successful",
+        "description": "Aborts the currently running operation on the managed cluster. The Managed Cluster will be moved to a Canceling state and eventually to a Canceled state when cancellation finishes. If the operation completes before cancelation can take place, an error is returned.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1434,16 +1447,29 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Abort operation on managed cluster": {
             "$ref": "./examples/ManagedClustersAbortOperation.json"
