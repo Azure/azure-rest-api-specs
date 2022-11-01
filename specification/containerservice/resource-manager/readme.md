@@ -46,15 +46,6 @@ input-file:
   - Microsoft.ContainerService/stable/2022-09-01/managedClusters.json
 ```
 
-### Tag: package-preview-2022-09-only
-
-These settings apply only when `--tag=package-preview-2022-09-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-09-only'
-input-file:
-  - Microsoft.ContainerService/preview/2022-09-02-preview/managedClusters.json
-```
-
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
