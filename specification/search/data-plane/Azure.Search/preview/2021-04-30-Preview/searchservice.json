@@ -6044,6 +6044,10 @@
     },
     "SemanticSettings": {
       "properties": {
+        "defaultConfiguration": {
+          "type": "string",
+          "description": "The name of the semantic configuration to use if none is specified in the query."
+        },
         "configurations": {
           "type": "array",
           "items": {
@@ -6086,7 +6090,8 @@
       "properties": {
         "titleField": {
           "$ref": "#/definitions/SemanticField",
-          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank.",
+          "x-nullable": true
         },
         "prioritizedContentFields": {
           "type": "array",
