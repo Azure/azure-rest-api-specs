@@ -45,7 +45,7 @@
         "tags": [
           "BenefitRecommendations"
         ],
-        "description": "List of recommendations for purchasing benefit (reservation or savings plan).",
+        "description": "List of recommendations for purchasing savings plan.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
         },
@@ -62,7 +62,7 @@
           {
             "name": "$orderby",
             "in": "query",
-            "description": "May be used to order the recommendations by: properties/armSkuName. This implicitly filters the results by the corresponding benefit type.",
+            "description": "May be used to order the recommendations by: properties/armSkuName. For the savings plan, the results are in order by default. There is no need to use this clause.",
             "type": "string",
             "x-ms-parameter-location": "method"
           },
@@ -105,7 +105,7 @@
           "BenefitUtilizationSummaries"
         ],
         "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
-        "description": "Lists benefit utilization summaries for the provided billingAccount. This API provides benefit utilization summaries only for enrollment accounts.",
+        "description": "Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -122,7 +122,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Supports filtering by properties/benefitType, properties/benefitId, properties/benefitOrderId and properties/usageDate. properties/benefitType is defaulted to savingsPlan.",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -158,7 +158,7 @@
           "BenefitUtilizationSummaries"
         ],
         "operationId": "BenefitUtilizationSummaries_ListByBillingProfileId",
-        "description": "Lists benefit utilization summaries for billingProfile.",
+        "description": "Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -178,7 +178,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Supports filtering by properties/benefitType, properties/benefitId, properties/benefitOrderId and properties/usageDate. properties/benefitType is defaulted to savingsPlan.",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -354,23 +354,23 @@
     },
     "benefitRecommendationProperties": {
       "type": "object",
-      "description": "The properties of the benefit plan recommendation.",
+      "description": "The properties of the benefit recommendations.",
       "discriminator": "scope",
       "properties": {
         "firstConsumptionDate": {
           "type": "string",
-          "description": "The first usage date used for looking back for computing the recommendation.",
+          "description": "The first usage date used for looking back for computing the recommendations.",
           "readOnly": true,
           "format": "date-time"
         },
         "lastConsumptionDate": {
           "type": "string",
-          "description": "The last usage date used for looking back for computing the recommendation.",
+          "description": "The last usage date used for looking back for computing the recommendations.",
           "readOnly": true,
           "format": "date-time"
         },
         "lookBackPeriod": {
-          "description": "The number of days of usage used to look back for computing the recommendation.",
+          "description": "The number of days of usage evaluated for computing the recommendations.",
           "$ref": "#/definitions/LookBackPeriod"
         },
         "totalHours": {
@@ -381,11 +381,11 @@
         },
         "usage": {
           "type": "object",
-          "description": "The additional details about the usage which are considered while computing benefit recommendations.",
+          "description": "On-demand charges between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.",
           "$ref": "#/definitions/recommendationUsageDetails"
         },
         "armSkuName": {
-          "description": "ARM SKU name. For example, Standard_D1_V2 for Reservations and Compute_Savings_Plan for SavingsPlan.",
+          "description": "ARM SKU name. 'Compute_Savings_Plan' for SavingsPlan.",
           "type": "string",
           "readOnly": true
         },
@@ -394,7 +394,7 @@
           "$ref": "#/definitions/Term"
         },
         "commitmentGranularity": {
-          "description": "Grain of the proposed commitment amount. For example, hourly, monthly etc.",
+          "description": "Grain of the proposed commitment amount. Supported values: 'Hourly'",
           "$ref": "#/definitions/Grain"
         },
         "currencyCode": {
@@ -405,7 +405,7 @@
         "costWithoutBenefit": {
           "type": "number",
           "format": "decimal",
-          "description": "The current cost without benefit corresponds to 'totalHours' property in a given look-back period.",
+          "description": "The current cost without benefit, corresponds to 'totalHours' in the look-back period.",
           "readOnly": true
         },
         "recommendationDetails": {
@@ -415,12 +415,12 @@
         },
         "allRecommendationDetails": {
           "type": "object",
-          "description": "The list of all benefit recommendations.",
+          "description": "The list of all benefit recommendations with the recommendation details.",
           "readOnly": true,
           "$ref": "#/definitions/allSavingsList"
         },
         "scope": {
-          "description": "Scope of the benefit. For example, Single or Shared.",
+          "description": "Benefit scope. For example, Single or Shared.",
           "$ref": "#/definitions/RecommendationScope"
         }
       },
@@ -430,7 +430,7 @@
     },
     "singleScopeBenefitRecommendationProperties": {
       "type": "object",
-      "description": "The properties of the benefit plan recommendation when scope is 'Single'.",
+      "description": "The properties of the benefit recommendations when scope is 'Single'.",
       "x-ms-discriminator-value": "Single",
       "properties": {
         "subscriptionId": {
@@ -452,7 +452,7 @@
     },
     "sharedScopeBenefitRecommendationProperties": {
       "type": "object",
-      "description": "The properties of the benefit plan recommendation when scope is 'Shared'.",
+      "description": "The properties of the benefit recommendation when scope is 'Shared'.",
       "x-ms-discriminator-value": "Shared",
       "allOf": [
         {
@@ -462,15 +462,15 @@
     },
     "recommendationUsageDetails": {
       "type": "object",
-      "description": "The additional details about the usage which are considered while computing benefit recommendations.",
+      "description": "On-demand charges between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.",
       "properties": {
         "usageGrain": {
-          "description": "The grain of the usage. For example, hourly or monthly etc.",
+          "description": "The grain of the usage. Supported values: 'Hourly'",
           "$ref": "#/definitions/Grain"
         },
         "charges": {
           "type": "array",
-          "description": "current cost without benefit i.e. charges at the specified grain.",
+          "description": "On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.",
           "readOnly": true,
           "items": {
             "type": "number",
@@ -484,7 +484,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of benefit recommendations.",
+          "description": "The list of benefit recommendations with the recommendation details..",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/allSavingsBenefitDetails"
@@ -498,62 +498,62 @@
           "format": "uri"
         }
       },
-      "description": "Result of listing benefit recommendations."
+      "description": "The list of all benefit recommendations with the recommendation details."
     },
     "allSavingsBenefitDetails": {
-      "description": "The properties of the benefit plan recommendation details for a saving.",
+      "description": "Benefit recommendation details.",
       "type": "object",
       "properties": {
         "overageCost": {
           "type": "number",
           "format": "decimal",
-          "description": "The difference between total cost and benefit cost.",
+          "description": "The difference between total cost and benefit cost for the 'totalHours' in the look-back period.",
           "readOnly": true
         },
         "benefitCost": {
           "type": "number",
           "format": "decimal",
-          "description": "The exact cost of the estimated usage using plan. It's equal to (commitmentAmount * totalHours)",
+          "description": "The estimated cost with benefit for the 'totalHours' in the look-back period. It's equal to (commitmentAmount * totalHours)",
           "readOnly": true
         },
         "totalCost": {
           "type": "number",
           "format": "decimal",
-          "description": "The cost of the suggested commitment.",
+          "description": "Total cost, which is sum of benefit cost and overage cost.",
           "readOnly": true
         },
         "savingsAmount": {
           "type": "number",
           "format": "decimal",
-          "description": "The amount saved by purchasing the recommended quantity of benefit.",
+          "description": "The amount saved for the 'totalHours' in the look-back period, by purchasing the recommended quantity of the benefit.",
           "readOnly": true
         },
         "savingsPercentage": {
           "type": "number",
           "format": "decimal",
-          "description": "The savings in percentage by purchasing the recommended quantity of benefit.",
+          "description": "The savings in percentage for the 'totalHours' in the look-back period, by purchasing the recommended quantity of benefit.",
           "readOnly": true
         },
         "coveragePercentage": {
-          "description": "Expected coverage at this commitment.",
+          "description": "Estimated benefit coverage percentage for the 'totalHours' in the look-back period, with this commitment.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
         "commitmentAmount": {
-          "description": "The commitment amount for the benefit.",
+          "description": "The commitment amount at the commitmentGranularity.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
         "averageUtilizationPercentage": {
-          "description": "Estimated average utilization percentage at this commitment.",
+          "description": "Estimated average utilization percentage for the 'totalHours' in the look-back period, with this commitment.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
         "wastageCost": {
-          "description": "Wastage cost at this commitment.",
+          "description": "Estimated unused portion of the 'benefitCost'.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
@@ -715,7 +715,7 @@
       "x-ms-azure-resource": true
     },
     "BenefitUtilizationSummariesListResult": {
-      "description": "Result of listing benefit utilization summaries.",
+      "description": "List of benefit utilization summaries.",
       "type": "object",
       "properties": {
         "value": {
@@ -748,7 +748,7 @@
       ],
       "properties": {
         "kind": {
-          "description": "Reservation, SavingsPlan or IncludedQuantity.",
+          "description": "Supported values: 'SavingsPlan'.",
           "$ref": "#/definitions/BenefitKind"
         }
       }
@@ -758,26 +758,26 @@
       "type": "object",
       "properties": {
         "armSkuName": {
-          "description": "ARM SKU name. For example, Standard_D1_V2 for reservations and ComputeSavingsPlan for savings plan.",
+          "description": "ARM SKU name. For example, 'Compute_Savings_Plan' for savings plan.",
           "type": "string",
           "readOnly": true
         },
         "benefitId": {
-          "description": "The benefit ID is the identifier of a benefit within a benefit order.",
+          "description": "The benefit ID is the identifier of the benefit.",
           "type": "string",
           "readOnly": true
         },
         "benefitOrderId": {
-          "description": "The benefit order ID is the identifier for a benefit purchase. Each benefit order ID represents a single purchase transaction. For example: A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "description": "The benefit order ID is the identifier for a benefit purchase.",
           "type": "string",
           "readOnly": true
         },
         "benefitType": {
-          "description": "The benefit type. For example, reservation or savings plan",
+          "description": "The benefit type. Supported values: 'SavingsPlan'.",
           "$ref": "#/definitions/BenefitKind"
         },
         "usageDate": {
-          "description": "Date corresponding to the utilization record. If the grain of data is monthly, it will be first day of month.",
+          "description": "Date corresponding to the utilization summary record. If the grain of data is monthly, value for this field will be first day of the month.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -845,19 +845,19 @@
       ],
       "properties": {
         "avgUtilizationPercentage": {
-          "description": "This is the average utilization percentage for the benefit ID.",
+          "description": "This is the average hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2022-10-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the avgUtilizationPercentage value will be equal to the average of the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
         "minUtilizationPercentage": {
-          "description": "This is the minimum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4, utilization was 10%, this field will return 10% for that day",
+          "description": "This is the minimum hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2022-10-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the minUtilizationPercentage value will be equal to the smallest in the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day. If on the day 2022-10-18, the lowest utilization percentage was 10% at hour 4, then the value for the minUtilizationPercentage in the response will be 10%.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
         },
         "maxUtilizationPercentage": {
-          "description": "This is the maximum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4, utilization was 100%, this field will return 100% for that day.",
+          "description": "This is the maximum hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2022-10-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the maxUtilizationPercentage value will be equal to the largest in the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day. If on the day 2022-10-18, the largest utilization percentage was 90% at hour 5, then the value for the maxUtilizationPercentage in the response will be 90%.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
@@ -869,7 +869,7 @@
     "billingScopeBenefitRecommendationParameter": {
       "name": "billingScope",
       "in": "path",
-      "description": "The scope associated with benefit recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with benefit recommendation operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for enterprise agreement scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -878,7 +878,7 @@
     "benefitRecommendationsFilterParameter": {
       "name": "$filter",
       "in": "query",
-      "description": "Can be used to filter benefitRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Shared'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last60Days'; properties/term with allowed values ['P1Y', 'P3Y'] and default value 'P3Y'; kind with default value 'SavingsPlan'; properties/armSkuName with allowed values ['Compute', 'SQL'] - if mentioned kind SavingsPlan is applied implicitly; properties/subscriptionId; properties/resourceGroup",
+      "description": "Can be used to filter benefitRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Shared'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last60Days'; properties/term with allowed values ['P1Y', 'P3Y'] and default value 'P3Y'; properties/subscriptionId; properties/resourceGroup",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -899,7 +899,7 @@
       "x-ms-parameter-location": "method"
     },
     "grainParameter": {
-      "description": "Daily or monthly grain.",
+      "description": "Grain.",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
