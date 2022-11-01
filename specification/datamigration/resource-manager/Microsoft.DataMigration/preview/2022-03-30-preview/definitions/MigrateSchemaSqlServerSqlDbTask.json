@@ -1,0 +1,308 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-03-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateSchemaSqlServerSqlDbTaskProperties": {
+      "x-ms-discriminator-value": "MigrateSchemaSqlServerSqlDb",
+      "type": "object",
+      "description": "Properties for task that migrates Schema for SQL Server databases to Azure SQL databases",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput"
+          },
+          "readOnly": true
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "DateTime in UTC when the task was created"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "Task id "
+        },
+        "isCloneable": {
+          "type": "boolean",
+          "description": "whether the task can be cloned or not"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateSchemaSqlServerSqlDbTaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates Schema for SQL Server databases to Azure SQL databases",
+      "properties": {
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbDatabaseInput"
+          }
+        },
+        "encryptedKeyForSecureFields": {
+          "type": "string",
+          "description": "encrypted key for secure fields"
+        },
+        "startedOn": {
+          "type": "string",
+          "description": "Migration start time"
+        }
+      },
+      "required": [
+        "selectedDatabases"
+      ],
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/SqlMigrationTaskInput"
+        }
+      ]
+    },
+    "MigrateSchemaSqlServerSqlDbDatabaseInput": {
+      "type": "object",
+      "description": "Database input for migrate schema Sql Server to Azure SQL Server scenario",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of source database"
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the source database"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of target database"
+        },
+        "schemaSetting": {
+          "$ref": "#/definitions/SchemaMigrationSetting",
+          "description": "Database schema migration settings"
+        }
+      }
+    },
+    "SchemaMigrationSetting": {
+      "type": "object",
+      "description": "Settings for migrating schema from source to target",
+      "properties": {
+        "schemaOption": {
+          "$ref": "#/definitions/SchemaMigrationOption",
+          "description": "Option on how to migrate the schema"
+        },
+        "fileId": {
+          "type": "string",
+          "description": "Resource Identifier of a file resource containing the uploaded schema file"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the file resource containing the uploaded schema file"
+        }
+      }
+    },
+    "SchemaMigrationOption": {
+      "type": "string",
+      "description": "Option for how schema is extracted and applied to target",
+      "enum": [
+        "None",
+        "ExtractFromSource",
+        "UseStorageFile"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaMigrationOption",
+        "modelAsString": true
+      }
+    },
+    "MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Overall state of the schema migration",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel": {
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "State of the schema migration for this database",
+          "readOnly": true
+        },
+        "stage": {
+          "$ref": "./TasksCommon.json#/definitions/SchemaMigrationStage",
+          "description": "Schema migration stage for this database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "databaseErrorResultPrefix": {
+          "type": "string",
+          "description": "Prefix string to use for querying errors for this database",
+          "readOnly": true
+        },
+        "schemaErrorResultPrefix": {
+          "type": "string",
+          "description": "Prefix string to use for querying schema errors for this database",
+          "readOnly": true
+        },
+        "numberOfSuccessfulOperations": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of successful operations for this database",
+          "readOnly": true
+        },
+        "numberOfFailedOperations": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of failed operations for this database",
+          "readOnly": true
+        },
+        "fileId": {
+          "type": "string",
+          "description": "Identifier for the file resource containing the schema of this database",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSchemaSqlServerSqlDbTaskOutputError": {
+      "x-ms-discriminator-value": "SchemaErrorOutput",
+      "type": "object",
+      "properties": {
+        "commandText": {
+          "type": "string",
+          "description": "Schema command which failed",
+          "readOnly": true
+        },
+        "errorText": {
+          "type": "string",
+          "description": "Reason of failure",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSchemaSqlTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "error": {
+          "$ref": "./Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput"
+        }
+      ]
+    },
+    "MigrateSchemaSqlServerSqlDbTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that migrates Schema for SQL Server databases to Azure SQL databases",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    }
+  }
+}

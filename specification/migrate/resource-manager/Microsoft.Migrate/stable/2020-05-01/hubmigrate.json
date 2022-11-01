@@ -1,0 +1,1267 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-05-01",
+    "title": "Microsoft.Azure.AMH.WebRole.V2020_05_01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "Azure Subscription Id in which project was created.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "Name of the Azure Resource Group that project is part of.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "migrateProjectName": {
+      "name": "migrateProjectName",
+      "description": "Migrate project name.",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}": {
+      "get": {
+        "summary": "Get a specific project.",
+        "description": "Get information related to a specific migrate project. Returns a json object of type 'migrateProject' as specified in the models section.",
+        "tags": [
+          "MigrateProjectsController"
+        ],
+        "operationId": "MigrateProjectsController_GetMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProject_Get": {
+            "$ref": "./examples/migrateProject_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "MigrateProjectsController"
+        ],
+        "summary": "Create a new project with specified settings.",
+        "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
+        "operationId": "MigrateProjectsController_PutMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "body",
+            "description": "Migrate project body.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProject_Put": {
+            "$ref": "./examples/migrateProject_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "MigrateProjectsController"
+        ],
+        "summary": "Delete the project",
+        "description": "Delete the migrate project. It deletes summary of the project.",
+        "operationId": "MigrateProjectsController_DeleteMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content. No project with specified name was found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProject_Delete": {
+            "$ref": "./examples/migrateProject_Delete.json"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "MigrateProjectsController"
+        ],
+        "summary": "Update project.",
+        "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
+        "operationId": "MigrateProjectsController_PatchMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "body",
+            "description": "Migrate project body.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProject_Patch": {
+            "$ref": "./examples/migrateProject_Patch.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionsController"
+        ],
+        "summary": "Get the private endpoint connections.",
+        "description": "Get all the private endpoint connections under a migrate project.",
+        "operationId": "PrivateEndpointConnectionsController_GetPrivateEndpointConnections",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByProject": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByProject.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections/{peConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionController"
+        ],
+        "summary": "Get the private endpoint.",
+        "description": "Get the private endpoint with the specified name.",
+        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "peConnectionName",
+            "description": "Private endpoint connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Get": {
+            "$ref": "./examples/PrivateEndpointConnection_Get.json"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnectionController"
+        ],
+        "summary": "Create or update private endpoint.",
+        "description": "Create a private endpoint with specified name. If a private endpoint already exists, update it.",
+        "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "peConnectionName",
+            "description": "Private endpoint connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "description": "Modify connection state body.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModifyConnectionStateBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Put": {
+            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnectionController"
+        ],
+        "summary": "Delete the endpoint",
+        "description": "Delete the private endpoint. Deleting non-existent private endpoint is a no-operation.",
+        "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "peConnectionName",
+            "description": "Private endpoint connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content. No private endpoint with specified name was found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResourceController"
+        ],
+        "summary": "Get the private link resource.",
+        "description": "Get the private link resource with the specified name.",
+        "operationId": "PrivateLinkResourceController_GetPrivateLinkResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "description": "Private Link resource name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResourceController"
+        ],
+        "summary": "Get the list of private link resources.",
+        "description": "Get the list of private link resources.",
+        "operationId": "PrivateLinkResourceController_GetPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListBySite": {
+            "$ref": "./examples/PrivateLinkResources_ListByProject.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/migrateProjects": {
+      "get": {
+        "summary": "Get all migrate projects.",
+        "description": "Get all the migrate projects in the subscription.",
+        "operationId": "Projects_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/migrateProjectsInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects": {
+      "get": {
+        "summary": "Get all migrate projects.",
+        "description": "Get all the migrate projects in the resource group.",
+        "operationId": "Projects_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "api-version",
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/migrateProjects_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of operations.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "MigrateProject": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Migrate project.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrateProjectProperties"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location in which project is created."
+        },
+        "id": {
+          "type": "string",
+          "description": "Path reference to this project /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the project.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/migrateProjects].",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "MigrateProjectProperties": {
+      "type": "object",
+      "description": "Properties of a migrate project.",
+      "properties": {
+        "registeredTools": {
+          "type": "array",
+          "description": "Register tools inside project.",
+          "items": {
+            "enum": [
+              "ServerDiscovery",
+              "ServerAssessment",
+              "ServerMigration",
+              "Cloudamize",
+              "Turbonomic",
+              "Zerto",
+              "CorentTech",
+              "ServerAssessmentV1",
+              "ServerMigration_Replication",
+              "Carbonite",
+              "DataMigrationAssistant",
+              "DatabaseMigrationService",
+              "Device42",
+              "JetStream",
+              "RackWare",
+              "UnifyCloud",
+              "Flexera",
+              "ServerDiscovery_Import",
+              "Lakeside",
+              "AppServiceMigrationAssistant",
+              "Movere",
+              "CloudSphere",
+              "Unknown"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "items",
+              "modelAsString": true
+            }
+          },
+          "readOnly": true
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Service endpoint."
+        },
+        "summary": {
+          "type": "object",
+          "description": "Project summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ProjectSummary"
+          },
+          "readOnly": true
+        },
+        "lastSummaryRefreshedTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Last summary refresh time.",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "description": "Refresh summary state.",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "refreshSummaryState",
+            "modelAsString": true
+          }
+        },
+        "utilityStorageAccountId": {
+          "type": "string",
+          "description": "Utility storage account id."
+        },
+        "publicNetworkAccess": {
+          "description": "Gets or sets the state of public network access.",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Gets the tag for optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Gets the properties of the object.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection.",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "description": "Provisioning state.",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Gets the properties of the object."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "Private endpoint connection state.",
+      "properties": {
+        "status": {
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "description": "Private link connection state.",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the object."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Action required."
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionCollection": {
+      "description": "Collection of PrivateLink resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "Private link resource.",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceCollection": {
+      "description": "Collection of private link resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of private links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectSummary": {
+      "type": "object",
+      "description": "Project summary.",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "description": "Instance type.",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "description": "Refresh summary state."
+        },
+        "lastSummaryRefreshedTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Last summary refresh time."
+        },
+        "extendedSummary": {
+          "type": "object",
+          "description": "Extended summary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModifyConnectionStateBody": {
+      "type": "object",
+      "description": "Modify connection state body.",
+      "properties": {
+        "eTag": {
+          "description": "Gets the tag for optimistic concurrency control.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionStateRequestBodyProperties"
+        }
+      }
+    },
+    "ConnectionStateRequestBodyProperties": {
+      "type": "object",
+      "description": "Properties of Connection state request.",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "AvailableOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of private link resource.",
+      "properties": {
+        "requiredMembers": {
+          "type": "array",
+          "description": "Required members.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required zone names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupId": {
+          "description": "Group id.",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectResultList": {
+      "type": "object",
+      "description": "List of projects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of projects.",
+          "items": {
+            "$ref": "#/definitions/MigrateProject"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    }
+  }
+}

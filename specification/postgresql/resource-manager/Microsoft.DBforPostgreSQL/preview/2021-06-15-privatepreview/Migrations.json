@@ -1,0 +1,821 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2021-06-15-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "description": "Azure Active Directory OAuth2 Flow",
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
+      "put": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_Create",
+        "x-ms-examples": {
+          "Migrations_Create": {
+            "$ref": "./examples/Migrations_Create.json"
+          }
+        },
+        "description": "Creates a new migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            },
+            "description": "The required parameters for creating a migration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_Get",
+        "x-ms-examples": {
+          "Migrations_Get": {
+            "$ref": "./examples/Migrations_Get.json"
+          }
+        },
+        "description": "Gets details of a migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_Update",
+        "x-ms-examples": {
+          "Migrations_Update": {
+            "$ref": "./examples/Migrations_Update.json"
+          }
+        },
+        "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationResourceForPatch"
+            },
+            "description": "The required parameters for updating a migration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_Delete",
+        "x-ms-examples": {
+          "Migrations_Delete": {
+            "$ref": "./examples/Migrations_Delete.json"
+          }
+        },
+        "description": "Deletes a migration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+      "get": {
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "Migrations_ListByTargetServer",
+        "x-ms-examples": {
+          "Migrations_ListByTargetServer": {
+            "$ref": "./examples/Migrations_ListByTargetServer.json"
+          }
+        },
+        "description": "List all the migrations on a given target server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationListFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MigrationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
+      "post": {
+        "summary": "Check migration name validity and availability",
+        "description": "This method checks whether a proposed migration name is valid and available.",
+        "tags": [
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "CheckMigrationNameAvailability",
+        "x-ms-examples": {
+          "CheckMigrationNameAvailability": {
+            "$ref": "./examples/CheckMigrationNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationNameAvailabilityResource"
+            },
+            "description": "The required parameters for checking if a migration name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationNameAvailabilityResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MigrationResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationResourceProperties",
+          "description": "Migration resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Represents a migration resource."
+    },
+    "MigrationResourceProperties": {
+      "type": "object",
+      "properties": {
+        "migrationId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "migrationName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "migrationDetailsLevel": {
+          "$ref": "#/definitions/MigrationDetailsLevel",
+          "readOnly": true
+        },
+        "currentStatus": {
+          "$ref": "#/definitions/MigrationStatus",
+          "readOnly": true
+        },
+        "sourceDBServerMetadata": {
+          "$ref": "#/definitions/DBServerMetadata",
+          "readOnly": true
+        },
+        "targetDBServerMetadata": {
+          "$ref": "#/definitions/DBServerMetadata",
+          "readOnly": true
+        },
+        "sourceDBServerResourceId": {
+          "type": "string"
+        },
+        "secretParameters": {
+          "$ref": "#/definitions/MigrationSecretParameters"
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string"
+        },
+        "targetDBServerResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "dBsToMigrate": {
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "migrationResourceGroup": {
+          "$ref": "#/definitions/MigrationResourceGroup"
+        },
+        "setupLogicalReplicationOnSourceDBIfNeeded": {
+          "type": "boolean"
+        },
+        "overwriteDBsInTarget": {
+          "type": "boolean"
+        },
+        "migrationWindowStartTimeInUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDataMigration": {
+          "type": "boolean"
+        },
+        "triggerCutover": {
+          "type": "boolean"
+        }
+      },
+      "description": "Migration resource properties."
+    },
+    "MigrationResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of migrations.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of migration resources."
+    },
+    "MigrationResourceForPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationResourcePropertiesForPatch",
+          "description": "Migration resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "Represents a migration resource for patch."
+    },
+    "MigrationResourcePropertiesForPatch": {
+      "type": "object",
+      "properties": {
+        "sourceDBServerResourceId": {
+          "type": "string"
+        },
+        "secretParameters": {
+          "$ref": "#/definitions/MigrationSecretParameters"
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string"
+        },
+        "dBsToMigrate": {
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "migrationResourceGroup": {
+          "$ref": "#/definitions/MigrationResourceGroup"
+        },
+        "setupLogicalReplicationOnSourceDBIfNeeded": {
+          "type": "boolean"
+        },
+        "overwriteDBsInTarget": {
+          "type": "boolean"
+        },
+        "migrationWindowStartTimeInUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDataMigration": {
+          "type": "boolean"
+        },
+        "triggerCutover": {
+          "type": "boolean"
+        }
+      },
+      "description": "Migration resource properties for patch."
+    },
+    "MigrationResourceGroup": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "subnetResourceId": {
+          "type": "string"
+        }
+      },
+      "description": "Migration resource group."
+    },
+    "MigrationSecretParameters": {
+      "required": [
+        "aadApp",
+        "adminCredentials"
+      ],
+      "type": "object",
+      "properties": {
+        "adminCredentials": {
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "$ref": "#/definitions/AdminCredentials"
+        },
+        "aadApp": {
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "$ref": "#/definitions/AADApp"
+        }
+      },
+      "description": "Migration secret parameters."
+    },
+    "AADApp": {
+      "type": "object",
+      "required": [
+        "aadSecret",
+        "clientId",
+        "tenantId"
+      ],
+      "properties": {
+        "aadSecret": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "clientId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "description": "Azure active directory application."
+    },
+    "AdminCredentials": {
+      "type": "object",
+      "required": [
+        "sourceServerPassword",
+        "targetServerPassword"
+      ],
+      "properties": {
+        "sourceServerPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "targetServerPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "description": "Server admin credentials."
+    },
+    "DBServerMetadata": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "storageMB": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sku": {
+          "$ref": "#/definitions/ServerSku"
+        }
+      },
+      "description": "Database server metadata."
+    },
+    "MigrationDetailsLevel": {
+      "enum": [
+        "Default",
+        "Summary",
+        "Full"
+      ],
+      "type": "string",
+      "description": "Migration details level.",
+      "x-ms-enum": {
+        "name": "MigrationDetailsLevel",
+        "modelAsString": true
+      }
+    },
+    "MigrationState": {
+      "enum": [
+        "InProgress",
+        "WaitingForUserAction",
+        "Canceled",
+        "Failed",
+        "Succeeded"
+      ],
+      "type": "string",
+      "description": "Migration state.",
+      "x-ms-enum": {
+        "name": "MigrationState",
+        "modelAsString": true
+      }
+    },
+    "MigrationStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/MigrationState",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "readOnly": true
+        },
+        "currentSubStateDetails": {
+          "$ref": "#/definitions/MigrationSubStateDetails",
+          "readOnly": true
+        }
+      },
+      "description": "Migration status."
+    },
+    "MigrationSubState": {
+      "enum": [
+        "PerformingPreRequisiteSteps",
+        "WaitingForLogicalReplicationSetupRequestOnSourceDB",
+        "WaitingForDBsToMigrateSpecification",
+        "WaitingForTargetDBOverwriteConfirmation",
+        "WaitingForDataMigrationScheduling",
+        "WaitingForDataMigrationWindow",
+        "MigratingData",
+        "WaitingForCutoverTrigger",
+        "CompletingMigration",
+        "Completed"
+      ],
+      "type": "string",
+      "description": "Migration sub state.",
+      "x-ms-enum": {
+        "name": "MigrationSubState",
+        "modelAsString": true
+      }
+    },
+    "MigrationSubStateDetails": {
+      "type": "object",
+      "properties": {
+        "currentSubState": {
+          "$ref": "#/definitions/MigrationSubState",
+          "readOnly": true
+        }
+      },
+      "description": "Migration sub state details."
+    },
+    "ServerSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the particular SKU, e.g. Burstable.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ],
+      "description": "Sku information related properties of a server."
+    },
+    "MigrationNameAvailabilityReason": {
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "type": "string",
+      "description": "Migration name availability reason.",
+      "x-ms-enum": {
+        "name": "MigrationNameAvailabilityReason",
+        "modelAsString": true
+      }
+    },
+    "MigrationNameAvailabilityResource": {
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/MigrationNameAvailabilityReason",
+          "description": "Migration name availability reason",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration name availability message.",
+          "readOnly": true
+        }
+      },
+      "description": "Represents a migration name's availability."
+    },
+    "ServiceError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the Batch service."
+    }
+  },
+  "parameters": {
+    "TargetDBServerSubscriptionIdParameter": {
+      "name": "targetDBServerSubscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID of the target database server.",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetDBServerResourceGroupNameParameter": {
+      "name": "targetDBServerResourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group name of the target database server.",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetDBServerNameParameter": {
+      "name": "targetDBServerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the target database server.",
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationNameParameter": {
+      "name": "migrationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the migration.",
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationListFilter": {
+      "name": "migrationListFilter",
+      "in": "query",
+      "required": false,
+      "enum": [
+        "Active",
+        "All"
+      ],
+      "type": "string",
+      "description": "Migration list filter. Retrieves either active migrations or all migrations.",
+      "x-ms-enum": {
+        "name": "MigrationListFilter",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

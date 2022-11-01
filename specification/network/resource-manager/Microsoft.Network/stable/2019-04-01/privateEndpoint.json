@@ -74,7 +74,7 @@
             "description": "Delete successful."
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -133,7 +133,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -176,7 +176,7 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpoint"
             },
-            "description": "Parameters supplied to the create or update private endpoint operation"
+            "description": "Parameters supplied to the create or update private endpoint operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -199,7 +199,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -249,7 +249,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -288,7 +288,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -396,7 +396,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -422,8 +422,8 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the private endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private endpoint."
         },
         "privateLinkServiceConnections": {
           "type": "array",
@@ -452,6 +452,16 @@
         "name": {
           "type": "string",
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -463,6 +473,11 @@
     },
     "PrivateLinkServiceConnectionProperties": {
       "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private link service connection."
+        },
         "privateLinkServiceId": {
           "type": "string",
           "description": "The resource id of private link service."

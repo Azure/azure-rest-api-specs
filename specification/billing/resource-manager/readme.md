@@ -26,7 +26,59 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10-preview
+tag: package-2020-05
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+title: BillingManagementClient
+description: Billing Client
+input-file:
+- Microsoft.Billing/stable/2021-10-01/billingSubscription.json
+- Microsoft.Billing/stable/2021-10-01/payment.json
+directive:
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2021-10-01/billingSubscription.json
+    reason: systemData is not in this API version
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2021-10-01/payment.json
+    reason: systemData is not in this API version
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
+- Microsoft.Billing/stable/2020-05-01/billingOperations.json
+```
+
+### Tag: package-2020-09-preview
+
+These settings apply only when `--tag=package-2020-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-preview'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2020-09-01-preview/billingPromotions.json
+- Microsoft.Billing/preview/2020-09-01-preview/billingOperations.json
+```
+
+### Tag: package-2020-11-preview
+
+These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-preview'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2020-11-01-preview/billingPromotions.json
+- Microsoft.Billing/preview/2020-11-01-preview/billingOperations.json
 ```
 
 ### Tag: package-2019-10-preview
@@ -85,8 +137,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -94,6 +146,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 
@@ -110,6 +165,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/billing/Microsoft.Azure.Management.Billing/src/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -133,11 +192,39 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-10
+  - tag: package-2020-05
   - tag: package-2019-10-preview
   - tag: package-2018-11-preview
   - tag: package-2018-03-preview
   - tag: package-2017-04-preview
   - tag: package-2017-02-preview
+```
+
+### Tag: package-2021-10 and java
+
+These settings apply only when `--tag=package-2021-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2021_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2021_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-10-preview and java
@@ -148,7 +235,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2019_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2019_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2019_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -161,7 +248,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2018_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -174,7 +261,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -187,7 +274,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_04_24_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -200,38 +287,11 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2017_02_27_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_02_27_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_02_27_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
 
 
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Billing/preview/2019-10-01-preview/billing.json
-  - $(this-folder)/Microsoft.Billing/preview/2018-11-01-preview/billing.json
-  - $(this-folder)/Microsoft.Billing/preview/2018-03-01-preview/billing.json
-  - $(this-folder)/Microsoft.Billing/preview/2017-04-24-preview/billing.json
-  - $(this-folder)/Microsoft.Billing/preview/2017-02-27-preview/billing.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 

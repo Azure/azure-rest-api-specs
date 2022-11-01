@@ -1,0 +1,1510 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2022-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incidents.": {
+            "$ref": "./examples/incidents/GetIncidents.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Gets all incidents.",
+        "operationId": "Incidents_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident.": {
+            "$ref": "./examples/incidents/GetIncidentById.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Gets an incident.",
+        "operationId": "Incidents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an incident.": {
+            "$ref": "./examples/incidents/CreateIncident.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Creates or updates the incident.",
+        "operationId": "Incidents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/Incident"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an incident.": {
+            "$ref": "./examples/incidents/DeleteIncident.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Delete the incident.",
+        "operationId": "Incidents_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/createTeam": {
+      "post": {
+        "x-ms-examples": {
+          "Creates incident teams group.": {
+            "$ref": "./examples/incidents/CreateTeam.json"
+          }
+        },
+        "tags": [
+          "IncidentTeam"
+        ],
+        "description": "Creates a Microsoft team to investigate the incident by sharing information and insights between participants.",
+        "operationId": "Incidents_CreateTeam",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/TeamProperties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeamInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident alerts.": {
+            "$ref": "./examples/incidents/GetAllIncidentAlerts.json"
+          }
+        },
+        "tags": [
+          "IncidentAlerts"
+        ],
+        "description": "Gets all incident alerts.",
+        "operationId": "Incidents_ListAlerts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentAlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/bookmarks": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident bookmarks.": {
+            "$ref": "./examples/incidents/GetAllIncidentBookmarks.json"
+          }
+        },
+        "tags": [
+          "IncidentBookmarks"
+        ],
+        "description": "Gets all incident bookmarks.",
+        "operationId": "Incidents_ListBookmarks",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentBookmarkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incident comments.": {
+            "$ref": "./examples/incidents/comments/GetAllIncidentComments.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Gets all incident comments.",
+        "operationId": "IncidentComments_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/IncidentComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident comment.": {
+            "$ref": "./examples/incidents/comments/GetIncidentCommentById.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Gets an incident comment.",
+        "operationId": "IncidentComments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an incident comment.": {
+            "$ref": "./examples/incidents/comments/CreateIncidentComment.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Creates or updates the incident comment.",
+        "operationId": "IncidentComments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentComment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the incident comment.": {
+            "$ref": "./examples/incidents/comments/DeleteIncidentComment.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Delete the incident comment.",
+        "operationId": "IncidentComments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/entities": {
+      "post": {
+        "x-ms-examples": {
+          "Gets all incident related entities": {
+            "$ref": "./examples/incidents/entities/GetAllIncidentEntities.json"
+          }
+        },
+        "tags": [
+          "IncidentEntities"
+        ],
+        "description": "Gets all incident related entities.",
+        "operationId": "Incidents_ListEntities",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentEntitiesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incident relations.": {
+            "$ref": "./examples/incidents/relations/GetAllIncidentRelations.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Gets all incident relations.",
+        "operationId": "IncidentRelations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/RelationTypes.json#/definitions/RelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "./common/RelationTypes.json#/definitions/Relation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident relation.": {
+            "$ref": "./examples/incidents/relations/GetIncidentRelationByName.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Gets an incident relation.",
+        "operationId": "IncidentRelations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an incident relation.": {
+            "$ref": "./examples/incidents/relations/CreateIncidentRelation.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Creates or updates the incident relation.",
+        "operationId": "IncidentRelations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
+          },
+          {
+            "$ref": "./common/RelationTypes.json#/parameters/Relation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./common/RelationTypes.json#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the incident relation.": {
+            "$ref": "./examples/incidents/relations/DeleteIncidentRelation.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Delete the incident relation.",
+        "operationId": "IncidentRelations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "./common/RelationTypes.json#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActivityTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents Activity timeline item.",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The activity query id."
+        },
+        "bucketStartTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket start time."
+        },
+        "bucketEndTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket end time."
+        },
+        "firstActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the first activity in the grouping bucket."
+        },
+        "lastActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the last activity in the grouping bucket."
+        },
+        "content": {
+          "type": "string",
+          "description": "The activity timeline content."
+        },
+        "title": {
+          "type": "string",
+          "description": "The activity timeline title."
+        }
+      },
+      "required": [
+        "queryId",
+        "bucketStartTimeUTC",
+        "bucketEndTimeUTC",
+        "firstActivityTimeUTC",
+        "lastActivityTimeUTC",
+        "content",
+        "title"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "BookmarkTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents bookmark timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The bookmark azure resource id."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The bookmark display name."
+        },
+        "notes": {
+          "type": "string",
+          "description": "The notes of the bookmark"
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark start time."
+        },
+        "eventTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark event time."
+        },
+        "createdBy": {
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "azureResourceId"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
+    },
+    "EntityTimelineItem": {
+      "description": "Entity timeline Item.",
+      "discriminator": "kind",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityTimelineKind",
+          "description": "The entity query kind type."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityTimelineKind": {
+      "description": "The entity query kind",
+      "enum": [
+        "Activity",
+        "Bookmark",
+        "SecurityAlert"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityTimelineKind",
+        "values": [
+          {
+            "description": "activity",
+            "value": "Activity"
+          },
+          {
+            "description": "bookmarks",
+            "value": "Bookmark"
+          },
+          {
+            "description": "security alerts",
+            "value": "SecurityAlert"
+          }
+        ]
+      }
+    },
+    "Incident": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents an incident in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncidentProperties",
+          "description": "Incident properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "IncidentAdditionalData": {
+      "description": "Incident additional data property bag.",
+      "properties": {
+        "alertsCount": {
+          "description": "The number of alerts in the incident",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "bookmarksCount": {
+          "description": "The number of bookmarks in the incident",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "commentsCount": {
+          "description": "The number of comments in the incident",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "alertProductNames": {
+          "description": "List of product names of alerts in the incident",
+          "items": {
+            "description": "Alert product name",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "providerIncidentUrl": {
+          "description": "The provider incident url to the incident in Microsoft 365 Defender portal",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics associated with incident",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "techniques": {
+          "description": "The techniques associated with incident's tactics'",
+          "items": {
+            "description": "Attack Technique",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentAlertList": {
+      "description": "List of incident alerts.",
+      "properties": {
+        "value": {
+          "description": "Array of incident alerts.",
+          "type": "array",
+          "items": {
+            "$ref": "./common/EntityTypes.json#/definitions/SecurityAlert"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "IncidentBookmarkList": {
+      "description": "List of incident bookmarks.",
+      "properties": {
+        "value": {
+          "description": "Array of incident bookmarks.",
+          "type": "array",
+          "items": {
+            "$ref": "./common/EntityTypes.json#/definitions/HuntingBookmark"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "IncidentComment": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents an incident comment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncidentCommentProperties",
+          "description": "Incident comment properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "IncidentCommentList": {
+      "description": "List of incident comments.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of comments.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of comments.",
+          "items": {
+            "$ref": "#/definitions/IncidentComment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "IncidentCommentProperties": {
+      "description": "Incident comment property bag.",
+      "properties": {
+        "createdTimeUtc": {
+          "description": "The time the comment was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The time the comment was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "The comment message",
+          "type": "string"
+        },
+        "author": {
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo",
+          "description": "Describes the client that created the comment",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "IncidentEntitiesResponse": {
+      "description": "The incident related entities response.",
+      "properties": {
+        "entities": {
+          "description": "Array of the incident related entities.",
+          "type": "array",
+          "items": {
+            "$ref": "./common/EntityTypes.json#/definitions/Entity"
+          }
+        },
+        "metaData": {
+          "description": "The metadata from the incident related entities results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "IncidentEntitiesResultsMetadata": {
+      "description": "Information of a specific aggregation in the incident related entities result.",
+      "properties": {
+        "count": {
+          "description": "Total number of aggregations of the given kind in the incident related entities result.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "entityKind": {
+          "$ref": "./common/EntityTypes.json#/definitions/EntityInnerKind",
+          "description": "The kind of the aggregated entity."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
+      ],
+      "type": "object"
+    },
+    "IncidentList": {
+      "description": "List all the incidents.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of incidents.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of incidents.",
+          "items": {
+            "$ref": "#/definitions/Incident"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "IncidentProperties": {
+      "description": "Describes incident properties",
+      "properties": {
+        "additionalData": {
+          "$ref": "#/definitions/IncidentAdditionalData",
+          "description": "Additional data on the incident",
+          "readOnly": true,
+          "type": "object"
+        },
+        "classification": {
+          "description": "The reason the incident was closed",
+          "type": "string",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationEnum"
+        },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
+        "classificationReason": {
+          "description": "The classification reason the incident was closed with",
+          "type": "string",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentClassificationReasonEnum"
+        },
+        "createdTimeUtc": {
+          "description": "The time the incident was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the incident",
+          "type": "string"
+        },
+        "firstActivityTimeUtc": {
+          "description": "The time of the first activity in the incident",
+          "format": "date-time",
+          "type": "string"
+        },
+        "incidentUrl": {
+          "description": "The deep-link url to the incident in Azure portal",
+          "readOnly": true,
+          "type": "string"
+        },
+        "incidentNumber": {
+          "description": "A sequential number",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "labels": {
+          "description": "List of labels relevant to this incident",
+          "items": {
+            "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
+          },
+          "type": "array"
+        },
+        "providerName": {
+          "description": "The name of the source provider that generated the incident",
+          "type": "string"
+        },
+        "providerIncidentId": {
+          "description": "The incident ID assigned by the incident provider",
+          "type": "string"
+        },
+        "lastActivityTimeUtc": {
+          "description": "The time of the last activity in the incident",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The last time the incident was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentOwnerInfo",
+          "description": "Describes a user that the incident is assigned to",
+          "type": "object"
+        },
+        "relatedAnalyticRuleIds": {
+          "description": "List of resource ids of Analytic rules related to the incident",
+          "items": {
+            "description": "Related Analytic rule resource id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "type": "string",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
+        },
+        "status": {
+          "description": "The status of the incident",
+          "type": "string",
+          "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
+        },
+        "teamInformation": {
+          "$ref": "#/definitions/TeamInformation",
+          "description": "Describes a team for the incident",
+          "type": "object"
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "severity",
+        "status"
+      ],
+      "type": "object"
+    },
+    "SecurityAlertTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents security alert timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The alert azure resource id."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The alert product name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The alert description."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The alert name."
+        },
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The alert severity."
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert start time."
+        },
+        "timeGenerated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert generated time."
+        },
+        "alertType": {
+          "type": "string",
+          "description": "The name of the alert type."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "displayName",
+        "severity",
+        "endTimeUtc",
+        "startTimeUtc",
+        "timeGenerated",
+        "alertType"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityAlert"
+    },
+    "TeamInformation": {
+      "description": "Describes team information",
+      "properties": {
+        "teamId": {
+          "description": "Team ID",
+          "readOnly": true,
+          "type": "string"
+        },
+        "primaryChannelUrl": {
+          "description": "The primary channel URL of the team",
+          "readOnly": true,
+          "type": "string"
+        },
+        "teamCreationTimeUtc": {
+          "description": "The time the team was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the team",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the team",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TeamProperties": {
+      "description": "Describes team properties",
+      "properties": {
+        "teamName": {
+          "description": "The name of the team",
+          "type": "string"
+        },
+        "teamDescription": {
+          "description": "The description of the team",
+          "type": "string"
+        },
+        "memberIds": {
+          "description": "List of member IDs to add to the team",
+          "items": {
+            "description": "A single-value attribute that is the unique identifier for the user, assigned by active directory.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "groupIds": {
+          "description": "List of group IDs to add their members to the team",
+          "items": {
+            "description": "A single-value attribute that is the unique identifier for the group, assigned by active directory.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "teamName"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "Incident": {
+      "description": "The incident",
+      "in": "body",
+      "name": "incident",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Incident"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentComment": {
+      "description": "The incident comment",
+      "in": "body",
+      "name": "incidentComment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/IncidentComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentCommentId": {
+      "description": "Incident comment ID",
+      "in": "path",
+      "name": "incidentCommentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentId": {
+      "description": "Incident ID",
+      "in": "path",
+      "name": "incidentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TeamProperties": {
+      "description": "Team properties",
+      "in": "body",
+      "name": "teamProperties",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/TeamProperties"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
