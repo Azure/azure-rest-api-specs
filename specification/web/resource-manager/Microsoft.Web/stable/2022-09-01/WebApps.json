@@ -29489,12 +29489,16 @@
       "type": "object",
       "properties": {
         "appSettings": {
-          "$ref": "./CommonDefinitions.json#/definitions/StringDictionary",
+          "$ref": "#/definitions/Object",
           "description": "Application settings of the workflow."
         },
         "files": {
           "$ref": "#/definitions/WorkflowFiles",
           "description": "Files of the app."
+        },
+        "filesToDelete": {
+          "$ref": "#/definitions/WorkflowFiles",
+          "description": "Files of the app to delete."
         }
       },
       "description": "The workflow filter."
