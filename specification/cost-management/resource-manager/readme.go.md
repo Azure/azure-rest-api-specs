@@ -21,6 +21,24 @@ directive:
 - rename-model:
     from: 'CostManagementOperation'
     to: 'OperationForCostManagement'
+- rename-model:
+    from: 'CostManagementProxyResource'
+    to: 'ProxyResourceForCostManagement'
+- from: costmanagement.json
+  where: 
+    - $.definitions.View.allOf[0]
+    - $.definitions.Alert.allOf[0]
+  transform: > 
+    $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
+- from: costmanagement.exports.json
+  where: 
+    - $.definitions.Export.allOf[0]
+    - $.definitions.ExportRun.allOf[0]
+  transform: > 
+    $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
+- rename-model:
+    from: 'CostManagementResource'
+    to: 'ResourceForCostManagement'
 ```
 
 ### Go multi-api
