@@ -7,7 +7,6 @@
     "MonitoringInstance": {
       "location": "eastus2",
       "properties": {
-        "productVersion": "2019",
         "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
         "databaseInstance": {
           "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
@@ -17,7 +16,9 @@
           "dnsServer": "10.10.10.10"
         },
         "domainUserCredentials": {
-          "userName": "domain.com\\domainuser"
+          "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
+          "userNameSecret": "userNameSecret",
+          "passwordSecret": "passwordSecret"
         },
         "gmsaDetails": {
           "loadBalancerIP": "10.10.10.10",
@@ -57,7 +58,7 @@
           }
         },
         "properties": {
-          "productVersion": "2019",
+          "productVersion": "1.0.81.2",
           "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
           "databaseInstance": {
             "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
@@ -68,7 +69,9 @@
             "ouPath": "AsiaPacific"
           },
           "domainUserCredentials": {
-            "userName": "domain.com\\domainuser"
+            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
+            "userNameSecret": "userNameSecret",
+            "passwordSecret": "passwordSecret"
           },
           "gmsaDetails": {
             "loadBalancerIP": "10.10.10.10",
@@ -100,7 +103,7 @@
           }
         },
         "properties": {
-          "productVersion": "2019",
+          "productVersion": "1.0.81.2",
           "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
           "databaseInstance": {
             "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
@@ -111,7 +114,9 @@
             "ouPath": "AsiaPacific"
           },
           "domainUserCredentials": {
-            "userName": "domain.com\\domainuser"
+            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
+            "userNameSecret": "userNameSecret",
+            "passwordSecret": "passwordSecret"
           },
           "gmsaDetails": {
             "loadBalancerIP": "10.10.10.10",
@@ -123,7 +128,13 @@
             "scomLicenseType": "None",
             "windowsServerLicenseType": "None",
             "sqlServerLicenseType": "None"
-          }
+          },
+          "operationsStatus": [
+            {
+              "operationName": "Scaling",
+              "operationState": "Success"
+            }
+          ]
         }
       }
     }

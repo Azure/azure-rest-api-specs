@@ -376,7 +376,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/setServerCount": {
       "post": {
         "operationId": "Instances_Scale",
-        "description": "Scale-in SCOM monitoring instance",
+        "description": "Scaling SCOM monitoring instance",
         "consumes": [
           "application/json"
         ],
@@ -404,10 +404,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The scale-in has completed successfully."
+            "description": "OK. The Scaling has completed successfully."
           },
           "202": {
-            "description": "Accepted. The scale-in will complete asyncronously."
+            "description": "Accepted. The Scaling will complete asyncronously."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -575,13 +575,7 @@
         "productVersion": {
           "description": "SCOM product version to be installed on instance",
           "type": "string",
-          "x-ms-enum": {
-            "name": "productVersion",
-            "modelAsString": true
-          },
-          "enum": [
-            "2019"
-          ]
+          "readOnly": true
         },
         "vNetSubnetId": {
           "description": "Virtual Network subnet id on which Aquila instance will be provisioned",
@@ -617,6 +611,31 @@
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationsStatus": {
+          "description": "Gets status of current and latest SCOM managed instance Operations",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceOperationStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ManagedInstanceOperationStatus": {
+      "description": "Gets status of current and latest SCOM managed instance Operation",
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "description": "Operation Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationState": {
+          "description": "Operation status",
           "type": "string",
           "readOnly": true
         }
@@ -671,20 +690,19 @@
       }
     },
     "DomainUserCredentials": {
-      "description": "Domain user name and password",
+      "description": "Get Domain user name and password from key vault",
       "properties": {
-        "userName": {
-          "description": "Domain user name ",
+        "keyVaultUrl": {
+          "description": "Key vault url to get the domain username and password",
           "type": "string"
         },
-        "password": {
-          "description": "Domain user password ",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
+        "userNameSecret": {
+          "description": "Domain user name secret ",
+          "type": "string"
+        },
+        "passwordSecret": {
+          "description": "Domain Password secret ",
+          "type": "string"
         }
       }
     },
@@ -864,12 +882,14 @@
     },
     "ScalingProperties": {
       "type": "object",
-      "description": "Properties for scale-in",
+      "description": "Properties for Scaling",
       "properties": {
         "serverCount": {
           "description": "Required management server count",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "maximum": 100,
+          "minimum": 1
         }
       }
     }
