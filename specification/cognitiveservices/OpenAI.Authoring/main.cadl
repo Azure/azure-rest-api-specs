@@ -1,0 +1,20 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@serviceTitle("Azure OpenAI API version 2022-06-01-preview")
+@serviceVersion("2022-06-01-preview")
+@server(
+  "{endpoint}/openai",
+  "// FIXME: (miissing-service-description) Add service description",
+  {
+    @doc("""
+Supported Cognitive Services endpoints (protocol and hostname, for example:
+https://westus.api.cognitive.microsoft.com).
+""")
+    endpoint: string,
+  }
+)
+@doc("// FIXME: (miissing-service-description) Add service description")
+namespace AzureOpenAIAPIversion20220601preview;
