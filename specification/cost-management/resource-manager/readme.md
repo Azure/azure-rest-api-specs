@@ -44,6 +44,7 @@ input-file:
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.exports.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2022-10-01/scheduledActions.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.benefits.json
 ```
