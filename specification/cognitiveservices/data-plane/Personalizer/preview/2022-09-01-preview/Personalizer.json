@@ -1,67 +1,22 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-09-01-preview",
     "title": "Personalizer Client 2022-09-01-preview",
-    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
+    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls.",
+    "version": "2022-09-01-preview"
   },
+  "host": "localhost:5001",
   "basePath": "/personalizer",
   "schemes": [
     "https"
   ],
   "paths": {
     "/configurations/service": {
-      "get": {
-        "tags": [
-          "Configurations20220901Preview"
-        ],
-        "summary": "Get Service Configuration.",
-        "description": "Get the Personalizer service configuration.",
-        "operationId": "ServiceConfiguration_Get",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfiguration"
-            }
-          },
-          "default": {
-            "description": "A generic error has occurred on the server.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful ServiceConfiguration_Get request": {
-            "$ref": "./examples/ServiceConfiguration_Get.json"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Configurations20220901Preview"
         ],
-        "summary": "Update Service Configuration.",
+        "summary": "Update Service Configuration",
         "description": "Update the Personalizer service configuration.",
         "operationId": "ServiceConfiguration_Update",
         "consumes": [
@@ -72,15 +27,8 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "name": "config",
             "in": "body",
+            "name": "body",
             "description": "The personalizer service configuration.",
             "required": true,
             "schema": {
@@ -97,20 +45,57 @@
           },
           "default": {
             "description": "Updating defaultReward, rewardWaitTime and rewardAggregation when changing learning mode from Online to Apprentice mode and vice versa is not allowed. Make the mode change and then change the additional settings with an additional API call.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Successful ServiceConfiguration_Update request": {
             "$ref": "./examples/ServiceConfiguration_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Configurations20220901Preview"
+        ],
+        "summary": "Service Configuration",
+        "description": "Get the Personalizer service configuration.",
+        "operationId": "ServiceConfiguration_Get",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          },
+          "default": {
+            "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            }
+          }
+        },
+      "parameters": [],
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_Get request": {
+            "$ref": "./examples/ServiceConfiguration_Get.json"
           }
         }
       }
@@ -120,21 +105,11 @@
         "tags": [
           "Configurations20220901Preview"
         ],
-        "summary": "Get Policy.",
+        "summary": "Policy",
         "description": "Get the Learning Settings currently used by the Personalizer service.",
         "operationId": "Policy_Get",
-        "consumes": [],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
         ],
         "responses": {
           "200": {
@@ -145,17 +120,18 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
+      "parameters": [],
         "x-ms-examples": {
           "Successful Policy_Get request": {
             "$ref": "./examples/Policy_Get.json"
@@ -166,7 +142,7 @@
         "tags": [
           "Configurations20220901Preview"
         ],
-        "summary": "Update Policy.",
+        "summary": "Update Policy",
         "description": "Update the Learning Settings that the Personalizer service will use to train models.",
         "operationId": "Policy_Update",
         "consumes": [
@@ -177,15 +153,8 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "name": "policy",
             "in": "body",
+            "name": "body",
             "description": "The learning settings.",
             "required": true,
             "schema": {
@@ -202,14 +171,14 @@
           },
           "default": {
             "description": "Invalid policy configuration.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -223,21 +192,11 @@
         "tags": [
           "Configurations20220901Preview"
         ],
-        "summary": "Reset Policy.",
+        "summary": "Reset Policy",
         "description": "Resets the learning settings of the Personalizer service to default.",
         "operationId": "Policy_Reset",
-        "consumes": [],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
         ],
         "responses": {
           "200": {
@@ -248,17 +207,18 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
+      "parameters": [],
         "x-ms-examples": {
           "Successful Policy_Reset request": {
             "$ref": "./examples/Policy_Reset.json"
@@ -266,29 +226,112 @@
         }
       }
     },
-    "/evaluations/{evaluationId}": {
-      "get": {
+    "/configurations/applyFromEvaluation": {
+      "post": {
         "tags": [
-          "Evaluations20220901Preview"
+          "Configurations20220901Preview"
         ],
-        "summary": "Get Evaluation.",
-        "description": "Get the Offline Evaluation associated with the Id.",
-        "operationId": "Evaluations_Get",
-        "consumes": [],
+        "summary": "Apply Learning Settings and Model",
+        "description": "Apply Learning Settings and model from a pre-existing Offline Evaluation, making them the current online Learning Settings and model and replacing the previous ones.",
+        "operationId": "ServiceConfiguration_ApplyFromEvaluation",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyReferenceContract"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Learning Settings not found in evaluation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_ApplyFromEvaluation request": {
+            "$ref": "./examples/ServiceConfiguration_ApplyFromEvaluation.json"
+          }
+        }
+      }
+    },
+    "/evaluations/{evaluationId}": {
+      "delete": {
+        "tags": [
+          "Evaluations20220901Preview"
+        ],
+        "summary": "Offline Evaluation",
+        "description": "Delete the Offline Evaluation associated with the ID.",
+        "operationId": "Evaluations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evaluationId",
+            "description": "Id of the Offline Evaluation to delete.",
             "required": true,
             "type": "string",
-            "description": "Client API version."
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           },
+          "default": {
+            "description": "Offline Evaluation not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Delete request": {
+            "$ref": "./examples/Evaluations_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Evaluations20220901Preview"
+        ],
+        "summary": "Offline Evaluation",
+        "description": "Get the Offline Evaluation associated with the ID.",
+        "operationId": "Evaluations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
           {
-            "name": "evaluationId",
             "in": "path",
+            "name": "evaluationId",
             "description": "Id of the Offline Evaluation.",
             "required": true,
             "type": "string",
@@ -305,17 +348,17 @@
             "in": "query",
             "name": "startTime",
             "description": "Start of aggregation time interval.",
+            "required": true,
             "type": "string",
-            "format": "date-time",
-            "required": true
+            "format": "date-time"
           },
           {
             "in": "query",
             "name": "endTime",
             "description": "End of aggregation time interval.",
+            "required": true,
             "type": "string",
-            "format": "date-time",
-            "required": true
+            "format": "date-time"
           },
           {
             "in": "query",
@@ -341,14 +384,14 @@
           },
           "default": {
             "description": "Offline Evaluation not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -358,60 +401,11 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Evaluations20220901Preview"
-        ],
-        "summary": "Delete Evaluation.",
-        "description": "Delete the Offline Evaluation associated with the Id.",
-        "operationId": "Evaluations_Delete",
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "name": "evaluationId",
-            "in": "path",
-            "description": "Id of the Offline Evaluation to delete.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Offline Evaluation not found.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Evaluations_Delete request": {
-            "$ref": "./examples/Evaluations_Delete.json"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Evaluations20220901Preview"
         ],
-        "summary": "Create Offline Evaluation.",
+        "summary": "Create Offline Evaluation",
         "description": "Submit a new Offline Evaluation job.",
         "operationId": "Evaluations_Create",
         "consumes": [
@@ -422,13 +416,6 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
             "in": "path",
             "name": "evaluationId",
             "description": "Id of the Offline Evaluation to create.",
@@ -438,7 +425,7 @@
           },
           {
             "in": "body",
-            "name": "evaluation",
+            "name": "body",
             "description": "The Offline Evaluation job definition.",
             "required": true,
             "schema": {
@@ -452,14 +439,14 @@
           },
           "default": {
             "description": "Invalid contract.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -475,20 +462,13 @@
         "tags": [
           "Evaluations20220901Preview"
         ],
-        "summary": "List Offline Evaluations.",
+        "summary": "All Offline Evaluations",
         "description": "List of all Offline Evaluations.",
         "operationId": "Evaluations_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "query",
             "name": "filter",
@@ -500,7 +480,8 @@
             "name": "top",
             "description": "The maximum number of resources to return from the collection. Defaults to maximum value of integer.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 2147483647
           },
           {
             "in": "query",
@@ -515,7 +496,8 @@
             "name": "maxpagesize",
             "description": "The maximum number of resources to include in a single response. Defaults to 100.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 100
           }
         ],
         "responses": {
@@ -527,16 +509,20 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "x-ms-examples": {
           "Successful Evaluations_List request": {
@@ -550,7 +536,7 @@
         "tags": [
           "Events"
         ],
-        "summary": "Post Reward.",
+        "summary": "Reward",
         "description": "Report reward between 0 and 1 that resulted from using the action specified in rewardActionId, for the specified event.",
         "operationId": "Events_Reward",
         "consumes": [
@@ -561,23 +547,16 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "name": "eventId",
             "in": "path",
+            "name": "eventId",
             "description": "The event id this reward applies to.",
             "required": true,
             "type": "string",
             "maxLength": 256
           },
           {
-            "name": "reward",
             "in": "body",
+            "name": "body",
             "description": "The reward should be a floating point number, typically between 0 and 1.",
             "required": true,
             "schema": {
@@ -591,14 +570,14 @@
           },
           "default": {
             "description": "Invalid reward request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -614,24 +593,16 @@
         "tags": [
           "Events"
         ],
-        "summary": "Activate Event.",
+        "summary": "Activate Event",
         "description": "Report that the specified event was actually used (e.g. by being displayed to the user) and a reward should be expected for it.",
         "operationId": "Events_Activate",
-        "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "name": "eventId",
             "in": "path",
+            "name": "eventId",
             "description": "The event ID to be activated.",
             "required": true,
             "type": "string",
@@ -644,14 +615,14 @@
           },
           "default": {
             "description": "Invalid activate event request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -662,80 +633,18 @@
         }
       }
     },
-    "/configurations/applyFromEvaluation": {
-      "post": {
-        "tags": [
-          "Configurations20220901Preview"
-        ],
-        "summary": "Apply Learning Settings and model from a pre-existing Offline Evaluation, making them the current online Learning Settings and model and replacing the previous ones.",
-        "operationId": "ServiceConfiguration_ApplyFromEvaluation",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Reference to the policy within the evaluation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyReferenceContract"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Learning Settings not found in evaluation.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful ServiceConfiguration_ApplyFromEvaluation request": {
-            "$ref": "./examples/ServiceConfiguration_ApplyFromEvaluation.json"
-          }
-        }
-      }
-    },
     "/featureImportances/{featureImportanceId}": {
       "delete": {
         "tags": [
           "FeatureImportances20220901Preview"
         ],
-        "summary": "Delete Feature Importance.",
-        "description": "Delete the Feature Importance associated with the Id.",
+        "summary": "Feature Importance",
+        "description": "Delete the Feature Importance associated with the ID.",
         "operationId": "FeatureImportances_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "path",
             "name": "featureImportanceId",
@@ -751,14 +660,14 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -772,20 +681,13 @@
         "tags": [
           "FeatureImportances20220901Preview"
         ],
-        "summary": "Get Feature Importance.",
-        "description": "Get the Feature Importance associated with the Id.",
+        "summary": "Feature Importance",
+        "description": "Get the Feature Importance associated with the ID.",
         "operationId": "FeatureImportances_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "path",
             "name": "featureImportanceId",
@@ -804,14 +706,14 @@
           },
           "default": {
             "description": "Feature importance not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -825,7 +727,7 @@
         "tags": [
           "FeatureImportances20220901Preview"
         ],
-        "summary": "Create Feature Importance.",
+        "summary": "Create Feature Importance",
         "description": "Submit a new Feature Importance job.",
         "operationId": "FeatureImportances_Create",
         "consumes": [
@@ -836,13 +738,6 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
             "in": "path",
             "name": "featureImportanceId",
             "description": "Id of the Feature Importance to create.",
@@ -852,7 +747,7 @@
           },
           {
             "in": "body",
-            "name": "featureImportance",
+            "name": "body",
             "description": "The Feature Importance job definition.",
             "required": true,
             "schema": {
@@ -866,14 +761,14 @@
           },
           "default": {
             "description": "Invalid contract.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -889,7 +784,7 @@
         "tags": [
           "FeatureImportances20220901Preview"
         ],
-        "summary": "List Feature Importances.",
+        "summary": "All Feature Importances",
         "description": "List of all Feature Importances.",
         "operationId": "FeatureImportances_List",
         "produces": [
@@ -897,18 +792,12 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
             "in": "query",
             "name": "top",
             "description": "The maximum number of resources to return from the collection. Defaults to maximum value of integer.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 2147483647
           },
           {
             "in": "query",
@@ -923,7 +812,8 @@
             "name": "maxpagesize",
             "description": "The maximum number of resources to include in a single response. Defaults to 100.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 100
           }
         ],
         "responses": {
@@ -935,134 +825,24 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "x-ms-examples": {
           "Successful FeatureImportances_List request": {
             "$ref": "./examples/FeatureImportances_List.json"
-          }
-        }
-      }
-    },
-    "/logs/interactions": {
-      "post": {
-        "tags": [
-          "LogsV1Dot1Preview2"
-        ],
-        "summary": "Post interactions.",
-        "description": "The endpoint is intended to be used from within a SDK for logging interactions and accepts specific format defined in https://github.com/VowpalWabbit/reinforcement_learning. This endpoint should not be used by the customer.",
-        "operationId": "Log_Interactions",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Interactions binary payload.",
-            "required": true,
-            "schema": {
-              "format": "binary",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Invalid request.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Log_Interactions request": {
-            "$ref": "./examples/Log_Interactions.json"
-          }
-        }
-      }
-    },
-    "/logs/observations": {
-      "post": {
-        "tags": [
-          "LogsV1Dot1Preview2"
-        ],
-        "summary": "Post observations.",
-        "description": "The endpoint is intended to be used from within a SDK for logging observations and accepts specific format defined in https://github.com/VowpalWabbit/reinforcement_learning. This endpoint should not be used by the customer.",
-        "operationId": "Log_Observations",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Observations binary payload.",
-            "required": true,
-            "schema": {
-              "format": "binary",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Invalid request.",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code for specific error that occurred."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Log_Observations request": {
-            "$ref": "./examples/Log_Observations.json"
           }
         }
       }
@@ -1072,19 +852,11 @@
         "tags": [
           "LogsV1Dot1Preview2"
         ],
-        "summary": "Deletes Logs.",
+        "summary": "Logs",
         "description": "Delete all logs of Rank and Reward calls stored by Personalizer.",
         "operationId": "Log_Delete",
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "204": {
@@ -1092,17 +864,18 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
+      "parameters": [],
         "x-ms-examples": {
           "Successful Log_Delete request": {
             "$ref": "./examples/Log_Delete.json"
@@ -1115,21 +888,11 @@
         "tags": [
           "LogsV1Dot1Preview2"
         ],
-        "summary": "Get Log Properties.",
+        "summary": "Log Properties",
         "description": "Get properties of the Personalizer logs.",
         "operationId": "Log_GetProperties",
-        "consumes": [],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
         ],
         "responses": {
           "200": {
@@ -1140,17 +903,18 @@
           },
           "default": {
             "description": "Log properties not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
+      "parameters": [],
         "x-ms-examples": {
           "Successful Log_GetProperties request": {
             "$ref": "./examples/Log_GetProperties.json"
@@ -1163,22 +927,14 @@
         "tags": [
           "ModelV1Dot1Preview3"
         ],
-        "summary": "Get Model.",
+        "summary": "Model",
         "description": "Get the model file generated by Personalizer service.",
         "operationId": "Model_Get",
-        "consumes": [],
         "produces": [
           "application/octet-stream",
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "query",
             "name": "signed",
@@ -1196,14 +952,14 @@
           },
           "default": {
             "description": "Requested resource does not exist on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1217,7 +973,7 @@
         "tags": [
           "ModelV1Dot1Preview3"
         ],
-        "summary": "Put the digitally signed model file.",
+        "summary": "Model File",
         "description": "Replace the existing model file for the Personalizer service.",
         "operationId": "Model_Import",
         "consumes": [
@@ -1228,16 +984,8 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
             "in": "body",
             "name": "body",
-            "description": "The digitally signed model file obtained from getting the model.",
             "required": true,
             "schema": {
               "format": "binary",
@@ -1251,14 +999,14 @@
           },
           "default": {
             "description": "Given model file is not signed or does not have a valid signature.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1272,21 +1020,11 @@
         "tags": [
           "ModelV1Dot1Preview3"
         ],
-        "summary": "Reset Model.",
+        "summary": "Reset Model",
         "description": "Resets the model file generated by Personalizer service.",
         "operationId": "Model_Reset",
-        "consumes": [],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
         ],
         "responses": {
           "204": {
@@ -1294,17 +1032,18 @@
           },
           "default": {
             "description": "Model reset failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
+      "parameters": [],
         "x-ms-examples": {
           "Successful Model_Reset request": {
             "$ref": "./examples/Model_Reset.json"
@@ -1317,21 +1056,11 @@
         "tags": [
           "ModelV1Dot1Preview3"
         ],
-        "summary": "Get Model Properties.",
+        "summary": "Model Properties",
         "description": "Get properties of the model file generated by Personalizer service.",
         "operationId": "Model_GetProperties",
-        "consumes": [],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          }
         ],
         "responses": {
           "200": {
@@ -1342,17 +1071,18 @@
           },
           "default": {
             "description": "A generic error has occurred on the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
+      "parameters": [],
         "x-ms-examples": {
           "Successful Model_GetProperties request": {
             "$ref": "./examples/Model_GetProperties.json"
@@ -1365,7 +1095,7 @@
         "tags": [
           "MultiSlotEvents"
         ],
-        "summary": "Post multi-slot Rewards.",
+        "summary": "Reward (MultiSlot)",
         "description": "Report reward that resulted from using the action specified in rewardActionId for the slot.",
         "operationId": "MultiSlotEvents_Reward",
         "consumes": [
@@ -1375,13 +1105,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "path",
             "name": "eventId",
@@ -1406,14 +1129,14 @@
           },
           "default": {
             "description": "Invalid reward request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1429,20 +1152,13 @@
         "tags": [
           "MultiSlotEvents"
         ],
-        "summary": "Activate multi-slot Event.",
+        "summary": "Activate Event (MultiSlot)",
         "description": "Report that the specified event was actually used or displayed to the user and a rewards should be expected for it.",
         "operationId": "MultiSlotEvents_Activate",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "path",
             "name": "eventId",
@@ -1458,14 +1174,14 @@
           },
           "default": {
             "description": "Invalid activate event request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1481,7 +1197,7 @@
         "tags": [
           "MultiSlotRank"
         ],
-        "summary": "Post multi-slot Rank.",
+        "summary": "Rank (MultiSlot)",
         "description": "Submit a Personalizer multi-slot rank request. Receives a context, a list of actions, and a list of slots. Returns which of the provided actions should be used in each slot, in each rewardActionId.",
         "operationId": "MultiSlot_Rank",
         "consumes": [
@@ -1491,13 +1207,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
           {
             "in": "body",
             "name": "body",
@@ -1517,14 +1226,14 @@
           },
           "default": {
             "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1540,7 +1249,7 @@
         "tags": [
           "Rank"
         ],
-        "summary": "Post Rank.",
+        "summary": "Rank",
         "description": "Submit a Personalizer rank request. Receives a context and a list of actions. Returns which of the provided actions should be used by your application, in rewardActionId.",
         "operationId": "Rank",
         "consumes": [
@@ -1551,15 +1260,8 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version."
-          },
-          {
-            "name": "rankRequest",
             "in": "body",
+            "name": "body",
             "description": "A Personalizer Rank request.",
             "required": true,
             "schema": {
@@ -1576,14 +1278,14 @@
           },
           "default": {
             "description": "Invalid request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
                 "description": "Error code for specific error that occurred."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1596,6 +1298,73 @@
     }
   },
   "definitions": {
+    "ApprenticeLearningMetrics": {
+      "required": [
+        "numberOfEvents",
+        "numberOfImitatedEvents",
+        "sumOfImitatedRewards",
+        "sumOfRewards"
+      ],
+      "type": "object",
+      "properties": {
+        "numberOfEvents": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sumOfRewards": {
+          "format": "float",
+          "type": "number"
+        },
+        "numberOfImitatedEvents": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sumOfImitatedRewards": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "ApprenticeModeMetrics": {
+      "required": [
+        "lastProcessedEventTime",
+        "numberOfEvents",
+        "numberOfImitatedEvents",
+        "startTime",
+        "sumOfImitatedRewards",
+        "sumOfRewards"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastProcessedEventTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastBatchMetrics": {
+          "$ref": "#/definitions/ApprenticeLearningMetrics"
+        },
+        "numberOfEvents": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sumOfRewards": {
+          "format": "float",
+          "type": "number"
+        },
+        "numberOfImitatedEvents": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sumOfImitatedRewards": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
     "BillingMeter": {
       "type": "object",
       "properties": {
@@ -1666,37 +1435,41 @@
     },
     "Evaluation": {
       "description": "A counterfactual evaluation.",
+      "required": [
+        "creationTime",
+        "endTime",
+        "evaluationType",
+        "id",
+        "name",
+        "startTime",
+        "status"
+      ],
       "type": "object",
       "properties": {
         "id": {
           "description": "The ID of the evaluation.",
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the evaluation.",
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "startTime": {
           "format": "date-time",
           "description": "The start time of the evaluation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "endTime": {
           "format": "date-time",
           "description": "The end time of the evaluation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "creationTime": {
           "format": "date-time",
           "description": "The creation time of the evaluation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "status": {
           "description": "The status of the job processing the evaluation.",
@@ -1711,7 +1484,6 @@
             "Canceled"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "EvaluationJobStatus",
             "modelAsString": true
@@ -1724,7 +1496,6 @@
             "Auto"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "EvaluationType",
             "modelAsString": true
@@ -1750,15 +1521,10 @@
       "required": [
         "endTime",
         "name",
-        "policies",
         "startTime"
       ],
       "type": "object",
       "properties": {
-        "enablePolicyOptimization": {
-          "description": "True if the evaluation should explore for a more optimal learning settings.",
-          "type": "boolean"
-        },
         "name": {
           "description": "The name of the evaluation.",
           "maxLength": 256,
@@ -1780,41 +1546,50 @@
           "items": {
             "$ref": "#/definitions/PolicyContract"
           }
+        },
+        "enablePolicyOptimization": {
+          "description": "True if the evaluation should explore for a more optimal learning settings.",
+          "type": "boolean"
         }
       }
     },
     "EvaluationDetails": {
+      "description": "Results of the evaluation.",
+      "required": [
+        "creationTime",
+        "endTime",
+        "evaluationType",
+        "id",
+        "name",
+        "startTime",
+        "status"
+      ],
       "type": "object",
       "properties": {
         "id": {
           "description": "The ID of the evaluation.",
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the evaluation.",
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "startTime": {
           "format": "date-time",
           "description": "The start time of the evaluation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "endTime": {
           "format": "date-time",
           "description": "The end time of the evaluation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "creationTime": {
           "format": "date-time",
           "description": "The creation time of the evaluation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "status": {
           "description": "The status of the job processing the evaluation.",
@@ -1829,7 +1604,6 @@
             "Canceled"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "EvaluationJobStatus",
             "modelAsString": true
@@ -1842,7 +1616,6 @@
             "Auto"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "EvaluationType",
             "modelAsString": true
@@ -1881,16 +1654,21 @@
       }
     },
     "Evaluations": {
-      "description": "Evaluations",
+      "description": "List of evaluations with paging.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of evaluations in the current page.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EvaluationDetails"
           }
         },
         "nextLink": {
+          "description": "Link to the next page of evaluations.",
           "type": "string"
         }
       }
@@ -1961,6 +1739,7 @@
       }
     },
     "FeatureImportanceContract": {
+      "description": "Contract object containing input parameters for the feature importance.",
       "required": [
         "endTime",
         "name",
@@ -1986,32 +1765,36 @@
       }
     },
     "FeatureImportanceDetails": {
+      "description": "Results of the feature importance.",
+      "required": [
+        "creationTime",
+        "endTime",
+        "id",
+        "name",
+        "startTime",
+        "status"
+      ],
       "type": "object",
       "properties": {
         "id": {
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "startTime": {
           "format": "date-time",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "creationTime": {
           "format": "date-time",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "status": {
           "description": "The status of the feature importance job.",
@@ -2024,7 +1807,6 @@
             "Canceled"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "FeatureImportanceStatus",
             "modelAsString": true
@@ -2033,17 +1815,38 @@
       }
     },
     "FeatureImportances": {
-      "description": "FeatureImportances",
+      "description": "List of feature importances with paging.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of feature importances in the current page.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FeatureImportanceDetails"
           }
         },
         "nextLink": {
+          "description": "Link to the next page of feature importances.",
           "type": "string"
+        }
+      }
+    },
+    "FeatureInferenceExplanation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Compound name of the model feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "score": {
+          "format": "float",
+          "description": "The feature score used during inference.",
+          "type": "number",
+          "readOnly": true
         }
       }
     },
@@ -2067,8 +1870,29 @@
         }
       }
     },
+    "InferenceExplanation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the choice received during inference.",
+          "type": "string",
+          "readOnly": true
+        },
+        "features": {
+          "description": "The feature value received by the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureInferenceExplanation"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "InternalError": {
       "description": "An object containing more specific information than the parent object about the error.",
+      "required": [
+        "code"
+      ],
       "type": "object",
       "properties": {
         "code": {
@@ -2085,7 +1909,11 @@
       "type": "object",
       "properties": {
         "dateRange": {
-          "$ref": "#/definitions/DateRange",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DateRange"
+            }
+          ],
           "readOnly": true
         }
       }
@@ -2118,7 +1946,7 @@
         "contextFeatures": {
           "description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
           "type": "array",
-          "items": {}
+        "items": {}
         },
         "actions": {
           "description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
@@ -2147,6 +1975,10 @@
       }
     },
     "MultiSlotRankResponse": {
+      "description": "Multi-slot rank result containing recommended action for each slot.",
+      "required": [
+        "eventId"
+      ],
       "type": "object",
       "properties": {
         "slots": {
@@ -2160,7 +1992,14 @@
         "eventId": {
           "description": "The eventId for the round trip from request to response.",
           "maxLength": 256,
-          "type": "string",
+          "type": "string"
+        },
+        "inferenceExplanation": {
+          "description": "Inference explanations for all choices made during inference.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InferenceExplanation"
+          },
           "readOnly": true
         }
       }
@@ -2199,6 +2038,7 @@
             "InvalidEvaluationContract",
             "InvalidContract",
             "DuplicateCustomPolicyNames",
+            "MaximumEvaluationCustomPoliciesExceeded",
             "NoLogsExistInDateRange",
             "LogsSizeExceedAllowedLimit",
             "InvalidRewardRequest",
@@ -2210,7 +2050,8 @@
             "InvalidModelMetadata",
             "ApprenticeModeNeverTurnedOn",
             "MissingAppId",
-            "InvalidRewardWaitTime",
+            "InvalidEventHubRewardWaitTime",
+            "InvalidCosmosDBRewardWaitTime",
             "InvalidLogRetentionDays",
             "InvalidMultiSlotApiAccess",
             "PayloadSizeExceeded",
@@ -2229,6 +2070,7 @@
             "LearningSettingsNotFound",
             "EvaluationModelNotFound",
             "LogsPropertiesNotFound",
+            "IncompatibleEvaluationVersion",
             "RequestTimeout",
             "ModelRankingError",
             "InternalServerError",
@@ -2280,6 +2122,10 @@
                 "description": "Custom policy names should be unique."
               },
               {
+                "value": "MaximumEvaluationCustomPoliciesExceeded",
+                "description": "A maximum of 10 custom policies are allowed"
+              },
+              {
                 "value": "NoLogsExistInDateRange",
                 "description": "No logs exist in date range."
               },
@@ -2324,8 +2170,12 @@
                 "description": "AppId is missing in the header."
               },
               {
-                "value": "InvalidRewardWaitTime",
-                "description": "Reward wait time should be either 10 minutes or 4 hours or 12 hours or 24 hours"
+                "value": "InvalidEventHubRewardWaitTime",
+                "description": "Reward wait time should be 10 minutes or 4 hours or 12 hours or 24 hours"
+              },
+              {
+                "value": "InvalidCosmosDBRewardWaitTime",
+                "description": "Reward wait time should be under 30 days, and under 2 days if CMK is configured."
               },
               {
                 "value": "InvalidLogRetentionDays",
@@ -2398,6 +2248,10 @@
               {
                 "value": "LogsPropertiesNotFound",
                 "description": "Log properties not found."
+              },
+              {
+                "value": "IncompatibleEvaluationVersion",
+                "description": "GetEvaluation cannot be called with an API version newer than the version used to create the evaluation."
               },
               {
                 "value": "RequestTimeout",
@@ -2547,11 +2401,19 @@
           }
         },
         "summary": {
-          "$ref": "#/definitions/Summary",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Summary"
+            }
+          ],
           "readOnly": true
         },
         "timeseries": {
-          "$ref": "#/definitions/TimeSeries",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          ],
           "readOnly": true
         }
       }
@@ -2566,7 +2428,7 @@
         "contextFeatures": {
           "description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This is determined by your application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, aggregated data about time and date, etc.\r\nFeatures should not include personally identifiable information (PII),\r\nunique UserIDs, or precise timestamps.",
           "type": "array",
-          "items": {}
+        "items": {}
         },
         "actions": {
           "description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.\r\nThe first item in the array will be used as Baseline item in Offline Evaluations.",
@@ -2596,6 +2458,9 @@
     },
     "RankResponse": {
       "description": "Returns which action to use as rewardActionId, and additional information about each action as a result of a Rank request.",
+      "required": [
+        "eventId"
+      ],
       "type": "object",
       "properties": {
         "ranking": {
@@ -2609,13 +2474,20 @@
         "eventId": {
           "description": "The eventId for the round trip from request to response.",
           "maxLength": 256,
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "rewardActionId": {
           "description": "The action chosen by the Personalizer service.\r\nThis is the action your application should display, and for which to report the reward.\r\nThis might not be the first found in 'ranking'.",
           "maxLength": 256,
           "type": "string",
+          "readOnly": true
+        },
+        "inferenceExplanation": {
+          "description": "Inference explanations for all choices made during inference.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InferenceExplanation"
+          },
           "readOnly": true
         }
       }
@@ -2636,7 +2508,7 @@
         "features": {
           "description": "List of dictionaries containing features.",
           "type": "array",
-          "items": {}
+        "items": {}
         }
       }
     },
@@ -2749,6 +2621,9 @@
             "modelAsString": true
           }
         },
+        "latestApprenticeModeMetrics": {
+          "$ref": "#/definitions/ApprenticeModeMetrics"
+        },
         "isAutoOptimizationEnabled": {
           "description": "Flag indicating whether Personalizer will automatically optimize Learning Settings by running Offline Evaluations periodically.",
           "type": "boolean"
@@ -2766,10 +2641,14 @@
         "modelRetrainDays": {
           "format": "int32",
           "description": "Number of days of historical logs used when a model retrain is triggered.",
-          "default": 0,
+          "default": 2,
           "maximum": 2147483647,
           "minimum": 0,
           "type": "integer"
+        },
+        "isInferenceExplainabilityEnabled": {
+          "description": "Flag indicating whether inference explainations are returned on rank calls.",
+          "type": "boolean"
         }
       }
     },
@@ -2802,7 +2681,7 @@
         "features": {
           "description": "List of dictionaries containing slot features.",
           "type": "array",
-          "items": {}
+        "items": {}
         },
         "excludedActions": {
           "description": "List of excluded action Ids.",
@@ -2818,6 +2697,7 @@
       }
     },
     "SlotResponse": {
+      "description": "Recommended action for a given slot.",
       "required": [
         "id"
       ],
@@ -2916,6 +2796,18 @@
       "type": "string",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "in": "path",
+      "name": "ApiVersion",
+      "description": "Personalizer API version (for example, v1.0).",
+      "required": true,
+      "enum": [
+        "2022-09-01-preview"
+      ],
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
@@ -2926,20 +2818,12 @@
     }
   },
   "security": [
-    {}
+  {}
   ],
   "tags": [
     {
       "name": "Configurations20220901Preview",
       "description": "Manages configuration operations."
-    },
-    {
-      "name": "MultiSlotEvents",
-      "description": "Manages multi-slot event operations."
-    },
-    {
-      "name": "MultiSlotRank",
-      "description": "Manages multi-slot ranking operations."
     },
     {
       "name": "Evaluations20220901Preview",
@@ -2964,6 +2848,14 @@
     {
       "name": "ModelV1Dot1Preview3",
       "description": "Manages reinforcement learning configuration operations."
+    },
+    {
+      "name": "MultiSlotEvents",
+      "description": "Manages multi-slot event operations."
+    },
+    {
+      "name": "MultiSlotRank",
+      "description": "Manages multi-slot ranking operations."
     }
   ],
   "x-ms-parameterized-host": {
@@ -2972,6 +2864,9 @@
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
       }
     ]
   }
