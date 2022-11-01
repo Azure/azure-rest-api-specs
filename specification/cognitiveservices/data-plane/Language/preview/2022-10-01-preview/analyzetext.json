@@ -2967,14 +2967,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -2995,6 +2988,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "AbstractiveSummaryDocumentResultWithDetectedLanguage":{
+      "type": "object",
+      "description": "An object representing the summarization result of a single document with detected language.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "AbstractiveSummaryDocumentResult": {
