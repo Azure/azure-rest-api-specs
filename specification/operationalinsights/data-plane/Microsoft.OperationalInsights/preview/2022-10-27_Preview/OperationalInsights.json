@@ -183,46 +183,6 @@
         }
       }
     },
-    "/$batch": {
-      "post": {
-        "operationId": "Query_Batch",
-        "summary": "Execute a batch of Analytics queries",
-        "description": "Executes a batch of Analytics queries for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
-        "x-ms-examples": {
-          "metadataPost": {
-            "$ref": "examples/batch-query-example.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The batch request body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/batchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
-            "schema": {
-              "$ref": "#/definitions/batchResponse"
-            }
-          },
-          "default": {
-            "description": "An error response object.",
-            "schema": {
-              "$ref": "#/definitions/errorResponse"
-            }
-          }
-        }
-      }
-    }
-  },
-  "x-ms-paths": {
     "/{resourceId}/query": {
       "get": {
         "operationId": "Query_ResourceGet",
@@ -284,6 +244,44 @@
             "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
             "schema": {
               "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "operationId": "Query_Batch",
+        "summary": "Execute a batch of Analytics queries",
+        "description": "Executes a batch of Analytics queries for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "metadataPost": {
+            "$ref": "examples/batch-query-example.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The batch request body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/batchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The API call succeeded and the Analytics query result is in the response payload",
+            "schema": {
+              "$ref": "#/definitions/batchResponse"
             }
           },
           "default": {
