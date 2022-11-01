@@ -3,28 +3,35 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "workspaceName": "myWorkspace",
-    "api-version": "2022-04-01-preview",
-    "parameters": {
-      "tags": {
-        "mytag1": "myvalue1"
-      }
-    }
+    "api-version": "2022-04-01-preview"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
+        "name": "myWorkspace",
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace",
         "type": "Microsoft.Databricks/workspaces",
-        "location": "East US 2",
-        "tags": {
-          "mytag1": "myvalue1"
-        },
         "sku": {
           "name": "premium"
         },
+        "location": "East US 2",
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "diskEncryptionSetId": "/subscriptions/subid/resourceGroups/myManagedRG/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+          "encryption": {
+            "entities": {
+              "managedDisk": {
+                "keySource": "Microsoft.Keyvault",
+                "keyVaultProperties": {
+                  "keyVaultUri": "https://test-vault-name.vault.azure.net/",
+                  "keyName": "test-cmk-key",
+                  "keyVersion": "00000000000000000000000000000000"
+                },
+                "rotationToLatestKeyVersionEnabled": true
+              }
+            }
+          },
           "parameters": null,
           "provisioningState": "Succeeded",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
@@ -44,17 +51,15 @@
             "puid": "33333333",
             "applicationId": "44444444-4444-4444-4444-444444444444"
           },
+          "managedDiskIdentity": {
+            "principalId": "22222222-2222-2222-2222-222222222222",
+            "tenantId": "44444444-4444-4444-4444-444444444444",
+            "type": "SystemAssigned"
+          },
           "createdDateTime": "2020-02-20T00:10:29.2858439Z",
-          "workspaceId": "6666666666666666",
-          "workspaceUrl": "adb-6666666666666666.19.azuredatabricks.net"
+          "workspaceId": "5555555555555555",
+          "workspaceUrl": "adb-5555555555555555.19.azuredatabricks.net"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Retry-After": "10",
-        "Azure-AsyncOperation": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/HelloWorld/providers/Microsoft.Databricks/workspaces/swaggerExample/operationStatus/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2022-04-01-preview",
-        "Location": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/HelloWorld/providers/Microsoft.Databricks/workspaces/swaggerExample/operationResults/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2022-04-01-preview"
       }
     }
   }
