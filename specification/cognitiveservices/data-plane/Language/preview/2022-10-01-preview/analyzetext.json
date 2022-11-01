@@ -2120,14 +2120,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -2164,6 +2157,17 @@
           }
         ]
       }
+    },
+    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
+      ]
     },
     "ExtractedSummaryDocumentResult": {
       "type": "object",
