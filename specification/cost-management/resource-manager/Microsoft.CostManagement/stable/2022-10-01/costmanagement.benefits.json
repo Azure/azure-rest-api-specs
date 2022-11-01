@@ -99,54 +99,6 @@
         }
       }
     },
-    "/{billingScope}/providers/Microsoft.CostManagement/benefitRecommendations/{recommendationId}": {
-      "get": {
-        "tags": [
-          "BenefitRecommendations"
-        ],
-        "description": "Details of a benefit plan recommendation for what-if analysis.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
-        },
-        "x-ms-examples": {
-          "BenefitRecommendationById": {
-            "$ref": "./examples/BenefitRecommendationsByRecommendationId.json"
-          }
-        },
-        "operationId": "BenefitRecommendation_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingScopeBenefitRecommendationParameter"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "The ID of the recommendation.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/benefitRecommendationModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common-types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummaries": {
       "get": {
         "tags": [
