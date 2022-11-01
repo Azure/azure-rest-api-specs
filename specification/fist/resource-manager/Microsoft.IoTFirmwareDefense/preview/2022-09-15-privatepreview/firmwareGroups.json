@@ -1,0 +1,400 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-09-15-privatepreview",
+    "title": "fist",
+    "description": "Description of the new service",
+    "x-ms-code-generation-settings": {
+      "name": "fistClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}": {
+      "put": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroups_Create",
+        "description": "The operation to create or update a firmwareGroups resource.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of firmware Group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirmwareGroup"
+            },
+            "description": "Parameters when creating firmwareGroups operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirmwareGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a firmwareGroup.": {
+            "$ref": "./examples/CreateFirmwareGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroup_Update",
+        "description": "The operation to update a firmware groups.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firmware group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirmwareGroup"
+            },
+            "description": "Parameters when creating a firmware group."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirmwareGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Firmware Group": {
+            "$ref": "./examples/UpdateFirmwareGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroup_Delete",
+        "description": "The operation to delete a firmware group.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a firmware group."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an firmware group.": {
+            "$ref": "./examples/DeleteFirmwareGroup.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroup_Get",
+        "description": "Get firmware group.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of firmware group."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirmwareGroup"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get firmware group.": {
+            "$ref": "./examples/GetFirmwareGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}/generateUploadUrl": {
+      "post": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroup_GenerateUploadUrl",
+        "description": "The operation to get a url for file upload.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of firmware group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateUploadUrlParameters"
+            },
+            "description": "Parameters when requesting a URL to upload firmware."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UrlData"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Url for upload firmware": {
+            "$ref": "./examples/PostGenerateUploadUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups": {
+      "get": {
+        "tags": [
+          "FirmwareGroups"
+        ],
+        "operationId": "FirmwareGroup_List",
+        "description": "Lists all of firmwareGroups in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirmwareGroupList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all firmware groups by subscription.": {
+            "$ref": "./examples/ListFirmwareGroupsBySubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FirmwareGroupProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "description": "FirmwareGroup properties."
+    },
+    "FirmwareGroup": {
+      "type": "object",
+      "description": "FirmwareGroup definition",
+      "properties": {
+        "properties": {
+          "title": "FirmwareGroup properties",
+          "description": "List the properties of firmwareGroups",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirmwareGroupProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FirmwareGroupList": {
+      "type": "object",
+      "description": "List result for firmware groups",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FirmwareGroup"
+          },
+          "description": "The list of firmware group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of asset."
+        }
+      }
+    },
+    "GenerateUploadUrlParameters": {
+      "type": "object",
+      "description": "Parameters for getting an upload URL",
+      "properties": {
+        "firmwareId": {
+          "type": "string",
+          "description": "A unique ID for the firmware to be uploaded."
+        }
+      }
+    },
+    "UrlData": {
+      "type": "object",
+      "properties": {
+        "uploadUrl": {
+          "description": "Url for file uploading.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Url data for file uploading."
+    }
+  },
+  "parameters": {}
+}

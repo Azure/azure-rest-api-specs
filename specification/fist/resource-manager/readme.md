@@ -28,7 +28,18 @@ These are the global settings for the fist.
 openapi-type: arm
 openapi-subtype: providerHub
 
-tag: package-2021-11-10-privatepreview
+tag: package-2022-09-15-privatepreview
+```
+
+### Tag: package-2022-09-15-privatepreview
+
+These settings apply only when `--tag=package-2022-09-15-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-15-privatepreview'
+input-file:
+  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/firmwareGroups.json
+  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/firmwares.json
+  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/operations.json
 ```
 
 ### Tag: package-2021-11-10-privatepreview
@@ -59,17 +70,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
-```
-
-## Suppression
-```
-directive:
-  - suppress: SECRET_PROPERTY
-    from:
-      - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/firmwares.json
-    where:
-      - $.definitions.UrlData.properties.uploadUrl
-    reason: Secrets are OK to return in a POST response.
 ```
 
 ## Az
