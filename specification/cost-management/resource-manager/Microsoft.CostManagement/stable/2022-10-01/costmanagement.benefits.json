@@ -153,7 +153,7 @@
           "BenefitUtilizationSummaries"
         ],
         "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
-        "description": "Lists savings plan utilization summaries for the enterprise agreement scope.",
+        "description": "Lists savings plan utilization summaries for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
@@ -165,8 +165,7 @@
             "$ref": "common-types.json#/parameters/billingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/grainParameter",
-            "description": "Supported values: 'Daily' and 'Monthly'."
+            "$ref": "#/parameters/grainParameter"
           },
           {
             "name": "filter",
@@ -207,7 +206,7 @@
           "BenefitUtilizationSummaries"
         ],
         "operationId": "BenefitUtilizationSummaries_ListByBillingProfileId",
-        "description": "Lists savings plan utilization summaries for billing profile.",
+        "description": "Lists savings plan utilization summaries for billing profile. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
