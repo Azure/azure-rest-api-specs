@@ -97,6 +97,9 @@
               "$ref": "#/definitions/Server"
             }
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -538,7 +541,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/PostgreSqlSku",
+          "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
         },
         "identity": {
@@ -634,7 +637,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/PostgreSqlSku",
+          "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
         },
         "identity": {
@@ -673,7 +676,7 @@
       },
       "description": "A list of servers."
     },
-    "PostgreSqlSku": {
+    "Sku": {
       "type": "object",
       "properties": {
         "name": {
