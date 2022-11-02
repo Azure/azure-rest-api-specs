@@ -19,7 +19,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 batch:
   - tag: package-2022-09
-  - tag: package-preview-2022-09-only
+  - tag: package-preview-2022-09
   - tag: package-preview-2022-08-03-only
   - tag: package-preview-2022-08-only
   - tag: package-2022-07
@@ -83,12 +83,12 @@ namespace: azure.mgmt.containerservice.v2022_09_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2022_09_01
 ```
 
-### Tag: package-preview-2022-09-only and python
+### Tag: package-preview-2022-09 and python
 
-These settings apply only when `--tag=package-preview-2022-09-only --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-09 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2022-09-only' && $(python)
+``` yaml $(tag) == 'package-preview-2022-09' && $(python)
 namespace: azure.mgmt.containerservice.v2022_09_02_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2022_09_02_preview
 ```
