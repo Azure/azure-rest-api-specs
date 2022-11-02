@@ -475,6 +475,23 @@
       },
       "description": "The Data Explorer Azure SKU"
     },
+    "BatchAccount": {
+      "type": "object",
+      "properties": {
+        "batchAccountResourceId": {
+          "type": "string",
+          "description": "The Batch Account ARM resource id."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "User assigned identity to use for accessing the Batch Account. Example: /subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. If not provided, the 'Autonomous Development Platform' service principle will be used."
+        }
+      },
+      "description": "BatchAccount Configuration",
+      "required": [
+        "batchAccountResourceId"
+      ]
+    },
     "CheckNameAvailabilityParameters": {
       "type": "object",
       "properties": {
@@ -585,6 +602,18 @@
         "azureSku"
       ]
     },
+    "DirectReadAccessState": {
+      "type": "string",
+      "description": "Direct read access state",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "DirectReadAccessState",
+        "modelAsString": true
+      }
+    },
     "Encryption": {
       "type": "object",
       "properties": {
@@ -635,6 +664,31 @@
       "x-ms-enum": {
         "name": "Reason",
         "modelAsString": true
+      }
+    },
+    "Resim": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ResimStateKV",
+          "description": "The state defines whether Resim is enabled for this Workspace or not, and accordingly whether to provision a resim dedicated Storage Account. Once enabled, this toggle cannot be turned off."
+        }
+      },
+      "description": "Resim Configuration",
+      "required": [
+        "state"
+      ]
+    },
+    "ResimStateKV": {
+      "type": "string",
+      "description": "Resim State",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "ResimStateKV",
+        "modelAsString": false
       }
     },
     "ResourceType": {
@@ -763,9 +817,26 @@
           "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5.",
           "minimum": 1
         },
+        "directReadAccess": {
+          "$ref": "#/definitions/DirectReadAccessState",
+          "description": "Enables direct data plane read access to the Workspace's underlying Azure resources according to Azure RBAC (thus bypassing the Autonomous Development Platform's authorization systems)."
+        },
         "dataCatalog": {
           "$ref": "#/definitions/DataCatalog",
           "description": "The Data Catalog configuration."
+        },
+        "resim": {
+          "$ref": "#/definitions/Resim",
+          "description": "The Resim configuration."
+        },
+        "batchAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchAccount"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "BatchAccount[]",
+          "description": "The Azure Batch Accounts associated with the Workspace for Resim and Compute jobs."
         },
         "sourceResourceId": {
           "type": "string",
@@ -831,9 +902,26 @@
           "description": "The amount of storage accounts provisioned per Workspace. If not provided, defaults to 5.",
           "minimum": 1
         },
+        "directReadAccess": {
+          "$ref": "#/definitions/DirectReadAccessState",
+          "description": "Enables direct data plane read access to the Workspace's underlying Azure resources according to Azure RBAC (thus bypassing the Autonomous Development Platform's authorization systems)."
+        },
         "dataCatalog": {
           "$ref": "#/definitions/DataCatalog",
           "description": "The Data Catalog configuration."
+        },
+        "resim": {
+          "$ref": "#/definitions/Resim",
+          "description": "The Resim configuration."
+        },
+        "batchAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchAccount"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "BatchAccount[]",
+          "description": "The Azure Batch Accounts associated with the Workspace for Resim and Compute jobs."
         },
         "sourceResourceId": {
           "type": "string",

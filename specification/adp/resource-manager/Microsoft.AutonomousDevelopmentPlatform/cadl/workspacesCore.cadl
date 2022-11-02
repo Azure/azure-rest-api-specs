@@ -58,8 +58,17 @@ model WorkspacePropertiesBase {
   @minValue(1)
   storageAccountCount?: int32;
 
+  @doc("Enables direct data plane read access to the Workspace's underlying Azure resources according to Azure RBAC (thus bypassing the Autonomous Development Platform's authorization systems).")
+  directReadAccess?: DirectReadAccessState;
+
   @doc("The Data Catalog configuration.")
   dataCatalog?: DataCatalog;
+
+  @doc("The Resim configuration.")
+  resim?: Resim;
+
+  @doc("The Azure Batch Accounts associated with the Workspace for Resim and Compute jobs.")
+  batchAccounts?: BatchAccount[];
 
   @doc("The ARM Id of the source resource that originated the data for this Workspace")
   sourceResourceId?: string;
@@ -182,4 +191,36 @@ model SkuTier is string {}
 enum SkuTierKV {
   Basic,
   Standard
+}
+
+@doc("Resim Configuration")
+model Resim {
+  @doc("The state defines whether Resim is enabled for this Workspace or not, and accordingly whether to provision a resim dedicated Storage Account. Once enabled, this toggle cannot be turned off.")
+  state: ResimStateKV;
+}
+
+@doc("Resim State")
+enum ResimStateKV {
+  Disabled,
+  Enabled
+}
+
+@doc("BatchAccount Configuration")
+model BatchAccount {
+  @doc("The Batch Account ARM resource id.")
+  batchAccountResourceId: string;
+
+  @doc("User assigned identity to use for accessing the Batch Account. Example: /subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. If not provided, the 'Autonomous Development Platform' service principle will be used.")
+  userAssignedIdentityResourceId?: string;
+}
+
+
+@doc("Direct read access state")
+@knownValues(DirectReadAccessStateKV)
+model DirectReadAccessState is string {}
+
+@doc("Direct read access state")
+enum DirectReadAccessStateKV {
+  Disabled,
+  Enabled
 }
