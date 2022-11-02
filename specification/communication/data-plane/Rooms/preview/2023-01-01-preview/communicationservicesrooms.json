@@ -466,11 +466,15 @@
       "description": "Participants to be patched in the room.",
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/RoomParticipant"
+        "type": "object",
+        "properties": {
+          "role": {
+            "$ref":"#/definitions/RoleType"
+          }
+        }
       },
       "example": {
           "rawId1": {
-            "rawId1": "string",
             "role": "Presenter"
           },
           "rawId2": {
@@ -480,19 +484,23 @@
       }
     },
     "ParticipantsCollection": {
-      "description": "Collection of participants in a room.",
+      "description": "A paginated collection of participants in a room.",
       "required": [
         "participants"
       ],
       "type": "object",
       "properties": {
         "participants": {
-          "description": "Room Participants.",
+          "description": "Current page of participants",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Url to retrieve the next page of participants",
+          "type": "string"
         }
       }
     }
