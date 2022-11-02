@@ -8572,13 +8572,24 @@
       "type": "object",
       "title": "VirtualMachinePatchParameters represents the body of the request to patch the virtual machine.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachinePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
         "tags": {
           "description": "The Azure resource tags that will replace the existing ones.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        },
+        }
+      }
+    },
+    "VirtualMachinePatchProperties": {
+      "type": "object",
+      "title": "VirtualMachinePatchProperties represents the properties of the virtual machine that can be patched.",
+      "properties": {
         "vmImageRepositoryCredentials": {
           "$ref": "#/definitions/ImageRepositoryCredentials"
         }
