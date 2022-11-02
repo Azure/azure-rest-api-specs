@@ -113,7 +113,7 @@
         "summary": "Delete registry.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "operationId": "Registries_Delete",
         "produces": [
@@ -131,7 +131,8 @@
             "name": "registryName",
             "description": "Name of registry. This is case-insensitive",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -146,6 +147,22 @@
           },
           "200": {
             "description": "Success"
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -407,10 +424,6 @@
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
-        },
-        "location": {
-          "description": "The geo-location where the resource lives.",
           "type": "string"
         },
         "properties": {
