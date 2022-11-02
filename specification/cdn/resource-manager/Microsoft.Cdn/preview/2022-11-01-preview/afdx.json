@@ -458,6 +458,11 @@
           },
           "201": {
             "description": "Created. The request has been fulfilled and a new domain has been created.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDDomain"
             }
@@ -534,6 +539,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDDomain"
             }
@@ -656,7 +666,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. Please poll the targeted custom domain and check the 'validationProperties' field for the new validation token values."
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. Please poll the targeted custom domain and check the 'validationProperties' field for the new validation token values.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Azure Front Door error response describing why the operation failed.",
@@ -832,6 +847,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDEndpoint"
             }
@@ -902,6 +922,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDEndpoint"
             }
@@ -959,7 +984,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1028,7 +1058,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Azure Front Door error response describing why the operation failed.",
@@ -1322,6 +1357,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDOriginGroup"
             }
@@ -1392,6 +1432,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDOriginGroup"
             }
@@ -1449,7 +1494,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content. The request has been accepted but the origin group was not found."
@@ -1705,6 +1755,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDOrigin"
             }
@@ -1782,6 +1837,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AFDOrigin"
             }
@@ -1846,7 +1906,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content. The request has been accepted but the origin was not found."
@@ -2046,6 +2111,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Route"
             }
@@ -2123,6 +2193,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Route"
             }
@@ -2187,7 +2262,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2404,7 +2484,12 @@
             "description": "Delete successful."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content. The request has been accepted but the rule set was not found."
@@ -2660,6 +2745,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Rule"
             }
@@ -2737,6 +2827,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Rule"
             }
@@ -2801,7 +2896,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content. The request has been accepted but the origin was not found."
@@ -2980,6 +3080,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SecurityPolicy"
             }
@@ -3050,6 +3155,11 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SecurityPolicy"
             }
@@ -3107,7 +3217,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -3286,6 +3401,11 @@
           },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Secret"
             }
@@ -3343,7 +3463,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content. The request has been accepted but the origin was not found."
