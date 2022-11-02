@@ -1507,13 +1507,21 @@
           "type": "string",
           "enum": [
             "/query"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "path",
+            "modelAsString": true
+          }
         },
         "method": {
           "type": "string",
           "enum": [
             "POST"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "methodType",
+            "modelAsString": true
+          }
         },
         "workspace": {
           "description": "Workspace Id to be included in the query",
@@ -1546,7 +1554,8 @@
           "type": "string"
         },
         "status": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "body": {
           "type": "object",
