@@ -557,42 +557,6 @@
         }
       }
     },
-    "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}/audit": {
-      "post": {
-        "description": "Audit savings plan purchase.",
-        "operationId": "SavingsPlanOrderAlias_Audit",
-        "tags": [
-          "Savings plan order aliases"
-        ],
-        "x-ms-examples": {
-          "SavingsPlanOrderAliasAudit": {
-            "$ref": "./examples/SavingsPlanOrderAliasAudit.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SavingsPlanOrderAliasNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SavingsPlanOrderAliasAuditRequestParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The request is completed."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.BillingBenefits/calculateMigrationCost": {
       "post": {
         "summary": "Calculates the refund amounts in EA account and price of the corresponding new purchases in MCA account.",
@@ -1523,37 +1487,6 @@
         }
       }
     },
-    "SavingsPlanOrderAliasAuditRequest": {
-      "type": "object",
-      "description": "Request to audit savings plan purchase",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SavingsPlanOrderAliasAuditRequestProperties"
-        }
-      }
-    },
-    "SavingsPlanOrderAliasAuditRequestProperties": {
-      "type": "object",
-      "description": "Properties to audit savings plan purchase",
-      "properties": {
-        "orderId": {
-          "type": "string",
-          "description": "Order ID of the savings plan in guid form"
-        },
-        "channel": {
-          "type": "string",
-          "description": "Channel type of the savings plan"
-        },
-        "pricingCurrencyTotal": {
-          "type": "array",
-          "description": "Pricing amount of savings plan purchase",
-          "items": {
-            "$ref": "#/definitions/PricingCurrencyTotal"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "PricingCurrencyTotal": {
       "type": "object",
       "allOf": [
@@ -2190,16 +2123,6 @@
       "description": "Request body for migrating all savings plan order into mca account",
       "schema": {
         "$ref": "#/definitions/CalculateMigrationCostRequest"
-      }
-    },
-    "SavingsPlanOrderAliasAuditRequestParameter": {
-      "name": "body",
-      "in": "body",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "description": "Request body for auditing a savings plan order alias",
-      "schema": {
-        "$ref": "#/definitions/SavingsPlanOrderAliasAuditRequest"
       }
     },
     "ReservationOrderAliasNameParameter": {
