@@ -1518,14 +1518,7 @@
         "conversations": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ConversationsSummaryResult"
-              },
-              {
-                "$ref": "#/definitions/ConversationResultBase"
-              }
-            ]
+            "$ref": "#/definitions/ConversationsSummaryResult"
           }
         }
       },
@@ -1544,14 +1537,15 @@
         "summaries": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SummaryResultItem"
-              }
-            ]
+            "$ref": "#/definitions/SummaryResultItem"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResultBase"
+        }
+      ]
     },
     "SummaryResultItem": {
       "type": "object",
