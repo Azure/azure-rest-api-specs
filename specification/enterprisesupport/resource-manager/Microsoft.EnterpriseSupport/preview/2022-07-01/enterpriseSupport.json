@@ -1,0 +1,701 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Enterprise Billing Resource Provider",
+    "description": "",
+    "version": "2022-07-01-preview"
+  },
+  "host": "localhost:7071",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases/{purchaseId}": {
+      "put": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "Purchase Enterprise Support",
+        "description": "",
+        "operationId": "PutPurchaseById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountId",
+            "description": "The customer billing account ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "billingProfileId",
+            "description": "The customer billing profile ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "purchaseId",
+            "description": "The purchase ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/purchaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Payload of PurchaseResult",
+            "schema": {
+              "$ref": "#/definitions/purchaseResult"
+            },
+            "x-ms-summary": "Body of the newly created purchase"
+          },
+          "202": {
+            "description": "Status Urls for Purchase Task",
+            "schema": {
+              "$ref": "#/definitions/httpManagementPayload"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "Status URL where the purchase response will be returned from",
+                "type": "string"
+              }
+            },
+            "x-ms-summary": "Status Urls for Purchase Task"
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-visibility": "important",
+        "x-ms-examples": {
+          "PutPurchaseById": {
+            "$ref": "./examples/EnterpriseSupportPutPurchaseById.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "Cancel purchase by purchase ID",
+        "operationId": "CancelPurchaseByPurchaseId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountId",
+            "description": "The customer billing account ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "billingProfileId",
+            "description": "The customer billing profile ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "purchaseId",
+            "description": "The unique ID for the purchase to be cancelled",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "description": "The adjusted service end date",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload of PurchaseResult",
+            "schema": {
+              "$ref": "#/definitions/purchaseResult"
+            },
+            "x-ms-summary": "Body of the deleted purchase"
+          },
+          "202": {
+            "description": "Urls to the cancellation statuses",
+            "schema": {
+              "$ref": "#/definitions/httpManagementPayload"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "Status URL where the purchase response will be returned from",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CancelPurchaseByPurchaseId": {
+            "$ref": "./examples/EnterpriseSupportCancelPurchaseByPurchaseId.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "Get Purchase By PurchaseId",
+        "operationId": "GetPurchaseById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountId",
+            "description": "The customer billing account ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "billingProfileId",
+            "description": "The customer billing profile ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "purchaseId",
+            "description": "The customer support purchase ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The enterprise support purchase result",
+            "schema": {
+              "$ref": "#/definitions/purchase"
+            },
+            "examples": {
+              "application/json": "{\"id\":\"c1c91e1e-198d-40e2-8836-4937f2ac3c71\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"f0b851f2-a355-4f2a-9cdb-687edcf9144a\",\"invoiceSectionId\":\"e5f820e5-f49a-42cd-a72a-c44afc826533\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"636c88a3-36e4-4f42-91da-8702be945f83\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPurchaseById": {
+            "$ref": "./examples/EnterpriseSupportGetPurchaseById.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "Patch purchase by purchase ID",
+        "operationId": "PatchPurchaseByPurchaseId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountId",
+            "description": "The customer billing account ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "billingProfileId",
+            "description": "The customer billing profile ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "purchaseId",
+            "description": "The unique ID for the purchase to be cancelled",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/purchaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload of PurchaseResult",
+            "schema": {
+              "$ref": "#/definitions/purchaseResult"
+            },
+            "x-ms-summary": "Body of the updated purchase"
+          },
+          "202": {
+            "description": "Urls to the patch statuses",
+            "schema": {
+              "$ref": "#/definitions/httpManagementPayload"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "Status URL where the purchase response will be returned from",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchPurchaseByPurchaseId": {
+            "$ref": "./examples/EnterpriseSupportPatchPurchaseByPurchaseId.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/purchases": {
+      "get": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "List Purchases by billing account",
+        "operationId": "GetPurchasesByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountId",
+            "description": "The customer billing account ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of purchases for a billing account",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/purchase"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPurchasesByBillingAccount": {
+            "$ref": "./examples/EnterpriseSupportGetPurchasesByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases": {
+      "get": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "List Purchases by billing profiles",
+        "operationId": "GetPurchasesByBillingGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountId",
+            "description": "The customer billing account ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "billingProfileId",
+            "description": "The customer billing profile ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "active",
+            "description": "",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "skus",
+            "description": "Comma separate list of BigCat SKU IDs",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of purchases for a billing profile",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/purchase"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPurchasesByBillingGroup": {
+            "$ref": "./examples/EnterpriseSupportGetPurchasesByBillingGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EnterpriseSupport/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List of REST API operations for Enterprise Support Resource Provider",
+        "operationId": "GetRestOperations",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of REST API operations for Enterprise Support Resource Provider",
+            "schema": {
+              "$ref": "#/definitions/availableOperations"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      }
+    }
+  },
+  "definitions": {
+    "availableOperations": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "httpManagementPayload": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "statusQueryGetUri": {
+          "type": "string"
+        },
+        "sendEventPostUri": {
+          "type": "string"
+        },
+        "terminatePostUri": {
+          "type": "string"
+        },
+        "rewindPostUri": {
+          "type": "string"
+        },
+        "purgeHistoryDeleteUri": {
+          "type": "string"
+        },
+        "restartPostUri": {
+          "type": "string"
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/display"
+        }
+      }
+    },
+    "purchase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "mcapiOrgId": {
+          "type": "string"
+        },
+        "billingAccountId": {
+          "type": "string"
+        },
+        "billingGroupId": {
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "type": "string"
+        },
+        "billingCurrency": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "termId": {
+          "type": "string"
+        },
+        "skuId": {
+          "type": "string"
+        },
+        "availabilityId": {
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isTest": {
+          "type": "boolean"
+        },
+        "csam": {
+          "type": "string"
+        },
+        "csmAdmin": {
+          "type": "string"
+        },
+        "serviceStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "serviceEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "purchaseDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "cancellationDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "purchaseError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/purchaseErrorProperties"
+        }
+      },
+      "example": "{\"error\":{\"code\":1000,\"message\":\"An error occurred while creating purchase\",\"additionalInfo\":\"Please see stack trace for more information\"}}"
+    },
+    "purchaseErrorProperties": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        },
+        "additionalInfo": {
+          "type": "string"
+        }
+      }
+    },
+    "purchaseRequest": {
+      "type": "object",
+      "properties": {
+        "purchaseId": {
+          "type": "string"
+        },
+        "billingAccountId": {
+          "type": "string"
+        },
+        "billingGroupId": {
+          "type": "string"
+        },
+        "shippingProfileId": {
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "skuId": {
+          "type": "string"
+        },
+        "availabilityId": {
+          "type": "string"
+        },
+        "termId": {
+          "type": "string"
+        },
+        "csam": {
+          "type": "string"
+        },
+        "csmAdmin": {
+          "type": "string"
+        },
+        "price": {
+          "format": "double",
+          "type": "number"
+        },
+        "serviceStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "serviceEndDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "example": "{\"purchaseId\":\"d049db07-3612-4fde-bb12-74c7ea0f40db\",\"billingAccountId\":\"d7d35675-49b7-4941-b2c2-d85f3e250f54\",\"billingGroupId\":\"832ebe40-a811-424b-96b0-07153470ae8d\",\"shippingProfileId\":\"4ed4b43e-2107-4c11-91cb-e0c67eb0d28a\",\"invoiceSectionId\":\"4507a387-0301-459b-94ea-09ec41295ebf\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"9e3ab2dd-afef-40eb-b369-2e9841ce654f\",\"termId\":\"\",\"csam\":\"wdi\",\"csmAdmin\":\"jonosace\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
+    },
+    "purchaseResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/purchase"
+        }
+      },
+      "example": "{\"id\":\"a3ac7998-8285-42bd-88d6-f655ac13d828\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"a3ac7998-8285-42bd-88d6-f655ac13d828\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"a43d72c6-25aa-42e5-911d-52ecebcc0611\",\"invoiceSectionId\":\"93230dea-af48-4e96-a4d0-446a31878a3c\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"b6853a32-ce62-46b1-a6fe-038c1d079921\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
