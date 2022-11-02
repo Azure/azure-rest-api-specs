@@ -68,7 +68,13 @@
             "description": "Request successful. Resource does not exist."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Delete successful."
@@ -363,7 +369,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}/ddosProtectionStatus": {
       "post": {
-        "operationId": "PublicIpAddresses_DdosProtectionStatus",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "operationId": "PublicIPAddresses_DdosProtectionStatus",
         "description": "Gets the Ddos Protection Status of a Public IP Address",
         "parameters": [
           {
@@ -395,7 +404,13 @@
             }
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
