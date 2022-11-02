@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-10-01-preview"
+    "version": "2023-05-01"
   },
   "securityDefinitions": {
     "AADToken": {
@@ -17,6 +17,7 @@
     },
     "apim_key": {
       "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
@@ -505,6 +506,7 @@
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
     "AnalyzeTextDynamicClassificationInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -783,7 +785,7 @@
         },
         "documentType": {
           "x-ms-enum": {
-            "name": "documentType",
+            "name": "healthcareDocumentType",
             "modelAsString": true
           },
           "type": "string",
@@ -916,7 +918,7 @@
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
-            "ConditionalQualifier",
+            "ConditionQualifier",
             "MedicationClass",
             "MedicationName",
             "Dosage",
@@ -2118,14 +2120,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ExtractedSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -2162,6 +2157,17 @@
           }
         ]
       }
+    },
+    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
+      ]
     },
     "ExtractedSummaryDocumentResult": {
       "type": "object",
@@ -2961,19 +2967,24 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
           }
         }
       },
       "required": [
         "documents"
+      ]
+    },
+    "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "An object representing the summarization result of a single document with detected language.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "AbstractiveSummarizationResult": {

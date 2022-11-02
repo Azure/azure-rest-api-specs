@@ -2016,6 +2016,15 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
+            "$ref": "#/parameters/LeaseAction"
+          },
+          {
+            "$ref": "#/parameters/LeaseDurationMethod"
+          },
+          {
+            "$ref": "#/parameters/ProposedLeaseIdOptional"
+          },
+          {
             "$ref": "#/parameters/CacheControl"
           },
           {
@@ -2106,6 +2115,11 @@
                 "x-ms-client-name": "EncryptionKeySha256",
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
+              },
+              "x-ms-lease-renewed": {
+                "x-ms-client-name": "LeaseRenewed",
+                "type": "boolean",
+                "description": "If the lease was auto-renewed with this request"
               }
             }
           },
@@ -2180,6 +2194,15 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
+            "$ref": "#/parameters/LeaseAction"
+          },
+          {
+            "$ref": "#/parameters/LeaseDurationMethod"
+          },
+          {
+            "$ref": "#/parameters/ProposedLeaseIdOptional"
+          },
+          {
             "$ref": "#/parameters/Body"
           },
           {
@@ -2248,6 +2271,11 @@
                 "x-ms-client-name": "EncryptionKeySha256",
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
+              },
+              "x-ms-lease-renewed": {
+                "x-ms-client-name": "LeaseRenewed",
+                "type": "boolean",
+                "description": "If the lease was auto-renewed with this request"
               }
             }
           },
@@ -2703,6 +2731,25 @@
       "required": false,
       "type": "integer",
       "x-ms-parameter-location": "method"
+    },
+    "LeaseAction": {
+      "name": "x-ms-lease-action",
+      "x-ms-client-name": "leaseAction",
+      "in": "header",
+      "x-ms-parameter-location": "method",
+      "description": "Optional. If \"acquire\" it will acquire the lease. If \"auto-renew\" it will renew the lease. If \"release\" it will release the lease only on flush. If \"acquire-release\" it will acquire & complete the operation & release the lease once operation is done.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "acquire",
+        "auto-renew",
+        "release",
+        "acquire-release"
+      ],
+      "x-ms-enum": {
+        "name": "LeaseAction",
+        "modelAsString": false
+      }
     },
     "Prefix": {
       "name": "prefix",
