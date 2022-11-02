@@ -591,7 +591,12 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
           },
           "204": {
             "description": "No Content. The request has been accepted but the domain was not found."
