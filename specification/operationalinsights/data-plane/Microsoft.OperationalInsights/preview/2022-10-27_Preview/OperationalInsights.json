@@ -297,7 +297,7 @@
   "x-ms-paths": {
     "/{resourceId}/query?disambiguation_dummy": {
       "get": {
-        "operationId": "Query_ResourceGet_Custom",
+        "operationId": "Query_ResourceGetXms",
         "summary": "Execute an Analytics query using resource URI",
         "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
@@ -332,7 +332,7 @@
         }
       },
       "post": {
-        "operationId": "Query_ResourceExecute_Custom",
+        "operationId": "Query_ResourceExecuteXms",
         "summary": "Execute an Analytics query using resource ID",
         "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
@@ -1507,21 +1507,13 @@
           "type": "string",
           "enum": [
             "/query"
-          ],
-          "x-ms-enum": {
-            "name": "path",
-            "modelAsString": true
-          }
+          ]
         },
         "method": {
           "type": "string",
           "enum": [
             "POST"
-          ],
-          "x-ms-enum": {
-            "name": "methodType",
-            "modelAsString": true
-          }
+          ]
         },
         "workspace": {
           "description": "Workspace Id to be included in the query",
@@ -1554,8 +1546,7 @@
           "type": "string"
         },
         "status": {
-          "type": "integer",
-          "format": "int64"
+          "type": "integer"
         },
         "body": {
           "type": "object",
