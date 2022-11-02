@@ -2,7 +2,7 @@
   "parameters": {
     "partyId": "PARTY123",
     "api-version": "2022-11-01-preview",
-    "body": {
+    "searchBoundaryQuery": {
       "ids": [
         "BOUNDARY123"
       ],
@@ -21,12 +21,10 @@
       "maxLastModifiedDateTime": "2021-04-22T12:53:39Z",
       "maxPageSize": 50,
       "skipToken": "string",
-      "parentType": "field",
+      "parentType": "Field",
       "parentIds": [
         "FIELD123"
       ],
-      "minArea": 200,
-      "maxArea": 800,
       "intersectsWithGeometry": {
         "type": "Polygon",
         "coordinates": [
@@ -65,14 +63,14 @@
             "description": "Some description",
             "source": "source",
             "parentId": "FIELD123",
-            "parentType": "field",
+            "parentType": "Field",
             "area": {
               "unit": "Acre",
               "value": 60.405
             }
           }
         ],
-        "$skipToken": "string",
+        "skipToken": "string",
         "nextLink": "https://{{resourceName}}.farmbeats.azure.net/parties/{{partyId}}/boundaries?api-version={{apiVersion}}&skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
       }
     }

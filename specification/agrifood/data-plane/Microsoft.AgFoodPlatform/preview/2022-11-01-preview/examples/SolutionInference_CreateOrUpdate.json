@@ -1,28 +1,20 @@
 {
   "parameters": {
-    "solutionId": "solutionId",
+    "solutionId": "solution.solutionId",
     "jobId": "jobId",
     "requestPath": "/v1/resources/jobId",
     "api-version": "2022-11-01-preview",
-    "body": {
-      "source": "Manual",
-      "name": "Application data for North Farm",
-      "description": "some description"
+    "solutionInferenceRequest": {
+      "requestPath": "string"
     }
   },
   "responses": {
-    "200": {
+    "202": {
+      "headers": {
+        "location":"location"
+      },
       "body": {
-        "source": "Manual",
-        "name": "Application data for North Farm",
-        "description": "some description"
-      }
-    },
-    "201": {
-      "body": {
-        "source": "Manual",
-        "name": "Application data for North Farm",
-        "description": "some description"
+        "requestPath": "string"
       }
     }
   }
