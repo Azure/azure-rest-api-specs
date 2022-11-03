@@ -70,12 +70,12 @@ output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/sec
 perform-load: false
 ```
 
-### Tag: package-2022-08-preview-only and python
+### Tag: package-2022-08-preview and python
 
-These settings apply only when `--tag=package-2022-08-preview-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2022-08-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2022-08-preview-only' && $(python)
+``` yaml $(tag) == 'package-2022-08-preview' && $(python)
 namespace: azure.mgmt.security.v2022_08_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_08_01_preview
 ```
