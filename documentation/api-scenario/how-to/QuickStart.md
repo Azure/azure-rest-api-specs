@@ -24,7 +24,7 @@ npm install -g oav
 - Validation result report. After each run API scenario, developer will get a validation report which contains detected issue in API test.
 - Integrate everywhere. Easily integrate with azure-pipeline, cloud-test.
 
-Execute `oav run -h` to find all available options.
+Run `oav run -h` to find all available options.
 
 ## Create AAD app
 
@@ -104,11 +104,11 @@ The `env.json` file contains required API scenario variables such as, subscripti
 
 ```json
 {
-  "subscriptionId": "<my subscription id>",
+  "subscriptionId": "<your subscription id>",
   "location": "westcentralus",
   "tenantId": "<AAD app tenantId>",
-  "client_id": "<my add client_id>",
-  "client_secret": "<my aad client_secret>"
+  "client_id": "<your add client_id>",
+  "client_secret": "<your aad client_secret>"
 }
 ```
 
