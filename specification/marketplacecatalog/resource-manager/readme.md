@@ -37,12 +37,3 @@ These settings apply only when `--tag=package-2022-02-02` is specified on the co
 input-file:
   - Search/stable/2022-02-02/search.json
 ```
-
-### Tag: package-2022-09-01-preview
-
-These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-09-01-preview'
-input-file:
-  - Microsoft.Marketplace/preview/2022-09-01-preview/marketplacecatalog.json
-```
