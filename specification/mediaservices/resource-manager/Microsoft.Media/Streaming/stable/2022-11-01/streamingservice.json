@@ -2622,7 +2622,7 @@
         "duration": {
           "format": "duration",
           "type": "string",
-          "description": "Duration of interruption in seconds. ISO 8601 time. For example, use PT1H30M to indicate 1 hour and 30 minutes."
+          "description": "Duration of interruption in ISO 8601 time. For example, use PT1H30M to indicate 1 hour and 30 minutes."
         },
         "reason": {
           "description": "Interruption reason.",
@@ -2647,7 +2647,7 @@
           "type": "string"
         },
         "endReason": {
-          "description": "End reason.",
+          "description": "Reason why ingestion stops. Empty if it's not stopped yet. E.g) Service Stopped. No Ingestion.",
           "type": "string"
         },
         "ingestInterruptions": {
@@ -2656,7 +2656,7 @@
             "$ref": "#/definitions/LiveEventIngestInterruption"
           },
           "x-ms-identifiers": [],
-          "description": "The list of ingest interruptions."
+          "description": "IngestInterruption entry list."
         }
       },
       "description": "The live event ingestion telemetry data.",
@@ -2679,7 +2679,7 @@
           "format": "int64"
         },
         "ingestDrift": {
-          "description": "Current ingest drift value in seconds for last 1 min.",
+          "description": "Current ingest drift value in seconds for last 1 minute.",
           "type": "string"
         }
       },
@@ -2711,7 +2711,30 @@
           }
         },
         "healthStatus": {
-          "description": "The health status over the last 20 seconds.",
+          "description": "Health status of last 20 seconds.",
+          "enum": [
+            "Excellent",
+            "Good",
+            "Poor"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventHealthStatus",
+            "values": [
+              {
+                "value": "Excellent",
+                "description": "Incoming bitrate >= 75% of target bitrate AND no Ingest warning and error AND ABS(IngestDrift) is equal to 0."
+              },
+              {
+                "value": "Good",
+                "description": "Incoming bitrate >= 20% AND no Ingest Error or warning exception discontinuities which gap < 10 seconds."
+              },
+              {
+                "value": "Poor",
+                "description": "Otherwise."
+              }
+            ],
+            "modelAsString": true
+          },
           "type": "string"
         },
         "healthDescriptions": {
@@ -2726,11 +2749,11 @@
           "type": "string"
         },
         "ingestion": {
-          "description": "Live event ingestion.",
+          "description": "Live event ingestion entry.",
           "$ref": "#/definitions/LiveEventIngestion"
         },
         "trackStatus": {
-          "description": "Track status entry list.",
+          "description": "Track entry list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LiveEventTrackStatus"
