@@ -4,7 +4,7 @@ import "@azure-tools/cadl-azure-core";
 using Cadl.Rest;
 using Azure.Core;
 
-namespace AzureOpenAIAPIversion20220601preview;
+namespace Azure.OpenAI;
 
 enum TypeDiscriminatorKnownValues {
   List: "list",
@@ -86,6 +86,7 @@ model DeploymentList {
 Deployments manage the reserved quota for Azure OpenAI models and make them
 available for inference requests.
 """)
+@resource("deployments")
 model Deployment {
   @doc("Defines the type of an object.")
   @visibility("read")
@@ -103,14 +104,13 @@ model Deployment {
   @visibility("read")
   updated_at?: int32;
 
-  @doc("The identity of this item.")
+  @doc("The identifier of the deployment")
+  @key("deploymentId")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("The OpenAI model to deploy. Can be a base model or a fine tune.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
-  "model": string;
+  "model"?: string;
 
   @doc("""
 The owner of this deployment. For Azure OpenAI only \"organization-owner\" is
@@ -256,7 +256,8 @@ model File {
 
   @doc("The identity of this item.")
   @visibility("read")
-  id?: string;
+  @key("fileId")
+  id: string;
 
   @doc("""
 The size of this file when available (can be null). File sizes larger than
@@ -273,8 +274,6 @@ fine-tuning. This allows us to validate the format of the uploaded file.
   purpose: Purpose;
 
   @doc("The name of the file.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   filename: string;
 }
 
@@ -317,6 +316,7 @@ model FineTuneList {
 }
 
 @doc("Fine tuning is a job to tailor a model to specific training data.")
+@resource("fine-tunes")
 model FineTune {
   @doc("Defines the type of an object.")
   @visibility("read")
@@ -336,11 +336,10 @@ model FineTune {
 
   @doc("The identity of this item.")
   @visibility("read")
-  id?: string;
+  @key
+  id: string;
 
   @doc("The identifier of the base model used for the fine-tune.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   "model": string;
 
   @doc("""
@@ -535,6 +534,7 @@ model ModelList {
 }
 
 @doc("A model is either a base model or the result of a successful fine tune job.")
+@resource("models")
 model Model {
   @doc("Defines the type of an object.")
   @visibility("read")
@@ -554,7 +554,8 @@ model Model {
 
   @doc("The identity of this item.")
   @visibility("read")
-  id?: string;
+  @key("modelId")
+  id: string;
 
   @doc("The base model ID if this is a fine tune model; otherwise `null`.")
   @visibility("read")
@@ -646,7 +647,8 @@ model StandardScaleSettings extends ScaleSettings {
   scale_type: "standard";
 }
 
-model Paths1Filz8PFilesPostRequestbodyContentMultipartFormDataSchema {
+@doc("content of uploaded file")
+model FileContent {
   @doc("""
 The intended purpose of the uploaded documents. Use \"fine-tune\" for
 fine-tuning. This allows us to validate the format of the uploaded file.
