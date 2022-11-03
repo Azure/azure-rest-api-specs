@@ -522,7 +522,17 @@
             }
           },
           "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "304": {
             "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
@@ -581,7 +591,17 @@
             }
           },
           "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "304": {
             "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
@@ -640,7 +660,17 @@
             }
           },
           "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "304": {
             "description": "Not Modified. The eTag in the request header is the same as the eTag in the storage container."
@@ -1864,6 +1894,7 @@
           "items": {
             "$ref": "#/definitions/LiveEventTimedMetadataEndpoint"
           },
+          "x-ms-identifiers": [],
           "description": "The metadata endpoints for the live event."
         }
       },
