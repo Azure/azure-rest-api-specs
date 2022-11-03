@@ -23,11 +23,6 @@
           "SinglePrivateProduct"
         ],
         "operationId": "SinglePrivateProduct_Get",
-        "x-ms-examples": {
-          "PrivateProduct_Get": {
-            "$ref": "./examples/SinglePrivateProduct_Get.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -103,11 +98,11 @@
             }
           }
         },
-        "security": [
-          {
-            "JWT": []
+        "x-ms-examples": {
+          "PrivateProduct_Get": {
+            "$ref": "./examples/SinglePrivateProduct_Get.json"
           }
-        ]
+        }
       }
     },
     "/providers/Microsoft.Marketplace/products/{id}": {
@@ -116,11 +111,6 @@
           "TenantBasedSingleProduct"
         ],
         "operationId": "TenantBasedSingleProduct_Get",
-        "x-ms-examples": {
-          "TenantBasedProduct_Get": {
-            "$ref": "./examples/TenantBasedSingleProduct_Get.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/UniqueProductIdParameter"
@@ -205,11 +195,11 @@
             }
           }
         },
-        "security": [
-          {
-            "JWT": []
+        "x-ms-examples": {
+          "TenantBasedProduct_Get": {
+            "$ref": "./examples/TenantBasedSingleProduct_Get.json"
           }
-        ]
+        }
       }
     }
   },
