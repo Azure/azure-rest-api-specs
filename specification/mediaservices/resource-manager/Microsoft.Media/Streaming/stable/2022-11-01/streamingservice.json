@@ -2942,7 +2942,7 @@
             "StreamEvent/InvalidConnection"
           ],
           "x-ms-enum": {
-            "name": "LiveEventHealthStatus",
+            "name": "LiveEventStreamEventType",
             "values": [
               {
                 "value": "StreamEvent/BeginIngest",
@@ -2995,7 +2995,7 @@
             "Information"
           ],
           "x-ms-enum": {
-            "name": "EventLevel",
+            "name": "LiveEventStreamEventLevel",
             "modelAsString": true
           }
         },
@@ -3024,72 +3024,80 @@
     "LiveEventTrackEventData": {
       "properties": {
         "trackName": {
-          "description": "",
+          "description": "Name of the track.",
           "type": "string"
         },
         "trackType": {
-          "description": "",
+          "description": "Type of the track.",
+          "enum": [
+            "Audio",
+            "Video"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventTrackEventTrackType",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "bitrate": {
-          "description": "",
+          "description": "Bitrate of the track.",
           "type": "integer",
           "format": "int64"
         },
         "incomingBitrate": {
-          "description": "",
+          "description": "Calculated bitrate based on data chunks coming from encoder.",
           "type": "integer",
           "format": "int64"
         },
         "lastTimestamp": {
-          "description": "",
+          "description": "Latest timestamp received for a track in last 20 seconds.",
           "type": "string"
         },
         "timescale": {
-          "description": "",
+          "description": "Timescale in which timestamps are expressed.",
           "type": "string"
         },
         "overlapCount": {
-          "description": "",
+          "description": "Number of data chunks that had overlapped timestamps in last 20 seconds.",
           "type": "integer",
           "format": "int64"
         },
         "discontinuityCount": {
-          "description": "",
+          "description": "Number of discontinuities detected in the last 20 seconds.",
           "type": "integer",
           "format": "int64"
         },
         "nonincreasingCount": {
-          "description": "",
+          "description": "Number of data chunks with timestamps in the past that were received in last 20 seconds.",
           "type": "integer",
           "format": "int64"
         },
         "unexpectedBitrate": {
-          "description": "",
+          "description": "If expected and actual bitrates differ by more than allowed limit in last 20 seconds.",
           "type": "boolean"
         },
         "state": {
-          "description": "",
+          "description": "State of the live event.",
           "type": "string"
         },
         "healthy": {
-          "description": "",
+          "description": "Indicates whether ingest is healthy.",
           "type": "boolean"
         },
         "lastFragmentArrivalTime": {
-          "description": "",
+          "description": "The last timestamp in UTC that a fragment arrived at the ingest endpoint.",
           "type": "string"
         },
         "ingestDriftValue": {
-          "description": "",
+          "description": "Indicates the speed of delay, in seconds-per-minute, of the incoming audio or video data during the last minute. The value is greater than zero if data is arriving to the live event slower than expected in the last minute; zero if data arrived with no delay; and \"n/a\" if no audio or video data was received. For example, if you have a contribution encoder sending in live content, and it is slowing down due to processing issues, or network latency, it may be only able to deliver a total of 58 seconds of audio or video in a one-minute period. This would be reported as two seconds-per-minute of drift. If the encoder is able to catch up and send all 60 seconds or more of data every minute, you will see this value reported as 0. If there was a disconnection or discontinuity from the encoder, this value may still display as 0, as it does not account for breaks in the data - only data that is delayed in timestamps.",
           "type": "string"
         },
         "transcriptionState": {
-          "description": "",
+          "description": "This value is \"On\" for audio track heartbeats if live transcription is turned on, otherwise you will see an empty string. This state is only applicable to tracktype of \"audio\" for Live transcription. All other tracks will have an empty value.",
           "type": "string"
         },
         "transcriptionLanguage": {
-          "description": "",
+          "description": "The language code (in BCP-47 format) of the transcription language. For example, \"de-de\" indicates German (Germany). The value is empty for the video track heartbeats, or when live transcription is turned off.",
           "type": "string"
         }
       },
@@ -3099,7 +3107,20 @@
     "LiveEventTrackEvent": {
       "properties": {
         "eventType": {
-          "description": "The type of the stream event.",
+          "description": "The type of the track event.",
+          "enum": [
+            "TrackEvent/IngestHeartbeat"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventTrackEventType",
+            "values": [
+              {
+                "value": "TrackEvent/IngestHeartbeat",
+                "description": "Track heartbeat received."
+              }    
+            ],
+            "modelAsString": true
+          },
           "type": "string"
         },
         "eventTime": {
