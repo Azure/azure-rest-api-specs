@@ -56,15 +56,7 @@
       "SasToken": []
     }
   ],
-  "responses": {
-    "default": {
-      "description": "An unexpected error occurred.",
-      "schema": {
-        "$ref": "#/definitions/ErrorResponse"
-      },
-      "x-ms-error-response": true
-    }
-  },
+  "responses": {},
   "parameters": {
     "ApiVersion": {
       "name": "api-version",
@@ -272,10 +264,16 @@
         "operationId": "Conversion_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/conversion/Conversion_GetOperationStillRunning.json"
+            "$ref": "./examples/conversion/Conversion_GetOperation_Running.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/conversion/Conversion_GetOperation_Success.json"
           },
           "Get the status of an operation which has finished successfully, with non-fatal warnings": {
-            "$ref": "./examples/conversion/Conversion_GetOperation.json"
+            "$ref": "./examples/conversion/Conversion_GetOperation_Success_Warnings.json"
+          },
+          "Get the status of an operation which has failed": {
+            "$ref": "./examples/conversion/Conversion_GetOperation_Fail.json"
           }
         },
         "parameters": [
@@ -290,7 +288,7 @@
           "200": {
             "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
             "schema": {
-              "$ref": "#/definitions/LongRunningOperationResult"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult2"
             },
             "headers": {
               "Resource-Location": {
@@ -300,7 +298,7 @@
             }
           },
           "default": {
-            "$ref": "#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default2"
           }
         }
       }
@@ -361,136 +359,6 @@
           },
           "type": "object",
           "readOnly": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "title": "Error response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetail"
-        }
-      }
-    },
-    "LongRunningOperationResult": {
-      "description": "The response model for a Long-Running Operations API.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The Id for this long-running operation.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status state of the request.",
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "LroStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "NotStarted",
-                "description": "The request has not started processing yet."
-              },
-              {
-                "value": "Running",
-                "description": "The request has started processing."
-              },
-              {
-                "value": "Failed",
-                "description": "The request has one or more failures."
-              },
-              {
-                "value": "Succeeded",
-                "description": "The request has successfully completed."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "created": {
-          "description": "The created timestamp.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorDetail"
-        },
-        "warning": {
-          "$ref": "#/definitions/ErrorDetail"
-        }
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "The error detail.",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "description": "The error details."
-        },
-        "innerError": {
-          "readOnly": true,
-          "type": "object",
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorAdditionalInfo"
-          },
-          "description": "The error additional info."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "InnerError": {
-      "type": "object",
-      "description": "The error detail.",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Inner error code."
-        },
-        "innerError": {
-          "readOnly": true,
-          "type": "object",
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error."
         }
       }
     }

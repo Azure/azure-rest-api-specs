@@ -284,10 +284,13 @@
         "operationId": "Dataset_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/dataset/Dataset_GetOperationStillRunning.json"
+            "$ref": "./examples/dataset/Dataset_GetOperation_Running.json"
           },
           "Get the status of an operation which has finished successfully": {
-            "$ref": "./examples/dataset/Dataset_GetOperation.json"
+            "$ref": "./examples/dataset/Dataset_GetOperation_Success.json"
+          },
+          "Get the status of an operation which has failed with error details and Inner Error": {
+            "$ref": "./examples/dataset/Dataset_GetOperation_Fail.json"
           }
         },
         "parameters": [
@@ -305,7 +308,7 @@
           "200": {
             "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
             "schema": {
-              "$ref": "../2.0/dwgconversion.json#/definitions/LongRunningOperationResult"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult2"
             },
             "headers": {
               "Resource-Location": {
@@ -315,7 +318,7 @@
             }
           },
           "default": {
-            "$ref": "../2.0/dwgconversion.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default2"
           }
         }
       }
