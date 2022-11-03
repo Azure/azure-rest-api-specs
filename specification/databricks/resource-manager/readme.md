@@ -77,7 +77,7 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: 'The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace resources.'
 openapi-type: arm
-tag: package-2022-04-01-preview
+tag: package-2022-09-01-preview
 ```
 
 ### Tag: package-2018-04-01
@@ -109,6 +109,16 @@ input-file:
 - Microsoft.Databricks/preview/2022-04-01-preview/databricks.json
 - Microsoft.Databricks/preview/2022-04-01-preview/vnetpeering.json
 - Microsoft.Databricks/preview/2022-04-01-preview/accessconnector.json
+```
+### Tag: package-2022-09-01-preview
+
+These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-01-preview'
+input-file:
+- Microsoft.Databricks/preview/2022-09-01-preview/databricks.json
+- Microsoft.Databricks/preview/2022-09-01-preview/vnetpeering.json
+- Microsoft.Databricks/preview/2022-09-01-preview/accessconnector.json
 ```
 
 ---
