@@ -18,47 +18,43 @@
       "body": {
         "value": [
           {
-            "kind": "SynapseSpark",
             "properties": {
-              "computationId": "a08f184b-0567-890a-ba22-a1199336d226",
-              "revision": 1,
-              "visibility": "ShowAll",
-              "purpose": "Body",
-              "sources": [
-                "foo"
-              ],
-              "sinks": [
-                "bar"
-              ],
-              "content": "Hello Python!",
-              "provisioningState": "Succeeded",
-              "language": "Python"
+                "language": "Python",
+                "visibility": "ShowAll",
+                "purpose": "OutputAdapter",
+                "content": "insight=dataFrame",
+                "computationId": "aa3b5278-ad09-4b79-926d-74db23258ba6",
+                "revision": 1,
+                "sources": [
+                    "dataFrame"
+                ],
+                "sinks": [
+                    "insight"
+                ],
+                "parameters": [
+                    {
+                        "defaultValue": null,
+                        "parameterId": "bd0d19d9-2abe-44c4-9786-f7f7239c0b24",
+                        "name": "param",
+                        "parameterType": "Boolean",
+                        "description": "Just one of those parameters"
+                    }
+                ],
+                "provisioningState": "Succeeded"
             },
-            "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/computations/Computation1/revisions/1",
-            "name": "1",
-            "type": "Microsoft.DataCollaboration/workspaces/computations/revisions"
-          },
-          {
             "kind": "SynapseSpark",
-            "properties": {
-              "computationId": "a08f184b-0567-890a-ba22-a1199336d226",
-              "revision": 2,
-              "visibility": "ShowAll",
-              "purpose": "Body",
-              "sources": [
-                "foo"
-              ],
-              "sinks": [
-                "bar"
-              ],
-              "content": "Hi Python!",
-              "provisioningState": "Succeeded",
-              "language": "Python"
-            },
-            "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/computations/Computation1/revisions/2",
-            "name": "2",
-            "type": "Microsoft.DataCollaboration/workspaces/computations/revisions"
-          }
+            "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/workspace1/computations/computation1/revisions/1",
+            "name": "Computation1",
+            "type": "Microsoft.DataCollaboration/workspaces/computations",
+            "systemData": {
+                "createdBy": "defaultApplicationName",
+                "createdByType": "User",
+                "createdAt": "2022-11-01T18:21:33.5758175Z",
+                "lastModifiedBy": "defaultApplicationName",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2022-11-01T18:21:33.5758175Z"
+            }
+        }
         ]
       }
     }
