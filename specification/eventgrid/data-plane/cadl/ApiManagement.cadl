@@ -1,0 +1,49 @@
+model ApiManagementBase {
+  @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`")
+  resourceUri?: string;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event.")
+model ApiManagementUserCreatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserUpdated event.")
+model ApiManagementUserUpdatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserDeleted event.")
+model ApiManagementUserDeletedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionCreated event.")
+model ApiManagementSubscriptionCreatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionUpdated event.")
+model ApiManagementSubscriptionUpdatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionDeleted event.")
+model ApiManagementSubscriptionDeletedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductCreated event.")
+model ApiManagementProductCreatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductUpdated event.")
+model ApiManagementProductUpdatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductDeleted event.")
+model ApiManagementProductDeletedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event.")
+model ApiManagementApiCreatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIUpdated event.")
+model ApiManagementApiUpdatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIDeleted event.")
+model ApiManagementApiDeletedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseCreated event.")
+model ApiManagementApiReleaseCreatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseUpdated event.")
+model ApiManagementApiReleaseUpdatedEventData is ApiManagementBase;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseDeleted event.")
+model ApiManagementApiReleaseDeletedEventData is ApiManagementBase;
