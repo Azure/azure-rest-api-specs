@@ -29,6 +29,10 @@ title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2022-09-preview
+csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
+
 license-header: MICROSOFT_MIT
 ```
 
@@ -60,6 +64,7 @@ These settings apply only when `--tag=package-2022-09-preview` is specified on t
 input-file:
   - Microsoft.RecoveryServices/preview/2022-09-01-preview/bms.json
 ```
+
 ### Tag: package-2022-06-01-preview
 
 These settings apply only when `--tag=package-2022-06-01-preview` is specified on the command line.
@@ -67,6 +72,14 @@ These settings apply only when `--tag=package-2022-06-01-preview` is specified o
 ``` yaml $(tag) == 'package-2022-06-01-preview'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-06-01-preview/bms.json
+```
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-04-01/bms.json
 ```
 
 ### Tag: package-2022-03
