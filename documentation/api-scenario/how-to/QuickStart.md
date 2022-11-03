@@ -24,7 +24,7 @@ npm install -g oav
 - Validation result report. After each run API scenario, developer will get a validation report which contains detected issue in API test.
 - Integrate everywhere. Easily integrate with azure-pipeline, cloud-test.
 
-See `oav run -h` to find all available options.
+Execute `oav run -h` to find all available options.
 
 ## Create AAD app
 
@@ -115,8 +115,10 @@ The `env.json` file contains required API scenario variables such as, subscripti
 #### 3. Run API Scenario test
 
 ```sh
-oav run ~/workspace/azure-rest-api-specs/specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios/quickstart.yaml --tag=package-2022-05-01 -e env.json --verbose
+oav run ~/workspace/azure-rest-api-specs/specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/scenarios/quickstart.yaml --tag package-2022-05-01 -e env.json --verbose
 ```
+
+The `--tag` parameter specifies tag name in the autorest configuration (readme.md) file, and Swagger files under the tag will be loaded. By default, oav tries to find the closest readme.md file in the upper directories of the scenario file, and use the "default" tag in it. You can use `--readme` and `--tag` to specify readme.md file and tag to load Swagger files, or `--specs` to specify Swagger files directly.
 
 #### 4. Debug with Postman
 
