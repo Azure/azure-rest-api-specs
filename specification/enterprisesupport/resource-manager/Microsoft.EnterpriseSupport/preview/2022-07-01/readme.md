@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-2022-07-01-preview` is specified o
 ``` yaml $(tag) == 'package-package-2022-07-01-preview'
 input-file:
 - Microsoft.EnterpriseSupport/preview/2022-07-01/enterpriseSupport.json
-
 ```
 
 # Code Generation
