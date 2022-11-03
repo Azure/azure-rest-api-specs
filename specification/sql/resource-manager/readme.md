@@ -140,6 +140,7 @@ input-file:
   - Microsoft.Sql/preview/2022-08-01-preview/ServerAutomaticTuning.json
   - Microsoft.Sql/preview/2022-08-01-preview/ServerAzureADAdministrators.json
   - Microsoft.Sql/preview/2022-08-01-preview/ServerAzureADOnlyAuthentications.json
+  - Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
   - Microsoft.Sql/preview/2022-08-01-preview/ServerConnectionPolicies.json
   - Microsoft.Sql/preview/2022-08-01-preview/ServerDevOpsAudit.json
   - Microsoft.Sql/preview/2022-08-01-preview/ServerDnsAliases.json
@@ -841,6 +842,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 
 
 # Needed when there is more than one input file
