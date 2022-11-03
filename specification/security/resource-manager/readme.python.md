@@ -75,7 +75,7 @@ perform-load: false
 These settings apply only when `--tag=package-preview-2022-08 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-previe-2022-08w' && $(python)
+``` yaml $(tag) == 'package-preview-2022-08' && $(python)
 namespace: azure.mgmt.security.v2022_08_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_08_01_preview
 ```
