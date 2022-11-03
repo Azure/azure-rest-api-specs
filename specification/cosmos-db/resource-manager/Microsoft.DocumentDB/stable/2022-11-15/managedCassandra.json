@@ -730,7 +730,7 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/CassandraReaperClusterStatus"
+                    "$ref": "#/definitions/CassandraReaperClusterStatus"
                   }
                 }
               }
@@ -826,17 +826,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CassandraClusterRepairPublicResource"
+                  "$ref": "#/definitions/CassandraClusterRepairPublicResource"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CassandraClusterRepairPublicResource"
+                  "$ref": "#/definitions/CassandraClusterRepairPublicResource"
                 }
               },
               "application/*+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CassandraClusterRepairPublicResource"
+                  "$ref": "#/definitions/CassandraClusterRepairPublicResource"
                 }
               }
             }
@@ -847,7 +847,7 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/CassandraReaperRunStatus"
+                    "$ref": "#/definitions/CassandraReaperRunStatus"
                   }
                 }
               }
@@ -942,7 +942,7 @@
                   "schema": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/CassandraReaperRunStatus"
+                      "$ref": "#/definitions/CassandraReaperRunStatus"
                     }
                   }
                 }
@@ -1091,7 +1091,7 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/CassandraRepairSegmentResourceFeedResponse"
+                    "$ref": "#/definitions/CassandraRepairSegmentResourceFeedResponse"
                   }
                 }
               }
@@ -1145,7 +1145,7 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/CassandraReaperRunStatus"
+                    "$ref": "#/definitions/CassandraReaperRunStatus"
                   }
                 }
               }
@@ -1961,7 +1961,7 @@
           "nullable": true
         },
         "properties": {
-          "$ref": "#/components/schemas/CassandraClusterRepairPublicProperties"
+          "$ref": "#/definitions/CassandraClusterRepairPublicProperties"
         }
       },
       "additionalProperties": false
@@ -1990,19 +1990,19 @@
         "repairRuns": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/CassandraReaperRunStatus"
+            "$ref": "#/definitions/CassandraReaperRunStatus"
           },
           "nullable": true
         },
         "repairSchedules": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/CassandraReaperScheduleStatus"
+            "$ref": "#/definitions/CassandraReaperScheduleStatus"
           },
           "nullable": true
         },
         "nodesStatus": {
-          "$ref": "#/components/schemas/CassandraReaperNodeStatus"
+          "$ref": "#/definitions/CassandraReaperNodeStatus"
         }
       },
       "additionalProperties": false
@@ -2067,7 +2067,7 @@
             "additionalProperties": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/CassandraReaperEndpointState"
+                "$ref": "#/definitions/CassandraReaperEndpointState"
               }
             }
           },
@@ -2093,7 +2093,7 @@
         "endpointStates": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/CassandraReaperGossipInfo"
+            "$ref": "#/definitions/CassandraReaperGossipInfo"
           },
           "nullable": true
         }
@@ -2327,7 +2327,7 @@
           "nullable": true
         },
         "tokenRange": {
-          "$ref": "#/components/schemas/CassandraRepairTokenRange"
+          "$ref": "#/definitions/CassandraRepairTokenRange"
         },
         "failCount": {
           "type": "integer",
@@ -2365,7 +2365,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/CassandraRepairSegment"
+            "$ref": "#/definitions/CassandraRepairSegment"
           },
           "nullable": true
         }
@@ -2376,12 +2376,12 @@
       "type": "object",
       "properties": {
         "baseRange": {
-          "$ref": "#/components/schemas/CassandraRepairRingRange"
+          "$ref": "#/definitions/CassandraRepairRingRange"
         },
         "tokenRanges": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/CassandraRepairRingRange"
+            "$ref": "#/definitions/CassandraRepairRingRange"
           },
           "nullable": true
         },
