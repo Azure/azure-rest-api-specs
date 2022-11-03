@@ -1,0 +1,322 @@
+import "./AzureCommunicationServicesCore.cadl"
+
+@doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.")
+model AcsUserDisconnectedEventData {
+  @doc("The communication identifier of the user who was disconnected")
+  userCommunicationIdentifier?: CommunicationIdentifierModel;
+}
+
+model AcsChatMessageBaseEventData {
+  @doc("The body of the chat message")
+  messageBody?: string;
+
+  @doc("The chat message metadata")
+  metadata?: Map<string, string>;
+}
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.")
+model AcsChatMessageReceivedEventData is AcsChatMessageBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.")
+model AcsChatMessageReceivedInThreadEventData is AcsChatMessageBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.")
+model AcsChatMessageEditedEventData {
+  ...AcsChatMessageBaseEventData;
+
+  @doc("The time at which the message was edited")
+  editTime?: zonedDateTime;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.")
+model AcsChatMessageEditedInThreadEventData {
+  ...AcsChatMessageBaseEventData;
+
+  @doc("The time at which the message was edited")
+  editTime?: zonedDateTime;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.")
+model AcsChatMessageDeletedEventData {
+  @doc("The time at which the message was deleted")
+  deleteTime?: zonedDateTime;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.")
+model AcsChatMessageDeletedInThreadEventData {
+  @doc("The time at which the message was deleted")
+  deleteTime?: zonedDateTime;
+}
+
+model AcsChatThreadBaseEventData {
+  @doc("The communication identifier of the user who created the thread")
+  createdByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The thread properties")
+  properties?: Map<string, string>;
+
+  @doc("The list of properties of participants who are part of the thread")
+  participants?: AcsChatThreadParticipantProperties[];
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.")
+model AcsChatThreadCreatedWithUserEventData is AcsChatThreadBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.")
+model AcsChatThreadCreatedEventData is AcsChatThreadBaseEventData;
+
+model AcsChatThreadDeletedBaseEventData {
+  @doc("The communication identifier of the user who deleted the thread")
+  deletedByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The deletion time of the thread")
+  deleteTime?: zonedDateTime;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.")
+model AcsChatThreadWithUserDeletedEventData is AcsChatThreadDeletedBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.")
+model AcsChatThreadDeletedEventData is AcsChatThreadDeletedBaseEventData;
+
+model AcsChatThredPropertiesBaseEventData {
+  @doc("The communication identifier of the user who updated the thread properties")
+  editedByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The time at which the properties of the thread were updated")
+  editTime?: zonedDateTime;
+
+  @doc("The updated thread properties")
+  properties?: Map<string, string>;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.")
+model AcsChatThreadPropertiesUpdatedPerUserEventData is AcsChatThredPropertiesBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.")
+model AcsChatThreadPropertiesUpdatedEventData is AcsChatThredPropertiesBaseEventData;
+
+model AcsChatParticipantBaseEventData {
+  @doc("The time at which the user was added to the thread")
+  time?: zonedDateTime;
+
+  @doc("The communication identifier of the user who added the user")
+  addedByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The details of the user who was added")
+  participantAdded?: AcsChatThreadParticipantProperties;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.")
+model AcsChatParticipantAddedToThreadWithUserEventData is AcsChatParticipantBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.")
+model AcsChatParticipantRemovedFromThreadWithUserEventData is AcsChatParticipantBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.")
+model AcsChatParticipantAddedToThreadEventData {
+  ...AcsChatParticipantBaseEventData;
+
+  @doc("The version of the thread")
+  version?: int64;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.")
+model AcsChatParticipantRemovedFromThreadEventData {
+  @doc("The time at which the user was removed to the thread")
+  time?: zonedDateTime;
+
+  @doc("The communication identifier of the user who removed the user")
+  removedByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The details of the user who was removed")
+  participantRemoved?: AcsChatThreadParticipantProperties;
+
+  @doc("The version of the thread")
+  version?: int64;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.")
+model AcsSmsDeliveryReportReceivedEventData {
+  @doc("Status of Delivery")
+  deliveryStatus?: string;
+
+  @doc("Details about Delivery Status")
+  deliveryStatusDetails?: string;
+
+  @doc("List of details of delivery attempts made")
+  deliveryAttempts?: AcsSmsDeliveryAttemptProperties[];
+
+  @doc("The time at which the SMS delivery report was received")
+  receivedTimestamp?: zonedDateTime;
+
+  @doc("Customer Content")
+  tag?: string;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.")
+model AcsSmsReceivedEventData {
+  @doc("The SMS content")
+  message?: string;
+
+  @doc("The time at which the SMS was received")
+  receivedTimestamp?: zonedDateTime;
+}
+
+@knownValues(recordingContentTypeKV)
+model recordingContentType is string {}
+enum recordingContentTypeKV {
+  AudioVideo,
+  Audio,
+}
+
+@knownValues(recordingChannelTypeKV)
+model recordingChannelType is string {}
+enum recordingChannelTypeKV {
+  Mixed,
+  Unmixed,
+}
+
+@knownValues(recordingFormatTypeKV)
+model recordingFormatType is string {}
+enum recordingFormatTypeKV {
+  Wav,
+  Mp3,
+  Mp4,
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.")
+model AcsRecordingFileStatusUpdatedEventData {
+  @doc("The details of recording storage information")
+  recordingStorageInfo?: AcsRecordingStorageInfoProperties;
+
+  @doc("The time at which the recording started")
+  recordingStartTime?: zonedDateTime;
+
+  @doc("The recording duration in milliseconds")
+  recordingDurationMs?: int64;
+
+  @doc("The recording content type- AudioVideo, or Audio")
+  recordingContentType?: recordingContentType;
+
+  @doc("The recording  channel type - Mixed, Unmixed")
+  recordingChannelType?: recordingChannelType;
+
+  @doc("The recording format type - Mp4, Mp3, Wav")
+  recordingFormatType?: recordingFormatType;
+
+  @doc("The reason for ending recording session")
+  sessionEndReason?: string;
+}
+
+@doc("Schema of common properties of all chat thread events")
+model AcsChatThreadEventBaseProperties {
+  @doc("The original creation time of the thread")
+  createTime?: zonedDateTime;
+
+  @doc("The version of the thread")
+  version?: int64;
+}
+
+@doc("Schema of common properties of all chat thread events")
+model AcsChatThreadEventInThreadBaseProperties is AcsChatThreadEventBaseProperties;
+
+@doc("Schema of common properties of all chat message events")
+model AcsChatMessageEventBaseProperties {
+  @doc("The chat message id")
+  messageId?: string;
+
+  @doc("The communication identifier of the sender")
+  senderCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The display name of the sender")
+  senderDisplayName?: string;
+
+  @doc("The original compose time of the message")
+  composeTime?: zonedDateTime;
+
+  @doc("The type of the message")
+  type?: string;
+
+  @doc("The version of the message")
+  version?: int64;
+}
+
+@doc("Schema of common properties of all thread-level chat message events")
+model AcsChatMessageEventInThreadBaseProperties is AcsChatMessageEventBaseProperties;
+
+@doc("Schema of common properties of all thread-level chat events")
+model AcsChatEventInThreadBaseProperties {
+  @doc("The transaction id will be used as co-relation vector")
+  transactionId?: string;
+
+  @doc("The chat thread id")
+  threadId?: string;
+}
+
+@doc("Schema of common properties of all chat events")
+model AcsChatEventBaseProperties {
+  @doc("The communication identifier of the target user")
+  recipientCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  ...AcsChatEventInThreadBaseProperties;
+}
+
+@doc("Schema of the chat thread participant")
+model AcsChatThreadParticipantProperties {
+  @doc("The name of the user")
+  displayName?: string;
+
+  @doc("The communication identifier of the user")
+  participantCommunicationIdentifier?: CommunicationIdentifierModel;
+}
+
+@doc("Schema of common properties of all SMS events")
+model AcsSmsEventBaseProperties {
+  @doc("The identity of the SMS message")
+  messageId?: string;
+
+  @doc("The identity of SMS message sender")
+  from?: string;
+
+  @doc("The identity of SMS message receiver")
+  to?: string;
+}
+
+@doc("Schema for details of a delivery attempt")
+model AcsSmsDeliveryAttemptProperties {
+  @doc("TimeStamp when delivery was attempted")
+  timestamp?: zonedDateTime;
+
+  @doc("Number of segments that were successfully delivered")
+  segmentsSucceeded?: integer;
+
+  @doc("Number of segments whose delivery failed")
+  segmentsFailed?: integer;
+}
+
+@doc("Schema for all properties of Recording Storage Information.")
+model AcsRecordingStorageInfoProperties {
+  @doc("List of details of recording chunks information")
+  recordingChunks?: AcsRecordingChunkInfoProperties[];
+}
+
+@doc("Schema for all properties of  Recording Chunk Information.")
+model AcsRecordingChunkInfoProperties {
+  @doc("The documentId of the recording chunk")
+  documentId?: string;
+
+  @doc("The index of the recording chunk")
+  index?: int64;
+
+  @doc("The reason for ending the recording chunk")
+  endReason?: string;
+
+  @doc("The location of the metadata for this chunk")
+  metadataLocation?: string;
+
+  @doc("The location of the content for this chunk")
+  contentLocation?: string;
+
+  @doc("The location to delete all chunk storage")
+  deleteLocation?: string;
+}

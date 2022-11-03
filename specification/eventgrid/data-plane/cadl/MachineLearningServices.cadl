@@ -1,0 +1,104 @@
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event.")
+model MachineLearningServicesModelRegisteredEventData {
+  @doc("The name of the model that was registered.")
+  modelName?: string;
+
+  @doc("The version of the model that was registered.")
+  modelVersion?: string;
+
+  @doc("The tags of the model that was registered.")
+  modelTags?: Map<string, string>;
+
+  @doc("The properties of the model that was registered.")
+  modelProperties?: Map<string, string>;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event.")
+model MachineLearningServicesModelDeployedEventData {
+  @doc("The name of the deployed service.")
+  serviceName?: string;
+
+  @doc("The compute type (e.g. ACI, AKS) of the deployed service.")
+  serviceComputeType?: string;
+
+  @doc("A common separated list of model IDs. The IDs of the models deployed in the service.")
+  modelIds?: string;
+
+  @doc("The tags of the deployed service.")
+  serviceTags?: Map<string, string>;
+
+  @doc("The properties of the deployed service.")
+  serviceProperties?: Map<string, string>;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event.")
+model MachineLearningServicesRunCompletedEventData {
+  @doc("The ID of the experiment that the run belongs to.")
+  experimentId?: string;
+
+  @doc("The name of the experiment that the run belongs to.")
+  experimentName?: string;
+
+  @doc("The ID of the Run that was completed.")
+  runId?: string;
+
+  @doc("The Run Type of the completed Run.")
+  runType?: string;
+
+  @doc("The tags of the completed Run.")
+  runTags?: Map<string, string>;
+
+  @doc("The properties of the completed Run.")
+  runProperties?: Map<string, string>;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.")
+model MachineLearningServicesDatasetDriftDetectedEventData {
+  @doc("The ID of the data drift monitor that triggered the event.")
+  dataDriftId?: string;
+
+  @doc("The name of the data drift monitor that triggered the event.")
+  dataDriftName?: string;
+
+  @doc("The ID of the Run that detected data drift.")
+  runId?: string;
+
+  @doc("The ID of the base Dataset used to detect drift.")
+  baseDatasetId?: string;
+
+  @doc("The ID of the target Dataset used to detect drift.")
+  targetDatasetId?: string;
+
+  @doc("The coefficient result that triggered the event.")
+  driftCoefficient?: float64;
+
+  @doc("The start time of the target dataset time series that resulted in drift detection.")
+  startTime?: zonedDateTime;
+
+  @doc("The end time of the target dataset time series that resulted in drift detection.")
+  endTime?: zonedDateTime;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event.")
+model MachineLearningServicesRunStatusChangedEventData {
+  @doc("The ID of the experiment that the Machine Learning Run belongs to.")
+  experimentId?: string;
+
+  @doc("The name of the experiment that the Machine Learning Run belongs to.")
+  experimentName?: string;
+
+  @doc("The ID of the Machine Learning Run.")
+  runId?: string;
+
+  @doc("The Run Type of the Machine Learning Run.")
+  runType?: string;
+
+  @doc("The tags of the Machine Learning Run.")
+  runTags?: Map<string, string>;
+
+  @doc("The properties of the Machine Learning Run.")
+  runProperties?: Map<string, string>;
+
+  @doc("The status of the Machine Learning Run.")
+  runStatus?: string;
+}
