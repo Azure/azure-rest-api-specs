@@ -7254,6 +7254,26 @@
         }
       }
     },
+	"CredentialListResponse": {
+      "description": "A list of credential resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of credentials.",
+          "items": {
+            "$ref": "#/definitions/CredentialResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
     "ManagedPrivateEndpointResource": {
       "description": "Managed private endpoint resource type.",
       "allOf": [
@@ -7265,6 +7285,23 @@
         "properties": {
           "$ref": "./entityTypes/ManagedPrivateEndpoint.json#/definitions/ManagedPrivateEndpoint",
           "description": "Managed private endpoint properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+	"CredentialResource": {
+      "description": "Credential resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Credential.json#/definitions/ManagedIdentityCredential",
+          "description": "Managed Identity Credential properties."
         }
       },
       "required": [
