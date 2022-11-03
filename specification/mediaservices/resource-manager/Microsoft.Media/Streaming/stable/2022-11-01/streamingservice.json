@@ -535,6 +535,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "Get status of a LiveEvent": {
             "$ref": "examples/liveevent-get-status.json"
@@ -591,6 +594,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "Get stream events of a LiveEvent": {
             "$ref": "examples/liveevent-get-stream-events.json"
@@ -647,6 +653,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "Get track ingest heart beats of a LiveEvent": {
             "$ref": "examples/liveevent-get-track-events.json"
@@ -2796,8 +2805,8 @@
         "mediaType": {
           "description": "Type of the track.",
           "enum": [
-            "Audio",
-            "Video"
+            "audio",
+            "video"
           ],
           "x-ms-enum": {
             "name": "LiveEventStreamEventMediaType",
@@ -3030,8 +3039,8 @@
         "trackType": {
           "description": "Type of the track.",
           "enum": [
-            "Audio",
-            "Video"
+            "audio",
+            "video"
           ],
           "x-ms-enum": {
             "name": "LiveEventTrackEventTrackType",
@@ -3093,7 +3102,7 @@
           "type": "string"
         },
         "transcriptionState": {
-          "description": "This value is \"On\" for audio track heartbeats if live transcription is turned on, otherwise you will see an empty string. This state is only applicable to tracktype of \"audio\" for Live transcription. All other tracks will have an empty value.",
+          "description": "This value is \"On\" for audio track heartbeats if live transcription is turned on, otherwise you will see an empty string. This state is only applicable to track type of \"audio\" for Live transcription. All other tracks will have an empty value.",
           "type": "string"
         },
         "transcriptionLanguage": {
