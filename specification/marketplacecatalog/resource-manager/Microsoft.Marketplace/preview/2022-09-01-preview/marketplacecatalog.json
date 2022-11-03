@@ -95,6 +95,7 @@
           },
           "403": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the provided authorization token validation has failed",
             "schema": {
               "type": "string"
@@ -557,6 +558,7 @@
         "plans": {
           "type": "array",
           "description": "List of plans that are available for this product",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/PlanSummary"
           }
@@ -839,6 +841,7 @@
         "artifacts": {
           "type": "array",
           "description": "Plan-level resources and configuration files",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/Artifact"
           }
@@ -851,7 +854,7 @@
           "type": "string",
           "description": "Plan description"
         },
-        "The skuId": {
+        "skuId": {
           "type": "string",
           "description": "The SKU id"
         },
@@ -870,6 +873,7 @@
         "purchaseDurationDiscounts": {
           "type": "array",
           "description": "The percentage discount for third-party virtual machines software reservations",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/PurchaseDurationDiscount"
           }
@@ -916,6 +920,7 @@
         "relatedSkus": {
           "type": "array",
           "description": "Pointing to a planId that is related to this plan",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/PlanSkuRelation"
           }
@@ -926,7 +931,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "description": "Sku",
+          "description": "The Sku",
           "allOf": [
             {
               "$ref": "#/definitions/RelatedSku"
@@ -950,7 +955,7 @@
           "type": "string",
           "description": "The generation"
         },
-        "The identity": {
+        "identity": {
           "type": "string",
           "description": "The identity"
         }
