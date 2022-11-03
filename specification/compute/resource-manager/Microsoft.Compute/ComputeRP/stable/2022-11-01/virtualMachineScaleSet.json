@@ -3590,6 +3590,10 @@
         "prioritizeUnhealthyInstances": {
           "type": "boolean",
           "description": "Upgrade all unhealthy instances in a scale set before any healthy instances."
+        },
+        "maxSurge": {
+          "type": "boolean",
+          "description": "Create a new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch."
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
