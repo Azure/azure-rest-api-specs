@@ -71,6 +71,7 @@
           },
           "404": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the offer does not exist / does not exist in the given market / is not available for the given audience",
             "schema": {
               "type": "string"
@@ -78,6 +79,7 @@
           },
           "400": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the request is malformed",
             "schema": {
               "type": "string"
@@ -85,6 +87,7 @@
           },
           "401": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the provided authorization token is not in allowed list",
             "schema": {
               "type": "string"
@@ -95,6 +98,12 @@
             "description": "In case the provided authorization token validation has failed",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -168,6 +177,7 @@
           },
           "404": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the offer does not exist / does not exist in the given market / is not available for given audience",
             "schema": {
               "type": "string"
@@ -175,6 +185,7 @@
           },
           "400": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the request is malformed",
             "schema": {
               "type": "string"
@@ -182,6 +193,7 @@
           },
           "401": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the provided authorization token is not in allowed list",
             "schema": {
               "type": "string"
@@ -189,9 +201,16 @@
           },
           "403": {
             "x-nullable": false,
+            "x-ms-error-response": true,
             "description": "In case the provided authorization token validation has failed",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -206,150 +225,172 @@
   "parameters": {
     "SubscriptionIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "subscriptionId",
       "in": "path",
       "required": true,
-      "description": "Subscription Id",
-      "x-nullable": true
+      "description": "Subscription Id"
     },
     "TenantIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-client-tenant-id",
       "x-originalName": "tenantId",
       "in": "header",
-      "description": "Tenant Id",
-      "x-nullable": true
+      "description": "Tenant Id"
     },
     "UniqueProductIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "id",
       "in": "path",
       "required": true,
-      "description": "Unique product Id",
-      "x-nullable": true
+      "description": "Unique product Id"
     },
     "PartnerTenantIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-partner-tenantid",
       "x-originalName": "partnerTenantId",
       "in": "header",
-      "description": "Partner tenant ID",
-      "x-nullable": true
+      "description": "Partner tenant ID"
     },
     "PricingAudienceParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-pricing-audience",
       "x-originalName": "pricingAudienceHeaderValue",
       "in": "header",
-      "description": "Pricing audience",
-      "x-nullable": true
+      "description": "Pricing audience"
     },
     "ApiVersionParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "api-version",
       "x-originalName": "apiVersion",
       "in": "query",
-      "default": "2022-09-01-preview",
-      "x-nullable": true
+      "default": "2022-09-01-preview"
     },
     "IncludeStopSoldPlanParameter": {
       "type": "boolean",
+      "x-ms-parameter-location": "method",
       "name": "includeStopSoldPlans",
       "in": "query",
       "description": "To include stop sold or hidden plans",
-      "default": false,
-      "x-nullable": false
+      "default": false
     },
     "LanguageParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "language",
       "in": "query",
       "description": "Product language",
-      "default": "en",
-      "x-nullable": true
+      "default": "en"
     },
     "MarketParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "market",
       "in": "query",
       "description": "Product market",
-      "default": "US",
-      "x-nullable": true
+      "default": "US"
     },
     "LookupOfferInTenantLevelParameter": {
       "type": "boolean",
+      "x-ms-parameter-location": "method",
       "name": "lookupOfferInTenantLevel",
       "in": "query",
-      "description": "Optional - in case you want to check againt tenant private audience also",
-      "default": false,
-      "x-nullable": false
+      "description": "Optional - in case you want to check against tenant private audience also",
+      "default": false
     },
     "IncludeHiddenPlansParameter": {
       "type": "boolean",
+      "x-ms-parameter-location": "method",
       "name": "includeHiddenPlans",
       "in": "query",
       "description": "Include hidden plans",
-      "default": false,
-      "x-nullable": false
+      "default": false
     },
     "ClientObjectIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-client-object-id",
       "x-originalName": "userObjectId",
       "in": "header",
-      "description": "AAD user ID",
-      "x-nullable": true
+      "description": "AAD user ID"
     },
     "ClientAltSecIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-client-alt-sec-id",
       "x-originalName": "altSecId",
       "in": "header",
-      "description": "Alternate Security ID - relevant for MSA user",
-      "x-nullable": true
+      "description": "Alternate Security ID - relevant for MSA user"
     },
     "UserPrincipalIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-client-principal-name",
       "x-originalName": "userPrincipal",
       "in": "header",
-      "description": "User principal name",
-      "x-nullable": true
+      "description": "User principal name"
     },
     "BillingAccountParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-client-billingaccount-id",
       "x-originalName": "billingAccountId",
       "in": "header",
-      "description": "Billing account Id",
-      "x-nullable": true
+      "description": "Billing account Id"
     },
     "BillingProfileIdParameter": {
       "type": "string",
+      "x-ms-parameter-location": "method",
       "name": "x-ms-client-billingprofile-id",
       "x-originalName": "billingProfileId",
       "in": "header",
-      "description": "Billing profile Id",
-      "x-nullable": true
+      "description": "Billing profile Id"
     },
     "ShouldCheckMarketplaceAdminPermissionsParameter": {
       "type": "boolean",
+      "x-ms-parameter-location": "method",
       "name": "shouldCheckMarketplaceAdminPermissions",
       "in": "query",
       "description": "Include marketplace admin permissions",
-      "default": false,
-      "x-nullable": false
+      "default": false
     },
     "ToDelete": {
       "type": "boolean",
+      "x-ms-parameter-location": "method",
       "name": "shouldCheckMarketplaceAdminPermissions",
       "in": "query",
       "description": "Include marketplace admin permissions",
-      "default": false,
-      "x-nullable": false
+      "default": false
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "ProductSummary": {
       "type": "object",
       "required": [
@@ -412,7 +453,7 @@
           "description": "Product unique identifier"
         },
         "productType": {
-          "description": "Product type",
+          "description": "Offer type",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -818,7 +859,7 @@
           "type": "string",
           "description": "Plan description"
         },
-        "skuId": {
+        "The skuId": {
           "type": "string",
           "description": "The SKU id"
         },
@@ -911,15 +952,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name"
+          "description": "The name"
         },
         "generation": {
           "type": "string",
-          "description": "Generation"
+          "description": "The generation"
         },
-        "identity": {
+        "The identity": {
           "type": "string",
-          "description": "Identity"
+          "description": "The identity"
         }
       }
     },
@@ -983,7 +1024,7 @@
       "properties": {
         "productId": {
           "type": "string",
-          "description": "productId"
+          "description": "Product Id"
         },
         "leadGenEnabled": {
           "type": "boolean",
