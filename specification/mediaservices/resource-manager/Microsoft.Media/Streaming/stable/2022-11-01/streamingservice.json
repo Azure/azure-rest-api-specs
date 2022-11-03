@@ -1789,6 +1789,16 @@
       },
       "description": "The live event endpoint."
     },
+    "LiveEventTimedMetadataEndpoint": {
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The metadata endpoint URL."
+        }
+      },
+      "type": "object",
+      "description": "The live event metadata insertion endpoint."
+    },
     "LiveEventInputAccessControl": {
       "type": "object",
       "properties": {
@@ -1848,6 +1858,13 @@
           },
           "x-ms-identifiers": [],
           "description": "The input endpoints for the live event."
+        },
+        "timedMetadataEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveEventTimedMetadataEndpoint"
+          },
+          "description": "The metadata endpoints for the live event."
         }
       },
       "description": "The live event input."
