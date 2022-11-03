@@ -2781,33 +2781,41 @@
     "LiveEventStreamEventData": {
       "properties": {
         "trackName": {
-          "description": "",
+          "description": "Name of the track. ",
           "type": "string"
         },
         "streamId": {
-          "description": "",
+          "description": "Stream ID in the format \"trackName_bitrate\"",
           "type": "string"
         },
         "trackId": {
-          "description": "",
+          "description": "Track index.",
           "type": "integer",
           "format": "int32"
         },
         "mediaType": {
-          "description": "",
+          "description": "Type of the track.",
+          "enum": [
+            "Audio",
+            "Video"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventStreamEventMediaType",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "bitrate": {
-          "description": "",
+          "description": "Bitrate of the track.",
           "type": "integer",
           "format": "int64"
         },
         "mediaTimestamp": {
-          "description": "",
+          "description": "Fragment timestamp in timescale.",
           "type": "string"
         },
         "timescale": {
-          "description": "",
+          "description": "Timescale in which timestamps are expressed.",
           "type": "string"
         },
         "previousFragmentTimestamp": {
@@ -2819,84 +2827,100 @@
           "type": "string"
         },
         "currentFragmentTimestamp": {
-          "description": "",
+          "description": "Current fragment timestamp in timescale.",
           "type": "string"
         },
         "fragmentOneTimestamp": {
-          "description": "",
+          "description": "Timestamp of first fragment used to make a comparison, in timescale.",
           "type": "string"
         },
         "fragmentOneDuration": {
-          "description": "",
+          "description": "Duration of first fragment used to make a comparison, in timescale.",
           "type": "string"
         },
         "fragmentTwoTimestamp": {
-          "description": "",
+          "description": "Timestamp of second fragment used to make a comparison, in timescale.",
           "type": "string"
         },
         "fragmentTwoDuration": {
-          "description": "",
+          "description": "Duration of second fragment used to make a comparison, in timescale.",
           "type": "string"
         },
         "fragmentDropReason": {
-          "description": "",
+          "description": "Reason the fragment was dropped.",
           "type": "string"
         },
         "discontinuityGap": {
-          "description": "",
+          "description": "Length of the discontinuity gap in timescale.",
           "type": "integer",
           "format": "int64"
         },
         "streamName": {
-          "description": "",
+          "description": "Identifier of the stream or connection. Encoder or customer is responsible to add this ID in the ingest URL.",
           "type": "string"
         },
         "resultCode": {
-          "description": "",
+          "description": "Result code.",
           "type": "string"
         },
         "resultMessage": {
-          "description": "",
+          "description": "Result message.",
           "type": "string"
         },
         "duration": {
-          "description": "",
+          "description": "Fragment duration.",
           "type": "string"
         },
         "resolution": {
-          "description": "Width x Height (only for video) ",
+          "description": "Width x Height for video, \"n/a\" otherwise.",
           "type": "string"
         },
         "minTime": {
-          "description": "",
+          "description": "The smaller timestamp of the two fragments compared.",
           "type": "string"
         },
         "minTimeMediaType": {
-          "description": "",
+          "description": "The media type of the smaller timestamp of two fragments compared.",
+          "enum": [
+            "Audio",
+            "Video"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventStreamEventMinTimeMediaType",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "maxTime": {
-          "description": "",
+          "description": "The larger timestamp of the two fragments compared.",
           "type": "string"
         },
         "maxTimeMediaType": {
-          "description": "",
+          "description": "The media type of the larger timestamp of two fragments compared.",
+          "enum": [
+            "Audio",
+            "Video"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventStreamEventMaxTimeMediaType",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "timescaleOfMinTime": {
-          "description": "",
+          "description": "Timescale of the fragment with the smaller timestamp.",
           "type": "string"
         },
         "timescaleOfMaxTime": {
-          "description": "",
+          "description": "Timescale of the fragment with the larger timestamp.",
           "type": "string"
         },
         "remoteIp": {
-          "description": "",
+          "description": "Truncated IP of the encoder.",
           "type": "string"
         },
         "remotePort": {
-          "description": "",
+          "description": "Port of the encoder.",
           "type": "string"
         }
       },
@@ -2906,7 +2930,55 @@
     "LiveEventStreamEvent": {
       "properties": {
         "eventType": {
-          "description": "The type of the stream event.",
+          "description": "The type of the stream event. Format: StreamEvent/{eventType}",
+          "enum": [
+            "StreamEvent/BeginIngest",
+            "StreamEvent/EndIngest",
+            "StreamEvent/FirstChunkReceived",
+            "StreamEvent/ChunkDropped",
+            "StreamEvent/UnalignedKeyFrames",
+            "StreamEvent/UnalignedPresentation",
+            "StreamEvent/Discontinuity",
+            "StreamEvent/InvalidConnection"
+          ],
+          "x-ms-enum": {
+            "name": "LiveEventHealthStatus",
+            "values": [
+              {
+                "value": "StreamEvent/BeginIngest",
+                "description": "Ingest session begins."
+              },
+              {
+                "value": "StreamEvent/EndIngest",
+                "description": "Ingest session ends."
+              },
+              {
+                "value": "StreamEvent/FirstChunkReceived",
+                "description": "First fragment received on ingest media track."
+              },
+              {
+                "value": "StreamEvent/ChunkDropped",
+                "description": "Fragment dropped."
+              },
+              {
+                "value": "StreamEvent/UnalignedKeyFrames",
+                "description": "Unaligned video keyframes detected."
+              },
+              {
+                "value": "StreamEvent/UnalignedPresentation",
+                "description": "Unaligned presentation detected, meaning two fragments across two quality levels are not time aligned."
+              },
+              {
+                "value": "StreamEvent/Discontinuity",
+                "description": "Timestamp discontinuity detected."
+              },
+              {
+                "value": "StreamEvent/InvalidConnection",
+                "description": "Ingest session denied."
+              }
+            ],
+            "modelAsString": true
+          },
           "type": "string"
         },
         "eventTime": {
