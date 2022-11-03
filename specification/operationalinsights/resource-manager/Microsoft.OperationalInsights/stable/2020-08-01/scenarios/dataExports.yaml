@@ -22,20 +22,20 @@ prepareSteps:
             name: PerGB2018
           retentionInDays: 30
   - step: EventhubNamespace_Create
-    armTemplate: armtemplate/Create_EventhubNamespace.json
+    armTemplate: templates/Create_EventhubNamespace.json
 
 scenarios:
   - scenario: DataExport
     description: Microsoft.OperationalInsights/workspaces/dataExports
     steps:
       - step: DataExports_CreateOrUpdate
-        exampleFile: ..\examples\DataExportCreateOrUpdate.json
+        exampleFile: ../examples/DataExportCreateOrUpdate.json
         requestUpdate:
           - replace: /parameters/properties/destination/resourceId
             value: $(eventhubId)
       - step: DataExports_ListByWorkspace
-        exampleFile: ..\examples\DataExportListByWorkspace.json
+        exampleFile: ../examples/DataExportListByWorkspace.json
       - step: DataExports_Get
-        exampleFile: ..\examples\DataExportGet.json
+        exampleFile: ../examples/DataExportGet.json
       - step: DataExports_Delete
-        exampleFile: ..\examples\DataExportDelete.json
+        exampleFile: ../examples/DataExportDelete.json

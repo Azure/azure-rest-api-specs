@@ -11,18 +11,18 @@ scenarios:
     description: Microsoft.OperationalInsights/clusters
     steps:
       - step: Clusters_Create
-        exampleFile: ..\examples\ClustersCreate.json
+        exampleFile: ../examples/ClustersCreate.json
         requestUpdate:
           - add: /parameters/identity
             value: {
               type: SystemAssigned
             }
       - step: Clusters_List
-        exampleFile: ..\examples\ClustersSubscriptionList.json
+        exampleFile: ../examples/ClustersSubscriptionList.json
       - step: Clusters_ListByResourceGroup
-        exampleFile: ..\examples\ClustersListByResourceGroup.json
+        exampleFile: ../examples/ClustersListByResourceGroup.json
       - step: Clusters_Get
-        exampleFile: ..\examples\ClustersGet.json
+        exampleFile: ../examples/ClustersGet.json
       - step: Clusters_Update
         operationId: Clusters_Update
         parameters:
@@ -30,4 +30,4 @@ scenarios:
             tags:
               tag1: val2
       - step: Clusters_Delete
-        exampleFile: ..\examples\ClustersDelete.json
+        exampleFile: ../examples/ClustersDelete.json

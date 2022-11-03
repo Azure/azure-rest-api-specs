@@ -10,10 +10,13 @@ variables:
   storageAccountName: oistorageaccountx
   storageAccountId:
     type: string
+  dataSourceName:
+    type: string
+    prefix: iodatasource
 
 prepareSteps:
   - step: StorageAccount_Create
-    armTemplate: armtemplate/Create_StorageAccount.json
+    armTemplate: templates/Create_StorageAccount.json
   - step: Workspaces_Create
     operationId: Workspaces_CreateOrUpdate
     parameters:
@@ -27,10 +30,6 @@ prepareSteps:
 scenarios:
   - scenario: WorkspacePurge
     description: Microsoft.OperationalInsights/workspaces/dataSources
-    variables:
-      dataSourceName:
-        type: string
-        prefix: iodatasource
     steps:
       - step: DataSources_Create
         operationId: DataSources_CreateOrUpdate
@@ -40,11 +39,11 @@ scenarios:
             properties:
               LinkedResourceId: $(storageAccountId)
       - step: DataSources_ListByWorkspace
-        exampleFile: ..\examples\DataSourcesListByWorkspace.json
+        exampleFile: ../examples/DataSourcesListByWorkspace.json
         requestUpdate:
           - replace: /$filter
             value: $filter=kind eq 'WindowsEvent'
       - step: DataSources_Get
-        exampleFile: ..\examples\DataSourcesGet.json
+        exampleFile: ../examples/DataSourcesGet.json
       - step: DataSources_Delete
-        exampleFile: ..\examples\DataSourcesDelete.json
+        exampleFile: ../examples/DataSourcesDelete.json

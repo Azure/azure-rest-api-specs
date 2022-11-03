@@ -13,7 +13,7 @@ variables:
 
 prepareSteps:
   - step: StorageAccount_Create
-    armTemplate: armtemplate/Create_StorageAccount.json
+    armTemplate: templates/Create_StorageAccount.json
   - step: Workspaces_Create
     operationId: Workspaces_CreateOrUpdate
     parameters:
@@ -29,13 +29,13 @@ scenarios:
     description: Microsoft.OperationalInsights/workspaces/storageInsightConfigs
     steps:
       - step: StorageInsightConfigs_CreateOrUpdate
-        exampleFile: ..\examples\StorageInsightsCreateOrUpdate.json
+        exampleFile: ../examples/StorageInsightsCreateOrUpdate.json
         requestUpdate:
           - replace: /parameters/properties/storageAccount/id
             value: $(storageAccountId)
       - step: StorageInsightConfigs_ListByWorkspace
-        exampleFile: ..\examples\StorageInsightsListByWorkspace.json
+        exampleFile: ../examples/StorageInsightsListByWorkspace.json
       - step: StorageInsightConfigs_Get
-        exampleFile: ..\examples\StorageInsightsGet.json
+        exampleFile: ../examples/StorageInsightsGet.json
       - step: StorageInsightConfigs_Delete
-        exampleFile: ..\examples\StorageInsightsDelete.json
+        exampleFile: ../examples/StorageInsightsDelete.json
