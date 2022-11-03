@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-11-01",
-    "title": "Benefits RP",
+    "title": "Billing benefits RP",
     "description": "Azure Benefits RP let users create and manage benefits like savings plan."
   },
   "host": "management.azure.com",
@@ -82,6 +82,9 @@
         "x-ms-examples": {
           "SavingsPlanOrderAliasCreate": {
             "$ref": "./examples/SavingsPlanOrderAliasCreate.json"
+          },
+          "SavingsPlanOrderAliasCreateSingleScope": {
+            "$ref": "./examples/SavingsPlanOrderAliasCreateSingleScope.json"
           }
         },
         "parameters": [
@@ -910,9 +913,9 @@
         "resourceGroupId": {
           "$ref": "#/definitions/ResourceGroupId"
         },
-        "appliedScopeDisplayName": {
+        "displayName": {
           "type": "string",
-          "description": "Applied scope display name"
+          "description": "Display name"
         }
       }
     },
@@ -1924,6 +1927,11 @@
           "description": "The type of the resource that is being reserved.",
           "$ref": "#/definitions/ReservedResourceType"
         },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Reservation needs to be reviewed."
+        },
         "reservedResourceProperties": {
           "type": "object",
           "description": "Properties specific to each reserved resource type. Not required if not applicable.",
@@ -2009,6 +2017,11 @@
         "reservedResourceType": {
           "description": "The type of the resource that is being reserved.",
           "$ref": "#/definitions/ReservedResourceType"
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Reservation needs to be reviewed."
         },
         "reservedResourceProperties": {
           "type": "object",
