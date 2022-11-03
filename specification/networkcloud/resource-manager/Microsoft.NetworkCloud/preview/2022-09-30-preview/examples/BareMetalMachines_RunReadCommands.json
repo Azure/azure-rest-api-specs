@@ -7,7 +7,19 @@
     "bareMetalMachineRunReadCommandsParameters": {
       "commands": [
         {
-          "command": "pwd"
+          "command": "kubectl get",
+          "arguments": [
+            "pods",
+            "-A"
+          ]
+        },
+        {
+          "command": "ping",
+          "arguments": [
+            "192.168.0.99",
+            "-c",
+            "3"
+          ]
         }
       ],
       "limitTimeSeconds": 60

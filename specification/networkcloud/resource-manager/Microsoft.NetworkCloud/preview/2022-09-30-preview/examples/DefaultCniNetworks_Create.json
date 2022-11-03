@@ -20,29 +20,29 @@
         "cniBgpConfiguration": {
           "nodeMeshPassword": "password",
           "serviceExternalPrefixes": [
-            "102.198.0.0/16"
+            "192.0.2.0/28"
           ],
           "serviceLoadBalancerPrefixes": [
-            "104.198.0.0/16"
+            "192.0.2.16/28"
           ],
           "communityAdvertisements": [
             {
-              "subnetPrefix": "255.255.255.254/31",
+              "subnetPrefix": "192.0.2.0/27",
               "communities": [
-                "community"
+                "64512:100"
               ]
             }
           ],
           "bgpPeers": [
             {
-              "peerIp": "10.24.0.1",
-              "asNumber": 8075
+              "peerIp": "203.0.113.254",
+              "asNumber": 64497
             }
           ]
         },
         "ipAllocationType": "DualStack",
-        "ipv4ConnectedPrefix": "10.0.0.0/24",
-        "ipv6ConnectedPrefix": "fdXY:IJKL:MNOP:15::/64"
+        "ipv4ConnectedPrefix": "203.0.113.0/24",
+        "ipv6ConnectedPrefix": "2001:db8:0:3::/64"
       }
     }
   },
@@ -74,39 +74,43 @@
           "vlan": 12,
           "cniBgpConfiguration": {
             "serviceExternalPrefixes": [
-              "102.198.0.0/16"
+              "192.0.2.0/28"
             ],
             "serviceLoadBalancerPrefixes": [
-              "104.198.0.0/16"
+              "192.0.2.16/28"
             ],
             "communityAdvertisements": [
               {
-                "subnetPrefix": "255.255.255.254/31",
+                "subnetPrefix": "192.0.2.0/27",
                 "communities": [
-                  "community"
+                  "64512:100"
                 ]
               }
             ],
             "bgpPeers": [
               {
-                "peerIp": "10.24.0.1",
-                "asNumber": 8075
+                "peerIp": "203.0.113.254",
+                "asNumber": 64497
               }
             ]
           },
           "ipAllocationType": "DualStack",
-          "ipv4ConnectedPrefix": "10.0.0.0/24",
-          "ipv6ConnectedPrefix": "fdXY:IJKL:MNOP:15::/64",
+          "ipv4ConnectedPrefix": "203.0.113.0/24",
+          "ipv6ConnectedPrefix": "2001:db8:0:3::/64",
           "provisioningState": "Succeeded",
           "interfaceName": "eth0",
           "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
           "fabricBgpPeers": [
             {
-              "peerIp": "10.10.0.1",
-              "asNumber": 8075
+              "peerIp": "203.0.113.2",
+              "asNumber": 64496
+            },
+            {
+              "peerIp": "203.0.113.3",
+              "asNumber": 64496
             }
           ],
-          "cniAsNumber": 1000,
+          "cniAsNumber": 64512,
           "hybridAksClustersAssociatedIds": [
             "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/hybridAksClusters/hybridAksClusterName"
           ],
@@ -142,39 +146,43 @@
           "vlan": 12,
           "cniBgpConfiguration": {
             "serviceExternalPrefixes": [
-              "102.198.0.0/16"
+              "192.0.2.0/28"
             ],
             "serviceLoadBalancerPrefixes": [
-              "104.198.0.0/16"
+              "192.0.2.16/28"
             ],
             "communityAdvertisements": [
               {
-                "subnetPrefix": "255.255.255.254/31",
+                "subnetPrefix": "192.0.2.0/27",
                 "communities": [
-                  "community"
+                  "64512:100"
                 ]
               }
             ],
             "bgpPeers": [
               {
-                "peerIp": "10.24.0.1",
-                "asNumber": 8075
+                "peerIp": "203.0.113.254",
+                "asNumber": 64497
               }
             ]
           },
           "ipAllocationType": "DualStack",
-          "ipv4ConnectedPrefix": "10.0.0.0/24",
-          "ipv6ConnectedPrefix": "fdXY:IJKL:MNOP:15::/64",
+          "ipv4ConnectedPrefix": "203.0.113.0/24",
+          "ipv6ConnectedPrefix": "2001:db8:0:3::/64",
           "provisioningState": "Succeeded",
           "interfaceName": "eth0",
           "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
           "fabricBgpPeers": [
             {
-              "peerIp": "10.10.0.1",
-              "asNumber": 8075
+              "peerIp": "203.0.113.2",
+              "asNumber": 64496
+            },
+            {
+              "peerIp": "203.0.113.3",
+              "asNumber": 64496
             }
           ],
-          "cniAsNumber": 1000,
+          "cniAsNumber": 64512,
           "hybridAksClustersAssociatedIds": [
             "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/hybridAksClusters/hybridAksClusterName"
           ],
