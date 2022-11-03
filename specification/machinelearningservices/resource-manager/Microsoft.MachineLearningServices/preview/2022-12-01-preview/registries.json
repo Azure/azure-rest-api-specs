@@ -149,8 +149,13 @@
             "description": "Success"
           },
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
@@ -364,6 +369,12 @@
             }
           },
           "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RegistryTrackedResource"
+            }
+          },
+          "202": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/RegistryTrackedResource"
