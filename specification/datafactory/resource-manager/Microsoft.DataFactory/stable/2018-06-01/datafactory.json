@@ -4048,7 +4048,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CredentialResource"
+              "$ref": "#/definitions/ManagedIdentityCredentialResource"
             }
           }
         ],
@@ -4056,7 +4056,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/CredentialResource"
+              "$ref": "#/definitions/ManagedIdentityCredentialResource"
             }
           },
           "default": {
@@ -4106,7 +4106,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/CredentialResource"
+              "$ref": "#/definitions/ManagedIdentityCredentialResource"
             }
           },
           "304": {
@@ -7293,6 +7293,7 @@
     },
 	"ManagedIdentityCredentialResource": {
       "description": "Credential resource type.",
+	  "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
