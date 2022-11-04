@@ -129,11 +129,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "managedInstanceName",
-            "in": "path",
-            "description": "The name of the managed instance.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
             "name": "startStopScheduleName",
@@ -380,7 +376,16 @@
       }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
