@@ -3734,6 +3734,10 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. <br><br>This may only be set to False when no extensions are present on the virtual machine scale set."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Optional property which must either be set to True or omitted."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."
@@ -4825,6 +4829,10 @@
         "priorityMixPolicy": {
           "$ref": "#/definitions/PriorityMixPolicy",
           "description": "Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance."
+        },
+        "constrainedMaximumCapacity": {
+          "type": "boolean",
+          "description": "Optional property which must either be set to True or omitted."
         },
         "timeCreated": {
           "readOnly": true,
