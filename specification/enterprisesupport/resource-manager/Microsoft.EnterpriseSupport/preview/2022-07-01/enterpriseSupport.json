@@ -10,7 +10,7 @@
     "http"
   ],
   "paths": {
-    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases/{purchaseId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases/{purchaseId}": {
       "put": {
         "tags": [
           "Resource Provider APIs"
@@ -76,6 +76,10 @@
             },
             "headers": {
               "Operation-Location": {
+                "description": "Status URL where the purchase response will be returned from",
+                "type": "string"
+              },
+              "Location": {
                 "description": "Status URL where the purchase response will be returned from",
                 "type": "string"
               }
@@ -160,6 +164,10 @@
               "Operation-Location": {
                 "description": "Status URL where the purchase response will be returned from",
                 "type": "string"
+              },
+              "Location": {
+                "description": "Status URL where the purchase response will be returned from",
+                "type": "string"
               }
             }
           },
@@ -222,7 +230,7 @@
               "$ref": "#/definitions/purchaseResult"
             },
             "examples": {
-              "application/json": "{\"id\":\"ebc0086f-dc49-4a4c-b121-79c75c2b2a3c\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"ebc0086f-dc49-4a4c-b121-79c75c2b2a3c\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"3825e0bc-d4bf-482b-a823-3523096bed1b\",\"invoiceSectionId\":\"75bdb7df-2e82-4400-9d50-7e2d5cdfd430\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"334aa276-c5dd-4398-ae02-c45dde06116b\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+              "application/json": "{\"id\":\"42d430f0-21ac-4852-86db-8a9e05131035\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"42d430f0-21ac-4852-86db-8a9e05131035\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"7c498078-be34-4dda-a0fa-eab079f4f261\",\"invoiceSectionId\":\"8c1c2f0e-8ef0-42f8-90fa-333122b0ff03\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"b99dfbeb-ebb9-4c90-b037-5655ffba5e68\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
             }
           },
           "default": {
@@ -304,6 +312,10 @@
               "Operation-Location": {
                 "description": "Status URL where the purchase response will be returned from",
                 "type": "string"
+              },
+              "Location": {
+                "description": "Status URL where the purchase response will be returned from",
+                "type": "string"
               }
             }
           },
@@ -321,7 +333,7 @@
         }
       }
     },
-    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/purchases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/purchases": {
       "get": {
         "tags": [
           "Resource Provider APIs"
@@ -371,7 +383,7 @@
         }
       }
     },
-    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases": {
       "get": {
         "tags": [
           "Resource Provider APIs"
@@ -450,6 +462,15 @@
         "operationId": "GetRestOperations",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API endpoint version",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -698,7 +719,7 @@
           "type": "string"
         }
       },
-      "example": "{\"purchaseId\":\"d42da087-f8dc-462e-96df-7aa34d22a92d\",\"billingAccountId\":\"44f1cfec-4c10-499b-b82c-d136ea0e159d\",\"billingGroupId\":\"d8e2263e-4ee6-4cd4-958e-f8783891e2b3\",\"shippingProfileId\":\"aef55365-767b-42c4-a0c2-f64cbee86d11\",\"invoiceSectionId\":\"4ed77976-e326-4531-bae0-de5aade73e5a\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"ffbf00b7-2ea3-4df7-bef0-0c259ea5a3e3\",\"termId\":\"\",\"csam\":\"wdi\",\"csmAdmin\":\"jonosace\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
+      "example": "{\"purchaseId\":\"2aded04b-8212-41ef-bd18-5ba302b12c51\",\"billingAccountId\":\"ed17f4a9-e4aa-40d9-8be9-d6fee692ea29\",\"billingGroupId\":\"7451f32d-36cd-40cc-92a9-23e85e644587\",\"shippingProfileId\":\"ace438d0-915f-412f-96df-2775f2d5a123\",\"invoiceSectionId\":\"eda1ab46-71fa-4434-a2c6-810cb9bfa2d1\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"55b3a420-edee-49a9-9c84-1bb7299c486d\",\"termId\":\"\",\"csam\":\"wdi\",\"csmAdmin\":\"jonosace\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
     },
     "purchaseResult": {
       "type": "object",
@@ -719,7 +740,7 @@
           "$ref": "#/definitions/purchase"
         }
       },
-      "example": "{\"id\":\"c2a3c514-8022-4c57-8cce-63d25fa85f81\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"c2a3c514-8022-4c57-8cce-63d25fa85f81\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"5f4906a3-00e0-4820-b270-8f57dede7041\",\"invoiceSectionId\":\"994e9c37-ff0a-4486-bf57-411782b3aba0\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"eefac747-a822-469f-a1bb-402c5d3db4db\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+      "example": "{\"id\":\"402c1eef-c9fa-4853-a856-44c40ad5daf2\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"402c1eef-c9fa-4853-a856-44c40ad5daf2\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"f348afcf-60e0-44ab-ad6c-22fa2d5e77be\",\"invoiceSectionId\":\"98f65eac-d091-4ba4-a5bd-779b1e17146e\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"f87ab45f-0c46-41ff-9284-471829b73243\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
     }
   },
   "security": [
