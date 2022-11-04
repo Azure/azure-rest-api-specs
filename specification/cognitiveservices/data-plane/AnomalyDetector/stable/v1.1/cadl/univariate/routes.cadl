@@ -20,7 +20,7 @@ interface Univariate {
   // FIXME: use this operation definition once errors can be modified
   // op DetectEntireSeries is Azure.Core.Foundations.Operation<DetectRequest, EntireDetectResponse>;
   op DetectEntireSeries(
-    ...DetectRequest,
+    @body body: DetectRequest,
   ): EntireDetectResponse | AnomalyDetectorError;
 
   @post
@@ -33,7 +33,7 @@ interface Univariate {
   // FIXME: use this operation definition once errors can be modified
   // op DetectLastPoint is Azure.Core.Foundations.Operation<DetectRequest, LastDetectResponse>;
   op DetectLastPoint(
-    ...DetectRequest,
+    @body body: DetectRequest,
   ): LastDetectResponse | AnomalyDetectorError;
 
   @post
@@ -43,6 +43,6 @@ interface Univariate {
   // FIXME: use this operation definition once errors can be modified
   // op DetectChangePoint is Azure.Core.Foundations.Operation<ChangePointDetectRequest, ChangePointDetectResponse>;
   op DetectChangePoint(
-    ...ChangePointDetectRequest,
+    @body body: ChangePointDetectRequest,
   ): ChangePointDetectResponse | AnomalyDetectorError;
 }

@@ -46,12 +46,12 @@ timestamp column.
 // >;
 // FIXME: Swagger defines a different name so this might have to be a client.cadl change
 op CreateMultivariateModel(
-  ...ModelInfo,
+  @body body: ModelInfo,
 ): {
   @statusCode statusCode: 201,
   @doc("Location and ID of the model.")
   @header Location: string,
-  ...Model
+  @body body: Model
   } | ErrorResponse;
 
 // FIXME: Using ResourceList returns the list of models in the `value` property, but the service defined
@@ -80,7 +80,7 @@ op CreateMultivariateModel(
 op ListMultivariateModels(
   @doc("Skip indicates how many models will be skipped.")
   @query
-  skip?: int32;
+  skip?: int32 = 0;
 
   @doc("Top indicates how many models will be fetched.")
   @query
@@ -153,14 +153,14 @@ op BatchDetectAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  ...DetectionRequest,
+  @body body: DetectionRequest,
 ): {
   @statusCode statusCode: 202,
   @doc("Id of the detection result.")
   @header "Operation-Id": string,
   @doc("Location of the detection result.")
   @header "Operation-Location": string,
-  ...DetectionResult,
+  @body body: DetectionResult,
 } | ErrorResponse;
 
 @route("/multivariate/models/{modelId}:detect-last")
@@ -188,7 +188,5 @@ op LastDetectAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  ...LastDetectionRequest,
-): {
-  ...LastDetectionResult,
-} | ErrorResponse;
+  @body body: LastDetectionRequest,
+): LastDetectionResult | ErrorResponse;
