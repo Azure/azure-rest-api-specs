@@ -4633,7 +4633,7 @@
         }
       },
       "patch": {
-        "description": "Update tags associated with the virtual machine. The API returns 200 OK when the operation is successful.",
+        "description": "Patch the properties of the provided virtual machine, or update the tags associated with the virtual machine. Properties and tag updates can be done independently. The API returns 200 OK when the update is successful. 202 Accepted is returned when the operation is performed asynchronously.",
         "summary": "Patch the virtual machine.",
         "operationId": "VirtualMachines_Update",
         "parameters": [
@@ -4665,6 +4665,18 @@
               "$ref": "#/definitions/VirtualMachine"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -4676,6 +4688,10 @@
           "Patch virtual machine": {
             "$ref": "./examples/VirtualMachines_Patch.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
