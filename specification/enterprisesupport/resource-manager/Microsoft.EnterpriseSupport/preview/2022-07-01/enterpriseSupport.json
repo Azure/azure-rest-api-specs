@@ -208,7 +208,7 @@
               "$ref": "#/definitions/purchaseResult"
             },
             "examples": {
-              "application/json": "{\"id\":\"8539bdae-7cb1-4d22-98d9-415346e36ae7\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"8539bdae-7cb1-4d22-98d9-415346e36ae7\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"279877f1-b6a4-4914-9e3f-9a8a81050c9c\",\"invoiceSectionId\":\"7f44b6d2-a886-4338-9997-55d38a4ad032\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"2756dac0-f5b0-45f7-a4aa-7a96f2cba151\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+              "application/json": "{\"id\":\"d03ab2c8-82d5-4135-8d10-890caa733c9d\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"d03ab2c8-82d5-4135-8d10-890caa733c9d\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"88269c6a-e9dc-4574-b457-02d5bddbe700\",\"invoiceSectionId\":\"36cb4b38-d2b4-4694-861b-f242fb40bb20\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"f902c28b-3bd9-489c-8c46-58051a80c540\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
             }
           },
           "default": {
@@ -275,9 +275,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Payload of PatchPurchaseResult",
+            "description": "Payload of PurchaseResult",
             "schema": {
-              "$ref": "#/definitions/patchPurchaseResult"
+              "$ref": "#/definitions/purchaseResult"
             },
             "x-ms-summary": "Body of the updated purchase"
           },
@@ -553,15 +553,6 @@
         }
       }
     },
-    "patchPurchaseResult": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/purchaseBase"
-        }
-      },
-      "example": "{\"properties\":{\"billingAccountId\":\"066db527-2bd2-4dcd-ac38-9f2f9a539e0d\",\"billingGroupId\":\"cc64a7a4-8eb3-4088-bdbc-85928d1a2ceb\",\"shippingProfileId\":\"27c45981-e7b7-49c8-b347-017c9a64ff22\",\"invoiceSectionId\":\"dcc84a3f-2db6-44dc-8b5e-396db1cc9ba9\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"513eb8c7-4cf1-4e16-8af1-f9c55b3552fb\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}}"
-    },
     "purchase": {
       "type": "object",
       "properties": {
@@ -757,7 +748,7 @@
           "type": "string"
         }
       },
-      "example": "{\"purchaseId\":\"fdff24fd-5656-44df-8e00-a540ae5a2269\",\"billingAccountId\":\"18a0ac92-46bd-4d2f-937d-10613a909fca\",\"billingGroupId\":\"4651c939-bef0-4c29-a617-967af87a8aaf\",\"shippingProfileId\":\"99a3d679-d9c2-4238-91a4-68dc7e9cfa1f\",\"invoiceSectionId\":\"37662207-bd1e-433c-b8d0-333f58b70ef1\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"61f50a28-8be1-422e-b69f-f4ae316e803f\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
+      "example": "{\"purchaseId\":\"3191be19-68b8-4af6-b350-7ef1adb13559\",\"billingAccountId\":\"8b16c38c-8680-4e23-bd91-9fde8e37b34b\",\"billingGroupId\":\"97839954-9f24-498a-8322-652baf1bc2e0\",\"shippingProfileId\":\"e2378451-8470-4c96-9aeb-98564e675f89\",\"invoiceSectionId\":\"cb024e13-9d5e-4fd4-b848-f1ae62dc34f9\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"7975d5ef-fb1f-44ae-a7d8-16614da88b9c\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
     },
     "purchaseResult": {
       "type": "object",
@@ -778,7 +769,7 @@
           "$ref": "#/definitions/purchase"
         }
       },
-      "example": "{\"id\":\"b5f3b4b3-4479-4437-ad60-f96a13bb4da3\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"b5f3b4b3-4479-4437-ad60-f96a13bb4da3\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"812ea88c-ffda-4d78-b992-0fa38f87108f\",\"invoiceSectionId\":\"7fd66d43-27c3-45bf-a5e0-304773b7d5b0\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"631be260-bd68-4cea-9712-5c60467400eb\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+      "example": "{\"id\":\"c70c546c-5980-4478-ba72-1d4a19f5555a\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"c70c546c-5980-4478-ba72-1d4a19f5555a\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"684f30f0-e0b5-4cce-b7c0-e74876326dcd\",\"invoiceSectionId\":\"75933e59-0896-4aa5-9e0a-af9352bfac41\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"3e6a3fd4-40eb-4f15-ac06-94431ba25081\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
     }
   },
   "security": [
