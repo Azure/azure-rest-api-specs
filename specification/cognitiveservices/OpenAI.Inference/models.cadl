@@ -2,9 +2,10 @@ import "@cadl-lang/rest";
 
 using Cadl.Rest;
 
-namespace AzureOpenAIServiceAPI;
+namespace Azure.OpenAI;
 
-model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema {
+@doc("Post body schema to create a prompt completion from a deployment")
+model CreateCompletionBody {
   @doc("""
 An optional prompt to complete from, encoded as a string, a list of strings, or
 a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -87,6 +88,8 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
 
   @doc("A sequence which indicates the end of the current document.")
   stop?: PostContentSchemaStop;
+
+  @doc("Completion configuration")
   completion_config?: string;
 
   @doc("""
@@ -129,48 +132,71 @@ model PostContentSchemaPrompt {}
 @doc("A sequence which indicates the end of the current document.")
 model PostContentSchemaStop {}
 
-model PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema {
+@doc("Expected response schema to completion request")
+model CreateCompletionResponse {
+  @doc("Id for completion response")
   id?: string;
+  @doc("Object for completion response")
   object?: string;
+  @doc("Created time for completion response")
   created?: int32;
+  @doc("Model used for completion response")
   "model"?: string;
-  choices?: Post200ApplicationJsonPropertiesItemsItem[];
+  @doc("Array of choices returned containing text completions to prompts sent")
+  choices?: CompletionChoice[];
 }
 
-model Post200ApplicationJsonPropertiesItemsItem {
+@doc("Choice model within completion response")
+model CompletionChoice {
+  @doc("Generated text for given completion prompt")
   text?: string;
+  @doc("Index")
   index?: int32;
-  logprobs?: PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs;
+  @doc("Log Prob Model")
+  logprobs?: LogProbsModel;
+  @doc("Reason for finishing")
   finish_reason?: string;
 }
 
-model PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs {
+@doc("LogProbs model within completion choice")
+model LogProbsModel {
+  @doc("Tokens")
   tokens?: string[];
+  @doc("LogProbs of Tokens")
   token_logprobs?: float32[];
+  @doc("Top LogProbs")
   top_logprobs?: Record<float32>[];
+  @doc("Text offset")
   text_offset?: int32[];
 }
 
 @error
+@doc("Error response")
 model ErrorResponse {
+  @doc("Error field in ErrorResponse")
   error?: ErrorResponseError;
 }
 
+@doc("Error schema for response")
 model ErrorResponseError {
+  @doc("Error code")
   code?: string;
+  @doc("Error message")
   message?: string;
+  @doc("Error parameter")
   param?: string;
+  @doc("Error type")
   type?: string;
 }
 
-model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema {
-  ...DictionaryOfany;
+  @doc("Embedding request body schema")
+model CreateEmbeddingBody {
 
   @doc("""
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists
 """)
-  input: PostContentSchemaInput;
+  input: EmbeddingInput;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
@@ -186,4 +212,4 @@ lists
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists
 """)
-model PostContentSchemaInput {}
+model EmbeddingInput {}
