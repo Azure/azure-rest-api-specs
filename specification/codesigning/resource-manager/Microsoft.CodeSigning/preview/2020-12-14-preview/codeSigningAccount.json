@@ -38,6 +38,10 @@
       "put": {
         "operationId": "CodeSigningAccount_Create",
         "description": "Create a Code Signing Account",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create Code Signing Account": {
             "$ref": "./examples/createCodeSigningAccount.json"
@@ -87,11 +91,7 @@
         },
         "tags": [
           "CodeSigningAccounts"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        ]
       },
       "patch": {
         "operationId": "CodeSigningAccount_Update",
@@ -185,6 +185,7 @@
       "delete": {
         "operationId": "CodeSigningAccount_Delete",
         "description": "Delete Code Signing Account",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Code Signing Account": {
             "$ref": "./examples/deleteCodeSigningAccount.json"
@@ -223,8 +224,7 @@
         },
         "tags": [
           "CodeSigningAccounts"
-        ],
-        "x-ms-long-running-operation": true
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles": {
@@ -273,6 +273,10 @@
       "put": {
         "operationId": "CertificateProfile_Create",
         "description": "Create a certificate profile",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create Certificate Profile": {
             "$ref": "./examples/createCertificateProfile.json"
@@ -326,11 +330,7 @@
         },
         "tags": [
           "CertificateProfiles"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        ]
       },
       "patch": {
         "operationId": "CertificateProfile_Update",
@@ -430,6 +430,10 @@
       "delete": {
         "operationId": "CertificateProfile_Delete",
         "description": "Delete a Certificate Profile",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete Certificate Profile": {
             "$ref": "./examples/deleteCertificateProfile.json"
@@ -471,11 +475,7 @@
         },
         "tags": [
           "CertificateProfiles"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
@@ -904,7 +904,8 @@
       "description": "Profile type of the certificate",
       "type": "string",
       "enum": [
-        "PublicTrust"
+        "PublicTrust",
+        "PrivateTrust"
       ],
       "x-ms-enum": {
         "name": "ProfileType",
