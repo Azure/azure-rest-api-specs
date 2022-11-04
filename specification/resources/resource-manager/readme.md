@@ -945,7 +945,10 @@ directive:
     reason: System Metadata from a change resource perspective is irrelevant
   - from: resources.json
     suppress: R4009
-    where: $.definitions.TagsResource
+    where:
+      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].put'
+      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
+      - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
     reason: The tags API does not support system data  
 ```
 
