@@ -170,25 +170,6 @@ model LogProbsModel {
   text_offset?: int32[];
 }
 
-@error
-@doc("Error response")
-model ErrorResponse {
-  @doc("Error field in ErrorResponse")
-  error?: ErrorResponseError;
-}
-
-@doc("Error schema for response")
-model ErrorResponseError {
-  @doc("Error code")
-  code?: string;
-  @doc("Error message")
-  message?: string;
-  @doc("Error parameter")
-  param?: string;
-  @doc("Error type")
-  type?: string;
-}
-
   @doc("Embedding request body schema")
 model CreateEmbeddingBody {
 
