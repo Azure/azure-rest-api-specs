@@ -805,7 +805,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
-- ./Microsoft.Sql/preview/2021-05-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
@@ -842,6 +841,8 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
 
 
 # Needed when there is more than one input file
