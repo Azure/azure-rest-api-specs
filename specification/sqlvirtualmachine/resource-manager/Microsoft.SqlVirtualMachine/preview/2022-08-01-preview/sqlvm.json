@@ -1042,14 +1042,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancerConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "multiSubnetIpConfigurations": {
           "description": "List of multi subnet IP configurations for an AG listener.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MultiSubnetIpConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "createDefaultAvailabilityGroupIfNotExist": {
           "description": "Create a default availability group if it does not exist.",
@@ -1123,7 +1125,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AgReplica"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1245,6 +1248,10 @@
           "$ref": "#/definitions/AvailabilityGroupListenerProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -1559,6 +1566,10 @@
           "$ref": "#/definitions/SqlVirtualMachineGroupProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -2410,6 +2421,10 @@
           "$ref": "#/definitions/SqlVirtualMachineProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
