@@ -1,0 +1,431 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+# Generated from test-proxy recording in:
+# https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/tests/SessionRecords/QuestionAnsweringClientLiveTests
+
+scope: None
+
+authentication:
+  type: AADToken
+  scope: https://cognitiveservices.azure.com/.default
+
+variables:
+  Endpoint: https://coglanapitest.cognitiveservices.azure.com
+
+scenarios:
+  - scenario: AnswersFollowupKnowledgeBaseQuestion
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: How long it takes to charge Surface?
+            top: 3
+            userId: sd53lsY=
+            confidenceScoreThreshold: 0.5
+            context:
+              previousQnaId: 27
+              previousUserQuery: How long should my Surface battery last?
+            answerSpanRequest:
+              enable: true
+              confidenceScoreThreshold: 0.2
+              topAnswersWithSpan: 1
+            includeUnstructuredSources: true
+          projectName: testQA
+          deploymentName: test
+  - scenario: AnswersFollowupKnowledgeBaseQuestionAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: How long it takes to charge Surface?
+            top: 3
+            userId: sd53lsY=
+            confidenceScoreThreshold: 0.5
+            context:
+              previousQnaId: 27
+              previousUserQuery: How long should my Surface battery last?
+            answerSpanRequest:
+              enable: true
+              confidenceScoreThreshold: 0.2
+              topAnswersWithSpan: 1
+            includeUnstructuredSources: true
+          projectName: testQA
+          deploymentName: test
+  - scenario: AnswersKnowledgeBaseQuestion
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: How long should my Surface battery last?
+            top: 3
+            userId: sd53lsY=
+            confidenceScoreThreshold: 0.2
+            answerSpanRequest:
+              enable: true
+              confidenceScoreThreshold: 0.2
+              topAnswersWithSpan: 1
+            includeUnstructuredSources: true
+          projectName: testQA
+          deploymentName: test
+  - scenario: AnswersKnowledgeBaseQuestionAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: How long should my Surface battery last?
+            top: 3
+            userId: sd53lsY=
+            confidenceScoreThreshold: 0.2
+            answerSpanRequest:
+              enable: true
+              confidenceScoreThreshold: 0.2
+              topAnswersWithSpan: 1
+            includeUnstructuredSources: true
+          projectName: testQA
+          deploymentName: test
+  - scenario: AnswersKnowledgeBaseQuestionWithMetadataFilter
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: Battery life
+            top: 3
+            filters:
+              metadataFilter:
+                metadata:
+                  - key: explicitlytaggedheading
+                    value: check the battery level
+                  - key: explicitlytaggedheading
+                    value: make your battery last
+                logicalOperation: OR
+          projectName: testQA
+          deploymentName: test
+  - scenario: AnswersKnowledgeBaseQuestionWithMetadataFilterAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: Battery life
+            top: 3
+            filters:
+              metadataFilter:
+                metadata:
+                  - key: explicitlytaggedheading
+                    value: check the battery level
+                  - key: explicitlytaggedheading
+                    value: make your battery last
+                logicalOperation: OR
+          projectName: testQA
+          deploymentName: test
+  - scenario: AnswersTextQuestion
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithDefaultLanguage
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithDefaultLanguageAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithDefaultLanguageParameter
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithDefaultLanguageParameterAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithLanguage
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithLanguageAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithLanguageParameter
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: AnswersTextQuestionWithLanguageParameterAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: GetsKnowledgeBaseQuestion
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            qnaId: 24
+          projectName: testQA
+          deploymentName: test
+  - scenario: GetsKnowledgeBaseQuestionAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        parameters:
+          knowledgeBaseQueryOptions:
+            qnaId: 24
+          projectName: testQA
+          deploymentName: test
+  - scenario: QueryKnowledgeBaseBadArgument
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        responses:
+          '400': {}
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: ' '
+          projectName: testQA
+          deploymentName: test
+  - scenario: QueryKnowledgeBaseBadArgumentAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswers
+        responses:
+          '400': {}
+        parameters:
+          knowledgeBaseQueryOptions:
+            question: ' '
+          projectName: testQA
+          deploymentName: test
+  - scenario: SupportsAadAuthentication
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit
+  - scenario: SupportsAadAuthenticationAsync
+    steps:
+      - operationId: QuestionAnswering_GetAnswersFromText
+        parameters:
+          textQueryOptions:
+            question: How long it takes to charge surface?
+            records:
+              - id: '1'
+                text: >-
+                  Power and charging. It takes two to four hours to charge the
+                  Surface Pro 4 battery fully from an empty state. It can take
+                  longer if you’re using your Surface for power-intensive
+                  activities like gaming or video streaming while you’re
+                  charging it.
+              - id: '2'
+                text: >-
+                  You can use the USB port on your Surface Pro 4 power supply to
+                  charge other devices, like a phone, while your Surface
+                  charges. The USB port on the power supply is only for
+                  charging, not for data transfer. If you want to use a USB
+                  device, plug it into the USB port on your Surface.
+            language: en
+            stringIndexType: Utf16CodeUnit

@@ -1,0 +1,359 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+# Generated from test-proxy recording in:
+# https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/cognitivelanguage/Azure.AI.Language.QuestionAnswering/tests/SessionRecords/QuestionAnsweringAuthoringClientLiveTests
+
+scope: None
+
+authentication:
+  type: AADToken
+  scope: https://cognitiveservices.azure.com/.default
+
+variables:
+  Endpoint: https://coglanapitest.cognitiveservices.azure.com
+
+scenarios:
+  - scenario: AddFeedback
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          projectName: TestProject1250816868
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+  - scenario: AddFeedbackAsync
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          projectName: TestProject403305723
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+  - scenario: CreateProject
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          projectName: TestProject876844875
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_ListProjects
+  - scenario: CreateProjectAsync
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          projectName: TestProject1811983877
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_ListProjects
+  - scenario: DeployProject
+    variables:
+      projectName:
+        type: string
+        value: TestProject1473367470
+      deploymentName:
+        type: string
+        value: production
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_UpdateSources
+        parameters:
+          body: >-
+            [{"op":"add","value":{"displayName":"MicrosoftFAQ","source":"https://www.microsoft.com/en-in/software-download/faq","sourceUri":"https://www.microsoft.com/en-in/software-download/faq","sourceKind":"url","contentStructureKind":"unstructured","refresh":false}}]
+      - operationId: QuestionAnsweringProjects_GetUpdateSourcesStatus
+        parameters:
+          jobId: c99e8d0a-a5f0-4116-9e65-6a6230420938
+      - operationId: QuestionAnsweringProjects_DeployProject
+      - operationId: QuestionAnsweringProjects_GetDeployStatus
+        parameters:
+          jobId: 9a635124-aec1-4687-a8c4-dfe27e3bacd1
+      - operationId: QuestionAnsweringProjects_ListDeployments
+      - operationId: QuestionAnsweringProjects_DeleteProject
+      - operationId: QuestionAnsweringProjects_GetDeleteStatus
+        parameters:
+          jobId: 5d73bb47-0c00-44ad-8170-84279170f22f
+  - scenario: DeployProjectAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject2106674352
+      deploymentName:
+        type: string
+        value: production
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_UpdateSources
+        parameters:
+          body: >-
+            [{"op":"add","value":{"displayName":"MicrosoftFAQ","source":"https://www.microsoft.com/en-in/software-download/faq","sourceUri":"https://www.microsoft.com/en-in/software-download/faq","sourceKind":"url","contentStructureKind":"unstructured","refresh":false}}]
+      - operationId: QuestionAnsweringProjects_GetUpdateSourcesStatus
+        parameters:
+          jobId: 7e876959-ce34-4243-a0c2-d0a36472f996
+      - operationId: QuestionAnsweringProjects_DeployProject
+      - operationId: QuestionAnsweringProjects_GetDeployStatus
+        parameters:
+          jobId: 82f4d1b1-74f5-4191-876b-95e19162de8d
+  - scenario: Export
+    variables:
+
+      projectName:
+        type: string
+        value: TestProject1385284102
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_GetExportStatus
+        parameters:
+          jobId: cac3864a-b8f5-4c3a-9440-1251b7e1391e
+  - scenario: ExportAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject2029022204
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_GetExportStatus
+        parameters:
+          jobId: 9041ef53-33cd-4a5d-8188-5dd0c2b4e8c6
+  - scenario: Import
+    variables:
+      projectName:
+        type: string
+        value: TestProject1832810713
+    steps:
+      - operationId: QuestionAnsweringProjects_GetImportStatus
+        parameters:
+          jobId: 49c59d14-11cc-4238-808d-2f7ff1d37415
+      - operationId: QuestionAnsweringProjects_GetProjectDetails
+  - scenario: ImportAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject2095524259
+    steps:
+      - operationId: QuestionAnsweringProjects_GetImportStatus
+        parameters:
+          jobId: 9a39d049-2377-4127-863a-eeeeabd6d063
+      - operationId: QuestionAnsweringProjects_GetProjectDetails
+  - scenario: SupportsAadAuthentication
+    variables:
+      projectName:
+        type: string
+        value: TestProject1485093020
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_DeleteProject
+      - operationId: QuestionAnsweringProjects_GetDeleteStatus
+        parameters:
+          jobId: 582394ec-03d8-4770-b526-98fbbf32078b
+  - scenario: SupportsAadAuthenticationAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject684466533
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_DeleteProject
+      - operationId: QuestionAnsweringProjects_GetDeleteStatus
+        parameters:
+          jobId: fbd8b964-9e61-48d9-88e3-17c60b2dad20
+  - scenario: UpdateQnAs
+    variables:
+      projectName:
+        type: string
+        value: TestProject594467270
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_UpdateQnas
+        parameters:
+          body: >-
+            [{"op":"add","value":{"questions":["What is the easiest way to use
+            azure services in my .NET project?"],"answer":"Using
+            Microsoft\u0027s Azure SDKs"}}]
+      - operationId: QuestionAnsweringProjects_GetUpdateQnasStatus
+        parameters:
+          jobId: 06e00a2e-f694-447a-91bf-01a11fa79ebb
+      - operationId: QuestionAnsweringProjects_DeleteProject
+      - operationId: QuestionAnsweringProjects_GetDeleteStatus
+        parameters:
+          jobId: d3a65483-7a78-44f4-b13a-e8f7c74fed2e
+  - scenario: UpdateQnAsAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject941848572
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_UpdateQnas
+        parameters:
+          body: >-
+            [{"op":"add","value":{"questions":["What is the easiest way to use
+            azure services in my .NET project?"],"answer":"Using
+            Microsoft\u0027s Azure SDKs"}}]
+      - operationId: QuestionAnsweringProjects_GetUpdateQnasStatus
+        parameters:
+          jobId: 7d61c062-2457-4a11-9f40-cbf2be697e11
+  - scenario: UpdateSources
+    variables:
+      projectName:
+        type: string
+        value: TestProject477022851
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_UpdateSources
+        parameters:
+          body: >-
+            [{"op":"add","value":{"displayName":"MicrosoftFAQ","source":"https://www.microsoft.com/en-in/software-download/faq","sourceUri":"https://www.microsoft.com/en-in/software-download/faq","sourceKind":"url","contentStructureKind":"unstructured","refresh":false}}]
+      - operationId: QuestionAnsweringProjects_GetUpdateSourcesStatus
+        parameters:
+          jobId: b3f9bd07-de7e-4ff5-9280-c505215ab8c1
+      - operationId: QuestionAnsweringProjects_DeleteProject
+      - operationId: QuestionAnsweringProjects_GetDeleteStatus
+        parameters:
+          jobId: b06cfaa6-b343-4850-b4dd-b8d319695f16
+  - scenario: UpdateSourcesAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject524654722
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+        parameters:
+          body:
+            description: This is the description for a test project
+            language: en
+            multilingualResource: false
+            settings:
+              defaultAnswer: No answer found for your question.
+      - operationId: QuestionAnsweringProjects_UpdateSources
+        parameters:
+          body: >-
+            [{"op":"add","value":{"displayName":"MicrosoftFAQ","source":"https://www.microsoft.com/en-in/software-download/faq","sourceUri":"https://www.microsoft.com/en-in/software-download/faq","sourceKind":"url","contentStructureKind":"unstructured","refresh":false}}]
+      - operationId: QuestionAnsweringProjects_GetUpdateSourcesStatus
+        parameters:
+          jobId: 48c252d2-db92-46f8-beb7-0c7a652fd7f8
+  - scenario: UpdateSynonyms
+    variables:
+      projectName:
+        type: string
+        value: TestProject1742978617
+      body:
+        type: object
+        value:
+          description: This is the description for a test project
+          language: en
+          multilingualResource: false
+          settings:
+            defaultAnswer: No answer found for your question.
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+      - operationId: QuestionAnsweringProjects_UpdateSynonyms
+        parameters:
+          body:
+            value:
+              - alterations:
+                  - qnamaker
+                  - qna maker
+              - alterations:
+                  - qna
+                  - question and answer
+  - scenario: UpdateSynonymsAsync
+    variables:
+      projectName:
+        type: string
+        value: TestProject1215134428
+      body:
+        type: object
+        value:
+          description: This is the description for a test project
+          language: en
+          multilingualResource: false
+          settings:
+            defaultAnswer: No answer found for your question.
+    steps:
+      - operationId: QuestionAnsweringProjects_CreateProject
+      - operationId: QuestionAnsweringProjects_UpdateSynonyms
+        parameters:
+          body:
+            value:
+              - alterations:
+                  - qnamaker
+                  - qna maker
+              - alterations:
+                  - qna
+                  - question and answer

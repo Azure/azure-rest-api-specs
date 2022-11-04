@@ -5,8 +5,6 @@ variables:
   accountName: coglantest
 
 prepareSteps:
-  - operationId: Accounts_Delete
-    readmeTag: ../../resource-manager/readme.md
   # Cognitive account only supports creation from portal
   # - operationId: Accounts_Create
   #   readmeTag: ../../resource-manager/readme.md
@@ -24,6 +22,12 @@ prepareSteps:
     outputVariables:
       Endpoint:
         fromResponse: /properties/endpoints/Language
+  #     resourceId:
+  #       fromResponse: /id
+  # - roleAssignment:
+  #     principalId: $(object_id)
+  #     roleName: Cognitive Services Language Owner
+  #     scope: $(resourceId)
 
 scenarios:
   - scenario: Liveness

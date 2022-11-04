@@ -1,4 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+# Generated from test-proxy recording in:
+# https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/cognitivelanguage/Azure.AI.Language.Conversations/tests/SessionRecords/ConversationAnalysisClientLiveTests
+
 scope: None
 
 authentication:
@@ -6,33 +10,7 @@ authentication:
   scope: https://cognitiveservices.azure.com/.default
 
 variables:
-  # resourceGroupName: rg-leni
-  # accountName: coglanapitest
   Endpoint: https://coglanapitest.cognitiveservices.azure.com
-
-# prepareSteps:
-  # - operationId: Accounts_Create
-  #   readmeTag: ../../../../../resource-manager/readme.md
-  #   parameters:
-  #     account:
-  #       location: $(location)
-  #       kind: TextAnalytics
-  #       sku:
-  #         name: F0
-  #       properties: {}
-  #       identity:
-  #         type: SystemAssigned
-  # - operationId: Accounts_Get
-  #   readmeTag: ../../../../../resource-manager/readme.md
-  #   outputVariables:
-  #     Endpoint:
-  #       fromResponse: /properties/endpoints/Language
-  #     resourceId:
-  #       fromResponse: /id
-  # - roleAssignment:
-  #     principalId: $(object_id)
-  #     roleName: Cognitive Services Language Owner
-  #     scope: $(resourceId)
 
 scenarios:
   - scenario: AnalyzeConversation_ConversationPII_TextInput

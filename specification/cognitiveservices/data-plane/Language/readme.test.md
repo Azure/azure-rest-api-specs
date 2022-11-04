@@ -6,5 +6,7 @@ These settings apply only when `--tag=release_2022_10_01_preview` is specified o
 test-resources:
   - preview/2022-10-01-preview/scenarios/ConversationAnalysis.yaml
   - preview/2022-10-01-preview/scenarios/ConversationAuthoring.yaml
+  - preview/2022-10-01-preview/scenarios/QuestionAnswering.yaml
+  - preview/2022-10-01-preview/scenarios/QuestionAnsweringAuthoring.yaml
 
 ```
