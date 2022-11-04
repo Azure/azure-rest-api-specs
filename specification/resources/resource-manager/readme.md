@@ -943,8 +943,9 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
-  - suppress: R4009
-    from: resources.json
+  - from: resources.json
+    suppress: R4009
+    where: $.definitions.TagsResource
     reason: The tags API does not support system data  
 ```
 
