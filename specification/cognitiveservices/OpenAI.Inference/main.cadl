@@ -3,11 +3,17 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("Azure OpenAI Service API")
-@serviceVersion("2022-03-01-preview")
+@service({title: "Azure OpenAI API", version: "2022-06-01-preview" })
 @server(
   "https://{endpoint}/openai",
-  "Azure OpenAI APIs for completions and search"
+  "Azure OpenAI APIs for completions and search",
+  {
+    @doc("""
+Supported Cognitive Services endpoints (protocol and hostname, for example:
+https://westus.api.cognitive.microsoft.com).
+""")
+    endpoint: string,
+  }
 )
 @doc("Azure OpenAI APIs for completions and search")
-namespace AzureOpenAIServiceAPI;
+namespace Azure.OpenAI;
