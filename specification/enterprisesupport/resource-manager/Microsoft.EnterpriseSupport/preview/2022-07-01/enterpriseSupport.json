@@ -208,7 +208,7 @@
               "$ref": "#/definitions/purchaseResult"
             },
             "examples": {
-              "application/json": "{\"id\":\"18048b18-baea-49b9-898d-26577d6b8cd9\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"18048b18-baea-49b9-898d-26577d6b8cd9\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"0504d1a0-12d6-4c9d-bdcf-b2732d42adae\",\"invoiceSectionId\":\"76bcbffe-a43c-47c1-99c2-b0ca7639f955\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"aec01ab4-b047-4a92-abe6-b8d77fc56aab\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+              "application/json": "{\"id\":\"a5c3ed42-8de8-4e75-8c90-f0965a46687d\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"a5c3ed42-8de8-4e75-8c90-f0965a46687d\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"06064416-961b-466b-a95d-4d6ccfe7d538\",\"invoiceSectionId\":\"3f6395fd-c503-4709-8e76-d565c7509e19\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"4f471bc1-99d1-440e-93e4-423e8f86cc7e\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
             }
           },
           "default": {
@@ -275,9 +275,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Payload of PurchaseResult",
+            "description": "Payload of PatchPurchaseResult",
             "schema": {
-              "$ref": "#/definitions/purchaseResult"
+              "$ref": "#/definitions/patchPurchaseResult"
             },
             "x-ms-summary": "Body of the updated purchase"
           },
@@ -549,7 +549,15 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/purchaseRequest"
+          "$ref": "#/definitions/purchaseBase"
+        }
+      }
+    },
+    "patchPurchaseResult": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/purchaseBase"
         }
       }
     },
@@ -628,6 +636,53 @@
         }
       }
     },
+    "purchaseBase": {
+      "type": "object",
+      "properties": {
+        "billingAccountId": {
+          "type": "string"
+        },
+        "billingGroupId": {
+          "type": "string"
+        },
+        "shippingProfileId": {
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "skuId": {
+          "type": "string"
+        },
+        "availabilityId": {
+          "type": "string"
+        },
+        "termId": {
+          "type": "string"
+        },
+        "csam": {
+          "type": "string"
+        },
+        "csmAdmin": {
+          "type": "string"
+        },
+        "price": {
+          "format": "double",
+          "type": "number"
+        },
+        "serviceStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "serviceEndDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "purchaseError": {
       "type": "object",
       "properties": {
@@ -701,7 +756,7 @@
           "type": "string"
         }
       },
-      "example": "{\"purchaseId\":\"ea86725a-4b45-444a-a0e7-ff8dfadf1220\",\"billingAccountId\":\"549b0e12-85db-45db-86d4-9a8f772df5f1\",\"billingGroupId\":\"dd38cc78-b3e4-4c2c-b576-7a267ab158c2\",\"shippingProfileId\":\"5f253d9d-b16b-46db-82fa-bb2894764ef6\",\"invoiceSectionId\":\"93169ebc-919f-47ff-abc5-4907285459fe\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"c3f72706-99eb-44f6-834b-2f66d49c75ad\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
+      "example": "{\"purchaseId\":\"335d73d7-b3ab-4091-9260-a3a0b8ba2600\",\"billingAccountId\":\"693f88e5-5122-4db3-993d-37e059f94c39\",\"billingGroupId\":\"2dfc8dcd-d33a-4759-9581-90db349a431f\",\"shippingProfileId\":\"a9eff5f3-5276-4d4f-aa55-6aeee3668997\",\"invoiceSectionId\":\"7dd6a6f7-a6a5-412d-adf4-c1d0d84f7da4\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"140b2be4-16a4-4aa9-9efc-e30e7cf03af2\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"price\":1.0,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
     },
     "purchaseResult": {
       "type": "object",
@@ -722,7 +777,7 @@
           "$ref": "#/definitions/purchase"
         }
       },
-      "example": "{\"id\":\"5107cfaa-8bc8-475c-a1da-62431647a6f9\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"5107cfaa-8bc8-475c-a1da-62431647a6f9\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"e94f7104-52bb-4b07-920a-6966a83edce8\",\"invoiceSectionId\":\"2623bd00-61ef-434f-a3d0-b52310c87304\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"3deb2f73-d897-49cc-9e02-6de326ef6c4e\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+      "example": "{\"id\":\"1eddeb7c-3895-45dc-8f66-2d458caa73ef\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"1eddeb7c-3895-45dc-8f66-2d458caa73ef\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"477ae5dc-c9c3-4e49-b9ca-c73b4c75ceb9\",\"invoiceSectionId\":\"3cdd81a3-fd37-4f08-89ff-386859d87935\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"d884ca1e-93a3-450f-aefb-68f77c54f8d2\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
     }
   },
   "security": [
