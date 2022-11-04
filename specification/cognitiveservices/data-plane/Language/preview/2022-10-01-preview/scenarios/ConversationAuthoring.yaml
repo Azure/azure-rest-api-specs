@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: None
+
+authentication:
+  type: AADToken
+  scope: https://cognitiveservices.azure.com/.default
+
+variables:
+  Endpoint: https://coglanapitest.cognitiveservices.azure.com
+
+scenarios:
+  - scenario: GetProjects
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_ListProjects
+  - scenario: GetProjectsAsync
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_ListProjects
+  - scenario: GetSupportedLanguageSpecificPrebuiltEntities
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities
+        parameters:
+          language: es
+          multilingual: 'false'
+  - scenario: GetSupportedLanguageSpecificPrebuiltEntitiesAsync
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities
+        parameters:
+          language: es
+          multilingual: 'false'
+  - scenario: GetSupportedMultilingualPrebuiltEntities
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities
+        parameters:
+          multilingual: 'true'
+  - scenario: GetSupportedMultilingualPrebuiltEntitiesAsync
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities
+        parameters:
+          multilingual: 'true'
+  - scenario: GetTrainedModels
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_ListTrainedModels
+        parameters:
+          projectName: CLUScriptDeployed
+  - scenario: GetTrainedModelsAsync
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_ListTrainedModels
+        parameters:
+          projectName: CLUScriptDeployed
+  - scenario: SupportsAadAuthentication
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_ListProjects
+  - scenario: SupportsAadAuthenticationAsync
+    steps:
+      - operationId: ConversationalAnalysisAuthoring_ListProjects

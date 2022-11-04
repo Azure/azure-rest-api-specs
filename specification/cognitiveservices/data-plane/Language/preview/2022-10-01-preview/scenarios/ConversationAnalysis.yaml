@@ -1,0 +1,413 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: None
+
+authentication:
+  type: AADToken
+  scope: https://cognitiveservices.azure.com/.default
+
+variables:
+  # resourceGroupName: rg-leni
+  # accountName: coglanapitest
+  Endpoint: https://coglanapitest.cognitiveservices.azure.com
+
+# prepareSteps:
+  # - operationId: Accounts_Create
+  #   readmeTag: ../../../../../resource-manager/readme.md
+  #   parameters:
+  #     account:
+  #       location: $(location)
+  #       kind: TextAnalytics
+  #       sku:
+  #         name: F0
+  #       properties: {}
+  #       identity:
+  #         type: SystemAssigned
+  # - operationId: Accounts_Get
+  #   readmeTag: ../../../../../resource-manager/readme.md
+  #   outputVariables:
+  #     Endpoint:
+  #       fromResponse: /properties/endpoints/Language
+  #     resourceId:
+  #       fromResponse: /id
+  # - roleAssignment:
+  #     principalId: $(object_id)
+  #     roleName: Cognitive Services Language Owner
+  #     scope: $(resourceId)
+
+scenarios:
+  - scenario: AnalyzeConversation_ConversationPII_TextInput
+    steps:
+      - operationId: AnalyzeConversation_SubmitJob
+        parameters:
+          body:
+            analysisInput:
+              conversations:
+                - conversationItems:
+                    - text: Hi, I am John Doe.?
+                      id: '1'
+                      participantId: '0'
+                    - text: Hi John, how are you doing today?
+                      id: '2'
+                      participantId: '1'
+                    - text: Pretty good.
+                      id: '3'
+                      participantId: '0'
+                  id: '1'
+                  language: en
+                  modality: text
+            tasks:
+              - parameters:
+                  piiCategories:
+                    - All
+                  includeAudioRedaction: false
+                  modelVersion: 2022-05-15-preview
+                  loggingOptOut: false
+                kind: ConversationalPIITask
+                taskName: analyze
+  - scenario: AnalyzeConversation_ConversationPII_TextInputAsync
+    steps:
+      - operationId: AnalyzeConversation_SubmitJob
+        parameters:
+          body:
+            analysisInput:
+              conversations:
+                - conversationItems:
+                    - text: Hi, I am John Doe.?
+                      id: '1'
+                      participantId: '0'
+                    - text: Hi John, how are you doing today?
+                      id: '2'
+                      participantId: '1'
+                    - text: Pretty good.
+                      id: '3'
+                      participantId: '0'
+                  id: '1'
+                  language: en
+                  modality: text
+            tasks:
+              - parameters:
+                  piiCategories:
+                    - All
+                  includeAudioRedaction: false
+                  modelVersion: 2022-05-15-preview
+                  loggingOptOut: false
+                kind: ConversationalPIITask
+                taskName: analyze
+  - scenario: AnalyzeConversation_ConversationPII_TranscriptInput
+    steps:
+      - operationId: AnalyzeConversation_SubmitJob
+        parameters:
+          body:
+            analysisInput:
+              conversations:
+                - conversationItems:
+                    - itn: hi
+                      maskedItn: hi
+                      text: Hi
+                      lexical: hi
+                      audioTimings:
+                        - word: hi
+                          offset: 4500000
+                          duration: 2800000
+                      id: '1'
+                      participantId: speaker
+                    - itn: jane doe
+                      maskedItn: jane doe
+                      text: Jane doe
+                      lexical: jane doe
+                      audioTimings:
+                        - word: jane
+                          offset: 7100000
+                          duration: 4800000
+                        - word: jane
+                          offset: 12000000
+                          duration: 1700000
+                      id: '2'
+                      participantId: speaker
+                    - itn: hi jane what's your phone number
+                      maskedItn: hi jane what's your phone number
+                      text: Hi Jane, what's your phone number?
+                      lexical: hi jane what's your phone number
+                      audioTimings:
+                        - word: hi
+                          offset: 7700000
+                          duration: 3100000
+                        - word: jane
+                          offset: 10900000
+                          duration: 5700000
+                        - word: what's
+                          offset: 17300000
+                          duration: 2600000
+                        - word: your
+                          offset: 20000000
+                          duration: 1600000
+                        - word: phone
+                          offset: 21700000
+                          duration: 1700000
+                        - word: number
+                          offset: 23500000
+                          duration: 2300000
+                      id: '3'
+                      participantId: agent
+                  id: '1'
+                  language: en
+                  modality: transcript
+            tasks:
+              - parameters:
+                  piiCategories:
+                    - All
+                  includeAudioRedaction: false
+                  redactionSource: lexical
+                  modelVersion: 2022-05-15-preview
+                  loggingOptOut: false
+                kind: ConversationalPIITask
+                taskName: analyze
+  - scenario: AnalyzeConversation_ConversationPII_TranscriptInputAsync
+    steps:
+      - operationId: AnalyzeConversation_SubmitJob
+        parameters:
+          body:
+            analysisInput:
+              conversations:
+                - conversationItems:
+                    - itn: hi
+                      maskedItn: hi
+                      text: Hi
+                      lexical: hi
+                      audioTimings:
+                        - word: hi
+                          offset: 4500000
+                          duration: 2800000
+                      id: '1'
+                      participantId: speaker
+                    - itn: jane doe
+                      maskedItn: jane doe
+                      text: Jane doe
+                      lexical: jane doe
+                      audioTimings:
+                        - word: jane
+                          offset: 7100000
+                          duration: 4800000
+                        - word: jane
+                          offset: 12000000
+                          duration: 1700000
+                      id: '2'
+                      participantId: speaker
+                    - itn: hi jane what's your phone number
+                      maskedItn: hi jane what's your phone number
+                      text: Hi Jane, what's your phone number?
+                      lexical: hi jane what's your phone number
+                      audioTimings:
+                        - word: hi
+                          offset: 7700000
+                          duration: 3100000
+                        - word: jane
+                          offset: 10900000
+                          duration: 5700000
+                        - word: what's
+                          offset: 17300000
+                          duration: 2600000
+                        - word: your
+                          offset: 20000000
+                          duration: 1600000
+                        - word: phone
+                          offset: 21700000
+                          duration: 1700000
+                        - word: number
+                          offset: 23500000
+                          duration: 2300000
+                      id: '3'
+                      participantId: agent
+                  id: '1'
+                  language: en
+                  modality: transcript
+            tasks:
+              - parameters:
+                  piiCategories:
+                    - All
+                  includeAudioRedaction: false
+                  redactionSource: lexical
+                  modelVersion: 2022-05-15-preview
+                  loggingOptOut: false
+                kind: ConversationalPIITask
+                taskName: analyze
+  - scenario: AnalyzeConversation_ConversationSummarization
+    steps:
+      - operationId: AnalyzeConversation_SubmitJob
+        parameters:
+          body:
+            analysisInput:
+              conversations:
+                - conversationItems:
+                    - text: Hello, how can I help you?
+                      id: '1'
+                      participantId: Agent
+                      role: Agent
+                    - text: >-
+                        How to upgrade Office? I am getting error messages the
+                        whole day.
+                      id: '2'
+                      participantId: Customer
+                      role: Customer
+                    - text: >-
+                        Press the upgrade button please. Then sign in and follow
+                        the instructions.
+                      id: '3'
+                      participantId: Agent
+                      role: Agent
+                  id: '1'
+                  language: en
+                  modality: text
+            tasks:
+              - parameters:
+                  summaryAspects:
+                    - issue
+                    - resolution
+                kind: ConversationalSummarizationTask
+                taskName: '1'
+  - scenario: AnalyzeConversation_ConversationSummarizationAsync
+    steps:
+      - operationId: AnalyzeConversation_SubmitJob
+        parameters:
+          body:
+            analysisInput:
+              conversations:
+                - conversationItems:
+                    - text: Hello, how can I help you?
+                      id: '1'
+                      participantId: Agent
+                      role: Agent
+                    - text: >-
+                        How to upgrade Office? I am getting error messages the
+                        whole day.
+                      id: '2'
+                      participantId: Customer
+                      role: Customer
+                    - text: >-
+                        Press the upgrade button please. Then sign in and follow
+                        the instructions.
+                      id: '3'
+                      participantId: Agent
+                      role: Agent
+                  id: '1'
+                  language: en
+                  modality: text
+            tasks:
+              - parameters:
+                  summaryAspects:
+                    - issue
+                    - resolution
+                kind: ConversationalSummarizationTask
+                taskName: '1'
+  - scenario: AnalyzeConversation_Orchestration_Conversation
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: Send an email to Carol about the tomorrow's demo
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: OrchestrationScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: AnalyzeConversation_Orchestration_ConversationAsync
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: Send an email to Carol about the tomorrow's demo
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: OrchestrationScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: AnalyzeConversation_Orchestration_QuestionAnswering
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: How are you?
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: OrchestrationScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: AnalyzeConversation_Orchestration_QuestionAnsweringAsync
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: How are you?
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: OrchestrationScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: AnalyzeConversation
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: Send an email to Carol about the tomorrow's demo
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: CLUScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: AnalyzeConversationAsync
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: Send an email to Carol about the tomorrow's demo
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: CLUScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: SupportsAadAuthentication
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: Send an email to Carol about the tomorrow's demo
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: CLUScriptDeployed
+              deploymentName: production
+            kind: Conversation
+  - scenario: SupportsAadAuthenticationAsync
+    steps:
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        parameters:
+          body:
+            analysisInput:
+              conversationItem:
+                text: Send an email to Carol about the tomorrow's demo
+                id: '1'
+                participantId: '1'
+            parameters:
+              projectName: CLUScriptDeployed
+              deploymentName: production
+            kind: Conversation

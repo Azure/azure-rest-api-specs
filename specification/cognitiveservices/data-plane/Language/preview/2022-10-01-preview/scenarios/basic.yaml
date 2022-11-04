@@ -1,0 +1,195 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: Subscription
+
+variables:
+  resourceGroupName: rg-leni
+  accountName: coglantest
+  projectName:
+    type: string
+    prefix: projectnam
+  jobId:
+    type: string
+    prefix: jobid
+  deploymentName:
+    type: string
+    prefix: deployment
+  trainedModelLabel:
+    type: string
+    prefix: trainedmod
+
+prepareSteps:
+  # - operationId: Accounts_Create
+  #   readmeTag: ../../../../../resource-manager/readme.md
+  #   parameters:
+  #     account:
+  #       location: $(location)
+  #       kind: TextAnalytics
+  #       sku:
+  #         name: F0
+  #       properties: {}
+  #       identity:
+  #         type: SystemAssigned
+  - operationId: Accounts_Get
+    readmeTag: ../../../../../resource-manager/readme.md
+    outputVariables:
+      resourceId:
+        fromResponse: /id
+      Endpoint:
+        fromResponse: /properties/endpoints/Language
+  # - roleAssignment:
+  #     principalId: $(object_id)
+  #     roleName: Cognitive Services Language Owner
+  #     scope: $(resourceId)
+
+scenarios:
+  - scenario: CognitiveLanguageService
+    authentication:
+      type: AADToken
+      scope: https://cognitiveservices.azure.com/.default
+    steps:
+      - operationId: AnalyzeText
+        exampleFile: ../examples/SuccessfulEntityLinkingRequest.json
+      - operationId: ConversationalAnalysisAuthoring_CreateProject
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulCreateProject.json
+      - operationId: ConversationalAnalysisAuthoring_GetProject
+        exampleFile: ../examples/analyzeconversations-authoring/SuccessfulGetProject.json
+      - operationId: AnalyzeText_SubmitJob
+        exampleFile: ../examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json
+      - operationId: AnalyzeText_JobStatus
+        exampleFile: ../examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json
+      - operationId: AnalyzeText_CancelJob
+        exampleFile: ../examples/SuccessfulAnalyzeTextJobsCancelRequest.json
+      - operationId: TextAnalysisAuthoring_DeployProject
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulDeployProject.json
+      - operationId: TextAnalysisAuthoring_ListProjects
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulListProjects.json
+      - operationId: TextAnalysisAuthoring_GetSupportedLanguages
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetSupportedLanguages.json
+      - operationId: TextAnalysisAuthoring_GetDeploymentStatus
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json
+      - operationId: TextAnalysisAuthoring_GetExportStatus
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetExportStatus.json
+      - operationId: TextAnalysisAuthoring_GetSwapDeploymentsStatus
+        exampleFile: >-
+          ../examples/analyzetext-authoring/SuccessfulGetSwapDeploymentsStatus.json
+      - operationId: TextAnalysisAuthoring_GetDeployment
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetDeployment.json
+      - operationId: TextAnalysisAuthoring_ListTrainingJobs
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulListTrainingJobs.json
+      - operationId: TextAnalysisAuthoring_GetModelEvaluationSummary
+        exampleFile: >-
+          ../examples/analyzetext-authoring/SuccessfulGetModelEvaluationSummary.json
+      - operationId: TextAnalysisAuthoring_GetModelEvaluationResults
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetModelEvaluation.json
+      - operationId: TextAnalysisAuthoring_ListTrainedModels
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulListModels.json
+      - operationId: TextAnalysisAuthoring_GetProjectDeletionStatus
+        exampleFile: >-
+          ../examples/analyzetext-authoring/SuccessfulGetProjectDeletionStatus.json
+      - operationId: TextAnalysisAuthoring_GetProject
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetProject.json
+      - operationId: TextAnalysisAuthoring_GetTrainingStatus
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetTrainStatus.json
+      - operationId: TextAnalysisAuthoring_ListDeployments
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulListDeployments.json
+      - operationId: TextAnalysisAuthoring_ListTrainingConfigVersions
+        exampleFile: >-
+          ../examples/analyzetext-authoring/SuccessfulGetSupportedTrainingConfigVersions.json
+      - operationId: TextAnalysisAuthoring_GetTrainedModel
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetModel.json
+      - operationId: TextAnalysisAuthoring_GetImportStatus
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulGetImportStatus.json
+      - operationId: TextAnalysisAuthoring_CreateProject
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulCreateProject.json
+      - operationId: TextAnalysisAuthoring_Train
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulTrainProject.json
+      - operationId: TextAnalysisAuthoring_CancelTrainingJob
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulCancelTrainingJob.json
+      - operationId: TextAnalysisAuthoring_Import
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulImportProject.json
+      - operationId: TextAnalysisAuthoring_Export
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulExportProject.json
+      - operationId: TextAnalysisAuthoring_SwapDeployments
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulSwapDeployments.json
+      - operationId: TextAnalysisAuthoring_DeleteTrainedModel
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulDeleteModel.json
+      - operationId: TextAnalysisAuthoring_DeleteDeployment
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulDeleteDeployment.json
+      - operationId: TextAnalysisAuthoring_DeleteProject
+        exampleFile: ../examples/analyzetext-authoring/SuccessfulDeleteProject.json
+      - operationId: ConversationalAnalysisAuthoring_DeployProject
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulDeployProject.json
+      - operationId: ConversationalAnalysisAuthoring_ListProjects
+        exampleFile: ../examples/analyzeconversations-authoring/SuccessfulListProjects.json
+      - operationId: ConversationalAnalysisAuthoring_GetProjectDeletionStatus
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetProjectDeletionStatus.json
+      - operationId: ConversationalAnalysisAuthoring_GetDeployment
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetDeployment.json
+      - operationId: ConversationalAnalysisAuthoring_GetSwapDeploymentsStatus
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetSwapDeploymentsStatus.json
+      - operationId: ConversationalAnalysisAuthoring_GetTrainingStatus
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetTrainStatus.json
+      - operationId: ConversationalAnalysisAuthoring_ListTrainingJobs
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulListTrainingJobs.json
+      - operationId: ConversationalAnalysisAuthoring_GetModelEvaluationResults
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetModelEvaluation.json
+      - operationId: ConversationalAnalysisAuthoring_ListTrainingConfigVersions
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetSupportedTrainingConfigVersions.json
+      - operationId: ConversationalAnalysisAuthoring_ListDeployments
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulListDeployments.json
+      - operationId: ConversationalAnalysisAuthoring_ListTrainedModels
+        exampleFile: ../examples/analyzeconversations-authoring/SuccessfulListModels.json
+      - operationId: ConversationalAnalysisAuthoring_GetSupportedLanguages
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetSupportedLanguages.json
+      - operationId: ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetSupportedPrebuiltEntities.json
+      - operationId: ConversationalAnalysisAuthoring_GetModelEvaluationSummary
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetModelEvaluationSummary.json
+      - operationId: ConversationalAnalysisAuthoring_GetTrainedModel
+        exampleFile: ../examples/analyzeconversations-authoring/SuccessfulGetModel.json
+      - operationId: ConversationalAnalysisAuthoring_GetDeploymentStatus
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json
+      - operationId: ConversationalAnalysisAuthoring_GetImportStatus
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetImportStatus.json
+      - operationId: ConversationalAnalysisAuthoring_GetExportStatus
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulGetExportStatus.json
+      - operationId: ConversationalAnalysisAuthoring_CancelTrainingJob
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulCancelTrainingJob.json
+      - operationId: ConversationalAnalysisAuthoring_SwapDeployments
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulSwapDeployments.json
+      - operationId: ConversationalAnalysisAuthoring_Import
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulImportProject.json
+      - operationId: ConversationalAnalysisAuthoring_Export
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulExportProject.json
+      - operationId: ConversationalAnalysisAuthoring_Train
+        exampleFile: ../examples/analyzeconversations-authoring/SuccessfulTrainProject.json
+      - operationId: ConversationAnalysis_AnalyzeConversation
+        exampleFile: ../examples/conversations/SuccessfulAnalyzeConversations.json
+      - operationId: ConversationalAnalysisAuthoring_DeleteTrainedModel
+        exampleFile: ../examples/analyzeconversations-authoring/SuccessfulDeleteModel.json
+      - operationId: ConversationalAnalysisAuthoring_DeleteDeployment
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulDeleteDeployment.json
+      - operationId: ConversationalAnalysisAuthoring_DeleteProject
+        exampleFile: >-
+          ../examples/analyzeconversations-authoring/SuccessfulDeleteProject.json
