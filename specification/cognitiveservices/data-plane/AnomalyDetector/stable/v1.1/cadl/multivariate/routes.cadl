@@ -19,7 +19,7 @@ resultId returned by the BatchDetectAnomaly api.
 """)
 // FIXME different name in swagger
 // Error must be modified to include header and definition specific to AnomalyDetector service
-op GetBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
+op GetMultivariateBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
 
 
 @post
@@ -44,8 +44,7 @@ timestamp column.
 //     };
 //   }
 // >;
-// FIXME: Swagger defines a different name so this might have to be a client.cadl change
-op CreateMultivariateModel(
+op CreateAndTrainMultivariateModel(
   @body body: ModelInfo,
 ): {
   @statusCode statusCode: 201,
@@ -149,7 +148,7 @@ storage folder, or pointed to a CSV file in Azure blob storage.
 //     ...DetectionResult,
 //   }
 // >;
-op BatchDetectAnomaly(
+op DetectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
@@ -184,7 +183,7 @@ immediately in the response body.
 //   },
 //   LastDetectionResult
 // >;
-op LastDetectAnomaly(
+op DetectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
