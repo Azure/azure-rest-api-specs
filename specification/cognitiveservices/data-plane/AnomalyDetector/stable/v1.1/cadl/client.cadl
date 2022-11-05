@@ -1,0 +1,29 @@
+import "./main.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+using AnomalyDetector.Univariate;
+using AnomalyDetector.Multivariate;
+
+@client({
+    name: "AnomalyDetectorClient",
+    service: AnomalyDetector,
+})
+namespace SDKCustomizations;
+
+interface Univariate {
+    op DetectEntireSeries is DetectUnivariateEntireSeries;
+    op DetectLastPoint is DetectUnivariateLastPoint;
+    op DetectChangePoint is DetectUnivariateChangePoint;
+}
+
+interface Multivariate {
+    op GetBatchDetectionResult is GetMultivariateBatchDetectionResult;
+    op CreateMultivariateModel is CreateAndTrainMultivariateModel;
+    op ListMultivariateModels is ListMultivariateModels;
+    op DeleteMultivariateModel is DeleteMultivariateModel;
+    op GetMultivariateModel is GetMultivariateModel;
+    op DetectBatchAnomaly is DetectMultivariateBatchAnomaly;
+    op DetectLastAnomaly is DetectMultivariateLastAnomaly;
+}
