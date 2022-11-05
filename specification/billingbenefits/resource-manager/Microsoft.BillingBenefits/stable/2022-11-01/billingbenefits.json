@@ -560,65 +560,6 @@
         }
       }
     },
-    "/providers/Microsoft.BillingBenefits/calculateMigrationCost": {
-      "post": {
-        "summary": "Calculates the refund amounts in EA account and price of the corresponding new purchases in MCA account.",
-        "description": "Calculates price for migrating `SavingsPlans` from EA to MCA account.\n",
-        "operationId": "CalculateMigrationCost_Post",
-        "x-ms-examples": {
-          "CalculateMigrationCost": {
-            "$ref": "./examples/CalculateMigrationCost.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CalculateMigrationCostRequestParameter"
-          }
-        ],
-        "tags": [
-          "Migration"
-        ],
-        "responses": {
-          "200": {
-            "description": "The request is completed.",
-            "schema": {
-              "$ref": "#/definitions/CalculateMigrationCostOperationResultResponse"
-            }
-          },
-          "202": {
-            "description": "The request is accepted and is being processed.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation."
-              },
-              "Location": {
-                "type": "string",
-                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Clients should wait for the Retry-After interval before polling again"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}": {
       "put": {
         "description": "Create a reservation order alias.",
@@ -1558,19 +1499,6 @@
         }
       }
     },
-    "CalculateMigrationCostRequest": {
-      "type": "object",
-      "properties": {
-        "sourceBillingAccountId": {
-          "type": "string",
-          "description": "Fully Qualified BillingAccountId"
-        },
-        "destinationBillingProfileId": {
-          "type": "string",
-          "description": "Fully Qualified BillingProfileId"
-        }
-      }
-    },
     "OperationResultError": {
       "type": "object",
       "description": "Required if status == failed or status == canceled.",
@@ -1582,200 +1510,6 @@
         "message": {
           "type": "string",
           "description": "Required if status == failed. Localized. If status == failed, provide an actionable error message indicating what error occurred, and what the user can do to address the issue."
-        }
-      }
-    },
-    "CalculateMigrationCostOperationResultResponse": {
-      "type": "object",
-      "description": "CalculateMigrationCost operation result",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "It should match what is used to GET the operation result."
-        },
-        "name": {
-          "type": "string",
-          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the operation.",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Pending"
-          ],
-          "x-ms-enum": {
-            "name": "CalculateMigrationCostOperationResultStatus",
-            "modelAsString": true
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/CalculateMigrationCostResponseProperties"
-        },
-        "error": {
-          "$ref": "#/definitions/OperationResultError"
-        }
-      }
-    },
-    "CalculateMigrationCostResponseProperties": {
-      "type": "object",
-      "description": "Calculate Migration Cost response properties",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "The session id of this calculate migration cost operation."
-        },
-        "netPayable": {
-          "$ref": "#/definitions/Price"
-        },
-        "refundsTotal": {
-          "$ref": "#/definitions/Price"
-        },
-        "purchasesTotal": {
-          "$ref": "#/definitions/Price"
-        },
-        "savingsPlansToPurchase": {
-          "type": "array",
-          "description": "Details of the savings plans being purchased",
-          "items": {
-            "$ref": "#/definitions/SavingsPlanToPurchaseCalculateExchange"
-          },
-          "x-ms-identifiers": []
-        },
-        "savingsPlansToExchange": {
-          "type": "array",
-          "description": "Details of the reservations being returned",
-          "items": {
-            "$ref": "#/definitions/SavingsPlansToExchange"
-          },
-          "x-ms-identifiers": []
-        },
-        "policyResult": {
-          "$ref": "#/definitions/CalculateMigrationCostPolicyErrors"
-        }
-      }
-    },
-    "CalculateMigrationCostPolicyErrors": {
-      "type": "object",
-      "description": "Calculate migrationCost policy Errors",
-      "properties": {
-        "policyErrors": {
-          "type": "array",
-          "description": "Calculate migrationCost policy Errors",
-          "items": {
-            "$ref": "#/definitions/CalculateMigrationCostPolicyError"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "CalculateMigrationCostPolicyError": {
-      "type": "object",
-      "description": "error details",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "SavingsPlanToPurchaseCalculateExchange": {
-      "type": "object",
-      "description": "Savings Plan purchase details",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SavingsPlanPurchaseRequest"
-        },
-        "billingCurrencyTotal": {
-          "$ref": "#/definitions/Price"
-        },
-        "pricingCurrencyTotal": {
-          "$ref": "#/definitions/Price"
-        },
-        "paymentSchedule": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PaymentDetail"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "SavingsPlanPurchaseRequest": {
-      "type": "object",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SavingsPlanPurchaseRequestProperties"
-        }
-      }
-    },
-    "SavingsPlanPurchaseRequestProperties": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Friendly name of the Savings Plan"
-        },
-        "billingScopeId": {
-          "$ref": "#/definitions/BillingScopeId"
-        },
-        "term": {
-          "$ref": "#/definitions/BenefitTerm"
-        },
-        "billingPlan": {
-          "$ref": "#/definitions/BillingPlan"
-        },
-        "reservedResourceType": {
-          "$ref": "#/definitions/ReservedResourceType"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Quantity to purchase. Must be greater than zero."
-        },
-        "appliedScopeType": {
-          "$ref": "#/definitions/AppliedScopeType"
-        },
-        "appliedScopeProperties": {
-          "$ref": "#/definitions/AppliedScopeProperties"
-        },
-        "commitment": {
-          "$ref": "#/definitions/Commitment"
-        }
-      }
-    },
-    "SavingsPlansToExchange": {
-      "type": "object",
-      "description": "SavingsPlan refund details",
-      "properties": {
-        "reservationId": {
-          "type": "string",
-          "description": "Fully qualified id of the SavingsPlan being returned."
-        },
-        "commitment": {
-          "$ref": "#/definitions/Commitment"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Quantity to be exchanged. Must be greater than zero."
-        },
-        "billingPlans": {
-          "$ref": "#/definitions/BillingPlan"
-        },
-        "billingRefundAmount": {
-          "$ref": "#/definitions/Price"
-        },
-        "billingInformation": {
-          "$ref": "#/definitions/BillingInformation"
         }
       }
     },
@@ -1930,7 +1664,7 @@
         "reviewDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the Reservation needs to be reviewed."
+          "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
         },
         "reservedResourceProperties": {
           "type": "object",
@@ -2126,16 +1860,6 @@
       "description": "Request body for validating a savings plan patch request",
       "schema": {
         "$ref": "#/definitions/SavingsPlanUpdateValidateRequest"
-      }
-    },
-    "CalculateMigrationCostRequestParameter": {
-      "name": "body",
-      "in": "body",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "description": "Request body for migrating all savings plan order into mca account",
-      "schema": {
-        "$ref": "#/definitions/CalculateMigrationCostRequest"
       }
     },
     "ReservationOrderAliasNameParameter": {
