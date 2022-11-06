@@ -270,7 +270,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Language",
+            "description": "The language",
             "default": "en",
             "x-nullable": true
           },
@@ -278,7 +278,7 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Market",
+            "description": "The market",
             "default": "US",
             "x-nullable": true
           },
@@ -1203,19 +1203,21 @@
     "PageResultOfProductSummary": {
       "type": "object",
       "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "additionalProperties": true,
       "properties": {
-        "NextPageLink": {
+        "nextPageLink": {
           "type": "string",
           "description": "Gets the link for the next page of items in the feed.",
           "format": "uri"
         },
-        "Count": {
+        "count": {
           "type": "integer",
           "description": "Gets the total count of items in the feed.",
           "format": "int64"
         },
-        "Items": {
+        "items": {
           "type": "array",
+          "x-ms-identifiers": [],
           "description": "Gets the collection of entities for this feed.",
           "items": {
             "$ref": "#/definitions/ProductSummary"
