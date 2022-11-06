@@ -28,37 +28,92 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/UniqueProductIdParameter"
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Unique product Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/PartnerTenantIdParameter"
+            "type": "string",
+            "name": "x-ms-partner-tenantid",
+            "x-originalName": "partnerTenantId",
+            "in": "header",
+            "description": "Partner tenant ID",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/PricingAudienceParameter"
+            "type": "string",
+            "name": "x-ms-pricing-audience",
+            "x-originalName": "pricingAudienceHeaderValue",
+            "in": "header",
+            "description": "Pricing audience",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "default": "2022-09-01-preview",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/IncludeStopSoldPlanParameter"
+            "type": "boolean",
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "To include stop sold or hidden plans",
+            "default": false,
+            "x-nullable": false
           },
           {
-            "$ref": "#/parameters/LanguageParameter"
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Product language",
+            "default": "en",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/MarketParameter"
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Product market",
+            "default": "US",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/LookupOfferInTenantLevelParameter"
+            "type": "boolean",
+            "name": "lookupOfferInTenantLevel",
+            "in": "query",
+            "description": "Optional - in case you want to check against tenant private audience also",
+            "default": false,
+            "x-nullable": false
           },
           {
-            "$ref": "#/parameters/IncludeHiddenPlansParameter"
+            "type": "boolean",
+            "name": "includeHiddenPlans",
+            "in": "query",
+            "description": "Include hidden plans",
+            "default": false,
+            "x-nullable": false
           },
           {
-            "$ref": "#/parameters/ClientObjectIdParameter"
+            "type": "string",
+            "name": "x-ms-client-object-id",
+            "x-originalName": "userObjectId",
+            "in": "header",
+            "description": "AAD user ID",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/ClientAltSecIdParameter"
+            "type": "string",
+            "name": "x-ms-client-alt-sec-id",
+            "x-originalName": "altSecId",
+            "in": "header",
+            "description": "Alternate Security ID - relevant for MSA user",
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -123,49 +178,125 @@
         "operationId": "TenantBasedSingleProduct_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/UniqueProductIdParameter"
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The unique product Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/TenantIdParameter"
+            "type": "string",
+            "name": "x-ms-client-tenant-id",
+            "x-originalName": "tenantId",
+            "in": "header",
+            "description": "Tenant Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/UserPrincipalIdParameter"
+            "type": "string",
+            "name": "x-ms-client-principal-name",
+            "x-originalName": "userPrincipal",
+            "in": "header",
+            "description": "User principal name",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/ClientObjectIdParameter"
+            "type": "string",
+            "name": "x-ms-client-object-id",
+            "x-originalName": "userObjectId",
+            "in": "header",
+            "description": "User object id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/SubscriptionIdInQueryParameter"
+            "type": "string",
+            "name": "x-ms-client-subscription-id",
+            "x-originalName": "subscriptionId",
+            "in": "header",
+            "description": "Subscription Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/PartnerTenantIdParameter"
+            "type": "string",
+            "name": "x-ms-pricing-audience",
+            "x-originalName": "pricingAudienceHeaderValue",
+            "in": "header",
+            "description": "Pricing audience",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/PricingAudienceParameter"
+            "type": "string",
+            "name": "x-ms-partner-tenantid",
+            "x-originalName": "partnerTenantId",
+            "in": "header",
+            "description": "Partner tenant Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/BillingAccountParameter"
+            "type": "string",
+            "name": "x-ms-client-billingaccount-id",
+            "x-originalName": "billingAccountId",
+            "in": "header",
+            "description": "Billing account Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/BillingProfileIdParameter"
+            "type": "string",
+            "name": "x-ms-client-billingprofile-id",
+            "x-originalName": "billingProfileId",
+            "in": "header",
+            "description": "Billing profile Id",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "description": "Api version",
+            "default": "2022-09-01-preview",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/IncludeStopSoldPlanParameter"
+            "type": "boolean",
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "To include stop-sold plans",
+            "default": false,
+            "x-nullable": false
           },
           {
-            "$ref": "#/parameters/LanguageParameter"
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Language",
+            "default": "en",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/MarketParameter"
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Market",
+            "default": "US",
+            "x-nullable": true
           },
           {
-            "$ref": "#/parameters/ShouldCheckMarketplaceAdminPermissionsParameter"
+            "type": "boolean",
+            "name": "shouldCheckMarketplaceAdminPermissions",
+            "in": "query",
+            "description": "Include marketplace admin permissions",
+            "default": false,
+            "x-nullable": false
           },
           {
-            "$ref": "#/parameters/IncludeHiddenPlansParameter"
+            "type": "boolean",
+            "name": "includeHiddenPlans",
+            "in": "query",
+            "description": "To include hidden plans",
+            "default": false,
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -320,29 +451,20 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
+      "description": "The API version to use for the request."
+    },
+    "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "required": true,
-      "description": "Subscription Id"
-    },
-    "SubscriptionIdInQueryParameter": {
-      "name": "subscriptionId",
-      "in": "query",
       "type": "string",
       "x-ms-parameter-location": "method",
       "required": true,
       "description": "Subscription id of the caller"
-    },
-    "TenantIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-client-tenant-id",
-      "x-originalName": "tenantId",
-      "in": "header",
-      "description": "Tenant Id"
     },
     "LocationParameter": {
       "name": "location",
@@ -360,6 +482,22 @@
       "required": true,
       "description": "Required edge zone"
     },
+    "LanguageParameter": {
+      "name": "language",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "The language of the free texts"
+    },
+    "MarketParameter": {
+      "name": "market",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "The required market"
+    },
     "SelectParameter": {
       "name": "$select",
       "in": "query",
@@ -375,126 +513,6 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "UniqueProductIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "id",
-      "in": "path",
-      "required": true,
-      "description": "Unique product Id"
-    },
-    "PartnerTenantIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-partner-tenantid",
-      "x-originalName": "partnerTenantId",
-      "in": "header",
-      "description": "Partner tenant ID"
-    },
-    "PricingAudienceParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-pricing-audience",
-      "x-originalName": "pricingAudienceHeaderValue",
-      "in": "header",
-      "description": "Pricing audience"
-    },
-    "ApiVersionParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "api-version",
-      "x-originalName": "apiVersion",
-      "in": "query",
-      "default": "2022-09-01-preview"
-    },
-    "IncludeStopSoldPlanParameter": {
-      "type": "boolean",
-      "x-ms-parameter-location": "method",
-      "name": "includeStopSoldPlans",
-      "in": "query",
-      "description": "To include stop sold or hidden plans",
-      "default": false
-    },
-    "LanguageParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "language",
-      "in": "query",
-      "description": "Product language",
-      "default": "en"
-    },
-    "MarketParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "market",
-      "in": "query",
-      "description": "Product market",
-      "default": "US"
-    },
-    "LookupOfferInTenantLevelParameter": {
-      "type": "boolean",
-      "x-ms-parameter-location": "method",
-      "name": "lookupOfferInTenantLevel",
-      "in": "query",
-      "description": "Optional - in case you want to check against tenant private audience also",
-      "default": false
-    },
-    "IncludeHiddenPlansParameter": {
-      "type": "boolean",
-      "x-ms-parameter-location": "method",
-      "name": "includeHiddenPlans",
-      "in": "query",
-      "description": "Include hidden plans",
-      "default": false
-    },
-    "ClientObjectIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-client-object-id",
-      "x-originalName": "userObjectId",
-      "in": "header",
-      "description": "AAD user ID"
-    },
-    "ClientAltSecIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-client-alt-sec-id",
-      "x-originalName": "altSecId",
-      "in": "header",
-      "description": "Alternate Security ID - relevant for MSA user"
-    },
-    "UserPrincipalIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-client-principal-name",
-      "x-originalName": "userPrincipal",
-      "in": "header",
-      "description": "User principal name"
-    },
-    "BillingAccountParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-client-billingaccount-id",
-      "x-originalName": "billingAccountId",
-      "in": "header",
-      "description": "Billing account Id"
-    },
-    "BillingProfileIdParameter": {
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "name": "x-ms-client-billingprofile-id",
-      "x-originalName": "billingProfileId",
-      "in": "header",
-      "description": "Billing profile Id"
-    },
-    "ShouldCheckMarketplaceAdminPermissionsParameter": {
-      "type": "boolean",
-      "x-ms-parameter-location": "method",
-      "name": "shouldCheckMarketplaceAdminPermissions",
-      "in": "query",
-      "description": "Include marketplace admin permissions",
-      "default": false
     }
   },
   "definitions": {
