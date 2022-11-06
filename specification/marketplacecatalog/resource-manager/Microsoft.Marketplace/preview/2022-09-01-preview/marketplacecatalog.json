@@ -135,7 +135,7 @@
             "$ref": "#/parameters/ClientObjectIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdInQueryParameter"
           },
           {
             "$ref": "#/parameters/PartnerTenantIdParameter"
@@ -221,7 +221,70 @@
           }
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/locations/{location}/edgeZones/{edgeZone}/products": {
+      "get": {
+        "tags": [
+          "ARM-Authenticated-Location-EdgeZones-Products-Listing-By-Subscription"
+        ],
+        "summary": "Get a list of edge zone products",
+        "operationId": "EdgeZonesProducts_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/EdgeZoneParameter"
+          },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns list of edge zone products",
+            "schema": {
+              "$ref": "#/definitions/PageResultOfProductSummary"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "In case request malformed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeZonesProducts_List": {
+            "$ref": "./examples/EdgeZonesProducts_List.json"
+          }
+        }
+      }
+    },
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -248,6 +311,38 @@
       "in": "header",
       "description": "Tenant Id"
     },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Location of the edge zones"
+    },
+    "EdgeZoneParameter": {
+      "name": "edgeZone",
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Required edge zone"
+    },
+    "SelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "description": "Properties to be returned in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "The optional page continuation token that is used in the event of paginated result.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
     "UniqueProductIdParameter": {
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -1051,6 +1146,29 @@
         "uri": {
           "type": "string",
           "description": "URI of the link"
+        }
+      }
+    },
+    "PageResultOfProductSummary": {
+      "type": "object",
+      "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "properties": {
+        "NextPageLink": {
+          "type": "string",
+          "description": "Gets the link for the next page of items in the feed.",
+          "format": "uri"
+        },
+        "Count": {
+          "type": "integer",
+          "description": "Gets the total count of items in the feed.",
+          "format": "int64"
+        },
+        "Items": {
+          "type": "array",
+          "description": "Gets the collection of entities for this feed.",
+          "items": {
+            "$ref": "#/definitions/ProductSummary"
+          }
         }
       }
     }
