@@ -167,6 +167,12 @@
               "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
+            }
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -174,7 +180,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": false,
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update dapr component with secrets": {
             "$ref": "./examples/DaprComponents_CreateOrUpdate_Secrets.json"
@@ -220,6 +226,9 @@
           "200": {
             "description": "Delete operation completed"
           },
+          "202": {
+            "description": "Delete operation is in progress"
+          },
           "204": {
             "description": "Environment does not exist"
           },
@@ -235,7 +244,7 @@
             "$ref": "./examples/DaprComponents_Delete.json"
           }
         },
-        "x-ms-long-running-operation": false
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets": {

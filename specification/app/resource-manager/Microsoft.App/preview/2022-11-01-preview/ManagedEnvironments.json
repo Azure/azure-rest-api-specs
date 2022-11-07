@@ -457,6 +457,12 @@
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -464,6 +470,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or Update Certificate": {
             "$ref": "./examples/Certificate_CreateOrUpdate.json"
@@ -506,6 +513,9 @@
           "200": {
             "description": "Delete operation completed"
           },
+          "202": {
+            "description": "Delete operation is in progress"
+          },
           "204": {
             "description": "Certificate does not exist"
           },
@@ -516,6 +526,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Certificate": {
             "$ref": "./examples/Certificate_Delete.json"

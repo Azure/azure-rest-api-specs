@@ -163,6 +163,12 @@
               "$ref": "#/definitions/ManagedEnvironmentStorage"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironmentStorage"
+            }
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -170,6 +176,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update environments storage": {
             "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate.json"
@@ -212,6 +219,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Delete operation is in progress"
+          },
           "204": {
             "description": "Storage does not exist"
           },
@@ -222,6 +232,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "List environments storages by subscription": {
             "$ref": "./examples/ManagedEnvironmentsStorages_Delete.json"
@@ -260,6 +271,21 @@
           "description": "Storage properties",
           "type": "object",
           "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of storage.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "StorageProvisioningState",
+                "modelAsString": true
+              }
+            },
             "azureFile": {
               "$ref": "./CommonDefinitions.json#/definitions/AzureFileProperties",
               "description": "Azure file properties"

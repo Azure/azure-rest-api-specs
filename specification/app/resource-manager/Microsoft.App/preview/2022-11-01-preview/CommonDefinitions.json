@@ -675,6 +675,21 @@
           "description": "Dapr Component resource specific properties",
           "type": "object",
           "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of dapr component.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DaprComponentProvisioningState",
+                "modelAsString": true
+              }
+            },
             "componentType": {
               "description": "Component type",
               "type": "string"
