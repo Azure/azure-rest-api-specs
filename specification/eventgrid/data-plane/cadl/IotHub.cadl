@@ -31,7 +31,7 @@ model DeviceTwinInfo {
   lastActivityTime?: string;
 
   @doc("Properties JSON element.")
-  properties?: Map<string, string>;
+  properties?: Record<string>;
 
   @doc("Whether the device twin is enabled or disabled.")
   status?: string;
@@ -43,7 +43,7 @@ model DeviceTwinInfo {
   version?: number;
 
   @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-  x509Thumbprint?: Map<string, string>;
+  x509Thumbprint?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).")
@@ -64,13 +64,13 @@ model DeviceConnectionStateEventProperties {
 @doc("Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).")
 model DeviceTelemetryEventProperties {
   @doc("The content of the message from the device.")
-  body?: Map<string, string>;
+  body?: Record<string>;
 
   @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
-  properties?: Map<string, string>;
+  properties?: Record<string>;
 
   @doc("System properties help identify contents and source of the messages.")
-  systemProperties?: Map<string, string>;
+  systemProperties?: Record<string>;
 }
 
 @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
