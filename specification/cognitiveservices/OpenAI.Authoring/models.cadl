@@ -2,6 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Rest;
+using Cadl.Http;
 using Azure.Core;
 
 namespace Azure.OpenAI;
@@ -105,7 +106,7 @@ model Deployment {
   updated_at?: int32;
 
   @doc("The identifier of the deployment")
-  @key("deploymentId")
+  @key("deployment_id")
   @visibility("read")
   id: string;
 
@@ -256,7 +257,7 @@ model File {
 
   @doc("The identity of this item.")
   @visibility("read")
-  @key("fileId")
+  @key("file_id")
   id: string;
 
   @doc("""
@@ -275,6 +276,18 @@ fine-tuning. This allows us to validate the format of the uploaded file.
 
   @doc("The name of the file.")
   filename: string;
+}
+
+@doc("Accepted Response")
+model AcceptedResponse {
+  @doc("The status code")
+  @statusCode
+  statusCode: 201;
+
+  @doc("Location of the newly created item")
+  @header 
+  @format("uri")
+  "Location": string;
 }
 
 @doc("""
@@ -554,7 +567,7 @@ model Model {
 
   @doc("The identity of this item.")
   @visibility("read")
-  @key("modelId")
+  @key("model_id")
   id: string;
 
   @doc("The base model ID if this is a fine tune model; otherwise `null`.")
