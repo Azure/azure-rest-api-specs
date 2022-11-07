@@ -20,7 +20,7 @@ model StorageBaseEventData<TStorageType> {
   identity?: string;
 
   @doc("For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.")
-  storageDiagnostics?: Map<string, string>;
+  storageDiagnostics?: Record<string>;
 }
 
 model StorageBaseTypeData {

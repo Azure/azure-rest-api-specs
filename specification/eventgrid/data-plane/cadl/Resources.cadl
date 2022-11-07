@@ -24,7 +24,7 @@ model ResourceBaseEventData {
   authorization?: ResourceAuthorization;
 
   @doc("The properties of the claims.")
-  claims?: Map<string, string>;
+  claims?: Record<string>;
 
   @doc("An operation ID used for troubleshooting.")
   correlationId?: string;
@@ -84,5 +84,5 @@ model ResourceAuthorization {
   action?: string;
 
   @doc("The evidence for the authorization.")
-  evidence?: Map<string, string>;
+  evidence?: Record<string>;
 }
