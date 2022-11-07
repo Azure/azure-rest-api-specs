@@ -26,7 +26,7 @@ interface CompletionsOperations {
   >;
 }
 
-interface EmbeddingsOperations {
+interface EmbeddingsOperations<T> {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("Return the embeddings for a given prompt.")
   @doc("Return the embeddings for a given prompt.")
@@ -39,7 +39,7 @@ interface EmbeddingsOperations {
       "deploymentId": string;
       @doc("expected schema for the body of the embedding post request")
       @body
-      body: CreateEmbeddingBody;
+      body: CreateEmbeddingBody<T>;
     },
     void
   >;

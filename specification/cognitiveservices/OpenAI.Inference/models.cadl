@@ -170,34 +170,8 @@ model LogProbsModel {
   text_offset?: int32[];
 }
 
-@error
-@doc("Error response")
-model ErrorResponse {
-  @doc("Error field in ErrorResponse")
-  error?: ErrorResponseError;
-}
-
-@doc("Error schema for response")
-model ErrorResponseError {
-  @doc("Error code")
-  code?: string;
-  @doc("Error message")
-  message?: string;
-  @doc("Error parameter")
-  param?: string;
-  @doc("Error type")
-  type?: string;
-}
-
-  @doc("Embedding request body schema")
-model CreateEmbeddingBody {
-
-  @doc("""
-An input to embed, encoded as a string, a list of strings, or a list of token
-lists
-""")
-  input: EmbeddingInput;
-
+@doc("Embedding request body schema, base fields")
+model CreateEmbeddingBaseBody {
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
 
@@ -208,8 +182,30 @@ lists
   "model"?: string;
 }
 
-@doc("""
+@doc("Embedding request body schema")
+model CreateEmbeddingBody<T> {
+
+  ... CreateEmbeddingBaseBody;
+  @doc("""
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists
 """)
-model EmbeddingInput {}
+  input: T;
+
+}
+
+@doc("String type of Embedding Input")
+model StringEmbeddingInput is CreateEmbeddingBody<string> {
+}
+
+@doc("String array type of Embedding Input")
+model StringArrayEmbeddingInput extends CreateEmbeddingBody<string[]>{
+}
+
+@doc("Integer array type of Embedding Input")
+model IntegerArrayEmbeddingInput extends CreateEmbeddingBody<integer[]>{
+}
+
+@doc("Array of integer array of Embedding Input")
+model ArrayIntegerArrayEmbeddingInput extends CreateEmbeddingBody<[integer[]]>{
+}
