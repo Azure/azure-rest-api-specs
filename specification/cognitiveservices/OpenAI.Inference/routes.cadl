@@ -26,21 +26,24 @@ interface CompletionsOperations {
   >;
 }
 
-interface EmbeddingsOperations<T> {
+@doc("Input model for embedding endpoint")
+model EmbeddingOperationInput {
+  @doc("deployment id of the model which was deployed")
+  @path
+  "deploymentId": string;
+  @doc("expected schema for the body of the embedding post request")
+  @body
+  body: EmbeddingCreateBody;
+}
+
+interface EmbeddingsOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("Return the embeddings for a given prompt.")
   @doc("Return the embeddings for a given prompt.")
   @route("/deployments/{deploymentId}/embeddings")
   @post
   Create is Foundations.Operation<
-    {
-      @doc("deployment id of the model which was deployed")
-      @path
-      "deploymentId": string;
-      @doc("expected schema for the body of the embedding post request")
-      @body
-      body: CreateEmbeddingBody<T>;
-    },
+    EmbeddingOperationInput,
     void
   >;
 }
