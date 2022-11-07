@@ -171,7 +171,7 @@ model LogProbsModel {
 }
 
 @doc("Embedding request body schema, base fields")
-model EmbeddingCreateBaseBody {
+model EmbeddingsCreateBaseBody {
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
 
@@ -183,8 +183,8 @@ model EmbeddingCreateBaseBody {
 }
 
 @doc("Embedding request body schema")
-model EmbeddingCreateBody {
-  ... EmbeddingCreateBaseBody;
+model EmbeddingsCreateBody {
+  ... EmbeddingsCreateBaseBody;
   @doc("""
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists

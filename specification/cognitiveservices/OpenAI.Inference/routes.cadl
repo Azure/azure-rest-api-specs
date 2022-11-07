@@ -27,13 +27,13 @@ interface CompletionsOperations {
 }
 
 @doc("Input model for embedding endpoint")
-model EmbeddingOperationInput {
+model EmbeddingsOperationInput {
   @doc("deployment id of the model which was deployed")
   @path
   "deploymentId": string;
   @doc("expected schema for the body of the embedding post request")
   @body
-  body: EmbeddingCreateBody;
+  body: EmbeddingsCreateBody;
 }
 
 interface EmbeddingsOperations {
@@ -43,7 +43,7 @@ interface EmbeddingsOperations {
   @route("/deployments/{deploymentId}/embeddings")
   @post
   Create is Foundations.Operation<
-    EmbeddingOperationInput,
+    EmbeddingsOperationInput,
     void
   >;
 }
