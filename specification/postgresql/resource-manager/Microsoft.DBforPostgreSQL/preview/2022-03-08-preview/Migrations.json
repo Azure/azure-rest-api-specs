@@ -48,7 +48,7 @@
         "description": "Creates a new migration.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
@@ -106,7 +106,7 @@
         "description": "Gets details of a migration.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
@@ -149,7 +149,7 @@
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
@@ -201,7 +201,7 @@
         "description": "Deletes a migration.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
@@ -246,7 +246,7 @@
         "description": "List all the migrations on a given target server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
@@ -296,7 +296,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
@@ -344,13 +344,13 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a migration resource."
@@ -604,7 +604,7 @@
           "type": "integer"
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./FlexibleServers.json#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
         }
       },
@@ -686,33 +686,6 @@
       },
       "description": "Migration sub state details."
     },
-    "Sku": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
-        },
-        "tier": {
-          "type": "string",
-          "description": "The tier of the particular SKU, e.g. Burstable.",
-          "enum": [
-            "Burstable",
-            "GeneralPurpose",
-            "MemoryOptimized"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name",
-        "tier"
-      ],
-      "description": "Sku information related properties of a server."
-    },
     "MigrationNameAvailabilityReason": {
       "enum": [
         "Invalid",
@@ -763,7 +736,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
         }
       },
       "description": "An error response from the Batch service."
