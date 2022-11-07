@@ -1021,7 +1021,10 @@
         },
         "approvers": {
           "type": "object",
-          "description": "The list of approvers."
+          "description": "The list of approvers.",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       },
       "required": [
@@ -1079,7 +1082,18 @@
           "description": "The person who has been assigned the task request."
         },
         "status": {
-          "$ref": "#/definitions/TaskStatus"
+          "type": "string",
+          "description": "Task request status.",
+          "enum": [
+            "Not Started",
+            "In Progress",
+            "Completed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "changeHistory": {
           "type": "array",
@@ -1095,26 +1109,6 @@
         "taskBody",
         "status"
       ]
-    },
-    "TaskStatus": {
-      "title": "TaskStatus",
-      "type": "object",
-      "description": "Task request status.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "Not Started",
-            "In Progress",
-            "Completed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "status",
-            "modelAsString": true
-          }
-        }
-      }
     },
     "TaskChangeHistory": {
       "title": "TaskChangeHistory",
@@ -1254,7 +1248,21 @@
           "$ref": "#/definitions/RequestPayload"
         },
         "status": {
-          "$ref": "#/definitions/WorkflowRunStatus"
+          "type": "string",
+          "description": "Workflow run status.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Completed",
+            "NotStarted",
+            "Canceling",
+            "CancellationFailed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "definition": {
           "type": "object",
@@ -1263,16 +1271,16 @@
         "detail": {
           "$ref": "#/definitions/WorkflowRunDetail"
         },
-        "endTime":{
-          "type":"string",
+        "endTime": {
+          "type": "string",
           "description": "The time of workflow run completed."
         },
-        "cancelTime":{
-          "type":"string",
+        "cancelTime": {
+          "type": "string",
           "description": "The time of workflow run be canceled."
         },
-        "cancelComment":{
-          "type":"string",
+        "cancelComment": {
+          "type": "string",
           "description": "The comment when cancel a workflow run."
         }
       },
@@ -1300,29 +1308,6 @@
         "trigger",
         "actions"
       ]
-    },
-    "WorkflowRunStatus": {
-      "title": "WorkflowRunStatus",
-      "type": "object",
-      "description": "Workflow run status.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "InProgress",
-            "Failed",
-            "Completed",
-            "NotStarted",
-            "Canceling",
-            "CancellationFailed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "status",
-            "modelAsString": true
-          }
-        }
-      }
     },
     "TriggerDetail": {
       "title": "TriggerDetail",
@@ -1667,16 +1652,16 @@
     "GatewayReferenceObject": {
       "title": "GatewayReferenceObject",
       "discriminator": "type",
-      "type":"object",
+      "type": "object",
       "properties": {
         "type": {
-          "type":"string",
+          "type": "string",
           "description": "",
           "enum": [
             "PathReference",
             "CollectionReference"
           ],
-          "x-ms-enum":{
+          "x-ms-enum": {
             "name": "type",
             "modelAsString": true
           }
