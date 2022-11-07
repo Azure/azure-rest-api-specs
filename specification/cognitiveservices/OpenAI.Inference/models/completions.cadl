@@ -3,9 +3,9 @@ import "@cadl-lang/rest";
 using Cadl.Rest;
 using Cadl.Http;
 
-namespace Azure.OpenAI.Request {
+namespace Azure.OpenAI.Completions.Request {
     @doc("Input model for completions create endpoint")
-    model CompletionsCreate {
+    model Create {
         @doc("deployment id of the model which was deployed")
         @path "deploymentId": string;
         @doc("expected schema for the body of the completion post request")
@@ -142,10 +142,10 @@ namespace Azure.OpenAI.Request {
     model Stop {}
 }
 
-namespace Azure.OpenAI.Response {
+namespace Azure.OpenAI.Completions.Response {
 
     @doc("Expected response schema to completion request")
-    model CompletionsCreate {
+    model Create {
         @doc("Id for completion response")
         id?: string;
         @doc("Object for completion response")

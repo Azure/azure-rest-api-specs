@@ -3,16 +3,16 @@ import "@cadl-lang/rest";
 using Cadl.Rest;
 using Cadl.Http;
 
-namespace Azure.OpenAI.Request {
+namespace Azure.OpenAI.Embeddings.Request {
 
     @doc("Input model for embeddings create endpoint")
-    model EmbeddingsOperationInput {
+    model Create {
         @doc("deployment id of the model which was deployed")
         @path
         "deploymentId": string;
         @doc("expected schema for the body of the embedding post request")
         @body
-        body: Request.EmbeddingsCreateBaseBody;
+        body: EmbeddingsCreateBaseBody;
     }
 
     @doc("Embedding request body schema, base fields")
