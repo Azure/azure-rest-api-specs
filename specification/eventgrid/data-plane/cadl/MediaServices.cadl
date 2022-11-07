@@ -15,7 +15,7 @@ model MediaJobStateChangeEventData {
 	@doc("The new state of the Job.")
 	state?: MediaJobState;
 	@doc("Gets the Job correlation data.")
-	correlationData?: Map<string, string>;
+	correlationData?: Record<string>;
 }
 
 enum MediaJobErrorCode {
@@ -94,7 +94,7 @@ model MediaJobOutputProgressEventData {
 	@doc("Gets the Job output progress.")
 	progress?: int64;
 	@doc("Gets the Job correlation data.")
-	jobCorrelationData?: Map<string, string>;
+	jobCorrelationData?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.")
@@ -104,7 +104,7 @@ model MediaJobOutputStateChangeEventData {
 	@doc("Gets the output.")
 	output?: MediaJobOutput;
 	@doc("Gets the Job correlation data.")
-	jobCorrelationData?: Map<string, string>;
+	jobCorrelationData?: Record<string>;
 }
 
 @doc("Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.")

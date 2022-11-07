@@ -11,7 +11,7 @@ model AcsChatMessageBaseEventData {
   messageBody?: string;
 
   @doc("The chat message metadata")
-  metadata?: Map<string, string>;
+  metadata?: Record<string>;
 }
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.")
 model AcsChatMessageReceivedEventData is AcsChatMessageBaseEventData;
@@ -52,7 +52,7 @@ model AcsChatThreadBaseEventData {
   createdByCommunicationIdentifier?: CommunicationIdentifierModel;
 
   @doc("The thread properties")
-  properties?: Map<string, string>;
+  properties?: Record<string>;
 
   @doc("The list of properties of participants who are part of the thread")
   participants?: AcsChatThreadParticipantProperties[];
@@ -86,7 +86,7 @@ model AcsChatThredPropertiesBaseEventData {
   editTime?: zonedDateTime;
 
   @doc("The updated thread properties")
-  properties?: Map<string, string>;
+  properties?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.")

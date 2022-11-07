@@ -7,10 +7,10 @@ model MachineLearningServicesModelRegisteredEventData {
   modelVersion?: string;
 
   @doc("The tags of the model that was registered.")
-  modelTags?: Map<string, string>;
+  modelTags?: Record<string>;
 
   @doc("The properties of the model that was registered.")
-  modelProperties?: Map<string, string>;
+  modelProperties?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event.")
@@ -25,10 +25,10 @@ model MachineLearningServicesModelDeployedEventData {
   modelIds?: string;
 
   @doc("The tags of the deployed service.")
-  serviceTags?: Map<string, string>;
+  serviceTags?: Record<string>;
 
   @doc("The properties of the deployed service.")
-  serviceProperties?: Map<string, string>;
+  serviceProperties?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event.")
@@ -46,10 +46,10 @@ model MachineLearningServicesRunCompletedEventData {
   runType?: string;
 
   @doc("The tags of the completed Run.")
-  runTags?: Map<string, string>;
+  runTags?: Record<string>;
 
   @doc("The properties of the completed Run.")
-  runProperties?: Map<string, string>;
+  runProperties?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.")
@@ -94,10 +94,10 @@ model MachineLearningServicesRunStatusChangedEventData {
   runType?: string;
 
   @doc("The tags of the Machine Learning Run.")
-  runTags?: Map<string, string>;
+  runTags?: Record<string>;
 
   @doc("The properties of the Machine Learning Run.")
-  runProperties?: Map<string, string>;
+  runProperties?: Record<string>;
 
   @doc("The status of the Machine Learning Run.")
   runStatus?: string;
