@@ -77,7 +77,7 @@ model CommonStorageAccountProperties {
     networkacls ?: NetworkAcls;
     @visibility("create")
     @doc("Blob Services")
-    blobServices: BlobServices;
+    blobServices?: BlobServices;
     @doc("Private End Point")
     privateEndPoint?: PrivateEndPoint;
 }
@@ -85,7 +85,7 @@ model CommonStorageAccountProperties {
 @doc("Configuration for BronzeAccount")
 model BronzeStorageAccountProperties {
     @doc("Enables Secure File Transfer Protocol, if set to true")
-    isSftpEnabled: string;
+    isSftpEnabled: boolean;
 }
 
 @doc("ADx Properties")
@@ -97,15 +97,30 @@ model AzureDataExplorerProperties {
     kustoClusterPrincipalAssignments: KustoClusterPrincipalAssignments;
 }
 
+enum KustoRoleType {
+  AllDatabasesAdmin,
+  AllDatabasesViewer
+}
+@knownValues(KustoRoleType)
+model KustoRole is string {}
+
+enum PrincipalTypeValues {
+    App,
+    Group,
+    User,
+}
+@knownValues(PrincipalTypeValues)
+model PrincipalType is string {}
+
 @doc("ADx Role assignments")
 model KustoClusterPrincipalAssignments {
     @visibility("create")
     @doc("system Identity Name")
     systemIdentityName?: string;
     @doc("Kusto roles")
-    role: string;
+    role: KustoRole;
     @doc("Principal type.")
-    principalType: string;
+    principalType: PrincipalType;
 }
 
 @doc("Private End Point Resource")
@@ -149,10 +164,26 @@ model ResourceAccessRules {
     resourceId: string;
 }
 
+enum BypassType {
+   None,
+   Logging,
+   Metrics,
+   AzureServices
+}
+@knownValues(BypassType)
+model Bypass is string {}
+
+enum DefaultActionType {
+  Allow,
+  Deny
+}
+@knownValues(DefaultActionType)
+model DefaultAction is string {}
+
 @doc("Network rule set")
 model NetworkAcls {
     @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices")
-    bypass: string;
+    bypass: Bypass;
     @doc("Virtual Network Rule")
     virtualNetworkRule: VirtualNetworkRule[];
     @doc("IP rule with specific IP or IP range in CIDR format.")
@@ -162,7 +193,7 @@ model NetworkAcls {
      @extension("x-ms-identifiers", [])
     resourceAccessRules: ResourceAccessRules[];
     @doc("Default Action")
-    defaultAction: string;
+    defaultAction: DefaultAction;
 }
 
 @doc("Restore Policy")
@@ -191,4 +222,3 @@ model VirtualNetworkConfiguration {
 
 @armResourceOperations
 interface Storage extends ResourceOperations<DataLakeHouseResources, StorageProperties> { }
-

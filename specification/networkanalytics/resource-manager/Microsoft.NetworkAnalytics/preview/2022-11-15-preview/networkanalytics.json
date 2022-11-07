@@ -431,7 +431,7 @@
       "type": "object",
       "properties": {
         "isSftpEnabled": {
-          "type": "string",
+          "type": "boolean",
           "description": "Enables Secure File Transfer Protocol, if set to true"
         }
       },
@@ -439,6 +439,19 @@
       "required": [
         "isSftpEnabled"
       ]
+    },
+    "Bypass": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Logging",
+        "Metrics",
+        "AzureServices"
+      ],
+      "x-ms-enum": {
+        "name": "Bypass",
+        "modelAsString": true
+      }
     },
     "CommonStorageAccountProperties": {
       "type": "object",
@@ -460,10 +473,7 @@
           "description": "Private End Point"
         }
       },
-      "description": "Common Storage Account Properties.",
-      "required": [
-        "blobServices"
-      ]
+      "description": "Common Storage Account Properties."
     },
     "DataLakeHouseResources": {
       "type": "object",
@@ -499,7 +509,6 @@
         "nextLink": {
           "type": "string",
           "description": "The link to the next page of items",
-          "format": "uri",
           "x-cadl-name": "Rest.ResourceLocation<DataLakeHouseResources>"
         }
       },
@@ -543,6 +552,17 @@
       },
       "description": "The updatable properties of the DataLakeHouseResources."
     },
+    "DefaultAction": {
+      "type": "string",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultAction",
+        "modelAsString": true
+      }
+    },
     "IPRules": {
       "type": "object",
       "properties": {
@@ -568,11 +588,11 @@
           "description": "system Identity Name"
         },
         "role": {
-          "type": "string",
+          "$ref": "#/definitions/KustoRole",
           "description": "Kusto roles"
         },
         "principalType": {
-          "type": "string",
+          "$ref": "#/definitions/PrincipalType",
           "description": "Principal type."
         }
       },
@@ -581,6 +601,17 @@
         "role",
         "principalType"
       ]
+    },
+    "KustoRole": {
+      "type": "string",
+      "enum": [
+        "AllDatabasesAdmin",
+        "AllDatabasesViewer"
+      ],
+      "x-ms-enum": {
+        "name": "KustoRole",
+        "modelAsString": true
+      }
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
@@ -604,7 +635,7 @@
       "type": "object",
       "properties": {
         "bypass": {
-          "type": "string",
+          "$ref": "#/definitions/Bypass",
           "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices"
         },
         "virtualNetworkRule": {
@@ -634,7 +665,7 @@
           "description": "Resource Access Rules."
         },
         "defaultAction": {
-          "type": "string",
+          "$ref": "#/definitions/DefaultAction",
           "description": "Default Action"
         }
       },
@@ -646,6 +677,18 @@
         "resourceAccessRules",
         "defaultAction"
       ]
+    },
+    "PrincipalType": {
+      "type": "string",
+      "enum": [
+        "App",
+        "Group",
+        "User"
+      ],
+      "x-ms-enum": {
+        "name": "PrincipalType",
+        "modelAsString": true
+      }
     },
     "PrivateEndPoint": {
       "type": "object",
