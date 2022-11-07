@@ -86,4 +86,9 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: LongRunningOperationsWithLongRunningExtension
     reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
+  - suppress: OperationIdNounVerb
+    where: $..paths[($..operationId["Models_*"])]
+    reason: There is a sub-route called /models/base/ that refers to the base models. Therefore, the correct operation ID seems to be "Models_GetBaseModel", for example.
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
