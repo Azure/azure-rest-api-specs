@@ -12,14 +12,19 @@ using Cadl.Http;
 
 namespace AnomalyDetector.Multivariate;
 
+@get
+@route("/multivariate/detect-batch/{resultId}")
 @summary("Get Multivariate Anomaly Detection Result")
 @doc("""
 For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
 """)
-// FIXME different name in swagger
-// Error must be modified to include header and definition specific to AnomalyDetector service
-op GetMultivariateBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
+// FIXME: Error must be modified to include header and definition specific to AnomalyDetector service
+// op GetBatchDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
+op GetBatchDetectionResult(
+  @format("uuid")
+  @path resultId: string,
+): DetectionResult | ErrorResponse;
 
 
 @post
@@ -35,14 +40,7 @@ a CSV file in Azure blob storage, which contains all the variables and a
 timestamp column.
 """)
 // op CreateMultivariateModel is Azure.Core.ResourceCreateWithServiceProvidedName<
-//   Model,
-//   {
-//     parameters: {
-//       @doc("Api Version")
-//       @query
-//       ApiVersion: "v1.1";
-//     };
-//   }
+//   Model
 // >;
 op CreateAndTrainMultivariateModel(
   @body body: ModelInfo,
@@ -130,7 +128,6 @@ query the detection result.The request should be a source link to indicate an
 externally accessible Azure storage Uri, either pointed to an Azure blob
 storage folder, or pointed to a CSV file in Azure blob storage.
 """)
-// FIXME different name in swagger
 // FIXME: this should be the operation definition once path API version parameters 
 // are supported and error responses can be modified
 // op BatchDetectAnomaly is Azure.Core.Foundations.LongRunningOperation<
@@ -170,7 +167,6 @@ and inference data, and the inference data should be put into request body in a
 JSON format. The request will complete synchronously and return the detection
 immediately in the response body.
 """)
-// FIXME different name in swagger
 // FIXME: this should be the operation definition once path API version parameters 
 // are supported and error responses can be modified
 // op LastDetectAnomaly is Azure.Core.Foundations.Operation<
