@@ -366,7 +366,6 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 - Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
-- Microsoft.Automation/stable/2022-08-08/python3package.json
 - Microsoft.Automation/stable/2022-08-08/account.json
 - Microsoft.Automation/stable/2022-08-08/certificate.json
 - Microsoft.Automation/stable/2022-08-08/connection.json
@@ -402,7 +401,6 @@ directive:
     where: $.definitions.TestJob
   - suppress: BodyTopLevelProperties
     from: runbook.json
-    where: $.definitions.TestJob.properties
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: account.json
     where: $.definitions.Key.properties.KeyName
@@ -499,7 +497,9 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: variable.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
-
+  - suppress: DefaultErrorResponseSchema
+    from: runbook.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.   
   - suppress: DeleteOperationResponses
     from: credential.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
@@ -543,7 +543,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
