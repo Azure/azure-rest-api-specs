@@ -28,16 +28,16 @@ model MapsGeofenceGeometry {
   deviceId?: string;
 
   @doc("Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.")
-  distance?: number;
+  distance?: float64;
 
   @doc("The unique ID for the geofence geometry.")
   geometryId?: string;
 
   @doc("Latitude of the nearest point of the geometry.")
-  nearestLat?: number;
+  nearestLat?: float64;
 
   @doc("Longitude of the nearest point of the geometry.")
-  nearestLon?: number;
+  nearestLon?: float64;
 
   @doc("The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API.")
   udId?: string;
