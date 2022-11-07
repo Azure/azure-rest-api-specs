@@ -4556,6 +4556,29 @@
       },
       "x-ms-discriminator-value": "KubernetesClusterBackupDatasourceParameters"
     },
+    "BlobBackupDatasourceParameters": {
+      "description": "Parameters for Backup",
+      "required": [
+        "containersList",
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "properties": {
+        "containersList": {
+          "description": "List of containers to be protected",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "BlobBackupDatasourceParameters"
+    },
     "AzureRetentionRule": {
       "allOf": [
         {
@@ -4841,7 +4864,8 @@
         },
         "isVaultProtectedByResourceGuard": {
           "description": "Is vault protected by resource guard",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "required": [
@@ -5978,6 +6002,38 @@
         }
       },
       "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
+    },
+    "ItemPathBasedRestoreCriteria": {
+      "description": "Class to contain criteria for item path based restore",
+      "required": [
+        "itemPath",
+        "isPathRelativeToBackupItem",
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "itemPath": {
+          "description": "Path of the item to be restored",
+          "type": "string"
+        },
+        "isPathRelativeToBackupItem": {
+          "description": "Flag to specify if the path is relative to Backup Item or full path",
+          "type": "boolean"
+        },
+        "subItemPathPrefix": {
+          "description": "list of prefixes to be used relative to the ItemPath for Restore criteria",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ItemPathBasedRestoreCriteria"
     },
     "JobExtendedInfo": {
       "description": "Extended Information about the job",
