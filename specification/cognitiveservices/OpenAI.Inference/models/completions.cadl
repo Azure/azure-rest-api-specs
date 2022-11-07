@@ -5,16 +5,16 @@ using Cadl.Http;
 
 namespace Azure.OpenAI.Request {
     @doc("Input model for completions create endpoint")
-    model CompletionsOperationInput {
+    model CompletionsCreate {
         @doc("deployment id of the model which was deployed")
         @path "deploymentId": string;
         @doc("expected schema for the body of the completion post request")
         @body
-        body: CompletionCreateBody;
+        body: CompletionsCreateBody;
     }
 
     @doc("Post body schema to create a prompt completion from a deployment")
-    model CompletionCreateBody {
+    model CompletionsCreateBody {
         @doc("""
     An optional prompt to complete from, encoded as a string, a list of strings, or
     a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -24,7 +24,7 @@ namespace Azure.OpenAI.Request {
     from the beginning of a new document. Maximum allowed size of string list is
     2048.
     """)
-        prompt?: PostContentSchemaPrompt;
+        prompt?: Prompt;
 
         @doc("The maximum number of tokens to generate. Has minimum of 0.")
         max_tokens?: int32;
@@ -96,7 +96,7 @@ namespace Azure.OpenAI.Request {
         echo?: boolean;
 
         @doc("A sequence which indicates the end of the current document.")
-        stop?: PostContentSchemaStop;
+        stop?: Stop;
 
         @doc("Completion configuration")
         completion_config?: string;
@@ -136,16 +136,16 @@ namespace Azure.OpenAI.Request {
     from the beginning of a new document. Maximum allowed size of string list is
     2048.
     """)
-    model PostContentSchemaPrompt {}
+    model Prompt {}
 
     @doc("A sequence which indicates the end of the current document.")
-    model PostContentSchemaStop {}
+    model Stop {}
 }
 
 namespace Azure.OpenAI.Response {
-    
+
     @doc("Expected response schema to completion request")
-    model CreateCompletionResponse {
+    model CompletionsCreate {
         @doc("Id for completion response")
         id?: string;
         @doc("Object for completion response")
@@ -155,23 +155,23 @@ namespace Azure.OpenAI.Response {
         @doc("Model used for completion response")
         "model"?: string;
         @doc("Array of choices returned containing text completions to prompts sent")
-        choices?: CompletionChoice[];
+        choices?: CompletionsChoice[];
     }
 
     @doc("Choice model within completion response")
-    model CompletionChoice {
+    model CompletionsChoice {
         @doc("Generated text for given completion prompt")
         text?: string;
         @doc("Index")
         index?: int32;
         @doc("Log Prob Model")
-        logprobs?: LogProbsModel;
+        logprobs?: CompletionsLogProbsModel;
         @doc("Reason for finishing")
         finish_reason?: string;
     }
 
     @doc("LogProbs model within completion choice")
-    model LogProbsModel {
+    model CompletionsLogProbsModel {
         @doc("Tokens")
         tokens?: string[];
         @doc("LogProbs of Tokens")
