@@ -10,11 +10,11 @@ namespace Azure.OpenAI.Completions.Request {
         @path "deploymentId": string;
         @doc("expected schema for the body of the completion post request")
         @body
-        body: CompletionsCreateBody;
+        body: CreateBody;
     }
 
     @doc("Post body schema to create a prompt completion from a deployment")
-    model CompletionsCreateBody {
+    model CreateBody {
         @doc("""
     An optional prompt to complete from, encoded as a string, a list of strings, or
     a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -155,23 +155,23 @@ namespace Azure.OpenAI.Completions.Response {
         @doc("Model used for completion response")
         "model"?: string;
         @doc("Array of choices returned containing text completions to prompts sent")
-        choices?: CompletionsChoice[];
+        choices?: Choice[];
     }
 
     @doc("Choice model within completion response")
-    model CompletionsChoice {
+    model Choice {
         @doc("Generated text for given completion prompt")
         text?: string;
         @doc("Index")
         index?: int32;
         @doc("Log Prob Model")
-        logprobs?: CompletionsLogProbsModel;
+        logprobs?: LogProbsModel;
         @doc("Reason for finishing")
         finish_reason?: string;
     }
 
     @doc("LogProbs model within completion choice")
-    model CompletionsLogProbsModel {
+    model LogProbsModel {
         @doc("Tokens")
         tokens?: string[];
         @doc("LogProbs of Tokens")

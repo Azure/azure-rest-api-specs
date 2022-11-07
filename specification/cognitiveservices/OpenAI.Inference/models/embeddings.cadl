@@ -12,11 +12,11 @@ namespace Azure.OpenAI.Embeddings.Request {
         "deploymentId": string;
         @doc("expected schema for the body of the embedding post request")
         @body
-        body: EmbeddingsCreateBaseBody;
+        body: CreateBaseBody;
     }
 
     @doc("Embedding request body schema, base fields")
-    model EmbeddingsCreateBaseBody {
+    model CreateBaseBody {
         @doc("The ID of the end-user, for use in tracking and rate-limiting.")
         user?: string;
 
@@ -29,7 +29,7 @@ namespace Azure.OpenAI.Embeddings.Request {
 
     @doc("Embedding request body schema")
     model EmbeddingsCreateBody {
-        ... EmbeddingsCreateBaseBody;
+        ... CreateBaseBody;
         @doc("""
         An input to embed, encoded as a string, a list of strings, or a list of token
         lists
