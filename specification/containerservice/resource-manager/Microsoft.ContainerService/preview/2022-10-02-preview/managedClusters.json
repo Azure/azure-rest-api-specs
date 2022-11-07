@@ -1398,6 +1398,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Reset Service Principal Profile": {
             "$ref": "./examples/ManagedClustersResetServicePrincipalProfile.json"
@@ -1456,6 +1459,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Reset AAD Profile": {
             "$ref": "./examples/ManagedClustersResetAADProfile.json"
@@ -1562,6 +1568,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Rotate Cluster Certificates": {
             "$ref": "./examples/ManagedClustersRotateClusterCertificates.json"
@@ -1611,6 +1620,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Rotate Cluster Service Account Signing Keys": {
             "$ref": "./examples/ManagedClustersRotateServiceAccountSigningKeys.json"
@@ -1661,6 +1673,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Stop Managed Cluster": {
             "$ref": "./examples/ManagedClustersStop.json"
@@ -1711,6 +1726,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Start Managed Cluster": {
             "$ref": "./examples/ManagedClustersStart.json"
@@ -1968,6 +1986,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Upgrade Agent Pool Node Image Version": {
             "$ref": "./examples/AgentPoolsUpgradeNodeImageVersion.json"
@@ -2077,7 +2098,6 @@
         "operationId": "ManagedClusters_RunCommand",
         "summary": "Submits a command to run against the Managed Cluster.",
         "description": "AKS will create a pod to run the command. This is primarily useful for private clusters. For more information see [AKS Run Command](https://docs.microsoft.com/azure/aks/private-clusters#aks-run-command-preview).",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2123,6 +2143,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "submitNewCommand": {
