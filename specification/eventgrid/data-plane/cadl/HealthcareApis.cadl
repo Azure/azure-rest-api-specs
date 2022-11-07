@@ -21,6 +21,12 @@ model HealthcareFhirResourceUpdatedEventData is HealthcareFhirResourceBaseEventD
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.")
 model HealthcareFhirResourceDeletedEventData is HealthcareFhirResourceBaseEventData;
 
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.")
+model HealthcareDicomImageCreatedEventData is HealthcareFhirResourceBaseEventData;
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.")
+model HealthcareDicomImageDeletedEventData is HealthcareFhirResourceBaseEventData;
+
 @knownValues(HealthcareFhirResourceTypeKV)
 model HealthcareFhirResourceType is string {}
 enum HealthcareFhirResourceTypeKV {
