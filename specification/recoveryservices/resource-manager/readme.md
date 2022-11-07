@@ -58,7 +58,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-09'
+```yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/registeredidentities.json
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/replicationusages.json
@@ -70,7 +70,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09'
+```yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-09-10/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2022-09-10/replicationusages.json
