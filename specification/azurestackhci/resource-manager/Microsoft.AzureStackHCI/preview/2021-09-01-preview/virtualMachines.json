@@ -40,7 +40,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}": {
       "get": {
         "operationId": "virtualmachines_Retrieve",
-        "description": "Gets virtualmachines by resource name",
+        "description": "Gets virtual machines by resource name",
         "x-ms-examples": {
           "GetVirtualMachine": {
             "$ref": "./examples/GetVirtualMachine.json"
@@ -68,7 +68,7 @@
             }
           },
           "200": {
-            "description": "Retrieves the virtualmachines resource.",
+            "description": "Retrieved the virtual machine resource.",
             "schema": {
               "$ref": "#/definitions/virtualmachines"
             }
@@ -122,13 +122,13 @@
             }
           },
           "200": {
-            "description": "Updates the virtualmachines resource.",
+            "description": "Updates the virtual machine resource.",
             "schema": {
               "$ref": "#/definitions/virtualmachines"
             }
           },
           "201": {
-            "description": "Creates the virtualmachines resource.",
+            "description": "Creates the virtual machine resource.",
             "schema": {
               "$ref": "#/definitions/virtualmachines"
             }
@@ -164,7 +164,7 @@
             }
           },
           "200": {
-            "description": "Deletes the virtualmachines resource."
+            "description": "Deletes the virtual machine resource."
           },
           "204": {
             "description": "No content"
@@ -208,13 +208,13 @@
             }
           },
           "200": {
-            "description": "Updates the virtualmachines resource.",
+            "description": "Updates the virtual machine resource.",
             "schema": {
               "$ref": "#/definitions/virtualmachines"
             }
           },
           "201": {
-            "description": "Updates the virtualmachines resource.",
+            "description": "Updates the virtual machine resource.",
             "schema": {
               "$ref": "#/definitions/virtualmachines"
             }
@@ -1471,7 +1471,7 @@
           "readOnly": true
         }
       },
-      "description": "virtualmachinesProperties defines a list of properties under virtualmachines"
+      "description": "Properties of a virtual machine resource"
     },
     "virtualMachineStatus": {
       "type": "object",
@@ -1564,7 +1564,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The virtualmachines resource definition."
+      "description": "The virtual machine resource definition."
     },
     "hardwareProfileUpdate": {
       "type": "object",
@@ -1682,7 +1682,7 @@
           "description": "Resource tags"
         }
       },
-      "description": "The virtualmachines resource patch definition."
+      "description": "The virtual machine resource patch definition."
     },
     "virtualmachinesListResult": {
       "type": "object",
@@ -1797,7 +1797,7 @@
           "type": "string"
         },
         "publicKey": {
-          "description": "Gets or sets the Public Key.",
+          "description": "The Public Key.",
           "type": "string"
         },
         "identity": {
@@ -1806,7 +1806,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "The provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -1866,7 +1866,7 @@
           "description": "Describes Machine Extension Properties."
         },
         "location": {
-          "description": "Gets or sets the location.",
+          "description": "The geo-location where the resource lives",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1878,24 +1878,24 @@
           "description": "The system data."
         },
         "tags": {
-          "description": "Gets or sets the Resource tags.",
+          "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "name": {
-          "description": "Gets or sets the name.",
+          "description": "The name of the resource",
           "type": "string",
           "readOnly": true
         },
         "id": {
-          "description": "Gets or sets the Id.",
+          "description": "Fully qualified resource ID for the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Gets or sets the type of the resource.",
+          "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
         }
@@ -2143,11 +2143,11 @@
       "type": "object",
       "properties": {
         "username": {
-          "description": "Gets or sets username to connect with the guest.",
+          "description": "The username to connect with the guest.",
           "type": "string"
         },
         "password": {
-          "description": "Gets or sets the password to connect with the guest.",
+          "description": "The password to connect with the guest.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -2170,17 +2170,17 @@
           "$ref": "#/definitions/HttpProxyConfiguration"
         },
         "provisioningAction": {
-          "description": "Gets or sets the guest agent provisioning action.",
+          "description": "The guest agent provisioning action.",
           "$ref": "#/definitions/ProvisioningAction",
           "type": "string"
         },
         "status": {
-          "description": "Gets or sets the guest agent status.",
+          "description": "The guest agent status.",
           "type": "string",
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "The provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -2191,7 +2191,7 @@
       "type": "object",
       "properties": {
         "httpsProxy": {
-          "description": "Gets or sets httpsProxy url.",
+          "description": "The httpsProxy url.",
           "type": "string"
         }
       }
