@@ -19,6 +19,8 @@ To see additional help and options, run:
 
 ## Configuration
 
+
+
 ### Basic Information
 These are the global settings for the DataCollaboration API.
 
@@ -27,6 +29,15 @@ title: DataCollaborationManagementClient
 description: The Azure Data Collaboration management API provides a RESTful set of web services that interact with Azure Data Collaboration (Oakes) services.
 openapi-type: arm
 tag: package-2022-05-04-preview
+```
+
+### Tag: package-2020-05-04-preview
+
+These settings apply only when `--tag=package-2020-05-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-04-preview'
+input-file:
+- Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
 ```
 
 ### Tag: package-2022-05-04-preview
@@ -38,13 +49,21 @@ input-file:
 - Microsoft.DataCollaboration/preview/2022-05-04-preview/DataCollaboration.json
 ```
 
-### Tag: package-2020-05-04-preview
+## Suppressions
 
-These settings apply only when `--tag=package-2020-05-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-05-04-preview'
-input-file:
-- Microsoft.DataCollaboration/preview/2020-05-04-preview/DataCollaboration.json
+``` yaml
+directive:
+  - suppress: UniqueXmsEnumName
+    reason: Following DataShare patterns. Will be resived later.
+  - suppress: EnumInsteadOfBoolean
+    reason: Reflecting Synapse BigDataPool DTO which has booleans
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: These properties need to keep the same with Microsoft.ContainerInstance. Rp can't change these properties.
+    from: DataCollaboration.json
+    where:
+      - $.definitions.ResourceLimits.properties.memoryInGB
+      - $.definitions.ResourceRequests.properties.memoryInGB
+      - $.definitions.ResourceRequestsInformation.properties.memoryInGB
 ```
 
 ---
@@ -104,20 +123,6 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/datacollaboration/azure-mgmt-datacollaboration
-```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Suppressions
-
-``` yaml
-directive:
-  - suppress: UniqueXmsEnumName
-    reason: Following DataShare patterns. Will be revised later.
-  - suppress: R3018  # EnumInsteadOfBoolean
-    reason: Reflecting Synapse BigDataPool DTO which has booleans
 ```
 
 # all the input files across all versions
