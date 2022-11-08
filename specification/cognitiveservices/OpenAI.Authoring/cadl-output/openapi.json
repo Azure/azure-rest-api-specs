@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure OpenAI API",
     "version": "2022-06-01-preview",
-    "description": "// FIXME: (missing-service-description) Add service description",
+    "description": "API for managing and utilizing Azure Open AI endpoints",
     "x-cadl-generated": [
       {
         "emitter": "@azure-tools/cadl-autorest"
@@ -899,11 +899,6 @@
     }
   },
   "definitions": {
-    "AcceptedResponse": {
-      "type": "object",
-      "properties": {},
-      "description": "Accepted Response"
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "properties": {
@@ -1075,20 +1070,6 @@
       },
       "description": "Represents a list of deployments."
     },
-    "DeploymentUpdate": {
-      "type": "object",
-      "properties": {
-        "model": {
-          "type": "string",
-          "description": "The new OpenAI model to be used for this deployment. Can be a base model or a\nfine tune."
-        },
-        "scale_settings": {
-          "$ref": "#/definitions/ScaleSettingsUpdate",
-          "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-        }
-      },
-      "description": "Defines changes to the deployment."
-    },
     "Deprecation": {
       "type": "object",
       "properties": {
@@ -1106,163 +1087,6 @@
         }
       },
       "description": "Defines the dates of deprecation for the different use cases of a\nmodel.\nUsually base models support 1 year of fine tuning after creation.\nInference is typically supported 2 years after creation of base or\nfine tuned\nmodels. The exact dates are specified in the properties."
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCode",
-          "description": "Error codes as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        },
-        "message": {
-          "type": "string",
-          "description": "The message of this error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The location where the error happened if available."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Error[]",
-          "description": "The error details if available."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        }
-      },
-      "description": "Error content as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorCode": {
-      "type": "string",
-      "enum": [
-        "conflict",
-        "invalidPayload",
-        "forbidden",
-        "notFound",
-        "unexpectedEntityState",
-        "itemDoesAlreadyExist",
-        "serviceUnavailable",
-        "internalFailure",
-        "quotaExceeded"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conflict",
-            "value": "conflict"
-          },
-          {
-            "name": "InvalidPayload",
-            "value": "invalidPayload"
-          },
-          {
-            "name": "Forbidden",
-            "value": "forbidden"
-          },
-          {
-            "name": "NotFound",
-            "value": "notFound"
-          },
-          {
-            "name": "UnexpectedEntityState",
-            "value": "unexpectedEntityState"
-          },
-          {
-            "name": "ItemDoesAlreadyExist",
-            "value": "itemDoesAlreadyExist"
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "serviceUnavailable"
-          },
-          {
-            "name": "InternalFailure",
-            "value": "internalFailure"
-          },
-          {
-            "name": "QuotaExceeded",
-            "value": "quotaExceeded"
-          }
-        ]
-      }
-    },
-    "ErrorCodeKnownValues": {
-      "type": "string",
-      "enum": [
-        "conflict",
-        "invalidPayload",
-        "forbidden",
-        "notFound",
-        "unexpectedEntityState",
-        "itemDoesAlreadyExist",
-        "serviceUnavailable",
-        "internalFailure",
-        "quotaExceeded"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCodeKnownValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Conflict",
-            "value": "conflict"
-          },
-          {
-            "name": "InvalidPayload",
-            "value": "invalidPayload"
-          },
-          {
-            "name": "Forbidden",
-            "value": "forbidden"
-          },
-          {
-            "name": "NotFound",
-            "value": "notFound"
-          },
-          {
-            "name": "UnexpectedEntityState",
-            "value": "unexpectedEntityState"
-          },
-          {
-            "name": "ItemDoesAlreadyExist",
-            "value": "itemDoesAlreadyExist"
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "serviceUnavailable"
-          },
-          {
-            "name": "InternalFailure",
-            "value": "internalFailure"
-          },
-          {
-            "name": "QuotaExceeded",
-            "value": "quotaExceeded"
-          }
-        ]
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error content as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        }
-      },
-      "description": "Error response as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
     },
     "Event": {
       "type": "object",
@@ -1616,52 +1440,6 @@
       },
       "description": "The hyper parameter settings used in a fine tune job."
     },
-    "InnerError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "Inner error codes as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        }
-      },
-      "description": "Inner error as defined in the Microsoft REST\nguidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "enum": [
-        "invalidPayload"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidPayload",
-            "value": "invalidPayload"
-          }
-        ]
-      }
-    },
-    "InnerErrorCodeKnownValues": {
-      "type": "string",
-      "enum": [
-        "invalidPayload"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCodeKnownValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "InvalidPayload",
-            "value": "invalidPayload"
-          }
-        ]
-      }
-    },
     "LogLevel": {
       "type": "string",
       "enum": [
@@ -1704,23 +1482,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ScaleSettings"
-        }
-      ],
-      "x-ms-discriminator-value": "manual"
-    },
-    "ManualScaleSettingsUpdate": {
-      "type": "object",
-      "properties": {
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The constant reserved capacity of the inference endpoint for this deployment."
-        }
-      },
-      "description": "Settings for the manual scale type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScaleSettingsUpdate"
         }
       ],
       "x-ms-discriminator-value": "manual"
@@ -1820,47 +1581,12 @@
         ]
       }
     },
-    "PurposeKnownValues": {
-      "type": "string",
-      "enum": [
-        "fine-tune",
-        "fine-tune-results"
-      ],
-      "x-ms-enum": {
-        "name": "PurposeKnownValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "FineTune",
-            "value": "fine-tune"
-          },
-          {
-            "name": "FineTuneResults",
-            "value": "fine-tune-results"
-          }
-        ]
-      }
-    },
     "ScaleSettings": {
       "type": "object",
       "properties": {
         "scale_type": {
           "type": "string",
           "description": "Discriminator property for ScaleSettings."
-        }
-      },
-      "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",
-      "discriminator": "scale_type",
-      "required": [
-        "scale_type"
-      ]
-    },
-    "ScaleSettingsUpdate": {
-      "type": "object",
-      "properties": {
-        "scale_type": {
-          "type": "string",
-          "description": "Discriminator property for ScaleSettingsUpdate."
         }
       },
       "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",
@@ -1878,27 +1604,6 @@
       "x-ms-enum": {
         "name": "ScaleType",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "Manual",
-            "value": "manual"
-          },
-          {
-            "name": "Standard",
-            "value": "standard"
-          }
-        ]
-      }
-    },
-    "ScaleTypeKnownValues": {
-      "type": "string",
-      "enum": [
-        "manual",
-        "standard"
-      ],
-      "x-ms-enum": {
-        "name": "ScaleTypeKnownValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "Manual",
@@ -1976,47 +1681,6 @@
       "x-ms-enum": {
         "name": "TypeDiscriminator",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "List",
-            "value": "list"
-          },
-          {
-            "name": "FineTune",
-            "value": "fine-tune"
-          },
-          {
-            "name": "File",
-            "value": "file"
-          },
-          {
-            "name": "FineTuneEvent",
-            "value": "fine-tune-event"
-          },
-          {
-            "name": "Model",
-            "value": "model"
-          },
-          {
-            "name": "Deployment",
-            "value": "deployment"
-          }
-        ]
-      }
-    },
-    "TypeDiscriminatorKnownValues": {
-      "type": "string",
-      "enum": [
-        "list",
-        "fine-tune",
-        "file",
-        "fine-tune-event",
-        "model",
-        "deployment"
-      ],
-      "x-ms-enum": {
-        "name": "TypeDiscriminatorKnownValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "List",

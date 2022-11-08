@@ -1,0 +1,139 @@
+import "@cadl-lang/rest";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+enum TypeDiscriminatorKnownValues {
+  List: "list",
+  FineTune: "fine-tune",
+  File: "file",
+  FineTuneEvent: "fine-tune-event",
+  Model: "model",
+  Deployment: "deployment",
+}
+
+@knownValues(TypeDiscriminatorKnownValues)
+model TypeDiscriminator is string;
+
+enum ScaleTypeKnownValues {
+  Manual: "manual",
+  Standard: "standard",
+}
+
+@knownValues(ScaleTypeKnownValues)
+model ScaleType is string;
+
+enum ErrorCodeKnownValues {
+  Conflict: "conflict",
+  InvalidPayload: "invalidPayload",
+  Forbidden: "forbidden",
+  NotFound: "notFound",
+  UnexpectedEntityState: "unexpectedEntityState",
+  ItemDoesAlreadyExist: "itemDoesAlreadyExist",
+  ServiceUnavailable: "serviceUnavailable",
+  InternalFailure: "internalFailure",
+  QuotaExceeded: "quotaExceeded",
+}
+
+@knownValues(ErrorCodeKnownValues)
+model ErrorCode is string;
+
+enum InnerErrorCodeKnownValues {
+  InvalidPayload: "invalidPayload",
+}
+
+@knownValues(InnerErrorCodeKnownValues)
+model InnerErrorCode is string;
+
+enum PurposeKnownValues {
+  FineTune: "fine-tune",
+  FineTuneResults: "fine-tune-results",
+}
+
+@knownValues(PurposeKnownValues)
+model Purpose is string;
+
+enum State {
+  NotRunning: "notRunning",
+  Running: "running",
+  Succeeded: "succeeded",
+  Canceled: "canceled",
+  Failed: "failed",
+  Deleted: "deleted",
+}
+
+enum LogLevel {
+  Info: "info",
+  Warning: "warning",
+  Error: "error",
+}
+
+@doc("""
+Error response as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+@error
+model ErrorResponse {
+  @doc("""
+Error content as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+  error?: Error;
+}
+
+@doc("""
+Error content as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+model Error {
+  @doc("""
+Error codes as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+  code: ErrorCode;
+
+  @doc("The message of this error.")
+  message: string;
+
+  @doc("The location where the error happened if available.")
+  target?: string;
+
+  @doc("The error details if available.")
+  details?: Error[];
+
+  @doc("""
+Inner error as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+  innererror?: InnerError;
+}
+
+@doc("""
+Inner error as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+model InnerError {
+  @doc("""
+Inner error codes as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+  code?: InnerErrorCode;
+
+  @doc("""
+Inner error as defined in the Microsoft REST guidelines
+(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+""")
+  innererror?: InnerError;
+}
+
+@doc("Accepted Response")
+model AcceptedResponse {
+  @doc("The status code")
+  @statusCode
+  statusCode: 201;
+
+  @doc("Location of the newly created item")
+  @header 
+  @format("uri")
+  "Location": string;
+}
