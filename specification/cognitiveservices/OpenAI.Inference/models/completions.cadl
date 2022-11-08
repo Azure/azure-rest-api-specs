@@ -8,6 +8,8 @@ namespace Azure.OpenAI.Completions.Request {
     model Create {
         @doc("deployment id of the model which was deployed")
         @path "deploymentId": string;
+        @doc("Request ID for troubleshooting purposes")
+        @header "apim-request-id": string;
         @doc("expected schema for the body of the completion post request")
         @body
         body: CreateBody;
