@@ -1,8 +1,8 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
-scope: Subscription
+# yaml-language-server: $schema=/home/me/workspace/azure-rest-api-specs/documentation/api-scenario/references/v1.2/schema.json
+scope: None
 variables:
   resourceGroupName: rg-leni
-  accountName: coglantest
+  accountName: coglanapitest
 
 prepareSteps:
   # Cognitive account only supports creation from portal
@@ -19,6 +19,9 @@ prepareSteps:
   #         type: SystemAssigned
   - operationId: Accounts_Get
     readmeTag: ../../resource-manager/readme.md
+    authentication:
+      type: AADToken
+      scope: https://management.azure.com/.default
     outputVariables:
       Endpoint:
         fromResponse: /properties/endpoints/Language
@@ -28,16 +31,32 @@ prepareSteps:
   #     principalId: $(object_id)
   #     roleName: Cognitive Services Language Owner
   #     scope: $(resourceId)
+  - operationId: Accounts_ListKeys
+    readmeTag: ../../resource-manager/readme.md
+    authentication:
+      type: AADToken
+      scope: https://management.azure.com/.default
+    outputVariables:
+      key1:
+        fromResponse: /key1
 
 scenarios:
-  - scenario: Liveness
+  - scenario: LivenessAAD
     authentication:
       type: AADToken
       scope: https://cognitiveservices.azure.com/.default
     steps:
       - operationId: AnalyzeText
         exampleFile: ./stable/2022-05-01/examples/SuccessfulEntityLinkingRequest.json
-
-cleanUpSteps:
-  - operationId: Accounts_Delete
-    readmeTag: ../../resource-manager/readme.md
+  - scenario: LivenessApiKey
+    authentication:
+      type: AzureKey
+      key: $(key1)
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    steps:
+      - operationId: AnalyzeText
+        exampleFile: ./stable/2022-05-01/examples/SuccessfulEntityLinkingRequest.json
+# cleanUpSteps:
+#   - operationId: Accounts_Delete
+#     readmeTag: ../../resource-manager/readme.md
