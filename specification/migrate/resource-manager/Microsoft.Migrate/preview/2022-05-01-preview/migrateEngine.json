@@ -3674,6 +3674,9 @@
     },
     "MigrateAgentModelCustomProperties": {
       "description": "MigrateAgent model custom properties.",
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -3681,7 +3684,8 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "instanceType"
+      "x-ms-discriminator-value": "IISWorkload",
+      "discriminator": "instanceType"
     },
     "MigrateAgentModelProperties": {
       "description": "MigrateAgent model properties.",
@@ -4546,6 +4550,9 @@
     },
     "WorkflowModelCustomProperties": {
       "description": "Workflow model custom properties.",
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -4575,7 +4582,8 @@
           "readOnly": true
         }
       },
-      "x-ms-discriminator-value": "instanceType"
+      "x-ms-discriminator-value": "SampleWorkflow",
+      "discriminator": "instanceType"
     },
     "WorkflowModelProperties": {
       "description": "Workflow model properties.",
@@ -5064,6 +5072,9 @@
     },
     "WorkloadInstanceModelCustomProperties": {
       "description": "Workload instance model custom properties.",
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -5087,7 +5098,8 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "instanceType"
+      "x-ms-discriminator-value": "IISWorkload",
+      "discriminator": "instanceType"
     },
     "WorkloadInstanceModelProperties": {
       "description": "Workload instance model properties.",
