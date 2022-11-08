@@ -1648,7 +1648,14 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntityLinkingResultWithDetectedLanguage"
+            "allOf": [
+              {
+                "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
+              }
+            ]
           }
         }
       },
@@ -1659,17 +1666,6 @@
       ],
       "required": [
         "documents"
-      ]
-    },
-    "EntityLinkingResultWithDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LinkedEntitiesDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
       ]
     },
     "LinkedEntitiesDocumentResult": {
