@@ -228,7 +228,7 @@
           "200": {
             "description": "The request is completed.",
             "schema": {
-              "$ref": "#/definitions/SavingsPlanOrderModel"
+              "$ref": "#/definitions/RoleAssignmentEntity"
             }
           },
           "default": {
@@ -1768,6 +1768,43 @@
       "x-ms-enum": {
         "name": "InstanceFlexibility",
         "modelAsString": true
+      }
+    },
+    "RoleAssignmentEntity": {
+      "type": "object",
+      "description": "Role assignment entity",
+      "properties": {
+        "id": {
+          "description": "Role assignment entity id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Role assignment entity name",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Role assignment entity properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleAssignmentEntityProperties"
+        }
+      }
+    },
+    "RoleAssignmentEntityProperties": {
+      "type": "object",
+      "description": "Role assignment entity properties",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "description": "Role definition id",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Scope of the role assignment entity",
+          "type": "string"
+        }
       }
     }
   },
