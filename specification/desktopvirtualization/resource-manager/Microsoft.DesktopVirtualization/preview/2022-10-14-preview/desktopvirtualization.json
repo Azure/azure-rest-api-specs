@@ -4041,10 +4041,6 @@
           "type": "boolean",
           "description": "The flag to turn on/off StartVMOnConnect feature."
         },
-        "migrationRequest": {
-          "$ref": "#/definitions/MigrationRequestProperties",
-          "description": "The registration info of HostPool."
-        },
         "cloudPcResource": {
           "type": "boolean",
           "description": "Is cloud pc resource.",
@@ -6188,53 +6184,6 @@
           "items": {
             "$ref": "#/definitions/ScalingHostPoolReference"
           }
-        }
-      }
-    },
-    "MigrationRequestProperties": {
-      "type": "object",
-      "description": "Properties for arm migration.",
-      "properties": {
-        "operation": {
-          "enum": [
-            "Start",
-            "Revoke",
-            "Complete",
-            "Hide",
-            "Unhide"
-          ],
-          "x-ms-enum": {
-            "name": "Operation",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Start",
-                "description": "Start the migration."
-              },
-              {
-                "value": "Revoke",
-                "description": "Revoke the migration."
-              },
-              {
-                "value": "Complete",
-                "description": "Complete the migration."
-              },
-              {
-                "value": "Hide",
-                "description": "Hide the hostpool."
-              },
-              {
-                "value": "Unhide",
-                "description": "Unhide the hostpool."
-              }
-            ]
-          },
-          "type": "string",
-          "description": "The type of operation for migration."
-        },
-        "migrationPath": {
-          "type": "string",
-          "description": "The path to the legacy object to migrate."
         }
       }
     },
