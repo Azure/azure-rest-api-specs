@@ -2273,6 +2273,34 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "string",
+            "description": "Optional, specifies the maximum number of encryption scopes that will be included in the list response."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Optional. When specified, only encryption scope names starting with the filter will be listed."
+          },
+          {
+            "name": "$include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Enabled",
+              "Disabled"
+            ],
+            "x-ms-enum": {
+              "name": "ListEncryptionScopesInclude",
+              "modelAsString": true
+            },
+            "description": "Optional, when specified, will list encryption scopes with the specific state. Defaults to All"
           }
         ],
         "responses": {
