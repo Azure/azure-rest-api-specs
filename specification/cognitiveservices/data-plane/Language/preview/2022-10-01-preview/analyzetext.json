@@ -1824,14 +1824,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/PiiEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/PIIResultWithDetectedLanguage"
           }
         }
       },
@@ -1842,6 +1835,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "PIIResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PiiEntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "PiiDomain": {
