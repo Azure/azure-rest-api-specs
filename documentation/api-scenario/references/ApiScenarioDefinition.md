@@ -120,6 +120,7 @@ Should be one of the following:
   - [REST Example](#rest-example)
 - [Step ARM Template](#step-arm-template)
 - [Step ARM Deployment Script](#step-arm-deployment-script)
+- [Step Role Assignment](#step-role-assignment)
 
 All of the above definitions share the following fields:
 
