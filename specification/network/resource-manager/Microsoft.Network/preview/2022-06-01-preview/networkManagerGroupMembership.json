@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/providers/Microsoft.Network/networkGroupMemberships/Default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/providers/Microsoft.Network/networkGroupMemberships": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -51,15 +51,15 @@
       ],
       "get": {
         "tags": [
-          "NetworkGroupMemberships_Get"
+          "NetworkGroupMemberships_List"
         ],
-        "operationId": "GetNetworkGroupMemberships",
-        "description": "Get networkGroupMemberships applied on a virtual network.",
+        "operationId": "ListNetworkGroupMemberships",
+        "description": "List networkGroupMemberships applied on a virtual network.",
         "responses": {
           "200": {
             "description": "OK - Returns information about the configurations.",
             "schema": {
-              "$ref": "#/definitions/NetworkGroupMembership"
+              "$ref": "#/definitions/NetworkGroupMembershipsListResult"
             }
           },
           "default": {
@@ -78,6 +78,20 @@
     }
   },
   "definitions": {
+	"NetworkGroupMembershipsListResult":
+	{
+	  "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkGroupMembership"
+          },
+          "description": "Gets a page of NetworkGroupMembership"
+        }
+      },
+      "description": "Result of the request to list NetworkGroupMembership."
+	},
     "NetworkGroupMembership": {
       "type": "object",
       "properties": {
