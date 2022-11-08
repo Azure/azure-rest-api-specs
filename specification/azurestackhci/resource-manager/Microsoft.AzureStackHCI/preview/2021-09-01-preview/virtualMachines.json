@@ -1459,7 +1459,7 @@
           }
         },
         "status": {
-          "$ref": "#/definitions/virtualMachineStatus"
+          "$ref": "#/definitions/VirtualMachineStatus"
         },
         "guestAgentProfile": {
           "description": "Guest agent status properties.",
@@ -1473,7 +1473,7 @@
       },
       "description": "Properties of a virtual machine resource"
     },
-    "virtualMachineStatus": {
+    "VirtualMachineStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
@@ -1527,7 +1527,7 @@
           }
         }
       },
-      "description": "virtualMachineStatus defines the observed state of virtualmachines"
+      "description": "VirtualMachineStatus defines the observed state of virtualmachines"
     },
     "virtualmachines": {
       "type": "object",
@@ -1539,17 +1539,8 @@
           "$ref": "#/definitions/virtualmachinesProperties"
         },
         "extendedLocation": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
         },
         "identity": {
           "$ref": "#/definitions/Identity",

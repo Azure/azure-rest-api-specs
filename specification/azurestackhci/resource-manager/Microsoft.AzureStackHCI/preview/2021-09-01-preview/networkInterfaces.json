@@ -344,12 +344,12 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/networkInterfaceStatus"
+          "$ref": "#/definitions/NetworkInterfaceStatus"
         }
       },
       "description": "Properties of a network interface resource"
     },
-    "networkInterfaceStatus": {
+    "NetworkInterfaceStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
@@ -386,7 +386,7 @@
           }
         }
       },
-      "description": "networkInterfaceStatus defines the observed state of network interfaces"
+      "description": "NetworkInterfaceStatus defines the observed state of network interfaces"
     },
     "ipConfiguration": {
       "type": "object",
@@ -451,17 +451,8 @@
           "$ref": "#/definitions/networkinterfacesProperties"
         },
         "extendedLocation": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"

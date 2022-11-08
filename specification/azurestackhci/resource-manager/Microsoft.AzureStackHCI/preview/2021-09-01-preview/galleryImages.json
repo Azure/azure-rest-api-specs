@@ -372,12 +372,12 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/galleryImageStatus"
+          "$ref": "#/definitions/GalleryImageStatus"
         }
       },
       "description": "Properties of a gallery image resource"
     },
-    "galleryImageStatus": {
+    "GalleryImageStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
@@ -430,7 +430,7 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "galleryImageStatus defines the observed state of galleryimages"
+      "description": "GalleryImageStatus defines the observed state of galleryimages"
     },
     "galleryImageIdentifier": {
       "type": "object",
@@ -521,18 +521,8 @@
           "$ref": "#/definitions/galleryimagesProperties"
         },
         "extendedLocation": {
-          "type": "object",
-          "description": "The extendedLocation of the resource.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
