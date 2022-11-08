@@ -79,6 +79,9 @@
           "Savings plan order aliases"
         ],
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SavingsPlanOrderAliasCreate": {
             "$ref": "./examples/SavingsPlanOrderAliasCreate.json"
@@ -445,6 +448,7 @@
             "$ref": "./examples/SavingsPlanUpdate.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/SavingsPlanOrderIdParameter"
@@ -467,7 +471,12 @@
             }
           },
           "202": {
-            "description": "The request is completed."
+            "description": "The request is completed.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "404": {
             "description": "Not found.",
@@ -568,6 +577,9 @@
           "Reservation order aliases"
         ],
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "ReservationOrderAliasCreate": {
             "$ref": "./examples/ReservationOrderAliasCreate.json"
@@ -681,11 +693,6 @@
           "description": "Savings plan order alias properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SavingsPlanOrderAliasProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "SystemData of Savings plan order alias.",
-          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -1040,11 +1047,6 @@
           "description": "Savings plan properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SavingsPlanModelProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "SystemData of Savings plan.",
-          "readOnly": true
         }
       }
     },
@@ -1161,11 +1163,6 @@
           "description": "Savings plan order properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SavingsPlanOrderModelProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "SystemData of Savings plan order.",
-          "readOnly": true
         }
       }
     },
@@ -1370,7 +1367,7 @@
       "type": "object",
       "properties": {
         "purchaseProperties": {
-          "$ref": "#/definitions/SavingsPlanModel"
+          "$ref": "#/definitions/PurchaseRequest"
         }
       }
     },
@@ -1496,6 +1493,9 @@
         },
         "renew": {
           "$ref": "#/definitions/Renew"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
         }
       }
     },
@@ -1617,11 +1617,6 @@
           "description": "Reservation order alias request properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationOrderAliasRequestProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "SystemData of Reservation order alias.",
-          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -1701,11 +1696,6 @@
           "description": "Reservation order alias response properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationOrderAliasResponseProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "SystemData of Reservation order alias.",
-          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -1788,6 +1778,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
       "description": "Name of the savings plan order alias"
     },
     "SavingsPlanOrderAliasRequestParameter": {
@@ -1868,6 +1859,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
       "description": "Name of the reservation order alias"
     },
     "ReservationOrderAliasRequestParameter": {
