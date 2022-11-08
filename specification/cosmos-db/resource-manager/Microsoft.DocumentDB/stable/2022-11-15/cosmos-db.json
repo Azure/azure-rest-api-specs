@@ -6454,6 +6454,11 @@
         "enablePartitionMerge": {
           "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
           "type": "boolean"
+        },
+        "minimumTlsVersion": {
+          "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+          "type": "string",
+          "$ref": "#/definitions/MinimumTlsVersion"
         }
       }
     },
@@ -6599,6 +6604,11 @@
         "enablePartitionMerge": {
           "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
           "type": "boolean"
+        },
+        "minimumTlsVersion": {
+          "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+          "type": "string",
+          "$ref": "#/definitions/MinimumTlsVersion"
         }
       },
       "required": [
@@ -6768,6 +6778,11 @@
         "enablePartitionMerge": {
           "description": "Flag to indicate enabling/disabling of Partition Merge feature on the account",
           "type": "boolean"
+        },
+        "minimumTlsVersion": {
+          "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+          "type": "string",
+          "$ref": "#/definitions/MinimumTlsVersion"
         }
       }
     },
@@ -9210,6 +9225,19 @@
       ],
       "x-ms-enum": {
         "name": "BackupStorageRedundancy",
+        "modelAsString": true
+      }
+    },
+    "MinimumTlsVersion": {
+      "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+      "type": "string",
+      "enum": [
+        "Tls",
+        "Tls11",
+        "Tls12"
+      ],
+      "x-ms-enum": {
+        "name": "MinimumTlsVersion",
         "modelAsString": true
       }
     }
