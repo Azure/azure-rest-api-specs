@@ -31,7 +31,9 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "parameters": {
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
@@ -127,13 +129,18 @@
           "items": {
             "$ref": "#/definitions/UserProperty"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["name", "type"]
+      "required": [
+        "name",
+        "type"
+      ]
     },
     "UserProperty": {
       "description": "User property.",
@@ -148,7 +155,10 @@
           "type": "object"
         }
       },
-      "required": ["name", "value"]
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "ActivityDependency": {
       "description": "Activity dependency information.",
@@ -163,7 +173,12 @@
           "description": "Match-Condition for the dependency.",
           "items": {
             "type": "string",
-            "enum": ["Succeeded", "Failed", "Skipped", "Completed"],
+            "enum": [
+              "Succeeded",
+              "Failed",
+              "Skipped",
+              "Completed"
+            ],
             "x-ms-enum": {
               "name": "DependencyCondition",
               "modelAsString": true
@@ -174,7 +189,10 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["activity", "dependencyConditions"]
+      "required": [
+        "activity",
+        "dependencyConditions"
+      ]
     },
     "ControlActivity": {
       "x-ms-discriminator-value": "Container",
@@ -257,7 +275,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "AzureBlobStorageReadSettings": {
       "description": "Azure blob read settings.",
@@ -946,7 +966,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "AzureBlobStorageWriteSettings": {
       "description": "Azure blob write settings.",
@@ -1024,7 +1046,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "CompressionReadSettings": {
       "description": "Compression read settings.",
@@ -1039,7 +1063,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "ZipDeflateReadSettings": {
       "description": "The ZipDeflate compression read settings.",
@@ -1179,7 +1205,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "AvroWriteSettings": {
       "description": "Avro write settings.",
@@ -1272,7 +1300,9 @@
           "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["fileExtension"]
+      "required": [
+        "fileExtension"
+      ]
     },
     "JsonWriteSettings": {
       "description": "Json write settings.",
@@ -1292,7 +1322,10 @@
     "JsonWriteFilePattern": {
       "description": "All available filePatterns.",
       "type": "string",
-      "enum": ["setOfObjects", "arrayOfObjects"],
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
       "x-ms-enum": {
         "name": "JsonWriteFilePattern",
         "modelAsString": true
@@ -1520,7 +1553,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "outputs": {
           "type": "array",
@@ -1528,10 +1563,14 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "CopyActivityTypeProperties": {
       "description": "Copy activity properties.",
@@ -1607,7 +1646,10 @@
           "$ref": "#/definitions/SkipErrorFile"
         }
       },
-      "required": ["source", "sink"]
+      "required": [
+        "source",
+        "sink"
+      ]
     },
     "CopySource": {
       "discriminator": "type",
@@ -1638,7 +1680,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "BinarySource": {
       "description": "A copy activity Binary source.",
@@ -2017,7 +2061,10 @@
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
           "type": "string",
-          "enum": ["Query", "QueryAll"],
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
           "x-ms-enum": {
             "name": "SalesforceSourceReadBehavior",
             "modelAsString": true
@@ -2041,7 +2088,10 @@
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
           "type": "string",
-          "enum": ["Query", "QueryAll"],
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
           "x-ms-enum": {
             "name": "SalesforceSourceReadBehavior",
             "modelAsString": true
@@ -2600,7 +2650,10 @@
           "description": "Specifies the Distcp options. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["resourceManagerEndpoint", "tempScriptPath"]
+      "required": [
+        "resourceManagerEndpoint",
+        "tempScriptPath"
+      ]
     },
     "AzureMySqlSource": {
       "description": "A copy activity Azure MySQL source.",
@@ -2643,7 +2696,9 @@
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "OracleSource": {
       "description": "A copy activity Oracle source.",
@@ -2735,7 +2790,11 @@
     },
     "AmazonRdsForOraclePartitionOption": {
       "type": "string",
-      "enum": ["None", "PhysicalPartitionsOfTable", "DynamicRange"],
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
       "x-ms-enum": {
         "name": "AmazonRdsForOraclePartitionOption",
         "modelAsString": true
@@ -3685,7 +3744,10 @@
           "description": "The bucket of the interim Amazon S3 which will be used to store the unloaded data from Amazon Redshift source. The bucket must be in the same region as the Amazon Redshift source. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["s3LinkedServiceName", "bucketName"]
+      "required": [
+        "s3LinkedServiceName",
+        "bucketName"
+      ]
     },
     "SnowflakeSource": {
       "description": "A copy activity snowflake source.",
@@ -3705,7 +3767,9 @@
           "description": "Snowflake export settings."
         }
       },
-      "required": ["exportSettings"]
+      "required": [
+        "exportSettings"
+      ]
     },
     "ExportSettings": {
       "description": "Export command settings.",
@@ -3720,7 +3784,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "SnowflakeExportCopyCommand": {
       "description": "Snowflake export command settings.",
@@ -3840,7 +3906,15 @@
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
       "type": "string",
-      "enum": ["String", "Int", "Int64", "Decimal", "Guid", "Boolean", "Date"],
+      "enum": [
+        "String",
+        "Int",
+        "Int64",
+        "Decimal",
+        "Guid",
+        "Boolean",
+        "Date"
+      ],
       "x-ms-enum": {
         "name": "StoredProcedureParameterType",
         "modelAsString": true
@@ -3883,7 +3957,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "SapCloudForCustomerSink": {
       "description": "A copy activity SAP Cloud for Customer sink.",
@@ -3897,7 +3973,10 @@
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
           "type": "string",
-          "enum": ["Insert", "Update"],
+          "enum": [
+            "Insert",
+            "Update"
+          ],
           "x-ms-enum": {
             "name": "SapCloudForCustomerSinkWriteBehavior",
             "modelAsString": true
@@ -3922,7 +4001,11 @@
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
       "type": "string",
-      "enum": ["PreserveHierarchy", "FlattenHierarchy", "MergeFiles"],
+      "enum": [
+        "PreserveHierarchy",
+        "FlattenHierarchy",
+        "MergeFiles"
+      ],
       "x-ms-enum": {
         "name": "CopyBehaviorType",
         "modelAsString": true
@@ -4039,7 +4122,9 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4360,7 +4445,10 @@
     "PolybaseSettingsRejectType": {
       "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
       "type": "string",
-      "enum": ["value", "percentage"],
+      "enum": [
+        "value",
+        "percentage"
+      ],
       "x-ms-enum": {
         "name": "PolybaseSettingsRejectType",
         "modelAsString": true
@@ -4376,7 +4464,9 @@
           "items": {
             "$ref": "#/definitions/DWCopyCommandDefaultValue"
           },
-          "x-ms-identifiers": ["columnName"]
+          "x-ms-identifiers": [
+            "columnName"
+          ]
         },
         "additionalOptions": {
           "type": "object",
@@ -4436,7 +4526,11 @@
     "SqlWriteBehaviorEnum": {
       "description": "Specify the write behavior when copying data into sql.",
       "type": "string",
-      "enum": ["Insert", "Upsert", "StoredProcedure"],
+      "enum": [
+        "Insert",
+        "Upsert",
+        "StoredProcedure"
+      ],
       "x-ms-enum": {
         "name": "SqlWriteBehaviorEnum",
         "modelAsString": true
@@ -4445,7 +4539,10 @@
     "SqlDWWriteBehaviorEnum": {
       "description": "Specify the write behavior when copying data into sql dw.",
       "type": "string",
-      "enum": ["Insert", "Upsert"],
+      "enum": [
+        "Insert",
+        "Upsert"
+      ],
       "x-ms-enum": {
         "name": "SqlDWWriteBehaviorEnum",
         "modelAsString": true
@@ -4483,7 +4580,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "SnowflakeImportCopyCommand": {
       "description": "Snowflake import command settings.",
@@ -4534,7 +4633,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["linkedServiceName"]
+      "required": [
+        "linkedServiceName"
+      ]
     },
     "LogSettings": {
       "description": "Log settings.",
@@ -4553,7 +4654,9 @@
           "$ref": "#/definitions/LogLocationSettings"
         }
       },
-      "required": ["logLocationSettings"]
+      "required": [
+        "logLocationSettings"
+      ]
     },
     "LogLocationSettings": {
       "description": "Log location settings.",
@@ -4568,7 +4671,9 @@
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["linkedServiceName"]
+      "required": [
+        "linkedServiceName"
+      ]
     },
     "CopyActivityLogSettings": {
       "description": "Settings for copy activity log.",
@@ -4604,7 +4709,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["linkedServiceName"]
+      "required": [
+        "linkedServiceName"
+      ]
     },
     "RedirectIncompatibleRowSettings": {
       "description": "Redirect incompatible row settings",
@@ -4622,7 +4729,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["linkedServiceName"]
+      "required": [
+        "linkedServiceName"
+      ]
     },
     "SkipErrorFile": {
       "description": "Skip error file.",
@@ -4705,7 +4814,9 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -4721,7 +4832,10 @@
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
           "type": "string",
-          "enum": ["Merge", "Upload"],
+          "enum": [
+            "Merge",
+            "Upload"
+          ],
           "x-ms-enum": {
             "name": "AzureSearchIndexWriteBehaviorType",
             "modelAsString": true
@@ -4777,7 +4891,9 @@
     "DynamicsSinkWriteBehavior": {
       "description": "Defines values for DynamicsSinkWriteBehavior.",
       "type": "string",
-      "enum": ["Upsert"],
+      "enum": [
+        "Upsert"
+      ],
       "x-ms-enum": {
         "name": "DynamicsSinkWriteBehavior",
         "modelAsString": true
@@ -4805,7 +4921,9 @@
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["writeBehavior"]
+      "required": [
+        "writeBehavior"
+      ]
     },
     "DynamicsCrmSink": {
       "description": "A copy activity Dynamics CRM sink.",
@@ -4829,7 +4947,9 @@
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["writeBehavior"]
+      "required": [
+        "writeBehavior"
+      ]
     },
     "CommonDataServiceForAppsSink": {
       "description": "A copy activity Common Data Service for Apps sink.",
@@ -4853,7 +4973,9 @@
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["writeBehavior"]
+      "required": [
+        "writeBehavior"
+      ]
     },
     "AzureDataExplorerSink": {
       "description": "A copy activity Azure Data Explorer sink.",
@@ -4890,7 +5012,10 @@
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
           "type": "string",
-          "enum": ["Insert", "Upsert"],
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
           "x-ms-enum": {
             "name": "SalesforceSinkWriteBehavior",
             "modelAsString": true
@@ -4918,7 +5043,10 @@
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
           "type": "string",
-          "enum": ["Insert", "Upsert"],
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
           "x-ms-enum": {
             "name": "SalesforceSinkWriteBehavior",
             "modelAsString": true
@@ -4992,7 +5120,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "TabularTranslator": {
       "description": "A copy activity tabular translator.",
@@ -5078,7 +5208,9 @@
           "$ref": "#/definitions/HDInsightHiveActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "HDInsightHiveActivityTypeProperties": {
       "description": "HDInsight Hive activity properties.",
@@ -5089,7 +5221,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5138,7 +5272,11 @@
     "HDInsightActivityDebugInfoOption": {
       "description": "The HDInsightActivityDebugInfoOption settings to use.",
       "type": "string",
-      "enum": ["None", "Always", "Failure"],
+      "enum": [
+        "None",
+        "Always",
+        "Failure"
+      ],
       "x-ms-enum": {
         "name": "HDInsightActivityDebugInfoOption",
         "modelAsString": true
@@ -5159,7 +5297,9 @@
           "$ref": "#/definitions/HDInsightPigActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "HDInsightPigActivityTypeProperties": {
       "description": "HDInsight Pig activity properties.",
@@ -5170,7 +5310,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "type": "object",
@@ -5213,7 +5355,9 @@
           "$ref": "#/definitions/HDInsightMapReduceActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "HDInsightMapReduceActivityTypeProperties": {
       "description": "HDInsight MapReduce activity properties.",
@@ -5224,7 +5368,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5269,7 +5415,10 @@
           }
         }
       },
-      "required": ["className", "jarFilePath"]
+      "required": [
+        "className",
+        "jarFilePath"
+      ]
     },
     "HDInsightStreamingActivity": {
       "description": "HDInsight streaming activity type.",
@@ -5286,7 +5435,9 @@
           "$ref": "#/definitions/HDInsightStreamingActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "HDInsightStreamingActivityTypeProperties": {
       "description": "HDInsight streaming activity properties.",
@@ -5297,7 +5448,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "arguments": {
           "description": "User specified arguments to HDInsightActivity.",
@@ -5363,7 +5516,13 @@
           }
         }
       },
-      "required": ["mapper", "reducer", "input", "output", "filePaths"]
+      "required": [
+        "mapper",
+        "reducer",
+        "input",
+        "output",
+        "filePaths"
+      ]
     },
     "HDInsightSparkActivity": {
       "description": "HDInsight Spark activity.",
@@ -5380,7 +5539,9 @@
           "$ref": "#/definitions/HDInsightSparkActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "HDInsightSparkActivityTypeProperties": {
       "description": "HDInsight spark activity properties.",
@@ -5427,7 +5588,10 @@
           }
         }
       },
-      "required": ["rootPath", "entryFilePath"]
+      "required": [
+        "rootPath",
+        "entryFilePath"
+      ]
     },
     "ExecuteSSISPackageActivity": {
       "description": "Execute SSIS package activity.",
@@ -5444,7 +5608,9 @@
           "$ref": "#/definitions/ExecuteSSISPackageActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "ExecuteSSISPackageActivityTypeProperties": {
       "description": "Execute SSIS package activity properties.",
@@ -5513,7 +5679,10 @@
           "$ref": "#/definitions/SSISLogLocation"
         }
       },
-      "required": ["packageLocation", "connectVia"]
+      "required": [
+        "packageLocation",
+        "connectVia"
+      ]
     },
     "SSISPackageLocation": {
       "description": "SSIS package location.",
@@ -5526,7 +5695,12 @@
         "type": {
           "description": "The type of SSIS package location.",
           "type": "string",
-          "enum": ["SSISDB", "File", "InlinePackage", "PackageStore"],
+          "enum": [
+            "SSISDB",
+            "File",
+            "InlinePackage",
+            "PackageStore"
+          ],
           "x-ms-enum": {
             "name": "SsisPackageLocationType",
             "modelAsString": true
@@ -5577,7 +5751,10 @@
           "items": {
             "$ref": "#/definitions/SSISChildPackage"
           },
-          "x-ms-identifiers": ["packagePath", "packageName"]
+          "x-ms-identifiers": [
+            "packagePath",
+            "packageName"
+          ]
         }
       }
     },
@@ -5597,7 +5774,9 @@
           "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SSISPropertyOverride": {
       "description": "SSIS property override.",
@@ -5612,7 +5791,9 @@
           "description": "Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SSISExecutionCredential": {
       "description": "SSIS package execution credential.",
@@ -5631,7 +5812,11 @@
           "description": "Password for windows authentication."
         }
       },
-      "required": ["domain", "userName", "password"]
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
     },
     "SSISAccessCredential": {
       "description": "SSIS access credential.",
@@ -5650,7 +5835,11 @@
           "description": "Password for windows authentication."
         }
       },
-      "required": ["domain", "userName", "password"]
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
     },
     "SSISChildPackage": {
       "description": "SSIS embedded child package.",
@@ -5673,7 +5862,10 @@
           "description": "Last modified date for embedded child package."
         }
       },
-      "required": ["packagePath", "packageContent"]
+      "required": [
+        "packagePath",
+        "packageContent"
+      ]
     },
     "SSISLogLocation": {
       "description": "SSIS package execution log location",
@@ -5686,7 +5878,9 @@
         "type": {
           "description": "The type of SSIS log location.",
           "type": "string",
-          "enum": ["File"],
+          "enum": [
+            "File"
+          ],
           "x-ms-enum": {
             "name": "SsisLogLocationType",
             "modelAsString": true
@@ -5698,7 +5892,11 @@
           "$ref": "#/definitions/SSISLogLocationTypeProperties"
         }
       },
-      "required": ["logPath", "type", "typeProperties"]
+      "required": [
+        "logPath",
+        "type",
+        "typeProperties"
+      ]
     },
     "SSISLogLocationTypeProperties": {
       "description": "SSIS package execution log location properties.",
@@ -5729,7 +5927,9 @@
           "$ref": "#/definitions/CustomActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "CustomActivityTypeProperties": {
       "description": "Custom activity properties.",
@@ -5767,7 +5967,9 @@
           "description": "Elevation level and scope for the user, default is nonadmin task. Type: string (or Expression with resultType double)."
         }
       },
-      "required": ["command"]
+      "required": [
+        "command"
+      ]
     },
     "CustomActivityReferenceObject": {
       "description": "Reference objects for custom activity",
@@ -5778,7 +5980,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "datasets": {
           "description": "Dataset references.",
@@ -5786,7 +5990,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         }
       }
     },
@@ -5805,7 +6011,10 @@
           "$ref": "#/definitions/SqlServerStoredProcedureActivityTypeProperties"
         }
       },
-      "required": ["typeProperties", "linkedServiceName"]
+      "required": [
+        "typeProperties",
+        "linkedServiceName"
+      ]
     },
     "SqlServerStoredProcedureActivityTypeProperties": {
       "description": "SQL stored procedure activity properties.",
@@ -5819,7 +6028,9 @@
           "type": "object"
         }
       },
-      "required": ["storedProcedureName"]
+      "required": [
+        "storedProcedureName"
+      ]
     },
     "ExecutePipelineActivity": {
       "x-ms-discriminator-value": "ExecutePipeline",
@@ -5840,7 +6051,9 @@
           "$ref": "#/definitions/ExecutePipelineActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "ExecutePipelineActivityPolicy": {
       "description": "Execution policy for an execute pipeline activity.",
@@ -5871,7 +6084,9 @@
           "type": "boolean"
         }
       },
-      "required": ["pipeline"]
+      "required": [
+        "pipeline"
+      ]
     },
     "DeleteActivity": {
       "x-ms-discriminator-value": "Delete",
@@ -5888,7 +6103,9 @@
           "$ref": "#/definitions/DeleteActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DeleteActivityTypeProperties": {
       "description": "Delete activity properties.",
@@ -5919,7 +6136,9 @@
           "description": "Delete activity store settings."
         }
       },
-      "required": ["dataset"]
+      "required": [
+        "dataset"
+      ]
     },
     "AzureDataExplorerCommandActivity": {
       "x-ms-discriminator-value": "AzureDataExplorerCommand",
@@ -5936,7 +6155,9 @@
           "$ref": "#/definitions/AzureDataExplorerCommandActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureDataExplorerCommandActivityTypeProperties": {
       "description": "Azure Data Explorer command activity properties.",
@@ -5950,7 +6171,9 @@
           "description": "Control command timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..)"
         }
       },
-      "required": ["command"]
+      "required": [
+        "command"
+      ]
     },
     "LookupActivity": {
       "x-ms-discriminator-value": "Lookup",
@@ -5967,7 +6190,9 @@
           "$ref": "#/definitions/LookupActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "LookupActivityTypeProperties": {
       "description": "Lookup activity properties.",
@@ -5985,12 +6210,20 @@
           "description": "Whether to return first row or all rows. Default value is true. Type: boolean (or Expression with resultType boolean)."
         }
       },
-      "required": ["source", "dataset"]
+      "required": [
+        "source",
+        "dataset"
+      ]
     },
     "WebActivityMethod": {
       "description": "The list of HTTP methods supported by a WebActivity.",
       "type": "string",
-      "enum": ["GET", "POST", "PUT", "DELETE"],
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
       "x-ms-enum": {
         "name": "WebActivityMethod",
         "modelAsString": true
@@ -6011,7 +6244,9 @@
           "$ref": "#/definitions/WebActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "WebActivityAuthentication": {
       "description": "Web activity authentication properties.",
@@ -6079,7 +6314,9 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/DatasetReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "linkedServices": {
           "type": "array",
@@ -6087,14 +6324,19 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           },
-          "x-ms-identifiers": ["referenceName"]
+          "x-ms-identifiers": [
+            "referenceName"
+          ]
         },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         }
       },
-      "required": ["method", "url"]
+      "required": [
+        "method",
+        "url"
+      ]
     },
     "GetMetadataActivity": {
       "x-ms-discriminator-value": "GetMetadata",
@@ -6111,7 +6353,9 @@
           "$ref": "#/definitions/GetMetadataActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "GetMetadataActivityTypeProperties": {
       "description": "GetMetadata activity properties.",
@@ -6138,7 +6382,9 @@
           "description": "GetMetadata activity format settings."
         }
       },
-      "required": ["dataset"]
+      "required": [
+        "dataset"
+      ]
     },
     "IfConditionActivity": {
       "x-ms-discriminator-value": "IfCondition",
@@ -6155,7 +6401,9 @@
           "$ref": "#/definitions/IfConditionActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "IfConditionActivityTypeProperties": {
       "description": "IfCondition activity properties.",
@@ -6170,7 +6418,9 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "ifFalseActivities": {
           "type": "array",
@@ -6178,10 +6428,14 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
-      "required": ["expression"]
+      "required": [
+        "expression"
+      ]
     },
     "SwitchActivity": {
       "x-ms-discriminator-value": "Switch",
@@ -6198,7 +6452,9 @@
           "$ref": "#/definitions/SwitchActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SwitchActivityTypeProperties": {
       "description": "Switch activity properties.",
@@ -6214,7 +6470,9 @@
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/SwitchCase"
           },
-          "x-ms-identifiers": ["value"]
+          "x-ms-identifiers": [
+            "value"
+          ]
         },
         "defaultActivities": {
           "type": "array",
@@ -6222,10 +6480,14 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
-      "required": ["on"]
+      "required": [
+        "on"
+      ]
     },
     "SwitchCase": {
       "description": "Switch cases with have a value and corresponding activities.",
@@ -6240,7 +6502,9 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6259,7 +6523,9 @@
           "$ref": "#/definitions/ForEachActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "ForEachActivityTypeProperties": {
       "description": "ForEach activity properties.",
@@ -6283,10 +6549,15 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
-      "required": ["items", "activities"]
+      "required": [
+        "items",
+        "activities"
+      ]
     },
     "AzureMLBatchExecutionActivity": {
       "description": "Azure ML Batch Execution activity.",
@@ -6303,7 +6574,9 @@
           "$ref": "#/definitions/AzureMLBatchExecutionActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureMLBatchExecutionActivityTypeProperties": {
       "description": "Azure ML Batch Execution activity properties.",
@@ -6345,7 +6618,10 @@
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
         }
       },
-      "required": ["linkedServiceName", "filePath"]
+      "required": [
+        "linkedServiceName",
+        "filePath"
+      ]
     },
     "AzureMLUpdateResourceActivity": {
       "description": "Azure ML Update Resource management activity.",
@@ -6362,7 +6638,9 @@
           "$ref": "#/definitions/AzureMLUpdateResourceActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureMLUpdateResourceActivityTypeProperties": {
       "description": "Azure ML Update Resource activity properties.",
@@ -6401,7 +6679,9 @@
           "$ref": "#/definitions/AzureMLExecutePipelineActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureMLExecutePipelineActivityTypeProperties": {
       "description": "Azure ML Execute Pipeline activity properties.",
@@ -6471,7 +6751,9 @@
           "$ref": "#/definitions/DataLakeAnalyticsUSQLActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DataLakeAnalyticsUSQLActivityTypeProperties": {
       "description": "DataLakeAnalyticsU-SQL activity properties.",
@@ -6509,7 +6791,10 @@
           "description": "Compilation mode of U-SQL. Must be one of these values : Semantic, Full and SingleBox. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["scriptPath", "scriptLinkedService"]
+      "required": [
+        "scriptPath",
+        "scriptLinkedService"
+      ]
     },
     "WaitActivity": {
       "x-ms-discriminator-value": "Wait",
@@ -6526,7 +6811,9 @@
           "$ref": "#/definitions/WaitActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "WaitActivityTypeProperties": {
       "description": "Wait activity properties.",
@@ -6536,7 +6823,9 @@
           "type": "object"
         }
       },
-      "required": ["waitTimeInSeconds"]
+      "required": [
+        "waitTimeInSeconds"
+      ]
     },
     "FailActivity": {
       "x-ms-discriminator-value": "Fail",
@@ -6554,7 +6843,9 @@
           "$ref": "#/definitions/FailActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "FailActivityTypeProperties": {
       "description": "Fail activity properties.",
@@ -6569,7 +6860,10 @@
           "type": "object"
         }
       },
-      "required": ["message", "errorCode"]
+      "required": [
+        "message",
+        "errorCode"
+      ]
     },
     "UntilActivity": {
       "x-ms-discriminator-value": "Until",
@@ -6586,7 +6880,9 @@
           "$ref": "#/definitions/UntilActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "UntilActivityTypeProperties": {
       "description": "Until activity properties.",
@@ -6605,10 +6901,15 @@
           "items": {
             "$ref": "#/definitions/Activity"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
-      "required": ["expression", "activities"]
+      "required": [
+        "expression",
+        "activities"
+      ]
     },
     "ValidationActivity": {
       "x-ms-discriminator-value": "Validation",
@@ -6625,7 +6926,9 @@
           "$ref": "#/definitions/ValidationActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "ValidationActivityTypeProperties": {
       "description": "Validation activity properties.",
@@ -6651,7 +6954,9 @@
           "$ref": "../datafactory.json#/definitions/DatasetReference"
         }
       },
-      "required": ["dataset"]
+      "required": [
+        "dataset"
+      ]
     },
     "FilterActivity": {
       "x-ms-discriminator-value": "Filter",
@@ -6668,7 +6973,9 @@
           "$ref": "#/definitions/FilterActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "FilterActivityTypeProperties": {
       "description": "Filter activity properties.",
@@ -6682,7 +6989,10 @@
           "$ref": "../datafactory.json#/definitions/Expression"
         }
       },
-      "required": ["condition", "items"]
+      "required": [
+        "condition",
+        "items"
+      ]
     },
     "DatabricksNotebookActivity": {
       "description": "DatabricksNotebook activity.",
@@ -6699,7 +7009,9 @@
           "$ref": "#/definitions/DatabricksNotebookActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DatabricksNotebookActivityTypeProperties": {
       "description": "Databricks Notebook activity properties.",
@@ -6729,7 +7041,9 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["notebookPath"]
+      "required": [
+        "notebookPath"
+      ]
     },
     "DatabricksSparkJarActivity": {
       "description": "DatabricksSparkJar activity.",
@@ -6746,7 +7060,9 @@
           "$ref": "#/definitions/DatabricksSparkJarActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DatabricksSparkJarActivityTypeProperties": {
       "description": "Databricks SparkJar activity properties.",
@@ -6777,7 +7093,9 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["mainClassName"]
+      "required": [
+        "mainClassName"
+      ]
     },
     "DatabricksSparkPythonActivity": {
       "description": "DatabricksSparkPython activity.",
@@ -6794,7 +7112,9 @@
           "$ref": "#/definitions/DatabricksSparkPythonActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DatabricksSparkPythonActivityTypeProperties": {
       "description": "Databricks SparkPython activity properties.",
@@ -6825,7 +7145,9 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["pythonFile"]
+      "required": [
+        "pythonFile"
+      ]
     },
     "SetVariableActivity": {
       "x-ms-discriminator-value": "SetVariable",
@@ -6842,7 +7164,9 @@
           "$ref": "#/definitions/SetVariableActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SetVariableActivityTypeProperties": {
       "description": "SetVariable activity properties.",
@@ -6872,7 +7196,9 @@
           "$ref": "#/definitions/AppendVariableActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AppendVariableActivityTypeProperties": {
       "description": "AppendVariable activity properties.",
@@ -6890,7 +7216,15 @@
     "AzureFunctionActivityMethod": {
       "description": "The list of HTTP methods supported by a AzureFunctionActivity.",
       "type": "string",
-      "enum": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE"],
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS",
+        "HEAD",
+        "TRACE"
+      ],
       "x-ms-enum": {
         "name": "AzureFunctionActivityMethod",
         "modelAsString": true
@@ -6911,7 +7245,9 @@
           "$ref": "#/definitions/AzureFunctionActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureFunctionActivityTypeProperties": {
       "description": "Azure Function activity type properties.",
@@ -6933,7 +7269,10 @@
           "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["method", "functionName"]
+      "required": [
+        "method",
+        "functionName"
+      ]
     },
     "WebHookActivity": {
       "x-ms-discriminator-value": "WebHook",
@@ -6950,12 +7289,16 @@
           "$ref": "#/definitions/WebHookActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "WebHookActivityMethod": {
       "description": "The list of HTTP methods supported by a WebHook activity.",
       "type": "string",
-      "enum": ["POST"],
+      "enum": [
+        "POST"
+      ],
       "x-ms-enum": {
         "name": "WebHookActivityMethod",
         "modelAsString": true
@@ -6993,7 +7336,10 @@
           "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
-      "required": ["method", "url"]
+      "required": [
+        "method",
+        "url"
+      ]
     },
     "ExecuteDataFlowActivity": {
       "description": "Execute data flow activity.",
@@ -7010,7 +7356,9 @@
           "$ref": "#/definitions/ExecuteDataFlowActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "ExecuteWranglingDataflowActivity": {
       "description": "Execute power query activity.",
@@ -7032,7 +7380,9 @@
           "description": "Activity policy."
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "ExecuteDataFlowActivityTypeProperties": {
       "description": "Execute data flow activity properties.",
@@ -7080,7 +7430,9 @@
           "type": "object"
         }
       },
-      "required": ["dataFlow"]
+      "required": [
+        "dataFlow"
+      ]
     },
     "ExecutePowerQueryActivityTypeProperties": {
       "description": "Execute power query data flow activity properties.",
@@ -7104,7 +7456,9 @@
           "items": {
             "$ref": "#/definitions/PowerQuerySinkMapping"
           },
-          "x-ms-identifiers": ["queryName"]
+          "x-ms-identifiers": [
+            "queryName"
+          ]
         }
       }
     },
@@ -7122,7 +7476,9 @@
           "items": {
             "$ref": "./DataFlow.json#/definitions/PowerQuerySink"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -7142,7 +7498,10 @@
           "$ref": "#/definitions/ScriptActivityTypeProperties"
         }
       },
-      "required": ["typeProperties", "linkedServiceName"]
+      "required": [
+        "typeProperties",
+        "linkedServiceName"
+      ]
     },
     "ScriptActivityTypeProperties": {
       "description": "Script activity properties.",
@@ -7169,7 +7528,10 @@
                 "name": "ScriptActivityLogDestination",
                 "modelAsString": true
               },
-              "enum": ["ActivityOutput", "ExternalStore"],
+              "enum": [
+                "ActivityOutput",
+                "ExternalStore"
+              ],
               "type": "string",
               "description": "The destination of logs. Type: string."
             },
@@ -7178,7 +7540,9 @@
               "$ref": "#/definitions/LogLocationSettings"
             }
           },
-          "required": ["logDestination"]
+          "required": [
+            "logDestination"
+          ]
         }
       }
     },
@@ -7195,7 +7559,10 @@
             "name": "ScriptType",
             "modelAsString": true
           },
-          "enum": ["Query", "NonQuery"],
+          "enum": [
+            "Query",
+            "NonQuery"
+          ],
           "type": "string",
           "description": "The type of the query. Type: string."
         },
@@ -7205,10 +7572,15 @@
           "items": {
             "$ref": "#/definitions/ScriptActivityParameter"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
-      "required": ["text", "type"]
+      "required": [
+        "text",
+        "type"
+      ]
     },
     "ScriptActivityParameter": {
       "description": "Parameters of a script block.",
@@ -7247,7 +7619,11 @@
         "direction": {
           "description": "The direction of the parameter.",
           "type": "string",
-          "enum": ["Input", "Output", "InputOutput"],
+          "enum": [
+            "Input",
+            "Output",
+            "InputOutput"
+          ],
           "x-ms-enum": {
             "name": "ScriptActivityParameterDirection",
             "modelAsString": true
@@ -7282,7 +7658,11 @@
     "SqlPartitionOption": {
       "description": "The partition mechanism that will be used for Sql read in parallel.",
       "type": "string",
-      "enum": ["None", "PhysicalPartitionsOfTable", "DynamicRange"],
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
       "x-ms-enum": {
         "name": "SqlPartitionOption",
         "modelAsString": true
@@ -7291,7 +7671,11 @@
     "SapHanaPartitionOption": {
       "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
       "type": "string",
-      "enum": ["None", "PhysicalPartitionsOfTable", "SapHanaDynamicRange"],
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "SapHanaDynamicRange"
+      ],
       "x-ms-enum": {
         "name": "SapHanaPartitionOption",
         "modelAsString": true
@@ -7316,7 +7700,11 @@
     "OraclePartitionOption": {
       "description": "The partition mechanism that will be used for Oracle read in parallel.",
       "type": "string",
-      "enum": ["None", "PhysicalPartitionsOfTable", "DynamicRange"],
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
       "x-ms-enum": {
         "name": "OraclePartitionOption",
         "modelAsString": true
@@ -7325,7 +7713,11 @@
     "TeradataPartitionOption": {
       "description": "The partition mechanism that will be used for teradata read in parallel.",
       "type": "string",
-      "enum": ["None", "Hash", "DynamicRange"],
+      "enum": [
+        "None",
+        "Hash",
+        "DynamicRange"
+      ],
       "x-ms-enum": {
         "name": "TeradataPartitionOption",
         "modelAsString": true
@@ -7334,7 +7726,11 @@
     "NetezzaPartitionOption": {
       "description": "The partition mechanism that will be used for Netezza read in parallel.",
       "type": "string",
-      "enum": ["None", "DataSlice", "DynamicRange"],
+      "enum": [
+        "None",
+        "DataSlice",
+        "DynamicRange"
+      ],
       "x-ms-enum": {
         "name": "NetezzaPartitionOption",
         "modelAsString": true
@@ -7370,7 +7766,9 @@
           "$ref": "#/definitions/SynapseNotebookActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SynapseNotebookActivityTypeProperties": {
       "description": "Execute Synapse notebook activity properties.",
@@ -7409,7 +7807,9 @@
           "format": "int32"
         }
       },
-      "required": ["notebook"]
+      "required": [
+        "notebook"
+      ]
     },
     "SynapseNotebookReference": {
       "description": "Synapse notebook reference type.",
@@ -7418,7 +7818,9 @@
         "type": {
           "type": "string",
           "description": "Synapse notebook reference type.",
-          "enum": ["NotebookReference"],
+          "enum": [
+            "NotebookReference"
+          ],
           "x-ms-enum": {
             "name": "NotebookReferenceType",
             "modelAsString": true
@@ -7429,7 +7831,10 @@
           "description": "Reference notebook name. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "BigDataPoolParametrizationReference": {
       "description": "Big data pool reference type.",
@@ -7438,7 +7843,9 @@
         "type": {
           "type": "string",
           "description": "Big data pool reference type.",
-          "enum": ["BigDataPoolReference"],
+          "enum": [
+            "BigDataPoolReference"
+          ],
           "x-ms-enum": {
             "name": "BigDataPoolReferenceType",
             "modelAsString": true
@@ -7449,7 +7856,10 @@
           "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "NotebookParameter": {
       "description": "Notebook parameter.",
@@ -7469,7 +7879,12 @@
     "NotebookParameterType": {
       "description": "Notebook parameter type.",
       "type": "string",
-      "enum": ["string", "int", "float", "bool"],
+      "enum": [
+        "string",
+        "int",
+        "float",
+        "bool"
+      ],
       "x-ms-enum": {
         "name": "NotebookParameterType",
         "modelAsString": true
@@ -7491,7 +7906,9 @@
           "$ref": "#/definitions/SynapseSparkJobActivityTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SynapseSparkJobActivityTypeProperties": {
       "description": "Execute spark job activity properties.",
@@ -7567,7 +7984,9 @@
           "format": "int32"
         }
       },
-      "required": ["sparkJob"]
+      "required": [
+        "sparkJob"
+      ]
     },
     "SynapseSparkJobReference": {
       "description": "Synapse spark job reference type.",
@@ -7576,7 +7995,9 @@
         "type": {
           "type": "string",
           "description": "Synapse spark job reference type.",
-          "enum": ["SparkJobDefinitionReference"],
+          "enum": [
+            "SparkJobDefinitionReference"
+          ],
           "x-ms-enum": {
             "name": "SparkJobReferenceType",
             "modelAsString": true
@@ -7587,7 +8008,10 @@
           "description": "Reference spark job name. Expression with resultType string."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   }
 }
