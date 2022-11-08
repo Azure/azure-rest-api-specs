@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-preview-2022-05-01'
 input-file:
-  - Microsoft.ResourceHealth/preview/2022-05-01/ResourceHealth.json
+  - Microsoft.ResourceHealth/preview/2022-05-01-preview/ResourceHealth.json
 ```
 
 ### Tag: package-2017-07
