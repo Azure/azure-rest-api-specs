@@ -634,7 +634,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAzureADAdministrators.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAzureADOnlyAuthentications.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ServerDevOpsAudit.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/ServerDevOpsAudit.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerDnsAliases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerKeys.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerOperations.json
