@@ -121,10 +121,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -311,10 +308,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -685,10 +679,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -841,10 +832,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -1173,10 +1161,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -1331,10 +1316,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -1665,10 +1647,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Error response."
           }
         },
         "x-ms-examples": {
@@ -1733,6 +1712,9 @@
     },
     "Snapshot": {
       "type": "object",
+      "required": [
+        "filters"
+      ],
       "properties": {
         "name": {
           "description": "The name of the snapshot.",
@@ -1757,6 +1739,8 @@
         "filters": {
           "description": "A list of filters used to filter the key-values included in the snapshot.",
           "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
           "items": {
             "$ref": "#/definitions/KeyValueFilter"
           }
@@ -1821,6 +1805,9 @@
     "KeyValueFilter": {
       "description": "Enables filtering of key-values.",
       "type": "object",
+      "required": [
+        "key"
+      ],
       "properties": {
         "key": {
           "description": "Filters key-values by their key field.",
