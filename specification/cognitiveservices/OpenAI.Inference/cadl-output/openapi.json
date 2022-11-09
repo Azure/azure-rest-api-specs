@@ -32,6 +32,19 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {}
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "apiKey"
+    }
+  },
   "tags": [],
   "paths": {
     "/deployments/{deploymentId}/completions": {

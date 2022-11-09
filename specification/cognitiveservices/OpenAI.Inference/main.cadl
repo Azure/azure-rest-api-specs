@@ -3,6 +3,10 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
+
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "apiKey"> |
+  OAuth2Auth<[]>) // need to figure out a way to use ImplicitFlow
 @service({title: "Azure OpenAI API", version: "2022-06-01-preview" })
 @server(
   "https://{endpoint}/openai",
