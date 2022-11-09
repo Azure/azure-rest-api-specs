@@ -41,20 +41,8 @@
               "$ref": "#/definitions/DatasourcePreferencesResponse"
             }
           },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          },
-          "503": {
-            "description": "Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
+          "default": {
+            "description": "An unexpected error occurred",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -106,20 +94,8 @@
               "$ref": "#/definitions/PolicyResponse"
             }
           },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          },
-          "503": {
-            "description": "Server Error",
+          "default": {
+            "description": "An unexpected error occurred",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -175,14 +151,8 @@
           "304": {
             "description": "Not Modified"
           },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          },
-          "404": {
-            "description": "Not Found",
+          "default": {
+            "description": "An unexpected error occurred",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
             }
@@ -199,35 +169,40 @@
   "definitions": {
     "AccountModelBase": {
       "type": "object",
+      "description": "Represents a purview account.",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the purview account."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the purview account."
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "Region where purview account is created."
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "Tenant id of the purview account."
         },
         "gatewayEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "Purview account gateway endpoint."
         }
       }
     },
     "Consent": {
       "type": "object",
+      "description": "Consent information related to a resource.",
       "properties": {
-        "value": {
-          "type": "boolean"
-        },
         "properties": {
           "$ref": "#/definitions/Properties"
         },
         "excludedScopes": {
           "type": "array",
+          "description": "Child scopes that need to be excluded (optional).",
           "items": {
             "type": "string"
           }
@@ -236,6 +211,7 @@
     },
     "DatasourcePreferencesResponse": {
       "type": "object",
+      "description": "Provides the consent information for a data source.",
       "properties": {
         "consent": {
           "$ref": "#/definitions/Consent"
@@ -245,32 +221,43 @@
         },
         "frequency": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "This represents the frequency at which the RPs will check for consent information."
         }
       }
     },
     "ErrorModel": {
       "type": "object",
+      "description": "Represents the error model.",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Service error code."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "Detailed error message."
         },
         "details": {
           "type": "array",
+          "description": "Granular errors (if any).",
           "items": {
             "$ref": "#/definitions/ErrorModel"
           }
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ErrorResponseModel": {
       "type": "object",
+      "description": "Represents the error response model.",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModel"
@@ -279,73 +266,92 @@
     },
     "PolicyElement": {
       "type": "object",
+      "description": "Represents a policy element.",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the policy element."
         },
         "scopes": {
           "type": "array",
+          "description": "List of scopes included in this policy.",
           "items": {
             "type": "string"
           }
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Kind of policy element. Possible values: policy/policySet/attributeRule."
         },
         "updatedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Time at which this policy element is last updated."
         },
         "version": {
           "format": "int64",
-          "type": "integer"
+          "type": "integer",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1."
         },
         "elementJson": {
-          "type": "string"
+          "type": "string",
+          "description": "Policy element serialized json payload."
         }
       }
     },
     "PolicyElementEventModel": {
       "type": "object",
+      "description": "Represents a policy element event model.",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the policy element."
         },
         "scopes": {
           "type": "array",
+          "description": "List of scopes included in this policy.",
           "items": {
             "type": "string"
           }
         },
         "kind": {
-          "type": "string"
+          "type": "string",
+          "description": "Kind of policy element. Possible values: policy/policySet/attributeRule."
         },
         "updatedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Time at which this policy element is last updated."
         },
         "version": {
           "format": "int64",
-          "type": "integer"
+          "type": "integer",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1."
         },
         "elementJson": {
-          "type": "string"
+          "type": "string",
+          "description": "Policy element serialized json payload."
         },
         "eventType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of event. Format: <RP-Name>/<Resource-Type>/<Action>. For Example: Microsoft.Purview/PolicyElements/Delete."
         }
       }
     },
     "PolicyEventsResponse": {
       "type": "object",
+      "description": "Represents the response for policy events API.",
       "properties": {
         "count": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Count of elements in payload."
         },
         "syncToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to store this value and keep updating if PDS returns a new value. Call this API with the most recent value recieved."
         },
         "elements": {
           "type": "array",
+          "description": "List of created/updated policy elements.",
           "items": {
             "$ref": "#/definitions/PolicyElementEventModel"
           }
@@ -354,44 +360,54 @@
     },
     "PolicyResponse": {
       "type": "object",
+      "description": "Represents the response for policy fetch API.",
       "properties": {
         "count": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Count of elements in payload."
         },
         "syncToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to pass this value while fetching records using policyEvents API."
         },
         "elements": {
           "type": "array",
+          "description": "List of policy elements.",
           "items": {
             "$ref": "#/definitions/PolicyElement"
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link with skip token to fetch next set of records. This is used in case of pagination."
         }
       }
     },
     "Properties": {
       "type": "object",
+      "description": "Consent properties.",
       "properties": {
         "scanner": {
           "$ref": "#/definitions/Scanner"
         },
         "dug": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Consent for data use governance."
         }
       }
     },
     "Scanner": {
       "type": "object",
+      "description": "Represents the collection of consent information for scanning service.",
       "properties": {
         "metadata": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Consent for metadata discovery."
         },
         "classification": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Consent for classification discovery."
         }
       }
     }
