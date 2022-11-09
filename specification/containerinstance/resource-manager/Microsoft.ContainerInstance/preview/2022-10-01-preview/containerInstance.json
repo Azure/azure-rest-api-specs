@@ -1463,6 +1463,10 @@
               "x-ms-identifiers": [
                 "name"
               ]
+            },
+            "confidentialComputeProperties": {
+              "description": "The properies for confidential contianer group",
+              "$ref": "#/definitions/ConfidentialComputeProperties"
             }
           },
           "required": [
@@ -2213,7 +2217,8 @@
       "type": "string",
       "enum": [
         "Standard",
-        "Dedicated"
+        "Dedicated",
+        "Confidential"
       ],
       "x-ms-enum": {
         "name": "ContainerGroupSku",
@@ -2381,6 +2386,27 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "ConfidentialComputeProperties": {
+      "description": "The properties for confidential container group",
+      "type": "object",
+      "properties": {
+        "ccePolicy": {
+          "type": "string",
+          "description": "The base64 encoded confidential compute enforcement policy"
+        },
+        "isolationType": {
+          "type": "string",
+          "description": "The VM isolation type for the confidential container group",
+          "enum": [
+            "SevSnP"
+          ],
+          "x-ms-enum": {
+            "name": "IsolationType",
+            "modelAsString": true
+          }
+        }
       }
     }
   },
