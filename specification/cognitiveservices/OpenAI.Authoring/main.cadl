@@ -1,12 +1,16 @@
 import "@cadl-lang/rest";
-import "./routes.cadl";
+import "./common.cadl";
+import "./deployment.cadl";
+import "./file.cadl";
+import "./finetune.cadl";
+import "./model.routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
 @service({title: "Azure OpenAI API", version: "2022-06-01-preview" })
 @server(
   "{endpoint}/openai",
-  "// FIXME: (missing-service-description) Add service description",
+  "API for managing and utilizing Azure Open AI endpoints",
   {
     @doc("""
 Supported Cognitive Services endpoints (protocol and hostname, for example:
@@ -15,5 +19,5 @@ https://westus.api.cognitive.microsoft.com).
     endpoint: string,
   }
 )
-@doc("// FIXME: (missing-service-description) Add service description")
+@doc("API for managing and utilizing Azure Open AI endpoints")
 namespace Azure.OpenAI;
