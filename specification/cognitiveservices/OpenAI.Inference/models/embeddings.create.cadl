@@ -12,24 +12,12 @@ namespace Azure.OpenAI.Request {
         "deploymentId": string;
         @doc("expected schema for the body of the embedding post request")
         @body
-        body: CreateBaseBody;
-    }
-
-    @doc("Embedding request body schema, base fields")
-    model CreateBaseBody {
-        @doc("The ID of the end-user, for use in tracking and rate-limiting.")
-        user?: string;
-
-        @doc("input type of embedding search to use")
-        input_type?: string;
-
-        @doc("ID of the model to use")
-        "model"?: string;
+        body: EmbeddingsCreateBody;
     }
 
     @doc("Embedding request body schema")
     model EmbeddingsCreateBody {
-        ... CreateBaseBody;
+        ... EmbeddingsCreateBaseBody;
         @doc("""
         An input to embed, encoded as a string, a list of strings, or a list of token
         lists
@@ -41,4 +29,15 @@ namespace Azure.OpenAI.Request {
         // have a typeless object as part of the response
     }
 
+    @doc("Embedding request body schema, base fields")
+    model EmbeddingsCreateBaseBody {
+        @doc("The ID of the end-user, for use in tracking and rate-limiting.")
+        user?: string;
+
+        @doc("input type of embedding search to use")
+        input_type?: string;
+
+        @doc("ID of the model to use")
+        "model"?: string;
+    }
 };

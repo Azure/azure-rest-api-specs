@@ -89,8 +89,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/object"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -182,24 +185,6 @@
         "body"
       ]
     },
-    "Request.CreateBaseBody": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "string",
-          "description": "The ID of the end-user, for use in tracking and rate-limiting."
-        },
-        "input_type": {
-          "type": "string",
-          "description": "input type of embedding search to use"
-        },
-        "model": {
-          "type": "string",
-          "description": "ID of the model to use"
-        }
-      },
-      "description": "Embedding request body schema, base fields"
-    },
     "Request.CreateBody": {
       "type": "object",
       "properties": {
@@ -287,7 +272,7 @@
       "type": "object",
       "properties": {
         "body": {
-          "$ref": "#/definitions/Request.CreateBaseBody",
+          "$ref": "#/definitions/Request.EmbeddingsCreateBody",
           "description": "expected schema for the body of the embedding post request"
         }
       },
@@ -295,6 +280,24 @@
       "required": [
         "body"
       ]
+    },
+    "Request.EmbeddingsCreateBaseBody": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The ID of the end-user, for use in tracking and rate-limiting."
+        },
+        "input_type": {
+          "type": "string",
+          "description": "input type of embedding search to use"
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the model to use"
+        }
+      },
+      "description": "Embedding request body schema, base fields"
     },
     "Request.EmbeddingsCreateBody": {
       "type": "object",
@@ -471,7 +474,7 @@
       "required": true,
       "description": "expected schema for the body of the embedding post request",
       "schema": {
-        "$ref": "#/definitions/Request.CreateBaseBody"
+        "$ref": "#/definitions/Request.EmbeddingsCreateBody"
       },
       "x-ms-parameter-location": "method"
     },

@@ -28,7 +28,7 @@ interface Operations {
   @post
   EmbeddingsCreate is Foundations.Operation<
     Request.EmbeddingsCreate,
-    void
+    object // using "void" as a type will generate a 204 response with no body, we are aiming for a 200 with an empty object
   >;
 }
 
