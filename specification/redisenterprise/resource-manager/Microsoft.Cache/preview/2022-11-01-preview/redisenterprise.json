@@ -1256,7 +1256,8 @@
         "EnableFailed",
         "Disabling",
         "DisableFailed",
-        "Disabled"
+        "Disabled",
+        "UnavailableLostCmkAccess"
       ],
       "x-ms-enum": {
         "name": "ResourceState",
@@ -1277,6 +1278,10 @@
             "type": "string"
           },
           "description": "The Availability Zones where this cluster will be deployed."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1336,6 +1341,20 @@
           "x-ms-enum": {
             "name": "TlsVersion",
             "modelAsString": true
+          }
+        },
+        "encryption": {
+          "type": "object",
+          "description": "The key and managed identity to use for encryption at rest with customer-managed keys. Set this to an empty object to use platform-managed keys.",
+          "properties": {
+            "keyId": {
+              "type": "string",
+              "description": "URL for the key"
+            },
+            "identityId": {
+              "type": "string",
+              "description": "ARM resource ID for the managed identity. This must exist in the userAssignedIdentity object of Cluster.identity"
+            }
           }
         },
         "hostName": {
