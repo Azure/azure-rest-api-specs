@@ -3,7 +3,7 @@
 # Azure REST API version change guide
 
 ## Overview
-This specification is aimed at providing guidance to Azure Service teams when making changes to the REST APIs. It is aimed at helping teams understand what kind changes to API requires updating the API version. The official Microsoft REST API guidelines can be found [here](https://github.com/Microsoft/api-guidelines). This document is meant to supplement the official guidance.
+This specification is aimed at providing guidance to Azure Service teams when making changes to the REST APIs. It is aimed at helping teams understand what kind changes to API requires updating the API version. The official  Microsoft REST API guidelines can be found [here](https://github.com/Microsoft/api-guidelines). This document is meant to supplement the official guidance.
 It will be also used as a reference by SDK teams and API reviewers when reviewing APIs
 
 ## Breaking Changes 
