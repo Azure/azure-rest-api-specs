@@ -3,7 +3,7 @@
   "info": {
     "version": "2022-03-01",
     "title": "Azure Orbital",
-    "description": "Azure Orbital service",
+    "description": "Azure Orbital service.",
     "license": {
       "name": "Microsoft"
     }
@@ -23,7 +23,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -71,7 +71,7 @@
         "tags": [
           "Spacecraft"
         ],
-        "description": "Return list of spacecrafts",
+        "description": "Returns list of spacecrafts by subscription.",
         "operationId": "Spacecrafts_ListBySubscription",
         "x-ms-examples": {
           "List of Spacecraft by Subscription": {
@@ -113,7 +113,7 @@
         "tags": [
           "Spacecraft"
         ],
-        "description": "Return list of spacecrafts",
+        "description": "Returns list of spacecrafts by resource group.",
         "operationId": "Spacecrafts_List",
         "x-ms-examples": {
           "List of Spacecraft by Resource Group": {
@@ -159,7 +159,7 @@
           "Spacecraft"
         ],
         "operationId": "Spacecrafts_Get",
-        "description": "Gets the specified spacecraft in a specified resource group",
+        "description": "Gets the specified spacecraft in a specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -198,7 +198,7 @@
         "tags": [
           "Spacecraft"
         ],
-        "description": "Creates or updates a spacecraft resource",
+        "description": "Creates or updates a spacecraft resource.",
         "operationId": "Spacecrafts_CreateOrUpdate",
         "parameters": [
           {
@@ -381,7 +381,7 @@
         "tags": [
           "Contact"
         ],
-        "description": "Returns list of contacts by spacecraftName",
+        "description": "Returns list of contacts by spacecraftName.",
         "operationId": "Contacts_List",
         "x-ms-examples": {
           "List of Spacecraft": {
@@ -430,7 +430,7 @@
           "Contact"
         ],
         "operationId": "Contacts_Get",
-        "description": "Gets the specified contact in a specified resource group",
+        "description": "Gets the specified contact in a specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -502,7 +502,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Contact"
             }
@@ -541,7 +541,7 @@
           "Contact"
         ],
         "operationId": "Contacts_Delete",
-        "description": "Deletes a specified contact",
+        "description": "Deletes a specified contact.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -598,7 +598,7 @@
         "tags": [
           "Contact"
         ],
-        "description": "Return list of available contacts",
+        "description": "Returns list of available contacts. A contact is available if the spacecraft is visible from the ground station for more than the minimum viable contact duration provided in the contact profile.",
         "operationId": "Spacecrafts_ListAvailableContacts",
         "x-ms-examples": {
           "List of Contact": {
@@ -667,7 +667,7 @@
           "Contact Profile"
         ],
         "operationId": "ContactProfiles_Get",
-        "description": "Gets the specified contact Profile in a specified resource group",
+        "description": "Gets the specified contact Profile in a specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -706,7 +706,7 @@
         "tags": [
           "Contact Profile"
         ],
-        "description": "Creates or updates a contact profile",
+        "description": "Creates or updates a contact profile.",
         "operationId": "ContactProfiles_CreateOrUpdate",
         "parameters": [
           {
@@ -889,7 +889,7 @@
         "tags": [
           "Contact Profile"
         ],
-        "description": "Returns list of contact profiles by Subscription",
+        "description": "Returns list of contact profiles by Subscription.",
         "operationId": "ContactProfiles_ListBySubscription",
         "x-ms-examples": {
           "List of Contact Profiles": {
@@ -931,7 +931,7 @@
         "tags": [
           "Contact Profile"
         ],
-        "description": "Returns list of contact profiles by Resource Group",
+        "description": "Returns list of contact profiles by Resource Group.",
         "operationId": "ContactProfiles_List",
         "x-ms-examples": {
           "List of Contact Profiles  by Resource Group": {
@@ -976,7 +976,7 @@
         "tags": [
           "Ground Station"
         ],
-        "description": "Returns list of available ground stations",
+        "description": "Returns list of available ground stations.",
         "operationId": "AvailableGroundStations_ListByCapability",
         "x-ms-examples": {
           "List of Ground Stations by Capability": {
@@ -1019,7 +1019,7 @@
           "Ground Station"
         ],
         "operationId": "AvailableGroundStations_Get",
-        "description": "Gets the specified  available ground station",
+        "description": "Gets the specified available ground station.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1132,7 +1132,7 @@
               "$ref": "#/definitions/ProvisioningState"
             }
           ],
-          "description": "The current state of the resource's creation, deletion, or modification"
+          "description": "The current state of the resource's creation, deletion, or modification."
         },
         "noradId": {
           "type": "string",
@@ -1140,15 +1140,15 @@
         },
         "titleLine": {
           "type": "string",
-          "description": "Title line of Two Line Element (TLE)."
+          "description": "Title line of the two-line element set (TLE)."
         },
         "tleLine1": {
           "type": "string",
-          "description": "Line 1 of Two Line Element (TLE)."
+          "description": "Line 1 of the two-line element set (TLE)."
         },
         "tleLine2": {
           "type": "string",
-          "description": "Line 2 of Two Line Element (TLE)."
+          "description": "Line 2 of the two-line element set (TLE)."
         },
         "links": {
           "type": "array",
@@ -1156,7 +1156,7 @@
             "$ref": "#/definitions/SpacecraftLink"
           },
           "x-ms-identifiers": [],
-          "description": "Links of the Spacecraft",
+          "description": "Immutable list of Spacecraft links.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1195,7 +1195,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Link name",
+          "description": "Link name.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1203,7 +1203,7 @@
         },
         "centerFrequencyMHz": {
           "type": "number",
-          "description": "Center Frequency in MHz",
+          "description": "Center Frequency in MHz.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1211,7 +1211,7 @@
         },
         "bandwidthMHz": {
           "type": "number",
-          "description": "Bandwidth in MHz",
+          "description": "Bandwidth in MHz.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1219,7 +1219,7 @@
         },
         "direction": {
           "type": "string",
-          "description": "Direction (uplink or downlink)",
+          "description": "Direction (uplink or downlink).",
           "enum": [
             "uplink",
             "downlink"
@@ -1235,7 +1235,7 @@
         },
         "polarization": {
           "type": "string",
-          "description": "polarization. eg (RHCP, LHCP)",
+          "description": "Polarization. e.g. (RHCP, LHCP).",
           "enum": [
             "RHCP",
             "LHCP",
@@ -1261,7 +1261,7 @@
           "x-ms-identifiers": []
         }
       },
-      "description": "Authorized Ground Stations for the link"
+      "description": "List of authorized spacecraft links per ground station and the expiration date of the authorization."
     },
     "Spacecraft": {
       "type": "object",
@@ -1293,7 +1293,7 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "Resource Reference"
+      "description": "Resource Reference."
     },
     "EndPoint": {
       "type": "object",
@@ -1347,7 +1347,7 @@
               "$ref": "#/definitions/ProvisioningState"
             }
           ],
-          "description": "The current state of the resource's creation, deletion, or modification"
+          "description": "The current state of the resource's creation, deletion, or modification."
         },
         "status": {
           "type": "string",
@@ -1360,15 +1360,15 @@
             "providerCancelled"
           ],
           "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
+            "name": "ContactsStatus",
+            "modelAsString": true
           },
           "description": "Status of a contact."
         },
         "reservationStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Reservation start time of a contact.",
+          "description": "Reservation start time of a contact (ISO 8601 UTC standard).",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1377,7 +1377,7 @@
         "reservationEndTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Reservation end time of a contact.",
+          "description": "Reservation end time of a contact (ISO 8601 UTC standard).",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1387,25 +1387,25 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Receive start time of a contact."
+          "description": "Receive start time of a contact (ISO 8601 UTC standard)."
         },
         "rxEndTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Receive end time of a contact."
+          "description": "Receive end time of a contact (ISO 8601 UTC standard)."
         },
         "txStartTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Transmit start time of a contact."
+          "description": "Transmit start time of a contact (ISO 8601 UTC standard)."
         },
         "txEndTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Transmit end time of a contact."
+          "description": "Transmit end time of a contact (ISO 8601 UTC standard)."
         },
         "errorMessage": {
           "type": "string",
@@ -1489,15 +1489,15 @@
               "$ref": "#/definitions/ProvisioningState"
             }
           ],
-          "description": "The current state of the resource's creation, deletion, or modification"
+          "description": "The current state of the resource's creation, deletion, or modification."
         },
         "minimumViableContactDuration": {
           "type": "string",
-          "description": "Minimum viable contact duration in ISO 8601 format."
+          "description": "Minimum viable contact duration in ISO 8601 format. Used for listing the available contacts with a spacecraft at a given ground station."
         },
         "minimumElevationDegrees": {
           "type": "number",
-          "description": "Minimum viable elevation for the contact in decimal degrees."
+          "description": "Minimum viable elevation for the contact in decimal degrees. Used for listing the available contacts with a spacecraft at a given ground station."
         },
         "autoTrackingConfiguration": {
           "type": "string",
@@ -1510,11 +1510,11 @@
             "name": "AutoTrackingConfiguration",
             "modelAsString": false
           },
-          "description": "Auto track configuration."
+          "description": "Auto-tracking configuration."
         },
         "eventHubUri": {
           "type": "string",
-          "description": "The URI of the Event Hub used for telemetry"
+          "description": "ARM resource identifier of the Event Hub used for telemetry. Requires granting Orbital Resource Provider the rights to send telemetry into the hub."
         },
         "networkConfiguration": {
           "type": "object",
@@ -1525,7 +1525,7 @@
           "properties": {
             "subnetId": {
               "type": "string",
-              "description": "Customer subnet ARM resource identifier."
+              "description": "ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it."
             }
           }
         },
@@ -1535,7 +1535,7 @@
           "items": {
             "$ref": "#/definitions/ContactProfileLink"
           },
-          "description": "Links of the Contact Profile"
+          "description": "Links of the Contact Profile. Describes RF links, modem processing, and IP endpoints."
         }
       },
       "description": "List of Contact Profile Resource Properties."
@@ -1569,37 +1569,37 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Channel name"
+          "description": "Channel name."
         },
         "centerFrequencyMHz": {
           "type": "number",
-          "description": "Center Frequency in MHz"
+          "description": "Center Frequency in MHz."
         },
         "bandwidthMHz": {
           "type": "number",
-          "description": "Bandwidth in MHz"
+          "description": "Bandwidth in MHz."
         },
         "endPoint": {
           "$ref": "#/definitions/EndPoint"
         },
         "modulationConfiguration": {
           "type": "string",
-          "description": "Configuration for modulation"
+          "description": "Copy of the modem configuration file such as Kratos QRadio. Only valid for uplink directions. If provided, the modem connects to the customer endpoint and accepts commands from the customer instead of a VITA.49 stream."
         },
         "demodulationConfiguration": {
           "type": "string",
-          "description": "Configuration for demodulation"
+          "description": "Copy of the modem configuration file such as Kratos QRadio or Kratos QuantumRx. Only valid for downlink directions. If provided, the modem connects to the customer endpoint and sends demodulated data instead of a VITA.49 stream."
         },
         "encodingConfiguration": {
           "type": "string",
-          "description": "Configuration for encoding"
+          "description": "Currently unused."
         },
         "decodingConfiguration": {
           "type": "string",
-          "description": "Configuration for decoding"
+          "description": "Currently unused."
         }
       },
-      "description": "Contact Profile Link Channel"
+      "description": "Contact Profile Link Channel."
     },
     "ContactProfileLink": {
       "type": "object",
@@ -1612,11 +1612,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Link name"
+          "description": "Link name."
         },
         "polarization": {
           "type": "string",
-          "description": "polarization. eg (RHCP, LHCP)",
+          "description": "Polarization. e.g. (RHCP, LHCP).",
           "enum": [
             "RHCP",
             "LHCP",
@@ -1630,7 +1630,7 @@
         },
         "direction": {
           "type": "string",
-          "description": "Direction (uplink or downlink)",
+          "description": "Direction (uplink or downlink).",
           "enum": [
             "uplink",
             "downlink"
@@ -1642,11 +1642,11 @@
         },
         "gainOverTemperature": {
           "type": "number",
-          "description": "Gain To Noise Temperature in db/K."
+          "description": "Gain To Noise Temperature in db/K. It is the required G/T by the customer. Not used yet."
         },
         "eirpdBW": {
           "type": "number",
-          "description": "Effective Isotropic Radiated Power (EIRP) in dBW."
+          "description": "Effective Isotropic Radiated Power (EIRP) in dBW. It is the required EIRP by the customer. Not used yet."
         },
         "channels": {
           "type": "array",
@@ -1658,10 +1658,10 @@
             "bandwidthMHz",
             "/endPoint/endPointName"
           ],
-          "description": "Contact Profile Link Channel"
+          "description": "Contact Profile Link Channel."
         }
       },
-      "description": "Contact Profile Link"
+      "description": "Contact Profile Link."
     },
     "ContactProfile": {
       "type": "object",
@@ -1713,12 +1713,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of a contact."
+          "description": "Start time of a contact (ISO 8601 UTC standard)."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "End time of a contact."
+          "description": "End time of a contact (ISO 8601 UTC standard)."
         }
       }
     },
@@ -1752,25 +1752,25 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Time at which antenna transmit will be enabled."
+          "description": "Time at which antenna transmit will be enabled (ISO 8601 UTC standard)."
         },
         "txEndTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Time at which antenna transmit will be disabled."
+          "description": "Time at which antenna transmit will be disabled (ISO 8601 UTC standard)."
         },
         "rxStartTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Earliest time to receive a signal."
+          "description": "Earliest time to receive a signal (ISO 8601 UTC standard)."
         },
         "rxEndTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Time to lost receiving a signal."
+          "description": "Time to lost receiving a signal (ISO 8601 UTC standard)."
         },
         "startAzimuthDegrees": {
           "type": "number",
@@ -1793,7 +1793,7 @@
           "description": "Spacecraft elevation above the horizon at contact end."
         }
       },
-      "description": "Contact Instance Properties"
+      "description": "Contact Instance Properties."
     },
     "Contact": {
       "type": "object",
@@ -1863,7 +1863,7 @@
             "$ref": "#/definitions/AvailableContacts"
           },
           "x-ms-identifiers": [],
-          "description": "A list of available contacts"
+          "description": "A list of available contacts."
         },
         "nextLink": {
           "type": "string",
@@ -1926,7 +1926,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Id of groundStation"
+          "description": "ID of groundStation."
         },
         "name": {
           "readOnly": true,
@@ -1935,7 +1935,7 @@
         },
         "location": {
           "type": "string",
-          "description": "Azure region"
+          "description": "Azure region."
         },
         "type": {
           "readOnly": true,
@@ -1949,10 +1949,10 @@
               "$ref": "#/definitions/AvailableGroundStationProperties"
             }
           ],
-          "description": "The properties bag for this resource"
+          "description": "The properties bag for this resource."
         }
       },
-      "description": "GroundStations available to schedule Contacts"
+      "description": "Ground Stations available to schedule Contacts."
     },
     "AvailableGroundStationProperties": {
       "type": "object",
@@ -1975,7 +1975,7 @@
         },
         "altitudeMeters": {
           "type": "number",
-          "description": "Altitude of the ground station"
+          "description": "Altitude of the ground station."
         },
         "releaseMode": {
           "type": "string",
@@ -1987,7 +1987,7 @@
             "name": "releaseMode",
             "modelAsString": true
           },
-          "description": "Release Status of a ground station"
+          "description": "Release Status of a ground station."
         }
       },
       "description": "Properties object for Available groundstation."
@@ -2014,7 +2014,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "The Azure Resource ID"
+                "description": "The Azure Resource ID."
               }
             }
           },
@@ -2047,7 +2047,7 @@
         "name": "ProvisioningState",
         "modelAsString": true
       },
-      "description": "The current state of the resource's creation, deletion, or modification",
+      "description": "The current state of the resource's creation, deletion, or modification.",
       "readOnly": true
     },
     "AuthorizedGroundstation": {
@@ -2056,15 +2056,15 @@
       "properties": {
         "groundStation": {
           "type": "string",
-          "description": "Groundstation name"
+          "description": "Groundstation name."
         },
         "expirationDate": {
           "type": "string",
           "format": "date",
-          "description": "Date of authorization expiration"
+          "description": "Date of authorization expiration."
         }
       },
-      "description": "Authorized groundstation"
+      "description": "Authorized groundstation."
     },
     "OperationResult": {
       "description": "Operation Result Entity.",
@@ -2084,13 +2084,13 @@
           "$ref": "#/definitions/Status"
         },
         "startTime": {
-          "description": "The operation start time",
+          "description": "The operation start time (ISO 8601 UTC standard).",
           "readOnly": true,
           "type": "string",
           "format": "date-time"
         },
         "endTime": {
-          "description": "The operation end time",
+          "description": "The operation end time (ISO 8601 UTC standard).",
           "readOnly": true,
           "type": "string",
           "format": "date-time"
@@ -2130,7 +2130,7 @@
     "OperationResultProperties": {
       "type": "object",
       "properties": {},
-      "description": "Operation result properties"
+      "description": "Operation result properties."
     },
     "OperationResultErrorProperties": {
       "type": "object",
@@ -2146,7 +2146,7 @@
           "readOnly": true
         }
       },
-      "description": "Operation result error properties"
+      "description": "Operation result error properties."
     }
   },
   "parameters": {
@@ -2170,7 +2170,7 @@
     "contactNameParameter": {
       "name": "contactName",
       "in": "path",
-      "description": "Contact Name",
+      "description": "Contact name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2178,7 +2178,7 @@
     "contactProfileNameParameter": {
       "name": "contactProfileName",
       "in": "path",
-      "description": "Contact Profile Name",
+      "description": "Contact Profile name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2188,13 +2188,13 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Ground Station name",
+      "description": "Ground Station name.",
       "x-ms-parameter-location": "method"
     },
     "spacecraftNameParameter": {
       "name": "spacecraftName",
       "in": "path",
-      "description": "Spacecraft ID",
+      "description": "Spacecraft ID.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2213,7 +2213,7 @@
         "modelAsString": true
       },
       "default": "EarthObservation",
-      "description": "Ground Station Capability",
+      "description": "Ground Station Capability.",
       "x-ms-parameter-location": "method"
     },
     "skipTokenParameter": {

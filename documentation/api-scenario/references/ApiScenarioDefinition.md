@@ -9,79 +9,99 @@ File should be in format of yaml.
 **Example:**
 
 ```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
 scope: ResourceGroup
 variables:
-  publicIpAddressName: pubipdns
-prepareSteps:
-  - step: prepare_resources
-    armTemplate: ./dep-something.json
+  configStoreName:
+    type: string
+    prefix: configstor
+
 scenarios:
-  - description: test_network_public_ip
+  - scenario: quickStart
+    description: Quick start with AppConfiguration ConfigurationStores
     steps:
-      - step: Create_publicIPAddresses_pubipdns
-        exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-    variables:
-      publicIpAddressName: pubipdns
+      - step: Operations_CheckNameAvailability
+        operationId: Operations_CheckNameAvailability
+        parameters:
+          checkNameAvailabilityParameters:
+            name: $(configStoreName)
+            type: Microsoft.AppConfiguration/configurationStores
+      - step: ConfigurationStores_Create
+        operationId: ConfigurationStores_Create
+        parameters:
+          configStoreCreationParameters:
+            location: $(location)
+            sku:
+              name: Standard
+            tags:
+              myTag: myTagValue
+      - step: ConfigurationStores_Get
+        operationId: ConfigurationStores_Get
 ```
 
 **Fields:**
 
 - **scope**
   - **Type:** Required, Enum
-  - **Enum:** ResourceGroup, Subscription, Tenant
-  - Now only "ResourceGroup" is supported.
-    - **ResourceGroup:** All of the following API scenario and steps should be under some resourceGroup. It means:
+  - **Enum:** ResourceGroup, Subscription, Tenant, None
+    - **ResourceGroup:** All scenarios and steps should be executed under some resourceGroup. It means:
       - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
       - The consumer SHOULD set the following variables:
         - **subscriptionId**
         - **resourceGroupName**
         - **location**
       - For details of how variables work please see [Variables](./Variables.md)
+    - **Subscription:** All scenarios and steps will be executed under some subscription. It means:
+      - No resource group need to be created.
+      - The consumer SHOULD set the following variables:
+        - **subscriptionId**
+    - **Tenant:** All scenarios and steps will be executed under tenant scope.
+    - **None:** None of the assumptions above will be made. Use this if the scenario is for data-plane APIs.
 - **variables**
-  - **Type:** Optional, Map of strings or variable containers
+  - **Type:** Optional, Map of Strings or Variables
   - See [Variables](./Variables.md)
 - **prepareSteps**
   - **Type:** Optional, Array of [Step](#step)
-  - Steps that should run before every API scenario steps.
+  - Steps that should run before each scenario.
 - **scenarios**
   - **Type:** Required, Array of [Scenario](#scenario)
 - **cleanUpSteps**
   - **Type:** Optional, Array of [Step](#step)
-  - Steps that should run after every API scenario steps.
+  - Steps that should run after each scenario.
 
 ## Scenario
 
-See [Scenario Schema](./v1.2/schema.json#L249).
+See [Scenario Schema](./v1.2/schema.json#L353).
 
 It defines one API scenario that could go through on its own.
 
 **Example:**
 
 ```yaml
-description: test_network_public_ip
-shareScope: true
+scenario: quickStart
+description: Quick start with AppConfiguration ConfigurationStores
 steps:
-  - step: Create_publicIPAddresses_pubipdns
-    exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
-    operationId: PublicIPAddresses_CreateOrUpdate
+  - step: Operations_CheckNameAvailability
+    operationId: Operations_CheckNameAvailability
+    parameters:
+      checkNameAvailabilityParameters:
+        name: $(configStoreName)
+        type: Microsoft.AppConfiguration/configurationStores
 variables:
-  publicIpAddressName: pubipdns
+  configStoreName: $(configStoreName)-test
 ```
 
 **Fields:**
 
+- **scenario**
+  - **Type:** Optional, String
+  - Name of the scenario that uniquely identifies it in the API scenario file.
 - **description**
-  - **Type:** Required, String
+  - **Type:** Optional, String
   - Description for this API scenario.
-- **shareScope**
-  - **Type:** Optional, Boolean or String
-  - **Default:** true
-  - Describe how the scope (ResourceGroup if scope is ResourceGroup) could be shared with other scenarios.  If true or the same string value for different API scenario, they share the same scope, which means:
-    - These API scenarios will run under the same scope (e.g. ResourceGroup).
-    - **prepareSteps** and **cleanUpSteps** will run only once in the scope. The variables will be shared.
-  - By default all the API scenario in one definition file will be launched in the same scope.  If shareScope is false, the API scenarios will not share anything with others in the same file.
 - **variables**
-  - **Type:** Optional, Map of strings
+  - **Type:** Optional, Map of Strings or Variables
   - See [Variables](./Variables.md)
 - **steps**
   - **Type:** Required, Array of [Step](#step)
@@ -89,7 +109,7 @@ variables:
 
 ## Step
 
-See [Step Schema](./v1.2/schema.json#L280).
+See [Step Schema](./v1.2/schema.json#L383).
 
 Defines one step in API scenario.
 
@@ -100,6 +120,7 @@ Should be one of the following:
   - [REST Example](#rest-example)
 - [Step ARM Template](#step-arm-template)
 - [Step ARM Deployment Script](#step-arm-deployment-script)
+- [Step Role Assignment](#step-role-assignment)
 
 All of the above definitions share the following fields:
 
@@ -113,80 +134,7 @@ All of the above definitions share the following fields:
   - **Type:** Optional, Map of Strings or variables
   - See [Variables](./Variables.md)
 
-## Step ARM Template
-
-See [Step ARM Template Schema](./v1.2/schema.json#L427).
-
-Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
-
-**Example:**
-
-```yaml
-- step: prepare_resources
-  armTemplate: ./dep-storage-account.json
-```
-
-**Fields:**
-
-- **armTemplate**
-  - **Type:** Required, String
-  - Path to ARM template json file. See [ARM Template](https://docs.microsoft.com/azure/templates/).
-
-## Step ARM Deployment Script
-
-See [Step ARM Deployment Script Schema](./v1.2/schema.json#L448).
-
-Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
-
-**Example:**
-
-```yaml
-- step: Add_Dns_Cname_Record
-  armDeploymentScript: ./templates/create_cname_record.ps1
-  environmentVariables:
-    - name: resourceGroupName
-      value: $(dnsResourceGroup)
-    - name: dnsZoneName
-      value: $(customDomainName)
-    - name: dnsCname
-      value: $(dnsCname)
-    - name: dnsCnameAlias
-      value: $(serviceName).somedomain.com
-```
-
-**Fields:**
-
-- **armDeploymentScript**
-  - **Type:** Required, String
-  - Path to script file. See [ARM Deployment Script Template](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template).
-- **arguments**
-  - **Type:** Optional, String
-  - Arguments for the script. Same as arguments in ARM Template. See [ARM Deployment Script Template](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template).
-- **environmentVariables**
-  - **Type:** Optional, Array of [EnvironmentVariable](#EnvironmentVariable)
-  - Specify the environment variables to pass over to the script.
-
-### EnvironmentVariable
-
-**Example:**
-
-```yaml
-- name: dnsCname
-  value: asc
-- name: dnsCnameAlias
-  value: $(serviceName).somedomain.com
-```
-
-**Fields:**
-
-- **name**
-  - **Type:** Required, String
-  - Name of Variable.
-- **value**
-  - **Type:** Required, String
-  - See [Variables](./Variables.md).
-
-## Step REST Call
+### Step REST Call
 
 Step to run a rest call defined in swagger operation. This may not be just one http call.
 
@@ -197,14 +145,22 @@ Step to run a rest call defined in swagger operation. This may not be just one h
 
 REST call step could be defined either by an operation, or by an example file. REST call will have computed **requestParameter** and **responseExpected** after parsing and loading.
 
-### REST Operation
+#### Operation based step
 
-See [Step Operation Schema](./v1.2/schema.json#L339)
+See [Step Operation Schema](./v1.2/schema.json#L450)
 
 **Example:**
-```yml
-- step: createPublicIPAddress
-  operationId: PublicIPAddresses_CreateOrUpdate
+```yaml
+- step: Operations_CheckNameAvailability
+  operationId: Operations_CheckNameAvailability
+  parameters:
+    checkNameAvailabilityParameters:
+      name: $(configStoreName)
+      type: Microsoft.AppConfiguration/configurationStores
+  responses:
+    200:
+      body:
+        nameAvailable: true
 ```
 
 **Fields:**
@@ -215,7 +171,7 @@ See [Step Operation Schema](./v1.2/schema.json#L339)
 - **parameters:**
   - **Type:** Optional, Map from parameter name to parameter value
 - **responses:**
-  - **Type:** Optional, Map from expected response code to response headers and body.
+  - **Type:** Optional, Map from expected response code to response headers and body or array of [JsonPatchOpTest](#jsonpatchoptest).
 - **outputVariables**
   - **Type:** Optional, Map from variable name to object with property:
     - **type**: Required, String
@@ -226,15 +182,15 @@ See [Step Operation Schema](./v1.2/schema.json#L339)
       - **Type:** Required, String
       - Path to the response field to be used as variable.
 
-### REST Example
+#### ExampleFile based step
 
-See [Step Example Schema](./v1.2/schema.json#L389)
+See [Step Example Schema](./v1.2/schema.json#L520)
 
 **Example:**
 
 ```yaml
-- step: Create_publicIPAddresses_pubipdns
-  exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
+- step: Operations_CheckNameAvailability
+  exampleFile: ../examples/CheckNameAvailable.json
 ```
 
 **Fields:**
@@ -281,11 +237,122 @@ if (scope is 'ResourceGroup' && operation.verb in ('PUT', 'PATCH')) {
 }
 ```
 
+### Step ARM Template
+
+See [Step ARM Template Schema](./v1.2/schema.json#L566).
+
+Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
+
+**Example:**
+
+```yaml
+- step: prepare_resources
+  armTemplate: ./dep-storage-account.json
+```
+
+**Fields:**
+
+- **armTemplate**
+  - **Type:** Required, String
+  - Path to ARM template json file. See [ARM Template](https://docs.microsoft.com/azure/templates/).
+
+### Step ARM Deployment Script
+
+See [Step ARM Deployment Script Schema](./v1.2/schema.json#L587).
+
+Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
+
+**Example:**
+
+```yaml
+- step: Add_Dns_Cname_Record
+  armDeploymentScript: ./templates/create_cname_record.ps1
+  environmentVariables:
+    - name: resourceGroupName
+      value: $(dnsResourceGroup)
+    - name: dnsZoneName
+      value: $(customDomainName)
+    - name: dnsCname
+      value: $(dnsCname)
+    - name: dnsCnameAlias
+      value: $(serviceName).somedomain.com
+```
+
+**Fields:**
+
+- **armDeploymentScript**
+  - **Type:** Required, String
+  - Path to script file. See [ARM Deployment Script Template](https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
+- **arguments**
+  - **Type:** Optional, String
+  - Arguments for the script. Same as arguments in ARM Template. See [ARM Deployment Script Template](https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
+- **environmentVariables**
+  - **Type:** Optional, Array of [EnvironmentVariable](#EnvironmentVariable)
+  - Specify the environment variables to pass over to the script.
+
+### Step Role Assignment
+
+See [Step Role Assignment Schema](./v1.2/schema.json#L629).
+
+Step to assign an Azure role to the scope.
+
+**Example:**
+
+```yaml
+- step: AssignDataOwnerRole
+  roleAssignment:
+    scope: $(configStoreId)
+    principalId: a0b840b5-a7b4-4bb4-b125-ae0acf68cf16
+    roleName: App Configuration Data Owner
+```
+
+**Fields:**
+
+- **scope**
+  - **Type:** Required, String
+  - The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.
+- **principalId**
+  - **Type:** Required, String, GUID
+  - The principal ID.
+- **principalType**
+  - **Type:** Optional, Enum
+  - **Enum:** User, Group, ServicePrincipal, ForeignGroup, Device
+  - **Default:** ServicePrincipal
+- **OneOf**:
+  - **roleName**
+    - **Type:** Required, String
+    - The built-in role name. [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+  - **roleDefinitionId**
+    - **Type:** Required, String, GUID
+    - The role definition ID. For example: 5ae67dd6-50cb-40e7-96ff-dc2bfa4b606b
+
+#### EnvironmentVariable
+
+**Example:**
+
+```yaml
+- name: dnsCname
+  value: asc
+- name: dnsCnameAlias
+  value: $(serviceName).somedomain.com
+```
+
+**Fields:**
+
+- **name**
+  - **Type:** Required, String
+  - Name of Variable.
+- **value**
+  - **Type:** Required, String
+  - See [Variables](./Variables.md).
+
+## Json Operations
+
 ### JsonPatchOp
 
-See [Json Patch Operation Schema](./v1.2/schema.json#L490)
+See [Json Patch Operation Schema](./v1.2/schema.json#L674)
 
-JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, move, and test on json path.
+JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, and move on json path.
 All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
 
 - [JsonPatchOp](#jsonpatchop)
@@ -294,7 +361,6 @@ All the json path used in JsonPatchOp is in format of [JsonPointer](https://data
   - [JsonPatchOpReplace](#jsonpatchopreplace)
   - [JsonPatchOpCopy](#jsonpatchopcopy)
   - [JsonPatchOpMove](#jsonpatchopmove)
-  - [JsonPatchOpTest](#jsonpatchoptest)
 
 #### JsonPatchOpAdd
 
@@ -483,7 +549,18 @@ result:
 - { "properties": { "items2": [1, 2, 3] } }
 ```
 
-#### JsonPatchOpTest
+### JsonTestOp
+
+See [Json Test Operation schema](./v1.2/schema.json#L767)
+
+JsonTestOp is used to define the test operation on json. You could test if the json path is expected.
+The json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
+
+- [JsonTestOp](#jsontestop)
+  - [JsonTestOpEqual](#jsontestopequal)
+  - [JsonTestOpExpression](#jsontestopexpression)
+
+#### JsonTestOpEqual
 
 **Example**
 
@@ -507,6 +584,39 @@ Test that a value at the target location is equal to a specified value.
 apply:
 - test: /properties/a
   value: 1
+
+on data:
+- { "properties": { "a": 0, "b": 1} }
+
+result:
+- throws error
+```
+
+#### JsonTestOpExpression
+
+**Example**
+
+```yaml
+test: /headers/location
+expression: to.not.be.undefined
+```
+
+**Fields:**
+
+- **test**
+  - **Type:** Required, JsonPointer
+- **expression**
+  - **Type:** Required, String
+  - [ChaiJS BDD Expression](https://www.chaijs.com/api/bdd/)
+
+Test that a value at the target location is expected as expression.
+
+**Example of test**
+
+```
+apply:
+- test: /properties/a
+  expression: to.be.null
 
 on data:
 - { "properties": { "a": 0, "b": 1} }

@@ -1046,11 +1046,24 @@
     "VirtualNetworkSubnetUsageResult": {
       "type": "object",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location the resource resides in.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
         "delegatedSubnetsUsage": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DelegatedSubnetUsage"
           },
+          "x-ms-identifiers": [
+            "subnetName"
+          ],
           "readOnly": true
         }
       },
@@ -1148,6 +1161,9 @@
           "items": {
             "$ref": "#/definitions/VcoreCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "status": {
@@ -1170,6 +1186,9 @@
           "items": {
             "$ref": "#/definitions/StorageMBCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "status": {
@@ -1214,6 +1233,9 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
@@ -1222,6 +1244,9 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of server versions supported by this server edition.",
           "readOnly": true
         },
@@ -1246,6 +1271,9 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
@@ -1254,6 +1282,9 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of server versions supported by this server edition.",
           "readOnly": true
         },
@@ -1262,6 +1293,9 @@
           "items": {
             "$ref": "#/definitions/NodeTypeCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of Node Types supported by this server edition.",
           "readOnly": true
         },
@@ -1300,6 +1334,9 @@
           "items": {
             "$ref": "#/definitions/FlexibleServerEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "supportedHyperscaleNodeEditions": {
@@ -1307,6 +1344,17 @@
           "items": {
             "$ref": "#/definitions/HyperscaleNodeEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
           "readOnly": true
         },
         "status": {
@@ -1326,6 +1374,9 @@
           "items": {
             "$ref": "#/definitions/CapabilityProperties"
           },
+          "x-ms-identifiers": [
+            "zone"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -1340,6 +1391,7 @@
       "type": "string",
       "description": "The version of a server.",
       "enum": [
+        "14",
         "13",
         "12",
         "11"
@@ -1436,6 +1488,14 @@
         },
         "sourceServerResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+              }
+            ]
+          },
           "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore'.",
           "x-ms-mutability": [
             "create"
@@ -1684,6 +1744,14 @@
         },
         "delegatedSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "default": "",
           "description": "delegated subnet arm resource id.",
           "x-ms-mutability": [
@@ -1693,6 +1761,14 @@
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          },
           "default": "",
           "description": "private dns zone arm resource id.",
           "x-ms-mutability": [
@@ -2013,7 +2089,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",

@@ -2442,6 +2442,15 @@
             "modelAsString": true
           }
         },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "maximum": 20000,
+          "exclusiveMaximum": false,
+          "description": "Priority of the routing rule."
+        },
         "backendAddressPool": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Backend address pool resource of the application gateway."
@@ -2460,6 +2469,9 @@
           "description": "The provisioning state of the request routing rule resource."
         }
       },
+      "required": [
+        "priority"
+      ],
       "description": "Properties of routing rule of the application gateway."
     },
     "ApplicationGatewayRoutingRule": {

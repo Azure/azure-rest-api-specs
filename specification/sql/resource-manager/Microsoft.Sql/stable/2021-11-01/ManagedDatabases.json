@@ -1,0 +1,822 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases": {
+      "get": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a list of managed databases.",
+        "operationId": "ManagedDatabases_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of databases.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List databases by managed instances": {
+            "$ref": "./examples/ManagedDatabaseListByManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a managed database.",
+        "operationId": "ManagedDatabases_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed database.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a managed database": {
+            "$ref": "./examples/ManagedDatabaseGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Creates a new database or updates an existing database.",
+        "operationId": "ManagedDatabases_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested database resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PitrPointInTimeInvalid - The point in time {0} is not valid. Valid point in time range from {1} days early to now and not before source server creation time.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 StorageAccountFull - Managed Instance has reached the total capacity of underlying Azure storage account. Azure Premium Storage account is limited to 35TB of allocated space.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 ManagedDatabaseNameInUse - Database '{0}' already exists. Choose a different database name.\n\n * 400 NoMoreSpaceInManagedInstance - The managed instance has reached its storage limit. The storage usage for the managed instance cannot exceed (%d) MBs.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 DatabaseNumberLimitReached - Maximum number of databases for SQL Database Managed Instance reached.\n\n * 400 InvalidDatabaseCreateOrUpdateRequest - The request body for the create or update database operation is invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidSourceDatabaseId - Invalid source database identifier.\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MissingCollation - Collation is required.\n\n * 400 MissingSourceDatabaseId - Missing source database identifier.\n\n * 400 MissingRestorePointInTime - Missing restore point in time\n\n * 400 MissingStorageContainerSasToken - Missing storage container SAS token\n\n * 400 MissingStorageContainerUri - Missing storage container URI\n\n * 400 RestorableDroppedDatabaseIdGivenForRestoreWithSourceDatabaseId - Cannot specify restorableDroppedDatabaseId when sourceDatabaseId is already given in restore create mode\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 UpdatingInstanceAndBackupRedundancy - Instance zone redundancy and backup storage redundancy cannot be updated in the same request.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 TargetServerDoesNotExist - The target server {0} does not exist or is not ready yet. Please check that it exists and retry the restore request.\n\n * 400 TargetServerRestoreNotAllowed - The target server {0} is currently not in a state that allows a restore to be started.\n\n * 400 BackupSetNotFound - No backups were found to restore the database. Please contact support to restore the database.\n\n * 400 FullBackupNotFound - Full backup can not be found.\n\n * 400 MissingThumbprint - Can not find server certificate.\n\n * 400 RestoreFromStripedBackupsNotEnabled - Restoring from striped backups is not supported.\n\n * 400 BackupSetBroken - Backup set is broken.\n\n * 400 BrokenRestorePlanNoFullBackup - The restore plan is broken because there is no full backup.\n\n * 400 SqlRestoreError - Non retriable error occurred while restoring backup with index {0} - {1} {2}\n\n * 400 BrokenRestorePlanWrongLogBackupLSN - The restore plan is broken because firstLsn of current log backup is not <= lastLsn of next log backup.\n\n * 400 BrokenRestorePlanWrongDiffBackupLSN - The restore plan is broken because firstLsn of diff backup is not >= firstLsn of full backup.\n\n * 400 BrokenRestorePlanGapInLogBackups - The restore plan is broken because firstLsn of current log backup is not equal to lastLsn of prev log backup.\n\n * 400 PartiallyContainedDatabaseUnsupported - \"Backup for a partially contained database is not supported.\"\n\n * 400 RequiredBackupIsNotLastRestored - Migration cannot be completed because provided backup file name is not the name of the last backup file that is restored.\n\n * 400 XtpInitializedDuringRestore - Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance.\n\n * 400 FullBackupMissingChecksum - Provided full backup is missing checksum.\n\n * 400 FullBackupDamaged - Provided full backup is damaged.\n\n * 400 MissingStripeInBackupSet - Provided backup set has one or more missing stripes.\n\n * 400 BrokenRestorePlanWrongDiffBaseGUID - The restore plan is broken because DifferentialBaseGuid of diff backup does not match BackupSetGuid of full backup.\n\n * 400 IncompatiblePhysicalLayoutTooFewDataFiles - Database backup contains incompatible physical layout. No data files are found in the backup.\n\n * 400 CorruptedPagesInBackupSet - Operation was aborted because RESTORE detected one or more corrupted pages in the backup set.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineDataFilesExist - Database backup contains incompatible physical layout. Non-online data files exist.\n\n * 400 CorruptedPagesListMaintenance - Operation was aborted because an internal error occurred while processing the backup taken without checksum.\n\n * 400 IncompatiblePhysicalLayoutWrongNumberOfLogFiles - Database backup contains incompatible physical layout. Multiple log files are not supported.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineLogFilesExist - Database backup contains incompatible physical layout. Non-online log files exist.\n\n * 400 IncompatiblePhysicalLayoutTooManyNonDataLogFiles - Database backup contains incompatible physical layout. Too many non-data/log files.\n\n * 400 ExternalBackupAlreadySignaledToComplete - The restore request has already been signaled to complete.\n\n * 400 ExternalBackupRestoreHasNotBeenStarted - The restore request can only be completed once the restore has started.\n\n * 400 ExternalBackupUpgradeInProgress - The restore request cannot be completed, since upgrade is in progress.\n\n * 400 IncompatiblePhysicalLayoutTooManyXTPFiles - Database backup contains incompatible physical layout. Multiple files found in the filegroup that contains MEMORY_OPTIMIZED_DATA.\n\n * 400 BlobStorageFailure - Blob storage failure has occurred.\n\n * 400 BackupsFromMultipleDatabasesDetectedInTheContainerFromTheStart - There are backups from multiple databases in the container folder. Please make sure the container folder has backups from a single database.{0}\n\n * 400 ManagedIdentityIssueDetectedFromTheStart - Managed identity is not set up properly. Please verify and try again.\n\n * 400 ManagedInstanceStorageLimitHit - The managed instance has reached its storage limit.\n\n * 400 AutoCompleteMissingLastBackupName - Auto complete restore request must have lastBackupName parameter provided.\n\n * 400 BlobStorageServerFailure - Blob storage server failure has occurred.\n\n * 400 BackupsFromMultipleDatabasesDetectedInTheContainerWhileRestoreInProgress - There are backups from multiple databases in the container folder. Please make sure the container folder has backups from a single database.{0}\n\n * 400 ManagedIdentityIssueDetectedWhileRestoreInProgress - Managed identity is not set up properly. Please verify and try again.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 CannotFindServerCertificateWithThumbprint - Cannot find server certificate with thumbprint '{0}'. Please use PowerShell Cmdlet 'Add-AzureRmSqlManagedInstanceTransparentDataEncryptionCertificate' to create the certificate.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 RestoreSourceDatabaseNotFound - Could not find database '{0}' at time '{1}' that can be restored.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 BackupRedundancyUpdateAndInstanceRedundancyConflict - The instance is multi-az but backup storage is being updated from zone redundant to non-zone redundant.\n\n * 409 InstanceRedundancyUpdateWhileBackupRedundancyUpdateInProgress - Cannot update instance redundancy because backup storage redundancy update is in progress.\n\n * 409 InstanceRedundancyUpdateAndBackupRedundancyConflict - The backup storage is non-zone redundant but instance redundancy is being updated to zone redundant.\n\n * 409 BackupRedundancyUpdateConflict - Cannot update backup storage redundancy because a backup storage redundancy update is already in progress.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 412 InstanceNotReadyForBackupRedundancyUpdate - Cannot update backup storage redundancy because the instance is not ready.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the database.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates a new managed database with minimal properties": {
+            "$ref": "./examples/ManagedDatabaseCreateMin.json"
+          },
+          "Creates a new managed database with maximal properties": {
+            "$ref": "./examples/ManagedDatabaseCreateMax.json"
+          },
+          "Creates a new managed database using point in time restore": {
+            "$ref": "./examples/ManagedDatabaseCreatePointInTimeRestore.json"
+          },
+          "Creates a new managed database from restoring a geo-replicated backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRecovery.json"
+          },
+          "Creates a new managed database by restoring from an external backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreExternalBackup.json"
+          },
+          "Creates a new managed database from restoring a long term retention backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreLtrBackup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Deletes a managed database.",
+        "operationId": "ManagedDatabases_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the managed database."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 LedgerNoDropPrimary - The Geo-primary database cannot be dropped because the database has Ledger Digest Uploads enabled. Disable Ledger Digest Uploads and retry the operation.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 GeoReplicationDatabaseNotPrimary - The operation cannot be performed since the database '{0}' is a replication target.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 DropDisallowedDuringFailover - Can not drop database because a failover operation is in progress on the failover group.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Deleting the managed database is in progress."
+          },
+          "204": {
+            "description": "The specified managed database does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete managed database": {
+            "$ref": "./examples/ManagedDatabaseDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Updates an existing database.",
+        "operationId": "ManagedDatabases_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested database resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 PitrPointInTimeInvalid - The point in time {0} is not valid. Valid point in time range from {1} days early to now and not before source server creation time.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 StorageAccountFull - Managed Instance has reached the total capacity of underlying Azure storage account. Azure Premium Storage account is limited to 35TB of allocated space.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 ManagedDatabaseNameInUse - Database '{0}' already exists. Choose a different database name.\n\n * 400 NoMoreSpaceInManagedInstance - The managed instance has reached its storage limit. The storage usage for the managed instance cannot exceed (%d) MBs.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 DatabaseNumberLimitReached - Maximum number of databases for SQL Database Managed Instance reached.\n\n * 400 InvalidDatabaseCreateOrUpdateRequest - The request body for the create or update database operation is invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidSourceDatabaseId - Invalid source database identifier.\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MissingCollation - Collation is required.\n\n * 400 MissingSourceDatabaseId - Missing source database identifier.\n\n * 400 MissingRestorePointInTime - Missing restore point in time\n\n * 400 MissingStorageContainerSasToken - Missing storage container SAS token\n\n * 400 MissingStorageContainerUri - Missing storage container URI\n\n * 400 RestorableDroppedDatabaseIdGivenForRestoreWithSourceDatabaseId - Cannot specify restorableDroppedDatabaseId when sourceDatabaseId is already given in restore create mode\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 CannotFindServerCertificateWithThumbprint - Cannot find server certificate with thumbprint '{0}'. Please use PowerShell Cmdlet 'Add-AzureRmSqlManagedInstanceTransparentDataEncryptionCertificate' to create the certificate.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 RestoreSourceDatabaseNotFound - Could not find database '{0}' at time '{1}' that can be restored.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Updating the managed database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a managed database with minimal properties": {
+            "$ref": "./examples/ManagedDatabaseUpdateMin.json"
+          },
+          "Updates a managed database with maximal properties": {
+            "$ref": "./examples/ManagedDatabaseUpdateMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/cancelMove": {
+      "post": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Cancels a managed database move operation.",
+        "operationId": "ManagedDatabases_CancelMove",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters of the cancel managed database move operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseMoveDefinition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully canceled move request."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceManagedDatabaseMoveRequest - Invalid Managed Instance database move request.\n\n * 400 InvalidManagedDatabaseMoveTargetResourceId - Invalid Managed Instance database move target resource ID in the properties.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidPrimary - The given primary field in create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidPartner - The given partners field in create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestDuplicatePartner - One or more of the provided partner servers are already part of the instance failover group. Please make sure the primary server and all of the given partner servers are unique.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidManagedInstanceRegion - The provided partner managed instance region in the instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestUnsupportedPartnerCount - Only one partner region is supported.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestUnsupportedPairCount - Only one managed instance pair is supported.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpoint - The readWriteEndpoint field is required for create or update requests.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalid - The create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupUpdateOrDeleteRequestOnSecondary - Modifications to the instance failover group are not allowed on a secondary server. Execute the request on the primary server.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestNegativeGracePeriodValues - Grace period value for the read-write endpoint must be non-negative.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestLessThanMinimumGracePeriodValues - Grace period value for the instance failover group must be greater than or equal to the '{0}' minutes minimum grace period\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpointFields - The property failoverWithDataLossGracePeriodMinutes must be provided when failover policy Automatic is selected for the read-write endpoint.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteFailoverPolicy - The failoverPolicy field for the read-write endpoint is required for create or update requests.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpointFieldsForManualPolicy - Grace period value should not be provided when failover policy Manual is selected for the read-write endpoint.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestReadOnlyPropertyModified - The create or update instance failover group request body should not modify the read-only property '{0}'.\n\n * 400 InstanceFailoverGroupFailoverRequestOnPrimary - The failover request should be initiated on the secondary server of instance failover group.\n\n * 400 InstanceFailoverGroupPartnerManagedInstanceFromDifferentSubscription - Primary server and the partner server of failover group are from different subscriptions. Cross subscription for servers of failover group is not allowed.\n\n * 400 InstanceFailoverGroupIncorrectNetworkingConfiguration - Networking configuration is incorrect. Primary server's replication traffic cannot reach secondary server.\n\n * 400 XtpServerStateMismatch - Both source and target servers do not support memory optimized data.\n\n * 400 TargetInsufficientStorage - Attempt to move/restore/copy database on the destination instance with insufficient space.\n\n * 400 CrossResourceOperationNotSupported - Cross resource operation is not supported.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedDatabaseGPFileSizeLimitExceeded - Creating a copy of a managed database on different SQL Managed Instance with General Purpose service tier would violate data file size limit. See: 'https://docs.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics'.\n\n * 400 ManagedInstanceGPStorageAccountLimitExceeded - Creating a copy of a database on different SQL Managed Instance with General Purpose service tier would violate storage account size limit. See: 'https://docs.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics'.\n\n * 400 SystemDatabaseUnsupportedOperation - Unsupported operation for system database.\n\n * 400 PlannedFailoverTimedOutForDatabase - User invoked planned failover, it timed out, and a specific database appears to be to blame.\n\n * 400 FailoverGroupRegionMismatch - Partner region specified in Failover Group need to match the region of the partner managed instance indicated.\n\n * 400 ServerEditionMismatch - Edition must be the same as the primary server when creating a replica server.\n\n * 400 DnsZoneMismatch - The DNSZone on the partner server is different from the DNSZone on the source server. This breaks InstanceFailoverGroup functionality.\n\n * 400 InvalidTargetSubregion - The target server of a non-readable secondary is not in a DR paired Azure region.\n\n * 400 GeoDrInstanceSizeMismatch - Primary managed instance and partner managed instance do not have the same storage size.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 GeoDrSecondaryInstanceNotEmpty - Secondary managed instance has user databases. To create an instance failover group the secondary managed instance needs to be empty.\n\n * 400 InstanceFailoverGroupIncorrectNetworkingConfiguration - Networking configuration is incorrect. Primary server's replication traffic cannot reach secondary server.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 SameKeyUriNotFoundOnRemoteServer - Secondary server does not have the key material from the same key vault as the primary server's encryption protector with key auto-rotation enabled.\n\n * 400 RemoteDatabaseCopyPermission - User does not have sufficient permission to create a database copy on the specified server.\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidFailoverGroupRegion - Servers specified in an Instance Failover Group need to reside in different regions to provide isolation.\n\n * 400 InstanceFailoverGroupDoesNotExist - Failover group does not exist on a server.\n\n * 400 InstanceFailoverGroupNotSecondary - Failover cannot be initiated from the primary server in a instance failover group.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidAddSecondaryPermission - User does not have sufficient permission to add secondary on the specified server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 PlannedFailoverTimedOutForDatabase - User invoked planned failover, it timed out, and a specific database appears to be to blame.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 PitrPointInTimeInvalid - The point in time {0} is not valid. Valid point in time range from {1} days early to now and not before source server creation time.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 StorageAccountFull - Managed Instance has reached the total capacity of underlying Azure storage account. Azure Premium Storage account is limited to 35TB of allocated space.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 ManagedDatabaseNameInUse - Database '{0}' already exists. Choose a different database name.\n\n * 400 NoMoreSpaceInManagedInstance - The managed instance has reached its storage limit. The storage usage for the managed instance cannot exceed (%d) MBs.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 DatabaseNumberLimitReached - Maximum number of databases for SQL Database Managed Instance reached.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 CrossManagedInstanceDatabaseMovementNotExist - Database movement does not exist.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 CannotFindServerCertificateWithThumbprint - Cannot find server certificate with thumbprint '{0}'. Please use PowerShell Cmdlet 'Add-AzureRmSqlManagedInstanceTransparentDataEncryptionCertificate' to create the certificate.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 RestoreSourceDatabaseNotFound - Could not find database '{0}' at time '{1}' that can be restored.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidDatabaseStateForOperation - The operation is not allowed on the database in its current replication state.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ManagedInstanceHasHybridLink - User tried to initiate operation that is not supported when managed instance has a hybrid link configured.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 InstanceFailoverGroupAlreadyExists - Failover group already exists on a given server.\n\n * 409 InstanceFailoverGroupBusy - Instance failover group is busy with another operation.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 InstanceFailoverGroupDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 InvalidFailoverGroupName - Invalid Instance Failover Group name was supplied.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidDatabaseStateForOperation - The operation is not allowed on the database in its current replication state.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Canceling move is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Cancels a managed database move.": {
+            "$ref": "./examples/ManagedDatabaseCancelMove.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeMove": {
+      "post": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Completes a managed database move operation.",
+        "operationId": "ManagedDatabases_CompleteMove",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters of the complete managed database move operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseMoveDefinition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed move request."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceManagedDatabaseMoveRequest - Invalid Managed Instance database move request.\n\n * 400 InvalidManagedDatabaseMoveTargetResourceId - Invalid Managed Instance database move target resource ID in the properties.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidPrimary - The given primary field in create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidPartner - The given partners field in create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestDuplicatePartner - One or more of the provided partner servers are already part of the instance failover group. Please make sure the primary server and all of the given partner servers are unique.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidManagedInstanceRegion - The provided partner managed instance region in the instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestUnsupportedPartnerCount - Only one partner region is supported.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestUnsupportedPairCount - Only one managed instance pair is supported.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpoint - The readWriteEndpoint field is required for create or update requests.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalid - The create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupUpdateOrDeleteRequestOnSecondary - Modifications to the instance failover group are not allowed on a secondary server. Execute the request on the primary server.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestNegativeGracePeriodValues - Grace period value for the read-write endpoint must be non-negative.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestLessThanMinimumGracePeriodValues - Grace period value for the instance failover group must be greater than or equal to the '{0}' minutes minimum grace period\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpointFields - The property failoverWithDataLossGracePeriodMinutes must be provided when failover policy Automatic is selected for the read-write endpoint.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteFailoverPolicy - The failoverPolicy field for the read-write endpoint is required for create or update requests.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpointFieldsForManualPolicy - Grace period value should not be provided when failover policy Manual is selected for the read-write endpoint.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestReadOnlyPropertyModified - The create or update instance failover group request body should not modify the read-only property '{0}'.\n\n * 400 InstanceFailoverGroupFailoverRequestOnPrimary - The failover request should be initiated on the secondary server of instance failover group.\n\n * 400 InstanceFailoverGroupPartnerManagedInstanceFromDifferentSubscription - Primary server and the partner server of failover group are from different subscriptions. Cross subscription for servers of failover group is not allowed.\n\n * 400 InstanceFailoverGroupIncorrectNetworkingConfiguration - Networking configuration is incorrect. Primary server's replication traffic cannot reach secondary server.\n\n * 400 XtpServerStateMismatch - Both source and target servers do not support memory optimized data.\n\n * 400 TargetInsufficientStorage - Attempt to move/restore/copy database on the destination instance with insufficient space.\n\n * 400 CrossResourceOperationNotSupported - Cross resource operation is not supported.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedDatabaseGPFileSizeLimitExceeded - Creating a copy of a managed database on different SQL Managed Instance with General Purpose service tier would violate data file size limit. See: 'https://docs.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics'.\n\n * 400 ManagedInstanceGPStorageAccountLimitExceeded - Creating a copy of a database on different SQL Managed Instance with General Purpose service tier would violate storage account size limit. See: 'https://docs.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics'.\n\n * 400 SystemDatabaseUnsupportedOperation - Unsupported operation for system database.\n\n * 400 PlannedFailoverTimedOutForDatabase - User invoked planned failover, it timed out, and a specific database appears to be to blame.\n\n * 400 FailoverGroupRegionMismatch - Partner region specified in Failover Group need to match the region of the partner managed instance indicated.\n\n * 400 ServerEditionMismatch - Edition must be the same as the primary server when creating a replica server.\n\n * 400 DnsZoneMismatch - The DNSZone on the partner server is different from the DNSZone on the source server. This breaks InstanceFailoverGroup functionality.\n\n * 400 InvalidTargetSubregion - The target server of a non-readable secondary is not in a DR paired Azure region.\n\n * 400 GeoDrInstanceSizeMismatch - Primary managed instance and partner managed instance do not have the same storage size.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 GeoDrSecondaryInstanceNotEmpty - Secondary managed instance has user databases. To create an instance failover group the secondary managed instance needs to be empty.\n\n * 400 InstanceFailoverGroupIncorrectNetworkingConfiguration - Networking configuration is incorrect. Primary server's replication traffic cannot reach secondary server.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 SameKeyUriNotFoundOnRemoteServer - Secondary server does not have the key material from the same key vault as the primary server's encryption protector with key auto-rotation enabled.\n\n * 400 RemoteDatabaseCopyPermission - User does not have sufficient permission to create a database copy on the specified server.\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidFailoverGroupRegion - Servers specified in an Instance Failover Group need to reside in different regions to provide isolation.\n\n * 400 InstanceFailoverGroupDoesNotExist - Failover group does not exist on a server.\n\n * 400 InstanceFailoverGroupNotSecondary - Failover cannot be initiated from the primary server in a instance failover group.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidAddSecondaryPermission - User does not have sufficient permission to add secondary on the specified server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 PlannedFailoverTimedOutForDatabase - User invoked planned failover, it timed out, and a specific database appears to be to blame.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 PitrPointInTimeInvalid - The point in time {0} is not valid. Valid point in time range from {1} days early to now and not before source server creation time.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 StorageAccountFull - Managed Instance has reached the total capacity of underlying Azure storage account. Azure Premium Storage account is limited to 35TB of allocated space.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 ManagedDatabaseNameInUse - Database '{0}' already exists. Choose a different database name.\n\n * 400 NoMoreSpaceInManagedInstance - The managed instance has reached its storage limit. The storage usage for the managed instance cannot exceed (%d) MBs.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 DatabaseNumberLimitReached - Maximum number of databases for SQL Database Managed Instance reached.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 CrossManagedInstanceDatabaseMovementNotExist - Database movement does not exist.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 CannotFindServerCertificateWithThumbprint - Cannot find server certificate with thumbprint '{0}'. Please use PowerShell Cmdlet 'Add-AzureRmSqlManagedInstanceTransparentDataEncryptionCertificate' to create the certificate.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 RestoreSourceDatabaseNotFound - Could not find database '{0}' at time '{1}' that can be restored.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidDatabaseStateForOperation - The operation is not allowed on the database in its current replication state.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ManagedInstanceHasHybridLink - User tried to initiate operation that is not supported when managed instance has a hybrid link configured.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 InstanceFailoverGroupAlreadyExists - Failover group already exists on a given server.\n\n * 409 InstanceFailoverGroupBusy - Instance failover group is busy with another operation.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 InstanceFailoverGroupDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 InvalidFailoverGroupName - Invalid Instance Failover Group name was supplied.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidDatabaseStateForOperation - The operation is not allowed on the database in its current replication state.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Completing move is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Completes a managed database move.": {
+            "$ref": "./examples/ManagedDatabaseCompleteMove.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeRestore": {
+      "post": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Completes the restore operation on a managed database.",
+        "operationId": "ManagedDatabases_CompleteRestore",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The definition for completing the restore of this managed database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompleteDatabaseRestoreDefinition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed restore request."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseCompleteRestoreRequest - The complete database restore request is invalid\n\n * 400 InvalidDatabaseCompleteRestoreRequestLastBackupName - The last backup name is invalid\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 TargetServerDoesNotExist - The target server {0} does not exist or is not ready yet. Please check that it exists and retry the restore request.\n\n * 400 TargetServerRestoreNotAllowed - The target server {0} is currently not in a state that allows a restore to be started.\n\n * 400 BackupSetNotFound - No backups were found to restore the database. Please contact support to restore the database.\n\n * 400 FullBackupNotFound - Full backup can not be found.\n\n * 400 MissingThumbprint - Can not find server certificate.\n\n * 400 RestoreFromStripedBackupsNotEnabled - Restoring from striped backups is not supported.\n\n * 400 BackupSetBroken - Backup set is broken.\n\n * 400 BrokenRestorePlanNoFullBackup - The restore plan is broken because there is no full backup.\n\n * 400 SqlRestoreError - Non retriable error occurred while restoring backup with index {0} - {1} {2}\n\n * 400 BrokenRestorePlanWrongLogBackupLSN - The restore plan is broken because firstLsn of current log backup is not <= lastLsn of next log backup.\n\n * 400 BrokenRestorePlanWrongDiffBackupLSN - The restore plan is broken because firstLsn of diff backup is not >= firstLsn of full backup.\n\n * 400 BrokenRestorePlanGapInLogBackups - The restore plan is broken because firstLsn of current log backup is not equal to lastLsn of prev log backup.\n\n * 400 PartiallyContainedDatabaseUnsupported - \"Backup for a partially contained database is not supported.\"\n\n * 400 RequiredBackupIsNotLastRestored - Migration cannot be completed because provided backup file name is not the name of the last backup file that is restored.\n\n * 400 XtpInitializedDuringRestore - Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance.\n\n * 400 FullBackupMissingChecksum - Provided full backup is missing checksum.\n\n * 400 FullBackupDamaged - Provided full backup is damaged.\n\n * 400 MissingStripeInBackupSet - Provided backup set has one or more missing stripes.\n\n * 400 BrokenRestorePlanWrongDiffBaseGUID - The restore plan is broken because DifferentialBaseGuid of diff backup does not match BackupSetGuid of full backup.\n\n * 400 IncompatiblePhysicalLayoutTooFewDataFiles - Database backup contains incompatible physical layout. No data files are found in the backup.\n\n * 400 CorruptedPagesInBackupSet - Operation was aborted because RESTORE detected one or more corrupted pages in the backup set.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineDataFilesExist - Database backup contains incompatible physical layout. Non-online data files exist.\n\n * 400 CorruptedPagesListMaintenance - Operation was aborted because an internal error occurred while processing the backup taken without checksum.\n\n * 400 IncompatiblePhysicalLayoutWrongNumberOfLogFiles - Database backup contains incompatible physical layout. Multiple log files are not supported.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineLogFilesExist - Database backup contains incompatible physical layout. Non-online log files exist.\n\n * 400 IncompatiblePhysicalLayoutTooManyNonDataLogFiles - Database backup contains incompatible physical layout. Too many non-data/log files.\n\n * 400 ExternalBackupAlreadySignaledToComplete - The restore request has already been signaled to complete.\n\n * 400 ExternalBackupRestoreHasNotBeenStarted - The restore request can only be completed once the restore has started.\n\n * 400 ExternalBackupUpgradeInProgress - The restore request cannot be completed, since upgrade is in progress.\n\n * 400 IncompatiblePhysicalLayoutTooManyXTPFiles - Database backup contains incompatible physical layout. Multiple files found in the filegroup that contains MEMORY_OPTIMIZED_DATA.\n\n * 400 BlobStorageFailure - Blob storage failure has occurred.\n\n * 400 BackupsFromMultipleDatabasesDetectedInTheContainerFromTheStart - There are backups from multiple databases in the container folder. Please make sure the container folder has backups from a single database.{0}\n\n * 400 ManagedIdentityIssueDetectedFromTheStart - Managed identity is not set up properly. Please verify and try again.\n\n * 400 ManagedInstanceStorageLimitHit - The managed instance has reached its storage limit.\n\n * 400 AutoCompleteMissingLastBackupName - Auto complete restore request must have lastBackupName parameter provided.\n\n * 400 BlobStorageServerFailure - Blob storage server failure has occurred.\n\n * 400 BackupsFromMultipleDatabasesDetectedInTheContainerWhileRestoreInProgress - There are backups from multiple databases in the container folder. Please make sure the container folder has backups from a single database.{0}\n\n * 400 ManagedIdentityIssueDetectedWhileRestoreInProgress - Managed identity is not set up properly. Please verify and try again.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Completing restore request is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Completes a managed database external backup restore.": {
+            "$ref": "./examples/ManagedDatabaseCompleteExternalRestore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/startMove": {
+      "post": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Starts a managed database move operation.",
+        "operationId": "ManagedDatabases_StartMove",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters of the start managed database move operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseStartMoveDefinition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully started move request."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidManagedInstanceBackupMode - Invalid Managed Instance backup mode in the properties.\n\n * 400 InvalidManagedInstanceCompleteMode - Invalid Managed Instance complete mode in the properties.\n\n * 400 InvalidResourceManagedDatabaseMoveRequest - Invalid Managed Instance database move request.\n\n * 400 InvalidManagedDatabaseMoveTargetResourceId - Invalid Managed Instance database move target resource ID in the properties.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 ManagedDatabaseMoveSourceAndTargetNameDoNotMatch - The specified database name '{0}' at the source instance and the specified database name '{1}' at the destination instance must be the same.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidPrimary - The given primary field in create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidPartner - The given partners field in create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestDuplicatePartner - One or more of the provided partner servers are already part of the instance failover group. Please make sure the primary server and all of the given partner servers are unique.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidManagedInstanceRegion - The provided partner managed instance region in the instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestUnsupportedPartnerCount - Only one partner region is supported.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestUnsupportedPairCount - Only one managed instance pair is supported.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpoint - The readWriteEndpoint field is required for create or update requests.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalid - The create or update instance failover group request body is empty or invalid.\n\n * 400 InstanceFailoverGroupUpdateOrDeleteRequestOnSecondary - Modifications to the instance failover group are not allowed on a secondary server. Execute the request on the primary server.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestNegativeGracePeriodValues - Grace period value for the read-write endpoint must be non-negative.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestLessThanMinimumGracePeriodValues - Grace period value for the instance failover group must be greater than or equal to the '{0}' minutes minimum grace period\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpointFields - The property failoverWithDataLossGracePeriodMinutes must be provided when failover policy Automatic is selected for the read-write endpoint.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteFailoverPolicy - The failoverPolicy field for the read-write endpoint is required for create or update requests.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestInvalidReadWriteEndpointFieldsForManualPolicy - Grace period value should not be provided when failover policy Manual is selected for the read-write endpoint.\n\n * 400 InstanceFailoverGroupCreateOrUpdateRequestReadOnlyPropertyModified - The create or update instance failover group request body should not modify the read-only property '{0}'.\n\n * 400 InstanceFailoverGroupFailoverRequestOnPrimary - The failover request should be initiated on the secondary server of instance failover group.\n\n * 400 InstanceFailoverGroupPartnerManagedInstanceFromDifferentSubscription - Primary server and the partner server of failover group are from different subscriptions. Cross subscription for servers of failover group is not allowed.\n\n * 400 InstanceFailoverGroupIncorrectNetworkingConfiguration - Networking configuration is incorrect. Primary server's replication traffic cannot reach secondary server.\n\n * 400 XtpServerStateMismatch - Both source and target servers do not support memory optimized data.\n\n * 400 TargetInsufficientStorage - Attempt to move/restore/copy database on the destination instance with insufficient space.\n\n * 400 CrossResourceOperationNotSupported - Cross resource operation is not supported.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedDatabaseGPFileSizeLimitExceeded - Creating a copy of a managed database on different SQL Managed Instance with General Purpose service tier would violate data file size limit. See: 'https://docs.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics'.\n\n * 400 ManagedInstanceGPStorageAccountLimitExceeded - Creating a copy of a database on different SQL Managed Instance with General Purpose service tier would violate storage account size limit. See: 'https://docs.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics'.\n\n * 400 SystemDatabaseUnsupportedOperation - Unsupported operation for system database.\n\n * 400 PlannedFailoverTimedOutForDatabase - User invoked planned failover, it timed out, and a specific database appears to be to blame.\n\n * 400 FailoverGroupRegionMismatch - Partner region specified in Failover Group need to match the region of the partner managed instance indicated.\n\n * 400 ServerEditionMismatch - Edition must be the same as the primary server when creating a replica server.\n\n * 400 DnsZoneMismatch - The DNSZone on the partner server is different from the DNSZone on the source server. This breaks InstanceFailoverGroup functionality.\n\n * 400 InvalidTargetSubregion - The target server of a non-readable secondary is not in a DR paired Azure region.\n\n * 400 GeoDrInstanceSizeMismatch - Primary managed instance and partner managed instance do not have the same storage size.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 GeoDrSecondaryInstanceNotEmpty - Secondary managed instance has user databases. To create an instance failover group the secondary managed instance needs to be empty.\n\n * 400 InstanceFailoverGroupIncorrectNetworkingConfiguration - Networking configuration is incorrect. Primary server's replication traffic cannot reach secondary server.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 SameKeyUriNotFoundOnRemoteServer - Secondary server does not have the key material from the same key vault as the primary server's encryption protector with key auto-rotation enabled.\n\n * 400 RemoteDatabaseCopyPermission - User does not have sufficient permission to create a database copy on the specified server.\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidFailoverGroupRegion - Servers specified in an Instance Failover Group need to reside in different regions to provide isolation.\n\n * 400 InstanceFailoverGroupDoesNotExist - Failover group does not exist on a server.\n\n * 400 InstanceFailoverGroupNotSecondary - Failover cannot be initiated from the primary server in a instance failover group.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidAddSecondaryPermission - User does not have sufficient permission to add secondary on the specified server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 PlannedFailoverTimedOutForDatabase - User invoked planned failover, it timed out, and a specific database appears to be to blame.\n\n * 400 PlannedFailoverTimedOut - User invoked planned failover, and it timed out while trying to contact the partner management service.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 GeoReplicationDatabaseNotSecondary - The operation expects the database to be a replication target.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 PitrPointInTimeInvalid - The point in time {0} is not valid. Valid point in time range from {1} days early to now and not before source server creation time.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 StorageAccountFull - Managed Instance has reached the total capacity of underlying Azure storage account. Azure Premium Storage account is limited to 35TB of allocated space.\n\n * 400 AkvHostNotResolvingFromNode - AKV host '{0}' is not resolvable from SQL, on server '{1}'.\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 ManagedDatabaseNameInUse - Database '{0}' already exists. Choose a different database name.\n\n * 400 NoMoreSpaceInManagedInstance - The managed instance has reached its storage limit. The storage usage for the managed instance cannot exceed (%d) MBs.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 SameKeyMaterialNotFoundOnRemoteServer - Secondary server does not have the key material of the primary server's encryption protector.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 AkvEndpointNotReachableFromNode - AKV endpoint '{0}' is not reachable from SQL, on server '{1}'.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 DatabaseNumberLimitReached - Maximum number of databases for SQL Database Managed Instance reached.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 CrossManagedInstanceDatabaseMovementNotExist - Database movement does not exist.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 CannotFindServerCertificateWithThumbprint - Cannot find server certificate with thumbprint '{0}'. Please use PowerShell Cmdlet 'Add-AzureRmSqlManagedInstanceTransparentDataEncryptionCertificate' to create the certificate.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 RestoreSourceDatabaseNotFound - Could not find database '{0}' at time '{1}' that can be restored.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidDatabaseStateForOperation - The operation is not allowed on the database in its current replication state.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ManagedInstanceHasHybridLink - User tried to initiate operation that is not supported when managed instance has a hybrid link configured.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 InstanceFailoverGroupAlreadyExists - Failover group already exists on a given server.\n\n * 409 InstanceFailoverGroupBusy - Instance failover group is busy with another operation.\n\n * 409 GeoReplicationCannotBecomePrimaryDuringUndo - User attempted to failover or force-terminate a geo-link while the secondary is in a state where it may not be physically consistent and so cannot enter the primary role.\n\n * 409 InstanceFailoverGroupDnsRecordInUse - A duplicate DNS record exists for the requested endpoint.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 InvalidFailoverGroupName - Invalid Instance Failover Group name was supplied.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidDatabaseStateForOperation - The operation is not allowed on the database in its current replication state.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ManagementServiceDatabaseBusy - Database '{0}' is busy with another operation. Please try your operation later.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Starting move is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Starts a managed database move with no optional parameters specified.": {
+            "$ref": "./examples/ManagedDatabaseStartMoveMin.json"
+          },
+          "Starts a managed database move with all optional parameters specified.": {
+            "$ref": "./examples/ManagedDatabaseStartMoveMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases": {
+      "get": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a list of inaccessible managed databases in a managed instance",
+        "operationId": "ManagedDatabases_ListInaccessibleByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of inaccessible managed databases in a managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List inaccessible managed databases by managed instances": {
+            "$ref": "./examples/InaccessibleManagedDatabaseListByManagedInstance.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CompleteDatabaseRestoreDefinition": {
+      "description": "Contains the information necessary to perform a complete database restore operation.",
+      "required": [
+        "lastBackupName"
+      ],
+      "type": "object",
+      "properties": {
+        "lastBackupName": {
+          "description": "The last backup name to apply",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedDatabase": {
+      "description": "A managed database resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedDatabaseListResult": {
+      "description": "A list of managed databases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabase"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDatabaseMoveDefinition": {
+      "description": "Contains the information necessary to perform a managed database move.",
+      "required": [
+        "destinationManagedDatabaseId"
+      ],
+      "type": "object",
+      "properties": {
+        "destinationManagedDatabaseId": {
+          "description": "The destination managed database ID",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedDatabaseProperties": {
+      "description": "The managed database's properties.",
+      "type": "object",
+      "properties": {
+        "collation": {
+          "description": "Collation of the managed database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "description": "Status of the database.",
+          "enum": [
+            "Online",
+            "Offline",
+            "Shutdown",
+            "Creating",
+            "Inaccessible",
+            "Restoring",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ManagedDatabaseStatus",
+            "modelAsString": true
+          }
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "Creation date of the database.",
+          "type": "string",
+          "readOnly": true
+        },
+        "earliestRestorePoint": {
+          "format": "date-time",
+          "description": "Earliest restore point in time for point in time restore.",
+          "type": "string",
+          "readOnly": true
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "defaultSecondaryLocation": {
+          "description": "Geo paired region.",
+          "type": "string",
+          "readOnly": true
+        },
+        "catalogCollation": {
+          "description": "Collation of the metadata catalog.",
+          "enum": [
+            "DATABASE_DEFAULT",
+            "SQL_Latin1_General_CP1_CI_AS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CatalogCollationType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "createMode": {
+          "description": "Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).",
+          "enum": [
+            "Default",
+            "RestoreExternalBackup",
+            "PointInTimeRestore",
+            "Recovery",
+            "RestoreLongTermRetentionBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedDatabaseCreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerUri": {
+          "description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the uri of the storage container where backups for this restore are stored.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceDatabaseId": {
+          "description": "The resource identifier of the source database associated with create operation of this database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorableDroppedDatabaseId": {
+          "description": "The restorable dropped database resource id to restore when creating this database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerSasToken": {
+          "description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the storage container sas token.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "failoverGroupId": {
+          "description": "Instance Failover Group resource identifier that this managed database belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recoverableDatabaseId": {
+          "description": "The resource identifier of the recoverable database associated with create operation of this database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "longTermRetentionBackupResourceId": {
+          "description": "The name of the Long Term Retention backup to be used for restore of this managed database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "autoCompleteRestore": {
+          "description": "Whether to auto complete restore of this managed database.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "lastBackupName": {
+          "description": "Last backup file name for restore of this managed database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "ManagedDatabaseStartMoveDefinition": {
+      "description": "Contains the information necessary to start a managed database move.",
+      "required": [
+        "destinationManagedDatabaseId"
+      ],
+      "type": "object",
+      "properties": {
+        "destinationManagedDatabaseId": {
+          "description": "The destination managed database ID",
+          "type": "string"
+        },
+        "operationMode": {
+          "description": "The move operation mode.",
+          "default": "Move",
+          "enum": [
+            "Move",
+            "Copy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MoveOperationMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ManagedDatabaseUpdate": {
+      "description": "An managed database update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
