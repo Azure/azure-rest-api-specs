@@ -7,6 +7,7 @@ using Cadl.Rest;
 using Cadl.Http;
 using Cadl.Versioning;
 
+@versioned(Versions)
 @service({title: "Anomaly Detector"})
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
@@ -21,7 +22,7 @@ https://westus2.api.cognitive.microsoft.com).
     
     @doc("Api Version")
     @path
-    ApiVersion: Versions,
+    ApiVersion?: Versions = Versions.v1_1,
   }
 )
 @doc("""
@@ -45,6 +46,6 @@ discover incidents and establish a logic flow for root cause analysis.
 namespace AnomalyDetector;
 
 enum Versions {
-  v11: "v1.1",
+  v1_1: "v1.1",
 }
 
