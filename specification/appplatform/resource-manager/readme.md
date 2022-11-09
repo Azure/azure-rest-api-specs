@@ -12,7 +12,7 @@ To build the SDK for AppPlatform, simply [Install AutoRest](https://aka.ms/autor
 
 > `autorest`
 
-To see additional help and options, run:
+To see additional help and s  options, run:
 
 > `autorest --help`
 
