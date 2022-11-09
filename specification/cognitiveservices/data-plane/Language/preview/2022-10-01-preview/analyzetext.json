@@ -1499,14 +1499,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/EntitiesResultWIthDetectedLanguage"
           }
         }
       },
@@ -1517,6 +1510,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "EntitiesResultWIthDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "EntitiesDocumentResult": {
