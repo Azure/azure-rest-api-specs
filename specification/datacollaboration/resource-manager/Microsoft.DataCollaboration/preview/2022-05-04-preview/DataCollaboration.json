@@ -414,6 +414,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -707,6 +713,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1082,6 +1094,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1322,6 +1340,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1602,6 +1626,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1840,6 +1870,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2379,6 +2415,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2640,6 +2682,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2954,6 +3002,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -3212,6 +3266,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -3531,7 +3591,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -3865,7 +3928,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -4175,7 +4241,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -4482,7 +4551,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -4743,7 +4815,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "204": {
             "description": "Success"
@@ -4992,7 +5067,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -8896,6 +8974,45 @@
         "resource": {
           "description": "Name of the resource type for display purposes",
           "type": "string"
+        }
+      }
+    },
+    "OperationResponse": {
+      "description": "Response for long running operation",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "endTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/DataCollaborationErrorInfo",
+          "description": "The error property when status is failed."
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation state of the long running operation.",
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         }
       }
     },
