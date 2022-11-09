@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualnetworks/{virtualnetworksName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualnetworks/{virtualNetworksName}": {
       "get": {
         "operationId": "virtualnetworks_Retrieve",
         "x-ms-examples": {
@@ -69,7 +69,7 @@
           "200": {
             "description": "Retrieved the virtual network resource.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworks"
+              "$ref": "#/definitions/VirtualNetworks"
             }
           }
         }
@@ -103,7 +103,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualnetworks"
+              "$ref": "#/definitions/VirtualNetworks"
             }
           }
         ],
@@ -117,13 +117,13 @@
           "200": {
             "description": "Updates the virtualnetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworks"
+              "$ref": "#/definitions/VirtualNetworks"
             }
           },
           "201": {
             "description": "Creates the virtual networks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworks"
+              "$ref": "#/definitions/VirtualNetworks"
             }
           }
         }
@@ -189,7 +189,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualnetworksPatch"
+              "$ref": "#/definitions/VirtualNetworksPatch"
             }
           }
         ],
@@ -203,13 +203,13 @@
           "200": {
             "description": "Updates the virtual network resource.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworks"
+              "$ref": "#/definitions/VirtualNetworks"
             }
           },
           "201": {
             "description": "Updates the virtual network resource.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworks"
+              "$ref": "#/definitions/VirtualNetworks"
             }
           }
         }
@@ -244,7 +244,7 @@
           "200": {
             "description": "Lists all virtual networks under the resource group.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworksListResult"
+              "$ref": "#/definitions/VirtualNetworksListResult"
             }
           }
         },
@@ -279,7 +279,7 @@
           "200": {
             "description": "Lists all virtual networks under the subscription.",
             "schema": {
-              "$ref": "#/definitions/virtualnetworksListResult"
+              "$ref": "#/definitions/VirtualNetworksListResult"
             }
           }
         },
@@ -290,7 +290,7 @@
     }
   },
   "definitions": {
-    "virtualnetworksProperties": {
+    "VirtualnetworksProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -549,7 +549,7 @@
         }
       }
     },
-    "virtualnetworks": {
+    "VirtualNetworks": {
       "type": "object",
       "description": "The virtual network resource definition.",
       "x-ms-azure-resource": true,
@@ -557,7 +557,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/virtualnetworksProperties"
+          "$ref": "#/definitions/VirtualNetworksProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -573,7 +573,7 @@
         }
       ]
     },
-    "virtualnetworksPatch": {
+    "VirtualNetworksPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -586,13 +586,13 @@
       },
       "description": "The virtual network resource patch definition."
     },
-    "virtualnetworksListResult": {
+    "VirtualNetworksListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/virtualnetworks"
+            "$ref": "#/definitions/VirtualNetworks"
           }
         },
         "nextLink": {
@@ -602,8 +602,8 @@
     }
   },
   "parameters": {
-    "virtualnetworksNameParameter": {
-      "name": "virtualnetworksName",
+    "VirtualNetworksNameParameter": {
+      "name": "virtualNetworksName",
       "in": "path",
       "required": true,
       "type": "string",

@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualMachinesName}": {
       "get": {
         "operationId": "virtualmachines_Retrieve",
         "description": "Gets virtual machines by resource name",
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "Retrieved the virtual machine resource.",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         }
@@ -100,7 +100,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -110,7 +110,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         ],
@@ -124,13 +124,13 @@
           "200": {
             "description": "Updates the virtual machine resource.",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           },
           "201": {
             "description": "Creates the virtual machine resource.",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         }
@@ -150,7 +150,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -186,7 +186,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -196,7 +196,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualmachinesPatch"
+              "$ref": "#/definitions/VirtualMachinesPatch"
             }
           }
         ],
@@ -210,19 +210,19 @@
           "200": {
             "description": "Updates the virtual machine resource.",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           },
           "201": {
             "description": "Updates the virtual machine resource.",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualMachinesName}/start": {
       "post": {
         "operationId": "virtualmachines_Start",
         "x-ms-long-running-operation": true,
@@ -242,7 +242,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -264,7 +264,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualMachinesName}/stop": {
       "post": {
         "operationId": "virtualmachines_Stop",
         "x-ms-long-running-operation": true,
@@ -284,7 +284,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -306,7 +306,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualMachinesName}/restart": {
       "post": {
         "operationId": "virtualmachines_Restart",
         "x-ms-long-running-operation": true,
@@ -326,7 +326,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachinesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -375,9 +375,9 @@
             }
           },
           "200": {
-            "description": "Lists all virtualmachines under the resource group.",
+            "description": "Lists all virtual machines under the resource group.",
             "schema": {
-              "$ref": "#/definitions/virtualmachinesListResult"
+              "$ref": "#/definitions/VirtualMachinesListResult"
             }
           }
         },
@@ -410,9 +410,9 @@
             }
           },
           "200": {
-            "description": "Lists all virtualmachines under the subscription.",
+            "description": "Lists all virtual machines under the subscription.",
             "schema": {
-              "$ref": "#/definitions/virtualmachinesListResult"
+              "$ref": "#/definitions/VirtualMachinesListResult"
             }
           }
         },
@@ -1200,7 +1200,7 @@
     }
   },
   "definitions": {
-    "virtualmachinesProperties": {
+    "VirtualMachinesProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -1527,16 +1527,16 @@
           }
         }
       },
-      "description": "VirtualMachineStatus defines the observed state of virtualmachines"
+      "description": "VirtualMachineStatus defines the observed state of virtual machines"
     },
-    "virtualmachines": {
+    "VirtualMachines": {
       "type": "object",
       "x-ms-client-flatten": true,
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/virtualmachinesProperties"
+          "$ref": "#/definitions/VirtualMachinesProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -1643,26 +1643,26 @@
         }
       }
     },
-    "virtualMachineUpdateProperties": {
+    "VirtualMachineUpdateProperties": {
       "description": "Defines the resource properties for the update.",
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/hardwareProfileUpdate"
+          "$ref": "#/definitions/HardwareProfileUpdate"
         },
         "storageProfile": {
-          "$ref": "#/definitions/storageProfileUpdate"
+          "$ref": "#/definitions/StorageProfileUpdate"
         },
         "networkProfile": {
-          "$ref": "#/definitions/networkProfileUpdate"
+          "$ref": "#/definitions/NetworkProfileUpdate"
         }
       }
     },
-    "virtualmachinesPatch": {
+    "VirtualMachinesPatch": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/virtualMachineUpdateProperties"
+          "$ref": "#/definitions/VirtualMachineUpdateProperties"
         },
         "tags": {
           "type": "object",
@@ -1674,13 +1674,13 @@
       },
       "description": "The virtual machine resource patch definition."
     },
-    "virtualmachinesListResult": {
+    "VirtualMachinesListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/virtualmachines"
+            "$ref": "#/definitions/VirtualMachines"
           }
         },
         "nextLink": {
@@ -2156,8 +2156,8 @@
     }
   },
   "parameters": {
-    "virtualmachinesNameParameter": {
-      "name": "virtualmachinesName",
+    "VirtualMachinesNameParameter": {
+      "name": "virtualMachinesName",
       "in": "path",
       "required": true,
       "type": "string",

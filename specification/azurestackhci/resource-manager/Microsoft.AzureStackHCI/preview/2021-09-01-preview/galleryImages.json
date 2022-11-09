@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages/{galleryimagesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages/{galleryImagesName}": {
       "get": {
         "operationId": "galleryimages_Retrieve",
-        "description": "Gets galleryimages by resource name",
+        "description": "Gets gallery images by resource name",
         "x-ms-examples": {
           "GetGalleryImage": {
             "$ref": "./examples/GetGalleryImage.json"
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "Retrieved the gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         }
@@ -95,7 +95,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         ],
@@ -119,13 +119,13 @@
           "200": {
             "description": "Updates the gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           },
           "201": {
             "description": "Creates the gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         }
@@ -146,7 +146,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -183,7 +183,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -193,7 +193,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/galleryimagesPatch"
+              "$ref": "#/definitions/GalleryImagesPatch"
             }
           }
         ],
@@ -207,13 +207,13 @@
           "200": {
             "description": "Updates the gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           },
           "201": {
             "description": "Updates the gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         }
@@ -222,7 +222,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListByResourceGroup",
-        "description": "Lists all galleryimages under the resource group.",
+        "description": "Lists all gallery images under the resource group.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageByResourceGroup.json"
@@ -247,9 +247,9 @@
             }
           },
           "200": {
-            "description": "Lists all galleryimages under the resource group.",
+            "description": "Lists all gallery images under the resource group.",
             "schema": {
-              "$ref": "#/definitions/galleryimagesListResult"
+              "$ref": "#/definitions/GalleryImagesListResult"
             }
           }
         },
@@ -261,7 +261,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListBySubscription",
-        "description": "List all galleryimages under the subscription",
+        "description": "List all gallery images under the subscription",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
@@ -283,9 +283,9 @@
             }
           },
           "200": {
-            "description": "Lists all galleryimages under the subscription.",
+            "description": "Lists all gallery images under the subscription.",
             "schema": {
-              "$ref": "#/definitions/galleryimagesListResult"
+              "$ref": "#/definitions/GalleryImagesListResult"
             }
           }
         },
@@ -296,7 +296,7 @@
     }
   },
   "definitions": {
-    "galleryimagesProperties": {
+    "GalleryImagesProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -346,10 +346,10 @@
           }
         },
         "identifier": {
-          "$ref": "#/definitions/galleryImageIdentifier"
+          "$ref": "#/definitions/GalleryImageIdentifier"
         },
         "version": {
-          "$ref": "#/definitions/galleryImageVersion"
+          "$ref": "#/definitions/GalleryImageVersion"
         },
         "provisioningState": {
           "type": "string",
@@ -430,9 +430,9 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "GalleryImageStatus defines the observed state of galleryimages"
+      "description": "GalleryImageStatus defines the observed state of gallery images"
     },
-    "galleryImageIdentifier": {
+    "GalleryImageIdentifier": {
       "type": "object",
       "properties": {
         "publisher": {
@@ -455,7 +455,7 @@
       ],
       "description": "This is the gallery image definition identifier."
     },
-    "galleryImageVersion": {
+    "GalleryImageVersion": {
       "type": "object",
       "properties": {
         "name": {
@@ -464,16 +464,16 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/galleryImageVersionProperties"
+          "$ref": "#/definitions/GalleryImageVersionProperties"
         }
       },
       "description": "Specifies information about the gallery image version that you want to create or update."
     },
-    "galleryImageVersionProperties": {
+    "GalleryImageVersionProperties": {
       "type": "object",
       "properties": {
         "storageProfile": {
-          "$ref": "#/definitions/galleryImageVersionStorageProfile"
+          "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         }
       },
       "required": [
@@ -481,24 +481,24 @@
       ],
       "description": "Describes the properties of a gallery image version."
     },
-    "galleryImageVersionStorageProfile": {
+    "GalleryImageVersionStorageProfile": {
       "type": "object",
       "properties": {
         "osDiskImage": {
-          "$ref": "#/definitions/galleryOSDiskImage"
+          "$ref": "#/definitions/GalleryOSDiskImage"
         }
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "galleryOSDiskImage": {
+    "GalleryOSDiskImage": {
       "allOf": [
         {
-          "$ref": "#/definitions/galleryDiskImage"
+          "$ref": "#/definitions/GalleryDiskImage"
         }
       ],
       "description": "This is the OS disk image."
     },
-    "galleryDiskImage": {
+    "GalleryDiskImage": {
       "type": "object",
       "properties": {
         "sizeInMB": {
@@ -510,7 +510,7 @@
       },
       "description": "This is the disk image base class."
     },
-    "galleryimages": {
+    "GalleryImages": {
       "type": "object",
       "description": "The gallery image resource definition.",
       "x-ms-azure-resource": true,
@@ -518,7 +518,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/galleryimagesProperties"
+          "$ref": "#/definitions/GalleryImagesProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -534,7 +534,7 @@
         }
       ]
     },
-    "galleryimagesPatch": {
+    "GalleryImagesPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -547,14 +547,14 @@
       },
       "description": "The gallery image resource patch definition."
     },
-    "galleryimagesListResult": {
+    "GalleryImagesListResult": {
       "type": "object",
-      "description": "List of galleryimages.",
+      "description": "List of gallery images.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/galleryimages"
+            "$ref": "#/definitions/GalleryImages"
           }
         },
         "nextLink": {
@@ -566,8 +566,8 @@
     }
   },
   "parameters": {
-    "galleryimagesNameParameter": {
-      "name": "galleryimagesName",
+    "GalleryImagesNameParameter": {
+      "name": "galleryImagesName",
       "in": "path",
       "required": true,
       "type": "string",

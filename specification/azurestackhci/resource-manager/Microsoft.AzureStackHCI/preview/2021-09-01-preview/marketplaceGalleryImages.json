@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "Retrieved the marketplace gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         }
@@ -95,7 +95,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         ],
@@ -119,13 +119,13 @@
           "200": {
             "description": "Updates the marketplace gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           },
           "201": {
             "description": "Creates the marketplace gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         }
@@ -146,7 +146,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -183,7 +183,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImagesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -193,7 +193,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimagesPatch"
+              "$ref": "#/definitions/MarketplaceGalleryImagesPatch"
             }
           }
         ],
@@ -207,13 +207,13 @@
           "200": {
             "description": "Updates the marketplace gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           },
           "201": {
             "description": "Updates the marketplace gallery image resource.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         }
@@ -249,7 +249,7 @@
           "200": {
             "description": "Lists all marketplacegalleryimages under the resource group.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimagesListResult"
+              "$ref": "#/definitions/MarketplaceGalleryImagesListResult"
             }
           }
         },
@@ -285,7 +285,7 @@
           "200": {
             "description": "Lists all marketplacegalleryimages under the subscription.",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimagesListResult"
+              "$ref": "#/definitions/MarketplaceGalleryImagesListResult"
             }
           }
         },
@@ -296,7 +296,7 @@
     }
   },
   "definitions": {
-    "marketplacegalleryimagesProperties": {
+    "MarketplaceGalleryImagesProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -341,10 +341,10 @@
           }
         },
         "identifier": {
-          "$ref": "#/definitions/galleryImageIdentifier"
+          "$ref": "#/definitions/GalleryImageIdentifier"
         },
         "version": {
-          "$ref": "#/definitions/galleryImageVersion"
+          "$ref": "#/definitions/GalleryImageVersion"
         },
         "provisioningState": {
           "type": "string",
@@ -428,7 +428,7 @@
       },
       "description": "MarketplaceGalleryImageStatus defines the observed state of marketplacegalleryimages"
     },
-    "galleryImageIdentifier": {
+    "GalleryImageIdentifier": {
       "type": "object",
       "properties": {
         "publisher": {
@@ -451,7 +451,7 @@
       ],
       "description": "This is the gallery image definition identifier."
     },
-    "galleryImageVersion": {
+    "GalleryImageVersion": {
       "type": "object",
       "properties": {
         "name": {
@@ -460,16 +460,16 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/galleryImageVersionProperties"
+          "$ref": "#/definitions/GalleryImageVersionProperties"
         }
       },
       "description": "Specifies information about the gallery image version that you want to create or update."
     },
-    "galleryImageVersionProperties": {
+    "GalleryImageVersionProperties": {
       "type": "object",
       "properties": {
         "storageProfile": {
-          "$ref": "#/definitions/galleryImageVersionStorageProfile"
+          "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         }
       },
       "required": [
@@ -477,24 +477,24 @@
       ],
       "description": "Describes the properties of a gallery image version."
     },
-    "galleryImageVersionStorageProfile": {
+    "GalleryImageVersionStorageProfile": {
       "type": "object",
       "properties": {
         "osDiskImage": {
-          "$ref": "#/definitions/galleryOSDiskImage"
+          "$ref": "#/definitions/GalleryOSDiskImage"
         }
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "galleryOSDiskImage": {
+    "GalleryOSDiskImage": {
       "allOf": [
         {
-          "$ref": "#/definitions/galleryDiskImage"
+          "$ref": "#/definitions/GalleryDiskImage"
         }
       ],
       "description": "This is the OS disk image."
     },
-    "galleryDiskImage": {
+    "GalleryDiskImage": {
       "type": "object",
       "properties": {
         "sizeInMB": {
@@ -506,7 +506,7 @@
       },
       "description": "This is the disk image base class."
     },
-    "marketplacegalleryimages": {
+    "MarketplaceGalleryImages": {
       "type": "object",
       "description": "The marketplace gallery image resource definition.",
       "x-ms-azure-resource": true,
@@ -514,7 +514,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/marketplacegalleryimagesProperties"
+          "$ref": "#/definitions/MarketplaceGalleryImagesProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -530,7 +530,7 @@
         }
       ]
     },
-    "marketplacegalleryimagesPatch": {
+    "MarketplaceGalleryImagesPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -543,7 +543,7 @@
       },
       "description": "The marketplace gallery image resource patch definition."
     },
-    "marketplacegalleryimagesListResult": {
+    "MarketplaceGalleryImagesListResult": {
       "type": "object",
       "description": "List of marketplacegalleryimages.",
       "properties": {
@@ -551,7 +551,7 @@
           "type": "array",
           "description": "The itemed list of marketplacegalleryimages",
           "items": {
-            "$ref": "#/definitions/marketplacegalleryimages"
+            "$ref": "#/definitions/MarketplaceGalleryImages"
           }
         },
         "nextLink": {
@@ -563,8 +563,8 @@
     }
   },
   "parameters": {
-    "marketplacegalleryimagesNameParameter": {
-      "name": "marketplacegalleryimagesName",
+    "MarketplaceGalleryImagesNameParameter": {
+      "name": "marketplaceGalleryImagesName",
       "in": "path",
       "required": true,
       "type": "string",
