@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "SampleCertOrder",
+    "api-version": "2022-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.CertificateRegistration/certificateOrders/sampleCertOrder",
+            "name": "sampleCertOrder",
+            "type": "Microsoft.CertificateRegistration/certificateOrders",
+            "location": "global",
+            "properties": {
+                "email": "john.doe@gmail.com",
+                "nameFirst": "John",
+                "nameLast": "Doe",
+                "phone": "+1.1234567890"
+            }
+        }
+        ]
+      }
+    },
+    "404": {
+      "body": {
+        "value": [
+          {
+            "Code": "NotFound",
+            "Message": "Cannot find CertificateOrder with name sampleCertOrder.",
+            "Target": null,
+            "Details": [
+                {
+                    "Message": "Cannot find CertificateOrder with name sampleCertOrder."
+                },
+                {
+                    "Code": "NotFound"
+                },
+                {
+                    "ErrorEntity": {
+                        "ExtendedCode": "51004",
+                        "MessageTemplate": "Cannot find {0} with name {1}.",
+                        "Parameters": [
+                            "CertificateOrder",
+                            "sampleCertOrder"
+                        ],
+                        "Code": "NotFound",
+                        "Message": "Cannot find CertificateOrder with name sampleCertOrder."
+                    }
+                }
+            ],
+            "Innererror": null
+        }
+        ]
+      }
+    },
+    "400": {},
+    "401": {}
+  }
+}
