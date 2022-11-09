@@ -739,7 +739,7 @@
       "required": true,
       "type": "string",
       "description": "The subscription ID of the target database server.",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "([a-z0-9]){8,8}[-]([a-z0-9]){4,4}[-]([a-z0-9]){4,4}[-]([a-z0-9]){4,4}[-]([a-z0-9]){12,12}",
       "x-ms-parameter-location": "method"
     },
     "TargetDbServerResourceGroupNameParameter": {
@@ -757,7 +757,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the target database server.",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "([-a-z0-9]){3,63}",
       "x-ms-parameter-location": "method"
     },
     "MigrationNameParameter": {
