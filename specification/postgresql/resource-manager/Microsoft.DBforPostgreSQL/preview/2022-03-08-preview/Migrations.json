@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
+    "/subscriptions/{targetDbServerSubscriptionId}/resourceGroups/{targetDbServerResourceGroupName}/providers/Microsoft.DbforPostgreSQL/flexibleServers/{targetDbServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
@@ -51,13 +51,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerNameParameter"
+            "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -109,13 +109,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerNameParameter"
+            "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -152,13 +152,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerNameParameter"
+            "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -204,13 +204,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerNameParameter"
+            "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -232,7 +232,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+    "/subscriptions/{targetDbServerSubscriptionId}/resourceGroups/{targetDbServerResourceGroupName}/providers/Microsoft.DbforPostgreSQL/flexibleServers/{targetDbServerName}/migrations": {
       "get": {
         "tags": [
           "Migrations"
@@ -249,13 +249,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerNameParameter"
+            "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationListFilter"
@@ -280,7 +280,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
+    "/subscriptions/{targetDbServerSubscriptionId}/resourceGroups/{targetDbServerResourceGroupName}/providers/Microsoft.DbforPostgreSQL/flexibleServers/{targetDbServerName}/checkMigrationNameAvailability": {
       "post": {
         "summary": "Check migration name validity and availability",
         "description": "This method checks whether a proposed migration name is valid and available.",
@@ -299,13 +299,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+            "$ref": "#/parameters/TargetDbServerResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TargetDBServerNameParameter"
+            "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
             "name": "parameters",
@@ -375,15 +375,15 @@
           "$ref": "#/definitions/MigrationStatus",
           "readOnly": true
         },
-        "sourceDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata",
+        "sourceDbServerMetadata": {
+          "$ref": "#/definitions/DbServerMetadata",
           "readOnly": true
         },
-        "targetDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata",
+        "targetDbServerMetadata": {
+          "$ref": "#/definitions/DbServerMetadata",
           "readOnly": true
         },
-        "sourceDBServerResourceId": {
+        "sourceDbServerResourceId": {
           "type": "string"
         },
         "secretParameters": {
@@ -392,7 +392,7 @@
         "userAssignedIdentityResourceId": {
           "type": "string"
         },
-        "targetDBServerResourceId": {
+        "targetDbServerResourceId": {
           "type": "string",
           "readOnly": true
         },
@@ -406,10 +406,10 @@
         "migrationResourceGroup": {
           "$ref": "#/definitions/MigrationResourceGroup"
         },
-        "setupLogicalReplicationOnSourceDBIfNeeded": {
+        "setupLogicalReplicationOnSourceDbIfNeeded": {
           "type": "boolean"
         },
-        "overwriteDBsInTarget": {
+        "overwriteDbsInTarget": {
           "type": "boolean"
         },
         "migrationWindowStartTimeInUtc": {
@@ -464,7 +464,7 @@
     "MigrationResourcePropertiesForPatch": {
       "type": "object",
       "properties": {
-        "sourceDBServerResourceId": {
+        "sourceDbServerResourceId": {
           "type": "string"
         },
         "secretParameters": {
@@ -483,10 +483,10 @@
         "migrationResourceGroup": {
           "$ref": "#/definitions/MigrationResourceGroup"
         },
-        "setupLogicalReplicationOnSourceDBIfNeeded": {
+        "setupLogicalReplicationOnSourceDbIfNeeded": {
           "type": "boolean"
         },
-        "overwriteDBsInTarget": {
+        "overwriteDbsInTarget": {
           "type": "boolean"
         },
         "migrationWindowStartTimeInUtc": {
@@ -590,7 +590,7 @@
       },
       "description": "Server admin credentials."
     },
-    "DBServerMetadata": {
+    "DbServerMetadata": {
       "type": "object",
       "properties": {
         "location": {
@@ -599,7 +599,7 @@
         "version": {
           "type": "string"
         },
-        "storageMB": {
+        "storageMb": {
           "format": "int32",
           "type": "integer"
         },
@@ -659,9 +659,9 @@
     "MigrationSubState": {
       "enum": [
         "PerformingPreRequisiteSteps",
-        "WaitingForLogicalReplicationSetupRequestOnSourceDB",
-        "WaitingForDBsToMigrateSpecification",
-        "WaitingForTargetDBOverwriteConfirmation",
+        "WaitingForLogicalReplicationSetupRequestOnSourceDb",
+        "WaitingForDbsToMigrateSpecification",
+        "WaitingForTargetDbOverwriteConfirmation",
         "WaitingForDataMigrationScheduling",
         "WaitingForDataMigrationWindow",
         "MigratingData",
@@ -733,24 +733,24 @@
     }
   },
   "parameters": {
-    "TargetDBServerSubscriptionIdParameter": {
-      "name": "targetDBServerSubscriptionId",
+    "TargetDbServerSubscriptionIdParameter": {
+      "name": "targetDbServerSubscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The subscription ID of the target database server.",
       "x-ms-parameter-location": "method"
     },
-    "TargetDBServerResourceGroupNameParameter": {
-      "name": "targetDBServerResourceGroupName",
+    "TargetDbServerResourceGroupNameParameter": {
+      "name": "targetDbServerResourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The resource group name of the target database server.",
       "x-ms-parameter-location": "method"
     },
-    "TargetDBServerNameParameter": {
-      "name": "targetDBServerName",
+    "TargetDbServerNameParameter": {
+      "name": "targetDbServerName",
       "in": "path",
       "required": true,
       "type": "string",
