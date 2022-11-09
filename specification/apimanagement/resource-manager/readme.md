@@ -8,7 +8,7 @@ This is the AutoRest configuration file for ApiManagement.
 
 ## Getting Started
 
-To build the SDK for ApiManagement, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for ApiManagement, ss simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
