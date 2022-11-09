@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages/{marketplacegalleryimagesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages/{marketplaceGalleryImagesName}": {
       "get": {
         "operationId": "marketplacegalleryimages_Get",
-        "description": "Gets marketplacegalleryimages by resource name",
+        "description": "Gets marketplace gallery images by resource name",
         "x-ms-examples": {
           "GetMarketplaceGalleryImage": {
             "$ref": "./examples/GetMarketplaceGalleryImage.json"
@@ -222,7 +222,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages": {
       "get": {
         "operationId": "marketplacegalleryimages_ListByResourceGroup",
-        "description": "Lists all marketplacegalleryimages under the resource group",
+        "description": "Lists all marketplace gallery images under the resource group",
         "x-ms-examples": {
           "ListMarketplaceGalleryImageByResourceGroup": {
             "$ref": "./examples/ListMarketplaceGalleryImageByResourceGroup.json"
@@ -247,7 +247,7 @@
             }
           },
           "200": {
-            "description": "Lists all marketplacegalleryimages under the resource group.",
+            "description": "Lists all marketplace gallery images under the resource group.",
             "schema": {
               "$ref": "#/definitions/MarketplaceGalleryImagesListResult"
             }
@@ -261,7 +261,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages": {
       "get": {
         "operationId": "marketplacegalleryimages_ListBySubscription",
-        "description": "Lists all marketplacegalleryimages under the subscription",
+        "description": "Lists all marketplace gallery images under the subscription",
         "x-ms-examples": {
           "ListMarketplaceGalleryImageBySubscription": {
             "$ref": "./examples/ListMarketplaceGalleryImageBySubscription.json"
@@ -283,7 +283,7 @@
             }
           },
           "200": {
-            "description": "Lists all marketplacegalleryimages under the subscription.",
+            "description": "Lists all marketplace gallery images under the subscription.",
             "schema": {
               "$ref": "#/definitions/MarketplaceGalleryImagesListResult"
             }
@@ -426,7 +426,7 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "MarketplaceGalleryImageStatus defines the observed state of marketplacegalleryimages"
+      "description": "MarketplaceGalleryImageStatus defines the observed state of marketplace gallery images"
     },
     "GalleryImageIdentifier": {
       "type": "object",
@@ -545,11 +545,11 @@
     },
     "MarketplaceGalleryImagesListResult": {
       "type": "object",
-      "description": "List of marketplacegalleryimages.",
+      "description": "List of marketplace gallery images.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The itemed list of marketplacegalleryimages",
+          "description": "The itemed list of marketplace gallery images",
           "items": {
             "$ref": "#/definitions/MarketplaceGalleryImages"
           }
