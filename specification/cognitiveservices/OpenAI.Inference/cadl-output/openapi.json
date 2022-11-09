@@ -176,7 +176,7 @@
       "type": "object",
       "properties": {
         "body": {
-          "$ref": "#/definitions/Request.CreateBody",
+          "$ref": "#/definitions/Request.CompletionsCreateBody",
           "description": "expected schema for the body of the completion post request"
         }
       },
@@ -185,11 +185,11 @@
         "body"
       ]
     },
-    "Request.CreateBody": {
+    "Request.CompletionsCreateBody": {
       "type": "object",
       "properties": {
         "prompt": {
-          "$ref": "#/definitions/Request.Prompt",
+          "$ref": "#/definitions/Request.CompletionsPrompt",
           "description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048."
         },
         "max_tokens": {
@@ -238,7 +238,7 @@
           "description": "Echo back the prompt in addition to the completion"
         },
         "stop": {
-          "$ref": "#/definitions/Request.Stop",
+          "$ref": "#/definitions/Request.CompletionsStop",
           "description": "A sequence which indicates the end of the current document."
         },
         "completion_config": {
@@ -268,6 +268,16 @@
       },
       "description": "Post body schema to create a prompt completion from a deployment"
     },
+    "Request.CompletionsPrompt": {
+      "type": "object",
+      "properties": {},
+      "description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048."
+    },
+    "Request.CompletionsStop": {
+      "type": "object",
+      "properties": {},
+      "description": "A sequence which indicates the end of the current document."
+    },
     "Request.EmbeddingsCreate": {
       "type": "object",
       "properties": {
@@ -280,24 +290,6 @@
       "required": [
         "body"
       ]
-    },
-    "Request.EmbeddingsCreateBaseBody": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "string",
-          "description": "The ID of the end-user, for use in tracking and rate-limiting."
-        },
-        "input_type": {
-          "type": "string",
-          "description": "input type of embedding search to use"
-        },
-        "model": {
-          "type": "string",
-          "description": "ID of the model to use"
-        }
-      },
-      "description": "Embedding request body schema, base fields"
     },
     "Request.EmbeddingsCreateBody": {
       "type": "object",
@@ -315,7 +307,7 @@
           "description": "ID of the model to use"
         },
         "input": {
-          "$ref": "#/definitions/object",
+          "$ref": "#/definitions/Request.EmbeddingsInput",
           "description": "An input to embed, encoded as a string, a list of strings, or a list of token\nlists"
         }
       },
@@ -324,17 +316,12 @@
         "input"
       ]
     },
-    "Request.Prompt": {
+    "Request.EmbeddingsInput": {
       "type": "object",
       "properties": {},
-      "description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048."
+      "description": "Embedding request body schema, base fields"
     },
-    "Request.Stop": {
-      "type": "object",
-      "properties": {},
-      "description": "A sequence which indicates the end of the current document."
-    },
-    "Response.Choice": {
+    "Response.CompletionsChoice": {
       "type": "object",
       "properties": {
         "text": {
@@ -347,7 +334,7 @@
           "description": "Index"
         },
         "logprobs": {
-          "$ref": "#/definitions/Response.LogProbsModel",
+          "$ref": "#/definitions/Response.CompletionsLogProbsModel",
           "description": "Log Prob Model"
         },
         "finish_reason": {
@@ -380,16 +367,16 @@
         "choices": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Response.Choice"
+            "$ref": "#/definitions/Response.CompletionsChoice"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Response.Choice[]",
+          "x-cadl-name": "Response.CompletionsChoice[]",
           "description": "Array of choices returned containing text completions to prompts sent"
         }
       },
       "description": "Expected response schema to completion request"
     },
-    "Response.LogProbsModel": {
+    "Response.CompletionsLogProbsModel": {
       "type": "object",
       "properties": {
         "tokens": {
@@ -456,7 +443,7 @@
       "required": true,
       "description": "expected schema for the body of the completion post request",
       "schema": {
-        "$ref": "#/definitions/Request.CreateBody"
+        "$ref": "#/definitions/Request.CompletionsCreateBody"
       },
       "x-ms-parameter-location": "method"
     },

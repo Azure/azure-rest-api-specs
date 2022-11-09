@@ -10,11 +10,11 @@ namespace Azure.OpenAI.Request {
         @path "deploymentId": string;
         @doc("expected schema for the body of the completion post request")
         @body
-        body: CreateBody;
+        body: CompletionsCreateBody;
     }
 
     @doc("Post body schema to create a prompt completion from a deployment")
-    model CreateBody {
+    model CompletionsCreateBody {
         @doc("""
     An optional prompt to complete from, encoded as a string, a list of strings, or
     a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -24,7 +24,7 @@ namespace Azure.OpenAI.Request {
     from the beginning of a new document. Maximum allowed size of string list is
     2048.
     """)
-        prompt?: Prompt;
+        prompt?: CompletionsPrompt;
 
         @doc("The maximum number of tokens to generate. Has minimum of 0.")
         max_tokens?: int32;
@@ -96,7 +96,7 @@ namespace Azure.OpenAI.Request {
         echo?: boolean;
 
         @doc("A sequence which indicates the end of the current document.")
-        stop?: Stop;
+        stop?: CompletionsStop;
 
         @doc("Completion configuration")
         completion_config?: string;
@@ -136,10 +136,10 @@ namespace Azure.OpenAI.Request {
     from the beginning of a new document. Maximum allowed size of string list is
     2048.
     """)
-    model Prompt {}
+    model CompletionsPrompt {}
 
     @doc("A sequence which indicates the end of the current document.")
-    model Stop {}
+    model CompletionsStop {}
 }
 
 namespace Azure.OpenAI.Response {
@@ -157,23 +157,23 @@ namespace Azure.OpenAI.Response {
         @doc("Model used for completion response")
         "model"?: string;
         @doc("Array of choices returned containing text completions to prompts sent")
-        choices?: Choice[];
+        choices?: CompletionsChoice[];
     }
 
     @doc("Choice model within completion response")
-    model Choice {
+    model CompletionsChoice {
         @doc("Generated text for given completion prompt")
         text?: string;
         @doc("Index")
         index?: int32;
         @doc("Log Prob Model")
-        logprobs?: LogProbsModel;
+        logprobs?: CompletionsLogProbsModel;
         @doc("Reason for finishing")
         finish_reason?: string;
     }
 
     @doc("LogProbs model within completion choice")
-    model LogProbsModel {
+    model CompletionsLogProbsModel {
         @doc("Tokens")
         tokens?: string[];
         @doc("LogProbs of Tokens")
