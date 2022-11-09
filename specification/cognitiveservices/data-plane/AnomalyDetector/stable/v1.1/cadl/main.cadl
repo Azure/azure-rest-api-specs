@@ -1,9 +1,12 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
 import "./univariate/routes.cadl";
 import "./multivariate/routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
+using Cadl.Versioning;
+
 @service({title: "Anomaly Detector"})
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
@@ -15,9 +18,10 @@ Supported Cognitive Services endpoints (protocol and hostname, for example:
 https://westus2.api.cognitive.microsoft.com).
 """)
     Endpoint: string,
+    
     @doc("Api Version")
     @path
-    ApiVersion: string,
+    ApiVersion: Versions,
   }
 )
 @doc("""
@@ -39,3 +43,8 @@ a set of time series. By using anomaly detector service, business customers can
 discover incidents and establish a logic flow for root cause analysis.
 """)
 namespace AnomalyDetector;
+
+enum Versions {
+  v11: "v1.1",
+}
+
