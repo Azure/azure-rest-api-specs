@@ -142,17 +142,15 @@
       }
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
-      "parameters": [
-        {
-          "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-        }
-      ],
       "get": {
         "tags": [
           "Environments"
         ],
         "description": "Gets an environment",
         "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
@@ -196,6 +194,9 @@
         ],
         "description": "Creates or updates an environment.",
         "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
@@ -271,6 +272,9 @@
         ],
         "parameters": [
           {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
@@ -322,6 +326,9 @@
         ],
         "description": "Deletes an environment and all its associated resources",
         "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
