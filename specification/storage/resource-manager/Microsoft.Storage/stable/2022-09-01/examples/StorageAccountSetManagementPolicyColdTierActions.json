@@ -9,6 +9,67 @@
     "properties": {
       "properties": {
         "policy": {
+          "rules": [
+            {
+              "enabled": true,
+              "name": "olcmtest1",
+              "type": "Lifecycle",
+              "definition": {
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob"
+                  ],
+                  "prefixMatch": [
+                    "olcmtestcontainer1"
+                  ]
+                },
+                "actions": {
+                  "baseBlob": {
+                    "tierToCool": {
+                      "daysAfterModificationGreaterThan": 30
+                    },
+                    "tierToArchive": {
+                      "daysAfterModificationGreaterThan": 90
+                    },
+                    "tierToCold": {
+                      "daysAfterModificationGreaterThan": 30
+                    },
+                    "delete": {
+                      "daysAfterModificationGreaterThan": 1000
+                    }
+                  },
+                  "snapshot": {
+                    "tierToCold": {
+                      "daysAfterCreationGreaterThan": 30
+                    },
+                    "delete": {
+                      "daysAfterCreationGreaterThan": 30
+                    }
+                  },
+                  "version": {
+                    "tierToCold": {
+                      "daysAfterCreationGreaterThan": 30
+                    },
+                    "delete": {
+                      "daysAfterCreationGreaterThan": 30
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
+        "name": "DefaultManagementPolicy",
+        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+        "properties": {
+          "policy": {
             "rules": [
               {
                 "enabled": true,
@@ -32,15 +93,15 @@
                         "daysAfterModificationGreaterThan": 90
                       },
                       "tierToCold": {
-                          "daysAfterModificationGreaterThan": 30
-                      }, 
+                        "daysAfterModificationGreaterThan": 30
+                      },
                       "delete": {
                         "daysAfterModificationGreaterThan": 1000
                       }
                     },
                     "snapshot": {
                       "tierToCold": {
-                          "daysAfterCreationGreaterThan": 30
+                        "daysAfterCreationGreaterThan": 30
                       },
                       "delete": {
                         "daysAfterCreationGreaterThan": 30
@@ -48,7 +109,7 @@
                     },
                     "version": {
                       "tierToCold": {
-                          "daysAfterCreationGreaterThan": 30
+                        "daysAfterCreationGreaterThan": 30
                       },
                       "delete": {
                         "daysAfterCreationGreaterThan": 30
@@ -58,68 +119,7 @@
                 }
               }
             ]
-          }
-      }
-    }
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
-        "name": "DefaultManagementPolicy",
-        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
-        "properties": {
-            "policy": {
-                "rules": [
-                  {
-                    "enabled": true,
-                    "name": "olcmtest1",
-                    "type": "Lifecycle",
-                    "definition": {
-                      "filters": {
-                        "blobTypes": [
-                          "blockBlob"
-                        ],
-                        "prefixMatch": [
-                          "olcmtestcontainer1"
-                        ]
-                      },
-                      "actions": {
-                        "baseBlob": {
-                          "tierToCool": {
-                            "daysAfterModificationGreaterThan": 30
-                          },
-                          "tierToArchive": {
-                            "daysAfterModificationGreaterThan": 90
-                          },
-                          "tierToCold": {
-                              "daysAfterModificationGreaterThan": 30
-                          }, 
-                          "delete": {
-                            "daysAfterModificationGreaterThan": 1000
-                          }
-                        },
-                        "snapshot": {
-                          "tierToCold": {
-                              "daysAfterCreationGreaterThan": 30
-                          },
-                          "delete": {
-                            "daysAfterCreationGreaterThan": 30
-                          }
-                        },
-                        "version": {
-                          "tierToCold": {
-                              "daysAfterCreationGreaterThan": 30
-                          },
-                          "delete": {
-                            "daysAfterCreationGreaterThan": 30
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
+          },
           "lastModifiedTime": "2021-06-08T02:53:39.0932539Z"
         }
       }
