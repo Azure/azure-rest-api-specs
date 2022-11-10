@@ -5,7 +5,7 @@
     "version": "2022-11-01-preview"
   },
   "paths": {
-    "/devopsPolicies/aggregate": {
+    "/devops-policies": {
       "get": {
         "tags": [
           "DevopsPolicy"
@@ -51,7 +51,7 @@
         }
       }
     },
-    "/devopsPolicies/sqlsecurityAuditorRoles/{purviewResourceName}": {
+    "/devops-policies/{purviewResourceName}/sqlSecurityAuditorRoles": {
       "put": {
         "tags": [
           "DevopsPolicy"
@@ -96,12 +96,24 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/DevopsPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DevopsPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -134,6 +146,13 @@
             "in": "path",
             "name": "purviewResourceName",
             "description": "Name of resource as registered on the Azure purview portal",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Http Etag value of a policy to be deleted.",
             "required": true,
             "type": "string"
           },
@@ -190,6 +209,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DevopsPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -212,7 +237,7 @@
         }
       }
     },
-    "/devopsPolicies/sqlPerfMonitorRoles/{purviewResourceName}": {
+    "/devops-policies/{purviewResourceName}/sqlPerfMonitorRoles": {
       "delete": {
         "tags": [
           "DevopsPolicy"
@@ -224,6 +249,13 @@
             "in": "path",
             "name": "purviewResourceName",
             "description": "Name of resource as registered on the Azure purview portal",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Http Etag value of a policy to be deleted.",
             "required": true,
             "type": "string"
           },
@@ -298,12 +330,24 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/DevopsPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DevopsPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -351,6 +395,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DevopsPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -400,16 +450,18 @@
         },
         "principals": {
           "type": "array",
+          "description": "Azure Active Directory Ids for users",
           "items": {
             "type": "string",
-            "description": "Azure Active Directory Ids for users"
+            "description": "Azure Active Directory Id"
           }
         },
         "principalGroups": {
           "type": "array",
+          "description": "Azure Active Directory Ids for groups",
           "items": {
             "type": "string",
-            "description": "Azure Active Directory Ids for groups"
+            "description": "Azure Active Directory Id"
           }
         },
         "resourceAzurePath": {
@@ -482,16 +534,6 @@
       ],
       "type": "object",
       "properties": {
-        "policyName": {
-          "type": "string",
-          "description": "The name of policy",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Id of policy",
-          "readOnly": true
-        },
         "systemData": {
           "$ref": "#/definitions/SystemData"
         },
