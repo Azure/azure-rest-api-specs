@@ -1010,6 +1010,12 @@
           },
           "StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions": {
             "$ref": "./examples/StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions.json"
+          },
+          "StorageAccountSetManagementPolicyColdTierActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicyColdTierActions.json"
+          },
+          "StorageAccountSetManagementPolicyHotTierActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicyHotTierActions.json"
           }
         },
         "parameters": [
@@ -4691,11 +4697,19 @@
       "properties": {
         "tierToCool": {
           "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blobs to cool storage. Support blobs currently at Hot tier"
+          "description": "The function to tier blobs to cool storage."
         },
         "tierToArchive": {
           "$ref": "#/definitions/DateAfterModification",
-          "description": "The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier"
+          "description": "The function to tier blobs to archive storage."
+        },
+        "tierToCold": {
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to tier blobs to cold storage."
+        },
+        "tierToHot": {
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts"
         },
         "delete": {
           "$ref": "#/definitions/DateAfterModification",
@@ -4712,11 +4726,19 @@
       "properties": {
         "tierToCool": {
           "$ref": "#/definitions/DateAfterCreation",
-          "description": "The function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier"
+          "description": "The function to tier blob snapshot to cool storage."
         },
         "tierToArchive": {
           "$ref": "#/definitions/DateAfterCreation",
-          "description": "The function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier"
+          "description": "The function to tier blob snapshot to archive storage."
+        },
+        "tierToCold": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to cold storage."
+        },
+        "tierToHot": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts"
         },
         "delete": {
           "$ref": "#/definitions/DateAfterCreation",
@@ -4729,11 +4751,19 @@
       "properties": {
         "tierToCool": {
           "$ref": "#/definitions/DateAfterCreation",
-          "description": "The function to tier blob version to cool storage. Support blob version currently at Hot tier"
+          "description": "The function to tier blob version to cool storage."
         },
         "tierToArchive": {
           "$ref": "#/definitions/DateAfterCreation",
-          "description": "The function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier"
+          "description": "The function to tier blob version to archive storage."
+        },
+        "tierToCold": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to cold storage."
+        },
+        "tierToHot": {
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts"
         },
         "delete": {
           "$ref": "#/definitions/DateAfterCreation",
