@@ -27,7 +27,7 @@
           {
             "in": "query",
             "name": "isProjectGondor",
-            "description": "Is call from a gondor client.",
+            "description": "Is call from a Gondor client.",
             "type": "boolean"
           },
           {
@@ -347,7 +347,7 @@
         },
         "syncToken": {
           "type": "string",
-          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to store this value and keep updating if PDS returns a new value. Call this API with the most recent value recieved."
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to store this value and keep updating if PDS returns a new value. Call this API with the most recent value received."
         },
         "elements": {
           "type": "array",
@@ -428,7 +428,8 @@
       "name": "api-version",
       "description": "The api-version of the service.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
