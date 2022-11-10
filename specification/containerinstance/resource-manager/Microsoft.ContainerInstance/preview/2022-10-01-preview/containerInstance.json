@@ -1465,12 +1465,24 @@
               ]
             }
           },
+          "priority": {
+            "type": "string",
+            "description": "The priority of the container group.",
+            "enum": [
+              "Regular",
+              "Spot"
+            ],
+            "x-ms-enum": {
+              "name": "ContainerGroupPriority",
+              "modelAsString": true
+            }
+          },
           "required": [
-            "containers",
-            "osType"
-          ]
+              "containers",
+              "osType"
+            ]
+          }
         }
-      }
     },
     "DeploymentExtensionSpec": {
       "description": "Extension sidecars to be added to the deployment.",
