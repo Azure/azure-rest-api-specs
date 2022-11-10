@@ -530,7 +530,7 @@
     "DevopsPolicy": {
       "required": [
         "decisionRules",
-        "scope"
+        "purviewResourceName"
       ],
       "type": "object",
       "properties": {
@@ -544,9 +544,9 @@
             "$ref": "#/definitions/DevopsPolicyDecisionRule"
           }
         },
-        "scope": {
-          "$ref": "#/definitions/DevopsPolicyScope",
-          "description": "Scope section for the policy"
+        "purviewResourceName": {
+          "type": "string",
+          "description": "Purview resource name"
         }
       }
     },
