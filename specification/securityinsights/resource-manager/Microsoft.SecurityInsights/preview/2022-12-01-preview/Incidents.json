@@ -935,7 +935,10 @@
             "$ref": "./common/EntityTypes.json#/definitions/SecurityAlert"
           }
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "IncidentBookmarkList": {
       "description": "List of incident bookmarks.",
@@ -948,7 +951,10 @@
             "$ref": "./common/EntityTypes.json#/definitions/HuntingBookmark"
           }
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "IncidentComment": {
       "type": "object",
@@ -977,7 +983,8 @@
           }
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "required": [
