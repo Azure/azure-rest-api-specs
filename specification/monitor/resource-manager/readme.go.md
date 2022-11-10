@@ -20,7 +20,18 @@ directive:
     where: "$.definitions.Resource"
     transform: >
       $["x-ms-client-name"] = "TrackedEntityResource";
-      
+  - from: swagger-document
+    where: $["paths"]["/{resourceUri}/providers/Microsoft.Insights/metricDefinitions"]
+    transform: >
+      delete $.get
+  - from: swagger-document
+    where: $["paths"]["/{resourceUri}/providers/Microsoft.Insights/metrics"]
+    transform: >
+      delete $.get
+  - from: swagger-document
+    where: $["paths"]["/{resourceUri}/providers/microsoft.insights/metricNamespaces"]
+    transform: >
+      delete $.get
 modelerfour:
   lenient-model-deduplication: true
 ```
