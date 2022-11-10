@@ -22,7 +22,7 @@ https://westus2.api.cognitive.microsoft.com).
     
     @doc("Api Version")
     @path
-    ApiVersion: Versions,
+    ApiVersion: APIVersion,
   }
 )
 @doc("""
@@ -49,3 +49,5 @@ enum Versions {
   v1_1: "v1.1",
 }
 
+@knownValues(Versions)
+model APIVersion is string;
