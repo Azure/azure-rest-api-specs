@@ -470,7 +470,7 @@
             }
           },
           "202": {
-            "description": "The request is completed.",
+            "description": "The request is accepted.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -596,7 +596,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The request is being processed.",
             "schema": {
               "$ref": "#/definitions/ReservationOrderAliasResponse"
@@ -1316,15 +1316,6 @@
         "billingAccount": {
           "type": "string",
           "description": "Billing account"
-        },
-        "internalProperties": {
-          "type": "object",
-          "properties": {
-            "purchaseRecordId": {
-              "description": "Purchase record Id",
-              "type": "string"
-            }
-          }
         }
       }
     },

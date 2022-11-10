@@ -29,6 +29,32 @@ openapi-type: arm
 tag: package-2022-11-01
 ```
 
+### Suppression
+``` yaml
+directive:
+  - suppress: ProvisioningStateValidation
+    from: billingbenefits.json
+    where: $.definitions.ProvisioningState
+    reason: \'Cancelled\' state is used in the service which should be equivalent to in ARM's \'Canceled\' definition ProvisioningState property.
+  - suppress: PathForPutOperation
+    from: billingbenefits.json
+    reason: Subscription or resource group is passed in request body.
+  - suppress: PatchSkuProperty
+    from: billingbenefits.json
+    reason: \'Sku\' is not a supported property in savings plan patch operation
+  - suppress: AllResourcesMustHaveDelete  
+    from: billingbenefits.json
+    reason: This service does not support deleting resources once created.
+  - suppress: TopLevelResourcesListBySubscription 
+    from: billingbenefits.json
+    reason: Currently only list by tenant is supported.
+  - suppress: CreateOperationAsyncResponseValidation 
+    from: billingbenefits.json
+    reason: According to ARM's guide 200 is returned when PUT call finishes.
+  - suppress: TrackedResourcePatchOperation
+    from: billingbenefits.json
+```
+
 ### Tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
