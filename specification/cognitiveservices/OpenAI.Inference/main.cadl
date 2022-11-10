@@ -6,7 +6,11 @@ using Cadl.Http;
 
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "apiKey"> |
-  OAuth2Auth<[]>) // need to figure out a way to use ImplicitFlow
+    OAuth2Auth<[{
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: []
+    }]>)
 @service({title: "Azure OpenAI API", version: "2022-06-01-preview" })
 @server(
   "https://{endpoint}/openai",
