@@ -293,6 +293,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -486,7 +492,8 @@
           "x-ms-enum": {
             "name": "ActiveRevisionsMode",
             "modelAsString": true
-          }
+          },
+          "default": "Single"
         },
         "ingress": {
           "$ref": "#/definitions/Ingress",
@@ -655,7 +662,8 @@
           "x-ms-enum": {
             "name": "appProtocol",
             "modelAsString": true
-          }
+          },
+          "default": "http"
         },
         "appPort": {
           "format": "int32",
@@ -729,7 +737,8 @@
           "x-ms-enum": {
             "name": "IngressTransportMethod",
             "modelAsString": true
-          }
+          },
+          "default": "auto"
         },
         "traffic": {
           "description": "Traffic weights for app's revisions",
