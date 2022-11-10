@@ -17,20 +17,18 @@ module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
-  - where-model: CIFSMountConfiguration
-    rename-property:
-      from: userName
-      to: username
-  - where-model: CIFSMountConfiguration
-    transform: $.required[0] = "username"
-  - where-model: NetworkConfiguration
-    rename-property:
-      from: dynamicVnetAssignmentScope
-      to: dynamicVNetAssignmentScope
-  - where-model: PrivateLinkServiceConnectionState
-    rename-property:
-      from: actionsRequired
-      to: actionRequired
+  - from: BatchManagement.json
+    where: $.definitions.CIFSMountConfiguration.properties.userName
+    transform:
+      $["x-ms-client-name"] = "username"
+  - from: BatchManagement.json
+    where: $.definitions.NetworkConfiguration.properties.dynamicVnetAssignmentScope
+    transform:
+      $["x-ms-client-name"] = "dynamicVNetAssignmentScope"
+  - from: BatchManagement.json
+    where: $.definitions.PrivateLinkServiceConnectionState.properties.actionsRequired
+    transform:
+      $["x-ms-client-name"] = "actionRequired"
 ```
 
 ## Go multi-api
