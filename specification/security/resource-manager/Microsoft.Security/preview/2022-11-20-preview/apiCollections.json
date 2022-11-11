@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{apiManagementServiceResourceId}/providers/Microsoft.Security/apiCollections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/providers/Microsoft.Security/apiCollections": {
       "get": {
         "x-ms-examples": {
           "Gets a list of Azure API Management APIs that have been onboarded to Defender for APIs": {
@@ -50,7 +50,13 @@
         "operationId": "APICollection_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiManagementServiceResourceId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -75,7 +81,7 @@
         }
       }
     },
-    "/{apiManagementServiceResourceId}/providers/Microsoft.Security/apiCollections/{apiCollectionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/providers/Microsoft.Security/apiCollections/{apiCollectionId}": {
       "get": {
         "x-ms-examples": {
           "Gets an Azure API Management API if it has been onboarded to Defender for APIs": {
@@ -91,10 +97,16 @@
         "operationId": "APICollection_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiManagementServiceResourceId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiCollectionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiCollectionIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -130,10 +142,16 @@
         "operationId": "APICollectionOnboarding_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiManagementServiceResourceId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiCollectionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiCollectionIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -169,10 +187,16 @@
         "operationId": "APICollectionOffboarding_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiManagementServiceResourceId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiCollectionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiCollectionIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -245,20 +269,24 @@
     }
   },
   "parameters": {
-    "ApiManagementServiceResourceId": {
-      "name": "apiManagementServiceResourceId",
+    "ApiManagementServiceNameParameter": {
+      "name": "serviceName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "A string representing the ARM ResourceId of the Azure API Management Service resource.",
+      "description": "The name of the API Management service.",
+      "minLength": 1,
+      "maxLength": 50,
       "x-ms-parameter-location": "method"
     },
-    "ApiCollectionId": {
+    "ApiCollectionIdParameter": {
       "name": "apiCollectionId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "A string representing the apiCollections resource within the Microsoft.Security provider namespace. This string matches the Azure API Management API name.",
+      "minLength": 1,
+      "maxLength": 256,
       "x-ms-parameter-location": "method"
     }
   }
