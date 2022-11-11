@@ -179,9 +179,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-05'
 input-file:
-- Microsoft.OffAzure/stable/2020-07-07/migrate.json
 - Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
-- Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
 
 #Needed when there is more than one input file
 override-info:
