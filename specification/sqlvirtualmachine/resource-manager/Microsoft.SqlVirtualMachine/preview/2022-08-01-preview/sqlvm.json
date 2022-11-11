@@ -985,7 +985,10 @@
             "in": "path",
             "description": "Name of the SQL virtual machine.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^((?!_)[^\\/""'\[\]:|<>+=;,?*@&]{1,64}(?<![.-]))$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "parameters",
