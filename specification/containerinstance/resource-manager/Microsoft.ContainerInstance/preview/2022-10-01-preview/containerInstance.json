@@ -119,6 +119,9 @@
           },
           "ContainerGroupsGet_Failed": {
             "$ref": "./examples/ContainerGroupsGet_Failed.json"
+          },
+          "ContainerGroupsGetWithPriority": {
+            "$ref": "./examples/ContainerGroupsGetPriority.json"
           }
         },
         "summary": "Get the properties of the specified container group.",
@@ -166,6 +169,9 @@
           },
           "ConfidentialContainerGroup": {
             "$ref": "./examples/ContainerGroupCreateConfidential.json"
+          },
+          "ContainerGroupsCreateWithPriority": {
+            "$ref": "./examples/ContainerGroupsCreatePriority.json"
           }
         },
         "summary": "Create or update container groups.",
@@ -1470,18 +1476,18 @@
             "confidentialComputeProperties": {
               "description": "The properies for confidential contianer group",
               "$ref": "#/definitions/ConfidentialComputeProperties"
-            }
-          },
-          "priority": {
-            "type": "string",
-            "description": "The priority of the container group.",
-            "enum": [
-              "Regular",
-              "Spot"
-            ],
-            "x-ms-enum": {
-              "name": "ContainerGroupPriority",
-              "modelAsString": true
+            },
+            "priority": {
+              "type": "string",
+              "description": "The priority of containers in the container group.",
+              "enum": [
+                "Regular",
+                "Spot"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupPriority",
+                "modelAsString": true
+              }
             }
           },
           "required": [
