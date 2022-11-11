@@ -1,6 +1,4 @@
-# Billingbenefits
-
-> see https://aka.ms/autorest
+# Billing benefits
 
 This is the AutoRest configuration file for billingbenefits.
 
