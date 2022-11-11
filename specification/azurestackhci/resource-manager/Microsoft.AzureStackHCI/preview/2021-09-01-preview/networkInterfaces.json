@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkinterfaces/{networkInterfacesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkinterfaces/{networkinterfacesName}": {
       "get": {
         "operationId": "networkinterfaces_Retrieve",
         "description": "Gets network interfaces by resource name",
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkInterfacesNameParameter"
+            "$ref": "#/parameters/networkinterfacesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "Retrieved the network interface resource.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+              "$ref": "#/definitions/networkinterfaces"
             }
           }
         }
@@ -94,7 +94,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkInterfacesNameParameter"
+            "$ref": "#/parameters/networkinterfacesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+              "$ref": "#/definitions/networkinterfaces"
             }
           }
         ],
@@ -118,13 +118,13 @@
           "200": {
             "description": "Updates the network interface resource.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+              "$ref": "#/definitions/networkinterfaces"
             }
           },
           "201": {
             "description": "Creates the network interface resource.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+              "$ref": "#/definitions/networkinterfaces"
             }
           }
         }
@@ -144,7 +144,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkInterfacesNameParameter"
+            "$ref": "#/parameters/networkinterfacesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -180,7 +180,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkInterfacesNameParameter"
+            "$ref": "#/parameters/networkinterfacesNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkInterfacesPatch"
+              "$ref": "#/definitions/networkinterfacesPatch"
             }
           }
         ],
@@ -204,13 +204,13 @@
           "200": {
             "description": "Updates the network interface resource.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+              "$ref": "#/definitions/networkinterfaces"
             }
           },
           "201": {
             "description": "Updates the network interface resource.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+              "$ref": "#/definitions/networkinterfaces"
             }
           }
         }
@@ -245,7 +245,7 @@
           "200": {
             "description": "Lists all network interfaces under the resource group.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfacesListResult"
+              "$ref": "#/definitions/networkinterfacesListResult"
             }
           }
         },
@@ -280,7 +280,7 @@
           "200": {
             "description": "Lists all network interfaces under the subscription.",
             "schema": {
-              "$ref": "#/definitions/NetworkInterfacesListResult"
+              "$ref": "#/definitions/networkinterfacesListResult"
             }
           }
         },
@@ -303,14 +303,14 @@
         }
       }
     },
-    "NetworkInterfacesProperties": {
+    "networkinterfacesProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpConfiguration"
+            "$ref": "#/definitions/ipConfiguration"
           },
           "description": "IPConfigurations - A list of IPConfigurations of the network interface.",
           "x-ms-identifiers": []
@@ -388,7 +388,7 @@
       },
       "description": "NetworkInterfaceStatus defines the observed state of network interfaces"
     },
-    "IpConfiguration": {
+    "ipConfiguration": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -440,7 +440,7 @@
       },
       "description": "InterfaceIPConfiguration iPConfiguration in a network interface."
     },
-    "NetworkInterfaces": {
+    "networkinterfaces": {
       "type": "object",
       "description": "The network interface resource definition.",
       "x-ms-azure-resource": true,
@@ -448,7 +448,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkInterfacesProperties"
+          "$ref": "#/definitions/networkinterfacesProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -464,7 +464,7 @@
         }
       ]
     },
-    "NetworkInterfacesPatch": {
+    "networkinterfacesPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -477,13 +477,13 @@
       },
       "description": "The network interface resource patch definition."
     },
-    "NetworkInterfacesListResult": {
+    "networkinterfacesListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaces"
+            "$ref": "#/definitions/networkinterfaces"
           }
         },
         "nextLink": {
@@ -493,8 +493,8 @@
     }
   },
   "parameters": {
-    "NetworkInterfacesNameParameter": {
-      "name": "networkInterfacesName",
+    "networkinterfacesNameParameter": {
+      "name": "networkinterfacesName",
       "in": "path",
       "required": true,
       "type": "string",

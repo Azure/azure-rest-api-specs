@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storagecontainers/{storageContainersName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storagecontainers/{storagecontainersName}": {
       "get": {
         "operationId": "storagecontainers_Retrieve",
         "description": "Gets storagecontainers by resource name",
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StorageContainersNameParameter"
+            "$ref": "#/parameters/storagecontainersNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "Retrieved the storage container resource.",
             "schema": {
-              "$ref": "#/definitions/StorageContainers"
+              "$ref": "#/definitions/storagecontainers"
             }
           }
         }
@@ -94,7 +94,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StorageContainersNameParameter"
+            "$ref": "#/parameters/storagecontainersNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageContainers"
+              "$ref": "#/definitions/storagecontainers"
             }
           }
         ],
@@ -118,13 +118,13 @@
           "200": {
             "description": "Updates the storage container resource.",
             "schema": {
-              "$ref": "#/definitions/StorageContainers"
+              "$ref": "#/definitions/storagecontainers"
             }
           },
           "201": {
             "description": "Creates the storage container resource.",
             "schema": {
-              "$ref": "#/definitions/StorageContainers"
+              "$ref": "#/definitions/storagecontainers"
             }
           }
         }
@@ -144,7 +144,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StorageContainersNameParameter"
+            "$ref": "#/parameters/storagecontainersNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -180,7 +180,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/StorageContainersNameParameter"
+            "$ref": "#/parameters/storagecontainersNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageContainersPatch"
+              "$ref": "#/definitions/storagecontainersPatch"
             }
           }
         ],
@@ -204,13 +204,13 @@
           "200": {
             "description": "Updates the storage container resource.",
             "schema": {
-              "$ref": "#/definitions/StorageContainers"
+              "$ref": "#/definitions/storagecontainers"
             }
           },
           "201": {
             "description": "Updates the storage container resource.",
             "schema": {
-              "$ref": "#/definitions/StorageContainers"
+              "$ref": "#/definitions/storagecontainers"
             }
           }
         }
@@ -243,9 +243,9 @@
             }
           },
           "200": {
-            "description": "Lists all storage containers under the resource group.",
+            "description": "Lists all storagecontainers under the resource group.",
             "schema": {
-              "$ref": "#/definitions/StorageContainersListResult"
+              "$ref": "#/definitions/storagecontainersListResult"
             }
           }
         },
@@ -278,9 +278,9 @@
             }
           },
           "200": {
-            "description": "Lists all storage containers under the subscription.",
+            "description": "Lists all storagecontainers under the subscription.",
             "schema": {
-              "$ref": "#/definitions/StorageContainersListResult"
+              "$ref": "#/definitions/storagecontainersListResult"
             }
           }
         },
@@ -291,7 +291,7 @@
     }
   },
   "definitions": {
-    "StorageContainersProperties": {
+    "storagecontainersProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -319,12 +319,12 @@
           "description": "Total size of the disk in MB"
         },
         "status": {
-          "$ref": "#/definitions/StorageContainerStatus"
+          "$ref": "#/definitions/storageContainerStatus"
         }
       },
       "description": "Properties of a storage container resource"
     },
-    "StorageContainerStatus": {
+    "storageContainerStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
@@ -371,16 +371,16 @@
           }
         }
       },
-      "description": "storageContainerStatus defines the observed state of storage containers"
+      "description": "storageContainerStatus defines the observed state of storagecontainers"
     },
-    "StorageContainers": {
+    "storagecontainers": {
       "type": "object",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageContainersProperties"
+          "$ref": "#/definitions/storagecontainersProperties"
         },
         "id": {
           "type": "string",
@@ -430,7 +430,7 @@
       ],
       "description": "The storage container resource definition."
     },
-    "StorageContainersPatch": {
+    "storagecontainersPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -443,13 +443,13 @@
       },
       "description": "The storage container resource patch definition."
     },
-    "StorageContainersListResult": {
+    "storagecontainersListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StorageContainers"
+            "$ref": "#/definitions/storagecontainers"
           }
         },
         "nextLink": {
@@ -459,8 +459,8 @@
     }
   },
   "parameters": {
-    "StorageContainersNameParameter": {
-      "name": "storageContainersName",
+    "storagecontainersNameParameter": {
+      "name": "storagecontainersName",
       "in": "path",
       "required": true,
       "type": "string",

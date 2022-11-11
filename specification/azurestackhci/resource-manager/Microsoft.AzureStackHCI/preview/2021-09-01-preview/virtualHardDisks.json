@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualharddisks/{virtualHardDisksName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualharddisks/{virtualharddisksName}": {
       "get": {
         "operationId": "virtualharddisks_Retrieve",
-        "description": "Gets virtual hard disks by resource name",
+        "description": "Gets virtualharddisks by resource name",
         "x-ms-examples": {
           "GetVirtualHardDisk": {
             "$ref": "./examples/GetVirtualHardDisk.json"
@@ -54,7 +54,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualHardDisksNameParameter"
+            "$ref": "#/parameters/virtualharddisksNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "Retrieved the virtual hard disk resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+              "$ref": "#/definitions/virtualharddisks"
             }
           }
         }
@@ -94,7 +94,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualHardDisksNameParameter"
+            "$ref": "#/parameters/virtualharddisksNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+              "$ref": "#/definitions/virtualharddisks"
             }
           }
         ],
@@ -118,13 +118,13 @@
           "200": {
             "description": "Updates the virtual hard disk resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+              "$ref": "#/definitions/virtualharddisks"
             }
           },
           "201": {
             "description": "Creates the virtual hard disk resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+              "$ref": "#/definitions/virtualharddisks"
             }
           }
         }
@@ -144,7 +144,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualHardDisksNameParameter"
+            "$ref": "#/parameters/virtualharddisksNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -180,7 +180,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualHardDisksNameParameter"
+            "$ref": "#/parameters/virtualharddisksNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -190,7 +190,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisksPatch"
+              "$ref": "#/definitions/virtualharddisksPatch"
             }
           }
         ],
@@ -204,13 +204,13 @@
           "200": {
             "description": "Updates the virtual hard disk resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+              "$ref": "#/definitions/virtualharddisks"
             }
           },
           "201": {
             "description": "Updates the virtual hard disk resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+              "$ref": "#/definitions/virtualharddisks"
             }
           }
         }
@@ -243,9 +243,9 @@
             }
           },
           "200": {
-            "description": "Lists all virtual hard disks under the resource group.",
+            "description": "Lists all virtualharddisks under the resource group.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisksListResult"
+              "$ref": "#/definitions/virtualharddisksListResult"
             }
           }
         },
@@ -278,9 +278,9 @@
             }
           },
           "200": {
-            "description": "Lists all virtual hard disks under the subscription.",
+            "description": "Lists all virtualharddisks under the subscription.",
             "schema": {
-              "$ref": "#/definitions/VirtualHardDisksListResult"
+              "$ref": "#/definitions/virtualharddisksListResult"
             }
           }
         },
@@ -291,7 +291,7 @@
     }
   },
   "definitions": {
-    "VirtualHardDisksProperties": {
+    "virtualharddisksProperties": {
       "type": "object",
       "properties": {
         "blockSizeBytes": {
@@ -405,9 +405,9 @@
           }
         }
       },
-      "description": "VirtualHardDiskStatus defines the observed state of virtual hard disks"
+      "description": "VirtualHardDiskStatus defines the observed state of virtualharddisks"
     },
-    "VirtualHardDisks": {
+    "virtualharddisks": {
       "type": "object",
       "description": "The virtual hard disk resource definition.",
       "x-ms-azure-resource": true,
@@ -415,7 +415,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualHardDisksProperties"
+          "$ref": "#/definitions/virtualharddisksProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -431,7 +431,7 @@
         }
       ]
     },
-    "VirtualHardDisksPatch": {
+    "virtualharddisksPatch": {
       "type": "object",
       "properties": {
         "tags": {
@@ -444,13 +444,13 @@
       },
       "description": "The virtual hard disk resource patch definition."
     },
-    "VirtualHardDisksListResult": {
+    "virtualharddisksListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualHardDisks"
+            "$ref": "#/definitions/virtualharddisks"
           }
         },
         "nextLink": {
@@ -460,8 +460,8 @@
     }
   },
   "parameters": {
-    "VirtualHardDisksNameParameter": {
-      "name": "virtualHardDisksName",
+    "virtualharddisksNameParameter": {
+      "name": "virtualharddisksName",
       "in": "path",
       "required": true,
       "type": "string",
