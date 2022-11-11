@@ -725,14 +725,14 @@
         }
       }
     },
-    "/fine-tunes/{id}": {
+    "/fine-tunes/{fine_tune_id}": {
       "get": {
         "operationId": "FineTunes_Get",
         "summary": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
         "description": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
         "parameters": [
           {
-            "name": "id",
+            "name": "fine_tune_id",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -763,7 +763,7 @@
         "description": "Deletes the fine-tune job specified by the given fine_tune_id.",
         "parameters": [
           {
-            "name": "id",
+            "name": "fine_tune_id",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -796,7 +796,7 @@
             "name": "fine_tune_id",
             "in": "path",
             "required": true,
-            "description": "fine tune id for which to get events",
+            "description": "The identity of this item.",
             "type": "string"
           },
           {
@@ -821,9 +821,9 @@
     },
     "/fine-tunes/{fine_tune_id}/events": {
       "get": {
-        "operationId": "FineTunes_GetEvents",
-        "summary": "Gets the events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
-        "description": "Gets the events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
+        "operationId": "FineTunes_ListEvents",
+        "summary": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
+        "description": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
         "parameters": [
           {
             "name": "fine_tune_id",
