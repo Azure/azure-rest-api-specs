@@ -653,9 +653,9 @@
     "Workload": {
       "type": "object",
       "properties": {
-        "name": {
+        "context": {
           "type": "string",
-          "description": "name of the workload"
+          "description": "the scenario for the workload"
         },
         "toolset": {
           "$ref": "#/definitions/Toolset",
@@ -832,7 +832,7 @@
       "in": "path",
       "required": true,
       "description": "workloadImpact resource ",
-      "pattern": "^[a-zA-Z0-9-]{3,40}$",
+      "pattern": "^[a-zA-Z0-9-:]{3,120}$",
       "type": "string",
       "x-ms-parameter-location": "method"
     }

@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 
 @doc("Workload Impact properties")
 model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,40}$")
+  @pattern("^[a-zA-Z0-9-:]{3,120}$")
   @key("workloadImpactName")
   @segment("workloadImpacts")
   @doc("workloadImpact resource ")
@@ -58,8 +58,8 @@ model AdditionalProperties {
 
 @doc("Information about the impacted workload")
 model Workload {
-	@doc("name of the workload")
-	name?: string;
+	@doc("the scenario for the workload")
+	context?: string;
 	@doc("Tool used to interact with Azure. SDK, AzPortal, etc.., Other")
 	toolset?: Toolset;
 }
