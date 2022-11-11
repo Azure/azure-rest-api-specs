@@ -36,7 +36,7 @@ tag: package-flexibleserver-2021-06
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2022-05
+tag: package-flexibleserver-2022-05-01-privatepreview
 ```
 
 
