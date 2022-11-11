@@ -45,7 +45,13 @@
                 "ipAddressRange": "192.168.1.1/8",
                 "action": "Allow"
               }
-            ]
+            ],
+            "stickySessions": {
+              "affinity": "sticky",
+              "HttpOnly": true,
+              "secure": true,
+              "sameSite": "None"
+            }
           },
           "dapr": {
             "enabled": true,
@@ -173,7 +179,13 @@
                   "ipAddressRange": "192.168.1.1/8",
                   "action": "Allow"
                 }
-              ]
+              ],
+              "stickySessions": {
+                "affinity": "sticky",
+                "HttpOnly": true,
+                "secure": true,
+                "sameSite": "None"
+              }
             },
             "dapr": {
               "enabled": true,
