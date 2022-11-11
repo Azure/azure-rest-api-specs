@@ -17,8 +17,11 @@ using Cadl.Versioning;
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       scopes: []
     }]>)
-@service({title: "Azure OpenAI API", version: "2022-06-01-preview" })
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@service({title: "Azure OpenAI API"})
+@versioned(Azure.OpenAI.Versions)
+@versionedDependency(
+  [[Azure.OpenAI.Versions.v2022_06_01_preview, Azure.Core.Versions.v1_0_Preview_1]]
+)
 @server(
   "{endpoint}/openai",
   "API for managing and utilizing Azure Open AI endpoints",
@@ -32,3 +35,7 @@ https://westus.api.cognitive.microsoft.com).
 )
 @doc("API for managing and utilizing Azure Open AI endpoints")
 namespace Azure.OpenAI;
+
+enum Versions {
+  v2022_06_01_preview: "2022-06-01-preview",
+}
