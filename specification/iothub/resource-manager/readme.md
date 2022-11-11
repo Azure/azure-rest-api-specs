@@ -332,7 +332,7 @@ directive:
     from: iothub.json
     reason: Ensure non-breaking change.
   - suppress: LroLocationHeader
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/failover"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/failover"].post.responses.202.headers
     from: iothub.json
     reason: False Negative
 ```
