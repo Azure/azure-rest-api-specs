@@ -93,6 +93,7 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 ```yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+  - Microsoft.Security/preview/2015-06-01-preview/operations.json
 ```
 ### Tag: package-preview-2022-08
 

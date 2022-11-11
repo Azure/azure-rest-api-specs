@@ -34,20 +34,61 @@
     }
   },
   "paths": {
-    "/{apiManagementServiceResourceId}/providers/Microsoft.Security/apiCollections/{apiCollectionId}": {
+    "/{apiManagementServiceResourceId}/providers/Microsoft.Security/apiCollections": {
       "get": {
         "x-ms-examples": {
-          "Determine whether an Azure API Management API is onboarded to Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollectionOnboardingState_Get_example.json"
+          "Gets a list of Azure API Management APIs that have been onboarded to Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollection_List_example.json"
           }
         },
         "tags": [
-          "D4APIOnboardingStatus",
+          "D4APICollectionList",
           "APIMConfig"
         ],
-        "description": "Determine whether an Azure API Management API is onboarded to Defender for APIs. If the Azure API Management API is onboarded to Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
-        "summary": "Determine whether an Azure API Management API is onboarded to Defender for APIs",
-        "operationId": "APICollectionOnboardingState_Get",
+        "description": "Gets a list of Azure API Management APIs that have been onboarded to Defender for APIs. If an Azure API Management API is onboarded to Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Gets a list of Azure API Management APIs that have been onboarded to Defender for APIs",
+        "operationId": "APICollection_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiManagementServiceResourceId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{apiManagementServiceResourceId}/providers/Microsoft.Security/apiCollections/{apiCollectionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets an Azure API Management API if it has been onboarded to Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollection_Get_example.json"
+          }
+        },
+        "tags": [
+          "D4APICollection",
+          "APIMConfig"
+        ],
+        "description": "Gets an Azure API Management API if it has been onboarded to Defender for APIs. If an Azure API Management API is onboarded to Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Gets an Azure API Management API if it has been onboarded to Defender for APIs",
+        "operationId": "APICollection_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiManagementServiceResourceId"
@@ -155,9 +196,28 @@
     }
   },
   "definitions": {
+    "ApiCollectionResponseList": {
+      "type": "object",
+      "description": "Page of a list of API collections as represented by Defender for APIs.",
+      "properties": {
+        "value": {
+          "description": "API collections in this page.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCollectionResponse"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
     "ApiCollectionResponse": {
       "type": "object",
-      "description": "D4API representation of an API collection",
+      "description": "An API collection as represented by Defender for APIs.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -176,7 +236,7 @@
       "properties": {
         "additionalData": {
           "type": "object",
-          "description": "Additional data regarding the API collection",
+          "description": "Additional data regarding the API collection.",
           "additionalProperties": {
             "type": "string"
           }
