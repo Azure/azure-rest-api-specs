@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2022-11-20-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{apiManagementServiceResourceId}/providers/Microsoft.Security/apiCollections/{apiCollectionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Determine whether an Azure API Management API is onboarded to Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollectionOnboardingState_Get_example.json"
+          }
+        },
+        "tags": [
+          "D4APIOnboardingStatus",
+          "APIMConfig"
+        ],
+        "description": "Determine whether an Azure API Management API is onboarded to Defender for APIs. If the Azure API Management API is onboarded to Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Determine whether an Azure API Management API is onboarded to Defender for APIs",
+        "operationId": "APICollectionOnboardingState_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiManagementServiceResourceId"
+          },
+          {
+            "$ref": "#/parameters/ApiCollectionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Onboard an Azure API Management API to Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollectionOnboarding_Create_example.json"
+          }
+        },
+        "tags": [
+          "OnboardToD4API",
+          "APIMConfig"
+        ],
+        "description": "Onboard an Azure API Management API to Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Onboard an Azure API Management API to Defender for APIs",
+        "operationId": "APICollectionOnboarding_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiManagementServiceResourceId"
+          },
+          {
+            "$ref": "#/parameters/ApiCollectionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security recommendation task on a resource": {
+            "$ref": "./examples/ApiCollections/APICollectionOffboarding_Delete_example.json"
+          }
+        },
+        "tags": [
+          "OffboardFromD4API",
+          "APIMConfig"
+        ],
+        "description": "Offboard an Azure API Management API from Defender for APIs. The system will stop monitoring the operations within the Azure API Management API for intrusive behaviors.",
+        "summary": "Offboard an Azure API Management API from Defender for APIs",
+        "operationId": "APICollectionOffboarding_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiManagementServiceResourceId"
+          },
+          {
+            "$ref": "#/parameters/ApiCollectionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiCollectionResponse": {
+      "type": "object",
+      "description": "D4API representation of an API collection",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiCollectionProperties": {
+      "type": "object",
+      "description": "Describes the properties of an API collection.",
+      "properties": {
+        "additionalData": {
+          "type": "object",
+          "description": "Additional data regarding the API collection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiManagementServiceResourceId": {
+      "name": "apiManagementServiceResourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A string representing the ARM ResourceId of the Azure API Management Service resource."
+    },
+    "ApiCollectionId": {
+      "name": "apiCollectionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A string representing the apiCollections resource within the Microsoft.Security provider namespace. This string matches the Azure API Management API name."
+    }
+  }
+}
