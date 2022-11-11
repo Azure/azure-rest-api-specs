@@ -16,8 +16,7 @@ with the same model. With this method, points before and after a certain point
 are used to determine whether it is an anomaly. The entire detection can give
 user an overall status of the time series.
 """)
-// FIXME: use this operation definition once errors can be modified
-// op DetectEntireSeries is Azure.Core.Foundations.Operation<DetectRequest, EntireDetectResponse>;
+// To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DetectUnivariateEntireSeries(
   @body body: DetectRequest,
 ): EntireDetectResponse | AnomalyDetectorError;
@@ -29,8 +28,7 @@ op DetectUnivariateEntireSeries(
 This operation generates a model using the points that you sent into the API,
 and based on all data to determine whether the last point is anomalous.
 """)
-// FIXME: use this operation definition once errors can be modified
-// op DetectLastPoint is Azure.Core.Foundations.Operation<DetectRequest, LastDetectResponse>;
+// To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DetectUnivariateLastPoint(
   @body body: DetectRequest,
 ): LastDetectResponse | AnomalyDetectorError;
@@ -39,8 +37,7 @@ op DetectUnivariateLastPoint(
 @route("timeseries/changepoint/detect")
 @summary("Detect change point for the entire series")
 @doc("Evaluate change point score of every series point")
-// FIXME: use this operation definition once errors can be modified
-// op DetectChangePoint is Azure.Core.Foundations.Operation<ChangePointDetectRequest, ChangePointDetectResponse>;
+// To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DetectUnivariateChangePoint(
   @body body: ChangePointDetectRequest,
 ): ChangePointDetectResponse | AnomalyDetectorError;
