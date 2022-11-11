@@ -393,6 +393,12 @@
           },
           "201": {
             "description": "Created -- LoadTest resource created",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
@@ -457,7 +463,13 @@
             }
           },
           "202": {
-            "description": "Accepted -- LoadTest resource patch request accepted"
+            "description": "Accepted -- LoadTest resource patch request accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Resource provider error response about the failure.",
@@ -504,7 +516,13 @@
             "description": "OK -- resource deleted"
           },
           "202": {
-            "description": "Accepted -- LoadTest resource delete request accepted"
+            "description": "Accepted -- LoadTest resource delete request accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content -- resource deleted"
