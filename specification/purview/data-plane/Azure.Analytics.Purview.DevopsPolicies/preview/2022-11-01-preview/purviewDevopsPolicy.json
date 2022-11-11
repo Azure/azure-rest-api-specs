@@ -42,7 +42,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName": "values"
+          "itemName": "value"
         },
         "x-ms-examples": {
           "DevopsPolicy_List": {
@@ -51,7 +51,7 @@
         }
       }
     },
-    "/devops-policies/{purviewResourceName}/sqlSecurityAuditorRoles": {
+    "/devops-policies/{purviewResourceName}/sql-security-auditor-roles": {
       "put": {
         "tags": [
           "DevopsPolicy"
@@ -237,7 +237,7 @@
         }
       }
     },
-    "/devops-policies/{purviewResourceName}/sqlPerfMonitorRoles": {
+    "/devops-policies/{purviewResourceName}/sql-perf-monitor-roles": {
       "delete": {
         "tags": [
           "DevopsPolicy"
@@ -467,24 +467,6 @@
         "resourceAzurePath": {
           "type": "string",
           "description": "Optional resource path of the azure resource"
-        }
-      }
-    },
-    "DevopsPolicyScope": {
-      "type": "object",
-      "required": [
-        "type",
-        "referenceName"
-      ],
-      "properties": {
-        "type": {
-          "description": "The type of reference",
-          "default": "DataSourceReference",
-          "type": "string"
-        },
-        "referenceName": {
-          "description": "The name of resource as registered on the purview portal",
-          "type": "string"
         }
       }
     },
