@@ -258,6 +258,10 @@
       "type": "object",
       "description": "Describes the properties of an API collection.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the Azure API Management API."
+        },
         "additionalData": {
           "type": "object",
           "description": "Additional data regarding the API collection.",
@@ -277,6 +281,7 @@
       "description": "The name of the API Management service.",
       "minLength": 1,
       "maxLength": 50,
+      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
       "x-ms-parameter-location": "method"
     },
     "ApiCollectionIdParameter": {
