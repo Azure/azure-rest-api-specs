@@ -50,5 +50,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2022-10-27' && $(go)
 namespace: resourceconnector
-output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2022-10-27/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-10-27/$(namespace)
 ```
