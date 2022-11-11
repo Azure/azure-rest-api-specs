@@ -680,6 +680,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ModernizeProject_Update_MaximumSet_Gen": {
             "$ref": "./examples/ModernizeProject_Update_MaximumSet_Gen.json"
@@ -2498,19 +2501,16 @@
           "type": "string"
         },
         "webServerId": {
-          "description": "Gets the web server id.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web server id.",
+          "type": "string"
         },
         "webServerName": {
-          "description": "Gets the web server name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web server name.",
+          "type": "string"
         },
         "displayName": {
-          "description": "Gets the display name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the display name.",
+          "type": "string"
         },
         "directories": {
           "description": "Gets or sets application directories.",
@@ -2930,8 +2930,8 @@
       "properties": {
         "resourcesDeployed": {
           "description": "Gets or sets the list of resources deployed.",
-          "type": "array",
-          "items": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -2945,37 +2945,56 @@
           "type": "string",
           "readOnly": true
         },
-        "context": {
-          "description": "Gets or sets the context of deployed resources.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Gets or sets the status of deployed resources.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets or sets the type of deployed resources.",
-          "type": "string",
-          "readOnly": true
-        },
-        "healthErrors": {
-          "description": "Gets or sets the list of health errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorModel"
-          },
-          "readOnly": true
-        },
         "deploymentTimestamp": {
           "format": "date-time",
           "description": "Gets or sets the deployment timestamp.",
           "type": "string",
           "readOnly": true
         },
+        "targetAzureService": {
+          "description": "Gets or sets the deployment target service.",
+          "enum": [
+            "AzureKubernetesService",
+            "AzureAppServiceContainer",
+            "AzureAppServiceNative"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "WorkloadDeploymentTarget",
+            "modelAsString": true
+          }
+        },
+        "containerRegistry": {
+          "description": "Gets or sets the container registry.",
+          "type": "string",
+          "readOnly": true
+        },
+        "imageName": {
+          "description": "Gets or sets the image name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "imageTag": {
+          "description": "Gets or sets the image tag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "appIp": {
+          "description": "Gets or sets the app ip address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "secretStoreName": {
+          "description": "Gets or sets the secret store name.",
+          "type": "string"
+        },
         "customProperties": {
-          "$ref": "#/definitions/WorkloadDeploymentModelCustomProperties"
+          "description": "Gets or sets the custom deployed resource properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3402,19 +3421,16 @@
           "type": "string"
         },
         "webServerId": {
-          "description": "Gets the web server id.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web server id.",
+          "type": "string"
         },
         "webServerName": {
-          "description": "Gets the web server name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the web server name.",
+          "type": "string"
         },
         "displayName": {
-          "description": "Gets the display name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Gets or sets the display name.",
+          "type": "string"
         },
         "directories": {
           "description": "Gets or sets application directories.",
@@ -3499,6 +3515,13 @@
         "serverFqdn": {
           "description": "Gets or sets the server FQDN.",
           "type": "string"
+        },
+        "ipAddresses": {
+          "description": "Gets or sets list of ip addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "runAsAccountId": {
           "description": "Gets or sets the run as account id.",
@@ -3644,6 +3667,9 @@
           "type": "string"
         },
         "managedIdentityName": {
+          "type": "string"
+        },
+        "clientId": {
           "type": "string"
         }
       }
