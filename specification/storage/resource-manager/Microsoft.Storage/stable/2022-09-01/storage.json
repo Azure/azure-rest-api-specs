@@ -2194,7 +2194,10 @@
           {
             "name": "$maxpagesize",
             "in": "query",
-            "type": "string",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000,
+            "format": "int32",
             "description": "Optional, specifies the maximum number of encryption scopes that will be included in the list response."
           },
           {
