@@ -1491,11 +1491,11 @@
             }
           },
           "required": [
-              "containers",
-              "osType"
-            ]
-          }
+            "containers",
+            "osType"
+          ]
         }
+      }
     },
     "DeploymentExtensionSpec": {
       "description": "Extension sidecars to be added to the deployment.",
@@ -2416,17 +2416,6 @@
         "ccePolicy": {
           "type": "string",
           "description": "The base64 encoded confidential compute enforcement policy"
-        },
-        "isolationType": {
-          "type": "string",
-          "description": "The VM isolation type for the confidential container group",
-          "enum": [
-            "SevSnP"
-          ],
-          "x-ms-enum": {
-            "name": "IsolationType",
-            "modelAsString": true
-          }
         }
       }
     }
