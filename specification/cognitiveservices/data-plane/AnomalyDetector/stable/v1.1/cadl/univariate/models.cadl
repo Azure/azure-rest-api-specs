@@ -36,7 +36,6 @@ enum AnomalyDetectorErrorCodesKnownValues {
 @knownValues(AnomalyDetectorErrorCodesKnownValues)
 model AnomalyDetectorErrorCodes is string;
 
-// FIXME: what is expected for the values of the TimeGranularity model? there are differences with the enum values defined.
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
@@ -105,7 +104,6 @@ and imputeMode is \"fixed\".
 
 @doc("The definition of input timeseries points.")
 model TimeSeriesPoint {
-  // FIXME: is zonedDateTime the correct type?
   @doc("Optional argument, timestamp of a data point (ISO8601 format).")
   timestamp?: zonedDateTime;
 
@@ -114,14 +112,11 @@ model TimeSeriesPoint {
 }
 
 @doc("The response of entire anomaly detection.")
-// @resource("{ApiVersion}/timeseries/entire/detect")
 model EntireDetectResponse {
   @doc("""
 Frequency extracted from the series, zero means no recurrent pattern has been
 found.
 """)
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  // @key
   period: int32;
 
   @doc("""
@@ -193,14 +188,11 @@ model AnomalyDetectorError {
 }
 
 @doc("The response of last anomaly detection.")
-// @resource("{ApiVersion}/timeseries/last/detect")
 model LastDetectResponse {
   @doc("""
 Frequency extracted from the series, zero means no recurrent pattern has been
 found.
 """)
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  // @key
   period: int32;
 
   @doc("Suggested input series points needed for detecting the latest point.")
@@ -292,8 +284,6 @@ be accepted.
 }
 
 @doc("The response of change point detection.")
-// FIXME: should this be a resource?
-// @resource("timeseries/changepoint/detect")
 model ChangePointDetectResponse {
   @doc("""
 Frequency extracted from the series, zero means no recurrent pattern has been
