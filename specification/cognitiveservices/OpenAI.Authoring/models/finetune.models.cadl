@@ -31,15 +31,15 @@ model FineTune {
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
-  created_at?: int32;
+  createdAt?: int32;
 
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
-  updated_at?: int32;
+  updatedAt?: int32;
 
   @doc("The identity of this item.")
   @visibility("read")
-  @key("fine_tune_id")
+  @key("fineTuneId")
   id: string;
 
   @doc("The identifier of the base model used for the fine-tune.")
@@ -101,7 +101,7 @@ model Event {
 
   @doc("A timestamp when this event was created (in unix epochs).")
   @visibility("read")
-  created_at?: int32;
+  createdAt?: int32;
 
   @doc("The verbosity level of an event.")
   @visibility("read")

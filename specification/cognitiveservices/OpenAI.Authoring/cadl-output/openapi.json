@@ -134,13 +134,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "created_at": {
+                "createdAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updated_at": {
+                "updatedAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -181,14 +181,14 @@
         }
       }
     },
-    "/deployments/{deployment_id}": {
+    "/deployments/{deploymentId}": {
       "get": {
         "operationId": "Deployments_Get",
-        "summary": "Gets details for a single deployment specified by the given deployment_id.",
-        "description": "Gets details for a single deployment specified by the given deployment_id.",
+        "summary": "Gets details for a single deployment specified by the given deploymentId.",
+        "description": "Gets details for a single deployment specified by the given deploymentId.",
         "parameters": [
           {
-            "name": "deployment_id",
+            "name": "deploymentId",
             "in": "path",
             "required": true,
             "description": "The identifier of the deployment",
@@ -215,11 +215,11 @@
       },
       "patch": {
         "operationId": "Deployments_Update",
-        "summary": "Updates the mutable details of the deployment with the given deployment_id.",
-        "description": "Updates the mutable details of the deployment with the given deployment_id.",
+        "summary": "Updates the mutable details of the deployment with the given deploymentId.",
+        "description": "Updates the mutable details of the deployment with the given deploymentId.",
         "parameters": [
           {
-            "name": "deployment_id",
+            "name": "deploymentId",
             "in": "path",
             "required": true,
             "description": "The identifier of the deployment",
@@ -264,13 +264,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "created_at": {
+                "createdAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updated_at": {
+                "updatedAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -317,13 +317,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "created_at": {
+                "createdAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updated_at": {
+                "updatedAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -369,11 +369,11 @@
       },
       "delete": {
         "operationId": "Deployments_Delete",
-        "summary": "Deletes the deployment specified by the given deployment_id.",
-        "description": "Deletes the deployment specified by the given deployment_id.",
+        "summary": "Deletes the deployment specified by the given deploymentId.",
+        "description": "Deletes the deployment specified by the given deploymentId.",
         "parameters": [
           {
-            "name": "deployment_id",
+            "name": "deploymentId",
             "in": "path",
             "required": true,
             "description": "The identifier of the deployment",
@@ -476,13 +476,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "created_at": {
+                "createdAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updated_at": {
+                "updatedAt": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -525,14 +525,14 @@
         }
       }
     },
-    "/files/{file_id}": {
+    "/files/{fileId}": {
       "get": {
         "operationId": "Files_Get",
-        "summary": "Gets details for a single file specified by the given file_id including status,\nsize, purpose, etc.",
-        "description": "Gets details for a single file specified by the given file_id including status,\nsize, purpose, etc.",
+        "summary": "Gets details for a single file specified by the given fileId including status,\nsize, purpose, etc.",
+        "description": "Gets details for a single file specified by the given fileId including status,\nsize, purpose, etc.",
         "parameters": [
           {
-            "name": "file_id",
+            "name": "fileId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -559,11 +559,11 @@
       },
       "delete": {
         "operationId": "Files_Delete",
-        "summary": "Deletes the file with the given file_id.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
-        "description": "Deletes the file with the given file_id.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
+        "summary": "Deletes the file with the given fileId.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
+        "description": "Deletes the file with the given fileId.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
         "parameters": [
           {
-            "name": "file_id",
+            "name": "fileId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -586,14 +586,14 @@
         }
       }
     },
-    "/files/{file_id}/content": {
+    "/files/{fileId}/content": {
       "get": {
         "operationId": "Files_GetFileContent",
-        "summary": "Gets the content of the file specified by the given file_id.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
-        "description": "Gets the content of the file specified by the given file_id.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
+        "summary": "Gets the content of the file specified by the given fileId.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
+        "description": "Gets the content of the file specified by the given fileId.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
         "parameters": [
           {
-            "name": "file_id",
+            "name": "fileId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -725,14 +725,14 @@
         }
       }
     },
-    "/fine-tunes/{fine_tune_id}": {
+    "/fine-tunes/{fineTuneId}": {
       "get": {
         "operationId": "FineTunes_Get",
-        "summary": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
-        "description": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
+        "summary": "Gets details for a single fine-tune job specified by the given\nfineTuneId.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
+        "description": "Gets details for a single fine-tune job specified by the given\nfineTuneId.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
         "parameters": [
           {
-            "name": "fine_tune_id",
+            "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -759,11 +759,11 @@
       },
       "delete": {
         "operationId": "FineTunes_Delete",
-        "summary": "Deletes the fine-tune job specified by the given fine_tune_id.",
-        "description": "Deletes the fine-tune job specified by the given fine_tune_id.",
+        "summary": "Deletes the fine-tune job specified by the given fineTuneId.",
+        "description": "Deletes the fine-tune job specified by the given fineTuneId.",
         "parameters": [
           {
-            "name": "fine_tune_id",
+            "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -786,14 +786,14 @@
         }
       }
     },
-    "/fine-tunes/{fine_tune_id}/cancel": {
+    "/fine-tunes/{fineTuneId}/cancel": {
       "post": {
         "operationId": "FineTunes_Cancel",
-        "summary": "Cancels the processing of the fine-tune job specified by the given fine_tune_id.",
-        "description": "Cancels the processing of the fine-tune job specified by the given fine_tune_id.",
+        "summary": "Cancels the processing of the fine-tune job specified by the given fineTuneId.",
+        "description": "Cancels the processing of the fine-tune job specified by the given fineTuneId.",
         "parameters": [
           {
-            "name": "fine_tune_id",
+            "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
@@ -819,14 +819,14 @@
         }
       }
     },
-    "/fine-tunes/{fine_tune_id}/events": {
+    "/fine-tunes/{fineTuneId}/events": {
       "get": {
         "operationId": "FineTunes_ListEvents",
-        "summary": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
-        "description": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
+        "summary": "List events for the fine-tune job specified by the given fineTuneId.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
+        "description": "List events for the fine-tune job specified by the given fineTuneId.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
         "parameters": [
           {
-            "name": "fine_tune_id",
+            "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "fine tune id for which to get events",
@@ -1039,13 +1039,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "created_at": {
+        "createdAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1293,7 +1293,7 @@
           "description": "Defines the type of an object.",
           "readOnly": true
         },
-        "created_at": {
+        "createdAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this event was created (in unix epochs).",
@@ -1346,13 +1346,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "created_at": {
+        "createdAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1460,13 +1460,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "created_at": {
+        "createdAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
