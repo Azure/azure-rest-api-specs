@@ -98,14 +98,14 @@
                   "type": "string",
                   "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
                 },
-                "scale_settings": {
+                "scaleSettings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "description": "The template for adding updateable properties.",
               "required": [
-                "scale_settings"
+                "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrReplaceModel<Deployment>"
             }
@@ -160,14 +160,14 @@
                   "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
                   "readOnly": true
                 },
-                "scale_settings": {
+                "scaleSettings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "required": [
                 "id",
-                "scale_settings"
+                "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.CustomResponseFields<(anonymous model)>"
             }
@@ -238,7 +238,7 @@
                   "type": "string",
                   "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
                 },
-                "scale_settings": {
+                "scaleSettings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
@@ -290,14 +290,14 @@
                   "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
                   "readOnly": true
                 },
-                "scale_settings": {
+                "scaleSettings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "required": [
                 "id",
-                "scale_settings"
+                "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<Azure.Core.(anonymous model)>"
             }
@@ -343,7 +343,7 @@
                   "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
                   "readOnly": true
                 },
-                "scale_settings": {
+                "scaleSettings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
@@ -351,7 +351,7 @@
               "description": "A  resource was successfully created.",
               "required": [
                 "id",
-                "scale_settings"
+                "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<Azure.Core.(anonymous model)>"
             }
@@ -994,7 +994,7 @@
     "Capabilities": {
       "type": "object",
       "properties": {
-        "fine_tune": {
+        "fineTune": {
           "type": "boolean",
           "description": "A value indicating whether a model can be used for fine tuning.",
           "readOnly": true
@@ -1014,7 +1014,7 @@
           "description": "A value indicating whether a model supports embeddings.",
           "readOnly": true
         },
-        "scale_types": {
+        "scaleTypes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScaleType"
@@ -1065,7 +1065,7 @@
           "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
           "readOnly": true
         },
-        "scale_settings": {
+        "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
           "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
         }
@@ -1073,7 +1073,7 @@
       "description": "Deployments manage the reserved quota for Azure OpenAI models and make them\navailable for inference requests.",
       "required": [
         "id",
-        "scale_settings"
+        "scaleSettings"
       ]
     },
     "DeploymentList": {
@@ -1103,7 +1103,7 @@
           "type": "string",
           "description": "The new OpenAI model to be used for this deployment. Can be a base model or a\nfine tune."
         },
-        "scale_settings": {
+        "scaleSettings": {
           "$ref": "#/definitions/ScaleSettingsUpdate",
           "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
         }
@@ -1113,7 +1113,7 @@
     "Deprecation": {
       "type": "object",
       "properties": {
-        "fine_tune": {
+        "fineTuneEndDate": {
           "type": "integer",
           "format": "int32",
           "description": "The end date of fine tune support of this model. Will be `null` for fine tune\nmodels.",
@@ -1759,13 +1759,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "created_at": {
+        "createdAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updated_at": {
+        "updatedAt": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1781,7 +1781,7 @@
           "description": "The base model ID if this is a fine tune model; otherwise `null`.",
           "readOnly": true
         },
-        "fine_tune": {
+        "fineTuneId": {
           "type": "string",
           "description": "The fine tune job ID if this is a fine tune model; otherwise `null`.",
           "readOnly": true
@@ -1865,29 +1865,29 @@
     "ScaleSettings": {
       "type": "object",
       "properties": {
-        "scale_type": {
+        "scaleType": {
           "type": "string",
           "description": "Discriminator property for ScaleSettings."
         }
       },
       "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",
-      "discriminator": "scale_type",
+      "discriminator": "scaleType",
       "required": [
-        "scale_type"
+        "scaleType"
       ]
     },
     "ScaleSettingsUpdate": {
       "type": "object",
       "properties": {
-        "scale_type": {
+        "scaleType": {
           "type": "string",
           "description": "Discriminator property for ScaleSettingsUpdate."
         }
       },
       "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",
-      "discriminator": "scale_type",
+      "discriminator": "scaleType",
       "required": [
-        "scale_type"
+        "scaleType"
       ]
     },
     "ScaleType": {

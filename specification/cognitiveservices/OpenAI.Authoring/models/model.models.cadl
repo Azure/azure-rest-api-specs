@@ -31,11 +31,11 @@ model Model {
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
-  created_at?: int32;
+  createdAt?: int32;
 
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
-  updated_at?: int32;
+  updatedAt?: int32;
 
   @doc("The identity of this item.")
   @visibility("read")
@@ -48,7 +48,7 @@ model Model {
 
   @doc("The fine tune job ID if this is a fine tune model; otherwise `null`.")
   @visibility("read")
-  fine_tune?: string;
+  fineTuneId?: string;
 
   @doc("The capabilities of a base or fine tune model.")
   capabilities?: Capabilities;
@@ -68,7 +68,7 @@ models. The exact dates are specified in the properties.
 model Capabilities {
   @doc("A value indicating whether a model can be used for fine tuning.")
   @visibility("read")
-  fine_tune?: boolean;
+  fineTune?: boolean;
 
   @doc("A value indicating whether a model can be deployed.")
   @visibility("read")
@@ -84,7 +84,7 @@ model Capabilities {
 
   @doc("The supported scale types for deployments of this model.")
   @visibility("read")
-  scale_types?: ScaleType[];
+  scaleTypes?: ScaleType[];
 }
 
 @doc("""
@@ -101,7 +101,7 @@ The end date of fine tune support of this model. Will be `null` for fine tune
 models.
 """)
   @visibility("read")
-  fine_tune?: int32;
+  fineTuneEndDate?: int32;
 
   @doc("The end date of inference support of this model.")
   @visibility("read")
@@ -114,7 +114,7 @@ model ManualScaleSettings extends ScaleSettings {
   capacity: int32;
 
   @doc("Defines how scaling operations will be executed.")
-  scale_type: "manual";
+  scaleType: "manual";
 }
 
 @doc("Settings for the manual scale type.")
@@ -123,11 +123,11 @@ model ManualScaleSettingsUpdate extends ScaleSettingsUpdate {
   capacity?: int32;
 
   @doc("Defines how scaling operations will be executed.")
-  scale_type: "manual";
+  scaleType: "manual";
 }
 
 @doc("Settings for the standard scale type.")
 model StandardScaleSettings extends ScaleSettings {
   @doc("Defines how scaling operations will be executed.")
-  scale_type: "standard";
+  scaleType: "standard";
 }

@@ -57,14 +57,14 @@ supported.
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
-  scale_settings: ScaleSettings;
+  scaleSettings: ScaleSettings;
 }
 
 @doc("""
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
-@discriminator("scale_type")
+@discriminator("scaleType")
 model ScaleSettings {}
 
 @doc("Defines changes to the deployment.")
@@ -79,12 +79,12 @@ fine tune.
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
-  scale_settings?: ScaleSettingsUpdate;
+  scaleSettings?: ScaleSettingsUpdate;
 }
 
 @doc("""
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
-@discriminator("scale_type")
+@discriminator("scaleType")
 model ScaleSettingsUpdate {}
