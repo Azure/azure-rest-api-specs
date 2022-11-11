@@ -40,7 +40,7 @@ tag: package-preview-2022-05
 ```
 
 
-### Tag: package-preview-2022-05
+### Tag: package-flexibleserver-2022-05-01-privatepreview
 
 These settings apply only when `--tag=package-flexibleserver-2022-05-01-privatepreview` is specified on the command line.
 

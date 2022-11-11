@@ -808,6 +808,7 @@
       "required": true,
       "type": "string",
       "description": "The subscription ID of the target database server.",
+      "pattern": "([a-z0-9]){8,8}[-]([a-z0-9]){4,4}[-]([a-z0-9]){4,4}[-]([a-z0-9]){4,4}[-]([a-z0-9]){12,12}",
       "x-ms-parameter-location": "method"
     },
     "TargetDBServerResourceGroupNameParameter": {
@@ -816,6 +817,7 @@
       "required": true,
       "type": "string",
       "description": "The resource group name of the target database server.",
+      "pattern": "^[-a-z0-9A-Z._()]+[^.]$",
       "x-ms-parameter-location": "method"
     },
     "TargetDBServerNameParameter": {
@@ -824,6 +826,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the target database server.",
+      "pattern": "([-a-z0-9]){3,63}",
       "x-ms-parameter-location": "method"
     },
     "MigrationNameParameter": {
@@ -832,6 +835,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the migration.",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "MigrationListFilter": {
