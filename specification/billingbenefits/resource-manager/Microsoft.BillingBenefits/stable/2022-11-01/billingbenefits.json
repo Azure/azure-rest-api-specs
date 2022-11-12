@@ -103,6 +103,12 @@
         ],
         "responses": {
           "200": {
+            "description": "The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+            }
+          },
+          "201": {
             "description": "The request is being processed.",
             "schema": {
               "$ref": "#/definitions/SavingsPlanOrderAliasModel"
@@ -111,6 +117,10 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
               },
               "Retry-After": {
                 "type": "integer",
@@ -597,6 +607,12 @@
         ],
         "responses": {
           "200": {
+            "description": "The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderAliasResponse"
+            }
+          },
+          "201": {
             "description": "The request is being processed.",
             "schema": {
               "$ref": "#/definitions/ReservationOrderAliasResponse"
@@ -605,6 +621,10 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
               },
               "Retry-After": {
                 "type": "integer",
