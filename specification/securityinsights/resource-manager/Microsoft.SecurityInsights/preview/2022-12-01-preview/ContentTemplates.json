@@ -57,7 +57,8 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+            "pattern": "^[a-z][a-z0-9]*$",
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
@@ -114,6 +115,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "pattern": "^[a-z][a-z0-9]*$",
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
@@ -124,7 +126,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/templateModel"
+              "$ref": "#/definitions/template"
             }
           },
           "default": {
@@ -157,6 +159,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "pattern": "^[a-z][a-z0-9]*$",
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
@@ -188,7 +191,7 @@
         "value": {
           "description": "Array of templates.",
           "items": {
-            "$ref": "#/definitions/templateModel"
+            "$ref": "#/definitions/template"
           },
           "type": "array"
         },
@@ -202,7 +205,7 @@
         "value"
       ]
     },
-    "templateModel": {
+    "template": {
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
@@ -298,11 +301,14 @@
           "items": {
             "$ref": "#/definitions/templateProperties"
           },
+          "x-ms-identifiers": [
+            "contentId"
+          ],
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         },
         "mainTemplate": {
           "description": "The JSON string of the template",
-          "type": "object"
+          "type": "string"
         }
       }
     }
