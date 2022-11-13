@@ -37,3 +37,12 @@ These settings apply only when `--tag=package-2022-07-31` is specified on the co
 input-file:
   - stable/2022-07-31/marketplacecatalog.json
 ```
+
+### Tag: package-2022-07-31
+
+These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-01-preview'
+input-file:
+  - preview/2022-09-01-preview/marketplacecatalog.json
+```
