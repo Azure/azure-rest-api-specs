@@ -6,23 +6,23 @@
   },
   "paths": {},
   "definitions": {
-    "metadataContentId": {
+    "contentMetadataContentId": {
       "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a metadata, both will have the same contentId.",
       "type": "string"
     },
-    "metadataParentId": {
+    "contentMetadataParentId": {
       "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)",
       "type": "string"
     },
-    "metadataDisplayName": {
+    "contentMetadataDisplayName": {
       "description": "DisplayName of the content.",
       "type": "string"
     },
-    "metadataVersion": {
+    "contentMetadataVersion": {
       "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks",
       "type": "string"
     },
-    "metadataPackageKind": {
+    "contentMetadataPackageKind": {
       "description": "The package kind",
       "enum": [
         "Solution",
@@ -42,7 +42,7 @@
         ]
       }
     },
-    "metadataKind": {
+    "contentMetadataKind": {
       "type": "string",
       "description": "The kind of content the metadata is for.",
       "enum": [
@@ -122,7 +122,7 @@
         ]
       }
     },
-    "metadataTrueFalseFlag": {
+    "contentMetadataTrueFalseFlag": {
       "type": "string",
       "description": "The boolean value the metadata is for.",
       "enum": [
@@ -142,7 +142,7 @@
         ]
       }
     },
-    "metadataSource": {
+    "contentMetadataSource": {
       "description": "The original source of the content item, where it comes from.",
       "type": "object",
       "required": [
@@ -187,7 +187,7 @@
         }
       }
     },
-    "metadataAuthor": {
+    "contentMetadataAuthor": {
       "type": "object",
       "description": "Publisher or creator of the content item.",
       "properties": {
@@ -205,7 +205,7 @@
         }
       }
     },
-    "metadataSupport": {
+    "contentMetadataSupport": {
       "type": "object",
       "description": "Support information for the content item.",
       "required": [
@@ -250,7 +250,7 @@
         }
       }
     },
-    "metadataDependencies": {
+    "contentMetadataDependencies": {
       "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
       "type": "object",
       "properties": {
@@ -303,7 +303,7 @@
         }
       }
     },
-    "metadataCategories": {
+    "contentMetadataCategories": {
       "type": "object",
       "description": "ies for the solution content item",
       "properties": {
@@ -333,7 +333,7 @@
         }
       }
     },
-    "metadataProviders": {
+    "contentMetadataProviders": {
       "description": "Providers for the solution content item",
       "type": "array",
       "example": [
@@ -345,29 +345,29 @@
         "type": "string"
       }
     },
-    "metadataFirstPublishDate": {
+    "contentMetadataFirstPublishDate": {
       "description": "first publish date of solution content item",
       "type": "string",
       "format": "date"
     },
-    "metadataLastPublishDate": {
+    "contentMetadataLastPublishDate": {
       "description": "last publish date of solution content item",
       "type": "string",
       "format": "date"
     },
-    "metadataCustomVersion": {
+    "contentMetadataCustomVersion": {
       "description": "The custom version of the content. A optional free text",
       "type": "string"
     },
-    "metadataContentSchemaVersion": {
+    "contentMetadataContentSchemaVersion": {
       "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version",
       "type": "string"
     },
-    "metadataIcon": {
+    "contentMetadataIcon": {
       "description": "the icon identifier. this id can later be fetched from the metadata",
       "type": "string"
     },
-    "metadataThreatAnalysisTactics": {
+    "contentMetadataThreatAnalysisTactics": {
       "description": "the tactics the resource covers",
       "type": "array",
       "example": [
@@ -378,7 +378,7 @@
         "type": "string"
       }
     },
-    "metadataThreatAnalysisTechniques": {
+    "contentMetadataThreatAnalysisTechniques": {
       "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
       "type": "array",
       "example": [
@@ -390,7 +390,7 @@
         "type": "string"
       }
     },
-    "metadataPreviewImages": {
+    "contentMetadataPreviewImages": {
       "description": "preview image file names. These will be taken from the solution artifacts",
       "type": "array",
       "example": [
@@ -401,7 +401,7 @@
         "type": "string"
       }
     },
-    "metadataPreviewImagesDark": {
+    "contentMetadataPreviewImagesDark": {
       "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
       "type": "array",
       "example": [
@@ -411,6 +411,17 @@
       "items": {
         "type": "string"
       }
+    },
+    "WorkspaceName": {
+      "description": "The name of the workspace.",
+      "in": "path",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "workspaceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "parameters": {}

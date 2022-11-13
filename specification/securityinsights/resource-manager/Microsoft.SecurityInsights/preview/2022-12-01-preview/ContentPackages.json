@@ -57,8 +57,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
@@ -115,8 +114,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
@@ -161,8 +159,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
@@ -211,7 +208,7 @@
           },
           {
             "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
@@ -273,35 +270,35 @@
       "description": "Describes package properties",
       "properties": {
         "packageId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataContentId",
           "description": "The package id"
         },
         "packageKind": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataPackageKind",
           "description": "The package kind"
         },
         "installedVersion": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataVersion",
           "description": "The version of the installed package, null or absent means not installed."
         },
         "isNew": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataTrueFalseFlag",
           "description": "Flag indicates if this is a newly published package."
         },
         "isPreview": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataTrueFalseFlag",
           "description": "Flag indicates if this package is in preview."
         },
         "isFeatured": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataTrueFalseFlag",
           "description": "Flag indicates if this package is among the featured list."
         },
         "version": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataVersion",
           "description": "the latest version number of the package"
         },
         "displayName": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataDisplayName",
           "description": "The display name of the package"
         },
         "description": {
@@ -309,47 +306,47 @@
           "type": "string"
         },
         "source": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSource",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataSource",
           "description": "The source of the package"
         },
         "author": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataAuthor",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataAuthor",
           "description": "The author of the package"
         },
         "support": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSupport",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataSupport",
           "description": "The support tier of the package"
         },
         "dependencies": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDependencies",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataDependencies",
           "description": "The support tier of the package"
         },
         "providers": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataProviders",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataProviders",
           "description": "Providers for the package item"
         },
         "firstPublishDate": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataFirstPublishDate",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataFirstPublishDate",
           "description": "first publish date package item"
         },
         "lastPublishDate": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataLastPublishDate",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataLastPublishDate",
           "description": "last publish date for the package item"
         },
         "categories": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataCategories",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataCategories",
           "description": "The categories of the package"
         },
         "threatAnalysisTactics": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTactics",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataThreatAnalysisTactics",
           "description": "the tactics the resource covers"
         },
         "threatAnalyticsTechniques": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTechniques",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataThreatAnalysisTechniques",
           "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
         },
         "icon": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataIcon",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataIcon",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
         "packageItems": {
@@ -365,16 +362,16 @@
       ],
       "type": "object"
     },
-    "PackageInstallationProperties": {
+    "packageInstallationProperties": {
       "type": "object",
       "description": "Package installation properties.",
       "properties": {
         "packageKind": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataPackageKind",
           "description": "package kind."
         },
         "version": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataVersion",
           "description": "version of the package to be installed."
         }
       }
@@ -395,7 +392,7 @@
       "name": "packageInstallationProperties",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/PackageInstallationProperties"
+        "$ref": "#/definitions/packageInstallationProperties"
       },
       "x-ms-parameter-location": "method"
     }

@@ -57,8 +57,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
@@ -115,8 +114,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "#/parameters/templateIdParameter"
@@ -159,8 +157,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "pattern": "^[a-z][a-z0-9]*$",
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/definitions/WorkspaceName"
           },
           {
             "$ref": "#/parameters/templateIdParameter"
@@ -233,67 +230,67 @@
       "type": "object",
       "properties": {
         "contentId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataContentId",
           "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
         },
         "displayName": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataDisplayName",
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataKind",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataKind",
           "description": "The kind of content the template is for."
         },
         "version": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataVersion",
           "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
         },
         "source": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSource",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataSource",
           "description": "Source of the content.  This is where/how it was created."
         },
         "author": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataAuthor",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataAuthor",
           "description": "The creator of the content item."
         },
         "support": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSupport",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataSupport",
           "description": "Support information for the template - type, name, contact information"
         },
         "providers": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataProviders",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataProviders",
           "description": "Providers for the content item"
         },
         "categories": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataCategories",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataCategories",
           "description": "Categories for the  item"
         },
         "firstPublishDate": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataFirstPublishDate",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataFirstPublishDate",
           "description": "first publish date content item"
         },
         "lastPublishDate": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataLastPublishDate",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataLastPublishDate",
           "description": "last publish date for the content item"
         },
         "threatAnalysisTactics": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTactics",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataThreatAnalysisTactics",
           "description": "the tactics the resource covers"
         },
         "threatAnalysisTechniques": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTechniques",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataThreatAnalysisTechniques",
           "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
         },
         "previewImages": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPreviewImages",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataPreviewImages",
           "description": "preview image file names. These will be taken from the solution artifacts"
         },
         "previewImagesDark": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPreviewImagesDark",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataPreviewImagesDark",
           "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support"
         },
         "icon": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataIcon",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataIcon",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
         "dependantTemplates": {
