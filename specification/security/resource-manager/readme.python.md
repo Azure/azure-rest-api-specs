@@ -38,6 +38,15 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 multiapi: true
 batch:
+  - tag: package-preview-2022-08
+  - tag: package-preview-2022-07
+  - tag: package-2022-05
+  - tag: package-preview-2022-05
+  - tag: package-2022-03
+  - tag: package-2022-01-only
+  - tag: package-2022-01-preview-only
+  - tag: package-2021-10-preview-only
+  - tag: package-2021-07-preview-only
   - tag: package-2021-07-only
   - tag: package-2021-06-only
   - tag: package-2021-05-preview-only
@@ -59,6 +68,96 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/
 perform-load: false
+```
+
+### Tag: package-preview-2022-08 and python
+
+These settings apply only when `--tag=package-preview-2022-08 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-08' && $(python)
+namespace: azure.mgmt.security.v2022_08_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_08_01_preview
+```
+
+### Tag: package-preview-2022-07 and python
+
+These settings apply only when `--tag=package-preview-2022-07 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-07' && $(python)
+namespace: azure.mgmt.security.v2022_07_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_07_01_preview
+```
+
+### Tag: package-2022-05 and python
+
+These settings apply only when `--tag=package-2022-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-05' && $(python)
+namespace: azure.mgmt.security.v2022_05_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_05_01
+```
+
+### Tag: package-preview-2022-05 and python
+
+These settings apply only when `--tag=package-preview-2022-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-05' && $(python)
+namespace: azure.mgmt.security.v2022_05_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_05_01_preview
+```
+
+### Tag: package-2022-03 and python
+
+These settings apply only when `--tag=package-2022-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-03' && $(python)
+namespace: azure.mgmt.security.v2022_03_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_03_01
+```
+
+### Tag: package-2022-01-only and python
+
+These settings apply only when `--tag=package-2022-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-01-only' && $(python)
+namespace: azure.mgmt.security.v2022_01_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_01_01
+```
+
+### Tag: package-2022-01-preview-only and python
+
+These settings apply only when `--tag=package-2022-01-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-01-preview-only' && $(python)
+namespace: azure.mgmt.security.v2022_01_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_01_01_preview
+```
+
+### Tag: package-2021-10-preview-only and python
+
+These settings apply only when `--tag=package-2021-10-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-10-preview-only' && $(python)
+namespace: azure.mgmt.security.v2021_10_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2021_10_01_preview
+```
+
+### Tag: package-2021-07-preview-only and python
+
+These settings apply only when `--tag=package-2021-07-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-07-preview-only' && $(python)
+namespace: azure.mgmt.security.v2021_07_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2021_07_01_preview
 ```
 
 ### Tag: package-2021-07-only and python
