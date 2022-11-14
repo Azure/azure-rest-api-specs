@@ -15,8 +15,7 @@ using OpenAPI;
 //
 
 // TODO: Use `Uri` type when available: https://github.com/microsoft/cadl/issues/654
-@serviceTitle("Confidential Ledger Service")
-@serviceVersion("2022-08-13")
+@service({title: "Confidential Ledger Service", version: "2022-08-13"})
 @useAuth(OAuth2Auth<[MyFlow]>)
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
@@ -156,7 +155,7 @@ model PagedLedgerEntries {
 namespace ConfidentialLedger {
   @summary("Retrieves a list of collection ids present in the Confidential Ledger")
   @doc("Collection ids are user-created collections of ledger entries")
-  op listCollections is Azure.Core.NonPagedResourceList<CollectionModel>;
+  op listCollections is Azure.Core.Foundations.NonPagedResourceList<CollectionModel>;
 
   // TODO: add return model
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
