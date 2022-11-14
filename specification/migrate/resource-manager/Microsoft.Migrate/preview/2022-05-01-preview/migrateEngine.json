@@ -642,82 +642,6 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          "ModernizeProject"
-        ],
-        "summary": "Updates the modernizeProject.",
-        "description": "Performs update on the modernizeProject.",
-        "operationId": "ModernizeProject_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "in": "path",
-            "name": "modernizeProjectName",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "description": "ModernizeProject Name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "ModernizeProject properties.",
-            "schema": {
-              "$ref": "#/definitions/UpdateModernizeProjectModel"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ModernizeProjectModel"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "ModernizeProject_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ModernizeProject_Update_MaximumSet_Gen.json"
-          },
-          "ModernizeProject_Update_MinimumSet_Gen": {
-            "$ref": "./examples/ModernizeProject_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "ModernizeProject"
@@ -4267,7 +4191,7 @@
     "SecureString": {
       "type": "object",
       "properties": {
-        "Length": {
+        "length": {
           "format": "int32",
           "type": "integer"
         }
@@ -5257,7 +5181,7 @@
       "description": "Workload instance model properties.",
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "description": "Gets or sets the workload instance name.",
           "type": "string"
         },
