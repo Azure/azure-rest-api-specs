@@ -28,6 +28,10 @@ These are the global settings for the devcenter.
 openapi-type: data-plane
 azure-arm: false
 tag: package-preview-2022-11
+
+directive:
+  - suppress:
+      - HostParametersValidation # Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
 ```
 
 
