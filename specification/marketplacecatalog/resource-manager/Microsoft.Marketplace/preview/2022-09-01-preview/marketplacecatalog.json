@@ -540,6 +540,7 @@
     },
     "ProductSummary": {
       "type": "object",
+      "description": "Summary description of the product",
       "required": [
         "productType"
       ],
@@ -694,8 +695,13 @@
           "description": "Average rating for the offer",
           "format": "double"
         },
+        "ratingCount": {
+          "type": "integer",
+          "description": "Total number of ratings for the offer",
+          "format": "int32"
+        },
         "startingPrice": {
-          "description": "The offer starting price",
+          "description": "The product starting price",
           "allOf": [
             {
               "$ref": "#/definitions/MarketStartPrice"
@@ -754,7 +760,7 @@
     },
     "AzureBenefit": {
       "type": "string",
-      "description": "",
+      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit), Possible values: Eligible, NotEligible, if no value selected, this filter is ignored. Default: null",
       "enum": [
         "Eligible",
         "NotEligible"
@@ -766,7 +772,7 @@
     },
     "Badge": {
       "type": "string",
-      "description": "",
+      "description": "Badge type",
       "enum": [
         "PreferredSolution",
         "PowerBICertified",
@@ -779,7 +785,7 @@
     },
     "PublisherType": {
       "type": "string",
-      "description": "",
+      "description": "The publisher type",
       "enum": [
         "Microsoft",
         "ThirdParty"
@@ -791,7 +797,7 @@
     },
     "PublishingStage": {
       "type": "string",
-      "description": "",
+      "description": "The product publishing stage",
       "enum": [
         "Preview",
         "Public"
@@ -803,7 +809,7 @@
     },
     "ProductType": {
       "type": "string",
-      "description": "",
+      "description": "The delivery method, deployment model",
       "enum": [
         "None",
         "DevService",
@@ -836,7 +842,7 @@
     },
     "PricingType": {
       "type": "string",
-      "description": "",
+      "description": "Pricing type",
       "enum": [
         "Free",
         "FreeTrial",
@@ -851,7 +857,7 @@
     },
     "VmImageGeneration": {
       "type": "string",
-      "description": "",
+      "description": "VM Image Generation",
       "enum": [
         "Gen1",
         "Gen2"
@@ -863,7 +869,7 @@
     },
     "VmArchitectureType": {
       "type": "string",
-      "description": "",
+      "description": "VM Architecture Type",
       "enum": [
         "X64Gen1",
         "X64Gen2",
@@ -876,7 +882,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "",
+      "description": "VM Security type",
       "enum": [
         "None",
         "Trusted",
@@ -889,7 +895,7 @@
     },
     "RatingBucket": {
       "type": "string",
-      "description": "",
+      "description": "Rating Bucket",
       "enum": [
         "AboveOne",
         "AboveTwo",
@@ -903,6 +909,7 @@
     },
     "MarketStartPrice": {
       "type": "object",
+      "description": "The product starting price",
       "properties": {
         "market": {
           "type": "string",
@@ -934,6 +941,7 @@
     },
     "PlanSummary": {
       "type": "object",
+      "description": "Summary description of the plan",
       "required": [
         "productType"
       ],
@@ -943,7 +951,7 @@
           "description": "Plan id"
         },
         "cspState": {
-          "description": "A value indicating whether the product is available for purchase through CSP channel",
+          "description": "Value showing whether the product is available for purchase through CSP channel, Possible values, OptIn, OptOut, SelectiveOptIn, for more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
           "allOf": [
             {
               "$ref": "#/definitions/CspState"
@@ -994,7 +1002,7 @@
         },
         "artifacts": {
           "type": "array",
-          "description": "Plan-level resources and configuration files",
+          "description": "Plan level resources and configuration files",
           "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/Artifact"
@@ -1048,7 +1056,7 @@
     },
     "CspState": {
       "type": "string",
-      "description": "",
+      "description": "Value showing whether the product is available for purchase through CSP channel, Possible values, OptIn, OptOut, SelectiveOptIn, for more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
       "enum": [
         "OptIn",
         "OptOut",
@@ -1062,6 +1070,7 @@
     },
     "PlanMetadata": {
       "type": "object",
+      "description": "Additional metadata",
       "properties": {
         "generation": {
           "type": "string",
@@ -1083,6 +1092,7 @@
     },
     "PlanSkuRelation": {
       "type": "object",
+      "description": "Related plan information",
       "properties": {
         "sku": {
           "description": "The Sku",
@@ -1100,6 +1110,7 @@
     },
     "RelatedSku": {
       "type": "object",
+      "description": "The sku",
       "properties": {
         "name": {
           "type": "string",
@@ -1117,6 +1128,7 @@
     },
     "Artifact": {
       "type": "object",
+      "description": "Plan level resources and configuration files",
       "required": [
         "artifactType"
       ],
@@ -1130,7 +1142,7 @@
           "description": "Artifact uri"
         },
         "artifactType": {
-          "description": "Artifact type",
+          "description": "The type of the artifact",
           "allOf": [
             {
               "$ref": "#/definitions/ArtifactType"
@@ -1141,7 +1153,7 @@
     },
     "ArtifactType": {
       "type": "string",
-      "description": "",
+      "description": "The type of the artifact",
       "enum": [
         "Template",
         "Fragment",
@@ -1155,6 +1167,7 @@
     },
     "PurchaseDurationDiscount": {
       "type": "object",
+      "description": "The percentage discount for 3rd party virtual machines software reservations",
       "required": [
         "discountPercentage"
       ],
@@ -1172,6 +1185,7 @@
     },
     "LeadGeneration": {
       "type": "object",
+      "description": "Lead generation information",
       "properties": {
         "productId": {
           "type": "string",
@@ -1185,6 +1199,7 @@
     },
     "Link": {
       "type": "object",
+      "description": "Links to publisher external references documents",
       "properties": {
         "id": {
           "type": "string",
@@ -1203,7 +1218,6 @@
     "PageResultOfProductSummary": {
       "type": "object",
       "description": "Represents a feed of entities that includes additional information that OData formats support.",
-      "additionalProperties": true,
       "properties": {
         "nextPageLink": {
           "type": "string",
