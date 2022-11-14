@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2022-02-22
+tag: package-2022-08-08
 ```
 
 ### Tag: package-2015-10
@@ -351,6 +351,47 @@ input-file:
 - Microsoft.Automation/stable/2022-02-22/hybridRunbookWorkerGroup.json
 ```
 
+### Tag: package-2022-08-08
+
+These settings apply only when `--tag=package-2022-08-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-08'
+input-file:
+- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
+- Microsoft.Automation/stable/2022-08-08/account.json
+- Microsoft.Automation/stable/2022-08-08/certificate.json
+- Microsoft.Automation/stable/2022-08-08/connection.json
+- Microsoft.Automation/stable/2022-08-08/connectionType.json
+- Microsoft.Automation/stable/2022-08-08/credential.json
+- Microsoft.Automation/stable/2022-08-08/dscConfiguration.json
+- Microsoft.Automation/stable/2022-08-08/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2022-08-08/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2022-08-08/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2022-08-08/job.json
+- Microsoft.Automation/stable/2022-08-08/jobSchedule.json
+- Microsoft.Automation/stable/2022-08-08/linkedWorkspace.json
+- Microsoft.Automation/stable/2022-08-08/module.json
+- Microsoft.Automation/stable/2022-08-08/operations.json
+- Microsoft.Automation/stable/2022-08-08/python2package.json
+- Microsoft.Automation/stable/2022-08-08/python3package.json
+- Microsoft.Automation/stable/2022-08-08/runbook.json
+- Microsoft.Automation/stable/2022-08-08/schedule.json
+- Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2022-08-08/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2022-08-08/sourceControl.json
+- Microsoft.Automation/stable/2022-08-08/sourceControlSyncJob.json
+- Microsoft.Automation/stable/2022-08-08/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2022-08-08/variable.json
+```
+
 ---
 ## Suppression
 ``` yaml
@@ -360,7 +401,6 @@ directive:
     where: $.definitions.TestJob
   - suppress: BodyTopLevelProperties
     from: runbook.json
-    where: $.definitions.TestJob.properties
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: account.json
     where: $.definitions.Key.properties.KeyName
@@ -394,6 +434,103 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: deletedAutomationAccount.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: python3package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: account.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DefaultErrorResponseSchema
+    from: certificate.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: connection.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: connectionType.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DefaultErrorResponseSchema
+    from: credential.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.    
+  - suppress: DefaultErrorResponseSchema
+    from: dscConfiguration.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: dscNodeConfiguration.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: job.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: jobSchedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: linkedWorkspace.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: module.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: python2package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: runbook.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: schedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: softwareUpdateConfigurationMachineRun.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: softwareUpdateConfigurationRun.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: sourceControl.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: sourceControlSyncJob.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: sourceControlSyncJobStreams.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: variable.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DefaultErrorResponseSchema
+    from: runbook.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.   
+  - suppress: DeleteOperationResponses
+    from: credential.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DeleteOperationResponses
+    from: certificate.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: dscNodeConfiguration.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: hybridRunbookWorkerGroup.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: module.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+  - suppress: DeleteOperationResponses
+    from: python2package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DeleteOperationResponses
+    from: schedule.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DeleteOperationResponses
+    from: sourceControl.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DeleteOperationResponses
+    from: variable.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+  - suppress: DeleteOperationResponses
+    from: python2package.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.      
+
 ```
 
 ---
@@ -406,7 +543,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
