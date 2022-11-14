@@ -120,7 +120,7 @@
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Creates or update GovernanceRule on the given subscription.",
+        "description": "Creates or update GovernanceRule on the given subscription",
         "operationId": "GovernanceRules_CreateOrUpdate",
         "parameters": [
           {
@@ -290,7 +290,7 @@
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Creates or update GovernanceRule on the given security connector.",
+        "description": "Creates or update GovernanceRule on the given security connector",
         "operationId": "SecurityConnectorGovernanceRules_CreateOrUpdate",
         "parameters": [
           {
@@ -380,7 +380,8 @@
           "default": {
             "description": "Error response describing why the operation failed"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules": {
@@ -469,7 +470,7 @@
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Creates or update GovernanceRule on the given management group.",
+        "description": "Creates or update GovernanceRule on the given management group",
         "operationId": "ManagementGroupGovernanceRules_CreateOrUpdate",
         "parameters": [
           {
@@ -558,7 +559,7 @@
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Execute a GovernanceRule on the given subscription.",
+        "description": "Execute a GovernanceRule on the given subscription",
         "operationId": "GovernanceRules_RuleIdExecuteSingleSubscription",
         "parameters": [
           {
@@ -604,7 +605,7 @@
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Execute a GovernanceRule on the given security connector.",
+        "description": "Execute a GovernanceRule on the given security connector",
         "operationId": "GovernanceRules_RuleIdExecuteSingleSecurityConnector",
         "parameters": [
           {
@@ -656,7 +657,7 @@
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Execute GovernanceRule on the given management group.",
+        "description": "Execute GovernanceRule on the given management group",
         "operationId": "GovernanceRules_RuleIdExecuteSingleManagementGroup",
         "parameters": [
           {
@@ -1103,14 +1104,14 @@
     },
     "GovernanceRuleEmailNotification": {
       "type": "object",
-      "description": "The governance email weekly notification configuration.",
+      "description": "The governance email weekly notification configuration",
       "properties": {
         "disableManagerEmailNotification": {
-          "description": "Defines whether manager email notifications are disabled.",
+          "description": "Defines whether manager email notifications are disabled",
           "type": "boolean"
         },
         "disableOwnerEmailNotification": {
-          "description": "Defines whether owner email notifications are disabled.",
+          "description": "Defines whether owner email notifications are disabled",
           "type": "boolean"
         }
       }
@@ -1121,20 +1122,20 @@
       "readOnly": true,
       "properties": {
         "createdBy": {
-          "description": "Governance rule Created by object id (GUID).",
+          "description": "Governance rule Created by object id (GUID)",
           "type": "string"
         },
         "createdOn": {
-          "description": "Governance rule creation date.",
+          "description": "Governance rule creation date",
           "type": "string",
           "format": "date-time"
         },
         "updatedBy": {
-          "description": "Governance rule last updated by object id (GUID).",
+          "description": "Governance rule last updated by object id (GUID)",
           "type": "string"
         },
         "updatedOn": {
-          "description": "Governance rule last update date.",
+          "description": "Governance rule last update date",
           "type": "string",
           "format": "date-time"
         }
