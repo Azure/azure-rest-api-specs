@@ -37,14 +37,14 @@
     "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/governanceAssignments": {
       "get": {
         "x-ms-examples": {
-          "List security governanceAssignments": {
+          "List governanceAssignments": {
             "$ref": "./examples/GovernanceAssignments/ListGovernanceAssignments_example.json"
           }
         },
         "tags": [
           "GovernanceAssignments"
         ],
-        "description": "Get security governanceAssignments on all your resources inside a scope",
+        "description": "Get governanceAssignments on all your resources inside a scope",
         "operationId": "GovernanceAssignments_List",
         "parameters": [
           {
@@ -79,7 +79,7 @@
     "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}": {
       "get": {
         "x-ms-examples": {
-          "Get security governanceAssignment by specific governanceAssignmentKey": {
+          "Get governanceAssignment by specific governanceAssignmentKey": {
             "$ref": "./examples/GovernanceAssignments/GetGovernanceAssignment_example.json"
           }
         },
@@ -126,7 +126,7 @@
         "tags": [
           "GovernanceAssignments"
         ],
-        "description": "Creates or update a security GovernanceAssignment on the given subscription.",
+        "description": "Creates or update a GovernanceAssignment on the given subscription.",
         "operationId": "GovernanceAssignments_CreateOrUpdate",
         "parameters": [
           {
@@ -230,7 +230,7 @@
       "description": "Security GovernanceAssignment over a given scope",
       "properties": {
         "properties": {
-          "description": "Properties of a security governanceAssignment",
+          "description": "Properties of a governanceAssignment",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GovernanceAssignmentProperties"
         }
