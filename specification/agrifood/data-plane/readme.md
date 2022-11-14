@@ -26,7 +26,7 @@ These are the global settings for the agfood.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-03-31-preview
+tag: package-2022-11-01-preview
 
 directive:
   - suppress: LongRunningResponseStatusCode
@@ -40,4 +40,12 @@ These settings apply only when `--tag=package-2021-03-31-preview` is specified o
 ```yaml $(tag) == 'package-2021-03-31-preview'
 input-file:
   - Microsoft.AgFoodPlatform/preview/2021-03-31-preview/agfood.json
+```
+### Tag: package-2022-11-01-preview
+
+These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-01-preview'
+input-file:
+  - Microsoft.AgFoodPlatform/preview/2022-11-01-preview/agfood.json
 ```
