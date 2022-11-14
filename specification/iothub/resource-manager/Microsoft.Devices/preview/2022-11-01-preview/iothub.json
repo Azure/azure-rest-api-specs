@@ -1735,6 +1735,16 @@
             "description": "Long running manual failover operation for the IoT hub completed"
           },
           "202": {
+            "headers": {
+              "location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "Manual failover initiated"
           },
           "default": {
@@ -2454,6 +2464,10 @@
         },
         "rootCertificate": {
           "$ref": "#/definitions/RootCertificateProperties"
+        },
+        "allowDataPlanePreviewFeatures": {
+          "description": "When this property is set to true, the hub receives all data plane preview features at all times.",
+          "type": "boolean"
         }
       }
     },
