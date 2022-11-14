@@ -852,6 +852,215 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks": {
+      "get": {
+        "tags": [
+          "IncidentTasks"
+        ],
+        "description": "Gets all incident tasks.",
+        "operationId": "IncidentTasks_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentTaskList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IncidentTasks_List": {
+            "$ref": "./examples/incidents/IncidentTasks/IncidentTasks_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/tasks/{incidentTaskId}": {
+      "get": {
+        "tags": [
+          "IncidentTasks"
+        ],
+        "description": "Gets an incident task.",
+        "operationId": "IncidentTasks_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentTaskId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentTask"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncidentTasks_Get": {
+            "$ref": "./examples/incidents/IncidentTasks/IncidentTasks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IncidentTasks"
+        ],
+        "description": "Creates or updates the incident task.",
+        "operationId": "IncidentTasks_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentTaskId"
+          },
+          {
+            "$ref": "#/parameters/IncidentTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentTask"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IncidentTask"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncidentTasks_CreateOrUpdate": {
+            "$ref": "./examples/incidents/IncidentTasks/IncidentTasks_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IncidentTasks"
+        ],
+        "description": "Delete the incident task.",
+        "operationId": "IncidentTasks_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentTaskId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncidentTasks_Delete": {
+            "$ref": "./examples/incidents/IncidentTasks/IncidentTasks_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1190,6 +1399,100 @@
         }
       }
     },
+    "IncidentTask": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/IncidentTaskProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IncidentTaskList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentTask"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "IncidentTaskProperties": {
+      "required": [
+        "status",
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "The title of the task",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the task",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/IncidentTaskStatus"
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "The time the task was created",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "description": "The last time the task was updated",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "object",
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
+        },
+        "lastModifiedBy": {
+          "type": "object",
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
+        }
+      }
+    },
+    "IncidentTaskStatus": {
+      "enum": [
+        "New",
+        "Completed"
+      ],
+      "type": "string",
+      "example": "New",
+      "x-ms-enum": {
+        "name": "IncidentTaskStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "New",
+            "description": "A new task"
+          },
+          {
+            "value": "Completed",
+            "description": "A completed task"
+          }
+        ]
+      }
+    },
     "TeamInformation": {
       "description": "Describes team information",
       "type": "object",
@@ -1302,6 +1605,24 @@
       "schema": {
         "$ref": "#/definitions/TeamInformation"
       }
+    },
+    "IncidentTask": {
+      "name": "incidentTask",
+      "description": "The incident task",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/IncidentTask"
+      }
+    },
+    "IncidentTaskId": {
+      "in": "path",
+      "name": "incidentTaskId",
+      "description": "Incident task ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
     }
   },
   "securityDefinitions": {
