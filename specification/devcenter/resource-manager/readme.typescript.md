@@ -10,4 +10,5 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/devcenter/arm-devcenter"
   payload-flattening-threshold: 1
   generate-metadata: true
+title: DevCenterClient
 ```

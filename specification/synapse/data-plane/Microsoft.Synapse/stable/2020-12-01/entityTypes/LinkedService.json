@@ -2843,6 +2843,10 @@
           "description": "The password used in Basic authentication type.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "servicePrincipalId": {
           "description": "The application's client ID used in AadServicePrincipal authentication type.",
           "type": "object"
@@ -6692,6 +6696,10 @@
         "authentication": {
           "type": "object",
           "description": "Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string)."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "description": "The resource ID of the Synapse workspace. The format should be: /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}. Type: string (or Expression with resultType string)."
         }
       },
       "required": [

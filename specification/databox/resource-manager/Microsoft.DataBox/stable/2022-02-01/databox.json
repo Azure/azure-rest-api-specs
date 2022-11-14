@@ -2511,8 +2511,8 @@
           "type": "string",
           "readOnly": true
         },
-        "accountName": {
-          "description": "Account name.",
+        "accountId": {
+          "description": "Account id.",
           "type": "string",
           "readOnly": true
         },
@@ -2808,6 +2808,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataBoxDiskGranularCopyProgress"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "granularCopyLogDetails": {
+          "description": "Copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxDiskGranularCopyLogDetails"
           },
           "readOnly": true,
           "x-ms-identifiers": []

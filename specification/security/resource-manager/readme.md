@@ -546,6 +546,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -758,7 +759,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
