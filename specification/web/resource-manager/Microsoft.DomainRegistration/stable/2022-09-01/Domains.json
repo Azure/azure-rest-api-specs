@@ -828,6 +828,92 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/retrieveContactInfo": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Retrieve contact info for an app service domain.",
+        "description": "Retrieve the contact admin for an app service domain.",
+        "operationId": "Domains_RetrieveContactInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {},
+            "body": {
+              "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.DomainRegistration/domains/example.com",
+              "name": "example.com",
+              "type": "Microsoft.DomainRegistration/domains",
+              "location": "global",
+              "tags": {},
+              "properties": {
+                "contactAdmin": {
+                    "addressMailing": {
+                        "address1": "1 Microsoft Way",
+                        "city": "Redmond",
+                        "country": "US",
+                        "postalCode": "11111",
+                        "state": "WA"
+                    },
+                    "email": "tech@email.com",
+                    "fax": null,
+                    "jobTitle": null,
+                    "nameFirst": "Joe",
+                    "nameLast": "Doe",
+                    "nameMiddle": null,
+                    "organization": null,
+                    "phone": "+1.5555555555"
+                },
+                "registrationStatus": "Active",
+                "provisioningState": "Succeeded",
+                "nameServers": [
+                    "NS",
+                    "NS"
+                ],
+                "privacy": true,
+                "createdTime": "2022-06-08T22:33:39",
+                "expirationTime": "2023-06-08T22:33:39",
+                "autoRenew": true,
+                "readyForDnsRecordManagement": true,
+                "domainNotRenewableReasons": [
+                    "ExpirationNotInRenewalTimeRange"
+                ],
+                "dnsType": "DefaultDomainRegistrarDns"
+            }
+            }
+          },
+          "400": {},
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2022-09-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Renew an existing domain": {
+            "$ref": "./examples/RetrieveContactInfo.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
