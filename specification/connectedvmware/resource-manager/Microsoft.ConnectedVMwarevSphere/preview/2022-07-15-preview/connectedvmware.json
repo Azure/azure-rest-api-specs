@@ -71,7 +71,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/assessPatches": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/assessPatches": {
       "post": {
         "tags": [
           "VirtualMachines"
@@ -98,7 +98,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -128,7 +128,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/installPatches": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/installPatches": {
       "post": {
         "tags": [
           "VirtualMachines"
@@ -155,7 +155,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3397,7 +3397,7 @@
         "tags": [
           "HybridIdentityMetadata"
         ],
-        "operationId": "HybridIdentityMetadata_ListByVm",
+        "operationId": "HybridIdentityMetadata_List",
         "summary": "Implements GET HybridIdentityMetadata in a vm.",
         "description": "Returns the list of HybridIdentityMetadata of the given vm.",
         "x-ms-examples": {
@@ -3445,7 +3445,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/extensions/{extensionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/extensions/{extensionName}": {
       "put": {
         "tags": [
           "MachineExtensions"
@@ -3463,7 +3463,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3533,7 +3533,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3600,7 +3600,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3655,7 +3655,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3690,7 +3690,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/extensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/extensions": {
       "get": {
         "tags": [
           "MachineExtensions"
@@ -3708,7 +3708,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3746,7 +3746,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{name}/upgradeExtensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}/upgradeExtensions": {
       "post": {
         "tags": [
           "MachineExtensions Upgrade"
@@ -3764,7 +3764,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -4002,7 +4002,7 @@
         "tags": [
           "GuestAgents"
         ],
-        "operationId": "GuestAgents_ListByVm",
+        "operationId": "GuestAgents_List",
         "summary": "Implements GET GuestAgent in a vm.",
         "description": "Returns the list of GuestAgent of the given vm.",
         "x-ms-examples": {
