@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
@@ -235,7 +235,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
       "get": {
         "tags": [
           "Migrations"
@@ -283,7 +283,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
       "post": {
         "summary": "Check migration name validity and availability",
         "description": "This method checks whether a proposed migration name is valid and available.",
@@ -803,7 +803,7 @@
   },
   "parameters": {
     "TargetDBServerSubscriptionIdParameter": {
-      "name": "targetDBServerSubscriptionId",
+      "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
@@ -812,7 +812,7 @@
       "x-ms-parameter-location": "method"
     },
     "TargetDBServerResourceGroupNameParameter": {
-      "name": "targetDBServerResourceGroupName",
+      "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
