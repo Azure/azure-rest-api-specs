@@ -36,7 +36,7 @@ tag: package-flexibleserver-2021-06
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-flexibleserver-2022-05-01-privatepreview
+tag: package-2020-01-01
 ```
 
 
@@ -58,7 +58,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/PrivateDnsZone.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/ServerStartStopRestart.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/VirtualNetwork.json
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/common-types.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Migrations.json
 ```
 ### Tag: package-flexibleserver-2022-03-preview
