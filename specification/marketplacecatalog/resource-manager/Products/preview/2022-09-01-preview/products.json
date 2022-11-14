@@ -22,6 +22,7 @@
         "tags": [
           "SinglePrivateProduct"
         ],
+        "summary": "Returns a single product directly from BigCat, by subscription as audience",
         "operationId": "SinglePrivateProduct_Get",
         "parameters": [
           {
@@ -119,7 +120,7 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "Returns a single offer directly from BigCat, by subscription as audience",
+            "description": "Returns a single product directly from BigCat, by subscription as audience",
             "schema": {
               "$ref": "#/definitions/ProductSummary"
             }
@@ -127,7 +128,7 @@
           "404": {
             "x-nullable": false,
             "x-ms-error-response": true,
-            "description": "In case the offer does not exist / does not exist in the given market / is not available for the given audience",
+            "description": "In case the product does not exist, does not exist in the given market or is not available for the given audience",
             "schema": {
               "type": "string"
             }
@@ -175,7 +176,8 @@
         "tags": [
           "TenantBasedSingleProduct"
         ],
-        "operationId": "TenantBasedSingleProduct_Get",
+        "summary": "Returns a single product directly from BigCat, by tenant as audience",
+        "operationId": "TenantBasedSingleOffer_Get",
         "parameters": [
           {
             "type": "string",
@@ -302,15 +304,15 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "Returns a single offer directly from BigCat, by tenant as audience",
+            "description": "Returns a single product directly from BigCat, by tenant as audience",
             "schema": {
               "$ref": "#/definitions/ProductSummary"
             }
           },
           "404": {
             "x-nullable": false,
+            "description": "In case the product does not exist, does not exist in the given market or is not available for the given audience",
             "x-ms-error-response": true,
-            "description": "In case the offer does not exist / does not exist in the given market / is not available for given audience",
             "schema": {
               "type": "string"
             }
@@ -349,6 +351,271 @@
         "x-ms-examples": {
           "TenantBasedProduct_Get": {
             "$ref": "./examples/TenantBasedSingleProduct_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products": {
+      "get": {
+        "tags": [
+          "ListingSubscriptionBasedPrivateProducts"
+        ],
+        "summary": "Gets a list of private products available for a given subscription Id",
+        "operationId": "PrivateOffers_Get",
+        "parameters": [
+          {
+            "type": "object",
+            "name": "odataQueryOptions",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/ODataQueryOptionsOfProductSummary"
+            },
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "description": "SubscriptionId",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Api version",
+            "default": "2022-09-01-preview",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "storefront",
+            "in": "query",
+            "description": "Storefront",
+            "default": "azure",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Market",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "To exclude public products and plans",
+            "default": false,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: '$select=displayName'"
+          },
+          {
+            "type": "string",
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
+          },
+          {
+            "type": "string",
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline. Example: '$expand=startingPrice'"
+          },
+          {
+            "type": "string",
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Example: '$orderby=displayName desc'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a list of public, private and preview products, by subscription as audience",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProductSummary"
+              }
+            }
+          },
+          "401": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "Authorization token is not in allowed list",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "403": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "Authorization token validation has failed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "In case request is malformed",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products": {
+      "get": {
+        "tags": [
+          "ListingTenantBasedPrivateProducts"
+        ],
+        "summary": "Gets a list of private products available for a given tenant Id",
+        "operationId": "TenantBasedAllOffer_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "x-ms-client-tenant-id",
+            "x-originalName": "tenantId",
+            "in": "header",
+            "description": "Tenant Id",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "x-ms-client-principal-name",
+            "x-originalName": "userPrincipal",
+            "in": "header",
+            "description": "User principal",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Api version",
+            "default": "2022-09-01-preview",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "x-ms-pricing-audience",
+            "x-originalName": "pricingAudienceHeaderValue",
+            "in": "header",
+            "description": "Pricing audience",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "description": "Language",
+            "default": "en",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "storefront",
+            "in": "query",
+            "description": "Storefront",
+            "default": "azure",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Market",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "To exclude public products and plans",
+            "default": false,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: '$select=displayName'"
+          },
+          {
+            "type": "string",
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
+          },
+          {
+            "type": "string",
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline. Example: '$expand=startingPrice'"
+          },
+          {
+            "type": "string",
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Example: '$orderby=displayName desc'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns a list of public, private and preview products, by tenant as audience",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProductSummary"
+              }
+            }
+          },
+          "401": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "Authorization token is not in allowed list",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "403": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "Authorization token validation has failed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "x-nullable": false,
+            "x-ms-error-response": true,
+            "description": "In case request is malformed",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
