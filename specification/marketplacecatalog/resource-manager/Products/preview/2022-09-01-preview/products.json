@@ -360,18 +360,9 @@
         "tags": [
           "ListingSubscriptionBasedPrivateProducts"
         ],
-        "summary": "Gets a list of private products available for a given subscription Id",
+        "summary": "Returns a list of public, private and preview products, by subscription as audience",
         "operationId": "PrivateOffers_Get",
         "parameters": [
-          {
-            "type": "object",
-            "name": "odataQueryOptions",
-            "in": "query",
-            "x-schema": {
-              "$ref": "#/definitions/ODataQueryOptionsOfProductSummary"
-            },
-            "x-nullable": true
-          },
           {
             "type": "string",
             "name": "subscriptionId",
@@ -451,10 +442,7 @@
             "x-nullable": false,
             "description": "Returns a list of public, private and preview products, by subscription as audience",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ProductSummary"
-              }
+              "$ref": "#/definitions/PageResultOfProductSummary"
             }
           },
           "401": {
@@ -489,7 +477,7 @@
         "tags": [
           "ListingTenantBasedPrivateProducts"
         ],
-        "summary": "Gets a list of private products available for a given tenant Id",
+        "summary": "Returns a list of public, private and preview products, by tenant as audience",
         "operationId": "TenantBasedAllOffer_Get",
         "parameters": [
           {
@@ -587,10 +575,7 @@
             "x-nullable": false,
             "description": "Returns a list of public, private and preview products, by tenant as audience",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ProductSummary"
-              }
+              "$ref": "#/definitions/PageResultOfProductSummary"
             }
           },
           "401": {
