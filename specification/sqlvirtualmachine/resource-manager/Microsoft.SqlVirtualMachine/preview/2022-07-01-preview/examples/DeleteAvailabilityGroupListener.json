@@ -4,11 +4,19 @@
     "resourceGroupName": "testrg",
     "sqlVirtualMachineGroupName": "testvmgroup",
     "availabilityGroupListenerName": "agl-test",
-    "api-version": "2022-02-01-preview"
+    "api-version": "2022-07-01-preview"
   },
   "responses": {
     "200": {},
-    "202": {},
-    "204": {}
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    },
+    "204": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
   }
 }
