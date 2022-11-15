@@ -391,6 +391,40 @@
           "readOnly": true
         }
       }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The full qualified ARM ID of an event."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID that uniquely identifies an event. "
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The etag for the resource."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {   
