@@ -137,7 +137,7 @@
           "enum": [
             "NoExplanation"
           ],
-          "x-ms_enum": {
+          "x-ms-enum": {
             "name": "noResultExplanation",
             "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why.",
             "values": [
@@ -219,7 +219,7 @@
     },
     "AvoidFeatures": {
       "name": "avoidFeatures",
-      "description": "To avoid certain types of connectors in the resulting path. Multiple comma separated values can be selected.",
+      "description": "To avoid certain types of connectors in the resulting path. Multiple values can be specified.",
       "type": "array",
       "items": {
         "type": "string",
@@ -227,7 +227,7 @@
           "stairs",
           "elevators"
         ],
-        "x-ms_enum": {
+        "x-ms-enum": {
           "name": "avoidFeatures",
           "description": "To avoid certain types of connectors in the resulting path.",
           "values": [
@@ -242,7 +242,7 @@
     },
     "MinWidth": {
       "name": "minWidth",
-      "description": "The minimum radius (in meters) of openings in the resulting path. For example, if you specified a minimum radius width of 0.5, the searched path will avoid openings less than 1 meters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by the same distance.",
+      "description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a minimum width of 0.5, the searched path will avoid openings less than 0.5 meters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by half of the distance provided.",
       "type": "number",
       "in": "query",
       "default": "0.0",
@@ -256,7 +256,7 @@
         "operationId": "Wayfinding_GetPath",
         "x-ms-examples": {
           "Get the shortest path between two points in the facility.": {
-            "$ref": "./examples/wayfind/Wayfind_GetPath.json"
+            "$ref": "./examples/wayfind/Wayfinding_GetPath.json"
           }
         },
         "parameters": [
