@@ -134,6 +134,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a SQL Analytics pool": {
             "$ref": "./examples/UpdateSqlPool.json"
@@ -189,7 +190,8 @@
             "description": "Accepted"
           },
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "default": {
             "schema": {
@@ -246,13 +248,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
@@ -368,11 +370,14 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -430,11 +435,14 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
             "description": "Accepted"
           },
           "default": {
@@ -548,7 +556,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -613,7 +622,8 @@
         ],
         "responses": {
           "404": {
-            "description": ""
+            "description": "",
+            "x-ms-error-response": true
           },
           "200": {
             "schema": {
@@ -679,13 +689,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
@@ -700,6 +710,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get the result of an operation on a SQL Analytics pool": {
             "$ref": "./examples/GetLocationHeaderResultWithSqlPool.json"
@@ -1463,7 +1474,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             },
             "description": ""
           }
@@ -5317,7 +5328,12 @@
       "properties": {
         "tier": {
           "type": "string",
-          "description": "The service tier"
+          "description": "The service tier",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "name": {
           "type": "string",
@@ -5343,7 +5359,11 @@
         "collation": {
           "type": "string",
           "description": "Collation mode",
-          "default": ""
+          "default": "",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sourceDatabaseId": {
           "type": "string",
@@ -5369,7 +5389,11 @@
         "restorePointInTime": {
           "type": "string",
           "description": "Snapshot time to restore",
-          "format": "date-time"
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "createMode": {
           "type": "string",
@@ -5432,6 +5456,7 @@
         "properties": {
           "title": "Metadata Sync Config properties",
           "description": "Metadata Sync Config properties",
+          "type": "object",
           "properties": {
             "enabled": {
               "type": "boolean",
@@ -5448,6 +5473,7 @@
       }
     },
     "GeoBackupPolicyProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -5473,6 +5499,7 @@
       "description": "The properties of the geo backup policy."
     },
     "GeoBackupPolicy": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GeoBackupPolicyProperties",
@@ -5501,6 +5528,7 @@
       "description": "A database geo backup policy."
     },
     "GeoBackupPolicyListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5513,6 +5541,7 @@
       "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
+      "type": "object",
       "properties": {
         "aggregationFunction": {
           "description": "The function that is used to aggregate each query's metrics.",
@@ -5590,12 +5619,14 @@
             "$ref": "#/definitions/QueryStatistic"
           },
           "description": "The list of queries.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryStatistic": {
+      "type": "object",
       "properties": {
         "queryId": {
           "description": "The id of the query",
@@ -5608,12 +5639,14 @@
             "$ref": "#/definitions/QueryInterval"
           },
           "description": "The list of query intervals.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryInterval": {
+      "type": "object",
       "properties": {
         "intervalStartTime": {
           "description": "The start time of the measurement interval (ISO8601 format).",
@@ -5633,12 +5666,14 @@
             "$ref": "#/definitions/QueryMetric"
           },
           "description": "The list of query metrics during this interval.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "A database query."
     },
     "QueryMetric": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the metric",
@@ -5674,13 +5709,15 @@
       "description": "A database query."
     },
     "TopQueriesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TopQueries"
           },
-          "description": "The list of top queries."
+          "description": "The list of top queries.",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5793,6 +5830,7 @@
       }
     },
     "ReplicationLinkProperties": {
+      "type": "object",
       "properties": {
         "isTerminationAllowed": {
           "readOnly": true,
@@ -5880,6 +5918,7 @@
       "description": "Represents the properties of a Sql pool replication link."
     },
     "ReplicationLink": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -5905,6 +5944,7 @@
       "description": "Represents a Sql pool replication link."
     },
     "ReplicationLinkListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5934,7 +5974,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "minDurationInMinutes": {
           "format": "int32",
@@ -5986,7 +6027,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowTimeRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6038,6 +6080,7 @@
       }
     },
     "TransparentDataEncryptionProperties": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -6054,6 +6097,7 @@
       "description": "Represents the properties of a database transparent data encryption."
     },
     "TransparentDataEncryption": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -6126,19 +6170,31 @@
         "retentionDays": {
           "format": "int32",
           "description": "Specifies the number of days to keep in the audit logs in the storage account.",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "auditActionsAndGroups": {
           "description": "Specifies the Actions-Groups and Actions to audit.\r\n\r\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\r\n\r\nBATCH_COMPLETED_GROUP,\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\r\nFAILED_DATABASE_AUTHENTICATION_GROUP.\r\n\r\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\r\n\r\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\r\n\r\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\r\nBACKUP_RESTORE_GROUP\r\nDATABASE_LOGOUT_GROUP\r\nDATABASE_OBJECT_CHANGE_GROUP\r\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\r\nDATABASE_OPERATION_GROUP\r\nDATABASE_PERMISSION_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\r\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\r\nFAILED_DATABASE_AUTHENTICATION_GROUP\r\nSCHEMA_OBJECT_ACCESS_GROUP\r\nSCHEMA_OBJECT_CHANGE_GROUP\r\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\r\nUSER_CHANGE_PASSWORD_GROUP\r\nBATCH_STARTED_GROUP\r\nBATCH_COMPLETED_GROUP\r\n\r\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\r\n\r\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\r\n\r\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\r\nSELECT\r\nUPDATE\r\nINSERT\r\nDELETE\r\nEXECUTE\r\nRECEIVE\r\nREFERENCES\r\n\r\nThe general form for defining an action to be audited is:\r\n{action} ON {object} BY {principal}\r\n\r\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\r\n\r\nFor example:\r\nSELECT on dbo.myTable by public\r\nSELECT on DATABASE::myDatabase by public\r\nSELECT on SCHEMA::mySchema by public\r\n\r\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           }
         },
         "storageAccountSubscriptionId": {
           "format": "uuid",
           "description": "Specifies the blob storage subscription Id.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
@@ -6301,6 +6357,7 @@
       }
     },
     "SqlPoolUsage": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -6344,13 +6401,15 @@
       "description": "The Sql pool usages."
     },
     "SqlPoolUsageListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolUsage"
           },
-          "description": "The list of usages for the Sql pool."
+          "description": "The list of usages for the Sql pool.",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
@@ -6847,7 +6906,8 @@
           "items": {
             "$ref": "#/definitions/VulnerabilityAssessmentScanError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "storageContainerPath": {
           "description": "The scan results storage container path.",
@@ -6903,14 +6963,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAddresses": {
           "description": "Specifies an array of e-mail addresses to which the alert is sent.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators.",
@@ -6984,7 +7052,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentRuleBaselineItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7217,6 +7286,7 @@
       }
     },
     "DataMaskingPolicyProperties": {
+      "type": "object",
       "properties": {
         "dataMaskingState": {
           "type": "string",
@@ -7256,6 +7326,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7382,6 +7453,7 @@
       }
     },
     "DataMaskingRule": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -7407,6 +7479,7 @@
       "description": "Represents a Sql pool data masking rule."
     },
     "DataMaskingRuleProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -7487,6 +7560,7 @@
       "description": "The properties of a Sql pool data masking rule."
     },
     "DataMaskingRuleListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

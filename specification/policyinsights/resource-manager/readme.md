@@ -27,7 +27,7 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2022-03
+tag: package-2022-09
 ```
 
 ### Validations
@@ -56,6 +56,8 @@ directive:
     where:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"].get.produces[0]
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
+      - $.paths["/{scope}/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata"].get.produces[0]
+
 
   - suppress: OperationIdNounConflictingModelNames
     reason: Metadata is already in plural form.
@@ -136,16 +138,51 @@ directive:
     transform: delete $['post']['x-ms-pageable']['operationName']
 ```
 
-### Tag: package-2022-03
 
-These settings apply only when `--tag=package-2022-03` is specified on the command line.
+### Tag: package-2022-09
 
-```yaml $(tag) == 'package-2022-03'
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+  - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+  - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
+  - Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
+  - Microsoft.PolicyInsights/stable/2022-04-01/operations.json
+  - Microsoft.PolicyInsights/stable/2022-09-01/attestations.json
+```
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04'
 input-file:
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
 - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
+- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
+- Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
+- Microsoft.PolicyInsights/stable/2022-04-01/operations.json
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
@@ -155,16 +192,18 @@ input-file:
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
 - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
 ```
+
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
@@ -175,6 +214,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 - Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
@@ -190,6 +230,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
 ```
@@ -204,6 +245,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/preview/2020-07-01-preview/checkPolicyRestrictions.json
 ```
@@ -218,6 +260,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 ```
 
@@ -255,7 +298,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
@@ -304,6 +347,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2022-09
+  - tag: package-2022-04
   - tag: package-2022-03
   - tag: package-2021-10
   - tag: package-2021-01
@@ -311,6 +356,31 @@ batch:
   - tag: package-2019-10
   - tag: package-2018-07
   - tag: package-2018-04
+```
+
+### Tag: package-2022-09 and java
+
+These settings apply only when `--tag=package-2022-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2022_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2022_09_01
+regenerate-manager: true
+generate-interface: true
+```
+### Tag: package-2022-04 and java
+
+These settings apply only when `--tag=package-2022-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-04' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2022_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2022_04_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2022-03 and java

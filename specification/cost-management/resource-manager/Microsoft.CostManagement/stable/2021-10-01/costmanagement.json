@@ -639,7 +639,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QueryResult"
+              "$ref": "#/definitions/ForecastResult"
             }
           },
           "204": {
@@ -703,7 +703,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QueryResult"
+              "$ref": "#/definitions/ForecastResult"
             }
           },
           "default": {
@@ -2184,6 +2184,66 @@
         }
       }
     },
+    "ForecastResult": {
+      "description": "Result of forecast. It contains all columns listed under groupings and aggregation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ForecastProperties",
+          "title": "Forecast properties"
+        }
+      }
+    },
+    "ForecastProperties": {
+      "description": "Forecast properties",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string"
+        },
+        "columns": {
+          "description": "Array of columns",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastColumn"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "rows": {
+          "description": "Array of rows",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {},
+            "x-ms-identifiers": []
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ForecastColumn": {
+      "description": "Forecast column properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of column.",
+          "type": "string"
+        }
+      }
+    },
     "QueryResult": {
       "description": "Result of query. It contains all columns listed under groupings and aggregation.",
       "type": "object",
@@ -2312,46 +2372,29 @@
         "type": {
           "description": "The type of the forecast.",
           "type": "string",
-          "enum": [
-            "Usage",
-            "ActualCost",
-            "AmortizedCost"
-          ],
-          "x-ms-enum": {
-            "name": "ForecastType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ForecastType"
         },
         "timeframe": {
           "description": "The time frame for pulling data for the forecast. If custom, then a specific time period must be provided.",
           "type": "string",
-          "enum": [
-            "MonthToDate",
-            "BillingMonthToDate",
-            "TheLastMonth",
-            "TheLastBillingMonth",
-            "WeekToDate",
-            "Custom"
-          ],
-          "x-ms-enum": {
-            "name": "ForecastTimeframeType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ForecastTimeframe"
         },
         "timePeriod": {
           "description": "Has time period for pulling data for the forecast.",
-          "$ref": "#/definitions/QueryTimePeriod"
+          "type": "object",
+          "$ref": "#/definitions/ForecastTimePeriod"
         },
         "dataset": {
           "description": "Has definition for data in this forecast.",
+          "type": "object",
           "$ref": "#/definitions/ForecastDataset"
         },
         "includeActualCost": {
-          "description": "a boolean determining if actualCost will be included",
+          "description": "A boolean determining if actualCost will be included.",
           "type": "boolean"
         },
         "includeFreshPartialCost": {
-          "description": "a boolean determining if FreshPartialCost will be included",
+          "description": "A boolean determining if FreshPartialCost will be included.",
           "type": "boolean"
         }
       },
@@ -2361,6 +2404,50 @@
         "dataset"
       ]
     },
+    "ForecastType": {
+      "description": "The type of the forecast.",
+      "type": "string",
+      "enum": [
+        "Usage",
+        "ActualCost",
+        "AmortizedCost"
+      ],
+      "x-ms-enum": {
+        "name": "ForecastType",
+        "modelAsString": true
+      }
+    },
+    "ForecastTimeframe": {
+      "description": "The time frame for pulling data for the forecast.",
+      "type": "string",
+      "enum": [
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "ForecastTimeframe",
+        "modelAsString": true
+      }
+    },
+    "ForecastTimePeriod": {
+      "description": "Has time period for pulling data for the forecast.",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
     "ForecastDataset": {
       "description": "The definition of data present in the forecast.",
       "type": "object",
@@ -2368,33 +2455,155 @@
         "granularity": {
           "description": "The granularity of rows in the forecast.",
           "type": "string",
-          "enum": [
-            "Daily"
-          ],
-          "x-ms-enum": {
-            "name": "GranularityType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GranularityType"
         },
         "configuration": {
           "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
-          "$ref": "#/definitions/QueryDatasetConfiguration"
+          "$ref": "#/definitions/ForecastDatasetConfiguration"
         },
         "aggregation": {
-          "type": "object",
           "description": "Dictionary of aggregation expression to use in the forecast. The key of each item in the dictionary is the alias for the aggregated column. forecast can have up to 2 aggregation clauses.",
+          "type": "object",
           "additionalProperties": {
             "type": "object",
-            "$ref": "#/definitions/QueryAggregation"
+            "$ref": "#/definitions/ForecastAggregation"
           },
           "maxItems": 2
         },
         "filter": {
-          "type": "object",
           "description": "Has filter expression to use in the forecast.",
-          "$ref": "#/definitions/QueryFilter"
+          "type": "object",
+          "$ref": "#/definitions/ForecastFilter"
+        }
+      },
+      "required": [
+        "aggregation"
+      ]
+    },
+    "GranularityType": {
+      "description": "The granularity of rows in the forecast.",
+      "type": "string",
+      "enum": [
+        "Daily"
+      ],
+      "x-ms-enum": {
+        "name": "GranularityType",
+        "modelAsString": true
+      }
+    },
+    "ForecastDatasetConfiguration": {
+      "description": "The configuration of dataset in the forecast.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the forecast. Any valid forecast column name is allowed. If not provided, then forecast includes all columns.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
+    },
+    "ForecastAggregation": {
+      "description": "The aggregation expression to be used in the forecast.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the column to aggregate.",
+          "type": "string",
+          "enum": [
+            "PreTaxCostUSD",
+            "Cost",
+            "CostUSD",
+            "PreTaxCost"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionName",
+            "modelAsString": true
+          }
+        },
+        "function": {
+          "description": "The name of the aggregation function to use.",
+          "type": "string",
+          "enum": [
+            "Sum"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "function"
+      ]
+    },
+    "ForecastFilter": {
+      "description": "The filter expression to be used in the export.",
+      "type": "object",
+      "properties": {
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastFilter"
+          },
+          "x-ms-identifiers": [],
+          "minItems": 2
+        },
+        "or": {
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastFilter"
+          },
+          "x-ms-identifiers": [],
+          "minItems": 2
+        },
+        "dimensions": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/ForecastComparisonExpression"
+        },
+        "tags": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/ForecastComparisonExpression"
+        }
+      }
+    },
+    "ForecastComparisonExpression": {
+      "description": "The comparison expression to be used in the forecast.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "ForecastOperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
     },
     "QueryDefinition": {
       "description": "The definition of a query.",

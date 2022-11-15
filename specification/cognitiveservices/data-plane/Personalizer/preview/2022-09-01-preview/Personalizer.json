@@ -13,7 +13,7 @@
     "/configurations/service": {
       "get": {
         "tags": [
-          "ConfigurationsV1Dot1Preview1"
+          "Configurations20220901Preview"
         ],
         "summary": "Get Service Configuration.",
         "description": "Get the Personalizer service configuration.",
@@ -59,7 +59,7 @@
       },
       "put": {
         "tags": [
-          "ConfigurationsV1Dot1Preview1"
+          "Configurations20220901Preview"
         ],
         "summary": "Update Service Configuration.",
         "description": "Update the Personalizer service configuration.",
@@ -118,7 +118,7 @@
     "/configurations/policy": {
       "get": {
         "tags": [
-          "ConfigurationsV1Dot1Preview1"
+          "Configurations20220901Preview"
         ],
         "summary": "Get Policy.",
         "description": "Get the Learning Settings currently used by the Personalizer service.",
@@ -164,7 +164,7 @@
       },
       "put": {
         "tags": [
-          "ConfigurationsV1Dot1Preview1"
+          "Configurations20220901Preview"
         ],
         "summary": "Update Policy.",
         "description": "Update the Learning Settings that the Personalizer service will use to train models.",
@@ -221,7 +221,7 @@
       },
       "delete": {
         "tags": [
-          "ConfigurationsV1Dot1Preview1"
+          "Configurations20220901Preview"
         ],
         "summary": "Reset Policy.",
         "description": "Resets the learning settings of the Personalizer service to default.",
@@ -665,7 +665,7 @@
     "/configurations/applyFromEvaluation": {
       "post": {
         "tags": [
-          "ConfigurationsV1Dot1Preview1"
+          "Configurations20220901Preview"
         ],
         "summary": "Apply Learning Settings and model from a pre-existing Offline Evaluation, making them the current online Learning Settings and model and replacing the previous ones.",
         "operationId": "ServiceConfiguration_ApplyFromEvaluation",
@@ -2218,6 +2218,7 @@
             "InvalidModelImportFormat",
             "FeatureImportanceAlreadyExists",
             "EvaluationAlreadyExists",
+            "InvalidModelRetrainDays",
             "InvalidApiAccess",
             "ModelFileAccessDenied",
             "ProblemTypeIncompatibleWithAutoOptimization",
@@ -2353,6 +2354,10 @@
               {
                 "value": "EvaluationAlreadyExists",
                 "description": "Evaluation with id {0} already exists."
+              },
+              {
+                "value": "InvalidModelRetrainDays",
+                "description": "Model retrain days must be between 0 and the number of log retention days."
               },
               {
                 "value": "InvalidApiAccess",
@@ -2676,6 +2681,7 @@
         "explorationPercentage",
         "logRetentionDays",
         "modelExportFrequency",
+        "modelRetrainDays",
         "rewardAggregation",
         "rewardWaitTime"
       ],
@@ -2756,6 +2762,14 @@
           "format": "date-time",
           "description": "Date when the first automatic optimization evaluation must be performed. Only relevant if IsAutoOptimizationEnabled is true.",
           "type": "string"
+        },
+        "modelRetrainDays": {
+          "format": "int32",
+          "description": "Number of days of historical logs used when a model retrain is triggered.",
+          "default": 0,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
@@ -2916,7 +2930,7 @@
   ],
   "tags": [
     {
-      "name": "ConfigurationsV1Dot1Preview1",
+      "name": "Configurations20220901Preview",
       "description": "Manages configuration operations."
     },
     {
