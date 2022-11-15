@@ -59,6 +59,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/ServerStartStopRestart.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/VirtualNetwork.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Replicas.json
 ```
 ### Tag: package-flexibleserver-2022-03-preview
 
