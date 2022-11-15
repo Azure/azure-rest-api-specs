@@ -832,14 +832,7 @@
         "documents": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
           }
         }
       },
@@ -850,6 +843,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguageString"
+        }
       ]
     },
     "HealthcareEntitiesDocumentResult": {
@@ -1499,14 +1503,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/EntitiesResultWithDetectedLanguage"
           }
         }
       },
@@ -1517,6 +1514,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "EntitiesResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "EntitiesDocumentResult": {
@@ -1648,14 +1656,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/LinkedEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/EntityLinkingResultWithDetectedLanguage"
           }
         }
       },
@@ -1666,6 +1667,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "EntityLinkingResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "LinkedEntitiesDocumentResult": {
@@ -1820,14 +1832,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/PiiEntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/PIIResultWithDetectedLanguage"
           }
         }
       },
@@ -1838,6 +1843,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "PIIResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PiiEntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "PiiDomain": {
@@ -2768,6 +2784,15 @@
       "properties": {
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
+    "DocumentDetectedLanguageString": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       }
