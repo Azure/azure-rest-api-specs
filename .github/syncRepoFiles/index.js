@@ -288,7 +288,7 @@ class Git {
                 return branch;
             }
             catch (error) {
-                core.error(error);
+                core.info(`${error}`);
                 return false;
             }
         });
@@ -331,8 +331,14 @@ class Git {
     }
     findExistingPr(branchRequest, newBranch) {
         return __awaiter(this, void 0, void 0, function* () {
-            const pullRequestList = yield this.github.pulls.list(Object.assign(Object.assign({}, _.pick(branchRequest, ['owner', 'repo'])), { state: 'open', head: `${_.pick(branchRequest, ['owner']).owner}:${newBranch}` }));
-            return pullRequestList.data[0];
+            try {
+                const pullRequestList = yield this.github.pulls.list(Object.assign(Object.assign({}, _.pick(branchRequest, ['owner', 'repo'])), { state: 'open', head: `${_.pick(branchRequest, ['owner']).owner}:${newBranch}` }));
+                return pullRequestList.data[0];
+            }
+            catch (error) {
+                core.info(`${error}`);
+                return false;
+            }
         });
     }
     getChangeFileContent(branchRequest, filePath) {
@@ -477,7 +483,7 @@ function run() {
         const isExistingPR = yield git.findExistingPr(dest, branchName);
         if (isExistingPR) {
             yield git.updatePullRequest(dest, isExistingPR.number, pullRequestTitle, (0, utils_1.dedent)(`
-        ⚠️ This PR is being automatically resync ⚠️
+        ⚠️ This PR was created automatically ⚠️
         ${pullRequestBody}
     `), config_1.default.PR_LABELS, config_1.default.ASSIGNEES, config_1.default.REVIEWERS, config_1.default.TEAM_REVIEWERS);
             core.notice(`Pull Request #${isExistingPR.number} updated: ${isExistingPR.html_url}`);
