@@ -771,6 +771,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "The test run is created.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            }
+          },
           "200": {
             "description": "The test run is updated.",
             "schema": {
@@ -1228,7 +1234,7 @@
           "200": {
             "description": "The requested load test run metrics",
             "schema": {
-              "$ref": "#/definitions/Metric"
+              "$ref": "#/definitions/Metrics"
             }
           },
           "default": {
@@ -1873,23 +1879,6 @@
         }
       }
     },
-    "Metric": {
-      "description": "The response to a metrics query.",
-      "type": "object",
-      "properties": {
-        "timeseries": {
-          "description": "Timeseries data for metric query.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesElement"
-          }
-        },
-        "nextLink": {
-          "description": "Link for the next set of timeseries in case of paginated results, if applicable",
-          "type": "string"
-        }
-      }
-    },
     "MetricAvailability": {
       "description": "Metric availability specifies the time grain (aggregation interval or frequency)",
       "type": "object",
@@ -2142,6 +2131,23 @@
           "format": "double",
           "description": "The metric value.",
           "type": "number"
+        }
+      }
+    },
+    "Metrics": {
+      "description": "The response to a metrics query.",
+      "type": "object",
+      "properties": {
+        "timeseries": {
+          "description": "Timeseries data for metric query.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesElement"
+          }
+        },
+        "nextLink": {
+          "description": "Link for the next set of timeseries in case of paginated results, if applicable",
+          "type": "string"
         }
       }
     },
