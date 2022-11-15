@@ -344,13 +344,13 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a migration resource."
@@ -587,22 +587,10 @@
       ],
       "properties": {
         "sourceServerPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "x-ms-external": true,
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/Password"
         },
         "targetServerPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "x-ms-external": true,
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/Password"
         }
       },
       "description": "Server admin credentials."
