@@ -57,6 +57,8 @@
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. ",
             "default": "2022-09-01-preview",
             "x-nullable": true
           },
@@ -72,7 +74,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Product language",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Defualt='en'",
             "default": "en",
             "x-nullable": true
           },
@@ -80,7 +82,7 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product market",
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
             "default": "US",
             "x-nullable": true
           },
@@ -192,6 +194,7 @@
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
             "in": "header",
+            "required": true,
             "description": "Tenant Id",
             "x-nullable": true
           },
@@ -200,6 +203,7 @@
             "name": "x-ms-client-principal-name",
             "x-originalName": "userPrincipal",
             "in": "header",
+            "required": true,
             "description": "User principal name",
             "x-nullable": true
           },
@@ -256,7 +260,8 @@
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
-            "description": "Api version",
+            "required": true,
+            "description": "Version of the REST API used for the request. ",
             "default": "2022-09-01-preview",
             "x-nullable": true
           },
@@ -272,7 +277,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "The language",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Defualt='en'",
             "default": "en",
             "x-nullable": true
           },
@@ -280,7 +285,7 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "The market",
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
             "default": "US",
             "x-nullable": true
           },
@@ -380,7 +385,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Defualt='en'",
             "default": "en",
             "x-nullable": true
           },
@@ -388,7 +393,7 @@
             "type": "string",
             "name": "storefront",
             "in": "query",
-            "description": "Relevant storefront",
+            "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
             "default": "azure",
             "x-nullable": true
           },
@@ -396,12 +401,13 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']\"",
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
             "x-nullable": true
           },
           {
             "type": "boolean",
-            "name": "excludePublicOffersAndPublicPlans",
+            "name": "excludePublic",
+            "x-originalName": "excludePublicOffersAndPublicPlans",
             "in": "query",
             "description": "To exclude public products and plans",
             "default": false,
@@ -491,7 +497,8 @@
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
             "in": "header",
-            "description": "Tenant Id",
+            "required": true,
+            "description": "The called tenant Id",
             "x-nullable": true
           },
           {
@@ -499,7 +506,8 @@
             "name": "x-ms-client-principal-name",
             "x-originalName": "userPrincipal",
             "in": "header",
-            "description": "User principal",
+            "required": true,
+            "description": "The caller user principal",
             "x-nullable": true
           },
           {
@@ -524,7 +532,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'\"",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Defualt='en'",
             "default": "en",
             "x-nullable": true
           },
@@ -532,7 +540,7 @@
             "type": "string",
             "name": "storefront",
             "in": "query",
-            "description": "Relevant storefront",
+            "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
             "default": "azure",
             "x-nullable": true
           },
@@ -540,12 +548,13 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']\"",
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
             "x-nullable": true
           },
           {
             "type": "boolean",
-            "name": "excludePublicOffersAndPublicPlans",
+            "name": "excludePublic",
+            "x-originalName": "excludePublicOffersAndPublicPlans",
             "in": "query",
             "description": "To exclude public products and plans",
             "default": false,
@@ -663,7 +672,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "required": true,
-      "description": "Subscription id of the caller"
+      "description": "Subscription Id of the caller"
     }
   },
   "definitions": {
