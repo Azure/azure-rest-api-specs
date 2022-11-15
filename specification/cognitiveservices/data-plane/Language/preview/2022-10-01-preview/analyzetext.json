@@ -752,6 +752,25 @@
     "ClassificationDocumentResult": {
       "type": "object",
       "properties": {
+        "class": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "class"
+      ]
+    },
+    "DynamicClassificationDocumentResult": {
+      "type": "object",
+      "properties": {
         "classifications": {
           "type": "array",
           "items": {
@@ -2480,7 +2499,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/ClassificationDocumentResult"
+                "$ref": "#/definitions/DynamicClassificationDocumentResult"
               }
             ]
           }
