@@ -778,7 +778,14 @@
           "properties": {
             "affinity": {
               "description": "Sticky Session Affinity",
-              "type": "string"
+              "enum": [
+                "Sticky"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "affinity",
+                "modelAsString": true
+              }
             }
           }
         }
