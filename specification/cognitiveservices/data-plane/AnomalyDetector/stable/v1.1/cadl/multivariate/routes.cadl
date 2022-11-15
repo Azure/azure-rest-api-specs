@@ -18,7 +18,7 @@ resultId returned by the BatchDetectAnomaly api.
 op GetBatchDetectionResult(
   @format("uuid")
   @path resultId: string,
-): DetectionResult | ErrorResponse;
+): DetectionResult | ResponseError;
 
 
 @post
@@ -41,7 +41,7 @@ op CreateAndTrainMultivariateModel(
   @doc("Location and ID of the model.")
   @header Location: string,
   @body body: Model
-  } | ErrorResponse;
+  } | ResponseError;
 
 @get
 @route("/multivariate/models")
@@ -56,7 +56,7 @@ op ListMultivariateModels(
   @doc("Top indicates how many models will be fetched.")
   @query
   top?: int32;
-): ModelList | ErrorResponse;
+): ModelList | ResponseError;
 
 
 @summary("Delete Multivariate Model")
@@ -72,7 +72,7 @@ op DeleteMultivariateModel(
   @doc("Delete model successfully.")
   @statusCode
   statusCode: 204
-  } | ErrorResponse;
+  } | ResponseError;
 
 @summary("Get Multivariate Model")
 @doc("""
@@ -86,7 +86,7 @@ op GetMultivariateModel(
   @doc("Model identifier.")
   @path
   modelId: string,
-): Model | ErrorResponse;
+): Model | ResponseError;
 
 @route("/multivariate/models/{modelId}:detect-batch")
 @summary("Detect Multivariate Anomaly")
@@ -111,7 +111,7 @@ op DetectMultivariateBatchAnomaly(
   @doc("Location of the detection result.")
   @header "Operation-Location": string,
   @body body: DetectionResult,
-} | ErrorResponse;
+} | ResponseError;
 
 @route("/multivariate/models/{modelId}:detect-last")
 @summary("Detect anomalies in the last point of the request body")
@@ -127,4 +127,4 @@ op DetectMultivariateLastAnomaly(
   @path
   modelId: string,
   @body body: LastDetectionRequest,
-): LastDetectionResult | ErrorResponse;
+): LastDetectionResult | ResponseError;

@@ -79,9 +79,6 @@ will need another API to get detection results.
 
 @error
 model ErrorResponse {
-  @header
-  @doc("Error code.")
-  "x-ms-error-code"?: string,
 
   @doc("The error code.")
   code: string;
@@ -361,4 +358,13 @@ model VariableValues {
 model LastDetectionResult {
   variableStates?: VariableState[];
   results?: AnomalyState[];
+}
+
+@doc("Error response")
+@error
+model ResponseError {
+  @header
+  @doc("Error code.")
+  "x-ms-error-code"?: string,
+  ...ErrorResponse
 }
