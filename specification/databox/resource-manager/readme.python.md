@@ -23,6 +23,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(python)
 multiapi: true
 batch:
+  - tag: package-2022-09
   - tag: package-2022-02
   - tag: package-2021-12
   - tag: package-2021-08-preview
@@ -38,6 +39,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/
 perform-load: false
+```
+
+### Tag: package-2022-09 and python
+
+These settings apply only when `--tag=package-2022-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(python)
+namespace: azure.mgmt.databox.v2022_09_01
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2022_09_01
 ```
 
 ### Tag: package-2022-02 and python
