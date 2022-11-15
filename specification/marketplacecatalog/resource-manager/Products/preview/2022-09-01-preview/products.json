@@ -468,6 +468,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/ListingSubscriptionBasedPrivateProducts_Get.json"
           }
         }
       }
@@ -601,6 +612,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/ListingTenantBasedPrivateProducts_Get.json"
           }
         }
       }
@@ -1059,13 +1081,11 @@
         },
         "minTermPrice": {
           "type": "number",
-          "description": "Starting (minimal) terms price.",
-          "format": "decimal"
+          "description": "Starting (minimal) terms price."
         },
         "minMeterPrice": {
           "type": "number",
-          "description": "Starting (minimal) meters price.",
-          "format": "decimal"
+          "description": "Starting (minimal) meters price."
         },
         "currency": {
           "type": "string",
@@ -1312,8 +1332,7 @@
         },
         "discountPercentage": {
           "type": "number",
-          "description": "The discountPercentage",
-          "format": "decimal"
+          "description": "The discountPercentage"
         }
       }
     },
