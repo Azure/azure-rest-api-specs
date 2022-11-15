@@ -39,6 +39,7 @@ input-file:
 - Microsoft.Storage/stable/2022-09-01/file.json
 - Microsoft.Storage/stable/2022-09-01/queue.json
 - Microsoft.Storage/stable/2022-09-01/table.json
+- Microsoft.Storage/stable/2022-09-01/networkSecurityPerimeter.json
 
 directive:
   - suppress: R3018
