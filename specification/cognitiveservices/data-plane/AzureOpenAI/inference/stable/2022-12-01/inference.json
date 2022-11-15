@@ -60,7 +60,7 @@
                 "type": "object",
                 "properties": {
                   "prompt": {
-                    "description": "An optional prompt to complete from, encoded as a string, a list of strings, or a list of token lists. Defaults to <|endoftext|>. The prompt to complete from. If you would like to provide multiple prompts, use the POST variant of this method. Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document. Maximum allowed size of string list is 2048.",
+                    "description": "An optional prompt to complete from, encoded as a string or a list of strings. Defaults to <|endoftext|>. The prompt to complete from. If you would like to provide multiple prompts, use the POST variant of this method. Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document. Maximum allowed size of string list is 2048.",
                     "oneOf": [
                       {
                         "type": "string",
@@ -264,6 +264,24 @@
                           }
                         }
                       }
+                    },
+                    "usage": {
+                      "type": "object",
+                      "properties": {
+                        "completion_tokens" : {
+                          "type": "number",
+                          "format": "int32"
+                        },
+                        "prompt_tokens" : {
+                          "type": "number",
+                          "format": "int32"
+                        },
+                        "total_tokens" : {
+                          "type": "number",
+                          "format": "int32"
+                        }
+                      },
+                      "required": [ "prompt_tokens", "total_tokens", "completion_tokens" ]
                     }
                   }
                 },
@@ -338,7 +356,7 @@
                 "additionalProperties": true,
                 "properties": {
                   "input": {
-                    "description": "An input to embed, encoded as a string, a list of strings, or a list of token lists",
+                    "description": "An input to embed, encoded as a string or a list of strings",
                     "oneOf": [
                       {
                         "type": "string",
@@ -356,29 +374,6 @@
                           "example": "This is a test.",
                           "nullable": false
                         }
-                      },
-                      {
-                        "type": "array",
-                        "minItems": 1,
-                        "items": {
-                          "type": "integer",
-                          "nullable": false
-                        },
-                        "example": "[1212, 318, 257, 1332, 13]"
-                      },
-                      {
-                        "type": "array",
-                        "minItems": 1,
-                        "maxItems": 2048,
-                        "items": {
-                          "type": "array",
-                          "minItems": 1,
-                          "items": {
-                            "type": "integer",
-                            "nullable": false
-                          }
-                        },
-                        "example": "[[1212, 318, 257, 1332, 13]]"
                       }
                     ]
                   },
@@ -411,7 +406,49 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "object": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "index": {
+                            "type": "integer"
+                          },
+                          "object": {
+                            "type": "string"
+                          },
+                          "embedding": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "required": [ "index", "object", "embedding" ]
+                      }
+                    },
+                    "usage": {
+                      "type": "object",
+                      "properties": {
+                        "prompt_tokens": {
+                          "type": "integer"
+                        },
+                        "total_tokens": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [ "prompt_tokens", "total_tokens" ]
+                    }
+                  },
+                  "required": [ "object", "model", "data", "usage" ]
                 }
               }
             }
