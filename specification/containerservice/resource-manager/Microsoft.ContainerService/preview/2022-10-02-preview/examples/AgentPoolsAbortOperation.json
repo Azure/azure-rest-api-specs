@@ -7,11 +7,7 @@
     "agentPoolName": "agentpool1"
   },
   "responses": {
-    "200": {},
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/subid1/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2017-08-31"
-      },
+    "200": {
       "body": {
         "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
         "name": "agentpool1",
@@ -28,6 +24,12 @@
             "maxSurge": "33%"
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid1/providers/Microsoft.ContainerService/locations/eastus/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2017-08-31",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid1/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-08-31"
       }
     }
   }

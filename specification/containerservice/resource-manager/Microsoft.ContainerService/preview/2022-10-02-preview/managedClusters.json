@@ -939,7 +939,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -947,10 +950,11 @@
               "location": {
                 "description": "URL to query for status of the operation.",
                 "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/AgentPool"
             }
           },
           "default": {
@@ -1463,7 +1467,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -1471,10 +1478,11 @@
               "location": {
                 "description": "URL to query for status of the operation.",
                 "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/ManagedCluster"
             }
           },
           "default": {
