@@ -3772,26 +3772,18 @@
           "type": "string",
           "description": "Friendly Name"
         },
-		"identityType": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "Identity Type"
-        },
-		"identityId": {
+		"ApplicationId": {
           "type": "string",
-          "description": "Comma separated list of user assigned identities"
+          "description": "Server ServicePrincipal Id"
         }
       }
     },
     "RegisteredServerUpdateParametersProperties": {
       "description": "RegisteredServer Update Properties object.",
       "properties": {
-		"identityType": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "Identity Type"
-        },
-		"identityId": {
+		"ApplicationId": {
           "type": "string",
-          "description": "Comma separated list of user assigned identities"
+          "description": "Server ServicePrincipal Id"
         }
       }
     },
@@ -5779,7 +5771,8 @@
       "x-ms-enum": {
         "name": "CloudEndpointChangeEnumerationTotalCountsState",
         "modelAsString": true
-      },
+      }
+    },
     "CloudEndpointAfsShareMetadataCertificatePublicKeys": {
       "type": "object",
       "description": "Cloud endpoint AFS file share metadata signing certificate public keys.",
