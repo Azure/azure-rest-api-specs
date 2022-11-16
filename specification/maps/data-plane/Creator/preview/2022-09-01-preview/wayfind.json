@@ -138,13 +138,17 @@
             "NoExplanation"
           ],
           "x-ms-enum": {
-            "name": "noResultExplanation",
+            "name": "NoResultExplanation",
             "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why.",
+            "modelAsString": true,
             "values": [
-              "NoExplanation"
-            ],
-            "modelAsString": true
-          }
+              {
+                "value": "NoExplanation",
+                "description": "Default value provided when a result is returned or it wasn't possible to dermine why a path wasn't found."
+              }
+            ]
+          },
+          "readOnly": true
         },
         "paths": {
           "description": "An array of wayfinding path results.  An empty array will be returned if no results were found.",
