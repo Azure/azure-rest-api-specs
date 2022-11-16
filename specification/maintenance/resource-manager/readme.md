@@ -26,9 +26,17 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-11
+tag: package-2023-04
 ```
 
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Maintenance/stable/2023-04-01/Maintenance.json
+```
 
 ### Tag: package-preview-2022-11
 
@@ -38,6 +46,7 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 input-file:
   - Microsoft.Maintenance/preview/2022-11-01-preview/Maintenance.json
 ```
+
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
