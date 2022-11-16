@@ -130,6 +130,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Creates or updates an availability group listener using load balancer. This is used for VMs present in single subnet.": {
             "$ref": "./examples/CreateOrUpdateAvailabilityGroupListener.json"
@@ -185,6 +188,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes an availability group listener.": {
             "$ref": "./examples/DeleteAvailabilityGroupListener.json"
@@ -364,6 +370,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Creates or updates a SQL virtual machine group.": {
             "$ref": "./examples/CreateOrUpdateSqlVirtualMachineGroup.json"
@@ -409,6 +418,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes a SQL virtual machine group.": {
             "$ref": "./examples/DeleteSqlVirtualMachineGroup.json"
@@ -460,6 +472,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Updates a SQL virtual machine group tags.": {
             "$ref": "./examples/UpdateSqlVirtualMachineGroup.json"
@@ -661,6 +676,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Starts Assessment on SQL virtual machine": {
             "$ref": "./examples/StartAssessmentOnSqlVirtualMachine.json"
@@ -705,6 +723,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Uninstalls and reinstalls the SQL Iaas Extension.": {
             "$ref": "./examples/RedeploySqlVirtualMachine.json"
@@ -812,6 +833,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Creates or updates a SQL virtual machine with min parameters.": {
             "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMIN.json"
@@ -872,6 +896,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes a SQL virtual machine.": {
             "$ref": "./examples/DeleteSqlVirtualMachine.json"
@@ -923,6 +950,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Updates a SQL virtual machine tags.": {
             "$ref": "./examples/UpdateSqlVirtualMachine.json"
@@ -1660,8 +1690,7 @@
           "x-ms-enum": {
             "name": "LeastPrivilegeMode",
             "modelAsString": true
-          },
-          "default": "NotSet"
+          }
         },
         "sqlImageSku": {
           "description": "SQL Server edition type.",
@@ -1720,8 +1749,7 @@
         },
         "enableAutomaticUpgrade": {
           "description": "Enable automatic upgrade of Sql IaaS extension Agent.",
-          "type": "boolean",
-          "default": false
+          "type": "boolean"
         }
       }
     },
