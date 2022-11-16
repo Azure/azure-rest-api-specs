@@ -155,3 +155,37 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: PathForPutOperation
+    from: maintenance.json
+    reason: Subscription or resource group is passed in request body.
+  - suppress: DeleteResponseBodyEmpty
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: PathContainsResourceType
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: PathContainsResourceType
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: TrackedResourcePatchOperation
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: UnSupportedPatchProperties
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: PathResourceProviderNamePascalCase
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: maintenance.json
+    reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
+```
+
