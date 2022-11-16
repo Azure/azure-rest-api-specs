@@ -15,7 +15,7 @@ For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
-op GetBatchDetectionResult(
+op GetMultivariateBatchDetectionResult(
   @format("uuid")
   @path resultId: string,
 ): DetectionResult | ResponseError;
