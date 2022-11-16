@@ -944,7 +944,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDate, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDateTime, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1136,6 +1136,22 @@
         "modelAsString": true
       }
     },
+    "ProvisioningSubState": {
+      "type": "string",
+      "description": "Represent the current sub state of the Reservation.",
+      "enum": [
+        "None",
+        "Active",
+        "Pending",
+        "AppliedBenefits",
+        "Warning",
+        "Orphaned"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningSubState",
+        "modelAsString": true
+      }
+    },
     "ReservedResourceType": {
       "type": "string",
       "description": "The type of the resource that is being reserved.",
@@ -1174,7 +1190,7 @@
     },
     "Location": {
       "type": "string",
-      "description": "Location in which the Resources needs to be reserved. It cannot be changed after the resource has been created.",
+      "description": "The Azure Region where the reserved resource lives.",
       "enum": [
         "westus",
         "eastus",
@@ -1306,14 +1322,24 @@
           "description": "List of reservations that are being purchased in this exchange.",
           "items": {
             "$ref": "#/definitions/PurchaseRequest"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "savingsPlansToPurchase": {
+          "type": "array",
+          "description": "List of savings plans that are being purchased in this exchange.",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanPurchaseRequest"
+          },
+          "x-ms-identifiers": []
         },
         "reservationsToExchange": {
           "type": "array",
           "description": "List of reservations that are being returned in this exchange.",
           "items": {
             "$ref": "#/definitions/ReservationToReturn"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1663,9 +1689,9 @@
           "format": "date-time",
           "description": "This is the DateTime when the reservation was created."
         },
-        "expiryDate": {
+        "expiryDateTime": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "This is the date when the Reservation will expire."
         },
         "benefitStartTime": {
@@ -1709,7 +1735,9 @@
         "Pending",
         "Processing",
         "Cancelled",
-        "Failed"
+        "Failed",
+        "Warning",
+        "NoBenefit"
       ],
       "x-ms-enum": {
         "name": "DisplayProvisioningState",
@@ -1789,8 +1817,7 @@
       "x-ms-azure-resource": true,
       "properties": {
         "location": {
-          "type": "string",
-          "description": "The Azure Region where the reserved resource lives."
+          "$ref": "#/definitions/Location"
         },
         "etag": {
           "type": "integer",
@@ -2128,14 +2155,24 @@
           "description": "Details of the reservations being purchased",
           "items": {
             "$ref": "#/definitions/ReservationToPurchaseCalculateExchange"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "savingsPlansToPurchase": {
+          "type": "array",
+          "description": "Details of the savings plans being purchased",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanToPurchaseCalculateExchange"
+          },
+          "x-ms-identifiers": []
         },
         "reservationsToExchange": {
           "type": "array",
           "description": "Details of the reservations being returned",
           "items": {
             "$ref": "#/definitions/ReservationToExchange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
@@ -2164,14 +2201,24 @@
           "description": "Details of the reservations being purchased",
           "items": {
             "$ref": "#/definitions/ReservationToPurchaseExchange"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "savingsPlansToPurchase": {
+          "type": "array",
+          "description": "Details of the savings plans being purchased",
+          "items": {
+            "$ref": "#/definitions/SavingsPlanToPurchaseExchange"
+          },
+          "x-ms-identifiers": []
         },
         "reservationsToExchange": {
           "type": "array",
           "description": "Details of the reservations being returned",
           "items": {
             "$ref": "#/definitions/ReservationToReturnForExchange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
@@ -2228,7 +2275,8 @@
           "description": "Exchange Policy errors",
           "items": {
             "$ref": "#/definitions/ExchangePolicyError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2277,6 +2325,18 @@
         }
       }
     },
+    "SavingsPlanToPurchaseCalculateExchange": {
+      "type": "object",
+      "description": "Savings Plan purchase details",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanPurchaseRequest"
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
     "ReservationToPurchaseExchange": {
       "type": "object",
       "description": "Reservation purchase details",
@@ -2300,6 +2360,52 @@
         }
       }
     },
+    "SavingsPlanToPurchaseExchange": {
+      "type": "object",
+      "description": "Savings Plan purchase details",
+      "properties": {
+        "savingsPlanOrderId": {
+          "type": "string",
+          "description": "Fully qualified id of the Savings Plan order being purchased"
+        },
+        "savingsPlanId": {
+          "type": "string",
+          "description": "Fully qualified id of the Savings Plan being purchased. This value is only guaranteed to be non-null if the purchase is successful."
+        },
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanPurchaseRequest"
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
+    "BenefitTerm": {
+      "type": "string",
+      "description": "Represent SavingsPlan term in ISO 8601 format.",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "SavingsPlanTerm",
+        "modelAsString": true
+      }
+    },
+    "BillingPlan": {
+      "type": "string",
+      "description": "Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.",
+      "enum": [
+        "P1M"
+      ],
+      "x-ms-enum": {
+        "name": "BillingPlan",
+        "modelAsString": true
+      }
+    },
     "ReservationsProperties": {
       "type": "object",
       "description": "The properties of the reservations",
@@ -2316,10 +2422,6 @@
           "type": "string",
           "description": "Friendly name for user to easily identify the reservation"
         },
-        "appliedScopes": {
-          "description": "The list of applied scopes",
-          "$ref": "#/definitions/AppliedScopes"
-        },
         "appliedScopeType": {
           "description": "The applied scope type",
           "$ref": "#/definitions/AppliedScopeType"
@@ -2330,7 +2432,16 @@
         },
         "capabilities": {
           "description": "Capabilities of the reservation",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "None",
+            "ApiReturnEnabled",
+            "ApiExchangeEnabled"
+          ],
+          "x-ms-enum": {
+            "name": "capabilities",
+            "modelAsString": true
+          }
         },
         "quantity": {
           "description": "Quantity of the SKUs that are part of the Reservation.",
@@ -2356,9 +2467,9 @@
           "description": "DateTime of the last time the Reservation was updated.",
           "readOnly": true
         },
-        "expiryDate": {
+        "expiryDateTime": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "This is the date when the Reservation will expire."
         },
         "skuDescription": {
@@ -2374,18 +2485,16 @@
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "displayProvisioningState": {
-          "description": "The provisioning state of the reservation for display, e.g. Succeeded",
-          "type": "string",
+          "$ref": "#/definitions/DisplayProvisioningState",
           "readOnly": true
         },
         "provisioningSubState": {
-          "description": "The provisioning state of the reservation, e.g. Succeeded",
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningSubState",
           "readOnly": true
         },
-        "purchaseDate": {
+        "purchaseDateTime": {
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "description": "This is the date when the Reservation was purchased."
         },
         "splitProperties": {
@@ -2423,13 +2532,11 @@
           "$ref": "#/definitions/ReservationTerm"
         },
         "userFriendlyAppliedScopeType": {
-          "description": "The applied scope type of the reservation for display, e.g. Shared",
-          "type": "string",
+          "$ref": "#/definitions/UserFriendlyAppliedScopeType",
           "readOnly": true
         },
         "userFriendlyRenewState": {
-          "description": "The renew state of the reservation for display, e.g. On",
-          "type": "string",
+          "$ref": "#/definitions/UserFriendlyRenewState",
           "readOnly": true
         },
         "utilization": {
@@ -2438,7 +2545,7 @@
           "description": "Reservation utilization",
           "properties": {
             "trend": {
-              "description": "The number of days trend for a reservation",
+              "description": "last 7 day utilization trend for a reservation",
               "readOnly": true,
               "type": "string"
             },
@@ -2450,23 +2557,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "AppliedScopeProperties": {
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID of the applied scope type"
-        },
-        "managementGroupId": {
-          "type": "string",
-          "description": "Management group ID of the format /providers/Microsoft.Management/managementGroups/{managementGroupId}"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Management group display name"
         }
       }
     },
@@ -2558,6 +2648,33 @@
         }
       }
     },
+    "SavingsPlanPurchaseRequestProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the Savings Plan"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        }
+      }
+    },
     "ReservationUtilizationAggregates": {
       "description": "The aggregate values of reservation utilization",
       "type": "object",
@@ -2620,6 +2737,16 @@
         },
         "processingCount": {
           "description": "The number of reservation in Processing state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "warningCount": {
+          "description": "The number of reservation in Warning state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "noBenefitCount": {
+          "description": "The number of reservation in NoBenefit state",
           "readOnly": true,
           "type": "number"
         }
@@ -2701,12 +2828,23 @@
           "$ref": "#/definitions/SkuName"
         },
         "location": {
-          "type": "string",
-          "description": "The Azure Region where the reserved resource lives."
+          "$ref": "#/definitions/Location"
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PurchaseRequestProperties"
+        }
+      }
+    },
+    "SavingsPlanPurchaseRequest": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavingsPlanPurchaseRequestProperties"
         }
       }
     },
@@ -2923,7 +3061,8 @@
       "description": "Type of the Applied Scope.",
       "enum": [
         "Single",
-        "Shared"
+        "Shared",
+        "ManagementGroup"
       ],
       "x-ms-enum": {
         "name": "AppliedScopeType",
@@ -2937,11 +3076,72 @@
         "type": "string",
         "minItems": 1,
         "maxItems": 1
+      },
+      "x-ms-identifiers": []
+    },
+    "AppliedScopeProperties": {
+      "type": "object",
+      "description": "Properties specific to applied scope type. Not required if not applicable.",
+      "properties": {
+        "tenantId": {
+          "$ref": "#/definitions/TenantId"
+        },
+        "managementGroupId": {
+          "$ref": "#/definitions/ManagementGroupId"
+        },
+        "subscriptionId": {
+          "$ref": "#/definitions/SubscriptionId"
+        },
+        "resourceGroupId": {
+          "$ref": "#/definitions/ResourceGroupId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        }
+      }
+    },
+    "TenantId": {
+      "type": "string",
+      "description": "Tenant ID where the savings plan should apply benefit."
+    },
+    "ManagementGroupId": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the management group where the benefit must be applied."
+    },
+    "SubscriptionId": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the subscription."
+    },
+    "ResourceGroupId": {
+      "type": "string",
+      "description": "Fully-qualified identifier of the resource group."
+    },
+    "Commitment": {
+      "type": "object",
+      "description": "Commitment towards the benefit.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Price"
+        }
+      ],
+      "properties": {
+        "grain": {
+          "type": "string",
+          "description": "Commitment grain.",
+          "enum": [
+            "Hourly"
+          ],
+          "x-ms-enum": {
+            "name": "CommitmentGrain",
+            "modelAsString": true
+          }
+        }
       }
     },
     "BillingScopeId": {
       "type": "string",
-      "description": "Subscription that will be charged for purchasing Reservation"
+      "description": "Subscription that will be charged for purchasing Reservation or Savings Plan"
     },
     "Price": {
       "type": "object",
