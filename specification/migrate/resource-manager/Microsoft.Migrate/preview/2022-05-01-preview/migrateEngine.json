@@ -6,6 +6,45 @@
     "version": "2022-05-01-preview"
   },
   "paths": {
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available API operations under this PR",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/modernizeProjects/{modernizeProjectName}/deployedResources/{deployedResourceName}": {
       "get": {
         "tags": [
