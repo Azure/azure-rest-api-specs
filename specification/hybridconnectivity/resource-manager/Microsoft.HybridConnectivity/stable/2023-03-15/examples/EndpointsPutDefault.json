@@ -5,7 +5,13 @@
     "endpointName": "default",
     "EndpointResource": {
       "properties": {
-        "type": "default"
+        "type": "default",
+        "serviceConfigurations": [
+          {
+            "name": "SSH",
+            "port": "22"
+          }
+        ]
       }
     }
   },
@@ -17,6 +23,12 @@
         "type": "Microsoft.HybridConnectivity/endpoints",
         "properties": {
           "type": "default",
+          "serviceConfigurations": [
+            {
+              "name": "SSH",
+              "port": "22"
+            }
+          ],
           "provisioningState": "Succeeded"
         }
       }

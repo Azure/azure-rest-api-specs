@@ -331,6 +331,15 @@
           },
           {
             "$ref": "#/parameters/AccessTokenExpirationParameter"
+          },
+          {
+            "name": "ListCredentialsRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListCredentialsRequest"
+            },
+            "description": "Object of type ListCredentialsRequest"
           }
         ],
         "responses": {
@@ -438,6 +447,10 @@
           "type": "integer",
           "format": "int64",
           "description": "The expiration of access key in unix time."
+        },
+        "serviceConfigurationToken": {
+          "type": "string",
+          "description": "The token to access the enabled service."
         }
       }
     },
@@ -528,8 +541,37 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource provisioning state."
+        },
+        "serviceConfigurations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The enabled service configurations.",
+          "items": {
+            "$ref": "#/definitions/ServiceConfigurations"
+          }
         }
       }
+    },
+    "ServiceConfigurations": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The type of service enabled.",
+          "enum": [
+            "SSH",
+            "WAC"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceNameType",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "type": "string",
+          "description": "The port on which service is enabled."
+        }
+      },
+      "type": "object"
     },
     "EndpointResource": {
       "description": "The endpoint for the target resource.",
@@ -602,6 +644,19 @@
         "hostname": {
           "type": "string",
           "description": "The target host name."
+        }
+      }
+    },
+    "ListCredentialsRequest": {
+      "type": "object",
+      "description": "Represent ListCredentials Request object.",
+      "required": [
+        "service"
+      ],
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The name of the service."
         }
       }
     }
