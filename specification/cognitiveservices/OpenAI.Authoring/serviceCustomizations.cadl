@@ -1,0 +1,15 @@
+import "@azure-tools/cadl-azure-core";
+import "./common.cadl";
+
+namespace Azure.OpenAI.ServiceCustomizations;
+
+@friendlyName("{name}List", T)
+model OpenAiList<T extends object, TType extends Azure.OpenAI.TypeDiscriminatorKnownValues> {
+    @doc("Defines the type of this object")
+    object?: TType;
+    @doc("The list of {name}s", T)
+    data?: T[];
+}
+
+#suppress "@azure-tools/cadl-azure-core/documentation-required" "Internal template - no need for public documentation"
+op OpenAIListOperation<T extends object, TType extends Azure.OpenAI.TypeDiscriminatorKnownValues> is Azure.Core.Foundations.ResourceList<T, {}, OpenAiList<T, TType>>;
