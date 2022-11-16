@@ -544,7 +544,7 @@
         },
         "serviceConfigurations": {
           "type": "array",
-          "readOnly": true,
+          "readOnly": false,
           "description": "The enabled service configurations.",
           "items": {
             "$ref": "#/definitions/ServiceConfigurations"
@@ -624,6 +624,11 @@
           "description": "The short lived proxy name."
         },
         "expiresOn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration time of short lived proxy name in unix epoch."
+        },
+        "serviceConfigurationToken": {
           "type": "integer",
           "format": "int64",
           "description": "The expiration time of short lived proxy name in unix epoch."
