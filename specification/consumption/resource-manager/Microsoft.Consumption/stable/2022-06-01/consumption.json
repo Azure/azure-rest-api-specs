@@ -198,9 +198,7 @@
       }
     } 
   },
-  "definitions": {
-    
-
+  "definitions": {   
     "PriceSheetResult": {
       "description": "An pricesheet resource.",
       "type": "object",
@@ -387,6 +385,58 @@
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MeterDetails": {
+      "description": "The properties of the meter detail.",
+      "properties": {
+        "meterName": {
+          "description": "The name of the meter, within the given meter category",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "The category of the meter, for example, 'Cloud services', 'Networking', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "The subcategory of the meter, for example, 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit in which the meter consumption is charged, for example, 'Hours', 'GB', etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterLocation": {
+          "description": "The location in which the Azure service is available.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalIncludedQuantity": {
+          "description": "The total included quantity associated with the offer.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pretaxStandardRate": {
+          "description": "The pretax listing price.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "serviceName": {
+          "description": "The name of the service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceTier": {
+          "description": "The service tier.",
           "type": "string",
           "readOnly": true
         }

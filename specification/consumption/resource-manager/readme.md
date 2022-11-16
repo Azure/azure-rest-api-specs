@@ -26,7 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-2022-06
 ```
 
 
