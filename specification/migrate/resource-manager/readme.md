@@ -116,7 +116,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05
+tag: package-2019-10
 ```
 
 ### Tag: package-migrate-2018-02
@@ -171,20 +171,6 @@ These settings apply only when `--tag=package-migrateengine-2022-05` is specifie
 ``` yaml $(tag) == 'package-migrateengine-2022-05'
 input-file:
 - Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
-```
-
-### Tag: package-2022-05
-
-These settings apply only when `--tag=package-2022-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-05'
-input-file:
-- Microsoft.OffAzure/stable/2020-07-07/migrate.json
-- Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
-- Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
-#Needed when there is more than one input file
-override-info:
-  title: "Azure Migrate"
 ```
 
 ## Suppression
