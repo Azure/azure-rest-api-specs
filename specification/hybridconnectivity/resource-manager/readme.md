@@ -24,16 +24,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the hybridconnectivity.
 
-``` yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2021-10-06-preview
-```
 
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-03
+tag: package-2023-03-15
 ```
 
 ### Tag: package-2021-10-06-preview
@@ -60,7 +55,7 @@ These settings apply only when `--tag=package-2023-03-15` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-03-15'
 input-file:
-  - Microsoft.HybridConnectivity/preview/2023-03-15/hybridconnectivity.json
+  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
 ```
 ---
 

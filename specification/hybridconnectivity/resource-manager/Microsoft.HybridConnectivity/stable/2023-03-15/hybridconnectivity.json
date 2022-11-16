@@ -359,6 +359,52 @@
         "deprecated": false
       }
     },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listIngressGatewayCredentials": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets the ingress gateway endpoint credentials ",
+        "operationId": "Endpoints_ListIngressGatewayCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListIngressGatewayCredentials": {
+            "$ref": "./examples/EndpointsPostListIngressGatewayCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ingress gateway access",
+            "schema": {
+              "$ref": "#/definitions/IngressGatewayResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listManagedProxyDetails": {
       "post": {
         "tags": [
@@ -543,8 +589,7 @@
           "description": "The resource provisioning state."
         },
         "serviceConfigurations": {
-          "type": "array",
-          "readOnly": false,
+          "type": "object",
           "description": "The enabled service configurations.",
           "items": {
             "$ref": "#/definitions/ServiceConfigurations"
@@ -553,25 +598,24 @@
       }
     },
     "ServiceConfigurations": {
+      "type": "object",
+      "description": "The service configuration object definition where each key's value is additional property dictionary.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The type of service enabled.",
-          "enum": [
-            "SSH",
-            "WAC"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceNameType",
-            "modelAsString": true
+        "ssh": {
+          "type": "object",
+          "description": "Details for SSH service configuration.",
+          "additionalProperties": {
+            "type": "string"
           }
         },
-        "port": {
-          "type": "string",
-          "description": "The port on which service is enabled."
+        "wac": {
+          "type": "object",
+          "description": "Details for WAC service configuration.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "type": "object"
+      }
     },
     "EndpointResource": {
       "description": "The endpoint for the target resource.",
@@ -627,11 +671,6 @@
           "type": "integer",
           "format": "int64",
           "description": "The expiration time of short lived proxy name in unix epoch."
-        },
-        "serviceConfigurationToken": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The expiration time of short lived proxy name in unix epoch."
         }
       }
     },
@@ -649,6 +688,17 @@
         "hostname": {
           "type": "string",
           "description": "The target host name."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service.",
+          "enum": [
+            "SSH",
+            "WAC"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceName"
+          }
         }
       }
     },
@@ -656,12 +706,19 @@
       "type": "object",
       "description": "Represent ListCredentials Request object.",
       "required": [
-        "service"
+        "serviceName"
       ],
       "properties": {
-        "service": {
+        "serviceName": {
           "type": "string",
-          "description": "The name of the service."
+          "description": "The name of the service.",
+          "enum": [
+            "SSH",
+            "WAC"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceName"
+          }
         }
       }
     }
