@@ -173,6 +173,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -224,7 +229,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/PriceSheetProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "meterId"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
