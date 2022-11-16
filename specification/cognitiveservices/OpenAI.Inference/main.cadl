@@ -1,8 +1,11 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+
 import "./routes.cadl";
 
-using Cadl.Rest;
 using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
 
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "apiKey"> |
@@ -11,9 +14,12 @@ using Cadl.Http;
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       scopes: []
     }]>)
-@service({title: "Azure OpenAI API", version: "2022-06-01-preview" })
+@service(
+  {
+    title: "Azure OpenAI API"
+  })
 @server(
-  "https://{endpoint}/openai",
+  "{endpoint}/openai",
   "Azure OpenAI APIs for completions and search",
   {
     @doc("""
@@ -23,5 +29,13 @@ https://westus.api.cognitive.microsoft.com).
     endpoint: string,
   }
 )
+@versioned(Azure.OpenAI.Versions)
+@versionedDependency(
+  [[Azure.OpenAI.Versions.v2022_06_01_preview, Azure.Core.Versions.v1_0_Preview_1]]
+)
 @doc("Azure OpenAI APIs for completions and search")
 namespace Azure.OpenAI;
+
+enum Versions {
+  v2022_06_01_preview: "2022-06-01-preview",
+}

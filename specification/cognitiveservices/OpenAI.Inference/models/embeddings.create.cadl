@@ -9,7 +9,7 @@ namespace Azure.OpenAI.Request {
     model EmbeddingsCreate {
         @doc("deployment id of the model which was deployed")
         @path
-        "deploymentId": string;
+        deploymentId: string;
         @doc("expected schema for the body of the embedding post request")
         @body
         body: EmbeddingsCreateBody;
@@ -21,7 +21,7 @@ namespace Azure.OpenAI.Request {
         user?: string;
 
         @doc("input type of embedding search to use")
-        input_type?: string;
+        inputType?: string;
 
         @doc("ID of the model to use")
         "model"?: string;
