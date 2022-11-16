@@ -1,12 +1,15 @@
 import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-dpg";
 import "@cadl-lang/rest";
 import "./models.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
+using Azure.DPG;
 
 namespace AnomalyDetector.Multivariate;
 
+@convenienceAPI
 @get
 @route("/multivariate/detect-batch/{resultId}")
 @summary("Get Multivariate Anomaly Detection Result")
@@ -21,6 +24,7 @@ op GetMultivariateBatchDetectionResult(
 ): DetectionResult | ResponseError;
 
 
+@convenienceAPI
 @post
 @route("/multivariate/models")
 @summary("Train a Multivariate Anomaly Detection Model")
@@ -41,8 +45,9 @@ op CreateAndTrainMultivariateModel(
   @doc("Location and ID of the model.")
   @header Location: string,
   @body body: Model
-  } | ResponseError;
+} | ResponseError;
 
+@convenienceAPI
 @get
 @route("/multivariate/models")
 @summary("List Multivariate Models")
@@ -59,6 +64,7 @@ op ListMultivariateModels(
 ): ModelList | ResponseError;
 
 
+@convenienceAPI
 @summary("Delete Multivariate Model")
 @doc("Delete an existing multivariate model according to the modelId")
 @delete
@@ -72,8 +78,9 @@ op DeleteMultivariateModel(
   @doc("Delete model successfully.")
   @statusCode
   statusCode: 204
-  } | ResponseError;
+} | ResponseError;
 
+@convenienceAPI
 @summary("Get Multivariate Model")
 @doc("""
 Get detailed information of multivariate model, including the training status
@@ -88,6 +95,7 @@ op GetMultivariateModel(
   modelId: string,
 ): Model | ResponseError;
 
+@convenienceAPI
 @route("/multivariate/models/{modelId}:detect-batch")
 @summary("Detect Multivariate Anomaly")
 @doc("""
@@ -113,6 +121,7 @@ op DetectMultivariateBatchAnomaly(
   @body body: DetectionResult,
 } | ResponseError;
 
+@convenienceAPI
 @route("/multivariate/models/{modelId}:detect-last")
 @summary("Detect anomalies in the last point of the request body")
 @doc("""
