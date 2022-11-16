@@ -150,6 +150,8 @@
   },
   "definitions": {
     "NetworkSecurityPerimeterConfiguration": {
+      "description": "The Network Security Perimeter configuration resource.",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -170,8 +172,7 @@
           "description": "Properties of the Network Security Perimeter Configuration",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The Network Security Perimeter configuration resource."
+      }
     },
     "NetworkSecurityPerimeterConfigurationList": {
       "description": "Result of the List Network Security Perimeter configuration operation.",
@@ -265,7 +266,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/NspAccessRule"
-              }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
             "diagnosticSettingsVersion": {
               "description": "Diagnostic settings version",
