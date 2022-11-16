@@ -381,7 +381,10 @@
             "description": "Error response describing why the operation failed"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules": {
@@ -546,7 +549,10 @@
             "description": "Error response describing why the operation failed"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
@@ -592,7 +598,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
@@ -644,7 +653,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
@@ -690,7 +702,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
@@ -1186,6 +1201,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
       "description": "The security connector name.",
       "x-ms-parameter-location": "method"
     },
