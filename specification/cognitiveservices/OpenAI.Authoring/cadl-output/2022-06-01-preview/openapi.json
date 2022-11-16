@@ -821,7 +821,7 @@
     },
     "/fine-tunes/{fineTuneId}/events": {
       "get": {
-        "operationId": "FineTunes_ListEvents",
+        "operationId": "FineTunes_Events",
         "summary": "List events for the fine-tune job specified by the given fineTuneId.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
         "description": "List events for the fine-tune job specified by the given fineTuneId.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
         "parameters": [
@@ -829,7 +829,7 @@
             "name": "fineTuneId",
             "in": "path",
             "required": true,
-            "description": "fine tune id for which to get events",
+            "description": "The identity of this item.",
             "type": "string"
           },
           {
@@ -1080,9 +1080,11 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/TypeDiscriminator",
-          "description": "Defines the type of an object.",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "deployment"
+          ],
+          "description": "Defines the type of this object"
         },
         "data": {
           "type": "array",
@@ -1090,25 +1092,9 @@
             "$ref": "#/definitions/Deployment"
           },
           "x-cadl-name": "Deployment[]",
-          "description": "The list of items.",
-          "readOnly": true
+          "description": "The list of Deployments"
         }
-      },
-      "description": "Represents a list of deployments."
-    },
-    "DeploymentUpdate": {
-      "type": "object",
-      "properties": {
-        "model": {
-          "type": "string",
-          "description": "The new OpenAI model to be used for this deployment. Can be a base model or a\nfine tune."
-        },
-        "scaleSettings": {
-          "$ref": "#/definitions/ScaleSettingsUpdate",
-          "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-        }
-      },
-      "description": "Defines changes to the deployment."
+      }
     },
     "Deprecation": {
       "type": "object",
@@ -1127,41 +1113,6 @@
         }
       },
       "description": "Defines the dates of deprecation for the different use cases of a\nmodel.\nUsually base models support 1 year of fine tuning after creation.\nInference is typically supported 2 years after creation of base or\nfine tuned\nmodels. The exact dates are specified in the properties."
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCode",
-          "description": "Error codes as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        },
-        "message": {
-          "type": "string",
-          "description": "The message of this error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The location where the error happened if available."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Error[]",
-          "description": "The error details if available."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        }
-      },
-      "description": "Error content as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "ErrorCode": {
       "type": "string",
@@ -1275,16 +1226,6 @@
         ]
       }
     },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error content as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        }
-      },
-      "description": "Error response as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-    },
     "Event": {
       "type": "object",
       "properties": {
@@ -1316,9 +1257,8 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/TypeDiscriminator",
-          "description": "Defines the type of an object.",
-          "readOnly": true
+          "$ref": "#/definitions/TypeDiscriminatorKnownValues",
+          "description": "Defines the type of this object"
         },
         "data": {
           "type": "array",
@@ -1327,11 +1267,9 @@
           },
           "x-ms-identifiers": [],
           "x-cadl-name": "Event[]",
-          "description": "The list of items.",
-          "readOnly": true
+          "description": "The list of Events"
         }
-      },
-      "description": "Represents a list of events."
+      }
     },
     "File": {
       "type": "object",
@@ -1431,9 +1369,11 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/TypeDiscriminator",
-          "description": "Defines the type of an object.",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "file"
+          ],
+          "description": "Defines the type of this object"
         },
         "data": {
           "type": "array",
@@ -1441,11 +1381,9 @@
             "$ref": "#/definitions/File"
           },
           "x-cadl-name": "File[]",
-          "description": "The list of items.",
-          "readOnly": true
+          "description": "The list of Files"
         }
-      },
-      "description": "Represents a list of files."
+      }
     },
     "FineTune": {
       "type": "object",
@@ -1573,9 +1511,11 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/TypeDiscriminator",
-          "description": "Defines the type of an object.",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "fine-tune"
+          ],
+          "description": "Defines the type of this object"
         },
         "data": {
           "type": "array",
@@ -1583,11 +1523,9 @@
             "$ref": "#/definitions/FineTune"
           },
           "x-cadl-name": "FineTune[]",
-          "description": "The list of items.",
-          "readOnly": true
+          "description": "The list of FineTunes"
         }
-      },
-      "description": "Represents a list of fine tunes."
+      }
     },
     "HyperParameters": {
       "type": "object",
@@ -1636,20 +1574,6 @@
         }
       },
       "description": "The hyper parameter settings used in a fine tune job."
-    },
-    "InnerError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "Inner error codes as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
-        }
-      },
-      "description": "Inner error as defined in the Microsoft REST guidelines\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
     },
     "InnerErrorCode": {
       "type": "string",
@@ -1729,23 +1653,6 @@
       ],
       "x-ms-discriminator-value": "manual"
     },
-    "ManualScaleSettingsUpdate": {
-      "type": "object",
-      "properties": {
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The constant reserved capacity of the inference endpoint for this deployment."
-        }
-      },
-      "description": "Settings for the manual scale type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScaleSettingsUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "manual"
-    },
     "Model": {
       "type": "object",
       "properties": {
@@ -1804,9 +1711,11 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/TypeDiscriminator",
-          "description": "Defines the type of an object.",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "model"
+          ],
+          "description": "Defines the type of this object"
         },
         "data": {
           "type": "array",
@@ -1814,11 +1723,9 @@
             "$ref": "#/definitions/Model"
           },
           "x-cadl-name": "Model[]",
-          "description": "The list of items.",
-          "readOnly": true
+          "description": "The list of Models"
         }
-      },
-      "description": "Represents a list of models."
+      }
     },
     "Purpose": {
       "type": "string",
@@ -1868,20 +1775,6 @@
         "scaleType": {
           "type": "string",
           "description": "Discriminator property for ScaleSettings."
-        }
-      },
-      "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",
-      "discriminator": "scaleType",
-      "required": [
-        "scaleType"
-      ]
-    },
-    "ScaleSettingsUpdate": {
-      "type": "object",
-      "properties": {
-        "scaleType": {
-          "type": "string",
-          "description": "Discriminator property for ScaleSettingsUpdate."
         }
       },
       "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",

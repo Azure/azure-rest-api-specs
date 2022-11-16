@@ -1,6 +1,7 @@
 import "@azure-tools/cadl-azure-core";
 import "@cadl-lang/rest";
 import "./models/model.models.cadl";
+import "./serviceCustomizations.cadl";
 
 namespace Azure.OpenAI;
 
@@ -24,7 +25,7 @@ fine-tuned models owned by the Azure OpenAI resource.
 """)
   @route("/models")
   @get
-  List is Foundations.Operation<{}, ModelList>;
+  List is ServiceCustomizations.OpenAIListOperation<Model, TypeDiscriminatorKnownValues.Model>;
 
   @summary("Gets details for the model specified by the given model_id.")
   @doc("Gets details for the model specified by the given model_id.")
