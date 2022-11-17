@@ -278,6 +278,15 @@
             }
           },
           {
+            "name": "semanticMaxWaitInMilliseconds",
+            "in": "query",
+            "type": "integer",
+            "description": "The time in milliseconds to wait before the semantic processing step times out. Only valid when semanticErrorHandling is set to 'partial'.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "searchFields",
             "in": "query",
             "type": "array",
@@ -2133,6 +2142,11 @@
         "semanticErrorHandling": {
           "type": "string",
           "description": "A value that specifies what response to return when semantic processing fails."
+        },
+        "semanticMaxWaitInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in milliseconds to wait before the semantic processing step times out. Only valid when semanticErrorHandling is set to 'partial'."
         },
         "search": {
           "type": "string",
