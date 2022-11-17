@@ -1,15 +1,12 @@
 import "@azure-tools/cadl-azure-core";
 import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
 import "./models.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-using Azure.DPG;
 
 namespace AnomalyDetector.Univariate;
 
-@convenienceAPI
 @post
 @route("timeseries/entire/detect")
 @summary("Detect anomalies for the entire series in batch.")
@@ -24,7 +21,6 @@ op DetectUnivariateEntireSeries(
   @body body: DetectRequest,
 ): EntireDetectResponse | AnomalyDetectorError;
 
-@convenienceAPI
 @post
 @route("timeseries/last/detect")
 @summary("Detect anomaly status of the latest point in time series.")
@@ -37,7 +33,6 @@ op DetectUnivariateLastPoint(
   @body body: DetectRequest,
 ): LastDetectResponse | AnomalyDetectorError;
 
-@convenienceAPI
 @post
 @route("timeseries/changepoint/detect")
 @summary("Detect change point for the entire series")
