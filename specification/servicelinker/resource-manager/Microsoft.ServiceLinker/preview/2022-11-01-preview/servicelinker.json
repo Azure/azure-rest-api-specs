@@ -1331,6 +1331,13 @@
             "required": false,
             "type": "string",
             "description": "OData filter options."
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData skipToken option for pagination."
           }
         ],
         "responses": {
@@ -2016,9 +2023,21 @@
           "type": "array",
           "description": "The configuration names to be set in compute service environment.",
           "items": {
-            "type": "string",
-            "description": "The configuration names for each auth type."
+            "$ref": "#/definitions/ConfigurationName"
           }
+        }
+      }
+    },
+    "ConfigurationName": {
+      "type": "object",
+      "description": "The configuration names.",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the configuration name."
         }
       }
     },
