@@ -52,6 +52,14 @@ input-file:
   - preview/v1.1-preview.3/Personalizer.json
 ```  
 
+### Release 2022-09-01-preview
+These settings apply only when `--tag=release_2022_09_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_09_01_preview'
+input-file: 
+  - preview/2022-09-01-preview/Personalizer.json
+```
+
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)

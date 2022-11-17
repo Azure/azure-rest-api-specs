@@ -1265,6 +1265,9 @@
           "items": {
             "$ref": "#/definitions/MHSMIPRule"
           },
+          "x-ms-identifiers": [
+            "value"
+          ],
           "description": "The list of IP address rules."
         },
         "virtualNetworkRules": {
@@ -1305,6 +1308,14 @@
     },
     "MHSMPrivateEndpointConnectionItem": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
         "properties": {
           "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
