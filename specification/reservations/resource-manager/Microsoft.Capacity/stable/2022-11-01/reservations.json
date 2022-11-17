@@ -1139,6 +1139,7 @@
     "ProvisioningSubState": {
       "type": "string",
       "description": "Represent the current sub state of the Reservation.",
+      "readOnly": true,
       "enum": [
         "None",
         "Active",
@@ -1733,6 +1734,7 @@
     "DisplayProvisioningState": {
       "type": "string",
       "description": "Represent the current display state of the Reservation.",
+      "readOnly": true,
       "enum": [
         "Succeeded",
         "Expiring",
@@ -1752,6 +1754,7 @@
     "UserFriendlyAppliedScopeType": {
       "type": "string",
       "description": "The applied scope type",
+      "readOnly": true,
       "enum": [
         "None",
         "Shared",
@@ -1767,6 +1770,7 @@
     "UserFriendlyRenewState": {
       "type": "string",
       "description": "The renew state of the reservation",
+      "readOnly": true,
       "enum": [
         "On",
         "Off",
@@ -2495,12 +2499,10 @@
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "displayProvisioningState": {
-          "$ref": "#/definitions/DisplayProvisioningState",
-          "readOnly": true
+          "$ref": "#/definitions/DisplayProvisioningState"
         },
         "provisioningSubState": {
-          "$ref": "#/definitions/ProvisioningSubState",
-          "readOnly": true
+          "$ref": "#/definitions/ProvisioningSubState"
         },
         "purchaseDateTime": {
           "type": "string",
@@ -2542,12 +2544,10 @@
           "$ref": "#/definitions/ReservationTerm"
         },
         "userFriendlyAppliedScopeType": {
-          "$ref": "#/definitions/UserFriendlyAppliedScopeType",
-          "readOnly": true
+          "$ref": "#/definitions/UserFriendlyAppliedScopeType"
         },
         "userFriendlyRenewState": {
-          "$ref": "#/definitions/UserFriendlyRenewState",
-          "readOnly": true
+          "$ref": "#/definitions/UserFriendlyRenewState"
         },
         "utilization": {
           "readOnly": true,
