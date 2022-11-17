@@ -313,7 +313,19 @@
           },
           "Install SAP Software on Distributed System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_Distributed.json"
-          }
+          },
+          "Create Infrastructure with Disk and OS configurations for Single Server System (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_SingleServer.json"
+          },
+          "Create Infrastructure with Disk and OS  configuration for Distributed System (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_Distributed.json"
+          },
+          "Create Infrastructure with Disk and OS  configuration for HA System with Availability Set (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvSet.json"
+          },
+          "Create Infrastructure with Disk and OS  configuration for HA System with Availability Zone (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvZone.json"
+          }          
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
         "parameters": [
@@ -2280,6 +2292,49 @@
         }
       }
     },
+    "DiskSku": {
+      "description": "The disk sku.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The sku name required such as 'StandardSSD_LRS', 'Premium_LRS'. Only one of these will be an accepted input.",
+          "type": "string"
+        }
+      }
+    },
+    "DiskVolumeConfiguration": {
+      "description": "The disk configuration required for the selected volume.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The total number of disks required for the concerned volume.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sizeGB": {
+          "description": "The disk size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sku": {
+          "description": "The disk SKU details.",
+          "$ref": "#/definitions/DiskSku"
+        }
+      }
+    },
+    "DiskConfiguration": {
+      "description": "The Disk Configuration Details.",
+      "type": "object",
+      "properties": {
+        "diskVolumeConfiguration": {
+          "description": "The disk configuration for the hana db volume.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DiskVolumeConfiguration"
+          }
+        }
+      }
+    },
     "VirtualMachineConfiguration": {
       "description": "Defines the virtual machine configuration.",
       "type": "object",
@@ -2328,6 +2383,10 @@
         "virtualMachineConfiguration": {
           "description": "Gets or sets the virtual machine configuration.",
           "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "dbDiskConfiguration": {
+          "description": "Gets or sets the disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
         }
       },
       "required": [
@@ -2379,6 +2438,10 @@
           "description": "The number of database VMs.",
           "type": "integer",
           "format": "int64"
+        },
+        "diskConfiguration": {
+          "description": "Gets or sets the disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
         }
       },
       "required": [
