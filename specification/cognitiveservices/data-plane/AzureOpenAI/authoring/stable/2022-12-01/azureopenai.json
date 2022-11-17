@@ -1194,6 +1194,9 @@
           "description": "The name of the file.",
           "minLength": 1,
           "type": "string"
+        },
+        "statistics": {
+          "$ref": "#/definitions/FileStatistics"
         }
       }
     },
@@ -1236,6 +1239,25 @@
           "items": {
             "$ref": "#/definitions/File"
           },
+          "readOnly": true
+        }
+      }
+    },
+    "FileStatistics": {
+      "title": "FileStatistics",
+      "description": "A file is a document usable for training and validation. It can also be a service generated document with result details.",
+      "type": "object",
+      "properties": {
+        "tokens": {
+          "format": "int32",
+          "description": "The number of tokens used in prompts and completions for files of kind \"fine-tune\" once validation of file content is complete.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "examples": {
+          "format": "int32",
+          "description": "The number of prompts with completions for files of kind \"fine-tune\" once validation of file content is complete.",
+          "type": "integer",
           "readOnly": true
         }
       }
@@ -1460,6 +1482,30 @@
         ]
       }
     },
+    "LifeCycleStatus": {
+      "title": "LifeCycleStatus",
+      "description": "The life cycle status of a model.",
+      "enum": [
+        "preview",
+        "generally-available"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "LifeCycleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "preview",
+            "description": "Model is in preview and exempted from SLA terms."
+          },
+          {
+            "value": "generally-available",
+            "description": "Model is generally available and covered by SLA terms."
+          }
+        ]
+      }
+    },
     "LogLevel": {
       "title": "LogLevel",
       "description": "The verbosity level of an event.",
@@ -1568,6 +1614,9 @@
         },
         "capabilities": {
           "$ref": "#/definitions/Capabilities"
+        },
+        "lifecycle_status": {
+          "$ref": "#/definitions/LifeCycleStatus"
         },
         "deprecation": {
           "$ref": "#/definitions/Deprecation"
@@ -1770,7 +1819,7 @@
     "endpoint": {
       "in": "path",
       "name": "endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://aoairesource.openai.azure.com. Replace \"aoairesource\" with your Azure OpenAI account name).",
       "required": true,
       "type": "string",
       "format": "uri",

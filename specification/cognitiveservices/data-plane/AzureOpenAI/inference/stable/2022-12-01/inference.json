@@ -268,22 +268,33 @@
                     "usage": {
                       "type": "object",
                       "properties": {
-                        "completion_tokens" : {
+                        "completion_tokens": {
                           "type": "number",
                           "format": "int32"
                         },
-                        "prompt_tokens" : {
+                        "prompt_tokens": {
                           "type": "number",
                           "format": "int32"
                         },
-                        "total_tokens" : {
+                        "total_tokens": {
                           "type": "number",
                           "format": "int32"
                         }
                       },
-                      "required": [ "prompt_tokens", "total_tokens", "completion_tokens" ]
+                      "required": [
+                        "prompt_tokens",
+                        "total_tokens",
+                        "completion_tokens"
+                      ]
                     }
-                  }
+                  },
+                  "required": [
+                    "id",
+                    "object",
+                    "created",
+                    "model",
+                    "choices"
+                  ]
                 },
                 "example": {
                   "model": "davinci",
@@ -432,7 +443,11 @@
                             }
                           }
                         },
-                        "required": [ "index", "object", "embedding" ]
+                        "required": [
+                          "index",
+                          "object",
+                          "embedding"
+                        ]
                       }
                     },
                     "usage": {
@@ -445,10 +460,18 @@
                           "type": "integer"
                         }
                       },
-                      "required": [ "prompt_tokens", "total_tokens" ]
+                      "required": [
+                        "prompt_tokens",
+                        "total_tokens"
+                      ]
                     }
                   },
-                  "required": [ "object", "model", "data", "usage" ]
+                  "required": [
+                    "object",
+                    "model",
+                    "data",
+                    "usage"
+                  ]
                 }
               }
             }
