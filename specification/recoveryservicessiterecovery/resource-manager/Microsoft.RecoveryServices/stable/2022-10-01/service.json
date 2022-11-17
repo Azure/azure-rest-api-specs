@@ -4450,6 +4450,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema":{
+              "$ref": "#/definitions/ServiceError",
+              "description": "The Service error details."
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4492,21 +4498,24 @@
             "in": "path",
             "description": "The name of the fabric containing the protected item.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w]*$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "The name of the container containing the protected item.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w]*$"
           },
           {
             "name": "replicationProtectedItemName",
             "in": "path",
             "description": "The name of the protected item on which the agent is to be updated.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w]*$"
           },
           {
             "name": "updateMobilityServiceRequest",
@@ -4526,10 +4535,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Update the mobility service on a protected item.": {
             "$ref": "./examples/ReplicationProtectedItems_UpdateMobilityService.json"
@@ -24868,7 +24885,8 @@
       "description": "The name of the recovery services vault.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "pattern": "^[\\w]*$"
     },
     "ApiVersion": {
       "name": "api-version",
