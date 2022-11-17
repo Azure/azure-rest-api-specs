@@ -1,5 +1,6 @@
 import "@azure-tools/cadl-azure-core";
 import "./models/deployment.models.cadl";
+import "./serviceCustomizations.cadl";
 
 namespace Azure.OpenAI;
 
@@ -12,7 +13,7 @@ interface Deployments {
   @doc("Gets the list of deployments owned by the Azure OpenAI resource.")
   @route("/deployments")
   @get
-  List is Foundations.Operation<{}, DeploymentList>;
+  List is ServiceCustomizations.OpenAIListOperation<Deployment, TypeDiscriminatorKnownValues.Deployment>;
 
   @summary("""
 Creates a new deployment for the Azure OpenAI resource according to the given

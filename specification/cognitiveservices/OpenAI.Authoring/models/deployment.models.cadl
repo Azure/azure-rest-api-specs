@@ -5,17 +5,18 @@ using Cadl.Rest.Resource;
 
 namespace Azure.OpenAI;
 
+/*
 @doc("Represents a list of deployments.")
 model DeploymentList {
   @doc("Defines the type of an object.")
   @visibility("read")
-  object?: TypeDiscriminator;
+  object?: TypeDiscriminatorKnownValues.Deployment;
 
   @doc("The list of items.")
   @visibility("read")
   data?: Deployment[];
 }
-
+*/
 @doc("""
 Deployments manage the reserved quota for Azure OpenAI models and make them
 available for inference requests.
@@ -67,6 +68,7 @@ reserved capacity.
 @discriminator("scaleType")
 model ScaleSettings {}
 
+/*
 @doc("Defines changes to the deployment.")
 model DeploymentUpdate {
   @doc("""
@@ -81,10 +83,13 @@ reserved capacity.
 """)
   scaleSettings?: ScaleSettingsUpdate;
 }
+*/
 
+/*
 @doc("""
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
 @discriminator("scaleType")
 model ScaleSettingsUpdate {}
+*/
