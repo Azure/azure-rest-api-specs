@@ -221,6 +221,7 @@
       }
     },
     "PriceSheetModel": {
+      "type":"object",
       "description": "price sheet result. It contains the pricesheet associated with billing period",
       "properties": {
         "pricesheets": {
@@ -247,6 +248,7 @@
       }
     },
     "DownloadProperties": {
+      "type":"object",
       "description": "The properties of the price sheet download.",
       "properties": {
         "downloadUrl": {
@@ -262,6 +264,7 @@
       }
     },
     "PriceSheetProperties": {
+      "type":"object",
       "description": "The properties of the price sheet.",
       "properties": {
         "billingPeriodId": {
@@ -315,6 +318,7 @@
       }
     },
     "ErrorDetails": {
+      "type":"object",
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -354,6 +358,7 @@
           "readOnly": true
         },
         "display": {
+          "type":"object",
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
@@ -381,6 +386,7 @@
       }
     },
     "OperationListResult": {
+      "type":"object",
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
@@ -399,6 +405,7 @@
       }
     },
     "MeterDetails": {
+      "type":"object",
       "description": "The properties of the meter detail.",
       "properties": {
         "meterName": {
@@ -451,6 +458,7 @@
       }
     },
     "Resource": {
+      "type":"object",
       "description": "The Resource model definition.",
       "properties": {
         "id": {
@@ -491,14 +499,16 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2022-06-01."
+      "description": "Version of the API to be used with the client request. The current version is 2022-06-01.",
+      "x-ms-parameter-location":"method"
     }, 
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure Subscription ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location":"method"
     },
     "billingPeriodNameParameter": {
       "name": "billingPeriodName",
