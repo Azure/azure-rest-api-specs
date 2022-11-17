@@ -1,10 +1,5 @@
  name: sync-common-types-files
  on: 
-   push:
-     branches:
-       - main
-     paths: 
-       - 'specification/common-types/**'
    schedule:
        - cron: '0 8 * * *'
    workflow_dispatch:
@@ -14,8 +9,8 @@
      if: ${{ github.repository == 'Azure/azure-rest-api-specs-pr' }}
      runs-on: ubuntu-latest
      steps:
-       - name: checkoutV2 
-         uses: actions/checkout@v2
+       - name: checkoutV3 
+         uses: actions/checkout@v3
        - name: sync-common-types-files
          uses: ./
          with:
@@ -28,8 +23,8 @@
      if: ${{ github.repository == 'Azure/azure-rest-api-specs-pr' }}
      runs-on: ubuntu-latest
      steps:
-       - name: checkoutV2 
-         uses: actions/checkout@v2
+       - name: checkoutV3 
+         uses: actions/checkout@v3
        - name: sync-common-types-files
          uses: ./
          with:
@@ -42,8 +37,8 @@
      if: ${{ github.repository == 'Azure/azure-rest-api-specs-pr' }}
      runs-on: ubuntu-latest
      steps:
-       - name: checkoutV2 
-         uses: actions/checkout@v2
+       - name: checkoutV3 
+         uses: actions/checkout@v3
        - name: sync-common-types-files
          uses: ./
          with:
