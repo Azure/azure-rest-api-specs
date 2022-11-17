@@ -281,7 +281,7 @@
             "name": "semanticMaxWaitInMilliseconds",
             "in": "query",
             "type": "integer",
-            "description": "The time in milliseconds to wait before the semantic processing step times out. Only valid when semanticErrorHandling is set to 'partial'.",
+            "description": "The time in milliseconds to wait before the semantic processing step times out. Must be set to a value >= 700. Only valid when semanticErrorHandling is set to 'partial'.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -1256,6 +1256,18 @@
           "x-nullable": true,
           "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
         },
+        "@search.semanticPartialResponseReason":{
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseReason",
+          "description": "The cause for semantic processing failure."
+        },
+        "@search.semanticPartialResponseType":{
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseType",
+          "description": "Indicates whether the response contains just the base search result or partially reranked search results."
+        },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
           "readOnly": true,
@@ -2146,7 +2158,7 @@
         "semanticMaxWaitInMilliseconds": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in milliseconds to wait before the semantic processing step times out. Only valid when semanticErrorHandling is set to 'partial'."
+          "description": "The time in milliseconds to wait before the semantic processing step times out. Must be set to a value >= 700. Only valid when semanticErrorHandling is set to 'partial'."
         },
         "search": {
           "type": "string",
