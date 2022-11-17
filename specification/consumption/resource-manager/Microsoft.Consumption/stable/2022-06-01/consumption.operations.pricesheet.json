@@ -342,13 +342,12 @@
       }
     },
     "OperationListResult": {
-      "type":"object",
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type":"object",
       "properties": {
         "value": {
           "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
           }
@@ -356,7 +355,6 @@
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
           "type": "string",
-          "readOnly": true
         }
       }
     },
