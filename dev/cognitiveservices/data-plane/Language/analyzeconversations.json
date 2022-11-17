@@ -2291,20 +2291,24 @@
         "conversations": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ConversationSentimentResult"
-              },
-              {
-                "$ref": "#/definitions/ConversationResultBase"
-              }
-            ]
+            "$ref": "#/definitions/ConversationalSentimentResultWithResultBase"
           }
         }
       },
       "allOf": [
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ConversationalSentimentResultWithResultBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationSentimentResult"
+        },
+        {
+          "$ref": "#/definitions/ConversationResultBase"
         }
       ]
     },

@@ -1091,21 +1091,28 @@
           "type": "array",
           "description": "Sentiment analysis per document.",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SentimentDocumentResult"
-              }
-            ]
-          }
+            "$ref": "#/definitions/SentimentDocumentResultWithDocumentDetectedLanguage"
+          }          
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
         "documents"
+      ]
+    },
+    "SentimentDocumentResultWithDocumentDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentimentDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "SentimentDocumentResult": {
@@ -2028,21 +2035,28 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              }
-            ]
+            "$ref": "#/definitions/KeyPhrasesDocumentResultWithDocumentDetectedLanguage"
           }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
         "documents"
+      ]
+    },
+    "KeyPhrasesDocumentResultWithDocumentDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyPhrasesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "KeyPhrasesDocumentResult": {
