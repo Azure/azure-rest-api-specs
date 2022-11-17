@@ -325,7 +325,7 @@
           },
           "Create Infrastructure with Disk and OS  configuration for HA System with Availability Zone (Recommended)": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvZone.json"
-          }          
+          }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
         "parameters": [
@@ -653,6 +653,9 @@
         "x-ms-examples": {
           "SAPCentralInstances_Create": {
             "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Create.json"
+          },
+          "Create SAP Central Instances for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Create_HA_AvSet.json"
           }
         },
         "description": "Creates the SAP Central Services Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
@@ -927,6 +930,9 @@
         "x-ms-examples": {
           "SAPDatabaseInstances_Create": {
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Create.json"
+          },
+          "Create SAP Database Instances for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Create_HA_AvSet.json"
           }
         },
         "description": "Creates the Database resource corresponding to the Virtual Instance for SAP solutions resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
@@ -1201,6 +1207,9 @@
         "x-ms-examples": {
           "SAPApplicationServerInstances_Create": {
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Create.json"
+          },
+          "Create SAP Application Server Instances for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Create_HA_AvSet.json"
           }
         },
         "description": "Puts the SAP Application Server Instance resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
@@ -2907,6 +2916,26 @@
       },
       "discriminator": "configurationType"
     },
+    "LoadBalancerDetails": {
+      "description": "The Load Balancer details such as Load Balancer ID.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageInformation": {
+      "description": "Storage details of all the Storage accounts attached to the VM. For e.g. NFS on AFS Shared Storage. ",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CentralServerVmDetails": {
       "description": "The SAP Central Services Instance VM details.",
       "type": "object",
@@ -2917,6 +2946,15 @@
         },
         "virtualMachineId": {
           "type": "string",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -2931,6 +2969,15 @@
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -3156,6 +3203,15 @@
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
           "readOnly": true
         },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
         "health": {
           "$ref": "#/definitions/HealthState",
           "readOnly": true
@@ -3355,6 +3411,11 @@
           "readOnly": true,
           "x-nullable": true
         },
+        "loadBalancerDetails": {
+          "description": "The Load Balancer details such as LoadBalancer ID attached to ASCS Virtual Machines",
+          "$ref": "#/definitions/LoadBalancerDetails",
+          "readOnly": true
+        },
         "vmDetails": {
           "description": "The list of virtual machines corresponding to the Central Services instance.",
           "type": "array",
@@ -3420,6 +3481,11 @@
         "ipAddress": {
           "type": "string",
           "description": "Database IP Address.",
+          "readOnly": true
+        },
+        "loadBalancerDetails": {
+          "description": "The Load Balancer details such as LoadBalancer ID attached to Database Virtual Machines",
+          "$ref": "#/definitions/LoadBalancerDetails",
           "readOnly": true
         },
         "vmDetails": {
