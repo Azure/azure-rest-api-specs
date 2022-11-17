@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-08-01-preview",
+    "version": "2022-11-01-preview",
     "title": "ArtifactsClient",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
@@ -31,7 +31,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_ListLinkConnectionsByWorkspace",
+        "operationId": "LinkConnection_ListByWorkspace",
         "description": "List link connections",
         "parameters": [
           {
@@ -67,7 +67,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_CreateOrUpdateLinkConnection",
+        "operationId": "LinkConnection_CreateOrUpdate",
         "description": "Creates or updates a link connection",
         "parameters": [
           {
@@ -110,7 +110,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_GetLinkConnection",
+        "operationId": "LinkConnection_Get",
         "description": "Get a link connection",
         "parameters": [
           {
@@ -144,7 +144,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_DeleteLinkConnection",
+        "operationId": "LinkConnection_Delete",
         "description": "Delete a link connection",
         "parameters": [
           {
@@ -438,6 +438,72 @@
         "x-ms-examples": {
           "LinkConnection_UpdateLandingZoneCredential": {
             "$ref": "./examples/LinkConnection_UpdateLandingZoneCredential.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/pause": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_Pause",
+        "description": "Pause a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_Pause": {
+            "$ref": "./examples/LinkConnection_Pause.json"
+          }
+        }
+      }
+    },
+    "/linkconnections/{linkConnectionName}/resume": {
+      "post": {
+        "tags": [
+          "linkConnections"
+        ],
+        "operationId": "LinkConnection_Resume",
+        "description": "Resume a link connection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LinkConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkConnection_Resume": {
+            "$ref": "./examples/LinkConnection_Resume.json"
           }
         }
       }
@@ -952,7 +1018,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The Synapse client API Version."
+      "description": "The Synapse client API Version.",
+      "x-ms-parameter-location": "client"
     },
     "Endpoint": {
       "name": "endpoint",
@@ -962,7 +1029,7 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client",
-      "format": "uri"
+      "format": "url"
     },
     "LinkConnectionName": {
       "name": "linkConnectionName",
