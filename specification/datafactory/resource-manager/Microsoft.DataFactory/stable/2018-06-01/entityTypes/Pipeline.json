@@ -3766,7 +3766,10 @@
           "$ref": "#/definitions/SnowflakeExportCopyCommand",
           "description": "Snowflake export settings."
         }
-      }
+      },
+      "required": [
+        "exportSettings"
+      ]
     },
     "ExportSettings": {
       "description": "Export command settings.",
@@ -7504,6 +7507,10 @@
       "description": "Script activity properties.",
       "type": "object",
       "properties": {
+        "scriptBlockExecutionTimeout": {
+          "type": "object",
+          "description": "ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
         "scripts": {
           "type": "array",
           "description": "Array of script blocks. Type: array.",
@@ -7929,9 +7936,28 @@
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "files": {
-          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "description": "(Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
           "type": "array",
           "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "pythonCodeReference": {
+          "description": "Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "filesV2": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7978,8 +8004,8 @@
           }
         },
         "referenceName": {
-          "type": "string",
-          "description": "Reference spark job name."
+          "type": "object",
+          "description": "Reference spark job name. Expression with resultType string."
         }
       },
       "required": [
