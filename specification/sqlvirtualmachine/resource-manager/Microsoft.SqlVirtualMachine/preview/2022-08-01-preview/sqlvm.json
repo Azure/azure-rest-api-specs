@@ -187,13 +187,21 @@
             }
           },
           "202": {
-            "description": "Deleting the availability group listener."
+            "description": "Deleting the availability group listener.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The availability group listener does not exist."
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes an availability group listener.": {
             "$ref": "./examples/DeleteAvailabilityGroupListener.json"
@@ -426,13 +434,21 @@
             }
           },
           "202": {
-            "description": "Deleting the SQL virtual machine group."
+            "description": "Deleting the SQL virtual machine group.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified SQL virtual machine group does not exist."
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes a SQL virtual machine group.": {
             "$ref": "./examples/DeleteSqlVirtualMachineGroup.json"
@@ -825,13 +841,21 @@
             }
           },
           "202": {
-            "description": "Deleting the SQL virtual machine."
+            "description": "Deleting the SQL virtual machine.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified SQL virtual machine does not exist."
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Deletes a SQL virtual machine.": {
             "$ref": "./examples/DeleteSqlVirtualMachine.json"
@@ -971,10 +995,18 @@
             }
           },
           "202": {
-            "description": "Accepted request to start assessment on SQL virtual machine."
+            "description": "Accepted request to start assessment on SQL virtual machine.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Starts Assessment on SQL virtual machine": {
             "$ref": "./examples/StartAssessmentOnSqlVirtualMachine.json"
@@ -1018,10 +1050,18 @@
             }
           },
           "202": {
-            "description": "Accepted redeploying the SQL virtual machine."
+            "description": "Accepted redeploying the SQL virtual machine.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Uninstalls and reinstalls the SQL Iaas Extension.": {
             "$ref": "./examples/RedeploySqlVirtualMachine.json"
