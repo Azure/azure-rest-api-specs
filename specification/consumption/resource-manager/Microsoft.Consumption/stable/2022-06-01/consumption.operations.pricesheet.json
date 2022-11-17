@@ -39,8 +39,8 @@
         "tags": [
           "PriceSheet"
         ],
-        "operationId": "PriceSheet_Get",
-        "description": "Gets the price sheet for a subscription. Price sheet is available via this API only for May 1, 2014 or later.",
+        "operationId": "PriceSheet_List",
+        "description": "List the price sheet for a subscription. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -291,7 +291,6 @@
         "includedQuantity": {
           "description": "Included quality for an offer",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "partNumber": {
@@ -302,7 +301,6 @@
         "unitPrice": {
           "description": "Unit Price",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "currencyCode": {
@@ -340,6 +338,25 @@
         "error": {
           "description": "The details of the error.",
           "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type":"object",
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -385,25 +402,6 @@
         }
       }
     },
-    "OperationListResult": {
-      "type":"object",
-      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "MeterDetails": {
       "type":"object",
       "description": "The properties of the meter detail.",
@@ -436,13 +434,11 @@
         "totalIncludedQuantity": {
           "description": "The total included quantity associated with the offer.",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "pretaxStandardRate": {
           "description": "The pretax listing price.",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "serviceName": {
@@ -511,6 +507,7 @@
       "x-ms-parameter-location":"method"
     },
     "billingPeriodNameParameter": {
+      "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
       "name": "billingPeriodName",
       "in": "path",
       "description": "Billing Period Name.",
