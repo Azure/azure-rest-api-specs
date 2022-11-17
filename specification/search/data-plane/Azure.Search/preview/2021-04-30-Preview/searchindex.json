@@ -1260,12 +1260,58 @@
           "type": "string",
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseReason",
+          "enum": [
+            "transient",
+            "maxWaitExceeded",
+            "capacityOverloaded"
+          ],
+          "x-ms-enum": {
+            "name": "SemanticPartialResponseReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "transient",
+                "name": "Transient",
+                "description": "Transient issues caused semantic processing to truncate."
+              },
+              {
+                "value": "maxWaitExceeded",
+                "name": "MaxWaitExceeded",
+                "description": "Semantic processing exceeded the max wait time, causing it to truncate."
+              },
+              {
+                "value": "capacityOverloaded",
+                "name": "CapacityOverloaded",
+                "description": "The system was overloaded, causing semantic processing to truncate."
+              }
+            ]
+          },
           "description": "The cause for semantic processing failure."
         },
         "@search.semanticPartialResponseType":{
           "type": "string",
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseType",
+          "enum": [
+            "baseResults",
+            "rerankedResults"
+          ],
+          "x-ms-enum": {
+            "name": "SemanticPartialResponseType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "baseResults",
+                "name": "BaseResults",
+                "description": "Search results are not affected by semantic processing."
+              },
+              {
+                "value": "rerankedResults",
+                "name": "RerankedResults",
+                "description": "Search results are partially reranked."
+              }
+            ]
+          },
           "description": "Indicates whether the response contains just the base search result or partially reranked search results."
         },
         "@search.nextPageParameters": {
