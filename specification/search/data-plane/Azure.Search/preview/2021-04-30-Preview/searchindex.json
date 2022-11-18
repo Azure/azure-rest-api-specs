@@ -1218,6 +1218,22 @@
       "additionalProperties": true,
       "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.."
     },
+    "AnswersDebugInfo": {
+      "properties": {
+        "queryClassifiedAsQuestion": {
+          "type": "boolean",
+          "description": "Whether the given query was classified as a question.",
+          "readdOnly": true
+        }
+      },
+      "x-ms-client-name": "Answers",
+      "description": "Answers debug info for this search result."
+    },
+    "SemanticDebugInfo": {
+      "x-ms-client-name": "Semantic",
+      "description": "Semantic debug info for this search result.",
+      "$ref": "#/definitions/AnswersDebugInfo"
+    },
     "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
@@ -1256,7 +1272,14 @@
           "x-nullable": true,
           "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
         },
-        "@search.semanticPartialResponseReason":{
+        "@search.debugInfo": {
+          "$ref": "#/definitions/SemanticDebugInfo",
+          "description": "Top-level debug info for this search result.",
+          "readOnly": true,
+          "x-ms-client-name": "DebugInfo",
+          "x-nullable": true
+        },
+        "@search.semanticPartialResponseReason": {
           "type": "string",
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseReason",
@@ -1288,7 +1311,7 @@
           },
           "description": "The cause for semantic processing failure."
         },
-        "@search.semanticPartialResponseType":{
+        "@search.semanticPartialResponseType": {
           "type": "string",
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseType",
