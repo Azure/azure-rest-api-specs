@@ -1279,6 +1279,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakFileLocks": {
+      "post": {
+        "tags": [
+          "File Locks"
+        ],
+        "summary": "Break file locks",
+        "description": "Break all the file locks on a volume",
+        "operationId": "Volumes_BreakFileLocks",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Optional body to provide the ability to clear file locks with selected options",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/breakFileLocksRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_BreakFileLocks": {
+            "$ref": "examples/Volumes_BreakFileLocks.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakReplication": {
       "post": {
         "tags": [
@@ -3451,6 +3510,9 @@
               "$ref": "#/definitions/volumeQuotaRule"
             }
           },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
           "default": {
             "description": "Error response describing why the operation failed."
           }
@@ -3559,6 +3621,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted -- Delete request accepted; operation will complete asynchronously"
           },
@@ -3576,49 +3641,6 @@
         "x-ms-examples": {
           "VolumeQuotaRules_Delete": {
             "$ref": "examples/VolumeQuotaRules_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/vaults": {
-      "get": {
-        "tags": [
-          "Vaults"
-        ],
-        "summary": "List vaults",
-        "description": "List vaults for a Netapp Account",
-        "operationId": "Vaults_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/vaultList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "Vaults_List": {
-            "$ref": "examples/Vaults_List.json"
           }
         }
       }
@@ -4141,6 +4163,65 @@
         "x-ms-examples": {
           "Subvolumes_Metadata": {
             "$ref": "examples/Subvolumes_Metadata.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}/restoreFiles": {
+      "post": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_RestoreFiles",
+        "summary": "Create a new Backup Restore Files request",
+        "description": "Restore the specified files from the specified backup to the active filesystem",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Restore payload supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backupRestoreFiles"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/BackupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Backups_SingleFileRestore": {
+            "$ref": "examples/Backups_SingleFileRestore.json"
           }
         }
       }
@@ -4906,6 +4987,13 @@
         "ldapSearchScope": {
           "description": "LDAP Search scope options",
           "$ref": "#/definitions/ldapSearchScopeOpt"
+        },
+        "preferredServersForLdapClient": {
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?)?$",
+          "description": "Comma separated list of IPv4 addresses of preferred servers for LDAP client. At most two comma separated IPv4 addresses can be passed.",
+          "example": "101.102.103.104, 101.102.103.105"
         }
       }
     },
@@ -5566,17 +5654,25 @@
             "backup": {
               "title": "Backup",
               "description": "Backup Properties",
+              "type": "object",
               "$ref": "#/definitions/volumeBackupProperties"
             },
             "replication": {
               "title": "Replication",
               "description": "Replication properties",
+              "type": "object",
               "$ref": "#/definitions/replicationObject"
             },
             "snapshot": {
               "title": "Snapshot",
               "description": "Snapshot properties.",
               "$ref": "#/definitions/volumeSnapshotProperties"
+            },
+            "volumeRelocation": {
+              "title": "VolumeRelocation",
+              "description": "VolumeRelocation properties",
+              "type": "object",
+              "$ref": "#/definitions/volumeRelocationProperties"
             }
           }
         },
@@ -5591,11 +5687,11 @@
         },
         "kerberosEnabled": {
           "type": "boolean",
+          "description": "Describe if a volume is KerberosEnabled. To be use with swagger version 2020-05-01 or later",
           "x-ms-mutability": [
             "read",
             "create"
           ],
-          "description": "Describe if a volume is KerberosEnabled. To be use with swagger version 2020-05-01 or later",
           "example": false,
           "default": false
         },
@@ -5675,6 +5771,7 @@
         "throughputMibps": {
           "title": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
+          "x-nullable": true,
           "example": 128.22
         },
         "encryptionKeySource": {
@@ -5765,6 +5862,15 @@
           },
           "example": "Enabled",
           "default": "Disabled"
+        },
+        "dataStoreResourceId": {
+          "title": "dataStoreResourceId",
+          "description": "Data store resource unique identifier",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
         "isDefaultQuotaEnabled": {
           "type": "boolean",
@@ -5857,6 +5963,21 @@
               }
             ]
           }
+        },
+        "provisionedAvailabilityZone": {
+          "title": "Provisioned Availability Zone",
+          "type": "string",
+          "readOnly": true,
+          "description": "The availability zone where the volume is provisioned. This refers to the logical availability zone where the volume resides.",
+          "example": "2",
+          "x-nullable": true
+        },
+        "isLargeVolume": {
+          "title": "Is Large Volume",
+          "type": "boolean",
+          "description": "Specifies whether volume is a Large Volume or Regular Volume.",
+          "example": false,
+          "default": false
         }
       }
     },
@@ -5962,12 +6083,9 @@
           "type": "boolean",
           "description": "Policy Enforced"
         },
-        "vaultId": {
-          "type": "string",
-          "description": "Vault Resource ID"
-        },
         "backupEnabled": {
           "type": "boolean",
+          "x-nullable": true,
           "description": "Backup Enabled"
         }
       }
@@ -6064,17 +6182,13 @@
       "description": "Volume relocation properties",
       "type": "object",
       "properties": {
-        "oldVolumeId": {
-          "type": "string",
-          "description": "The id of the old volume that is being relocated"
-        },
-        "oldBareMetalTenantId": {
-          "type": "string",
-          "description": "The id of the bare metal tenant owned by the existing volume"
-        },
         "relocationRequested": {
           "type": "boolean",
           "description": "Has relocation been requested for this volume"
+        },
+        "readyToBeFinalized": {
+          "type": "boolean",
+          "description": "Has relocation finished and is ready to be cleaned up"
         }
       }
     },
@@ -6216,8 +6330,9 @@
           }
         },
         "throughputMibps": {
-          "title": "Maximum throughput in Mibps that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
+          "title": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
+          "x-nullable": true,
           "example": 128.22
         },
         "dataProtection": {
@@ -6227,6 +6342,7 @@
             "backup": {
               "title": "Backup",
               "description": "Backup Properties",
+              "type": "object",
               "$ref": "#/definitions/volumeBackupProperties"
             },
             "snapshot": {
@@ -6452,21 +6568,25 @@
         "hourlySchedule": {
           "title": "hourlySchedule",
           "description": "Schedule for hourly snapshots",
+          "type": "object",
           "$ref": "#/definitions/hourlySchedule"
         },
         "dailySchedule": {
           "title": "dailySchedule",
           "description": "Schedule for daily snapshots",
+          "type": "object",
           "$ref": "#/definitions/dailySchedule"
         },
         "weeklySchedule": {
           "title": "weeklySchedule",
           "description": "Schedule for weekly snapshots",
+          "type": "object",
           "$ref": "#/definitions/weeklySchedule"
         },
         "monthlySchedule": {
           "title": "monthlySchedule",
           "description": "Schedule for monthly snapshots",
+          "type": "object",
           "$ref": "#/definitions/monthlySchedule"
         },
         "enabled": {
@@ -6766,6 +6886,23 @@
         "creationToken": {
           "type": "string",
           "description": "New creation token for the volume that controls the mount point name"
+        }
+      }
+    },
+    "breakFileLocksRequest": {
+      "description": "Break file locks request",
+      "type": "object",
+      "properties": {
+        "clientIP": {
+          "type": "string",
+          "description": "To clear file locks on a volume for a particular client",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+          "example": "101.102.103.104"
+        },
+        "confirmRunningDisruptiveOperation": {
+          "type": "boolean",
+          "description": "Break File locks could be a disruptive operation for application as locks on the volume will be broken, if want to process, set to true.",
+          "default": false
         }
       }
     },
@@ -7118,60 +7255,6 @@
         }
       }
     },
-    "vaultList": {
-      "description": "List of Vaults",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of vaults",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/vault"
-          }
-        }
-      }
-    },
-    "vault": {
-      "description": "Vault information",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "properties": {
-          "description": "Vault Properties",
-          "$ref": "#/definitions/vaultProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "vaultProperties": {
-      "description": "Vault properties",
-      "type": "object",
-      "properties": {
-        "vaultName": {
-          "type": "string",
-          "readOnly": false,
-          "description": "Vault Name"
-        }
-      }
-    },
     "backupStatus": {
       "description": "Backup status",
       "type": "object",
@@ -7234,6 +7317,11 @@
           "format": "int64",
           "readOnly": true,
           "description": "Displays the total bytes transferred"
+        },
+        "lastTransferDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Displays the time taken in seconds for the last transfer to complete"
         }
       }
     },
@@ -7595,6 +7683,7 @@
         "groupMetaData": {
           "title": "groupMetaData",
           "description": "Volume group details",
+          "type": "object",
           "$ref": "#/definitions/volumeGroupMetaData"
         },
         "volumes": {
@@ -7619,6 +7708,7 @@
         "groupMetaData": {
           "title": "groupMetaData",
           "description": "Volume group details",
+          "type": "object",
           "$ref": "#/definitions/volumeGroupMetaData"
         }
       }
@@ -7703,6 +7793,42 @@
           "description": "Destination folder where the files will be restored",
           "type": "string",
           "example": "/AVSdataStore"
+        }
+      }
+    },
+    "backupRestoreFiles": {
+      "description": "Restore payload for Single File Backup Restore",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "fileList",
+        "destinationVolumeId"
+      ],
+      "properties": {
+        "fileList": {
+          "description": "List of files to be restored",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1
+          },
+          "example": [
+            "/dir1/customer1.db",
+            "/dir1/customer2.db"
+          ]
+        },
+        "restoreFilePath": {
+          "description": "Destination folder where the files will be restored",
+          "type": "string",
+          "example": "/AVSdataStore"
+        },
+        "destinationVolumeId": {
+          "description": "Resource Id of the destination volume on which the files need to be restored",
+          "type": "string",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1"
         }
       }
     },
