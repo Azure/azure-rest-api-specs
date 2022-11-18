@@ -287,6 +287,15 @@
           "Create Infrastructure only for Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
           },
+          "Create Infrastructure without SAP Trans Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_SkipTransMount.json"
+          },
+          "Create Infrastructure with a new SAP Trans Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_CreateTrans.json"
+          },
+          "Create Infrastructure with an existing SAP Trans Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_MountTrans.json"
+          },
           "Detect SAP Software Installation on a Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_SingleServer.json"
           },
@@ -2415,6 +2424,100 @@
         "highAvailabilityType"
       ]
     },
+    "FileShareConfigurationType": {
+      "description": "The type of file share config.",
+      "enum": [
+        "Skip",
+        "CreateAndMount",
+        "Mount"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "configurationType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "SkipFileShareConfiguration": {
+      "x-ms-discriminator-value": "Skip",
+      "description": "Gets or sets the skip file share configuration",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ]
+    },
+    "CreateAndMountFileShareConfiguration": {
+      "x-ms-discriminator-value": "CreateAndMount",
+      "description": "Gets or sets the file share configuration for file share created with the VIS case.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "The name of file share resource group. The app rg is used in case of missing input."
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of file share storage account name . A custom name is used in case of missing input."
+        }
+      }
+    },
+    "MountFileShareConfiguration": {
+      "x-ms-discriminator-value": "Mount",
+      "description": "Gets or sets the file share configuration for externally mounted cases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fileshare resource ID"
+        },
+        "privateEndpointId": {
+          "type": "string",
+          "description": "The private endpoint resource ID"
+        }
+      },
+      "required": [
+        "id",
+        "privateEndpointId"
+      ]
+    },
+    "FileShareConfiguration": {
+      "description": "File Share configuration details, populated with information on storage configuration mounted on the VIS. The createAndMount option is selected in case of missing input.",
+      "type": "object",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/FileShareConfigurationType"
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "StorageConfiguration": {
+      "description": "Gets or sets the storage configuration.",
+      "type": "object",
+      "properties": {
+        "transportFileShareConfiguration": {
+          "description": "The properties of the transport directory attached to the VIS. The default for transportFileShareConfiguration is the createAndMount flow if storage configuration is missing.",
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      }
+    },
     "ThreeTierConfiguration": {
       "x-ms-discriminator-value": "ThreeTier",
       "x-ms-client-flatten": true,
@@ -2445,6 +2548,10 @@
         "highAvailabilityConfig": {
           "description": "The high availability configuration.",
           "$ref": "#/definitions/HighAvailabilityConfiguration"
+        },
+        "storageConfiguration": {
+          "description": "The storage configuration.",
+          "$ref": "#/definitions/StorageConfiguration"
         }
       },
       "required": [
