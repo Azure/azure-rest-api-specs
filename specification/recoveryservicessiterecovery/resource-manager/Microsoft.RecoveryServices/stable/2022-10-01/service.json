@@ -4452,9 +4452,9 @@
             "description": "Accepted"
           },
           "default": {
-            "schema":{
-              "$ref": "#/definitions/ServiceError",
-              "description": "The Service error details."
+            "description": "The Service error details.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
             }
           }
         },
@@ -4541,11 +4541,17 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "The Service error details.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Update the mobility service on a protected item.": {
