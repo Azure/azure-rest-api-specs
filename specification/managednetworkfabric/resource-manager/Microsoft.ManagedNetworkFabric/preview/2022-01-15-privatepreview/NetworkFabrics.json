@@ -41,7 +41,7 @@
         ],
         "operationId": "NetworkFabrics_Create",
         "summary": "Create Network Fabric.",
-        "description": "Implements Network Fabric PUT method.",
+        "description": "Create Network Fabric resource.",
         "consumes": [
           "application/json"
         ],
@@ -51,9 +51,6 @@
         "x-ms-examples": {
           "NetworkFabrics_Create_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_Create_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_Create_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_Create_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -120,16 +117,13 @@
         ],
         "operationId": "NetworkFabrics_Get",
         "summary": "Gets a Network Fabric.",
-        "description": "Implements Network Fabric GET method.",
+        "description": "Get Network Fabric resource details.",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "NetworkFabrics_Get_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_Get_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_Get_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_Get_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -171,7 +165,7 @@
         ],
         "operationId": "NetworkFabrics_Update",
         "summary": "Updates a Network Fabric.",
-        "description": "API to update certain properties of the Network Fabric resource.",
+        "description": "Update certain properties of the Network Fabric resource.",
         "consumes": [
           "application/json"
         ],
@@ -181,9 +175,6 @@
         "x-ms-examples": {
           "NetworkFabrics_Update_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_Update_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_Update_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_Update_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -247,16 +238,13 @@
         ],
         "operationId": "NetworkFabrics_Delete",
         "summary": "Deletes a Network Fabric.",
-        "description": "Implements Network Fabric DELETE method.",
+        "description": "Delete Network Fabric resource.",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "NetworkFabrics_Delete_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_Delete_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_Delete_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -310,13 +298,10 @@
       "get": {
         "operationId": "NetworkFabrics_ListByResourceGroup",
         "summary": "List NetworkFabrics by resource group.",
-        "description": "Implements NetworkFabrics list by resource group GET method.",
+        "description": "List all the Network Fabric resources in the given resource group.",
         "x-ms-examples": {
           "NetworkFabrics_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -353,13 +338,10 @@
       "get": {
         "operationId": "NetworkFabrics_ListBySubscription",
         "summary": "List NetworkFabrics by subscription.",
-        "description": "Implements NetworkFabrics list by subscription GET method.",
+        "description": "List all the Network Fabric resources in the given subscription.",
         "x-ms-examples": {
           "NetworkFabrics_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -395,14 +377,11 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_validateConfiguration",
-        "description": "Validates the existing configuration to ensure the provision action succeeds.",
+        "description": "Validates the current configuration to ensure the provision action succeeds.",
         "summary": "Implements the operation to validate the current configuration settings.",
         "x-ms-examples": {
           "NetworkFabrics_validateConfiguration_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_validateConfiguration_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_validateConfiguration_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_validateConfiguration_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -455,8 +434,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_provision",
-        "description": "Provisions the underlying hardware.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Provisions the underlying resources in the given Network Fabric instance.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -499,9 +478,6 @@
         "x-ms-examples": {
           "NetworkFabrics_provision_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_provision_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_provision_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_provision_MinimumSet_Gen.json"
           }
         }
       }
@@ -512,8 +488,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_deprovision",
-        "description": "Deprovisions the underlying hardware.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Deprovisions the underlying resources in the given Network Fabric instance.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -556,9 +532,6 @@
         "x-ms-examples": {
           "NetworkFabrics_deprovision_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_deprovision_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_deprovision_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_deprovision_MinimumSet_Gen.json"
           }
         }
       }
@@ -613,9 +586,6 @@
         "x-ms-examples": {
           "NetworkFabrics_restoreConfig_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_restoreConfig_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_restoreConfig_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_restoreConfig_MinimumSet_Gen.json"
           }
         }
       }
@@ -626,8 +596,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_upgrade",
-        "description": "Upgrades the underlying hardware.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Upgrades the underlying resources in the given Network Fabric Instance.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -670,9 +640,6 @@
         "x-ms-examples": {
           "NetworkFabrics_upgrade_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_upgrade_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_upgrade_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_upgrade_MinimumSet_Gen.json"
           }
         }
       }
@@ -684,7 +651,7 @@
         ],
         "operationId": "NetworkFabrics_getManagementNetworkConfigurationStatus",
         "description": "Updates the status of the ManagementNetworkConfiguration.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -727,9 +694,6 @@
         "x-ms-examples": {
           "NetworkFabrics_getManagementNetworkConfigurationStatus_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_getManagementNetworkConfigurationStatus_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_getManagementNetworkConfigurationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_getManagementNetworkConfigurationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -740,8 +704,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_enableNniLayer2",
-        "description": "Enables layer 2 for the path of the Network Fabric.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Enables layer 2 configuration for the given Network Fabric.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -793,9 +757,6 @@
         "x-ms-examples": {
           "NetworkFabrics_enableNniLayer2_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_enableNniLayer2_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_enableNniLayer2_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_enableNniLayer2_MinimumSet_Gen.json"
           }
         }
       }
@@ -806,8 +767,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_enableNniLayer3",
-        "description": "Enables layer 3 for the path of the Network Fabric.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Enables layer 3 configuration for the given Network Fabric.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -859,9 +820,6 @@
         "x-ms-examples": {
           "NetworkFabrics_enableNniLayer3_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_enableNniLayer3_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_enableNniLayer3_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_enableNniLayer3_MinimumSet_Gen.json"
           }
         }
       }
@@ -872,8 +830,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_disableNniLayer2",
-        "description": "Disables layer 2 for the path of the Network Fabric.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Disables layer 2 configuration for the given Network Fabric.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -925,9 +883,6 @@
         "x-ms-examples": {
           "NetworkFabrics_disableNniLayer2_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_disableNniLayer2_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_disableNniLayer2_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_disableNniLayer2_MinimumSet_Gen.json"
           }
         }
       }
@@ -938,8 +893,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_disableNniLayer3",
-        "description": "Disables layer 3 for the path of the Network Fabric.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Disables layer 3 configuration for the given Network Fabric.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -991,9 +946,6 @@
         "x-ms-examples": {
           "NetworkFabrics_disableNniLayer3_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_disableNniLayer3_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_disableNniLayer3_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_disableNniLayer3_MinimumSet_Gen.json"
           }
         }
       }
@@ -1004,8 +956,8 @@
           "NetworkFabrics"
         ],
         "operationId": "NetworkFabrics_getNniStatus",
-        "description": "Updates status of the path of the Network Fabric.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Provides the Nni status of layer2 and layer3 networks for the given Network Fabric",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1051,9 +1003,6 @@
         "x-ms-examples": {
           "NetworkFabrics_getNniStatus_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabrics_getNniStatus_MaximumSet_Gen.json"
-          },
-          "NetworkFabrics_getNniStatus_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabrics_getNniStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -1102,11 +1051,11 @@
       "properties": {
         "managementNetworkConfiguration": {
           "type": "object",
-          "description": "Configuration to be used to setup the management network.",
+          "description": "Configuration for management network setup.",
           "properties": {
             "managementVpnConfiguration": {
               "type": "object",
-              "description": "Configuration to be used for management vpn.",
+              "description": "Configuration for management vpn.",
               "allOf": [
                 {
                   "$ref": "#/definitions/ManagementVPNPatchableProperties"
@@ -1115,7 +1064,7 @@
             },
             "workloadVpnConfiguration": {
               "type": "object",
-              "description": "Configuration to be used for management vpn.",
+              "description": "Configuration for workload vpn.",
               "allOf": [
                 {
                   "$ref": "#/definitions/WorkloadVPNPatchableProperties"
@@ -1137,7 +1086,7 @@
         "peerAsn": {
           "type": "integer",
           "format": "int32",
-          "description": "ASN of PE devices for CE/PE connectivity."
+          "description": "ASN of PE devices for CE/PE connectivity.Example : 28"
         }
       },
       "allOf": [
@@ -1148,11 +1097,11 @@
     },
     "TerminalServerPatchableProperties": {
       "type": "object",
-      "description": "Network and credentials configuration already applied to terminal server.",
+      "description": "Network and credential configuration currently applied on terminal server.",
       "properties": {
         "networkDeviceId": {
           "type": "string",
-          "description": "ARM Resource ID for the NetworkDevice used.",
+          "description": "ARM Resource ID used for the NetworkDevice.",
           "readOnly": true
         },
         "username": {
@@ -1177,7 +1126,7 @@
       "properties": {
         "racks": {
           "type": "array",
-          "description": "NetworkRack Azure resource IDs from this Network Fabric. The number of racks allowed depends on the Network Fabric SKU.",
+          "description": "List of NetworkRack resource IDs under the Network Fabric. The number of racks allowed depends on the Network Fabric SKU.",
           "items": {
             "description": "NetworkRack Azure resource ID.",
             "type": "string"
@@ -1186,7 +1135,7 @@
         },
         "l2IsolationDomains": {
           "type": "array",
-          "description": "L2IsolationDomain Azure resource IDs from this Network Fabric.",
+          "description": "List of L2IsolationDomain resource IDs under the Network Fabric.",
           "items": {
             "description": "L2IsolationDomain Azure resource ID.",
             "type": "string"
@@ -1195,7 +1144,7 @@
         },
         "l3IsolationDomains": {
           "type": "array",
-          "description": "L3IsolationDomain Azure resource IDs from this Network Fabric.",
+          "description": "List of L3IsolationDomain resource IDs under the Network Fabric.",
           "items": {
             "description": "L3IsolationDomain Azure resource ID.",
             "type": "string"
@@ -1206,17 +1155,17 @@
     },
     "ManagementVPNPatchableProperties": {
       "type": "object",
-      "description": "Configuration to be used for management vpn.",
+      "description": "Configuration for management vpn.",
       "properties": {
         "optionBProperties": {
-          "description": "option B properties object",
+          "description": "option B properties",
           "$ref": "#/definitions/OptionBProperties"
         }
       }
     },
     "WorkloadVPNPatchableProperties": {
       "type": "object",
-      "description": "Configuration to be used for management vpn.",
+      "description": "Configuration for workload vpn.",
       "properties": {
         "optionBProperties": {
           "description": "option B properties object",
@@ -1239,7 +1188,7 @@
       "properties": {
         "networkFabricSku": {
           "type": "string",
-          "description": "Network Fabric SKU specifies the supported compute / aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.",
+          "description": "Supported Network Fabric SKU.Example: Compute / Aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1247,7 +1196,7 @@
         },
         "networkFabricControllerId": {
           "type": "string",
-          "description": "Azure resource ID for the NetworkFabricController the NetworkFabric belongs to.",
+          "description": "Azure resource ID for the NetworkFabricController the NetworkFabric belongs.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1259,7 +1208,7 @@
           "properties": {
             "layer2Configuration": {
               "type": "object",
-              "description": "layer2Configuration configuration. This BGP configuration enables exchange of routes using mp-BGP for multiple isolation domains with single peering.",
+              "description": "Layer2Configuration configuration. This BGP configuration enables exchange of routes using mp-BGP for multiple isolation domains with single peering.",
               "properties": {
                 "portCount": {
                   "type": "integer",
@@ -1269,11 +1218,11 @@
                 "mtu": {
                   "type": "integer",
                   "format": "int32",
-                  "description": "MTU of the packets between PE & CE. Default value is 9000."
+                  "description": "MTU of the packets between PE & CE."
                 },
                 "interfaces": {
                   "type": "array",
-                  "description": "List of network device interfaces Azure resource IDs.",
+                  "description": "List of network device interfaces resource IDs.",
                   "items": {
                     "type": "string",
                     "description": "Azure resource ID for the NetworkDevice/networkInterface."
@@ -1289,7 +1238,7 @@
                 "vlanId": {
                   "type": "integer",
                   "format": "int32",
-                  "description": "VLAN for CE/PE Layer 3 connectivity."
+                  "description": "VLAN for CE/PE Layer 3 connectivity.Example : 501"
                 },
                 "fabricAsn": {
                   "type": "integer",
@@ -1310,7 +1259,7 @@
         },
         "terminalServerConfiguration": {
           "type": "object",
-          "description": "Network and credentials configuration already applied to terminal server.",
+          "description": "Network and credentials configuration currently applied to terminal server.",
           "properties": {},
           "required": [
             "username",
@@ -1331,7 +1280,7 @@
           "properties": {
             "ipv4Prefix": {
               "type": "string",
-              "description": "ipv4Prefix. Example: 123.0.0.0/28.",
+              "description": "ipv4Prefix. Default value : 10.1.0.0/19.",
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -1339,7 +1288,7 @@
             },
             "ipv6Prefix": {
               "type": "string",
-              "description": "ipv6Prefix. Example: 3FFE:FFFF:0:CD30::a1/124.",
+              "description": "ipv6Prefix. Default value 3FFE:FFFF:0:CD40::/59.",
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -1347,10 +1296,10 @@
             },
             "managementVpnConfiguration": {
               "type": "object",
-              "description": "Configuration to be used for management vpn.",
+              "description": "Configuration for management vpn.",
               "properties": {
                 "state": {
-                  "description": "state. Example: enabled | disabled.",
+                  "description": "Indicates configuration state. Example: enabled | disabled.",
                   "$ref": "./common.json#/definitions/EnabledDisabledState"
                 },
                 "peeringOption": {
@@ -1381,10 +1330,10 @@
             },
             "workloadVpnConfiguration": {
               "type": "object",
-              "description": "Configuration to be used for workload vpn.",
+              "description": "Configuration for workload vpn.",
               "properties": {
                 "state": {
-                  "description": "state. Example: enabled | disabled.",
+                  "description": "Indicates configuration state. Example: enabled | disabled.",
                   "$ref": "./common.json#/definitions/EnabledDisabledState"
                 },
                 "peeringOption": {
@@ -1433,7 +1382,7 @@
         "terminalServerConfiguration",
         "managementNetworkConfiguration"
       ],
-      "description": "NetworkFabricProperties define the resource properties."
+      "description": "NetworkFabricProperties - define the resource properties."
     },
     "TerminalServerConnectivityState": {
       "type": "string",
@@ -1466,7 +1415,7 @@
     },
     "ManagementVPNDesiredStates": {
       "type": "string",
-      "description": "Enumeration of the desired state for the Management VPN.",
+      "description": "Desired state for the Management VPN.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -1490,7 +1439,7 @@
     },
     "ValidationResultProperties": {
       "type": "object",
-      "description": "Model for validation result.",
+      "description": "Validation result properties.",
       "properties": {
         "result": {
           "description": "Result of the NetworkFabric configuration validation.",
@@ -1498,7 +1447,7 @@
         },
         "errors": {
           "type": "array",
-          "description": "List with stringified validation errors.",
+          "description": "List of validation errors.",
           "items": {
             "type": "string",
             "description": "Validation error."
@@ -1586,17 +1535,17 @@
         "vlanId": {
           "type": "integer",
           "format": "int32",
-          "description": "Vlan Id"
+          "description": "Vlan Id.Example : 501"
         },
         "fabricAsn": {
           "type": "integer",
           "format": "int32",
-          "description": "Fabric ASN number"
+          "description": "Fabric ASN number.Default value is 65001 "
         },
         "peerAsn": {
           "type": "integer",
           "format": "int32",
-          "description": "Peer ASN number"
+          "description": "Peer ASN number.Example : 28"
         },
         "bfdConfiguration": {
           "type": "object",
@@ -1630,7 +1579,7 @@
           "description": "Route Targets to be applied for incoming routes into CE.",
           "items": {
             "type": "string",
-            "description": "Import route target. Example: 65531:2001, 65532:2001."
+            "description": "Import route target. Example: 65541:2001, 65542:2001."
           }
         },
         "exportRouteTargets": {
@@ -1645,7 +1594,7 @@
     },
     "EnableDisableNniLayer2Properties": {
       "type": "array",
-      "description": "List of network interfaces Azure resource IDs.",
+      "description": "List of network interface resource IDs.",
       "items": {
         "type": "string",
         "description": "Azure resource ID for the NetworkDevices/NetworkInterface."
@@ -1653,7 +1602,7 @@
     },
     "EnableDisableNniLayer3Properties": {
       "type": "array",
-      "description": "List of Network Devices Azure resource IDs.",
+      "description": "List of Network Device resource IDs.",
       "items": {
         "type": "string",
         "description": "Azure resource ID for the NetworkDevices."
@@ -1679,7 +1628,7 @@
                 "description": "Network Interface Resource Ids"
               },
               "state": {
-                "description": "state. Example: enabled | disabled.",
+                "description": "Layer 2 state. Example: enabled | disabled.",
                 "$ref": "./common.json#/definitions/EnabledDisabledState"
               }
             }
@@ -1700,7 +1649,7 @@
                 "description": "Network Device Resource Ids"
               },
               "state": {
-                "description": "state. Example: enabled | disabled.",
+                "description": "Layer 3 state. Example: enabled | disabled.",
                 "$ref": "./common.json#/definitions/EnabledDisabledState"
               }
             }
@@ -1714,19 +1663,19 @@
       "properties": {
         "primaryIpv4Prefix": {
           "type": "string",
-          "description": "IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.23.1.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+          "description": "IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.31.0.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "primaryIpv6Prefix": {
           "type": "string",
-          "description": "IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a1/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+          "description": "IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a0/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "secondaryIpv4Prefix": {
           "type": "string",
-          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.23.1.2/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.31.0.20/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "secondaryIpv6Prefix": {
           "type": "string",
-          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a1/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         }
       }
     }

@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "aaaaaaaaaaaaaaaa",
-    "resourceGroupName": "rgAccessControlLists",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
     "api-version": "2022-01-15-privatepreview",
-    "accessControlListName": "aaaaaaaaaaaaaaaaa",
+    "accessControlListName": "aclOne",
     "body": {
       "properties": {
         "addressFamily": "ipv4",
@@ -11,15 +11,15 @@
           {
             "sequenceNumber": 3,
             "action": "allow",
-            "destinationAddress": "aaaaaaaaaaaaaaa",
-            "destinationPort": "aaaaaaaaaaaaaa",
-            "sourceAddress": "aaaaaaaa",
-            "sourcePort": "aaaaaaaaaaaaa",
-            "protocol": 12
+            "destinationAddress": "1.1.1.1",
+            "destinationPort": "21",
+            "sourceAddress": "2.2.2.2",
+            "sourcePort": "65000",
+            "protocol": 6
           }
         ]
       },
-      "location": "aaa"
+      "location": "EastUs"
     }
   },
   "responses": {
@@ -31,15 +31,26 @@
             {
               "sequenceNumber": 3,
               "action": "allow",
-              "destinationAddress": "aaaaaaaaaaaaaaa",
-              "destinationPort": "aaaaaaaaaaaaaa",
-              "sourceAddress": "aaaaaaaa",
-              "sourcePort": "aaaaaaaaaaaaa",
-              "protocol": 12
+              "destinationAddress": "1.1.1.1",
+              "destinationPort": "21",
+              "sourceAddress": "2.2.2.2",
+              "sourcePort": "65000",
+              "protocol": 6
             }
           ]
         },
-        "location": "aaa"
+        "location": "EastUs",
+        "id": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "aaaaaaaaaaaaaa",
+        "type": "aaaaaa",
+        "systemData": {
+          "createdBy": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "createdByType": "User",
+          "createdAt": "2022-06-15T07:15:42.793Z",
+          "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-06-15T07:15:42.793Z"
+        }
       }
     }
   }

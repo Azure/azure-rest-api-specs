@@ -41,7 +41,7 @@
         ],
         "operationId": "L3IsolationDomains_Create",
         "summary": "Create L3 Isolation Domain.",
-        "description": "Implements L3 Isolation Domain PUT method.",
+        "description": "Create isolation domain resources for layer 3 connectivity between compute nodes and for communication with external services .This configuration is applied on the devices only after the creation of networks is completed and isolation domain is enabled. ",
         "consumes": [
           "application/json"
         ],
@@ -102,9 +102,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_Create_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_Create_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_Create_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_Create_MinimumSet_Gen.json"
           }
         }
       },
@@ -114,7 +111,7 @@
         ],
         "operationId": "L3IsolationDomains_Get",
         "summary": "Gets a L3 Isolation Domain.",
-        "description": "Implements L3 Isolation Domain GET method.",
+        "description": "Retrieves details of this L3 Isolation Domain.",
         "produces": [
           "application/json"
         ],
@@ -153,9 +150,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_Get_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_Get_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_Get_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -193,7 +187,7 @@
             "in": "body",
             "name": "body",
             "required": true,
-            "description": "L3 Isolation Domain properties to update.",
+            "description": "API to update certain properties of the L3 Isolation Domain resource.",
             "schema": {
               "$ref": "#/definitions/L3IsolationDomainPatch"
             }
@@ -229,9 +223,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_Update_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_Update_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_Update_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -241,7 +232,7 @@
         ],
         "operationId": "L3IsolationDomains_Delete",
         "summary": "Deletes a L3 Isolation Domain.",
-        "description": "Implements L3 Isolation Domain DELETE method.",
+        "description": "Deletes layer 3 connectivity between compute nodes by managed by named L3 Isolation name.",
         "produces": [
           "application/json"
         ],
@@ -287,9 +278,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_Delete_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_Delete_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -298,7 +286,7 @@
       "get": {
         "operationId": "L3IsolationDomains_ListByResourceGroup",
         "summary": "List L3IsolationDomains by resource group.",
-        "description": "Implements L3IsolationDomains list by resource group GET method.",
+        "description": "Displays L3IsolationDomains list by resource group GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -330,9 +318,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -341,7 +326,7 @@
       "get": {
         "operationId": "L3IsolationDomains_ListBySubscription",
         "summary": "List L3IsolationDomains by subscription.",
-        "description": "Implements L3IsolationDomains list by subscription GET method.",
+        "description": "Displays L3IsolationDomains list by subscription GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -370,9 +355,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -384,7 +366,7 @@
         ],
         "operationId": "L3IsolationDomains_updateAdminState",
         "description": "Enables racks for this Isolation Domain.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "executes enable operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -436,9 +418,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_updateAdminState_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_updateAdminState_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_updateAdminState_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_updateAdminState_MinimumSet_Gen.json"
           }
         }
       }
@@ -502,9 +481,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_updateOptionBAdminState_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_updateOptionBAdminState_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_updateOptionBAdminState_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_updateOptionBAdminState_MinimumSet_Gen.json"
           }
         }
       }
@@ -516,7 +492,7 @@
         ],
         "operationId": "L3IsolationDomains_clearArpTable",
         "description": "Clears ARP tables for this Isolation Domain.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "executes clear ARP operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -568,9 +544,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_clearArpTable_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_clearArpTable_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_clearArpTable_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_clearArpTable_MinimumSet_Gen.json"
           }
         }
       }
@@ -582,7 +555,7 @@
         ],
         "operationId": "L3IsolationDomains_clearNeighborTable",
         "description": "Clears IPv6 neighbor tables for this Isolation Domain.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "executes ipv6 clear neighbor tables operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -634,9 +607,6 @@
         "x-ms-examples": {
           "L3IsolationDomains_clearNeighborTable_MaximumSet_Gen": {
             "$ref": "./examples/L3IsolationDomains_clearNeighborTable_MaximumSet_Gen.json"
-          },
-          "L3IsolationDomains_clearNeighborTable_MinimumSet_Gen": {
-            "$ref": "./examples/L3IsolationDomains_clearNeighborTable_MinimumSet_Gen.json"
           }
         }
       }
@@ -647,8 +617,8 @@
           "InternalNetworks"
         ],
         "operationId": "InternalNetworks_Create",
-        "summary": "Create InternalNetwork.",
-        "description": "Implements InternalNetwork PUT method.",
+        "summary": "Creates InternalNetwork for Layer3 Isolation Domain for communication of compute within and across racks.",
+        "description": "Creates InternalNetwork PUT method.",
         "consumes": [
           "application/json"
         ],
@@ -716,9 +686,6 @@
         "x-ms-examples": {
           "InternalNetworks_Create_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_Create_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_Create_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_Create_MinimumSet_Gen.json"
           }
         }
       },
@@ -727,8 +694,8 @@
           "InternalNetworks"
         ],
         "operationId": "InternalNetworks_Get",
-        "summary": "Gets a InternalNetworks.",
-        "description": "Implements InternalNetworks GET method.",
+        "summary": "Retrieves details of InternalNetworks using GET method.",
+        "description": "Gets a InternalNetworks.",
         "produces": [
           "application/json"
         ],
@@ -774,9 +741,6 @@
         "x-ms-examples": {
           "InternalNetworks_Get_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_Get_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_Get_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -785,8 +749,8 @@
           "InternalNetworks"
         ],
         "operationId": "InternalNetworks_Update",
-        "summary": "Updates a InternalNetworks.",
-        "description": "API to update certain properties of the InternalNetworks resource.",
+        "summary": "API to update certain properties of the InternalNetworks resources.",
+        "description": "Updates a InternalNetworks.",
         "consumes": [
           "application/json"
         ],
@@ -854,9 +818,6 @@
         "x-ms-examples": {
           "InternalNetworks_Update_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_Update_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_Update_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -919,9 +880,6 @@
         "x-ms-examples": {
           "InternalNetworks_Delete_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_Delete_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -929,8 +887,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks": {
       "get": {
         "operationId": "InternalNetworks_List",
-        "summary": "List all InternalNetworks within an isolation domain.",
-        "description": "Implements InternalNetworks list by resource group GET method.",
+        "summary": "Executes list operation to display list of all internal networks",
+        "description": "Displays InternalNetworks list by resource group GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -969,9 +927,6 @@
         "x-ms-examples": {
           "InternalNetworks_List_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_List_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_List_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_List_MinimumSet_Gen.json"
           }
         }
       }
@@ -983,7 +938,7 @@
         ],
         "operationId": "InternalNetworks_updateAdminState",
         "description": "Update Administrative state of  InternalNetworks on resources referred by their resource ids.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Executes the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1042,9 +997,6 @@
         "x-ms-examples": {
           "InternalNetworks_updateAdminState_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_updateAdminState_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_updateAdminState_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_updateAdminState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1056,7 +1008,7 @@
         ],
         "operationId": "InternalNetworks_updateBgpState",
         "description": "Update BGP state for internalNetwork. Allowed only on edge devices.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Executes the operation to the underlying resources for updating BGP state on edge devices.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1115,9 +1067,6 @@
         "x-ms-examples": {
           "InternalNetworks_updateBgpState_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_updateBgpState_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_updateBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_updateBgpState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1129,7 +1078,7 @@
         ],
         "operationId": "InternalNetworks_updateBfdForBgpState",
         "description": "Update BfdForBgp for internalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1188,9 +1137,6 @@
         "x-ms-examples": {
           "InternalNetworks_updateBfdForBgpState_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_updateBfdForBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_updateBfdForBgpState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1202,7 +1148,7 @@
         ],
         "operationId": "InternalNetworks_clearIpv6Neighbors",
         "description": "clearIpv6Neighbors for internalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1261,9 +1207,6 @@
         "x-ms-examples": {
           "InternalNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_clearIpv6Neighbors_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_clearIpv6Neighbors_MinimumSet_Gen.json"
           }
         }
       }
@@ -1275,7 +1218,7 @@
         ],
         "operationId": "InternalNetworks_clearArpEntries",
         "description": "clearArpEntries for internalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Executes clearArpEntries operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1334,9 +1277,6 @@
         "x-ms-examples": {
           "InternalNetworks_clearArpEntries_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_clearArpEntries_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_clearArpEntries_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_clearArpEntries_MinimumSet_Gen.json"
           }
         }
       }
@@ -1348,7 +1288,7 @@
         ],
         "operationId": "InternalNetworks_updateBfdForStaticRoutesState",
         "description": "Update BfdForStaticRoutes for internalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Executes update BfdForStaticRoutes operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1407,9 +1347,6 @@
         "x-ms-examples": {
           "InternalNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen": {
             "$ref": "./examples/InternalNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen.json"
-          },
-          "InternalNetworks_updateBfdForStaticRoutesState_MinimumSet_Gen": {
-            "$ref": "./examples/InternalNetworks_updateBfdForStaticRoutesState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1420,8 +1357,8 @@
           "ExternalNetworks"
         ],
         "operationId": "ExternalNetworks_Create",
-        "summary": "Create ExternalNetwork.",
-        "description": "Implements ExternalNetwork PUT method.",
+        "summary": "Creates ExternalNetwork for Layer3 Isolation Domain for communication of computes with external services",
+        "description": "Creates ExternalNetwork PUT method.",
         "consumes": [
           "application/json"
         ],
@@ -1489,9 +1426,6 @@
         "x-ms-examples": {
           "ExternalNetworks_Create_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_Create_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_Create_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_Create_MinimumSet_Gen.json"
           }
         }
       },
@@ -1500,7 +1434,7 @@
           "ExternalNetworks"
         ],
         "operationId": "ExternalNetworks_Get",
-        "summary": "Gets a ExternalNetwork.",
+        "summary": "Retrieves details of ExternalNetwork.",
         "description": "Implements ExternalNetworks GET method.",
         "produces": [
           "application/json"
@@ -1547,9 +1481,6 @@
         "x-ms-examples": {
           "ExternalNetworks_Get_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_Get_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_Get_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -1627,9 +1558,6 @@
         "x-ms-examples": {
           "ExternalNetworks_Update_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_Update_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_Update_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -1692,9 +1620,6 @@
         "x-ms-examples": {
           "ExternalNetworks_Delete_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_Delete_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1702,7 +1627,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks": {
       "get": {
         "operationId": "ExternalNetworks_List",
-        "summary": "List all External Networks within an isolation domain.",
+        "summary": "Executes list operation to display External Networks within an isolation domain.",
         "description": "Implements External Networks list by resource group GET method.",
         "parameters": [
           {
@@ -1742,9 +1667,6 @@
         "x-ms-examples": {
           "ExternalNetworks_List_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_List_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_List_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_List_MinimumSet_Gen.json"
           }
         }
       }
@@ -1755,8 +1677,8 @@
           "ExternalNetworks"
         ],
         "operationId": "ExternalNetworks_updateAdminState",
-        "description": "Update Administrative State for externalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Executes update operation to enable or disable administrative State for externalNetwork.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1815,9 +1737,6 @@
         "x-ms-examples": {
           "ExternalNetworks_updateAdminState_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_updateAdminState_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_updateAdminState_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_updateAdminState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1829,7 +1748,7 @@
         ],
         "operationId": "ExternalNetworks_updateBgpState",
         "description": "Update BGP for externalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Executes BGP state update operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1888,9 +1807,6 @@
         "x-ms-examples": {
           "ExternalNetworks_updateBgpState_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_updateBgpState_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_updateBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_updateBgpState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1902,7 +1818,7 @@
         ],
         "operationId": "ExternalNetworks_updateBfdForBgpState",
         "description": "Update BfdForBgp for externalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Execute BfdForBgp update operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1961,9 +1877,6 @@
         "x-ms-examples": {
           "ExternalNetworks_updateBfdForBgpState_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_updateBfdForBgpState_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_updateBfdForBgpState_MinimumSet_Gen.json"
           }
         }
       }
@@ -1975,7 +1888,7 @@
         ],
         "operationId": "ExternalNetworks_clearIpv6Neighbors",
         "description": "clearIpv6Neighbors for externalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Executes clearIpv6Neighbors table operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2034,9 +1947,6 @@
         "x-ms-examples": {
           "ExternalNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_clearIpv6Neighbors_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_clearIpv6Neighbors_MinimumSet_Gen.json"
           }
         }
       }
@@ -2048,7 +1958,7 @@
         ],
         "operationId": "ExternalNetworks_clearArpEntries",
         "description": "clearArpEntries for externalNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2107,9 +2017,6 @@
         "x-ms-examples": {
           "ExternalNetworks_clearArpEntries_MaximumSet_Gen": {
             "$ref": "./examples/ExternalNetworks_clearArpEntries_MaximumSet_Gen.json"
-          },
-          "ExternalNetworks_clearArpEntries_MinimumSet_Gen": {
-            "$ref": "./examples/ExternalNetworks_clearArpEntries_MinimumSet_Gen.json"
           }
         }
       }
@@ -2426,17 +2333,17 @@
         "vlanId": {
           "type": "integer",
           "format": "int32",
-          "description": "vlanId. Example: 200."
+          "description": "vlanId. Example: 1001."
         },
         "fabricASN": {
           "type": "integer",
           "format": "int32",
-          "description": "fabricASN. Example: 12076."
+          "description": "fabricASN. Example: 65048."
         },
         "peerASN": {
           "type": "integer",
           "format": "int32",
-          "description": "peerASN. Example: 12076."
+          "description": "peerASN. Example: 65047."
         },
         "bfdConfiguration": {
           "type": "object",
@@ -2449,7 +2356,7 @@
             "interval": {
               "type": "integer",
               "format": "int32",
-              "description": "interval in seconds. Example: 300."
+              "description": "interval in milliseconds. Example: 300."
             },
             "multiplier": {
               "type": "integer",
@@ -2509,12 +2416,12 @@
         "vlanId": {
           "type": "integer",
           "format": "int32",
-          "description": "vlanId. Example: 200."
+          "description": "vlanId. Example: 1001."
         },
         "mtu": {
           "type": "integer",
           "format": "int32",
-          "description": "mtu. Example: 9000."
+          "description": "Maximum transmission unit. Default value is 1500."
         },
         "connectedIPv4Subnets": {
           "type": "array",
@@ -2650,7 +2557,7 @@
               "properties": {
                 "administrativeState": {
                   "type": "string",
-                  "description": "state. Example: Enabled | Disabled.",
+                  "description": "state. Example: Enabled | Disabled. It indicates administrative state of the isolationDomain, whether it is enabled or disabled. If enabled, the configuration is applied on the devices. If disabled, the configuration is removed from the devices",
                   "readOnly": true
                 },
                 "interval": {
@@ -2672,16 +2579,16 @@
             "fabricASN": {
               "type": "integer",
               "format": "int32",
-              "description": "fabricASN. Example: 12076."
+              "description": "fabricASN. Example: 65048."
             },
             "peerASN": {
               "type": "integer",
               "format": "int32",
-              "description": "peerASN. Example: 12076."
+              "description": "peerASN. Example: 65047."
             },
             "ipv4Prefix": {
               "type": "string",
-              "description": "ipv4Prefix. Example: 123.0.0.0/30."
+              "description": "ipv4Prefix. Example: 10.1.0.0/28."
             },
             "ipv6Prefix": {
               "type": "string",

@@ -41,7 +41,7 @@
         ],
         "operationId": "NetworkFabricControllers_Create",
         "summary": "Create Network fabric controller.",
-        "description": "Implements Network Fabric Controller PUT method.",
+        "description": "Creates a Network Fabric Controller.",
         "consumes": [
           "application/json"
         ],
@@ -51,9 +51,6 @@
         "x-ms-examples": {
           "NetworkFabricControllers_Create_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Create_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_Create_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_Create_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -97,7 +94,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.need to check with the team whether this field needs to be updated or not",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -114,16 +111,13 @@
         ],
         "operationId": "NetworkFabricControllers_Get",
         "summary": "Gets a Network Fabric Controller.",
-        "description": "Implements Network Fabric Controller GET method.",
+        "description": "Shows the provisioning status of Network Fabric Controller.",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "NetworkFabricControllers_Get_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Get_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_Get_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_Get_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -165,7 +159,7 @@
         ],
         "operationId": "NetworkFabricControllers_Update",
         "summary": "Updates a Network Fabric Controller.",
-        "description": "API to update certain properties of the Network Fabric Controller resource.",
+        "description": "Updates are currently not supported for the Network Fabric Controller resource.",
         "consumes": [
           "application/json"
         ],
@@ -175,9 +169,6 @@
         "x-ms-examples": {
           "NetworkFabricControllers_Update_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Update_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_Update_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_Update_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -241,16 +232,13 @@
         ],
         "operationId": "NetworkFabricControllers_Delete",
         "summary": "Deletes a Network Fabric Controller.",
-        "description": "Implements Network Fabric Controller DELETE method.",
+        "description": "Deletes the Network Fabric Controller resource.",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "NetworkFabricControllers_Delete_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_Delete_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_Delete_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -304,13 +292,10 @@
       "get": {
         "operationId": "NetworkFabricControllers_ListByResourceGroup",
         "summary": "List NetworkFabricControllers by resource group.",
-        "description": "Implements NetworkFabricControllers list by resource group GET method.",
+        "description": "Lists all the NetworkFabricControllers thats available in the resource group.",
         "x-ms-examples": {
           "NetworkFabricControllers_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -347,13 +332,10 @@
       "get": {
         "operationId": "NetworkFabricControllers_ListBySubscription",
         "summary": "List NetworkFabricControllers by subscription.",
-        "description": "Implements NetworkFabricControllers list by subscription GET method.",
+        "description": "Lists all the NetworkFabricControllers by subscription.",
         "x-ms-examples": {
           "NetworkFabricControllers_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "parameters": [
@@ -389,8 +371,8 @@
           "NetworkFabricControllers"
         ],
         "operationId": "NetworkFabricControllers_enableWorkloadManagementNetwork",
-        "description": "Enable workloadManagementNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Enables the workloadManagementNetwork (Tenant Network).",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -433,9 +415,6 @@
         "x-ms-examples": {
           "NetworkFabricControllers_enableWorkloadManagementNetwork_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_enableWorkloadManagementNetwork_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_enableWorkloadManagementNetwork_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_enableWorkloadManagementNetwork_MinimumSet_Gen.json"
           }
         }
       }
@@ -446,8 +425,8 @@
           "NetworkFabricControllers"
         ],
         "operationId": "NetworkFabricControllers_disableWorkloadManagementNetwork",
-        "description": "Disable workloadManagementNetwork.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "description": "Disables the workloadManagementNetwork (Tenant Network).",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -490,9 +469,6 @@
         "x-ms-examples": {
           "NetworkFabricControllers_disableWorkloadManagementNetwork_MaximumSet_Gen": {
             "$ref": "./examples/NetworkFabricControllers_disableWorkloadManagementNetwork_MaximumSet_Gen.json"
-          },
-          "NetworkFabricControllers_disableWorkloadManagementNetwork_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkFabricControllers_disableWorkloadManagementNetwork_MinimumSet_Gen.json"
           }
         }
       }
@@ -505,7 +481,7 @@
       "properties": {
         "infrastructureExpressRouteConnections": {
           "type": "array",
-          "description": "List of Infrastructure ExpressRouteConnections.",
+          "description": "As part of an update, the Infrastructure ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Infrastructure services. (This is a Mandatory attribute)",
           "x-ms-identifiers": [
             "expressRouteCircuitId"
           ],
@@ -515,7 +491,7 @@
         },
         "workloadExpressRouteConnections": {
           "type": "array",
-          "description": "List of Workload ExpressRouteConnections.",
+          "description": "As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).",
           "x-ms-identifiers": [
             "expressRouteCircuitId"
           ],
@@ -544,18 +520,18 @@
           "properties": {
             "ipv4AddressSpaces": {
               "type": "array",
-              "description": "List of IPv4 Network Fabric Controller Address Spaces.",
+              "description": "The IPv4 Address space is optional, if the value is not defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
               "items": {
                 "type": "string",
-                "description": "IPv4 Network Fabric Controller Address Space."
+                "description": "This will provide the IPv4 Network Fabric Controller Address Space."
               }
             },
             "ipv6AddressSpaces": {
               "type": "array",
-              "description": "List of IPv6 Network Fabric Controller Address Spaces.",
+              "description": "The IPv6 is not supported right now.",
               "items": {
                 "type": "string",
-                "description": "IPv6 Network Fabric Controller Address Space."
+                "description": "The IPv6 is not supported right now."
               }
             }
           },
@@ -567,18 +543,18 @@
           "properties": {
             "ipv4AddressSpaces": {
               "type": "array",
-              "description": "List of IPv4 Network Fabric Controller Address Spaces.",
+              "description": "The IPv4 Address space is optional, if the value is defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
               "items": {
                 "type": "string",
-                "description": "IPv4 Network Fabric Controller Address Space."
+                "description": "This will provide the IPv4 Network Fabric Controller Address Space."
               }
             },
             "ipv6AddressSpaces": {
               "type": "array",
-              "description": "List of IPv6 Network Fabric Controller Address Spaces.",
+              "description": "The IPv6 is not supported right now.",
               "items": {
                 "type": "string",
-                "description": "IPv6 Network Fabric Controller Address Space."
+                "description": "The IPv6 is not supported right now."
               }
             }
           },
@@ -590,7 +566,7 @@
           "properties": {
             "name": {
               "type": "string",
-              "description": "Managed resource group name."
+              "description": "The NFC service will be hosted in a Managed resource group."
             },
             "location": {
               "type": "string",
@@ -600,16 +576,16 @@
         },
         "networkFabricIds": {
           "type": "array",
-          "description": "NetworkFabric Azure resource IDs from this Network Fabric Controller.",
+          "description": "The NF-ID will be an input parameter used by the NF to link and get associated with the parent NFC Service.",
           "items": {
-            "description": "NetworkFabric Azure resource ID.",
+            "description": "NetworkFabric ID (NF-ID) is a mandatory attribute, which will be consumed by Network Fabric.",
             "type": "string"
           },
           "readOnly": true
         },
         "workloadManagementNetwork": {
           "type": "boolean",
-          "description": "workloadManagementNetwork state.",
+          "description": "A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints.",
           "readOnly": true,
           "default": true
         },
@@ -622,12 +598,12 @@
           "description": "IPv6 Network Fabric Controller Address Space."
         },
         "operationalState": {
-          "description": "Gets the operational state of the resource.",
+          "description": "The Operational Status would always be NULL. Look only in to the Provisioning state for the latest status.",
           "$ref": "#/definitions/NetworkFabricControllerOperationalState",
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets the provisioning state of the resource.",
+          "description": "Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.",
           "$ref": "./common.json#/definitions/ProvisioningState",
           "readOnly": true
         }
@@ -639,11 +615,11 @@
       "properties": {
         "expressRouteCircuitId": {
           "type": "string",
-          "description": "The express route circuit Azure resource ID, must be of type Microsoft.Network/expressRouteCircuits/circuitName."
+          "description": "The express route circuit Azure resource ID, must be of type Microsoft.Network/expressRouteCircuits/circuitName. The ExpressRoute Circuit is a mandatory attribute."
         },
         "expressRouteAuthorizationKey": {
           "type": "string",
-          "description": "Authorization key for the circuit, must be of type Microsoft.Network/expressRouteCircuits/authorizations.",
+          "description": "Authorization key for the circuit, must be of type Microsoft.Network/expressRouteCircuits/authorizations. The Auth Key is a mandatory attribute.",
           "x-ms-secret": true
         }
       },
@@ -651,7 +627,7 @@
         "expressRouteCircuitId",
         "expressRouteAuthorizationKey"
       ],
-      "description": "ExpressRouteConnectionInformation defines the resource properties."
+      "description": "The ExpressRoute circuit ID and the Auth Key are required for you to successfully deploy NFC service."
     },
     "ExpressRouteStatusDef": {
       "type": "object",

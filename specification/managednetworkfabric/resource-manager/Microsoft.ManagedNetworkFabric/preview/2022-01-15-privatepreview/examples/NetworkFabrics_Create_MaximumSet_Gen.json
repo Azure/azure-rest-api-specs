@@ -1,216 +1,133 @@
 {
   "parameters": {
-    "subscriptionId": "vhdwu",
-    "resourceGroupName": "rgNetworkFabrics",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
     "api-version": "2022-01-15-privatepreview",
-    "networkFabricName": "tneqyuytfwd",
+    "networkFabricName": "FabricName",
     "body": {
       "properties": {
-        "networkFabricSku": "mnklnsporifmomirjfvnvculmbi",
-        "networkFabricControllerId": "ctrwbhgllgyzprgrpvzi",
+        "networkFabricSku": "fab3",
+        "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
         "networkToNetworkInterconnect": {
-          "layer2Configuration": {
-            "portCount": 15,
-            "mtu": 7
-          },
+          "layer2Configuration": {},
           "layer3Configuration": {
-            "vlanId": 28,
-            "fabricAsn": 29,
-            "routerId": "djzdpxlfnqwacoxd",
-            "peerAsn": 9,
-            "primaryIpv4Prefix": "lyoiwuktkexxf",
-            "primaryIpv6Prefix": "ngsgr",
-            "secondaryIpv4Prefix": "uydegfzh",
-            "secondaryIpv6Prefix": "nbmddvxjrei"
+            "vlanId": 20,
+            "fabricAsn": 65046,
+            "peerAsn": 65046,
+            "primaryIpv4Prefix": "10.18.0.124/31",
+            "secondaryIpv4Prefix": "10.18.0.128/31"
           }
         },
         "terminalServerConfiguration": {
-          "username": "vbobdeluawy",
-          "password": "",
-          "primaryIpv4Prefix": "prwhzq",
-          "primaryIpv6Prefix": "gpjpfrbunuoxngpovjegkxyzmevid",
-          "secondaryIpv4Prefix": "qvtcbtrspzrd",
-          "secondaryIpv6Prefix": "elietukegxrcvmqhlaeoignkzfkkud"
+          "username": "username",
+          "password": "xxxx",
+          "primaryIpv4Prefix": "20.0.0.12/30"
         },
         "managementNetworkConfiguration": {
-          "ipv4Prefix": "ghodevptj",
-          "ipv6Prefix": "ekijzcsuzrvhwcstzrufpebcof",
+          "ipv4Prefix": "10.18.0.0/19",
           "managementVpnConfiguration": {
             "peeringOption": "OptionA",
-            "optionAProperties": {
-              "mtu": 18,
-              "vlanId": 2,
-              "fabricAsn": 30,
-              "peerAsn": 22,
-              "bfdConfiguration": {
-                "interval": 22,
-                "multiplier": 17
-              },
-              "primaryIpv4Prefix": "w",
-              "primaryIpv6Prefix": "keqtfjmfqhvaxerdqbgiowhvi",
-              "secondaryIpv4Prefix": "wvsbtvm",
-              "secondaryIpv6Prefix": "tlim"
-            },
             "optionBProperties": {
               "importRouteTargets": [
-                "pknriegnytjujfkcfqincbu"
+                "65046:10039"
               ],
               "exportRouteTargets": [
-                "yhvcklkbfdseppiekvrgsie"
+                "65046:10039"
               ]
             }
           },
           "workloadVpnConfiguration": {
             "peeringOption": "OptionA",
-            "optionAProperties": {
-              "mtu": 18,
-              "vlanId": 2,
-              "fabricAsn": 30,
-              "peerAsn": 22,
-              "bfdConfiguration": {
-                "interval": 22,
-                "multiplier": 17
-              },
-              "primaryIpv4Prefix": "w",
-              "primaryIpv6Prefix": "keqtfjmfqhvaxerdqbgiowhvi",
-              "secondaryIpv4Prefix": "wvsbtvm",
-              "secondaryIpv6Prefix": "tlim"
-            },
             "optionBProperties": {
               "importRouteTargets": [
-                "pknriegnytjujfkcfqincbu"
+                "65046:10050"
               ],
               "exportRouteTargets": [
-                "yhvcklkbfdseppiekvrgsie"
+                "65046:10050"
               ]
             }
           }
-        },
-        "operationalState": "Provisioning",
-        "annotation": "wumxdpnmmhyleehgnkn"
+        }
       },
-      "tags": {
-        "key7857": "eivpqopdkpfmgtoriuxojtisysrm"
-      },
-      "location": "hvc"
+      "location": "eastus"
     }
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "networkFabricSku": "mnklnsporifmomirjfvnvculmbi",
-          "networkFabricControllerId": "ctrwbhgllgyzprgrpvzi",
+          "networkFabricSku": "fab3",
+          "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
           "networkToNetworkInterconnect": {
-            "layer2Configuration": {
-              "portCount": 15,
-              "mtu": 7,
-              "interfaces": [
-                "vikaagxvhka"
-              ]
-            },
+            "layer2Configuration": null,
             "layer3Configuration": {
-              "vlanId": 28,
-              "fabricAsn": 29,
-              "routerId": "djzdpxlfnqwacoxd",
-              "peerAsn": 9,
-              "primaryIpv4Prefix": "lyoiwuktkexxf",
-              "primaryIpv6Prefix": "ngsgr",
-              "secondaryIpv4Prefix": "uydegfzh",
-              "secondaryIpv6Prefix": "nbmddvxjrei"
+              "vlanId": 20,
+              "fabricAsn": 65046,
+              "routerId": null,
+              "peerAsn": 5,
+              "primaryIpv4Prefix": "10.18.0.124/31",
+              "secondaryIpv4Prefix": "10.18.0.128/31"
             }
           },
           "terminalServerConfiguration": {
-            "networkDeviceId": "fldwjaidatqejozlwhglbujp",
-            "username": "vbobdeluawy",
-            "primaryIpv4Prefix": "prwhzq",
-            "primaryIpv6Prefix": "gpjpfrbunuoxngpovjegkxyzmevid",
-            "secondaryIpv4Prefix": "qvtcbtrspzrd",
-            "secondaryIpv6Prefix": "elietukegxrcvmqhlaeoignkzfkkud"
+            "username": "root",
+            "primaryIpv4Prefix": "20.0.0.12/30"
           },
           "managementNetworkConfiguration": {
-            "ipv4Prefix": "ghodevptj",
-            "ipv6Prefix": "ekijzcsuzrvhwcstzrufpebcof",
+            "ipv4Prefix": "10.18.0.0/19",
+            "ipv6Prefix": null,
             "managementVpnConfiguration": {
               "state": "Enabled",
               "peeringOption": "OptionA",
-              "optionAProperties": {
-                "mtu": 18,
-                "vlanId": 2,
-                "fabricAsn": 30,
-                "peerAsn": 22,
-                "bfdConfiguration": {
-                  "interval": 22,
-                  "multiplier": 17
-                },
-                "primaryIpv4Prefix": "w",
-                "primaryIpv6Prefix": "keqtfjmfqhvaxerdqbgiowhvi",
-                "secondaryIpv4Prefix": "wvsbtvm",
-                "secondaryIpv6Prefix": "tlim"
-              },
+              "optionAProperties": null,
               "optionBProperties": {
                 "importRouteTargets": [
-                  "pknriegnytjujfkcfqincbu"
+                  "65046:10039"
                 ],
                 "exportRouteTargets": [
-                  "yhvcklkbfdseppiekvrgsie"
+                  "65046:10039"
                 ]
               }
             },
             "workloadVpnConfiguration": {
               "state": "Enabled",
               "peeringOption": "OptionA",
-              "optionAProperties": {
-                "mtu": 18,
-                "vlanId": 2,
-                "fabricAsn": 30,
-                "peerAsn": 22,
-                "bfdConfiguration": {
-                  "interval": 22,
-                  "multiplier": 17
-                },
-                "primaryIpv4Prefix": "w",
-                "primaryIpv6Prefix": "keqtfjmfqhvaxerdqbgiowhvi",
-                "secondaryIpv4Prefix": "wvsbtvm",
-                "secondaryIpv6Prefix": "tlim"
-              },
+              "optionAProperties": null,
               "optionBProperties": {
                 "importRouteTargets": [
-                  "pknriegnytjujfkcfqincbu"
+                  "q65046:10050"
                 ],
                 "exportRouteTargets": [
-                  "yhvcklkbfdseppiekvrgsie"
+                  "65046:10050"
                 ]
               }
             }
           },
-          "operationalState": "Provisioning",
+          "operationalState": "Provisioned",
           "provisioningState": "Succeeded",
-          "annotation": "wumxdpnmmhyleehgnkn",
           "racks": [
-            "uqiitp"
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3AggRack",
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack1",
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack2"
           ],
           "l2IsolationDomains": [
-            "oiwggmkbkgeo"
+            "/subscriptions/xxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName"
           ],
           "l3IsolationDomains": [
-            "nirtpdkfxfspsmvvvvbwagsscmghp"
+            "/subscriptions/xxxxx/resourceGroups/resourecegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
           ]
         },
-        "tags": {
-          "key7857": "eivpqopdkpfmgtoriuxojtisysrm"
-        },
-        "location": "hvc",
-        "id": "ttko",
-        "name": "pofoiequbbkdhhnvhtd",
-        "type": "x",
+        "location": "eastuseuap",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
+        "name": "FabricName",
+        "type": "microsoft.managednetworkfabric/networkfabrics",
         "systemData": {
-          "createdBy": "tzvvnhgkgpfnizwk",
+          "createdBy": "User@email.com",
           "createdByType": "User",
-          "createdAt": "2022-10-14T06:26:12.867Z",
-          "lastModifiedBy": "frivmasgjtvniqdgyiuwioinu",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-10-14T06:26:12.867Z"
+          "createdAt": "2022-11-08T14:45:30.6933268Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-08T14:45:30.6933268Z"
         }
       }
     },
@@ -220,118 +137,78 @@
       },
       "body": {
         "properties": {
-          "networkFabricSku": "mnklnsporifmomirjfvnvculmbi",
-          "networkFabricControllerId": "ctrwbhgllgyzprgrpvzi",
+          "networkFabricSku": "fab3",
+          "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
           "networkToNetworkInterconnect": {
-            "layer2Configuration": {
-              "portCount": 15,
-              "mtu": 7,
-              "interfaces": [
-                "vikaagxvhka"
-              ]
-            },
+            "layer2Configuration": null,
             "layer3Configuration": {
-              "vlanId": 28,
-              "fabricAsn": 29,
-              "routerId": "djzdpxlfnqwacoxd",
-              "peerAsn": 9,
-              "primaryIpv4Prefix": "lyoiwuktkexxf",
-              "primaryIpv6Prefix": "ngsgr",
-              "secondaryIpv4Prefix": "uydegfzh",
-              "secondaryIpv6Prefix": "nbmddvxjrei"
+              "vlanId": 20,
+              "fabricAsn": 65046,
+              "routerId": null,
+              "peerAsn": 5,
+              "primaryIpv4Prefix": "10.18.0.124/31",
+              "secondaryIpv4Prefix": "10.18.0.128/31"
             }
           },
           "terminalServerConfiguration": {
-            "networkDeviceId": "fldwjaidatqejozlwhglbujp",
-            "username": "vbobdeluawy",
-            "primaryIpv4Prefix": "prwhzq",
-            "primaryIpv6Prefix": "gpjpfrbunuoxngpovjegkxyzmevid",
-            "secondaryIpv4Prefix": "qvtcbtrspzrd",
-            "secondaryIpv6Prefix": "elietukegxrcvmqhlaeoignkzfkkud"
+            "username": "root",
+            "primaryIpv4Prefix": "20.0.0.12/30"
           },
           "managementNetworkConfiguration": {
-            "ipv4Prefix": "ghodevptj",
-            "ipv6Prefix": "ekijzcsuzrvhwcstzrufpebcof",
+            "ipv4Prefix": "10.18.0.0/19",
+            "ipv6Prefix": null,
             "managementVpnConfiguration": {
               "state": "Enabled",
               "peeringOption": "OptionA",
-              "optionAProperties": {
-                "mtu": 18,
-                "vlanId": 2,
-                "fabricAsn": 30,
-                "peerAsn": 22,
-                "bfdConfiguration": {
-                  "interval": 22,
-                  "multiplier": 17
-                },
-                "primaryIpv4Prefix": "w",
-                "primaryIpv6Prefix": "keqtfjmfqhvaxerdqbgiowhvi",
-                "secondaryIpv4Prefix": "wvsbtvm",
-                "secondaryIpv6Prefix": "tlim"
-              },
+              "optionAProperties": null,
               "optionBProperties": {
                 "importRouteTargets": [
-                  "pknriegnytjujfkcfqincbu"
+                  "65046:10039"
                 ],
                 "exportRouteTargets": [
-                  "yhvcklkbfdseppiekvrgsie"
+                  "65046:10039"
                 ]
               }
             },
             "workloadVpnConfiguration": {
               "state": "Enabled",
               "peeringOption": "OptionA",
-              "optionAProperties": {
-                "mtu": 18,
-                "vlanId": 2,
-                "fabricAsn": 30,
-                "peerAsn": 22,
-                "bfdConfiguration": {
-                  "interval": 22,
-                  "multiplier": 17
-                },
-                "primaryIpv4Prefix": "w",
-                "primaryIpv6Prefix": "keqtfjmfqhvaxerdqbgiowhvi",
-                "secondaryIpv4Prefix": "wvsbtvm",
-                "secondaryIpv6Prefix": "tlim"
-              },
+              "optionAProperties": null,
               "optionBProperties": {
                 "importRouteTargets": [
-                  "pknriegnytjujfkcfqincbu"
+                  "q65046:10050"
                 ],
                 "exportRouteTargets": [
-                  "yhvcklkbfdseppiekvrgsie"
+                  "65046:10050"
                 ]
               }
             }
           },
-          "operationalState": "Provisioning",
+          "operationalState": "Provisioned",
           "provisioningState": "Succeeded",
-          "annotation": "wumxdpnmmhyleehgnkn",
           "racks": [
-            "uqiitp"
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3AggRack",
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack1",
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack2"
           ],
           "l2IsolationDomains": [
-            "oiwggmkbkgeo"
+            "/subscriptions/xxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/l2IsolationDomainName"
           ],
           "l3IsolationDomains": [
-            "nirtpdkfxfspsmvvvvbwagsscmghp"
+            "/subscriptions/xxxxx/resourceGroups/resourecegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
           ]
         },
-        "tags": {
-          "key7857": "eivpqopdkpfmgtoriuxojtisysrm"
-        },
-        "location": "hvc",
-        "id": "ttko",
-        "name": "pofoiequbbkdhhnvhtd",
-        "type": "x",
+        "location": "eastuseuap",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
+        "name": "FabricName",
+        "type": "microsoft.managednetworkfabric/networkfabrics",
         "systemData": {
-          "createdBy": "tzvvnhgkgpfnizwk",
+          "createdBy": "User email",
           "createdByType": "User",
-          "createdAt": "2022-10-14T06:26:12.867Z",
-          "lastModifiedBy": "frivmasgjtvniqdgyiuwioinu",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-10-14T06:26:12.867Z"
+          "createdAt": "2022-11-08T14:45:30.6933268Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-08T14:45:30.6933268Z"
         }
       }
     }

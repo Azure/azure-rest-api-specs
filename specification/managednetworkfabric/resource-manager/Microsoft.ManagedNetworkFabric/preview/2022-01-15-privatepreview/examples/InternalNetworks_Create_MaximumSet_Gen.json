@@ -1,70 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "phjbbocjfgcxydwfxxsgiyvlitqv",
-    "resourceGroupName": "rgL3IsolationDomains",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
     "api-version": "2022-01-15-privatepreview",
-    "l3IsolationDomainName": "appnodyfdudgexfnaoshxyevmjwp",
-    "internalNetworkName": "tprhfbrufmgczbhlu",
+    "l3IsolationDomainName": "example-l3domain",
+    "internalNetworkName": "example-internalnetwork",
     "body": {
       "properties": {
-        "vlanId": 28,
-        "mtu": 3,
+        "vlanId": 1001,
+        "mtu": 1500,
         "connectedIPv4Subnets": [
           {
-            "prefix": "srmwovppgxdjkgbetrejz",
-            "gateway": "yuonbjpnlbqvmeyfcjvqcffx",
-            "annotation": "jmshnvskim"
+            "prefix": "10.0.0.0/24",
+            "gateway": "10.0.0.1"
           }
         ],
-        "connectedIPv6Subnets": [
-          {
-            "prefix": "klg",
-            "gateway": "oloxnxfklbg",
-            "annotation": "dckflqwxswixmbouzhbtpcejwgezx"
-          }
-        ],
-        "staticRouteConfiguration": {
-          "bfdConfiguration": {
-            "interval": 13,
-            "multiplier": 17
-          },
-          "ipv4Routes": {
-            "prefix": "xyygllxtsaqsltjyiclbqlcr",
-            "nextHop": [
-              "tfrmiggkganhtq"
-            ]
-          },
-          "ipv6Routes": {
-            "prefix": "umkokjpxljxltlgnzcydxguxe",
-            "nextHop": [
-              "qtjmaoyoxsuqpesayvc"
-            ]
-          }
-        },
         "bgpConfiguration": {
           "bfdConfiguration": {
-            "interval": 28,
-            "multiplier": 30,
-            "annotation": "ibjzsyvyiszpucjbwer"
+            "interval": 3,
+            "multiplier": 5
           },
           "defaultRouteOriginate": true,
-          "fabricASN": 5,
-          "peerASN": 4,
-          "ipv4Prefix": "ywhgptwbvsncvoreqgpomuniiqz",
-          "ipv6Prefix": "mebybwfxmlidgpfrkjkasblavpop",
-          "ipv4NeighborAddress": [
-            {
-              "address": "qkiz"
-            }
-          ],
-          "ipv6NeighborAddress": [
-            {
-              "address": "ifhqsr"
-            }
-          ],
-          "annotation": "b"
-        },
-        "annotation": "oriodw"
+          "fabricASN": 65048,
+          "peerASN": 65047,
+          "ipv4Prefix": "10.0.0.0/28"
+        }
       }
     }
   },
@@ -72,93 +32,27 @@
     "200": {
       "body": {
         "properties": {
-          "vlanId": 28,
-          "mtu": 3,
+          "vlanId": 1001,
+          "mtu": 1500,
           "connectedIPv4Subnets": [
             {
-              "prefix": "srmwovppgxdjkgbetrejz",
-              "gateway": "yuonbjpnlbqvmeyfcjvqcffx",
-              "annotation": "jmshnvskim"
+              "prefix": "10.0.0.0/24",
+              "gateway": "10.0.0.1"
             }
           ],
-          "connectedIPv6Subnets": [
-            {
-              "prefix": "klg",
-              "gateway": "oloxnxfklbg",
-              "annotation": "dckflqwxswixmbouzhbtpcejwgezx"
-            }
-          ],
-          "staticRouteConfiguration": {
-            "bfdConfiguration": {
-              "interval": 13,
-              "multiplier": 17
-            },
-            "ipv4Routes": {
-              "prefix": "xyygllxtsaqsltjyiclbqlcr",
-              "nextHop": [
-                "tfrmiggkganhtq"
-              ]
-            },
-            "ipv6Routes": {
-              "prefix": "umkokjpxljxltlgnzcydxguxe",
-              "nextHop": [
-                "qtjmaoyoxsuqpesayvc"
-              ]
-            }
-          },
           "bgpConfiguration": {
             "bfdConfiguration": {
-              "administrativeState": "ybplxkembvpbt",
-              "interval": 28,
-              "multiplier": 30,
-              "annotation": "ibjzsyvyiszpucjbwer"
+              "administrativeState": "null",
+              "interval": 3,
+              "multiplier": 5
             },
             "defaultRouteOriginate": true,
-            "fabricASN": 5,
-            "peerASN": 4,
-            "ipv4Prefix": "ywhgptwbvsncvoreqgpomuniiqz",
-            "ipv6Prefix": "mebybwfxmlidgpfrkjkasblavpop",
-            "ipv4NeighborAddress": [
-              {
-                "address": "qkiz",
-                "operationalState": "eagastilanwmpppvusfirirzwdod"
-              }
-            ],
-            "ipv6NeighborAddress": [
-              {
-                "address": "ifhqsr",
-                "operationalState": "vdebynioizwhnatsn"
-              }
-            ],
-            "annotation": "b"
-          },
-          "disabledOnResources": [
-            "ifmqthaiomkxfkngovgzoboujas"
-          ],
-          "administrativeState": "Enabled",
-          "bgpDisabledOnResources": [
-            "wztzgib"
-          ],
-          "bfdDisabledOnResources": [
-            "pjngbtxgarcsxlwn"
-          ],
-          "bfdForStaticRoutesDisabledOnResources": [
-            "ulwyimyzurgd"
-          ],
-          "provisioningState": "Succeeded",
-          "annotation": "oriodw"
+            "fabricASN": 65048,
+            "peerASN": 65047,
+            "ipv4Prefix": "10.0.0.0/28"
+          }
         },
-        "id": "hbszyvvxljeiipqjq",
-        "name": "isujswbhbux",
-        "type": "mcxsbrxmnvncionvycxh",
-        "systemData": {
-          "createdBy": "nvatdjzx",
-          "createdByType": "User",
-          "createdAt": "2022-10-14T06:24:39.768Z",
-          "lastModifiedBy": "okzpxwc",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-10-14T06:24:39.768Z"
-        }
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/lexample-l3domain/internalNetworks/example-internalnetwork"
       }
     },
     "201": {
@@ -167,93 +61,27 @@
       },
       "body": {
         "properties": {
-          "vlanId": 28,
-          "mtu": 3,
+          "vlanId": 1001,
+          "mtu": 1500,
           "connectedIPv4Subnets": [
             {
-              "prefix": "srmwovppgxdjkgbetrejz",
-              "gateway": "yuonbjpnlbqvmeyfcjvqcffx",
-              "annotation": "jmshnvskim"
+              "prefix": "10.0.0.0/24",
+              "gateway": "10.0.0.1"
             }
           ],
-          "connectedIPv6Subnets": [
-            {
-              "prefix": "klg",
-              "gateway": "oloxnxfklbg",
-              "annotation": "dckflqwxswixmbouzhbtpcejwgezx"
-            }
-          ],
-          "staticRouteConfiguration": {
-            "bfdConfiguration": {
-              "interval": 13,
-              "multiplier": 17
-            },
-            "ipv4Routes": {
-              "prefix": "xyygllxtsaqsltjyiclbqlcr",
-              "nextHop": [
-                "tfrmiggkganhtq"
-              ]
-            },
-            "ipv6Routes": {
-              "prefix": "umkokjpxljxltlgnzcydxguxe",
-              "nextHop": [
-                "qtjmaoyoxsuqpesayvc"
-              ]
-            }
-          },
           "bgpConfiguration": {
             "bfdConfiguration": {
-              "administrativeState": "ybplxkembvpbt",
-              "interval": 28,
-              "multiplier": 30,
-              "annotation": "ibjzsyvyiszpucjbwer"
+              "administrativeState": "null",
+              "interval": 3,
+              "multiplier": 5
             },
             "defaultRouteOriginate": true,
-            "fabricASN": 5,
-            "peerASN": 4,
-            "ipv4Prefix": "ywhgptwbvsncvoreqgpomuniiqz",
-            "ipv6Prefix": "mebybwfxmlidgpfrkjkasblavpop",
-            "ipv4NeighborAddress": [
-              {
-                "address": "qkiz",
-                "operationalState": "eagastilanwmpppvusfirirzwdod"
-              }
-            ],
-            "ipv6NeighborAddress": [
-              {
-                "address": "ifhqsr",
-                "operationalState": "vdebynioizwhnatsn"
-              }
-            ],
-            "annotation": "b"
-          },
-          "disabledOnResources": [
-            "ifmqthaiomkxfkngovgzoboujas"
-          ],
-          "administrativeState": "Enabled",
-          "bgpDisabledOnResources": [
-            "wztzgib"
-          ],
-          "bfdDisabledOnResources": [
-            "pjngbtxgarcsxlwn"
-          ],
-          "bfdForStaticRoutesDisabledOnResources": [
-            "ulwyimyzurgd"
-          ],
-          "provisioningState": "Succeeded",
-          "annotation": "oriodw"
+            "fabricASN": 65048,
+            "peerASN": 65047,
+            "ipv4Prefix": "10.0.0.0/28"
+          }
         },
-        "id": "hbszyvvxljeiipqjq",
-        "name": "isujswbhbux",
-        "type": "mcxsbrxmnvncionvycxh",
-        "systemData": {
-          "createdBy": "nvatdjzx",
-          "createdByType": "User",
-          "createdAt": "2022-10-14T06:24:39.768Z",
-          "lastModifiedBy": "okzpxwc",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-10-14T06:24:39.768Z"
-        }
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/lexample-l3domain/internalNetworks/example-internalnetwork"
       }
     }
   }

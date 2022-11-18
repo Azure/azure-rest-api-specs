@@ -41,7 +41,7 @@
         ],
         "operationId": "NetworkDeviceSkus_Get",
         "summary": "Gets a Network Device Sku.",
-        "description": "Implements Network Device Sku GET method.",
+        "description": "Get Network Device SKU details.",
         "produces": [
           "application/json"
         ],
@@ -77,9 +77,6 @@
         "x-ms-examples": {
           "NetworkDeviceSkus_Get_MaximumSet_Gen": {
             "$ref": "./examples/NetworkDeviceSkus_Get_MaximumSet_Gen.json"
-          },
-          "NetworkDeviceSkus_Get_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkDeviceSkus_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -88,7 +85,7 @@
       "get": {
         "operationId": "NetworkDeviceSkus_ListBySubscription",
         "summary": "List NetworkDeviceSkus by subscription.",
-        "description": "Implements NetworkDeviceSkus list by subscription GET method.",
+        "description": "List Network Device SKUs for the given subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -117,9 +114,6 @@
         "x-ms-examples": {
           "NetworkDeviceSkus_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/NetworkDeviceSkus_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "NetworkDeviceSkus_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/NetworkDeviceSkus_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -169,7 +163,7 @@
                   "modelAsString": true,
                   "name": "isCurrentVersion"
                 },
-                "description": "Whether this version is in use."
+                "description": "If the current version is in use."
               },
               "isTest": {
                 "type": "string",
@@ -181,7 +175,7 @@
                   "modelAsString": true,
                   "name": "isTestVersion"
                 },
-                "description": "Whether this version is a test version."
+                "description": "If the current version is a test version."
               }
             }
           }
@@ -227,7 +221,7 @@
           "description": "Available roles for the network device.",
           "items": {
             "type": "string",
-            "description": "Available role for the network device.",
+            "description": "Available roles for the network device.",
             "enum": [
               "CE",
               "ToR",
@@ -271,7 +265,7 @@
                   "properties": {
                     "connectorType": {
                       "type": "string",
-                      "description": "Connector type. Example: optical."
+                      "description": "Connector type. Example: Optical."
                     },
                     "maxSpeedInMbps": {
                       "type": "integer",

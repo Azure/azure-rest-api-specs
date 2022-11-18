@@ -41,7 +41,7 @@
         ],
         "operationId": "L2IsolationDomains_Create",
         "summary": "Create L2 Isolation Domain.",
-        "description": "Implements L2 Isolation Domain PUT method.",
+        "description": "Creates layer 2 network connectivity between compute nodes within a rack and across racks.The configuration is applied on the devices only after the isolation domain is enabled.",
         "consumes": [
           "application/json"
         ],
@@ -102,9 +102,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_Create_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_Create_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_Create_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_Create_MinimumSet_Gen.json"
           }
         }
       },
@@ -113,7 +110,7 @@
           "L2IsolationDomains"
         ],
         "operationId": "L2IsolationDomains_Get",
-        "summary": "Gets a L2 Isolation Domain.",
+        "summary": "Retrieves details of this L2 Isolation Domain.",
         "description": "Implements L2 Isolation Domain GET method.",
         "produces": [
           "application/json"
@@ -153,9 +150,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_Get_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_Get_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_Get_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -193,7 +187,7 @@
             "in": "body",
             "name": "body",
             "required": true,
-            "description": "L2 Isolation Domain properties to update.",
+            "description": "API to update certain properties of the L2 Isolation Domain resource..",
             "schema": {
               "$ref": "#/definitions/L2IsolationDomainPatch"
             }
@@ -229,9 +223,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_Update_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_Update_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_Update_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -240,8 +231,8 @@
           "L2IsolationDomains"
         ],
         "operationId": "L2IsolationDomains_Delete",
-        "summary": "Deletes a L2 Isolation Domain.",
-        "description": "Implements L2 Isolation Domain DELETE method.",
+        "summary": "Deletes named L2 Isolation Domain",
+        "description": "Deletes layer 2 connectivity between compute nodes by managed by named L2 Isolation name.",
         "produces": [
           "application/json"
         ],
@@ -287,9 +278,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_Delete_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_Delete_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -301,7 +289,7 @@
         ],
         "operationId": "L2IsolationDomains_updateAdministrativeState",
         "description": "Enables isolation domain across the fabric or on specified racks.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -353,9 +341,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_updateAdministrativeState_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_updateAdministrativeState_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_updateAdministrativeState_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_updateAdministrativeState_MinimumSet_Gen.json"
           }
         }
       }
@@ -367,7 +352,7 @@
         ],
         "operationId": "L2IsolationDomains_clearArpTable",
         "description": "Clears ARP tables for this Isolation Domain.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -419,9 +404,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_clearArpTable_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_clearArpTable_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_clearArpTable_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_clearArpTable_MinimumSet_Gen.json"
           }
         }
       }
@@ -433,7 +415,7 @@
         ],
         "operationId": "L2IsolationDomains_clearNeighborTable",
         "description": "Clears IPv6 neighbors for this Isolation Domain.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -485,9 +467,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_clearNeighborTable_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_clearNeighborTable_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_clearNeighborTable_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_clearNeighborTable_MinimumSet_Gen.json"
           }
         }
       }
@@ -499,7 +478,7 @@
         ],
         "operationId": "L2IsolationDomains_getArpEntries",
         "description": "Clears IPv6 neighbors for this Isolation Domain.",
-        "summary": "Implements the operation to the underlying hardware.",
+        "summary": "Implements the operation to the underlying resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -545,9 +524,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_getArpEntries_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_getArpEntries_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_getArpEntries_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_getArpEntries_MinimumSet_Gen.json"
           }
         }
       }
@@ -556,7 +532,7 @@
       "get": {
         "operationId": "L2IsolationDomains_ListByResourceGroup",
         "summary": "List L2IsolationDomains by resource group.",
-        "description": "Implements L2IsolationDomains list by resource group GET method.",
+        "description": "Displays L2IsolationDomains list by resource group GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -588,9 +564,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -599,7 +572,7 @@
       "get": {
         "operationId": "L2IsolationDomains_ListBySubscription",
         "summary": "List L2IsolationDomains by subscription.",
-        "description": "Implements L2IsolationDomains list by subscription GET method.",
+        "description": "Displays L2IsolationDomains list by subscription GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -628,9 +601,6 @@
         "x-ms-examples": {
           "L2IsolationDomains_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/L2IsolationDomains_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "L2IsolationDomains_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/L2IsolationDomains_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -653,12 +623,12 @@
         "vlanId": {
           "type": "integer",
           "format": "int32",
-          "description": "vlanId. Example: 100."
+          "description": "vlanId. Example: 501."
         },
         "mtu": {
           "type": "integer",
           "format": "int32",
-          "description": "mtu. Example: 9000."
+          "description": "maximum transmission unit. Default value is 1500."
         },
         "disabledOnResources": {
           "type": "array",
@@ -670,7 +640,8 @@
           "readOnly": true
         },
         "administrativeState": {
-          "description": "state. Example: Enabled | Disabled.",
+          "description": "state. Example: Enabled | Disabled. It indicates administrative state of the isolationDomain, whether it is enabled or disabled. If enabled, the configuration is applied on the devices. If disabled, the configuration is removed from the devices",
+          "readOnly": true,
           "$ref": "./common.json#/definitions/EnabledDisabledState"
         },
         "provisioningState": {
@@ -693,7 +664,7 @@
         "mtu": {
           "type": "integer",
           "format": "int32",
-          "description": "mtu. Example: 9000."
+          "description": "maximum transmission unit. Default value is 1500."
         }
       },
       "description": "L2IsolationDomainPatchProperties define the patchable resource properties."
@@ -740,7 +711,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of L2IsolationDomain resources.",
+          "description": "Displays list of L2IsolationDomain resources.",
           "items": {
             "$ref": "#/definitions/L2IsolationDomain"
           }
