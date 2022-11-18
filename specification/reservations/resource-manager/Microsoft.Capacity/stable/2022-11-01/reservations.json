@@ -382,7 +382,18 @@
             }
           },
           "202": {
-            "description": "The request is accepted and is being processed"
+            "description": "The request is accepted and is being processed",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -432,7 +443,18 @@
             }
           },
           "202": {
-            "description": "The request is accepted and is being processed"
+            "description": "The request is accepted and is being processed",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -561,7 +583,22 @@
             }
           },
           "202": {
-            "description": "The request is accepted and is being processed"
+            "description": "The request is accepted and is being processed",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -2430,6 +2467,10 @@
         "displayName": {
           "type": "string",
           "description": "Friendly name for user to easily identify the reservation"
+        },
+        "appliedScopes": {
+          "description": "The list of applied scopes",
+          "$ref": "#/definitions/AppliedScopes"
         },
         "appliedScopeType": {
           "description": "The applied scope type",
