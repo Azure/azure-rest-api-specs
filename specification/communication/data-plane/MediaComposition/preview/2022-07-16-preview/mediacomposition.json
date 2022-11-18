@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Media Composition Service",
     "description": "Azure Communication Media Composition Service",
-    "version": "2022-07-16-preview"
+    "version": "2022-07-16-preview1"
   },
   "paths": {
     "/mediaCompositions/{mediaCompositionId}": {
@@ -20,18 +20,15 @@
           {
             "in": "path",
             "name": "mediaCompositionId",
-            "description": "The media composition id",
+            "description": "",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "maxLength": 256
+            "type": "string"
           },
           {
             "in": "query",
             "name": "api-version",
             "required": true,
-            "type": "string",
-            "description": "The api version"
+            "type": "string"
           }
         ],
         "responses": {
@@ -41,16 +38,45 @@
               "$ref": "#/definitions/MediaComposition"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
             },
             "x-ms-error-response": true
           }
@@ -77,24 +103,20 @@
           {
             "in": "path",
             "name": "mediaCompositionId",
-            "description": "The media composition id",
+            "description": "",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "maxLength": 256
+            "type": "string"
           },
           {
             "in": "query",
             "name": "api-version",
             "required": true,
-            "type": "string",
-            "description": "The api version"
+            "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "The media composition being created",
-            "required": true,
+            "description": "",
             "schema": {
               "$ref": "#/definitions/MediaComposition"
             }
@@ -107,16 +129,45 @@
               "$ref": "#/definitions/MediaComposition"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
             },
             "x-ms-error-response": true
           }
@@ -134,7 +185,7 @@
         "summary": "Updates an existing media composition",
         "operationId": "MediaComposition_Update",
         "consumes": [
-          "application/merge-patch+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -143,24 +194,20 @@
           {
             "in": "path",
             "name": "mediaCompositionId",
-            "description": "The media composition id",
+            "description": "",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "maxLength": 256
+            "type": "string"
           },
           {
             "in": "query",
             "name": "api-version",
             "required": true,
-            "type": "string",
-            "description": "The api version"
+            "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "required": true,
-            "description": "The media composition updates",
+            "description": "",
             "schema": {
               "$ref": "#/definitions/MediaComposition"
             }
@@ -173,16 +220,45 @@
               "$ref": "#/definitions/MediaComposition"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
             },
             "x-ms-error-response": true
           }
@@ -206,34 +282,60 @@
           {
             "in": "path",
             "name": "mediaCompositionId",
-            "description": "The media composition id",
+            "description": "",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "maxLength": 256
+            "type": "string"
           },
           {
             "in": "query",
             "name": "api-version",
             "required": true,
-            "type": "string",
-            "description": "The api version"
+            "type": "string"
           }
         ],
         "responses": {
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
             },
             "x-ms-error-response": true
           }
@@ -259,18 +361,15 @@
           {
             "in": "path",
             "name": "mediaCompositionId",
-            "description": "The media composition id",
+            "description": "",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "maxLength": 256
+            "type": "string"
           },
           {
             "in": "query",
             "name": "api-version",
             "required": true,
-            "type": "string",
-            "description": "The api version"
+            "type": "string"
           }
         ],
         "responses": {
@@ -280,16 +379,45 @@
               "$ref": "#/definitions/CompositionStreamState"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
             },
             "x-ms-error-response": true
           }
@@ -315,18 +443,15 @@
           {
             "in": "path",
             "name": "mediaCompositionId",
-            "description": "The media composition id",
+            "description": "",
             "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "maxLength": 256
+            "type": "string"
           },
           {
             "in": "query",
             "name": "api-version",
             "required": true,
-            "type": "string",
-            "description": "The api version"
+            "type": "string"
           }
         ],
         "responses": {
@@ -336,16 +461,45 @@
               "$ref": "#/definitions/CompositionStreamState"
             }
           },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Failure",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
             },
             "x-ms-error-response": true
           }
@@ -660,6 +814,9 @@
         "layer": {
           "description": "The layer this input group should appear on",
           "type": "string"
+        },
+        "scalingMode": {
+          "$ref": "#/definitions/ScalingMode"
         }
       },
       "discriminator": "kind"
@@ -721,6 +878,9 @@
         "placeholderImageUri": {
           "description": "Set global placeholder image",
           "type": "string"
+        },
+        "scalingMode": {
+          "$ref": "#/definitions/ScalingMode"
         }
       },
       "discriminator": "kind"
@@ -1071,6 +1231,19 @@
       },
       "x-ms-discriminator-value": "rtmp"
     },
+    "ScalingMode": {
+      "description": "The scaling mode for the view of a video stream in a cell.",
+      "enum": [
+        "stretch",
+        "crop",
+        "fit"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScalingMode",
+        "modelAsString": true
+      }
+    },
     "ScreenShare": {
       "required": [
         "call"
@@ -1202,4 +1375,3 @@
     }
   }
 }
-
