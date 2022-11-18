@@ -1245,6 +1245,109 @@
       "description": "Semantic debug info for this search result.",
       "$ref": "#/definitions/AnswersDebugInfo"
     },
+    "RerankerInputResult": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "readOnly": "true",
+          "description": "The title field."
+        },
+        "content": {
+          "type": "string",
+          "readOnly": "true",
+          "description": "The concatenated content fields."
+        },
+        "keywords": {
+          "type": "string",
+          "readOnly": "true",
+          "description": "The concatenated keyword fields."
+        }
+      },
+      "description": "The concatenated semantic fields sent to the reranker model.",
+      "x-ms-client-name": "RerankerInput"
+    },
+    "SemanticFieldResult": {
+      "x-ms-client-name": "Semantic",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of this semantic field."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "How much of this semantic field was used during semantic processing.",
+          "enum": [
+            "used",
+            "unused",
+            "partial"
+          ],
+          "x-ms-enum": {
+            "name": "SemanticFieldResultState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "used",
+                "name": "Used",
+                "description": "The field was fully used."
+              },
+              {
+                "value": "unused",
+                "name": "Unused",
+                "description": "The field was not used."
+              },
+              {
+                "value": "partial",
+                "name": "Partial",
+                "description": "The field was partially used."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DocumentSemanticDebugInfo": {
+      "x-ms-client-name": "Semantic",
+      "description": "Semantic debug info for this document.",
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticFieldResult",
+          "description": "The title field used in semantic processing.",
+          "readOnly": true,
+          "x-ms-client-name": "TitleField"
+        },
+        "contentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticFieldResult"
+          },
+          "description": "The list of content fields used in semantic processing.",
+          "readOnly": true,
+          "x-ms-client-name": "ContentFields"
+        },
+        "keywordFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticFieldResult"
+          },
+          "description": "The list of keyword fields used in semantic processing.",
+          "readOnly": true,
+          "x-ms-client-name": "KeywordFields"
+        },
+        "rerankerInput": {
+          "$ref": "#/definitions/RerankerInputResult",
+          "description": "The concatenated semantic fields sent to the reranker model.",
+          "readOnly": true,
+          "x-ms-client-name": "RerankerInput"
+        }
+      }
+    },
+    "DocumentDebugInfo": {
+      "x-ms-client-name": "DocumentDebugInfo",
+      "description": "Debug info for this document.",
+      "$ref": "#/definitions/DocumentSemanticDebugInfo"
+    },
     "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
@@ -1414,6 +1517,12 @@
           "x-ms-client-name": "Captions",
           "x-nullable": true,
           "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
+        },
+        "@search.documentDebugInfo": {
+          "$ref": "#/definitions/DocumentDebugInfo",
+          "readOnly": true,
+          "x-ms-client-name": "DocumentDebugInfo",
+          "description": "Debug info for this document."
         }
       },
       "required": [
