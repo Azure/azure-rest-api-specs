@@ -39,3 +39,12 @@ namespace Azure.OpenAI;
 enum Versions {
   v2022_06_01_preview: "2022-06-01-preview",
 }
+
+
+@doc("A specific deployment")
+@Cadl.Rest.resource("deployments")
+model Deployment {
+  @doc("deployment id of the deployed model")
+  @key
+  deploymentId: string;
+}

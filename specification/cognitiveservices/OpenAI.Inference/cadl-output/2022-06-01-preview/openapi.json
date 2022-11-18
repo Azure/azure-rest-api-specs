@@ -57,18 +57,25 @@
   "paths": {
     "/deployments/{deploymentId}/completions": {
       "post": {
-        "operationId": "Operations_CompletionsCreate",
-        "summary": "Create a completion from a chosen model",
-        "description": "Create a completion from a chosen model",
+        "operationId": "Operations_Completions",
+        "description": "Return the completions for a given prompt.",
         "parameters": [
           {
-            "$ref": "#/parameters/Request.CompletionsCreate.deploymentId"
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "description": "deployment id of the deployed model",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Request.CompletionsCreate.body"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CompletionsRequest"
+            }
           }
         ],
         "responses": {
@@ -81,7 +88,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/Response.CompletionsCreate"
+              "$ref": "#/definitions/Completions"
             }
           },
           "default": {
@@ -95,18 +102,25 @@
     },
     "/deployments/{deploymentId}/embeddings": {
       "post": {
-        "operationId": "Operations_EmbeddingsCreate",
-        "summary": "Return the embeddings for a given prompt.",
+        "operationId": "Operations_Embeddings",
         "description": "Return the embeddings for a given prompt.",
         "parameters": [
           {
-            "$ref": "#/parameters/Request.EmbeddingsCreate.deploymentId"
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "description": "deployment id of the deployed model",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Request.EmbeddingsCreate.body"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsRequest"
+            }
           }
         ],
         "responses": {
@@ -193,24 +207,117 @@
         "code"
       ]
     },
-    "Request.CompletionsCreate": {
+    "Completions": {
       "type": "object",
       "properties": {
-        "body": {
-          "$ref": "#/definitions/Request.CompletionsCreateBody",
-          "description": "expected schema for the body of the completion post request"
+        "id": {
+          "type": "string",
+          "description": "Id for completion response"
+        },
+        "object": {
+          "type": "string",
+          "description": "Object for completion response"
+        },
+        "created": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Created time for completion response"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model used for completion response"
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompletionsChoice"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "CompletionsChoice[]",
+          "description": "Array of choices returned containing text completions to prompts sent"
         }
       },
-      "description": "Input model for completions create endpoint",
-      "required": [
-        "body"
-      ]
+      "description": "Expected response schema to completion request"
     },
-    "Request.CompletionsCreateBody": {
+    "CompletionsChoice": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Generated text for given completion prompt"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index"
+        },
+        "logprobs": {
+          "$ref": "#/definitions/CompletionsLogProbsModel",
+          "description": "Log Prob Model"
+        },
+        "finishReason": {
+          "type": "string",
+          "description": "Reason for finishing"
+        }
+      },
+      "description": "Choice model within completion response"
+    },
+    "CompletionsLogProbsModel": {
+      "type": "object",
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Tokens"
+        },
+        "tokenLogprobs": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-cadl-name": "float32[]",
+          "description": "LogProbs of Tokens"
+        },
+        "topLogprobs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "float"
+            },
+            "x-cadl-name": "Record<float32>"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Record<float32>[]",
+          "description": "Top LogProbs"
+        },
+        "textOffset": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-cadl-name": "int32[]",
+          "description": "Text offset"
+        }
+      },
+      "description": "LogProbs model within completion choice"
+    },
+    "CompletionsPrompt": {
+      "type": "object",
+      "properties": {},
+      "description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048."
+    },
+    "CompletionsRequest": {
       "type": "object",
       "properties": {
         "prompt": {
-          "$ref": "#/definitions/Request.CompletionsPrompt",
+          "$ref": "#/definitions/CompletionsPrompt",
           "description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048."
         },
         "maxTokens": {
@@ -259,7 +366,7 @@
           "description": "Echo back the prompt in addition to the completion"
         },
         "stop": {
-          "$ref": "#/definitions/Request.CompletionsStop",
+          "$ref": "#/definitions/CompletionsStopSequence",
           "description": "A sequence which indicates the end of the current document."
         },
         "completionConfig": {
@@ -289,30 +396,30 @@
       },
       "description": "Post body schema to create a prompt completion from a deployment"
     },
-    "Request.CompletionsPrompt": {
-      "type": "object",
-      "properties": {},
-      "description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048."
-    },
-    "Request.CompletionsStop": {
+    "CompletionsStopSequence": {
       "type": "object",
       "properties": {},
       "description": "A sequence which indicates the end of the current document."
     },
-    "Request.EmbeddingsCreate": {
+    "Deployment": {
       "type": "object",
       "properties": {
-        "body": {
-          "$ref": "#/definitions/Request.EmbeddingsCreateBody",
-          "description": "expected schema for the body of the embedding post request"
+        "deploymentId": {
+          "type": "string",
+          "description": "deployment id of the deployed model"
         }
       },
-      "description": "Input model for embeddings create endpoint",
+      "description": "A specific deployment",
       "required": [
-        "body"
+        "deploymentId"
       ]
     },
-    "Request.EmbeddingsCreateBody": {
+    "EmbeddingsInput": {
+      "type": "object",
+      "properties": {},
+      "description": "Embedding request body schema, base fields"
+    },
+    "EmbeddingsRequest": {
       "type": "object",
       "properties": {
         "user": {
@@ -328,7 +435,7 @@
           "description": "ID of the model to use"
         },
         "input": {
-          "$ref": "#/definitions/Request.EmbeddingsInput",
+          "$ref": "#/definitions/EmbeddingsInput",
           "description": "An input to embed, encoded as a string, a list of strings, or a list of token\nlists"
         }
       },
@@ -336,112 +443,6 @@
       "required": [
         "input"
       ]
-    },
-    "Request.EmbeddingsInput": {
-      "type": "object",
-      "properties": {},
-      "description": "Embedding request body schema, base fields"
-    },
-    "Response.CompletionsChoice": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Generated text for given completion prompt"
-        },
-        "index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Index"
-        },
-        "logprobs": {
-          "$ref": "#/definitions/Response.CompletionsLogProbsModel",
-          "description": "Log Prob Model"
-        },
-        "finishReason": {
-          "type": "string",
-          "description": "Reason for finishing"
-        }
-      },
-      "description": "Choice model within completion response"
-    },
-    "Response.CompletionsCreate": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id for completion response"
-        },
-        "object": {
-          "type": "string",
-          "description": "Object for completion response"
-        },
-        "created": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Created time for completion response"
-        },
-        "model": {
-          "type": "string",
-          "description": "Model used for completion response"
-        },
-        "choices": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Response.CompletionsChoice"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Response.CompletionsChoice[]",
-          "description": "Array of choices returned containing text completions to prompts sent"
-        }
-      },
-      "description": "Expected response schema to completion request"
-    },
-    "Response.CompletionsLogProbsModel": {
-      "type": "object",
-      "properties": {
-        "tokens": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "Tokens"
-        },
-        "tokenLogprobs": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "float"
-          },
-          "x-cadl-name": "float32[]",
-          "description": "LogProbs of Tokens"
-        },
-        "topLogprobs": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "float"
-            },
-            "x-cadl-name": "Record<float32>"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Record<float32>[]",
-          "description": "Top LogProbs"
-        },
-        "textOffset": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "x-cadl-name": "int32[]",
-          "description": "Text offset"
-        }
-      },
-      "description": "LogProbs model within completion choice"
     },
     "Versions": {
       "type": "string",
@@ -471,42 +472,6 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "minLength": 1,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Request.CompletionsCreate.body": {
-      "name": "body",
-      "in": "body",
-      "required": true,
-      "description": "expected schema for the body of the completion post request",
-      "schema": {
-        "$ref": "#/definitions/Request.CompletionsCreateBody"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "Request.CompletionsCreate.deploymentId": {
-      "name": "deploymentId",
-      "in": "path",
-      "required": true,
-      "description": "deployment id of the model which was deployed",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Request.EmbeddingsCreate.body": {
-      "name": "body",
-      "in": "body",
-      "required": true,
-      "description": "expected schema for the body of the embedding post request",
-      "schema": {
-        "$ref": "#/definitions/Request.EmbeddingsCreateBody"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "Request.EmbeddingsCreate.deploymentId": {
-      "name": "deploymentId",
-      "in": "path",
-      "required": true,
-      "description": "deployment id of the model which was deployed",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
