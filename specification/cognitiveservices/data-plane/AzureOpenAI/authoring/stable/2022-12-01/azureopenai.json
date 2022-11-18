@@ -953,6 +953,9 @@
         },
         "scale_settings": {
           "$ref": "#/definitions/ScaleSettings"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -1005,6 +1008,60 @@
           "type": "integer",
           "readOnly": true
         }
+      }
+    },
+    "EntityError": {
+      "title": "EntityError",
+      "description": "Failure details of an entity.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/EntityErrorCode"
+        },
+        "message": {
+          "description": "The message of this error.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details if available.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityError"
+          }
+        }
+      }
+    },
+    "EntityErrorCode": {
+      "title": "EntityErrorCode",
+      "description": "Entity error codes.",
+      "enum": [
+        "internalFailure",
+        "jsonlValidationFailed",
+        "fileImportFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EntityErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "internalFailure",
+            "description": "Internal error. Please retry."
+          },
+          {
+            "value": "jsonlValidationFailed",
+            "description": "Validation of jsonl data failed."
+          },
+          {
+            "value": "fileImportFailed",
+            "description": "Import of file failed."
+          }
+        ]
       }
     },
     "Error": {
@@ -1197,6 +1254,9 @@
         },
         "statistics": {
           "$ref": "#/definitions/FileStatistics"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -1350,6 +1410,9 @@
         "suffix": {
           "description": "The suffix used to identify the fine-tuned model.",
           "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -1497,11 +1560,11 @@
         "values": [
           {
             "value": "preview",
-            "description": "Model is in preview and exempted from SLA terms."
+            "description": "Model is in preview and covered by the service preview terms."
           },
           {
             "value": "generally-available",
-            "description": "Model is generally available and covered by SLA terms."
+            "description": "Model is generally available."
           }
         ]
       }
