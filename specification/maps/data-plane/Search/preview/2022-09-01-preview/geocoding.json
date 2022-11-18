@@ -516,7 +516,19 @@
       "enum": [
         "Display",
         "Route"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "UsageTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Display"
+          },
+          {
+            "value": "Route"
+          }
+        ]
+      }
     },
     "GeocodePoints": {
       "description": "A collection of geocode points that differ in how they were calculated and their suggested use.",
@@ -535,7 +547,25 @@
               "InterpolationOffset",
               "Parcel",
               "Rooftop"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "CalculationMethodEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Interpolation"
+                },
+                {
+                  "value": "InterpolationOffset"
+                },
+                {
+                  "value": "Parcel"
+                },
+                {
+                  "value": "Rooftop"
+                }
+              ]
+            }
           },
           "usageTypes": {
             "description": "The best use for the geocode point.\nEach geocode point is defined as a `Route` point, a `Display` point or both.\nUse `Route` points if you are creating a route to the location. Use `Display` points if you are showing the location on a map. For example, if the location is a park, a `Route` point may specify an entrance to the park where you can enter with a car, and a `Display` point may be a point that specifies the center of the park.",
@@ -978,7 +1008,22 @@
           "Good",
           "Ambiguous",
           "UpHierarchy"
-        ]
+        ],
+        "x-ms-enum": {
+          "name": "MatchCodesEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Good"
+            },
+            {
+              "value": "Ambiguous"
+            },
+            {
+              "value": "UpHierarchy"
+            }
+          ]
+        }
       }
     },
     "Confidence": {
@@ -988,7 +1033,22 @@
         "High",
         "Medium",
         "Low"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ConfidenceEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "High"
+          },
+          {
+            "value": "Medium"
+          },
+          {
+            "value": "Low"
+          }
+        ]
+      }
     },
     "NextLink": {
       "type": "string",
@@ -999,7 +1059,16 @@
       "description": "The type of a FeatureCollection object must be FeatureCollection.",
       "enum": [
         "FeatureCollection"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "FeatureCollectionEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "FeatureCollection"
+          }
+        ]
+      }
     }
   }
 }
