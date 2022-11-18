@@ -3,7 +3,7 @@
   "info": {
     "title": "Service Fabric Client APIs",
     "description": "Service Fabric REST Client APIs allows management of Service Fabric clusters, applications and services.",
-    "version": "9.1"
+    "version": "9.1.0.46"
   },
   "host": "localhost:19080",
   "schemes": [
@@ -19,6 +19,11 @@
         "operationId": "GetClusterManifest",
         "summary": "Get the Service Fabric cluster manifest.",
         "description": "Get the Service Fabric cluster manifest. The cluster manifest contains properties of the cluster that include different node types on the cluster,\nsecurity configurations, fault, and upgrade domain topologies, etc.\n\nThese properties are specified as part of the ClusterConfig.JSON file while deploying a stand-alone cluster. However, most of the information in the cluster manifest\nis generated internally by service fabric during cluster deployment in other deployment scenarios (e.g. when using Azure portal).\n\nThe contents of the cluster manifest are for informational purposes only and users are not expected to take a dependency on the format of the file contents or its interpretation.",
+        "x-ms-examples": {
+          "get ClusterManifest": {
+            "$ref": "./examples/GetClusterManifest.json"
+          }
+        },
         "tags": [
           "Cluster"
         ],
@@ -51,6 +56,11 @@
         "operationId": "GetClusterHealth",
         "summary": "Gets the health of a Service Fabric cluster.",
         "description": "Use EventsHealthStateFilter to filter the collection of health events reported on the cluster based on the health state.\nSimilarly, use NodesHealthStateFilter and ApplicationsHealthStateFilter to filter the collection of nodes and applications returned based on their aggregated health state.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -96,6 +106,11 @@
         "operationId": "GetClusterHealthUsingPolicy",
         "summary": "Gets the health of a Service Fabric cluster using the specified policy.",
         "description": "Use EventsHealthStateFilter to filter the collection of health events reported on the cluster based on the health state.\nSimilarly, use NodesHealthStateFilter and ApplicationsHealthStateFilter to filter the collection of nodes and applications returned based on their aggregated health state.\nUse ClusterHealthPolicies to override the health policies used to evaluate the health.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterHealthUsingPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -146,6 +161,11 @@
         "operationId": "GetClusterHealthChunk",
         "summary": "Gets the health of a Service Fabric cluster using health chunks.",
         "description": "Gets the health of a Service Fabric cluster using health chunks. Includes the aggregated health state of the cluster, but none of the cluster entities.\nTo expand the cluster health and get the health state of all or some of the entities, use the POST URI and specify the cluster health chunk query description.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterHealthChunk.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -176,6 +196,11 @@
         "operationId": "GetClusterHealthChunkUsingPolicyAndAdvancedFilters",
         "summary": "Gets the health of a Service Fabric cluster using health chunks.",
         "description": "Gets the health of a Service Fabric cluster using health chunks. The health evaluation is done based on the input cluster health chunk query description.\nThe query description allows users to specify health policies for evaluating the cluster and its children.\nUsers can specify very flexible filters to select which cluster entities to return. The selection can be done based on the entities health state and based on the hierarchy.\nThe query can return multi-level children of the entities based on the specified filters. For example, it can return one application with a specified name, and for this application, return\nonly services that are in Error or Warning, and all partitions and replicas for one of these services.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterHealthChunk.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -211,6 +236,11 @@
         "operationId": "ReportClusterHealth",
         "summary": "Sends a health report on the Service Fabric cluster.",
         "description": "Sends a health report on a Service Fabric cluster. The report must contain the information about the source of the health report and property on which it is reported.\nThe report is sent to a Service Fabric gateway node, which forwards to the health store.\nThe report may be accepted by the gateway, but rejected by the health store after extra validation.\nFor example, the health store may reject the report because of an invalid parameter, like a stale sequence number.\nTo see whether the report was applied in the health store, run GetClusterHealth and check that the report appears in the HealthEvents section.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/ReportClusterHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -246,6 +276,11 @@
         "operationId": "GetProvisionedFabricCodeVersionInfoList",
         "summary": "Gets a list of fabric code versions that are provisioned in a Service Fabric cluster.",
         "description": "Gets a list of information about fabric code versions that are provisioned in the cluster. The parameter CodeVersion can be used to optionally filter the output to only that particular version.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetProvisionedFabricCodeVersionInfoList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -281,6 +316,11 @@
         "operationId": "GetProvisionedFabricConfigVersionInfoList",
         "summary": "Gets a list of fabric config versions that are provisioned in a Service Fabric cluster.",
         "description": "Gets a list of information about fabric config versions that are provisioned in the cluster. The parameter ConfigVersion can be used to optionally filter the output to only that particular version.",
+        "x-ms-examples": {
+          "GetProvisionedFabricConfigVersionInfoList": {
+            "$ref": "./examples/GetProvisionedFabricConfigVersionInfoList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -316,6 +356,11 @@
         "operationId": "GetClusterUpgradeProgress",
         "summary": "Gets the progress of the current cluster upgrade.",
         "description": "Gets the current progress of the ongoing cluster upgrade. If no upgrade is currently in progress, get the last state of the previous cluster upgrade.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterUpgradeProgress.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -347,6 +392,11 @@
       "get": {
         "operationId": "GetClusterConfiguration",
         "summary": "Get the Service Fabric standalone cluster configuration.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterConfiguration.json"
+          }
+        },
         "description": "The cluster configuration contains properties of the cluster that include different node types on the cluster,\nsecurity configurations, fault, and upgrade domain topologies, etc.",
         "tags": [
           "Cluster"
@@ -383,6 +433,11 @@
         "operationId": "GetClusterConfigurationUpgradeStatus",
         "summary": "Get the cluster configuration upgrade status of a Service Fabric standalone cluster.",
         "description": "Get the cluster configuration upgrade status details of a Service Fabric standalone cluster.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetClusterConfigurationUpgradeStatus.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -415,6 +470,11 @@
         "operationId": "GetUpgradeOrchestrationServiceState",
         "summary": "Get the service state of Service Fabric Upgrade Orchestration Service.",
         "description": "Get the service state of Service Fabric Upgrade Orchestration Service. This API is internally used for support purposes.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/GetUpgradeOrchestrationServiceState.json"
+          }
+        },
         "tags": [
           "Cluster"
         ],
@@ -447,6 +507,11 @@
         "operationId": "SetUpgradeOrchestrationServiceState",
         "summary": "Update the service state of Service Fabric Upgrade Orchestration Service.",
         "description": "Update the service state of Service Fabric Upgrade Orchestration Service. This API is internally used for support purposes.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/SetUpgradeOrchestrationServiceState.json"
+          }
+        },
         "tags": [
           "Cluster"
         ],
@@ -482,6 +547,11 @@
         "summary": "Provision the code or configuration packages of a Service Fabric cluster.",
         "description": "Validate and provision the code or configuration packages of a Service Fabric cluster.",
         "operationId": "ProvisionCluster",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/ProvisionCluster.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -513,6 +583,11 @@
       "post": {
         "summary": "Unprovision the code or configuration packages of a Service Fabric cluster.",
         "description": "It is supported to unprovision code and configuration separately.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/UnprovisionCluster.json"
+          }
+        },
         "operationId": "UnprovisionCluster",
         "parameters": [
           {
@@ -546,6 +621,11 @@
         "summary": "Roll back the upgrade of a Service Fabric cluster.",
         "description": "Roll back the code or configuration upgrade of a Service Fabric cluster.",
         "operationId": "RollbackClusterUpgrade",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/RollbackClusterUpgrade.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -575,6 +655,11 @@
         "summary": "Make the cluster upgrade move on to the next upgrade domain.",
         "description": "Make the cluster code or configuration upgrade move on to the next upgrade domain if appropriate.",
         "operationId": "ResumeClusterUpgrade",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/ResumeClusterUpgrade.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -607,6 +692,11 @@
         "summary": "Start upgrading the code or configuration version of a Service Fabric cluster.",
         "description": "Validate the supplied upgrade parameters and start upgrading the code or configuration version of a Service Fabric cluster if the parameters are valid.",
         "operationId": "StartClusterUpgrade",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/StartClusterUpgrade.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -676,6 +766,11 @@
         "operationId": "UpdateClusterUpgrade",
         "summary": "Update the upgrade parameters of a Service Fabric cluster upgrade.",
         "description": "Update the upgrade parameters used during a Service Fabric cluster upgrade.",
+        "x-ms-examples": {
+          "get health": {
+            "$ref": "./examples/UpdateClusterUpgrade.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -708,6 +803,11 @@
         "operationId": "GetAadMetadata",
         "summary": "Gets the Azure Active Directory metadata used for secured connection to cluster.",
         "description": "Gets the Azure Active Directory metadata used for secured connection to cluster.\nThis API is not supposed to be called separately. It provides information needed to set up an Azure Active Directory secured connection with a Service Fabric cluster.",
+        "x-ms-examples": {
+          "GetAadMetadata": {
+            "$ref": "./examples/GetAadMetadata.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -780,6 +880,11 @@
         "operationId": "GetClusterLoad",
         "summary": "Gets the load of a Service Fabric cluster.",
         "description": "Retrieves the load information of a Service Fabric cluster for all the metrics that have load or capacity defined.",
+        "x-ms-examples": {
+          "Get ClusterLoad": {
+            "$ref": "./examples/GetClusterLoad.json"
+          }
+        },
         "tags": [
           "Cluster"
         ],
@@ -812,6 +917,11 @@
         "operationId": "ToggleVerboseServicePlacementHealthReporting",
         "summary": "Changes the verbosity of service placement health reporting.",
         "description": "If verbosity is set to true, then detailed health reports will be generated when replicas cannot be placed or dropped.\nIf verbosity is set to false, then no health reports will be generated when replicas cannot be placed or dropped.",
+        "x-ms-examples": {
+          "ToggleVerboseServicePlacementHealthReporting": {
+            "$ref": "./examples/ToggleVerboseServicePlacementHealthReporting.json"
+          }
+        },
         "tags": [
           "Cluster"
         ],
@@ -844,6 +954,11 @@
         "summary": "Validate and assess the impact of a code or configuration version update of a Service Fabric cluster.",
         "description": "Validate the supplied upgrade parameters and assess the expected impact of a code or configuration version upgrade of a Service Fabric cluster. The upgrade will not be initiated.",
         "operationId": "ValidateClusterUpgrade",
+        "x-ms-examples": {
+          "ValidateClusterUpgrade": {
+            "$ref": "./examples/ValidateClusterUpgrade.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_8-2_RequiredQueryParam"
@@ -977,6 +1092,11 @@
         "tags": [
           "Node"
         ],
+        "x-ms-examples": {
+          "ValidateClusterUpgrade": {
+            "$ref": "./examples/GetNodeHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -1010,6 +1130,11 @@
         "operationId": "GetNodeHealthUsingPolicy",
         "summary": "Gets the health of a Service Fabric node, by using the specified health policy.",
         "description": "Gets the health of a Service Fabric node. Use EventsHealthStateFilter to filter the collection of health events reported on the node based on the health state. Use ClusterHealthPolicy in the POST body to override the health policies used to evaluate the health. If the node that you specify by name does not exist in the health store, this returns an error.",
+        "x-ms-examples": {
+          "ValidateClusterUpgrade": {
+            "$ref": "./examples/GetNodeHealthUsingPolicy.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1051,6 +1176,11 @@
         "operationId": "ReportNodeHealth",
         "summary": "Sends a health report on the Service Fabric node.",
         "description": "Reports health state of the specified Service Fabric node. The report must contain the information about the source of the health report and property on which it is reported.\nThe report is sent to a Service Fabric gateway node, which forwards to the health store.\nThe report may be accepted by the gateway, but rejected by the health store after extra validation.\nFor example, the health store may reject the report because of an invalid parameter, like a stale sequence number.\nTo see whether the report was applied in the health store, run GetNodeHealth and check that the report appears in the HealthEvents section.",
+        "x-ms-examples": {
+          "ReportNodeHealth": {
+            "$ref": "./examples/ReportNodeHealth.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1089,6 +1219,11 @@
         "operationId": "GetNodeLoadInfo",
         "summary": "Gets the load information of a Service Fabric node.",
         "description": "Retrieves the load information of a Service Fabric node for all the metrics that have load or capacity defined.",
+        "x-ms-examples": {
+          "GetNodeLoadInfo": {
+            "$ref": "./examples/GetNodeLoadInfo.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1124,6 +1259,11 @@
         "operationId": "DisableNode",
         "summary": "Deactivate a Service Fabric cluster node with the specified deactivation intent.",
         "description": "Deactivate a Service Fabric cluster node with the specified deactivation intent. Once the deactivation is in progress, the deactivation intent can be increased, but not decreased (for example, a node that is deactivated with the Pause intent can be deactivated further with Restart, but not the other way around. Nodes may be reactivated using the Activate a node operation any time after they are deactivated. If the deactivation is not complete, this will cancel the deactivation. A node that goes down and comes back up while deactivated will still need to be reactivated before services will be placed on that node.",
+        "x-ms-examples": {
+          "DisableNode": {
+            "$ref": "./examples/DisableNode.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1159,6 +1299,11 @@
         "operationId": "EnableNode",
         "summary": "Activate a Service Fabric cluster node that is currently deactivated.",
         "description": "Activates a Service Fabric cluster node that is currently deactivated. Once activated, the node will again become a viable target for placing new replicas, and any deactivated replicas remaining on the node will be reactivated.",
+        "x-ms-examples": {
+          "EnableNode": {
+            "$ref": "./examples/EnableNode.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1191,6 +1336,11 @@
         "operationId": "RemoveNodeState",
         "summary": "Notifies Service Fabric that the persisted state on a node has been permanently removed or lost.",
         "description": "This implies that it is not possible to recover the persisted state of that node. This generally happens if a hard disk has been wiped clean, or if a hard disk crashes. The node has to be down for this operation to be successful. This operation lets Service Fabric know that the replicas on that node no longer exist, and that Service Fabric should stop waiting for those replicas to come back up. Do not run this cmdlet if the state on the node has not been removed and the node can come back up with its state intact. Starting from Service Fabric 6.5, in order to use this API for seed nodes, please change the seed nodes to regular (non-seed) nodes and then invoke this API to remove the node state. If the cluster is running on Azure, after the seed node goes down, Service Fabric will try to change it to a non-seed node automatically. To make this happen, make sure the number of non-seed nodes in the primary node type is no less than the number of Down seed nodes. If necessary, add more nodes to the primary node type to achieve this. For standalone cluster, if the Down seed node is not expected to come back up with its state intact, please remove the node from the cluster, see https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-windows-server-add-remove-nodes",
+        "x-ms-examples": {
+          "RemoveNodeState": {
+            "$ref": "./examples/RemoveNodeState.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1223,6 +1373,11 @@
         "operationId": "RestartNode",
         "summary": "Restarts a Service Fabric cluster node.",
         "description": "Restarts a Service Fabric cluster node that is already started.",
+        "x-ms-examples": {
+          "RestartNode": {
+            "$ref": "./examples/RestartNode.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1258,6 +1413,11 @@
         "operationId": "RemoveConfigurationOverrides",
         "summary": "Removes configuration overrides on the specified node.",
         "description": "This api allows removing all existing configuration overrides on specified node.",
+        "x-ms-examples": {
+          "RemoveConfigurationOverrides": {
+            "$ref": "./examples/RemoveConfigurationOverrides.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1290,6 +1450,11 @@
         "operationId": "GetConfigurationOverrides",
         "summary": "Gets the list of configuration overrides on the specified node.",
         "description": "This api allows getting all existing configuration overrides on the specified node.",
+        "x-ms-examples": {
+          "GetConfigurationOverrides": {
+            "$ref": "./examples/GetConfigurationOverrides.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1325,6 +1490,11 @@
         "operationId": "AddConfigurationParameterOverrides",
         "summary": "Adds the list of configuration overrides on the specified node.",
         "description": "This api allows adding all existing configuration overrides on the specified node.",
+        "x-ms-examples": {
+          "AddConfigurationParameterOverrides": {
+            "$ref": "./examples/AddConfigurationParameterOverrides.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1363,6 +1533,11 @@
         "operationId": "RemoveNodeTags",
         "summary": "Removes the list of tags from the specified node.",
         "description": "This api allows removing set of tags from the specified node.",
+        "x-ms-examples": {
+          "RemoveNodeTags": {
+            "$ref": "./examples/RemoveNodeTags.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1395,6 +1570,11 @@
         "operationId": "AddNodeTags",
         "summary": "Adds the list of tags on the specified node.",
         "description": "This api allows adding tags to the specified node.",
+        "x-ms-examples": {
+          "AddNodeTags": {
+            "$ref": "./examples/AddNodeTags.json"
+          }
+        },
         "tags": [
           "Node"
         ],
@@ -1482,6 +1662,11 @@
         "summary": "Gets the list of application types in the Service Fabric cluster matching exactly the specified name.",
         "description": "Returns the information about the application types that are provisioned or in the process of being provisioned in the Service Fabric cluster. These results are of application types whose name match exactly the one specified as the parameter, and which comply with the given query parameters. All versions of the application type matching the application type name are returned, with each version returned as one application type. The response includes the name, version, status, and other details about the application type. This is a paged query, meaning that if not all of the application types fit in a page, one page of results is returned as well as a continuation token, which can be used to get the next page. For example, if there are 10 application types but a page only fits the first three application types, or if max results is set to 3, then three is returned. To access the rest of the results, retrieve subsequent pages by using the returned continuation token in the next query. An empty continuation token is returned if there are no subsequent pages.",
         "operationId": "GetApplicationTypeInfoListByName",
+        "x-ms-examples": {
+          "GetApplicationTypeInfoListByName": {
+            "$ref": "./examples/GetApplicationTypeInfoListByName.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -1529,6 +1714,11 @@
         "operationId": "ProvisionApplicationType",
         "summary": "Provisions or registers a Service Fabric application type with the cluster using the '.sfpkg' package in the external store or using the application package in the image store.",
         "description": "Provisions a Service Fabric application type with the cluster. The provision is required before any new applications can be instantiated.\nThe provision operation can be performed either on the application package specified by the relativePathInImageStore, or by using the URI of the external '.sfpkg'.",
+        "x-ms-examples": {
+          "ProvisionApplicationType": {
+            "$ref": "./examples/ProvisionApplicationType.json"
+          }
+        },
         "tags": [
           "ApplicationType"
         ],
@@ -1564,6 +1754,11 @@
         "operationId": "UnprovisionApplicationType",
         "summary": "Removes or unregisters a Service Fabric application type from the cluster.",
         "description": "This operation can only be performed if all application instances of the application type have been deleted. Once the application type is unregistered, no new application instances can be created for this particular application type.",
+        "x-ms-examples": {
+          "UnprovisionApplicationType": {
+            "$ref": "./examples/UnprovisionApplicationType.json"
+          }
+        },
         "tags": [
           "ApplicationType"
         ],
@@ -1602,6 +1797,11 @@
         "operationId": "UpdateApplicationTypeArmMetadata",
         "summary": "Updates the Arm Metadata for a specific Application Type.",
         "description": "Updates the Arm Metadata for a specific Application Type. Is able to be called immediately after the provision app type API is called.  ",
+        "x-ms-examples": {
+          "UpdateApplicationTypeArmMetadata": {
+            "$ref": "./examples/UpdateApplicationTypeArmMetadata.json"
+          }
+        },
         "tags": [
           "ApplicationType"
         ],
@@ -1735,6 +1935,11 @@
         "summary": "Gets the manifest describing a service type.",
         "description": "Gets the manifest describing a service type. The response contains the service manifest XML as a string.",
         "operationId": "GetServiceManifest",
+        "x-ms-examples": {
+          "GetServiceManifest": {
+            "$ref": "./examples/GetServiceManifest.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -1776,6 +1981,11 @@
         "summary": "Gets the list containing the information about service types from the applications deployed on a node in a Service Fabric cluster.",
         "description": "Gets the list containing the information about service types from the applications deployed on a node in a Service Fabric cluster. The response includes the name of the service type, its registration status, the code package that registered it and activation ID of the service package.",
         "operationId": "GetDeployedServiceTypeInfoList",
+        "x-ms-examples": {
+          "GetDeployedServiceTypeInfoList": {
+            "$ref": "./examples/GetDeployedServiceTypeInfoList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -1817,6 +2027,11 @@
         "summary": "Gets the information about a specified service type of the application deployed on a node in a Service Fabric cluster.",
         "description": "Gets the list containing the information about a specific service type from the applications deployed on a node in a Service Fabric cluster. The response includes the name of the service type, its registration status, the code package that registered it and activation ID of the service package. Each entry represents one activation of a service type, differentiated by the activation ID.",
         "operationId": "GetDeployedServiceTypeInfoByName",
+        "x-ms-examples": {
+          "GetDeployedServiceTypeInfoByName": {
+            "$ref": "./examples/GetDeployedServiceTypeInfoByName.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -1901,6 +2116,11 @@
         "summary": "Deletes an existing Service Fabric application.",
         "description": "An application must be created before it can be deleted. Deleting an application will delete all services that are part of that application. By default, Service Fabric will try to close service replicas in a graceful manner and then delete the service. However, if a service is having issues closing the replica gracefully, the delete operation may take a long time or get stuck. Use the optional ForceRemove flag to skip the graceful close sequence and forcefully delete the application and all of its services.",
         "operationId": "DeleteApplication",
+        "x-ms-examples": {
+          "DeleteApplication": {
+            "$ref": "./examples/DeleteApplication.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -1947,6 +2167,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetApplicationLoadInfo": {
+            "$ref": "./examples/GetApplicationLoadInfo.json"
+          }
+        },
         "tags": [
           "Application"
         ],
@@ -2075,6 +2300,11 @@
         "summary": "Gets the health of the service fabric application.",
         "description": "Returns the heath state of the service fabric application. The response reports either Ok, Error or Warning health state. If the entity is not found in the health store, it will return Error.",
         "operationId": "GetApplicationHealth",
+        "x-ms-examples": {
+          "GetApplicationHealth": {
+            "$ref": "./examples/GetApplicationHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApplicationIdRequiredPathParam"
@@ -2120,6 +2350,11 @@
         "operationId": "GetApplicationHealthUsingPolicy",
         "summary": "Gets the health of a Service Fabric application using the specified policy.",
         "description": "Gets the health of a Service Fabric application. Use EventsHealthStateFilter to filter the collection of health events reported on the node based on the health state. Use ClusterHealthPolicies to override the health policies used to evaluate the health.",
+        "x-ms-examples": {
+          "GetApplicationHealthUsingPolicy": {
+            "$ref": "./examples/GetApplicationHealthUsingPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApplicationIdRequiredPathParam"
@@ -2170,6 +2405,11 @@
         "operationId": "ReportApplicationHealth",
         "summary": "Sends a health report on the Service Fabric application.",
         "description": "Reports health state of the specified Service Fabric application. The report must contain the information about the source of the health report and property on which it is reported.\nThe report is sent to a Service Fabric gateway Application, which forwards to the health store.\nThe report may be accepted by the gateway, but rejected by the health store after extra validation.\nFor example, the health store may reject the report because of an invalid parameter, like a stale sequence number.\nTo see whether the report was applied in the health store, get application health and check that the report appears in the HealthEvents section.",
+        "x-ms-examples": {
+          "ReportApplicationHealth": {
+            "$ref": "./examples/ReportApplicationHealth.json"
+          }
+        },
         "tags": [
           "Application"
         ],
@@ -2248,6 +2488,11 @@
         "summary": "Gets details for the latest upgrade performed on this application.",
         "description": "Returns information about the state of the latest application upgrade along with details to aid debugging application health issues.",
         "operationId": "GetApplicationUpgrade",
+        "x-ms-examples": {
+          "GetApplicationUpgrade": {
+            "$ref": "./examples/GetApplicationUpgrade.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -2297,6 +2542,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "UpdateApplicationUpgrade": {
+            "$ref": "./examples/UpdateApplicationUpgrade.json"
+          }
+        },
         "tags": [
           "Application"
         ],
@@ -2332,6 +2582,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "UpdateApplication": {
+            "$ref": "./examples/UpdateApplication.json"
+          }
+        },
         "tags": [
           "Application"
         ],
@@ -2367,6 +2622,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "ResumeApplicationUpgrade": {
+            "$ref": "./examples/ResumeApplicationUpgrade.json"
+          }
+        },
         "tags": [
           "Application"
         ],
@@ -2399,6 +2659,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "RollbackApplicationUpgrade": {
+            "$ref": "./examples/RollbackApplicationUpgrade.json"
+          }
+        },
         "tags": [
           "Application"
         ],
@@ -2527,6 +2792,11 @@
         "tags": [
           "Application"
         ],
+        "x-ms-examples": {
+          "GetDeployedApplicationHealth": {
+            "$ref": "./examples/GetDeployedApplicationHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -2598,6 +2868,11 @@
         "tags": [
           "Application"
         ],
+        "x-ms-examples": {
+          "GetDeployedApplicationHealthUsingPolicy": {
+            "$ref": "./examples/GetDeployedApplicationHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the health information of the deployed application.",
@@ -2622,6 +2897,11 @@
         "tags": [
           "Application"
         ],
+        "x-ms-examples": {
+          "ReportDeployedApplicationHealth": {
+            "$ref": "./examples/ReportDeployedApplicationHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -2701,6 +2981,11 @@
         "tags": [
           "ApplicationType"
         ],
+        "x-ms-examples": {
+          "UpdateApplicationArmMetadata": {
+            "$ref": "./examples/UpdateApplicationArmMetadata.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApplicationIdRequiredPathParam"
@@ -2756,6 +3041,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "GetServiceInfo": {
+            "$ref": "examples/GetServiceInfoList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "List of services in the cluster for the specified application.",
@@ -2794,6 +3084,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "GetServiceInfo": {
+            "$ref": "examples/GetServiceInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the specified service.",
@@ -2832,6 +3127,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "GetApplicationNameInfo": {
+            "$ref": "examples/GetApplicationNameInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the name of the application for the specified service.",
@@ -2919,6 +3219,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "CreateServiceFromTemplate": {
+            "$ref": "examples/CreateServiceFromTemplate.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "A successful operation will return 202 status code."
@@ -2954,6 +3259,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "DeleteService": {
+            "$ref": "examples/DeleteService.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -3029,6 +3339,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "GetServiceDescription": {
+            "$ref": "examples/GetServiceDescription.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.",
@@ -3073,6 +3388,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "GetServiceHealth": {
+            "$ref": "examples/GetServiceHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the health information of the specified service.",
@@ -3159,6 +3479,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "ReportServiceHealth": {
+            "$ref": "examples/ReportServiceHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -3200,6 +3525,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "ResolveService": {
+            "$ref": "examples/ResolveService.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.",
@@ -3241,6 +3571,11 @@
         "tags": [
           "Service"
         ],
+        "x-ms-examples": {
+          "GetUnplacedReplicaInformation": {
+            "$ref": "examples/GetUnplacedReplicaInformation.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the specified service.",
@@ -3282,6 +3617,11 @@
             "$ref": "#/parameters/ServiceArmMetadataUpdateDescriptionRequiredBodyParam"
           }
         ],
+        "x-ms-examples": {
+          "UpdateServiceArmMetadata": {
+            "$ref": "examples/UpdateServiceArmMetadata.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful update will return 200 status code."
@@ -3323,6 +3663,11 @@
             "$ref": "#/parameters/ContinuationTokenOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetLoadedPartitionInfoList": {
+            "$ref": "examples/GetLoadedPartitionInfoList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the requested cluster load information.",
@@ -3361,6 +3706,11 @@
         "tags": [
           "Partition"
         ],
+        "x-ms-examples": {
+          "GetPartitionInfoList": {
+            "$ref": "examples/GetPartitionInfoList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "List of partitions of a Service Fabric service.",
@@ -3396,6 +3746,11 @@
         "tags": [
           "Partition"
         ],
+        "x-ms-examples": {
+          "GetPartitionInfo": {
+            "$ref": "examples/GetPartitionInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the specified partition.",
@@ -3434,6 +3789,11 @@
         "tags": [
           "Partition"
         ],
+        "x-ms-examples": {
+          "GetServiceNameInfo": {
+            "$ref": "examples/GetServiceNameInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the name of the service for the specified partition.",
@@ -3478,6 +3838,11 @@
         "tags": [
           "Partition"
         ],
+        "x-ms-examples": {
+          "GetPartitionHealth": {
+            "$ref": "examples/GetPartitionHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the health information about the specified partition.",
@@ -3564,6 +3929,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "ReportPartitionHealth": {
+            "$ref": "examples/ReportPartitionHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -3596,6 +3966,11 @@
         "tags": [
           "Partition"
         ],
+        "x-ms-examples": {
+          "GetPartitionLoadInformation": {
+            "$ref": "examples/GetPartitionLoadInformation.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the specified partition's last reported load metrics.",
@@ -3631,6 +4006,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "ResetPartitionLoad": {
+            "$ref": "examples/ResetPartitionLoad.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3663,6 +4043,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "RecoverPartition": {
+            "$ref": "examples/RecoverPartition.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3695,6 +4080,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "RecoverServicePartitions": {
+            "$ref": "examples/RecoverServicePartitions.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3724,6 +4114,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "RecoverSystemPartitions": {
+            "$ref": "examples/RecoverSystemPartitions.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3753,6 +4148,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "RecoverAllPartitions": {
+            "$ref": "examples/RecoverAllPartitions.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3791,6 +4191,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "MovePrimaryReplica": {
+            "$ref": "examples/MovePrimaryReplica.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3832,6 +4237,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "MoveSecondaryReplica": {
+            "$ref": "examples/MoveSecondaryReplica.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3870,6 +4280,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "UpdatePartitionLoad": {
+            "$ref": "examples/UpdatePartitionLoad.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "List UpdatePartitionLoadResults.",
@@ -3917,6 +4332,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "MoveInstance": {
+            "$ref": "examples/MoveInstance.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3961,6 +4381,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "MoveAuxiliaryReplica": {
+            "$ref": "examples/MoveAuxiliaryReplica.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation request will return 200 status code."
@@ -3990,6 +4415,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "CreateRepairTask": {
+            "$ref": "examples/CreateRepairTask.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.\nThe response body provides information about the created repair task.",
@@ -4022,6 +4452,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "CancelRepairTask": {
+            "$ref": "examples/CancelRepairTask.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.\nThe response body provides information about the updated repair task.\nSuccess indicates that the cancellation request was recorded, but does not guarantee that the repair task will be cancelled.\nClients may use the State property of the repair task to determine the current state of the repair task.",
@@ -4054,6 +4489,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "DeleteRepairTask": {
+            "$ref": "examples/DeleteRepairTask.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -4089,6 +4529,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "GetRepairTaskList": {
+            "$ref": "examples/GetRepairTaskList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.\nThe response body provides a list of repair tasks matching all of the given filters.",
@@ -4121,6 +4566,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "ForceApproveRepairTask": {
+            "$ref": "examples/ForceApproveRepairTask.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.\nThe response body provides information about the updated repair task.",
@@ -4153,6 +4603,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "UpdateRepairTaskHealthPolicy": {
+            "$ref": "examples/UpdateRepairTaskHealthPolicy.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.\nThe response body provides information about the updated repair task.",
@@ -4185,6 +4640,11 @@
         "tags": [
           "RepairManagement"
         ],
+        "x-ms-examples": {
+          "UpdateRepairExecutionState": {
+            "$ref": "examples/UpdateRepairExecutionState.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code.\nThe response body provides information about the updated repair task.",
@@ -4223,6 +4683,11 @@
         "tags": [
           "Replica"
         ],
+        "x-ms-examples": {
+          "GetReplicaInfoList": {
+            "$ref": "examples/GetReplicaInfoList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the replicas of the specified partition.",
@@ -4261,6 +4726,11 @@
         "tags": [
           "Replica"
         ],
+        "x-ms-examples": {
+          "GetReplicaInfo": {
+            "$ref": "examples/GetReplicaInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the specified replicas of the specified partition of a Service Fabric service.",
@@ -4305,6 +4775,11 @@
         "tags": [
           "Replica"
         ],
+        "x-ms-examples": {
+          "GetReplicaHealth": {
+            "$ref": "examples/GetReplicaHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the requested replica health.",
@@ -4371,6 +4846,11 @@
         "tags": [
           "Replica"
         ],
+        "x-ms-examples": {
+          "ReportReplicaHealth": {
+            "$ref": "examples/ReportReplicaHealth.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -4435,6 +4915,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetDeployedServiceReplicaInfoList": {
+            "$ref": "examples/GetDeployedServiceReplicaInfoList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the list of deployed service replica information.",
@@ -4479,6 +4964,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetDeployedServiceReplicaDetailInfo": {
+            "$ref": "examples/GetDeployedServiceReplicaDetailInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the list of deployed service replica information.",
@@ -4517,6 +5007,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetDeployedServiceReplicaDetailInfo": {
+            "$ref": "examples/GetDeployedServiceReplicaDetailInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the list of deployed service replica information.",
@@ -4541,6 +5036,11 @@
         "tags": [
           "Replica"
         ],
+        "x-ms-examples": {
+          "RestartReplica": {
+            "$ref": "examples/RestartReplica.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -4599,6 +5099,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "RemoveReplica": {
+            "$ref": "examples/RemoveReplica.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code. A successful operation means that the restart command was received by the replica on the node and it is in the process of restarting."
@@ -4634,6 +5139,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetDeployedServicePackageInfoList": {
+            "$ref": "examples/GetDeployedServicePackageInfoList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the list of deployed service packages information.",
@@ -4675,6 +5185,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetDeployedServicePackageInfoListByName": {
+            "$ref": "examples/GetDeployedServicePackageInfoListByName.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the list of deployed service packages information.",
@@ -4722,6 +5237,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "GetDeployedServicePackageHealth": {
+            "$ref": "examples/GetDeployedServicePackageHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the health information of the deployed service package for a specific node and application.",
@@ -4814,6 +5334,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "ReportDeployedServicePackageHealth": {
+            "$ref": "examples/ReportDeployedServicePackageHealth.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -4849,6 +5374,11 @@
             "$ref": "#/parameters/TimeoutOptionalQueryParam"
           }
         ],
+        "x-ms-examples": {
+          "DeployServicePackageToNode": {
+            "$ref": "examples/DeployServicePackageToNode.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -4867,6 +5397,11 @@
         "operationId": "GetDeployedCodePackageInfoList",
         "summary": "Gets the list of code packages deployed on a Service Fabric node.",
         "description": "Gets the list of code packages deployed on a Service Fabric node for the given application.",
+        "x-ms-examples": {
+          "GetDeployedCodePackageInfoList": {
+            "$ref": "./examples/GetDeployedCodePackageInfoList.json"
+          }
+        },
         "tags": [
           "Code Package"
         ],
@@ -4911,6 +5446,11 @@
         "operationId": "RestartDeployedCodePackage",
         "summary": "Restarts a code package deployed on a Service Fabric node in a cluster.",
         "description": "Restarts a code package deployed on a Service Fabric node in a cluster. This aborts the code package process, which will restart all the user service replicas hosted in that process.",
+        "x-ms-examples": {
+          "RestartDeployedCodePackage": {
+            "$ref": "./examples/RestartDeployedCodePackage.json"
+          }
+        },
         "tags": [
           "Code Package"
         ],
@@ -5082,6 +5622,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "CreateComposeDeployment": {
+            "$ref": "examples/CreateComposeDeployment.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "A successful operation will return 202 status code."
@@ -5114,6 +5659,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "GetComposeDeploymentStatus": {
+            "$ref": "examples/GetComposeDeploymentStatus.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Information about the compose deployment.",
@@ -5152,6 +5702,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "GetComposeDeploymentStatusList": {
+            "$ref": "examples/GetComposeDeploymentStatusList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "List of status of compose deployments in the cluster.",
@@ -5187,6 +5742,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "GetComposeDeploymentUpgradeProgress": {
+            "$ref": "examples/GetComposeDeploymentUpgradeProgress.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Details about the compose deployment upgrade.",
@@ -5222,6 +5782,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "RemoveComposeDeployment": {
+            "$ref": "examples/RemoveComposeDeployment.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "A successful operation will return 202 status code."
@@ -5257,6 +5822,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "StartComposeDeploymentUpgrade": {
+            "$ref": "examples/StartComposeDeploymentUpgrade.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "A successful response means that the upgrade has started. Use GetComposeDeploymentUpgrade operation to get the status of the upgrade."
@@ -5289,6 +5859,11 @@
         "tags": [
           "Compose Deployment"
         ],
+        "x-ms-examples": {
+          "StartRollbackComposeDeploymentUpgrade": {
+            "$ref": "examples/StartRollbackComposeDeploymentUpgrade.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful response means that the rollback has started. Use GetComposeDeploymentUpgrade operation to get the status of the rollback."
@@ -5511,6 +6086,11 @@
         "summary": "Uploads contents of the file to the image store.",
         "description": "Uploads contents of the file to the image store. Use this API if the file is small enough to upload again if the connection fails. The file's data needs to be added to the request body. The contents will be uploaded to the specified path. Image store service uses a mark file to indicate the availability of the folder. The mark file is an empty file named \"_.dir\". The mark file is generated by the image store service when all files in a folder are uploaded. When using File-by-File approach to upload application package in REST, the image store service isn't aware of the file hierarchy of the application package; you need to create a mark file per folder and upload it last, to let the image store service know that the folder is complete.",
         "operationId": "UploadFile",
+        "x-ms-examples": {
+          "UploadFile": {
+            "$ref": "./examples/UploadFile.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -5593,6 +6173,11 @@
         "tags": [
           "ImageStore"
         ],
+        "x-ms-examples": {
+          "DeleteImageStoreContent": {
+            "$ref": "./examples/DeleteImageStoreContent.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -5622,6 +6207,11 @@
         "tags": [
           "ImageStore"
         ],
+        "x-ms-examples": {
+          "Get information about image store content under a given relative path": {
+            "$ref": "./examples/GetImageStoreContent.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the requested image store content information.",
@@ -5657,6 +6247,11 @@
         "tags": [
           "ImageStore"
         ],
+        "x-ms-examples": {
+          "CopyImageStoreContent": {
+            "$ref": "./examples/CopyImageStoreContent.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -5689,6 +6284,11 @@
         "tags": [
           "ImageStore"
         ],
+        "x-ms-examples": {
+          "DeleteImageStoreUploadSession": {
+            "$ref": "./examples/DeleteImageStoreUploadSession.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code."
@@ -5721,6 +6321,11 @@
         "tags": [
           "ImageStore"
         ],
+        "x-ms-examples": {
+          "CopyImageStoreContent": {
+            "$ref": "./examples/CommitImageStoreUploadSession.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "If the commit request succeeds, the server returns the HTTP 200 OK status code."
@@ -5819,6 +6424,11 @@
         "summary": "Uploads a file chunk to the image store relative path.",
         "description": "Uploads a file chunk to the image store with the specified upload session ID and image store relative path. This API allows user to resume the file upload operation. user doesn't have to restart the file upload from scratch whenever there is a network interruption. Use this option if the file size is large.\n\nTo perform a resumable file upload, user need to break the file into multiple chunks and upload these chunks to the image store one-by-one. Chunks don't have to be uploaded in order. If the file represented by the image store relative path already exists, it will be overwritten when the upload session commits.",
         "operationId": "UploadFileChunk",
+        "x-ms-examples": {
+          "UploadFileChunk": {
+            "$ref": "./examples/UploadFileChunk.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -5903,6 +6513,11 @@
         "tags": [
           "ImageStore"
         ],
+        "x-ms-examples": {
+          "Gets the overall ImageStore information": {
+            "$ref": "./examples/GetFolderSize.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful operation will return 200 status code and the requested folder size in image store.",
@@ -5978,6 +6593,11 @@
         "tags": [
           "Infrastructure"
         ],
+        "x-ms-examples": {
+          "InvokeInfrastructureCommand": {
+            "$ref": "./examples/InvokeInfrastructureCommand.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The response from the infrastructure service. The response format is a JSON stream.\nThe contents of the response depend on which command was issued.",
@@ -6016,6 +6636,11 @@
         "tags": [
           "Infrastructure"
         ],
+        "x-ms-examples": {
+          "InvokeInfrastructureQuery": {
+            "$ref": "./examples/InvokeInfrastructureQuery.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The response from the infrastructure service. The response format is a JSON stream.\nThe contents of the response depend on which command was issued.",
@@ -6040,6 +6665,11 @@
         "tags": [
           "Faults"
         ],
+        "x-ms-examples": {
+          "StartDataLoss": {
+            "$ref": "./examples/StartDataLoss.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -6130,6 +6760,11 @@
         "tags": [
           "Faults"
         ],
+        "x-ms-examples": {
+          "StartQuorumLoss": {
+            "$ref": "./examples/StartQuorumLoss.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -6223,6 +6858,11 @@
         "tags": [
           "Faults"
         ],
+        "x-ms-examples": {
+          "StartDataLoss": {
+            "$ref": "./examples/StartPartitionRestart.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -6310,6 +6950,11 @@
         "tags": [
           "Faults"
         ],
+        "x-ms-examples": {
+          "StartDataLoss": {
+            "$ref": "./examples/StartNodeTransition.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -6443,6 +7088,11 @@
         "tags": [
           "Faults"
         ],
+        "x-ms-examples": {
+          "CancelOperation": {
+            "$ref": "./examples/CancelOperation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion_6-0_RequiredQueryParam"
@@ -7846,6 +8496,11 @@
         "tags": [
           "Property Management"
         ],
+        "x-ms-examples": {
+          "GetNameExistsInfo": {
+            "$ref": "examples/GetNameExistsInfo.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful response means that the Service Fabric name exists."
@@ -7876,6 +8531,11 @@
         "tags": [
           "Property Management"
         ],
+        "x-ms-examples": {
+          "DeleteName": {
+            "$ref": "examples/DeleteName.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful response means that the Service Fabric name has been deleted."
@@ -8097,6 +8757,11 @@
         "tags": [
           "Property Management"
         ],
+        "x-ms-examples": {
+          "Delete property": {
+            "$ref": "examples/DeleteProperty.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "A successful response means that the property has been deleted."
@@ -8242,6 +8907,11 @@
         "tags": [
           "EventsStore"
         ],
+        "x-ms-examples": {
+          "Get container-related events": {
+            "$ref": "./examples/GetContainersEventList.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "List of events objects with base type ContainerInstanceEvent.",
@@ -11620,17 +12290,17 @@
           "description": "Value that indicates whether the metrics is balanced or not after resource balancer run."
         },
         "DeviationBefore": {
-          "type": "string",
+          "type": "number",
           "format": "double",
           "description": "The standard average deviation of the metrics before resource balancer run."
         },
         "DeviationAfter": {
-          "type": "string",
+          "type": "number",
           "format": "double",
           "description": "The standard average deviation of the metrics after resource balancer run."
         },
         "BalancingThreshold": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The balancing threshold for a certain metric."
         },
@@ -11639,7 +12309,7 @@
           "description": "The current action being taken with regard to this metric"
         },
         "ActivityThreshold": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The Activity Threshold specified for this metric in the system Cluster Manifest."
         },
@@ -11652,7 +12322,7 @@
           "description": "The total cluster load. In future releases of Service Fabric this parameter will be deprecated in favor of CurrentClusterLoad."
         },
         "CurrentClusterLoad": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The total cluster load."
         },
@@ -11661,7 +12331,8 @@
           "description": "The remaining capacity for the metric in the cluster. In future releases of Service Fabric this parameter will be deprecated in favor of ClusterCapacityRemaining."
         },
         "ClusterCapacityRemaining": {
-          "type": "string",
+          "type": "integer",
+          "format": "double",
           "description": "The remaining capacity for the metric in the cluster."
         },
         "IsClusterCapacityViolation": {
@@ -11669,7 +12340,7 @@
           "description": "Indicates that the metric is currently over capacity in the cluster."
         },
         "NodeBufferPercentage": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The reserved percentage of total node capacity for this metric."
         },
@@ -11678,20 +12349,22 @@
           "description": "Remaining capacity in the cluster excluding the reserved space. In future releases of Service Fabric this parameter will be deprecated in favor of BufferedClusterCapacityRemaining."
         },
         "BufferedClusterCapacityRemaining": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "Remaining capacity in the cluster excluding the reserved space."
         },
         "ClusterRemainingBufferedCapacity": {
-          "type": "string",
+          "type": "integer",
+          "format": "double",
           "description": "The remaining percentage of cluster total capacity for this metric."
         },
         "MinNodeLoadValue": {
           "type": "string",
+          "format": "double",
           "description": "The minimum load on any node for this metric. In future releases of Service Fabric this parameter will be deprecated in favor of MinimumNodeLoad."
         },
         "MinimumNodeLoad": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The minimum load on any node for this metric."
         },
@@ -11701,10 +12374,11 @@
         },
         "MaxNodeLoadValue": {
           "type": "string",
+          "format": "double",
           "description": "The maximum load on any node for this metric. In future releases of Service Fabric this parameter will be deprecated in favor of MaximumNodeLoad."
         },
         "MaximumNodeLoad": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The maximum load on any node for this metric."
         },
@@ -11713,7 +12387,7 @@
           "description": "The node id of the node with the maximum load for this metric."
         },
         "PlannedLoadRemoval": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "This value represents the load of the replicas that are planned to be removed in the future within the cluster.\nThis kind of load is reported for replicas that are currently being moving to other nodes and for replicas that are currently being dropped but still use the load on the source node."
         }
@@ -13794,22 +14468,22 @@
           "description": "The remaining reserved capacity for this metric on the node. In future releases of Service Fabric this parameter will be deprecated in favor of BufferedNodeCapacityRemaining."
         },
         "CurrentNodeLoad": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "Current load on the node for this metric."
         },
         "NodeCapacityRemaining": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The remaining capacity on the node for the metric."
         },
         "BufferedNodeCapacityRemaining": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "The remaining capacity which is not reserved by NodeBufferPercentage for this metric on the node."
         },
         "PlannedNodeLoadRemoval": {
-          "type": "string",
+          "type": "integer",
           "format": "double",
           "description": "This value represents the load of the replicas that are planned to be removed in the future.\nThis kind of load is reported for replicas that are currently being moving to other nodes and for replicas that are currently being dropped but still use the load on the source node."
         }
