@@ -313,6 +313,18 @@
           },
           "Install SAP Software on Distributed System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_Distributed.json"
+          },
+          "Create Infrastructure with Disk and OS configurations for Single Server System (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_SingleServer.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for Distributed System (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_Distributed.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for HA System with Availability Set (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvSet.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for HA System with Availability Zone (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvZone.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -1753,6 +1765,23 @@
         "modelAsString": true
       }
     },
+    "DiskSkuName": {
+      "description": "Defines the disk sku name.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS",
+        "Premium_ZRS",
+        "StandardSSD_ZRS",
+        "PremiumV2_LRS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DiskSkuName",
+        "modelAsString": true
+      }
+    },
     "SAPVirtualInstanceError": {
       "type": "object",
       "properties": {
@@ -2280,6 +2309,48 @@
         }
       }
     },
+    "DiskSku": {
+      "description": "The disk sku.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DiskSkuName"
+        }
+      }
+    },
+    "DiskVolumeConfiguration": {
+      "description": "The disk configuration required for the selected volume.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The total number of disks required for the concerned volume.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sizeGB": {
+          "description": "The disk size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sku": {
+          "description": "The disk SKU details.",
+          "$ref": "#/definitions/DiskSku"
+        }
+      }
+    },
+    "DiskConfiguration": {
+      "description": "The Disk Configuration Details.",
+      "type": "object",
+      "properties": {
+        "diskVolumeConfigurations": {
+          "description": "The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DiskVolumeConfiguration"
+          }
+        }
+      }
+    },
     "VirtualMachineConfiguration": {
       "description": "Defines the virtual machine configuration.",
       "type": "object",
@@ -2328,6 +2399,10 @@
         "virtualMachineConfiguration": {
           "description": "Gets or sets the virtual machine configuration.",
           "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "dbDiskConfiguration": {
+          "description": "Gets or sets the disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
         }
       },
       "required": [
@@ -2379,6 +2454,10 @@
           "description": "The number of database VMs.",
           "type": "integer",
           "format": "int64"
+        },
+        "diskConfiguration": {
+          "description": "Gets or sets the disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
         }
       },
       "required": [
