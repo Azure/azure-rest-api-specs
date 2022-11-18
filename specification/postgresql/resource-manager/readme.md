@@ -47,7 +47,6 @@ These settings apply only when `--tag=package-flexibleserver-2022-05-01-privatep
 ```yaml $(tag) == 'package-flexibleserver-2022-05-01-privatepreview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
 ```
 ### Tag: package-flexibleserver-2022-03-preview
 
