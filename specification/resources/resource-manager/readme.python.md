@@ -21,7 +21,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 clear-output-folder: true
 batch:
-  - tag: package-privatelinks-2020-05
+  - tag: package-privatelinks-2020-09
   - multiapiscript-privatelinks: true
   - tag: package-features-2021-07
   - tag: package-features-2015-12
@@ -158,14 +158,14 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
-### Tag: package-changes-2022-05 and python
+### Tag: package-changes-2022-09 and python
 
-These settings apply only when `--tag=package-changes-2022-05 --python` is specified on the command line.
+These settings apply only when `--tag=package-changes-2022-09 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-changes-2022-05'
-namespace: azure.mgmt.resource.changes.v2022_05_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_05_01
+``` yaml $(tag) == 'package-changes-2022-09'
+namespace: azure.mgmt.resource.changes.v2022_09_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_09_01
 ```
 
 ### Tag: package-privatelinks-2020-05 and python
