@@ -26,20 +26,42 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-06
+tag: package-2022-10
 ```
 
+### Tag: package-preview-2022-10
 
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/registries.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2022-10-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2022-10-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2022-10-01/workspaceFeatures.json
+```
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-06'
+``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.MachineLearningServices/preview/2022-06-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2022-06-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2022-06-01-preview/workspaceFeatures.json
 ```
+
 ### Tag: package-2022-05-01
 
 These settings apply only when `--tag=package-2022-05-01` is specified on the command line.

@@ -1,0 +1,585 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Data Registry Service",
+    "version": "2022-12-01-preview",
+    "description": "APIs for managing data registry in Azure Maps."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/MapsAccountGeographicResourceLocation"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
+      }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "header"
+    },
+    "SasToken": {
+      "type": "apiKey",
+      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
+      "name": "SAS Token",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://atlas.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureKey": []
+    },
+    {
+      "SasToken": []
+    }
+  ],
+  "responses": {},
+  "parameters": {
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "UserDataId": {
+      "name": "udid",
+      "description": "The user data id of the data registry.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdHeader": {
+      "name": "Operation-Id",
+      "description": "The caller provided operationId, in GUID format.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdQuery": {
+      "name": "operationId",
+      "description": "The ID to query the status for the data register request.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/dataRegistries": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to fetch the list of all data registries registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace).\n\nThis API won't check whether Azure Maps can access the underlying content and whether integrity check is passed for each data registry. Please use [Get Data Registry API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-data-registry) for the latest status individually.\n\n## Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n## List Response\n\nThe Data Registry List API returns the complete list of all data registries in `json` format.",
+        "operationId": "DataRegistries_List",
+        "x-ms-examples": {
+          "List all previously registered data registries": {
+            "$ref": "./examples/DataRegistries_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request completed successfully. The response body contains a list of all the previously registered data registries.",
+            "schema": {
+              "$ref": "#/definitions/DataRegistryList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/dataRegistries/{udid}": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to fetch the data registry of a given udid registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). If Azure Maps cannot access the underlying content or integrity check is not passed, `status` will be `Failed` and error detail is returned.\n\n## Submit Get Data Registry Request\n\nTo fetch the data registry of a given udid you will issue a `GET` request with no additional parameters.",
+        "operationId": "DataRegistries_GetDataRegistry",
+        "x-ms-examples": {
+          "Get the data registry of a completed udid": {
+            "$ref": "./examples/DataRegistries_GetDataRegistryCompleted.json"
+          },
+          "Get the data registry of a failed udid": {
+            "$ref": "./examples/DataRegistries_GetDataRegistryFailed.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UserDataId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request completed successfully. The response body is the data registry of a given udid.",
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "put": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThe Data Registry Register API allows the caller to register their data content uploaded to Azure Storage Account in the Azure Maps Service with customer provided udid, restricted in GUID format; or to replace an existing udid with another data registry.\n\nYou can use this API in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Register or Replace Request\n\nTo register or replace your data registry you will use a `PUT` request.\n\nFor example, to register a collection of geofences  in `GeoJSON` format, set Azure blob data registry object representing how Azure Maps accesses your geojson file. and `dataFormat` to _geojson_ in the request body.\n\nThe Data Registry Register or Replace API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "DataRegistries_RegisterOrReplace",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Register or replace a new udid": {
+            "$ref": "./examples/DataRegistries_RegisterOrReplace.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UserDataId"
+          },
+          {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "dataRegistry",
+            "in": "body",
+            "description": "The data registry to be registered.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource replacing: The request has been accepted for processing.",
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the status monitor for the operation."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          },
+          "201": {
+            "description": "Resource creating: The request has been accepted for processing.",
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the status monitor for the operation."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "description": "New URL to check for the results of the long running process. `api-version` is not included in the URL."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataRegistry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "delete": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to unregister a previously registered data registry without deleting the underlying content in caller's storage account.\n\nYou can use this API in a scenario like unregistering geofences previously registered using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial), or unregistering a zipped DWG design files which was used in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Unregister Request\n\nTo unregister a data registry you will issue a `DELETE` request where the path will contain the `udid` of the data registry to unregister.\n\nFor example, to unregister a collection of geofences previously registered, set the `udid` in the query parameter.\n\n## Unregister Response\n\nThe Data Delete API returns a HTTP `204 No Content` response with an empty body, no matter it has been unregistered successfully or is not found.",
+        "operationId": "DataRegistries_Unregister",
+        "x-ms-examples": {
+          "Unregister a data registry without deleting the underlying contents": {
+            "$ref": "./examples/DataRegistries_Unregister.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UserDataId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Data registry unregister request completed successfully. The data registry was unregistered in Azure Maps Service."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/dataRegistries/{udid}/content": {
+      "get": {
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to retrieve the underlying content of a previously registered data registry after data integrity check. The content is not available if the status is `Running` or `Failed`.\n\nYou can use this API in a scenario like downloading an existing collection of geofences registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace).\n\n## Submit Get Content Request\n\nTo get the underlying content of a udid you will use a `GET` request where the path will contain the `udid` of the content to retrieve.\n\n## Get Content Response\n\nThe Get Content API will return a HTTP `200 OK` response if the underlying content with the passed-in `udid` is ready (`Completed` status), where the response body will be the underlying content. A HTTP `400 Bad Request` error response will be returned if the `udid` is not ready (`Running` status) or broken (`Failed` status).",
+        "operationId": "DataRegistries_GetContent",
+        "x-ms-examples": {
+          "Download previously registered GeoJSON content": {
+            "$ref": "./examples/DataRegistries_GetContent.json"
+          }
+        },
+        "produces": [
+          "application/geo+json",
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UserDataId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get content request completed successfully. The response body will contain the content for the passed in `udid`.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the Download API response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/dataRegistries/operations/{operationId}": {
+      "get": {
+        "description": "The endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis path will be obtained from a call to [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). While in progress, a HTTP `200 OK` response will be returned with `Retry-After` header - followed by a HTTP `200 OK` with no extra header once completed.",
+        "operationId": "DataRegistries_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/DataRegistries_GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which is failed": {
+            "$ref": "./examples/DataRegistries_GetOperationFailed.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/DataRegistries_GetOperationCompleted.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the long running operation",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Recommended minimum number of seconds to wait before next check."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataRegistry": {
+      "description": "The data registry in Azure Maps.",
+      "type": "object",
+      "properties": {
+        "udid": {
+          "description": "The user data id for the data registry.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description to be given to the data registry. The max length is 1024 characters.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Data registry kind.",
+          "type": "string",
+          "enum": [
+            "AzureBlob"
+          ],
+          "x-ms-enum": {
+            "name": "DataRegistryKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AzureBlob",
+                "description": "Azure Blob"
+              }
+            ]
+          }
+        },
+        "azureBlob": {
+          "$ref": "#/definitions/AzureBlob"
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus"
+        },
+        "error": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
+        }
+      }
+    },
+    "AzureBlob": {
+      "description": "Azure blob data registry details.",
+      "type": "object",
+      "properties": {
+        "dataFormat": {
+          "$ref": "#/definitions/DataFormat"
+        },
+        "msiClientId": {
+          "description": "Client ID of user-assigned managed identity. Use system-assigned managed identity if not provided.",
+          "type": "string"
+        },
+        "linkedResource": {
+          "description": "The linked resource. Need to configure in Azure Maps control plane beforehand.",
+          "type": "string"
+        },
+        "blobUrl": {
+          "description": "The blob URL.",
+          "type": "string"
+        },
+        "downloadURL": {
+          "description": "The download URL of the underlying data. It may not be available if the status of the data registry is `Running` or `Failed`.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "description": "The size of the content in bytes.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "contentMD5": {
+          "description": "The content MD5 of the content.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataFormat",
+        "linkedResource",
+        "blobUrl"
+      ]
+    },
+    "DataRegistryList": {
+      "description": "The response model for the DataRegistry List API. Returns a list of all the previously registered data.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of all the previously registered data registries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataRegistry"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of data registries.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataFormat": {
+      "description": "Data format of the uploaded content for validation purpose.",
+      "type": "string",
+      "enum": [
+        "geojson",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "DataFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          },
+          {
+            "value": "zip",
+            "description": "Compressed data format."
+          }
+        ]
+      }
+    },
+    "LongRunningOperationStatus": {
+      "description": "The status of a long running operation.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Running",
+        "Failed",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "LongRunningOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Running",
+            "description": "The request is under processing."
+          },
+          {
+            "value": "Failed",
+            "description": "The request has one or more failures."
+          },
+          {
+            "value": "Completed",
+            "description": "The request has successfully completed."
+          }
+        ]
+      }
+    },
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The operationId",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus"
+        },
+        "error": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorDetail"
+        }
+      }
+    }
+  }
+}

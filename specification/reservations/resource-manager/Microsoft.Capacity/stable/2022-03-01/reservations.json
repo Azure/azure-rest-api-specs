@@ -572,6 +572,80 @@
         }
       }
     },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/archive": {
+      "post": {
+        "summary": "Archive a `Reservation`.",
+        "description": "Archiving a `Reservation` moves it to `Archived` state.",
+        "operationId": "Reservation_Archive",
+        "x-ms-examples": {
+          "Archive": {
+            "$ref": "./examples/Archive.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Archive"
+        ],
+        "responses": {
+          "200": {
+            "description": "Archived a reservation."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/unarchive": {
+      "post": {
+        "summary": "Unarchive a `Reservation`.",
+        "description": "Unarchiving a `Reservation` moves it to the state it was before archiving.\n",
+        "operationId": "Reservation_Unarchive",
+        "x-ms-examples": {
+          "Unarchive": {
+            "$ref": "./examples/Unarchive.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Unarchive"
+        ],
+        "responses": {
+          "200": {
+            "description": "Unarchive complete for the reservation."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/revisions": {
       "get": {
         "summary": "Get `Reservation` revisions.",
@@ -652,7 +726,7 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/calculateRefund": {
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/calculateRefund": {
       "post": {
         "summary": "Calculate the refund amount of a reservation order.",
         "description": "Calculate price for returning `Reservations` if there are no policy errors.\n",
@@ -663,6 +737,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -689,7 +766,7 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/return": {
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/return": {
       "post": {
         "summary": "Return a reservation.",
         "description": "Return a reservation.",
@@ -700,6 +777,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -2314,6 +2394,12 @@
         "mergeProperties": {
           "$ref": "#/definitions/ReservationMergeProperties"
         },
+        "swapProperties": {
+          "$ref": "#/definitions/ReservationSwapProperties"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
         },
@@ -2367,6 +2453,23 @@
         }
       }
     },
+    "AppliedScopeProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the applied scope type"
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "Management group ID of the format /providers/Microsoft.Management/managementGroups/{managementGroupId}"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Management group display name"
+        }
+      }
+    },
     "ReservationSplitProperties": {
       "type": "object",
       "properties": {
@@ -2396,6 +2499,19 @@
             "type": "string"
           },
           "description": "Resource Ids of the Source Reservation's merged to form this Reservation. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "ReservationSwapProperties": {
+      "type": "object",
+      "properties": {
+        "swapSource": {
+          "type": "string",
+          "description": "Resource Id of the Source Reservation that gets swapped. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "swapDestination": {
+          "type": "string",
+          "description": "Reservation Resource Id that the original resource gets swapped to. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
       }
     },
