@@ -2327,6 +2327,11 @@
           "type": "string",
           "readOnly": true
         },
+        "partnerTenantId": {
+          "description": "Solution Partner Tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
         "dataAccessScopes": {
           "description": "Gets scope of the FarmBeats data access that's required for processing solution request to partner.\r\nExample: For gdd they might need weatherScope and satelliteScope.",
           "type": "array",
@@ -2334,6 +2339,9 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails"
         },
         "inputParameterScopes": {
           "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
@@ -2362,6 +2370,16 @@
         "accessFBApplicationId": {
           "format": "uuid",
           "description": "Application id of the multi tenant application to be used by partner to access FarmBeats data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleId": {
+          "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleName": {
+          "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
           "type": "string",
           "readOnly": true
         },
@@ -2397,6 +2415,17 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "properties": {
+        "saasOfferId": {
+          "type": "string"
+        },
+        "publisherId": {
+          "type": "string"
+        }
+      }
     },
     "FarmBeatsSolutionListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
