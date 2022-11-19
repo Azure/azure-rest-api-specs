@@ -85,11 +85,29 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+```
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
+```
+
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-07'
+``` yaml $(tag) == 'package-preview-2022-07'
 input-file:
   - Microsoft.Security/preview/2022-07-01-preview/applications.json
 ```
@@ -107,7 +125,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-05-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
 ```
@@ -159,7 +177,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -169,11 +187,11 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -206,7 +224,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -216,11 +234,11 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -270,7 +288,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
@@ -288,7 +306,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
@@ -298,10 +315,12 @@ input-file:
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
+- Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+
 
 # Needed when there is more than one input file
 override-info:
@@ -498,7 +517,6 @@ override-info:
   title: SecurityCenter
 ```
 
-
 ### Tag: package-2019-08-python-only
 
 These settings apply only when `--tag=package-2019-08-python-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -539,6 +557,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -672,7 +691,7 @@ input-file:
 override-info:
   title: SecurityCenter
 
-``` 
+```
 
 ### Tag: package-2021-06-only
 
@@ -714,8 +733,10 @@ override-info:
 ```
 
 ### Tag: package-preview-2022-01
+
 These settings apply only when `--tag=package-2022-01-preview-only` is specified on the command line.
-```yaml $(tag) == 'package-2022-01-preview-only'
+
+``` yaml $(tag) == 'package-2022-01-preview-only'
 input-file:
   - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
   - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json  
@@ -723,7 +744,7 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
-``` 
+```
 
 ### Tag: package-2022-01-only
 
@@ -749,7 +770,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
@@ -786,72 +807,3 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-``` yaml $(tag) == 'all-api-versions' /*autogenerated*/
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/compliances.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/settings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/operations.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/locations.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/tasks.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/alerts.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/topologies.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-  - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/alerts.json
-  - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set,
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file:
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
