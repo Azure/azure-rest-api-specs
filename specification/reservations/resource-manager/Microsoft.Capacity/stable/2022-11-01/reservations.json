@@ -94,25 +94,25 @@
             "$ref": "#/parameters/LocationIdParameter"
           },
           {
-            "name": "publisherId",
-            "description": "Publisher id used to get the third party products",
+            "name": "$filter",
+            "description": "May be used to filter by Catalog properties. The filter supports 'eq', 'or', and 'and'.",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "offerId",
-            "description": "Offer id used to get the third party products",
+            "name": "$skip",
+            "description": "The number of reservations to skip from the list before returning results",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "number"
           },
           {
-            "name": "planId",
-            "description": "Plan id used to get the third party products",
+            "name": "$take",
+            "description": "To number of reservations to return",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "number"
           }
         ],
         "tags": [
@@ -120,12 +120,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of available resources",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Catalog"
-              }
+              "$ref": "#/definitions/CatalogsResult"
             }
           },
           "default": {
@@ -1470,6 +1467,30 @@
         },
         "billingCurrencyRemainingCommitmentAmount": {
           "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "CatalogsResult": {
+      "type": "object",
+      "description": "The list of catalogs and pagination information.",
+      "properties": {
+        "value": {
+          "description": "The list of catalogs.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalItems": {
+          "description": "The total amount of catalog items.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
