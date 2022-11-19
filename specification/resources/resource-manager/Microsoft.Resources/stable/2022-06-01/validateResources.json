@@ -286,19 +286,29 @@
         },
         "validationType": {
           "type": "string",
-          "description": "Optional parameter, by default this operation uses 'ArmFull' as the validation type. There are two supported values: 'ArmFull' and 'ArmPartial', the difference between both is that 'ArmFull' besides calling RP preflight ('ArmPartial'), also validates that existing resource properties such as: 'location', 'identity' and 'plan' remain unmodified. Additionally validates that the resource location is available and that the number of target resource groups (nested deployments) do not exceed 800 limit.",
+          "description": "Optional parameter, by default this operation uses 'ArmFull' as the validation type.",
           "enum": [
             "ArmFull",
             "ArmPartial"
           ],
           "x-ms-enum": {
             "name": "ValidationType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "Besides performing 'ArmPartial' validation, it also performs resource provider preflight, this means calling a resource provider, and passing the corresponding resource properties for validation.",
+                "value": "ArmFull"
+              },
+              {
+                "description": "ArmPartial validation performs 'static resource validation' which means, validating that existing resource properties such as: 'location', 'identity' and 'plan' remain unmodified. Additionally validates that the resource location is available for the resource, that the number of target resource groups (nested deployments) do not exceed 800 limit, and quota limit is not exceeded.",
+                "value": "ArmPartial"
+              }
+            ]
           }
         },
         "resources": {
           "type": "array",
-          "description": "Array of resources to validate. These resources must share the same resource type, and namespace as the top-level properties",
+          "description": "Array of resources to validate. These resources must share the same: resource type, namespace and location as the top-level properties, these restrictions are required to ensure the API acts as a synchronous API by making a single preflight request to a resource provider.",
           "items": {
             "$ref": "#/definitions/GenericResource",
             "description": "Details of validated resources."
