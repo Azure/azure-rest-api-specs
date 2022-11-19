@@ -691,11 +691,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "name": "$expand",
@@ -742,11 +738,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "name": "parameters",
@@ -817,11 +809,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -873,11 +861,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "name": "parameters",
@@ -971,11 +955,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1026,11 +1006,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1081,14 +1057,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "sqlVirtualMachineName",
-            "in": "path",
-            "description": "Name of the SQL virtual machine.",
-            "required": true,
-            "type": "string",
-            "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
             "name": "parameters",
@@ -2625,6 +2594,9 @@
       "description": "Name of the SQL virtual machine.",
       "required": true,
       "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^((?!_)[^\\\\/\"'\\[\\]:|<>+=;,?*@&]{1,64}(?<![.-]))$",
       "x-ms-parameter-location": "method"
     },
     "SqlVirtualMachineGroupNameParameter": {
