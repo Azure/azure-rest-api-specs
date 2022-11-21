@@ -1321,7 +1321,12 @@
             "description": "OK - terminal state"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed."
@@ -3510,9 +3515,6 @@
               "$ref": "#/definitions/volumeQuotaRule"
             }
           },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
-          },
           "default": {
             "description": "Error response describing why the operation failed."
           }
@@ -4212,13 +4214,21 @@
             "description": "OK - terminal state"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Backups_SingleFileRestore": {
             "$ref": "examples/Backups_SingleFileRestore.json"
@@ -6893,7 +6903,7 @@
       "description": "Break file locks request",
       "type": "object",
       "properties": {
-        "clientIP": {
+        "clientIp": {
           "type": "string",
           "description": "To clear file locks on a volume for a particular client",
           "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
@@ -8080,6 +8090,7 @@
     "AccountName": {
       "name": "accountName",
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
       "in": "path",
       "required": true,
       "description": "The name of the NetApp account",
@@ -8135,6 +8146,7 @@
       "name": "backupName",
       "type": "string",
       "in": "path",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
       "required": true,
       "description": "The name of the backup",
       "x-ms-parameter-location": "method"
