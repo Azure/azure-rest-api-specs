@@ -31,7 +31,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_ListByWorkspace",
+        "operationId": "LinkConnection_ListLinkConnectionsByWorkspace",
         "description": "List link connections",
         "parameters": [
           {
@@ -67,7 +67,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_CreateOrUpdate",
+        "operationId": "LinkConnection_CreateOrUpdateLinkConnection",
         "description": "Creates or updates a link connection",
         "parameters": [
           {
@@ -110,7 +110,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_Get",
+        "operationId": "LinkConnection_GetLinkConnection",
         "description": "Get a link connection",
         "parameters": [
           {
@@ -144,7 +144,7 @@
         "tags": [
           "linkConnections"
         ],
-        "operationId": "LinkConnection_Delete",
+        "operationId": "LinkConnection_DeleteLinkConnection",
         "description": "Delete a link connection",
         "parameters": [
           {
@@ -223,7 +223,7 @@
           "linkConnections"
         ],
         "operationId": "LinkConnection_Start",
-        "description": "Start a link connection",
+        "description": "Start a link connection. It may take a few minutes from Starting to Running, monitor the status with LinkConnection_GetDetailedStatus.",
         "parameters": [
           {
             "$ref": "#/parameters/LinkConnectionName"
@@ -256,7 +256,7 @@
           "linkConnections"
         ],
         "operationId": "LinkConnection_Stop",
-        "description": "Stop a link connection",
+        "description": "Stop a link connection. It may take a few minutes from Stopping to stopped, monitor the status with LinkConnection_GetDetailedStatus.",
         "parameters": [
           {
             "$ref": "#/parameters/LinkConnectionName"
@@ -448,7 +448,7 @@
           "linkConnections"
         ],
         "operationId": "LinkConnection_Pause",
-        "description": "Pause a link connection",
+        "description": "Pause a link connection. It may take a few minutes from Pausing to Paused, monitor the status with LinkConnection_GetDetailedStatus.",
         "parameters": [
           {
             "$ref": "#/parameters/LinkConnectionName"
@@ -481,7 +481,7 @@
           "linkConnections"
         ],
         "operationId": "LinkConnection_Resume",
-        "description": "Resume a link connection",
+        "description": "Resume a link connection. It may take a few minutes from Resuming to Running, monitor the status with LinkConnection_GetDetailedStatus.",
         "parameters": [
           {
             "$ref": "#/parameters/LinkConnectionName"
@@ -823,7 +823,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Link connection status"
+          "description": "Link connection status, please refer to this [articles](https://learn.microsoft.com/en-us/azure/synapse-analytics/synapse-link/sql-database-synapse-link#monitoring) for details."
         },
         "continuousRunId": {
           "type": "string",
@@ -869,7 +869,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Link table status"
+          "description": "Link table status, please refer to this [articles](https://learn.microsoft.com/en-us/azure/synapse-analytics/synapse-link/sql-database-synapse-link#monitoring) for details."
         },
         "errorMessage": {
           "type": "string",
