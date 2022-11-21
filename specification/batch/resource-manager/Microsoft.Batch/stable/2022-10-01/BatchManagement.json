@@ -3678,7 +3678,8 @@
         "password": {
           "type": "string",
           "title": "The password to access the certificate's private key.",
-          "description": "This must not be specified if the certificate format is Cer."
+          "description": "This must not be specified if the certificate format is Cer.",
+          "x-ms-secret": true
         }
       },
       "description": "Certificate properties for create operations",
@@ -4694,7 +4695,8 @@
         },
         "password": {
           "type": "string",
-          "title": "The password to log into the registry server."
+          "title": "The password to log into the registry server.",
+          "x-ms-secret": true
         },
         "registryServer": {
           "type": "string",
@@ -4996,7 +4998,8 @@
         "sshPrivateKey": {
           "type": "string",
           "title": "The SSH private key for the user account.",
-          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done)."
+          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done).",
+          "x-ms-secret": true
         }
       },
       "title": "Properties used to create a user account on a Linux node."
@@ -5039,7 +5042,8 @@
         },
         "password": {
           "type": "string",
-          "title": "The password for the user account."
+          "title": "The password for the user account.",
+          "x-ms-secret": true
         },
         "elevationLevel": {
           "title": "The elevation level of the user account.",
@@ -6057,12 +6061,14 @@
         "accountKey": {
           "type": "string",
           "title": "The Azure Storage Account key.",
-          "description": "This property is mutually exclusive with both sasKey and identity; exactly one must be specified."
+          "description": "This property is mutually exclusive with both sasKey and identity; exactly one must be specified.",
+          "x-ms-secret": true
         },
         "sasKey": {
           "type": "string",
           "title": "The Azure Storage SAS token.",
-          "description": "This property is mutually exclusive with both accountKey and identity; exactly one must be specified."
+          "description": "This property is mutually exclusive with both accountKey and identity; exactly one must be specified.",
+          "x-ms-secret": true
         },
         "blobfuseOptions": {
           "type": "string",
@@ -6134,10 +6140,12 @@
         },
         "password": {
           "type": "string",
-          "title": "The password to use for authentication against the CIFS file system."
+          "title": "The password to use for authentication against the CIFS file system.",
+          "x-ms-secret": true
         }
       },
       "required": [
+        "userName",
         "source",
         "password",
         "relativeMountPath"
@@ -6158,7 +6166,8 @@
         },
         "accountKey": {
           "type": "string",
-          "title": "The Azure Storage account key."
+          "title": "The Azure Storage account key.",
+          "x-ms-secret": true
         },
         "relativeMountPath": {
           "type": "string",
@@ -6174,7 +6183,8 @@
       "required": [
         "accountName",
         "azureFileUrl",
-        "relativeMountPath"
+        "relativeMountPath",
+        "accountKey"
       ],
       "title": "Information used to connect to an Azure Fileshare."
     },
