@@ -240,7 +240,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}": {
       "get": {
         "x-ms-examples": {
-          "Get governance rules by specific governanceRuleId": {
+          "Get governance rules by specific governance rule Id": {
             "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRule_example.json"
           }
         },
@@ -926,7 +926,8 @@
         },
         "remediationTimeframe": {
           "type": "string",
-          "description": "Governance rule remediation timeframe - this is the time that will affect on the grace-period duration e.g. 7.00:00:00 - means 7 days"
+          "description": "Governance rule remediation timeframe - this is the time that will affect on the grace-period duration e.g. 7.00:00:00 - means 7 days",
+          "pattern": "^[0-9]+\\.[0-9]{2}:[0-9]{2}:[0-9]{2}$"
         },
         "isGracePeriod": {
           "description": "Defines whether there is a grace period on the governance rule",
@@ -1174,7 +1175,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Governance rule key - unique key for the standard Governance rule",
+      "description": "The Governance rule key - unique key for the standard Governance rule (GUID)",
       "x-ms-parameter-location": "method"
     },
     "GovernanceRuleBody": {
