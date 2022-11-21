@@ -4450,12 +4450,6 @@
           },
           "202": {
             "description": "Accepted"
-          },
-          "default": {
-            "description": "The Service error details.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4498,24 +4492,21 @@
             "in": "path",
             "description": "The name of the fabric containing the protected item.",
             "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+$"
+            "type": "string"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "The name of the container containing the protected item.",
             "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+$"
+            "type": "string"
           },
           {
             "name": "replicationProtectedItemName",
             "in": "path",
             "description": "The name of the protected item on which the agent is to be updated.",
             "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]+$"
+            "type": "string"
           },
           {
             "name": "updateMobilityServiceRequest",
@@ -4540,12 +4531,6 @@
               "Location": {
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "The Service error details.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -11193,28 +11178,6 @@
           "format": "date-time",
           "description": "The key encryption key certificate expiry date.",
           "type": "string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "The generic service error details.",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            }
-          }
         }
       }
     },
@@ -24913,8 +24876,7 @@
       "description": "The name of the recovery services vault.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "client",
-      "pattern": "^[A-Za-z0-9_-]+$"
+      "x-ms-parameter-location": "client"
     },
     "ApiVersion": {
       "name": "api-version",
