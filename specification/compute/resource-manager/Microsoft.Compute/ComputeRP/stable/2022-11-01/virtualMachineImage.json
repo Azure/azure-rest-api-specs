@@ -905,6 +905,54 @@
       ],
       "description": "Describes automatic OS upgrade properties on the image."
     },
+    "ImageDeprecationStatus": {
+      "properties": {
+        "imageState": {
+          "type": "string",
+          "description": "Describes the state of the image.",
+          "enum": [
+            "Active",
+            "ScheduledForDeprecation",
+            "Deprecated"
+          ],
+          "x-ms-enum": {
+            "name": "ImageState",
+            "modelAsString": true
+          }
+        },
+        "scheduledDeprecationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the image is scheduled to be deprecated by the Publisher."
+        },
+        "alternativeOption": {
+          "$ref": "#/definitions/AlternativeOption"
+        }
+      },
+      "description": "Describes image deprecation status properties on the image."
+    },
+    "AlternativeOption": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Describes the type of the alternative option.",
+          "enum": [
+            "None",
+            "Offer",
+            "Plan"
+          ],
+          "x-ms-enum": {
+            "name": "AlternativeType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Indicates the alternative option value specified by the Publisher. This is the Offer name when the type is Offer or the Plan name when the type is Plan."
+        }
+      },
+      "description": "Describes the alternative option specified by the Publisher for this image when this image is deprecated."
+    },
     "VirtualMachineImageFeature": {
       "properties": {
         "name": {
@@ -937,6 +985,9 @@
         },
         "automaticOSUpgradeProperties": {
           "$ref": "#/definitions/AutomaticOSUpgradeProperties"
+        },
+        "imageDeprecationStatus": {
+          "$ref": "#/definitions/ImageDeprecationStatus"
         },
         "hyperVGeneration": {
           "$ref": "./computeRPCommon.json#/definitions/HyperVGenerationType"
