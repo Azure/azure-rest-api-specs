@@ -2255,7 +2255,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/locationName"
           },
           {
             "$ref": "#/parameters/operationResultId"
@@ -4072,6 +4072,14 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90
+    },
+    "locationName": {
+      "name": "locationName",
+      "in": "path",
+      "description": "The location of the operation.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "operationResultId": {
       "name": "operationResultId",
