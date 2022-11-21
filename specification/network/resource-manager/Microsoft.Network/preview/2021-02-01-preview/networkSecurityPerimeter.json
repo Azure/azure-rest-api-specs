@@ -1736,6 +1736,24 @@
         "modelAsString": true
       }
     },
+    "NSPLinkProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state of NSP Link/LinkReference.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Failed",
+        "WaitForRemoteCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "nspLinkProvisioningState",
+        "modelAsString": true
+      }
+    },
     "NspAccessRuleReconcile": {
       "type": "object",
       "properties": {},
@@ -1779,7 +1797,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "#/definitions/NSPProvisioningState",
+          "$ref": "#/definitions/NSPLinkProvisioningState",
           "description": "The provisioning state of the NSP Link resource."
         },
         "autoApprovedRemotePerimeterResourceId": {
@@ -1794,6 +1812,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Remote NSP Guid with which the link gets created."
+        },
+        "remotePerimeterLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP location with which the link gets created."
         },
         "localInboundProfiles": {
           "type": "array",
@@ -1889,7 +1912,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "#/definitions/NSPProvisioningState",
+          "$ref": "#/definitions/NSPLinkProvisioningState",
           "description": "The provisioning state of the NSP LinkReference resource."
         },
         "remotePerimeterResourceId": {
@@ -1901,6 +1924,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Remote NSP Guid with which the link is created."
+        },
+        "remotePerimeterLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Remote NSP location with which the link gets created."
         },
         "localInboundProfiles": {
           "type": "array",
