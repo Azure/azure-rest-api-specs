@@ -4557,7 +4557,7 @@
       "x-ms-discriminator-value": "KubernetesClusterBackupDatasourceParameters"
     },
     "BlobBackupDatasourceParameters": {
-      "description": "Parameters for Backup",
+      "description": "Parameters to be used during configuration of backup of blobs",
       "required": [
         "containersList",
         "objectType"
@@ -4570,7 +4570,7 @@
       ],
       "properties": {
         "containersList": {
-          "description": "List of containers to be protected",
+          "description": "List of containers to be backed up during configuration of backup of blobs",
           "type": "array",
           "items": {
             "type": "string"
@@ -6004,7 +6004,7 @@
       "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
     },
     "ItemPathBasedRestoreCriteria": {
-      "description": "Class to contain criteria for item path based restore",
+      "description": "Prefix criteria to be used to during restore",
       "required": [
         "itemPath",
         "isPathRelativeToBackupItem",
@@ -6018,15 +6018,15 @@
       ],
       "properties": {
         "itemPath": {
-          "description": "Path of the item to be restored",
+          "description": "The path of the item to be restored. It could be the full path of the item or the path relative to the backup item",
           "type": "string"
         },
         "isPathRelativeToBackupItem": {
-          "description": "Flag to specify if the path is relative to Backup Item or full path",
+          "description": "Flag to specify if the path is relative to backup item or full path",
           "type": "boolean"
         },
         "subItemPathPrefix": {
-          "description": "list of prefixes to be used relative to the ItemPath for Restore criteria",
+          "description": "The list of prefix strings to be used as filter criteria during restore. These are relative to the item path specified.",
           "type": "array",
           "items": {
             "type": "string"
