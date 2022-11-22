@@ -3670,7 +3670,10 @@
           "$ref": "#/definitions/SnowflakeExportCopyCommand",
           "description": "Snowflake export settings."
         }
-      }
+      },
+      "required": [
+        "exportSettings"
+      ]
     },
     "ExportSettings": {
       "description": "Export command settings.",
@@ -7499,9 +7502,28 @@
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "files": {
-          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "description": "(Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
           "type": "array",
           "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "pythonCodeReference": {
+          "description": "Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "filesV2": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
