@@ -761,7 +761,8 @@
             "enum": [
               "provisioning",
               "ready",
-              "archived"
+              "archived",
+              "failed"
             ],
             "x-ms-enum": {
               "name": "SnapshotStatus",
@@ -945,6 +946,9 @@
           },
           "GetSnapshot_IfNoneMatch": {
             "$ref": "./examples/GetSnapshot_IfNoneMatch.json"
+          },
+          "GetSnapshot_Failed": {
+            "$ref": "./examples/GetSnapshot_Failed.json"
           }
         }
       },
@@ -1727,13 +1731,19 @@
           "enum": [
             "provisioning",
             "ready",
-            "archived"
+            "archived",
+            "failed"
           ],
           "x-nullable": false,
           "x-ms-enum": {
             "name": "SnapshotStatus",
             "modelAsString": true
           },
+          "readOnly": true
+        },
+        "status_code": {
+          "description": "Provides additional information about the status of the snapshot.",
+          "type": "integer",
           "readOnly": true
         },
         "filters": {
@@ -1770,6 +1780,13 @@
           "type": "string",
           "x-nullable": true,
           "readOnly": true
+        },
+        "retention_period": {
+          "description": "The amount of time, in seconds, that a snapshot will remain in the archived state before expiring. This property is only writable during the creation of a snapshot. If not specified, the default lifetime of key-value revisions will be used.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7776000,
+          "x-nullable": true
         },
         "size": {
           "description": "The size in bytes of the snapshot.",
@@ -1829,7 +1846,8 @@
           "enum": [
             "provisioning",
             "ready",
-            "archived"
+            "archived",
+            "failed"
           ],
           "x-nullable": false,
           "x-ms-enum": {

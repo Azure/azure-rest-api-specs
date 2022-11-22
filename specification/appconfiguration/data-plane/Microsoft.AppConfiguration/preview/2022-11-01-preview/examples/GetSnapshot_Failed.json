@@ -2,7 +2,8 @@
   "parameters": {
     "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
     "api-version": "2022-11-01-preview",
-    "name": "Prod-2022-08-01"
+    "name": "Prod-2022-08-01",
+    "If-Match": "\"4f6dd610dd5e4deebc7fbaef685fb903\""
   },
   "responses": {
     "200": {
@@ -16,8 +17,8 @@
       "body": {
         "etag": "4f6dd610dd5e4deebc7fbaef685fb903",
         "name": "Prod-2022-08-01",
-        "status": "ready",
-        "status_code": 200,
+        "status": "failed",
+        "status_code": 429,
         "filters": [
           {
             "key": "app1/*",
@@ -26,8 +27,8 @@
         ],
         "composition_type": "all",
         "created": "2022-08-01T22:19:40+00:00",
-        "size": 100000,
-        "items_count": 71,
+        "size": 0,
+        "items_count": 0,
         "retention_period": 2592000,
         "tags": {
           "release": "{link/id}"
