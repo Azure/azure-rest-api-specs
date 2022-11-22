@@ -587,10 +587,22 @@
       ],
       "properties": {
         "sourceServerPassword": {
-          "$ref": "./common-types.json#/definitions/Password"
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "targetServerPassword": {
-          "$ref": "./common-types.json#/definitions/Password"
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       },
       "description": "Server admin credentials."
