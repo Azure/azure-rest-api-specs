@@ -108,6 +108,9 @@
         "x-ms-examples": {
           "CreateM365Resource": {
             "$ref": "./examples/M365Resource_Put.json"
+          },
+          "CreateM365ResourceWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Put_WithBillingFrequency.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -162,8 +165,35 @@
         "operationId": "M365Resources_Update",
         "description": "Updates the properties of a M365 resource.",
         "x-ms-examples": {
-          "UpdateM365ResourceProperty": {
-            "$ref": "./examples/M365Resource_Patch.json"
+          "AutoRenewOn": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_On.json"
+          },
+          "AutoRenewOff": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_Off.json"
+          },
+          "AutoRenewOnUpdateRenewalTermDetails": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_On_UpdateRenewalTermDetails.json"
+          },
+          "AutoRenewOnUpdateRenewalTermDetailsWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_On_UpdateRenewalTermDetails_WithBillingFrequency.json"
+          },
+          "ChangeQuantity": {
+            "$ref": "./examples/M365Resource_Patch_ChangeQuantity.json"
+          },
+          "ConvertImmediate": {
+            "$ref": "./examples/M365Resource_Patch_ConvertImmediate.json"
+          },
+          "ConvertImmediateWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Patch_ConvertImmediate_WithBillingFrequency.json"
+          },
+          "NextBillingFrequencyUpdate": {
+            "$ref": "./examples/M365Resource_Patch_NextBillingFrequencyUpdate.json"
+          },
+          "TermUpdate": {
+            "$ref": "./examples/M365Resource_Patch_TermUpdate.json"
+          },
+          "TermUpdateWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Patch_TermUpdate_WithBillingFrequency.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -398,7 +428,6 @@
         },
         "nextBillingCycleDetails": {
           "description": "Next billing cycle details of the resource.",
-          "readOnly": true,
           "$ref": "#/definitions/NextBillingCycleDetails"
         },
         "productCategory": {
@@ -441,6 +470,10 @@
           "description": "The number of licenses purchased for the resource",
           "type": "integer",
           "format": "int64"
+        },
+        "renewalTermDetails": {
+          "description": "Renewal term details of the resource.",
+          "$ref": "#/definitions/RenewalTermDetails"
         },
         "skuDescription": {
           "description": "The SKU description of the product for which the resource is purchased.",
@@ -504,8 +537,34 @@
       "properties": {
         "billingFrequency": {
           "description": "Billing frequency of the product under the resource.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        }
+      }
+    },
+    "RenewalTermDetails": {
+      "description": "Renewal term details of the resource.",
+      "type": "object",
+      "properties": {
+        "billingFrequency": {
+          "description": "Billing frequency of the product under the resource.",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Id of the product for which the resource is purchased",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The number of licenses purchased for the resource",
+          "type": "integer",
+          "format": "int64"
+        },
+        "skuId": {
+          "description": "The SKU ID of the product for which the resource is purchased.",
+          "type": "string"
+        },
+        "termDuration": {
+          "description": "The duration for which you can use the resource. Example P1Y and P1M",
+          "type": "string"
         }
       }
     }
