@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2022-10-01-preview"
+    "version": "2023-05-01"
   },
   "paths": {},
   "definitions": {
@@ -769,7 +769,7 @@
           {
             "value": "mixed",
             "description": "Mixed sentiment."
-          }                   
+          }
         ]
       }
     },
@@ -805,62 +805,12 @@
       "properties": {
         "sentenceCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
-        },
-        "phraseControls": {
-          "type": "array",
-          "description": "Control the phrases to be used in the summary.",
-          "items": {
-            "$ref": "#/definitions/PhraseControl"
-          }
         }
-      }
-    },
-    "PhraseControl": {
-      "type": "object",
-      "description": "Control the phrases to be used in the summary.",
-      "required": [
-        "targetPhrase",
-        "strategy"
-      ],
-      "properties": {
-        "targetPhrase": {
-          "type": "string",
-          "description": "The target phrase to control."
-        },
-        "strategy": {
-          "$ref": "#/definitions/PhraseControlStrategy"
-        }
-      }
-    },
-    "PhraseControlStrategy": {
-      "enum": [
-        "encourage",
-        "discourage",
-        "disallow"
-      ],
-      "type": "string",
-      "description": "The strategy to use in phrase control.",
-      "x-ms-enum": {
-        "modelAsString": false,
-        "name": "PhraseControlStrategy",
-        "values": [
-          {
-            "value": "encourage",
-            "description": "The model will have higher probability to select the target phrase in the summary if there are multiple alternates."
-          },
-          {
-            "value": "discourage",
-            "description": "The model will have lower probability to select the target phrase in the summary if there are multiple alternates."
-          },
-          {
-            "value": "disallow",
-            "description": "The model will avoid to select the target phrase in the summary."
-          }
-        ]
       }
     },
     "SummaryContext": {
@@ -891,7 +841,6 @@
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
-      "format": "uri",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },

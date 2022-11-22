@@ -85,11 +85,29 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+```
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
+```
+
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-07'
+``` yaml $(tag) == 'package-preview-2022-07'
 input-file:
   - Microsoft.Security/preview/2022-07-01-preview/applications.json
 ```
@@ -107,7 +125,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-05-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
 ```
@@ -159,7 +177,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -206,7 +224,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -297,10 +315,12 @@ input-file:
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
+- Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+
 
 # Needed when there is more than one input file
 override-info:
@@ -497,7 +517,6 @@ override-info:
   title: SecurityCenter
 ```
 
-
 ### Tag: package-2019-08-python-only
 
 These settings apply only when `--tag=package-2019-08-python-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -538,6 +557,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -671,7 +691,7 @@ input-file:
 override-info:
   title: SecurityCenter
 
-``` 
+```
 
 ### Tag: package-2021-06-only
 
@@ -713,8 +733,10 @@ override-info:
 ```
 
 ### Tag: package-preview-2022-01
+
 These settings apply only when `--tag=package-2022-01-preview-only` is specified on the command line.
-```yaml $(tag) == 'package-2022-01-preview-only'
+
+``` yaml $(tag) == 'package-2022-01-preview-only'
 input-file:
   - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
   - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json  
@@ -722,7 +744,7 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
-``` 
+```
 
 ### Tag: package-2022-01-only
 
@@ -748,7 +770,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js

@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-07-01-preview",
+    "api-version": "2023-05-01",
     "Endpoint": "{Endpoint}",
     "body": {
       "kind": "EntityRecognition",
@@ -13,7 +13,7 @@
           {
             "id": "1",
             "language": "en",
-            "text": "Microsoft was founded by Bill Gates and Paul Allen."
+            "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975."
           },
           {
             "id": "2",
@@ -53,6 +53,22 @@
                   "length": 10,
                   "offset": 40,
                   "text": "Paul Allen"
+                },
+                {
+                  "text": "April 4, 1975",
+                  "category": "DateTime",
+                  "subcategory": "Date",
+                  "offset": 54,
+                  "length": 13,
+                  "confidenceScore": 0.99,
+                  "resolutions": [
+                    {
+                      "resolutionKind": "DateTimeResolution",
+                      "dateTimeSubKind": "Date",
+                      "timex": "1975-04-04",
+                      "value": "1975-04-04"
+                    }
+                  ]
                 }
               ],
               "id": "1",
