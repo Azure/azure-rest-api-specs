@@ -2549,11 +2549,21 @@
     "ServicesResource": {
       "description": "The common properties of a service.",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
         "name": {
           "readOnly": true,
           "type": "string",
           "description": "The resource name.",
           "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
         },
         "kind": {
           "readOnly": false,
@@ -2569,6 +2579,21 @@
             "modelAsString": false
           }
         },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
         "etag": {
           "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
           "type": "string"
@@ -2576,21 +2601,36 @@
         "identity": {
           "type": "object",
           "description": "Setting indicating whether the service has a managed identity associated with it.",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of the resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of the resource."
+            },
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
             }
-          ]
+          }
         }
       },
       "x-ms-azure-resource": true,
       "required": [
+        "location",
         "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
       ]
     },
     "ServicesDescriptionListResult": {
