@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "type": "string"
+      }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "apiVersion": "2021-12-01-preview",
+            "name": "workspacena",
+            "location": "[parameters('location')]",
+            "tags": {
+                "tag1": "value1"
+            },
+            "properties": {
+                "retentionInDays": 30,
+                "sku": {
+                    "name": "PerNode"
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "workspaceId":{
+            "type": "string",
+            "value": "[resourceId('Microsoft.OperationalInsights/workspaces','workspacena')]"
+        }
+    }
+  }

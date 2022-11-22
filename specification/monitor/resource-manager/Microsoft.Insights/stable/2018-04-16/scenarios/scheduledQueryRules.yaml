@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  ruleName:
+    type: string
+    prefix: schedulequeryrulena
+
+prepareSteps:
+  - step: WorkSpace_Create
+    armTemplate: templates/Create_OperationalInsightsWorkspaces.json
+
+scenarios:
+  - scenario: ScheduledQueryRule
+    description: Microsoft.Insights/scheduledQueryRules
+    steps:
+      - step: ScheduledQueryRules_Create
+        operationId: ScheduledQueryRules_CreateOrUpdate
+        parameters:
+          parameters:
+            location: $(location)
+            properties:
+              action: 
+                odata.type: Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction
+                severity: 1
+                trigger:
+                  threshold: 3
+                  thresholdOperator: GreaterThan
+                  metricTrigger: 
+                    metricColumn: Computer
+                    metricTriggerType: Consecutive
+                    threshold: 5
+                    thresholdOperator: GreaterThan
+              source:
+                 dataSourceId: $(workspaceId)
+                 query: Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)
+                 queryType: ResultCount
+              description: log search rule description
+              enabled: true
+              schedule:
+                frequencyInMinutes: 15
+                timeWindowInMinutes: 15
+      - step: ScheduledQueryRules_ListBySubscription
+        operationId: ScheduledQueryRules_ListBySubscription
+      - step: ScheduledQueryRules_ListByResourceGroup
+        operationId: ScheduledQueryRules_ListByResourceGroup
+      - step: ScheduledQueryRules_Get
+        exampleFile: ../examples/getScheduledQueryRules.json
+      - step: ScheduledQueryRules_Update
+        exampleFile: ../examples/patchScheduledQueryRules.json
+      - step: ScheduledQueryRules_Delete
+        exampleFile: ../examples/deleteScheduledQueryRules.json
