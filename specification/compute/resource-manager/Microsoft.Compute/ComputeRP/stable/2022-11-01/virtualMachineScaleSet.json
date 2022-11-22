@@ -4705,7 +4705,7 @@
           "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
         },
         "serviceArtifactReference": {
-          "$ref": "./computeRPCommon.json#/definitions/ServiceArtifactReference",
+          "$ref": "#/definitions/ServiceArtifactReference",
           "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
         }
       },
@@ -5765,6 +5765,15 @@
         "serviceName",
         "action"
       ]
+    },
+    "ServiceArtifactReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        }
+      },
+      "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
     }
   }
 }
