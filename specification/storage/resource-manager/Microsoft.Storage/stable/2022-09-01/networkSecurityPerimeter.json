@@ -5,6 +5,16 @@
     "title": "StorageManagementClient",
     "description": "The Azure Storage Management API."
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations": {
       "get": {
@@ -98,7 +108,7 @@
         "tags": [
           "StorageAccounts NetworkSecurityPerimeterConfigurations"
         ],
-        "operationId": "NetworkSecurityPerimeterConfigurations_CreateOrUpdate",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
         "description": "Refreshes any information about the association.",
         "x-ms-examples": {
           "NetworkSecurityPerimeterConfigurationList": {
