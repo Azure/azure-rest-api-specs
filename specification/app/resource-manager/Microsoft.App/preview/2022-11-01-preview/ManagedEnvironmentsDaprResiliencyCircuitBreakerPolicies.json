@@ -15,13 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprResiliencyRetryPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprResiliencyCircuitBreakerPolicies": {
       "get": {
         "tags": [
-          "DaprResiliencyRetryPolicies"
+          "DaprResiliencyCircuitBreakerPolicies"
         ],
         "summary": "Get the Dapr Policies for a managed environment.",
-        "operationId": "DaprResiliencyRetryPolicies_List",
+        "operationId": "DaprResiliencyCircuitBreakerPolicies_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -44,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPoliciesCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPoliciesCollection"
             }
           },
           "default": {
@@ -61,13 +61,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprResiliencyRetryPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprResiliencyCircuitBreakerPolicies/{policyName}": {
       "get": {
         "tags": [
-          "DaprResiliencyRetryPolicies"
+          "DaprResiliencyCircuitBreakerPolicies"
         ],
         "summary": "Get a dapr policy.",
-        "operationId": "DaprResiliencyRetryPolicies_Get",
+        "operationId": "DaprResiliencyCircuitBreakerPolicies_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -85,7 +85,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "Name of the Dapr resiliency retry policy.",
+            "description": "Name of the Dapr resiliency circuit breaker policy.",
             "required": true,
             "type": "string"
           },
@@ -97,7 +97,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
             }
           },
           "default": {
@@ -112,11 +112,11 @@
       },
       "put": {
         "tags": [
-          "DaprResiliencyRetryPolicies"
+          "DaprResiliencyCircuitBreakerPolicies"
         ],
         "summary": "Creates or updates a Dapr Component.",
         "description": "Creates or updates a Dapr Component in a Managed Environment.",
-        "operationId": "DaprResiliencyRetryPolicies_CreateOrUpdate",
+        "operationId": "DaprResiliencyCircuitBreakerPolicies_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -134,17 +134,17 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "Name of the Dapr resiliency retry policy.",
+            "description": "Name of the Dapr resiliency circuit breaker policy.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "daprResiliencyRetryPoliciesEnvelope",
+            "name": "daprResiliencyCircuitBreakerPoliciesEnvelope",
             "in": "body",
             "description": "Configuration details of the Dapr Policy.",
             "required": true,
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
             }
           },
           {
@@ -155,7 +155,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
             }
           },
           "default": {
@@ -171,11 +171,11 @@
       },
       "delete": {
         "tags": [
-          "DaprResiliencyRetryPolicies"
+          "DaprResiliencyCircuitBreakerPolicies"
         ],
         "summary": "Delete a Dapr Component.",
         "description": "Delete a Dapr Component from a Managed Environment.",
-        "operationId": "DaprResiliencyRetryPolicies_Delete",
+        "operationId": "DaprResiliencyCircuitBreakerPolicies_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
