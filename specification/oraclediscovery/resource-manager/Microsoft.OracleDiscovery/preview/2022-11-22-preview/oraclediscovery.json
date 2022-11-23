@@ -754,7 +754,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
-          "$ref": "#/definitions/conndetailsModelResult"
+          "$ref": "#/definitions/OracleServerModel"
         },
         "id": {
           "type": "string",
@@ -790,7 +790,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
-          "$ref": "#/definitions/conndetailsModelResult"
+          "$ref": "#/definitions/OracleDatabaseModel"
         },
         "id": {
           "type": "string",
@@ -914,42 +914,17 @@
         }
       }
     },
-    "conndetailsModel": {
-      "type": "object",
-      "description": "Bulk model for creating machine to assess resources",
-      "properties": {
-        "hostName": {
-          "type": "string",
-          "description": "The DB Host Name."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "The DB Server Name."
-        },
-        "portNumber": {
-          "type": "integer",
-          "description": "The DB Port Number.",
-          "minimum": 999,
-          "maximum": 9999
-        }
-      },
-      "required": [
-        "hostName",
-        "serverName",
-        "portNumber"
-      ]
-    },
     "versionInfoModel": {
       "type": "object",
       "description": "Bulk model for creating machine to assess resources",
       "properties": {
         "edition": {
           "type": "string",
-          "description": "The DB Host Name."
+          "description": "The DB edition."
         },
         "instance": {
           "type": "string",
-          "description": "The DB Server Name."
+          "description": "The DB instance name."
         }
       },
       "required": [
@@ -958,31 +933,6 @@
     "serverConfigModel": {
       "required": [
       ]
-    },
-    "conndetailsModelResult": {
-      "type": "object",
-      "description": "Bulk model for creating machine to assess resources",
-      "properties": {
-        "hostName": {
-          "type": "string",
-          "description": "The DB Host Name."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "The DB Server Name."
-        },
-        "portNumber": {
-          "type": "integer",
-          "description": "The DB Port Number.",
-          "minimum": 999,
-          "maximum": 9999
-        },
-        "numberOfDatabases": {
-          "type": "integer",
-          "description": "The DB Port Number."
-        }
-
-      }
     },
     "ErrorResponse": {
       "description": "Error response.",
