@@ -17,7 +17,7 @@ prepareSteps:
   - step: NetworkSubnet_Create
     armTemplate: templates/Create_NetworkAndSubnet.json
   - step: Redis_Create
-    exampleFile: ..\examples\RedisCacheCreateDefaultVersion.json
+    exampleFile: ../examples/RedisCacheCreateDefaultVersion.json
     requestUpdate:
       - remove: /parameters/properties/subnetId
       - remove: /parameters/properties/staticIP
@@ -31,21 +31,21 @@ scenarios:
     description: Microsoft.Cache/redis
     steps:
       - step: Redis_CheckNameAvailability
-        exampleFile: ..\examples\RedisCacheCheckNameAvailability.json
+        exampleFile: ../examples/RedisCacheCheckNameAvailability.json
       - step: Redis_ListBySubscription
-        exampleFile: ..\examples\RedisCacheList.json
+        exampleFile: ../examples/RedisCacheList.json
       - step: Redis_ListByResourceGroup
-        exampleFile: ..\examples\RedisCacheListByResourceGroup.json
+        exampleFile: ../examples/RedisCacheListByResourceGroup.json
       - step: Redis_Get
-        exampleFile: ..\examples\RedisCacheGet.json
+        exampleFile: ../examples/RedisCacheGet.json
       - step: Redis_Update
-        exampleFile: ..\examples\RedisCacheUpdate.json
+        exampleFile: ../examples/RedisCacheUpdate.json
       - step: Redis_RegenerateKey
-        exampleFile: ..\examples\RedisCacheRegenerateKey.json
+        exampleFile: ../examples/RedisCacheRegenerateKey.json
       - step: Redis_ListKeys
-        exampleFile: ..\examples\RedisCacheListKeys.json
+        exampleFile: ../examples/RedisCacheListKeys.json
       - step: Redis_ForceReboot
-        exampleFile: ..\examples\RedisCacheForceReboot.json
+        exampleFile: ../examples/RedisCacheForceReboot.json
         requestUpdate:
           - remove: /parameters/shardId
           - remove: /parameters/rebootType
@@ -56,18 +56,18 @@ scenarios:
       cacheName: $(name)
     steps:
       - step: FirewallRules_CreateOrUpdate
-        exampleFile: ..\examples\RedisCacheFirewallRuleCreate.json
+        exampleFile: ../examples/RedisCacheFirewallRuleCreate.json
         requestUpdate:
           - replace: /parameters/properties/startIP
             value: 10.0.1.1
           - replace: /parameters/properties/endIP
             value: 10.0.1.4
       - step: FirewallRules_List
-        exampleFile: ..\examples\RedisCacheFirewallRulesList.json
+        exampleFile: ../examples/RedisCacheFirewallRulesList.json
       - step: FirewallRules_Get
-        exampleFile: ..\examples\RedisCacheFirewallRuleGet.json
+        exampleFile: ../examples/RedisCacheFirewallRuleGet.json
       - step: FirewallRules_Delete
-        exampleFile: ..\examples\RedisCacheFirewallRuleDelete.json
+        exampleFile: ../examples/RedisCacheFirewallRuleDelete.json
 
   - scenario: PatchSchedule
     description: Microsoft.Cache/redis/patchSchedules
@@ -75,19 +75,19 @@ scenarios:
       cacheName: $(name)
     steps:
       - step: PatchSchedules_CreateOrUpdate
-        exampleFile: ..\examples\RedisCachePatchSchedulesCreateOrUpdate.json
+        exampleFile: ../examples/RedisCachePatchSchedulesCreateOrUpdate.json
       - step: PatchSchedules_ListByRedisResource
-        exampleFile: ..\examples\RedisCachePatchSchedulesList.json
+        exampleFile: ../examples/RedisCachePatchSchedulesList.json
       - step: PatchSchedules_Get
-        exampleFile: ..\examples\RedisCachePatchSchedulesGet.json
+        exampleFile: ../examples/RedisCachePatchSchedulesGet.json
       - step: PatchSchedules_Delete
-        exampleFile: ..\examples\RedisCachePatchSchedulesDelete.json
+        exampleFile: ../examples/RedisCachePatchSchedulesDelete.json
 
   - scenario: Operation
     description: Microsoft.Cache/operations
     steps:
       - step: Operations_List
-        exampleFile: ..\examples\RedisCacheOperations.json
+        exampleFile: ../examples/RedisCacheOperations.json
 
   - scenario: PrivateEndpointConnections
     description: Microsoft.Cache/redis/privateEndpointConnections
@@ -97,23 +97,23 @@ scenarios:
       - step: PrivateEndpoint_Create
         armTemplate: templates/Create_PrivateEndpoint.json
       - step: PrivateEndpointConnections_List
-        exampleFile: ..\examples\RedisCacheListPrivateEndpointConnections.json
+        exampleFile: ../examples/RedisCacheListPrivateEndpointConnections.json
         outputVariables:
           privateEndpointConnectionName:
             type: string
             fromResponse: /value/0/name
       - step: PrivateEndpointConnections_Put
-        exampleFile: ..\examples\RedisCachePutPrivateEndpointConnection.json
+        exampleFile: ../examples/RedisCachePutPrivateEndpointConnection.json
         requestUpdate:
           - replace: /properties/properties/privateLinkServiceConnectionState/status
             value: Rejected
       - step: PrivateEndpointConnections_Get
-        exampleFile: ..\examples\RedisCacheGetPrivateEndpointConnection.json
+        exampleFile: ../examples/RedisCacheGetPrivateEndpointConnection.json
       - step: PrivateLinkResources_ListByRedisCache
-        exampleFile: ..\examples\RedisCacheListPrivateLinkResources.json
+        exampleFile: ../examples/RedisCacheListPrivateLinkResources.json
       - step: PrivateEndpointConnections_Delete
-        exampleFile: ..\examples\RedisCacheDeletePrivateEndpointConnection.json
+        exampleFile: ../examples/RedisCacheDeletePrivateEndpointConnection.json
 
 cleanUpSteps:
   - step: Redis_Delete
-    exampleFile: ..\examples\RedisCacheDelete.json
+    exampleFile: ../examples/RedisCacheDelete.json
