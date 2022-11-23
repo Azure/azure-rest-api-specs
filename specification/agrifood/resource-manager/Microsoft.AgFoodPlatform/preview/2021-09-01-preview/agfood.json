@@ -2343,7 +2343,7 @@
         "marketplaceOfferDetails": {
           "$ref": "#/definitions/MarketplaceOfferDetails"
         },
-        "inputParameterScopes": {
+        "inputParameterValidationScopes": {
           "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
           "type": "array",
           "items": {
@@ -2381,14 +2381,6 @@
         "roleName": {
           "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
           "type": "string",
-          "readOnly": true
-        },
-        "roleDefinitionIds": {
-          "description": "List of RoleDefinitionIds needed to make the SaaS multi tenant application access relevant fb data.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
           "readOnly": true
         },
         "accessFBApplicationName": {
