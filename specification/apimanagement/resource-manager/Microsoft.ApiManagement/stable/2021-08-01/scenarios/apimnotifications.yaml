@@ -14,30 +14,30 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
   - step: Notification_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateNotification.json
+    exampleFile: ../examples/ApiManagementCreateNotification.json
 
 scenarios:
   - scenario: Notification
     description: Microsoft.ApiManagement/service/notifications
     steps:
       - step: Notification_ListByService
-        exampleFile: ..\examples\ApiManagementListNotifications.json
+        exampleFile: ../examples/ApiManagementListNotifications.json
       - step: Notification_Get
-        exampleFile: ..\examples\ApiManagementGetNotification.json
+        exampleFile: ../examples/ApiManagementGetNotification.json
 
   - scenario: NotificationRecipientEmail
     description: Microsoft.ApiManagement/service/notifications/recipientUsers
     steps:
       - step: NotificationRecipientEmail_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateNotificationRecipientEmail.json
+        exampleFile: ../examples/ApiManagementCreateNotificationRecipientEmail.json
       - step: NotificationRecipientEmail_CheckEntityExists
-        exampleFile: ..\examples\ApiManagementHeadNotificationRecipientEmail.json
+        exampleFile: ../examples/ApiManagementHeadNotificationRecipientEmail.json
       - step: NotificationRecipientEmail_ListByNotification
-        exampleFile: ..\examples\ApiManagementListNotificationRecipientEmails.json
+        exampleFile: ../examples/ApiManagementListNotificationRecipientEmails.json
       - step: NotificationRecipientEmail_Delete
-        exampleFile: ..\examples\ApiManagementDeleteNotificationRecipientEmail.json
+        exampleFile: ../examples/ApiManagementDeleteNotificationRecipientEmail.json

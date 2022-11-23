@@ -14,12 +14,12 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
   - step: Product_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateProduct.json
+    exampleFile: ../examples/ApiManagementCreateProduct.json
     outputVariables:
       subproductId:
         type: string
@@ -30,38 +30,38 @@ scenarios:
     description: Microsoft.ApiManagement/service/subscriptions
     steps:
       - step: Subscription_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateSubscription.json
+        exampleFile: ../examples/ApiManagementCreateSubscription.json
         requestUpdate:
           - replace: /parameters/properties/scope
             value: $(subproductId)
           - remove: /parameters/properties/ownerId
       - step: Subscription_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadSubscription.json
+        exampleFile: ../examples/ApiManagementHeadSubscription.json
       - step: Subscription_List
-        exampleFile: ..\examples\ApiManagementListSubscriptions.json
+        exampleFile: ../examples/ApiManagementListSubscriptions.json
       - step: Subscription_Get
-        exampleFile: ..\examples\ApiManagementGetSubscription.json
+        exampleFile: ../examples/ApiManagementGetSubscription.json
       - step: Subscription_Update
-        exampleFile: ..\examples\ApiManagementUpdateSubscription.json
+        exampleFile: ../examples/ApiManagementUpdateSubscription.json
       - step: Subscription_RegeneratePrimaryKey
-        exampleFile: ..\examples\ApiManagementSubscriptionRegeneratePrimaryKey.json
+        exampleFile: ../examples/ApiManagementSubscriptionRegeneratePrimaryKey.json
       - step: Subscription_RegenerateSecondaryKey
-        exampleFile: ..\examples\ApiManagementSubscriptionRegenerateSecondaryKey.json
+        exampleFile: ../examples/ApiManagementSubscriptionRegenerateSecondaryKey.json
       - step: Subscription_ListSecrets
-        exampleFile: ..\examples\ApiManagementSubscriptionListSecrets.json
+        exampleFile: ../examples/ApiManagementSubscriptionListSecrets.json
       - step: Subscription_Delete
-        exampleFile: ..\examples\ApiManagementDeleteSubscription.json
+        exampleFile: ../examples/ApiManagementDeleteSubscription.json
 
   - scenario: ApiManagementSkus
     description: Microsoft.ApiManagement/skus
     steps:
       - step: ApiManagementSkus_List
-        exampleFile: ..\examples\ApiManagementListSku.json
+        exampleFile: ../examples/ApiManagementListSku.json
 
   - scenario: TenantSettings
     description: Microsoft.ApiManagement/service/settings
     steps:
       - step: TenantSettings_ListByService
-        exampleFile: ..\examples\ApiManagementListTenantSettings.json
+        exampleFile: ../examples/ApiManagementListTenantSettings.json
       - step: TenantSettings_Get
-        exampleFile: ..\examples\ApiManagementGetTenantSettings.json
+        exampleFile: ../examples/ApiManagementGetTenantSettings.json

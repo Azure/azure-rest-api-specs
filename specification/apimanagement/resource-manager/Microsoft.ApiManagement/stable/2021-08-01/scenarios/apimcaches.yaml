@@ -11,7 +11,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -21,18 +21,18 @@ scenarios:
     description: Microsoft.ApiManagement/service/caches
     steps:
       - step: Cache_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateCache.json
+        exampleFile: ../examples/ApiManagementCreateCache.json
       - step: Cache_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadCache.json
+        exampleFile: ../examples/ApiManagementHeadCache.json
       - step: Cache_Get
-        exampleFile: ..\examples\ApiManagementGetCache.json
+        exampleFile: ../examples/ApiManagementGetCache.json
       - step: Cache_ListByService
-        exampleFile: ..\examples\ApiManagementListCaches.json
+        exampleFile: ../examples/ApiManagementListCaches.json
       - step: Cache_Update
-        exampleFile: ..\examples\ApiManagementUpdateCache.json
+        exampleFile: ../examples/ApiManagementUpdateCache.json
         requestUpdate:
           - replace: /parameters/properties/description
             value: update cache description
           - remove: /parameters/properties/useFromLocation
       - step: Cache_Delete
-        exampleFile: ..\examples\ApiManagementDeleteCache.json
+        exampleFile: ../examples/ApiManagementDeleteCache.json

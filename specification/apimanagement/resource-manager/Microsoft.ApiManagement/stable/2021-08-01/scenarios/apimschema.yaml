@@ -11,7 +11,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -21,12 +21,12 @@ scenarios:
     description: Microsoft.ApiManagement/service/schemas
     steps:
       - step: GlobalSchema_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateGlobalSchema1.json
+        exampleFile: ../examples/ApiManagementCreateGlobalSchema1.json
       - step: GlobalSchema_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadGlobalSchema.json
+        exampleFile: ../examples/ApiManagementHeadGlobalSchema.json
       - step: GlobalSchema_ListByService
-        exampleFile: ..\examples\ApiManagementListGlobalSchemas.json
+        exampleFile: ../examples/ApiManagementListGlobalSchemas.json
       - step: GlobalSchema_Get
-        exampleFile: ..\examples\ApiManagementGetGlobalSchema1.json
+        exampleFile: ../examples/ApiManagementGetGlobalSchema1.json
       - step: GlobalSchema_Delete
-        exampleFile: ..\examples\ApiManagementDeleteGlobalSchema.json
+        exampleFile: ../examples/ApiManagementDeleteGlobalSchema.json

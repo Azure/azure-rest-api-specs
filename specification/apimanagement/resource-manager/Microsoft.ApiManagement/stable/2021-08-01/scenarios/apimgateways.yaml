@@ -16,7 +16,7 @@ variables:
     
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Premium
@@ -26,38 +26,38 @@ scenarios:
     description: Microsoft.ApiManagement/service/gateways
     steps:
       - step: Gateway_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateGateway.json
+        exampleFile: ../examples/ApiManagementCreateGateway.json
       - step: Gateway_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadGateway.json
+        exampleFile: ../examples/ApiManagementHeadGateway.json
       - step: Gateway_ListByService
-        exampleFile: ..\examples\ApiManagementListGateways.json
+        exampleFile: ../examples/ApiManagementListGateways.json
       - step: Gateway_Get
-        exampleFile: ..\examples\ApiManagementGetGateway.json
+        exampleFile: ../examples/ApiManagementGetGateway.json
       - step: Gateway_Update
-        exampleFile: ..\examples\ApiManagementUpdateGateway.json
+        exampleFile: ../examples/ApiManagementUpdateGateway.json
       - step: Gateway_ListKeys
-        exampleFile: ..\examples\ApiManagementGatewayListKeys.json
+        exampleFile: ../examples/ApiManagementGatewayListKeys.json
       - step: Gateway_RegenerateKey
-        exampleFile: ..\examples\ApiManagementGatewayRegenerateKey.json
+        exampleFile: ../examples/ApiManagementGatewayRegenerateKey.json
       - step: Gateway_GenerateToken
-        exampleFile: ..\examples\ApiManagementGatewayGenerateToken.json
+        exampleFile: ../examples/ApiManagementGatewayGenerateToken.json
       - step: Gateway_Delete
-        exampleFile: ..\examples\ApiManagementDeleteGateway.json
+        exampleFile: ../examples/ApiManagementDeleteGateway.json
 
   - scenario: OutboundNetworkDependenciesEndpoints
     description: Microsoft.ApiManagement/service/outboundNetworkDependenciesEndpoints
     steps:
       - step: OutboundNetworkDependenciesEndpoints_ListByService
-        exampleFile: ..\examples\ApiManagementServiceGetOutboundNetworkDependenciesEndpoints.json
+        exampleFile: ../examples/ApiManagementServiceGetOutboundNetworkDependenciesEndpoints.json
 
   - scenario: NetworkStatus
     description: Microsoft.ApiManagement/service/networkstatus
     steps:
       - step: NetworkStatus_ListByLocation
-        exampleFile: ..\examples\ApiManagementServiceGetNetworkStatusByLocation.json
+        exampleFile: ../examples/ApiManagementServiceGetNetworkStatusByLocation.json
         requestUpdate:
           - replace: /locationName
             value: $(location)
         
       - step: NetworkStatus_ListByService
-        exampleFile: ..\examples\ApiManagementServiceGetNetworkStatus.json
+        exampleFile: ../examples/ApiManagementServiceGetNetworkStatus.json

@@ -11,37 +11,37 @@ scenarios:
     description: Microsoft.ApiManagement/service
     steps:
       - step: ApiManagementService_CheckNameAvailability
-        exampleFile: ..\examples\ApiManagementServiceCheckNameAvailability.json
+        exampleFile: ../examples/ApiManagementServiceCheckNameAvailability.json
       - step: ApiManagementService_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateService.json
+        exampleFile: ../examples/ApiManagementCreateService.json
         requestUpdate:
           - replace: /parameters/sku/name
             value: Standard
       - step: ApiManagementService_List
-        exampleFile: ..\examples\ApiManagementListServiceBySubscription.json
+        exampleFile: ../examples/ApiManagementListServiceBySubscription.json
       - step: ApiManagementService_ListByResourceGroup
-        exampleFile: ..\examples\ApiManagementListServiceBySubscriptionAndResourceGroup.json
+        exampleFile: ../examples/ApiManagementListServiceBySubscriptionAndResourceGroup.json
       - step: ApiManagementService_Get
-        exampleFile: ..\examples\ApiManagementServiceGetService.json
+        exampleFile: ../examples/ApiManagementServiceGetService.json
       - step: ApiManagementService_Update
-        exampleFile: ..\examples\ApiManagementUpdateServiceDisableTls10.json
+        exampleFile: ../examples/ApiManagementUpdateServiceDisableTls10.json
       - step: ApiManagementService_GetDomainOwnershipIdentifier
-        exampleFile: ..\examples\ApiManagementServiceGetDomainOwnershipIdentifier.json
+        exampleFile: ../examples/ApiManagementServiceGetDomainOwnershipIdentifier.json
       - step: ApiManagementService_GetSsoToken
-        exampleFile: ..\examples\ApiManagementServiceGetSsoToken.json
+        exampleFile: ../examples/ApiManagementServiceGetSsoToken.json
       - step: ApiManagementServiceSkus_ListAvailableServiceSkus
-        exampleFile: ..\examples\ApiManagementListSKUs-Dedicated.json
+        exampleFile: ../examples/ApiManagementListSKUs-Dedicated.json
       - step: ApiManagementService_Delete
-        exampleFile: ..\examples\ApiManagementServiceDeleteService.json
+        exampleFile: ../examples/ApiManagementServiceDeleteService.json
       - step: DeletedServices_ListBySubscription
-        exampleFile: ..\examples\ApiManagementDeletedServicesListBySubscription.json
+        exampleFile: ../examples/ApiManagementDeletedServicesListBySubscription.json
       - step: DeletedServices_GetByName
-        exampleFile: ..\examples\ApiManagementGetDeletedServiceByName.json
+        exampleFile: ../examples/ApiManagementGetDeletedServiceByName.json
       - step: DeletedServices_Purge
-        exampleFile: ..\examples\ApiManagementDeletedServicesPurge.json
+        exampleFile: ../examples/ApiManagementDeletedServicesPurge.json
         
   - scenario: ApiManagementOperations
     description: Microsoft.ApiManagement/operations
     steps:
       - step: ApiManagementOperations_List
-        exampleFile: ..\examples\ApiManagementListOperations.json
+        exampleFile: ../examples/ApiManagementListOperations.json

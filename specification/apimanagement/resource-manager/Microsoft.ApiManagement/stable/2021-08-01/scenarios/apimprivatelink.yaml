@@ -16,7 +16,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -32,17 +32,17 @@ scenarios:
     description: Microsoft.ApiManagement/service/privateEndpointConnections
     steps:
       - step: PrivateEndpointConnection_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementApproveOrRejectPrivateEndpointConnection.json
+        exampleFile: ../examples/ApiManagementApproveOrRejectPrivateEndpointConnection.json
         requestUpdate:
           - replace: /privateEndpointConnectionRequest/id
             value: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointConnectionName
           - replace: /privateEndpointConnectionRequest/properties/privateLinkServiceConnectionState/status
             value: Rejected
       - step: PrivateEndpointConnection_ListByService
-        exampleFile: ..\examples\ApiManagementListPrivateEndpointConnections.json
+        exampleFile: ../examples/ApiManagementListPrivateEndpointConnections.json
       - step: PrivateEndpointConnection_ListPrivateLinkResources
-        exampleFile: ..\examples\ApiManagementListPrivateLinkGroupResources.json
+        exampleFile: ../examples/ApiManagementListPrivateLinkGroupResources.json
       - step: PrivateEndpointConnection_GetByName
-        exampleFile: ..\examples\ApiManagementGetPrivateEndpointConnection.json
+        exampleFile: ../examples/ApiManagementGetPrivateEndpointConnection.json
       - step: PrivateEndpointConnection_Delete
-        exampleFile: ..\examples\ApiManagementDeletePrivateEndpointConnection.json
+        exampleFile: ../examples/ApiManagementDeletePrivateEndpointConnection.json

@@ -8,31 +8,31 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
   - step: TenantAccess_Create
-    exampleFile: ..\examples\ApiManagementCreateTenantAccess.json
+    exampleFile: ../examples/ApiManagementCreateTenantAccess.json
 
 scenarios:
   - scenario: TenantAccess
     description: Microsoft.ApiManagement/service/tenant
     steps:
       - step: TenantAccess_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadTenantAccess.json
+        exampleFile: ../examples/ApiManagementHeadTenantAccess.json
       - step: TenantAccess_ListByService
-        exampleFile: ..\examples\ApiManagementListTenantAccess.json
+        exampleFile: ../examples/ApiManagementListTenantAccess.json
       - step: TenantAccess_Get
-        exampleFile: ..\examples\ApiManagementGetTenantAccess.json
+        exampleFile: ../examples/ApiManagementGetTenantAccess.json
       - step: TenantAccess_Update
-        exampleFile: ..\examples\ApiManagementUpdateTenantAccess.json
+        exampleFile: ../examples/ApiManagementUpdateTenantAccess.json
       - step: TenantAccess_RegenerateSecondaryKey
         operationId: TenantAccess_RegenerateSecondaryKey
         parameters:
           accessName: access
       - step: TenantAccess_ListSecrets
-        exampleFile: ..\examples\ApiManagementListSecretsTenantAccess.json
+        exampleFile: ../examples/ApiManagementListSecretsTenantAccess.json
       - step: TenantAccess_RegeneratePrimaryKey
         operationId: TenantAccess_RegeneratePrimaryKey
         parameters:
@@ -54,10 +54,10 @@ scenarios:
     description: Microsoft.ApiManagement/service/tenant/configuration
     steps:
       - step: TenantConfiguration_Save
-        exampleFile: ..\examples\ApiManagementTenantConfigurationSave.json
+        exampleFile: ../examples/ApiManagementTenantConfigurationSave.json
       - step: TenantConfiguration_GetSyncState
-        exampleFile: ..\examples\ApiManagementTenantAccessSyncState.json
+        exampleFile: ../examples/ApiManagementTenantAccessSyncState.json
       - step: TenantConfiguration_Validate
-        exampleFile: ..\examples\ApiManagementTenantConfigurationValidate.json
+        exampleFile: ../examples/ApiManagementTenantConfigurationValidate.json
       - step: TenantConfiguration_Deploy
-        exampleFile: ..\examples\ApiManagementTenantConfigurationDeploy.json
+        exampleFile: ../examples/ApiManagementTenantConfigurationDeploy.json

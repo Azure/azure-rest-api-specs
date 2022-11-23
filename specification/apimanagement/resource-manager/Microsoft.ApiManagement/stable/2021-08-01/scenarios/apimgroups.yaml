@@ -11,7 +11,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -21,14 +21,14 @@ scenarios:
     description: Microsoft.ApiManagement/service/groups
     steps:
       - step: Group_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateGroup.json
+        exampleFile: ../examples/ApiManagementCreateGroup.json
       - step: Group_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadGroup.json
+        exampleFile: ../examples/ApiManagementHeadGroup.json
       - step: Group_ListByService
-        exampleFile: ..\examples\ApiManagementListGroups.json
+        exampleFile: ../examples/ApiManagementListGroups.json
       - step: Group_Get
-        exampleFile: ..\examples\ApiManagementGetGroup.json
+        exampleFile: ../examples/ApiManagementGetGroup.json
       - step: Group_Update
-        exampleFile: ..\examples\ApiManagementUpdateGroup.json
+        exampleFile: ../examples/ApiManagementUpdateGroup.json
       - step: Group_Delete
-        exampleFile: ..\examples\ApiManagementDeleteGroup.json
+        exampleFile: ../examples/ApiManagementDeleteGroup.json

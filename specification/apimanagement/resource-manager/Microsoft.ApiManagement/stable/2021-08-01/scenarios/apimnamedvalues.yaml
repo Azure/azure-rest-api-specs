@@ -11,7 +11,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -21,16 +21,16 @@ scenarios:
     description: Microsoft.ApiManagement/service/namedValues
     steps:
       - step: NamedValue_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateNamedValue.json
+        exampleFile: ../examples/ApiManagementCreateNamedValue.json
       - step: NamedValue_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadNamedValue.json
+        exampleFile: ../examples/ApiManagementHeadNamedValue.json
       - step: NamedValue_ListByService
-        exampleFile: ..\examples\ApiManagementListNamedValues.json
+        exampleFile: ../examples/ApiManagementListNamedValues.json
       - step: NamedValue_Get
-        exampleFile: ..\examples\ApiManagementGetNamedValue.json
+        exampleFile: ../examples/ApiManagementGetNamedValue.json
       - step: NamedValue_Update
-        exampleFile: ..\examples\ApiManagementUpdateNamedValue.json
+        exampleFile: ../examples/ApiManagementUpdateNamedValue.json
       - step: NamedValue_ListValue
-        exampleFile: ..\examples\ApiManagementNamedValueListValue.json
+        exampleFile: ../examples/ApiManagementNamedValueListValue.json
       - step: NamedValue_Delete
-        exampleFile: ..\examples\ApiManagementDeleteNamedValue.json
+        exampleFile: ../examples/ApiManagementDeleteNamedValue.json

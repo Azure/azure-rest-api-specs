@@ -14,7 +14,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -24,7 +24,7 @@ scenarios:
     description: Microsoft.ApiManagement/service/identityProviders
     steps:
       - step: IdentityProvider_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateIdentityProvider.json
+        exampleFile: ../examples/ApiManagementCreateIdentityProvider.json
         requestUpdate:
           - replace: /identityProviderName
             value: aad
@@ -35,19 +35,19 @@ scenarios:
           - add: /parameters/properties/allowedTenants
             value: [$(azureTenantId)]
       - step: IdentityProvider_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadIdentityProvider.json
+        exampleFile: ../examples/ApiManagementHeadIdentityProvider.json
         requestUpdate:
           - replace: /identityProviderName
             value: aad
       - step: IdentityProvider_ListByService
-        exampleFile: ..\examples\ApiManagementListIdentityProviders.json
+        exampleFile: ../examples/ApiManagementListIdentityProviders.json
       - step: IdentityProvider_Get
-        exampleFile: ..\examples\ApiManagementGetIdentityProvider.json
+        exampleFile: ../examples/ApiManagementGetIdentityProvider.json
         requestUpdate:
           - replace: /identityProviderName
             value: aad
       - step: IdentityProvider_Update
-        exampleFile: ..\examples\ApiManagementUpdateIdentityProvider.json
+        exampleFile: ../examples/ApiManagementUpdateIdentityProvider.json
         requestUpdate:
           - replace: /identityProviderName
             value: aad
@@ -56,9 +56,9 @@ scenarios:
           - replace: /parameters/properties/clientSecret
             value: $(azureClientSecret)
       - step: IdentityProvider_ListSecrets
-        exampleFile: ..\examples\ApiManagementIdentityProviderListSecrets.json
+        exampleFile: ../examples/ApiManagementIdentityProviderListSecrets.json
         requestUpdate:
           - replace: /identityProviderName
             value: aad
       - step: IdentityProvider_Delete
-        exampleFile: ..\examples\ApiManagementDeleteIdentityProvider.json
+        exampleFile: ../examples/ApiManagementDeleteIdentityProvider.json

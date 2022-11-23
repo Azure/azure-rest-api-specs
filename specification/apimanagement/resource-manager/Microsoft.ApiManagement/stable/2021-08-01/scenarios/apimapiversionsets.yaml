@@ -11,7 +11,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -21,14 +21,14 @@ scenarios:
     description: Microsoft.ApiManagement/service/apiVersionSets
     steps:
       - step: ApiVersionSet_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreateApiVersionSet.json
+        exampleFile: ../examples/ApiManagementCreateApiVersionSet.json
       - step: ApiVersionSet_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadApiVersionSet.json
+        exampleFile: ../examples/ApiManagementHeadApiVersionSet.json
       - step: ApiVersionSet_ListByService
-        exampleFile: ..\examples\ApiManagementListApiVersionSets.json
+        exampleFile: ../examples/ApiManagementListApiVersionSets.json
       - step: ApiVersionSet_Get
-        exampleFile: ..\examples\ApiManagementGetApiVersionSet.json
+        exampleFile: ../examples/ApiManagementGetApiVersionSet.json
       - step: ApiVersionSet_Update
-        exampleFile: ..\examples\ApiManagementUpdateApiVersionSet.json
+        exampleFile: ../examples/ApiManagementUpdateApiVersionSet.json
       - step: ApiVersionSet_Delete
-        exampleFile: ..\examples\ApiManagementDeleteApiVersionSet.json
+        exampleFile: ../examples/ApiManagementDeleteApiVersionSet.json

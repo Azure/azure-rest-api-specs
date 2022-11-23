@@ -11,7 +11,7 @@ variables:
 
 prepareSteps:
   - step: ApiManagementService_CreateOrUpdate
-    exampleFile: ..\examples\ApiManagementCreateService.json
+    exampleFile: ../examples/ApiManagementCreateService.json
     requestUpdate:
       - replace: /parameters/sku/name
         value: Standard
@@ -21,15 +21,15 @@ scenarios:
     description: Microsoft.ApiManagement/service/portalRevisions
     steps:
       - step: PortalRevision_CreateOrUpdate
-        exampleFile: ..\examples\ApiManagementCreatePortalRevision.json
+        exampleFile: ../examples/ApiManagementCreatePortalRevision.json
       - step: PortalRevision_GetEntityTag
-        exampleFile: ..\examples\ApiManagementHeadPortalRevision.json
+        exampleFile: ../examples/ApiManagementHeadPortalRevision.json
       - step: PortalRevision_ListByService
-        exampleFile: ..\examples\ApiManagementListPortalRevisions.json
+        exampleFile: ../examples/ApiManagementListPortalRevisions.json
       - step: PortalRevision_Get
-        exampleFile: ..\examples\ApiManagementGetPortalRevision.json
+        exampleFile: ../examples/ApiManagementGetPortalRevision.json
       - step: PortalRevision_Update
-        exampleFile: ..\examples\ApiManagementUpdatePortalRevision.json
+        exampleFile: ../examples/ApiManagementUpdatePortalRevision.json
         requestUpdate:
           - remove: /parameters/properties/isCurrent
         
