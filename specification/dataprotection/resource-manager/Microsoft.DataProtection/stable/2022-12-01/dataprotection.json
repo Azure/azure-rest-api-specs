@@ -4325,6 +4325,10 @@
           "description": "Is vault protected by resource guard",
           "type": "boolean",
           "readOnly": true
+        },
+        "featureSettings": {
+          "$ref": "#/definitions/FeatureSettings",
+          "description": "Feature Settings"
         }
       },
       "required": [
@@ -4631,6 +4635,24 @@
       ],
       "title": "CopyOption",
       "type": "object"
+    },
+    "CrossSubscriptionRestoreSettings": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "CrossSubscriptionRestore state",
+          "enum": [
+            "Disabled",
+            "PermanentlyDisabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CrossSubscriptionRestoreState",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "CustomCopyOption": {
       "allOf": [
@@ -5172,6 +5194,15 @@
       "title": "ExportJobsResult",
       "type": "object"
     },
+    "FeatureSettings": {
+      "description": "Class containing feature settings of vault",
+      "type": "object",
+      "properties": {
+        "crossSubscriptionRestoreSettings": {
+          "$ref": "#/definitions/CrossSubscriptionRestoreSettings"
+        }
+      }
+    },
     "FeatureValidationRequest": {
       "description": "Base class for feature object",
       "type": "object",
@@ -5517,6 +5548,10 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
+        },
+        "featureSettings": {
+          "$ref": "#/definitions/FeatureSettings",
+          "description": "Feature Settings"
         }
       }
     },
@@ -6265,11 +6300,16 @@
         "url": {
           "description": "Url denoting the restore destination. It can point to container / file share etc",
           "type": "string"
+        },
+        "targetResourceArmId": {
+          "description": "Full ARM Id denoting the restore destination. It is the ARM Id pointing to container / file share\r\nThis is optional if the target subscription can be identified with the URL field. If not\r\nthen this is needed if CrossSubscriptionRestore field of BackupVault is in any of the disabled states",
+          "type": "string"
         }
       },
       "required": [
         "filePrefix",
         "restoreTargetLocationType",
+        "targetResourceArmId",
         "url"
       ],
       "type": "object"
