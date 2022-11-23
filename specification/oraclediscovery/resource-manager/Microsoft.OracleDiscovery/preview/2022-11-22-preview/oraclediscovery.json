@@ -178,7 +178,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureOracle/OracleSites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites": {
       "get": {
         "operationId": "oracleSite_listbyresourcegroupname",
         "parameters": [
@@ -196,7 +196,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/SitesListResult"
             }
           },
           "default": {
@@ -205,10 +205,13 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureOracle/OracleSites": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OracleDiscovery/OracleSites": {
       "get": {
         "operationId": "oracleSite_listbysubscriptioname",
         "parameters": [
@@ -223,7 +226,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/SitesListResult"
             }
           },
           "default": {
@@ -232,10 +235,44 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureOracle/OracleSites/{siteName}/OracleServers/{serverName}": {
+    "/providers/Microsoft.OracleDiscovery/Operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Returns list of all operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleServers/{serverName}": {
       "get": {
         "operationId": "oracleServer_get",
         "parameters": [
@@ -400,7 +437,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureOracle/OracleSites/{siteName}/OracleDatabases/{batabaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases/{batabaseName}": {
       "get": {
         "operationId": "oracleDatabase_get",
         "parameters": [
@@ -629,7 +666,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "TODO."
+          "description": "Url to follow for getting next page of resources."
         }
       }
     },
@@ -745,7 +782,7 @@
           }
         },
         "dbConfig": {
-          "$ref": "#/definitions/dbConfigModel",
+          "$ref": "#/definitions/DbConfigModel",
           "description": "The Database Config."
         },
         "errors": {
@@ -813,11 +850,11 @@
           }
         },
         "versionInfo": {
-          "$ref": "#/definitions/versionInfoModel",
+          "$ref": "#/definitions/VersionInfoModel",
           "description": "The Database Config."
         },
         "serverConfig": {
-          "$ref": "#/definitions/serverConfigModel",
+          "$ref": "#/definitions/ServerConfigModel",
           "description": "The Database Config."
         },
         "errors": {
@@ -956,7 +993,7 @@
       },
       "description": "Results of the request to list operations."
     },
-    "dbConfigModel": {
+    "DbConfigModel": {
       "type": "object",
       "description": "DB  model for creating machine to assess resources",
       "properties": {
@@ -964,7 +1001,7 @@
       "required": [
       ]
     },
-    "dbConfigModelResult": {
+    "DbConfigModelResult": {
       "type": "object",
       "description": "DB model result for creating machine to assess resources",
       "properties": {
@@ -998,7 +1035,7 @@
         }
       }
     },
-    "versionInfoModel": {
+    "VersionInfoModel": {
       "type": "object",
       "description": "Bulk model for creating machine to assess resources",
       "properties": {
@@ -1014,7 +1051,7 @@
       "required": [
       ]
     },
-    "serverConfigModel": {
+    "ServerConfigModel": {
       "required": [
       ]
     },
