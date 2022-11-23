@@ -6824,17 +6824,11 @@
     "PeerRouteList": {
       "type": "object",
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/PeerRoute"
-            },
-            "description": "List of peer routes."
-          }
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
         },
-        "description": "List of virtual router peer routes."
+        "description": "List of peer routes."
       },
       "description": "Map from virtual router instance to list of peer routes."
     },
