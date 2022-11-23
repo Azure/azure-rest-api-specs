@@ -2195,6 +2195,17 @@
         }
       }
     },
+    "ResourceParameter": {
+      "type": "object",
+      "properties": {
+        "resourceIdName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        }
+      }
+    },
     "Insight": {
       "type": "object",
       "properties": {
@@ -2343,11 +2354,11 @@
         "marketplaceOfferDetails": {
           "$ref": "#/definitions/MarketplaceOfferDetails"
         },
-        "inputParameterValidationScopes": {
+        "inputParametersValidationScopes": {
           "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ResourceParameter"
           },
           "readOnly": true
         },
