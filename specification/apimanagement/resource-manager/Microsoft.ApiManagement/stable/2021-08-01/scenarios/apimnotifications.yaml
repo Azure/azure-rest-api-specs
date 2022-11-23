@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicenotifi
+  userId:
+    type: string
+    prefix: userid
+  email:
+    type: string
+    prefix: email
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+  - step: Notification_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateNotification.json
+
+scenarios:
+  - scenario: Notification
+    description: Microsoft.ApiManagement/service/notifications
+    steps:
+      - step: Notification_ListByService
+        exampleFile: ../examples/ApiManagementListNotifications.json
+      - step: Notification_Get
+        exampleFile: ../examples/ApiManagementGetNotification.json
+
+  - scenario: NotificationRecipientEmail
+    description: Microsoft.ApiManagement/service/notifications/recipientUsers
+    steps:
+      - step: NotificationRecipientEmail_CreateOrUpdate
+        exampleFile: ../examples/ApiManagementCreateNotificationRecipientEmail.json
+      - step: NotificationRecipientEmail_CheckEntityExists
+        exampleFile: ../examples/ApiManagementHeadNotificationRecipientEmail.json
+      - step: NotificationRecipientEmail_ListByNotification
+        exampleFile: ../examples/ApiManagementListNotificationRecipientEmails.json
+      - step: NotificationRecipientEmail_Delete
+        exampleFile: ../examples/ApiManagementDeleteNotificationRecipientEmail.json

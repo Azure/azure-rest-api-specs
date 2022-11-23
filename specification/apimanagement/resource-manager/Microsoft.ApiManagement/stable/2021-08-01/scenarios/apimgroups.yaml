@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicegroup
+  groupId:
+    type: string
+    prefix: groupid
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: Group
+    description: Microsoft.ApiManagement/service/groups
+    steps:
+      - step: Group_CreateOrUpdate
+        exampleFile: ../examples/ApiManagementCreateGroup.json
+      - step: Group_GetEntityTag
+        exampleFile: ../examples/ApiManagementHeadGroup.json
+      - step: Group_ListByService
+        exampleFile: ../examples/ApiManagementListGroups.json
+      - step: Group_Get
+        exampleFile: ../examples/ApiManagementGetGroup.json
+      - step: Group_Update
+        exampleFile: ../examples/ApiManagementUpdateGroup.json
+      - step: Group_Delete
+        exampleFile: ../examples/ApiManagementDeleteGroup.json

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicepolicy
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: Policy
+    description: Microsoft.ApiManagement/service/policies
+    steps:
+      - step: Policy_CreateOrUpdate
+        exampleFile: ../examples/ApiManagementCreatePolicy.json
+      - step: Policy_GetEntityTag
+        exampleFile: ../examples/ApiManagementHeadPolicy.json
+      - step: Policy_Get
+        exampleFile: ../examples/ApiManagementGetPolicy.json
+      - step: Policy_ListByService
+        exampleFile: ../examples/ApiManagementListPolicies.json
+      - step: Policy_Delete
+        exampleFile: ../examples/ApiManagementDeletePolicy.json
+
+  - scenario: PolicyDescription
+    description: Microsoft.ApiManagement/service/policyDescriptions
+    steps:
+      - step: PolicyDescription_ListByService
+        exampleFile: ../examples/ApiManagementListPolicyDescriptions.json

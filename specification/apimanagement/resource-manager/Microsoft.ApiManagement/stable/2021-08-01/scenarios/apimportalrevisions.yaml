@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicerevision
+  portalRevisionId:
+    type: string
+    prefix: portalrevi
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: PortalRevision
+    description: Microsoft.ApiManagement/service/portalRevisions
+    steps:
+      - step: PortalRevision_CreateOrUpdate
+        exampleFile: ../examples/ApiManagementCreatePortalRevision.json
+      - step: PortalRevision_GetEntityTag
+        exampleFile: ../examples/ApiManagementHeadPortalRevision.json
+      - step: PortalRevision_ListByService
+        exampleFile: ../examples/ApiManagementListPortalRevisions.json
+      - step: PortalRevision_Get
+        exampleFile: ../examples/ApiManagementGetPortalRevision.json
+      - step: PortalRevision_Update
+        exampleFile: ../examples/ApiManagementUpdatePortalRevision.json
+        requestUpdate:
+          - remove: /parameters/properties/isCurrent
+        

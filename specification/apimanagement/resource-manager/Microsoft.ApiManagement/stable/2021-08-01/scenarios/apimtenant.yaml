@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicetenant
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+  - step: TenantAccess_Create
+    exampleFile: ../examples/ApiManagementCreateTenantAccess.json
+
+scenarios:
+  - scenario: TenantAccess
+    description: Microsoft.ApiManagement/service/tenant
+    steps:
+      - step: TenantAccess_GetEntityTag
+        exampleFile: ../examples/ApiManagementHeadTenantAccess.json
+      - step: TenantAccess_ListByService
+        exampleFile: ../examples/ApiManagementListTenantAccess.json
+      - step: TenantAccess_Get
+        exampleFile: ../examples/ApiManagementGetTenantAccess.json
+      - step: TenantAccess_Update
+        exampleFile: ../examples/ApiManagementUpdateTenantAccess.json
+      - step: TenantAccess_RegenerateSecondaryKey
+        operationId: TenantAccess_RegenerateSecondaryKey
+        parameters:
+          accessName: access
+      - step: TenantAccess_ListSecrets
+        exampleFile: ../examples/ApiManagementListSecretsTenantAccess.json
+      - step: TenantAccess_RegeneratePrimaryKey
+        operationId: TenantAccess_RegeneratePrimaryKey
+        parameters:
+          accessName: access
+
+  - scenario: TenantAccessGit
+    description: Microsoft.ApiManagement/service/tenant/git
+    steps:
+      - step: TenantAccessGit_RegeneratePrimaryKey
+        operationId: TenantAccessGit_RegeneratePrimaryKey
+        parameters:
+          accessName: access
+      - step: TenantAccessGit_RegenerateSecondaryKey
+        operationId: TenantAccessGit_RegenerateSecondaryKey
+        parameters:
+          accessName: access
+
+  - scenario: TenantConfiguration
+    description: Microsoft.ApiManagement/service/tenant/configuration
+    steps:
+      - step: TenantConfiguration_Save
+        exampleFile: ../examples/ApiManagementTenantConfigurationSave.json
+      - step: TenantConfiguration_GetSyncState
+        exampleFile: ../examples/ApiManagementTenantAccessSyncState.json
+      - step: TenantConfiguration_Validate
+        exampleFile: ../examples/ApiManagementTenantConfigurationValidate.json
+      - step: TenantConfiguration_Deploy
+        exampleFile: ../examples/ApiManagementTenantConfigurationDeploy.json

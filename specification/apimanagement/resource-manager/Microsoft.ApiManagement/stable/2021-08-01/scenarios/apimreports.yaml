@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  serviceName:
+    type: string
+    prefix: servicereports
+
+prepareSteps:
+  - step: ApiManagementService_CreateOrUpdate
+    exampleFile: ../examples/ApiManagementCreateService.json
+    requestUpdate:
+      - replace: /parameters/sku/name
+        value: Standard
+
+scenarios:
+  - scenario: Reports
+    description: Microsoft.ApiManagement/service/reports
+    steps:
+      - step: Reports_ListByApi
+        exampleFile: ../examples/ApiManagementGetReportsByApi.json
+      - step: Reports_ListByGeo
+        exampleFile: ../examples/ApiManagementGetReportsByGeo.json
+      - step: Reports_ListByOperation
+        exampleFile: ../examples/ApiManagementGetReportsByOperation.json
+      - step: Reports_ListByProduct
+        exampleFile: ../examples/ApiManagementGetReportsByProduct.json
+      - step: Reports_ListBySubscription
+        exampleFile: ../examples/ApiManagementGetReportsBySubscription.json
+      - step: Reports_ListByTime
+        exampleFile: ../examples/ApiManagementGetReportsByTime.json
+      - step: Reports_ListByUser
+        exampleFile: ../examples/ApiManagementGetReportsByUser.json
+
+  - scenario: Region
+    description: Microsoft.ApiManagement/service/regions
+    steps:
+      - step: Region_ListByService
+        exampleFile: ../examples/ApiManagementListRegions.json
