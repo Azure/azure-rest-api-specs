@@ -335,7 +335,6 @@
           {
             "name": "ListCredentialsRequest",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/ListCredentialsRequest"
             },
@@ -496,7 +495,8 @@
         },
         "serviceConfigurationToken": {
           "type": "string",
-          "description": "The token to access the enabled service."
+          "description": "The token to access the enabled service.",
+          "x-ms-secret": true
         }
       }
     },
@@ -589,33 +589,38 @@
           "description": "The resource provisioning state."
         },
         "serviceConfigurations": {
-          "type": "object",
+          "type": "array",
           "description": "The enabled service configurations.",
           "items": {
-            "$ref": "#/definitions/ServiceConfigurations"
-          }
+            "$ref": "#/definitions/ServiceConfiguration"
+          },
+          "x-ms-identifiers": [
+            "serviceName"
+          ]
         }
       }
     },
-    "ServiceConfigurations": {
-      "type": "object",
-      "description": "The service configuration object definition where each key's value is additional property dictionary.",
+    "ServiceConfiguration": {
+      "description": "The service configuration object definition",
       "properties": {
-        "ssh": {
-          "type": "object",
-          "description": "Details for SSH service configuration.",
-          "additionalProperties": {
-            "type": "string"
+        "serviceName": {
+          "type": "string",
+          "description": "The type of service enabled.",
+          "enum": [
+            "SSH",
+            "WAC"
+          ],
+          "x-ms-enum": {
+            "name": "serviceName",
+            "modelAsString": true
           }
         },
-        "wac": {
-          "type": "object",
-          "description": "Details for WAC service configuration.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "port": {
+          "type": "string",
+          "description": "The port on which service is enabled."
         }
-      }
+      },
+      "type": "object"
     },
     "EndpointResource": {
       "description": "The endpoint for the target resource.",
@@ -697,7 +702,8 @@
             "WAC"
           ],
           "x-ms-enum": {
-            "name": "ServiceName"
+            "name": "serviceName",
+            "modelAsString": true
           }
         }
       }
@@ -705,9 +711,6 @@
     "ListCredentialsRequest": {
       "type": "object",
       "description": "Represent ListCredentials Request object.",
-      "required": [
-        "serviceName"
-      ],
       "properties": {
         "serviceName": {
           "type": "string",
@@ -717,7 +720,8 @@
             "WAC"
           ],
           "x-ms-enum": {
-            "name": "ServiceName"
+            "name": "serviceName",
+            "modelAsString": true
           }
         }
       }

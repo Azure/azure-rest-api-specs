@@ -6,14 +6,16 @@
     "EndpointResource": {
       "properties": {
         "type": "default",
-        "serviceConfigurations": {
-          "ssh": {
+        "serviceConfigurations": [
+          {
+            "serviceName": "SSH",
             "port": "22"
           },
-          "wac": {
+          {
+            "serviceName": "WAC",
             "port": "80"
           }
-        }
+        ]
       }
     }
   },
@@ -25,14 +27,16 @@
         "type": "Microsoft.HybridConnectivity/endpoints",
         "properties": {
           "type": "default",
-          "serviceConfigurations": {
-            "ssh": {
+          "serviceConfigurations": [
+            {
+              "serviceName": "SSH",
               "port": "22"
             },
-            "wac": {
+            {
+              "serviceName": "WAC",
               "port": "80"
             }
-          },
+          ],
           "provisioningState": "Succeeded"
         }
       }
