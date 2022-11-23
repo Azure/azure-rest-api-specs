@@ -356,7 +356,49 @@
           }
         }
       },
-      "patch": {}
+      "patch": {
+        "operationId": "oracleServer_patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/SitesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureOracle/OracleSites/{siteName}/OracleDatabases/{batabaseName}": {
       "get": {
@@ -480,7 +522,49 @@
         }
 
       },
-      "patch": {}
+      "patch": {
+        "operationId": "oracleDatabase_patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/SitesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -880,9 +964,9 @@
       "required": [
       ]
     },
-    "dbConfigModelResul": {
+    "dbConfigModelResult": {
       "type": "object",
-      "description": "Bulk model for creating machine to assess resources",
+      "description": "DB model result for creating machine to assess resources",
       "properties": {
       },
       "required": [
