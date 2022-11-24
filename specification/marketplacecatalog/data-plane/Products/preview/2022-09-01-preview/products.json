@@ -216,7 +216,7 @@
             "x-nullable": false,
             "description": "Returns a list of public or preview products",
             "schema": {
-              "$ref": "#/definitions/PageResultOfProductSummary"
+              "$ref": "#/definitions/CatalogApiResponse"
             }
           },
           "400": {
@@ -896,26 +896,21 @@
         }
       }
     },
-    "PageResultOfProductSummary": {
+    "CatalogApiResponse": {
       "type": "object",
-      "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "description": "Response page composed of a list of Product Summaries together with a next page link",
       "properties": {
-        "nextPageLink": {
-          "type": "string",
-          "description": "Gets the link for the next page of items in the feed.",
-          "format": "uri"
-        },
-        "count": {
-          "type": "integer",
-          "description": "Gets the total count of items in the feed.",
-          "format": "int64"
-        },
         "items": {
           "type": "array",
-          "description": "Gets the collection of entities for this feed.",
+          "description": "The list of returned items",
           "items": {
             "$ref": "#/definitions/ProductSummary"
           }
+        },
+        "nextPageLink": {
+          "type": "string",
+          "description": "Link to the next page",
+          "format": "uri"
         }
       }
     }
