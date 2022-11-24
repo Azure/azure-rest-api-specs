@@ -87,6 +87,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
+  - repo: azure-sdk-for-go
 ```
 
 ## Az
