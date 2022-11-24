@@ -55,7 +55,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/OracleSite"
             }
           },
           "default": {
@@ -80,19 +80,28 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Created OracleSites resource",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/OracleSite"
             }
           },
           "201": {
             "description": "Created OracleSites resource",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/OracleSite"
             }
           },
           "default": {
@@ -166,7 +175,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/OracleSite"
             }
           },
           "default": {
@@ -296,7 +305,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServerResult"
+              "$ref": "#/definitions/OracleServer"
             }
           },
           "default": {
@@ -339,13 +348,13 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServerResult"
+              "$ref": "#/definitions/OracleServer"
             }
           },
           "201": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServerResult"
+              "$ref": "#/definitions/OracleServer"
             }
           },
           "default": {
@@ -425,7 +434,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/SitesResult"
+              "$ref": "#/definitions/OracleServer"
             }
           },
           "default": {
@@ -437,7 +446,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases/{batabaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases/{databaseName}": {
       "get": {
         "operationId": "oracleDatabase_get",
         "parameters": [
@@ -461,137 +470,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleDatabaseResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "oracleDatabase_put",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "description": "The machines to add to the assessment",
-            "schema": {
               "$ref": "#/definitions/OracleDatabase"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieves the OracleSites resource.",
-            "schema": {
-              "$ref": "#/definitions/OracleDatabaseResult"
-            }
-          },
-          "201": {
-            "description": "Retrieves the OracleSites resource.",
-            "schema": {
-              "$ref": "#/definitions/OracleDatabaseResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "oracleDatabase_delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deletes the OracleSites resource."
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-
-      },
-      "patch": {
-        "operationId": "oracleDatabase_patch",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "description": "Clouds patch payload.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourcePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieves the OracleSites resource.",
-            "schema": {
-              "$ref": "#/definitions/SitesResult"
             }
           },
           "default": {
@@ -618,8 +497,29 @@
         }
       }
     },
-    "SitesResult": {
+    "SitesListResult": {
+      "type": "object",
+      "description": "List of Sites.",
       "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/OracleSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OracleSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OracleSiteModel"
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -635,10 +535,6 @@
           "readOnly": true,
           "description": "Resource Type"
         },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -651,24 +547,24 @@
           "description": "The extended location."
         }
       },
+      "required": [
+        "extendedLocation",
+        "properties"
+      ],
       "description": "The samples resource definition."
     },
-    "SitesListResult": {
+    "OracleSiteModel": {
       "type": "object",
-      "description": "List of Sites.",
+      "description": "Oracle Site properties",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Sites.",
-          "items": {
-            "$ref": "#/definitions/SitesResult"
-          }
-        },
-        "nextLink": {
+        "type": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "readOnly": true,
+          "description": "The mapped Master Site Id."
         }
-      }
+      },
+      "required": [
+      ]
     },
     "OracleServer": {
       "type": "object",
@@ -869,78 +765,6 @@
       },
       "required": [
       ]
-    },
-    "OracleServerResult": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Resource properties.",
-          "$ref": "#/definitions/OracleServerModel"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "The samples resource definition."
-    },
-    "OracleDatabaseResult": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Resource properties.",
-          "$ref": "#/definitions/OracleDatabaseModel"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "The samples resource definition."
     },
     "ResourceProviderOperationList": {
       "type": "object",
