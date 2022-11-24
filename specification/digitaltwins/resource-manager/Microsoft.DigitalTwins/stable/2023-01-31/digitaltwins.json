@@ -2169,9 +2169,24 @@
           "type": "string"
         },
         "adxTableName": {
-          "description": "The name of the Azure Data Explorer table. Defaults to AdtPropertyEvents.",
+          "description": "The name of the Azure Data Explorer table used for storing updates to properties of twins and relationships. Defaults to AdtPropertyEvents.",
           "type": "string",
           "default": "AdtPropertyEvents",
+          "x-nullable": true
+        },
+        "recordPropertyAndItemRemovals": {
+          "description": "Specifies whether or not to record twin / relationship property and item removals, including removals of indexed or keyed values (such as map entries, array elements, etc.). This feature is de-activated unless explicitly set to 'true'. Setting this property to 'true' will generate an additional column in the property events table in ADX.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adxTwinLifecycleEventsTableName": {
+          "description": "The name of the Azure Data Explorer table used for recording twin lifecycle events. The table will not be created if this property is left unspecified.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "adxRelationshipLifecycleEventsTableName": {
+          "description": "The name of the Azure Data Explorer table used for recording relationship lifecycle events. The table will not be created if this property is left unspecified.",
+          "type": "string",
           "x-nullable": true
         },
         "eventHubEndpointUri": {
