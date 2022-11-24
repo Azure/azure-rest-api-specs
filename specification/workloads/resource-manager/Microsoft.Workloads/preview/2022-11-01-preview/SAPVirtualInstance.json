@@ -1536,6 +1536,242 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances/{centralInstanceName}/start": {
+      "post": {
+        "tags": [
+          "SAPCentralInstances"
+        ],
+        "operationId": "SAPCentralInstances_StartInstance",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Start the SAP Central Services Instance": {
+            "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_StartInstance.json"
+          }
+        },
+        "description": "Starts the SAP Central Services Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SAPVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CentralInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances/{centralInstanceName}/stop": {
+      "post": {
+        "tags": [
+          "SAPCentralInstances"
+        ],
+        "operationId": "SAPCentralInstances_StopInstance",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Stop the SAP Central Services Instance.": {
+            "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_StopInstance.json"
+          }
+        },
+        "description": "Stops the SAP Central Services Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SAPVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CentralInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Central Services instance stop request body.",
+            "schema": {
+              "$ref": "#/definitions/StopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances/{applicationInstanceName}/start": {
+      "post": {
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "operationId": "SAPApplicationServerInstances_StartInstance",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Start the SAP Application Server Instance.": {
+            "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_StartInstance.json"
+          }
+        },
+        "description": "Starts the SAP Application Server Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SAPVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SAPApplicationInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances/{applicationInstanceName}/stop": {
+      "post": {
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "operationId": "SAPApplicationServerInstances_StopInstance",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Stop the SAP Application Server Instance": {
+            "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_StopInstance.json"
+          }
+        },
+        "description": "Stops the SAP Application Server Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SAPVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SAPApplicationInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Application server instance stop request body.",
+            "schema": {
+              "$ref": "#/definitions/StopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1642,7 +1878,8 @@
         "Stopping",
         "Offline",
         "PartiallyRunning",
-        "Unavailable"
+        "Unavailable",
+        "SoftShutdown"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2793,13 +3030,14 @@
       ]
     },
     "StopRequest": {
-      "description": "Stop SAP Request.",
+      "description": "Stop SAP instance(s) request body.",
       "type": "object",
       "properties": {
-        "hardStop": {
-          "type": "boolean",
-          "default": false,
-          "description": "A boolean to specify if the SAP system should be hard-stopped."
+        "softStopTimeoutSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "default": 0,
+          "description": "This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop."
         }
       }
     },
