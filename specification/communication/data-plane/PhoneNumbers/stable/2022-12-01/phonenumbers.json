@@ -63,7 +63,11 @@
             "enum": [
               "person",
               "application"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberAssignmentType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
@@ -291,17 +295,25 @@
             "enum": [
               "geographic",
               "tollFree"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberType",
+              "modelAsString": true
+            }
           },
           {
             "in": "query",
             "name": "assignmentType",
-            "description": "Filter by assignmentType, e.g. User, Application.",
+            "description": "Filter by assignmentType, e.g. Person, Application.",
             "type": "string",
             "enum": [
               "person",
               "application"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberAssignmentType",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
