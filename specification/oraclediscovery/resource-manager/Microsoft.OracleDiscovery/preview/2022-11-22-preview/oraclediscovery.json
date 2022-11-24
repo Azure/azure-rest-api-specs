@@ -446,6 +446,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleServers": {
+      "get": {
+        "operationId": "oracleServers_listbysitename",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases/{databaseName}": {
       "get": {
         "operationId": "oracleDatabase_get",
@@ -481,6 +520,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases": {
+      "get": {
+        "operationId": "oracleDatabase_listbysitename",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -506,6 +584,40 @@
           "description": "List of Sites.",
           "items": {
             "$ref": "#/definitions/OracleSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OracleDatabaseListResult": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/OracleDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OracleServerListResult": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/OracleServer"
           }
         },
         "nextLink": {
@@ -658,12 +770,22 @@
           "readOnly": true,
           "description": "The discovery status code success/failure/in-progress."
         },
-        "databaseSize": {
+        "dataSize": {
           "type": "string",
           "readOnly": true,
-          "description": "The size of database."
+          "description": "The data size of database in GB."
         },
-        "status": {
+        "logSize": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The log data size of database in GB."
+        },
+        "tempSize": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The temp data size of database in GB."
+        },
+        "databaseStatus": {
           "type": "string",
           "readOnly": true,
           "description": "The status of database online/offline."
