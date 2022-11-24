@@ -55,7 +55,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleSite"
+              "$ref": "#/definitions/OracleSiteProperties"
             }
           },
           "default": {
@@ -87,7 +87,7 @@
             "required": true,
             "description": "The machines to add to the assessment",
             "schema": {
-              "$ref": "#/definitions/OracleSite"
+              "$ref": "#/definitions/OracleSiteProperties"
             }
           }
         ],
@@ -95,13 +95,13 @@
           "200": {
             "description": "Created OracleSites resource",
             "schema": {
-              "$ref": "#/definitions/OracleSite"
+              "$ref": "#/definitions/OracleSiteProperties"
             }
           },
           "201": {
             "description": "Created OracleSites resource",
             "schema": {
-              "$ref": "#/definitions/OracleSite"
+              "$ref": "#/definitions/OracleSiteProperties"
             }
           },
           "default": {
@@ -175,7 +175,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleSite"
+              "$ref": "#/definitions/OracleSiteProperties"
             }
           },
           "default": {
@@ -305,7 +305,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServer"
+              "$ref": "#/definitions/OracleServerProperties"
             }
           },
           "default": {
@@ -340,7 +340,7 @@
             "required": true,
             "description": "The machines to add to the assessment",
             "schema": {
-              "$ref": "#/definitions/OracleServer"
+              "$ref": "#/definitions/OracleServerProperties"
             }
           }
         ],
@@ -348,13 +348,13 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServer"
+              "$ref": "#/definitions/OracleServerProperties"
             }
           },
           "201": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServer"
+              "$ref": "#/definitions/OracleServerProperties"
             }
           },
           "default": {
@@ -434,7 +434,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleServer"
+              "$ref": "#/definitions/OracleServerProperties"
             }
           },
           "default": {
@@ -509,7 +509,7 @@
           "200": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
-              "$ref": "#/definitions/OracleDatabase"
+              "$ref": "#/definitions/OracleDatabaseProperties"
             }
           },
           "default": {
@@ -583,7 +583,7 @@
           "type": "array",
           "description": "List of Sites.",
           "items": {
-            "$ref": "#/definitions/OracleSite"
+            "$ref": "#/definitions/OracleSiteProperties"
           }
         },
         "nextLink": {
@@ -600,7 +600,7 @@
           "type": "array",
           "description": "List of Sites.",
           "items": {
-            "$ref": "#/definitions/OracleDatabase"
+            "$ref": "#/definitions/OracleDatabaseProperties"
           }
         },
         "nextLink": {
@@ -617,7 +617,7 @@
           "type": "array",
           "description": "List of Sites.",
           "items": {
-            "$ref": "#/definitions/OracleServer"
+            "$ref": "#/definitions/OracleServerProperties"
           }
         },
         "nextLink": {
@@ -626,11 +626,11 @@
         }
       }
     },
-    "OracleSite": {
+    "OracleSiteProperties": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OracleSiteModel"
+          "$ref": "#/definitions/OracleSite"
         },
         "id": {
           "type": "string",
@@ -665,7 +665,7 @@
       ],
       "description": "The samples resource definition."
     },
-    "OracleSiteModel": {
+    "OracleSite": {
       "type": "object",
       "description": "Oracle Site properties",
       "properties": {
@@ -678,11 +678,50 @@
       "required": [
       ]
     },
-    "OracleServer": {
+    "OracleServerProperties": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OracleServerModel"
+          "$ref": "#/definitions/OracleServer"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "required": [
+        "extendedLocation",
+        "properties"
+      ],
+      "description": "The samples resource definition."
+    },
+    "OracleDatabaseProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OracleDatabase"
         },
         "id": {
           "type": "string",
@@ -718,45 +757,6 @@
       "description": "The samples resource definition."
     },
     "OracleDatabase": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OracleDatabaseModel"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location."
-        }
-      },
-      "required": [
-        "extendedLocation",
-        "properties"
-      ],
-      "description": "The samples resource definition."
-    },
-    "OracleDatabaseModel": {
       "type": "object",
       "description": "Oracle Database properties",
       "properties": {
@@ -816,7 +816,7 @@
       "required": [
       ]
     },
-    "OracleServerModel": {
+    "OracleServer": {
       "type": "object",
       "description": "Oracle Database properties",
       "properties": {
@@ -942,14 +942,6 @@
     "DbConfigModel": {
       "type": "object",
       "description": "DB  model for creating machine to assess resources",
-      "properties": {
-      },
-      "required": [
-      ]
-    },
-    "DbConfigModelResult": {
-      "type": "object",
-      "description": "DB model result for creating machine to assess resources",
       "properties": {
       },
       "required": [
