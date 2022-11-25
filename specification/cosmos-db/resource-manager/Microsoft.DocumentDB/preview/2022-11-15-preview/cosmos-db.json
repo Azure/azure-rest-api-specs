@@ -9095,7 +9095,7 @@
         },
         "materializedViewDefinition": {
           "$ref": "#/definitions/MaterializedViewDefinition",
-          "description": "The configuration for defining Materialized View. This must be specified for creating a Materialized View container."
+          "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
         }
       },
       "required": [
@@ -9431,11 +9431,11 @@
       "description": "Materialized View definition for the container.",
       "properties": {
         "sourceCollectionId": {
-          "description": "Name of the Cosmos DB SQL source container",
+          "description": "The name of the source container on which the Materialized View will be created.",
           "type": "string"
         },
         "definition": {
-          "description": "Definition for the SQL Materialized view",
+          "description": "The definition should be an SQL query which would be used to fetch data from the source container to populate into the Materialized View container.",
           "type": "string"
         }
       },
