@@ -2415,6 +2415,158 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances": {
+      "get": {
+        "tags": [
+          "DeletedBackupInstances"
+        ],
+        "description": "Gets deleted backup instances belonging to a backup vault",
+        "operationId": "DeletedBackupInstances_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedBackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DeletedBackupInstances in a Vault": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/ListDeletedBackupInstances.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances/{backupInstanceName}": {
+      "get": {
+        "tags": [
+          "DeletedBackupInstances"
+        ],
+        "description": "Gets a deleted backup instance with name in a backup vault",
+        "operationId": "DeletedBackupInstances_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "backupInstanceName",
+            "description": "The name of the deleted backup instance",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedBackupInstanceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DeletedBackupInstance": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/GetDeletedBackupInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances/{backupInstanceName}/undelete": {
+      "post": {
+        "tags": [
+          "DeletedBackupInstances"
+        ],
+        "operationId": "DeletedBackupInstances_Undelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "backupInstanceName",
+            "description": "The name of the deleted backup instance",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Undelete Deleted BackupInstance": {
+            "$ref": "./examples/DeletedBackupInstanceOperations/UndeleteDeletedBackupInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/resourceGuards": {
       "get": {
         "tags": [
@@ -4313,6 +4465,10 @@
           "description": "Resource move details for backup vault",
           "readOnly": true
         },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings",
+          "description": "Security Settings"
+        },
         "storageSettings": {
           "description": "Storage Settings",
           "items": {
@@ -4823,6 +4979,85 @@
       },
       "title": "Day",
       "type": "object"
+    },
+    "DeletedBackupInstance": {
+      "description": "Deleted Backup Instance",
+      "required": [
+        "dataSourceInfo",
+        "policyInfo"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupInstance"
+        }
+      ],
+      "properties": {
+        "deletionInfo": {
+          "$ref": "#/definitions/DeletionInfo",
+          "description": "Deletion info of Backup Instance",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedBackupInstanceResource": {
+      "description": "Deleted Backup Instance",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeletedBackupInstance",
+          "description": "DeletedBackupInstanceResource properties"
+        }
+      }
+    },
+    "DeletedBackupInstanceResourceList": {
+      "description": "List of DeletedBackupInstance resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedBackupInstanceResource"
+          }
+        }
+      }
+    },
+    "DeletionInfo": {
+      "description": "Deletion Info",
+      "type": "object",
+      "properties": {
+        "deletionTime": {
+          "description": "Specifies time of deletion",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingEndDate": {
+          "description": "Specifies billing end date",
+          "type": "string",
+          "readOnly": true
+        },
+        "scheduledPurgeTime": {
+          "description": "Specifies purge time",
+          "type": "string",
+          "readOnly": true
+        },
+        "deleteActivityID": {
+          "description": "Delete activity ID for troubleshooting purpose",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "DeleteOption": {
       "description": "Delete Option",
@@ -5549,6 +5784,10 @@
           "$ref": "#/definitions/MonitoringSettings",
           "description": "Monitoring Settings"
         },
+        "securitySettings": {
+          "$ref": "#/definitions/SecuritySettings",
+          "description": "Security Settings"
+        },
         "featureSettings": {
           "$ref": "#/definitions/FeatureSettings",
           "description": "Feature Settings"
@@ -6114,6 +6353,53 @@
         "value": {
           "description": "Gets or sets value stored in secret store resource",
           "type": "string"
+        }
+      }
+    },
+    "SecuritySettings": {
+      "description": "Class containing security settings of vault",
+      "type": "object",
+      "properties": {
+        "softDeleteSettings": {
+          "$ref": "#/definitions/SoftDeleteSettings"
+        }
+      }
+    },
+    "SoftDeleteSettings": {
+      "description": "Soft delete related settings",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "State of soft delete",
+          "enum": [
+            "Off",
+            "On",
+            "AlwaysOn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SoftDeleteState",
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "Soft Delete is turned off for the BackupVault",
+                "value": "Off"
+              },
+              {
+                "description": "Soft Delete is enabled for the BackupVault but can be turned off",
+                "value": "On"
+              },
+              {
+                "description": "Soft Delete is permanently enabled for the BackupVault and the setting cannot be changed",
+                "value": "AlwaysOn"
+              }
+            ]
+          }
+        },
+        "retentionDurationInDays": {
+          "description": "Soft delete retention duration",
+          "format": "double",
+          "type": "number"
         }
       }
     },
