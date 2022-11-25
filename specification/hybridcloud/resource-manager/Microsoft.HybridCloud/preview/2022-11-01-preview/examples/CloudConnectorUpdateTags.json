@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "cloudConnectorName": "cloudConnector",
+    "parameters": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "tenantUri": "localhost.tenanturi.com",
+          "applicationId": "fd8e91ac-f03e-4202-82cb-7d12d919ff09",
+          "clientSecret": {
+            "key": "veervInterCert",
+            "keyVaultId": "https://veerav-tst-kv-east.vault.azure.net/secrets/veervInterCert/a8d10bd9f69f4effaa4f8cb5cea5bd3c"
+          },
+          "cloudConnections": [],
+          "provisioningState": "Updating"
+        },
+        "id": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourceGroups/vnaidu-tst-rg-east/providers/Microsoft.HybridCloud/cloudConnectors/cloudConnector10",
+        "name": "cloudConnector",
+        "type": "Microsoft.HybridCloud/CloudConnectors",
+        "etag": "09ea30a4-6cf2-4288-bf37-3d3a5b730e18",
+        "location": "westus2",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/vnaidu-tst-rg-east/providers/Microsoft.ManagedIdentity/userAssignedIdentities/vnaidu-tst-mid-east": {}
+          }
+        }
+      }
+    }
+  }
+}
