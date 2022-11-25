@@ -36,7 +36,12 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}": {
       "get": {
+        "tags": [
+          "OracleSites"
+        ],
         "operationId": "oracleSite_get",
+        "summary": "Implements OracleSites GET method.",
+        "description": "Gets the OracleSites resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -67,7 +72,12 @@
         }
       },
       "put": {
+        "tags": [
+          "OracleSites"
+        ],
         "operationId": "oracleSite_create",
+        "summary": "Implements OracleSites PUT method.",
+        "description": "Puts the OracleSites resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -113,7 +123,12 @@
         }
       },
       "delete": {
+        "tags": [
+          "OracleSites"
+        ],
         "operationId": "oracleSite_delete",
+        "summary": "Implements OracleSites DELETE method.",
+        "description": "Deletes the OracleSites resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -147,7 +162,12 @@
         }
       },
       "patch": {
+        "tags": [
+          "OracleSites"
+        ],
         "operationId": "oracleSite_patch",
+        "summary": "Implements OracleSites PATCH method.",
+        "description": "Patchs the OracleSites resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -189,7 +209,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites": {
       "get": {
+        "tags": [
+          "OracleSites"
+        ],
         "operationId": "oracleSite_listbyresourcegroupname",
+        "summary": "Implements OracleSites GET method in a resource group.",
+        "description": "Lits the OracleSites resource in a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -222,7 +247,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OracleDiscovery/OracleSites": {
       "get": {
+        "tags": [
+          "OracleSites"
+        ],
         "operationId": "oracleSite_listbysubscriptioname",
+        "summary": "Implements OracleSites GET method in a subscription.",
+        "description": "Lists the OracleSites resource in a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -283,7 +313,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleServers/{serverName}": {
       "get": {
+        "tags": [
+          "OracleServers"
+        ],
         "operationId": "oracleServer_get",
+        "summary": "Implements OracleServers GET method.",
+        "description": "Gets the OracleServers resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -317,7 +352,12 @@
         }
       },
       "put": {
+        "tags": [
+          "OracleServers"
+        ],
         "operationId": "oracleServer_put",
+        "summary": "Implements OracleServers PUT method.",
+        "description": "Puts the OracleServers resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -366,7 +406,12 @@
         }
       },
       "delete": {
+        "tags": [
+          "OracleServers"
+        ],
         "operationId": "oracleServer_delete",
+        "summary": "Implements OracleServers DELETE method.",
+        "description": "Deletes the OracleServers resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -403,7 +448,12 @@
         }
       },
       "patch": {
+        "tags": [
+          "OracleServers"
+        ],
         "operationId": "oracleServer_patch",
+        "summary": "Implements OracleSites PATCH method.",
+        "description": "Patchs the OracleSites resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -448,7 +498,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleServers": {
       "get": {
+        "tags": [
+          "OracleServers"
+        ],
         "operationId": "oracleServers_listbysitename",
+        "summary": "Implements OracleSites GET method.",
+        "description": "Lists the OracleSites resource in OracleSites.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -487,7 +542,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases/{databaseName}": {
       "get": {
+        "tags": [
+          "OracleDatabases"
+        ],
         "operationId": "oracleDatabase_get",
+        "summary": "Implements OracleDatabases GET method.",
+        "description": "Gets the OracleDatabases resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -523,7 +583,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases": {
       "get": {
+        "tags": [
+          "OracleDatabases"
+        ],
         "operationId": "oracleDatabase_listbysitename",
+        "summary": "Implements OracleSites GET method.",
+        "description": "Lists the OracleSites resource in OracleSites.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -679,6 +744,8 @@
         }
       },
       "required": [
+        "masterSiteId",
+        "migrateProjectId"
       ]
     },
     "OracleServer": {
@@ -821,7 +888,7 @@
     },
     "OracleServerProperties": {
       "type": "object",
-      "description": "Oracle Database properties",
+      "description": "Oracle Server properties",
       "properties": {
         "type": {
           "type": "string",
@@ -840,7 +907,6 @@
         },
         "hostName": {
           "type": "string",
-          "readOnly": true,
           "description": "The DB  IP/host name."
         },
         "serviceId": {
@@ -848,8 +914,7 @@
           "type": "array",
           "items": {
             "description": "Oracle Server ARM Id",
-            "type": "string",
-            "readOnly": true
+            "type": "string"
           }
         },
         "portNumber": {
@@ -857,8 +922,7 @@
           "type": "array",
           "items": {
             "description": "Oracle Server ARM Id",
-            "type": "string",
-            "readOnly": true
+            "type": "string"
           }
         },
         "oracleDatabases": {
@@ -889,6 +953,9 @@
         }
       },
       "required": [
+        "serviceId",
+        "portNumber",
+        "hostName"
       ]
     },
     "ResourceProviderOperationList": {
@@ -951,8 +1018,8 @@
       ]
     },
     "Error": {
-      "description": "Defines the error.",
       "type": "object",
+      "description": "Defines the error.",
       "properties": {
         "id": {
           "description": "The error ID.",
@@ -993,6 +1060,10 @@
       ]
     },
     "ServerConfigModel": {
+      "type": "object",
+      "description": "The DB server configuration",
+      "properties": {
+      },
       "required": [
       ]
     },
