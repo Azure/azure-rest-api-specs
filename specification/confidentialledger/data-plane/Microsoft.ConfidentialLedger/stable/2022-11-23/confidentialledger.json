@@ -490,6 +490,44 @@
     }
   },
   "definitions": {
+    "ApplicationClaims": {
+      "description": "List of application claim objects.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ApplicationClaimObject"
+      }
+    },
+    "ApplicationClaimData": {
+      "description": "Data used to build an application claim.",
+      "properties": {
+        "collectionId": {
+          "description": "Identifier for a collection id.",
+          "type": "string"
+        },
+        "contents": {
+          "description": "Contents of a ledger entry.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationClaimObject": {
+      "description": "Representation of an application claim object.",
+      "properties": {
+        "claimData": {
+          "$ref": "#/definitions/ApplicationClaimData"
+        },
+        "secretKey": {
+          "type": "string",
+          "description": "Base64-encoded secret key."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the application claim."
+        }
+      },
+      "type": "object"
+    },
     "ConfidentialLedgerEnclaves": {
       "description": "Information about the enclaves running the Confidential Ledger.",
       "required": [
@@ -868,6 +906,9 @@
         "transactionId"
       ],
       "properties": {
+        "applicationClaims": {
+          "$ref": "#/definitions/ApplicationClaims"
+        },
         "receipt": {
           "$ref": "#/definitions/ReceiptContents"
         },
