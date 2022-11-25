@@ -4889,6 +4889,16 @@
         }
       }
     },
+    "GuestAgentProfileUpdate": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "clientPublicKey": {
+          "description": "Gets or sets the Public Key provided by the client for enabling guest management.",
+          "type": "string"
+        }
+      }
+    },
     "PlacementProfile": {
       "description": "Defines the resource properties.",
       "type": "object",
@@ -5137,6 +5147,9 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileUpdate"
+        },
+        "guestAgentProfile": {
+          "$ref": "#/definitions/GuestAgentProfileUpdate"
         }
       }
     },

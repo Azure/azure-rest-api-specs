@@ -27,9 +27,32 @@ These are the global settings for the mobilenetwork.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-11-01
+tag: package-2022-12-01-privatepreview
 ```
 
+
+### Tag: package-2022-12-01-privatepreview
+
+These settings apply only when `--tag=package-2022-12-01-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-privatepreview'
+input-file:
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/common.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/operation.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/service.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/sim.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/site.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/slice.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/radioAccessNetwork.json
+```
 
 ### Tag: package-2022-11-01
 
