@@ -1356,10 +1356,10 @@
             "$ref": "#/parameters/IntegrationRuntimeNameParameter"
           },
           {
-            "$ref": "#/parameters/IntegrationRuntimeNameOperationIdParameter"
+            "$ref": "#/parameters/IntegrationRuntimeNameActionParameter"
           },
           {
-            "$ref": "#/parameters/IntegrationRuntimeNameActionParameter"
+            "$ref": "#/parameters/IntegrationRuntimeNameOperationIdParameter"
           },
           {
             "name": "If-None-Match",
@@ -3009,6 +3009,7 @@
       ]
     },
     "IntegrationRuntimeOperationStatus": {
+      "type" : "object",
       "properties": {
         "status": {
           "type": "string",
@@ -3180,7 +3181,10 @@
       "required": true,
       "in": "path",
       "description": "Integration runtime name",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "IntegrationRuntimeNameOperationIdParameter": {
       "name": "integrationRuntimeOperationId",
@@ -3188,7 +3192,10 @@
       "required": true,
       "in": "path",
       "description": "Integration runtime operation id parameter name",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "IntegrationRuntimeNameActionParameter": {
       "name": "integrationRuntimeAction",

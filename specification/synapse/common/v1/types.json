@@ -280,7 +280,10 @@
       "description": "The name of the workspace.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "PrivateLinkHubNameParameter": {
       "name": "privateLinkHubName",
