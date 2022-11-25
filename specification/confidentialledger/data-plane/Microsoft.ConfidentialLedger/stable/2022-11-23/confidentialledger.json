@@ -6,12 +6,12 @@
     "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{ledgerEndpoint}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "ledgerEndpoint",
+        "name": "endpoint",
         "description": "The Confidential Ledger URL, for example https://contoso.confidentialledger.azure.com",
         "required": true,
         "type": "string",
@@ -960,9 +960,10 @@
       "in": "query",
       "required": true,
       "x-ms-parameter-location": "method",
-      "maximum": 9223372036854776000,
-      "minimum": -9223372036854776000,
+      "maximum": 9223372036854775807,
+      "minimum": -9223372036854775808,
       "type": "integer",
+      "format": "int64",
       "description": "The commit in the consensus protocol."
     },
     "CollectionIdParameter": {
