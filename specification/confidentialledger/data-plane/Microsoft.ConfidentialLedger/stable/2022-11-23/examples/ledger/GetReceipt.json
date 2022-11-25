@@ -2,39 +2,47 @@
   "parameters": {
     "api-version": "2022-11-23",
     "ledgerUri": "myledger.confidentialledger.azure.com",
-    "transactionId": "3.14"
+    "transactionId": "2.15"
   },
   "responses": {
     "200": {
       "body": {
-        "state": "Ready",
+        "applicationClaims": [
+          {
+            "claimData": {
+              "collectionId": "subledger:0",
+              "contents": "Ledger entry contents at transaction id 2.15"
+            },
+            "secretKey": "pVQTvOfYbw/kFmwMCvrDqmChrvM7StCzcpdi/bhjoJ4=",
+            "version": "v1"
+          }
+        ],
         "receipt": {
-          "leaf": "fdc977c49d3a8bdf986176984e9432a09b5f6fe0c04e0b1c2dd177c03fdca9ec",
-          "nodeId": "682c161e1bc0aec694cac58a6ea456e1caa6c9c56d8dd873da9455c341947065",
+          "cert": "-----BEGIN CERTIFICATE-----\nMIIBwzCCAUmgAwIBAgIRAMRXRsojcLOzbz90rSp67xQwCgYIKoZIzj0EAwMwFjEU\nMBIGA1UEAwwLQ0NGIE5ldHdvcmswHhcNMjIxMTI1MTE1NzM1WhcNMjMwMjIzMTE1\nNzM0WjATMREwDwYDVQQDDAhDQ0YgTm9kZTB2MBAGByqGSM49AgEGBSuBBAAiA2IA\nBFjnt5PbiuXlBDdWWJvR1d0niMIzx6hxRCs06d8MUwG49UvdqRc8aY2eeCuoGupG\n9uWA3WBaZoe3QcqUr0+S+WLYXP0TYRx0xQncbKZgSWa3bcFNqaosw1KnjbLaSIRR\nJKNeMFwwCQYDVR0TBAIwADAdBgNVHQ4EFgQUHOauq1jxw2NJMh0UrzkrWi/Vuxkw\nHwYDVR0jBBgwFoAUSyn9seKhGp3n74by4boUVRXOpvcwDwYDVR0RBAgwBocEfwAA\nATAKBggqhkjOPQQDAwNoADBlAjBuhyVaon0EVXKUnO59acJVcfN8fYbz8keieiov\nOHqVqSCc60mdNGugn1kUmCKtHWYCMQDDMnOFtyeTfHPCo4n48nyoCHdaTVyS/XIF\n83P94iQITIiCX9ZDxf/eqc8rcEvm63A=\n-----END CERTIFICATE-----\n",
+          "leafComponents": {
+            "commitEvidence": "ce:2.15:3cc2bfd0e14c9fb8b3d4838d3dce19704ca83fa04720e044512f25581fc9b0a7",
+            "writeSetDigest": "f71b60aa93a6ae36bfcadaf852b2eb43e7f868bd95053c84dd4b67d11c05d516"
+          },
+          "nodeId": "ff9bf39b7150510ad437977d7010aa733e718b407df755b52b961e4c3b2708fd",
           "proof": [
             {
-              "left": "f847e5efe3965b0dacb5c15c666602807a11fdecd465d0976779eed27121ffa3"
+              "left": "65e4256d7e7cbff2723de58dc1d8931e4683a328e720ba7c784a82b65d027b4a"
             },
             {
-              "left": "a56ce9efb73957f561f12d60513281fd2aaf16440234e2fd56e7d3d2ff4be8b0"
+              "left": "ef24f237b9208cfa51cdfa56b84927adce7074f3b5502abc0a6111bbd1317438"
             },
             {
-              "left": "d91c982f525302244b13b6add92cd0925e1e0fb621ff2a7bb408ecc51be8528e"
+              "left": "067d74a552d2f96d236e8fe94ed40ffd8ae665f890d6b8721783a7795a1b3dec"
             },
             {
-              "left": "6d87faceda763ce65914f95dfcc04b37ea3f26bc552764752a0f2720039f76be"
-            },
-            {
-              "left": "e0cc83ea2fae6c535fc44605fb25ba9fdfb319e0e577b3541760f9a3565c549b"
-            },
-            {
-              "left": "f0e95ed85f5f6c0197aed4f6685b93dc56edd823a2532bd717558a5ab77267cb"
+              "left": "1a64045485d3e9137978cb4de06a422a76738d36489d8efa829bbf7bdd262ac1"
             }
           ],
-          "root": "06fef62c80b6471c7005c1b114166fd1b0e077845f5ad544ad4eea4fb1d31f78",
-          "signature": "MGQCMACklXqd0ge+gBS8WzewrwtwzRzSKy+bfrLZVx0YHmQvtsqs7dExYESsqrUrB8ZcKwIwS3NPKaGq0w2QlPlCqUC3vQoQvhcZgPHPu2GkFYa7JEOdSKLknNPHaCRv80zx2RGF"
+          "serviceEndorsements": [],
+          "signature": "MGYCMQCYbEjjClnK63cpkb+LBM4XFugq99zPM8KLN9yKvXwV576mXd3fyUOrF84HJbAbO6gCMQCiebUALQkaSixwh4q3l3v+rd9pgBnH2HZpnby6vvJLGkYBDUAdR0kyYV5OEJva6N0="
         },
-        "transactionId": "3.14"
+        "state": "Ready",
+        "transactionId": "2.15"
       }
     }
   }
