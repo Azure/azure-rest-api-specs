@@ -164,6 +164,7 @@
             "in": "body",
             "name": "body",
             "description": "The updated values for the deployment.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DeploymentUpdate"
             }
@@ -880,6 +881,13 @@
     "Capabilities": {
       "title": "Capabilities",
       "description": "The capabilities of a base or fine tune model.",
+      "required": [
+        "completion",
+        "embeddings",
+        "fine_tune",
+        "inference",
+        "scale_types"
+      ],
       "type": "object",
       "properties": {
         "fine_tune": {
@@ -1121,6 +1129,11 @@
     },
     "Event": {
       "title": "Event",
+      "required": [
+        "created_at",
+        "level",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "object": {
@@ -1129,16 +1142,15 @@
         "created_at": {
           "format": "unixtime",
           "description": "A timestamp when this event was created (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "level": {
           "$ref": "#/definitions/LogLevel"
         },
         "message": {
           "description": "The message describing the event. This can be a change of state, e.g., enqueued, started, failed or completed, or other events like uploaded results.",
-          "type": "string",
-          "readOnly": true
+          "minLength": 1,
+          "type": "string"
         }
       }
     },
@@ -1559,7 +1571,6 @@
         "error"
       ],
       "type": "string",
-      "readOnly": true,
       "x-ms-enum": {
         "name": "LogLevel",
         "modelAsString": true,
