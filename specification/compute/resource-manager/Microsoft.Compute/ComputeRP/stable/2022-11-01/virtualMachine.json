@@ -1100,6 +1100,20 @@
             "description": "The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'"
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified",
+            "enum": [
+              "instanceView",
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetVMs",
+              "modelAsString": true
+            }
+          },
+          {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1160,7 +1174,21 @@
             "required": false,
             "type": "string",
             "description": "The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'"
-          }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified",
+            "enum": [
+              "instanceView",
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetVMs",
+              "modelAsString": true
+            }
+          },
         ],
         "responses": {
           "200": {
