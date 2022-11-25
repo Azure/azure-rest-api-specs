@@ -1329,6 +1329,72 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/{integrationRuntimeAction}/operationstatuses/{integrationRuntimeOperationId}": {
+      "get": {
+        "operationId": "IntegrationRuntime Start Operation Status",
+        "summary": "Get integration runtime start operation status",
+        "description": "Get an integration runtime start operation status",
+        "tags": [
+          "IntegrationRuntime"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameOperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameActionParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET integration runtime operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get integration runtime operation status": {
+            "$ref": "./examples/IntegrationRuntimes_Get_OperationStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2909,6 +2975,20 @@
         }
       }
     },
+    "IntegrationRuntimes_OperationStatus": {
+      "description": "integration runtime operation results request.",
+      "type": "object",
+      "properties": {
+        "autoUpdate": {
+          "description": "Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.",
+          "$ref": "#/definitions/IntegrationRuntimeAutoUpdate"
+        },
+        "updateDelayOffset": {
+          "description": "The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.",
+          "type": "string"
+        }
+      }
+    },
     "IntegrationRuntimeResource": {
       "type": "object",
       "description": "Integration runtime resource type.",
@@ -2927,6 +3007,26 @@
       "required": [
         "properties"
       ]
+    },
+    "IntegrationRuntimeOperationStatus": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
+        }
+      }
     },
     "GetSsisObjectMetadataRequest": {
       "type": "object",
@@ -3080,6 +3180,22 @@
       "required": true,
       "in": "path",
       "description": "Integration runtime name",
+      "x-ms-parameter-location": "method"
+    },
+    "IntegrationRuntimeNameOperationIdParameter": {
+      "name": "integrationRuntimeOperationId",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "Integration runtime operation id parameter name",
+      "x-ms-parameter-location": "method"
+    },
+    "IntegrationRuntimeNameActionParameter": {
+      "name": "integrationRuntimeAction",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "description": "Integration runtime operation id parameter name",
       "x-ms-parameter-location": "method"
     }
   }
