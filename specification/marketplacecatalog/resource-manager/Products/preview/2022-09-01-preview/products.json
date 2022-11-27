@@ -33,7 +33,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Unique product Id",
+            "description": "The unique product Id",
             "x-nullable": true
           },
           {
@@ -66,7 +66,7 @@
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "To include stop sold plans",
+            "description": "Denotes whether to include stop sold plans",
             "default": false,
             "x-nullable": false
           },
@@ -98,7 +98,7 @@
             "type": "boolean",
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Include hidden plans",
+            "description": "Denotes whether to include hidden plans",
             "default": false,
             "x-nullable": false
           },
@@ -269,7 +269,7 @@
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "To include stop-sold plans",
+            "description": "Denotes whether to include stop-sold plans",
             "default": false,
             "x-nullable": false
           },
@@ -293,7 +293,7 @@
             "type": "boolean",
             "name": "shouldCheckMarketplaceAdminPermissions",
             "in": "query",
-            "description": "Include marketplace admin permissions",
+            "description": "Denotes whether to include marketplace admin permissions",
             "default": false,
             "x-nullable": false
           },
@@ -301,7 +301,7 @@
             "type": "boolean",
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "To include hidden plans",
+            "description": "Denotes whether to include hidden plans",
             "default": false,
             "x-nullable": false
           }
@@ -409,7 +409,7 @@
             "name": "excludePublic",
             "x-originalName": "excludePublicOffersAndPublicPlans",
             "in": "query",
-            "description": "To exclude public products and plans",
+            "description": "Denotes whether to exclude public products and plans",
             "default": false,
             "x-nullable": false
           },
@@ -443,7 +443,7 @@
             "x-nullable": false,
             "description": "Returns a list of public, private and preview products, by subscription as audience",
             "schema": {
-              "$ref": "#/definitions/PageResultOfProductSummary"
+              "$ref": "#/definitions/CatalogApiResponse"
             }
           },
           "401": {
@@ -556,7 +556,7 @@
             "name": "excludePublic",
             "x-originalName": "excludePublicOffersAndPublicPlans",
             "in": "query",
-            "description": "To exclude public products and plans",
+            "description": "Denotes whether to exclude public products and plans",
             "default": false,
             "x-nullable": false
           },
@@ -590,7 +590,7 @@
             "x-nullable": false,
             "description": "Returns a list of public, private and preview products, by tenant as audience",
             "schema": {
-              "$ref": "#/definitions/PageResultOfProductSummary"
+              "$ref": "#/definitions/CatalogApiResponse"
             }
           },
           "401": {
@@ -915,6 +915,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product",
+          "format": "date-time"
         }
       }
     },
@@ -1372,27 +1377,24 @@
         }
       }
     },
-    "PageResultOfProductSummary": {
+    "CatalogApiResponse": {
       "type": "object",
-      "description": "Represents a feed of entities that includes additional information that OData formats support.",
+      "description": "Response page composed of a list of Product Summaries together with a next page link",
       "properties": {
+        "value": {
+          "items": {
+            "type": "array",
+            "x-ms-identifiers": [],
+            "description": "The list of returned items",
+            "items": {
+              "$ref": "#/definitions/ProductSummary"
+            }
+          }
+        },
         "nextPageLink": {
           "type": "string",
-          "description": "Gets the link for the next page of items in the feed.",
+          "description": "Link to the next page",
           "format": "uri"
-        },
-        "count": {
-          "type": "integer",
-          "description": "Gets the total count of items in the feed.",
-          "format": "int64"
-        },
-        "value": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "description": "Gets the collection of entities for this feed.",
-          "items": {
-            "$ref": "#/definitions/ProductSummary"
-          }
         }
       }
     }
