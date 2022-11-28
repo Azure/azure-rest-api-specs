@@ -1,0 +1,402 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  domainName:
+    type: string
+    prefix: domainname
+  domainTopicName:
+    type: string
+    prefix: domaintopi
+  topicName:
+    type: string
+    prefix: topicname
+  eventSubscriptionName:
+    type: string
+    prefix: eventsubsc
+  partnerRegistrationName:
+    type: string
+    prefix: partnerreg
+  partnerNamespaceName:
+    type: string
+    prefix: partnernam
+  systemTopicName:
+    type: string
+    prefix: systemtopi
+  privateEndpointName:
+    type: string
+    prefix: eventgridprivateendpoint
+  virtualNetworksName:
+    type: string
+    prefix: eventgridvnet
+  namespaceName:
+    type: string
+    prefix: eventhubna
+  location:
+    type: string
+
+prepareSteps:
+  - step: Domains_CreateOrUpdate
+    exampleFile: ../examples/Domains_CreateOrUpdate.json
+    outputVariables:
+      domainId:
+        type: string
+        fromResponse: /id
+  - step: Topics_CreateOrUpdate
+    exampleFile: ../examples/Topics_CreateOrUpdate.json
+  - step: PartnerRegistrations_CreateOrUpdate
+    operationId: PartnerRegistrations_CreateOrUpdate
+    parameters:
+      partnerRegistrationInfo:
+        location: global
+    outputVariables:
+      partnerRegistrationId:
+        type: string
+        fromResponse: /id
+  - step: SystemTopics_CreateOrUpdate
+    operationId: SystemTopics_CreateOrUpdate
+    parameters:
+      systemTopicInfo:
+        location: global
+        properties:
+          topicType: Microsoft.Resources.Subscriptions
+          source: /subscriptions/$(subscriptionId)
+  - step: Eventhub_Create
+    armTemplate: templates/Create_EventHubs.json
+
+scenarios:
+  - scenario: Domains
+    description: Microsoft.EventGrid/domains
+    steps:
+      - step: Domains_ListBySubscription
+        exampleFile: ../examples/Domains_ListBySubscription.json
+      - step: Domains_ListByResourceGroup
+        exampleFile: ../examples/Domains_ListByResourceGroup.json
+      - step: Domains_Get
+        exampleFile: ../examples/Domains_Get.json
+      - step: Domains_Update
+        exampleFile: ../examples/Domains_Update.json
+      - step: Domains_ListSharedAccessKeys
+        exampleFile: ../examples/Domains_ListSharedAccessKeys.json
+      - step: Domains_RegenerateKey
+        exampleFile: ../examples/Domains_RegenerateKey.json
+
+  - scenario: DomainEventSubscriptions
+    description:  Microsoft.EventGrid/domains/eventSubscriptions
+    steps:
+      - step: DomainEventSubscriptions_CreateOrUpdate
+        operationId: DomainEventSubscriptions_CreateOrUpdate
+        parameters:
+          eventSubscriptionInfo:
+            properties:
+              destination:
+                endpointType: EventHub
+                properties:
+                  resourceId: $(eventhubId)
+      - step: DomainEventSubscriptions_List
+        exampleFile: ../examples/DomainEventSubscriptions_List.json
+      - step: DomainEventSubscriptions_Get
+        exampleFile: ../examples/DomainEventSubscriptions_Get.json
+      - step: DomainEventSubscriptions_Update
+        operationId: DomainEventSubscriptions_Update
+        parameters:
+          eventSubscriptionUpdateParameters:
+            labels:
+              - label1
+      - step: DomainEventSubscriptions_GetDeliveryAttributes
+        exampleFile: ../examples/DomainEventSubscriptions_GetDeliveryAttributes.json
+      - step: DomainEventSubscriptions_Delete
+        exampleFile: ../examples/DomainEventSubscriptions_Delete.json
+
+  - scenario: DomainTopics
+    description: Microsoft.EventGrid/domains/topics
+    steps:
+      - step: DomainTopics_CreateOrUpdate
+        exampleFile: ../examples/DomainTopics_CreateOrUpdate.json
+      - step: DomainTopics_ListByDomain
+        exampleFile: ../examples/DomainTopics_ListByDomain.json
+      - step: DomainTopics_Get
+        exampleFile: ../examples/DomainTopics_Get.json
+      - step: DomainTopicEventSubscriptions_CreateOrUpdate
+        operationId: DomainTopicEventSubscriptions_CreateOrUpdate
+        parameters:
+          eventSubscriptionInfo:
+            properties:
+              destination:
+                endpointType: EventHub
+                properties:
+                  resourceId: $(eventhubId)
+      - step: DomainTopicEventSubscriptions_List
+        exampleFile: ../examples/DomainTopicEventSubscriptions_List.json
+      - step: DomainTopicEventSubscriptions_Get
+        exampleFile: ../examples/DomainTopicEventSubscriptions_Get.json
+      - step: DomainTopicEventSubscriptions_GetDeliveryAttributes
+        exampleFile: ../examples/DomainTopicEventSubscriptions_GetDeliveryAttributes.json
+      - step: DomainTopicEventSubscriptions_Delete
+        exampleFile: ../examples/DomainTopicEventSubscriptions_Delete.json
+      - step: DomainTopics_Delete
+        exampleFile: ../examples/DomainTopics_Delete.json
+
+  - scenario: Topics
+    description: Microsoft.EventGrid/topics
+    steps:
+      - step: Topics_ListBySubscription
+        exampleFile: ../examples/Topics_ListBySubscription.json
+      - step: Topics_ListByResourceGroup
+        exampleFile: ../examples/Topics_ListByResourceGroup.json
+      - step: Topics_Get
+        exampleFile: ../examples/Topics_Get.json
+      - step: Topics_Update
+        exampleFile: ../examples/Topics_Update.json
+      - step: Topics_ListSharedAccessKeys
+        exampleFile: ../examples/Topics_ListSharedAccessKeys.json
+      - step: Topics_RegenerateKey
+        exampleFile: ../examples/Topics_RegenerateKey.json
+
+  - scenario: TopicEventSubscriptions
+    description: Microsoft.EventGrid/topics/eventSubscriptions
+    steps:
+      - step: TopicEventSubscriptions_CreateOrUpdate
+        operationId: TopicEventSubscriptions_CreateOrUpdate
+        parameters:
+          eventSubscriptionInfo:
+            properties:
+              destination:
+                endpointType: EventHub
+                properties:
+                  resourceId: $(eventhubId)
+      - step: TopicEventSubscriptions_List
+        exampleFile: ../examples/TopicEventSubscriptions_List.json
+      - step: TopicEventSubscriptions_Get
+        exampleFile: ../examples/TopicEventSubscriptions_Get.json
+      - step: TopicEventSubscriptions_Update
+        operationId: TopicEventSubscriptions_Update
+        parameters:
+          eventSubscriptionUpdateParameters:
+            labels:
+              - label1
+      - step: TopicEventSubscriptions_GetDeliveryAttributes
+        exampleFile: ../examples/TopicEventSubscriptions_GetDeliveryAttributes.json
+      - step: TopicEventSubscriptions_Delete
+        exampleFile: ../examples/TopicEventSubscriptions_Delete.json
+
+  - scenario: PartnerRegistrations 
+    description: Microsoft.EventGrid/partnerRegistrations
+    steps:
+      - step: PartnerRegistrations_ListBySubscription
+        exampleFile: ../examples/PartnerRegistrations_ListBySubscription.json
+      - step: PartnerRegistrations_Get
+        exampleFile: ../examples/PartnerRegistrations_Get.json
+      - step: PartnerRegistrations_ListByResourceGroup
+        exampleFile: ../examples/PartnerRegistrations_ListByResourceGroup.json
+      - step: PartnerRegistrations_Update
+        exampleFile: ../examples/PartnerRegistrations_Update.json
+
+  - scenario: PartnerNamespaces
+    description: Microsoft.EventGrid/partnerNamespaces
+    steps:
+      - step: PartnerNamespaces_CreateOrUpdate
+        exampleFile: ../examples/PartnerNamespaces_CreateOrUpdate.json
+        requestUpdate:
+          - replace: /partnerNamespaceInfo/properties/partnerRegistrationFullyQualifiedId
+            value: $(partnerRegistrationId)
+      - step: PartnerNamespaces_ListBySubscription
+        exampleFile: ../examples/PartnerNamespaces_ListBySubscription.json
+      - step: PartnerNamespaces_ListByResourceGroup
+        exampleFile: ../examples/PartnerNamespaces_ListByResourceGroup.json
+      - step: PartnerNamespaces_Get
+        exampleFile: ../examples/PartnerNamespaces_Get.json
+      - step: PartnerNamespaces_Update
+        exampleFile: ../examples/PartnerNamespaces_Update.json
+      - step: PartnerNamespaces_ListSharedAccessKeys
+        exampleFile: ../examples/PartnerNamespaces_ListSharedAccessKeys.json
+      - step: PartnerNamespaces_RegenerateKey
+        exampleFile: ../examples/PartnerNamespaces_RegenerateKey.json
+      - step: PartnerNamespaces_Delete
+        exampleFile: ../examples/PartnerNamespaces_Delete.json
+
+  - scenario: PartnerConfigurations
+    description: Microsoft.EventGrid/partnerConfigurations/default
+    steps:
+      - step: PartnerConfigurations_CreateOrUpdate
+        operationId: PartnerConfigurations_CreateOrUpdate
+        parameters:
+          partnerConfigurationInfo:
+            location: global
+      - step: PartnerConfigurations_ListBySubscription
+        exampleFile: ../examples/PartnerConfigurations_ListBySubscription.json
+      - step: PartnerConfigurations_Get
+        exampleFile: ../examples/PartnerConfigurations_Get.json
+      - step: PartnerConfigurations_ListByResourceGroup
+        exampleFile: ../examples/PartnerConfigurations_ListByResourceGroup.json
+      - step: PartnerConfigurations_Update
+        exampleFile: ../examples/PartnerConfigurations_Update.json
+      - step: PartnerConfigurations_AuthorizePartner
+        operationId: PartnerConfigurations_AuthorizePartner
+        parameters:
+          partnerInfo:
+            partnerName: Auth0
+      - step: PartnerConfigurations_UnauthorizePartner
+        operationId: PartnerConfigurations_AuthorizePartner
+        parameters:
+          partnerInfo:
+            partnerName: Auth0
+      - step: PartnerConfigurations_Delete
+        exampleFile: ../examples/PartnerConfigurations_Delete.json
+
+  - scenario: SystemTopics
+    description: Microsoft.EventGrid/systemTopics
+    steps:
+      - step: SystemTopics_ListBySubscription
+        exampleFile: ../examples/SystemTopics_ListBySubscription.json
+      - step: SystemTopics_ListByResourceGroup
+        exampleFile: ../examples/SystemTopics_ListByResourceGroup.json
+      - step: SystemTopics_Get
+        exampleFile: ../examples/SystemTopics_Get.json
+      - step: SystemTopics_Update
+        exampleFile: ../examples/SystemTopics_Update.json
+
+  - scenario: SystemTopicEventSubscriptions
+    description: Microsoft.EventGrid/systemTopics/eventSubscriptions
+    steps:
+      - step: SystemTopicEventSubscriptions_CreateOrUpdate
+        operationId: SystemTopicEventSubscriptions_CreateOrUpdate
+        parameters:
+          eventSubscriptionInfo:
+            properties:
+              destination:
+                endpointType: EventHub
+                properties:
+                  resourceId: $(eventhubId)
+      - step: SystemTopicEventSubscriptions_ListBySystemTopic
+        exampleFile: ../examples/SystemTopicEventSubscriptions_ListBySystemTopic.json
+      - step: SystemTopicEventSubscriptions_Get
+        exampleFile: ../examples/SystemTopicEventSubscriptions_Get.json
+      - step: SystemTopicEventSubscriptions_Update
+        operationId: SystemTopicEventSubscriptions_Update
+        parameters:
+          eventSubscriptionUpdateParameters:
+            labels:
+              - label1
+      - step: SystemTopicEventSubscriptions_GetDeliveryAttributes
+        exampleFile: ../examples/SystemTopicEventSubscriptions_GetDeliveryAttributes.json
+      - step: SystemTopicEventSubscriptions_Delete
+        exampleFile: ../examples/SystemTopicEventSubscriptions_Delete.json
+
+  - scenario: EventSubscriptions
+    description: Microsoft.EventGrid/eventSubscriptions
+    steps:
+      - step: EventSubscriptions_CreateOrUpdate
+        operationId: EventSubscriptions_CreateOrUpdate
+        parameters:
+          scope: subscriptions/$(subscriptionId)
+          eventSubscriptionInfo:
+            properties:
+              destination:
+                endpointType: EventHub
+                properties:
+                  resourceId: $(eventhubId)
+      - step: EventSubscriptions_ListGlobalBySubscription
+        exampleFile: ../examples/EventSubscriptions_ListGlobalBySubscription.json
+      - step: EventSubscriptions_ListGlobalBySubscriptionForTopicType
+        exampleFile: ../examples/EventSubscriptions_ListGlobalBySubscriptionForTopicType.json
+      - step: EventSubscriptions_ListGlobalByResourceGroup
+        exampleFile: ../examples/EventSubscriptions_ListGlobalByResourceGroup.json
+      - step: EventSubscriptions_ListRegionalByResourceGroup
+        exampleFile: ../examples/EventSubscriptions_ListRegionalByResourceGroup.json
+      - step: EventSubscriptions_ListByDomainTopic
+        exampleFile: ../examples/EventSubscriptions_ListByDomainTopic.json
+      - step: EventSubscriptions_Get
+        exampleFile: ../examples/EventSubscriptions_GetForSubscription.json
+        requestUpdate:
+          - replace: /scope
+            value: subscriptions/$(subscriptionId)
+      - step: EventSubscriptions_ListRegionalBySubscription
+        exampleFile: ../examples/EventSubscriptions_ListRegionalBySubscription.json
+      - step: EventSubscriptions_ListRegionalBySubscriptionForTopicType
+        exampleFile: ../examples/EventSubscriptions_ListRegionalBySubscriptionForTopicType.json
+      - step: EventSubscriptions_ListRegionalByResourceGroupForTopicType
+        exampleFile: ../examples/EventSubscriptions_ListRegionalByResourceGroupForTopicType.json
+      - step: EventSubscriptions_ListByResource
+        exampleFile: ../examples/EventSubscriptions_ListByResource.json
+        requestUpdate:
+          - replace: /resourceName
+            value: $(topicName)
+      - step: EventSubscriptions_ListGlobalByResourceGroupForTopicType
+        exampleFile: ../examples/EventSubscriptions_ListGlobalByResourceGroupForTopicType.json
+      - step: EventSubscriptions_Update
+        operationId: EventSubscriptions_Update
+        parameters:
+          scope: subscriptions/$(subscriptionId)
+          eventSubscriptionUpdateParameters:
+            labels:
+              - label1
+      - step: EventSubscriptions_GetDeliveryAttributes
+        exampleFile: ../examples/EventSubscriptions_GetDeliveryAttributes.json
+        requestUpdate:
+          - replace: /scope
+            value: subscriptions/$(subscriptionId)
+      - step: EventSubscriptions_Delete
+        exampleFile: ../examples/EventSubscriptions_DeleteForSubscription.json
+        requestUpdate:
+          - replace: /scope
+            value: subscriptions/$(subscriptionId)
+
+  - scenario: Operations
+    description: Microsoft.EventGrid/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ../examples/Operations_List.json
+
+  - scenario: TopicTypes
+    description: Microsoft.EventGrid/topicTypes
+    steps:
+      - step: TopicTypes_List
+        exampleFile: ../examples/TopicTypes_List.json
+      - step: TopicTypes_Get
+        exampleFile: ../examples/TopicTypes_Get.json
+      - step: TopicTypes_ListEventTypes
+        exampleFile: ../examples/TopicTypes_ListEventTypes.json
+
+  - scenario: VerifiedPartners
+    description: Microsoft.EventGrid/verifiedPartners
+    steps:
+      - step: VerifiedPartners_List
+        exampleFile: ../examples/VerifiedPartners_List.json
+      - step: VerifiedPartners_Get
+        exampleFile: ../examples/VerifiedPartners_Get.json
+        requestUpdate:
+          - replace: /verifiedPartnerName
+            value: Auth0
+
+  - scenario: PrivateEndpointConnections
+    description: Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections
+    variables:
+      parentName: $(domainName)
+      parentType: domains
+    steps:
+      - step: PrivateEndpoint_Create
+        armTemplate: templates/Create_PrivateEndpoint.json
+      - step: PrivateEndpointConnections_ListByResource
+        exampleFile: ../examples/PrivateEndpointConnections_ListByResource.json
+        outputVariables:
+          privateEndpointConnectionName:
+            type: string
+            fromResponse: /value/0/name
+      - step: PrivateEndpointConnections_Update
+        exampleFile: ../examples/PrivateEndpointConnections_Update.json
+        requestUpdate:
+          - replace: /privateEndpointConnection/properties/privateLinkServiceConnectionState/status
+            value: Rejected
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ../examples/PrivateEndpointConnections_Get.json
+      - step: PrivateLinkResources_ListByResource
+        exampleFile: ../examples/PrivateLinkResources_ListByResource.json
+
+cleanUpSteps:
+  - step: SystemTopics_Delete
+    exampleFile: ../examples/SystemTopics_Delete.json
+  - step: PartnerRegistrations_Delete
+    exampleFile: ../examples/PartnerRegistrations_Delete.json
+  - step: Topics_Delete
+    exampleFile: ../examples/Topics_Delete.json

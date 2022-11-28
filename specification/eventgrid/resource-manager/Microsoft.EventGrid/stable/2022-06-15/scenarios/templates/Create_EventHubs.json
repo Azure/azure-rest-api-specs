@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "namespaceName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.EventHub/namespaces",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[parameters('namespaceName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "Standard",
+                "tier": "Standard",
+                "capacity": 1
+            },
+            "properties": {
+                "minimumTlsVersion": "1.0",
+                "publicNetworkAccess": "Enabled",
+                "disableLocalAuth": false,
+                "zoneRedundant": false,
+                "isAutoInflateEnabled": false,
+                "maximumThroughputUnits": 0,
+                "kafkaEnabled": true
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaceName'), '/eventhubs')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaceName'))]"
+            ],
+            "properties": {
+                "messageRetentionInDays": 1,
+                "partitionCount": 1,
+                "status": "Active"
+            }
+        }
+    ],
+    "outputs": {
+        "eventhubId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaceName'), 'eventhubs')]"
+        }
+    }
+}
