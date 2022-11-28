@@ -233,6 +233,10 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - suppress: 
+      - APIVersionPattern  
+    from: 
+      - Microsoft.Compute/common-types/v1/common.json
 ```
 
 ### Tag: package-2022-11-01
