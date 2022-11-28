@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-12'
 input-file:
-- Microsoft.DataProtection/preview/2022-12-01/dataprotection.json
+- Microsoft.DataProtection/stable/2022-12-01/dataprotection.json
 ```
 
 ### Tag: package-2022-10-preview
