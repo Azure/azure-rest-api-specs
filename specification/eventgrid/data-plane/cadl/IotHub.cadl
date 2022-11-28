@@ -1,3 +1,7 @@
+@service({title:"Schema of Azure IoT Hub events published to Azure Event Grid", version:"2018-01-01"})
+@doc("Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
+namespace IoTHub;
+
 @doc("Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).")
 model DeviceLifeCycleEventProperties {
   @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
@@ -16,7 +20,7 @@ model DeviceTwinInfo {
   authenticationType?: string;
 
   @doc("Count of cloud to device messages sent to this device.")
-  cloudToDeviceMessageCount?: number;
+  cloudToDeviceMessageCount?: integer;
 
   @doc("Whether the device is connected or disconnected.")
   connectionState?: string;
@@ -40,7 +44,7 @@ model DeviceTwinInfo {
   statusUpdateTime?: string;
 
   @doc("An integer that is incremented by one each time the device twin is updated.")
-  version?: number;
+  version?: integer;
 
   @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
   x509Thumbprint?: Record<string>;
@@ -79,7 +83,7 @@ model DeviceTwinProperties {
   metadata?: DeviceTwinMetadata;
 
   @doc("Version of device twin properties.")
-  version?: number;
+  version?: float64;
 }
 
 @doc("Metadata information for the properties JSON document.")
