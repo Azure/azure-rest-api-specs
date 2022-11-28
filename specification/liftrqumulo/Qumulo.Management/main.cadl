@@ -1,25 +1,48 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-autorest";
+import "@cadl-lang/versioning";
 import "@azure-tools/cadl-azure-resource-manager";
 import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-providerhub-controller";
 
-@armNamespace
-@serviceTitle("Qumulo.Storage") 
-@serviceVersion("2022-06-27-preview")
-namespace Qumulo.Storage;
-
+using Cadl.Versioning;
 using Azure.ResourceManager;
 using Cadl.Http;
 using Cadl.Rest;
 
+@armProviderNamespace
+@service({title:"Qumulo.Storage"})
+@versionedDependency([[Versions.v2022_06_27_preview,Azure.ResourceManager.Versions.v1_0_Preview_1], [Versions.v2022_10_12_preview,Azure.ResourceManager.Versions.v1_0_Preview_1]])
+@versioned(Versions)
+namespace Qumulo.Storage;
+
+@doc("Storage Sku")
+enum StorageSku {
+
+  @doc("Standard Storage Sku")
+  "Standard",
+  
+  @doc("Performance Storage Sku")
+  "Performance"
+}
+
+enum Versions {
+  v2022_06_27_preview: "2022-06-27-preview",
+  v2022_10_12_preview: "2022-10-12-preview",
+}
+
+
+
+
 @doc("Qumulo File System resource")
 model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
+
   @key("fileSystemName")
   @segment("fileSystems")
+
   @doc("Name of the storage resource")
   name: string;
-  ...Azure.ARM.ManagedServiceIdentity
+
+  ...ManagedServiceIdentity
 }
 
 @armResourceOperations
@@ -52,6 +75,23 @@ model FileSystemResourceProperties {
 
   @doc("List of eNIC IPs")
   privateIPs: string[];
+
+  @added(Versions.v2022_10_12_preview)
+  @doc("Initial administrator password of the resource")
+  @secret
+  adminPassword: string;
+
+  @added(Versions.v2022_10_12_preview)
+  @doc("Storage capacity in TB")
+  initialCapacity: int32;
+
+  @added(Versions.v2022_10_12_preview)
+  @doc("Availability zone")
+  availabilityZone: string;
+
+  @added(Versions.v2022_10_12_preview)
+  @doc("Storage Sku")
+  storageSku: StorageSku;
 }
 
 @doc("MarketplaceDetails of Qumulo FileSystem resource")
@@ -74,12 +114,13 @@ model MarketplaceDetails{
 
 @doc("User Details of Qumulo FileSystem resource")
 model UserDetails{
+
   @doc("First name")
   firstName?: string;
 
   @doc("Last name")
   lastName?: string;
-
+  
   @doc("User Email")
   email: string;
 
@@ -96,9 +137,9 @@ model UserDetails{
   contactPhoneNumber?: string;
 }
 
-
 @doc("Company details of Qumulo FileSystem resource")
 model CompanyDetails{
+
   @doc("Company name")
   companyName: string;
 
@@ -120,14 +161,18 @@ model CompanyDetails{
 
 @doc("Marketplace subscription status of the storage resource")
 enum MarketplaceSubscriptionStatus{
+
   "PendingFulfillmentStart",
   "Subscribed",
   "Suspended",
   "Unsubscribed",
 }
 
+
+
 @doc("Provisioning State of the storage resource")
 enum ProvisioningState {
+
   "Accepted",
   "Creating",
   "Updating",
