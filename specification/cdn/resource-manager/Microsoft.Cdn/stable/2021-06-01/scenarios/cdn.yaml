@@ -1,0 +1,189 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  profileName:
+    type: string
+    prefix: profilenam
+  endpointName:
+    type: string
+    prefix: endpointna
+  originName:
+    type: string
+    prefix: originname
+  originGroupName:
+    type: string
+    prefix: origingrou
+  customDomainName:
+    type: string
+    prefix: customdoma
+  location:
+    type: string
+
+prepareSteps:
+  - step: Profiles_Create
+    operationId: Profiles_Create
+    parameters:
+      profile:
+        location: global
+        sku:
+          name: Standard_Microsoft
+
+  - step: Endpoints_Create
+    operationId: Endpoints_Create
+    parameters:
+      endpoint:
+        location: $(location)
+        properties:
+          contentTypesToCompress:
+            - text/html
+            - application/octet-stream
+          isCompressionEnabled: true
+          isHttpAllowed: true
+          isHttpsAllowed: true
+          originHostHeader: www.bing.com
+          originPath: /photos
+          queryStringCachingBehavior: BypassCaching
+          origins:
+            - name: origin1
+              properties:
+                enabled: true
+                hostName: www.someDomain1.net
+                httpPort: 80
+                httpsPort: 443
+
+  - step: OriginGroups_Create
+    operationId: OriginGroups_Create
+    parameters:
+      originGroup:
+        properties: 
+          healthProbeSettings:
+            probePath: /health.aspx
+            probeRequestType: GET 
+            probeProtocol: Http 
+            probeIntervalInSeconds: 120
+          origins: 
+            - id: /subscriptions/$(subscriptionId)/resourceGroups/$(resourceGroupName)/providers/Microsoft.Cdn/profiles/$(profileName)/endpoints/$(endpointName)/origins/origin1
+
+  - step: Endpoints_Update
+    operationId: Endpoints_Update
+    parameters:
+      endpointUpdateProperties:
+        properties:
+          defaultOriginGroup:
+            id: /subscriptions/$(subscriptionId)/resourcegroups/$(resourceGroupName)/providers/Microsoft.Cdn/profiles/$(profileName)/endpoints/$(endpointName)/originGroups/$(originGroupName)
+    
+  - step: Origins_Create
+    operationId: Origins_Create
+    parameters:
+      origin:
+        properties:
+          enabled: true
+          hostName: www.someDomain.net
+          httpPort: 80
+          httpsPort: 443
+
+scenarios:
+  - scenario: Profiles
+    description: Microsoft.Cdn/profiles
+    steps:
+      - step: Profiles_List
+        exampleFile: ../examples/Profiles_List.json
+      - step: Profiles_ListByResourceGroup
+        exampleFile: ../examples/Profiles_ListByResourceGroup.json
+      - step: Profiles_Get
+        exampleFile: ../examples/Profiles_Get.json
+      - step: Profiles_Update
+        exampleFile: ../examples/Profiles_Update.json
+      - step: Profiles_ListResourceUsage
+        exampleFile: ../examples/Profiles_ListResourceUsage.json
+      - step: Profiles_ListSupportedOptimizationTypes
+        exampleFile: ../examples/Profiles_ListSupportedOptimizationTypes.json
+
+  - scenario: Endpoints
+    description: Microsoft.Cdn/profiles/endpoints
+    steps:
+      - step: Endpoints_ListByProfile
+        exampleFile: ../examples/Endpoints_ListByProfile.json
+      - step: Endpoints_Get
+        exampleFile: ../examples/Endpoints_Get.json
+      - step: Endpoints_ListResourceUsage
+        exampleFile: ../examples/Endpoints_ListResourceUsage.json
+      - step: Endpoints_ValidateCustomDomain
+        exampleFile: ../examples/Endpoints_ValidateCustomDomain.json
+      - step: Endpoints_PurgeContent
+        exampleFile: ../examples/Endpoints_PurgeContent.json
+      - step: Endpoints_Stop
+        exampleFile: ../examples/Endpoints_Stop.json
+      - step: Endpoints_Start
+        exampleFile: ../examples/Endpoints_Start.json
+
+  - scenario: Origins
+    description: Microsoft.Cdn/profiles/endpoints/origins
+    steps:
+      - step: Origins_ListByEndpoint
+        exampleFile: ../examples/Origins_ListByEndpoint.json
+      - step: Origins_Get
+        exampleFile: ../examples/Origins_Get.json
+      - step: Origins_Update
+        exampleFile: ../examples/Origins_Update.json
+        requestUpdate:
+          - remove: /originUpdateProperties/properties/privateLinkAlias
+      - step: Origins_Delete
+        exampleFile: ../examples/Origins_Delete.json
+
+  - scenario: OriginGroups
+    description: Microsoft.Cdn/profiles/endpoints/originGroups
+    steps:
+      - step: OriginGroups_ListByEndpoint
+        exampleFile: ../examples/OriginGroups_ListByEndpoint.json
+      - step: OriginGroups_Get
+        exampleFile: ../examples/OriginGroups_Get.json
+      - step: OriginGroups_Update
+        exampleFile: ../examples/OriginGroups_Update.json
+        requestUpdate:
+          - remove: /originGroupUpdateProperties/properties/origins
+
+  - scenario: CheckNameAvailabilityWithSubscription
+    description: Microsoft.Cdn/checkNameAvailability
+    steps:
+      - step: CheckNameAvailability
+        exampleFile: ../examples/CheckNameAvailability.json
+      - step: CheckNameAvailabilityWithSubscription
+        exampleFile: ../examples/CheckNameAvailabilityWithSubscription.json
+
+  - scenario: ValidateProbe
+    description: Microsoft.Cdn/validateProbe
+    steps:
+      - step: ValidateProbe
+        exampleFile: ../examples/ValidateProbe.json
+
+  - scenario: ResourceUsage
+    description: Microsoft.Cdn/checkResourceUsage
+    steps:
+      - step: ResourceUsage_List
+        exampleFile: ../examples/ResourceUsage_List.json
+
+  - scenario: Operations
+    description: Microsoft.Cdn/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ../examples/Operations_List.json
+
+  - scenario: EdgeNodes
+    description: Microsoft.Cdn/edgenodes
+    steps:
+      - step: EdgeNodes_List
+        exampleFile: ../examples/EdgeNodes_List.json
+
+  - scenario: ManagedRuleSets
+    description: Microsoft.Cdn/cdnWebApplicationFirewallManagedRuleSets
+    steps:
+      - step: ManagedRuleSets_List
+        exampleFile: ../examples/WafListManagedRuleSets.json
+
+cleanUpSteps:
+  - step: Endpoints_Delete
+    exampleFile: ../examples/Endpoints_Delete.json
+  - step: Profiles_Delete
+    exampleFile: ../examples/Profiles_Delete.json

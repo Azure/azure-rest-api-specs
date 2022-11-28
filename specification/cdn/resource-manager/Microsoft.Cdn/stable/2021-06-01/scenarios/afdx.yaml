@@ -1,0 +1,193 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  profileName:
+    type: string
+    prefix: afdprofilenam
+  customDomainName:
+    type: string
+    prefix: afdcustomdoma
+  endpointName:
+    type: string
+    prefix: afdendpointna
+  originGroupName:
+    type: string
+    prefix: afdorigingrou
+  originName:
+    type: string
+    prefix: afdoriginname
+  routeName:
+    type: string
+    prefix: routename
+  ruleSetName:
+    type: string
+    prefix: rulesetnam
+  ruleName:
+    type: string
+    prefix: rulename
+
+prepareSteps:
+  - step: Profiles_Create
+    operationId: Profiles_Create
+    parameters:
+      profile:
+        location: global
+        sku:
+          name: Premium_AzureFrontDoor
+  - step: AFDCustomDomains_Create
+    exampleFile: ../examples/AFDCustomDomains_Create.json
+    requestUpdate:
+      - remove: /customDomain/properties/azureDnsZone
+  - step: AFDEndpoints_Create
+    exampleFile: ../examples/AFDEndpoints_Create.json
+  - step: AFDOriginGroups_Create
+    exampleFile: ../examples/AFDOriginGroups_Create.json
+  - step: AFDOrigins_Create
+    exampleFile: ../examples/AFDOrigins_Create.json
+  - step: RuleSets_Create
+    exampleFile: ../examples/RuleSets_Create.json
+
+scenarios:
+  - scenario: CheckEndpointNameAvailability
+    description: Microsoft.Cdn/checkEndpointNameAvailability
+    steps:
+      - step: CheckEndpointNameAvailability
+        exampleFile: ../examples/CheckEndpointNameAvailability.json
+      - step: AFDProfiles_CheckHostNameAvailability
+        exampleFile: ../examples/AFDProfiles_CheckHostNameAvailability.json
+      - step: AFDProfiles_ListResourceUsage
+        exampleFile: ../examples/AFDProfiles_ListResourceUsage.json
+
+  - scenario: AFDCustomDomains
+    description: Microsoft.Cdn/profiles/customDomains
+    steps:
+      - step: AFDCustomDomains_ListByProfile
+        exampleFile: ../examples/AFDCustomDomains_ListByProfile.json
+      - step: AFDCustomDomains_Get
+        exampleFile: ../examples/AFDCustomDomains_Get.json
+      - step: AFDCustomDomains_Update
+        exampleFile: ../examples/AFDCustomDomains_Update.json
+        requestUpdate:
+          - remove: /customDomainUpdateProperties/properties/azureDnsZone
+          - replace: /customDomainUpdateProperties/properties/tlsSettings/certificateType
+            value: ManagedCertificate
+
+  - scenario: AFDEndpoints
+    description: Microsoft.Cdn/profiles/afdEndpoints
+    steps:
+      - step: AFDEndpoints_ListByProfile
+        exampleFile: ../examples/AFDEndpoints_ListByProfile.json
+      - step: AFDEndpoints_Get
+        exampleFile: ../examples/AFDEndpoints_Get.json
+      - step: AFDEndpoints_Update
+        exampleFile: ../examples/AFDEndpoints_Update.json
+      - step: AFDEndpoints_PurgeContent
+        exampleFile: ../examples/AFDEndpoints_PurgeContent.json
+        requestUpdate:
+          - remove: /contents/domains
+      - step: AFDEndpoints_ListResourceUsage
+        exampleFile: ../examples/AFDEndpoints_ListResourceUsage.json
+      - step: AFDEndpoints_ValidateCustomDomain
+        exampleFile: ../examples/AFDEndpoints_ValidateCustomDomain.json
+
+  - scenario: AFDOriginGroups
+    description: Microsoft.Cdn/profiles/originGroups
+    steps:
+      - step: AFDOriginGroups_ListByProfile
+        exampleFile: ../examples/AFDOriginGroups_ListByProfile.json
+      - step: AFDOriginGroups_Get
+        exampleFile: ../examples/AFDOriginGroups_Get.json
+      - step: AFDOriginGroups_Update
+        exampleFile: ../examples/AFDOriginGroups_Update.json
+      - step: AFDOriginGroups_ListResourceUsage
+        exampleFile: ../examples/AFDOriginGroups_ListResourceUsage.json
+
+
+  - scenario: AFDOrigins
+    description: Microsoft.Cdn/profiles/originGroups/origins
+    steps:
+      - step: AFDOrigins_ListByOriginGroup
+        exampleFile: ../examples/AFDOrigins_ListByOriginGroup.json
+      - step: AFDOrigins_Get
+        exampleFile: ../examples/AFDOrigins_Get.json
+      - step: AFDOrigins_Update
+        exampleFile: ../examples/AFDOrigins_Update.json
+
+  - scenario: Routes
+    description: Microsoft.Cdn/profiles/afdEndpoints/routes
+    steps:
+      - step: Routes_Create
+        exampleFile: ../examples/Routes_Create.json
+        requestUpdate:
+          - replace: /route/properties/customDomains/0/id
+            value: /subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/$(customDomainName)
+          - replace: /route/properties/originGroup/id
+            value: /subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/$(originGroupName)
+          - replace: /route/properties/ruleSets/0/id
+            value: /subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/$(ruleSetName)
+      - step: Routes_ListByEndpoint
+        exampleFile: ../examples/Routes_ListByEndpoint.json
+      - step: Routes_Get
+        exampleFile: ../examples/Routes_Get.json
+      - step: Routes_Update
+        exampleFile: ../examples/Routes_Update.json
+        requestUpdate:
+          - replace: /routeUpdateProperties/properties/customDomains/0/id
+            value: /subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/$(customDomainName)
+          - replace: /routeUpdateProperties/properties/originGroup/id
+            value: /subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/$(originGroupName)
+          - replace: /routeUpdateProperties/properties/ruleSets/0/id
+            value: /subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/$(ruleSetName)
+      - step: Routes_Delete
+        exampleFile: ../examples/Routes_Delete.json
+
+  - scenario: RuleSets
+    description: Microsoft.Cdn/profiles/ruleSets
+    steps:
+      - step: RuleSets_ListByProfile
+        exampleFile: ../examples/RuleSets_ListByProfile.json
+      - step: RuleSets_Get
+        exampleFile: ../examples/RuleSets_Get.json
+      - step: RuleSets_ListResourceUsage
+        exampleFile: ../examples/RuleSets_ListResourceUsage.json
+
+  - scenario: Rules
+    description: Microsoft.Cdn/profiles/ruleSets/rules
+    steps:
+      - step: Rules_Create
+        exampleFile: ../examples/Rules_Create.json
+      - step: Rules_ListByRuleSet
+        exampleFile: ../examples/Rules_ListByRuleSet.json
+      - step: Rules_Get
+        exampleFile: ../examples/Rules_Get.json
+      - step: Rules_Update
+        exampleFile: ../examples/Rules_Update.json
+      - step: Rules_Delete
+        exampleFile: ../examples/Rules_Delete.json
+
+  - scenario: LogAnalytics
+    description: Microsoft.Cdn/profiles/LogAnalytics
+    steps:
+      - step: LogAnalytics_GetLogAnalyticsLocations
+        exampleFile: ../examples/LogAnalytics_GetLogAnalyticsLocations.json
+      - step: LogAnalytics_GetLogAnalyticsRankings
+        exampleFile: ../examples/LogAnalytics_GetLogAnalyticsRankings.json
+      - step: LogAnalytics_GetLogAnalyticsResources
+        exampleFile: ../examples/LogAnalytics_GetLogAnalyticsResources.json
+      - step: LogAnalytics_GetWafLogAnalyticsMetrics
+        exampleFile: ../examples/LogAnalytics_GetWafLogAnalyticsMetrics.json
+      - step: LogAnalytics_GetWafLogAnalyticsRankings
+        exampleFile: ../examples/LogAnalytics_GetWafLogAnalyticsRankings.json
+
+cleanUpSteps:
+  - step: RuleSets_Delete
+    exampleFile: ../examples/RuleSets_Delete.json
+  - step: AFDOrigins_Delete
+    exampleFile: ../examples/AFDOrigins_Delete.json
+  - step: AFDOriginGroups_Delete
+    exampleFile: ../examples/AFDOriginGroups_Delete.json
+  - step: AFDEndpoints_Delete
+    exampleFile: ../examples/AFDEndpoints_Delete.json
+  - step: AFDCustomDomains_Delete
+    exampleFile: ../examples/AFDCustomDomains_Delete.json
