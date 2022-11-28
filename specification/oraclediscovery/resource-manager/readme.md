@@ -1,8 +1,8 @@
-# scvmm
+# oraclediscovery
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for scvmm.
+This is the AutoRest configuration file for oraclediscovery.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the scvmm.
+These are the global settings for the oraclediscovery.
 
 ```yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-11-22-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-11-22-preview'
 input-file:
-  - Microsoft.ScVmm/preview/2022-11-22-preview/scvmm.json
+  - Microsoft.OracleDiscovery/preview/2022-11-22-preview/oraclediscovery.json
 ```
 
 ---
@@ -56,7 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_scvmm']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_oraclediscovery']
 ```
 
 ## Go
