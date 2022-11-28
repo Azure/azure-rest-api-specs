@@ -71,7 +71,7 @@
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "To include stop sold or hidden plans",
+            "description": "Denotes whether to include stop sold or hidden plans",
             "default": false,
             "x-nullable": false
           },
@@ -97,7 +97,7 @@
           },
           "404": {
             "x-nullable": false,
-            "description": "In case product does not exist / does not exist in given market",
+            "description": "In case product does not exist, or does not exist in given market",
             "schema": {
               "type": "string"
             }
@@ -138,7 +138,7 @@
             "type": "string",
             "name": "storefront",
             "in": "query",
-            "description": "Relevant storefront",
+            "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
             "default": "azure",
             "x-nullable": true
           },
@@ -171,7 +171,7 @@
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Add hide key to retrieve preview items",
+            "description": "Add hide key to retrieve preview products",
             "collectionFormat": "multi",
             "x-nullable": true,
             "items": {
@@ -380,6 +380,11 @@
           "description": "Average rating for the offer",
           "format": "double"
         },
+        "ratingCount": {
+          "type": "integer",
+          "description": "Total number of ratings for the offer",
+          "format": "int32"
+        },
         "startingPrice": {
           "description": "The product starting price",
           "allOf": [
@@ -434,6 +439,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product",
+          "format": "date-time"
         }
       }
     },
@@ -731,7 +741,7 @@
     },
     "CspState": {
       "type": "string",
-      "description": "PA value showing whether the product is available for purchase through CSP channel, Possible values, OptIn, OptOut, SelectiveOptIn, for more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
+      "description": "Value showing whether the product is available for purchase through CSP channel, Possible values, OptIn, OptOut, SelectiveOptIn, for more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
       "enum": [
         "OptIn",
         "OptOut",
@@ -769,7 +779,7 @@
       "description": "Related plan information",
       "properties": {
         "sku": {
-          "description": "Sku",
+          "description": "The Sku",
           "allOf": [
             {
               "$ref": "#/definitions/RelatedSku"
@@ -788,15 +798,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name"
+          "description": "The name"
         },
         "generation": {
           "type": "string",
-          "description": "Generation"
+          "description": "The generation"
         },
         "identity": {
           "type": "string",
-          "description": "Identity"
+          "description": "The identity"
         }
       }
     },
@@ -862,7 +872,7 @@
       "properties": {
         "productId": {
           "type": "string",
-          "description": "productId"
+          "description": "Product Id"
         },
         "leadGenEnabled": {
           "type": "boolean",
