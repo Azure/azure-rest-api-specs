@@ -9,9 +9,11 @@
     "/accounts/{accountId}/alerts": {
       "post": {
         "tags": [
-          "Alerts"
+          "DataQuality Alerts"
         ],
-        "operationId": "CreateAlert",
+        "summary": "Create a DQ Alert.",
+        "description": "Create a DQ Alert.",
+        "operationId": "Create_Alert",
         "consumes": [
           "application/json"
         ],
@@ -22,18 +24,14 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get DQAlert Detail",
             "schema": {
               "$ref": "#/definitions/DQAlert"
             }
@@ -45,19 +43,33 @@
             "schema": {
               "$ref": "#/definitions/DQAlert"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Alert_Create": {
-            "$ref": "./examples/Alert_Create.json"
+          "CreateAlert": {
+            "$ref": "./examples/CreateAlert.json"
           }
         }
       },
       "get": {
         "tags": [
-          "Alerts"
+          "DataQuality Alerts"
         ],
-        "operationId": "GetAllMatchedAlerts",
+        "summary": "Get all DQ Alert set for a particular asset/datasource/collection.",
+        "description": "Get all DQ Alert set for a particular asset/datasource/collection.",
+        "operationId": "Get_All_Alert",
         "produces": [
           "application/json"
         ],
@@ -65,33 +77,29 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "query",
-            "name": "Level",
+            "name": "level",
             "type": "string"
           },
           {
             "in": "query",
-            "name": "ScopeId",
+            "name": "scopeId",
             "type": "string"
           },
           {
             "in": "query",
-            "name": "SkipDetails",
+            "name": "skipDetails",
             "type": "boolean"
           },
           {
             "in": "query",
             "name": "skipToken",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
+            "description": "Get Skip Token",
             "type": "string"
           }
         ],
@@ -104,11 +112,23 @@
                 "$ref": "#/definitions/DQAlertPagedResults"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Alert_GetAll": {
-            "$ref": "./examples/Alert_GetAll.json"
+          "GetAllMatchedAlerts": {
+            "$ref": "./examples/GetAllMatchedAlerts.json"
           }
         }
       }
@@ -116,9 +136,11 @@
     "/accounts/{accountId}/alerts/{alertId}": {
       "get": {
         "tags": [
-          "Alerts"
+          "DataQuality Alerts"
         ],
-        "operationId": "GetAlertDetails",
+        "summary": "Fetch the details of a DQ Alert.",
+        "description": "Fetch the details of a DQ Alert.",
+        "operationId": "Get_Alert",
         "produces": [
           "application/json"
         ],
@@ -126,18 +148,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "alertId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Alert Id",
             "required": true,
             "type": "string"
           }
@@ -148,20 +166,35 @@
             "schema": {
               "$ref": "#/definitions/DQAlert"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Alert_Get": {
-            "$ref": "./examples/Alert_Get.json"
+          "GetAlertDetails": {
+            "$ref": "./examples/GetAlertDetails.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "Alerts"
+          "DataQuality Alerts"
         ],
-        "operationId": "UpdateAlert",
+        "summary": "Update a DQ Alert.",
+        "description": "Update a DQ Alert.",
+        "operationId": "Update_Alert",
         "consumes": [
+          "application/merge-patch+json",
           "application/json"
         ],
         "produces": [
@@ -171,25 +204,22 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "alertId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Alert Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "description": "Get Additional Detail",
+            "schema": { }
           }
         ],
         "responses": {
@@ -198,19 +228,33 @@
             "schema": {
               "$ref": "#/definitions/DQAlert"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Alert_Patch": {
-            "$ref": "./examples/Alert_Patch.json"
+          "UpdateAlert": {
+            "$ref": "./examples/UpdateAlert.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Alerts"
+          "DataQuality Alerts"
         ],
-        "operationId": "DeleteAlert",
+        "summary": "Delete a DQ Alert.",
+        "description": "Delete a DQ Alert.",
+        "operationId": "Delete_Alert",
         "produces": [
           "application/json"
         ],
@@ -218,18 +262,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "alertId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Alert Id",
             "required": true,
             "type": "string"
           }
@@ -240,11 +280,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Alert_Delete": {
-            "$ref": "./examples/Alert_Delete.json"
+          "DeleteAlert": {
+            "$ref": "./examples/DeleteAlert.json"
           }
         }
       }
@@ -252,9 +304,11 @@
     "/accounts/{accountId}/alerts/exist": {
       "post": {
         "tags": [
-          "Alerts"
+          "DataQuality Alerts"
         ],
-        "operationId": "CheckAlertNameScopeUniqueness",
+        "summary": "Check if alert name is unique.",
+        "description": "Checks if alert name is unique.",
+        "operationId": "Check_Alert_Name",
         "consumes": [
           "application/json"
         ],
@@ -265,18 +319,14 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get AlertNameValidation",
             "schema": {
               "$ref": "#/definitions/AlertNameValidation"
             }
@@ -288,11 +338,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Alert_Exists": {
-            "$ref": "./examples/Alert_Exists.json"
+          "CheckAlertNameScopeUniqueness": {
+            "$ref": "./examples/CheckAlertNameScopeUniqueness.json"
           }
         }
       }
@@ -300,9 +362,11 @@
     "/accounts/{accountId}/assets/{assetId}/rules": {
       "post": {
         "tags": [
-          "AssessmentRules"
+          "DataQuality Rule"
         ],
-        "operationId": "CreateRules",
+        "summary": "Create DataQuality Rule.",
+        "description": "Create DataQuality Rule.",
+        "operationId": "Create_Rule",
         "consumes": [
           "application/json"
         ],
@@ -313,24 +377,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get DataQuality Rules",
             "schema": {
               "$ref": "#/definitions/DataQualityRules"
             }
@@ -341,20 +402,34 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DataQualityRules"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
         "x-ms-examples": {
           "CreateRules": {
-            "$ref": "./examples/Rules_Create.json"
+            "$ref": "./examples/CreateRules.json"
           }
         }
       },
       "get": {
         "tags": [
-          "AssessmentRules"
+          "DataQuality Rule"
         ],
-        "operationId": "GetRules",
+        "summary": "Get DataQuality Rule.",
+        "description": "Get DataQuality Rule.",
+        "operationId": "Get_Rule",
         "produces": [
           "application/json"
         ],
@@ -362,18 +437,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           }
@@ -383,21 +454,36 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DataQualityRules"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
             }
           }
         },
         "x-ms-examples": {
           "GetRules": {
-            "$ref": "./examples/Rules_Get.json"
+            "$ref": "./examples/GetRules.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "AssessmentRules"
+          "DataQuality Rule"
         ],
-        "operationId": "UpdateRules",
+        "summary": "Update DataQuality Rule.",
+        "description": "Update DataQuality Rule.",
+        "operationId": "Update_Rule",
         "consumes": [
+          "application/merge-patch+json",
           "application/json"
         ],
         "produces": [
@@ -407,25 +493,22 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "description": "Get Data",
+            "schema": { }
           }
         ],
         "responses": {
@@ -434,21 +517,87 @@
             "schema": {
               "$ref": "#/definitions/DataQualityRules"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
           "UpdateRules": {
-            "$ref": "./examples/Rules_Patch.json"
+            "$ref": "./examples/UpdateRules.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataQuality Rule"
+        ],
+        "summary": "Delete DataQuality Rule.",
+        "description": "Delete DataQuality Rule.",
+        "operationId": "Delete_Rule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "description": "Get Asset Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAllRules": {
+            "$ref": "./examples/DeleteAllRules.json"
           }
         }
       }
     },
     "/accounts/{accountId}/assets/{assetId}/favourite-fields": {
-      "put": {
+      "post": {
         "tags": [
-          "AssessmentRules"
+          "DataQuality Rule"
         ],
-        "operationId": "SetFavouriteFields",
+        "summary": "Set DataQuality Favourite Fields.",
+        "description": "Set DataQuality Favourite Fields.",
+        "operationId": "Set_Fav_Rule",
         "consumes": [
           "application/json"
         ],
@@ -459,29 +608,26 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "query",
-            "name": "DataSourceFQN",
+            "name": "dataSourceFQN",
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Favourite Fields In Rule",
             "schema": {
               "$ref": "#/definitions/DataQualityRules"
             }
@@ -496,11 +642,23 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
           "SetFavouriteFields": {
-            "$ref": "./examples/Rules_FavouriteFields.json"
+            "$ref": "./examples/SetFavouriteFields.json"
           }
         }
       }
@@ -508,9 +666,11 @@
     "/accounts/{accountId}/assets/{assetId}/assessments": {
       "post": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "SubmitJob",
+        "summary": "Submits a new DQ assessmet Job.",
+        "description": "Submits a new DQ assessmet Job.",
+        "operationId": "Job_Submit",
         "consumes": [
           "application/json"
         ],
@@ -521,24 +681,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Job Id Details",
             "schema": {
               "$ref": "#/definitions/AssessmentJobDTO"
             }
@@ -550,19 +707,33 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_Submit": {
-            "$ref": "./examples/Assessments_Submit.json"
+          "SubmitJob": {
+            "$ref": "./examples/SubmitJob.json"
           }
         }
       },
       "get": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "GetAssetRunMetadata",
+        "summary": "Get DataQuality Assessment Run MetaData.",
+        "description": "Get DataQuality Assessment Run MetaData.",
+        "operationId": "Get_Job_MetaData",
         "produces": [
           "application/json"
         ],
@@ -570,18 +741,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           }
@@ -595,11 +762,23 @@
                 "$ref": "#/definitions/JobStatusEntity"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_GetAll": {
-            "$ref": "./examples/Assessments_GetAll.json"
+          "GetAssetRunMetadata": {
+            "$ref": "./examples/GetAssetRunMetadata.json"
           }
         }
       }
@@ -607,9 +786,11 @@
     "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/status": {
       "get": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "GetJobStatus",
+        "summary": "Get Status Of DataQuality Assessment Job.",
+        "description": "Get status of DQ assessmet job & returns DataQuality Job Status.",
+        "operationId": "Get_Job_Status",
         "produces": [
           "application/json"
         ],
@@ -617,27 +798,24 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assessmentId",
+            "description": "Get Assessment Id",
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -646,11 +824,23 @@
             "schema": {
               "$ref": "#/definitions/JobStatusEntityDTO"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_Status": {
-            "$ref": "./examples/Assessments_Status.json"
+          "GetJobStatus": {
+            "$ref": "./examples/GetJobStatus.json"
           }
         }
       }
@@ -658,9 +848,11 @@
     "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/scores": {
       "get": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "GetJobRun",
+        "summary": "Get DataQuality Assessment Job Run.",
+        "description": "Get DataQuality Assessment Job Run.",
+        "operationId": "Get_Job_Run",
         "produces": [
           "application/json"
         ],
@@ -668,24 +860,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assessmentId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Assessment Id",
             "required": true,
             "type": "string"
           }
@@ -696,11 +885,23 @@
             "schema": {
               "$ref": "#/definitions/DQRunResult"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_GetScore": {
-            "$ref": "./examples/Assessments_GetScore.json"
+          "GetJobRun": {
+            "$ref": "./examples/GetJobRun.json"
           }
         }
       }
@@ -708,9 +909,11 @@
     "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/rules": {
       "get": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "GetJobRules",
+        "summary": "Get DataQuality Assessment Job Rules.",
+        "description": "Get DataQuality Assessment Job Rules.",
+        "operationId": "Get_Job_Rule",
         "produces": [
           "application/json"
         ],
@@ -718,24 +921,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assessmentId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Assessment Id",
             "required": true,
             "type": "string"
           }
@@ -746,11 +946,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_GetRules": {
-            "$ref": "./examples/Assessments_GetRules.json"
+          "GetJobRules": {
+            "$ref": "./examples/GetJobRules.json"
           }
         }
       }
@@ -758,9 +970,11 @@
     "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/errorfile": {
       "get": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "DownloadJobErrorFile",
+        "summary": "Get DataQuality Assessment Job Error File.",
+        "description": "Get DataQuality Assessment Job Error File.",
+        "operationId": "Get_Job_ErrorFile",
         "produces": [
           "text/csv",
           "application/json"
@@ -769,24 +983,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assessmentId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Assessment Id",
             "required": true,
             "type": "string"
           }
@@ -797,11 +1008,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_GetErrorFile": {
-            "$ref": "./examples/Assessments_GetErrorFile.json"
+          "DownloadJobErrorFile": {
+            "$ref": "./examples/DownloadJobErrorFile.json"
           }
         }
       }
@@ -809,9 +1032,11 @@
     "/accounts/{accountId}/assets/{assetId}/assessments/{assessmentId}/cancel": {
       "post": {
         "tags": [
-          "Assessments"
+          "DataQuality Jobs"
         ],
-        "operationId": "CancelJob",
+        "summary": "Cancel DataQuality Assessment Job.",
+        "description": "Cancel DataQuality assessmet Job.",
+        "operationId": "Job_Cancel",
         "produces": [
           "application/json"
         ],
@@ -819,27 +1044,24 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assessmentId",
+            "description": "Get Assessment Id",
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -848,11 +1070,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessments_Cancel": {
-            "$ref": "./examples/Assessments_Cancel.json"
+          "CancelJob": {
+            "$ref": "./examples/CancelJob.json"
           }
         }
       }
@@ -860,9 +1094,11 @@
     "/accounts/{accountId}/assessments/schedules": {
       "post": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "CreateScheduledAssessments",
+        "summary": "Create Schedule Assessment.",
+        "description": "Create Schedule Assessment.",
+        "operationId": "Create_Schedule",
         "consumes": [
           "application/json"
         ],
@@ -873,24 +1109,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "query",
             "name": "runNow",
+            "description": "Get RunNow",
             "type": "boolean",
             "default": false
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
+            "description": "Get Schedule Metadata",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScheduleMetadata"
@@ -903,19 +1136,33 @@
             "schema": {
               "$ref": "#/definitions/ScheduleMetadata"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Create": {
-            "$ref": "./examples/Assessment_Schedule_Create.json"
+          "CreateScheduledAssessments": {
+            "$ref": "./examples/CreateScheduledAssessments.json"
           }
         }
       },
       "get": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "GetScheduledAssessments",
+        "summary": "Get Schedule Assessment.",
+        "description": "Get Schedule Assessment.",
+        "operationId": "Get_Schedule",
         "produces": [
           "application/json"
         ],
@@ -923,12 +1170,7 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           }
@@ -939,21 +1181,38 @@
             "schema": {
               "$ref": "#/definitions/ScheduleMetadataPagedResults"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
           "GetScheduledAssessments": {
-            "$ref": "./examples/Assessment_Schedule_GetAll.json"
+            "$ref": "./examples/GetScheduledAssessments.json"
           }
         }
       }
     },
-    "/accounts/{accountId}/assessments/schedules/names/{scheduleName}": {
-      "head": {
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}": {
+      "patch": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "ExistsScheduledAssessment",
+        "summary": "Update Schedule Assessment.",
+        "description": "Update Schedule Assessment.",
+        "operationId": "Update_Schedule",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -961,18 +1220,259 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get Schedule Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "runNow",
+            "description": "Get RunNow",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get Schedule Metadata",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateScheduledAssessments": {
+            "$ref": "./examples/UpdateScheduledAssessments.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataQuality Schedule"
+        ],
+        "summary": "Update Schedule Assessment.",
+        "description": "Update Schedule Assessment.",
+        "operationId": "Update_Schedule_Post",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get Schedule Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "runNow",
+            "description": "Get RunNow",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get Schedule Metadata",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateScheduledAssessmentsPost": {
+            "$ref": "./examples/UpdateScheduledAssessmentsPost.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataQuality Schedule"
+        ],
+        "summary": "Get Schedule Assessment MetaData.",
+        "description": "Get Schedule Assessment MetaData.",
+        "operationId": "Get_Schedule_MetaData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get Schedule Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleMetadata"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetScheduledAssessmentMetadata": {
+            "$ref": "./examples/GetScheduledAssessmentMetadata.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataQuality Schedule"
+        ],
+        "summary": "Delete Schedule Assessment.",
+        "description": "Delete Schedule Assessment.",
+        "operationId": "Delete_Schedule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "description": "Get Schedule Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteScheduledAssessments": {
+            "$ref": "./examples/DeleteScheduledAssessments.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/names/{scheduleName}": {
+      "head": {
+        "tags": [
+          "DataQuality Schedule"
+        ],
+        "summary": "Check Schedule Assessment.",
+        "description": "Check Schedule Assessment.",
+        "operationId": "Check_Schedule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "scheduleName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Schedule Name",
             "required": true,
             "type": "string"
           }
@@ -983,11 +1483,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Exist": {
-            "$ref": "./examples/Assessment_Schedule_Exist.json"
+          "ExistsScheduledAssessment": {
+            "$ref": "./examples/ExistsScheduledAssessment.json"
           }
         }
       }
@@ -995,9 +1507,11 @@
     "/accounts/{accountId}/assessments/schedules/scheduleNames": {
       "get": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "GetAllScheduleNames",
+        "summary": "Get All Schedule Assessment.",
+        "description": "Get All Schedule Assessment.",
+        "operationId": "Get_All_Schedule",
         "produces": [
           "application/json"
         ],
@@ -1005,12 +1519,7 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           }
@@ -1024,11 +1533,23 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Exist": {
-            "$ref": "./examples/Assessment_Schedule_GetAll.json"
+          "GetAllScheduleNames": {
+            "$ref": "./examples/GetAllScheduleNames.json"
           }
         }
       }
@@ -1036,9 +1557,11 @@
     "/accounts/{accountId}/assessments/schedules/{scheduleId}/runs": {
       "get": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "GetScheduledAssessmentsRuns",
+        "summary": "Get Schedule Assessment Runs.",
+        "description": "Get Schedule Assessment Runs.",
+        "operationId": "Get_Schedule_Run",
         "produces": [
           "application/json"
         ],
@@ -1046,18 +1569,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Schedule Id",
             "required": true,
             "type": "string"
           }
@@ -1071,11 +1590,23 @@
                 "$ref": "#/definitions/ScheduleTriggerRunEntity"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Exist": {
-            "$ref": "./examples/Assessment_Schedule_GetById.json"
+          "GetScheduledAssessmentsRuns": {
+            "$ref": "./examples/GetScheduledAssessmentsRuns.json"
           }
         }
       }
@@ -1083,9 +1614,11 @@
     "/accounts/{accountId}/assessments/schedules/runs": {
       "post": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "GetScheduledAssessmentsRunsBulkStatus",
+        "summary": "Get Schedule Assessment Run Bulk Status.",
+        "description": "Get Schedule Assessment Run Bulk Status.",
+        "operationId": "Get_All_Schedule_Runs",
         "consumes": [
           "application/json"
         ],
@@ -1096,18 +1629,14 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Runs",
             "required": true,
             "schema": {
               "type": "array",
@@ -1126,11 +1655,23 @@
                 "$ref": "#/definitions/ScheduleTriggerRunEntityAssetInfo"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Run": {
-            "$ref": "./examples/Assessment_Schedule_Run.json"
+          "GetScheduledAssessmentsRunsBulkStatus": {
+            "$ref": "./examples/GetScheduledAssessmentsRunsBulkStatus.json"
           }
         }
       }
@@ -1138,9 +1679,11 @@
     "/accounts/{accountId}/assessments/schedules/{scheduleId}/runs/{runId}": {
       "get": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "GetScheduledAssessmentRunDetails",
+        "summary": "Get Schedule Assessment Run.",
+        "description": "Get Schedule Assessment Run.",
+        "operationId": "Get_Schedule_Run_Details",
         "produces": [
           "application/json"
         ],
@@ -1148,24 +1691,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "scheduleId",
+            "description": "Get Schedule Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Run Id",
             "required": true,
             "type": "string"
           }
@@ -1176,11 +1716,23 @@
             "schema": {
               "$ref": "#/definitions/ScheduleTriggerRunEntityAssetInfo"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_RunById": {
-            "$ref": "./examples/Assessment_Schedule_RunById.json"
+          "GetScheduledAssessmentRunDetails": {
+            "$ref": "./examples/GetScheduledAssessmentRunDetails.json"
           }
         }
       }
@@ -1188,9 +1740,11 @@
     "/accounts/{accountId}/assessments/schedules/{scheduleId}/runs/{runId}/cancel": {
       "post": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "CancelScheduledAssessmentRun",
+        "summary": "Cancel Schedule Assessment.",
+        "description": "Cancel Schedule Assessment.",
+        "operationId": "Cancel_Schedule",
         "produces": [
           "application/json"
         ],
@@ -1198,24 +1752,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "scheduleId",
+            "description": "Get Schedule Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Run Id",
             "required": true,
             "type": "string"
           }
@@ -1226,24 +1777,35 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Cancel": {
-            "$ref": "./examples/Assessment_Schedule_Cancel.json"
+          "CancelScheduledAssessmentRun": {
+            "$ref": "./examples/CancelScheduledAssessmentRun.json"
           }
         }
       }
     },
-    "/accounts/{accountId}/assessments/schedules/{scheduleId}": {
-      "put": {
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/triggerinternal": {
+      "post": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "UpdateScheduledAssessmentsPost",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Run Schedule Assessment Internal.",
+        "description": "Run Schedule Assessment Internal.",
+        "operationId": "Run_Schedule_Internal",
         "produces": [
           "application/json"
         ],
@@ -1251,131 +1813,41 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "runNow",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessment_Schedule_Put": {
-            "$ref": "./examples/Assessment_Schedule_Put.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Scheduling"
-        ],
-        "operationId": "GetScheduledAssessmentMetadata",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Schedule Id",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessment_Schedule_GetById": {
-            "$ref": "./examples/Assessment_Schedule_GetById.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Scheduling"
-        ],
-        "operationId": "DeleteScheduledAssessments",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
             "description": "Success",
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Delete": {
-            "$ref": "./examples/Assessment_Schedule_Delete.json"
+          "RunScheduledAssessmentsInternal": {
+            "$ref": "./examples/RunScheduledAssessmentsInternal.json"
           }
         }
       }
@@ -1383,9 +1855,11 @@
     "/accounts/{accountId}/assessments/schedules/{scheduleId}/trigger": {
       "post": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "RunScheduledAssessmentsExternal",
+        "summary": "Run Schedule Assessment External.",
+        "description": "Run Schedule Assessment External.",
+        "operationId": "Run_Schedule_External",
         "produces": [
           "application/json"
         ],
@@ -1393,18 +1867,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Schedule Id",
             "required": true,
             "type": "string"
           }
@@ -1415,11 +1885,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_Trigger": {
-            "$ref": "./examples/Assessment_Schedule_Trigger.json"
+          "RunScheduledAssessmentsExternal": {
+            "$ref": "./examples/RunScheduledAssessmentsExternal.json"
           }
         }
       }
@@ -1427,9 +1909,11 @@
     "/accounts/{accountId}/assessments/schedules/queryFilterRuns": {
       "post": {
         "tags": [
-          "Scheduling"
+          "DataQuality Schedule"
         ],
-        "operationId": "GetScheduledAssessmentsRunsFiltered",
+        "summary": "Get Schedule Assessment Runs Filterd.",
+        "description": "Get Schedule Assessment Runs Filterd.",
+        "operationId": "Get_Schedule_Filtered",
         "consumes": [
           "application/json"
         ],
@@ -1440,18 +1924,14 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Query Filter Payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TableRepositoryQueryPayloadModel"
@@ -1467,11 +1947,168 @@
                 "$ref": "#/definitions/ScheduleTriggerRunEntity"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Assessment_Schedule_QueryFilterRuns": {
-            "$ref": "./examples/Assessment_Schedule_QueryFilterRuns.json"
+          "GetScheduledAssessmentsRunsFiltered": {
+            "$ref": "./examples/GetScheduledAssessmentsRunsFiltered.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assessments/schedules/{scheduleId}/{triggerRunId}/status": {
+      "put": {
+        "tags": [
+          "DataQuality Schedule"
+        ],
+        "summary": "Update Trigger Run Status.",
+        "description": "Update Trigger Run Status.",
+        "operationId": "Update_Schedule_Trigger",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "triggerRunId",
+            "description": "Get Trigger Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scheduleId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get Job Info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobOpInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTriggerRunStatus": {
+            "$ref": "./examples/UpdateTriggerRunStatus.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/assets/{assetId}/runs/{runId}/status": {
+      "put": {
+        "tags": [
+          "DataQuality Schedule"
+        ],
+        "summary": "Update Manual Run Status.",
+        "description": "Update Manual Run Status.",
+        "operationId": "Update_Schedule_Manual_Run",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Get Account Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "description": "Get Asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "description": "Get Run Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get Job Info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobOpInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateManualRunStatus": {
+            "$ref": "./examples/UpdateManualRunStatus.json"
           }
         }
       }
@@ -1479,9 +2116,11 @@
     "/accounts/{accountId}/assets/{assetId}/trends": {
       "post": {
         "tags": [
-          "Trending"
+          "DataQuality Trending"
         ],
-        "operationId": "GetRulesTrendings",
+        "summary": "Get Rules Trending.",
+        "description": "Get Rules Trending.",
+        "operationId": "Get_Rule_Trending",
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -1497,24 +2136,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Rule Trending Query Payload",
             "schema": {
               "$ref": "#/definitions/RuleTrendingQueryPayload"
             }
@@ -1526,14 +2162,26 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RuleTrending"
+                "$ref": "#/definitions/RuleTrendingEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
               }
             }
           }
         },
         "x-ms-examples": {
-          "Trends_GetAll": {
-            "$ref": "./examples/Trends_GetAll.json"
+          "GetRulesTrendings": {
+            "$ref": "./examples/GetRulesTrendings.json"
           }
         }
       }
@@ -1541,9 +2189,11 @@
     "/accounts/{accountId}/assets/{assetId}/trends/rules": {
       "post": {
         "tags": [
-          "Trending"
+          "DataQuality Trending"
         ],
-        "operationId": "GetRulesTrendingsByRuleId",
+        "summary": "Get Rules Trending By Rule Id.",
+        "description": "Get Rules Trending By Rule Id.",
+        "operationId": "Get_Rule_Trending_By_Id",
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -1559,24 +2209,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "assetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Asset Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Rule Trending Query Payload",
             "schema": {
               "$ref": "#/definitions/RuleTrendingQueryPayload"
             }
@@ -1588,11 +2235,23 @@
             "schema": {
               "$ref": "#/definitions/RuleTrending"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Trends_GetByRuleId": {
-            "$ref": "./examples/Trends_GetByRuleId.json"
+          "GetRulesTrendingsByRuleId": {
+            "$ref": "./examples/GetRulesTrendingsByRuleId.json"
           }
         }
       }
@@ -1600,9 +2259,11 @@
     "/accounts/{accountId}/validation": {
       "post": {
         "tags": [
-          "Validation"
+          "DataQuality Jobs"
         ],
-        "operationId": "Validate",
+        "summary": "Validating Request.",
+        "description": "Validating Request.",
+        "operationId": "Validate_Request",
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -1617,19 +2278,15 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "name": "AccountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get Request",
             "schema": {
               "$ref": "#/definitions/ViewSchemaRequest"
             }
@@ -1641,21 +2298,35 @@
             "schema": {
               "$ref": "#/definitions/ViewSchemaResponse"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Schema_Validation": {
-            "$ref": "./examples/Schema_Validation.json"
+          "Validate": {
+            "$ref": "./examples/Validate.json"
           }
         }
       }
     },
-    "/accounts/{accountId}/views/viewsource/{ViewSourceName}": {
+    "/accounts/{accountId}/views/viewsource/{viewSourceName}": {
       "post": {
         "tags": [
-          "Views"
+          "DataQuality Views"
         ],
-        "operationId": "CreateView",
+        "summary": "Create a view instance.",
+        "description": "Crete a view instance.",
+        "operationId": "Create_View",
         "consumes": [
           "application/json"
         ],
@@ -1666,24 +2337,20 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "ViewSourceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "name": "viewSourceName",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get View",
             "schema": {
               "$ref": "#/definitions/DataQualityView"
             }
@@ -1695,21 +2362,35 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Views_Create": {
-            "$ref": "./examples/Views_Create.json"
+          "CreateView": {
+            "$ref": "./examples/CreateView.json"
           }
         }
       }
     },
-    "/accounts/{accountId}/views/{ViewId}": {
+    "/accounts/{accountId}/views/{viewId}": {
       "get": {
         "tags": [
-          "Views"
+          "DataQuality Views"
         ],
-        "operationId": "GetView",
+        "summary": "Get a view instance.",
+        "description": "Get a view instance.",
+        "operationId": "Get_View",
         "produces": [
           "application/json"
         ],
@@ -1717,18 +2398,13 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "ViewId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "name": "viewId",
             "required": true,
             "type": "string"
           }
@@ -1739,19 +2415,33 @@
             "schema": {
               "$ref": "#/definitions/DataQualityView"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Views_Get": {
-            "$ref": "./examples/Views_Get.json"
+          "GetView": {
+            "$ref": "./examples/GetView.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Views"
+          "DataQuality Views"
         ],
-        "operationId": "DeleteView",
+        "summary": "Delete a view instance.",
+        "description": "Delete a view instance.",
+        "operationId": "Delete_View",
         "produces": [
           "application/json"
         ],
@@ -1759,18 +2449,13 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "ViewId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "name": "viewId",
             "required": true,
             "type": "string"
           }
@@ -1781,19 +2466,33 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Views_Delete": {
-            "$ref": "./examples/Views_Delete.json"
+          "DeleteView": {
+            "$ref": "./examples/DeleteView.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Views"
+          "DataQuality Views"
         ],
-        "operationId": "UpdateView",
+        "summary": "Update a view instance.",
+        "description": "Update a view instance.",
+        "operationId": "Update_View",
         "consumes": [
           "application/json"
         ],
@@ -1804,24 +2503,20 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "ViewId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "name": "viewId",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Get New Input",
             "schema": {
               "$ref": "#/definitions/DataQualityView"
             }
@@ -1833,11 +2528,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Views_Update": {
-            "$ref": "./examples/Views_Update.json"
+          "UpdateView": {
+            "$ref": "./examples/UpdateView.json"
           }
         }
       }
@@ -1845,9 +2552,11 @@
     "/accounts/{accountId}/viewsources": {
       "post": {
         "tags": [
-          "ViewSource"
+          "DataQuality View Sources"
         ],
-        "operationId": "CreateViewSource",
+        "summary": "Create a view source.",
+        "description": "Create a view source.",
+        "operationId": "Create_View_Source",
         "consumes": [
           "application/json"
         ],
@@ -1858,18 +2567,14 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "",
             "schema": {
               "$ref": "#/definitions/ViewSource"
             }
@@ -1881,19 +2586,33 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "ViewSources_Create": {
-            "$ref": "./examples/ViewSources_Create.json"
+          "CreateViewSource": {
+            "$ref": "./examples/CreateViewSource.json"
           }
         }
       },
       "get": {
         "tags": [
-          "ViewSource"
+          "DataQuality View Sources"
         ],
-        "operationId": "GetViewSources",
+        "summary": "Get all view sources.",
+        "description": "Get all view sources.",
+        "operationId": "Get_All_View_Source",
         "produces": [
           "application/json"
         ],
@@ -1901,12 +2620,7 @@
           {
             "in": "path",
             "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           }
@@ -1920,11 +2634,23 @@
                 "$ref": "#/definitions/ViewSourceDTO"
               }
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "ViewSources_Get": {
-            "$ref": "./examples/ViewSources_GetAll.json"
+          "GetViewSources": {
+            "$ref": "./examples/GetViewSources.json"
           }
         }
       }
@@ -1932,9 +2658,11 @@
     "/accounts/{accountId}/viewsources/{source}": {
       "head": {
         "tags": [
-          "ViewSource"
+          "DataQuality View Sources"
         ],
-        "operationId": "CheckViewSourceName",
+        "summary": "Validate a view source.",
+        "description": "Validate a view source.",
+        "operationId": "Validate_View_Source",
         "produces": [
           "application/json"
         ],
@@ -1942,18 +2670,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "source",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Source",
             "required": true,
             "type": "string"
           }
@@ -1964,19 +2688,33 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "ViewSources_Validation": {
-            "$ref": "./examples/ViewSources_Validation.json"
+          "CheckViewSourceName": {
+            "$ref": "./examples/CheckViewSourceName.json"
           }
         }
       },
       "get": {
         "tags": [
-          "ViewSource"
+          "DataQuality View Sources"
         ],
-        "operationId": "GetViewSource",
+        "summary": "Get a view source.",
+        "description": "Get a view source.",
+        "operationId": "Get_View_Source",
         "produces": [
           "application/json"
         ],
@@ -1984,18 +2722,14 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "source",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "description": "Get Source",
             "required": true,
             "type": "string"
           }
@@ -2006,21 +2740,35 @@
             "schema": {
               "$ref": "#/definitions/ViewSourceDetail"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "ViewSources_Get": {
-            "$ref": "./examples/ViewSources_Get.json"
+          "GetViewSource": {
+            "$ref": "./examples/GetViewSource.json"
           }
         }
       }
     },
-    "/accounts/{accountId}/viewsources/{ViewSourceName}/views/{ViewName}/validation": {
+    "/accounts/{accountId}/viewsources/{viewSource}/views/{view}/validation": {
       "head": {
         "tags": [
-          "ViewSource"
+          "DataQuality Views"
         ],
-        "operationId": "CheckUniqueViewName",
+        "summary": "Check ViewName is unique or not.",
+        "description": "Check View Name is Unique or not in a View Source.",
+        "operationId": "Check_View_Source",
         "produces": [
           "application/json"
         ],
@@ -2028,24 +2776,21 @@
           {
             "in": "path",
             "name": "accountId",
+            "description": "Get Account Id",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "ViewSourceName",
+            "name": "viewSource",
+            "description": "Get View Source",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "ViewName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
+            "name": "view",
+            "description": "Get View",
             "required": true,
             "type": "string"
           }
@@ -2056,11 +2801,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "An error response received from the DataQuality Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Views_Validation": {
-            "$ref": "./examples/Views_Validation.json"
+          "CheckUniqueViewName": {
+            "$ref": "./examples/CheckUniqueViewName.json"
           }
         }
       }
@@ -2074,10 +2831,6 @@
           "enum": [
             "CATALOG_PATH"
           ],
-          "x-ms-enum": {
-            "name": "definitions",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "type": {
@@ -2142,7 +2895,7 @@
             "type": "string"
           }
         },
-        "properties": {},
+        "properties": { },
         "credentials": {
           "$ref": "#/definitions/CredentialEntity"
         }
@@ -2188,27 +2941,12 @@
             "DelegatedAuth",
             "ManagedIdentity"
           ],
-          "x-ms-enum": {
-            "name": "CredentialEntity",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "referenceName": {
           "type": "string"
         },
-        "credentialProperties": {}
-      }
-    },
-    "DataTypeProperties": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
+        "credentialProperties": { }
       }
     },
     "DataQualityRules": {
@@ -2236,7 +2974,10 @@
         "schemaReference": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/DataTypeProperties"
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         },
         "dataSourceType": {
@@ -2244,10 +2985,6 @@
             "CATALOG_ASSET",
             "FLOWLET"
           ],
-          "x-ms-enum": {
-            "name": "dataSourceType",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "rules": {
@@ -2269,10 +3006,6 @@
             "DSL",
             "SQL"
           ],
-          "x-ms-enum": {
-            "name": "DataQualityView",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "script": {
@@ -2312,30 +3045,18 @@
             "ENABLED",
             "DISABLED"
           ],
-          "x-ms-enum": {
-            "name": "status",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "notificationFrequency": {
           "enum": [
             "IMMEDIATE"
           ],
-          "x-ms-enum": {
-            "name": "notificationFrequency",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "notificationType": {
           "enum": [
             "EMAIL"
           ],
-          "x-ms-enum": {
-            "name": "notificationType",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "condition": {
@@ -2431,10 +3152,6 @@
             "DRAFT",
             "PUBLISHED"
           ],
-          "x-ms-enum": {
-            "name": "DQRuleScore",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "ruleType": {
@@ -2458,6 +3175,41 @@
         "totalRows": {
           "format": "int32",
           "type": "integer"
+        }
+      }
+    },
+    "ErrorModel": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
         }
       }
     },
@@ -2622,10 +3374,6 @@
             "DRAFT",
             "PUBLISHED"
           ],
-          "x-ms-enum": {
-            "name": "alertStatus",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "level": {
@@ -2633,10 +3381,6 @@
             "ASSET",
             "FIELD"
           ],
-          "x-ms-enum": {
-            "name": "level",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "type": {
@@ -2652,10 +3396,6 @@
             "TIMELINESS",
             "REFERENCE"
           ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "tags": {
@@ -2664,7 +3404,7 @@
             "type": "string"
           }
         },
-        "typeProperties": {}
+        "typeProperties": { }
       }
     },
     "RuleTrending": {
@@ -2779,10 +3519,6 @@
             "TRIGGER_DELETED",
             "PIPELINE_DELETED"
           ],
-          "x-ms-enum": {
-            "name": "ScheduleMetadata",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "runOnce": {
@@ -2890,10 +3626,6 @@
             "CATALOG",
             "DATAQUALITY_SCAN"
           ],
-          "x-ms-enum": {
-            "name": "SourceSchema",
-            "modelAsString": true
-          },
           "type": "string"
         },
         "schema": {
@@ -2927,22 +3659,22 @@
     "TriggerDQJobsStatus": {
       "type": "object",
       "properties": {
-        "succeeded": {
+        "Succeeded": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "inProgress": {
+        "InProgress": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "queued": {
+        "Queued": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "failed": {
+        "Failed": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "cancelled": {
+        "Cancelled": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "skipped": {
+        "Skipped": {
           "$ref": "#/definitions/DQAssetList"
         }
       }
@@ -2965,7 +3697,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "schedule": {},
+        "schedule": { },
         "timezone": {
           "type": "string"
         }
