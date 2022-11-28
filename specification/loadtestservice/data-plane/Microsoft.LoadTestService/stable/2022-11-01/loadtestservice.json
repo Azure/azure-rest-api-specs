@@ -12,7 +12,7 @@
           "Test"
         ],
         "summary": "Create a new test or update an existing test.",
-        "operationId": "Test_CreateOrUpdate",
+        "operationId": "Test_CreateOrUpdateTest",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -73,7 +73,7 @@
           "Test"
         ],
         "summary": "Delete a test by its name.",
-        "operationId": "Test_Delete",
+        "operationId": "Test_DeleteTest",
         "produces": [
           "application/json"
         ],
@@ -113,7 +113,7 @@
           "Test"
         ],
         "summary": "Get load test details by test name",
-        "operationId": "Test_Get",
+        "operationId": "Test_GetTest",
         "produces": [
           "application/json"
         ],
@@ -158,7 +158,7 @@
           "Test"
         ],
         "summary": "Get all load tests by the fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
-        "operationId": "Test_List",
+        "operationId": "Test_ListTests",
         "produces": [
           "application/json"
         ],
@@ -243,7 +243,7 @@
           "Test"
         ],
         "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten. File should be provided in the request body as application/octet-stream.",
-        "operationId": "Test_UploadFile",
+        "operationId": "Test_UploadTestFile",
         "consumes": [
           "application/octet-stream"
         ],
@@ -335,7 +335,7 @@
           "Test"
         ],
         "summary": "Get test file by the file name.",
-        "operationId": "Test_GetFile",
+        "operationId": "Test_GetTestFile",
         "produces": [
           "application/json"
         ],
@@ -385,7 +385,7 @@
           "Test"
         ],
         "summary": "Delete file by the file name for a test",
-        "operationId": "Test_DeleteFile",
+        "operationId": "Test_DeleteTestFile",
         "produces": [
           "application/json"
         ],
@@ -434,7 +434,7 @@
           "Test"
         ],
         "summary": "Get all test files.",
-        "operationId": "Test_ListFiles",
+        "operationId": "Test_ListTestFiles",
         "produces": [
           "application/json"
         ],
@@ -549,7 +549,7 @@
           "Test"
         ],
         "summary": "Get associated app component (collection of azure resources) for the given test.",
-        "operationId": "Test_ListAppComponents",
+        "operationId": "Test_GetAppComponents",
         "produces": [
           "application/json"
         ],
@@ -655,7 +655,7 @@
           "Test"
         ],
         "summary": "List server metrics configuration for the given test.",
-        "operationId": "Test_ListServerMetricsConfig",
+        "operationId": "Test_GetServerMetricsConfig",
         "produces": [
           "application/json"
         ],
@@ -700,7 +700,7 @@
           "TestRun"
         ],
         "summary": "Delete a test run by its name.",
-        "operationId": "TestRun_Delete",
+        "operationId": "TestRun_DeleteTestRun",
         "produces": [
           "application/json"
         ],
@@ -740,7 +740,7 @@
           "TestRun"
         ],
         "summary": "Create and start a new test run with the given name.",
-        "operationId": "TestRun_CreateOrUpdate",
+        "operationId": "TestRun_CreateOrUpdateTestRun",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -807,7 +807,7 @@
           "TestRun"
         ],
         "summary": "Get test run details by name.",
-        "operationId": "TestRun_Get",
+        "operationId": "TestRun_GetTestRun",
         "produces": [
           "application/json"
         ],
@@ -852,7 +852,7 @@
           "TestRun"
         ],
         "summary": "Get test run file by file name.",
-        "operationId": "TestRun_GetFile",
+        "operationId": "TestRun_GetTestRunFile",
         "produces": [
           "application/json"
         ],
@@ -904,7 +904,7 @@
           "TestRun"
         ],
         "summary": "Get all test runs with given filters",
-        "operationId": "TestRun_List",
+        "operationId": "TestRun_ListTestRuns",
         "produces": [
           "application/json"
         ],
@@ -998,7 +998,7 @@
           "TestRun"
         ],
         "summary": "Stop test run by name.",
-        "operationId": "TestRun_Stop",
+        "operationId": "TestRun_StopTestRun",
         "produces": [
           "application/json"
         ],
@@ -1254,6 +1254,9 @@
           "Lists the metric values for a load test run.": {
             "$ref": "./examples/ListTestRunMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1367,6 +1370,9 @@
           "Lists the metric dimension values for a load test run.": {
             "$ref": "./examples/ListMetricDimensionValues.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1437,7 +1443,7 @@
           "TestRun"
         ],
         "summary": "Get associated app component (collection of azure resources) for the given test run.",
-        "operationId": "TestRun_ListAppComponents",
+        "operationId": "TestRun_GetAppComponents",
         "produces": [
           "application/json"
         ],
