@@ -873,7 +873,8 @@
                 "description": "Create a new managed HSM pool. This is the default option."
               }
             ]
-          }
+          },
+          "x-ms-mutability": ["create", "update"]
         },
         "statusMessage": {
           "readOnly": true,
@@ -1177,7 +1178,8 @@
           "x-ms-enum": {
             "name": "NetworkRuleBypassOptions",
             "modelAsString": true
-          }
+          },
+          "default": "AzureServices"
         },
         "defaultAction": {
           "type": "string",
@@ -1189,21 +1191,24 @@
           "x-ms-enum": {
             "name": "NetworkRuleAction",
             "modelAsString": true
-          }
+          },
+          "default": "Allow"
         },
         "ipRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MHSMIPRule"
           },
-          "description": "The list of IP address rules."
+          "description": "The list of IP address rules.",
+          "default": []
         },
         "virtualNetworkRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MHSMVirtualNetworkRule"
           },
-          "description": "The list of virtual network rules."
+          "description": "The list of virtual network rules.",
+          "default": []
         }
       },
       "description": "A set of rules governing the network accessibility of a managed hsm pool."
