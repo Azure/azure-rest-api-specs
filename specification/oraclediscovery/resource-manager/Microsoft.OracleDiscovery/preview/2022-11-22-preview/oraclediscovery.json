@@ -1013,6 +1013,10 @@
       "type": "object",
       "description": "DB  model for creating machine to assess resources",
       "properties": {
+        "testProperties": {
+          "type": "string",
+          "description": "Description of this operation."
+        }
       },
       "required": [
       ]
@@ -1063,9 +1067,12 @@
       "type": "object",
       "description": "The DB server configuration",
       "properties": {
-      },
-      "required": [
-      ]
+        "sampleProp": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Error response.",
