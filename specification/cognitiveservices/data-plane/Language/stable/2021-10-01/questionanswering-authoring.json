@@ -271,6 +271,12 @@
           "application/json"
         ],
         "responses": {
+          "200": {
+            "description": "Export job status, project metadata, and assets.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobState"
+            }
+          },
           "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {

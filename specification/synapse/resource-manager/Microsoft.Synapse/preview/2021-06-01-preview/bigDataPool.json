@@ -253,15 +253,15 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
-            "description": ""
+            "description": "Created"
           },
           "204": {
             "description": ""
@@ -406,7 +406,8 @@
         "creationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The time when the Big Data pool was created."
+          "description": "The time when the Big Data pool was created.",
+          "readOnly": true
         },
         "autoPause": {
           "$ref": "#/definitions/AutoPauseProperties",
@@ -415,6 +416,15 @@
         "isComputeIsolationEnabled": {
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
+        },
+        "isAutotuneEnabled": {
+          "type": "boolean",
+          "title": "Enable Autotune",
+          "description": "Whether autotune is required or not.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
@@ -447,7 +457,8 @@
           "type": "array",
           "items": {
             "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",
@@ -508,7 +519,11 @@
         "minNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of nodes the Big Data pool can support."
+          "description": "The minimum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "enabled": {
           "type": "boolean",
@@ -517,7 +532,11 @@
         "maxNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of nodes the Big Data pool can support."
+          "description": "The maximum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -544,6 +563,24 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
+        },
+        "minExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of executors alloted",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "maxExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of executors alloted",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -597,7 +634,11 @@
           "x-ms-enum": {
             "name": "ConfigurationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     }

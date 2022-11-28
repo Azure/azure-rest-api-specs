@@ -101,13 +101,14 @@
           {
             "name": "guid",
             "in": "query",
-            "description": "An array of GUIDs of entities to create.",
+            "description": "An array of GUIDs of entities to list.",
             "required": true,
             "type": "array",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
           },
           {
             "$ref": "#/parameters/minExtInfo"
@@ -184,7 +185,7 @@
         },
         "parameters": [
           {
-            "name": "guids",
+            "name": "guid",
             "in": "query",
             "description": "An array of GUIDs of entities to delete.",
             "required": true,
@@ -192,7 +193,8 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
           }
         ],
         "responses": {

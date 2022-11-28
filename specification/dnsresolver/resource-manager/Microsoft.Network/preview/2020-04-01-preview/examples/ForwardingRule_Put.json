@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "abdd4249-9f34-4cc6-8e42-c2e32110603e",
+    "resourceGroupName": "sampleResourceGroup",
+    "dnsForwardingRulesetName": "sampleDnsForwardingRuleset",
+    "forwardingRuleName": "sampleForwardingRule",
+    "parameters": {
+      "properties": {
+        "domainName": "contoso.com.",
+        "targetDnsServers": [
+          {
+            "ipAddress": "10.0.0.1",
+            "port": 53
+          },
+          {
+            "ipAddress": "10.0.0.2",
+            "port": 53
+          }
+        ],
+        "forwardingRuleState": "Enabled",
+        "metadata": {
+          "additionalProp1": "value1"
+        }
+      }
+    },
+    "api-version": "2020-04-01-preview"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/dnsForwardingRulesets/sampleDnsForwardingRuleset/forwardingRules/sampleForwardingRule",
+        "name": "sampleForwardingRule",
+        "type": "Microsoft.Network/dnsForwardingRulesets/forwardingRules",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "systemData": {
+          "createdByType": "Application",
+          "createdAt": "2021-04-01T01:01:01.1075056Z",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-04-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "domainName": "contoso.com.",
+          "targetDnsServers": [
+            {
+              "ipAddress": "10.0.0.1",
+              "port": 53
+            },
+            {
+              "ipAddress": "10.0.0.2",
+              "port": 53
+            }
+          ],
+          "metadata": {
+            "additionalProp1": "value1"
+          },
+          "forwardingRuleState": "Enabled",
+          "provisioningState": "Succecced"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/dnsForwardingRulesets/sampleDnsForwardingRuleset/forwardingRules/sampleForwardingRule",
+        "name": "sampleForwardingRule",
+        "type": "Microsoft.Network/dnsForwardingRulesets/forwardingRules",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "systemData": {
+          "createdByType": "Application",
+          "createdAt": "2021-04-01T01:01:01.1075056Z",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-04-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "domainName": "contoso.com.",
+          "targetDnsServers": [
+            {
+              "ipAddress": "10.0.0.1",
+              "port": 53
+            },
+            {
+              "ipAddress": "10.0.0.2",
+              "port": 53
+            }
+          ],
+          "metadata": {
+            "additionalProp1": "value1"
+          },
+          "forwardingRuleState": "Enabled",
+          "provisioningState": "Succecced"
+        }
+      }
+    }
+  }
+}

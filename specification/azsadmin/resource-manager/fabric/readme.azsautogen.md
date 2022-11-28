@@ -24,7 +24,7 @@ These are the global settings for the Fabric API.
 title: FabricAdminClient
 description: Fabric Admin Client
 openapi-type: arm
-tag: package-2019-05-01
+tag: package-2022-03-01
 ```
 
 ``` yaml
@@ -34,7 +34,6 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/Fabric.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGateway.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGatewayPool.json
-  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/FabricLocation.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/FileShare.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/InfraRole.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/InfraRoleInstance.json
@@ -53,6 +52,7 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json"
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json"
+  - $(this-folder)/Microsoft.Fabric.Admin/stable/2022-03-01/FabricLocation.json
 ```
 
 ---

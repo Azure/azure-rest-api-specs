@@ -3168,7 +3168,7 @@
           "$ref": "#/definitions/StorageSyncErrorDetails",
           "description": "Error details of the given entry."
         },
-        "innerError": {
+        "innererror": {
           "$ref": "#/definitions/StorageSyncInnerErrorDetails",
           "description": "Inner error details of the given entry."
         }
@@ -3476,13 +3476,15 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 100,
-          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
+          "default": 20
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
           "minimum": 0,
           "maximum": 2147483647,
-          "description": "Tier files older than days."
+          "description": "Tier files older than days.",
+          "default": 0
         },
         "friendlyName": {
           "type": "string",
@@ -3783,6 +3785,13 @@
         "aggregationType": {
           "type": "string",
           "description": "Aggregation type for the metric."
+        },
+        "supportedAggregationTypes": {
+          "description": "Supported aggregation types for the metric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "fillGapWithZero": {
           "type": "boolean",

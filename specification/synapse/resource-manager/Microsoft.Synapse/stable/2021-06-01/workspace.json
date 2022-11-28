@@ -270,13 +270,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
             "description": ""
           },
@@ -754,6 +754,9 @@
             "description": "OK"
           },
           "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
             "description": "Created"
           },
           "default": {
@@ -895,11 +898,19 @@
         },
         "administratorType": {
           "description": "Workspace active directory administrator type",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sid": {
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -926,7 +937,11 @@
       "properties": {
         "accountUrl": {
           "description": "Account URL",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "filesystem": {
           "description": "Filesystem name",
@@ -938,7 +953,11 @@
         },
         "createManagedPrivateEndpoint": {
           "description": "Create managed private endpoint to this storage account or not",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1084,7 +1103,12 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1166,11 +1190,16 @@
       }
     },
     "CspWorkspaceAdminProperties": {
+      "type": "object",
       "description": "Initial workspace AAD admin properties for a CSP subscription",
       "properties": {
         "initialWorkspaceAdminObjectId": {
           "description": "AAD object ID of initial workspace admin",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1208,7 +1237,11 @@
         },
         "managedResourceGroupName": {
           "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -1226,7 +1259,11 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
           "type": "object"
         },
@@ -1282,6 +1319,7 @@
             "Disabled"
           ],
           "description": "Enable or Disable public network access to workspace",
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "WorkspacePublicNetworkAccess",
@@ -1303,6 +1341,11 @@
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
           "type": "boolean"
+        },
+        "trustedServiceBypassEnabled": {
+          "description": "Is trustedServiceBypassEnabled for the workspace",
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1382,6 +1425,7 @@
       ],
       "properties": {
         "properties": {
+          "type": "object",
           "title": "Managed Identity Sql Control Settings",
           "description": "Sql Control Settings for workspace managed identity",
           "properties": {
@@ -1395,7 +1439,11 @@
                   "enum": [
                     "Enabled",
                     "Disabled"
-                  ]
+                  ],
+                  "x-ms-enum": {
+                    "name": "DesiredState",
+                    "modelAsString": false
+                  }
                 },
                 "actualState": {
                   "description": "Actual state",
@@ -1407,6 +1455,10 @@
                     "Disabled",
                     "Unknown"
                   ],
+                  "x-ms-enum": {
+                    "name": "ActualState",
+                    "modelAsString": false
+                  },
                   "readOnly": true
                 }
               }
@@ -1417,6 +1469,7 @@
       }
     },
     "RestorableDroppedSqlPoolProperties": {
+      "type": "object",
       "properties": {
         "databaseName": {
           "readOnly": true,
@@ -1465,6 +1518,7 @@
       "description": "The properties of a restorable dropped Sql pool"
     },
     "RestorableDroppedSqlPool": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1485,6 +1539,7 @@
       "description": "A restorable dropped Sql pool"
     },
     "RestorableDroppedSqlPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
