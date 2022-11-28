@@ -5218,6 +5218,25 @@
       "type": "object",
       "x-ms-azure-resource": true
     },
+    "ImmutabilitySettings": {
+      "description": "Immutability Settings at vault level",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Immutability state",
+          "enum": [
+            "Disabled",
+            "Unlocked",
+            "Locked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImmutabilityState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "DppProxyResource": {
       "properties": {
         "id": {
@@ -6362,6 +6381,9 @@
       "properties": {
         "softDeleteSettings": {
           "$ref": "#/definitions/SoftDeleteSettings"
+        },
+        "immutabilitySettings": {
+          "$ref": "#/definitions/ImmutabilitySettings"
         }
       }
     },
