@@ -4066,7 +4066,7 @@
       "description": "Object containing updates for patch operations."
     },
     "ResourcePoolProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Resource Pool.",
       "type": "object",
       "properties": {
         "uuid": {
@@ -4296,7 +4296,7 @@
       }
     },
     "VCenterProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a VCenter.",
       "required": [
         "fqdn"
       ],
@@ -4583,7 +4583,7 @@
       "description": "Specifies the patch settings."
     },
     "OsProfile": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the operating system settings for the virtual machine.",
       "type": "object",
       "properties": {
         "computerName": {
@@ -4659,7 +4659,7 @@
       }
     },
     "OsProfileUpdate": {
-      "description": "Defines the os update properties.",
+      "description": "Specifies the operating system settings for the virtual machine.",
       "type": "object",
       "properties": {
         "windowsConfiguration": {
@@ -4685,7 +4685,7 @@
       }
     },
     "HardwareProfile": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the hardware settings for the virtual machine.",
       "type": "object",
       "properties": {
         "memorySizeMB": {
@@ -4721,7 +4721,7 @@
       }
     },
     "NetworkProfileUpdate": {
-      "description": "Defines the update resource properties.",
+      "description": "Specifies the network interfaces of the virtual machine.",
       "type": "object",
       "properties": {
         "networkInterfaces": {
@@ -4734,7 +4734,7 @@
       }
     },
     "NetworkProfile": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the network interfaces of the virtual machine.",
       "type": "object",
       "properties": {
         "networkInterfaces": {
@@ -4803,7 +4803,7 @@
       }
     },
     "StorageProfile": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the storage settings for the virtual machine disks.",
       "type": "object",
       "properties": {
         "disks": {
@@ -4824,7 +4824,7 @@
       }
     },
     "StorageProfileUpdate": {
-      "description": "Defines the resource update properties.",
+      "description": "Specifies the storage settings for the virtual machine disks.",
       "type": "object",
       "properties": {
         "disks": {
@@ -4837,7 +4837,7 @@
       }
     },
     "GuestAgentProfile": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the guest agent settings for the virtual machine.",
       "type": "object",
       "properties": {
         "vmUuid": {
@@ -4890,7 +4890,7 @@
       }
     },
     "GuestAgentProfileUpdate": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the guest agent settings for the virtual machine.",
       "type": "object",
       "properties": {
         "clientPublicKey": {
@@ -4900,7 +4900,7 @@
       }
     },
     "PlacementProfile": {
-      "description": "Defines the resource properties.",
+      "description": "Specifies the compute and storage placement settings for the virtual machine.",
       "type": "object",
       "properties": {
         "resourcePoolId": {
@@ -4956,7 +4956,7 @@
       }
     },
     "VirtualMachineProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Virtual Machine.",
       "type": "object",
       "properties": {
         "resourcePoolId": {
@@ -5132,7 +5132,7 @@
       }
     },
     "VirtualMachineUpdateProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Virtual Machine.",
       "type": "object",
       "properties": {
         "hardwareProfile": {
@@ -5207,7 +5207,7 @@
       }
     },
     "VirtualMachineTemplateProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Virtual Machine Template.",
       "type": "object",
       "properties": {
         "uuid": {
@@ -5317,7 +5317,7 @@
       }
     },
     "ClusterProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Cluster.",
       "type": "object",
       "properties": {
         "uuid": {
@@ -5457,7 +5457,7 @@
       ]
     },
     "HostProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Host.",
       "type": "object",
       "properties": {
         "uuid": {
@@ -5597,7 +5597,7 @@
       ]
     },
     "DatastoreProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Datastore.",
       "type": "object",
       "properties": {
         "uuid": {
@@ -5829,7 +5829,7 @@
       ]
     },
     "VirtualNetworkProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Virtual Network.",
       "type": "object",
       "properties": {
         "uuid": {
@@ -6302,7 +6302,7 @@
       "x-ms-azure-resource": true
     },
     "InventoryItemProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of an Inventory Item.",
       "required": [
         "inventoryType"
       ],
@@ -6382,6 +6382,10 @@
         },
         "resourcePool": {
           "description": "ResourcePool inventory resource details.",
+          "$ref": "#/definitions/InventoryItemDetails"
+        },
+        "cluster": {
+          "description": "Cluster inventory resource details.",
           "$ref": "#/definitions/InventoryItemDetails"
         },
         "instanceUuid": {
@@ -6540,7 +6544,7 @@
       }
     },
     "InventoryItemDetails": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of an Inventory Item reference.",
       "type": "object",
       "properties": {
         "inventoryItemId": {
@@ -6603,7 +6607,7 @@
       "x-ms-azure-resource": true
     },
     "HybridIdentityMetadataProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of Hybrid Identity Metadata for a Virtual Machine.",
       "type": "object",
       "properties": {
         "vmId": {
@@ -7010,7 +7014,7 @@
       "x-ms-azure-resource": true
     },
     "GuestAgentProperties": {
-      "description": "Defines the resource properties.",
+      "description": "Describes the properties of a Virtual Machine Guest Agent.",
       "type": "object",
       "properties": {
         "uuid": {
