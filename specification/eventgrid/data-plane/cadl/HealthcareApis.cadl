@@ -1,4 +1,5 @@
-@service({title:"Microsoft.HealthcareApi",version:"2018-01-01"})
+@service({title:"Schema of Azure HealthcareApis events published to Azure Event Grid.",version:"2018-01-01"})
+@doc("Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace HealthCareApis;
 
 model HealthcareFhirResourceBaseEventData {
@@ -15,6 +16,24 @@ model HealthcareFhirResourceBaseEventData {
   resourceVersionId?: int64;
 }
 
+model HealthcareDicomImageBaseEventData {
+  @doc("Unique identifier for the Study")
+  imageStudyInstanceUid?: string;
+
+  @doc("Unique identifier for the Series")
+  imageSeriesInstanceUid?: string;
+
+  @doc("Unique identifier for the DICOM Image",)
+  imageSopInstanceUid?: string;
+
+  @doc("Host name of the DICOM account for this image.")
+  serviceHostName?: string;
+
+  @doc("Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service.")
+  sequenceNumber?: int64;
+
+}
+
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.")
 model HealthcareFhirResourceCreatedEventData is HealthcareFhirResourceBaseEventData;
 
@@ -25,10 +44,10 @@ model HealthcareFhirResourceUpdatedEventData is HealthcareFhirResourceBaseEventD
 model HealthcareFhirResourceDeletedEventData is HealthcareFhirResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.")
-model HealthcareDicomImageCreatedEventData is HealthcareFhirResourceBaseEventData;
+model HealthcareDicomImageCreatedEventData is HealthcareDicomImageBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.")
-model HealthcareDicomImageDeletedEventData is HealthcareFhirResourceBaseEventData;
+model HealthcareDicomImageDeletedEventData is HealthcareDicomImageBaseEventData;
 
 model HealthcareFhirResourceType is string {}
 enum HealthcareFhirResourceTypeKV {
