@@ -3632,6 +3632,8 @@
     },
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "location": {
           "type": "string",
@@ -3727,14 +3729,39 @@
           "description": "This is the ARM Sku name.",
           "type": "string",
           "readOnly": true
-        },
+        }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "ModernSingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the modern reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
         "subscriptionId": {
-          "description": "Subscription ID",
+          "description": "Subscription id associated with single scoped recommendation.",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModernReservationRecommendationProperties"
+        }
+      ]
+    },
+    "ModernSharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the modern reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModernReservationRecommendationProperties"
+        }
+      ]
     },
     "ModernReservationTransactionProperties": {
       "description": "The properties of a modern reservation transaction.",
