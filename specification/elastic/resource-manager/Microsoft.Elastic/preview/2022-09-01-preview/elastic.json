@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2022-07-01-preview"
+    "version": "2022-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1083,6 +1083,9 @@
           "201": {
             "description": "Success"
           },
+          "202": {
+            "description": "Success"
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -1142,6 +1145,9 @@
         ],
         "responses": {
           "201": {
+            "description": "Success"
+          },
+          "202": {
             "description": "Success"
           },
           "default": {
@@ -2011,6 +2017,11 @@
           "description": "Disk capacity of the elasticsearch in Elastic cloud deployment.",
           "type": "string",
           "readOnly": true
+        },
+        "deploymentUrl": {
+          "description": "Deployment URL of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2253,7 +2264,9 @@
         "2020-07-01",
         "2021-09-01-preview",
         "2021-10-01-preview",
-        "2022-05-05-preview"
+        "2022-05-05-preview",
+        "2022-07-01-preview",
+        "2022-09-01-preview"
       ],
       "x-ms-enum": {
         "modelAsString": true,
