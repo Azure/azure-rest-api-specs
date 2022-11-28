@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2022-01-15-privatepreview",
+    "networkRackName": "networkRackName",
+    "body": {
+      "properties": {
+        "networkRackSku": "RackSKU",
+        "networkFabricId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/networkFabricName",
+        "annotation": "null"
+      },
+      "tags": {
+        "keyID": "keyValue"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkRackSku": "RackSKU",
+          "networkFabricId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/networkFabricName",
+          "networkDevices": [
+            "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName"
+          ],
+          "provisioningState": "Succeeded",
+          "annotation": "null"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkRacks/networkRackName",
+        "name": "networkRackName",
+        "type": "microsoft.managednetworkfabric/networkracks",
+        "systemData": {
+          "createdBy": "d1bd24c7-b27f-477e-86dd-939e107873d7",
+          "createdByType": "Application",
+          "createdAt": "2022-09-16T06:09:38.603Z",
+          "lastModifiedBy": "email@address.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-09-16T06:19:40.603Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "networkRackSku": "RackSKU",
+          "networkFabricId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkRacks/networkRackName",
+          "networkDevices": [
+            "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName"
+          ],
+          "provisioningState": "Succeeded",
+          "annotation": "null"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkRacks/networkRackName",
+        "name": "networkRackName",
+        "type": "microsoft.managednetworkfabric/networkracks",
+        "systemData": {
+          "createdBy": "d1bd24c7-b27f-477e-86dd-939e107873d7",
+          "createdByType": "Application",
+          "createdAt": "2022-09-16T06:09:38.603Z",
+          "lastModifiedBy": "email@address.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-09-16T06:19:40.603Z"
+        }
+      }
+    }
+  }
+}
