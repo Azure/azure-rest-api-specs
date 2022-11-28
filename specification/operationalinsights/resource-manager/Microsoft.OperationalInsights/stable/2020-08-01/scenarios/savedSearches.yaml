@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  workspaceName:
+    type: string
+    prefix: oisavesearch
+
+prepareSteps:
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+
+scenarios:
+  - scenario: SavedSearch
+    description: Microsoft.OperationalInsights/workspaces/savedSearches
+    steps:
+      - step: SavedSearches_CreateOrUpdate
+        exampleFile: ../examples/WorkspacesSavedSearchesCreateOrUpdate.json
+      - step: SavedSearches_ListByWorkspace
+        exampleFile: ../examples/SavedSearchesListByWorkspace.json
+      - step: SavedSearches_Get
+        exampleFile: ../examples/WorkspacesSavedSearchesGet.json
+      - step: SavedSearches_Delete
+        exampleFile: ../examples/WorkspacesDeleteSavedSearches.json

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  workspaceName:
+    type: string
+    prefix: oiintelliagencepack
+
+prepareSteps:
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+
+scenarios:
+  - scenario: IntelligencePack
+    description: Microsoft.OperationalInsights/workspaces/intelligencePacks/Disable 
+    steps:
+      - step: IntelligencePacks_List
+        exampleFile: ../examples/WorkspacesListIntelligencePacks.json
+      - step: IntelligencePacks_Enable
+        exampleFile: ../examples/WorkspacesEnableIntelligencePack.json
+      - step: IntelligencePacks_Disable
+        exampleFile: ../examples/WorkspacesDisableIntelligencePack.json

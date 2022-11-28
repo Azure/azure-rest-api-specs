@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  workspaceName:
+    type: string
+    prefix: oilinkedstorageaccount
+  storageAccountName: oilinkedstorageaccountx
+  storageAccountId:
+    type: string
+
+prepareSteps:
+  - step: StorageAccount_Create
+    armTemplate: templates/Create_StorageAccount.json
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+
+scenarios:
+  - scenario: LinkedStorageAccount
+    description: Microsoft.OperationalInsights/workspaces/linkedStorageAccounts
+    steps:
+      - step: LinkedStorageAccounts_CreateOrUpdate
+        exampleFile: ../examples/LinkedStorageAccountsCreate.json
+        requestUpdate:
+          - remove: /parameters/properties/storageAccountIds/1
+          - replace: /parameters/properties/storageAccountIds/0
+            value: $(storageAccountId)
+      - step: LinkedStorageAccounts_ListByWorkspace
+        exampleFile: ../examples/LinkedStorageAccountsListByWorkspace.json
+      - step: LinkedStorageAccounts_Get
+        exampleFile: ../examples/LinkedStorageAccountsGet.json
+      - step: LinkedStorageAccounts_Delete
+        exampleFile: ../examples/LinkedStorageAccountsDelete.json

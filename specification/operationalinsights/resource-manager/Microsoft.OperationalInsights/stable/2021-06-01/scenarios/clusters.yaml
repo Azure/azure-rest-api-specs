@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  clusterName: 
+    type: string
+    prefix: oicluster
+    
+scenarios:
+  - scenario: Cluster
+    description: Microsoft.OperationalInsights/clusters
+    steps:
+      - step: Clusters_Create
+        exampleFile: ../examples/ClustersCreate.json
+        requestUpdate:
+          - add: /parameters/identity
+            value: {
+              type: SystemAssigned
+            }
+      - step: Clusters_List
+        exampleFile: ../examples/ClustersSubscriptionList.json
+      - step: Clusters_ListByResourceGroup
+        exampleFile: ../examples/ClustersListByResourceGroup.json
+      - step: Clusters_Get
+        exampleFile: ../examples/ClustersGet.json
+      - step: Clusters_Update
+        operationId: Clusters_Update
+        parameters:
+          parameters:
+            tags:
+              tag1: val2
+      - step: Clusters_Delete
+        exampleFile: ../examples/ClustersDelete.json

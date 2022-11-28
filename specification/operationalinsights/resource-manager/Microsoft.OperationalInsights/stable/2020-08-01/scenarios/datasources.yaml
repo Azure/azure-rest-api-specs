@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  workspaceName:
+    type: string
+    prefix: oiautorest
+  storageAccountName: oistorageaccountx
+  storageAccountId:
+    type: string
+  dataSourceName:
+    type: string
+    prefix: iodatasource
+
+prepareSteps:
+  - step: StorageAccount_Create
+    armTemplate: templates/Create_StorageAccount.json
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+
+scenarios:
+  - scenario: WorkspacePurge
+    description: Microsoft.OperationalInsights/workspaces/dataSources
+    steps:
+      - step: DataSources_Create
+        operationId: DataSources_CreateOrUpdate
+        parameters:
+          parameters:
+            kind: IISLogs
+            properties:
+              LinkedResourceId: $(storageAccountId)
+      - step: DataSources_ListByWorkspace
+        exampleFile: ../examples/DataSourcesListByWorkspace.json
+        requestUpdate:
+          - replace: /$filter
+            value: $filter=kind eq 'WindowsEvent'
+      - step: DataSources_Get
+        exampleFile: ../examples/DataSourcesGet.json
+      - step: DataSources_Delete
+        exampleFile: ../examples/DataSourcesDelete.json

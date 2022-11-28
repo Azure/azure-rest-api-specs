@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  workspaceName:
+    type: string
+    prefix: oidataexport
+  namespacesName:
+    type: string
+    prefix: eventhubnamespace
+  eventhubId:
+    type: string
+
+prepareSteps:
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+  - step: EventhubNamespace_Create
+    armTemplate: templates/Create_EventhubNamespace.json
+
+scenarios:
+  - scenario: DataExport
+    description: Microsoft.OperationalInsights/workspaces/dataExports
+    steps:
+      - step: DataExports_CreateOrUpdate
+        exampleFile: ../examples/DataExportCreateOrUpdate.json
+        requestUpdate:
+          - replace: /parameters/properties/destination/resourceId
+            value: $(eventhubId)
+      - step: DataExports_ListByWorkspace
+        exampleFile: ../examples/DataExportListByWorkspace.json
+      - step: DataExports_Get
+        exampleFile: ../examples/DataExportGet.json
+      - step: DataExports_Delete
+        exampleFile: ../examples/DataExportDelete.json

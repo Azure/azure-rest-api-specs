@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  workspaceName:
+    type: string
+    prefix: oiautorest
+
+scenarios:
+  - scenario: Workspace
+    description: Microsoft.OperationalInsights/workspaces
+    steps:
+      - step: Workspaces_CreateOrUpdate
+        exampleFile: ../examples/WorkspacesCreate.json
+      - step: Workspaces_List 
+        operationId: Workspaces_List
+      - step: Workspaces_Get
+        exampleFile: ../examples/WorkspacesGet.json
+      - step: Workspaces_ListByResourceGroup
+        operationId: Workspaces_ListByResourceGroup
+      - step: Workspaces_Update
+        exampleFile: ../examples/WorkspacesUpdate.json
+      - step: Workspaces_Delete
+        exampleFile: ../examples/WorkspacesDelete.json
+      - step: DeletedWorkspaces_List
+        operationId: DeletedWorkspaces_List
+      - step: DeletedWorkspaces_ListByResourceGroup
+        operationId: DeletedWorkspaces_ListByResourceGroup
+
+  - scenario: Operations
+    description: Microsoft.OperationalInsights/operations
+    steps:
+      - step: Operations_List
+        exampleFile: ../examples/OperationsListByTenant.json

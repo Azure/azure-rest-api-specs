@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location: 
+    type: string
+  workspaceName:
+    type: string
+    prefix: oilinkedservice
+  clusterName:
+    type: string
+    prefix: linkedservicecluser
+
+prepareSteps:
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+  - step: Cluster_Create
+    operationId: Clusters_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        sku:
+          name: CapacityReservation
+          capacity: 1000
+        identity:
+          type: SystemAssigned
+    outputVariables:
+      cluserId:
+        type: string
+        fromResponse: /id
+        
+
+scenarios:
+  - scenario: LinkedService
+    description: Microsoft.OperationalInsights/workspaces/linkedServices
+    steps:
+      - step: LinkedServices_CreateOrUpdate
+        exampleFile: ../examples/LinkedServicesCreate.json
+        requestUpdate:
+          - replace: /parameters/properties/writeAccessResourceId
+            value: $(cluserId)
+      - step: LinkedServices_ListByWorkspace
+        exampleFile: ../examples/LinkedServicesListByWorkspace.json
+      - step: LinkedServices_Get
+        exampleFile: ../examples/LinkedServicesGet.json
+      - step: LinkedServices_Delete
+        exampleFile: ../examples/LinkedServicesDelete.json
+
+  - scenario: AvailableServiceTiers
+    description: Microsoft.OperationalInsights/workspaces/availableServiceTiers
+    steps:
+      - step: AvailableServiceTiers_ListByWorkspace
+        exampleFile: ../examples/WorkspacesAvailableServiceTiers.json
+
+  - scenario: ManagementGroups
+    description: Microsoft.OperationalInsights/workspaces/managementGroups
+    steps:
+      - step: ManagementGroups_List
+        exampleFile: ../examples/WorkspacesListManagementGroups.json
+
+  - scenario: Schema
+    description: Microsoft.OperationalInsights/workspaces/schema
+    steps:
+      - step: Schema_Get
+        exampleFile: ../examples/SavedSearchesGetSchema.json
+
+  - scenario: SharedKeys
+    description: Microsoft.OperationalInsights/workspaces/sharedKeys
+    steps:
+      - step: SharedKeys_GetSharedKeys
+        exampleFile: ../examples/WorkspacesGetSharedKeys.json
+
+  - scenario: Usages
+    description: Microsoft.OperationalInsights/workspaces/usages
+    steps:
+      - step: Usages_List
+        exampleFile: ../examples/WorkspacesListUsages.json

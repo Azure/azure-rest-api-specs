@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  location:
+    type: string
+  workspaceName:
+    type: string
+    prefix: oistorageinsightconfig
+  storageAccountName: oistorageinsightconfigx
+  storageAccountId:
+    type: string
+
+prepareSteps:
+  - step: StorageAccount_Create
+    armTemplate: templates/Create_StorageAccount.json
+  - step: Workspaces_Create
+    operationId: Workspaces_CreateOrUpdate
+    parameters:
+      parameters:
+        location: $(location)
+        properties:
+          sku: 
+            name: PerGB2018
+          retentionInDays: 30
+
+scenarios:
+  - scenario: StorageInsightConfig
+    description: Microsoft.OperationalInsights/workspaces/storageInsightConfigs
+    steps:
+      - step: StorageInsightConfigs_CreateOrUpdate
+        exampleFile: ../examples/StorageInsightsCreateOrUpdate.json
+        requestUpdate:
+          - replace: /parameters/properties/storageAccount/id
+            value: $(storageAccountId)
+      - step: StorageInsightConfigs_ListByWorkspace
+        exampleFile: ../examples/StorageInsightsListByWorkspace.json
+      - step: StorageInsightConfigs_Get
+        exampleFile: ../examples/StorageInsightsGet.json
+      - step: StorageInsightConfigs_Delete
+        exampleFile: ../examples/StorageInsightsDelete.json
