@@ -34,7 +34,7 @@ tag: package-spark-2020-12-01
 ```
 
 ``` yaml $(package-artifacts)
-tag: package-artifacts-composite-v6
+tag: package-artifacts-composite-v7
 ```
 
 ``` yaml $(package-access-control)
