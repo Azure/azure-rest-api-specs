@@ -512,7 +512,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success",
             "schema": {
               "type": "string"
@@ -2408,7 +2408,7 @@
   },
   "definitions": {
     "AlertingScope": {
-      "description": "The Alert Scope",
+      "description": "The Alert Scope Model",
       "type": "object",
       "properties": {
         "level": {
@@ -2430,7 +2430,7 @@
       }
     },
     "AlertNameValidation": {
-      "description": "The Alert Name Validation",
+      "description": "The Alert Name Validation Model",
       "type": "object",
       "properties": {
         "alertName": {
@@ -3429,6 +3429,7 @@
       "type": "object",
       "properties": {
         "filters": {
+          "description": "The TableRepositoryQueryPayloadModel Filters",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilterPayloadModel"
@@ -3436,10 +3437,12 @@
         },
         "lastUpdatedAfter": {
           "format": "date-time",
+          "description": "The TableRepositoryQueryPayloadModel LastUpdatedAfter",
           "type": "string"
         },
         "lastUpdatedBefore": {
           "format": "date-time",
+          "description": "The TableRepositoryQueryPayloadModel LastUpdatedBefore",
           "type": "string"
         }
       }
@@ -3473,22 +3476,29 @@
       "type": "object",
       "properties": {
         "frequency": {
+          "description": "The TriggerRecurrence Frequency",
           "type": "string"
         },
         "interval": {
           "format": "int32",
+          "description": "The TriggerRecurrence Interval",
           "type": "integer"
         },
         "startTime": {
           "format": "date-time",
+          "description": "The TriggerRecurrence StartTime",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
+          "description": "The TriggerRecurrence EndTime",
           "type": "string"
         },
-        "schedule": { },
+        "schedule": {
+          "description": "The TriggerRecurrence Schedule"
+        },
         "timezone": {
+          "description": "The TriggerRecurrence TimeZone",
           "type": "string"
         }
       }
