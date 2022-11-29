@@ -62,7 +62,7 @@
   "parameters": {
     "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API.",
+      "description": "The version number of Azure Maps API.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -70,7 +70,7 @@
     },
     "UserDataId": {
       "name": "udid",
-      "description": "The user data id of the data registry.",
+      "description": "The user data ID of the data registry.",
       "type": "string",
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
       "in": "path",
@@ -79,7 +79,7 @@
     },
     "OperationIdHeader": {
       "name": "Operation-Id",
-      "description": "The caller provided operationId, in GUID format.",
+      "description": "The caller provided operation ID, in GUID format.",
       "type": "string",
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
       "in": "header",
@@ -88,7 +88,7 @@
     },
     "OperationIdQuery": {
       "name": "operationId",
-      "description": "The ID to query the status for the data register request.",
+      "description": "The ID used to query the status for the data register request.",
       "type": "string",
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
       "in": "path",
@@ -99,7 +99,7 @@
   "paths": {
     "/dataRegistries": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to fetch the list of all data registries registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace).\n\nThis API won't check whether Azure Maps can access the underlying content and whether integrity check is passed for each data registry. Please use [Get Data Registry API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-data-registry) for the latest status individually.\n\n## Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n## List Response\n\nThe Data Registry List API returns the complete list of all data registries in `json` format.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch the list of all data registries registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace).\n\nThis API doesn't validate that Azure Maps can access the underlying content nor does it perform any integrity check on the data registry. Please use [Get Data Registry API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/get-data-registry) for the latest status individually.\n\nThe Data Registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\n## Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n## List Response\n\nThe Data Registry List API returns the complete list of all data registries in `JSON` format.",
         "operationId": "DataRegistries_List",
         "x-ms-examples": {
           "List all previously registered data registries": {
@@ -129,7 +129,7 @@
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code for specific error that occurred."
+                "description": "Error code for the specific error that occurred."
               }
             },
             "x-ms-error-response": true
@@ -139,7 +139,7 @@
     },
     "/dataRegistries/{udid}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to fetch the data registry of a given udid registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). If Azure Maps cannot access the underlying content or integrity check is not passed, `status` will be `Failed` and error detail is returned.\n\n## Submit Get Data Registry Request\n\nTo fetch the data registry of a given udid you will issue a `GET` request with no additional parameters.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API allows the caller to fetch the data registry of a given udid registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). If Azure Maps cannot access the underlying content or the integrity check fails, the `status` is set to `Failed` and and error is returned.\n\nThe Data Registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\n## Submit Get Data Registry Request\n\nThe data registry `GET` request returns details of the requested data registry, as determined by the `udid`. The details are returned in the body of the response in JSON format.",
         "operationId": "DataRegistries_GetDataRegistry",
         "x-ms-examples": {
           "Get the data registry of a completed udid": {
@@ -183,7 +183,7 @@
         }
       },
       "put": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThe Data Registry Register API allows the caller to register their data content uploaded to Azure Storage Account in the Azure Maps Service with customer provided udid, restricted in GUID format; or to replace an existing udid with another data registry.\n\nYou can use this API in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Register or Replace Request\n\nTo register or replace your data registry you will use a `PUT` request.\n\nFor example, to register a collection of geofences  in `GeoJSON` format, set Azure blob data registry object representing how Azure Maps accesses your geojson file. and `dataFormat` to _geojson_ in the request body.\n\nThe Data Registry Register or Replace API performs a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Registry's Register request is used to register data in an Azure Storage Account with an Azure Maps account.\n\nThis is useful in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements) for use in the Azure Maps Creator [Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\nThe Data Registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\n## Submit Register or Replace Request\n\nThe Data Registry's Register and Replace API are both [long-running](https://aka.ms/am-creator-lrt-v2) `PUT` requests that contain an [AzureBlob](#azureblob) JSON object in the body of the request that defines the data registry details.",
         "operationId": "DataRegistries_RegisterOrReplace",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -266,7 +266,7 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to unregister a previously registered data registry without deleting the underlying content in caller's storage account.\n\nYou can use this API in a scenario like unregistering geofences previously registered using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial), or unregistering a zipped DWG design files which was used in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Unregister Request\n\nTo unregister a data registry you will issue a `DELETE` request where the path will contain the `udid` of the data registry to unregister.\n\nFor example, to unregister a collection of geofences previously registered, set the `udid` in the query parameter.\n\n## Unregister Response\n\nThe Data Delete API returns a HTTP `204 No Content` response with an empty body, no matter it has been unregistered successfully or is not found.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\nThis API allows the caller to unregister a previously registered data registry without deleting the underlying content in caller's storage account.\n\nYou can use this API in a scenario like unregistering geofences previously registered using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial), or unregistering a zipped DWG design files which was used in [Azure Maps Creator Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion).\n\n## Submit Unregister Request\n\nTo unregister a data registry you will issue a `DELETE` request where the path will contain the `udid` of the data registry to unregister.\n\nFor example, to unregister a collection of geofences previously registered, set the `udid` in the query parameter.\n\n## Unregister Response\n\nThe Data Delete API returns a HTTP `204 No Content` response with an empty body, no matter it has been unregistered successfully or is not found.",
         "operationId": "DataRegistries_Unregister",
         "x-ms-examples": {
           "Unregister a data registry without deleting the underlying contents": {
@@ -306,7 +306,7 @@
     },
     "/dataRegistries/{udid}/content": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis API allows the caller to retrieve the underlying content of a previously registered data registry after data integrity check. The content is not available if the status is `Running` or `Failed`.\n\nYou can use this API in a scenario like downloading an existing collection of geofences registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace).\n\n## Submit Get Content Request\n\nTo get the underlying content of a udid you will use a `GET` request where the path will contain the `udid` of the content to retrieve.\n\n## Get Content Response\n\nThe Get Content API will return a HTTP `200 OK` response if the underlying content with the passed-in `udid` is ready (`Completed` status), where the response body will be the underlying content. A HTTP `400 Bad Request` error response will be returned if the `udid` is not ready (`Running` status) or broken (`Failed` status).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Data Registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\nThis API allows the caller to retrieve the underlying content of a previously registered data registry after data integrity check. The content is not available if the status is `Running` or `Failed`.\n\nYou can use this API in a scenario like downloading an existing collection of geofences registered previously using the [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace).\n\n## Submit Get Content Request\n\nTo get the underlying content of a udid you will use a `GET` request where the path will contain the `udid` of the content to retrieve.\n\n## Get Content Response\n\nThe Get Content API will return a HTTP `200 OK` response if the underlying content with the passed-in `udid` is ready (`Completed` status), where the response body will be the underlying content. A HTTP `400 Bad Request` error response will be returned if the `udid` is not ready (`Running` status) or broken (`Failed` status).",
         "operationId": "DataRegistries_GetContent",
         "x-ms-examples": {
           "Download previously registered GeoJSON content": {
@@ -359,7 +359,7 @@
     },
     "/dataRegistries/operations/{operationId}": {
       "get": {
-        "description": "The endpoint of Data Registry APIs is bound to the region of your maps account. Data Registry Service is not available for global maps account.\n\nThis path will be obtained from a call to [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). While in progress, a HTTP `200 OK` response will be returned with `Retry-After` header - followed by a HTTP `200 OK` with no extra header once completed.",
+        "description": "The Data Registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\nThis path will be obtained from a call to [Register or Replace API](https://docs.microsoft.com/en-us/rest/api/maps/data-registry/register-or-replace). While in progress, a HTTP `200 OK` response will be returned with `Retry-After` header - followed by a HTTP `200 OK` with no extra header once completed.",
         "operationId": "DataRegistries_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
