@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Content Moderator Client",
-    "version": "2022-11-30-preview",
+    "version": "2022-12-30-preview",
     "description": "Analyze harmful content"
   },
   "securityDefinitions": {
@@ -950,13 +950,6 @@
       "properties": {
         "category": {
           "$ref": "#/definitions/ImageCategory"
-        },
-        "listIds": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "listId"
-          }
         }
       }
     },
@@ -990,7 +983,7 @@
           "type": "array",
           "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
           "items": {
-            "$ref": "#/definitions/ImageCategoryConfig"
+            "$ref": "#/definitions/ImageCategory"
           }
         }
       }
@@ -1084,13 +1077,6 @@
         },
         "riskLevel": {
           "$ref": "#/definitions/RiskLevel"
-        },
-        "listMatchResults": {
-          "description": "The details of list match",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageListMatchResult"
-          }
         }
       }
     },
