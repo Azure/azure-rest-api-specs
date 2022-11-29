@@ -114,12 +114,6 @@
               "$ref": "#/definitions/OracleSite"
             }
           },
-          "201": {
-            "description": "Created OracleSites resource",
-            "schema": {
-              "$ref": "#/definitions/OracleSite"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -437,12 +431,6 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the OracleSites resource.",
-            "schema": {
-              "$ref": "#/definitions/OracleServer"
-            }
-          },
-          "201": {
             "description": "Retrieves the OracleSites resource.",
             "schema": {
               "$ref": "#/definitions/OracleServer"
@@ -842,11 +830,6 @@
         "migrateProjectId": {
           "type": "string",
           "description": "The mapped Master Site Id."
-        },
-        "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "required": ["masterSiteId", "migrateProjectId"]
@@ -994,11 +977,6 @@
           "$ref": "#/definitions/DbConfigModel",
           "description": "The Database Config."
         },
-        "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
-          "readOnly": true
-        },
         "errors": {
           "description": "The list of errors.",
           "type": "array",
@@ -1074,11 +1052,6 @@
             "$ref": "#/definitions/Error",
             "readOnly": true
           }
-        },
-        "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "required": ["serviceId", "portNumber", "hostName"]
