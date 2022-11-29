@@ -43,6 +43,16 @@ output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregis
 perform-load: false
 ```
 
+### Tag: package-2022-12-only and python
+
+These settings apply only when `--tag=package-2022-12-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-12-only' && $(python)
+namespace: azure.mgmt.containerregistry.v2022_12_01
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2022_12_01
+```
+
 ### Tag: package-2022-02-preview-only and python
 
 These settings apply only when `--tag=package-2022-02-preview-only --python` is specified on the command line.
