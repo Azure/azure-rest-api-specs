@@ -103,7 +103,7 @@ op DetectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @body body: DetectionRequest,
+  @body body: MultivariateDetectionOptions,
 ): {
   @statusCode statusCode: 202,
   @doc("Id of the detection result.")
@@ -126,5 +126,5 @@ op DetectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @body body: LastDetectionRequest,
+  @body body: MultivariateLastDetectionOptions,
 ): LastDetectionResult | ResponseError;
