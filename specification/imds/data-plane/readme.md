@@ -27,10 +27,18 @@ These are the global settings for the Instance Metadata Service API.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2021-11-15
+tag: package-2021-12-13
 ```
 
 
+### Tag: package-2021-12-13
+
+These settings apply only when `--tag=package-2021-12-13` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12-13'
+input-file:
+  - Microsoft.InstanceMetadataService/stable/2021-12-13/imds.json
+```
 ### Tag: package-2021-11-15
 
 These settings apply only when `--tag=package-2021-11-15` is specified on the command line.
@@ -39,6 +47,7 @@ These settings apply only when `--tag=package-2021-11-15` is specified on the co
 input-file:
   - Microsoft.InstanceMetadataService/stable/2021-11-15/imds.json
 ```
+
 ### Tag: package-2021-11-01
 
 These settings apply only when `--tag=package-2021-11-01` is specified on the command line.
@@ -614,6 +623,22 @@ directive:
       - $.definitions.IdentityTokenResponse.properties.object_id
       - $.definitions.IdentityTokenResponse.properties.msi_res_id
       - $.definitions.IdentityErrorResponse.properties.error_description
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2021-12-13/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
 ```
 
 ---
@@ -668,6 +693,7 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-10-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-11-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-11-15/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2021-12-13/imds.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
