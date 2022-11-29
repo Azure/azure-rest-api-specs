@@ -6,14 +6,13 @@
         "description": "REST APIs for Marketplace Professional Service Offers"
     },
     "host": "management.azure.com",
-	"schemes": ["https"],
-	"consumes": ["application/json"],
-	"produces": ["application/json"],
-	"security": [
-		{
-		"azure_auth": ["user_impersonation"]
-		}
-	],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "security": [{
+            "azure_auth": ["user_impersonation"]
+        }
+    ],
     "securityDefinitions": {
         "azure_auth": {
             "type": "oauth2",
@@ -42,7 +41,7 @@
                         "$ref": "#/parameters/BillingProfileParameter"
                     }, {
                         "$ref": "#/parameters/InvoiceSectionParameter"
-                    }, {						
+                    }, {
                         "$ref": "#/parameters/ResourceNameParameter"
                     }, {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -78,12 +77,12 @@
                     "application/json"
                 ],
                 "parameters": [{
-						"$ref": "#/parameters/BillingAccountParameter"
+                        "$ref": "#/parameters/BillingAccountParameter"
                     }, {
                         "$ref": "#/parameters/BillingProfileParameter"
                     }, {
                         "$ref": "#/parameters/InvoiceSectionParameter"
-                    }, {						
+                    }, {
                         "$ref": "#/parameters/ResourceNameParameter"
                     }, {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -150,7 +149,7 @@
                         "$ref": "#/parameters/BillingProfileParameter"
                     }, {
                         "$ref": "#/parameters/InvoiceSectionParameter"
-                    }, {						
+                    }, {
                         "$ref": "#/parameters/ResourceNameParameter"
                     }, {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -195,7 +194,7 @@
                 }
             }
         },
-		"/providers/Microsoft.Billing/billingAccounts/{enrollmentBillingAccount}/providers/Microsoft.ProfessionalService/resources/{resourceName}": {
+        "/providers/Microsoft.Billing/billingAccounts/{enrollmentBillingAccount}/providers/Microsoft.ProfessionalService/resources/{resourceName}": {
             "get": {
                 "tags": [
                     "EnrollmentBillingScopeProfessionalServiceResources"
@@ -207,7 +206,7 @@
                 ],
                 "parameters": [{
                         "$ref": "#/parameters/EnrollmentBillingAccountParameter"
-                    }, {						
+                    }, {
                         "$ref": "#/parameters/ResourceNameParameter"
                     }, {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -243,8 +242,8 @@
                     "application/json"
                 ],
                 "parameters": [{
-						"$ref": "#/parameters/EnrollmentBillingAccountParameter"
-                    }, {						
+                        "$ref": "#/parameters/EnrollmentBillingAccountParameter"
+                    }, {
                         "$ref": "#/parameters/ResourceNameParameter"
                     }, {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -307,7 +306,7 @@
                 "description": "Deletes the specified ProfessionalService for enrollment account.",
                 "parameters": [{
                         "$ref": "#/parameters/EnrollmentBillingAccountParameter"
-                    }, {						
+                    }, {
                         "$ref": "#/parameters/ResourceNameParameter"
                     }, {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -351,7 +350,7 @@
                     "final-state-via": "location"
                 }
             }
-        },		
+        },
         "/providers/Microsoft.ProfessionalService/operationResults/{operationId}": {
             "get": {
                 "tags": [
@@ -571,11 +570,11 @@
                 "quoteId": {
                     "type": "string",
                     "description": "The quote id which the ProfessionalService will be purchase with."
-                },	
+                },
                 "storeFront": {
                     "type": "string",
                     "description": "The store front which initiates the purchase."
-                },					
+                },
                 "autoRenew": {
                     "type": "boolean",
                     "description": "Whether the ProfessionalService subscription will auto renew upon term end."
@@ -606,59 +605,60 @@
                 "type": "string"
             }
         },
-    "parameters": {
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to be used with the HTTP request."
-        },
-        "OperationIdParameter": {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "the operation Id parameter.",
-            "x-ms-parameter-location": "method"
-        },
-        "EnrollmentBillingAccountParameter": {
-            "name": "enrollmentBillingAccount",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The enrollment billing account id."
-        },		
-        "BillingAccountParameter": {
-            "name": "billingAccount",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The billing account id."
-        },
-        "BillingProfileParameter": {
-            "name": "billingProfile",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The biling profile id.",
-            "x-ms-parameter-location": "method"
-        },
-        "InvoiceSectionParameter": {
-            "name": "invoiceSection",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The invoice section id.",
-            "x-ms-parameter-location": "method"
-        },		
-        "ResourceNameParameter": {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource.",
-            "x-ms-parameter-location": "method"
+        "parameters": {
+            "ApiVersionParameter": {
+                "name": "api-version",
+                "in": "query",
+                "required": true,
+                "type": "string",
+                "description": "The API version to be used with the HTTP request."
+            },
+            "OperationIdParameter": {
+                "name": "operationId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "the operation Id parameter.",
+                "x-ms-parameter-location": "method"
+            },
+            "EnrollmentBillingAccountParameter": {
+                "name": "enrollmentBillingAccount",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The enrollment billing account id."
+            },
+            "BillingAccountParameter": {
+                "name": "billingAccount",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The billing account id."
+            },
+            "BillingProfileParameter": {
+                "name": "billingProfile",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The biling profile id.",
+                "x-ms-parameter-location": "method"
+            },
+            "InvoiceSectionParameter": {
+                "name": "invoiceSection",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The invoice section id.",
+                "x-ms-parameter-location": "method"
+            },
+            "ResourceNameParameter": {
+                "name": "resourceName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the resource.",
+                "x-ms-parameter-location": "method"
+            }
         }
     }
 }
