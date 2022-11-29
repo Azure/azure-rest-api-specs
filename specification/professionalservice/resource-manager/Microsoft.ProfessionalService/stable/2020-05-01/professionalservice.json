@@ -97,8 +97,17 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+				  "200": {
+					"description": "Resource creation has completed.",
+					"schema": {
+					  "$ref": "#/definitions/ProfessionalServiceResource"
+					}
+				  },					
+                    "202": {
                         "description": "Accepted and the operation will complete asynchronously.",
+						"schema": {
+						  "$ref": "#/definitions/EmptySchema"
+						}						
                         "headers": {
                             "Location": {
                                 "description": "The URL to check the status of the asynchronous operation.",
@@ -181,7 +190,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
+                    "final-state-via": "location"
                 }
             }
         },
@@ -249,7 +258,13 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+				  "200": {
+					"description": "Resource creation has completed.",
+					"schema": {
+					  "$ref": "#/definitions/ProfessionalServiceResource"
+					}
+				  },						
+                    "202": {
                         "description": "Accepted and the operation will complete asynchronously.",
                         "headers": {
                             "Location": {
@@ -329,7 +344,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
+                    "final-state-via": "location"
                 }
             }
         },
@@ -408,6 +423,12 @@
 				"description": "OK",
 				"schema": {
 				  "$ref": "#/definitions/ProfessionalServiceRpOperationsResponseWithContinuation"
+				},
+				"default": {
+					"description": "A response indicating an error.",
+					"schema": {
+						"$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+					}
 				}
 			  }
 			},
@@ -423,6 +444,12 @@
 		}		
     },
     "definitions": {
+		"EmptySchema": {
+		  "description": "Empty schema",
+		  "type": "object",
+		  "properties": {
+		  }
+		},		
 		"ProfessionalServiceRpOperationsResponseWithContinuation": {
 		  "description": "professional service operation response with continuation.",
 		  "type": "object",
@@ -433,6 +460,7 @@
 			},
 			"value": {
 			  "description": "the value of response.",
+			  "x-ms-identifiers": [],
 			  "type": "array",
 			  "items": {
 				"$ref": "#/definitions/ProfessionalServiceRpOperation"
