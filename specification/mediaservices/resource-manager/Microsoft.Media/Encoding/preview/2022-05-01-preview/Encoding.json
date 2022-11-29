@@ -27,6 +27,20 @@
     }
   },
   "definitions": {
+    "Preset": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
+    },
     "CmafFormat": {
       "allOf": [
         {
@@ -159,20 +173,6 @@
       "properties": {},
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Media.DDAudio"
-    },
-    "Preset": {
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        }
-      },
-      "type": "object",
-      "required": [
-        "@odata.type"
-      ],
-      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
     },
     "Layer": {
       "properties": {
