@@ -60,4 +60,8 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Existing external API uses property names like n_epochs, created_at, not following naming/casing guidelines from azure. 
+  - suppress: ValidFormats
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+  - suppress: IntegerTypeMustHaveFormat
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
 ```
