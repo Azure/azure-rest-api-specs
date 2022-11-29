@@ -1,3 +1,7 @@
+@service({title:"Schema of Azure App Service events published to Azure Event Grid", version: "2018-01-01"})
+@doc("Describes the schema of the Azure App Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
+namespace Web;
+
 model WebAppBaseEventData {
   appEventTypeDetail?: AppEventTypeDetail;
 
@@ -79,7 +83,25 @@ model WebAppServicePlanUpdatedEventData {
   verb?: string;
 
   @doc("sku of app service plan.")
-  sku?: Record<string>;
+  sku?: sku;
+}
+
+@doc("sku of app service plan.")
+model sku {
+  @doc("name of app service plan sku.")
+  name?: string;
+
+  @doc("tier of app service plan sku.")
+  Tier?:string;
+
+  @doc("size of app service plan sku.")
+  Size?:string;
+
+  @doc("family of app service plan sku.")
+  Family?:string;
+
+  @doc("capacity of app service plan sku.")
+  Capacity?:string;
 }
 
 @knownValues(AppActionKV)
