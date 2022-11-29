@@ -97,13 +97,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Resource creation has completed.",
-                        "schema": {
-                            "$ref": "#/definitions/ProfessionalServiceResource"
-                        }
-                    },
-                    "202": {
+                    "201": {
                         "description": "Accepted and the operation will complete asynchronously.",
                         "headers": {
                             "Location": {
@@ -116,9 +110,6 @@
                                 "type": "integer"
                             }
                         }
-                    },
-                    "204": {
-                        "description": "Operation completed successfully."
                     },
                     "default": {
                         "description": "A response indicating an error.",
@@ -134,7 +125,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
+                    "final-state-via": "azure-async-operation"
                 }
             },
             "delete": {
@@ -190,7 +181,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
+                    "final-state-via": "azure-async-operation"
                 }
             }
         },
@@ -258,13 +249,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Resource creation has completed.",
-                        "schema": {
-                            "$ref": "#/definitions/ProfessionalServiceResource"
-                        }
-                    },
-                    "202": {
+                    "201": {
                         "description": "Accepted and the operation will complete asynchronously.",
                         "headers": {
                             "Location": {
@@ -277,9 +262,6 @@
                                 "type": "integer"
                             }
                         }
-                    },
-                    "204": {
-                        "description": "Operation completed successfully."
                     },
                     "default": {
                         "description": "A response indicating an error.",
@@ -295,7 +277,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
+                    "final-state-via": "azure-async-operation"
                 }
             },
             "delete": {
@@ -347,7 +329,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
+                    "final-state-via": "azure-async-operation"
                 }
             }
         },
@@ -402,7 +384,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "location"
+                    "final-state-via": "azure-async-operation"
                 }
             }
         },
@@ -426,12 +408,6 @@
 				"description": "OK",
 				"schema": {
 				  "$ref": "#/definitions/ProfessionalServiceRpOperationsResponseWithContinuation"
-				}
-			  },
-			  "default": {
-				"description": "A response indicating an error.",
-				"schema": {
-				  "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
 				}
 			  }
 			},
