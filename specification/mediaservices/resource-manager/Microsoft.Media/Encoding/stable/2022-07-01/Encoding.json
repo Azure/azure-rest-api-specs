@@ -27,6 +27,20 @@
     }
   },
   "definitions": {
+    "Preset": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
+    },
     "Codec": {
       "discriminator": "@odata.type",
       "properties": {
@@ -111,70 +125,6 @@
       "type": "object",
       "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
     },
-    "AudioTrackDescriptor": {
-      "x-ms-discriminator-value": "#Microsoft.Media.AudioTrackDescriptor",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackDescriptor"
-        }
-      ],
-      "properties": {
-        "channelMapping": {
-          "type": "string",
-          "enum": [
-            "FrontLeft",
-            "FrontRight",
-            "Center",
-            "LowFrequencyEffects",
-            "BackLeft",
-            "BackRight",
-            "StereoLeft",
-            "StereoRight"
-          ],
-          "x-ms-enum": {
-            "name": "ChannelMapping",
-            "values": [
-              {
-                "value": "FrontLeft",
-                "description": "The Front Left Channel."
-              },
-              {
-                "value": "FrontRight",
-                "description": "The Front Right Channel."
-              },
-              {
-                "value": "Center",
-                "description": "The Center Channel."
-              },
-              {
-                "value": "LowFrequencyEffects",
-                "description": "Low Frequency Effects Channel.  Sometimes referred to as the Subwoofer."
-              },
-              {
-                "value": "BackLeft",
-                "description": "The Back Left Channel.  Sometimes referred to as the Left Surround Channel."
-              },
-              {
-                "value": "BackRight",
-                "description": "The Back Right Channel.  Sometimes referred to as the Right Surround Channel."
-              },
-              {
-                "value": "StereoLeft",
-                "description": "The Left Stereo channel.  Sometimes referred to as Down Mix Left."
-              },
-              {
-                "value": "StereoRight",
-                "description": "The Right Stereo channel.  Sometimes referred to as Down Mix Right."
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "Optional designation for single channel audio tracks.  Can be used to combine the tracks into stereo or multi-channel audio tracks."
-        }
-      },
-      "type": "object",
-      "description": "A TrackSelection to select audio tracks."
-    },
     "DDAudio": {
       "allOf": [
         {
@@ -185,242 +135,6 @@
       "properties": {},
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Media.DDAudio"
-    },
-    "FaceDetectorPreset": {
-      "x-ms-discriminator-value": "#Microsoft.Media.FaceDetectorPreset",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Preset"
-        }
-      ],
-      "properties": {
-        "resolution": {
-          "type": "string",
-          "enum": [
-            "SourceResolution",
-            "StandardDefinition"
-          ],
-          "x-ms-enum": {
-            "name": "AnalysisResolution",
-            "values": [
-              {
-                "value": "SourceResolution"
-              },
-              {
-                "value": "StandardDefinition"
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
-        },
-        "mode": {
-          "type": "string",
-          "enum": [
-            "Analyze",
-            "Redact",
-            "Combined"
-          ],
-          "x-ms-enum": {
-            "name": "FaceRedactorMode",
-            "values": [
-              {
-                "value": "Analyze",
-                "description": "Analyze mode detects faces and outputs a metadata file with the results. Allows editing of the metadata file before faces are blurred with Redact mode."
-              },
-              {
-                "value": "Redact",
-                "description": "Redact mode consumes the metadata file from Analyze mode and redacts the faces found."
-              },
-              {
-                "value": "Combined",
-                "description": "Combined mode does the Analyze and Redact steps in one pass when editing the analyzed faces is not desired."
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "This mode provides the ability to choose between the following settings: 1) Analyze - For detection only.This mode generates a metadata JSON file marking appearances of faces throughout the video.Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces.It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction."
-        },
-        "blurType": {
-          "type": "string",
-          "enum": [
-            "Box",
-            "Low",
-            "Med",
-            "High",
-            "Black"
-          ],
-          "x-ms-enum": {
-            "name": "BlurType",
-            "values": [
-              {
-                "value": "Box",
-                "description": "Box: debug filter, bounding box only"
-              },
-              {
-                "value": "Low",
-                "description": "Low: box-car blur filter"
-              },
-              {
-                "value": "Med",
-                "description": "Med: Gaussian blur filter"
-              },
-              {
-                "value": "High",
-                "description": "High: Confuse blur filter"
-              },
-              {
-                "value": "Black",
-                "description": "Black: Black out filter"
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "Blur type"
-        },
-        "experimentalOptions": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
-        }
-      },
-      "type": "object",
-      "description": "Describes all the settings to be used when analyzing a video in order to detect (and optionally redact) all the faces present."
-    },
-    "AudioAnalyzerPreset": {
-      "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Preset"
-        }
-      ],
-      "properties": {
-        "audioLanguage": {
-          "type": "string",
-          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode::Basic, since automatic language detection is not included in basic mode. If the language isn't specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'.\" The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463"
-        },
-        "mode": {
-          "type": "string",
-          "enum": [
-            "Standard",
-            "Basic"
-          ],
-          "x-ms-enum": {
-            "name": "AudioAnalysisMode",
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Performs all operations included in the Basic mode, additionally performing language detection and speaker diarization."
-              },
-              {
-                "value": "Basic",
-                "description": "This mode performs speech-to-text transcription and generation of a VTT subtitle/caption file. The output of this mode includes an Insights JSON file including only the keywords, transcription,and timing information. Automatic language detection and speaker diarization are not included in this mode."
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "Determines the set of audio analysis operations to be performed. If unspecified, the Standard AudioAnalysisMode would be chosen."
-        },
-        "experimentalOptions": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
-        }
-      },
-      "type": "object",
-      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track."
-    },
-    "AudioOverlay": {
-      "x-ms-discriminator-value": "#Microsoft.Media.AudioOverlay",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Overlay"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "Describes the properties of an audio overlay."
-    },
-    "CopyVideo": {
-      "x-ms-discriminator-value": "#Microsoft.Media.CopyVideo",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Codec"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "A codec flag, which tells the encoder to copy the input video bitstream without re-encoding."
-    },
-    "CopyAudio": {
-      "x-ms-discriminator-value": "#Microsoft.Media.CopyAudio",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Codec"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "A codec flag, which tells the encoder to copy the input audio bitstream."
-    },
-    "Deinterlace": {
-      "properties": {
-        "parity": {
-          "type": "string",
-          "enum": [
-            "Auto",
-            "TopFieldFirst",
-            "BottomFieldFirst"
-          ],
-          "x-ms-enum": {
-            "name": "DeinterlaceParity",
-            "values": [
-              {
-                "value": "Auto",
-                "description": "Automatically detect the order of fields"
-              },
-              {
-                "value": "TopFieldFirst",
-                "description": "Apply top field first processing of input video."
-              },
-              {
-                "value": "BottomFieldFirst",
-                "description": "Apply bottom field first processing of input video."
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "The field parity for de-interlacing, defaults to Auto."
-        },
-        "mode": {
-          "type": "string",
-          "enum": [
-            "Off",
-            "AutoPixelAdaptive"
-          ],
-          "x-ms-enum": {
-            "name": "DeinterlaceMode",
-            "values": [
-              {
-                "value": "Off",
-                "description": "Disables de-interlacing of the source video."
-              },
-              {
-                "value": "AutoPixelAdaptive",
-                "description": "Apply automatic pixel adaptive de-interlacing on each frame in the input video."
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "The deinterlacing mode. Defaults to AutoPixelAdaptive."
-        }
-      },
-      "type": "object",
-      "description": "Describes the de-interlacing settings."
     },
     "Fade": {
       "description": "Describes the properties of a Fade effect applied to the input media.",
@@ -443,20 +157,6 @@
         "duration"
       ],
       "type": "object"
-    },
-    "Preset": {
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        }
-      },
-      "type": "object",
-      "required": [
-        "@odata.type"
-      ],
-      "description": "Base type for all Presets, which define the recipe or instructions on how the input media files should be processed."
     },
     "Layer": {
       "properties": {
@@ -716,6 +416,70 @@
       ],
       "description": "Base type for all TrackDescriptor types, which define the metadata and selection for tracks that should be processed by a Job"
     },
+    "AudioTrackDescriptor": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioTrackDescriptor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackDescriptor"
+        }
+      ],
+      "properties": {
+        "channelMapping": {
+          "type": "string",
+          "enum": [
+            "FrontLeft",
+            "FrontRight",
+            "Center",
+            "LowFrequencyEffects",
+            "BackLeft",
+            "BackRight",
+            "StereoLeft",
+            "StereoRight"
+          ],
+          "x-ms-enum": {
+            "name": "ChannelMapping",
+            "values": [
+              {
+                "value": "FrontLeft",
+                "description": "The Front Left Channel."
+              },
+              {
+                "value": "FrontRight",
+                "description": "The Front Right Channel."
+              },
+              {
+                "value": "Center",
+                "description": "The Center Channel."
+              },
+              {
+                "value": "LowFrequencyEffects",
+                "description": "Low Frequency Effects Channel.  Sometimes referred to as the Subwoofer."
+              },
+              {
+                "value": "BackLeft",
+                "description": "The Back Left Channel.  Sometimes referred to as the Left Surround Channel."
+              },
+              {
+                "value": "BackRight",
+                "description": "The Back Right Channel.  Sometimes referred to as the Right Surround Channel."
+              },
+              {
+                "value": "StereoLeft",
+                "description": "The Left Stereo channel.  Sometimes referred to as Down Mix Left."
+              },
+              {
+                "value": "StereoRight",
+                "description": "The Right Stereo channel.  Sometimes referred to as Down Mix Right."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Optional designation for single channel audio tracks.  Can be used to combine the tracks into stereo or multi-channel audio tracks."
+        }
+      },
+      "type": "object",
+      "description": "A TrackSelection to select audio tracks."
+    },
     "SelectAudioTrackByAttribute": {
       "x-ms-discriminator-value": "#Microsoft.Media.SelectAudioTrackByAttribute",
       "allOf": [
@@ -870,6 +634,154 @@
       "type": "object",
       "description": "An InputDefinition for a single file.  TrackSelections are scoped to the file specified."
     },
+    "FaceDetectorPreset": {
+      "x-ms-discriminator-value": "#Microsoft.Media.FaceDetectorPreset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Preset"
+        }
+      ],
+      "properties": {
+        "resolution": {
+          "type": "string",
+          "enum": [
+            "SourceResolution",
+            "StandardDefinition"
+          ],
+          "x-ms-enum": {
+            "name": "AnalysisResolution",
+            "values": [
+              {
+                "value": "SourceResolution"
+              },
+              {
+                "value": "StandardDefinition"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Analyze",
+            "Redact",
+            "Combined"
+          ],
+          "x-ms-enum": {
+            "name": "FaceRedactorMode",
+            "values": [
+              {
+                "value": "Analyze",
+                "description": "Analyze mode detects faces and outputs a metadata file with the results. Allows editing of the metadata file before faces are blurred with Redact mode."
+              },
+              {
+                "value": "Redact",
+                "description": "Redact mode consumes the metadata file from Analyze mode and redacts the faces found."
+              },
+              {
+                "value": "Combined",
+                "description": "Combined mode does the Analyze and Redact steps in one pass when editing the analyzed faces is not desired."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "This mode provides the ability to choose between the following settings: 1) Analyze - For detection only.This mode generates a metadata JSON file marking appearances of faces throughout the video.Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces.It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction."
+        },
+        "blurType": {
+          "type": "string",
+          "enum": [
+            "Box",
+            "Low",
+            "Med",
+            "High",
+            "Black"
+          ],
+          "x-ms-enum": {
+            "name": "BlurType",
+            "values": [
+              {
+                "value": "Box",
+                "description": "Box: debug filter, bounding box only"
+              },
+              {
+                "value": "Low",
+                "description": "Low: box-car blur filter"
+              },
+              {
+                "value": "Med",
+                "description": "Med: Gaussian blur filter"
+              },
+              {
+                "value": "High",
+                "description": "High: Confuse blur filter"
+              },
+              {
+                "value": "Black",
+                "description": "Black: Black out filter"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Blur type"
+        },
+        "experimentalOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
+        }
+      },
+      "type": "object",
+      "description": "Describes all the settings to be used when analyzing a video in order to detect (and optionally redact) all the faces present."
+    },
+    "AudioAnalyzerPreset": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Preset"
+        }
+      ],
+      "properties": {
+        "audioLanguage": {
+          "type": "string",
+          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode::Basic, since automatic language detection is not included in basic mode. If the language isn't specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'.\" The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "AudioAnalysisMode",
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Performs all operations included in the Basic mode, additionally performing language detection and speaker diarization."
+              },
+              {
+                "value": "Basic",
+                "description": "This mode performs speech-to-text transcription and generation of a VTT subtitle/caption file. The output of this mode includes an Insights JSON file including only the keywords, transcription,and timing information. Automatic language detection and speaker diarization are not included in this mode."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Determines the set of audio analysis operations to be performed. If unspecified, the Standard AudioAnalysisMode would be chosen."
+        },
+        "experimentalOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
+        }
+      },
+      "type": "object",
+      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track."
+    },
     "Overlay": {
       "discriminator": "@odata.type",
       "properties": {
@@ -913,6 +825,28 @@
         "inputLabel"
       ],
       "description": "Base type for all overlays - image, audio or video."
+    },
+    "AudioOverlay": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioOverlay",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Overlay"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Describes the properties of an audio overlay."
+    },
+    "CopyVideo": {
+      "x-ms-discriminator-value": "#Microsoft.Media.CopyVideo",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Codec"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "A codec flag, which tells the encoder to copy the input video bitstream without re-encoding."
     },
     "Image": {
       "x-ms-discriminator-value": "#Microsoft.Media.Image",
@@ -992,6 +926,72 @@
       "properties": {},
       "type": "object",
       "description": "Describes the settings for producing PNG thumbnails."
+    },
+    "CopyAudio": {
+      "x-ms-discriminator-value": "#Microsoft.Media.CopyAudio",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Codec"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "A codec flag, which tells the encoder to copy the input audio bitstream."
+    },
+    "Deinterlace": {
+      "properties": {
+        "parity": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "TopFieldFirst",
+            "BottomFieldFirst"
+          ],
+          "x-ms-enum": {
+            "name": "DeinterlaceParity",
+            "values": [
+              {
+                "value": "Auto",
+                "description": "Automatically detect the order of fields"
+              },
+              {
+                "value": "TopFieldFirst",
+                "description": "Apply top field first processing of input video."
+              },
+              {
+                "value": "BottomFieldFirst",
+                "description": "Apply bottom field first processing of input video."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The field parity for de-interlacing, defaults to Auto."
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Off",
+            "AutoPixelAdaptive"
+          ],
+          "x-ms-enum": {
+            "name": "DeinterlaceMode",
+            "values": [
+              {
+                "value": "Off",
+                "description": "Disables de-interlacing of the source video."
+              },
+              {
+                "value": "AutoPixelAdaptive",
+                "description": "Apply automatic pixel adaptive de-interlacing on each frame in the input video."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The deinterlacing mode. Defaults to AutoPixelAdaptive."
+        }
+      },
+      "type": "object",
+      "description": "Describes the de-interlacing settings."
     },
     "Rectangle": {
       "properties": {
