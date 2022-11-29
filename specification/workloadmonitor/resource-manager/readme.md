@@ -1,3 +1,7 @@
 # Microsoft.WorkloadMonitor
 
+> see https://aka.ms/autorest
+
+## Update: Service deprecation
+
 The service backing this library is retired on November 30th, 2022. At that point, this library will no longer work. See [here](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fazure.microsoft.com%2Fen-us%2Fupdates%2Ftransition-to-azure-monitor-log-alerts-for-vm-guest-health-by-30-november-2022%2F&data=05%7C01%7CJulia.Weingart%40microsoft.com%7C5b4a9c95d2be4ffa8b5908dad1677625%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638052539579118760%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=fHJcXlHLXb3DaeJZ3IY7DYG3oosRdKqrp2tMBE1NCkk%3D&reserved=0) for more details on the Azure VM Insights Guest Health retirement, and [here](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Fazure%2Fazure-monitor%2Fvm%2Fvminsights-health-migrate&data=05%7C01%7CJulia.Weingart%40microsoft.com%7C5b4a9c95d2be4ffa8b5908dad1677625%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638052539579118760%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=sY25QiCYR2fRkwCtiNeAVXTliqif62DsRpDQHiAENn8%3D&reserved=0) for how to migrate to Azure Monitor Log alerts
