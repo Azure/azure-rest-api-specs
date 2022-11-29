@@ -24,7 +24,7 @@
         "tags": [
           "Text Analysis"
         ],
-        "summary": "Text Analyze",
+        "summary": "Analyze Text",
         "description": "A sync API for harmful content analysis for text",
         "operationId": "Text_Analyze",
         "consumes": [
@@ -72,8 +72,8 @@
         "tags": [
           "Text Analysis"
         ],
-        "summary": "Text Batch Analyze",
-        "description": "An async API for harmful content analysis for image batch",
+        "summary": "Analyze Text In Batch",
+        "description": "An API for triggering harmful content analysis of text batch",
         "operationId": "Text_BatchDetect",
         "consumes": [
           "application/json"
@@ -92,7 +92,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "The analysis request of the image batch",
+            "description": "The analysis request of the text batch",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TextBatchDetectRequest"
@@ -162,7 +162,7 @@
         "tags": [
           "Image Analysis"
         ],
-        "summary": "Image Analyze",
+        "summary": "Analyze Image",
         "description": "A sync API for harmful content analysis for image",
         "operationId": "Image_Detect",
         "consumes": [
@@ -207,8 +207,8 @@
         "tags": [
           "Image Analysis"
         ],
-        "summary": "Image Batch Analyze",
-        "description": "An async API for harmful content analysis for image batch",
+        "summary": "Analyze Image In Batch",
+        "description": "An API to trigger harmful content analysis for image batch",
         "operationId": "Image_BatchDetect",
         "consumes": [
           "application/json"
@@ -222,7 +222,7 @@
             "$ref": "#/parameters/QueryApiVersion"
           },
           {
-            "name": "imageBatchDetectRequest",
+            "name": "request",
             "in": "body",
             "description": "The analysis request of the image batch",
             "required": true,
@@ -295,7 +295,7 @@
           "Text List Management"
         ],
         "operationId": "ListManagementTextLists_GetDetails",
-        "description": "Returns list Id details of the Text List with list Id equal to list Id passed.",
+        "description": "Returns text list details of the Text List with list Id equal to list Id passed.",
         "summary": "Get Text List By listId",
         "parameters": [
           {
@@ -353,7 +353,7 @@
         ],
         "operationId": "ListManagementTextLists_Update",
         "description": "Updates an Text List by listId, , if listId not exists, create a new Text List",
-        "summary": "Upsert Text List",
+        "summary": "Create Or Update Text List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -400,7 +400,6 @@
           "Text List Management"
         ],
         "operationId": "ListManagementTextLists_GetAllTextLists",
-        "description": "gets all the Text Lists",
         "summary": "Get All Text Lists",
         "responses": {
           "200": {
@@ -437,8 +436,7 @@
           "Text List Management"
         ],
         "operationId": "ListManagementTerm_GetAllTerms",
-        "description": "Gets all terms from the list with list Id equal to the list Id passed.",
-        "summary": "Get All Text By listId",
+        "summary": "Get All Items By listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -493,8 +491,7 @@
           "Text List Management"
         ],
         "operationId": "ListManagementTerm_AddTerm",
-        "description": "Returns the details of the term with list Id equal to list Id and image Id equal to image Id passed.",
-        "summary": "Get Text By textId and ListId",
+        "summary": "Get Item By itemId and listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -529,8 +526,7 @@
           "Text List Management"
         ],
         "operationId": "ListManagementTerm_DeleteTerm",
-        "description": "Deletes a term from the list with list Id equal to the list Id passed.",
-        "summary": "Delete Text By itemId and listId",
+        "summary": "Delete Item By itemId and listId",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -559,8 +555,7 @@
           "Text List Management"
         ],
         "operationId": "ListManagementTerm_UpdateTerm",
-        "description": "Upsert text to the list with list Id equal to list Id passed.",
-        "summary": "Upsert Text To Text List",
+        "summary": "Create Item In Text List",
         "parameters": [
           {
             "$ref": "#/parameters/ListId"
@@ -615,31 +610,11 @@
         "HateSpeech",
         "SelfHarm",
         "Sexual",
-        "Violence",
-        "Custom"
+        "Violence"
       ],
       "x-ms-enum": {
         "name": "TextCategory",
         "modelAsString": true
-      }
-    },
-    "TextCategoryConfig": {
-      "type": "object",
-      "description": "Configuration for category",
-      "required": [
-        "category"
-      ],
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextCategory"
-        },
-        "listIds": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "listId"
-          }
-        }
       }
     },
     "TextDetectStrategy":{
@@ -678,19 +653,10 @@
       }
     },
     "RiskLevel": {
-      "type": "string",
-      "x-nullable": false,
-      "enum": [
-        "VeryHigh",
-        "High",
-        "Medium",
-        "Low",
-        "VeryLow"
-      ],
-      "x-ms-enum": {
-        "name": "RiskLevel",
-        "modelAsString": true
-      }
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "maximum": 7
     },
     "TextDetectResult": {
       "type": "object",
@@ -740,7 +706,8 @@
         "strategy": {
           "type": "string",
           "description": "Analyze strategy. When set to \"Shortcut\", other analysis will be skipped once any of configured blocklists was hit. When set to comprehensive, all the analysis will be done even when blocklists were hit.",
-          "$ref": "#/definitions/TextDetectStrategy"
+          "$ref": "#/definitions/TextDetectStrategy",
+          "default": "Comprehensive"
         }
       }
     },
@@ -765,9 +732,6 @@
           "$ref": "#/definitions/TextDetectResult"
         },
         "violenceResult": {
-          "$ref": "#/definitions/TextDetectResult"
-        },
-        "customResult": {
           "$ref": "#/definitions/TextDetectResult"
         }
       }
@@ -822,7 +786,8 @@
         "strategy": {
           "type": "string",
           "description": "Analyze strategy. When set to \"Shortcut\", other analysis will be skipped once any of configured blocklists was hit. When set to comprehensive, all the analysis will be done even when blocklists were hit.",
-          "$ref": "#/definitions/TextDetectStrategy"
+          "$ref": "#/definitions/TextDetectStrategy",
+          "default": "Comprehensive"
         }
       }
     },
@@ -864,6 +829,9 @@
           "type":"array",
           "items": {
             "type": "object",
+            "required": [
+              "textId"
+            ],
             "properties": {
               "textId": {
                 "description": "Id for text batch item",
@@ -886,9 +854,6 @@
                 "$ref": "#/definitions/TextDetectResult"
               },
               "violenceResult": {
-                "$ref": "#/definitions/TextDetectResult"
-              },
-              "customResult": {
                 "$ref": "#/definitions/TextDetectResult"
               },
               "error": {
@@ -974,24 +939,11 @@
       "enum": [
         "Adult",
         "Racy",
-        "Underage",
-        "Custom"
+        "Gory"
       ],
       "x-ms-enum": {
         "name": "ImageCategory",
         "modelAsString": false
-      }
-    },
-    "ImageCategoryConfig": {
-      "type": "object",
-      "description": "Configuration for category",
-      "required": [
-        "category"
-      ],
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ImageCategory"
-        }
       }
     },
     "Image": {
@@ -1002,7 +954,7 @@
           "description": "Base64 encoding of image",
           "type": "string"
         },
-        "uri": {
+        "url": {
           "description": "The blob uri of image",
           "type": "string",
           "format": "uri"
@@ -1025,75 +977,6 @@
           "description": "The categories will be analyzed, if not assigned, default categories will be analyzed",
           "items": {
             "$ref": "#/definitions/ImageCategory"
-          }
-        }
-      }
-    },
-    "ImageListMatchResult": {
-      "description": "The result of custom list match",
-      "type": "object",
-      "properties": {
-        "listId": {
-          "description": "The id of matched custom list",
-          "type": "string"
-        },
-        "imageId": {
-          "description": "The id of matched image",
-          "type": "string"
-        }
-      }
-    },
-    "ImageDetectDiagnosis": {
-      "type": "object",
-      "required": [
-        "width",
-        "height",
-        "left",
-        "top",
-        "analyzed"
-      ],
-      "properties": {
-        "width": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The width of the diagnosis rectangle, in pixels."
-        },
-        "height": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The height of the diagnosis rectangle, in pixels."
-        },
-        "left": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The distance from the left edge if the image to the left edge of the diagnosis rectangle, in pixels."
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The distance from the top edge if the image to the top edge of the diagnosis rectangle, in pixels."
-        },
-        "analyzed": {
-          "type": "boolean",
-          "description": "Whether this category is analyzed in diagnosis rectangle"
-        },
-        "score": {
-          "description": "The score of analysis result",
-          "type": "number",
-          "format": "float"
-        },
-        "diagnosisDetail": {
-          "description": "The additional fields of model output",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "listMatchResults": {
-          "description": "The detail of list match",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageListMatchResult"
           }
         }
       }
@@ -1127,10 +1010,7 @@
         "racyResult": {
           "$ref": "#/definitions/ImageDetectResult"
         },
-        "underageResult": {
-          "$ref": "#/definitions/ImageDetectResult"
-        },
-        "customResult": {
+        "goryResult": {
           "$ref": "#/definitions/ImageDetectResult"
         }
       }
@@ -1140,15 +1020,15 @@
       "type": "object",
       "required": [
         "imageId",
-        "uri"
+        "url"
       ],
       "properties": {
         "imageId": {
           "description": "Id of image batch item",
           "type": "string"
         },
-        "uri": {
-          "description": "Uri of image batch item, it should be a blob url of image file to analyze",
+        "url": {
+          "description": "Url of image batch item, it should be a blob url of image file to analyze",
           "type": "string",
           "format": "url"
         }
@@ -1169,7 +1049,7 @@
         },
         "categories": {
           "type": "array",
-          "description": "The categories will be analyzed, if not assigned, default the categories will be analyzed",
+          "description": "The categories will be analyzed, if not assigned, default categories will be analyzed",
           "items": {
             "$ref": "#/definitions/ImageCategory"
           }
@@ -1177,7 +1057,7 @@
       }
     },
     "ImageBatchDetectResultsResponse": {
-      "description": "Status and result of the batch analysis.",
+      "description": "Status and results of the batch analysis.",
       "type": "object",
       "required": [
         "status",
@@ -1225,10 +1105,7 @@
               "racyResult": {
                 "$ref": "#/definitions/ImageDetectResult"
               },
-              "underageResult": {
-                "$ref": "#/definitions/ImageDetectResult"
-              },
-              "customResult": {
+              "goryResult": {
                 "$ref": "#/definitions/ImageDetectResult"
               },
               "error": {
@@ -1244,107 +1121,12 @@
         }
       }
     },
-    "ImageWithTextCategory": {
-      "type": "string",
-      "x-nullable": false,
-      "enum": [
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "ImageWithTextCategory",
-        "modelAsString": false
-      }
-    },
-    "ImageWithText": {
-      "description": "The image and text",
-      "type": "object",
-      "required": [
-        "image"
-      ],
-      "properties": {
-        "image": {
-          "$ref": "#/definitions/Image"
-        },
-        "text": {
-          "description": "Text associated with the image",
-          "type": "string"
-        }
-      }
-    },
-    "ImageWithTextDetectRequest": {
-      "description": "The analysis request of the image-with-text",
-      "type": "object",
-      "required": [
-        "imageWithText"
-      ],
-      "properties": {
-        "image": {
-          "description": "The image needs to be scanned",
-          "$ref": "#/definitions/ImageWithText"
-        },
-        "categories": {
-          "type": "array",
-          "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
-          "items": {
-            "$ref": "#/definitions/ImageWithTextCategory"
-          }
-        }
-      }
-    },
-    "ImageWithTextDetectResult": {
-      "type": "object",
-      "required": [
-        "category"
-      ],
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ImageWithTextCategory"
-        },
-        "analyzed": {
-          "description": "Whether this category is analyzed in this input image-with-text",
-          "type": "boolean"
-        },
-        "score": {
-          "description": "The score of analysis result",
-          "type": "number",
-          "format": "float"
-        },
-        "modelOutputDetail": {
-          "description": "The additional fields of model output",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ImageWithTextDetectResponse": {
-      "description": "The analysis response of the image-with-text",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-              "$ref": "#/definitions/ImageWithTextDetectResult"
-            }
-        }
-      }
-    },
-    "TextListMatchMethod": {
-      "description": "Detection method for Text List.",
-      "enum": [
-        "Exact",
-        "Semantic"
-      ],
-      "type": "string"
-    },
     "TextList": {
       "description": "Text List.",
       "required": [
-        "listId"
+        "listId",
+        "name",
+        "defaultLanguage"
       ],
       "properties": {
         "listId": {
@@ -1360,7 +1142,7 @@
           "type": "string"
         },
         "defaultLanguage": {
-          "description": "language hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
+          "description": "Language hint for text analysis, could not be updated after list created. Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
           "type": "string"
         }
       }
@@ -1385,63 +1167,9 @@
           "type": "string"
         },
         "language": {
-          "$ref": "#parameters/Language"
+          "description": "Language of this item, Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\"). If not assigned, the list defaultLanguage will be used",
+          "type": "string"
         }
-      }
-    },
-    "ImageListMatchMethod": {
-      "description": "Detection method for image list.",
-      "enum": [
-        "Exact",
-        "Semantic"
-      ],
-      "type": "string"
-    },
-    "ImageList": {
-      "description": "Image List Properties.",
-      "properties": {
-        "listId": {
-          "description": "Image list Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Image list name.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description for Text List.",
-          "type": "string"
-        },
-        "method": {
-          "$ref": "#/definitions/ImageListMatchMethod"
-        }
-      }
-    },
-    "ImageInList": {
-      "description": "Image data",
-      "required": [
-        "imageId",
-        "imageUri"
-      ],
-      "properties": {
-        "imageId": {
-          "description": "Image id",
-          "type": "string"
-        },
-        "description": {
-          "description": "Image data description",
-          "type": "string"
-        },
-        "imageUri": {
-          "type": "string",
-          "format": "url"
-        }
-      }
-    },
-    "ImageLists": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ImageList"
       }
     }
   },
@@ -1457,7 +1185,7 @@
     },
     "Language": {
       "name": "language",
-      "description": "Language hint for text recognition and document analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
+      "description": "Language hint for text analysis.  Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
       "required": false,
       "type": "string",
       "in": "query",
@@ -1508,14 +1236,6 @@
       "name": "listId",
       "in": "path",
       "description": "List Id of the list.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ImageId": {
-      "name": "imageId",
-      "in": "path",
-      "description": "Id of the image.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
