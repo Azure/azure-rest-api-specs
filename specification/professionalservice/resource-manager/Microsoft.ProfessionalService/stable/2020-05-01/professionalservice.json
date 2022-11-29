@@ -405,7 +405,46 @@
                     "final-state-via": "location"
                 }
             }
-        }
+        },
+		"/providers/Microsoft.ProfessionalService/operations": {
+		  "get": {
+			"tags": [
+			  "SaaSResources"
+			],
+			"operationId": "operations_List",
+			"description": "Gets all ProfessionalService operations.",
+			"produces": [
+			  "application/json"
+			],
+			"parameters": [
+			  {
+				"$ref": "#/parameters/ApiVersionParameter"
+			  }
+			],
+			"responses": {
+			  "200": {
+				"description": "OK",
+				"schema": {
+				  "$ref": "#/definitions/ProfessionalServiceOperationsResponseWithContinuation"
+				}
+			  },
+			  "default": {
+				"description": "A response indicating an error.",
+				"schema": {
+				  "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+				}
+			  }
+			},
+			"x-ms-examples": {
+			  "Get professional service operations": {
+				"$ref": "./examples/Operations/GetOperations.json"
+			  }
+			},
+			"x-ms-pageable": {
+			  "nextLinkName": "nextLink"
+			}
+		  }
+		},		
     },
     "definitions": {
         "Result": {
@@ -417,6 +456,67 @@
                 }
             }
         },
+		"ProfessionalServiceOperationsResponseWithContinuation": {
+		  "description": "professional service operation response with continuation.",
+		  "type": "object",
+		  "properties": {
+			"nextLink": {
+			  "description": "the next link to query to get the remaining results.",
+			  "type": "string"
+			},
+			"value": {
+			  "description": "the value of response.",
+			  "type": "array",
+			  "items": {
+				"$ref": "#/definitions/ProfessionalServiceOperation"
+			  }
+			}
+		  }
+		},		
+		"ProfessionalServiceOperation": {
+		  "description": "professional service operations",
+		  "type": "object",
+		  "properties": {
+			"name": {
+			  "description": "the operation name",
+			  "type": "string"
+			},
+			"display": {
+			  "description": "the operation display",
+			  "$ref": "#/definitions/ProfessionalServiceOperationDisplay"
+			},
+			"origin": {
+			  "description": "the operation origin",
+			  "type": "string"
+			},
+			"isDataAction": {
+			  "description": "whether the operation is a data action or not.",
+			  "type": "boolean"
+			}
+		  }
+		},
+		"ProfessionalServiceOperationDisplay": {
+		  "description": "professional service operation display",
+		  "type": "object",
+		  "properties": {
+			"provider": {
+			  "description": "Name of the provider for display purposes",
+			  "type": "string"
+			},
+			"resource": {
+			  "description": "Name of the resource type for display purposes",
+			  "type": "string"
+			},
+			"operation": {
+			  "description": "Name of the operation for display purposes",
+			  "type": "string"
+			},
+			"description": {
+			  "description": "Description of the operation for display purposes",
+			  "type": "string"
+			}
+		  }
+		},
         "ProfessionalServiceResource": {
             "description": "ProfessionalService REST API resource definition.",
             "type": "object",
@@ -604,61 +704,61 @@
             "additionalProperties": {
                 "type": "string"
             }
-        },
-        "parameters": {
-            "ApiVersionParameter": {
-                "name": "api-version",
-                "in": "query",
-                "required": true,
-                "type": "string",
-                "description": "The API version to be used with the HTTP request."
-            },
-            "OperationIdParameter": {
-                "name": "operationId",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "the operation Id parameter.",
-                "x-ms-parameter-location": "method"
-            },
-            "EnrollmentBillingAccountParameter": {
-                "name": "enrollmentBillingAccount",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The enrollment billing account id."
-            },
-            "BillingAccountParameter": {
-                "name": "billingAccount",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The billing account id."
-            },
-            "BillingProfileParameter": {
-                "name": "billingProfile",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The biling profile id.",
-                "x-ms-parameter-location": "method"
-            },
-            "InvoiceSectionParameter": {
-                "name": "invoiceSection",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The invoice section id.",
-                "x-ms-parameter-location": "method"
-            },
-            "ResourceNameParameter": {
-                "name": "resourceName",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The name of the resource.",
-                "x-ms-parameter-location": "method"
-            }
         }
-    }
+    },
+	"parameters": {
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "The API version to be used with the HTTP request."
+		},
+		"OperationIdParameter": {
+			"name": "operationId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "the operation Id parameter.",
+			"x-ms-parameter-location": "method"
+		},
+		"EnrollmentBillingAccountParameter": {
+			"name": "enrollmentBillingAccount",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The enrollment billing account id."
+		},
+		"BillingAccountParameter": {
+			"name": "billingAccount",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The billing account id."
+		},
+		"BillingProfileParameter": {
+			"name": "billingProfile",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The biling profile id.",
+			"x-ms-parameter-location": "method"
+		},
+		"InvoiceSectionParameter": {
+			"name": "invoiceSection",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The invoice section id.",
+			"x-ms-parameter-location": "method"
+		},
+		"ResourceNameParameter": {
+			"name": "resourceName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The name of the resource.",
+			"x-ms-parameter-location": "method"
+		}
+	}	
 }
