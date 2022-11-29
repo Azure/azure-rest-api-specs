@@ -2289,6 +2289,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "operationId": "PrivateLinkResources_ListByHostPool",
+        "description": "List the private link resources available for this hostpool.",
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByHostPool": {
+            "$ref": "./examples/PrivateLinkResources_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/retrieveRegistrationToken": {
       "post": {
         "tags": [
@@ -3729,6 +3772,18 @@
           "items": {
             "type": "string"
           }
+        },
+        "publicNetworkAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Enabled to allow this resource to be access from the public network"
         }
       }
     },
