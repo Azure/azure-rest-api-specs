@@ -409,7 +409,7 @@
 		"/providers/Microsoft.ProfessionalService/operations": {
 		  "get": {
 			"tags": [
-			  "SaaSResources"
+			  "ProfessionalServiceResources"
 			],
 			"operationId": "operations_List",
 			"description": "Gets all ProfessionalService operations.",
@@ -425,7 +425,7 @@
 			  "200": {
 				"description": "OK",
 				"schema": {
-				  "$ref": "#/definitions/ProfessionalServiceOperationsResponseWithContinuation"
+				  "$ref": "#/definitions/ProfessionalServiceRpOperationsResponseWithContinuation"
 				}
 			  },
 			  "default": {
@@ -437,14 +437,14 @@
 			},
 			"x-ms-examples": {
 			  "Get professional service operations": {
-				"$ref": "./examples/Operations/GetOperations.json"
+				"$ref": "./examples/OperationsRp/GetRpOperations.json"
 			  }
 			},
 			"x-ms-pageable": {
 			  "nextLinkName": "nextLink"
 			}
 		  }
-		},		
+		}		
     },
     "definitions": {
         "Result": {
@@ -456,7 +456,7 @@
                 }
             }
         },
-		"ProfessionalServiceOperationsResponseWithContinuation": {
+		"ProfessionalServiceRpOperationsResponseWithContinuation": {
 		  "description": "professional service operation response with continuation.",
 		  "type": "object",
 		  "properties": {
@@ -468,12 +468,12 @@
 			  "description": "the value of response.",
 			  "type": "array",
 			  "items": {
-				"$ref": "#/definitions/ProfessionalServiceOperation"
+				"$ref": "#/definitions/ProfessionalServiceRpOperation"
 			  }
 			}
 		  }
 		},		
-		"ProfessionalServiceOperation": {
+		"ProfessionalServiceRpOperation": {
 		  "description": "professional service operations",
 		  "type": "object",
 		  "properties": {
@@ -483,7 +483,7 @@
 			},
 			"display": {
 			  "description": "the operation display",
-			  "$ref": "#/definitions/ProfessionalServiceOperationDisplay"
+			  "$ref": "#/definitions/ProfessionalServiceRpOperationDisplay"
 			},
 			"origin": {
 			  "description": "the operation origin",
@@ -495,7 +495,7 @@
 			}
 		  }
 		},
-		"ProfessionalServiceOperationDisplay": {
+		"ProfessionalServiceRpOperationDisplay": {
 		  "description": "professional service operation display",
 		  "type": "object",
 		  "properties": {
@@ -577,6 +577,7 @@
                 },
                 "location": {
                     "type": "string",
+					"x-ms-mutability": [ "create", "read" ],
                     "description": "Resource location. Only value allowed for professional service is 'global'"
                 },
                 "properties": {
@@ -712,6 +713,7 @@
 			"in": "query",
 			"required": true,
 			"type": "string",
+			"x-ms-parameter-location":"client",
 			"description": "The API version to be used with the HTTP request."
 		},
 		"OperationIdParameter": {
@@ -757,6 +759,7 @@
 			"in": "path",
 			"required": true,
 			"type": "string",
+			"pattern": "^[a-z][a-z0-9]*$",
 			"description": "The name of the resource.",
 			"x-ms-parameter-location": "method"
 		}
