@@ -11,9 +11,8 @@
         "tags": [
           "DataQuality Alerts"
         ],
-        "summary": "Create a DQ Alert.",
         "description": "Create a DQ Alert.",
-        "operationId": "Create_Alert",
+        "operationId": "Alert_Create",
         "consumes": [
           "application/json"
         ],
@@ -22,11 +21,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -58,8 +53,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateAlert": {
-            "$ref": "./examples/CreateAlert.json"
+          "Alert_Create": {
+            "$ref": "./examples/Alert_Create.json"
           }
         }
       },
@@ -67,20 +62,12 @@
         "tags": [
           "DataQuality Alerts"
         ],
-        "summary": "Get all DQ Alert set for a particular asset/datasource/collection.",
         "description": "Get all DQ Alert set for a particular asset/datasource/collection.",
-        "operationId": "Get_All_Alert",
+        "operationId": "AlertList_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "query",
             "name": "level",
@@ -97,10 +84,7 @@
             "type": "boolean"
           },
           {
-            "in": "query",
-            "name": "skipToken",
-            "description": "Get Skip Token",
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -126,9 +110,13 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
         "x-ms-examples": {
-          "GetAllMatchedAlerts": {
-            "$ref": "./examples/GetAllMatchedAlerts.json"
+          "AlertList_Get": {
+            "$ref": "./examples/AlertList_Get.json"
           }
         }
       }
@@ -138,26 +126,21 @@
         "tags": [
           "DataQuality Alerts"
         ],
-        "summary": "Fetch the details of a DQ Alert.",
         "description": "Fetch the details of a DQ Alert.",
-        "operationId": "Get_Alert",
+        "operationId": "Alert_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "alertId",
             "description": "Get Alert Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -181,8 +164,8 @@
           }
         },
         "x-ms-examples": {
-          "GetAlertDetails": {
-            "$ref": "./examples/GetAlertDetails.json"
+          "Alert_Get": {
+            "$ref": "./examples/Alert_Get.json"
           }
         }
       },
@@ -190,9 +173,8 @@
         "tags": [
           "DataQuality Alerts"
         ],
-        "summary": "Update a DQ Alert.",
         "description": "Update a DQ Alert.",
-        "operationId": "Update_Alert",
+        "operationId": "Alert_Update",
         "consumes": [
           "application/merge-patch+json",
           "application/json"
@@ -203,17 +185,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "alertId",
             "description": "Get Alert Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -243,8 +221,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateAlert": {
-            "$ref": "./examples/UpdateAlert.json"
+          "Alert_Update": {
+            "$ref": "./examples/Alert_Update.json"
           }
         }
       },
@@ -252,26 +230,21 @@
         "tags": [
           "DataQuality Alerts"
         ],
-        "summary": "Delete a DQ Alert.",
         "description": "Delete a DQ Alert.",
-        "operationId": "Delete_Alert",
+        "operationId": "Alert_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "alertId",
             "description": "Get Alert Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -295,8 +268,8 @@
           }
         },
         "x-ms-examples": {
-          "DeleteAlert": {
-            "$ref": "./examples/DeleteAlert.json"
+          "Alert_Delete": {
+            "$ref": "./examples/Alert_Delete.json"
           }
         }
       }
@@ -306,7 +279,6 @@
         "tags": [
           "DataQuality Alerts"
         ],
-        "summary": "Check if alert name is unique.",
         "description": "Checks if alert name is unique.",
         "operationId": "Check_Alert_Name",
         "consumes": [
@@ -317,11 +289,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -353,8 +321,8 @@
           }
         },
         "x-ms-examples": {
-          "CheckAlertNameScopeUniqueness": {
-            "$ref": "./examples/CheckAlertNameScopeUniqueness.json"
+          "Check_Alert_Name": {
+            "$ref": "./examples/Check_Alert_Name.json"
           }
         }
       }
@@ -362,11 +330,10 @@
     "/accounts/{accountId}/assets/{assetId}/rules": {
       "post": {
         "tags": [
-          "DataQuality Rule"
+          "DataQuality Rules"
         ],
-        "summary": "Create DataQuality Rule.",
         "description": "Create DataQuality Rule.",
-        "operationId": "Create_Rule",
+        "operationId": "Rules_Create",
         "consumes": [
           "application/json"
         ],
@@ -376,17 +343,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -418,35 +381,30 @@
           }
         },
         "x-ms-examples": {
-          "CreateRules": {
-            "$ref": "./examples/CreateRules.json"
+          "Rules_Create": {
+            "$ref": "./examples/Rules_Create.json"
           }
         }
       },
       "get": {
         "tags": [
-          "DataQuality Rule"
+          "DataQuality Rules"
         ],
-        "summary": "Get DataQuality Rule.",
         "description": "Get DataQuality Rule.",
-        "operationId": "Get_Rule",
+        "operationId": "Rules_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -470,18 +428,17 @@
           }
         },
         "x-ms-examples": {
-          "GetRules": {
-            "$ref": "./examples/GetRules.json"
+          "Rules_Get": {
+            "$ref": "./examples/Rules_Get.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "DataQuality Rule"
+          "DataQuality Rules"
         ],
-        "summary": "Update DataQuality Rule.",
         "description": "Update DataQuality Rule.",
-        "operationId": "Update_Rule",
+        "operationId": "Rules_Update",
         "consumes": [
           "application/merge-patch+json",
           "application/json"
@@ -492,17 +449,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -532,35 +485,30 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRules": {
-            "$ref": "./examples/UpdateRules.json"
+          "Rules_Update": {
+            "$ref": "./examples/Rules_Update.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "DataQuality Rule"
+          "DataQuality Rules"
         ],
-        "summary": "Delete DataQuality Rule.",
         "description": "Delete DataQuality Rule.",
-        "operationId": "Delete_Rule",
+        "operationId": "Rules_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -584,8 +532,8 @@
           }
         },
         "x-ms-examples": {
-          "DeleteAllRules": {
-            "$ref": "./examples/DeleteAllRules.json"
+          "Rules_Delete": {
+            "$ref": "./examples/Rules_Delete.json"
           }
         }
       }
@@ -593,11 +541,10 @@
     "/accounts/{accountId}/assets/{assetId}/favourite-fields": {
       "post": {
         "tags": [
-          "DataQuality Rule"
+          "DataQuality Rules"
         ],
-        "summary": "Set DataQuality Favourite Fields.",
         "description": "Set DataQuality Favourite Fields.",
-        "operationId": "Set_Fav_Rule",
+        "operationId": "FavRules_Update",
         "consumes": [
           "application/json"
         ],
@@ -605,13 +552,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "query",
             "name": "dataSourceFQN",
@@ -623,6 +563,9 @@
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -657,8 +600,8 @@
           }
         },
         "x-ms-examples": {
-          "SetFavouriteFields": {
-            "$ref": "./examples/SetFavouriteFields.json"
+          "FavRules_Update": {
+            "$ref": "./examples/FavRules_Update.json"
           }
         }
       }
@@ -668,9 +611,8 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Submits a new DQ assessmet Job.",
         "description": "Submits a new DQ assessmet Job.",
-        "operationId": "Job_Submit",
+        "operationId": "AssessmentJob_Submit",
         "consumes": [
           "application/json"
         ],
@@ -680,17 +622,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -722,8 +660,8 @@
           }
         },
         "x-ms-examples": {
-          "SubmitJob": {
-            "$ref": "./examples/SubmitJob.json"
+          "AssessmentJob_Submit": {
+            "$ref": "./examples/AssessmentJob_Submit.json"
           }
         }
       },
@@ -731,26 +669,21 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Get DataQuality Assessment Run MetaData.",
         "description": "Get DataQuality Assessment Run MetaData.",
-        "operationId": "Get_Job_MetaData",
+        "operationId": "AssessmentJobList_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -777,8 +710,8 @@
           }
         },
         "x-ms-examples": {
-          "GetAssetRunMetadata": {
-            "$ref": "./examples/GetAssetRunMetadata.json"
+          "AssessmentJobList_Get": {
+            "$ref": "./examples/AssessmentJobList_Get.json"
           }
         }
       }
@@ -788,20 +721,12 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Get Status Of DataQuality Assessment Job.",
         "description": "Get status of DQ assessmet job & returns DataQuality Job Status.",
-        "operationId": "Get_Job_Status",
+        "operationId": "AssementJobStatus_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "assetId",
@@ -816,6 +741,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -839,8 +767,8 @@
           }
         },
         "x-ms-examples": {
-          "GetJobStatus": {
-            "$ref": "./examples/GetJobStatus.json"
+          "AssementJobStatus_Get": {
+            "$ref": "./examples/AssementJobStatus_Get.json"
           }
         }
       }
@@ -850,20 +778,12 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Get DataQuality Assessment Job Run.",
         "description": "Get DataQuality Assessment Job Run.",
-        "operationId": "Get_Job_Run",
+        "operationId": "AssessmentJobScore_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "assetId",
@@ -877,6 +797,9 @@
             "description": "Get Assessment Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -900,8 +823,8 @@
           }
         },
         "x-ms-examples": {
-          "GetJobRun": {
-            "$ref": "./examples/GetJobRun.json"
+          "AssessmentJobScore_Get": {
+            "$ref": "./examples/AssessmentJobScore_Get.json"
           }
         }
       }
@@ -911,20 +834,12 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Get DataQuality Assessment Job Rules.",
         "description": "Get DataQuality Assessment Job Rules.",
-        "operationId": "Get_Job_Rule",
+        "operationId": "AssessmentJobRule_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "assetId",
@@ -938,6 +853,9 @@
             "description": "Get Assessment Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -961,8 +879,8 @@
           }
         },
         "x-ms-examples": {
-          "GetJobRules": {
-            "$ref": "./examples/GetJobRules.json"
+          "AssessmentJobRule_Get": {
+            "$ref": "./examples/AssessmentJobRule_Get.json"
           }
         }
       }
@@ -972,21 +890,13 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Get DataQuality Assessment Job Error File.",
         "description": "Get DataQuality Assessment Job Error File.",
-        "operationId": "Get_Job_ErrorFile",
+        "operationId": "AssessmentJobErrorFile_Get",
         "produces": [
           "text/csv",
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "assetId",
@@ -1000,6 +910,9 @@
             "description": "Get Assessment Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1023,8 +936,8 @@
           }
         },
         "x-ms-examples": {
-          "DownloadJobErrorFile": {
-            "$ref": "./examples/DownloadJobErrorFile.json"
+          "AssessmentJobErrorFile_Get": {
+            "$ref": "./examples/AssessmentJobErrorFile_Get.json"
           }
         }
       }
@@ -1034,20 +947,12 @@
         "tags": [
           "DataQuality Jobs"
         ],
-        "summary": "Cancel DataQuality Assessment Job.",
         "description": "Cancel DataQuality assessmet Job.",
-        "operationId": "Job_Cancel",
+        "operationId": "AssessmentJob_Cancel",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "assetId",
@@ -1062,6 +967,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1085,8 +993,8 @@
           }
         },
         "x-ms-examples": {
-          "CancelJob": {
-            "$ref": "./examples/CancelJob.json"
+          "AssessmentJob_Cancel": {
+            "$ref": "./examples/AssessmentJob_Cancel.json"
           }
         }
       }
@@ -1096,9 +1004,8 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Create Schedule Assessment.",
         "description": "Create Schedule Assessment.",
-        "operationId": "Create_Schedule",
+        "operationId": "Schedule_Create",
         "consumes": [
           "application/json"
         ],
@@ -1107,18 +1014,14 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "query",
             "name": "runNow",
             "description": "Get RunNow",
             "type": "boolean",
             "default": false
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1151,8 +1054,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateScheduledAssessments": {
-            "$ref": "./examples/CreateScheduledAssessments.json"
+          "Schedule_Create": {
+            "$ref": "./examples/Schedule_Create.json"
           }
         }
       },
@@ -1160,19 +1063,14 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get Schedule Assessment.",
         "description": "Get Schedule Assessment.",
-        "operationId": "Get_Schedule",
+        "operationId": "Schedule_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1196,8 +1094,8 @@
           }
         },
         "x-ms-examples": {
-          "GetScheduledAssessments": {
-            "$ref": "./examples/GetScheduledAssessments.json"
+          "Schedule_Get": {
+            "$ref": "./examples/Schedule_Get.json"
           }
         }
       }
@@ -1207,9 +1105,8 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Update Schedule Assessment.",
         "description": "Update Schedule Assessment.",
-        "operationId": "Update_Schedule",
+        "operationId": "Schedule_Update",
         "consumes": [
           "application/json"
         ],
@@ -1217,13 +1114,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "scheduleId",
@@ -1237,6 +1127,9 @@
             "description": "Get RunNow",
             "type": "boolean",
             "default": false
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1269,8 +1162,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateScheduledAssessments": {
-            "$ref": "./examples/UpdateScheduledAssessments.json"
+          "Schedule_Update": {
+            "$ref": "./examples/Schedule_Update.json"
           }
         }
       },
@@ -1278,9 +1171,8 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Update Schedule Assessment.",
         "description": "Update Schedule Assessment.",
-        "operationId": "Update_Schedule_Post",
+        "operationId": "ScheduleMetadata_Update",
         "consumes": [
           "application/json"
         ],
@@ -1288,13 +1180,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "scheduleId",
@@ -1308,6 +1193,9 @@
             "description": "Get RunNow",
             "type": "boolean",
             "default": false
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1340,8 +1228,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateScheduledAssessmentsPost": {
-            "$ref": "./examples/UpdateScheduledAssessmentsPost.json"
+          "ScheduleMetadata_Update": {
+            "$ref": "./examples/ScheduleMetadata_Update.json"
           }
         }
       },
@@ -1349,26 +1237,21 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get Schedule Assessment MetaData.",
         "description": "Get Schedule Assessment MetaData.",
-        "operationId": "Get_Schedule_MetaData",
+        "operationId": "ScheduleMetadata_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "scheduleId",
             "description": "Get Schedule Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1392,8 +1275,8 @@
           }
         },
         "x-ms-examples": {
-          "GetScheduledAssessmentMetadata": {
-            "$ref": "./examples/GetScheduledAssessmentMetadata.json"
+          "ScheduleMetadata_Get": {
+            "$ref": "./examples/ScheduleMetadata_Get.json"
           }
         }
       },
@@ -1401,26 +1284,21 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Delete Schedule Assessment.",
         "description": "Delete Schedule Assessment.",
-        "operationId": "Delete_Schedule",
+        "operationId": "Schedule_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "scheduleId",
             "description": "Get Schedule Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1444,8 +1322,8 @@
           }
         },
         "x-ms-examples": {
-          "DeleteScheduledAssessments": {
-            "$ref": "./examples/DeleteScheduledAssessments.json"
+          "Schedule_Delete": {
+            "$ref": "./examples/Schedule_Delete.json"
           }
         }
       }
@@ -1455,26 +1333,21 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Check Schedule Assessment.",
         "description": "Check Schedule Assessment.",
-        "operationId": "Check_Schedule",
+        "operationId": "ScheduleName_Validate",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "scheduleName",
             "description": "Get Schedule Name",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1498,8 +1371,8 @@
           }
         },
         "x-ms-examples": {
-          "ExistsScheduledAssessment": {
-            "$ref": "./examples/ExistsScheduledAssessment.json"
+          "ScheduleName_Validate": {
+            "$ref": "./examples/ScheduleName_Validate.json"
           }
         }
       }
@@ -1509,19 +1382,14 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get All Schedule Assessment.",
         "description": "Get All Schedule Assessment.",
-        "operationId": "Get_All_Schedule",
+        "operationId": "Schedules_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1548,8 +1416,8 @@
           }
         },
         "x-ms-examples": {
-          "GetAllScheduleNames": {
-            "$ref": "./examples/GetAllScheduleNames.json"
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get.json"
           }
         }
       }
@@ -1559,26 +1427,21 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get Schedule Assessment Runs.",
         "description": "Get Schedule Assessment Runs.",
-        "operationId": "Get_Schedule_Run",
+        "operationId": "ScheduleRun_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "scheduleId",
             "description": "Get Schedule Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1605,8 +1468,8 @@
           }
         },
         "x-ms-examples": {
-          "GetScheduledAssessmentsRuns": {
-            "$ref": "./examples/GetScheduledAssessmentsRuns.json"
+          "ScheduleRun_Get": {
+            "$ref": "./examples/ScheduleRun_Get.json"
           }
         }
       }
@@ -1616,9 +1479,8 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get Schedule Assessment Run Bulk Status.",
         "description": "Get Schedule Assessment Run Bulk Status.",
-        "operationId": "Get_All_Schedule_Runs",
+        "operationId": "ScheduleRuns_Get",
         "consumes": [
           "application/json"
         ],
@@ -1627,11 +1489,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1670,8 +1528,8 @@
           }
         },
         "x-ms-examples": {
-          "GetScheduledAssessmentsRunsBulkStatus": {
-            "$ref": "./examples/GetScheduledAssessmentsRunsBulkStatus.json"
+          "ScheduleRuns_Get": {
+            "$ref": "./examples/ScheduleRuns_Get.json"
           }
         }
       }
@@ -1681,20 +1539,12 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get Schedule Assessment Run.",
         "description": "Get Schedule Assessment Run.",
-        "operationId": "Get_Schedule_Run_Details",
+        "operationId": "ScheduleRun_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "scheduleId",
@@ -1708,6 +1558,9 @@
             "description": "Get Run Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1731,8 +1584,8 @@
           }
         },
         "x-ms-examples": {
-          "GetScheduledAssessmentRunDetails": {
-            "$ref": "./examples/GetScheduledAssessmentRunDetails.json"
+          "ScheduleRun_Get": {
+            "$ref": "./examples/ScheduleRun_Get.json"
           }
         }
       }
@@ -1742,20 +1595,12 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Cancel Schedule Assessment.",
         "description": "Cancel Schedule Assessment.",
-        "operationId": "Cancel_Schedule",
+        "operationId": "Schedule_Cancel",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "scheduleId",
@@ -1769,6 +1614,9 @@
             "description": "Get Run Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1792,8 +1640,8 @@
           }
         },
         "x-ms-examples": {
-          "CancelScheduledAssessmentRun": {
-            "$ref": "./examples/CancelScheduledAssessmentRun.json"
+          "Schedule_Cancel": {
+            "$ref": "./examples/Schedule_Cancel.json"
           }
         }
       }
@@ -1803,7 +1651,6 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Run Schedule Assessment Internal.",
         "description": "Run Schedule Assessment Internal.",
         "operationId": "Run_Schedule_Internal",
         "produces": [
@@ -1812,17 +1659,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "scheduleId",
             "description": "Get Schedule Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1846,8 +1689,8 @@
           }
         },
         "x-ms-examples": {
-          "RunScheduledAssessmentsInternal": {
-            "$ref": "./examples/RunScheduledAssessmentsInternal.json"
+          "Run_Schedule_Internal": {
+            "$ref": "./examples/Run_Schedule_Internal.json"
           }
         }
       }
@@ -1857,7 +1700,6 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Run Schedule Assessment External.",
         "description": "Run Schedule Assessment External.",
         "operationId": "Run_Schedule_External",
         "produces": [
@@ -1866,17 +1708,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "scheduleId",
             "description": "Get Schedule Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1900,8 +1738,8 @@
           }
         },
         "x-ms-examples": {
-          "RunScheduledAssessmentsExternal": {
-            "$ref": "./examples/RunScheduledAssessmentsExternal.json"
+          "Run_Schedule_External": {
+            "$ref": "./examples/Run_Schedule_External.json"
           }
         }
       }
@@ -1911,9 +1749,8 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Get Schedule Assessment Runs Filterd.",
         "description": "Get Schedule Assessment Runs Filterd.",
-        "operationId": "Get_Schedule_Filtered",
+        "operationId": "SchedulesFilter_Get",
         "consumes": [
           "application/json"
         ],
@@ -1922,11 +1759,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -1962,8 +1795,8 @@
           }
         },
         "x-ms-examples": {
-          "GetScheduledAssessmentsRunsFiltered": {
-            "$ref": "./examples/GetScheduledAssessmentsRunsFiltered.json"
+          "SchedulesFilter_Get": {
+            "$ref": "./examples/SchedulesFilter_Get.json"
           }
         }
       }
@@ -1973,7 +1806,6 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Update Trigger Run Status.",
         "description": "Update Trigger Run Status.",
         "operationId": "Update_Schedule_Trigger",
         "consumes": [
@@ -1983,13 +1815,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "triggerRunId",
@@ -2002,6 +1827,9 @@
             "name": "scheduleId",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2034,8 +1862,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateTriggerRunStatus": {
-            "$ref": "./examples/UpdateTriggerRunStatus.json"
+          "Update_Schedule_Trigger": {
+            "$ref": "./examples/Update_Schedule_Trigger.json"
           }
         }
       }
@@ -2045,7 +1873,6 @@
         "tags": [
           "DataQuality Schedule"
         ],
-        "summary": "Update Manual Run Status.",
         "description": "Update Manual Run Status.",
         "operationId": "Update_Schedule_Manual_Run",
         "consumes": [
@@ -2055,13 +1882,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "assetId",
@@ -2077,6 +1897,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/api-version"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Get Job Info",
@@ -2107,8 +1930,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateManualRunStatus": {
-            "$ref": "./examples/UpdateManualRunStatus.json"
+          "Update_Schedule_Manual_Run": {
+            "$ref": "./examples/Update_Schedule_Manual_Run.json"
           }
         }
       }
@@ -2118,9 +1941,8 @@
         "tags": [
           "DataQuality Trending"
         ],
-        "summary": "Get Rules Trending.",
         "description": "Get Rules Trending.",
-        "operationId": "Get_Rule_Trending",
+        "operationId": "RuleTrendings_Get",
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -2135,17 +1957,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2180,8 +1998,8 @@
           }
         },
         "x-ms-examples": {
-          "GetRulesTrendings": {
-            "$ref": "./examples/GetRulesTrendings.json"
+          "RuleTrendings_Get": {
+            "$ref": "./examples/RuleTrendings_Get.json"
           }
         }
       }
@@ -2191,9 +2009,8 @@
         "tags": [
           "DataQuality Trending"
         ],
-        "summary": "Get Rules Trending By Rule Id.",
         "description": "Get Rules Trending By Rule Id.",
-        "operationId": "Get_Rule_Trending_By_Id",
+        "operationId": "RuleTrendingsById_Get",
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -2208,17 +2025,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "assetId",
             "description": "Get Asset Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2250,8 +2063,8 @@
           }
         },
         "x-ms-examples": {
-          "GetRulesTrendingsByRuleId": {
-            "$ref": "./examples/GetRulesTrendingsByRuleId.json"
+          "RuleTrendingsById_Get": {
+            "$ref": "./examples/RuleTrendingsById_Get.json"
           }
         }
       }
@@ -2259,11 +2072,10 @@
     "/accounts/{accountId}/validation": {
       "post": {
         "tags": [
-          "DataQuality Jobs"
+          "DataQuality Schema Validation"
         ],
-        "summary": "Validating Request.",
-        "description": "Validating Request.",
-        "operationId": "Validate_Request",
+        "description": "Schema Validating Request.",
+        "operationId": "ViewSchema_Validate",
         "consumes": [
           "application/json-patch+json",
           "application/json",
@@ -2277,11 +2089,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "AccountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2313,8 +2121,8 @@
           }
         },
         "x-ms-examples": {
-          "Validate": {
-            "$ref": "./examples/Validate.json"
+          "ViewSchema_Validate": {
+            "$ref": "./examples/ViewSchema_Validate.json"
           }
         }
       }
@@ -2324,9 +2132,8 @@
         "tags": [
           "DataQuality Views"
         ],
-        "summary": "Create a view instance.",
         "description": "Crete a view instance.",
-        "operationId": "Create_View",
+        "operationId": "View_Create",
         "consumes": [
           "application/json"
         ],
@@ -2336,16 +2143,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
+            "name": "viewSourceName",
+            "description": "Get View Source Name",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "viewSourceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2377,8 +2181,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateView": {
-            "$ref": "./examples/CreateView.json"
+          "View_Create": {
+            "$ref": "./examples/View_Create.json"
           }
         }
       }
@@ -2388,25 +2192,21 @@
         "tags": [
           "DataQuality Views"
         ],
-        "summary": "Get a view instance.",
         "description": "Get a view instance.",
-        "operationId": "Get_View",
+        "operationId": "View_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
+            "name": "viewId",
+            "description": "Get View Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "viewId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2430,8 +2230,8 @@
           }
         },
         "x-ms-examples": {
-          "GetView": {
-            "$ref": "./examples/GetView.json"
+          "View_Get": {
+            "$ref": "./examples/View_Get.json"
           }
         }
       },
@@ -2439,25 +2239,21 @@
         "tags": [
           "DataQuality Views"
         ],
-        "summary": "Delete a view instance.",
         "description": "Delete a view instance.",
-        "operationId": "Delete_View",
+        "operationId": "View_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
+            "name": "viewId",
+            "description": "Get View Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "viewId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2481,8 +2277,8 @@
           }
         },
         "x-ms-examples": {
-          "DeleteView": {
-            "$ref": "./examples/DeleteView.json"
+          "View_Delete": {
+            "$ref": "./examples/View_Delete.json"
           }
         }
       },
@@ -2490,9 +2286,8 @@
         "tags": [
           "DataQuality Views"
         ],
-        "summary": "Update a view instance.",
         "description": "Update a view instance.",
-        "operationId": "Update_View",
+        "operationId": "View_Update",
         "consumes": [
           "application/json"
         ],
@@ -2502,16 +2297,13 @@
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
+            "name": "viewId",
+            "description": "Get View Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "viewId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2543,8 +2335,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateView": {
-            "$ref": "./examples/UpdateView.json"
+          "View_Update": {
+            "$ref": "./examples/View_Update.json"
           }
         }
       }
@@ -2554,9 +2346,8 @@
         "tags": [
           "DataQuality View Sources"
         ],
-        "summary": "Create a view source.",
         "description": "Create a view source.",
-        "operationId": "Create_View_Source",
+        "operationId": "ViewSource_Create",
         "consumes": [
           "application/json"
         ],
@@ -2565,11 +2356,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "in": "body",
@@ -2601,8 +2388,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateViewSource": {
-            "$ref": "./examples/CreateViewSource.json"
+          "ViewSource_Create": {
+            "$ref": "./examples/ViewSource_Create.json"
           }
         }
       },
@@ -2610,19 +2397,14 @@
         "tags": [
           "DataQuality View Sources"
         ],
-        "summary": "Get all view sources.",
         "description": "Get all view sources.",
-        "operationId": "Get_All_View_Source",
+        "operationId": "ViewSource_GetList",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2649,8 +2431,8 @@
           }
         },
         "x-ms-examples": {
-          "GetViewSources": {
-            "$ref": "./examples/GetViewSources.json"
+          "ViewSource_GetList": {
+            "$ref": "./examples/ViewSource_GetList.json"
           }
         }
       }
@@ -2660,26 +2442,21 @@
         "tags": [
           "DataQuality View Sources"
         ],
-        "summary": "Validate a view source.",
         "description": "Validate a view source.",
-        "operationId": "Validate_View_Source",
+        "operationId": "ViewSource_Validate",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "source",
             "description": "Get Source",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2703,8 +2480,8 @@
           }
         },
         "x-ms-examples": {
-          "CheckViewSourceName": {
-            "$ref": "./examples/CheckViewSourceName.json"
+          "ViewSource_Validate": {
+            "$ref": "./examples/ViewSource_Validate.json"
           }
         }
       },
@@ -2712,26 +2489,21 @@
         "tags": [
           "DataQuality View Sources"
         ],
-        "summary": "Get a view source.",
         "description": "Get a view source.",
-        "operationId": "Get_View_Source",
+        "operationId": "ViewSource_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "source",
             "description": "Get Source",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2755,8 +2527,8 @@
           }
         },
         "x-ms-examples": {
-          "GetViewSource": {
-            "$ref": "./examples/GetViewSource.json"
+          "ViewSource_Get": {
+            "$ref": "./examples/ViewSource_Get.json"
           }
         }
       }
@@ -2764,22 +2536,14 @@
     "/accounts/{accountId}/viewsources/{viewSource}/views/{view}/validation": {
       "head": {
         "tags": [
-          "DataQuality Views"
+          "DataQuality View Sources"
         ],
-        "summary": "Check ViewName is unique or not.",
         "description": "Check View Name is Unique or not in a View Source.",
-        "operationId": "Check_View_Source",
+        "operationId": "ViewSourceViewName_Validate",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "accountId",
-            "description": "Get Account Id",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "viewSource",
@@ -2793,6 +2557,9 @@
             "description": "Get View",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2816,8 +2583,8 @@
           }
         },
         "x-ms-examples": {
-          "CheckUniqueViewName": {
-            "$ref": "./examples/CheckUniqueViewName.json"
+          "ViewSourceViewName_Validate": {
+            "$ref": "./examples/ViewSourceViewName_Validate.json"
           }
         }
       }
@@ -2825,13 +2592,18 @@
   },
   "definitions": {
     "AlertingScope": {
+      "description": "The Alert Scope",
       "type": "object",
       "properties": {
         "level": {
           "enum": [
             "CATALOG_PATH"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScopeLevel",
+            "modelAsString": true
+          }
         },
         "type": {
           "type": "string"
@@ -2842,9 +2614,11 @@
       }
     },
     "AlertNameValidation": {
+      "description": "The Alert Name Validation",
       "type": "object",
       "properties": {
         "alertName": {
+          "description": "The Alert Name",
           "type": "string"
         },
         "values": {
@@ -2859,20 +2633,25 @@
       "type": "object",
       "properties": {
         "jobId": {
+          "description": "The Job Id",
           "type": "string"
         }
       }
     },
     "Asset": {
+      "description": "The Asset Model",
       "type": "object",
       "properties": {
         "guid": {
+          "description": "The Asset GuId",
           "type": "string"
         },
         "name": {
+          "description": "The Asset Name",
           "type": "string"
         },
         "schema": {
+          "description": "The Asset Schema",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schema"
@@ -2881,12 +2660,15 @@
       }
     },
     "Assets": {
+      "description": "The Assets Model",
       "type": "object",
       "properties": {
         "datasourceKind": {
+          "description": "The Assets DatasourceKind",
           "type": "string"
         },
         "datasourceName": {
+          "description": "The Assets Data Source Name",
           "type": "string"
         },
         "includes": {
@@ -2895,39 +2677,49 @@
             "type": "string"
           }
         },
-        "properties": { },
+        "properties": {
+          "description": "The Assets Properties"
+        },
         "credentials": {
           "$ref": "#/definitions/CredentialEntity"
         }
       }
     },
     "Attributes": {
+      "description": "The Attributes Model",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The Attributes Name",
           "type": "string"
         },
         "description": {
+          "description": "The Attributes Description",
           "type": "string"
         },
         "qualifiedName": {
+          "description": "The Attributes QualifiedName",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "Collection": {
+      "description": "The Alert Model",
       "type": "object",
       "properties": {
         "type": {
+          "description": "The Collection Type",
           "type": "string"
         },
         "referenceName": {
+          "description": "The Collection ReferenceName",
           "type": "string"
         }
       }
     },
     "CredentialEntity": {
+      "description": "The Assets Model",
       "type": "object",
       "properties": {
         "credentialType": {
@@ -2941,7 +2733,11 @@
             "DelegatedAuth",
             "ManagedIdentity"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string"
@@ -2953,16 +2749,20 @@
       "type": "object",
       "properties": {
         "modelVersion": {
+          "description": "The DataQualityRules ModelVersion",
           "default": "1.0.0",
           "type": "string"
         },
         "dataSourceId": {
+          "description": "The DataQualityRules DataSourceId",
           "type": "string"
         },
-        "dataSourceFQN": {
+        "dataSourceFqn": {
+          "description": "The DataQualityRules DataSourceFQN",
           "type": "string"
         },
         "favouriteFields": {
+          "description": "The DataQualityRules FavouriteFields",
           "type": "array",
           "items": {
             "type": "string"
@@ -2972,6 +2772,7 @@
           "$ref": "#/definitions/SourceSchema"
         },
         "schemaReference": {
+          "description": "The DataQualityRules SchemaReference",
           "type": "object",
           "additionalProperties": {
             "type": "object",
@@ -2981,13 +2782,19 @@
           }
         },
         "dataSourceType": {
+          "description": "The DataQualityRules DataSourceType",
           "enum": [
             "CATALOG_ASSET",
             "FLOWLET"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatasourceType",
+            "modelAsString": true
+          }
         },
         "rules": {
+          "description": "The DataQualityRules Rules",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Rule"
@@ -2996,28 +2803,37 @@
       }
     },
     "DataQualityView": {
+      "description": "The DataQualityView Model",
       "type": "object",
       "properties": {
         "attributes": {
           "$ref": "#/definitions/Attributes"
         },
         "scriptType": {
+          "description": "The DataQualityView ScriptType",
           "enum": [
             "DSL",
             "SQL"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewScriptType",
+            "modelAsString": true
+          }
         },
         "script": {
+          "description": "The DataQualityView Script",
           "type": "string"
         },
         "assets": {
+          "description": "The DataQualityView Assets",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Asset"
           }
         },
         "schema": {
+          "description": "The DataQualityView Schema",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schema"
@@ -3029,40 +2845,61 @@
       }
     },
     "DQAlert": {
+      "description": "The Alert Model",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The Alert Id",
           "type": "string"
         },
         "name": {
+          "description": "The Alert Name",
           "type": "string"
         },
         "description": {
+          "description": "The Alert Status",
           "type": "string"
         },
         "status": {
+          "description": "The Alert Status",
           "enum": [
             "ENABLED",
             "DISABLED"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         },
         "notificationFrequency": {
+          "description": "The Alert Notification Frequency",
           "enum": [
             "IMMEDIATE"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationFrequency",
+            "modelAsString": true
+          }
         },
         "notificationType": {
+          "description": "The Alert Notification Type",
           "enum": [
             "EMAIL"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationType",
+            "modelAsString": true
+          }
         },
         "condition": {
+          "description": "The Alert Condition",
           "type": "string"
         },
         "alertingScopes": {
+          "description": "The Alert Scope",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlertingScope"
@@ -3070,24 +2907,30 @@
         },
         "createdOn": {
           "format": "date-time",
+          "description": "The Alert Create Time",
           "type": "string"
         },
         "createdBy": {
+          "description": "The Alert Created By",
           "type": "string"
         },
         "lastUpdatedOn": {
           "format": "date-time",
+          "description": "The Alert Last Updated Time",
           "type": "string"
         },
         "lastUpdatedBy": {
+          "description": "The Alert Last Updated By",
           "type": "string"
         },
         "lastActivatedOn": {
           "format": "date-time",
+          "description": "The Alert Last Activited on",
           "type": "string"
         },
         "activatedCount": {
           "format": "int32",
+          "description": "The Alert Activated Count",
           "type": "integer"
         }
       }
@@ -3099,28 +2942,34 @@
       "type": "object",
       "properties": {
         "values": {
+          "description": "The PagedResults Values",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DQAlert"
           }
         },
         "nextLink": {
+          "description": "The PagedResults NextLink",
           "type": "string"
         },
         "count": {
           "format": "int32",
+          "description": "The PagedResults Count",
           "type": "integer"
         }
       }
     },
     "DQAssetList": {
+      "description": "The DQAssetList Model",
       "type": "object",
       "properties": {
         "count": {
           "format": "int32",
+          "description": "The DQAssetList Count",
           "type": "integer"
         },
         "assets": {
+          "description": "The DQAssetList Assets",
           "type": "array",
           "items": {
             "type": "string"
@@ -3129,40 +2978,53 @@
       }
     },
     "DQRuleScore": {
+      "description": "The DQRuleScore Model",
       "type": "object",
       "properties": {
         "ruleLookupIdentifier": {
+          "description": "The DQRuleScore Rulelookupidentifier",
           "type": "string"
         },
         "failingRows": {
           "format": "int64",
+          "description": "The DQRuleScore FailingRows",
           "type": "integer"
         },
         "passingRows": {
           "format": "int64",
+          "description": "The DQRuleScore PassingRows",
           "type": "integer"
         },
         "score": {
           "format": "double",
+          "description": "The DQRuleScore Score",
           "type": "number"
         },
         "status": {
+          "description": "The DQRuleScore Status",
           "enum": [
             "INCOMPLETE",
             "DRAFT",
             "PUBLISHED"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         },
         "ruleType": {
+          "description": "The DQRuleScore Ruletype",
           "type": "string"
         }
       }
     },
     "DQRunResult": {
+      "description": "The DQRunResult Model",
       "type": "object",
       "properties": {
         "scores": {
+          "description": "The DQRunResult Scores",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DQRuleScore"
@@ -3170,15 +3032,18 @@
         },
         "goodRowCount": {
           "format": "int32",
+          "description": "The DQRunResult Goodrowcount",
           "type": "integer"
         },
         "totalRows": {
           "format": "int32",
+          "description": "The DQRunResult Totalrows",
           "type": "integer"
         }
       }
     },
     "ErrorModel": {
+      "description": "The error model for DataQuality",
       "required": [
         "code",
         "message"
@@ -3186,15 +3051,19 @@
       "type": "object",
       "properties": {
         "code": {
+          "description": "The error code",
           "type": "string"
         },
         "message": {
+          "description": "The error message",
           "type": "string"
         },
         "target": {
+          "description": "The error target",
           "type": "string"
         },
         "details": {
+          "description": "The error details",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorModel"
@@ -3214,15 +3083,19 @@
       }
     },
     "FilterPayloadModel": {
+      "description": "The FilterPayloadModel Model",
       "type": "object",
       "properties": {
         "operand": {
+          "description": "The FilterPayloadModel Operand",
           "type": "string"
         },
         "operator": {
+          "description": "The FilterPayloadModel Operator",
           "type": "string"
         },
         "values": {
+          "description": "The FilterPayloadModel Values",
           "type": "array",
           "items": {
             "type": "string"
@@ -3231,9 +3104,11 @@
       }
     },
     "InputSchema": {
+      "description": "The InputSchema Model",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The InputSchema Name",
           "type": "string"
         },
         "columns": {
@@ -3245,77 +3120,98 @@
       }
     },
     "JobOpInfo": {
+      "description": "The JobOpInfo Model",
       "type": "object",
       "properties": {
         "status": {
+          "description": "The JobOpInfo Status",
           "type": "string"
         },
         "reason": {
+          "description": "The JobOpInfo Reason",
           "type": "string"
         }
       }
     },
     "JobStatusEntity": {
+      "description": "The JobStatusEntity Model",
       "type": "object",
       "properties": {
         "accountId": {
+          "description": "The JobStatusEntity AccountId",
           "type": "string"
         },
-        "assetID": {
+        "AssetId": {
+          "description": "The JobStatusEntity AssetID",
           "type": "string"
         },
-        "jobID": {
+        "JobId": {
+          "description": "The JobStatusEntity JobID",
           "type": "string"
         },
         "jobRunId": {
+          "description": "The JobStatusEntity JobRunId",
           "type": "string"
         },
         "jobStartTime": {
           "format": "date-time",
+          "description": "The JobStatusEntity JobStartTime",
           "type": "string"
         },
         "jobEndTime": {
           "format": "date-time",
+          "description": "The JobStatusEntity JobEndTime",
           "type": "string"
         },
         "totalRunTime": {
+          "description": "The JobStatusEntity TotalRunTime",
           "type": "string"
         },
         "jobStatus": {
+          "description": "The JobStatusEntity JobStatus",
           "type": "string"
         },
         "message": {
+          "description": "The JobStatusEntity Message",
           "type": "string"
         },
         "globalScore": {
           "format": "double",
+          "description": "The JobStatusEntity GlobalScore",
           "type": "number"
         },
         "jobEnvironment": {
+          "description": "The JobStatusEntity JobEnvironment",
           "type": "string"
         },
         "scheduleId": {
+          "description": "The JobStatusEntity ScheduleId",
           "type": "string"
         },
         "assetType": {
+          "description": "The JobStatusEntity AssetType",
           "type": "string"
         },
         "statusCode": {
           "format": "int32",
+          "description": "The JobStatusEntity StatusCode",
           "type": "integer"
         }
       }
     },
     "JobStatusEntityDTO": {
+      "description": "The JobStatusEntityDTO Model",
       "type": "object",
       "properties": {
         "jobRunId": {
+          "description": "The JobStatusEntityDTO JobRunId",
           "type": "string"
         },
         "status": {
           "type": "string"
         },
         "message": {
+          "description": "The JobStatusEntityDTO Message",
           "type": "string"
         },
         "runStart": {
@@ -3332,23 +3228,29 @@
       }
     },
     "QueryColumn": {
+      "description": "The QueryColumn Model",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The QueryColumn Name",
           "type": "string"
         },
         "type": {
+          "description": "The QueryColumn Type",
           "type": "string"
         }
       }
     },
     "QuerySchema": {
+      "description": "The QuerySchema Model",
       "type": "object",
       "properties": {
         "query": {
+          "description": "The QuerySchema Query",
           "type": "string"
         },
         "inputSchemas": {
+          "description": "The QuerySchema InputSchemas",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InputSchema"
@@ -3357,33 +3259,48 @@
       }
     },
     "Rule": {
+      "description": "The Rule Model",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The Rule Id",
           "type": "string"
         },
         "name": {
+          "description": "The Rule Name",
           "type": "string"
         },
         "description": {
+          "description": "The Rule Description",
           "type": "string"
         },
         "status": {
+          "description": "The Rule Status",
           "enum": [
             "INCOMPLETE",
             "DRAFT",
             "PUBLISHED"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         },
         "level": {
+          "description": "The Rule Level",
           "enum": [
             "ASSET",
             "FIELD"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Level",
+            "modelAsString": true
+          }
         },
         "type": {
+          "description": "The Rule Type",
           "enum": [
             "NOTNULL",
             "INFERRED",
@@ -3396,24 +3313,34 @@
             "TIMELINESS",
             "REFERENCE"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RuleType",
+            "modelAsString": true
+          }
         },
         "tags": {
+          "description": "The Rule Tags",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "typeProperties": { }
+        "typeProperties": {
+          "description": "The Rule TypeProperties"
+        }
       }
     },
     "RuleTrending": {
+      "description": "The RuleTrending Model",
       "type": "object",
       "properties": {
         "ruleId": {
+          "description": "The RuleTrending RuleId",
           "type": "string"
         },
         "scores": {
+          "description": "The RuleTrending Scores",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuleTrendingEntity"
@@ -3422,66 +3349,83 @@
       }
     },
     "RuleTrendingEntity": {
+      "description": "The RuleTrendingEntity Model",
       "type": "object",
       "properties": {
         "jobTime": {
           "format": "date-time",
+          "description": "The RuleTrendingEntity JobTime",
           "type": "string"
         },
         "jobId": {
+          "description": "The RuleTrendingEntity JobId",
           "type": "string"
         },
         "score": {
           "format": "double",
+          "description": "The RuleTrendingEntity TotalRows",
           "type": "number"
         },
         "totalRows": {
           "format": "double",
+          "description": "The RuleTrendingEntity Id",
           "type": "number"
         },
         "failedRows": {
           "format": "double",
+          "description": "The RuleTrendingEntity FailedRows",
           "type": "number"
         },
         "passedRows": {
           "format": "double",
+          "description": "The RuleTrendingEntity PassedRows",
           "type": "number"
         },
         "description": {
+          "description": "The RuleTrendingEntity Description",
           "type": "string"
         },
         "status": {
+          "description": "The RuleTrendingEntity Status",
           "type": "string"
         }
       }
     },
     "RuleTrendingQueryPayload": {
+      "description": "The RuleTrendingQueryPayload Model",
       "type": "object",
       "properties": {
         "jobCount": {
           "format": "int32",
+          "description": "The RuleTrendingQueryPayload JobCount",
           "type": "integer"
         },
         "ruleId": {
+          "description": "The RuleTrendingQueryPayload RuleId",
           "type": "string"
         },
         "start": {
           "format": "int64",
+          "description": "The RuleTrendingQueryPayload Start",
           "type": "integer"
         },
         "end": {
           "format": "int64",
+          "description": "The RuleTrendingQueryPayload End",
           "type": "integer"
         }
       }
     },
     "ScheduleBulkRunsStatus": {
+      "description": "The ScheduleBulkRunsStatus Model",
       "type": "object",
       "properties": {
         "scheduleId": {
+          "description": "The ScheduleBulkRunsStatus ScheduleId",
           "type": "string"
         },
         "triggerRunIds": {
+          "description": "The ScheduleBulkRunsStatus TriggerRunIds",
           "type": "array",
           "items": {
             "type": "string"
@@ -3490,27 +3434,33 @@
       }
     },
     "ScheduleMetadata": {
+      "description": "The ScheduleMetadata Model",
       "type": "object",
       "properties": {
         "scheduleId": {
+          "description": "The ScheduleMetadata ScheduleId",
           "type": "string"
         },
         "scheduleName": {
+          "description": "The ScheduleMetadata ScheduleName",
           "type": "string"
         },
         "description": {
+          "description": "The ScheduleMetadata Description",
           "type": "string"
         },
         "recurrence": {
           "$ref": "#/definitions/TriggerRecurrence"
         },
         "datasources": {
+          "description": "The ScheduleMetadata Datasources",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Assets"
           }
         },
         "scheduleStatus": {
+          "description": "The ScheduleMetadata ScheduleStatus",
           "enum": [
             "RUNNING",
             "PAUSED",
@@ -3519,9 +3469,14 @@
             "TRIGGER_DELETED",
             "PIPELINE_DELETED"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
         },
         "runOnce": {
+          "description": "The ScheduleMetadata RunOnce",
           "type": "boolean"
         }
       }
@@ -3533,72 +3488,91 @@
       "type": "object",
       "properties": {
         "values": {
+          "description": "The PagedResults Values",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScheduleMetadata"
           }
         },
         "nextLink": {
+          "description": "The PagedResults NextLink",
           "type": "string"
         },
         "count": {
           "format": "int32",
+          "description": "The PagedResults Count",
           "type": "integer"
         }
       }
     },
     "ScheduleTriggerRunEntity": {
+      "description": "The ScheduleTriggerRunEntity Model",
       "type": "object",
       "properties": {
         "scheduleId": {
+          "description": "The ScheduleTriggerRunEntity ScheduleId",
           "type": "string"
         },
         "scheduleName": {
+          "description": "The ScheduleTriggerRunEntity ScheduleName",
           "type": "string"
         },
         "triggerRunId": {
+          "description": "The ScheduleTriggerRunEntity TriggerRunId",
           "type": "string"
         },
         "triggerStatus": {
+          "description": "The ScheduleTriggerRunEntity TriggerStatus",
           "type": "string"
         },
         "triggerStartTime": {
           "format": "date-time",
+          "description": "The ScheduleTriggerRunEntity TriggerStartTime",
           "type": "string"
         },
         "triggerLastUpdateTime": {
           "format": "date-time",
+          "description": "The ScheduleTriggerRunEntity TriggerLastUpdateTime",
           "type": "string"
         },
         "assessmentType": {
+          "description": "The ScheduleTriggerRunEntity AssessmentType",
           "type": "string"
         }
       }
     },
     "ScheduleTriggerRunEntityAssetInfo": {
+      "description": "The ScheduleTriggerRunEntityAssetInfo Model",
       "type": "object",
       "properties": {
         "scheduleId": {
+          "description": "The ScheduleTriggerRunEntityAssetInfo ScheduleId",
           "type": "string"
         },
         "scheduleName": {
+          "description": "The ScheduleTriggerRunEntityAssetInfo ScheduleName",
           "type": "string"
         },
         "triggerRunId": {
+          "description": "The ScheduleTriggerRunEntityAssetInfo TriggerRunId",
           "type": "string"
         },
         "triggerStatus": {
+          "description": "The ScheduleTriggerRunEntityAssetInfo TriggerStatus",
           "type": "string"
         },
         "triggerStartTime": {
           "format": "date-time",
+          "description": "The ScheduleTriggerRunEntityAssetInfo TriggerStartTime",
           "type": "string"
         },
         "triggerLastUpdateTime": {
           "format": "date-time",
+          "description": "The ScheduleTriggerRunEntityAssetInfo TriggerLastUpdateTime",
           "type": "string"
         },
         "assessmentType": {
+          "description": "The ScheduleTriggerRunEntityAssetInfo AssessmentType",
           "type": "string"
         },
         "jobStatus": {
@@ -3607,37 +3581,49 @@
       }
     },
     "Schema": {
+      "description": "The Schema Model",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The Schema Name",
           "type": "string"
         },
         "type": {
+          "description": "The Schema Type",
           "type": "string"
         }
       }
     },
     "SourceSchema": {
+      "description": "The SourceSchema Model",
       "type": "object",
       "properties": {
         "schemaProvider": {
+          "description": "The SourceSchema SchemaProvider",
           "default": "CATALOG",
           "enum": [
             "CATALOG",
             "DATAQUALITY_SCAN"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SchemaProvider",
+            "modelAsString": true
+          }
         },
         "schema": {
+          "description": "The SourceSchema Schema",
           "type": "string"
         },
         "refreshedAt": {
           "format": "int64",
+          "description": "The SourceSchema RefreshedAt",
           "type": "integer"
         }
       }
     },
     "TableRepositoryQueryPayloadModel": {
+      "description": "The TableRepositoryQueryPayloadModel Model",
       "type": "object",
       "properties": {
         "filters": {
@@ -3657,29 +3643,31 @@
       }
     },
     "TriggerDQJobsStatus": {
+      "description": "The TriggerDQJobsStatus Model",
       "type": "object",
       "properties": {
-        "Succeeded": {
+        "succeeded": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "InProgress": {
+        "inProgress": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "Queued": {
+        "queued": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "Failed": {
+        "failed": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "Cancelled": {
+        "cancelled": {
           "$ref": "#/definitions/DQAssetList"
         },
-        "Skipped": {
+        "skipped": {
           "$ref": "#/definitions/DQAssetList"
         }
       }
     },
     "TriggerRecurrence": {
+      "description": "The TriggerRecurrence Model",
       "type": "object",
       "properties": {
         "frequency": {
@@ -3704,35 +3692,44 @@
       }
     },
     "ViewColumn": {
+      "description": "The ViewColumn Model",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The ViewColumn name",
           "type": "string"
         },
         "type": {
+          "description": "The ViewColumn type",
           "type": "string"
         }
       }
     },
     "ViewEntry": {
+      "description": "The ViewEntry Model",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ViewEntry Id",
           "type": "string"
         },
         "name": {
+          "description": "The ViewEntry Name",
           "type": "string"
         },
         "updatedTime": {
           "format": "int64",
+          "description": "The ViewEntry UpdatedTime",
           "type": "integer"
         }
       }
     },
     "ViewSchemaRequest": {
+      "description": "The ViewSchemaRequest Model",
       "type": "object",
       "properties": {
         "type": {
+          "description": "The ViewSchemaRequest Type",
           "type": "string"
         },
         "properties": {
@@ -3741,9 +3738,11 @@
       }
     },
     "ViewSchemaResponse": {
+      "description": "The ViewSchemaResponse Model",
       "type": "object",
       "properties": {
         "outputSchema": {
+          "description": "The ViewSchemaResponse OutputSchema",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ViewColumn"
@@ -3752,12 +3751,15 @@
       }
     },
     "ViewSource": {
+      "description": "The ViewSource Model",
       "type": "object",
       "properties": {
         "kind": {
+          "description": "The ViewSource Kind",
           "type": "string"
         },
         "name": {
+          "description": "The ViewSource Name",
           "type": "string"
         },
         "properties": {
@@ -3766,15 +3768,18 @@
       }
     },
     "ViewSourceDetail": {
+      "description": "The ViewSourceDetail Model",
       "type": "object",
       "properties": {
         "views": {
+          "description": "The ViewSourceDetail Views",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ViewEntry"
           }
         },
         "name": {
+          "description": "The ViewSourceResponseDTO Name",
           "type": "string"
         },
         "properties": {
@@ -3783,20 +3788,25 @@
       }
     },
     "ViewSourceDTO": {
+      "description": "The ViewSourceDTO Model",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The ViewSourceDTO Name",
           "type": "string"
         },
         "parentCollection": {
+          "description": "The ViewSourceDTO ParentCollection",
           "type": "string"
         }
       }
     },
     "ViewSourceProperties": {
+      "description": "The ViewSourceProperties Model",
       "type": "object",
       "properties": {
         "description": {
+          "description": "The ViewSourceProperties Description",
           "type": "string"
         },
         "collection": {
@@ -3805,15 +3815,19 @@
       }
     },
     "ViewSourcePropertiesDTO": {
+      "description": "The ViewSourcePropertiesDTO Model",
       "type": "object",
       "properties": {
         "createdAt": {
+          "description": "The ViewSourcePropertiesDTO CreatedAt",
           "type": "string"
         },
         "lastModifiedAt": {
+          "description": "The ViewSourcePropertiesDTO LastModifiedAt",
           "type": "string"
         },
         "description": {
+          "description": "The ViewSourceProperties Description",
           "type": "string"
         },
         "collection": {
@@ -3821,5 +3835,44 @@
         }
       }
     }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
   }
 }
