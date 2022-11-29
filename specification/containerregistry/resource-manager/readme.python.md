@@ -20,6 +20,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-2022-12-only
   - tag: package-2022-02-preview-only
   - tag: package-2021-12-preview-only
   - tag: package-2021-09-only

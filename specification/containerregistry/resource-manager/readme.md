@@ -33,9 +33,9 @@ tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12-preview-only'
+```yaml $(tag) == 'package-2022-12-only'
 input-file:
-  - Microsoft.ContainerRegistry/preview/2022-12-01/containerregistry.json
+  - Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json
 ```
 
 ### Tag: package-2022-12
