@@ -642,12 +642,24 @@
         }
       }
     },
+    "TextDetectStrategy":{
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Comprehensive",
+        "Shortcut"
+      ],
+      "x-ms-enum": {
+        "name": "TextCategory",
+        "modelAsString": true
+      }
+    },
     "TextListMatchResult": {
       "description": "The result of custom list match",
       "type": "object",
       "required": [
         "listId",
-        "textId",
+        "itemId",
         "text"
       ],
       "properties": {
@@ -655,12 +667,12 @@
           "description": "The id of matched custom list",
           "type": "string"
         },
-        "textId": {
-          "description": "The id of matched text",
+        "itemId": {
+          "description": "The id of matched item",
           "type": "string"
         },
         "text": {
-          "description": "The content of matched text",
+          "description": "The content of matched item",
           "type": "string"
         }
       }
@@ -689,10 +701,6 @@
         "category": {
           "$ref": "#/definitions/TextCategory"
         },
-        "detected": {
-          "description": "Whether this category is detected in this input text",
-          "type": "boolean"
-        },
         "confidenceScore": {
           "description": "The confidence score of analysis result",
           "type": "number",
@@ -700,13 +708,6 @@
         },
         "riskLevel": {
           "$ref": "#/definitions/RiskLevel"
-        },
-        "listMatchResults": {
-          "description": "The details of list match",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextListMatchResult"
-          }
         }
       }
     },
@@ -725,8 +726,21 @@
           "type": "array",
           "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.",
           "items": {
-            "$ref": "#/definitions/TextCategoryConfig"
+            "$ref": "#/definitions/TextCategory"
           }
+        },
+        "blockListIds": {
+          "type": "array",
+          "description": "The ids of blocklists",
+          "items": {
+            "type": "string",
+            "description": "listId"
+          }
+        },
+        "strategy": {
+          "type": "string",
+          "description": "Analyze strategy. When set to \"Shortcut\", other analysis will be skipped once any of configured blocklists was hit. When set to comprehensive, all the analysis will be done even when blocklists were hit.",
+          "$ref": "#/definitions/TextDetectStrategy"
         }
       }
     },
@@ -734,6 +748,13 @@
       "description": "The analysis response of the text",
       "type": "object",
       "properties": {
+        "blocklistMatchResults": {
+          "description": "The details of list match",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextListMatchResult"
+          }
+        },
         "hateSpeechResult": {
           "$ref": "#/definitions/TextDetectResult"
         },
@@ -787,8 +808,21 @@
           "type": "array",
           "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.",
           "items": {
-            "$ref": "#/definitions/TextCategoryConfig"
+            "$ref": "#/definitions/TextCategory"
           }
+        },
+        "blockListIds": {
+          "type": "array",
+          "description": "The ids of blocklists",
+          "items": {
+            "type": "string",
+            "description": "listId"
+          }
+        },
+        "strategy": {
+          "type": "string",
+          "description": "Analyze strategy. When set to \"Shortcut\", other analysis will be skipped once any of configured blocklists was hit. When set to comprehensive, all the analysis will be done even when blocklists were hit.",
+          "$ref": "#/definitions/TextDetectStrategy"
         }
       }
     },
@@ -834,6 +868,13 @@
               "textId": {
                 "description": "Id for text batch item",
                 "type": "string"
+              },
+              "blocklistMatchResults": {
+                "description": "The details of list match",
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/TextListMatchResult"
+                }
               },
               "hateSpeechResult": {
                 "$ref": "#/definitions/TextDetectResult"
@@ -981,7 +1022,7 @@
         },
         "categories": {
           "type": "array",
-          "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
+          "description": "The categories will be analyzed, if not assigned, default categories will be analyzed",
           "items": {
             "$ref": "#/definitions/ImageCategory"
           }
@@ -1066,10 +1107,6 @@
         "category": {
           "$ref": "#/definitions/ImageCategory"
         },
-        "detected": {
-          "description": "Whether this category is detected in this input image",
-          "type": "boolean"
-        },
         "confidenceScore": {
           "description": "The confidence score of analysis result",
           "type": "number",
@@ -1132,9 +1169,9 @@
         },
         "categories": {
           "type": "array",
-          "description": "The categories will be analyzed, if not assigned, all the categories will be analyzed",
+          "description": "The categories will be analyzed, if not assigned, default the categories will be analyzed",
           "items": {
-            "$ref": "#/definitions/ImageCategoryConfig"
+            "$ref": "#/definitions/ImageCategory"
           }
         }
       }
@@ -1433,7 +1470,7 @@
       "type": "string",
       "in": "query",
       "enum": [
-        "2022-09-30-preview"
+        "2022-12-30-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersion",
