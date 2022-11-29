@@ -97,17 +97,17 @@
                     }
                 ],
                 "responses": {
-				  "200": {
-					"description": "Resource creation has completed.",
-					"schema": {
-					  "$ref": "#/definitions/ProfessionalServiceResource"
-					}
-				  },					
+                    "200": {
+                        "description": "Resource creation has completed.",
+                        "schema": {
+                            "$ref": "#/definitions/ProfessionalServiceResource"
+                        }
+                    },
                     "202": {
                         "description": "Accepted and the operation will complete asynchronously.",
-						"schema": {
-						  "$ref": "#/definitions/EmptySchema"
-						}						
+                        "schema": {
+                            "$ref": "#/definitions/EmptySchema"
+                        },
                         "headers": {
                             "Location": {
                                 "description": "The URL to check the status of the asynchronous operation.",
@@ -258,12 +258,12 @@
                     }
                 ],
                 "responses": {
-				  "200": {
-					"description": "Resource creation has completed.",
-					"schema": {
-					  "$ref": "#/definitions/ProfessionalServiceResource"
-					}
-				  },						
+                    "200": {
+                        "description": "Resource creation has completed.",
+                        "schema": {
+                            "$ref": "#/definitions/ProfessionalServiceResource"
+                        }
+                    },
                     "202": {
                         "description": "Accepted and the operation will complete asynchronously.",
                         "headers": {
@@ -403,115 +403,113 @@
                 }
             }
         },
-		"/providers/Microsoft.ProfessionalService/operations": {
-		  "get": {
-			"tags": [
-			  "ProfessionalServiceResources"
-			],
-			"operationId": "operations_List",
-			"description": "Gets all ProfessionalService operations.",
-			"produces": [
-			  "application/json"
-			],
-			"parameters": [
-			  {
-				"$ref": "#/parameters/ApiVersionParameter"
-			  }
-			],
-			"responses": {
-			  "200": {
-				"description": "OK",
-				"schema": {
-				  "$ref": "#/definitions/ProfessionalServiceRpOperationsResponseWithContinuation"
-				},
-				"default": {
-					"description": "A response indicating an error.",
-					"schema": {
-						"$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-					}
-				}
-			  }
-			},
-			"x-ms-examples": {
-			  "Get professional service operations": {
-				"$ref": "./examples/OperationsRp/GetRpOperations.json"
-			  }
-			},
-			"x-ms-pageable": {
-			  "nextLinkName": "nextLink"
-			}
-		  }
-		}		
+        "/providers/Microsoft.ProfessionalService/operations": {
+            "get": {
+                "tags": [
+                    "ProfessionalServiceResources"
+                ],
+                "operationId": "operations_List",
+                "description": "Gets all ProfessionalService operations.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ProfessionalServiceRpOperationsResponseWithContinuation"
+                        },
+                        "default": {
+                            "description": "A response indicating an error.",
+                            "schema": {
+                                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+                            }
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get professional service operations": {
+                        "$ref": "./examples/OperationsRp/GetRpOperations.json"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        }
     },
     "definitions": {
-		"EmptySchema": {
-		  "description": "Empty schema",
-		  "type": "object",
-		  "properties": {
-		  }
-		},		
-		"ProfessionalServiceRpOperationsResponseWithContinuation": {
-		  "description": "professional service operation response with continuation.",
-		  "type": "object",
-		  "properties": {
-			"nextLink": {
-			  "description": "the next link to query to get the remaining results.",
-			  "type": "string"
-			},
-			"value": {
-			  "description": "the value of response.",
-			  "x-ms-identifiers": [],
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/ProfessionalServiceRpOperation"
-			  }
-			}
-		  }
-		},		
-		"ProfessionalServiceRpOperation": {
-		  "description": "professional service operations",
-		  "type": "object",
-		  "properties": {
-			"name": {
-			  "description": "the operation name",
-			  "type": "string"
-			},
-			"display": {
-			  "description": "the operation display",
-			  "$ref": "#/definitions/ProfessionalServiceRpOperationDisplay"
-			},
-			"origin": {
-			  "description": "the operation origin",
-			  "type": "string"
-			},
-			"isDataAction": {
-			  "description": "whether the operation is a data action or not.",
-			  "type": "boolean"
-			}
-		  }
-		},
-		"ProfessionalServiceRpOperationDisplay": {
-		  "description": "professional service operation display",
-		  "type": "object",
-		  "properties": {
-			"provider": {
-			  "description": "Name of the provider for display purposes",
-			  "type": "string"
-			},
-			"resource": {
-			  "description": "Name of the resource type for display purposes",
-			  "type": "string"
-			},
-			"operation": {
-			  "description": "Name of the operation for display purposes",
-			  "type": "string"
-			},
-			"description": {
-			  "description": "Description of the operation for display purposes",
-			  "type": "string"
-			}
-		  }
-		},
+        "EmptySchema": {
+            "description": "Empty schema",
+            "type": "object",
+            "properties": {}
+        },
+        "ProfessionalServiceRpOperationsResponseWithContinuation": {
+            "description": "professional service operation response with continuation.",
+            "type": "object",
+            "properties": {
+                "nextLink": {
+                    "description": "the next link to query to get the remaining results.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "the value of response.",
+                    "x-ms-identifiers": [],
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProfessionalServiceRpOperation"
+                    }
+                }
+            }
+        },
+        "ProfessionalServiceRpOperation": {
+            "description": "professional service operations",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "the operation name",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "the operation display",
+                    "$ref": "#/definitions/ProfessionalServiceRpOperationDisplay"
+                },
+                "origin": {
+                    "description": "the operation origin",
+                    "type": "string"
+                },
+                "isDataAction": {
+                    "description": "whether the operation is a data action or not.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "ProfessionalServiceRpOperationDisplay": {
+            "description": "professional service operation display",
+            "type": "object",
+            "properties": {
+                "provider": {
+                    "description": "Name of the provider for display purposes",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "Name of the resource type for display purposes",
+                    "type": "string"
+                },
+                "operation": {
+                    "description": "Name of the operation for display purposes",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the operation for display purposes",
+                    "type": "string"
+                }
+            }
+        },
         "ProfessionalServiceResource": {
             "description": "ProfessionalService REST API resource definition.",
             "type": "object",
@@ -572,7 +570,7 @@
                 },
                 "location": {
                     "type": "string",
-					"x-ms-mutability": [ "create", "read" ],
+                    "x-ms-mutability": ["create", "read"],
                     "description": "Resource location. Only value allowed for professional service is 'global'"
                 },
                 "properties": {
@@ -702,61 +700,61 @@
             }
         }
     },
-	"parameters": {
-		"ApiVersionParameter": {
-			"name": "api-version",
-			"in": "query",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location":"client",
-			"description": "The API version to be used with the HTTP request."
-		},
-		"OperationIdParameter": {
-			"name": "operationId",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "the operation Id parameter.",
-			"x-ms-parameter-location": "method"
-		},
-		"EnrollmentBillingAccountParameter": {
-			"name": "enrollmentBillingAccount",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The enrollment billing account id."
-		},
-		"BillingAccountParameter": {
-			"name": "billingAccount",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The billing account id."
-		},
-		"BillingProfileParameter": {
-			"name": "billingProfile",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The biling profile id.",
-			"x-ms-parameter-location": "method"
-		},
-		"InvoiceSectionParameter": {
-			"name": "invoiceSection",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The invoice section id.",
-			"x-ms-parameter-location": "method"
-		},
-		"ResourceNameParameter": {
-			"name": "resourceName",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"pattern": "^[a-zA-Z0-9-_.()]{0,63}[a-zA-Z0-9-_()]$",
-			"description": "The name of the resource.",
-			"x-ms-parameter-location": "method"
-		}
-	}	
+    "parameters": {
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client",
+            "description": "The API version to be used with the HTTP request."
+        },
+        "OperationIdParameter": {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the operation Id parameter.",
+            "x-ms-parameter-location": "method"
+        },
+        "EnrollmentBillingAccountParameter": {
+            "name": "enrollmentBillingAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The enrollment billing account id."
+        },
+        "BillingAccountParameter": {
+            "name": "billingAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The billing account id."
+        },
+        "BillingProfileParameter": {
+            "name": "billingProfile",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The biling profile id.",
+            "x-ms-parameter-location": "method"
+        },
+        "InvoiceSectionParameter": {
+            "name": "invoiceSection",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The invoice section id.",
+            "x-ms-parameter-location": "method"
+        },
+        "ResourceNameParameter": {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.()]{0,63}[a-zA-Z0-9-_()]$",
+            "description": "The name of the resource.",
+            "x-ms-parameter-location": "method"
+        }
+    }
 }
