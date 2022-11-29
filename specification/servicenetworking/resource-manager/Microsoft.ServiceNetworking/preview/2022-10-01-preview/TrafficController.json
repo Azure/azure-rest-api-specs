@@ -358,6 +358,9 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
@@ -376,7 +379,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -626,6 +629,9 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
@@ -644,7 +650,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -894,6 +900,9 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
@@ -912,7 +921,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1310,6 +1319,7 @@
       "required": true,
       "description": "Name of Association",
       "type": "string",
+      "pattern":"*",
       "x-ms-parameter-location": "method"
     },
     "Frontend.frontendName": {
@@ -1318,6 +1328,7 @@
       "required": true,
       "description": "Frontends",
       "type": "string",
+      "pattern":"*",
       "x-ms-parameter-location": "method"
     },
     "TrafficController.trafficControllerName": {
@@ -1326,6 +1337,7 @@
       "required": true,
       "description": "traffic controller name for path",
       "type": "string",
+      "pattern":"*",
       "x-ms-parameter-location": "method"
     }
   }
