@@ -59,7 +59,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "deployment",
             "description": "The specification of the deployment including the model to deploy and the scale settings.",
             "required": true,
             "schema": {
@@ -492,7 +492,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "fileImport",
             "description": "The definition of the file to create including its purpose, the file name and the url of the file location.",
             "required": true,
             "schema": {
@@ -581,7 +581,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "fineTune",
             "description": "The specification of the fine-tuned model to create.\r\nRequired parameters are the base model and the training file to use.\r\nOptionally a validation file can be specified to compute validation metrics during training.\r\nHyper parameters will be set to default values or can by optionally specified.\r\nThese include batch size, learning rate multiplier, number of epochs and others.",
             "required": true,
             "schema": {
@@ -1120,6 +1120,9 @@
     "ErrorResponse": {
       "title": "ErrorResponse",
       "description": "Error response as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
+      "required": [
+        "error"
+      ],
       "type": "object",
       "properties": {
         "error": {
