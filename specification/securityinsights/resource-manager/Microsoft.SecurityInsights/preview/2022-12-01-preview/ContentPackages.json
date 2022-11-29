@@ -34,11 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{sentinelWorkspaceName}/providers/Microsoft.SecurityInsights/contentPackages": {
       "get": {
         "x-ms-examples": {
           "Get all available packages.": {
             "$ref": "./examples/ContentPackages/GetPackages.json"
+          },
+          "Get all available packages with OData filter/orderby/skip/top": {
+            "$ref": "./examples/ContentPackages/GetPackagesOData.json"
           }
         },
         "tags": [
@@ -57,7 +60,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
@@ -69,7 +72,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
           },
           {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkip"
           }
         ],
         "responses": {
@@ -91,7 +94,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{sentinelWorkspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}": {
       "get": {
         "x-ms-examples": {
           "Get a package.": {
@@ -99,10 +102,10 @@
           }
         },
         "tags": [
-          "ContentPackage"
+          "ContentPackages"
         ],
         "description": "Gets a package byt its identifier.",
-        "operationId": "ContentPackage_Get",
+        "operationId": "ContentPackages_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -114,7 +117,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
@@ -136,7 +139,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}/install": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{sentinelWorkspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}/install": {
       "post": {
         "x-ms-examples": {
           "Install a package to the workspace.": {
@@ -147,7 +150,7 @@
           "ContentPackages"
         ],
         "description": "Install a package to the workspace.",
-        "operationId": "ContentPackage_Install",
+        "operationId": "ContentPackages_Install",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -159,7 +162,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
@@ -184,7 +187,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}/uninstall": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{sentinelWorkspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}/uninstall": {
       "post": {
         "x-ms-examples": {
           "Uninstall a package from the workspace.": {
@@ -192,10 +195,10 @@
           }
         },
         "tags": [
-          "ContentPackage"
+          "ContentPackages"
         ],
         "description": "Uninstall a package from the workspace.",
-        "operationId": "ContentPackage_Uninstall",
+        "operationId": "ContentPackages_Uninstall",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -207,7 +210,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "#/parameters/PackageIdParameter"
@@ -349,8 +352,21 @@
           "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
         "packageItems": {
-          "description": "The JSON string of the package.",
-          "type": "string"
+          "description": "The JSON object of the package items.",
+          "type": "object",
+          "properties": {
+            "resources": {
+              "type": "array",
+              "description": "package items resources.",
+              "items": {
+                "$ref": "#/definitions/packageItemArmResource",
+                "description": "package item resource."
+              },
+              "x-ms-identifiers": [
+                "contentId"
+              ]
+            }
+          }
         }
       },
       "required": [
@@ -360,6 +376,45 @@
         "displayName"
       ],
       "type": "object"
+    },
+
+    "packageItemArmResource": {
+      "description": "package item ARM resource",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "package item properties",
+          "$ref": "#/definitions/packageItemProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "packageItemProperties": {
+      "description": "Describes package item properties",
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataContentId",
+          "description": "The package item id"
+        },
+        "contentKind": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataKind",
+          "description": "The package item kind"
+        },
+        "displayName": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMetadataDisplayName",
+          "description": "The display name of the package item"
+        },
+        "mainTemplate": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMainTemplateProperties",
+          "description": "The main template of the package item"
+        }
+      }
     },
     "packageInstallationProperties": {
       "type": "object",

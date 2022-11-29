@@ -34,11 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentTemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{sentinelWorkspaceName}/providers/Microsoft.SecurityInsights/contentTemplates": {
       "get": {
         "x-ms-examples": {
           "Get all installed templates.": {
             "$ref": "./examples/ContentTemplates/GetTemplates.json"
+          },
+          "Get all installed templates with OData filter/orderby/skip/top": {
+            "$ref": "./examples/ContentTemplates/GetTemplatesOData.json"
           }
         },
         "tags": [
@@ -57,7 +60,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
@@ -69,7 +72,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
           },
           {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkip"
           }
         ],
         "responses": {
@@ -91,7 +94,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentTemplates/{templateId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{sentinelWorkspaceName}/providers/Microsoft.SecurityInsights/contentTemplates/{templateId}": {
       "get": {
         "x-ms-examples": {
           "Get a template.": {
@@ -99,10 +102,10 @@
           }
         },
         "tags": [
-          "ContentTemplate"
+          "ContentTemplates"
         ],
         "description": "Gets a template byt its identifier.",
-        "operationId": "ContentTemplate_Get",
+        "operationId": "ContentTemplates_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -114,7 +117,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "#/parameters/templateIdParameter"
@@ -142,10 +145,10 @@
           }
         },
         "tags": [
-          "ContentTemplate"
+          "ContentTemplates"
         ],
         "description": "Delete an installed template.",
-        "operationId": "ContentTemplate_Delete",
+        "operationId": "ContentTemplates_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -157,7 +160,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/3.0/types.json#/parameters/WorkspaceName"
+            "$ref": "./common/ContentCommonTypes.json#/parameters/sentinelWorkspaceName"
           },
           {
             "$ref": "#/parameters/templateIdParameter"
@@ -304,8 +307,8 @@
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         },
         "mainTemplate": {
-          "description": "The JSON string of the template",
-          "type": "string"
+          "$ref": "./common/ContentCommonTypes.json#/definitions/contentMainTemplate",
+          "description": "The main template of the template"
         }
       }
     }
