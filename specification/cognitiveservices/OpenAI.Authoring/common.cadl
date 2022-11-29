@@ -70,69 +70,8 @@ enum LogLevel {
   Error: "error",
 }
 
-/*
-@doc("""
-Error response as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-@error
-model ErrorResponse {
-  @doc("""
-Error content as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-  error?: Error;
-}
-
-@doc("""
-Error content as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-model Error {
-  @doc("""
-Error codes as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-  code: ErrorCode;
-
-  @doc("The message of this error.")
-  message: string;
-
-  @doc("The location where the error happened if available.")
-  target?: string;
-
-  @doc("The error details if available.")
-  details?: Error[];
-
-  @doc("""
-Inner error as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-  innererror?: InnerError;
-}
-
-@doc("""
-Inner error as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-model InnerError {
-  @doc("""
-Inner error codes as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-  code?: InnerErrorCode;
-
-  @doc("""
-Inner error as defined in the Microsoft REST guidelines
-(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
-""")
-  innererror?: InnerError;
-}
-*/
-
-
-@doc("Accepted Response")
-model AcceptedResponse {
+@doc("Created Response")
+model CreatedResponse {
   @doc("The status code")
   @statusCode
   statusCode: 201;

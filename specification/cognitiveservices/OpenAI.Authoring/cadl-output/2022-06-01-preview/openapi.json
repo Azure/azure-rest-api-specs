@@ -105,6 +105,7 @@
               },
               "description": "The template for adding updateable properties.",
               "required": [
+                "model",
                 "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrReplaceModel<Deployment>"
@@ -166,7 +167,11 @@
                 }
               },
               "required": [
+                "status",
+                "createdAt",
+                "updatedAt",
                 "id",
+                "model",
                 "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.CustomResponseFields<(anonymous model)>"
@@ -296,7 +301,11 @@
                 }
               },
               "required": [
+                "status",
+                "createdAt",
+                "updatedAt",
                 "id",
+                "model",
                 "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<Azure.Core.(anonymous model)>"
@@ -350,7 +359,11 @@
               },
               "description": "A  resource was successfully created.",
               "required": [
+                "status",
+                "createdAt",
+                "updatedAt",
                 "id",
+                "model",
                 "scaleSettings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<Azure.Core.(anonymous model)>"
@@ -920,11 +933,6 @@
     }
   },
   "definitions": {
-    "AcceptedResponse": {
-      "type": "object",
-      "properties": {},
-      "description": "Accepted Response"
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "properties": {
@@ -1026,6 +1034,11 @@
       },
       "description": "The capabilities of a base or fine tune model."
     },
+    "CreatedResponse": {
+      "type": "object",
+      "properties": {},
+      "description": "Created Response"
+    },
     "Deployment": {
       "type": "object",
       "properties": {
@@ -1072,7 +1085,11 @@
       },
       "description": "Deployments manage the reserved quota for Azure OpenAI models and make them\navailable for inference requests.",
       "required": [
+        "status",
+        "createdAt",
+        "updatedAt",
         "id",
+        "model",
         "scaleSettings"
       ]
     },

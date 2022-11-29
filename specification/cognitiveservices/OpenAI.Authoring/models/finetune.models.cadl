@@ -7,19 +7,6 @@ using Azure.Core;
 
 namespace Azure.OpenAI;
 
-/*
-@doc("Represents a list of fine tunes.")
-model FineTuneList {
-  @doc("Defines the type of an object.")
-  @visibility("read")
-  object?: TypeDiscriminator;
-
-  @doc("The list of items.")
-  @visibility("read")
-  data?: FineTune[];
-}
-*/
-
 @doc("Fine tuning is a job to tailor a model to specific training data.")
 @resource("fine-tunes")
 model FineTune {
@@ -215,16 +202,3 @@ model FineTuneCreation {
   @doc("The hyper parameter settings used in a fine tune job.")
   hyperparams?: HyperParameters;
 }
-
-/*
-@doc("Represents a list of events.")
-model EventList {
-  @doc("Defines the type of an object.")
-  @visibility("read")
-  object?: TypeDiscriminator;
-
-  @doc("The list of items.")
-  @visibility("read")
-  data?: Event[];
-}
-*/
