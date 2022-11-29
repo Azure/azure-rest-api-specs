@@ -280,7 +280,7 @@
           "DataQuality Alerts"
         ],
         "description": "Checks if alert name is unique.",
-        "operationId": "Check_Alert_Name",
+        "operationId": "Alert_Validate",
         "consumes": [
           "application/json"
         ],
@@ -321,8 +321,8 @@
           }
         },
         "x-ms-examples": {
-          "Check_Alert_Name": {
-            "$ref": "./examples/Check_Alert_Name.json"
+          "Alert_Validate": {
+            "$ref": "./examples/Alert_Validate.json"
           }
         }
       }
@@ -1646,55 +1646,6 @@
         }
       }
     },
-    "/accounts/{accountId}/assessments/schedules/{scheduleId}/triggerinternal": {
-      "post": {
-        "tags": [
-          "DataQuality Schedule"
-        ],
-        "description": "Run Schedule Assessment Internal.",
-        "operationId": "Run_Schedule_Internal",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "description": "Get Schedule Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An error response received from the DataQuality Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Run_Schedule_Internal": {
-            "$ref": "./examples/Run_Schedule_Internal.json"
-          }
-        }
-      }
-    },
     "/accounts/{accountId}/assessments/schedules/{scheduleId}/trigger": {
       "post": {
         "tags": [
@@ -1797,141 +1748,6 @@
         "x-ms-examples": {
           "SchedulesFilter_Get": {
             "$ref": "./examples/SchedulesFilter_Get.json"
-          }
-        }
-      }
-    },
-    "/accounts/{accountId}/assessments/schedules/{scheduleId}/{triggerRunId}/status": {
-      "put": {
-        "tags": [
-          "DataQuality Schedule"
-        ],
-        "description": "Update Trigger Run Status.",
-        "operationId": "Update_Schedule_Trigger",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "triggerRunId",
-            "description": "Get Trigger Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Get Job Info",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobOpInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An error response received from the DataQuality Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update_Schedule_Trigger": {
-            "$ref": "./examples/Update_Schedule_Trigger.json"
-          }
-        }
-      }
-    },
-    "/accounts/{accountId}/assets/{assetId}/runs/{runId}/status": {
-      "put": {
-        "tags": [
-          "DataQuality Schedule"
-        ],
-        "description": "Update Manual Run Status.",
-        "operationId": "Update_Schedule_Manual_Run",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "assetId",
-            "description": "Get Asset Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "runId",
-            "description": "Get Run Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Get Job Info",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobOpInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An error response received from the DataQuality Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update_Schedule_Manual_Run": {
-            "$ref": "./examples/Update_Schedule_Manual_Run.json"
           }
         }
       }
@@ -3116,20 +2932,6 @@
           "items": {
             "$ref": "#/definitions/QueryColumn"
           }
-        }
-      }
-    },
-    "JobOpInfo": {
-      "description": "The JobOpInfo Model",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The JobOpInfo Status",
-          "type": "string"
-        },
-        "reason": {
-          "description": "The JobOpInfo Reason",
-          "type": "string"
         }
       }
     },
