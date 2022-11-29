@@ -24,8 +24,12 @@
       "properties": {
         "minimumTlsVersion": "1.2",
         "encryption": {
-          "keyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version",
-          "identityId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+            },
+            "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+          }
         }
       },
       "tags": {
@@ -65,8 +69,12 @@
           "redisVersion": "5",
           "minimumTlsVersion": "1.2",
           "encryption": {
-            "keyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version",
-            "identityId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+              },
+              "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+            }
           }
         },
         "tags": {

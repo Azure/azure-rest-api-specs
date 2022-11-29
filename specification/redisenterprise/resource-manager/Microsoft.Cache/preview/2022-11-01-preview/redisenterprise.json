@@ -1341,16 +1341,27 @@
         },
         "encryption": {
           "type": "object",
-          "description": "The key and managed identity to use for encryption at rest with customer-managed keys. Set this to an empty object to use platform-managed keys.",
+          "description": "All encryption configuration for a resource.",
           "properties": {
-            "keyUrl": {
-              "type": "string",
-              "format": "url",
-              "description": "https URL for the key, e.g. https://my-key-vault.vault.azure.net/keys/my-key/00000000"
-            },
-            "identityId": {
-              "type": "string",
-              "description": "ARM resource ID for the managed identity. This must exist in the userAssignedIdentity object of Cluster.identity"
+            "customerManagedKeyEncryption": {
+              "type": "object",
+              "description": "All Customer-managed key encryption properties for the resource. Set this to an empty object to use Microsoft-managed key encryption.",
+              "properties": {
+                "keyEncryptionKeyIdentity": {
+                  "type": "object",
+                  "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+                  "properties": {
+                    "userAssignedIdentityResourceId": {
+                      "type": "string",
+                      "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/<sub uuid>/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId."
+                    }
+                  }
+                },
+                "keyEncryptionKeyUrl": {
+                  "type": "string",
+                  "description": "Key encryption key Url, versioned or unversioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+                }
+              }
             }
           }
         },
