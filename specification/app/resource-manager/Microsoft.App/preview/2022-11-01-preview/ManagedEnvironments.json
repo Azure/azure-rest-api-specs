@@ -796,93 +796,19 @@
           "description": "retry policies",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DaprResiliencyRetryPolicy"
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
           }
         },
         "timeouts": {
           "description": "timeout policy",
-          "$ref": "#/definitions/DaprResiliencyTimeoutPolicy"
+          "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
         },
         "circuitBreakers": {
           "description": "circuit breaker policies",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DaprResiliencyCircuitBreakerPolicy"
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
           }
-        }
-      }
-    },
-    "DaprResiliencyRetryPolicy": {
-      "description": "Resiliency Policy Retries",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "policy name",
-          "type": "string"
-        },
-        "policy": {
-          "description": "back-off and retry interval strategy",
-          "type": "string"
-        },
-        "duration": {
-          "description": "time interval between retries",
-          "type": "string"
-        },
-        "maxRetries": {
-          "description": "maximum number of retries to attempt",
-          "type": "string"
-        },
-        "maxInterval": {
-          "description": "determines the maximum interval between retries",
-          "type": "string"
-        }
-      }
-    },
-    "DaprResiliencyCircuitBreakerPolicy": {
-      "description": "Resiliency Policy Breakers Policy",
-      "type": "object",
-      "properties": {
-        "maxRequests": {
-          "description": "maximum number of requests allowed to pass through",
-          "type": "string"
-        },
-        "interval": {
-          "description": "cyclical period of time used by the CB to clear its internal counts",
-          "type": "string"
-        },
-        "timeout": {
-          "description": "the period of the open state until the CB switches to half-open",
-          "type": "string"
-        },
-        "trip": {
-          "description": "A Common Expression Language (CEL) statement that is evaluated by the CB When the statement evaluates to true, the CB trips and becomes open",
-          "type": "string"
-        },
-        "circuitBreakerScope": {
-          "description": "Specify whether circuit breaking state should be scoped to an individual actor ID, all actors across the actor type, or both. Possible values include id, type, or both",
-          "type": "string"
-        },
-        "circuitBreakerCacheSize": {
-          "description": "Specify a cache size for the number of CBs to keep in memory. The value should be larger than the expected number of active actor instances.",
-          "type": "string"
-        }
-      }
-    },
-    "DaprResiliencyTimeoutPolicy": {
-      "description": "Resiliency Policy Retries",
-      "type": "object",
-      "properties": {
-        "general": {
-          "description": "timeout duration for general operations",
-          "type": "string"
-        },
-        "important": {
-          "description": "timeout duration for important operations",
-          "type": "string"
-        },
-        "largeResponse": {
-          "description": "timeout duration for large operations",
-          "type": "string"
         }
       }
     },
