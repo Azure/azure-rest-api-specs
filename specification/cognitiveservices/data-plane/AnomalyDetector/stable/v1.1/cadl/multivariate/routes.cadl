@@ -18,7 +18,7 @@ resultId returned by the BatchDetectAnomaly api.
 op GetMultivariateBatchDetectionResult(
   @format("uuid")
   @path resultId: string,
-): DetectionResult | ResponseError;
+): MultivariateDetectionResult | ResponseError;
 
 
 @post
@@ -110,7 +110,7 @@ op DetectMultivariateBatchAnomaly(
   @header "Operation-Id": string,
   @doc("Location of the detection result.")
   @header "Operation-Location": string,
-  @body body: DetectionResult,
+  @body body: MultivariateDetectionResult,
 } | ResponseError;
 
 @route("/multivariate/models/{modelId}:detect-last")
@@ -127,4 +127,4 @@ op DetectMultivariateLastAnomaly(
   @path
   modelId: string,
   @body body: MultivariateLastDetectionOptions,
-): LastDetectionResult | ResponseError;
+): MultivariateLastDetectionResult | ResponseError;
