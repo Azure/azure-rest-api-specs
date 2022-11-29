@@ -199,7 +199,7 @@
                 "tags": [
                     "EnrollmentBillingScopeProfessionalServiceResources"
                 ],
-                "operationId": "ProfessionalService_Get",
+                "operationId": "ProfessionalServiceForEnrollment_Get",
                 "description": "Gets information about the specified Professional Service for enrollment account.",
                 "produces": [
                     "application/json"
@@ -228,7 +228,7 @@
                 },
                 "x-ms-examples": {
                     "Get professional service resource": {
-                        "$ref": "./examples/ProfessionalService/ProfessionalServiceGet.json"
+                        "$ref": "./examples/ProfessionalService/ProfessionalServiceEnrollmentGet.json"
                     }
                 }
             },
@@ -236,7 +236,7 @@
                 "tags": [
                     "EnrollmentBillingScopeProfessionalServiceResources"
                 ],
-                "operationId": "ProfessionalService_CreateOrUpdate",
+                "operationId": "ProfessionalServiceForEnrollment_CreateOrUpdate",
                 "description": "Creates or updates a ProfessionalService resource for enrollment account.",
                 "produces": [
                     "application/json"
@@ -290,7 +290,7 @@
                 },
                 "x-ms-examples": {
                     "Create professional service resource": {
-                        "$ref": "./examples/ProfessionalService/ProfessionalServicePut.json"
+                        "$ref": "./examples/ProfessionalService/ProfessionalServiceEnrollmentPut.json"
                     }
                 },
                 "x-ms-long-running-operation": true,
@@ -302,7 +302,7 @@
                 "tags": [
                     "EnrollmentBillingScopeProfessionalServiceResources"
                 ],
-                "operationId": "ProfessionalService_Delete",
+                "operationId": "ProfessionalServiceForEnrollment_Delete",
                 "description": "Deletes the specified ProfessionalService for enrollment account.",
                 "parameters": [{
                         "$ref": "#/parameters/EnrollmentBillingAccountParameter"
@@ -342,7 +342,7 @@
                 },
                 "x-ms-examples": {
                     "Delete professional service resource": {
-                        "$ref": "./examples/ProfessionalService/ProfessionalServiceDelete.json"
+                        "$ref": "./examples/ProfessionalService/ProfessionalServiceEnrollmentDelete.json"
                     }
                 },
                 "x-ms-long-running-operation": true,
@@ -750,7 +750,7 @@
 			"in": "path",
 			"required": true,
 			"type": "string",
-			"pattern": "^[a-z][a-z0-9]*$",
+			"pattern": "^[a-zA-Z0-9-_.()]{0,63}[a-zA-Z0-9-_()]$",
 			"description": "The name of the resource.",
 			"x-ms-parameter-location": "method"
 		}
