@@ -1343,8 +1343,9 @@
           "type": "object",
           "description": "The key and managed identity to use for encryption at rest with customer-managed keys. Set this to an empty object to use platform-managed keys.",
           "properties": {
-            "keyId": {
+            "keyUrl": {
               "type": "string",
+              "format": "url",
               "description": "https URL for the key, e.g. https://my-key-vault.vault.azure.net/keys/my-key/00000000"
             },
             "identityId": {
