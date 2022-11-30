@@ -113,7 +113,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create Governance rule": {
+          "Create governance rule": {
             "$ref": "./examples/GovernanceRules/PutGovernanceRule_example.json"
           }
         },
@@ -335,7 +335,7 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete Governance rule": {
+          "Delete governance rule": {
             "$ref": "./examples/GovernanceRules/DeleteSecurityConnectorGovernanceRule_example.json"
           }
         },
@@ -607,14 +607,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
       "post": {
         "x-ms-examples": {
-          "Execute Governance rule": {
+          "Execute governance rule": {
             "$ref": "./examples/GovernanceRules/PostSecurityConnectorGovernanceRule_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Execute a Governance rule on the given security connector",
+        "description": "Execute a governance rule on the given security connector",
         "operationId": "GovernanceRules_RuleIdExecuteSingleSecurityConnector",
         "parameters": [
           {
@@ -662,14 +662,14 @@
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
       "post": {
         "x-ms-examples": {
-          "Execute Governance rule": {
+          "Execute governance rule": {
             "$ref": "./examples/GovernanceRules/PostManagementGroupGovernanceRule_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Execute Governance rule on the given management group",
+        "description": "Execute governance rule on the given management group",
         "operationId": "GovernanceRules_RuleIdExecuteSingleManagementGroup",
         "parameters": [
           {
@@ -985,7 +985,7 @@
         },
         "excludedScopes": {
           "type": "array",
-          "description": "Excluded Scopes, filter out the descendants of the scope (On management scopes)",
+          "description": "Excluded scopes, filter out the descendants of the scope (on management scopes)",
           "items": {
             "description": "The excluded scope",
             "type": "string"
@@ -1005,7 +1005,7 @@
           "description": "Defines whether the rule is management scope rule (master connector as a single scope or management scope)"
         },
         "ownerSource": {
-          "description": "The Owner source for the governance rule - e.g. Manually by user@contoso.com - see example",
+          "description": "The owner source for the governance rule - e.g. Manually by user@contoso.com - see example",
           "$ref": "#/definitions/GovernanceRuleOwnerSource"
         },
         "governanceEmailNotification": {
@@ -1135,34 +1135,37 @@
     "GovernanceRuleMetadata": {
       "type": "object",
       "description": "The governance rule metadata",
-      "readOnly": true,
       "properties": {
         "createdBy": {
           "description": "Governance rule Created by object id (GUID)",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdOn": {
           "description": "Governance rule creation date",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "updatedBy": {
           "description": "Governance rule last updated by object id (GUID)",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "updatedOn": {
           "description": "Governance rule last update date",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
     "ExecuteRuleStatus": {
       "type": "object",
-      "description": "Execute status of Governance rule over a given scope",
+      "description": "Execute status of governance rule over a given scope",
       "properties": {
         "operationId": {
-          "description": "Unique key for the execution of Governance rule",
+          "description": "Unique key for the execution of governance rule",
           "type": "string",
           "readOnly": true
         }
@@ -1175,7 +1178,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Governance rule key - unique key for the standard Governance rule (GUID)",
+      "description": "The governance rule key - unique key for the standard governance rule (GUID)",
       "x-ms-parameter-location": "method"
     },
     "GovernanceRuleBody": {
@@ -1194,7 +1197,7 @@
       "schema": {
         "$ref": "#/definitions/ExecuteGovernanceRuleParams"
       },
-      "description": "ExecuteGovernanceRule over a given scope",
+      "description": "Execute governance rule over a given scope",
       "x-ms-parameter-location": "method"
     },
     "SecurityConnectorName": {
@@ -1211,7 +1214,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Governance rule execution key - unique key for the execution of Governance rule",
+      "description": "The governance rule execution key - unique key for the execution of governance rule",
       "x-ms-parameter-location": "method"
     }
   }
