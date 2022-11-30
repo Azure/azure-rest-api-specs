@@ -7776,13 +7776,15 @@
     "DocumentationContract": {
       "properties": {
         "properties": {
-          "title": {
-            "type": "string",
-            "description": "documentation title."
-          },
-          "content": {
-            "type": "string",
-            "description": "Markdown documentation content."
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "documentation title."
+            },
+            "content": {
+              "type": "string",
+              "description": "Markdown documentation content."
+            }
           }
         }
       },
@@ -7796,13 +7798,15 @@
     "DocumentationUpdateContract": {
       "properties": {
         "properties": {
-          "title": {
-            "type": "string",
-            "description": "documentation title."
-          },
-          "content": {
-            "type": "string",
-            "description": "Markdown documentation content."
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "documentation title."
+            },
+            "content": {
+              "type": "string",
+              "description": "Markdown documentation content."
+            }
           }
         }
       },
@@ -7820,15 +7824,17 @@
     "WikiContract": {
       "properties": {
         "properties": {
-          "documents": {
-            "type": "array",
-            "description": "Collection wiki documents included into this wiki.",
-            "items": {
-              "$ref": "#/definitions/WikiDocumentationContract"
-            },
-            "x-ms-identifiers": [
-              "documentationId"
-            ]
+          "properties": {
+            "documents": {
+              "type": "array",
+              "description": "Collection wiki documents included into this wiki.",
+              "items": {
+                "$ref": "#/definitions/WikiDocumentationContract"
+              },
+              "x-ms-identifiers": [
+                "documentationId"
+              ]
+            }
           }
         }
       },
