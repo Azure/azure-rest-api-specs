@@ -50,6 +50,9 @@
     },
     {
       "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinks"
     }
   ],
   "paths": {
@@ -104,6 +107,43 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinks"
+        ],
+        "operationId": "PrivateLinks_ListByResourceGroup",
+        "description": "Lists all private link resources in a RedisEnterprise cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkListResult"
             }
           },
           "default": {
@@ -1356,9 +1396,16 @@
             "read",
             "create"
           ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU to create, which affects price, performance, and features."
         }
       },
       "description": "Describes the RedisEnterprise cluster",
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1429,6 +1476,10 @@
     "ClusterUpdate": {
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU to create, which affects price, performance, and features."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -1447,6 +1498,10 @@
     "ClusterUpdateProperties": {
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU to create, which affects price, performance, and features."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -1735,6 +1790,80 @@
         "name": "PrivateEndpointServiceConnectionStatusKV",
         "modelAsString": true
       }
+    },
+    "PrivateLink": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Information about private links",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLink"
+          },
+          "x-cadl-name": "PrivateLink[]",
+          "description": "The PrivateLink items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<PrivateLink>"
+        }
+      },
+      "description": "The response of a PrivateLink list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id."
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The private link resource required member names."
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The private link resource Private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link",
+      "required": [
+        "groupId",
+        "requiredMembers",
+        "requiredZoneNames"
+      ]
     },
     "PrivateLinkServiceConnectionState": {
       "type": "object",
