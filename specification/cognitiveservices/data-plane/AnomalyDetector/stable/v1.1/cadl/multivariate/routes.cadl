@@ -35,12 +35,12 @@ timestamp column.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op TrainMultivariateModel(
-  @body body: ModelInfo,
+  @body model: ModelInfo,
 ): {
   @statusCode statusCode: 201,
   @doc("Location and ID of the model.")
   @header Location: string,
-  @body body: AnomalyDetectionModel
+  @body model: AnomalyDetectionModel
   } | ResponseError;
 
 @get
@@ -103,14 +103,14 @@ op DetectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @body body: MultivariateDetectionOptions,
+  @body options: MultivariateDetectionOptions,
 ): {
   @statusCode statusCode: 202,
   @doc("Id of the detection result.")
   @header "Operation-Id": string,
   @doc("Location of the detection result.")
   @header "Operation-Location": string,
-  @body body: MultivariateDetectionResult,
+  @body result: MultivariateDetectionResult,
 } | ResponseError;
 
 @route("/multivariate/models/{modelId}:detect-last")
@@ -126,5 +126,5 @@ op DetectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @body body: MultivariateLastDetectionOptions,
+  @body options: MultivariateLastDetectionOptions,
 ): MultivariateLastDetectionResult | ResponseError;
