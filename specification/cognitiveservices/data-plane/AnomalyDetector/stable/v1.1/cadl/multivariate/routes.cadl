@@ -18,7 +18,7 @@ resultId returned by the BatchDetectAnomaly api.
 op GetMultivariateBatchDetectionResult(
   @format("uuid")
   @path resultId: string,
-): DetectionResult | ResponseError;
+): MultivariateDetectionResult | ResponseError;
 
 
 @post
@@ -34,13 +34,13 @@ a CSV file in Azure blob storage, which contains all the variables and a
 timestamp column.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
-op CreateAndTrainMultivariateModel(
-  @body body: ModelInfo,
+op TrainMultivariateModel(
+  @body modelInfo: ModelInfo,
 ): {
   @statusCode statusCode: 201,
   @doc("Location and ID of the model.")
   @header Location: string,
-  @body body: Model
+  @body result: AnomalyDetectionModel
   } | ResponseError;
 
 @get
@@ -86,7 +86,7 @@ op GetMultivariateModel(
   @doc("Model identifier.")
   @path
   modelId: string,
-): Model | ResponseError;
+): AnomalyDetectionModel | ResponseError;
 
 @route("/multivariate/models/{modelId}:detect-batch")
 @summary("Detect Multivariate Anomaly")
@@ -103,14 +103,14 @@ op DetectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @body body: DetectionRequest,
+  @body options: MultivariateDetectionOptions,
 ): {
   @statusCode statusCode: 202,
   @doc("Id of the detection result.")
   @header "Operation-Id": string,
   @doc("Location of the detection result.")
   @header "Operation-Location": string,
-  @body body: DetectionResult,
+  @body result: MultivariateDetectionResult,
 } | ResponseError;
 
 @route("/multivariate/models/{modelId}:detect-last")
@@ -126,5 +126,5 @@ op DetectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
-  @body body: LastDetectionRequest,
-): LastDetectionResult | ResponseError;
+  @body options: MultivariateLastDetectionOptions,
+): MultivariateLastDetectionResult | ResponseError;

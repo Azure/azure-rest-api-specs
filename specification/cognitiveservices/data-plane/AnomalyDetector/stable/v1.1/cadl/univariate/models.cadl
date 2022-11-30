@@ -49,7 +49,7 @@ enum TimeGranularity {
 }
 
 @doc("The request of entire or last anomaly detection.")
-model DetectRequest {
+model UnivariateDetectionOptions {
   @doc("""
 Time series data points. Points should be sorted by timestamp in ascending
 order to match the anomaly detection result. If the data is not sorted
@@ -112,7 +112,7 @@ model TimeSeriesPoint {
 }
 
 @doc("The response of entire anomaly detection.")
-model EntireDetectResponse {
+model UnivariateDetectionResult {
   @doc("""
 Frequency extracted from the series, zero means no recurrent pattern has been
 found.
@@ -188,7 +188,7 @@ model AnomalyDetectorError {
 }
 
 @doc("The response of last anomaly detection.")
-model LastDetectResponse {
+model UnivariateLastDetectionResult {
   @doc("""
 Frequency extracted from the series, zero means no recurrent pattern has been
 found.
@@ -243,7 +243,7 @@ sever the anomaly is. For normal points, the \"severity\" is always 0.
 }
 
 @doc("The request of change point detection.")
-model ChangePointDetectRequest {
+model UnivariateChangePointDetectionOptions {
   @doc("""
 Time series data points. Points should be sorted by timestamp in ascending
 order to match the change point detection result.
@@ -284,7 +284,7 @@ be accepted.
 }
 
 @doc("The response of change point detection.")
-model ChangePointDetectResponse {
+model UnivariateChangePointDetectionResult {
   @doc("""
 Frequency extracted from the series, zero means no recurrent pattern has been
 found.

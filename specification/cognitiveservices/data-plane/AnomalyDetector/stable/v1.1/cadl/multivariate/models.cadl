@@ -19,7 +19,7 @@ enum FillNAMethodKnownValues {
 @knownValues(FillNAMethodKnownValues)
 model FillNAMethod is string;
 
-enum DetectionStatus {
+enum MultivariateDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
   Ready: "READY",
@@ -48,23 +48,23 @@ enum ModelStatus {
 
 @doc("Detection results for the given resultId.")
 @resource("multivariate/detect-batch")
-model DetectionResult {
+model MultivariateDetectionResult {
   @doc("Result identifier, which is used to fetch the results of an inference call.")
   @key
   @format("uuid")
   resultId: string;
 
   @doc("Multivariate anomaly detection status.")
-  summary: DetectionResultSummary;
+  summary: MultivariateDetectionResultSummary;
 
   @doc("Detection result for each timestamp.")
   results: AnomalyState[];
 }
 
 @doc("Multivariate anomaly detection status.")
-model DetectionResultSummary {
+model MultivariateDetectionResultSummary {
   @doc("Status of detection results. One of CREATED, RUNNING, READY, and FAILED.")
-  status: DetectionStatus;
+  status: MultivariateDetectionStatus;
 
   @doc("Error message when detection is failed.")
   errors?: ErrorResponse[];
@@ -74,7 +74,7 @@ model DetectionResultSummary {
 Detection request for batch inference. This is an asynchronous inference which
 will need another API to get detection results.
 """)
-  setupInfo: DetectionRequest;
+  setupInfo: MultivariateDetectionOptions;
 }
 
 @error
@@ -110,7 +110,7 @@ model VariableState {
 Detection request for batch inference. This is an asynchronous inference which
 will need another API to get detection results.
 """)
-model DetectionRequest {
+model MultivariateDetectionOptions {
   @doc("""
 Source link to the input data to indicate an accessible Azure storage Uri,
 either pointed to an Azure blob storage folder, or pointed to a CSV file in
@@ -292,7 +292,7 @@ epoch.
 
 @doc("Response of getting a model.")
 @resource("multivariate/models")
-model Model {
+model AnomalyDetectionModel {
   @doc("Model identifier.")
   @key
   @format("uuid")
@@ -316,7 +316,7 @@ information.
 model ModelList {
   @doc("List of models.")
   @items
-  models: Model[];
+  models: AnomalyDetectionModel[];
 
   @doc("Number of trained multivariate models.")
   currentCount: int32;
@@ -329,7 +329,7 @@ model ModelList {
   nextLink?: string;
 }
 
-model LastDetectionRequest {
+model MultivariateLastDetectionOptions {
   @doc("""
 This contains the inference data, including the name, timestamps(ISO 8601) and
 values of variables.
@@ -355,7 +355,7 @@ model VariableValues {
   values: float32[];
 }
 
-model LastDetectionResult {
+model MultivariateLastDetectionResult {
   variableStates?: VariableState[];
   results?: AnomalyState[];
 }
