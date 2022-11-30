@@ -1,54 +1,60 @@
 {
-  "parameters": {
-    "billingAccount": "48cb92a8-b67e-5a1b-4c7b-7bafbb523123",
-    "billingProfile": "AYOE-3HRP-BG7-ABC",
-	"invoiceSection": "GOSZ-YOKV-PJA-ABC",
-    "resourceName": "ps_subscription",
-    "api-version": "2020-05-01",
     "parameters": {
-      "location": "global",
-      "name": "ps_subscription",
-      "properties": {
-        "publisherId": "profservicepublisher",
-        "offerId": "testprofservice",
-        "skuId": "ff051f4f-a6d9-4cbc-8d9a-2a41bd468abc",
-        "termId": "hjdtn7tfnxcy",
-        "quoteId": "quoteabc",		
-        "paymentChannelMetadata": {
-          "OrganizationId": "fe8fd1af-1f5d-47f5-9db2-600bc5c74123_2018-09-30"
+        "billingAccount": "48cb92a8-b67e-5a1b-4c7b-7bafbb523123",
+        "billingProfile": "AYOE-3HRP-BG7-ABC",
+        "invoiceSection": "GOSZ-YOKV-PJA-ABC",
+        "resourceName": "ps_subscription",
+        "api-version": "2020-05-01",
+        "parameters": {
+            "location": "global",
+            "name": "ps_subscription",
+            "properties": {
+                "publisherId": "profservicepublisher",
+                "offerId": "testprofservice",
+                "skuId": "ff051f4f-a6d9-4cbc-8d9a-2a41bd468abc",
+                "termId": "hjdtn7tfnxcy",
+                "quoteId": "quoteabc",
+                "paymentChannelMetadata": {
+                    "OrganizationId": "fe8fd1af-1f5d-47f5-9db2-600bc5c74123_2018-09-30"
+                }
+            }
         }
-      }
-    }
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/48cb92a8-b67e-5a1b-4c7b-7bafbb523123/billingProfiles/AYOE-3HRP-BG7-ABC/invoiceSections/GOSZ-YOKV-PJA-ABC/providers/Microsoft.ProfessionalService/resources/ps_subscription",
-        "name": "ps_subscription",
-        "type": "Microsoft.ProfessionalService/resources",
-        "properties": {
-          "status": "Subscribed",
-          "publisherId": "profservicepublisher",
-          "skuId": "ff051f4f-a6d9-4cbc-8d9a-2a41bd468abc",
-          "offerId": "testprofservice",
-          "quantity": null,
-          "termId": null,
-          "paymentChannelMetadata": {
-			  "billingAccountId": "34194aa3-a6c2-5306-7152-3e8a7ced1123",
-			  "organizationId": "fe8fd1af-1f5d-47f5-9db2-600bc5c74123_2018-09-30"
-          },
-          "term": {
-			  "startDate": "2022-08-28T00:00:00Z",
-			  "endDate": "2023-08-27T00:00:00Z",
-			  "termUnit": "P1Y"
-          },
-          "autoRenew": null,
-          "isFreeTrial": false,
-		  "created": "2022-08-28T08:53:36.3296017Z",
-		  "lastModified": "2022-08-28T08:56:10.8225908Z"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/providers/Microsoft.Billing/billingAccounts/48cb92a8-b67e-5a1b-4c7b-7bafbb523123/billingProfiles/AYOE-3HRP-BG7-ABC/invoiceSections/GOSZ-YOKV-PJA-ABC/providers/Microsoft.ProfessionalService/resources/ps_subscription",
+                "name": "ps_subscription",
+                "type": "Microsoft.ProfessionalService/resources",
+                "properties": {
+                    "status": "Subscribed",
+                    "publisherId": "profservicepublisher",
+                    "skuId": "ff051f4f-a6d9-4cbc-8d9a-2a41bd468abc",
+                    "offerId": "testprofservice",
+                    "quantity": null,
+                    "termId": null,
+                    "paymentChannelMetadata": {
+                        "billingAccountId": "34194aa3-a6c2-5306-7152-3e8a7ced1123",
+                        "organizationId": "fe8fd1af-1f5d-47f5-9db2-600bc5c74123_2018-09-30"
+                    },
+                    "term": {
+                        "startDate": "2022-08-28T00:00:00Z",
+                        "endDate": "2023-08-27T00:00:00Z",
+                        "termUnit": "P1Y"
+                    },
+                    "autoRenew": null,
+                    "isFreeTrial": false,
+                    "created": "2022-08-28T08:53:36.3296017Z",
+                    "lastModified": "2022-08-28T08:56:10.8225908Z"
+                },
+                "tags": {}
+            }
         },
-        "tags": {}
-      }
+        "202": {
+            "headers": {
+                "Location": "https://management.azure.com/providers/Microsoft.ProfessionalService/operationResults/cf9f95c9-af6b-41dd-a622-e6f4fc60c3ee?api-version=2020-05-01",
+                "Retry-After": "10"
+            }
+        }
     }
-  }
 }
