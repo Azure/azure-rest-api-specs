@@ -30,8 +30,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "The unique product Id",
-            "x-nullable": true
+            "description": "The unique product Id"
           },
           {
             "type": "string",
@@ -39,41 +38,36 @@
             "x-originalName": "callingApp",
             "in": "header",
             "required": true,
-            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'",
-            "x-nullable": true
+            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'"
           },
           {
             "type": "string",
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
-            "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview",
-            "x-nullable": true
+            "required": true,
+            "description": "Version of the REST API used for the request. "
           },
           {
             "type": "string",
             "name": "language",
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'",
-            "default": "en",
-            "x-nullable": true
+            "default": "en"
           },
           {
             "type": "string",
             "name": "market",
             "in": "query",
             "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "default": "US",
-            "x-nullable": true
+            "default": "US"
           },
           {
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
             "description": "Denotes whether to include stop sold or hidden plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "array",
@@ -89,21 +83,18 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a single public or preview product",
             "schema": {
               "$ref": "#/definitions/ProductSummary"
             }
           },
           "404": {
-            "x-nullable": false,
             "description": "In case product does not exist, or does not exist in given market",
             "schema": {
               "type": "string"
             }
           },
           "400": {
-            "x-nullable": false,
             "description": "In case request is malformed",
             "schema": {
               "type": "string"
@@ -149,7 +140,6 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview",
             "x-nullable": true
           },
           {
@@ -180,39 +170,37 @@
           },
           {
             "type": "string",
-            "name": "$select",
+            "name": "select",
             "in": "query",
             "description": "Selects which properties to include in the results. Example: '$select=displayName'"
           },
           {
             "type": "string",
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
           },
           {
             "type": "string",
-            "name": "$expand",
+            "name": "expand",
             "in": "query",
             "description": "Expands related entities inline. Example: '$expand=startingPrice'"
           },
           {
             "type": "string",
-            "name": "$orderBy",
+            "name": "orderby",
             "in": "query",
             "description": "Ordering expression for the results using OData notation. Example: '$orderby=displayName desc'"
           }
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of public or preview products",
             "schema": {
               "$ref": "#/definitions/CatalogApiResponse"
             }
           },
           "400": {
-            "x-nullable": false,
             "description": "In case request is malformed",
             "schema": {
               "type": "string"
