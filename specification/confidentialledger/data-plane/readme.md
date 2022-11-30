@@ -27,7 +27,7 @@ These settings apply only when `--tag=package-2022-08-13` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-08-13'
 input-file:
-  - Azure.Security.ConfidentialLedger/stable/2022-08-13/confidentialledger.json
+  - Azure.Security.ConfidentialLedgerBugBash/stable/2022-08-13/confidentialledger.json
 ```
 
 
