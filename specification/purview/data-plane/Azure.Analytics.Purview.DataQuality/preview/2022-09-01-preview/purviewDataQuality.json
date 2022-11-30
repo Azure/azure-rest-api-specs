@@ -1064,7 +1064,7 @@
           "DataQuality Schedule"
         ],
         "description": "Get Schedule Assessment.",
-        "operationId": "Schedule_Get",
+        "operationId": "ScheduleList_Get",
         "produces": [
           "application/json"
         ],
@@ -1094,14 +1094,14 @@
           }
         },
         "x-ms-examples": {
-          "Schedule_Get": {
-            "$ref": "./examples/Schedule_Get.json"
+          "ScheduleList_Get": {
+            "$ref": "./examples/ScheduleList_Get.json"
           }
         }
       }
     },
     "/accounts/{accountId}/assessments/schedules/{scheduleId}": {
-      "patch": {
+      "put": {
         "tags": [
           "DataQuality Schedule"
         ],
@@ -1167,78 +1167,12 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "DataQuality Schedule"
-        ],
-        "description": "Update Schedule Assessment.",
-        "operationId": "ScheduleMetadata_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "scheduleId",
-            "description": "Get Schedule Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "runNow",
-            "description": "Get RunNow",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Get Schedule Metadata",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScheduleMetadata"
-            }
-          },
-          "default": {
-            "description": "An error response received from the DataQuality Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduleMetadata_Update": {
-            "$ref": "./examples/ScheduleMetadata_Update.json"
-          }
-        }
-      },
       "get": {
         "tags": [
           "DataQuality Schedule"
         ],
         "description": "Get Schedule Assessment MetaData.",
-        "operationId": "ScheduleMetadata_Get",
+        "operationId": "Schedule_Get",
         "produces": [
           "application/json"
         ],
@@ -1275,8 +1209,8 @@
           }
         },
         "x-ms-examples": {
-          "ScheduleMetadata_Get": {
-            "$ref": "./examples/ScheduleMetadata_Get.json"
+          "Schedule_Get": {
+            "$ref": "./examples/Schedule_Get.json"
           }
         }
       },
@@ -1383,7 +1317,7 @@
           "DataQuality Schedule"
         ],
         "description": "Get All Schedule Assessment.",
-        "operationId": "Schedules_Get",
+        "operationId": "ScheduleNames_Get",
         "produces": [
           "application/json"
         ],
@@ -1416,8 +1350,8 @@
           }
         },
         "x-ms-examples": {
-          "Schedules_Get": {
-            "$ref": "./examples/Schedules_Get.json"
+          "ScheduleNames_Get": {
+            "$ref": "./examples/ScheduleNames_Get.json"
           }
         }
       }
