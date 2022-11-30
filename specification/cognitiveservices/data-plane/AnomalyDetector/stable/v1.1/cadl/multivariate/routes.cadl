@@ -35,12 +35,12 @@ timestamp column.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op TrainMultivariateModel(
-  @body model: ModelInfo,
+  @body modelInfo: ModelInfo,
 ): {
   @statusCode statusCode: 201,
   @doc("Location and ID of the model.")
   @header Location: string,
-  @body model: AnomalyDetectionModel
+  @body result: AnomalyDetectionModel
   } | ResponseError;
 
 @get
