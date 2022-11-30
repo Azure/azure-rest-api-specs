@@ -240,6 +240,9 @@
           "items": {
             "$ref": "#/definitions/DocumentationContract"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Page values.",
           "readOnly": true
         },
@@ -7773,24 +7776,37 @@
     "DocumentationContract": {
       "properties": {
         "properties": {
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "documentation title."
-            },
-            "content": {
-              "type": "string",
-              "description": "Markdown documentation content."
-            }
+          "title": {
+            "type": "string",
+            "description": "documentation title."
+          },
+          "content": {
+            "type": "string",
+            "description": "Markdown documentation content."
           }
         }
       },
       "allOf": [
         {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "./../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Markdown documentation details."
+    },
+    "DocumentationUpdateContract": {
+      "properties": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "documentation title."
+          },
+          "content": {
+            "type": "string",
+            "description": "Markdown documentation content."
+          }
+        }
+      },
+      "description": "Documentation update contract details."
     },
     "WikiDocumentationContract": {
       "properties": {
@@ -7804,14 +7820,15 @@
     "WikiContract": {
       "properties": {
         "properties": {
-          "properties": {
-            "documents": {
-              "type": "array",
-              "description": "Collection wiki documents included into this wiki.",
-              "items": {
-                "$ref": "#/definitions/WikiDocumentationContract"
-              }
-            }
+          "documents": {
+            "type": "array",
+            "description": "Collection wiki documents included into this wiki.",
+            "items": {
+              "$ref": "#/definitions/WikiDocumentationContract"
+            },
+            "x-ms-identifiers": [
+              "documentationId"
+            ]
           }
         }
       },
@@ -7821,6 +7838,20 @@
         }
       ],
       "description": "Wiki properties"
+    },
+    "WikiContractUpdateContract": {
+      "properties": {
+        "properties": {
+          "documents": {
+            "type": "array",
+            "description": "Collection wiki documents included into this wiki.",
+            "items": {
+              "$ref": "#/definitions/WikiDocumentationContract"
+            }
+          }
+        }
+      },
+      "description": "Wiki update contract details."
     }
   },
   "parameters": {}
