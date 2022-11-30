@@ -121,43 +121,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/privateLinkResources": {
-      "get": {
-        "tags": [
-          "PrivateLinks"
-        ],
-        "operationId": "PrivateLinks_ListByResourceGroup",
-        "description": "Lists all private link resources in a RedisEnterprise cluster.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise": {
       "get": {
         "tags": [
@@ -851,6 +814,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/import": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Import",
+        "description": "Imports RDB file(s)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "description": "Name of cluster",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "description": "Name of database",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/ImportParameters"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/listKeys": {
       "post": {
         "tags": [
@@ -954,64 +975,6 @@
             "description": "The content of the action request",
             "schema": {
               "$ref": "#/definitions/RegenerateKeyParameters"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/import": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "operationId": "Databases_Import",
-        "description": "Imports RDB file(s)",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "description": "Name of cluster",
-            "pattern": "[a-z0-9][-a-z0-9]*",
-            "minLength": 1,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "description": "Name of database",
-            "pattern": "[a-z0-9][-a-z0-9]*",
-            "minLength": 1,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "$ref": "#/definitions/ImportParameters"
             }
           }
         ],
@@ -1337,6 +1300,52 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinks"
+        ],
+        "operationId": "PrivateLinks_ListByCluster",
+        "description": "Lists all private link resources in a RedisEnterprise cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "description": "Name of cluster",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
