@@ -1354,6 +1354,18 @@
                     "userAssignedIdentityResourceId": {
                       "type": "string",
                       "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/<sub uuid>/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId."
+                    },
+                    "identityType": {
+                      "type": "string",
+                      "enum": [
+                        "systemAssignedIdentity",
+                        "userAssignedIdentity"
+                      ],
+                      "description": "Only userAssignedIdentity is supported in this API version; other types may be supported in the future",
+                      "x-ms-enum": {
+                        "name": "ManagedServiceIdentityType",
+                        "modelAsString": true
+                      }
                     }
                   }
                 },
