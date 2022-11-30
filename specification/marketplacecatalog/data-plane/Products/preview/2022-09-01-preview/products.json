@@ -88,16 +88,16 @@
               "$ref": "#/definitions/ProductSummary"
             }
           },
-          "404": {
-            "description": "In case product does not exist, or does not exist in given market",
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 404 - In case product not found.\n\n * 500 - In case of internal error.",
             "schema": {
-              "type": "string"
-            }
-          },
-          "400": {
-            "description": "In case request is malformed",
-            "schema": {
-              "type": "string"
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
@@ -200,10 +200,16 @@
               "$ref": "#/definitions/CatalogApiResponse"
             }
           },
-          "400": {
-            "description": "In case request is malformed",
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case of internal error.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         }
@@ -211,6 +217,30 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "The Catalog API error response object",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The Catalog API response details",
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      }
+    },
+    "ErrorResponseDetails": {
+      "description": "The catalog API error response details object",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code description. Such as code=InternalError",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message. Such as message=Internal server error",
+          "type": "string"
+        }
+      }
+    },
     "ProductSummary": {
       "type": "object",
       "description": "Summary description of the product",
