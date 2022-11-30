@@ -12,9 +12,13 @@ emitters:
     generateTest: true
     azureSdkForJs: true
     packageDetails:
-      name: "@azure-rest/confidentialledger-bugbash"
+      name: "@azure-rest/azure-confidentialledger-bugbash-rest"
       description: "Cadl Test Service"
       version: "1.0.0-beta.1"
   "@azure-tools/cadl-java":
     "sdk-folder": sdk/confidentialledger/azure-confidentialledgerbugbash
     namespace: com.azure.confidentialledgerbugbash
+  "@azure-tools/cadl-autorest":
+    output-file: confidentialledger.json
+    examples-directory: ./examples
+    azure-resource-provider-folder: specification/confidentialledger/data-plane

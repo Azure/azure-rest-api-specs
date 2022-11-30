@@ -20,7 +20,9 @@
         "name": "ledgerUri",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -204,7 +206,7 @@
               "required": [
                 "contents"
               ],
-              "x-cadl-name": "UpdateableProperties<DefaultKeyVisibility<LedgerEntry, read>>"
+              "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrReplaceModel<LedgerEntry>"
             }
           }
         ],
@@ -214,7 +216,8 @@
             "headers": {
               "Location": {
                 "description": "The location of an instance of LedgerEntry",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -234,7 +237,11 @@
         "description": "Get a LedgerEntry",
         "parameters": [
           {
-            "$ref": "#/parameters/LedgerEntry.transactionId"
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/CollectionIdParameter"
@@ -266,7 +273,11 @@
         "description": "Runs a custom action on LedgerEntry",
         "parameters": [
           {
-            "$ref": "#/parameters/LedgerEntry.transactionId"
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -295,7 +306,11 @@
         "description": "Runs a custom action on LedgerEntry",
         "parameters": [
           {
-            "$ref": "#/parameters/LedgerEntry.transactionId"
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -353,7 +368,12 @@
         "description": "Delete a LedgerUser",
         "parameters": [
           {
-            "$ref": "#/parameters/LedgerUser.userId"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "x-ms-skip-url-encoding": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -377,7 +397,12 @@
         "description": "Get a LedgerUser",
         "parameters": [
           {
-            "$ref": "#/parameters/LedgerUser.userId"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "x-ms-skip-url-encoding": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -404,7 +429,12 @@
         "description": "Creates or updates a LedgerUser",
         "parameters": [
           {
-            "$ref": "#/parameters/LedgerUser.userId"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "The user id, either an AAD object ID or certificate fingerprint.",
+            "x-ms-skip-url-encoding": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -421,7 +451,7 @@
                 }
               },
               "description": "The template for adding optional properties.",
-              "x-cadl-name": "OptionalProperties<UpdateableProperties<DefaultKeyVisibility<LedgerUser, read>>>"
+              "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrUpdateModel<LedgerUser>"
             }
           }
         ],
@@ -445,7 +475,7 @@
                 "userId",
                 "assignedRole"
               ],
-              "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<(anonymous model)>"
+              "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<Azure.Core.(anonymous model)>"
             }
           },
           "201": {
@@ -468,7 +498,7 @@
                 "userId",
                 "assignedRole"
               ],
-              "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<(anonymous model)>"
+              "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -551,11 +581,17 @@
         "code"
       ]
     },
+    "CollectionIdParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "The collectionId parameter definition."
+    },
     "CollectionModel": {
       "type": "object",
       "properties": {
         "collectionId": {
-          "type": "string"
+          "type": "string",
+          "description": "The collection id."
         }
       },
       "description": "Identifier for collections.",
@@ -572,13 +608,16 @@
         },
         "collectionId": {
           "type": "string",
+          "description": "The collection id.",
           "readOnly": true
         },
         "transactionId": {
           "$ref": "#/definitions/TransactionId",
+          "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
           "readOnly": true
         }
       },
+      "description": "Details about a ledger entry.",
       "required": [
         "contents",
         "collectionId",
@@ -594,7 +633,7 @@
       ],
       "x-ms-enum": {
         "name": "LedgerQueryState",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "LedgerUser": {
@@ -626,8 +665,53 @@
       ],
       "x-ms-enum": {
         "name": "LedgerUserRole",
-        "modelAsString": true
+        "modelAsString": false
       }
+    },
+    "MyFlow": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "implicit"
+          ],
+          "description": "type of auth flow"
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "enum": [
+            "https://login.microsoftonline.com/common/v2.0/oauth2/authorize"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "authorizationUrl of auth flow"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "enum": [
+            "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "tokenUrl of auth flow"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {},
+          "x-cadl-name": "[https://confidential-ledger.azure.com/.default]",
+          "description": "scopes of auth flow"
+        }
+      },
+      "description": "Define the auth flow",
+      "required": [
+        "type",
+        "authorizationUrl",
+        "tokenUrl",
+        "scopes"
+      ]
     },
     "PagedLedgerEntries": {
       "type": "object",
@@ -648,6 +732,7 @@
         "nextLink": {
           "type": "string",
           "description": "Path from which to retrieve the next page of results.",
+          "format": "uri",
           "x-cadl-name": "Rest.ResourceLocation<LedgerEntry>"
         }
       },
@@ -659,7 +744,8 @@
     },
     "ReceiptContents": {
       "type": "object",
-      "properties": {}
+      "properties": {},
+      "description": "The contents of a receipt."
     },
     "TransactionId": {
       "type": "string",
@@ -669,13 +755,16 @@
       "type": "object",
       "properties": {
         "receipt": {
-          "$ref": "#/definitions/ReceiptContents"
+          "$ref": "#/definitions/ReceiptContents",
+          "description": "The receipt contents."
         },
         "state": {
-          "$ref": "#/definitions/LedgerQueryState"
+          "$ref": "#/definitions/LedgerQueryState",
+          "description": "The state of the ledger query."
         },
         "transactionId": {
-          "$ref": "#/definitions/TransactionId"
+          "$ref": "#/definitions/TransactionId",
+          "description": "The transaction ID."
         }
       },
       "description": "A receipt certifying the transaction at the specified id.",
@@ -694,17 +783,19 @@
       ],
       "x-ms-enum": {
         "name": "TransactionState",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "TransactionStatus": {
       "type": "object",
       "properties": {
         "state": {
-          "$ref": "#/definitions/TransactionState"
+          "$ref": "#/definitions/TransactionState",
+          "description": "The transaction state."
         },
         "transactionId": {
-          "$ref": "#/definitions/TransactionId"
+          "$ref": "#/definitions/TransactionId",
+          "description": "The transaction ID."
         }
       },
       "description": "Response returned to a query for the transaction status.",
@@ -730,23 +821,6 @@
       "required": false,
       "description": "The collection id.",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "LedgerEntry.transactionId": {
-      "name": "transactionId",
-      "in": "path",
-      "required": true,
-      "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "LedgerUser.userId": {
-      "name": "userId",
-      "in": "path",
-      "required": true,
-      "description": "The user id, either an AAD object ID or certificate fingerprint.",
-      "type": "string",
-      "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     }
   }
