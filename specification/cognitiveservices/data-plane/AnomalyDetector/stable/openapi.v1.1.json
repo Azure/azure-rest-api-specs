@@ -19,7 +19,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Univariate.EntireDetectResponse"
+                  "$ref": "#/components/schemas/Univariate.UnivariateDetectionResult"
                 }
               }
             }
@@ -27,7 +27,7 @@
           "default": {
             "description": "An unexpected error response.",
             "headers": {
-              "x-ms-error": {
+              "x-ms-error-code": {
                 "required": false,
                 "schema": {
                   "type": "string"
@@ -47,7 +47,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Univariate.DetectRequest"
+                "$ref": "#/components/schemas/Univariate.UnivariateDetectionOptions"
               }
             }
           }
@@ -66,7 +66,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Univariate.LastDetectResponse"
+                  "$ref": "#/components/schemas/Univariate.UnivariateLastDetectionResult"
                 }
               }
             }
@@ -74,7 +74,7 @@
           "default": {
             "description": "An unexpected error response.",
             "headers": {
-              "x-ms-error": {
+              "x-ms-error-code": {
                 "required": false,
                 "schema": {
                   "type": "string"
@@ -94,7 +94,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Univariate.DetectRequest"
+                "$ref": "#/components/schemas/Univariate.UnivariateDetectionOptions"
               }
             }
           }
@@ -113,7 +113,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Univariate.ChangePointDetectResponse"
+                  "$ref": "#/components/schemas/Univariate.UnivariateChangePointDetectionResult"
                 }
               }
             }
@@ -121,7 +121,7 @@
           "default": {
             "description": "An unexpected error response.",
             "headers": {
-              "x-ms-error": {
+              "x-ms-error-code": {
                 "required": false,
                 "schema": {
                   "type": "string"
@@ -141,7 +141,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Univariate.ChangePointDetectRequest"
+                "$ref": "#/components/schemas/Univariate.UnivariateChangePointDetectionOptions"
               }
             }
           }
@@ -170,7 +170,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Multivariate.DetectionResult"
+                  "$ref": "#/components/schemas/Multivariate.MultivariateDetectionResult"
                 }
               }
             }
@@ -199,7 +199,7 @@
     },
     "/multivariate/models": {
       "post": {
-        "operationId": "Multivariate_CreateAndTrainMultivariateModel",
+        "operationId": "Multivariate_TrainMultivariateModel",
         "summary": "Train a Multivariate Anomaly Detection Model",
         "description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
         "parameters": [],
@@ -218,7 +218,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Multivariate.Model"
+                  "$ref": "#/components/schemas/Multivariate.AnomalyDetectionModel"
                 }
               }
             }
@@ -375,7 +375,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Multivariate.Model"
+                  "$ref": "#/components/schemas/Multivariate.AnomalyDetectionModel"
                 }
               }
             }
@@ -440,7 +440,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Multivariate.DetectionResult"
+                  "$ref": "#/components/schemas/Multivariate.MultivariateDetectionResult"
                 }
               }
             }
@@ -469,7 +469,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Multivariate.DetectionRequest"
+                "$ref": "#/components/schemas/Multivariate.MultivariateDetectionOptions"
               }
             }
           }
@@ -498,7 +498,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Multivariate.LastDetectionResult"
+                  "$ref": "#/components/schemas/Multivariate.MultivariateLastDetectionResult"
                 }
               }
             }
@@ -527,7 +527,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Multivariate.LastDetectionRequest"
+                "$ref": "#/components/schemas/Multivariate.MultivariateLastDetectionOptions"
               }
             }
           }
@@ -542,7 +542,7 @@
   ],
   "components": {
     "schemas": {
-      "Univariate.DetectRequest": {
+      "Univariate.UnivariateDetectionOptions": {
         "type": "object",
         "properties": {
           "series": {
@@ -600,7 +600,7 @@
           "series"
         ]
       },
-      "Univariate.EntireDetectResponse": {
+      "Univariate.UnivariateDetectionResult": {
         "type": "object",
         "properties": {
           "period": {
@@ -698,7 +698,7 @@
         },
         "description": "Error information returned by the API."
       },
-      "Univariate.LastDetectResponse": {
+      "Univariate.UnivariateLastDetectionResult": {
         "type": "object",
         "properties": {
           "period": {
@@ -756,7 +756,7 @@
           "isPositiveAnomaly"
         ]
       },
-      "Univariate.ChangePointDetectRequest": {
+      "Univariate.UnivariateChangePointDetectionOptions": {
         "type": "object",
         "properties": {
           "series": {
@@ -802,7 +802,7 @@
           "granularity"
         ]
       },
-      "Univariate.ChangePointDetectResponse": {
+      "Univariate.UnivariateChangePointDetectionResult": {
         "type": "object",
         "properties": {
           "period": {
@@ -831,7 +831,7 @@
         },
         "description": "The response of change point detection."
       },
-      "Multivariate.DetectionResult": {
+      "Multivariate.MultivariateDetectionResult": {
         "type": "object",
         "properties": {
           "resultId": {
@@ -842,7 +842,7 @@
           "summary": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Multivariate.DetectionResultSummary"
+                "$ref": "#/components/schemas/Multivariate.MultivariateDetectionResultSummary"
               }
             ],
             "description": "Multivariate anomaly detection status."
@@ -956,7 +956,7 @@
           "endTime"
         ]
       },
-      "Multivariate.Model": {
+      "Multivariate.AnomalyDetectionModel": {
         "type": "object",
         "properties": {
           "modelId": {
@@ -996,9 +996,9 @@
           "models": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Multivariate.Model"
+              "$ref": "#/components/schemas/Multivariate.AnomalyDetectionModel"
             },
-            "x-cadl-name": "Multivariate.Model[]",
+            "x-cadl-name": "Multivariate.AnomalyDetectionModel[]",
             "description": "List of models."
           },
           "currentCount": {
@@ -1023,7 +1023,7 @@
           "maxCount"
         ]
       },
-      "Multivariate.DetectionRequest": {
+      "Multivariate.MultivariateDetectionOptions": {
         "type": "object",
         "properties": {
           "dataSource": {
@@ -1054,7 +1054,7 @@
           "endTime"
         ]
       },
-      "Multivariate.LastDetectionRequest": {
+      "Multivariate.MultivariateLastDetectionOptions": {
         "type": "object",
         "properties": {
           "variables": {
@@ -1076,7 +1076,7 @@
           "topContributorCount"
         ]
       },
-      "Multivariate.LastDetectionResult": {
+      "Multivariate.MultivariateLastDetectionResult": {
         "type": "object",
         "properties": {
           "variableStates": {
@@ -1209,13 +1209,13 @@
           "InvalidImputeFixedValue"
         ]
       },
-      "Multivariate.DetectionResultSummary": {
+      "Multivariate.MultivariateDetectionResultSummary": {
         "type": "object",
         "properties": {
           "status": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Multivariate.DetectionStatus"
+                "$ref": "#/components/schemas/Multivariate.MultivariateDetectionStatus"
               }
             ],
             "description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED."
@@ -1238,7 +1238,7 @@
           "setupInfo": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Multivariate.DetectionRequest"
+                "$ref": "#/components/schemas/Multivariate.MultivariateDetectionOptions"
               }
             ],
             "description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results."
@@ -1250,7 +1250,7 @@
           "setupInfo"
         ]
       },
-      "Multivariate.DetectionStatus": {
+      "Multivariate.MultivariateDetectionStatus": {
         "type": "string",
         "enum": [
           "CREATED",
