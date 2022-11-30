@@ -948,7 +948,7 @@
           "readOnly": true
         },
         "model": {
-          "description": "The OpenAI model to deploy. Can be a base model or a fine tune.",
+          "description": "The OpenAI model identifier (model-id) to deploy. Can be a base model or a fine tune.",
           "minLength": 1,
           "type": "string"
         },
@@ -988,7 +988,7 @@
       "type": "object",
       "properties": {
         "model": {
-          "description": "The new OpenAI model to be used for this deployment. Can be a base model or a fine tune.",
+          "description": "The new OpenAI model identifier (model-id) to be used for this deployment. Can be a base model or a fine tune.",
           "type": "string"
         },
         "scale_settings": {
@@ -1320,30 +1320,30 @@
           "readOnly": true
         },
         "model": {
-          "description": "The identifier of the base model used for the fine-tune.",
+          "description": "The identifier (model-id) of the base model used for the fine-tune.",
           "minLength": 1,
           "type": "string"
         },
         "fine_tuned_model": {
-          "description": "The identifier of the resulting fine tuned model. This property is only populated for successfully completed fine-tune runs.\r\nUse this identifier to create a deployment for inferencing.",
+          "description": "The identifier (model-id) of the resulting fine tuned model. This property is only populated for successfully completed fine-tune runs.\r\nUse this identifier to create a deployment for inferencing.",
           "type": "string"
         },
         "training_files": {
-          "description": "The files that are used for training the fine tuned model.",
+          "description": "The file identities (file-id) that are used for training the fine tuned model.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
           }
         },
         "validation_files": {
-          "description": "The files that are used to evaluate the fine tuned model during training.",
+          "description": "The file identities (file-id) that are used to evaluate the fine tuned model during training.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
           }
         },
         "result_files": {
-          "description": "The result files containing training and evaluation metrics in csv format.\r\nThe file is only available for successfully completed fine-tune runs.",
+          "description": "The result file identities (file-id) containing training and evaluation metrics in csv format.\r\nThe file is only available for successfully completed fine-tune runs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
@@ -1386,17 +1386,17 @@
       "type": "object",
       "properties": {
         "model": {
-          "description": "The identifier of the base model used for this fine-tune.",
+          "description": "The identifier (model-id) of the base model used for this fine-tune.",
           "minLength": 1,
           "type": "string"
         },
         "training_file": {
-          "description": "The file that is used for training this fine tuned model.",
+          "description": "The file identity (file-id) that is used for training this fine tuned model.",
           "minLength": 1,
           "type": "string"
         },
         "validation_file": {
-          "description": "The file that is used to evaluate the fine tuned model during training.",
+          "description": "The file identity (file-id) that is used to evaluate the fine tuned model during training.",
           "type": "string"
         },
         "suffix": {
@@ -1666,11 +1666,11 @@
           "readOnly": true
         },
         "model": {
-          "description": "The base model ID if this is a fine tune model; otherwise `null`.",
+          "description": "The base model identity (model-id) if this is a fine tune model; otherwise `null`.",
           "type": "string"
         },
         "fine_tune": {
-          "description": "The fine tune job ID if this is a fine tune model; otherwise `null`.",
+          "description": "The fine tune job identity (fine-tune-id) if this is a fine tune model; otherwise `null`.",
           "type": "string"
         },
         "capabilities": {
