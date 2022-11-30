@@ -937,9 +937,10 @@
       "type": "string",
       "x-nullable": false,
       "enum": [
-        "Adult",
-        "Racy",
-        "Gory"
+        "HateSpeech",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
       ],
       "x-ms-enum": {
         "name": "ImageCategory",
@@ -994,9 +995,6 @@
           "description": "The confidence score of analysis result",
           "type": "number",
           "format": "float"
-        },
-        "riskLevel": {
-          "$ref": "#/definitions/RiskLevel"
         }
       }
     },
@@ -1004,13 +1002,16 @@
       "description": "The analysis response of the image",
       "type": "object",
       "properties": {
-        "adultResult": {
+        "hateSpeechResult": {
           "$ref": "#/definitions/ImageDetectResult"
         },
-        "racyResult": {
+        "selfHarmResult": {
           "$ref": "#/definitions/ImageDetectResult"
         },
-        "goryResult": {
+        "sexualResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "violenceResult": {
           "$ref": "#/definitions/ImageDetectResult"
         }
       }
@@ -1099,13 +1100,16 @@
                 "description": "imageId of individual image in batch",
                 "type": "string"
               },
-              "adultResult": {
+              "hateSpeechResult": {
                 "$ref": "#/definitions/ImageDetectResult"
               },
-              "racyResult": {
+              "selfHarmResult": {
                 "$ref": "#/definitions/ImageDetectResult"
               },
-              "goryResult": {
+              "sexualResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "violenceResult": {
                 "$ref": "#/definitions/ImageDetectResult"
               },
               "error": {
