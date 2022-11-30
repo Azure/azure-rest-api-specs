@@ -753,6 +753,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/forceUnlink": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ForceUnlink",
+        "description": "Forcibly unlinks one or more databasse from a replication group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "description": "Name of cluster",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "description": "Name of database",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/ForceUnlinkParameters"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/listKeys": {
       "post": {
         "tags": [
@@ -1487,6 +1545,23 @@
       "description": "Export request. Parameters for a Redis Enterprise export operation.",
       "required": [
         "sasUris"
+      ]
+    },
+    "ForceUnlinkParameters": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The resource IDs of the database resources to be unlinked"
+        }
+      },
+      "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation.",
+      "required": [
+        "ids"
       ]
     },
     "ImportParameters": {
