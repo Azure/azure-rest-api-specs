@@ -1,0 +1,143 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "accountId": "9af94315-8b88-4b7c-9469-3ac69a406652",
+    "api-version": "2022-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "values": [
+          {
+            "scheduleId": "13c9f195-92b9-43bc-af4b-1db14fdf5560",
+            "scheduleName": "qwe",
+            "description": null,
+            "recurrence": null,
+            "datasources": [
+              {
+                "datasourceKind": "AdlsGen2",
+                "datasourceName": "dqdemosource",
+                "includes": [
+                  "https://dqdemosource.dfs.core.windows.net/adbdelta"
+                ],
+                "properties": {},
+                "credentials": null
+              }
+            ],
+            "scheduleStatus": "RUNNING",
+            "runOnce": true
+          },
+          {
+            "scheduleId": "8df2897f-868a-4e27-a6ea-20867d898dd0",
+            "scheduleName": "cptest",
+            "description": null,
+            "recurrence": null,
+            "datasources": [
+              {
+                "datasourceKind": "AdlsGen2",
+                "datasourceName": "dqdemosource",
+                "includes": [
+                  "https://dqdemosource.dfs.core.windows.net/parquet"
+                ],
+                "properties": {},
+                "credentials": null
+              }
+            ],
+            "scheduleStatus": "RUNNING",
+            "runOnce": true
+          },
+          {
+            "scheduleId": "3aadb5ac-b306-4cb3-ac98-50b89ee57b4f",
+            "scheduleName": "test",
+            "description": null,
+            "recurrence": {
+              "frequency": "Month",
+              "interval": 1,
+              "startTime": "2022-09-08T03:05:00Z",
+              "endTime": "2022-10-01T00:00:00Z",
+              "schedule": {
+                "monthDays": [
+                  2
+                ]
+              },
+              "timezone": "UTC"
+            },
+            "datasources": [
+              {
+                "datasourceKind": "AdlsGen2",
+                "datasourceName": "dqdemosource",
+                "includes": [
+                  "https://dqdemosource.dfs.core.windows.net/100k-assets",
+                  "https://dqdemosource.dfs.core.windows.net/10k-assets",
+                  "https://dqdemosource.dfs.core.windows.net/2m-resourceset-asset",
+                  "https://dqdemosource.dfs.core.windows.net/2m-resourceset-working",
+                  "https://dqdemosource.dfs.core.windows.net/2m-utf-csv",
+                  "https://dqdemosource.dfs.core.windows.net/2million-20percent",
+                  "https://dqdemosource.dfs.core.windows.net/2milliondata",
+                  "https://dqdemosource.dfs.core.windows.net/2mresorceset",
+                  "https://dqdemosource.dfs.core.windows.net/adbdelta",
+                  "https://dqdemosource.dfs.core.windows.net/alerts-and-notifications",
+                  "https://dqdemosource.dfs.core.windows.net/bracecont",
+                  "https://dqdemosource.dfs.core.windows.net/catalogscanbehavior",
+                  "https://dqdemosource.dfs.core.windows.net/csv",
+                  "https://dqdemosource.dfs.core.windows.net/csvparservalidation",
+                  "https://dqdemosource.dfs.core.windows.net/csvtest",
+                  "https://dqdemosource.dfs.core.windows.net/csvtestdata",
+                  "https://dqdemosource.dfs.core.windows.net/customparser",
+                  "https://dqdemosource.dfs.core.windows.net/data1",
+                  "https://dqdemosource.dfs.core.windows.net/dataquality",
+                  "https://dqdemosource.dfs.core.windows.net/dataquality-acl",
+                  "https://dqdemosource.dfs.core.windows.net/deltadq",
+                  "https://dqdemosource.dfs.core.windows.net/deltatablelookup",
+                  "https://dqdemosource.dfs.core.windows.net/deltatestdata",
+                  "https://dqdemosource.dfs.core.windows.net/demo",
+                  "https://dqdemosource.dfs.core.windows.net/devtest",
+                  "https://dqdemosource.dfs.core.windows.net/dqscheduling",
+                  "https://dqdemosource.dfs.core.windows.net/dqsvk",
+                  "https://dqdemosource.dfs.core.windows.net/dqtestcontainer",
+                  "https://dqdemosource.dfs.core.windows.net/dqtestsource",
+                  "https://dqdemosource.dfs.core.windows.net/e2e",
+                  "https://dqdemosource.dfs.core.windows.net/hierarchicalschema",
+                  "https://dqdemosource.dfs.core.windows.net/karthike2etest",
+                  "https://dqdemosource.dfs.core.windows.net/mov",
+                  "https://dqdemosource.dfs.core.windows.net/new-rule-model-coverage",
+                  "https://dqdemosource.dfs.core.windows.net/notificationstests",
+                  "https://dqdemosource.dfs.core.windows.net/parquet",
+                  "https://dqdemosource.dfs.core.windows.net/parquettestdata",
+                  "https://dqdemosource.dfs.core.windows.net/performance",
+                  "https://dqdemosource.dfs.core.windows.net/prod-stress-test-data-quality",
+                  "https://dqdemosource.dfs.core.windows.net/prodtestdata",
+                  "https://dqdemosource.dfs.core.windows.net/profiling",
+                  "https://dqdemosource.dfs.core.windows.net/regexpattern",
+                  "https://dqdemosource.dfs.core.windows.net/resourcesetdataset",
+                  "https://dqdemosource.dfs.core.windows.net/rowswitherror",
+                  "https://dqdemosource.dfs.core.windows.net/rsundercontainer",
+                  "https://dqdemosource.dfs.core.windows.net/sample",
+                  "https://dqdemosource.dfs.core.windows.net/sample2",
+                  "https://dqdemosource.dfs.core.windows.net/sourceviewsink",
+                  "https://dqdemosource.dfs.core.windows.net/spark",
+                  "https://dqdemosource.dfs.core.windows.net/spark2",
+                  "https://dqdemosource.dfs.core.windows.net/specialcharacter",
+                  "https://dqdemosource.dfs.core.windows.net/tablelookup",
+                  "https://dqdemosource.dfs.core.windows.net/testwildcards",
+                  "https://dqdemosource.dfs.core.windows.net/trendanalysis",
+                  "https://dqdemosource.dfs.core.windows.net/trends",
+                  "https://dqdemosource.dfs.core.windows.net/twomillionresourceset",
+                  "https://dqdemosource.dfs.core.windows.net/uniq",
+                  "https://dqdemosource.dfs.core.windows.net/unrelated",
+                  "https://dqdemosource.dfs.core.windows.net/viewsource",
+                  "https://dqdemosource.dfs.core.windows.net/viewtest"
+                ],
+                "properties": {},
+                "credentials": null
+              }
+            ],
+            "scheduleStatus": "RUNNING",
+            "runOnce": false
+          }
+        ],
+        "count": 3
+      }
+    }
+  }
+}
