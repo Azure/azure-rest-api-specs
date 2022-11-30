@@ -108,7 +108,7 @@
             "name": "debug",
             "in": "query",
             "type": "string",
-            "description": "This parameter controls debug response information for semantic queries, and allows the user to pass in a combination of flags like so: 'Semantic | All'. The values 'semantic' or 'all' are only valid when the query type is 'semantic'.",
+            "description": "This parameter controls debug response information and allows the user to pass in a combination of flags like so: 'Semantic | All'. The values 'semantic' or 'all' are only valid when the query type is 'semantic'. Defaults to 'Disabled'.",
             "x-ms-client-name": "Debug",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
@@ -279,7 +279,7 @@
                 {
                   "value": "partial",
                   "name": "Partial",
-                  "description": "If there is an exception during semantic processing, still return partial results. Partial result content depends on what semantic step failed and the reason for the failure."
+                  "description": "If there is an exception during semantic processing, return partial results with a 206 status code. Partial result content depends on what semantic step failed and the reason for the failure."
                 }
               ]
             },
@@ -1346,7 +1346,11 @@
     "DocumentDebugInfo": {
       "x-ms-client-name": "DocumentDebugInfo",
       "description": "Debug info for this document.",
-      "$ref": "#/definitions/DocumentSemanticDebugInfo"
+      "properties": {
+        "semantic": {
+          "$ref": "#/definitions/DocumentSemanticDebugInfo"
+        }
+      }
     },
     "SearchDocumentsResult": {
       "properties": {
@@ -2376,7 +2380,7 @@
         },
         "semanticErrorHandling": {
           "type": "string",
-          "description": "A value that specifies what response to return when semantic processing fails."
+          "description": "A value that specifies whether to fail the request when semantic processing is unavailable or to instead return the base results."
         },
         "semanticMaxWaitInMilliseconds": {
           "type": "integer",
