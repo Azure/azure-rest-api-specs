@@ -17,8 +17,8 @@ interface Operations {
   @route("/deployments/{deploymentId}/completions")
   @post
   CompletionsCreate is Foundations.Operation<
-    Request.CompletionsCreate,
-    Response.CompletionsCreate
+    CompletionsCreateRequest,
+    CompletionsCreateResponse
   >;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
