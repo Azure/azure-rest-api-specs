@@ -2355,8 +2355,11 @@
           "AnalyticsConnectors"
         ],
         "description": "Patch Analytics Connector Service details.",
-        "operationId": "AnalyticsConnector_Update",
+        "operationId": "AnalyticsConnector_Patch",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Update a Analytics Connector Service": {
             "$ref": "./examples/analyticsconnectors/AnalyticsConnectors_Patch.json"
