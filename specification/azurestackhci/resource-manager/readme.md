@@ -289,7 +289,15 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2020-11-01-preview/virtualMachines.json
   - Microsoft.AzureStackHCI/preview/2020-11-01-preview/virtualNetworks.json
   - Microsoft.AzureStackHCI/preview/2020-11-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/azurestackhci.json
+```
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2020-10-01/azurestackhci.json
+  - Microsoft.AzureStackHCI/stable/2021-10-01/clusters.json
 ```
 
 ### Tag: package-2020-03-01-preview
