@@ -110,6 +110,23 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2022-11-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2022-11-01-preview/updates.json
 ```
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-10-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updates.json
+```
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
