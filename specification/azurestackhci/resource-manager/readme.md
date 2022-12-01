@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-05
+tag: package-2022-10
 ```
 
 ## Suppression
@@ -42,21 +42,63 @@ directive:
       - clusters.json
       - extensions.json
       - operations.json
+      - offers.json
+      - publishers.json
+      - skus.json
+      - updateRuns.json
+      - updateSummaries.json
+      - updates.json
+      - galleryImages.json
+      - networkInterfaces.json
+      - virtualHardDisks.json
+      - virtualMachines.json
+      - virtualNetworks.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-10-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2022-10-01/updates.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-09-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-09-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-09-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-09-01/operations.json
+```
 
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.AzureStackHCI/stable/2022-05-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2022-05-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2022-05-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-05-01/operations.json
 ```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -69,6 +111,19 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
 ```
 
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualNetworks.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/operations.json
+```
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -79,6 +134,25 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-01-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2022-01-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-01-01/operations.json
+```
+
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2021-09
@@ -134,10 +208,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

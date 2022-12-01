@@ -718,6 +718,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
@@ -1168,7 +1173,7 @@
         },
         "parent": {
           "title": "Parent",
-          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "$ref": "#/definitions/ParentGroupBagInfo",
           "x-nullable": true
         },
         "state": {
@@ -1571,6 +1576,24 @@
         "id": {
           "type": "string",
           "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "ParentGroupBagInfo": {
+      "description": "The ID, name and displayName of the parent management group.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the parent management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the parent management group."
         }
       }
     },

@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2022-07-01-preview"
+    "version": "2023-05-01"
   },
   "paths": {},
   "definitions": {
@@ -193,7 +193,7 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "TaskState"
+            "name": "State"
           }
         }
       },
@@ -270,7 +270,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "JobState"
+            "name": "State"
           }
         },
         "errors": {
@@ -345,9 +345,27 @@
     "RequestStatistics": {
       "type": "object",
       "required": [
+        "documentsCount",
+        "validDocumentsCount",
+        "erroneousDocumentsCount",
         "transactionsCount"
       ],
       "properties": {
+        "documentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents submitted in the request."
+        },
+        "validDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
         "transactionsCount": {
           "type": "integer",
           "format": "int64",
@@ -720,6 +738,98 @@
           "format": "int32",
           "maximum": 10,
           "minimum": 1
+        }
+      }
+    },
+    "Sentiment": {
+      "type": "string",
+      "description": "Predicted sentiment.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "TextSentiment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "positive",
+            "description": "Positive sentiment."
+          },
+          {
+            "value": "neutral",
+            "description": "Neutral sentiment."
+          },
+          {
+            "value": "negative",
+            "description": "Negative sentiment."
+          },
+          {
+            "value": "mixed",
+            "description": "Mixed sentiment."
+          }
+        ]
+      }
+    },
+    "SentimentConfidenceScores": {
+      "type": "object",
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "neutral": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
+    },
+    "AbstractiveSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for an Abstractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType"
+        }
+      }
+    },
+    "SummaryContext": {
+      "type": "object",
+      "description": "The context of the summary.",
+      "required": [
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
         }
       }
     }

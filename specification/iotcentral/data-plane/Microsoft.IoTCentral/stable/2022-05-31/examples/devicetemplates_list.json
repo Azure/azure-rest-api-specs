@@ -1,0 +1,208 @@
+{
+  "title": "List device templates",
+  "description": "List device templates that are currently published in the application. This operation does not return device templates in draft state.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "2022-05-31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "etag": "\"~FeoA18iSWEoC7QR3Xf33BmlVQoXvM6toNHamHuGdBs8=\"",
+            "displayName": "Test Contoso Definition",
+            "capabilityModel": {
+              "@id": "dtmi:contoso:testCapabilityModel;1",
+              "@type": "Interface",
+              "contents": [
+                {
+                  "@id": "dtmi:contoso:testCapabilityModel:settings;1",
+                  "@type": "Component",
+                  "displayName": "Settings",
+                  "name": "settings",
+                  "schema": {
+                    "@id": "dtmi:contoso:settings;1",
+                    "@type": "Interface",
+                    "contents": [
+                      {
+                        "@type": "Telemetry",
+                        "displayName": "Test Component Telemetry",
+                        "name": "testComponentTelemetry",
+                        "schema": "double"
+                      },
+                      {
+                        "@type": [
+                          "Property",
+                          "Initialized"
+                        ],
+                        "displayName": "Temperature Threshold",
+                        "name": "threshold",
+                        "schema": "double",
+                        "writable": true,
+                        "initialValue": "100"
+                      }
+                    ],
+                    "displayName": "Settings"
+                  }
+                },
+                {
+                  "@type": [
+                    "Telemetry",
+                    "Humidity"
+                  ],
+                  "displayName": "Humidity",
+                  "name": "humidity",
+                  "schema": "double"
+                },
+                {
+                  "@type": [
+                    "Property",
+                    "Cloud"
+                  ],
+                  "displayName": "Online Status",
+                  "name": "status",
+                  "schema": {
+                    "@type": "Enum",
+                    "enumValues": [
+                      {
+                        "displayName": "Offline",
+                        "enumValue": 1,
+                        "name": "offline"
+                      },
+                      {
+                        "displayName": "Online",
+                        "enumValue": 2,
+                        "name": "online"
+                      }
+                    ],
+                    "valueSchema": "integer"
+                  }
+                }
+              ],
+              "displayName": "Test Capability Model",
+              "extends": [
+                {
+                  "@id": "dtmi:contoso:testInterface;1",
+                  "@type": [
+                    "Interface",
+                    "NamedInterface"
+                  ],
+                  "contents": [
+                    {
+                      "@type": "Telemetry",
+                      "displayName": "Test Telemetry",
+                      "name": "testTelemetry",
+                      "schema": "double"
+                    },
+                    {
+                      "@type": [
+                        "EventValue",
+                        "Telemetry",
+                        "Event"
+                      ],
+                      "displayName": "Test Event",
+                      "name": "testEvent",
+                      "schema": "integer",
+                      "severity": "warning"
+                    },
+                    {
+                      "@type": [
+                        "Initialized",
+                        "Property"
+                      ],
+                      "displayName": "Test Property",
+                      "name": "testProperty",
+                      "schema": "string",
+                      "writable": true,
+                      "initialValue": "initialValue1"
+                    },
+                    {
+                      "@type": "Property",
+                      "displayName": "Test Read-Only Property",
+                      "name": "testReadOnly",
+                      "schema": "string"
+                    },
+                    {
+                      "@type": "Property",
+                      "displayName": "Test Complex Property",
+                      "name": "testComplex",
+                      "schema": {
+                        "@id": "dtmi:contoso:testComplex;1",
+                        "@type": "Object",
+                        "displayName": "Object",
+                        "fields": [
+                          {
+                            "displayName": "First",
+                            "name": "first",
+                            "schema": "string"
+                          },
+                          {
+                            "displayName": "Second",
+                            "name": "second",
+                            "schema": "string"
+                          }
+                        ]
+                      },
+                      "writable": true
+                    },
+                    {
+                      "@type": "Command",
+                      "commandType": "synchronous",
+                      "displayName": "Test Command",
+                      "name": "testCommand",
+                      "request": {
+                        "@type": "CommandPayload",
+                        "displayName": "Test Request",
+                        "name": "testRequest",
+                        "schema": "double"
+                      },
+                      "response": {
+                        "@type": "CommandPayload",
+                        "displayName": "Test Response",
+                        "name": "testResponse",
+                        "schema": "geopoint"
+                      }
+                    },
+                    {
+                      "@type": "Property",
+                      "displayName": "Test Enum",
+                      "name": "testEnum",
+                      "schema": {
+                        "@id": "dtmi:contoso:testEnum;1",
+                        "@type": "Enum",
+                        "displayName": "Enum",
+                        "enumValues": [
+                          {
+                            "displayName": "First",
+                            "enumValue": 1,
+                            "name": "first"
+                          },
+                          {
+                            "displayName": "Second",
+                            "enumValue": 2,
+                            "name": "second"
+                          }
+                        ],
+                        "valueSchema": "integer"
+                      },
+                      "writable": true
+                    }
+                  ],
+                  "displayName": "Test Interface",
+                  "name": "contoso_testInterface"
+                }
+              ]
+            },
+            "@id": "dtmi:modelDefinition:contoso;1",
+            "@type": [
+              "ModelDefinition",
+              "DeviceModel"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
