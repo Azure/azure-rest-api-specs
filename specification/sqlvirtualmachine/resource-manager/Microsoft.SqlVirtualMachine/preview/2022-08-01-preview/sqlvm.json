@@ -1868,9 +1868,9 @@
           "$ref": "#/definitions/StorageConfigurationSettings",
           "description": "Storage Configuration Settings."
         },
-        "troubleshootStatus": {
-          "$ref": "#/definitions/TroubleshootStatus",
-          "description": "Troubleshoot status",
+        "troubleshootingStatus": {
+          "$ref": "#/definitions/TroubleshootingStatus",
+          "description": "Troubleshooting status",
           "readOnly": true
         },
         "assessmentSettings": {
@@ -2158,7 +2158,7 @@
         }
       }
     },
-    "TroubleshootStatus": {
+    "TroubleshootingStatus": {
       "description": "Status of last troubleshooting operation on this SQL VM",
       "type": "object",
       "properties": {
@@ -2199,7 +2199,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/TroubleshootAdditionalProperties",
+          "$ref": "#/definitions/TroubleshootingAdditionalProperties",
           "description": "Troubleshooting properties",
           "readOnly": true
         }
@@ -2439,13 +2439,13 @@
         }
       }
     },
-    "TroubleshootAdditionalProperties": {
-      "description": "SQL VM Troubleshoot additional properties.",
+    "TroubleshootingAdditionalProperties": {
+      "description": "SQL VM Troubleshooting additional properties.",
       "type": "object",
       "properties": {
-        "unhealthyReplicaProperties": {
-          "$ref": "#/definitions/UnhealthyReplicaProperties",
-          "description": "The properties describing unhealthy replica"
+        "unhealthyReplicaInfo": {
+          "$ref": "#/definitions/UnhealthyReplicaInfo",
+          "description": "The unhealthy replica information"
         }
       }
     },
@@ -2490,8 +2490,8 @@
         }
       }
     },
-    "UnhealthyReplicaProperties": {
-      "description": "SQL VM Troubleshoot UnhealthyReplica scenario properties.",
+    "UnhealthyReplicaInfo": {
+      "description": "SQL VM Troubleshoot UnhealthyReplica scenario information.",
       "type": "object",
       "properties": {
         "availabilityGroupName": {
@@ -2571,7 +2571,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/TroubleshootAdditionalProperties",
+          "$ref": "#/definitions/TroubleshootingAdditionalProperties",
           "description": "Troubleshooting properties"
         },
         "virtualMachineResourceId": {
