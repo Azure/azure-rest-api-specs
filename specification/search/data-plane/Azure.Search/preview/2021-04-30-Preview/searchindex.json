@@ -1449,11 +1449,11 @@
               {
                 "value": "rerankedResults",
                 "name": "RerankedResults",
-                "description": "Search results are partially reranked."
+                "description": "Results are semantically reranked and include semantic captions, but do not include semantic highlights or answers."
               }
             ]
           },
-          "description": "Indicates whether the response contains just the base search result or partially reranked search results."
+          "description": "Indicates whether the response contains just the base search result or semantically reranked search results lacking semantic highlights or answers."
         },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
@@ -1786,17 +1786,17 @@
           {
             "value": "disabled",
             "name": "Disabled",
-            "description": "Do not return debug results for the query."
+            "description": "Do not return debug info for the query."
           },
           {
             "value": "semantic",
             "name": "Semantic",
-            "description": "Return semantic debug results for the query."
+            "description": "Return semantic debug info for the query."
           },
           {
             "value": "all",
             "name": "All",
-            "description": "Return all debug results for the query."
+            "description": "Return all debug info for the query."
           }
         ]
       },
