@@ -2417,7 +2417,7 @@
         "operationId": "AnalyticsConnectors_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "Location"
         },
         "x-ms-examples": {
           "Delete a Analytics Connectors": {
@@ -2602,7 +2602,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ServiceAccessPolicyEntry"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "ServiceAccessPolicyEntry": {
       "description": "An access policy entry.",
@@ -3080,7 +3081,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -4089,7 +4091,8 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/FhirServiceAccessPolicyEntry"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "FhirServiceAccessPolicyEntry": {
       "type": "object",
