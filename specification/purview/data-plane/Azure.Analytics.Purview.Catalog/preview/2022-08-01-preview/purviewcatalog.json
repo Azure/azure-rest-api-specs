@@ -5134,6 +5134,7 @@
         },
         "createTime": {
           "type": "integer",
+          "format": "int64",
           "description": "The created time of the record."
         },
         "createdBy": {
@@ -5173,6 +5174,7 @@
         },
         "updateTime": {
           "type": "integer",
+          "format": "int64",
           "description": "The update time of the record."
         },
         "updatedBy": {
@@ -5485,6 +5487,7 @@
             },
             "createTime": {
               "type": "integer",
+              "format": "int64",
               "description": "The created time of the record."
             },
             "createdBy": {
@@ -5549,6 +5552,7 @@
             },
             "updateTime": {
               "type": "integer",
+              "format": "int64",
               "description": "The update time of the record."
             },
             "updatedBy": {
@@ -5975,6 +5979,7 @@
             },
             "createTime": {
               "type": "integer",
+              "format": "int64",
               "description": "The created time of the record."
             },
             "createdBy": {
@@ -5983,6 +5988,7 @@
             },
             "updateTime": {
               "type": "integer",
+              "format": "int64",
               "description": "The update time of the record."
             },
             "updatedBy": {
@@ -6387,6 +6393,7 @@
           "properties": {
             "createTime": {
               "type": "integer",
+              "format": "int64",
               "description": "The created time of the record."
             },
             "createdBy": {
@@ -6421,6 +6428,7 @@
             },
             "updateTime": {
               "type": "integer",
+              "format": "int64",
               "description": "The update time of the record."
             },
             "updatedBy": {
@@ -6876,7 +6884,11 @@
         "SUCCESS",
         "FAILED"
       ],
-      "description": "ImportStatus"
+      "description": "ImportStatus",
+      "x-ms-enum": {
+        "name": "importStatus",
+        "modelAsString": true
+      }
     },
     "BulkImportResponse": {
       "type": "object",
@@ -7399,10 +7411,12 @@
         },
         "createTime": {
           "type": "integer",
+          "format": "int64",
           "description": "The create time of the record. The Unix epoch format."
         },
         "updateTime": {
           "type": "integer",
+          "format": "int64",
           "description": "The last update time of the record. The Unix epoch format."
         },
         "id": {
@@ -7700,10 +7714,12 @@
         },
         "createTime": {
           "type": "integer",
+          "format": "int64",
           "description": "The create time of the record. The Unix epoch format."
         },
         "updateTime": {
           "type": "integer",
+          "format": "int64",
           "description": "The last update time of the record. The Unix epoch format."
         },
         "id": {
@@ -8064,6 +8080,7 @@
       "properties": {
         "errorCode": {
           "type": "integer",
+          "format": "int32",
           "description": "Error code from async import job if fail"
         },
         "errorMessage": {
@@ -8135,6 +8152,7 @@
       "properties": {
         "errorCode": {
           "type": "integer",
+          "format": "int32",
           "description": "Error code from async bulk delete job if fail"
         },
         "errorMessage": {
@@ -8165,6 +8183,7 @@
     },
     "ErrorResponse": {
       "description": "An error response from the service",
+      "type": "object",
       "properties": {
         "requestId": {
           "type": "string",
