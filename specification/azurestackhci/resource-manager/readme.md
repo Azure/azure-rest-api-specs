@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-12
+tag: package-2022-12
 ```
 
 ## Suppression
@@ -57,6 +57,24 @@ directive:
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-12-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2022-12-01/updates.json
+```
 
 ### Tag: package-preview-2022-12
 
