@@ -51,7 +51,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1302,6 +1302,19 @@
       },
       "x-ms-azure-resource": true,
       "description": "Resource Reference."
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list Orbital operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
+          },
+          "description": "List of Orbital operations supported by the Orbital resource provider."
+        }
+      }
     },
     "EndPoint": {
       "type": "object",
