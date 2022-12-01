@@ -297,7 +297,6 @@ These settings apply only when `--tag=package-2020-10-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-10-01'
 input-file:
   - Microsoft.AzureStackHCI/stable/2020-10-01/azurestackhci.json
-  - Microsoft.AzureStackHCI/stable/2020-10-01/clusters.json
 ```
 
 ### Tag: package-2020-03-01-preview
