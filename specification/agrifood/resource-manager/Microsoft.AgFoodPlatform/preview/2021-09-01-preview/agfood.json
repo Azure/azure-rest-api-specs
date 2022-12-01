@@ -1217,24 +1217,19 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FarmBeatsResourceNameParameter"
           },
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "Solution Id of the solution.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+            "$ref": "#/parameters/SolutionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1253,7 +1248,7 @@
             }
           },
           "201": {
-            "description": "Success",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Solution"
             }
@@ -1261,7 +1256,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1282,24 +1277,19 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FarmBeatsResourceNameParameter"
           },
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "Solution Id of the solution.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+            "$ref": "#/parameters/SolutionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1312,7 +1302,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1333,24 +1323,19 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FarmBeatsResourceNameParameter"
           },
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "Solution Id of the solution.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+            "$ref": "#/parameters/SolutionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1358,12 +1343,12 @@
             "description": "Success"
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1386,10 +1371,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FarmBeatsResourceNameParameter"
@@ -1489,7 +1474,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1502,7 +1487,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1558,7 +1543,7 @@
             "minimum": 10
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1571,7 +1556,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1605,7 +1590,7 @@
             "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1618,7 +1603,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2144,12 +2129,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
         },
         "properties": {
           "$ref": "#/definitions/SolutionProperties"
@@ -2406,12 +2391,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
         },
         "properties": {
           "$ref": "#/definitions/FarmBeatsSolutionProperties"
@@ -2468,6 +2453,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "SolutionId": {
+      "in": "path",
+      "name": "solutionId",
+      "description": "Solution Id of the solution.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
     }
   },
   "securityDefinitions": {
