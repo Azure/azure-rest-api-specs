@@ -34,6 +34,7 @@
             "in": "body",
             "name": "body",
             "description": "Get DQAlert Detail",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DQAlert"
             }
@@ -85,16 +86,19 @@
           {
             "in": "query",
             "name": "level",
+            "description": "Get Level",
             "type": "string"
           },
           {
             "in": "query",
             "name": "scopeId",
+            "description": "Get Scope Id",
             "type": "string"
           },
           {
             "in": "query",
             "name": "skipDetails",
+            "description": "Get Skip Detail",
             "type": "boolean"
           },
           {
@@ -227,7 +231,7 @@
             "in": "body",
             "name": "body",
             "description": "Get Additional Detail",
-            "schema": {}
+            "schema": { }
           }
         ],
         "responses": {
@@ -526,7 +530,7 @@
             "in": "body",
             "name": "body",
             "description": "Get Data",
-            "schema": {}
+            "schema": { }
           }
         ],
         "responses": {
@@ -720,6 +724,7 @@
             "in": "body",
             "name": "body",
             "description": "Get Job Id Details",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AssessmentJobDTO"
             }
@@ -1848,7 +1853,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RuleTrending"
+                "$ref": "#/definitions/RuleTrendingEntity"
               }
             }
           },
@@ -2686,7 +2691,7 @@
         "referenceName": {
           "type": "string"
         },
-        "credentialProperties": {}
+        "credentialProperties": { }
       }
     },
     "DataQualityRules": {
@@ -2953,7 +2958,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RuleScoreStatus",
+            "name": "RuleStatus",
             "modelAsString": true
           }
         },
