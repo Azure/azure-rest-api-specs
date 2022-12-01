@@ -15,6 +15,277 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules": {
+      "get": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Lists all cache rule resources for the specified container registry.",
+        "operationId": "CacheRules_ListAsync",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRulesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleList": {
+            "$ref": "./examples/CacheRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules/{cacheRuleName}": {
+      "get": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Gets the properties of the specified cache rule resource.",
+        "operationId": "CacheRules_GetAsync",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleGet": {
+            "$ref": "./examples/CacheRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Creates a cache rule for a container registry with the specified parameters.",
+        "operationId": "CacheRules_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          },
+          {
+            "name": "cacheRuleCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a cache rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleCreate": {
+            "$ref": "./examples/CacheRuleCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Deletes a cache rule resource from a container registry.",
+        "operationId": "CacheRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The cache rule does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleDelete": {
+            "$ref": "./examples/CacheRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Updates a cache rule for a container registry with the specified parameters.",
+        "operationId": "CacheRules_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          },
+          {
+            "name": "cacheRuleUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a cache rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CacheRuleUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleUpdate": {
+            "$ref": "./examples/CacheRuleUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries": {
       "get": {
         "tags": [
@@ -164,7 +435,10 @@
             "$ref": "./examples/ConnectedRegistryCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -194,7 +468,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The webhook does not exist in the subscription."
@@ -211,7 +490,10 @@
             "$ref": "./examples/ConnectedRegistryDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -302,7 +584,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -314,6 +601,277 @@
         "x-ms-examples": {
           "ConnectedRegistryDeactivate": {
             "$ref": "./examples/ConnectedRegistryDeactivate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/credentialSets": {
+      "get": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Lists all credential set resources for the specified container registry.",
+        "operationId": "CredentialSets_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetList": {
+            "$ref": "./examples/CredentialSetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/credentialSets/{credentialSetName}": {
+      "get": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Gets the properties of the specified credential set resource.",
+        "operationId": "CredentialSets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetGet": {
+            "$ref": "./examples/CredentialSetGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Creates a credential set for a container registry with the specified parameters.",
+        "operationId": "CredentialSets_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          },
+          {
+            "name": "credentialSetCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a credential set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetCreate": {
+            "$ref": "./examples/CredentialSetCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Deletes a credential set from a container registry.",
+        "operationId": "CredentialSets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The credential store resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetDelete": {
+            "$ref": "./examples/CredentialSetDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Updates a credential set for a container registry with the specified parameters.",
+        "operationId": "CredentialSets_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          },
+          {
+            "name": "credentialSetUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a credential set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialSetUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetUpdate": {
+            "$ref": "./examples/CredentialSetUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -465,7 +1023,10 @@
             "$ref": "./examples/ExportPipelineCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -495,7 +1056,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The export pipeline does not exist in the subscription."
@@ -512,7 +1078,10 @@
             "$ref": "./examples/ExportPipelineDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importImage": {
@@ -550,7 +1119,12 @@
             "description": "The request was successful; the operation has completed successfully."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -713,7 +1287,10 @@
             "$ref": "./examples/ImportPipelineCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -743,7 +1320,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The import pipeline does not exist in the subscription."
@@ -760,7 +1342,10 @@
             "$ref": "./examples/ImportPipelineDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/providers/Microsoft.ContainerRegistry/operations": {
@@ -984,7 +1569,10 @@
             "$ref": "./examples/PipelineRunCreate_Import.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1014,7 +1602,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The pipeline run does not exist in the subscription."
@@ -1031,7 +1624,10 @@
             "$ref": "./examples/PipelineRunDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
@@ -1162,7 +1758,10 @@
             "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1192,7 +1791,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The private endpoint connection does not exist in the subscription."
@@ -1203,7 +1807,10 @@
             "$ref": "./examples/PrivateEndpointConnectionDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/registries": {
@@ -1361,7 +1968,10 @@
             "$ref": "./examples/RegistryCreateZoneRedundant.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1388,7 +1998,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The container registry does not exist in the subscription."
@@ -1399,7 +2014,10 @@
             "$ref": "./examples/RegistryDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -1784,7 +2402,10 @@
             "$ref": "./examples/ReplicationCreateZoneRedundant.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1814,7 +2435,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The replication does not exist in the subscription."
@@ -1825,7 +2451,10 @@
             "$ref": "./examples/ReplicationDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -2027,7 +2656,10 @@
             "$ref": "./examples/ScopeMapCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -2057,7 +2689,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The scopemap does not exist in the subscription."
@@ -2074,7 +2711,10 @@
             "$ref": "./examples/ScopeMapDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -2282,7 +2922,10 @@
             "$ref": "./examples/TokenCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -2312,7 +2955,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The token does not exist in the subscription."
@@ -2329,7 +2977,10 @@
             "$ref": "./examples/TokenDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -2429,7 +3080,12 @@
             }
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
@@ -2574,7 +3230,10 @@
             "$ref": "./examples/WebhookCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -2604,7 +3263,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The webhook does not exist in the subscription."
@@ -2615,7 +3279,10 @@
             "$ref": "./examples/WebhookDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -2793,25 +3460,25 @@
     }
   },
   "definitions": {
-    "ConnectedRegistryListResult": {
-      "description": "The result of a request to list connected registries for a container registry.",
+    "CacheRulesListResult": {
+      "description": "The result of a request to list cache rules for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of connected registries. Since this list may be incomplete, the nextLink field should be used to request the next list of connected registries.",
+          "description": "The list of cache rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConnectedRegistry"
+            "$ref": "#/definitions/CacheRule"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of connected registries.",
+          "description": "If provided, client must use NextLink URI to request next list of cache rules.",
           "type": "string"
         }
       }
     },
-    "ConnectedRegistry": {
-      "description": "An object that represents a connected registry for a container registry.",
+    "CacheRule": {
+      "description": "An object that represents a cache rule for a container registry.",
       "type": "object",
       "allOf": [
         {
@@ -2820,8 +3487,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConnectedRegistryProperties",
-          "description": "The properties of the connected registry.",
+          "$ref": "#/definitions/CacheRuleProperties",
+          "description": "The properties of the cache rule.",
           "x-ms-client-flatten": true
         }
       }
@@ -2878,6 +3545,101 @@
         }
       },
       "readOnly": true
+    },
+    "CacheRuleProperties": {
+      "description": "The properties of a cache rule.",
+      "type": "object",
+      "properties": {
+        "credentialSetResourceId": {
+          "description": "The ARM resource ID of the credential store which is associated with the cache rule.",
+          "type": "string"
+        },
+        "sourceRepository": {
+          "description": "Source repository pulled from upstream.",
+          "type": "string"
+        },
+        "targetRepository": {
+          "description": "Target repository specified in docker pull command.\r\nEg: docker pull myregistry.azurecr.io/{targetRepository}:{tag}",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the cache rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CacheRuleUpdateParameters": {
+      "description": "The parameters for updating a cache rule.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CacheRuleUpdateProperties",
+          "description": "The properties of the cache rule update parameters.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CacheRuleUpdateProperties": {
+      "description": "The parameters for updating cache rule properties.",
+      "type": "object",
+      "properties": {
+        "credentialSetResourceId": {
+          "description": "The ARM resource ID of the credential store which is associated with the Cache rule.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedRegistryListResult": {
+      "description": "The result of a request to list connected registries for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of connected registries. Since this list may be incomplete, the nextLink field should be used to request the next list of connected registries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedRegistry"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of connected registries.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedRegistry": {
+      "description": "An object that represents a connected registry for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectedRegistryProperties",
+          "description": "The properties of the connected registry.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "ConnectedRegistryProperties": {
       "description": "The properties of a connected registry.",
@@ -2974,10 +3736,10 @@
           "items": {
             "$ref": "#/definitions/StatusDetailProperties"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "correlationId"
-          ],
-          "readOnly": true
+          ]
         },
         "notificationsList": {
           "description": "The list of notifications subscription information for the connected registry.",
@@ -3252,25 +4014,25 @@
         }
       }
     },
-    "ExportPipelineListResult": {
-      "description": "The result of a request to list export pipelines for a container registry.",
+    "CredentialSetListResult": {
+      "description": "The result of a request to list credential sets for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
+          "description": "The list of credential sets. Since this list may be incomplete, the nextLink field should be used to request the next list of credential sets.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportPipeline"
+            "$ref": "#/definitions/CredentialSet"
           }
         },
         "nextLink": {
-          "description": "The URI that can be used to request the next list of pipeline runs.",
+          "description": "The URI that can be used to request the next list of credential sets.",
           "type": "string"
         }
       }
     },
-    "ExportPipeline": {
-      "description": "An object that represents an export pipeline for a container registry.",
+    "CredentialSet": {
+      "description": "An object that represents a credential set resource for a container registry.",
       "type": "object",
       "allOf": [
         {
@@ -3278,17 +4040,13 @@
         }
       ],
       "properties": {
-        "location": {
-          "description": "The location of the export pipeline.",
-          "type": "string"
-        },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity of the export pipeline."
+          "description": "Identities associated with the resource. This is used to access the KeyVault secrets."
         },
         "properties": {
-          "$ref": "#/definitions/ExportPipelineProperties",
-          "description": "The properties of the export pipeline.",
+          "$ref": "#/definitions/CredentialSetProperties",
+          "description": "The properties of the credential set.",
           "x-ms-client-flatten": true
         }
       }
@@ -3328,36 +4086,32 @@
         }
       }
     },
-    "ExportPipelineProperties": {
-      "description": "The properties of an export pipeline.",
-      "required": [
-        "target"
-      ],
+    "CredentialSetProperties": {
+      "description": "The properties of a credential set resource.",
       "type": "object",
       "properties": {
-        "target": {
-          "$ref": "#/definitions/ExportPipelineTargetProperties",
-          "description": "The target properties of the export pipeline."
+        "loginServer": {
+          "description": "The credentials are stored for this upstream or login server.",
+          "type": "string"
         },
-        "options": {
-          "description": "The list of all options configured for the pipeline.",
+        "authCredentials": {
+          "description": "List of authentication credentials stored for an upstream.\r\nUsually consists of a primary and an optional secondary credential.",
           "type": "array",
           "items": {
-            "enum": [
-              "OverwriteTags",
-              "OverwriteBlobs",
-              "DeleteSourceBlobOnSuccess",
-              "ContinueOnErrors"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "PipelineOptions",
-              "modelAsString": true
-            }
-          }
+            "$ref": "#/definitions/AuthCredential"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of credential store resource.",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
-          "description": "The provisioning state of the pipeline at the time the operation was called.",
+          "description": "Provisioning state of the resource.",
           "enum": [
             "Creating",
             "Updating",
@@ -3433,24 +4187,33 @@
       },
       "x-ms-azure-resource": true
     },
-    "ExportPipelineTargetProperties": {
-      "description": "The properties of the export pipeline target.",
-      "required": [
-        "keyVaultUri"
-      ],
+    "AuthCredential": {
+      "description": "Authentication credential stored for an upstream.",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of target for the export pipeline.",
+        "name": {
+          "description": "The name of the credential.",
+          "enum": [
+            "Credential1"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialName",
+            "modelAsString": true
+          }
+        },
+        "usernameSecretIdentifier": {
+          "description": "KeyVault Secret URI for accessing the username.",
           "type": "string"
         },
-        "uri": {
-          "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
+        "passwordSecretIdentifier": {
+          "description": "KeyVault Secret URI for accessing the password.",
           "type": "string"
         },
-        "keyVaultUri": {
-          "description": "They key vault secret uri to obtain the target storage SAS token.",
-          "type": "string"
+        "credentialHealth": {
+          "$ref": "#/definitions/CredentialHealth",
+          "description": "This provides data pertaining to the health of the auth credential.",
+          "readOnly": true
         }
       }
     },
@@ -3480,6 +4243,172 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "CredentialHealth": {
+      "description": "The health of the auth credential.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The health status of credential.",
+          "enum": [
+            "Healthy",
+            "Unhealthy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "description": "Error code representing the health check error.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Descriptive message representing the health check error.",
+          "type": "string"
+        }
+      }
+    },
+    "CredentialSetUpdateParameters": {
+      "description": "The parameters for updating a credential set",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CredentialSetUpdateProperties",
+          "description": "The properties of the credential set update parameters",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identities associated with the resource. This is used to access the KeyVault secrets."
+        }
+      }
+    },
+    "CredentialSetUpdateProperties": {
+      "description": "The parameters for updating credential set properties.",
+      "type": "object",
+      "properties": {
+        "authCredentials": {
+          "description": "List of authentication credentials stored for an upstream.\r\nUsually consists of a primary and an optional secondary credential.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthCredential"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ExportPipelineListResult": {
+      "description": "The result of a request to list export pipelines for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportPipeline"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
+          "type": "string"
+        }
+      }
+    },
+    "ExportPipeline": {
+      "description": "An object that represents an export pipeline for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "The location of the export pipeline.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the export pipeline."
+        },
+        "properties": {
+          "$ref": "#/definitions/ExportPipelineProperties",
+          "description": "The properties of the export pipeline.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExportPipelineProperties": {
+      "description": "The properties of an export pipeline.",
+      "required": [
+        "target"
+      ],
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/ExportPipelineTargetProperties",
+          "description": "The target properties of the export pipeline."
+        },
+        "options": {
+          "description": "The list of all options configured for the pipeline.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "OverwriteTags",
+              "OverwriteBlobs",
+              "DeleteSourceBlobOnSuccess",
+              "ContinueOnErrors"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PipelineOptions",
+              "modelAsString": true
+            }
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the pipeline at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExportPipelineTargetProperties": {
+      "description": "The properties of the export pipeline target.",
+      "required": [
+        "keyVaultUri"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of target for the export pipeline.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
+          "type": "string"
+        },
+        "keyVaultUri": {
+          "description": "They key vault secret uri to obtain the target storage SAS token.",
+          "type": "string"
+        }
+      }
     },
     "ImportImageParameters": {
       "required": [
@@ -4435,7 +5364,7 @@
           }
         },
         "anonymousPullEnabled": {
-          "description": "Enables registry-wide pull from unauthenticated clients. It's in preview and available in the Standard and Premium service tiers.",
+          "description": "Enables registry-wide pull from unauthenticated clients.",
           "default": false,
           "type": "boolean"
         }
@@ -4853,7 +5782,7 @@
           }
         },
         "anonymousPullEnabled": {
-          "description": "Enables registry-wide pull from unauthenticated clients. It's in preview and available in the Standard and Premium service tiers.",
+          "description": "Enables registry-wide pull from unauthenticated clients.",
           "type": "boolean"
         }
       }
@@ -6217,6 +7146,28 @@
       "description": "An OData filter expression that describes a subset of connectedRegistries to return. The parameters that can be filtered are parent.id (the resource id of the connectedRegistry parent), mode, and connectionState. The supported operator is eq.",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CredentialSetNameParameter": {
+      "name": "credentialSetName",
+      "in": "path",
+      "description": "The name of the credential set.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "CacheRuleNameParameter": {
+      "name": "cacheRuleName",
+      "in": "path",
+      "description": "The name of the cache rule.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     }
   },
