@@ -197,6 +197,17 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-03-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
 ```
+### Tag: package-2022-01
+
+These settings apply only when `--tag=package-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2022-01-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2022-01-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2022-01-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2022-01-01/operations.json
+```
 
 ### Tag: package-preview-2021-09
 
