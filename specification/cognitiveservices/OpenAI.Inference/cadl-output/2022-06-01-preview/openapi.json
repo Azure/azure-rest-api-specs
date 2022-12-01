@@ -100,13 +100,13 @@
         "description": "Return the embeddings for a given prompt.",
         "parameters": [
           {
-            "$ref": "#/parameters/Request.EmbeddingsCreate.deploymentId"
+            "$ref": "#/parameters/EmbeddingsCreateRequest.deploymentId"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Request.EmbeddingsCreate.body"
+            "$ref": "#/parameters/EmbeddingsCreateRequest.body"
           }
         ],
         "responses": {
@@ -400,27 +400,14 @@
       "properties": {},
       "description": "A sequence which indicates the end of the current document."
     },
-    "Request.EmbeddingsCreate": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Request.EmbeddingsCreateBody",
-          "description": "expected schema for the body of the embedding post request"
-        }
-      },
-      "description": "Input model for embeddings create endpoint",
-      "required": [
-        "body"
-      ]
-    },
-    "Request.EmbeddingsCreateBody": {
+    "EmbeddingsCreateBody": {
       "type": "object",
       "properties": {
         "user": {
           "type": "string",
           "description": "The ID of the end-user, for use in tracking and rate-limiting."
         },
-        "inputType": {
+        "input_type": {
           "type": "string",
           "description": "input type of embedding search to use"
         },
@@ -429,7 +416,7 @@
           "description": "ID of the model to use"
         },
         "input": {
-          "$ref": "#/definitions/Request.EmbeddingsInput",
+          "$ref": "#/definitions/EmbeddingsInput",
           "description": "An input to embed, encoded as a string, a list of strings, or a list of token\nlists"
         }
       },
@@ -438,7 +425,7 @@
         "input"
       ]
     },
-    "Request.EmbeddingsInput": {
+    "EmbeddingsInput": {
       "type": "object",
       "properties": {},
       "description": "Embedding request body schema, base fields"
@@ -492,17 +479,17 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Request.EmbeddingsCreate.body": {
+    "EmbeddingsCreateRequest.body": {
       "name": "body",
       "in": "body",
       "required": true,
       "description": "expected schema for the body of the embedding post request",
       "schema": {
-        "$ref": "#/definitions/Request.EmbeddingsCreateBody"
+        "$ref": "#/definitions/EmbeddingsCreateBody"
       },
       "x-ms-parameter-location": "method"
     },
-    "Request.EmbeddingsCreate.deploymentId": {
+    "EmbeddingsCreateRequest.deploymentId": {
       "name": "deploymentId",
       "in": "path",
       "required": true,
