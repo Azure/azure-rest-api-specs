@@ -26,14 +26,23 @@ These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01
+tag: package-2022-09
 ```
 
-### Tag: package-2022-02-preview 
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.Advisor/stable/2022-09-01/advisor.json
+```
+### Tag: package-2022-02-preview
 
 These settings apply only when `--tag=package-2022-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02-preview'
+``` yaml $(tag) == 'package-2022-02-preview'
 input-file:
   - Microsoft.Advisor/preview/2022-02-01-preview/predictRecommendation.json
 ```
@@ -42,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-preview'
+``` yaml $(tag) == 'package-2020-07-preview'
 input-file:
   - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
 ```
@@ -51,10 +60,11 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-01'
+``` yaml $(tag) == 'package-2020-01'
 input-file:
   - Microsoft.Advisor/stable/2020-01-01/advisor.json
 ```
+
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -93,7 +103,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -129,6 +139,3 @@ csharp:
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-

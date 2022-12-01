@@ -89,6 +89,7 @@ These settings apply only when `--tag=package-2021-12-01-preview-only` is specif
 ``` yaml $(tag) == 'package-2021-12-01-preview-only'
 input-file:
 - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-2020-10-01
@@ -156,6 +157,19 @@ input-file:
 - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
+### Tag: package-2022-04-01-only
+
+These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01-only'
+input-file:
+- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/common-types.json
+```
+
 ### Tag: package-2022-04-01-preview-only
 
 These settings apply only when `--tag=package-2022-04-01-preview-only` is specified on the command line.
@@ -164,6 +178,15 @@ These settings apply only when `--tag=package-2022-04-01-preview-only` is specif
 input-file:
 - Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
 - Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+```
+
+### Tag: package-2022-08-01-preview-only
+
+These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 
@@ -509,7 +532,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

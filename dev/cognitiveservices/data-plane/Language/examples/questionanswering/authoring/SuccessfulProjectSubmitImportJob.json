@@ -3,7 +3,7 @@
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "Content-Type": "application/json",
-    "api-version": "2022-07-01-preview",
+    "api-version": "2023-05-01",
     "projectName": "proj1",
     "body": {
       "assets": {
@@ -42,13 +42,8 @@
               "prompts": [
                 {
                   "displayOrder": 1,
-                  "qnaId": 11,
+                  "qnaId": 2,
                   "displayText": "prompt 1.1"
-                },
-                {
-                  "displayOrder": 2,
-                  "qnaId": 21,
-                  "displayText": "prompt 1.2"
                 }
               ]
             }
@@ -71,7 +66,7 @@
     "202": {
       "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
       "headers": {
-        "Operation-Location": "job1"
+        "Operation-Location": "https://<resource-endpoint>/language/authoring/query-knowledgebases/projects/proj1/import/jobs/job1?api-version=2023-05-01"
       }
     }
   }

@@ -604,7 +604,7 @@
           "type": "string",
           "description": "Primary user identity resource id"
         },
-        "primaryKeyUri": {
+        "primaryKeyURI": {
           "type": "string",
           "description": "Primary key uri"
         },
@@ -612,7 +612,7 @@
           "type": "string",
           "description": "Geo backup user identity resource id as identity can't cross region, need identity in same region as geo backup"
         },
-        "geoBackupKeyUri": {
+        "geoBackupKeyURI": {
           "type": "string",
           "description": "Geo backup key uri as key vault can't cross region, need cmk in same region as geo backup"
         },
@@ -697,6 +697,10 @@
           "type": "string",
           "readOnly": true,
           "description": "The sku name of the server storage."
+        },
+        "autoIoScaling": {
+          "description": "Enable IO Auto Scaling or not.",
+          "$ref": "#/definitions/EnableStatusEnum"
         }
       },
       "description": "Storage Profile properties of a server"

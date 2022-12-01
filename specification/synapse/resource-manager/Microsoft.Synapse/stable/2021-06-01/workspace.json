@@ -270,13 +270,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Workspace"
             },
             "description": ""
           },
@@ -754,6 +754,9 @@
             "description": "OK"
           },
           "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
             "description": "Created"
           },
           "default": {
@@ -895,11 +898,19 @@
         },
         "administratorType": {
           "description": "Workspace active directory administrator type",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sid": {
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -945,7 +956,6 @@
           "type": "boolean",
           "x-ms-mutability": [
             "create",
-            "update",
             "read"
           ]
         }
@@ -1093,7 +1103,12 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1175,11 +1190,16 @@
       }
     },
     "CspWorkspaceAdminProperties": {
+      "type": "object",
       "description": "Initial workspace AAD admin properties for a CSP subscription",
       "properties": {
         "initialWorkspaceAdminObjectId": {
           "description": "AAD object ID of initial workspace admin",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1239,7 +1259,11 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
           "type": "object"
         },
@@ -1401,6 +1425,7 @@
       ],
       "properties": {
         "properties": {
+          "type": "object",
           "title": "Managed Identity Sql Control Settings",
           "description": "Sql Control Settings for workspace managed identity",
           "properties": {
@@ -1444,6 +1469,7 @@
       }
     },
     "RestorableDroppedSqlPoolProperties": {
+      "type": "object",
       "properties": {
         "databaseName": {
           "readOnly": true,
@@ -1492,6 +1518,7 @@
       "description": "The properties of a restorable dropped Sql pool"
     },
     "RestorableDroppedSqlPool": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1512,6 +1539,7 @@
       "description": "A restorable dropped Sql pool"
     },
     "RestorableDroppedSqlPoolListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",

@@ -3,16 +3,31 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Question Answering - Authoring",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2022-07-01-preview"
+    "version": "2023-05-01"
   },
   "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    },
     "apim_key": {
       "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
   },
   "security": [
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    },
     {
       "apim_key": []
     }
@@ -27,7 +42,7 @@
     ]
   },
   "paths": {
-    "/query-knowledgebases/projects": {
+    "/authoring/query-knowledgebases/projects": {
       "get": {
         "summary": "Gets all projects for a user.",
         "operationId": "QuestionAnsweringProjects_ListProjects",
@@ -76,7 +91,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}": {
+    "/authoring/query-knowledgebases/projects/{projectName}": {
       "get": {
         "summary": "Get the requested project metadata.",
         "operationId": "QuestionAnsweringProjects_GetProjectDetails",
@@ -207,7 +222,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/deletion-jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/deletion-jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Project delete job.",
         "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
@@ -246,7 +261,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/:export": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:export": {
       "post": {
         "summary": "Export project metadata and assets.",
         "operationId": "QuestionAnsweringProjects_Export",
@@ -300,7 +315,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Export job, once job completes, returns the project metadata, and assets.",
         "operationId": "QuestionAnsweringProjects_GetExportStatus",
@@ -342,7 +357,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/:import": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:import": {
       "post": {
         "summary": "Import project assets.",
         "operationId": "QuestionAnsweringProjects_Import",
@@ -398,7 +413,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Import job.",
         "operationId": "QuestionAnsweringProjects_GetImportStatus",
@@ -440,7 +455,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
       "put": {
         "summary": "Deploy project to production.",
         "operationId": "QuestionAnsweringProjects_DeployProject",
@@ -485,7 +500,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Deploy job.",
         "operationId": "QuestionAnsweringProjects_GetDeployStatus",
@@ -530,7 +545,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/deployments": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments": {
       "get": {
         "summary": "List all deployments of a project.",
         "operationId": "QuestionAnsweringProjects_ListDeployments",
@@ -582,7 +597,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/synonyms": {
+    "/authoring/query-knowledgebases/projects/{projectName}/synonyms": {
       "get": {
         "summary": "Gets all the synonyms of a project.",
         "operationId": "QuestionAnsweringProjects_GetSynonyms",
@@ -677,7 +692,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/sources": {
+    "/authoring/query-knowledgebases/projects/{projectName}/sources": {
       "get": {
         "summary": "Gets all the sources of a project.",
         "operationId": "QuestionAnsweringProjects_GetSources",
@@ -778,7 +793,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update sources job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
@@ -820,7 +835,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/qnas": {
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas": {
       "get": {
         "summary": "Gets all the QnAs of a project.",
         "operationId": "QuestionAnsweringProjects_GetQnas",
@@ -924,7 +939,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update QnAs job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
@@ -966,7 +981,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/feedback": {
+    "/authoring/query-knowledgebases/projects/{projectName}/feedback": {
       "post": {
         "summary": "Update Active Learning feedback.",
         "operationId": "QuestionAnsweringProjects_AddFeedback",
