@@ -821,7 +821,7 @@
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute/operationResults/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "Get governance rules execution status by specific governanceRuleId": {
+          "Get governance rules execution status by specific governance rule ID": {
             "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
           }
         },
@@ -857,6 +857,55 @@
               "location": {
                 "type": "string",
                 "description": "Location URL for the execution status"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/delete/operationResults/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get governance rules deletion status by specific governance rule ID": {
+            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleDeleteStatus_example.json"
+          }
+        },
+        "tags": [
+          "GovernanceRules"
+        ],
+        "description": "Get a specific governance rule deletion status for the requested scope by rule ID and operation ID",
+        "operationId": "ManagementGroupGovernanceRulesDeleteStatus_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete succeeded"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "Location URL for the deletion status"
               }
             }
           },
