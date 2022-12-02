@@ -1,4 +1,5 @@
-@service({title:"Microsoft.AppConfiguration",version:"2018-01-01"})
+@service({title:"Schema of Azure App Configuration events published to Azure Event Grid",version:"2018-01-01"})
+@doc("Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace AppConfiguration;
 
 enum AppConfigurationEventTypes {
@@ -7,13 +8,13 @@ enum AppConfigurationEventTypes {
 }
 
 model AppConfigurationBase<TEventType> {
-  @doc("The key used to identify the key-value that was {name}.", TEventType)
+  @doc("The key used to identify the key-value that was {name}.", {name:TEventType})
   key?: string;
 
-  @doc("The label, if any, used to identify the key-value that was {name}.", TEventType)
+  @doc("The label, if any, used to identify the key-value that was {name}.", {name:TEventType})
   label?: string;
 
-  @doc("The etag representing the key-value that was {name}.", TEventType)
+  @doc("The etag representing the key-value that was {name}.", {name:TEventType})
   etag?: string;
 
   @doc("The sync token representing the server state after the event.")
