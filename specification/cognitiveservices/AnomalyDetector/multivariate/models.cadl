@@ -19,7 +19,7 @@ enum FillNAMethodKnownValues {
 @knownValues(FillNAMethodKnownValues)
 model FillNAMethod is string;
 
-enum MultivariateDetectionStatus {
+enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
   Ready: "READY",
@@ -67,7 +67,7 @@ model MultivariateDetectionResult {
 @doc("Multivariate anomaly detection status.")
 model MultivariateBatchDetectionResultSummary {
   @doc("Status of detection results. One of CREATED, RUNNING, READY, and FAILED.")
-  status: MultivariateDetectionStatus;
+  status: MultivariateBatchDetectionStatus;
 
   @doc("Error message when detection is failed.")
   errors?: ErrorResponse[];
