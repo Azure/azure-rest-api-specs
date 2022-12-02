@@ -27,7 +27,8 @@ changes, e.g. running or complete, and when results are uploaded.
 """)
   @route("/fine-tunes")
   @get
-  List is ServiceCustomizations.OpenAIListOperation<FineTune, TypeDiscriminatorKnownValues.FineTune>;
+  // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
+  List is ServiceCustomizations.OpenAIListOperation<FineTune, "fine-tune">;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("""
@@ -94,7 +95,7 @@ complete, and when results are uploaded.
   { 
       @doc("A flag indicating whether to stream events for the fine-tune job. If set to true,\nevents will be sent as data-only server-sent events as they become available. The stream will terminate with\na data: [DONE] message when the job is finished (succeeded, cancelled, or failed).\nIf set to false, only events generated so far will be returned..")
       @query stream: boolean
-  }, ServiceCustomizations.OpenAiList<Event, TypeDiscriminatorKnownValues>>;
+  }, ServiceCustomizations.OpenAiList<Event, TypeDiscriminator>>;
 
   // #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("Cancels the processing of the fine-tune job specified by the given fineTuneId.")

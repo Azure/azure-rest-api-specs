@@ -13,7 +13,8 @@ interface Deployments {
   @doc("Gets the list of deployments owned by the Azure OpenAI resource.")
   @route("/deployments")
   @get
-  List is ServiceCustomizations.OpenAIListOperation<Deployment, TypeDiscriminatorKnownValues.Deployment>;
+  // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
+  List is ServiceCustomizations.OpenAIListOperation<Deployment, "deployment">;
 
   @summary("""
 Creates a new deployment for the Azure OpenAI resource according to the given

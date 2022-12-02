@@ -29,7 +29,8 @@ corresponding fine-tune job.
 """)
   @route("/files")
   @get
-  List is ServiceCustomizations.OpenAIListOperation<File, TypeDiscriminatorKnownValues.File>;
+  // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
+  List is ServiceCustomizations.OpenAIListOperation<File, "file">;
 
   @summary("""
 Creates a new file entity by uploading data from a local machine. Uploaded
