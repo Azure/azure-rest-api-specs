@@ -2226,6 +2226,14 @@
           "type": "string",
           "description": "The resource location."
         },
+        "resourcegroup": {
+          "type": "string",
+          "description": "The resource group of the resource."
+        },
+        "subscriptionid": {
+          "type": "string",
+          "description": "The subscription id of the resource."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -2294,7 +2302,8 @@
       "properties": {
         "code": {
           "description": "The error code.",
-          "type": "string",
+          "format": "int32",
+          "type": "integer",
           "readOnly": true
         },
         "httpStatusCode": {
