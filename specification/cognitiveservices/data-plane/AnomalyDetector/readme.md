@@ -54,8 +54,7 @@ These settings apply only when `--tag=release_1_1` is specified on the command l
 
 ```yaml $(tag) == 'release_1_1'
 input-file:
-  - stable/v1.1/UnivariateAnomalyDetector.json
-  - stable/v1.1/MultivariateAnomalyDetector.json
+  - stable/v1.1/openapi.json
 ```
 
 ## Swagger to SDK
