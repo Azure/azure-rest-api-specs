@@ -1,3 +1,7 @@
+@service({title:"Schema of Azure Media Services events published to Azure Event Grid",version:"2018-01-01"})
+@doc("Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
+namespace MediaServices;
+
 enum MediaJobState {
 	Canceled,
 	Canceling,
@@ -70,7 +74,8 @@ model MediaJobErrorDetail {
 @doc("The event data for a Job output.")
 model MediaJobOutput {
 	@doc("The discriminator for derived types.")
-	@odata.type?: string;
+	@projectedName("json","@odata.type")
+	OdataType?: string;
 	@doc("Gets the Job output error.")
 	error?: MediaJobError;
 	@doc("Gets the Job output label.")
@@ -135,27 +140,27 @@ model MediaJobErroredEventData {
 }
 
 @doc("Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.")
-@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputCanceled")
+@discriminator("#Microsoft.Media.JobOutputCanceled")
 model MediaJobOutputCanceledEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.")
-@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputCanceling")
+@discriminator("#Microsoft.Media.JobOutputCanceling")
 model MediaJobOutputCancelingEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.")
-@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputErrored")
+@discriminator("#Microsoft.Media.JobOutputErrored")
 model MediaJobOutputErroredEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.")
-@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputFinished")
+@discriminator("#Microsoft.Media.JobOutputFinished")
 model MediaJobOutputFinishedEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.")
-@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputProcessing")
+@discriminator("#Microsoft.Media.JobOutputProcessing")
 model MediaJobOutputProcessingEventData is MediaJobOutputStateChangeEventData;
 
 @doc("Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.")
-@Autorest.extension("x-ms-discriminator-value", "#Microsoft.Media.JobOutputCanceled")
+@discriminator("#Microsoft.Media.JobOutputCanceled")
 model MediaJobOutputScheduledEventData is MediaJobOutputStateChangeEventData;
 
 model MediaLiveEventConnectionBaseData {
