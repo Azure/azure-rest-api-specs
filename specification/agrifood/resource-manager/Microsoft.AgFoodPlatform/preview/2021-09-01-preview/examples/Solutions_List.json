@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "examples-rg",
+    "farmBeatsResourceName": "examples-farmbeatsResourceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName/solutions/abc.abccatcher",
+            "type": "Microsoft.AgFoodPlatform/farmBeats/solutions",
+            "systemData": {
+              "createdBy": "8f8ba545-dcfd-4ad6-89fd-8111e64849bd",
+              "createdByType": "User",
+              "createdAt": "2022-12-01T10:17:04Z",
+              "lastModifiedBy": "8f8ba545-dcfd-4ad6-89fd-8111e64849bd",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-12-01T10:17:04Z"
+            },
+            "properties": {
+              "solutionId": "abc.abccatcher",
+              "partnerId": "abc",
+              "saasSubscriptionId": "[reference(variables('saasTemplateName'))].saasSubscriptionId",
+              "saasSubscriptionName": "SomeApp",
+              "marketplacePublisherId": "publisherId",
+              "planId": "skuId",
+              "offerId": "offerId",
+              "termId": "termId"
+            },
+            "eTag": "000077ef-0000-3300-0000-63887f200000",
+            "name": "abc.abccatcher"
+          }
+        ]
+      }
+    }
+  }
+}
