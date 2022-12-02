@@ -41,6 +41,16 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 input-file:
   - Microsoft.HealthcareApis/stable/2022-12-01/healthcare-apis.json
 ```
+
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.HealthcareApis/preview/2022-10-01-preview/healthcare-apis.json
+```
+
 ### Tag: package-2022-06
 
 These settings apply only when `--tag=package-2022-06` is specified on the command line.
