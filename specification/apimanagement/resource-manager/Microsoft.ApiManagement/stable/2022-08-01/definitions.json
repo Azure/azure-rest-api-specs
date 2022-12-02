@@ -5605,6 +5605,190 @@
       },
       "description": "Request Report data."
     },
+    "ResolverCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResolverContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Resolver list representation."
+    },
+    "ResolverContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResolverEntityBaseContract",
+          "description": "Properties of the Resolver Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "GraphQL API Resolver details."
+    },
+    "ResolverEntityBaseContract": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Resolver Name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "path": {
+          "type": "string",
+          "description": "Path is type/field being resolved.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the resolver. May include HTML formatting tags.",
+          "maxLength": 1000
+        }
+      },
+      "description": "GraphQL API Resolver Entity Base Contract details."
+    },
+    "ResolverResultContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResolverResultContractProperties",
+          "description": "Properties of the Resolver Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Long Running Git Resolver Results."
+    },
+    "ResolverResultContractProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resolver result identifier."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of an async resolver.",
+          "enum": [
+            "Started",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AsyncResolverStatus",
+            "modelAsString": false
+          }
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of an async resolver. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time of an async resolver. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "resultInfo": {
+          "type": "string",
+          "description": "Optional result info."
+        },
+        "error": {
+          "$ref": "./apimanagement.json#/definitions/ErrorResponseBody",
+          "description": "Error Body Contract"
+        },
+        "actionLog": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResolverResultLogItemContract"
+          },
+          "x-ms-identifiers": [
+            "objectKey"
+          ],
+          "readOnly": true,
+          "description": "This property if only provided as part of the TenantConfiguration_Validate resolver. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy resolver."
+        }
+      },
+      "description": "Resolver Result."
+    },
+    "ResolverResultLogItemContract": {
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "The type of entity contract."
+        },
+        "action": {
+          "type": "string",
+          "description": "Action like create/update/delete."
+        },
+        "objectKey": {
+          "type": "string",
+          "description": "Identifier of the entity being created/updated/deleted."
+        }
+      },
+      "description": "Log of the entity being created, updated or deleted."
+    },
+    "ResolverUpdateContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResolverUpdateContractProperties",
+          "description": "Properties of the GraphQL API Resolver entity that can be updated."
+        }
+      },
+      "description": "GraphQL API Resolver Update Contract details."
+    },
+    "ResolverUpdateContractProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Resolver Name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "path": {
+          "type": "string",
+          "description": "Path is type/field being resolved.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the resolver. May include HTML formatting tags.",
+          "maxLength": 1000
+        }
+      },
+      "description": "Resolver Update Contract Properties."
+    },
     "ResponseContract": {
       "properties": {
         "statusCode": {

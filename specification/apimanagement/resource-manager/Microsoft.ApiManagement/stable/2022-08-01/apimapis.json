@@ -1801,6 +1801,654 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/resolvers": {
+      "get": {
+        "tags": [
+          "GraphQLApiResolver"
+        ],
+        "operationId": "GraphQLApiResolver_ListByApi",
+        "description": "Lists a collection of the resolvers for the specified GraphQL API.",
+        "x-ms-examples": {
+          "ApiManagementListGraphQLApiResolvers": {
+            "$ref": "./examples/ApiManagementListGraphQLApiResolvers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of resolvers summary entities at the GraphQL API level.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/ResolverContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/resolvers/{resolverId}": {
+      "head": {
+        "tags": [
+          "GraphQLApiResolver"
+        ],
+        "operationId": "GraphQLApiResolver_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the GraphQL API resolver specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadGraphQLApiResolver": {
+            "$ref": "./examples/ApiManagementHeadGraphQLApiResolver.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified GraphQL API resolver entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GraphQLApiResolver"
+        ],
+        "operationId": "GraphQLApiResolver_Get",
+        "description": "Gets the details of the GraphQL API Resolver specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetGraphQLApiResolver": {
+            "$ref": "./examples/ApiManagementGetGraphQLApiResolver.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Resolver entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GraphQLApiResolver"
+        ],
+        "operationId": "GraphQLApiResolver_CreateOrUpdate",
+        "description": "Creates a new resolver in the GraphQL API or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementCreateGraphQLApiResolver": {
+            "$ref": "./examples/ApiManagementCreateGraphQLApiResolver.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resolver was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Resolver was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GraphQLApiResolver"
+        ],
+        "operationId": "GraphQLApiResolver_Update",
+        "description": "Updates the details of the resolver in the GraphQL API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateGraphQLApiResolver": {
+            "$ref": "./examples/ApiManagementUpdateGraphQLApiResolver.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverUpdateContract"
+            },
+            "description": "GraphQL API Resolver Update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resolver was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ResolverContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GraphQLApiResolver"
+        ],
+        "operationId": "GraphQLApiResolver_Delete",
+        "description": "Deletes the specified resolver in the GraphQL API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteGraphQLApiResolver": {
+            "$ref": "./examples/ApiManagementDeleteGraphQLApiResolver.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GraphQL API resolver successfully removed"
+          },
+          "204": {
+            "description": "GraphQL API resolver successfully removed by previous request or does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/resolvers/{resolverId}/policies": {
+      "get": {
+        "tags": [
+          "GraphQLApiResolverPolicy"
+        ],
+        "operationId": "GraphQLApiResolverPolicy_ListByResolver",
+        "description": "Get the list of policy configuration at the GraphQL API Resolver level.",
+        "x-ms-examples": {
+          "ApiManagementListGraphQLApiResolverPolicies": {
+            "$ref": "./examples/ApiManagementListGraphQLApiResolverPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GraphQL Api Resolvers Policy Collection.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/resolvers/{resolverId}/policies/{policyId}": {
+      "head": {
+        "tags": [
+          "GraphQLApiResolverPolicy"
+        ],
+        "operationId": "GraphQLApiResolverPolicy_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the GraphQL API resolver policy specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadGraphQLApiResolverPolicy": {
+            "$ref": "./examples/ApiManagementHeadGraphQLApiResolverPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified GraphQL API resolver policy entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GraphQLApiResolverPolicy"
+        ],
+        "operationId": "GraphQLApiResolverPolicy_Get",
+        "description": "Get the policy configuration at the GraphQL API Resolver level.",
+        "x-ms-examples": {
+          "ApiManagementGetGraphQLApiResolverPolicy": {
+            "$ref": "./examples/ApiManagementGetGraphQLApiResolverPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyExportFormat"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GraphQL Api Resolver Policy information.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GraphQLApiResolverPolicy"
+        ],
+        "operationId": "GraphQLApiResolverPolicy_CreateOrUpdate",
+        "description": "Creates or updates policy configuration for the GraphQL API Resolver level.",
+        "x-ms-examples": {
+          "ApiManagementCreateGraphQLApiResolverPolicy": {
+            "$ref": "./examples/ApiManagementCreateGraphQLApiResolverPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyContract"
+            },
+            "description": "The policy contents to apply."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "GraphQL Api Resolver policy configuration was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "GraphQL Api Resolver policy configuration of the tenant was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GraphQLApiResolverPolicy"
+        ],
+        "operationId": "GraphQLApiResolverPolicy_Delete",
+        "description": "Deletes the policy configuration at the GraphQL Api Resolver.",
+        "x-ms-examples": {
+          "ApiManagementDeleteGraphQLApiResolverPolicy": {
+            "$ref": "./examples/ApiManagementDeleteGraphQLApiResolverPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ResolverIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Policy successfully removed"
+          },
+          "204": {
+            "description": "Policy successfully removed by previous request or does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the resolver failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products": {
       "get": {
         "tags": [
