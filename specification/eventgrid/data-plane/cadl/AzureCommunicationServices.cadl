@@ -133,7 +133,14 @@ model AcsChatParticipantAddedToThreadWithUserEventData extends AcsChatThreadEven
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.")
 model AcsChatParticipantRemovedFromThreadWithUserEventData extends AcsChatThreadEventBaseProperties {
-  ...AcsChatParticipantBaseEventData;
+  @doc("The time at which the user was removed to the thread")
+  time?: zonedDateTime;
+
+  @doc("The communication identifier of the user who removed the user")
+  removedByCommunicationIdentifier?: CommunicationIdentifierModel;
+
+  @doc("The details of the user who was removed")
+  participantRemoved?: AcsChatThreadParticipantProperties;
 } 
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.")
