@@ -276,7 +276,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Multivariate.MultivariateDetectionOptions"
+              "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionOptions"
             }
           }
         ],
@@ -411,7 +411,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Univariate.UnivariateDetectionResult"
+              "$ref": "#/definitions/Univariate.UnivariateEntireDetectionResult"
             }
           },
           "default": {
@@ -642,6 +642,29 @@
       ],
       "x-ms-enum": {
         "name": "DataSchema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OneTable",
+            "value": "OneTable",
+            "description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable."
+          },
+          {
+            "name": "MultiTable",
+            "value": "MultiTable",
+            "description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
+          }
+        ]
+      }
+    },
+    "Multivariate.DataSchemaValues": {
+      "type": "string",
+      "enum": [
+        "OneTable",
+        "MultiTable"
+      ],
+      "x-ms-enum": {
+        "name": "DataSchemaValues",
         "modelAsString": false,
         "values": [
           {
@@ -766,7 +789,8 @@
           },
           "x-ms-identifiers": [],
           "x-cadl-name": "Multivariate.ErrorResponse[]",
-          "description": "Error messages when failed to create a model."
+          "description": "Error messages when failed to create a model.",
+          "readOnly": true
         },
         "diagnosticsInfo": {
           "$ref": "#/definitions/Multivariate.DiagnosticsInfo",
@@ -886,7 +910,7 @@
         ]
       }
     },
-    "Multivariate.MultivariateDetectionOptions": {
+    "Multivariate.MultivariateBatchDetectionOptions": {
       "type": "object",
       "properties": {
         "dataSource": {
@@ -917,40 +941,11 @@
         "endTime"
       ]
     },
-    "Multivariate.MultivariateDetectionResult": {
-      "type": "object",
-      "properties": {
-        "resultId": {
-          "type": "string",
-          "description": "Result identifier, which is used to fetch the results of an inference call.",
-          "format": "uuid"
-        },
-        "summary": {
-          "$ref": "#/definitions/Multivariate.MultivariateDetectionResultSummary",
-          "description": "Multivariate anomaly detection status."
-        },
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Multivariate.AnomalyState"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyState[]",
-          "description": "Detection result for each timestamp."
-        }
-      },
-      "description": "Detection results for the given resultId.",
-      "required": [
-        "resultId",
-        "summary",
-        "results"
-      ]
-    },
-    "Multivariate.MultivariateDetectionResultSummary": {
+    "Multivariate.MultivariateBatchDetectionResultSummary": {
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/Multivariate.MultivariateDetectionStatus",
+          "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionStatus",
           "description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED."
         },
         "errors": {
@@ -971,7 +966,7 @@
           "x-cadl-name": "Multivariate.VariableState[]"
         },
         "setupInfo": {
-          "$ref": "#/definitions/Multivariate.MultivariateDetectionOptions",
+          "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionOptions",
           "description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results."
         }
       },
@@ -981,7 +976,7 @@
         "setupInfo"
       ]
     },
-    "Multivariate.MultivariateDetectionStatus": {
+    "Multivariate.MultivariateBatchDetectionStatus": {
       "type": "string",
       "enum": [
         "CREATED",
@@ -990,7 +985,7 @@
         "FAILED"
       ],
       "x-ms-enum": {
-        "name": "MultivariateDetectionStatus",
+        "name": "MultivariateBatchDetectionStatus",
         "modelAsString": false,
         "values": [
           {
@@ -1011,6 +1006,35 @@
           }
         ]
       }
+    },
+    "Multivariate.MultivariateDetectionResult": {
+      "type": "object",
+      "properties": {
+        "resultId": {
+          "type": "string",
+          "description": "Result identifier, which is used to fetch the results of an inference call.",
+          "format": "uuid"
+        },
+        "summary": {
+          "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionResultSummary",
+          "description": "Multivariate anomaly detection status."
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Multivariate.AnomalyState"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Multivariate.AnomalyState[]",
+          "description": "Detection result for each timestamp."
+        }
+      },
+      "description": "Detection results for the given resultId.",
+      "required": [
+        "resultId",
+        "summary",
+        "results"
+      ]
     },
     "Multivariate.MultivariateLastDetectionOptions": {
       "type": "object",
@@ -1470,7 +1494,7 @@
         "series"
       ]
     },
-    "Univariate.UnivariateDetectionResult": {
+    "Univariate.UnivariateEntireDetectionResult": {
       "type": "object",
       "properties": {
         "period": {
