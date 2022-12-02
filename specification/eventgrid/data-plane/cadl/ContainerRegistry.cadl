@@ -1,6 +1,6 @@
 @service({title:"Schema of Azure Container Registry events published to Azure Event Grid",version:"2018-01-01"})
 @doc("Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace ContainerRegistry;
+namespace ContainerRegistry{
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")
 model ContainerRegistryImagePushedEventData extends ContainerRegistryEventData{};
@@ -60,24 +60,8 @@ model ContainerRegistryArtifactEventData {
   connectedRegistry?: ContainerRegistryEventConnectedRegistry;
 }
 
-model ContainerRegistryBaseEventTarget<TmediaType extends string, Tsize extends string, Tdigest extends string, Trepository extends string, Ttag extends string> {
-  @doc(TmediaType)
-  mediaType?: string;
-
-  @doc(Tsize)
-  size?: int64;
-
-  @doc(Tdigest)
-  digest?: string;
-
-  @doc(Trepository)
-  repository?: string;
-
-  @doc(Ttag)
-  tag?: string;
-}
 @doc("The target of the event.")
-model ContainerRegistryEventTarget is ContainerRegistryBaseEventTarget<
+model ContainerRegistryEventTarget is BaseEvent.ContainerRegistryBaseEventTarget<
     "The MIME type of the referenced object.",
     "The number of bytes of the content. Same as Length field.",
     "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
@@ -92,7 +76,7 @@ model ContainerRegistryEventTarget is ContainerRegistryBaseEventTarget<
 }
 
 @doc("The target of the event.")
-model ContainerRegistryArtifactEventTarget is ContainerRegistryBaseEventTarget<
+model ContainerRegistryArtifactEventTarget is BaseEvent.ContainerRegistryBaseEventTarget<
     "The MIME type of the artifact.",
     "The size in bytes of the artifact.",
     "The digest of the artifact.",
@@ -144,4 +128,25 @@ model ContainerRegistryEventSource {
 model ContainerRegistryEventConnectedRegistry {
   @doc("The name of the connected registry that generated this event.")
   name?: string;
+}
+
+}
+
+namespace BaseEvent{
+  model ContainerRegistryBaseEventTarget<TmediaType extends string, Tsize extends string, Tdigest extends string, Trepository extends string, Ttag extends string> {
+    @doc(TmediaType)
+    mediaType?: string;
+  
+    @doc(Tsize)
+    size?: int64;
+  
+    @doc(Tdigest)
+    digest?: string;
+  
+    @doc(Trepository)
+    repository?: string;
+  
+    @doc(Ttag)
+    tag?: string;
+  }
 }
