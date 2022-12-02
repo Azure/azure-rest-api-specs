@@ -1,17 +1,18 @@
-@service({title:"Microsoft.ContainerRegistry",version:"2018-01-01"})
+@service({title:"Schema of Azure Container Registry events published to Azure Event Grid",version:"2018-01-01"})
+@doc("Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace ContainerRegistry;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")
-model ContainerRegistryImagePushedEventData is ContainerRegistryEventData;
+model ContainerRegistryImagePushedEventData extends ContainerRegistryEventData{};
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.")
-model ContainerRegistryImageDeletedEventData is ContainerRegistryEventData;
+model ContainerRegistryImageDeletedEventData extends ContainerRegistryEventData{};
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.")
-model ContainerRegistryChartPushedEventData is ContainerRegistryArtifactEventData;
+model ContainerRegistryChartPushedEventData extends ContainerRegistryArtifactEventData{};
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.")
-model ContainerRegistryChartDeletedEventData is ContainerRegistryArtifactEventData;
+model ContainerRegistryChartDeletedEventData extends ContainerRegistryArtifactEventData{};
 
 model ContainerRegistryBaseEventData {
   @doc("The event ID.")
@@ -76,7 +77,7 @@ model ContainerRegistryBaseEventTarget<TmediaType extends string, Tsize extends 
   tag?: string;
 }
 @doc("The target of the event.")
-model ContainerRegistryEventTarget extends ContainerRegistryBaseEventTarget<
+model ContainerRegistryEventTarget is ContainerRegistryBaseEventTarget<
     "The MIME type of the referenced object.",
     "The number of bytes of the content. Same as Length field.",
     "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
@@ -91,7 +92,7 @@ model ContainerRegistryEventTarget extends ContainerRegistryBaseEventTarget<
 }
 
 @doc("The target of the event.")
-model ContainerRegistryArtifactEventTarget extends ContainerRegistryBaseEventTarget<
+model ContainerRegistryArtifactEventTarget is ContainerRegistryBaseEventTarget<
     "The MIME type of the artifact.",
     "The size in bytes of the artifact.",
     "The digest of the artifact.",
