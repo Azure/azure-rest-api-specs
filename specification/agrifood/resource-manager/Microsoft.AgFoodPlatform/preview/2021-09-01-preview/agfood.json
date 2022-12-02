@@ -1201,6 +1201,418 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions/{solutionId}": {
+      "put": {
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Install Or Update Solution.",
+        "operationId": "Solutions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Solution resource request body.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstallationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_CreateOrUpdate": {
+            "$ref": "./examples/Solutions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Get installed Solution details by Solution id.",
+        "operationId": "Solutions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_Get": {
+            "$ref": "./examples/Solutions_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Uninstall Solution.",
+        "operationId": "Solutions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_Delete": {
+            "$ref": "./examples/Solutions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions": {
+      "get": {
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Get installed Solutions details.",
+        "operationId": "Solutions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "solutionIds",
+            "description": "Installed Solution ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SolutionListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Solutions_List": {
+            "$ref": "./examples/Solutions_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions": {
+      "get": {
+        "tags": [
+          "SolutionsDiscoverability"
+        ],
+        "description": "Get list of farmBeats solutions.",
+        "operationId": "SolutionsDiscoverability_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "farmBeatsSolutionIds",
+            "description": "Ids of FarmBeats Solutions which the customer requests to fetch.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "farmBeatsSolutionNames",
+            "description": "Names of FarmBeats Solutions which the customer requests to fetch.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsSolutionListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SolutionsDiscoverability_List": {
+            "$ref": "./examples/SolutionsDiscoverability_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{farmBeatsSolutionId}": {
+      "get": {
+        "tags": [
+          "SolutionsDiscoverability"
+        ],
+        "description": "Get farmBeats solution by id.",
+        "operationId": "SolutionsDiscoverability_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farmBeatsSolutionId",
+            "description": "farmBeatsSolutionId to be queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsSolution"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionsDiscoverability_Get": {
+            "$ref": "./examples/SolutionsDiscoverability_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1647,6 +2059,382 @@
           "type": "string"
         }
       }
+    },
+    "SolutionProperties": {
+      "description": "Solution resource properties.",
+      "required": [
+        "offerId",
+        "planId",
+        "marketplacePublisherId",
+        "saasSubscriptionId",
+        "saasSubscriptionName",
+        "termId"
+      ],
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerId": {
+          "description": "Partner Id of the Solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "saasSubscriptionId": {
+          "description": "SaaS subscriptionId of the installed SaaS application.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "saasSubscriptionName": {
+          "description": "SaaS subscription name of the installed SaaS application.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "marketplacePublisherId": {
+          "description": "SaaS application Publisher Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "planId": {
+          "description": "SaaS application Plan Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "offerId": {
+          "description": "SaaS application Offer Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "termId": {
+          "description": "SaaS application Term Id.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "SolutionInstallationRequest": {
+      "description": "Solution Installation Request Body.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties"
+        }
+      }
+    },
+    "Solution": {
+      "description": "Solution resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SolutionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
+    "Measure": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ResourceParameter": {
+      "type": "object",
+      "properties": {
+        "resourceIdName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        }
+      }
+    },
+    "Insight": {
+      "type": "object",
+      "properties": {
+        "farmerId": {
+          "type": "string"
+        },
+        "modelId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "modelVersion": {
+          "type": "string"
+        },
+        "insightStartDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "insightEndDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "measures": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Measure"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "eTag": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "InsightAttachment": {
+      "type": "object",
+      "properties": {
+        "insightId": {
+          "type": "string"
+        },
+        "modelId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "fileLink": {
+          "type": "string"
+        },
+        "originalFileName": {
+          "type": "string"
+        },
+        "farmerId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "eTag": {
+          "type": "string"
+        }
+      }
+    },
+    "SolutionEvaluatedOutput": {
+      "type": "object",
+      "properties": {
+        "insightResponse": {
+          "$ref": "#/definitions/Insight"
+        },
+        "insightAttachmentResponse": {
+          "$ref": "#/definitions/InsightAttachment"
+        }
+      }
+    },
+    "FarmBeatsSolutionProperties": {
+      "description": "FarmBeatsSolution properties.",
+      "type": "object",
+      "properties": {
+        "partnerId": {
+          "description": "Solution Partner Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerTenantId": {
+          "description": "Solution Partner Tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataAccessScopes": {
+          "description": "Gets scope of the FarmBeats data access that's required for processing solution request to partner.\r\nExample: For gdd they might need weatherScope and satelliteScope.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails"
+        },
+        "inputParametersValidationScopes": {
+          "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceParameter"
+          },
+          "readOnly": true
+        },
+        "openApiSpecsDictionary": {
+          "description": "Gets apiVersion: Swagger Document Dictionary to capture all api versions of swagger exposed by partner to farmbeats.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        },
+        "evaluatedOutputsDictionary": {
+          "description": "Gets example name: insight sample response Dictionary to capture all variations of computed results ingested by partner.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SolutionEvaluatedOutput"
+          },
+          "readOnly": true
+        },
+        "accessFBApplicationId": {
+          "format": "uuid",
+          "description": "Application id of the multi tenant application to be used by partner to access FarmBeats data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleId": {
+          "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleName": {
+          "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessFBApplicationName": {
+          "description": "Application name of the multi tenant application to be used by partner to access FarmBeatsData.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FarmBeatsSolution": {
+      "description": "FarmBeats solution resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/FarmBeatsSolutionProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "properties": {
+        "saasOfferId": {
+          "type": "string"
+        },
+        "publisherId": {
+          "type": "string"
+        }
+      }
+    },
+    "FarmBeatsSolutionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FarmBeatsSolution"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1665,6 +2453,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "SolutionId": {
+      "in": "path",
+      "name": "solutionId",
+      "description": "Solution Id of the solution.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
     }
   },
   "securityDefinitions": {
