@@ -17,8 +17,8 @@ interface Operations {
   @route("/deployments/{deploymentId}/completions")
   @post
   CompletionsCreate is Foundations.Operation<
-    Request.CompletionsCreate,
-    Response.CompletionsCreate
+    CompletionsCreateRequest,
+    CompletionsCreateResponse
   >;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
@@ -27,7 +27,7 @@ interface Operations {
   @route("/deployments/{deploymentId}/embeddings")
   @post
   EmbeddingsCreate is Foundations.Operation<
-    Request.EmbeddingsCreate,
+    EmbeddingsCreateRequest,
     object // using "void" as a type will generate a 204 response with no body, we are aiming for a 200 with an empty object
   >;
 }
