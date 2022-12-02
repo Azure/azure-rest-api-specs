@@ -1305,8 +1305,12 @@
             "type": "string"
           }
         },
-        "protocol": {
-          "$ref": "#/definitions/NetworkProtocol"
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkProtocol"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1384,6 +1388,7 @@
         "Failed",
         "Succeeded",
         "Canceled",
+        "Creating",
         "Updating",
         "Deleting"
       ],
