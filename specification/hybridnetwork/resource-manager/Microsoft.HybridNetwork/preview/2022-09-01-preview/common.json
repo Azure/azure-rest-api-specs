@@ -222,6 +222,111 @@
         "name": "PublisherScope",
         "modelAsString": true
       }
+    },
+    "ArtifactAccessCredential": {
+      "description": "The artifact manifest credential definition.",
+      "type": "object",
+      "discriminator": "credentialType",
+      "required": [
+        "credentialType"
+      ],
+      "properties": {
+        "credentialType": {
+          "type": "string",
+          "description": "The credential type.",
+          "enum": [
+            "Unknown",
+            "AzureContainerRegistryScopedToken",
+            "AzureStorageAccountToken"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureContainerRegistryScopedTokenCredential": {
+      "description": "The azure container registry scoped token credential definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureContainerRegistryScopedToken",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactAccessCredential"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username of the credential."
+        },
+        "acrToken": {
+          "type": "string",
+          "description": "The credential value."
+        },
+        "acrServerUrl": {
+          "type": "string",
+          "description": "The Acr server url"
+        },
+        "repositories": {
+          "type": "array",
+          "description": "The repositories that could be accessed using the current credential.",
+          "items": {
+            "type": "string",
+            "description": "The repository that could be accessed using the current credential."
+          },
+          "x-ms-identifiers": []
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when credential will expire."
+        }
+      }
+    },
+    "AzureStorageAccountCredential": {
+      "description": "The azure storage account credential definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureStorageAccountToken",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactAccessCredential"
+        }
+      ],
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The storage account Id"
+        },
+        "containerCredentials": {
+          "type": "array",
+          "description": "The containers that could be accessed using the current credential.",
+          "items": {
+            "$ref": "#/definitions/AzureStorageAccountContainerCredential",
+            "description": "The container that could be accessed using the current credential."
+          },
+          "x-ms-identifiers": []
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when credential will expire."
+        }
+      }
+    },
+    "AzureStorageAccountContainerCredential": {
+      "description": "The azure storage account container credential definition.",
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "The storage account container name"
+        },
+        "containerSasUri": {
+          "type": "string",
+          "description": "The storage account container sas uri"
+        }
+      }
     }
   },
   "parameters": {

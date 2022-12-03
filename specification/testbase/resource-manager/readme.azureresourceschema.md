@@ -18,6 +18,7 @@ batch:
   - tag: schema-testbase-2022-09-15-preview
   - tag: schema-testbase-2022-10-15-preview
   - tag: schema-testbase-2022-11-01-preview
+  - tag: schema-testbase-2022-11-15-preview
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
@@ -125,10 +126,19 @@ input-file:
 ```
 
 ### Tag: schema-testbase-2022-11-01-preview and azureresourceschema
-
 ``` yaml $(tag) == 'schema-testbase-2022-11-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.TestBase/preview/2022-11-01-preview/testbase.json
+```
+
+### Tag: schema-testbase-2022-11-15-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-testbase-2022-11-15-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.TestBase/preview/2022-11-15-preview/testbase.json
+  - Microsoft.TestBase/preview/2022-11-15-preview/draftpackage.json
 ```

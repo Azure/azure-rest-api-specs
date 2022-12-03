@@ -426,6 +426,252 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/artifactStores": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyArtifactStores_ListByPublisher",
+        "description": "Lists all available artifact stores under a publisher.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of publisher artifact stores.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStoreOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List artifact stores under a publisher": {
+            "$ref": "./examples/ProxyPublisher/ArtifactStoreListByPublisher.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/artifactStores/{artifactStoreName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyArtifactStores_Get",
+        "description": "Get information about artifact stores.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting network function publisher artifact store.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStoreOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition group overview": {
+            "$ref": "./examples/ProxyPublisher/ArtifactStoreGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/artifactStores/{artifactStoreName}/artifacts/{artifactName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyArtifacts_Get",
+        "description": "Get information about artifacts.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting network function publisher artifacts.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition group overview": {
+            "$ref": "./examples/ProxyPublisher/ArtifactGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/artifactStores/{artifactStoreName}/listCredential": {
+      "post": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ArtifactStores_GetCredential",
+        "description": "Get credential for downloading artifacts defined in artifact store.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the credential for downloading artifacts.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ArtifactAccessCredential"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List a credential for artifact manifest": {
+            "$ref": "./examples/ProxyPublisher/ArtifactStoreGetCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listCredential": {
+      "post": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_GetCredential",
+        "description": "Get credential for downloading artifacts defined in artifact store.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the credential for downloading artifacts.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersionCredential"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List a credential for artifact manifest": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionVersionGetCredentials.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -769,6 +1015,144 @@
         "name": "NetworkFunctionPublisherArtifactType",
         "modelAsString": true
       }
+    },
+    "ArtifactStoreOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactStoreOverview"
+          },
+          "description": "A list of artifact stores."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of artifact stores."
+    },
+    "ArtifactStoreOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ArtifactStoreOverviewPropertiesFormat",
+          "description": "ArtifactStores properties."
+        }
+      },
+      "description": "Artifact store properties Overview."
+    },
+    "ArtifactStoreOverviewPropertiesFormat": {
+      "description": "Artifact store properties Overview.",
+      "type": "object",
+      "properties": {
+        "storeType": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The artifact store type.",
+          "enum": [
+            "Unknown",
+            "AzureContainerRegistry",
+            "AzureStorageAccount"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactStoreType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ArtifactOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactOverview"
+          },
+          "description": "The network function definition overview properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of available artifacts."
+    },
+    "ArtifactOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ArtifactPropertiesFormat",
+          "description": "Artifact overview properties."
+        }
+      }
+    },
+    "ArtifactPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "artifactVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactVersionOverview"
+          },
+          "x-ms-identifiers": [
+            "artifactVersion"
+          ]
+        }
+      },
+      "description": "Network function definition version artifact overview properties."
+    },
+    "ArtifactVersionOverview": {
+      "type": "object",
+      "properties": {
+        "artifactVersion": {
+          "type": "string",
+          "description": "The artifact version."
+        },
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "$ref": "#/definitions/NetworkFunctionPublisherArtifactType"
+        }
+      }
+    },
+    "NetworkFunctionDefinitionVersionCredential": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/ArtifactAccessCredential"
+          },
+          "x-ms-identifiers": [],
+          "description": "The artifact store credential definition."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of credentials."
     }
   }
 }

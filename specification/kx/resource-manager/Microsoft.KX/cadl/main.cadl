@@ -1,0 +1,54 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+@armNamespace
+@serviceTitle("KX Resource Provider")
+@serviceVersion("2022-11-01-preview")
+namespace Microsoft.KX;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+
+@doc("A kdbInsightsEnterprise resource")
+model KdbInsightsEnterpriseResource is TrackedResource<KdbInsightsEnterpriseProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("kdbInsightsEnterpriseName")
+  @segment("kdbInsightsEnterprise")
+  @path
+  @doc("The name of the kdbInsightsEnterprise resource")
+  name: string;
+}
+
+@doc("Provisioning State")
+@knownValues(ProvisioningStateKV)
+model ProvisioningState is string {}
+
+enum ProvisioningStateKV {
+  Succeeded,
+  Failed,
+  Canceled,
+  Provisioning,
+  Deleting,
+  Accepted,
+}
+
+@secret
+model PasswordString is string {}
+
+@doc("Details of the kdbInsightsEnterprise resource.")
+model KdbInsightsEnterpriseProperties {
+  @visibility("create")
+  @doc("The password to use for KeyCloak")
+  @pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*]).{12,320}$")
+  keyCloakPassword?: PasswordString;
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@armResourceOperations
+interface KdbInsightsEnterprise extends ResourceOperations<KdbInsightsEnterpriseResource, KdbInsightsEnterpriseProperties> {}
