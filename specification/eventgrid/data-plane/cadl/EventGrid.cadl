@@ -12,6 +12,8 @@ using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
 
+//TODO: add in publish here
+
 @doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
 model EventGridEvent {
   @doc("An unique identifier for the event.")
@@ -41,6 +43,7 @@ model EventGridEvent {
     
 }
 
+//TODO: how to get additional properties true?
 @doc("Properties of an event published to an Event Grid topic using the CloudEvent 1.0 Schema")
 model CloudEventEvent {
   @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
@@ -52,7 +55,7 @@ model CloudEventEvent {
   @doc("Event data specific to the event type.")
   data?: object;
 
-  @doc("Event data specific to the event type.")
+  @doc("Event data specific to the event type, encoded as a base64 string.")
   data_base64?: bytes;
   
   @doc("Type of event related to the originating occurrence.")
@@ -72,6 +75,7 @@ model CloudEventEvent {
 
   @doc("This describes the subject of the event in the context of the event producer (identified by source).")
   subject?: string;
+  
 }
 
 @doc("Properties of an event published to an Event Grid topic using a custom schema")

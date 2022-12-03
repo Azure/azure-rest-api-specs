@@ -3,12 +3,19 @@
 namespace MediaServices;
 
 enum MediaJobState {
+	@doc("The job was canceled. This is a final state for the job.")
 	Canceled,
+	@doc("The job is in the process of being canceled. This is a transient state for the job.")
 	Canceling,
+	@doc("The job has encountered an error. This is a final state for the job.")
 	Error,
+	@doc("The job is finished. This is a final state for the job.")
 	Finished,
+	@doc("The job is processing. This is a transient state for the job.")
 	Processing,
+	@doc("The job is in a queued state, waiting for resources to become available. This is a transient state.")
 	Queued,
+	@doc("The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states.")
 	Scheduled,
 }
 
@@ -23,29 +30,47 @@ model MediaJobStateChangeEventData {
 }
 
 enum MediaJobErrorCode {
+	@doc("Fatal service error, please contact support.")
 	ServiceError,
+	@doc("Transient error, please retry, if retry is unsuccessful, please contact support.")
 	ServiceTransientError,
+	@doc("While trying to download the input files, the files were not accessible, please check the availability of the source.")
 	DownloadNotAccessible,
+	@doc("While trying to download the input files, there was an issue during transfer (storage service, network errors), see details and check your source.")
 	DownloadTransientError,
+	@doc("While trying to upload the output files, the destination was not reachable, please check the availability of the destination.")
 	UploadNotAccessible,
+	@doc("While trying to upload the output files, there was an issue during transfer (storage service, network errors), see details and check your destination.")
 	UploadTransientError,
+	@doc("There was a problem with the combination of input files and the configuration settings applied, fix the configuration settings and retry with the same input, or change input to match the configuration.")
 	ConfigurationUnsupported,
+	@doc("There was a problem with the input content (for example: zero byte files, or corrupt/non-decodable files), check the input files.")
 	ContentMalformed,
+	@doc("There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files.")
 	ContentUnsupported,
+	@doc("There is an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support.")
 	IdentityUnsupported,
 }
 
 enum MediaJobErrorCategory {
+	@doc("The error is service related.")
 	Service,
+	@doc("The error is download related.")
 	Download,
+	@doc("The error is upload related.")
 	Upload,
+	@doc("The error is configuration related.")
 	Configuration,
+	@doc("The error is related to data in the input files.")
 	Content,
+	@doc("The error is related to account information.")
 	Account,
 }
 
 enum MediaJobRetry {
+	@doc("Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected.")
 	DoNotRetry,
+	@doc("Issue may be resolved after waiting for a period of time and resubmitting the same Job.")
 	MayRetry,
 }
 
@@ -72,6 +97,7 @@ model MediaJobErrorDetail {
 }
 
 @doc("The event data for a Job output.")
+@discriminator("@odata.type")
 model MediaJobOutput {
 	@doc("The discriminator for derived types.")
 	@projectedName("json","@odata.type")
@@ -87,12 +113,14 @@ model MediaJobOutput {
 }
 
 @doc("The event data for a Job output asset.")
+@discriminator("#Microsoft.Media.JobOutputAsset")
 model MediaJobOutputAsset {
 	@doc("Gets the Job output asset name.")
 	assetName?: string;
 }
 
 @doc("Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.")
+@discriminator("#Microsoft.Media.JobOutputProgress")
 model MediaJobOutputProgressEventData {
 	@doc("Gets the Job output label.")
 	label?: string;
@@ -113,55 +141,61 @@ model MediaJobOutputStateChangeEventData {
 }
 
 @doc("Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.")
-model MediaJobScheduledEventData is MediaJobStateChangeEventData;
+@discriminator("#Microsoft.Media.JobScheduled")
+model MediaJobScheduledEventData extends MediaJobStateChangeEventData{};
 
 @doc("Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event.")
-model MediaJobProcessingEventData is MediaJobStateChangeEventData;
+@discriminator("#Microsoft.Media.JobProcessing")
+model MediaJobProcessingEventData extends MediaJobStateChangeEventData{};
 
 @doc("Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event.")
-model MediaJobCancelingEventData is MediaJobStateChangeEventData;
+@discriminator("#Microsoft.Media.JobCanceling")
+model MediaJobCancelingEventData extends MediaJobStateChangeEventData{};
 
 @doc("Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.")
-model MediaJobFinishedEventData {
+@discriminator("#Microsoft.Media.JobFinished")
+model MediaJobFinishedEventData extends MediaJobStateChangeEventData {
 	@doc("Gets the Job outputs.")
 	outputs?: MediaJobOutput[];
 }
 
 @doc("Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event.")
-model MediaJobCanceledEventData {
+@discriminator("#Microsoft.Media.JobCanceled")
+model MediaJobCanceledEventData extends MediaJobStateChangeEventData {
 	@doc("Gets the Job outputs.")
 	outputs?: MediaJobOutput[];
 }
 
 @doc("Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event.")
-model MediaJobErroredEventData {
+@discriminator("#Microsoft.Media.JobErrored")
+model MediaJobErroredEventData extends MediaJobStateChangeEventData{
 	@doc("Gets the Job outputs.")
 	outputs?: MediaJobOutput[];
 }
 
 @doc("Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.")
 @discriminator("#Microsoft.Media.JobOutputCanceled")
-model MediaJobOutputCanceledEventData is MediaJobOutputStateChangeEventData;
+model MediaJobOutputCanceledEventData extends MediaJobOutputStateChangeEventData{};
 
 @doc("Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.")
 @discriminator("#Microsoft.Media.JobOutputCanceling")
-model MediaJobOutputCancelingEventData is MediaJobOutputStateChangeEventData;
+model MediaJobOutputCancelingEventData extends MediaJobOutputStateChangeEventData{};
 
 @doc("Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.")
 @discriminator("#Microsoft.Media.JobOutputErrored")
-model MediaJobOutputErroredEventData is MediaJobOutputStateChangeEventData;
+model MediaJobOutputErroredEventData extends MediaJobOutputStateChangeEventData{};
 
 @doc("Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.")
 @discriminator("#Microsoft.Media.JobOutputFinished")
-model MediaJobOutputFinishedEventData is MediaJobOutputStateChangeEventData;
+model MediaJobOutputFinishedEventData extends MediaJobOutputStateChangeEventData{};
 
 @doc("Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.")
 @discriminator("#Microsoft.Media.JobOutputProcessing")
-model MediaJobOutputProcessingEventData is MediaJobOutputStateChangeEventData;
+model MediaJobOutputProcessingEventData extends MediaJobOutputStateChangeEventData{};
 
 @doc("Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.")
 @discriminator("#Microsoft.Media.JobOutputCanceled")
-model MediaJobOutputScheduledEventData is MediaJobOutputStateChangeEventData;
+model MediaJobOutputScheduledEventData extends MediaJobOutputStateChangeEventData{};
 
 model MediaLiveEventConnectionBaseData {
 	@doc("Gets the ingest URL provided by the live event.")
