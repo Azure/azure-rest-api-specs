@@ -3,7 +3,7 @@
   "info": {
     "title": "DeviceUpdate",
     "description": "Microsoft Device Update resource provider.",
-    "version": "2022-10-01"
+    "version": "2022-12-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1336,6 +1336,10 @@
                 "modelAsString": true
               }
             },
+            "encryption": {
+              "$ref": "#/definitions/Encryption",
+              "description": "CMK encryption at rest properties"
+            },
             "locations": {
               "description": "Device Update account primary and failover location details",
               "readOnly": true,
@@ -1352,6 +1356,19 @@
           "description": "The type of identity used for the resource."
         }
       }
+    },
+    "Encryption": {
+      "properties": {
+        "keyVaultKeyUri": {
+          "description": "The URI of the key vault",
+          "type": "string"
+        },
+        "userAssignedIdentity": {
+          "description": "The full resourceId of the user assigned identity to be used for key vault access. Identity has to be also assigned to the Account",
+          "type": "string"
+        }
+      },
+      "description": "The CMK encryption settings on the Device Update account."
     },
     "Location": {
       "type": "object",
