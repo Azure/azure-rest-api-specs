@@ -1,68 +1,33 @@
 @service({title:"Schema of Azure resource events published to Azure Event Grid", version: "2018-01-01"})
 @doc("Describes the schema of the Azure resource events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace Resources;
-
-model ResourceBaseEventData {
-  @doc("The tenant ID of the resource.")
-  tenantId?: string;
-
-  @doc("The subscription ID of the resource.")
-  subscriptionId?: string;
-
-  @doc("The resource group of the resource.")
-  resourceGroup?: string;
-
-  @doc("The resource provider performing the operation.")
-  resourceProvider?: string;
-
-  @doc("The URI of the resource in the operation.")
-  resourceUri?: string;
-
-  @doc("The operation that was performed.")
-  operationName?: string;
-
-  @doc("The status of the operation.")
-  status?: string;
-
-  @doc("The requested authorization for the operation.")
-  authorization?: ResourceAuthorization;
-
-  @doc("The properties of the claims.")
-  claims?: Record<string>;
-
-  @doc("An operation ID used for troubleshooting.")
-  correlationId?: string;
-
-  @doc("The details of the operation.")
-  httpRequest?: ResourceHttpRequest;
-}
+namespace Resources{
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.")
-model ResourceWriteSuccessData is ResourceBaseEventData;
+model ResourceWriteSuccessData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteFailure event. This is raised when a resource create or update operation fails.")
-model ResourceWriteFailureData is ResourceBaseEventData;
+model ResourceWriteFailureData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled.")
-model ResourceWriteCancelData is ResourceBaseEventData;
+model ResourceWriteCancelData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteSuccess event. This is raised when a resource delete operation succeeds.")
-model ResourceDeleteSuccessData is ResourceBaseEventData;
+model ResourceDeleteSuccessData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteFailure event. This is raised when a resource delete operation fails.")
-model ResourceDeleteFailureData is ResourceBaseEventData;
+model ResourceDeleteFailureData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteCancel event. This is raised when a resource delete operation is canceled.")
-model ResourceDeleteCancelData is ResourceBaseEventData;
+model ResourceDeleteCancelData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionSuccess event. This is raised when a resource action operation succeeds.")
-model ResourceActionSuccessData is ResourceBaseEventData;
+model ResourceActionSuccessData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionFailure event. This is raised when a resource action operation fails.")
-model ResourceActionFailureData is ResourceBaseEventData;
+model ResourceActionFailureData is BaseEvents.ResourceBaseEventData;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionCancel event. This is raised when a resource action operation is canceled.")
-model ResourceActionCancelData is ResourceBaseEventData;
+model ResourceActionCancelData is BaseEvents.ResourceBaseEventData;
 
 @doc("The details of the HTTP request.")
 model ResourceHttpRequest {
@@ -89,4 +54,42 @@ model ResourceAuthorization {
 
   @doc("The evidence for the authorization.")
   evidence?: Record<string>;
+}
+}
+
+namespace BaseEvents{
+  model ResourceBaseEventData {
+    @doc("The tenant ID of the resource.")
+    tenantId?: string;
+  
+    @doc("The subscription ID of the resource.")
+    subscriptionId?: string;
+  
+    @doc("The resource group of the resource.")
+    resourceGroup?: string;
+  
+    @doc("The resource provider performing the operation.")
+    resourceProvider?: string;
+  
+    @doc("The URI of the resource in the operation.")
+    resourceUri?: string;
+  
+    @doc("The operation that was performed.")
+    operationName?: string;
+  
+    @doc("The status of the operation.")
+    status?: string;
+  
+    @doc("The requested authorization for the operation.")
+    authorization?: Resources.ResourceAuthorization;
+  
+    @doc("The properties of the claims.")
+    claims?: Record<string>;
+  
+    @doc("An operation ID used for troubleshooting.")
+    correlationId?: string;
+  
+    @doc("The details of the operation.")
+    httpRequest?: Resources.ResourceHttpRequest;
+  }
 }
