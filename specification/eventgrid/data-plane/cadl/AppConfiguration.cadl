@@ -3,8 +3,8 @@
 namespace AppConfiguration;
 
 enum AppConfigurationEventTypes {
-  modified;
-  deleted;
+  "modified",
+  "deleted",
 }
 
 model AppConfigurationBase<TEventType> {
@@ -22,7 +22,7 @@ model AppConfigurationBase<TEventType> {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.")
-model AppConfigurationKeyValueModifiedEventData is AppConfigurationBase<AppConfigurationEventTypes.modified>;
+model AppConfigurationKeyValueModifiedEventData is AppConfigurationBase<AppConfigurationEventTypes.modified>{};
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.")
-model AppConfigurationKeyValueDeletedEventData is AppConfigurationBase<AppConfigurationEventTypes.deleted>;
+model AppConfigurationKeyValueDeletedEventData is AppConfigurationBase<AppConfigurationEventTypes.deleted>{};

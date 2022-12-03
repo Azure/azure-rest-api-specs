@@ -1,57 +1,60 @@
 @service({title:"Schema of Azure Key Vault events published to Azure Event Grid", version:"2018-01-01"})
 @doc("Describes the schema of the Azure Key Vault events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace KeyVault;
-
-model KeyVaultCertificateBase {
-  @doc("The id of the object that triggered this event.")
-  Id?: string;
-
-  @doc("Key vault name of the object that triggered this event.")
-  VaultName?: string;
-
-  @doc("The type of the object that triggered this event")
-  ObjectType?: string;
-
-  @doc("The name of the object that triggered this event")
-  ObjectName?: string;
-
-  @doc("The version of the object that triggered this event")
-  Version?: string;
-
-  @doc("Not before date of the object that triggered this event")
-  NBF?: float64;
-
-  @doc("The expiration date of the object that triggered this event")
-  EXP?: float64;
-}
-
+namespace KeyVault{
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNewVersionCreated event.")
-model KeyVaultCertificateNewVersionCreatedEventData is KeyVaultCertificateBase;
+model KeyVaultCertificateNewVersionCreatedEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNearExpiry event.")
-model KeyVaultCertificateNearExpiryEventData is KeyVaultCertificateBase;
+model KeyVaultCertificateNearExpiryEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateExpired event.")
-model KeyVaultCertificateExpiredEventData is KeyVaultCertificateBase;
+model KeyVaultCertificateExpiredEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyNewVersionCreated event.")
-model KeyVaultKeyNewVersionCreatedEventData is KeyVaultCertificateBase;
+model KeyVaultKeyNewVersionCreatedEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyNearExpiry event.")
-model KeyVaultKeyNearExpiryEventData is KeyVaultCertificateBase;
+model KeyVaultKeyNearExpiryEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyExpired event.")
-model KeyVaultKeyExpiredEventData is KeyVaultCertificateBase;
+model KeyVaultKeyExpiredEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNewVersionCreated event.")
-model KeyVaultSecretNewVersionCreatedEventData is KeyVaultCertificateBase;
+model KeyVaultSecretNewVersionCreatedEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNearExpiry event.")
-model KeyVaultSecretNearExpiryEventData is KeyVaultCertificateBase;
+model KeyVaultSecretNearExpiryEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretExpired event.")
-model KeyVaultSecretExpiredEventData is KeyVaultCertificateBase;
+model KeyVaultSecretExpiredEventData is BaseEvents.KeyVaultCertificateBase;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.")
-model KeyVaultVaultAccessPolicyChangedEventData is KeyVaultCertificateBase;
+model KeyVaultVaultAccessPolicyChangedEventData is BaseEvents.KeyVaultCertificateBase;
+
+}
+
+namespace BaseEvents{
+  model KeyVaultCertificateBase {
+    @doc("The id of the object that triggered this event.")
+    Id?: string;
+  
+    @doc("Key vault name of the object that triggered this event.")
+    VaultName?: string;
+  
+    @doc("The type of the object that triggered this event")
+    ObjectType?: string;
+  
+    @doc("The name of the object that triggered this event")
+    ObjectName?: string;
+  
+    @doc("The version of the object that triggered this event")
+    Version?: string;
+  
+    @doc("Not before date of the object that triggered this event")
+    NBF?: float64;
+  
+    @doc("The expiration date of the object that triggered this event")
+    EXP?: float64;
+  }
+}
