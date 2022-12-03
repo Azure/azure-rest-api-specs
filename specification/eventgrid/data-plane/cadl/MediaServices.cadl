@@ -1,6 +1,6 @@
 @service({title:"Schema of Azure Media Services events published to Azure Event Grid",version:"2018-01-01"})
 @doc("Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace MediaServices;
+namespace MediaServices{
 
 enum MediaJobState {
 	@doc("The job was canceled. This is a final state for the job.")
@@ -197,22 +197,12 @@ model MediaJobOutputProcessingEventData extends MediaJobOutputStateChangeEventDa
 @discriminator("#Microsoft.Media.JobOutputCanceled")
 model MediaJobOutputScheduledEventData extends MediaJobOutputStateChangeEventData{};
 
-model MediaLiveEventConnectionBaseData {
-	@doc("Gets the ingest URL provided by the live event.")
-	ingestUrl?: string;
-	@doc("Gets the stream Id.")
-	streamId?: string;
-	@doc("Gets the remote IP.")
-	encoderIp?: string;
-	@doc("Gets the remote port.")
-	encoderPort?: string;
-}
 @doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.")
-model MediaLiveEventEncoderConnectedEventData is MediaLiveEventConnectionBaseData;
+model MediaLiveEventEncoderConnectedEventData is BaseEvents.MediaLiveEventConnectionBaseData;
 
 @doc("Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event.")
 model MediaLiveEventConnectionRejectedEventData {
-	...MediaLiveEventConnectionBaseData;
+	...BaseEvents.MediaLiveEventConnectionBaseData;
 
 	@doc("Gets the result code.")
 	resultCode?: string;
@@ -220,7 +210,7 @@ model MediaLiveEventConnectionRejectedEventData {
 
 @doc("Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event.")
 model MediaLiveEventEncoderDisconnectedEventData {
-	...MediaLiveEventConnectionBaseData;
+	...BaseEvents.MediaLiveEventConnectionBaseData;
 
 	@doc("Gets the result code.")
 	resultCode?: string;
@@ -354,4 +344,18 @@ model MediaLiveEventChannelArchiveHeartbeatEventData {
 	channelLatencyMs: string;
 	@doc("Gets the latency result code.")
 	latencyResultCode: string;
+}
+}
+
+namespace BaseEvents{
+	model MediaLiveEventConnectionBaseData {
+		@doc("Gets the ingest URL provided by the live event.")
+		ingestUrl?: string;
+		@doc("Gets the stream Id.")
+		streamId?: string;
+		@doc("Gets the remote IP.")
+		encoderIp?: string;
+		@doc("Gets the remote port.")
+		encoderPort?: string;
+	}
 }
