@@ -2059,6 +2059,382 @@
           "type": "string"
         }
       }
+    },
+    "SolutionProperties": {
+      "description": "Solution resource properties.",
+      "required": [
+        "offerId",
+        "planId",
+        "marketplacePublisherId",
+        "saasSubscriptionId",
+        "saasSubscriptionName",
+        "termId"
+      ],
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerId": {
+          "description": "Partner Id of the Solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "saasSubscriptionId": {
+          "description": "SaaS subscriptionId of the installed SaaS application.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "saasSubscriptionName": {
+          "description": "SaaS subscription name of the installed SaaS application.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "marketplacePublisherId": {
+          "description": "SaaS application Publisher Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "planId": {
+          "description": "SaaS application Plan Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "offerId": {
+          "description": "SaaS application Offer Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "termId": {
+          "description": "SaaS application Term Id.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "SolutionInstallationRequest": {
+      "description": "Solution Installation Request Body.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties"
+        }
+      }
+    },
+    "Solution": {
+      "description": "Solution resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SolutionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
+    "Measure": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ResourceParameter": {
+      "type": "object",
+      "properties": {
+        "resourceIdName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        }
+      }
+    },
+    "Insight": {
+      "type": "object",
+      "properties": {
+        "farmerId": {
+          "type": "string"
+        },
+        "modelId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "modelVersion": {
+          "type": "string"
+        },
+        "insightStartDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "insightEndDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "measures": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Measure"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "eTag": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "InsightAttachment": {
+      "type": "object",
+      "properties": {
+        "insightId": {
+          "type": "string"
+        },
+        "modelId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "fileLink": {
+          "type": "string"
+        },
+        "originalFileName": {
+          "type": "string"
+        },
+        "farmerId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "eTag": {
+          "type": "string"
+        }
+      }
+    },
+    "SolutionEvaluatedOutput": {
+      "type": "object",
+      "properties": {
+        "insightResponse": {
+          "$ref": "#/definitions/Insight"
+        },
+        "insightAttachmentResponse": {
+          "$ref": "#/definitions/InsightAttachment"
+        }
+      }
+    },
+    "FarmBeatsSolutionProperties": {
+      "description": "FarmBeatsSolution properties.",
+      "type": "object",
+      "properties": {
+        "partnerId": {
+          "description": "Solution Partner Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerTenantId": {
+          "description": "Solution Partner Tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataAccessScopes": {
+          "description": "Gets scope of the FarmBeats data access that's required for processing solution request to partner.\r\nExample: For gdd they might need weatherScope and satelliteScope.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails"
+        },
+        "inputParametersValidationScopes": {
+          "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceParameter"
+          },
+          "readOnly": true
+        },
+        "openApiSpecsDictionary": {
+          "description": "Gets apiVersion: Swagger Document Dictionary to capture all api versions of swagger exposed by partner to farmbeats.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        },
+        "evaluatedOutputsDictionary": {
+          "description": "Gets example name: insight sample response Dictionary to capture all variations of computed results ingested by partner.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SolutionEvaluatedOutput"
+          },
+          "readOnly": true
+        },
+        "accessFBApplicationId": {
+          "format": "uuid",
+          "description": "Application id of the multi tenant application to be used by partner to access FarmBeats data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleId": {
+          "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleName": {
+          "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessFBApplicationName": {
+          "description": "Application name of the multi tenant application to be used by partner to access FarmBeatsData.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FarmBeatsSolution": {
+      "description": "FarmBeats solution resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/FarmBeatsSolutionProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "properties": {
+        "saasOfferId": {
+          "type": "string"
+        },
+        "publisherId": {
+          "type": "string"
+        }
+      }
+    },
+    "FarmBeatsSolutionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FarmBeatsSolution"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
