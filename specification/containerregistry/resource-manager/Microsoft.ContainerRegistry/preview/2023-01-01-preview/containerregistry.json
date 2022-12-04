@@ -265,13 +265,13 @@
               "$ref": "#/definitions/CacheRule"
             }
           },
-          "202": {
+          "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CacheRule"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -290,7 +290,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -880,13 +880,13 @@
               "$ref": "#/definitions/CredentialSet"
             }
           },
-          "202": {
+          "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CredentialSet"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -905,7 +905,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
