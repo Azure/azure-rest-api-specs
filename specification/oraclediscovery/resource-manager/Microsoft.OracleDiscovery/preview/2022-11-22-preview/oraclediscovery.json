@@ -129,8 +129,12 @@
         }
       },
       "delete": {
-        "tags": ["OracleSites"],
+        "tags": [ "OracleSites" ],
         "operationId": "OracleSites_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "summary": "Implements OracleSites DELETE method.",
         "description": "Deletes the OracleSites resource.",
         "x-ms-examples": {
@@ -167,7 +171,7 @@
             "description": "Accepted"
           },
           "204": {
-            "description": "No Content"
+            "description": "The OracleSites resource is already deleted or not found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -469,8 +473,12 @@
         }
       },
       "delete": {
-        "tags": ["OracleServers"],
+        "tags": [ "OracleServers" ],
         "operationId": "OracleServers_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "summary": "Implements OracleServers DELETE method.",
         "description": "Deletes the OracleServers resource.",
         "x-ms-examples": {
@@ -517,7 +525,7 @@
             "description": "Accepted"
           },
           "204": {
-            "description": "No Content"
+            "description": "The OracleServer resource is already deleted or not found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
