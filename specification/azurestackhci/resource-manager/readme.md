@@ -56,23 +56,6 @@ directive:
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
-### Tag: package-2022-12
-
-These settings apply only when `--tag=package-2022-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-10'
-input-file:
-  - Microsoft.AzureStackHCI/stable/2022-12-01/arcSettings.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/clusters.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/extensions.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/operations.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/offers.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/skus.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/publishers.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/updateRuns.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/updateSummaries.json
-  - Microsoft.AzureStackHCI/stable/2022-12-01/updates.json
-```
 
 ### Tag: package-2022-10
 
@@ -177,7 +160,6 @@ These settings apply only when `--tag=package-preview-2021-07` is specified on t
 input-file:
   - Microsoft.AzureStackHCI/preview/2021-07-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2021-07-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/extensions.json
   - Microsoft.AzureStackHCI/preview/2021-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2021-07-01-preview/networkInterfaces.json
   - Microsoft.AzureStackHCI/preview/2021-07-01-preview/operations.json
