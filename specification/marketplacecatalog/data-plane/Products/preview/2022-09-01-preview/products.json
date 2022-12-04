@@ -75,7 +75,6 @@
             "in": "query",
             "description": "Add hide key to retrieve preview products",
             "collectionFormat": "multi",
-            "x-nullable": true,
             "items": {
               "type": "string"
             }
@@ -122,16 +121,14 @@
             "x-originalName": "callingApp",
             "in": "header",
             "required": true,
-            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'",
-            "x-nullable": true
+            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'"
           },
           {
             "type": "string",
             "name": "storefront",
             "in": "query",
             "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
-            "default": "azure",
-            "x-nullable": true
+            "default": "azure"
           },
           {
             "type": "string",
@@ -139,23 +136,20 @@
             "x-originalName": "apiVersion",
             "in": "query",
             "required": true,
-            "description": "Version of the REST API used for the request. ",
-            "x-nullable": true
+            "description": "Version of the REST API used for the request. "
           },
           {
             "type": "string",
             "name": "language",
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'",
-            "default": "en",
-            "x-nullable": true
+            "default": "en"
           },
           {
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "x-nullable": true
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']"
           },
           {
             "type": "array",
@@ -163,7 +157,6 @@
             "in": "query",
             "description": "Add hide key to retrieve preview products",
             "collectionFormat": "multi",
-            "x-nullable": true,
             "items": {
               "type": "string"
             }
@@ -178,7 +171,7 @@
             "type": "string",
             "name": "filter",
             "in": "query",
-            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
+            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'. ProductSummary fields that can be filtered by are: `displayName` \n- `test1` \n `test2`"
           },
           {
             "type": "string",
