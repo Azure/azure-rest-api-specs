@@ -263,13 +263,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/clusters.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/networkInterfaces.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualMachines.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2020-10-01
