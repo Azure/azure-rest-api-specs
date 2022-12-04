@@ -267,20 +267,14 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/clusters.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/networkInterfaces.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualMachines.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualNetworks.json
 ```
 
-### Tag: package-2020-10-01
+### Tag: package-2020-10
 
-These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+``` yaml $(tag) == 'package-2020-10'
 input-file:
   - Microsoft.AzureStackHCI/stable/2020-10-01/azurestackhci.json
 ```
