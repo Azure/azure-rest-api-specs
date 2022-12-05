@@ -1329,6 +1329,70 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/start/operationstatuses/{integrationRuntimeOperationId}": {
+      "get": {
+        "operationId": "IntegrationRuntime Start Operation Status",
+        "summary": "Get integration runtime start operation status",
+        "description": "Get an integration runtime start operation status",
+        "tags": [
+          "IntegrationRuntime"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameActionParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameOperationIdParameter"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET integration runtime operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get integration runtime operation status": {
+            "$ref": "./examples/IntegrationRuntimes_Start_OperationStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3070,6 +3134,38 @@
           "type": "integer",
           "format": "int32"
         }
+      }
+    }
+  },
+  "IntegrationRuntimeOperationStatus": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "status": {
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "description": "status of Start Integrationruntimes.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Workspace status",
+            "modelAsString": true
+          }
+        }
+      },
+      "name": {
+        "type": "string",
+        "description": "The operation name."
+      },
+      "properties": {
+        "type": "object",
+        "description": "The operation properties."
+      },
+      "error": {
+        "type": "string",
+        "description": "The operation error message."
       }
     }
   },
