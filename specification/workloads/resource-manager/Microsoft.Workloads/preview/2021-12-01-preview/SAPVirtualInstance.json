@@ -287,6 +287,18 @@
           "Create Infrastructure only for Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
           },
+          "Detect SAP Software Installation on a Single Server System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_SingleServer.json"
+          },
+          "Detect SAP Software Installation on a Distributed System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_Distributed.json"
+          },
+          "Detect SAP Software Installation on an HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_HA_AvSet.json"
+          },
+          "Detect SAP Software Installation on an HA System with Availability Zone": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_HA_AvZone.json"
+          },
           "Install SAP Software on Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_SingleServer.json"
           },
@@ -1531,7 +1543,8 @@
       "description": "The SAP software installation Type.",
       "enum": [
         "ServiceInitiated",
-        "SAPInstallWithoutOSConfig"
+        "SAPInstallWithoutOSConfig",
+        "External"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1616,6 +1629,8 @@
         "SoftwareInstallationPending",
         "SoftwareInstallationInProgress",
         "SoftwareInstallationFailed",
+        "SoftwareDetectionInProgress",
+        "SoftwareDetectionFailed",
         "DiscoveryPending",
         "DiscoveryInProgress",
         "DiscoveryFailed",
@@ -2545,6 +2560,23 @@
         "sapBitsStorageAccountId",
         "softwareVersion"
       ]
+    },
+    "ExternalInstallationSoftwareConfiguration": {
+      "description": "The SAP Software configuration Input when the software is installed externally outside the service.",
+      "type": "object",
+      "x-ms-discriminator-value": "External",
+      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "properties": {
+        "centralServerVmId": {
+          "type": "string",
+          "description": "The resource ID of the virtual machine containing the central server instance."
+        }
+      }
     },
     "HighAvailabilitySoftwareConfiguration": {
       "description": "Gets or sets the HA software configuration.",

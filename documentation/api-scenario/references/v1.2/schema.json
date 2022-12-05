@@ -106,9 +106,17 @@
                 "key": {
                   "type": "string"
                 },
-                "headerName": {
+                "name": {
                   "type": "string",
                   "default": "Authorization"
+                },
+                "in": {
+                  "type": "string",
+                  "enum": [
+                    "header",
+                    "query"
+                  ],
+                  "default": "header"
                 }
               },
               "required": [
@@ -385,6 +393,9 @@
         },
         {
           "$ref": "#/definitions/StepArmDeploymentScript"
+        },
+        {
+          "$ref": "#/definitions/StepRoleAssignment"
         }
       ]
     },
@@ -460,7 +471,7 @@
           "minProperties": 1,
           "additionalProperties": false,
           "patternProperties": {
-            "^([0-9]{3})$": {
+            "^([2-5][0-9]{2})|([245]xx)$": {
               "oneOf": [
                 {
                   "type": "object",
@@ -613,6 +624,51 @@
       "required": [
         "armDeploymentScript"
       ],
+      "additionalProperties": false
+    },
+    "StepRoleAssignment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "roleAssignment": {
+          "type": "object",
+          "properties": {
+            "roleName": {
+              "type": "string"
+            },
+            "roleDefinitionId": {
+              "type": "string"
+            },
+            "principalId": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "principalType": {
+              "type": "string",
+              "enum": ["User", "Group", "ServicePrincipal", "ForeignGroup", "Device"],
+              "default": "ServicePrincipal"
+            }
+          },
+          "oneOf": [
+            {
+              "required": ["roleName", "principalId", "scope"]
+            },
+            {
+              "required": ["roleDefinitionId", "principalId", "scope"]
+            }
+          ]
+        },
+        "step": {},
+        "description": {},
+        "variables": {}
+      },
+      "required": ["roleAssignment"],
       "additionalProperties": false
     },
     "JsonPatchOp": {

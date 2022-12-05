@@ -1330,20 +1330,24 @@
         "conversations": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ConversationPIIResult"
-              },
-              {
-                "$ref": "#/definitions/ConversationResultBase"
-              }
-            ]
+            "$ref": "#/definitions/ConversationalPIIResultWithResultBase"
           }
         }
       },
       "allOf": [
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ConversationalPIIResultWithResultBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationPIIResult"
+        },
+        {
+          "$ref": "#/definitions/ConversationResultBase"
         }
       ]
     },
@@ -1518,14 +1522,7 @@
         "conversations": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ConversationsSummaryResult"
-              },
-              {
-                "$ref": "#/definitions/ConversationResultBase"
-              }
-            ]
+            "$ref": "#/definitions/ConversationsSummaryResult"
           }
         }
       },
@@ -1544,14 +1541,15 @@
         "summaries": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SummaryResultItem"
-              }
-            ]
+            "$ref": "#/definitions/SummaryResultItem"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResultBase"
+        }
+      ]
     },
     "SummaryResultItem": {
       "type": "object",

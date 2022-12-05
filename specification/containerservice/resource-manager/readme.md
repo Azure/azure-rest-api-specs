@@ -34,7 +34,26 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-08-03
+tag: package-2022-09
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.ContainerService/stable/2022-09-01/managedClusters.json
+```
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.ContainerService/preview/2022-09-02-preview/managedClusters.json
+  - Microsoft.ContainerService/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-08-03-only
@@ -789,7 +808,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -835,4 +854,12 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where: $.definitions.ManagedClusterSecurityProfile.properties.customCATrustCertificates      
+    reason: customCATrustCertificates contains a widely used acronym, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
+    reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
 ```
