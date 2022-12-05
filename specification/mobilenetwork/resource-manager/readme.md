@@ -90,25 +90,6 @@ input-file:
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/ts29571.json
 ```
 
-### Tag: package-2021-04-01-preview
-
-These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-04-01-preview'
-input-file:
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/attachedDataNetwork.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/common.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/dataNetwork.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/mobileNetwork.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/operation.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreControlPlane.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreDataPlane.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/service.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/simPolicy.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/slice.json
-  - Microsoft.MobileNetwork/preview/2021-04-01-preview/ts29571.json
-```
-
 ---
 
 # Code Generation
