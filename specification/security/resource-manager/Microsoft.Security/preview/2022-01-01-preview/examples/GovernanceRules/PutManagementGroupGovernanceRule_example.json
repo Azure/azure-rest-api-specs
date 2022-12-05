@@ -1,12 +1,12 @@
 {
   "parameters": {
     "api-version": "2022-01-01-preview",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "managementGroupId": "contoso",
     "ruleId": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
     "governanceRule": {
       "properties": {
-        "displayName": "Admin's rule",
-        "description": "A rule for critical recommendations",
+        "displayName": "Management group rule",
+        "description": "A rule for a management group",
         "remediationTimeframe": "7.00:00:00",
         "isGracePeriod": true,
         "rulePriority": 200,
@@ -29,22 +29,25 @@
           "value": "user@contoso.com"
         },
         "governanceEmailNotification": {
-          "disableManagerEmailNotification": false,
+          "disableManagerEmailNotification": true,
           "disableOwnerEmailNotification": false
-        }
+        },
+        "excludedScopes": [
+          "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+        ]
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/governanceRules/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "id": "providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Security/governanceRules/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
         "name": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
         "type": "Microsoft.Security/governanceRules",
         "properties": {
           "tenantId": "f0b6d37b-e4bc-4719-9291-c066c3194f23",
-          "displayName": "Admin's rule",
-          "description": "A rule for critical recommendations",
+          "displayName": "Management group rule",
+          "description": "A rule for a management group",
           "remediationTimeframe": "7.00:00:00",
           "isGracePeriod": true,
           "rulePriority": 200,
@@ -67,10 +70,12 @@
             "value": "user@contoso.com"
           },
           "governanceEmailNotification": {
-            "disableManagerEmailNotification": false,
+            "disableManagerEmailNotification": true,
             "disableOwnerEmailNotification": false
           },
-          "excludedScopes": [],
+          "excludedScopes": [
+            "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+          ],
           "includeMemberScopes": false,
           "metadata": {
             "createdBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
@@ -83,13 +88,13 @@
     },
     "201": {
       "body": {
-        "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/governanceRules/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+        "id": "providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Security/governanceRules/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
         "name": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
         "type": "Microsoft.Security/governanceRules",
         "properties": {
           "tenantId": "f0b6d37b-e4bc-4719-9291-c066c3194f23",
-          "displayName": "Admin's rule",
-          "description": "A rule for critical recommendations",
+          "displayName": "Management group rule",
+          "description": "A rule for a management group",
           "remediationTimeframe": "7.00:00:00",
           "isGracePeriod": true,
           "rulePriority": 200,
@@ -112,10 +117,12 @@
             "value": "user@contoso.com"
           },
           "governanceEmailNotification": {
-            "disableManagerEmailNotification": false,
+            "disableManagerEmailNotification": true,
             "disableOwnerEmailNotification": false
           },
-          "excludedScopes": [],
+          "excludedScopes": [
+            "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+          ],
           "includeMemberScopes": false,
           "metadata": {
             "createdBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
