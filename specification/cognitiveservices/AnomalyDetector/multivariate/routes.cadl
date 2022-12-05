@@ -16,7 +16,9 @@ resultId returned by the BatchDetectAnomaly api.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op GetMultivariateBatchDetectionResult(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @format("uuid")
+  @doc("ID of a batch detection result.")
   @path resultId: string,
 ): MultivariateDetectionResult | ResponseError;
 
@@ -35,6 +37,8 @@ timestamp column.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op TrainMultivariateModel(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
+  @doc("Model information.")
   @body modelInfo: ModelInfo,
 ): {
   @statusCode statusCode: 201,
@@ -49,6 +53,7 @@ op TrainMultivariateModel(
 @doc("List models of a resource.")
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op ListMultivariateModels(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Skip indicates how many models will be skipped.")
   @query
   skip?: int32 = 0;
@@ -65,6 +70,7 @@ op ListMultivariateModels(
 @route("/multivariate/models/{modelId}")
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DeleteMultivariateModel(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Model identifier.")
   @path
   modelId: string,
@@ -83,6 +89,7 @@ and variables used in the model.
 @route("/multivariate/models/{modelId}")
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op GetMultivariateModel(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Model identifier.")
   @path
   modelId: string,
@@ -100,9 +107,11 @@ storage folder, or pointed to a CSV file in Azure blob storage.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DetectMultivariateBatchAnomaly(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Model identifier.")
   @path
   modelId: string,
+  @doc("Request of multivariate anomaly detection.")
   @body options: MultivariateBatchDetectionOptions,
 ): {
   @statusCode statusCode: 202,
@@ -123,8 +132,10 @@ immediately in the response body.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DetectMultivariateLastAnomaly(
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Model identifier.")
   @path
   modelId: string,
+  @doc("Request of last detection.")
   @body options: MultivariateLastDetectionOptions,
 ): MultivariateLastDetectionResult | ResponseError;
