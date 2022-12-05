@@ -999,7 +999,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDateTime, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
+            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'. Reservation properties include sku/name, properties/{appliedScopeType, archived, displayName, displayProvisioningState, effectiveDateTime, expiryDate, expiryDateTime, provisioningState, quantity, renew, reservedResourceType, term, userFriendlyAppliedScopeType, userFriendlyRenewState}",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1770,10 +1770,15 @@
           "format": "date-time",
           "description": "This is the DateTime when the reservation was created."
         },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation will expire."
+        },
         "expiryDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date when the Reservation will expire."
+          "description": "This is the date-time when the Reservation will expire."
         },
         "benefitStartTime": {
           "type": "string",
@@ -2560,10 +2565,15 @@
           "description": "DateTime of the last time the Reservation was updated.",
           "readOnly": true
         },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation will expire."
+        },
         "expiryDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date when the Reservation will expire."
+          "description": "This is the date-time when the Reservation will expire."
         },
         "reviewDateTime": {
           "type": "string",
@@ -2588,10 +2598,15 @@
         "provisioningSubState": {
           "$ref": "#/definitions/ProvisioningSubState"
         },
+        "purchaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation was purchased."
+        },
         "purchaseDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date when the Reservation was purchased."
+          "description": "This is the date-time when the Reservation was purchased."
         },
         "splitProperties": {
           "$ref": "#/definitions/ReservationSplitProperties"
