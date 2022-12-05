@@ -71,6 +71,7 @@ model MultivariateBatchDetectionResultSummary {
 
   @doc("Error message when detection is failed.")
   errors?: ErrorResponse[];
+  @doc("Variable Status.")
   variableStates?: VariableState[];
 
   @doc("""
@@ -80,6 +81,7 @@ will need another API to get detection results.
   setupInfo: MultivariateBatchDetectionOptions;
 }
 
+@doc("ErrorResponse contains code and message that shows the error information.")
 @error
 model ErrorResponse {
 
@@ -90,6 +92,7 @@ model ErrorResponse {
   message: string;
 }
 
+@doc("Variable Status.")
 model VariableState {
   @doc("Variable name in variable states.")
   variable?: string;
@@ -142,15 +145,18 @@ be date-time of ISO 8601 format.
   endTime: zonedDateTime;
 }
 
+@doc("Anomaly status and information.")
 model AnomalyState {
   @doc("The timestamp for this anomaly.")
   timestamp: zonedDateTime;
+  @doc("The detailed value of this anomalous timestamp.")
   value?: AnomalyValue;
 
   @doc("Error message for the current timestamp.")
   errors?: ErrorResponse[];
 }
 
+@doc("Detailed information of the anomalous timestamp.")
 model AnomalyValue {
   @doc("True if an anomaly is detected at the current timestamp.")
   isAnomaly: boolean;
@@ -170,9 +176,11 @@ well.
   @minValue(0.0)
   @maxValue(2.0)
   score: float32;
+  @doc("Interpretation of this anomalous timestamp.")
   interpretation?: AnomalyInterpretation[];
 }
 
+@doc("Interpretation of the anomalous timestamp.")
 model AnomalyInterpretation {
   @doc("Variable.")
   variable?: string;
@@ -182,9 +190,11 @@ This score shows the percentage contributing to the anomalous timestamp. A
 number between 0 and 1.
 """)
   contributionScore?: float32;
+  @doc("Correlation changes among the anomalous variables")
   correlationChanges?: CorrelationChanges;
 }
 
+@doc("Correlation changes among the anomalous variables")
 model CorrelationChanges {
   @doc("The correlated variables that have correlation changes under an anomaly.")
   changedVariables?: string[];
@@ -267,10 +277,13 @@ Previous, Subsequent, Linear, Zero, Fixed.
 
 @doc("Diagnostics information to help inspect the states of model or variable.")
 model DiagnosticsInfo {
+  @doc("Model status.")
   modelState?: ModelState;
+  @doc("Variable Status.")
   variableStates?: VariableState[];
 }
 
+@doc("Model status.")
 model ModelState {
   @doc("""
 This indicates the number of passes of the entire training dataset the
@@ -333,6 +346,7 @@ model ModelList {
   nextLink?: string;
 }
 
+@doc("Request of last detection.")
 model MultivariateLastDetectionOptions {
   @doc("""
 This contains the inference data, including the name, timestamps(ISO 8601) and
@@ -348,6 +362,7 @@ variables for one anomalous timestamp in the response. The default number is
   topContributorCount: int32;
 }
 
+@doc("Variable values.")
 model VariableValues {
   @doc("Variable name of last detection request.")
   variable: string;
@@ -359,8 +374,12 @@ model VariableValues {
   values: float32[];
 }
 
+
+@doc("Results of last detection.")
 model MultivariateLastDetectionResult {
+  @doc("Variable Status.")
   variableStates?: VariableState[];
+  @doc("Anomaly status and information.")
   results?: AnomalyState[];
 }
 
