@@ -28,15 +28,83 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2011-01
 ```
 
 
+### Tag: package-preview-2011-01
+
+These settings apply only when `--tag=package-preview-2011-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2011-01'
+input-file:
+  - Microsoft.Network/preview/2011-01-19/applicationGateway.json
+  - Microsoft.Network/preview/2011-01-19/applicationGatewayWafDynamicManifests.json
+  - Microsoft.Network/preview/2011-01-19/applicationSecurityGroup.json
+  - Microsoft.Network/preview/2011-01-19/availableDelegations.json
+  - Microsoft.Network/preview/2011-01-19/availableServiceAliases.json
+  - Microsoft.Network/preview/2011-01-19/azureFirewall.json
+  - Microsoft.Network/preview/2011-01-19/azureFirewallFqdnTag.json
+  - Microsoft.Network/preview/2011-01-19/azureWebCategory.json
+  - Microsoft.Network/preview/2011-01-19/bastionHost.json
+  - Microsoft.Network/preview/2011-01-19/checkDnsAvailability.json
+  - Microsoft.Network/preview/2011-01-19/cloudServiceNetworkInterface.json
+  - Microsoft.Network/preview/2011-01-19/cloudServicePublicIpAddress.json
+  - Microsoft.Network/preview/2011-01-19/cloudServiceSwap.json
+  - Microsoft.Network/preview/2011-01-19/customIpPrefix.json
+  - Microsoft.Network/preview/2011-01-19/ddosCustomPolicy.json
+  - Microsoft.Network/preview/2011-01-19/ddosProtectionPlan.json
+  - Microsoft.Network/preview/2011-01-19/dscpConfiguration.json
+  - Microsoft.Network/preview/2011-01-19/endpointService.json
+  - Microsoft.Network/preview/2011-01-19/expressRouteCircuit.json
+  - Microsoft.Network/preview/2011-01-19/expressRouteCrossConnection.json
+  - Microsoft.Network/preview/2011-01-19/expressRoutePort.json
+  - Microsoft.Network/preview/2011-01-19/expressRouteProviderPort.json
+  - Microsoft.Network/preview/2011-01-19/firewallPolicy.json
+  - Microsoft.Network/preview/2011-01-19/ipAllocation.json
+  - Microsoft.Network/preview/2011-01-19/ipGroups.json
+  - Microsoft.Network/preview/2011-01-19/loadBalancer.json
+  - Microsoft.Network/preview/2011-01-19/natGateway.json
+  - Microsoft.Network/preview/2011-01-19/network.json
+  - Microsoft.Network/preview/2011-01-19/networkInterface.json
+  - Microsoft.Network/preview/2011-01-19/networkManager.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerConnection.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerGroup.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerScopeConnection.json
+  - Microsoft.Network/preview/2011-01-19/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2011-01-19/networkProfile.json
+  - Microsoft.Network/preview/2011-01-19/networkSecurityGroup.json
+  - Microsoft.Network/preview/2011-01-19/networkVirtualAppliance.json
+  - Microsoft.Network/preview/2011-01-19/networkWatcher.json
+  - Microsoft.Network/preview/2011-01-19/operation.json
+  - Microsoft.Network/preview/2011-01-19/privateEndpoint.json
+  - Microsoft.Network/preview/2011-01-19/privateLinkService.json
+  - Microsoft.Network/preview/2011-01-19/publicIpAddress.json
+  - Microsoft.Network/preview/2011-01-19/publicIpPrefix.json
+  - Microsoft.Network/preview/2011-01-19/routeFilter.json
+  - Microsoft.Network/preview/2011-01-19/routeTable.json
+  - Microsoft.Network/preview/2011-01-19/securityPartnerProvider.json
+  - Microsoft.Network/preview/2011-01-19/serviceCommunity.json
+  - Microsoft.Network/preview/2011-01-19/serviceEndpointPolicy.json
+  - Microsoft.Network/preview/2011-01-19/serviceTags.json
+  - Microsoft.Network/preview/2011-01-19/usage.json
+  - Microsoft.Network/preview/2011-01-19/virtualNetwork.json
+  - Microsoft.Network/preview/2011-01-19/virtualNetworkGateway.json
+  - Microsoft.Network/preview/2011-01-19/virtualNetworkTap.json
+  - Microsoft.Network/preview/2011-01-19/virtualRouter.json
+  - Microsoft.Network/preview/2011-01-19/virtualWan.json
+  - Microsoft.Network/preview/2011-01-19/vmssNetworkInterface.json
+  - Microsoft.Network/preview/2011-01-19/vmssPublicIpAddress.json
+  - Microsoft.Network/preview/2011-01-19/webapplicationfirewall.json
+```
 ### Tag: package-2022-07
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+``` yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.Network/stable/2022-07-01/applicationGateway.json
   - Microsoft.Network/stable/2022-07-01/applicationGatewayWafDynamicManifests.json
@@ -100,6 +168,7 @@ input-file:
   - Microsoft.Network/stable/2022-07-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2022-07-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
