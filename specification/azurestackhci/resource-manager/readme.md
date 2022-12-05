@@ -48,6 +48,11 @@ directive:
       - updateRuns.json
       - updateSummaries.json
       - updates.json
+      - galleryImages.json
+      - networkInterfaces.json
+      - virtualHardDisks.json
+      - virtualMachines.json
+      - virtualNetworks.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
@@ -56,7 +61,7 @@ directive:
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.AzureStackHCI/stable/2022-10-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2022-10-01/clusters.json
@@ -69,6 +74,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-10-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2022-10-01/updates.json
 ```
+
 ### Tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
@@ -105,6 +111,19 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
 ```
 
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/virtualNetworks.json
+  - Microsoft.AzureStackHCI/preview/2021-07-01-preview/operations.json
+```
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -115,6 +134,25 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-01-01/clusters.json
   - Microsoft.AzureStackHCI/stable/2022-01-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-01-01/operations.json
+```
+
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2021-09-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2021-09
