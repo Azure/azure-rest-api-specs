@@ -1191,23 +1191,6 @@
         "modelAsString": true
       }
     },
-    "ProvisioningSubState": {
-      "type": "string",
-      "description": "Represent the current sub state of the Reservation.",
-      "readOnly": true,
-      "enum": [
-        "None",
-        "Active",
-        "Pending",
-        "AppliedBenefits",
-        "Warning",
-        "Orphaned"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningSubState",
-        "modelAsString": true
-      }
-    },
     "ReservedResourceType": {
       "type": "string",
       "description": "The type of the resource that is being reserved.",
@@ -1246,7 +1229,7 @@
     },
     "Location": {
       "type": "string",
-      "description": "The Azure Region where the reserved resource lives.",
+      "description": "Location in which the Resources needs to be reserved. It cannot be changed after the resource has been created.",
       "enum": [
         "westus",
         "eastus",
@@ -1819,7 +1802,6 @@
     "DisplayProvisioningState": {
       "type": "string",
       "description": "Represent the current display state of the Reservation.",
-      "readOnly": true,
       "enum": [
         "Succeeded",
         "Expiring",
@@ -1911,7 +1893,8 @@
       "x-ms-azure-resource": true,
       "properties": {
         "location": {
-          "$ref": "#/definitions/Location"
+          "type": "string",
+          "description": "The Azure Region where the reserved resource lives."
         },
         "etag": {
           "type": "integer",
@@ -2530,16 +2513,7 @@
         },
         "capabilities": {
           "description": "Capabilities of the reservation",
-          "type": "string",
-          "enum": [
-            "None",
-            "ApiReturnEnabled",
-            "ApiExchangeEnabled"
-          ],
-          "x-ms-enum": {
-            "name": "capabilities",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "quantity": {
           "description": "Quantity of the SKUs that are part of the Reservation.",
@@ -2593,10 +2567,14 @@
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "displayProvisioningState": {
-          "$ref": "#/definitions/DisplayProvisioningState"
+          "description": "The provisioning state of the reservation for display, e.g. Succeeded",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningSubState": {
-          "$ref": "#/definitions/ProvisioningSubState"
+          "description": "The provisioning sub state of the reservation, e.g. Succeeded",
+          "type": "string",
+          "readOnly": true
         },
         "purchaseDate": {
           "type": "string",
@@ -2643,10 +2621,14 @@
           "$ref": "#/definitions/ReservationTerm"
         },
         "userFriendlyAppliedScopeType": {
-          "$ref": "#/definitions/UserFriendlyAppliedScopeType"
+          "description": "The applied scope type of the reservation for display, e.g. Shared",
+          "type": "string",
+          "readOnly": true
         },
         "userFriendlyRenewState": {
-          "$ref": "#/definitions/UserFriendlyRenewState"
+          "description": "The renew state of the reservation for display, e.g. On",
+          "type": "string",
+          "readOnly": true
         },
         "utilization": {
           "readOnly": true,
@@ -2953,7 +2935,8 @@
           "$ref": "#/definitions/SkuName"
         },
         "location": {
-          "$ref": "#/definitions/Location"
+          "type": "string",
+          "description": "The Azure Region where the reserved resource lives."
         },
         "properties": {
           "x-ms-client-flatten": true,
