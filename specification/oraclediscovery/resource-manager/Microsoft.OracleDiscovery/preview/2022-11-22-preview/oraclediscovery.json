@@ -836,42 +836,16 @@
           "description": "Resource properties.",
           "$ref": "#/definitions/OracleSiteProperties"
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data."
-        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "required": [ "extendedLocation", "properties" ],
       "description": "The samples resource definition."
     },
@@ -919,11 +893,6 @@
           "readOnly": true,
           "description": "Resource Type"
         },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -934,13 +903,9 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location."
         }
       },
-      "required": [ "extendedLocation", "properties" ],
+      "required": [ "properties" ],
       "description": "The samples resource definition."
     },
     "OracleDatabase": {
@@ -962,11 +927,6 @@
           "readOnly": true,
           "description": "Resource Name"
         },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [ "read", "create" ]
-        },
         "type": {
           "type": "string",
           "readOnly": true,
@@ -982,13 +942,9 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location."
         }
       },
-      "required": [ "extendedLocation", "properties" ],
+      "required": [ "properties" ],
       "description": "The samples resource definition."
     },
     "OracleDatabaseProperties": {
