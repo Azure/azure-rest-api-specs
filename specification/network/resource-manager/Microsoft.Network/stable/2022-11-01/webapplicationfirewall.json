@@ -478,6 +478,30 @@
           "type": "string",
           "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$",
           "maxLength": 32768
+        },
+        "logScrubbing": {
+          "description": "To scrub sensitive log fields",
+          "properties": {
+            "state": {
+              "type": "string",
+              "description": "State of the log scrubbing config. Default value is Enabled.",
+              "enum": [
+                "Disabled",
+                "Enabled"
+              ],
+              "x-ms-enum": {
+                "name": "WebApplicationFirewallScrubbingState",
+                "modelAsString": true
+              }
+            },
+            "scrubbingRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WebApplicationFirewallScrubbingRules"
+              },
+              "description": "The rules that are applied to the logs for scrubbing."
+            }
+          }
         }
       }
     },
@@ -842,6 +866,59 @@
         "name": "ActionType",
         "modelAsString": true
       }
-    }
+    },
+    "WebApplicationFirewallScrubbingRules": {
+      "description": "Allow certain variables to be scrubbed on WAF logs",
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ],
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "RequestArgNames",
+            "RequestPostArgNames",
+            "RequestJSONArgNames",
+            "RequestIPAddress"
+          ],
+          "description": "The variable to be scrubbed from the logs.",
+          "x-ms-enum": {
+            "name": "scrubbingRuleEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "EqualsAny"
+          ],
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Defines the state of log scrubbing rule. Default value is Enabled.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryState",
+            "modelAsString": true
+          }
+        }
+      }
+	}
   }
 }
