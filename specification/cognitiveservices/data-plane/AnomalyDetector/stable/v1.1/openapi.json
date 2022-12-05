@@ -75,6 +75,7 @@
             "name": "resultId",
             "in": "path",
             "required": true,
+            "description": "ID of a batch detection result.",
             "format": "uuid",
             "type": "string"
           }
@@ -116,6 +117,7 @@
             "name": "modelInfo",
             "in": "body",
             "required": true,
+            "description": "Model information.",
             "schema": {
               "$ref": "#/definitions/Multivariate.ModelInfo"
             }
@@ -300,6 +302,7 @@
             "name": "options",
             "in": "body",
             "required": true,
+            "description": "Request of multivariate anomaly detection.",
             "schema": {
               "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionOptions"
             }
@@ -359,6 +362,7 @@
             "name": "options",
             "in": "body",
             "required": true,
+            "description": "Request of last detection.",
             "schema": {
               "$ref": "#/definitions/Multivariate.MultivariateLastDetectionOptions"
             }
@@ -401,6 +405,7 @@
             "name": "options",
             "in": "body",
             "required": true,
+            "description": "Method of univariate anomaly detection.",
             "schema": {
               "$ref": "#/definitions/Univariate.UnivariateChangePointDetectionOptions"
             }
@@ -417,6 +422,7 @@
             "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
+                "description": "Error code.",
                 "type": "string"
               }
             },
@@ -442,6 +448,7 @@
             "name": "options",
             "in": "body",
             "required": true,
+            "description": "Method of univariate anomaly detection.",
             "schema": {
               "$ref": "#/definitions/Univariate.UnivariateDetectionOptions"
             }
@@ -458,6 +465,7 @@
             "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
+                "description": "Error code.",
                 "type": "string"
               }
             },
@@ -483,6 +491,7 @@
             "name": "options",
             "in": "body",
             "required": true,
+            "description": "Method of univariate anomaly detection.",
             "schema": {
               "$ref": "#/definitions/Univariate.UnivariateDetectionOptions"
             }
@@ -499,6 +508,7 @@
             "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
+                "description": "Error code.",
                 "type": "string"
               }
             },
@@ -605,9 +615,11 @@
           "description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1."
         },
         "correlationChanges": {
-          "$ref": "#/definitions/Multivariate.CorrelationChanges"
+          "$ref": "#/definitions/Multivariate.CorrelationChanges",
+          "description": "Correlation changes among the anomalous variables"
         }
-      }
+      },
+      "description": "Interpretation of the anomalous timestamp."
     },
     "Multivariate.AnomalyState": {
       "type": "object",
@@ -618,7 +630,8 @@
           "description": "The timestamp for this anomaly."
         },
         "value": {
-          "$ref": "#/definitions/Multivariate.AnomalyValue"
+          "$ref": "#/definitions/Multivariate.AnomalyValue",
+          "description": "The detailed value of this anomalous timestamp."
         },
         "errors": {
           "type": "array",
@@ -630,6 +643,7 @@
           "description": "Error message for the current timestamp."
         }
       },
+      "description": "Anomaly status and information.",
       "required": [
         "timestamp"
       ]
@@ -661,9 +675,11 @@
             "$ref": "#/definitions/Multivariate.AnomalyInterpretation"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyInterpretation[]"
+          "x-cadl-name": "Multivariate.AnomalyInterpretation[]",
+          "description": "Interpretation of this anomalous timestamp."
         }
       },
+      "description": "Detailed information of the anomalous timestamp.",
       "required": [
         "isAnomaly",
         "severity",
@@ -681,7 +697,8 @@
           "x-cadl-name": "string[]",
           "description": "The correlated variables that have correlation changes under an anomaly."
         }
-      }
+      },
+      "description": "Correlation changes among the anomalous variables"
     },
     "Multivariate.DataSchema": {
       "type": "string",
@@ -734,7 +751,8 @@
       "type": "object",
       "properties": {
         "modelState": {
-          "$ref": "#/definitions/Multivariate.ModelState"
+          "$ref": "#/definitions/Multivariate.ModelState",
+          "description": "Model status."
         },
         "variableStates": {
           "type": "array",
@@ -742,7 +760,8 @@
             "$ref": "#/definitions/Multivariate.VariableState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableState[]"
+          "x-cadl-name": "Multivariate.VariableState[]",
+          "description": "Variable Status."
         }
       },
       "description": "Diagnostics information to help inspect the states of model or variable."
@@ -759,6 +778,7 @@
           "description": "The message explaining the error reported by the service."
         }
       },
+      "description": "ErrorResponse contains code and message that shows the error information.",
       "required": [
         "code",
         "message"
@@ -927,7 +947,8 @@
           "x-cadl-name": "float32[]",
           "description": "Latency for each epoch. "
         }
-      }
+      },
+      "description": "Model status."
     },
     "Multivariate.ModelStatus": {
       "type": "string",
@@ -1013,7 +1034,8 @@
             "$ref": "#/definitions/Multivariate.VariableState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableState[]"
+          "x-cadl-name": "Multivariate.VariableState[]",
+          "description": "Variable Status."
         },
         "setupInfo": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionOptions",
@@ -1104,6 +1126,7 @@
           "description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10."
         }
       },
+      "description": "Request of last detection.",
       "required": [
         "variables",
         "topContributorCount"
@@ -1118,7 +1141,8 @@
             "$ref": "#/definitions/Multivariate.VariableState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableState[]"
+          "x-cadl-name": "Multivariate.VariableState[]",
+          "description": "Variable Status."
         },
         "results": {
           "type": "array",
@@ -1126,9 +1150,11 @@
             "$ref": "#/definitions/Multivariate.AnomalyState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyState[]"
+          "x-cadl-name": "Multivariate.AnomalyState[]",
+          "description": "Anomaly status and information."
         }
-      }
+      },
+      "description": "Results of last detection."
     },
     "Multivariate.ResponseError": {
       "type": "object",
@@ -1177,7 +1203,8 @@
           "format": "date-time",
           "description": "Last valid timestamp with value of input data."
         }
-      }
+      },
+      "description": "Variable Status."
     },
     "Multivariate.VariableValues": {
       "type": "object",
@@ -1204,6 +1231,7 @@
           "description": "Values of variables."
         }
       },
+      "description": "Variable values.",
       "required": [
         "variable",
         "timestamps",
