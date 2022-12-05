@@ -6180,7 +6180,7 @@
           },
           {
             "in": "query",
-            "name": "count",
+            "name": "$top",
             "description": "Number of labeling jobs to return.",
             "type": "integer",
             "format": "int32"
@@ -8766,6 +8766,16 @@
       "description": "Asset output type.",
       "type": "object",
       "properties": {
+        "assetName": {
+          "description": "Output Asset Name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "assetVersion": {
+          "description": "Output Asset Version.",
+          "type": "string",
+          "x-nullable": true
+        },
         "mode": {
           "description": "Output Asset Delivery Mode.",
           "default": "ReadWriteMount",
@@ -8970,6 +8980,27 @@
         }
       ],
       "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "AutoRebuildSetting": {
+      "description": "AutoRebuild setting for the derived image",
+      "enum": [
+        "Disabled",
+        "OnBaseImageUpdate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AutoRebuildSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled"
+          },
+          {
+            "value": "OnBaseImageUpdate"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "AutoSeasonality": {
@@ -10472,9 +10503,11 @@
       "additionalProperties": false
     },
     "ContainerType": {
+      "description": "The type of container to retrieve logs from.",
       "enum": [
         "StorageInitializer",
-        "InferenceServer"
+        "InferenceServer",
+        "ModelDataCollector"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -10482,10 +10515,16 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "StorageInitializer"
+            "value": "StorageInitializer",
+            "description": "The container used to download models and score script."
           },
           {
-            "value": "InferenceServer"
+            "value": "InferenceServer",
+            "description": "The container used to serve user's request."
+          },
+          {
+            "value": "ModelDataCollector",
+            "description": "The container used to collect payload and custom logging when mdc is enabled."
           }
         ]
       },
@@ -10998,7 +11037,7 @@
           ]
         },
         "dataUri": {
-          "description": "[Required] Uri of the data. Usage/meaning depends on Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20221001Preview.Assets.DataVersionBase.DataType",
+          "description": "[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -11608,6 +11647,15 @@
         }
       ],
       "properties": {
+        "autoRebuild": {
+          "description": "Defines if image needs to be rebuilt based on base image changes.",
+          "default": "Disabled",
+          "$ref": "#/definitions/AutoRebuildSetting",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "build": {
           "description": "Configuration settings for Docker build context.",
           "$ref": "#/definitions/BuildContext",
@@ -13169,6 +13217,27 @@
       },
       "additionalProperties": false
     },
+    "IncrementalDataRefresh": {
+      "description": "Whether IncrementalDataRefresh is enabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IncrementalDataRefresh",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "InferenceContainerProperties": {
       "type": "object",
       "properties": {
@@ -14014,10 +14083,10 @@
           ],
           "x-nullable": true
         },
-        "multiSelectEnabled": {
+        "multiSelect": {
           "description": "Indicates whether it is allowed to select multiple classes in this category.",
-          "default": false,
-          "type": "boolean",
+          "default": "Disabled",
+          "$ref": "#/definitions/MultiSelect",
           "x-ms-mutability": [
             "create",
             "read",
@@ -14070,10 +14139,10 @@
           ],
           "x-nullable": true
         },
-        "incrementalDataRefreshEnabled": {
+        "incrementalDataRefresh": {
           "description": "Indicates whether to enable incremental data refresh.",
-          "default": false,
-          "type": "boolean",
+          "default": "Disabled",
+          "$ref": "#/definitions/IncrementalDataRefresh",
           "x-ms-mutability": [
             "create",
             "read",
@@ -14902,6 +14971,27 @@
       "x-ms-discriminator-value": "Mpi",
       "additionalProperties": false
     },
+    "MultiSelect": {
+      "description": "Whether multiSelect is enabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MultiSelect",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "NCrossValidations": {
       "description": "N-Cross validations value.",
       "required": [
@@ -15192,7 +15282,7 @@
         },
         "maxNodes": {
           "format": "int32",
-          "description": "Maximum nodes to leverage for training in any single trial. Controls multi-node distributed training.",
+          "description": "Maximum nodes to use for the experiment.",
           "default": 1,
           "type": "integer"
         },
@@ -15998,6 +16088,11 @@
         }
       ],
       "properties": {
+        "logbase": {
+          "description": "An optional positive number or e in string format to be used as base for log based random sampling",
+          "type": "string",
+          "x-nullable": true
+        },
         "rule": {
           "description": "The specific type of random algorithm",
           "default": "Random",
@@ -17993,6 +18088,12 @@
           "default": -1,
           "type": "integer"
         },
+        "maxNodes": {
+          "format": "int32",
+          "description": "Maximum nodes to use for the experiment.",
+          "default": 1,
+          "type": "integer"
+        },
         "maxTrials": {
           "format": "int32",
           "description": "Number of iterations.",
@@ -18358,6 +18459,34 @@
       "x-ms-discriminator-value": "TextNER",
       "additionalProperties": false
     },
+    "TrainingMode": {
+      "description": "Training mode dictates whether to use distributed training or not",
+      "enum": [
+        "Auto",
+        "Distributed",
+        "NonDistributed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TrainingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Auto",
+            "description": "Auto mode"
+          },
+          {
+            "value": "Distributed",
+            "description": "Distributed training mode"
+          },
+          {
+            "value": "NonDistributed",
+            "description": "Non distributed training mode"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "TrainingSettings": {
       "description": "Training related configuration.",
       "type": "object",
@@ -18397,6 +18526,11 @@
           "description": "Stack ensemble settings for stack ensemble run.",
           "$ref": "#/definitions/StackEnsembleSettings",
           "x-nullable": true
+        },
+        "trainingMode": {
+          "description": "TrainingMode mode - Setting to 'auto' is same as setting it to 'non-distributed' for now, however in the future may result in mixed mode or heuristics based mode selection. Default is 'auto'.\r\nIf 'Distributed' then only distributed featurization is used and distributed algorithms are chosen.\r\nIf 'NonDistributed' then only non distributed algorithms are chosen.",
+          "default": "Auto",
+          "$ref": "#/definitions/TrainingMode"
         }
       },
       "additionalProperties": false
