@@ -16,7 +16,6 @@ resultId returned by the BatchDetectAnomaly api.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op GetMultivariateBatchDetectionResult(
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @format("uuid")
   @doc("ID of a batch detection result.")
   @path resultId: string,
@@ -37,7 +36,6 @@ timestamp column.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op TrainMultivariateModel(
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Model information.")
   @body modelInfo: ModelInfo,
 ): {
@@ -53,7 +51,6 @@ op TrainMultivariateModel(
 @doc("List models of a resource.")
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op ListMultivariateModels(
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Skip indicates how many models will be skipped.")
   @query
   skip?: int32 = 0;
@@ -70,7 +67,6 @@ op ListMultivariateModels(
 @route("/multivariate/models/{modelId}")
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op DeleteMultivariateModel(
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Not applicable, will fix in: https://github.com/Azure/azure-rest-api-specs/issues/21527."
   @doc("Model identifier.")
   @path
   modelId: string,
