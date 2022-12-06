@@ -284,7 +284,8 @@
       "description": "The type of the automation rule action.",
       "enum": [
         "ModifyProperties",
-        "RunPlaybook"
+        "RunPlaybook",
+        "AddIncidentTask"
       ],
       "type": "string",
       "example": "ModifyProperties",
@@ -299,8 +300,28 @@
           {
             "value": "RunPlaybook",
             "description": "Run a playbook on an object"
+          },
+          {
+            "value": "AddIncidentTask",
+            "description": "Add a task to an incident object"
           }
         ]
+      }
+    },
+    "AddIncidentTaskActionProperties": {
+      "required": [
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "The title of the task.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the task.",
+          "type": "string"
+        }
       }
     },
     "AutomationRule": {
@@ -338,6 +359,23 @@
         }
       },
       "discriminator": "actionType"
+    },
+    "AutomationRuleAddIncidentTaskAction": {
+      "description": "Describes an automation rule action to add a task to an incident",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleAction"
+        }
+      ],
+      "properties": {
+        "actionConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/AddIncidentTaskActionProperties"
+        }
+      },
+      "x-ms-discriminator-value": "AddIncidentTask",
+      "x-ms-client-flatten": true
     },
     "AutomationRuleBooleanCondition": {
       "type": "object",
