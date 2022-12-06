@@ -1353,10 +1353,7 @@
             "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../common/v1/types.json#/parameters/IntegrationRuntimeNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/IntegrationRuntimeOperationIdParameter"
+            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
           },
           {
             "name": "If-None-Match",
@@ -1364,6 +1361,13 @@
             "required": false,
             "type": "string",
             "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "integrationRuntimeOperationId",
+            "description": "Integration runtime Operation Id",
+            "required": true
           }
         ],
         "responses": {
@@ -3135,6 +3139,7 @@
     }
   },
   "IntegrationRuntimeOperationStatus": {
+    "description": "Integration Runtime Operation Status",
     "type": "object",
     "properties": {
       "status": {
