@@ -1,83 +1,84 @@
 {
   "parameters": {
-      "accountName": "ddb1",
-      "resourceGroupName": "rg1",
-      "api-version": "2022-11-15-preview",
-      "subscriptionId": "subid",
-      "databaseName": "databaseName",
-      "containerName": "mvContainerName",
-      "createUpdateSqlContainerParameters": {
-          "location": "West US",
-          "tags": {},
-          "properties": {
-              "resource": {
-                  "id": "mvContainerName",
-                  "partitionKey": {
-                      "paths": [
-                          "/pk"
-                      ],
-                      "kind": "Hash"
-                  },
-                  "materializedViewDefinition": {
-                      "sourceCollectionId": "sourceContainerName",
-                      "definition": "select * from ROOT"
-                  }
-              },
-              "options": {}
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-11-15-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "containerName": "mvContainerName",
+    "createUpdateSqlContainerParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "mvContainerName",
+          "partitionKey": {
+            "paths": [
+              "/pk"
+            ],
+            "kind": "Hash"
+          },
+          "materializedViewDefinition": {
+            "sourceCollectionId": "sourceContainerName",
+            "definition": "select * from ROOT"
           }
+        },
+        "options": {}
       }
+    }
   },
   "responses": {
-      "200": {
-          "body": {
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/mvContainerName",
-              "name": "mvContainerName",
-              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
-              "location": "West US",
-              "tags": {},
-              "properties": {
-                  "resource": {
-                      "id": "mvContainerName",
-                      "indexingPolicy": {
-                          "indexingMode": "consistent",
-                          "automatic": true,
-                          "includedPaths": [{
-                                  "path": "/*"
-                              }
-                          ],
-                          "excludedPaths": [{
-                                  "path": "/\"_etag\"/?"
-                              }
-                          ]
-                      },
-                      "partitionKey": {
-                          "paths": ["/pk"],
-                          "kind": "Hash"
-                      },
-                      "defaultTtl": -1,
-                      "uniqueKeyPolicy": {
-                          "uniqueKeys": []
-                      },
-                      "conflictResolutionPolicy": {
-                          "mode": "LastWriterWins",
-                          "conflictResolutionPath": "/_ts",
-                          "conflictResolutionProcedure": ""
-                      },
-                      "geospatialConfig": {
-                          "type": "Geography"
-                      },
-                      "materializedViewDefinition": {
-                          "sourceCollectionRid": "e9N-s6Ua-4Y=",
-                          "sourceCollectionId": "sourceContainerName",
-                          "definition": "select * from ROOT"
-                      },
-                      "_rid": "e9N-s+nr644=",
-                      "_ts": 1666700363,
-                      "_etag": "\"00004700-0000-0800-0000-6357d44b0000\""
-                  }
-              }
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/mvContainerName",
+        "name": "mvContainerName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "mvContainerName",
+            "indexingPolicy": {
+              "indexingMode": "consistent",
+              "automatic": true,
+              "includedPaths": [
+                {
+                  "path": "/*"
+                }
+              ],
+              "excludedPaths": [
+                {
+                  "path": "/\"_etag\"/?"
+                }
+              ]
+            },
+            "partitionKey": {
+              "paths": [
+                "/pk"
+              ],
+              "kind": "Hash"
+            },
+            "defaultTtl": -1,
+            "uniqueKeyPolicy": {
+              "uniqueKeys": []
+            },
+            "conflictResolutionPolicy": {
+              "mode": "LastWriterWins",
+              "conflictResolutionPath": "/_ts",
+              "conflictResolutionProcedure": ""
+            },
+            "materializedViewDefinition": {
+              "sourceCollectionRid": "e9N-s6Ua-4Y=",
+              "sourceCollectionId": "sourceContainerName",
+              "definition": "select * from ROOT"
+            },
+            "_rid": "e9N-s+nr644=",
+            "_ts": 1666700363,
+            "_etag": "\"00004700-0000-0800-0000-6357d44b0000\""
           }
-      },
-      "202": {}
+        }
+      }
+    },
+    "202": {}
   }
 }
