@@ -24,13 +24,13 @@
         "operationId": "Registries_ImportImage",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -50,7 +50,12 @@
             "description": "The request was successful; the operation has completed successfully."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -64,7 +69,10 @@
             "$ref": "./examples/ImportImageFromPublicRegistry.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/providers/Microsoft.ContainerRegistry/operations": {
@@ -76,7 +84,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -106,10 +114,10 @@
         "operationId": "Registries_CheckNameAvailability",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "registryNameCheckRequest",
@@ -148,13 +156,13 @@
         "operationId": "PrivateEndpointConnections_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -187,13 +195,13 @@
         "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -224,13 +232,13 @@
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -259,6 +267,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -267,7 +280,10 @@
             "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -277,13 +293,13 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -297,7 +313,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The private endpoint connection does not exist in the subscription."
@@ -308,7 +329,10 @@
             "$ref": "./examples/PrivateEndpointConnectionDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/registries": {
@@ -320,10 +344,10 @@
         "operationId": "Registries_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -353,13 +377,13 @@
         "operationId": "Registries_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -389,13 +413,13 @@
         "operationId": "Registries_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -423,13 +447,13 @@
         "operationId": "Registries_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -455,6 +479,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Registry"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -466,7 +495,10 @@
             "$ref": "./examples/RegistryCreateZoneRedundant.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -476,13 +508,13 @@
         "operationId": "Registries_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -493,7 +525,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The container registry does not exist in the subscription."
@@ -504,7 +541,10 @@
             "$ref": "./examples/RegistryDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -514,13 +554,13 @@
         "operationId": "Registries_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -546,6 +586,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Registry"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -554,7 +599,10 @@
             "$ref": "./examples/RegistryUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
@@ -566,13 +614,13 @@
         "operationId": "Registries_ListUsages",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -602,13 +650,13 @@
         "operationId": "Registries_ListPrivateLinkResources",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -641,13 +689,13 @@
         "operationId": "Registries_GetPrivateLinkResource",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -686,13 +734,13 @@
         "operationId": "Registries_ListCredentials",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -722,13 +770,13 @@
         "operationId": "Registries_RegenerateCredential",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -767,13 +815,13 @@
         "operationId": "Replications_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -806,13 +854,13 @@
         "operationId": "Replications_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -843,13 +891,13 @@
         "operationId": "Replications_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -878,6 +926,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Replication"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -889,7 +942,10 @@
             "$ref": "./examples/ReplicationCreateZoneRedundant.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -899,13 +955,13 @@
         "operationId": "Replications_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -919,7 +975,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The replication does not exist in the subscription."
@@ -930,7 +991,10 @@
             "$ref": "./examples/ReplicationDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -940,13 +1004,13 @@
         "operationId": "Replications_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -975,6 +1039,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Replication"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -983,7 +1052,631 @@
             "$ref": "./examples/ReplicationUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps": {
+      "get": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Lists all the scope maps for the specified container registry.",
+        "operationId": "ScopeMaps_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMapListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapList": {
+            "$ref": "./examples/ScopeMapList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps/{scopeMapName}": {
+      "get": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Gets the properties of the specified scope map.",
+        "operationId": "ScopeMaps_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapGet": {
+            "$ref": "./examples/ScopeMapGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Creates a scope map for a container registry with the specified parameters.",
+        "operationId": "ScopeMaps_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          },
+          {
+            "name": "scopeMapCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a scope map.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapCreate": {
+            "$ref": "./examples/ScopeMapCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Deletes a scope map from a container registry.",
+        "operationId": "ScopeMaps_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The scopemap does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapDelete": {
+            "$ref": "./examples/ScopeMapDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScopeMaps"
+        ],
+        "description": "Updates a scope map with the specified parameters.",
+        "operationId": "ScopeMaps_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeMapNameParameter"
+          },
+          {
+            "name": "scopeMapUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a scope map.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeMapUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ScopeMap"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeMapUpdate": {
+            "$ref": "./examples/ScopeMapUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Lists all the tokens for the specified container registry.",
+        "operationId": "Tokens_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TokenListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenList": {
+            "$ref": "./examples/TokenList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens/{tokenName}": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Gets the properties of the specified token.",
+        "operationId": "Tokens_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenGet": {
+            "$ref": "./examples/TokenGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Creates a token for a container registry with the specified parameters.",
+        "operationId": "Tokens_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          },
+          {
+            "name": "tokenCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenCreate": {
+            "$ref": "./examples/TokenCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Deletes a token from a container registry.",
+        "operationId": "Tokens_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The token does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenDelete": {
+            "$ref": "./examples/TokenDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Updates a token with the specified parameters.",
+        "operationId": "Tokens_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenNameParameter"
+          },
+          {
+            "name": "tokenUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenUpdate": {
+            "$ref": "./examples/TokenUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/generateCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Generate keys for a token of a specified container registry.",
+        "operationId": "Registries_GenerateCredentials",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "generateCredentialsParameters",
+            "in": "body",
+            "description": "The parameters for generating credentials.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateCredentialsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/GenerateCredentialsResult"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryGenerateCredentials": {
+            "$ref": "./examples/RegistryGenerateCredentials.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
@@ -995,13 +1688,13 @@
         "operationId": "Webhooks_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1034,13 +1727,13 @@
         "operationId": "Webhooks_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1071,13 +1764,13 @@
         "operationId": "Webhooks_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1106,6 +1799,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Webhook"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -1114,7 +1812,10 @@
             "$ref": "./examples/WebhookCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1124,13 +1825,13 @@
         "operationId": "Webhooks_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1144,7 +1845,12 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The webhook does not exist in the subscription."
@@ -1155,7 +1861,10 @@
             "$ref": "./examples/WebhookDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -1165,13 +1874,13 @@
         "operationId": "Webhooks_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1200,6 +1909,11 @@
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Webhook"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
         },
@@ -1208,7 +1922,10 @@
             "$ref": "./examples/WebhookUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/ping": {
@@ -1220,13 +1937,13 @@
         "operationId": "Webhooks_Ping",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1259,13 +1976,13 @@
         "operationId": "Webhooks_ListEvents",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1301,13 +2018,13 @@
         "operationId": "Webhooks_GetCallbackConfig",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RegistryNameParameter"
@@ -1633,7 +2350,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1644,58 +2361,26 @@
         }
       }
     },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
+    "InnerErrorDescription": {
+      "description": "inner error.",
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
-        "createdBy": {
-          "description": "The identity that created the resource.",
+        "code": {
+          "description": "error code.",
           "type": "string"
         },
-        "createdByType": {
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
+        "message": {
+          "description": "error message.",
           "type": "string"
         },
-        "lastModifiedBy": {
-          "description": "The identity that last modified the resource.",
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "lastModifiedByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource modification (UTC).",
+        "target": {
+          "description": "target of the particular error.",
           "type": "string"
         }
-      },
-      "readOnly": true
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "description": "The properties of a private endpoint connection.",
@@ -1799,7 +2484,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2019,50 +2704,37 @@
         }
       }
     },
-    "Resource": {
-      "description": "An Azure resource.",
+    "ErrorResponseBody": {
+      "description": "An error response from the Azure Container Registry service.",
       "required": [
-        "location"
+        "code",
+        "message"
       ],
       "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
+        "code": {
+          "description": "error code.",
+          "type": "string"
         },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
+        "message": {
+          "description": "error message.",
+          "type": "string"
         },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
         },
-        "location": {
-          "description": "The location of the resource. This cannot be changed after the resource is created.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
+        "details": {
+          "description": "an array of additional nested error response info objects, as described by this contract.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InnerErrorDescription"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
           ]
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "type": "object",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "Status": {
       "description": "The status of an Azure resource at the time the operation was called.",
@@ -2187,32 +2859,14 @@
         }
       }
     },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+    "ErrorResponse": {
+      "description": "An error response from the Azure Container Registry service.",
       "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "type": "object",
-          "readOnly": true
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Azure container registry build API error body."
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "IPRule": {
       "description": "IP rule with specific IP or IP range in CIDR format.",
@@ -2642,7 +3296,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2726,6 +3380,378 @@
         }
       }
     },
+    "ScopeMapListResult": {
+      "description": "The result of a request to list scope maps for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of scope maps. Since this list may be incomplete, the nextLink field should be used to request the next list of scope maps.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeMap"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of scope maps.",
+          "type": "string"
+        }
+      }
+    },
+    "ScopeMap": {
+      "description": "An object that represents a scope map for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopeMapProperties",
+          "description": "The properties of the scope map.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopeMapProperties": {
+      "description": "The properties of a scope map.",
+      "required": [
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The user friendly description of the scope map.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the scope map. E.g. BuildIn scope map.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of scope map.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "actions": {
+          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ScopeMapUpdateParameters": {
+      "description": "The properties for updating the scope map.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopeMapPropertiesUpdateParameters",
+          "description": "The update parameters for scope map properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopeMapPropertiesUpdateParameters": {
+      "description": "The update parameters for scope map properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The user friendly description of the scope map.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of scope permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TokenListResult": {
+      "description": "The result of a request to list tokens for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of tokens. Since this list may be incomplete, the nextLink field should be used to request the next list of tokens.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Token"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of tokens.",
+          "type": "string"
+        }
+      }
+    },
+    "Token": {
+      "description": "An object that represents a token for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TokenProperties",
+          "description": "The properties of the token.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TokenProperties": {
+      "description": "The properties of a token.",
+      "type": "object",
+      "properties": {
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of scope map.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "scopeMapId": {
+          "description": "The resource ID of the scope map to which the token will be associated with.",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/TokenCredentialsProperties",
+          "description": "The credentials that can be used for authenticating the token."
+        },
+        "status": {
+          "description": "The status of the token example enabled or disabled.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TokenCredentialsProperties": {
+      "description": "The properties of the credentials that can be used for authenticating the token.",
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenCertificate"
+          },
+          "x-ms-identifiers": [
+            "thumbprint"
+          ]
+        },
+        "passwords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenPassword"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ActiveDirectoryObject": {
+      "description": "The Active Directory Object that will be used for authenticating the token of a container registry.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "The user/group/application object ID for Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of user/group/application object Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
+        }
+      }
+    },
+    "TokenCertificate": {
+      "description": "The properties of a certificate used for authenticating a token.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "certificate1",
+            "certificate2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenCertificateName",
+            "modelAsString": true
+          }
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry datetime of the certificate.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "The thumbprint of the certificate.",
+          "type": "string"
+        },
+        "encodedPemCertificate": {
+          "description": "Base 64 encoded string of the public certificate1 in PEM format that will be used for authenticating the token.",
+          "type": "string"
+        }
+      }
+    },
+    "TokenPassword": {
+      "description": "The password that will be used for authenticating the token of a container registry.",
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation datetime of the password.",
+          "type": "string"
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry datetime of the password.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The password name \"password1\" or \"password2\"",
+          "enum": [
+            "password1",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenPasswordName",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The password value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TokenUpdateParameters": {
+      "description": "The parameters for updating a token.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TokenUpdateProperties",
+          "description": "The properties of the token update parameters.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TokenUpdateProperties": {
+      "description": "The parameters for updating token properties.",
+      "type": "object",
+      "properties": {
+        "scopeMapId": {
+          "description": "The resource ID of the scope map to which the token will be associated with.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the token example enabled or disabled.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenStatus",
+            "modelAsString": true
+          }
+        },
+        "credentials": {
+          "$ref": "#/definitions/TokenCredentialsProperties",
+          "description": "The credentials that can be used for authenticating the token."
+        }
+      }
+    },
+    "GenerateCredentialsParameters": {
+      "description": "The parameters used to generate credentials for a specified token or user of a container registry.",
+      "type": "object",
+      "properties": {
+        "tokenId": {
+          "description": "The resource ID of the token for which credentials have to be generated.",
+          "type": "string"
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry date of the generated credentials after which the credentials become invalid.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Specifies name of the password which should be regenerated if any -- password1 or password2.",
+          "enum": [
+            "password1",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TokenPasswordName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "GenerateCredentialsResult": {
+      "description": "The response from the GenerateCredentials operation.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username for a container registry.",
+          "type": "string"
+        },
+        "passwords": {
+          "description": "The list of passwords for a container registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenPassword"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "WebhookListResult": {
       "description": "The result of a request to list webhooks for a container registry.",
       "type": "object",
@@ -2748,7 +3774,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -3224,94 +4250,9 @@
           }
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "An error response from the Azure Container Registry service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody",
-          "description": "Azure container registry build API error body."
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "description": "An error response from the Azure Container Registry service.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "an array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InnerErrorDescription"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
-        }
-      }
-    },
-    "InnerErrorDescription": {
-      "description": "inner error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The Microsoft Azure subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The client API version.",
-      "required": true,
-      "type": "string"
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group to which the container registry belongs.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
     "RegistryNameParameter": {
       "name": "registryName",
       "in": "path",
@@ -3343,6 +4284,28 @@
       "maxLength": 50,
       "minLength": 5,
       "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ScopeMapNameParameter": {
+      "name": "scopeMapName",
+      "in": "path",
+      "description": "The name of the scope map.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-_]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "TokenNameParameter": {
+      "name": "tokenName",
+      "in": "path",
+      "description": "The name of the token.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
