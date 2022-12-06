@@ -37,6 +37,21 @@
           },
           {
             "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "required": true,
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as 'US'"
+          },
+          {
+            "type": "string",
             "name": "x-ms-partner-tenantid",
             "x-originalName": "partnerTenantId",
             "in": "header",
@@ -48,15 +63,6 @@
             "x-originalName": "pricingAudienceHeaderValue",
             "in": "header",
             "description": "Pricing audience"
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview"
           },
           {
             "type": "boolean",
@@ -71,13 +77,6 @@
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default='en'",
             "default": "en"
-          },
-          {
-            "type": "string",
-            "name": "market",
-            "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "default": "US"
           },
           {
             "type": "boolean",
@@ -174,6 +173,21 @@
           },
           {
             "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "required": true,
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as 'US'"
+          },
+          {
+            "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
             "in": "header",
@@ -231,19 +245,10 @@
             "description": "Billing profile Id"
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview"
-          },
-          {
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Denotes whether to include stop-sold plans",
+            "description": "Denotes whether to include stop sold plans",
             "default": false
           },
           {
@@ -252,13 +257,6 @@
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default='en'",
             "default": "en"
-          },
-          {
-            "type": "string",
-            "name": "market",
-            "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "default": "US"
           },
           {
             "type": "boolean",
@@ -341,8 +339,13 @@
             "x-originalName": "apiVersion",
             "in": "query",
             "required": true,
-            "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview"
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as 'US'"
           },
           {
             "type": "string",
@@ -359,12 +362,6 @@
             "default": "azure"
           },
           {
-            "type": "string",
-            "name": "market",
-            "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']"
-          },
-          {
             "type": "boolean",
             "name": "excludePublic",
             "x-originalName": "excludePublicOffersAndPublicPlans",
@@ -374,27 +371,27 @@
           },
           {
             "type": "string",
-            "name": "$select",
+            "name": "select",
             "in": "query",
             "description": "Selects which properties to include in the results. Example: '$select=displayName'"
           },
           {
             "type": "string",
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
           },
           {
             "type": "string",
-            "name": "$expand",
+            "name": "expand",
             "in": "query",
             "description": "Expands related entities inline. Example: '$expand=startingPrice'"
           },
           {
             "type": "string",
-            "name": "$orderBy",
+            "name": "orderby",
             "in": "query",
-            "description": "Ordering expression for the results using OData notation. Example: '$orderby=displayName desc'"
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'."
           }
         ],
         "responses": {
@@ -449,6 +446,14 @@
         "parameters": [
           {
             "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
             "in": "header",
@@ -462,15 +467,6 @@
             "in": "header",
             "required": true,
             "description": "The caller user principal"
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview"
           },
           {
             "type": "string",
@@ -497,7 +493,7 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']"
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as 'US'"
           },
           {
             "type": "boolean",
@@ -509,27 +505,27 @@
           },
           {
             "type": "string",
-            "name": "$select",
+            "name": "select",
             "in": "query",
             "description": "Selects which properties to include in the results. Example: '$select=displayName'"
           },
           {
             "type": "string",
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
           },
           {
             "type": "string",
-            "name": "$expand",
+            "name": "expand",
             "in": "query",
             "description": "Expands related entities inline. Example: '$expand=startingPrice'"
           },
           {
             "type": "string",
-            "name": "$orderBy",
+            "name": "orderby",
             "in": "query",
-            "description": "Ordering expression for the results using OData notation. Example: '$orderby=displayName desc'"
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'."
           }
         ],
         "responses": {
@@ -1147,6 +1143,14 @@
         "isPrivate": {
           "type": "boolean",
           "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "hasProtectedArtifacts": {
+          "type": "boolean",
+          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is still available for purchase or not"
         }
       }
     },
