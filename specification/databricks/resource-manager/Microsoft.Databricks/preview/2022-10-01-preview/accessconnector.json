@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DatabricksAccessConnectorClient",
-    "version": "2022-04-01-preview",
+    "version": "2022-10-01-preview",
     "description": "These APIs allow end users to operate on Azure Databricks Access Connector resources."
   },
   "host": "management.azure.com",
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "databricks.json#/definitions/ErrorResponse"
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -113,7 +113,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "databricks.json#/definitions/ErrorResponse"
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -126,8 +126,11 @@
         "operationId": "AccessConnectors_CreateOrUpdate",
         "description": "Creates or updates azure databricks accessConnector.",
         "x-ms-examples": {
-          "Create an azure databricks accessConnector": {
+          "Create an azure databricks accessConnector with SystemAssigned Identity": {
             "$ref": "./examples/AccessConnectorCreateOrUpdate.json"
+          },
+          "Create an azure databricks accessConnector with UserAssigned Identity": {
+            "$ref": "./examples/AccessConnectorCreateOrUpdateWithUserAssigned.json"
           }
         },
         "parameters": [
@@ -169,7 +172,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "databricks.json#/definitions/ErrorResponse"
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -222,7 +225,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "databricks.json#/definitions/ErrorResponse"
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -262,7 +265,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "databricks.json#/definitions/ErrorResponse"
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -301,7 +304,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "databricks.json#/definitions/ErrorResponse"
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -316,7 +319,11 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/IdentityData"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "properties": {
           "description": "Azure Databricks accessConnector properties",
@@ -325,7 +332,7 @@
       },
       "allOf": [
         {
-          "$ref": "databricks.json#/definitions/TrackedResource"
+          "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/TrackedResource"
         }
       ],
       "description": "Information about azure databricks accessConnector."
@@ -349,39 +356,6 @@
         }
       }
     },
-    "IdentityData": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "None",
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the resource."
-    },
     "AccessConnectorUpdate": {
       "description": "An update to an azure databricks accessConnector.",
       "type": "object",
@@ -394,8 +368,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/IdentityData",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
