@@ -43,6 +43,9 @@
       "name": "Operations"
     },
     {
+      "name": "OperationStatuses"
+    },
+    {
       "name": "RedisEnterprise"
     },
     {
@@ -84,6 +87,49 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{location}/providers/Microsoft.Cache/operationStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationStatuses"
+        ],
+        "operationId": "OperationStatuses_Get",
+        "description": "Gets information about a database in a RedisEnterprise cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.LocationParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "Operation ID",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -1383,17 +1429,6 @@
         "modelAsString": true
       }
     },
-    "ClientProtocolKV": {
-      "type": "string",
-      "enum": [
-        "Encrypted",
-        "Plaintext"
-      ],
-      "x-ms-enum": {
-        "name": "ClientProtocolKV",
-        "modelAsString": true
-      }
-    },
     "Cluster": {
       "type": "object",
       "properties": {
@@ -1570,7 +1605,12 @@
       "properties": {
         "clientProtocol": {
           "$ref": "#/definitions/ClientProtocol",
-          "description": "Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted."
+          "description": "Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "port": {
           "type": "integer",
@@ -1656,16 +1696,29 @@
         "modelAsString": true
       }
     },
-    "KeyTypeKV": {
-      "type": "string",
-      "enum": [
-        "Primary",
-        "Secondary"
-      ],
-      "x-ms-enum": {
-        "name": "KeyTypeKV",
-        "modelAsString": true
-      }
+    "OperationStatus": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperationStatusProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Proxy resource for selecting azure location",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OperationStatusProperties": {
+      "type": "object",
+      "properties": {}
     },
     "PrivateEndpoint": {
       "type": "object",
@@ -1747,26 +1800,14 @@
       "type": "string",
       "description": "The current provisioning state.",
       "enum": [
-        "Creating",
-        "Deleting",
+        "Succeeded",
         "Failed",
-        "Succeeded"
+        "Canceled",
+        "Creating",
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "PrivateEndpointConnectionProvisioningStateKV": {
-      "type": "string",
-      "enum": [
-        "Creating",
-        "Deleting",
-        "Failed",
-        "Succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningStateKV",
         "modelAsString": true
       }
     },
@@ -1785,18 +1826,6 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
-    "PrivateEndpointServiceConnectionStatusKV": {
-      "type": "string",
-      "enum": [
-        "Approved",
-        "Pending",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatusKV",
         "modelAsString": true
       }
     },
@@ -1901,29 +1930,15 @@
       "type": "string",
       "enum": [
         "Succeeded",
-        "Canceled",
         "Failed",
-        "Creating",
+        "Canceled",
+        "Provisioning",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Accepted"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "ProvisioningStateKV": {
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "Canceled",
-        "Failed",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningStateKV",
         "modelAsString": true
       }
     },
@@ -1961,27 +1976,6 @@
         "modelAsString": true
       }
     },
-    "ResourceStateKV": {
-      "type": "string",
-      "enum": [
-        "Running",
-        "Creating",
-        "CreateFailed",
-        "Updating",
-        "UpdateFailed",
-        "Deleting",
-        "DeleteFailed",
-        "Enabling",
-        "EnableFailed",
-        "Disabling",
-        "DisableFailed",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceStateKV",
-        "modelAsString": true
-      }
-    },
     "SasUri": {
       "type": "string",
       "format": "password",
@@ -2006,22 +2000,6 @@
         "name",
         "capacity"
       ]
-    },
-    "SkuKV": {
-      "type": "string",
-      "enum": [
-        "Enterprise_E10",
-        "Enterprise_E20",
-        "Enterprise_E50",
-        "Enterprise_E100",
-        "EnterpriseFlash_F300",
-        "EnterpriseFlash_F700",
-        "EnterpriseFlash_F1500"
-      ],
-      "x-ms-enum": {
-        "name": "SkuKV",
-        "modelAsString": true
-      }
     },
     "SkuName": {
       "type": "string",
@@ -2064,33 +2042,17 @@
           }
         ]
       }
-    },
-    "TlsVersionKV": {
-      "type": "string",
-      "enum": [
-        "1.0",
-        "1.1",
-        "1.2"
-      ],
-      "x-ms-enum": {
-        "name": "TlsVersionKV",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OnePointZero",
-            "value": "1.0"
-          },
-          {
-            "name": "OnePointOne",
-            "value": "1.1"
-          },
-          {
-            "name": "OnePointTwo",
-            "value": "1.2"
-          }
-        ]
-      }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "description": "The location name.",
+      "minLength": 1,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
