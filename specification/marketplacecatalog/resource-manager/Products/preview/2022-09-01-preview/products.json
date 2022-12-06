@@ -26,31 +26,28 @@
         "operationId": "SinglePrivateProduct_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#../../../../../common-types/resource-management/v3/types.json#/definitions/SubscriptionIdParameter"
           },
           {
             "type": "string",
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "The unique product Id",
-            "x-nullable": true
+            "description": "The unique product Id"
           },
           {
             "type": "string",
             "name": "x-ms-partner-tenantid",
             "x-originalName": "partnerTenantId",
             "in": "header",
-            "description": "Partner tenant ID",
-            "x-nullable": true
+            "description": "Partner tenant ID"
           },
           {
             "type": "string",
             "name": "x-ms-pricing-audience",
             "x-originalName": "pricingAudienceHeaderValue",
             "in": "header",
-            "description": "Pricing audience",
-            "x-nullable": true
+            "description": "Pricing audience"
           },
           {
             "type": "string",
@@ -59,76 +56,66 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview",
-            "x-nullable": true
+            "default": "2022-09-01-preview"
           },
           {
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
             "description": "Denotes whether to include stop sold plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "string",
             "name": "language",
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default='en'",
-            "default": "en",
-            "x-nullable": true
+            "default": "en"
           },
           {
             "type": "string",
             "name": "market",
             "in": "query",
             "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "default": "US",
-            "x-nullable": true
+            "default": "US"
           },
           {
             "type": "boolean",
             "name": "lookupOfferInTenantLevel",
             "in": "query",
             "description": "Optional - in case you want to check against tenant private audience also",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "boolean",
             "name": "includeHiddenPlans",
             "in": "query",
             "description": "Denotes whether to include hidden plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "string",
             "name": "x-ms-client-object-id",
             "x-originalName": "userObjectId",
             "in": "header",
-            "description": "AAD user ID",
-            "x-nullable": true
+            "description": "AAD user ID"
           },
           {
             "type": "string",
             "name": "x-ms-client-alt-sec-id",
             "x-originalName": "altSecId",
             "in": "header",
-            "description": "Alternate Security ID - relevant for MSA user",
-            "x-nullable": true
+            "description": "Alternate Security ID - relevant for MSA user"
           }
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a single product directly from BigCat, by subscription as audience",
             "schema": {
               "$ref": "#/definitions/ProductSummary"
             }
           },
           "404": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the product does not exist, does not exist in the given market or is not available for the given audience",
             "schema": {
@@ -136,7 +123,6 @@
             }
           },
           "400": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the request is malformed",
             "schema": {
@@ -144,7 +130,6 @@
             }
           },
           "401": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the provided authorization token is not in allowed list",
             "schema": {
@@ -152,7 +137,6 @@
             }
           },
           "403": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the provided authorization token validation has failed",
             "schema": {
@@ -186,8 +170,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "The unique product Id",
-            "x-nullable": true
+            "description": "The unique product Id"
           },
           {
             "type": "string",
@@ -195,8 +178,7 @@
             "x-originalName": "tenantId",
             "in": "header",
             "required": true,
-            "description": "The caller tenant Id",
-            "x-nullable": true
+            "description": "The caller tenant Id"
           },
           {
             "type": "string",
@@ -204,56 +186,49 @@
             "x-originalName": "userPrincipal",
             "in": "header",
             "required": true,
-            "description": "The caller user principal",
-            "x-nullable": true
+            "description": "The caller user principal"
           },
           {
             "type": "string",
             "name": "x-ms-client-object-id",
             "x-originalName": "userObjectId",
             "in": "header",
-            "description": "User object id",
-            "x-nullable": true
+            "description": "User object id"
           },
           {
             "type": "string",
             "name": "x-ms-client-subscription-id",
             "x-originalName": "subscriptionId",
             "in": "header",
-            "description": "Subscription Id",
-            "x-nullable": true
+            "description": "Subscription Id"
           },
           {
             "type": "string",
             "name": "x-ms-pricing-audience",
             "x-originalName": "pricingAudienceHeaderValue",
             "in": "header",
-            "description": "Pricing audience",
-            "x-nullable": true
+            "description": "Pricing audience"
           },
           {
             "type": "string",
             "name": "x-ms-partner-tenantid",
             "x-originalName": "partnerTenantId",
             "in": "header",
-            "description": "Partner tenant Id",
-            "x-nullable": true
+            "description": "Partner tenant Id"
           },
           {
             "type": "string",
             "name": "x-ms-client-billingaccount-id",
             "x-originalName": "billingAccountId",
             "in": "header",
-            "description": "Billing account Id",
-            "x-nullable": true
+            "description": "Billing account Id"
           },
           {
             "type": "string",
             "name": "x-ms-client-billingprofile-id",
             "x-originalName": "billingProfileId",
             "in": "header",
-            "description": "Billing profile Id",
-            "x-nullable": true
+            "description": "Billing profile Id"
           },
           {
             "type": "string",
@@ -262,60 +237,52 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview",
-            "x-nullable": true
+            "default": "2022-09-01-preview"
           },
           {
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
             "description": "Denotes whether to include stop-sold plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "string",
             "name": "language",
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default='en'",
-            "default": "en",
-            "x-nullable": true
+            "default": "en"
           },
           {
             "type": "string",
             "name": "market",
             "in": "query",
             "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "default": "US",
-            "x-nullable": true
+            "default": "US"
           },
           {
             "type": "boolean",
             "name": "shouldCheckMarketplaceAdminPermissions",
             "in": "query",
             "description": "Denotes whether to include marketplace admin permissions",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "boolean",
             "name": "includeHiddenPlans",
             "in": "query",
             "description": "Denotes whether to include hidden plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           }
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a single product directly from BigCat, by tenant as audience",
             "schema": {
               "$ref": "#/definitions/ProductSummary"
             }
           },
           "404": {
-            "x-nullable": false,
             "description": "In case the product does not exist, does not exist in the given market or is not available for the given audience",
             "x-ms-error-response": true,
             "schema": {
@@ -323,7 +290,6 @@
             }
           },
           "400": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the request is malformed",
             "schema": {
@@ -331,7 +297,6 @@
             }
           },
           "401": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the provided authorization token is not in allowed list",
             "schema": {
@@ -339,7 +304,6 @@
             }
           },
           "403": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case the provided authorization token validation has failed",
             "schema": {
@@ -369,7 +333,7 @@
         "operationId": "ListingSubscriptionBasedPrivateProducts_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#../../../../../common-types/resource-management/v3/types.json#/definitions/SubscriptionIdParameter"
           },
           {
             "type": "string",
@@ -378,31 +342,27 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview",
-            "x-nullable": true
+            "default": "2022-09-01-preview"
           },
           {
             "type": "string",
             "name": "language",
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default='en'",
-            "default": "en",
-            "x-nullable": true
+            "default": "en"
           },
           {
             "type": "string",
             "name": "storefront",
             "in": "query",
             "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
-            "default": "azure",
-            "x-nullable": true
+            "default": "azure"
           },
           {
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "x-nullable": true
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']"
           },
           {
             "type": "boolean",
@@ -410,8 +370,7 @@
             "x-originalName": "excludePublicOffersAndPublicPlans",
             "in": "query",
             "description": "Denotes whether to exclude public products and plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "string",
@@ -440,14 +399,12 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of public, private and preview products, by subscription as audience",
             "schema": {
               "$ref": "#/definitions/CatalogApiResponse"
             }
           },
           "401": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "Authorization token is not in allowed list",
             "schema": {
@@ -455,7 +412,6 @@
             }
           },
           "403": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "Authorization token validation has failed",
             "schema": {
@@ -463,7 +419,6 @@
             }
           },
           "400": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case request is malformed",
             "schema": {
@@ -498,8 +453,7 @@
             "x-originalName": "tenantId",
             "in": "header",
             "required": true,
-            "description": "The caller tenant Id",
-            "x-nullable": true
+            "description": "The caller tenant Id"
           },
           {
             "type": "string",
@@ -507,8 +461,7 @@
             "x-originalName": "userPrincipal",
             "in": "header",
             "required": true,
-            "description": "The caller user principal",
-            "x-nullable": true
+            "description": "The caller user principal"
           },
           {
             "type": "string",
@@ -517,39 +470,34 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request. ",
-            "default": "2022-09-01-preview",
-            "x-nullable": true
+            "default": "2022-09-01-preview"
           },
           {
             "type": "string",
             "name": "x-ms-pricing-audience",
             "x-originalName": "pricingAudienceHeaderValue",
             "in": "header",
-            "description": "Pricing audience",
-            "x-nullable": true
+            "description": "Pricing audience"
           },
           {
             "type": "string",
             "name": "language",
             "in": "query",
             "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default='en'",
-            "default": "en",
-            "x-nullable": true
+            "default": "en"
           },
           {
             "type": "string",
             "name": "storefront",
             "in": "query",
             "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
-            "default": "azure",
-            "x-nullable": true
+            "default": "azure"
           },
           {
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "x-nullable": true
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']"
           },
           {
             "type": "boolean",
@@ -557,8 +505,7 @@
             "x-originalName": "excludePublicOffersAndPublicPlans",
             "in": "query",
             "description": "Denotes whether to exclude public products and plans",
-            "default": false,
-            "x-nullable": false
+            "default": false
           },
           {
             "type": "string",
@@ -587,14 +534,12 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
             "description": "Returns a list of public, private and preview products, by tenant as audience",
             "schema": {
               "$ref": "#/definitions/CatalogApiResponse"
             }
           },
           "401": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "Authorization token is not in allowed list",
             "schema": {
@@ -602,7 +547,6 @@
             }
           },
           "403": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "Authorization token validation has failed",
             "schema": {
@@ -610,7 +554,6 @@
             }
           },
           "400": {
-            "x-nullable": false,
             "x-ms-error-response": true,
             "description": "In case request is malformed",
             "schema": {
@@ -663,16 +606,6 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "description": "Subscription Id of the caller"
     }
   },
   "definitions": {
