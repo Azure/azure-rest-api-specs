@@ -1314,7 +1314,7 @@
     },
     "DocumentSemanticDebugInfo": {
       "x-ms-client-name": "Semantic",
-      "description": "Semantic debug information for this document.",
+      "description": "Semantic debug information for this match.",
       "properties": {
         "titleField": {
           "$ref": "#/definitions/SemanticFieldResult",
@@ -1350,7 +1350,7 @@
     },
     "DocumentDebugInfo": {
       "x-ms-client-name": "DocumentDebugInfo",
-      "description": "Debug information for this document.",
+      "description": "Debug information for this match.",
       "properties": {
         "semantic": {
           "$ref": "#/definitions/DocumentSemanticDebugInfo"
@@ -1422,17 +1422,17 @@
               {
                 "value": "transient",
                 "name": "Transient",
-                "description": "Transient issues caused semantic processing to truncate."
+                "description": "Transient issues caused semantic processing to terminate before all results could be processed."
               },
               {
                 "value": "maxWaitExceeded",
                 "name": "MaxWaitExceeded",
-                "description": "Semantic processing exceeded the max wait time, causing it to truncate."
+                "description": "Semantic processing exceeded the maximum wait time. Only a subset of the initial results were reranked."
               },
               {
                 "value": "capacityOverloaded",
                 "name": "CapacityOverloaded",
-                "description": "The system was overloaded, causing semantic processing to truncate."
+                "description": "The service was overloaded, causing semantic processing to terminate before all results could be processed."
               }
             ]
           },
@@ -1535,7 +1535,7 @@
           "$ref": "#/definitions/DocumentDebugInfo",
           "readOnly": true,
           "x-ms-client-name": "DocumentDebugInfo",
-          "description": "Debug information for this document."
+          "description": "Debug information for this match."
         }
       },
       "required": [
