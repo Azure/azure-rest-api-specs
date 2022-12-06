@@ -4703,66 +4703,10 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         }
       }
-    },
-    "Identity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned,UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here."
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the resource."
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of the identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client ID of the identity."
-        }
-      },
-      "description": "UserAssignedIdentity for the resource."
     },
     "netAppAccountPatch": {
       "description": "NetApp account patch resource",
@@ -6095,7 +6039,6 @@
         },
         "backupEnabled": {
           "type": "boolean",
-          "x-nullable": true,
           "description": "Backup Enabled"
         }
       }
@@ -6198,6 +6141,7 @@
         },
         "readyToBeFinalized": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Has relocation finished and is ready to be cleaned up"
         }
       }
@@ -7807,7 +7751,7 @@
       }
     },
     "backupRestoreFiles": {
-      "description": "Restore payload for Single File Backup Restore",
+      "description": "Restore payload for single file backup restore",
       "type": "object",
       "x-ms-azure-resource": true,
       "required": [
@@ -7831,7 +7775,7 @@
           ]
         },
         "restoreFilePath": {
-          "description": "Destination folder where the files will be restored",
+          "description": "Destination folder where the files will be restored, if present it should start with a '/'",
           "type": "string",
           "example": "/AVSdataStore"
         },
