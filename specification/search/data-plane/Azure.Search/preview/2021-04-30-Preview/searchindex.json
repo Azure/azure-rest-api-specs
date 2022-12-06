@@ -1237,13 +1237,18 @@
           "readOnly": true
         }
       },
-      "x-ms-client-name": "Answers",
+      "x-ms-client-name": "AnswersDebugInfo",
       "description": "Provides debug information for an Answers construct in the search result."
     },
     "SemanticDebugInfo": {
-      "x-ms-client-name": "Semantic",
+      "x-ms-client-name": "SemanticDebugInfo",
       "description": "Provides debug information for a Semantic construct in the search result.",
-      "$ref": "#/definitions/AnswersDebugInfo"
+      "properties": {
+        "answers": {
+          "$ref": "#/definitions/AnswersDebugInfo",
+          "readOnly": true
+        }
+      }
     },
     "RerankerInputResult": {
       "properties": {
@@ -1267,7 +1272,7 @@
       "x-ms-client-name": "RerankerInput"
     },
     "SemanticFieldResult": {
-      "x-ms-client-name": "Semantic",
+      "x-ms-client-name": "SemanticFieldResult",
       "properties": {
         "name": {
           "type": "string",
@@ -1388,11 +1393,15 @@
           "readOnly": true,
           "x-ms-client-name": "Answers",
           "x-nullable": true,
-          "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
+          "description": "The Answers construction of a search result. This value will be null if Answers was unspecified or set to 'none'."
         },
         "@search.debugInfo": {
-          "$ref": "#/definitions/SemanticDebugInfo",
-          "description": "Top-level debug information for this search result.",
+          "description": "Debug information for this search result.",
+          "properties": {
+            "semantic": {
+              "$ref": "#/definitions/SemanticDebugInfo"
+            }
+          },
           "readOnly": true,
           "x-ms-client-name": "DebugInfo",
           "x-nullable": true
