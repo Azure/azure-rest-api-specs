@@ -260,6 +260,33 @@
       },
       "description": "Paged Documentation list representation."
     },
+    "WikiCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WikiContract"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Wiki list representation."
+    },
     "ApiContract": {
       "properties": {
         "properties": {
@@ -7784,9 +7811,9 @@
         "content": {
           "type": "string",
           "description": "Markdown documentation content."
-        },
-        "description": "Markdown documentation details."
-      }
+        }
+      },
+      "description": "Markdown documentation details."
     },
     "DocumentationContract": {
       "type": "object",
