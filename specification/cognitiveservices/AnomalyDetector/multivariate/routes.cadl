@@ -17,6 +17,7 @@ resultId returned by the BatchDetectAnomaly api.
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op GetMultivariateBatchDetectionResult(
   @format("uuid")
+  @doc("ID of a batch detection result.")
   @path resultId: string,
 ): MultivariateDetectionResult | ResponseError;
 
@@ -35,6 +36,7 @@ timestamp column.
 """)
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op TrainMultivariateModel(
+  @doc("Model information.")
   @body modelInfo: ModelInfo,
 ): {
   @statusCode statusCode: 201,
@@ -103,6 +105,7 @@ op DetectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
+  @doc("Request of multivariate anomaly detection.")
   @body options: MultivariateBatchDetectionOptions,
 ): {
   @statusCode statusCode: 202,
@@ -126,5 +129,6 @@ op DetectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
+  @doc("Request of last detection.")
   @body options: MultivariateLastDetectionOptions,
 ): MultivariateLastDetectionResult | ResponseError;
