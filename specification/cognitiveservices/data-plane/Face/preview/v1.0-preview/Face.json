@@ -2542,6 +2542,7 @@
           {
             "in": "query",
             "name": "start",
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2591,7 +2592,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnrolledPerson"
+              "$ref": "#/definitions/EnrollmentRequest"
             }
           }
         ],
@@ -2640,6 +2641,7 @@
             "in": "path",
             "name": "personId",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2682,6 +2684,7 @@
             "in": "path",
             "name": "personId",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2723,6 +2726,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2753,7 +2757,7 @@
           "PersonDirectory"
         ],
         "summary": "Add a new face to person.",
-        "operationId": "PersonDirectory_AddPersonFace",
+        "operationId": "PersonDirectory_AddPersonFaceFromUrl",
         "produces": [
           "application/json"
         ],
@@ -2763,6 +2767,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2789,6 +2794,9 @@
             "name": "targetFace",
             "description": "Target face.",
             "type": "string"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -2832,6 +2840,7 @@
             "name": "personId",
             "description": "Target person to get persistedFaceIds from.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2879,6 +2888,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2893,6 +2903,7 @@
             "name": "persistedFaceId",
             "description": "Persisted face id to delete.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2934,6 +2945,7 @@
             "name": "personId",
             "description": "Target person to get face from.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -2948,6 +2960,7 @@
             "name": "persistedFaceId",
             "description": "Target person face id to get.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -2989,6 +3002,7 @@
             "name": "personId",
             "description": "Target person to update face from.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3003,6 +3017,7 @@
             "name": "persistedFaceId",
             "description": "PersistedFaceId created from Person Face Create",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3245,6 +3260,7 @@
             "in": "query",
             "name": "start",
             "description": "List persons from the least personId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3339,6 +3355,7 @@
             "name": "personId",
             "description": "Valid PersonId created from Person Create.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -3694,6 +3711,7 @@
             "name": "personId",
             "description": "Person id.",
             "required": true,
+            "format": "uuid",
             "type": "string"
           },
           {
@@ -5218,7 +5236,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "name": {
           "type": "string"
@@ -5233,7 +5252,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "name": {
           "type": "string"
@@ -5248,7 +5268,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         }
       }
     },
@@ -5268,7 +5289,8 @@
       "properties": {
         "persistedFaceId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "recognitionModel": {
           "type": "string"
@@ -5283,13 +5305,15 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "persistedFaceIds": {
           "type": "array",
           "items": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-nullable": false
           }
         },
         "name": {
@@ -5342,7 +5366,9 @@
         "addPersonIds": {
           "type": "array",
           "items": {
-            "type": "string"
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
           }
         }
       }
@@ -5365,7 +5391,9 @@
         "addPersonIds": {
           "type": "array",
           "items": {
-            "type": "string"
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": false
           }
         }
       }
@@ -5391,7 +5419,8 @@
           "type": "array",
           "items": {
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "x-nullable": false
           }
         }
       }
@@ -5401,7 +5430,8 @@
       "properties": {
         "personId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "dynamicPersonGroupIds": {
           "type": "array",
