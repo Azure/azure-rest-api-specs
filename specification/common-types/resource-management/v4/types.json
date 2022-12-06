@@ -649,6 +649,36 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
+    "ManagementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the management group. The name is case insensitive.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope at which the operation is performed.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "TenantIdParameter": {
+      "name": "tenantId",
+      "in": "path",
+      "description": "The Azure tenant ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
     "OperationIdParameter": {
       "name": "operationId",
       "in": "path",
@@ -663,8 +693,24 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of Azure region.",
+      "description": "The name of the Azure region.",
       "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "If-Match": {
+      "name": "ifMatch",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "The If-Match header that makes a request conditional.",
+      "x-ms-parameter-location": "method"
+    },
+    "If-None-Match": {
+      "name": "ifNoneMatch",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "The If-None-Match header that makes a request conditional.",
       "x-ms-parameter-location": "method"
     }
   }
