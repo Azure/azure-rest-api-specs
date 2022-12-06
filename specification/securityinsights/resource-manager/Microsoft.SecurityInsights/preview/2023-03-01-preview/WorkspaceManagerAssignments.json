@@ -557,6 +557,10 @@
           "description": "The time the job started",
           "format": "date-time",
           "type": "string"
+        },
+        "errorMessage": {
+          "description": "Message to describe error, if an error exists",
+          "type": "string"
         }
       },
       "required": [
@@ -576,7 +580,8 @@
           "description": "Status of the item publication",
           "enum": [
             "Succeeded",
-            "Failed"
+            "Failed",
+            "InProgress"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -590,6 +595,10 @@
               {
                 "description": "The item publication failed",
                 "value": "Failed"
+              },
+              {
+                "description": "The item publication is in progress",
+                "value": "InProgress"
               }
             ]
           }
