@@ -40,14 +40,14 @@ tag: package-2020-01-01
 ```
 
 
-### Tag: package-flexibleserver-2022-05-01-privatepreview
+### Tag: package-flexibleserver-2022-05-01-preview
 
-These settings apply only when `--tag=package-flexibleserver-2022-05-01-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-flexibleserver-2022-05-01-privatepreview'
+```yaml $(tag) == 'package-flexibleserver-2022-05-01-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
 ```
 ### Tag: package-flexibleserver-2022-03-preview
 
