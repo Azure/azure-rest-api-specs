@@ -56,6 +56,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FlexibleServers.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Replicas.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
 ```
