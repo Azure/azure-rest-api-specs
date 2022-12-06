@@ -20,7 +20,7 @@
         "tags": [
           "DaprResiliencyTimeoutPolicies"
         ],
-        "summary": "Get the Dapr Policies for a managed environment.",
+        "summary": "Get the Dapr Resiliency Timeout Policies for a managed environment.",
         "operationId": "DaprResiliencyTimeoutPolicies_List",
         "parameters": [
           {
@@ -54,7 +54,11 @@
             }
           }
         },
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "List Dapr Resiliency Timeout Policy": {
+            "$ref": "./examples/DaprResiliencyTimeoutPolicies_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -65,7 +69,7 @@
         "tags": [
           "DaprResiliencyTimeoutPolicies"
         ],
-        "summary": "Get a dapr policy.",
+        "summary": "Get a Dapr Resiliency Timeout Policy.",
         "operationId": "DaprResiliencyTimeoutPolicies_Get",
         "parameters": [
           {
@@ -84,7 +88,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "Name of the Dapr resiliency timeout policy.",
+            "description": "Name of the Dapr Resiliency Timeout Policy.",
             "required": true,
             "type": "string"
           },
@@ -106,14 +110,18 @@
             }
           }
         },
-        "x-ms-examples": {}
+        "x-ms-examples": {
+          "Get Dapr Resiliency Timeout Policy": {
+            "$ref": "./examples/DaprResiliencyTimeoutPolicies_Get.json"
+          }
+        }
       },
       "put": {
         "tags": [
           "DaprResiliencyTimeoutPolicies"
         ],
-        "summary": "Creates or updates a Dapr Component.",
-        "description": "Creates or updates a Dapr Component in a Managed Environment.",
+        "summary": "Creates or updates a Dapr Resiliency Timeout Policy.",
+        "description": "Creates or updates a Dapr Resiliency Timeout Policy in a Managed Environment.",
         "operationId": "DaprResiliencyTimeoutPolicies_CreateOrUpdate",
         "parameters": [
           {
@@ -132,14 +140,14 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "Name of the Dapr resiliency timeout policy.",
+            "description": "Name of the Dapr Resiliency Timeout Policy.",
             "required": true,
             "type": "string"
           },
           {
             "name": "daprResiliencyTimeoutPoliciesEnvelope",
             "in": "body",
-            "description": "Configuration details of the Dapr Policy.",
+            "description": "Configuration details of the Dapr Resiliency Timeout Policy.",
             "required": true,
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
@@ -163,15 +171,18 @@
             }
           }
         },
-        "x-ms-long-running-operation": false,
-        "x-ms-examples": {}
+        "x-ms-examples": {
+          "Create or update Dapr Resiliency Timeout Policy": {
+            "$ref": "./examples/DaprResiliencyTimeoutPolicies_CreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
           "DaprResiliencyTimeoutPolicies"
         ],
-        "summary": "Delete a Dapr Component.",
-        "description": "Delete a Dapr Component from a Managed Environment.",
+        "summary": "Delete a Dapr Resiliency Timeout Policy.",
+        "description": "Delete a Dapr Resiliency Timeout Policy from a Managed Environment.",
         "operationId": "DaprResiliencyTimeoutPolicies_Delete",
         "parameters": [
           {
@@ -212,8 +223,11 @@
             }
           }
         },
-        "x-ms-examples": {},
-        "x-ms-long-running-operation": false
+        "x-ms-examples": {
+          "Delete Dapr Resiliency Timeout Policy": {
+            "$ref": "./examples/DaprResiliencyTimeoutPolicies_Delete.json"
+          }
+        }
       }
     }
   },

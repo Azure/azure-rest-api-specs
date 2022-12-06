@@ -20,7 +20,7 @@
         "tags": [
           "DaprResiliencyCircuitBreakerPolicies"
         ],
-        "summary": "Get the Dapr Policies for a managed environment.",
+        "summary": "Get the Dapr Resiliency Circuit Breaker Policies for a managed environment.",
         "operationId": "DaprResiliencyCircuitBreakerPolicies_List",
         "parameters": [
           {
@@ -54,7 +54,11 @@
             }
           }
         },
-        "x-ms-examples": {},
+        "x-ms-examples": {
+          "List Dapr Resiliency Circuit Breaker Policy": {
+            "$ref": "./examples/DaprResiliencyCircuitBreakerPolicies_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -65,7 +69,7 @@
         "tags": [
           "DaprResiliencyCircuitBreakerPolicies"
         ],
-        "summary": "Get a dapr policy.",
+        "summary": "Get a Dapr Resiliency Circuit Breaker policy.",
         "operationId": "DaprResiliencyCircuitBreakerPolicies_Get",
         "parameters": [
           {
@@ -106,14 +110,18 @@
             }
           }
         },
-        "x-ms-examples": {}
+        "x-ms-examples": {
+          "Get Dapr Resiliency Circuit Breaker Policy": {
+            "$ref": "./examples/DaprResiliencyCircuitBreakerPolicies_Get.json"
+          }
+        }
       },
       "put": {
         "tags": [
           "DaprResiliencyCircuitBreakerPolicies"
         ],
-        "summary": "Creates or updates a Dapr Component.",
-        "description": "Creates or updates a Dapr Component in a Managed Environment.",
+        "summary": "Creates or updates a Dapr Resiliency Circuit Breaker Policy.",
+        "description": "Creates or updates a Dapr Resiliency Circuit Breaker Policy in a Managed Environment.",
         "operationId": "DaprResiliencyCircuitBreakerPolicies_CreateOrUpdate",
         "parameters": [
           {
@@ -132,14 +140,14 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "Name of the Dapr resiliency circuit breaker policy.",
+            "description": "Name of the Dapr Resiliency Circuit Breaker Policy.",
             "required": true,
             "type": "string"
           },
           {
             "name": "daprResiliencyCircuitBreakerPoliciesEnvelope",
             "in": "body",
-            "description": "Configuration details of the Dapr Policy.",
+            "description": "Configuration details of the Dapr Resiliency Circuit Breaker Policy.",
             "required": true,
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
@@ -163,8 +171,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": false,
-        "x-ms-examples": {}
+        "x-ms-examples": {
+          "Create or update Dapr Resiliency Circuit Breaker Policy": {
+            "$ref": "./examples/DaprResiliencyCircuitBreakerPolicies_CreateOrUpdate.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -190,7 +201,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "Name of the Dapr Component.",
+            "description": "Name of the Dapr Resiliency Circuit Breaker Policy.",
             "required": true,
             "type": "string"
           },
@@ -212,8 +223,11 @@
             }
           }
         },
-        "x-ms-examples": {},
-        "x-ms-long-running-operation": false
+        "x-ms-examples": {
+          "Delete Dapr Resiliency Circuit Breaker Policy": {
+            "$ref": "./examples/DaprResiliencyCircuitBreakerPolicies_Delete.json"
+          }
+        }
       }
     }
   },

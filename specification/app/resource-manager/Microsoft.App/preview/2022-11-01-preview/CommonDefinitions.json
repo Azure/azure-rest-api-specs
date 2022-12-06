@@ -771,25 +771,30 @@
     "DaprResiliencyRetryPolicy": {
       "description": "Resiliency Policy Retries",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "name": {
           "description": "policy name",
           "type": "string"
         },
         "policy": {
-          "description": "back-off and retry interval strategy",
+          "description": "Back-off and retry interval strategy",
           "type": "string"
         },
         "duration": {
-          "description": "time interval between retries",
+          "description": "Time interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         },
         "maxRetries": {
-          "description": "maximum number of retries to attempt",
+          "description": "Maximum number of retries to attempt",
           "type": "string"
         },
         "maxInterval": {
-          "description": "determines the maximum interval between retries",
+          "description": "Determines the maximum interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         }
       }
@@ -818,17 +823,22 @@
     "DaprResiliencyCircuitBreakerPolicy": {
       "description": "Resiliency Policy Breakers Policy",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "maxRequests": {
-          "description": "maximum number of requests allowed to pass through",
-          "type": "string"
+          "description": "Maximum number of requests allowed to pass through",
+          "type": "integer"
         },
         "interval": {
-          "description": "cyclical period of time used by the CB to clear its internal counts",
+          "description": "Cyclical period of time used by the CB to clear its internal counts. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         },
         "timeout": {
-          "description": "the period of the open state until the CB switches to half-open",
+          "description": "The period of the open state until the CB switches to half-open. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         },
         "trip": {
@@ -841,7 +851,7 @@
         },
         "circuitBreakerCacheSize": {
           "description": "Specify a cache size for the number of CBs to keep in memory. The value should be larger than the expected number of active actor instances.",
-          "type": "string"
+          "type": "integer"
         }
       }
     },
@@ -869,17 +879,22 @@
     "DaprResiliencyTimeoutPolicy": {
       "description": "Resiliency Policy Retries",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "general": {
-          "description": "timeout duration for general operations",
+          "description": "Timeout duration for general operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         },
         "important": {
-          "description": "timeout duration for important operations",
+          "description": "Timeout duration for important operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         },
         "largeResponse": {
-          "description": "timeout duration for large operations",
+          "description": "Timeout duration for large operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
           "type": "string"
         }
       }
