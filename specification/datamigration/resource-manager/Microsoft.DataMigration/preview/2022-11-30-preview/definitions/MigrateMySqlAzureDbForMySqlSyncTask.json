@@ -35,8 +35,20 @@
           "items": {
             "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncDatabaseInput"
           }
+        },
+        "optionalAgentSettings": {
+          "type": "object",
+          "description": "Optional parameters for fine tuning the data transfer rate during migration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlSchemaMigrationOptions"
+        }
+      ],
       "required": [
         "sourceConnectionInfo",
         "targetConnectionInfo",

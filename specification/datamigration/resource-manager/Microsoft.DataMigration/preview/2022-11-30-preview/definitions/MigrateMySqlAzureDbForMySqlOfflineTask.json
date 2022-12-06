@@ -46,9 +46,24 @@
           "format": "date-time",
           "description": "Parameter to specify when the migration started"
         },
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the source server if it is an azure instance"
+        },
+        "targetServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the target server"
+        },
         "optionalAgentSettings": {
           "type": "object",
           "description": "Optional parameters for fine tuning the data transfer rate during migration",
+          "properties": {
+            "enableConsistentBackup": {
+              "type": "boolean",
+              "description": "Setting to enable transactional consistency",
+              "default": false
+            }
+          },
           "additionalProperties": {
             "type": "string"
           }
@@ -58,6 +73,11 @@
           "description": "encrypted key for secure fields"
         }
       },
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlSchemaMigrationOptions"
+        }
+      ],
       "required": [
         "sourceConnectionInfo",
         "targetConnectionInfo",
@@ -172,6 +192,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Last time the storage was updated",
+          "readOnly": true
+        },
+        "sourceBinlogPosition": {
+          "description": "The binlog position when the consistent snapshot was taken",
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionOutput",
           "readOnly": true
         }
       },
