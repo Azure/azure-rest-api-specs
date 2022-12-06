@@ -121,6 +121,7 @@ input-file:
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedInstanceTdeCertificates.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedInstanceVulnerabilityAssessments.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
+  - Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedServerDnsAliases.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedServerSecurityAlertPolicies.json
