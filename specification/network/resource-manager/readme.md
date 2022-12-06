@@ -28,16 +28,16 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2022-06-preview
+tag: package-2022-12-preview
 ```
 
-### Tag: package-2022-06-preview
+### Tag: package-2022-12-preview
 
-These settings apply only when `--tag=2022-06-preview` is specified on the command line.
+These settings apply only when `--tag=2022-12-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-06-preview'
+``` yaml $(tag) == 'package-2022-12-preview'
 input-file:
-  - Microsoft.Network/preview/2022-06-01-preview/networkVerifier.json
+  - Microsoft.Network/preview/2022-12-01-preview/networkVerifier.json
   - Microsoft.Network/stable/2022-07-01/applicationGateway.json
   - Microsoft.Network/stable/2022-07-01/applicationGatewayWafDynamicManifests.json
   - Microsoft.Network/stable/2022-07-01/applicationSecurityGroup.json
