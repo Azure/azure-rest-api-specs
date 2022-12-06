@@ -1238,28 +1238,28 @@
         }
       },
       "x-ms-client-name": "Answers",
-      "description": "Answers debug info for this search result."
+      "description": "Provides debug information for an Answers construct in the search result."
     },
     "SemanticDebugInfo": {
       "x-ms-client-name": "Semantic",
-      "description": "Semantic debug info for this search result.",
+      "description": "Provides debug information for a Semantic construct in the search result.",
       "$ref": "#/definitions/AnswersDebugInfo"
     },
     "RerankerInputResult": {
       "properties": {
         "title": {
           "type": "string",
-          "readOnly": "true",
+          "readOnly": true,
           "description": "The title field."
         },
         "content": {
           "type": "string",
-          "readOnly": "true",
+          "readOnly": true,
           "description": "The concatenated content fields."
         },
         "keywords": {
           "type": "string",
-          "readOnly": "true",
+          "readOnly": true,
           "description": "The concatenated keyword fields."
         }
       },
@@ -1309,7 +1309,7 @@
     },
     "DocumentSemanticDebugInfo": {
       "x-ms-client-name": "Semantic",
-      "description": "Semantic debug info for this document.",
+      "description": "Semantic debug information for this document.",
       "properties": {
         "titleField": {
           "$ref": "#/definitions/SemanticFieldResult",
@@ -1345,7 +1345,7 @@
     },
     "DocumentDebugInfo": {
       "x-ms-client-name": "DocumentDebugInfo",
-      "description": "Debug info for this document.",
+      "description": "Debug information for this document.",
       "properties": {
         "semantic": {
           "$ref": "#/definitions/DocumentSemanticDebugInfo"
@@ -1392,7 +1392,7 @@
         },
         "@search.debugInfo": {
           "$ref": "#/definitions/SemanticDebugInfo",
-          "description": "Top-level debug info for this search result.",
+          "description": "Top-level debug information for this search result.",
           "readOnly": true,
           "x-ms-client-name": "DebugInfo",
           "x-nullable": true
@@ -1526,7 +1526,7 @@
           "$ref": "#/definitions/DocumentDebugInfo",
           "readOnly": true,
           "x-ms-client-name": "DocumentDebugInfo",
-          "description": "Debug info for this document."
+          "description": "Debug information for this document."
         }
       },
       "required": [
@@ -1786,17 +1786,17 @@
           {
             "value": "disabled",
             "name": "Disabled",
-            "description": "Do not return debug info for the query."
+            "description": "Do not return debug information for the query."
           },
           {
             "value": "semantic",
             "name": "Semantic",
-            "description": "Return semantic debug info for the query."
+            "description": "Return semantic debug information for the query."
           },
           {
             "value": "all",
             "name": "All",
-            "description": "Return all debug info for the query."
+            "description": "Return all debug information for the query."
           }
         ]
       },
@@ -2385,7 +2385,7 @@
         "semanticMaxWaitInMilliseconds": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in milliseconds to wait before the semantic processing step times out. Must be set to a value >= 750. Only valid when semanticErrorHandling is set to 'partial'."
+          "description": "The maximum amount of time to wait for semantic enrichment. If semantic processing exceeds this duration, partial results will be returned instead. This duration does not include time spent retrieving documents from the search index. Must be set to a value greater than or equal to 750. Only valid when semanticErrorHandling is set to 'partial'."
         },
         "search": {
           "type": "string",
