@@ -4,7 +4,7 @@
     "resourceGroupName": "SampleResourceGroup",
     "workspaceName": "Workspace1",
     "pipelineName": "Pipeline1",
-    "api-version": "2020-05-04-preview",
+    "api-version": "2022-05-04-preview",
     "pipeline": {
       "properties": {
         "description": "A pipeline"
@@ -23,7 +23,18 @@
       "body": {
         "properties": {
           "description": "A pipeline",
-          "scriptParameters": [
+          "stepParameters": [
+            {
+              "parameterType": "BoundDataDescriptor",
+              "defaultValue": {
+                "parameterValueType": "DataAsset",
+                "dataAssetId": "d83b8ff9-599c-4006-8d9c-74abd3e0ff38"
+              },
+              "name": "p1",
+              "description": "This is a bound data descriptor parameter"
+            }
+          ],
+          "computationParameters": [
             {
               "parameterType": "String",
               "defaultValue": "some value",
@@ -56,7 +67,18 @@
       "body": {
         "properties": {
           "description": "A pipeline",
-          "scriptParameters": [
+          "stepParameters": [
+            {
+              "parameterType": "BoundDataDescriptor",
+              "defaultValue": {
+                "parameterValueType": "DataAsset",
+                "dataAssetId": "d83b8ff9-599c-4006-8d9c-74abd3e0ff38"
+              },
+              "name": "p1",
+              "description": "This is a bound data descriptor parameter"
+            }
+          ],
+          "computationParameters": [
             {
               "parameterType": "String",
               "defaultValue": "some value",

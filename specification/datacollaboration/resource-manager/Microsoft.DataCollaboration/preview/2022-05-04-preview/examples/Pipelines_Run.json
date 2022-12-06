@@ -6,15 +6,27 @@
     "pipelineName": "Pipeline1",
     "pipelineRunParameters": {
       "pipelineRunMode": "Test",
-      "pipelineRunParameterAssignments": [
-        {
-          "parameterType": "String",
-          "value": "Date",
-          "pipelineParameterId": "5e2b76d9-b273-4865-8329-209649895cd8"
-        }
-      ]
+      "pipelineRunParameterAssignments": {
+        "pipelineRunComputationParameterAssignments": [
+          {
+            "parameterType": "String",
+            "value": "Date",
+            "pipelineParameterId": "5e2b76d9-b273-4865-8329-209649895cd8"
+          }
+        ],
+        "pipelineRunStepParameterAssignments": [
+          {
+            "parameterType": "BoundDataDescriptor",
+            "value": {
+              "parameterValueType": "DataAsset",
+              "dataAssetId": "d83b8ff9-599c-4006-8d9c-74abd3e0ff38"
+            },
+            "pipelineParameterId": "df44be10-fe4e-41f6-8803-f3a7dcea8b97"
+          }
+        ]
+      }
     },
-    "api-version": "2020-05-04-preview"
+    "api-version": "2022-05-04-preview"
   },
   "responses": {
     "200": {

@@ -3,14 +3,21 @@
     "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
     "resourceGroupName": "SampleResourceGroup",
     "workspaceName": "Workspace1",
-    "proposalName": "Proposal1",
-    "referenceName": "ScriptReference1",
-    "api-version": "2020-05-04-preview",
-    "scriptReference": {
+    "computationName": "Computation1",
+    "api-version": "2022-05-04-preview",
+    "computation": {
+      "kind": "SynapseSpark",
       "properties": {
-        "scriptId": "d164252e-2909-4718-a91e-315195c54b09",
-        "displayName": "name",
-        "revision": 1
+        "visibility": "ShowAll",
+        "purpose": "Body",
+        "sources": [
+          "foo"
+        ],
+        "sinks": [
+          "bar"
+        ],
+        "content": "Hello Python!",
+        "language": "Python"
       }
     }
   },
@@ -24,14 +31,21 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
+        "kind": "SynapseSpark",
         "properties": {
-          "displayName": "name",
-          "scriptId": "d164252e-2909-4718-a91e-315195c54b09",
+          "computationId": "a08f184b-0567-890a-ba22-a1199336d226",
           "revision": 1,
-          "scriptVisibility": "ShowAll",
+          "visibility": "ShowAll",
           "purpose": "Body",
-          "scriptKind": "SynapseSpark",
-          "ownerId": "fe7c006c-71d2-4501-90ed-ccf7204db79b"
+          "sources": [
+            "foo"
+          ],
+          "sinks": [
+            "bar"
+          ],
+          "content": "Hello Python!",
+          "provisioningState": "Succeeded",
+          "language": "Python"
         },
         "systemData": {
           "createdBy": "John Smith",
@@ -41,9 +55,9 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
         },
-        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/ScriptReference1",
-        "name": "ScriptReference1",
-        "type": "Microsoft.DataCollaboration/workspaces/proposals/scriptReferences"
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/computations/Computation1",
+        "name": "Computation1",
+        "type": "Microsoft.DataCollaboration/workspaces/computations"
       }
     },
     "201": {
@@ -55,14 +69,21 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
+        "kind": "SynapseSpark",
         "properties": {
-          "displayName": "name",
-          "scriptId": "d164252e-2909-4718-a91e-315195c54b09",
+          "computationId": "a08f184b-0567-890a-ba22-a1199336d226",
           "revision": 1,
-          "scriptVisibility": "ShowAll",
+          "visibility": "ShowAll",
           "purpose": "Body",
-          "scriptKind": "SynapseSpark",
-          "ownerId": "fe7c006c-71d2-4501-90ed-ccf7204db79b"
+          "sources": [
+            "foo"
+          ],
+          "sinks": [
+            "bar"
+          ],
+          "content": "Hello Python!",
+          "provisioningState": "Succeeded",
+          "language": "Python"
         },
         "systemData": {
           "createdBy": "John Smith",
@@ -72,9 +93,9 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
         },
-        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/ScriptReference1",
-        "name": "ScriptReference1",
-        "type": "Microsoft.DataCollaboration/workspaces/proposals/scriptReferences"
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/computations/Computation1",
+        "name": "Computation1",
+        "type": "Microsoft.DataCollaboration/workspaces/computations"
       }
     }
   }

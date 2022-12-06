@@ -6,7 +6,7 @@
     "proposalName": "Proposal1",
     "entitlementName": "Entitlement1",
     "constraintName": "Constraint1",
-    "api-version": "2020-05-04-preview"
+    "api-version": "2022-05-04-preview"
   },
   "responses": {
     "200": {
@@ -18,32 +18,32 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
-        "kind": "Script",
         "properties": {
-          "description": "Constraint description",
-          "scriptReferenceId": "6fa17733-0c87-4671-bc4c-a6d9f1228948",
+          "computationReferenceId": "fca971c6-2055-41e1-8079-9e261a52c899",
           "adapterBindingConstraints": [
             {
-              "scriptReferenceId": "dbe16ab9-3da7-4ba7-be15-116e6793a26c",
+              "computationReferenceId": "dbe16ab9-3da7-4ba7-be15-116e6793a26c",
               "bindingKey": "src1"
             },
             {
-              "scriptReferenceId": "9d5f5f69-bd75-4d3f-8244-8f8303432efb",
+              "computationReferenceId": "9d5f5f69-bd75-4d3f-8244-8f8303432efb",
               "bindingKey": "snk1"
             }
-          ]
+          ],
+          "description": "Constraint description"
         },
-        "systemData": {
-          "createdBy": "John Smith",
-          "createdByType": "User",
-          "createdAt": "2018-11-14T04:47:52.9614956Z",
-          "lastModifiedBy": "John Smith",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-11-14T04:47:52.9614956Z"
-        },
+        "kind": "Computation",
         "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/entitlements/Entitlement1/constraints/Constraint1",
         "name": "Constraint1",
-        "type": "Microsoft.DataCollaboration/workspaces/proposals/entitlements/constraints"
+        "type": "Microsoft.DataCollaboration/workspaces/proposals/entitlements/constraints",
+        "systemData": {
+          "createdBy": "defaultApplicationName",
+          "createdByType": "User",
+          "createdAt": "2022-11-06T16:21:41.0043892Z",
+          "lastModifiedBy": "defaultApplicationName",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-11-06T16:21:41.0043892Z"
+        }
       }
     }
   }

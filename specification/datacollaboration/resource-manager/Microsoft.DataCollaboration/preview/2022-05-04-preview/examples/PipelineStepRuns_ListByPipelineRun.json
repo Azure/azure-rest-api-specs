@@ -4,7 +4,7 @@
     "resourceGroupName": "SampleResourceGroup",
     "workspaceName": "Workspace1",
     "pipelineRunName": "a4cdba19-a513-46ca-9d48-47806e396d13",
-    "api-version": "2020-05-04-preview"
+    "api-version": "2022-05-04-preview"
   },
   "responses": {
     "200": {
@@ -25,6 +25,17 @@
               "durationMs": 2000,
               "pipelineStepRunStatus": "Succeeded",
               "errorMessage": "nda",
+              "executionParameters": [
+                {
+                  "name": "p1",
+                  "resolvedBy": "PipelineRun",
+                  "parameterType": "BoundDataDescriptor",
+                  "value": {
+                    "parameterValueType": "DataAsset",
+                    "dataAssetId": "d83b8ff9-599c-4006-8d9c-74abd3e0ff38"
+                  }
+                }
+              ],
               "pipelineSubsteps": [
                 {
                   "kind": "DataMovement",
@@ -65,6 +76,7 @@
                   "sourceBindings": [
                     {
                       "bindingKey": "Source2",
+                      "parameterName": "p1",
                       "adapter": {
                         "name": "Script1",
                         "revision": 1,
@@ -84,7 +96,7 @@
                       "adapter": {
                         "name": "Script3",
                         "revision": 1,
-                        "purpose": "OutputAdapter",
+                        "purpose": "Body",
                         "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script3"
                       }
                     }
