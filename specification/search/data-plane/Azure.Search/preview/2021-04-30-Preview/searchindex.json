@@ -1255,20 +1255,20 @@
         "title": {
           "type": "string",
           "readOnly": true,
-          "description": "The title field."
+          "description": "The portion of the title field used for semantic processing."
         },
         "content": {
           "type": "string",
           "readOnly": true,
-          "description": "The concatenated content fields."
+          "description": "The portion of the combined content fields used for semantic processing."
         },
         "keywords": {
           "type": "string",
           "readOnly": true,
-          "description": "The concatenated keyword fields."
+          "description": "The portion of the combined keyword fields used for semantic processing."
         }
       },
-      "description": "The concatenated semantic fields sent to the reranker model.",
+      "description": "The combined semantic fields used as input for semantic processing. The input string is subject to a maximum length. The values from the provided fields are concatenated until the maximum limit is reached.",
       "x-ms-client-name": "RerankerInput"
     },
     "SemanticFieldResult": {
