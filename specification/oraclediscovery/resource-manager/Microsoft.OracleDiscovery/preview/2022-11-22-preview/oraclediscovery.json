@@ -1,0 +1,1272 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for OracleDiscovery",
+    "description": "The Microsoft.OracleDiscovery Rest API spec.",
+    "version": "2022-11-22-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}": {
+      "get": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_Get",
+        "summary": "Implements OracleSites GET method.",
+        "description": "Gets the OracleSites resource.",
+        "x-ms-examples": {
+          "OracleSites_Get": {
+            "$ref": "./examples/OracleSites_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_Create",
+        "summary": "Implements OracleSites PUT method.",
+        "description": "Puts the OracleSites resource.",
+        "x-ms-examples": {
+          "OracleSites_Create": {
+            "$ref": "./examples/OracleSites_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created OracleSites resource",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "summary": "Implements OracleSites DELETE method.",
+        "description": "Deletes the OracleSites resource.",
+        "x-ms-examples": {
+          "OracleSites_Delete": {
+            "$ref": "./examples/OracleSites_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the OracleSites resource."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The OracleSites resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_Update",
+        "summary": "Implements OracleSites PATCH method.",
+        "description": "Patch the OracleSites resource.",
+        "x-ms-examples": {
+          "OracleSites_Update": {
+            "$ref": "./examples/OracleSites_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OracleSitesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites": {
+      "get": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_ListByResourceGroup",
+        "summary": "Implements OracleSites GET method in a resource group.",
+        "description": "Lits the OracleSites resource in a resource group.",
+        "x-ms-examples": {
+          "OracleSites_ListByResourceGroup": {
+            "$ref": "./examples/OracleSites_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OracleDiscovery/OracleSites": {
+      "get": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_ListBySubscription",
+        "summary": "Implements OracleSites GET method in a subscription.",
+        "description": "Lists the OracleSites resource in a subscription.",
+        "x-ms-examples": {
+          "OracleSites_ListBySubscription": {
+            "$ref": "./examples/OracleSites_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.OracleDiscovery/Operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Returns list of all operations.",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleServers/{serverName}": {
+      "get": {
+        "tags": [
+          "OracleServers"
+        ],
+        "operationId": "OracleServers_Get",
+        "summary": "Implements OracleServers GET method.",
+        "description": "Gets the OracleServers resource.",
+        "x-ms-examples": {
+          "OracleServers_Get": {
+            "$ref": "./examples/OracleServers_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OracleServers"
+        ],
+        "operationId": "OracleServers_Create",
+        "summary": "Implements OracleServers PUT method.",
+        "description": "Puts the OracleServers resource.",
+        "x-ms-examples": {
+          "OracleServers_Create": {
+            "$ref": "./examples/OracleServers_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/OracleServer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OracleServers"
+        ],
+        "operationId": "OracleServers_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "summary": "Implements OracleServers DELETE method.",
+        "description": "Deletes the OracleServers resource.",
+        "x-ms-examples": {
+          "OracleSites_Delete": {
+            "$ref": "./examples/OracleServers_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the OracleSites resource."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The OracleServer resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OracleServers"
+        ],
+        "operationId": "OracleServers_Update",
+        "summary": "Implements OracleSites PATCH method.",
+        "description": "Patch the OracleSites resource.",
+        "x-ms-examples": {
+          "OracleServers_Update": {
+            "$ref": "./examples/OracleServers_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OracleServerResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleServers": {
+      "get": {
+        "tags": [
+          "OracleServers"
+        ],
+        "operationId": "OracleServers_ListBySite",
+        "summary": "Implements OracleSites GET method.",
+        "description": "Lists the OracleSites resource in OracleSites.",
+        "x-ms-examples": {
+          "OracleServers_ListBySite": {
+            "$ref": "./examples/OracleServers_ListBySite.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases/{databaseName}": {
+      "get": {
+        "tags": [
+          "OracleDatabases"
+        ],
+        "operationId": "OracleDatabases_Get",
+        "summary": "Implements OracleDatabases GET method.",
+        "description": "Gets the OracleDatabases resource.",
+        "x-ms-examples": {
+          "OracleDatabases_Get": {
+            "$ref": "./examples/OracleDatabases_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Database"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases": {
+      "get": {
+        "tags": [
+          "OracleDatabases"
+        ],
+        "operationId": "OracleDatabases_ListBySite",
+        "summary": "Implements OracleSites GET method.",
+        "description": "Lists the OracleSites resource in OracleSites.",
+        "x-ms-examples": {
+          "OracleDatabases_ListBySite": {
+            "$ref": "./examples/OracleDatabases_ListBySite.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location for off-azure resources.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "OracleSiteList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/OracleSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OracleDatabaseList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/OracleDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OracleServerList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/OracleServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OracleSite": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/OracleSiteProperties"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "extendedLocation",
+        "properties"
+      ],
+      "description": "The samples resource definition."
+    },
+    "OracleSiteProperties": {
+      "type": "object",
+      "description": "Oracle Site properties",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "description": "The mapped Master Site Id."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "The mapped Master Site Id."
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "masterSiteId",
+        "migrateProjectId"
+      ]
+    },
+    "OracleServer": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/OracleServerProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The samples resource definition."
+    },
+    "OracleDatabase": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/OracleDatabaseProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The samples resource definition."
+    },
+    "OracleDatabaseProperties": {
+      "type": "object",
+      "description": "Oracle Database properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The of Oracle server Standalone/PDB."
+        },
+        "statusCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The discovery status code success/failure/in-progress."
+        },
+        "dataSize": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The data size of database in GB."
+        },
+        "logSize": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The log data size of database in GB."
+        },
+        "tempSize": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The temp data size of database in GB."
+        },
+        "databaseStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of database online/offline."
+        },
+        "oracleServes": {
+          "description": "List of the OracleServer ARM Id.",
+          "type": "array",
+          "items": {
+            "description": "Oracle Server ARM Id",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "dbConfig": {
+          "$ref": "#/definitions/DbConfigModel",
+          "description": "The Database Config."
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error",
+            "readOnly": true
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OracleServerProperties": {
+      "type": "object",
+      "description": "Oracle Server properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The of Oracle server NON-CDB/CDB."
+        },
+        "clusterType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The of Oracle server Standalone/HA/RAC."
+        },
+        "pdbCount": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The count of PDB in case type is CDB."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The DB  IP/host name."
+        },
+        "serviceId": {
+          "description": "List of the DB ServiceId (sid).",
+          "type": "array",
+          "items": {
+            "description": "Oracle Server ARM Id",
+            "type": "string"
+          }
+        },
+        "machineId": {
+          "description": "List of the discovery Machine Ids.",
+          "type": "array",
+          "items": {
+            "description": "discovery Machine Id",
+            "type": "string"
+          }
+        },
+        "portNumber": {
+          "description": "List of the DB port number.",
+          "type": "array",
+          "items": {
+            "description": "Oracle Server ARM Id",
+            "type": "string"
+          }
+        },
+        "oracleDatabases": {
+          "description": "List of the OracleDatabase ARM Id.",
+          "type": "array",
+          "items": {
+            "description": "Oracle Server ARM Id",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "versionInfo": {
+          "$ref": "#/definitions/VersionInfoModel",
+          "description": "The Database Config."
+        },
+        "serverConfig": {
+          "$ref": "#/definitions/ServerConfigModel",
+          "description": "The Database Config."
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error",
+            "readOnly": true
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serviceId",
+        "portNumber",
+        "hostName"
+      ]
+    },
+    "DbConfigModel": {
+      "type": "object",
+      "description": "DB  model for creating machine to assess resources",
+      "properties": {
+        "testProperties": {
+          "type": "string",
+          "description": "Description of this operation."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "description": "The error ID.",
+          "type": "string"
+        },
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "possibleCause": {
+          "description": "The error possible cause.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description": "Gets description of the checkpoint.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Gets description of the checkpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "VersionInfoModel": {
+      "type": "object",
+      "description": "Bulk model for creating machine to assess resources",
+      "properties": {
+        "edition": {
+          "type": "string",
+          "description": "The DB edition."
+        },
+        "instance": {
+          "type": "string",
+          "description": "The DB instance name."
+        }
+      }
+    },
+    "ServerConfigModel": {
+      "type": "object",
+      "description": "The DB server configuration",
+      "properties": {
+        "sampleProp": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OracleServerResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "OracleSitesResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    }
+  }
+}
