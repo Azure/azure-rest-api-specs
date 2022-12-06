@@ -1,15 +1,18 @@
-@service({title:"Schema of Azure Maps events published to Azure Event Grid", version: "2018-01-01"})
+@service({
+  title: "Schema of Azure Maps events published to Azure Event Grid",
+  version: "2018-01-01",
+})
 @doc("Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace Maps;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
-model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties{};
+model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.")
-model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties{};
+model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.")
-model MapsGeofenceResultEventData extends MapsGeofenceEventProperties{};
+model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).")
 model MapsGeofenceEventProperties {

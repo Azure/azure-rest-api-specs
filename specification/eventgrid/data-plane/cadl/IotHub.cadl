@@ -1,4 +1,7 @@
-@service({title:"Schema of Azure IoT Hub events published to Azure Event Grid", version:"2018-01-01"})
+@service({
+  title: "Schema of Azure IoT Hub events published to Azure Event Grid",
+  version: "2018-01-01",
+})
 @doc("Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace IoTHub;
 
@@ -33,8 +36,8 @@ model DeviceTwinInfo {
 
   @doc("The ISO8601 timestamp of the last activity.")
   lastActivityTime?: string;
-
   //TODO: something here needs to change
+
   @doc("Properties JSON element.")
   properties?: PropertiesJson;
 
@@ -46,8 +49,8 @@ model DeviceTwinInfo {
 
   @doc("An integer that is incremented by one each time the device twin is updated.")
   version?: integer;
-
   //TODO: also here
+
   @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
   x509Thumbprint?: ThumbPrintValue;
 }
@@ -101,35 +104,34 @@ model DeviceConnectionStateEventInfo {
 }
 
 @doc("Event data for Microsoft.Devices.DeviceCreated event.")
-model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties{};
+model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceDeleted event.")
-model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties{};
+model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceConnected event.")
-model IotHubDeviceConnectedEventData extends DeviceConnectionStateEventProperties{};
+model IotHubDeviceConnectedEventData
+  extends DeviceConnectionStateEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
-model IotHubDeviceDisconnectedEventData extends DeviceConnectionStateEventProperties{};
+model IotHubDeviceDisconnectedEventData
+  extends DeviceConnectionStateEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
-model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties{};
+model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
+model PropertiesJson {
+  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+  desired?: IoTHub.DeviceTwinProperties;
 
-
-model PropertiesJson{
-    @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-    desired?:IoTHub.DeviceTwinProperties;
-
-    @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-    reported?:IoTHub.DeviceTwinProperties
+  @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+  reported?: IoTHub.DeviceTwinProperties;
 }
 
-model ThumbPrintValue{
-    @doc("Primary thumbprint for the x509 certificate.")
-    primaryThumbprint?:string;
+model ThumbPrintValue {
+  @doc("Primary thumbprint for the x509 certificate.")
+  primaryThumbprint?: string;
 
-    @doc("Secondary thumbprint for the x509 certificate.")
-    secondaryThumbprint?:string;
+  @doc("Secondary thumbprint for the x509 certificate.")
+  secondaryThumbprint?: string;
 }
-
