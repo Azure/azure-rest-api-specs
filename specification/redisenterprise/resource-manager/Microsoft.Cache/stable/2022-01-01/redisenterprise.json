@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "OperationStatuses"
+      "name": "OperationsStatus"
     },
     {
       "name": "RedisEnterprise"
@@ -55,7 +55,7 @@
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "PrivateLinks"
+      "name": "PrivateLinkResources"
     }
   ],
   "paths": {
@@ -90,12 +90,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/operationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/operationsStatus/{operationId}": {
       "get": {
         "tags": [
-          "OperationStatuses"
+          "OperationsStatus"
         ],
-        "operationId": "OperationStatuses_Get",
+        "operationId": "OperationsStatus_Get",
         "description": "Gets information about a database in a RedisEnterprise cluster",
         "parameters": [
           {
@@ -1083,7 +1083,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateEndpointConnections/{connectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -1110,7 +1110,7 @@
             "type": "string"
           },
           {
-            "name": "connectionName",
+            "name": "privateEndpointConnectionName",
             "in": "path",
             "required": true,
             "description": "Name of private endpoint connection",
@@ -1160,7 +1160,7 @@
             "type": "string"
           },
           {
-            "name": "connectionName",
+            "name": "privateEndpointConnectionName",
             "in": "path",
             "required": true,
             "description": "Name of private endpoint connection",
@@ -1236,7 +1236,7 @@
             "type": "string"
           },
           {
-            "name": "connectionName",
+            "name": "privateEndpointConnectionName",
             "in": "path",
             "required": true,
             "description": "Name of private endpoint connection",
@@ -1309,7 +1309,7 @@
             "type": "string"
           },
           {
-            "name": "connectionName",
+            "name": "privateEndpointConnectionName",
             "in": "path",
             "required": true,
             "description": "Name of private endpoint connection",
@@ -1351,9 +1351,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateLinkResources": {
       "get": {
         "tags": [
-          "PrivateLinks"
+          "PrivateLinkResources"
         ],
-        "operationId": "PrivateLinks_ListByCluster",
+        "operationId": "PrivateLinkResources_ListByCluster",
         "description": "Lists all private link resources in a RedisEnterprise cluster.",
         "parameters": [
           {
