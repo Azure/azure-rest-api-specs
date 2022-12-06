@@ -1250,7 +1250,7 @@
         }
       }
     },
-    "RerankerInputResult": {
+    "RerankerInputUsage": {
       "properties": {
         "title": {
           "type": "string",
@@ -1271,8 +1271,8 @@
       "description": "The combined semantic fields used as input for semantic processing. The input string is subject to a maximum length. The values from the provided fields are concatenated until the maximum limit is reached.",
       "x-ms-client-name": "RerankerInput"
     },
-    "SemanticFieldResult": {
-      "x-ms-client-name": "SemanticFieldResult",
+    "SemanticFieldUsage": {
+      "x-ms-client-name": "SemanticFieldUsage",
       "properties": {
         "name": {
           "type": "string",
@@ -1282,14 +1282,14 @@
         "state": {
           "type": "string",
           "readOnly": true,
-          "description": "How much of this semantic field was used during semantic processing.",
+          "description": "Indicates whether the contents of the semantic field were used in full, partially, or not at all when constructing the input string for semantic processing.",
           "enum": [
             "used",
             "unused",
             "partial"
           ],
           "x-ms-enum": {
-            "name": "SemanticFieldResultState",
+            "name": "SemanticFieldState",
             "modelAsString": true,
             "values": [
               {
@@ -1317,7 +1317,7 @@
       "description": "Semantic debug information for this match.",
       "properties": {
         "titleField": {
-          "$ref": "#/definitions/SemanticFieldResult",
+          "$ref": "#/definitions/SemanticFieldUsage",
           "description": "The title field used in semantic processing.",
           "readOnly": true,
           "x-ms-client-name": "TitleField"
@@ -1325,7 +1325,7 @@
         "contentFields": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SemanticFieldResult"
+            "$ref": "#/definitions/SemanticFieldUsage"
           },
           "description": "The list of content fields used in semantic processing.",
           "readOnly": true,
@@ -1334,15 +1334,14 @@
         "keywordFields": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SemanticFieldResult"
+            "$ref": "#/definitions/SemanticFieldUsage"
           },
           "description": "The list of keyword fields used in semantic processing.",
           "readOnly": true,
           "x-ms-client-name": "KeywordFields"
         },
         "rerankerInput": {
-          "$ref": "#/definitions/RerankerInputResult",
-          "description": "The concatenated semantic fields sent to the reranker model.",
+          "$ref": "#/definitions/RerankerInputUsage",
           "readOnly": true,
           "x-ms-client-name": "RerankerInput"
         }
