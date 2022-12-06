@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
+    "resourceGroupName": "SampleResourceGroup",
+    "workspaceName": "Workspace1",
+    "proposalName": "Proposal1",
+    "entitlementName": "Entitlement1",
+    "constraintName": "Constraint1",
+    "api-version": "2022-05-04-preview",
+    "constraint": {
+      "kind": "ComputationParameter",
+      "properties": {
+        "isParameterRequired": true,
+        "parameterName": "filter",
+        "parameterType": "String",
+        "validationRule": {
+          "computationParameterValidationRuleType": "StringOptionsSet",
+          "options": [
+            "Date",
+            "SomeValue"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "parameterName": "filter",
+          "parameterType": "String",
+          "isParameterRequired": true,
+          "validationRule": {
+            "options": [
+              "Date",
+              "SomeValue"
+            ],
+            "computationParameterValidationRuleType": "StringOptionsSet"
+          },
+          "description": null
+        },
+        "kind": "ComputationParameter",
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/entitlements/Entitlement1/constraints/Constraint1",
+        "name": "Constraint1",
+        "type": "Microsoft.DataCollaboration/workspaces/proposals/entitlements/constraints",
+        "systemData": {
+          "createdBy": "defaultApplicationName",
+          "createdByType": "User",
+          "createdAt": "2022-11-06T16:21:59.899199Z",
+          "lastModifiedBy": "defaultApplicationName",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-11-06T16:21:59.899199Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "parameterName": "filter",
+          "parameterType": "String",
+          "isParameterRequired": true,
+          "validationRule": {
+            "options": [
+              "Date",
+              "SomeValue"
+            ],
+            "computationParameterValidationRuleType": "StringOptionsSet"
+          },
+          "description": null
+        },
+        "kind": "ComputationParameter",
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/entitlements/Entitlement1/constraints/Constraint1",
+        "name": "Constraint1",
+        "type": "Microsoft.DataCollaboration/workspaces/proposals/entitlements/constraints",
+        "systemData": {
+          "createdBy": "defaultApplicationName",
+          "createdByType": "User",
+          "createdAt": "2022-11-06T16:21:59.899199Z",
+          "lastModifiedBy": "defaultApplicationName",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-11-06T16:21:59.899199Z"
+        }
+      }
+    }
+  }
+}

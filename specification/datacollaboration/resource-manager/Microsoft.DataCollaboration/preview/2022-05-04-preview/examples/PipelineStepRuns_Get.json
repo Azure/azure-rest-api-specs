@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-567890abcdef",
+    "resourceGroupName": "SampleResourceGroup",
+    "workspaceName": "Workspace1",
+    "pipelineRunName": "a4cdba19-a513-46ca-9d48-47806e396d13",
+    "pipelineStepRunName": "5ec0dd18-ea32-4d27-b3a5-2920c5f26325",
+    "api-version": "2022-05-04-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:33:55 GMT",
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "14993",
+        "x-ms-correlation-request-id": "5d862c55-4de9-4a46-969d-cf1ed3e235ed"
+      },
+      "body": {
+        "properties": {
+          "pipelineStepName": "PipelineStep1",
+          "endTime": "2018-11-14T04:47:52.9614956Z",
+          "startTime": "2018-11-14T04:47:52.9614956Z",
+          "durationMs": 2000,
+          "pipelineStepRunStatus": "Succeeded",
+          "errorMessage": "nda",
+          "executionParameters": [
+            {
+              "name": "p1",
+              "resolvedBy": "PipelineRun",
+              "parameterType": "BoundDataDescriptor",
+              "value": {
+                "parameterValueType": "DataAsset",
+                "dataAssetId": "d83b8ff9-599c-4006-8d9c-74abd3e0ff38"
+              }
+            }
+          ],
+          "pipelineSubsteps": [
+            {
+              "kind": "DataMovement",
+              "pipelineSubstepId": "9cbbdb34-6427-4de1-b2a7-23c24eb7ab3c",
+              "executionStatus": "Succeeded",
+              "endTime": "2018-11-14T04:47:52.9614956Z",
+              "startTime": "2018-11-14T04:47:52.9614956Z",
+              "durationMs": 2000,
+              "errorMessage": "",
+              "dataMovementExecutionStage": "Input",
+              "dataSetName": "DataAsset1",
+              "dataSetCategory": "Production",
+              "dataSetType": "Blob",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/dataAssetReferences/DataAssetReference1",
+              "numberOfFiles": 10,
+              "totalBytes": 45000,
+              "source": {
+                "kind": "ScriptExecution",
+                "pipelineStepName": "7490ef67-8772-44ac-b4c9-e415bca7d771",
+                "pipelineSubstepId": "b0bc3097-138a-4790-90e4-66393ad55d21",
+                "outputBindingKey": "sink1"
+              }
+            },
+            {
+              "kind": "ScriptExecution",
+              "pipelineSubstepId": "12769331-6f74-456e-bbcf-e1c237b16713",
+              "executionStatus": "Succeeded",
+              "endTime": "2018-11-14T04:47:52.9614956Z",
+              "startTime": "2018-11-14T04:47:52.9614956Z",
+              "durationMs": 2000,
+              "errorMessage": "",
+              "scriptExecutionInformation": {
+                "name": "Script1",
+                "revision": 1,
+                "purpose": "Body",
+                "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script1"
+              },
+              "sourceBindings": [
+                {
+                  "bindingKey": "Source2",
+                  "parameterName": "p1",
+                  "adapter": {
+                    "name": "Script1",
+                    "revision": 1,
+                    "purpose": "InputAdapter",
+                    "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script2"
+                  },
+                  "sourceSubstepReference": {
+                    "kind": "DataMovement",
+                    "pipelineStepName": "7490ef67-8772-44ac-b4c9-e415bca7d771",
+                    "pipelineSubstepId": "b0bc3097-138a-4790-90e4-66393ad55d21"
+                  }
+                }
+              ],
+              "sinkBindings": [
+                {
+                  "bindingKey": "Sink1",
+                  "adapter": {
+                    "name": "Script3",
+                    "revision": 1,
+                    "purpose": "Body",
+                    "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/scriptReferences/Script3"
+                  }
+                }
+              ],
+              "synapseSparkInformation": {
+                "sparkPoolInformation": {
+                  "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/constrainedResources/SynapseSparkPool1",
+                  "nodeSize": "Small",
+                  "nodeCount": 5
+                },
+                "sparkPoolExecutionInformation": {
+                  "executorNodeSize": "Small",
+                  "executorsCount": 2
+                }
+              }
+            },
+            {
+              "kind": "DiagnosticsLog",
+              "pipelineSubstepId": "31e4a414-aec7-4597-b2f9-e592260b9365",
+              "executionStatus": "Succeeded",
+              "endTime": "2018-11-14T04:47:52.9614956Z",
+              "startTime": "2018-11-14T04:47:52.9614956Z",
+              "durationMs": 2000,
+              "errorMessage": "",
+              "dataSetName": "DataAsset1",
+              "dataSetCategory": "Production",
+              "dataSetType": "Blob",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/proposals/Proposal1/dataAssetReferences/DataAssetReference1",
+              "numberOfFiles": 10,
+              "totalBytes": 45000,
+              "diagnosticsLogType": "ConsoleLog"
+            }
+          ]
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-567890abcdef/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCollaboration/workspaces/Workspace1/pipelineRuns/a4cdba19-a513-46ca-9d48-47806e396d13/pipelineStepRuns/5ec0dd18-ea32-4d27-b3a5-2920c5f26325",
+        "name": "5ec0dd18-ea32-4d27-b3a5-2920c5f26325",
+        "type": "Microsoft.DataCollaboration/workspaces/pipelineRuns/pipelineStepRuns"
+      }
+    }
+  }
+}
