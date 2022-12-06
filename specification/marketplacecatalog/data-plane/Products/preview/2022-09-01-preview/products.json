@@ -42,6 +42,13 @@
           },
           {
             "type": "string",
+            "name": "market",
+            "in": "query",
+            "required": true,
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as 'US' "
+          },
+          {
+            "type": "string",
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
@@ -56,17 +63,10 @@
             "default": "en"
           },
           {
-            "type": "string",
-            "name": "market",
-            "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']",
-            "default": "US"
-          },
-          {
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Denotes whether to include stop sold or hidden plans",
+            "description": "Denotes whether to include stop sold plans",
             "default": false
           },
           {
@@ -125,18 +125,18 @@
           },
           {
             "type": "string",
-            "name": "storefront",
-            "in": "query",
-            "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
-            "default": "azure"
-          },
-          {
-            "type": "string",
             "name": "api-version",
             "x-originalName": "apiVersion",
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request. "
+          },
+          {
+            "type": "string",
+            "name": "storefront",
+            "in": "query",
+            "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
+            "default": "azure"
           },
           {
             "type": "string",
@@ -149,7 +149,7 @@
             "type": "string",
             "name": "market",
             "in": "query",
-            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as ['US']"
+            "description": "Product sold market, possible values at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies, such as 'US'"
           },
           {
             "type": "array",
@@ -171,7 +171,7 @@
             "type": "string",
             "name": "filter",
             "in": "query",
-            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'. ProductSummary fields that can be filtered by are: `displayName` \n- `test1` \n `test2`"
+            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'"
           },
           {
             "type": "string",
@@ -183,7 +183,7 @@
             "type": "string",
             "name": "orderby",
             "in": "query",
-            "description": "Ordering expression for the results using OData notation. Example: '$orderby=displayName desc'"
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'."
           }
         ],
         "responses": {
@@ -747,6 +747,14 @@
         "isPrivate": {
           "type": "boolean",
           "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "hasProtectedArtifacts": {
+          "type": "boolean",
+          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is still available for purchase or not"
         }
       }
     },
