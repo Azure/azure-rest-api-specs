@@ -2394,6 +2394,12 @@
         "mergeProperties": {
           "$ref": "#/definitions/ReservationMergeProperties"
         },
+        "swapProperties": {
+          "$ref": "#/definitions/ReservationSwapProperties"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
         },
@@ -2447,6 +2453,23 @@
         }
       }
     },
+    "AppliedScopeProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the applied scope type"
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "Management group ID of the format /providers/Microsoft.Management/managementGroups/{managementGroupId}"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Management group display name"
+        }
+      }
+    },
     "ReservationSplitProperties": {
       "type": "object",
       "properties": {
@@ -2476,6 +2499,19 @@
             "type": "string"
           },
           "description": "Resource Ids of the Source Reservation's merged to form this Reservation. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "ReservationSwapProperties": {
+      "type": "object",
+      "properties": {
+        "swapSource": {
+          "type": "string",
+          "description": "Resource Id of the Source Reservation that gets swapped. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "swapDestination": {
+          "type": "string",
+          "description": "Reservation Resource Id that the original resource gets swapped to. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
       }
     },

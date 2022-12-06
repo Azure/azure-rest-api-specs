@@ -253,13 +253,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": ""
           },
@@ -446,7 +446,12 @@
         "nodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of nodes in the Big Data pool."
+          "description": "The number of nodes in the Big Data pool.",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
@@ -457,7 +462,8 @@
           "type": "array",
           "items": {
             "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",
@@ -566,12 +572,20 @@
         "minExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of executors alloted"
+          "description": "The minimum number of executors alloted",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "maxExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of executors alloted"
+          "description": "The maximum number of executors alloted",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       }
     },
