@@ -777,25 +777,32 @@
         }
       ],
       "properties": {
-        "name": {
-          "description": "policy name",
-          "type": "string"
-        },
-        "policy": {
-          "description": "Back-off and retry interval strategy",
-          "type": "string"
-        },
-        "duration": {
-          "description": "Time interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
-        },
-        "maxRetries": {
-          "description": "Maximum number of retries to attempt",
-          "type": "string"
-        },
-        "maxInterval": {
-          "description": "Determines the maximum interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
+        "properties": {
+          "description": "DaprResiliencyRetryPolicy resource specific properties",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "policy name",
+              "type": "string"
+            },
+            "policy": {
+              "description": "Back-off and retry interval strategy",
+              "type": "string"
+            },
+            "duration": {
+              "description": "Time interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            },
+            "maxRetries": {
+              "description": "The maximum number of retries to attempt. -1 denotes an indefinite number of retries.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxInterval": {
+              "description": "Determines the maximum interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -821,7 +828,7 @@
       }
     },
     "DaprResiliencyCircuitBreakerPolicy": {
-      "description": "Resiliency Policy Breakers Policy",
+      "description": "Resiliency Policy Circuit Breakers Policy",
       "type": "object",
       "allOf": [
         {
@@ -829,29 +836,37 @@
         }
       ],
       "properties": {
-        "maxRequests": {
-          "description": "Maximum number of requests allowed to pass through",
-          "type": "integer"
-        },
-        "interval": {
-          "description": "Cyclical period of time used by the CB to clear its internal counts. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
-        },
-        "timeout": {
-          "description": "The period of the open state until the CB switches to half-open. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
-        },
-        "trip": {
-          "description": "A Common Expression Language (CEL) statement that is evaluated by the CB When the statement evaluates to true, the CB trips and becomes open",
-          "type": "string"
-        },
-        "circuitBreakerScope": {
-          "description": "Specify whether circuit breaking state should be scoped to an individual actor ID, all actors across the actor type, or both. Possible values include id, type, or both",
-          "type": "string"
-        },
-        "circuitBreakerCacheSize": {
-          "description": "Specify a cache size for the number of CBs to keep in memory. The value should be larger than the expected number of active actor instances.",
-          "type": "integer"
+        "properties": {
+          "description": "DaprResiliencyCircuitBreakerPolicy resource specific properties",
+          "type": "object",
+          "properties": {
+            "maxRequests": {
+              "description": "Maximum number of requests allowed to pass through",
+              "type": "integer",
+              "format": "int32"
+            },
+            "interval": {
+              "description": "Cyclical period of time used by the CB to clear its internal counts. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "The period of the open state until the CB switches to half-open. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            },
+            "trip": {
+              "description": "A Common Expression Language (CEL) statement that is evaluated by the CB When the statement evaluates to true, the CB trips and becomes open",
+              "type": "string"
+            },
+            "circuitBreakerScope": {
+              "description": "Specify whether circuit breaking state should be scoped to an individual actor ID, all actors across the actor type, or both. Possible values include id, type, or both",
+              "type": "string"
+            },
+            "circuitBreakerCacheSize": {
+              "description": "Specify a cache size for the number of CBs to keep in memory. The value should be larger than the expected number of active actor instances.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         }
       }
     },
@@ -885,17 +900,23 @@
         }
       ],
       "properties": {
-        "general": {
-          "description": "Timeout duration for general operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
-        },
-        "important": {
-          "description": "Timeout duration for important operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
-        },
-        "largeResponse": {
-          "description": "Timeout duration for large operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-          "type": "string"
+        "properties": {
+          "description": "DaprResiliencyTimeoutPolicy resource specific properties",
+          "type": "object",
+          "properties": {
+            "general": {
+              "description": "Timeout duration for general operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            },
+            "important": {
+              "description": "Timeout duration for important operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            },
+            "largeResponse": {
+              "description": "Timeout duration for large operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "type": "string"
+            }
+          }
         }
       }
     },
