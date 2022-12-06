@@ -3,7 +3,7 @@
   "info": {
     "title": "Purview Catalog Service REST API Document",
     "description": "Purview Catalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments. This spec defines REST API of Purview Catalog Service.",
-    "version": "2022-03-01-preview"
+    "version": "2022-08-01-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
@@ -576,7 +576,7 @@
           {
             "name": "attr:qualifiedName",
             "in": "query",
-            "description": "The qualified name of the entity.",
+            "description": "The qualified name of the entity.(This is only an example. qualifiedName can be changed to other unique attributes)",
             "required": false,
             "type": "string"
           }
@@ -1138,8 +1138,7 @@
             "description": "Template File"
           },
           "400": {
-            "description": "If the provided fileType is not supported",
-            "x-ms-error-response": true
+            "description": "If the provided fileType is not supported"
           }
         }
       }
@@ -1238,8 +1237,7 @@
                 ]
               }
             },
-            "description": "If Business Metadata definition has invalid or missing information",
-            "x-ms-error-response": true
+            "description": "If Business Metadata definition has invalid or missing information"
           },
           "409": {
             "examples": {
@@ -1274,8 +1272,7 @@
                 ]
               }
             },
-            "description": "If Business Metadata already exists (duplicate qualifiedName)",
-            "x-ms-error-response": true
+            "description": "If Business Metadata already exists (duplicate qualifiedName)"
           }
         }
       }
@@ -3031,6 +3028,98 @@
         }
       }
     },
+    "/glossary/terms/bulkDeletion/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Glossary"
+        ],
+        "description": "Get the status of bulk delete operation",
+        "operationId": "Glossary_GetBulkDeleteOperationStatus",
+        "x-ms-examples": {
+          "Glossary_GetBulkDeleteOperationStatus": {
+            "$ref": "./examples/Glossary_GetBulkDeleteOperationStatusByOperationguid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of bulk delete operation.",
+            "schema": {
+              "$ref": "#/definitions/BulkDeleteOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/glossary/terms": {
+      "delete": {
+        "tags": [
+          "Glossary"
+        ],
+        "description": "Delete Glossary Terms",
+        "operationId": "Glossary_DeleteGlossaryTermsByGuids",
+        "x-ms-examples": {
+          "Glossary_DeleteGlossaryTerms": {
+            "$ref": "./examples/Glossary_GetBulkDeleteOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/forceDeleteEntityAssignment"
+          },
+          {
+            "$ref": "#/parameters/forceDeleteChild"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "termGuids",
+            "description": "An array of term guids to be deleted.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "An array of term guids to be deleted.",
+              "items": {
+                "$ref": "#/definitions/TermGuid"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to delete glossary terms has been accepted.",
+            "schema": {
+              "$ref": "#/definitions/BulkDeleteOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/search/query": {
       "post": {
         "tags": [
@@ -3051,6 +3140,12 @@
           "Discovery_Query_AndOrNested": {
             "$ref": "./examples/Discovery_Query_AndOrNested.json"
           },
+          "Discovery_Query_SystemTime": {
+            "$ref": "./examples/Discovery_Query_SystemTime.json"
+          },
+          "Discovery_Query_BusinessMetadataAttribute": {
+            "$ref": "./examples/Discovery_Query_BusinessMetadataAttribute.json"
+          },
           "Discovery_Query_Attribute": {
             "$ref": "./examples/Discovery_Query_Attribute.json"
           },
@@ -3070,10 +3165,7 @@
             "$ref": "./examples/Discovery_Query_AssetType.json"
           },
           "Discovery_Query_Term": {
-            "$ref": "./examples/Discovery_Query_Term.json"
-          },
-          "Discovery_Query_TermOfGlossary": {
-            "$ref": "./examples/Discovery_Query_TermOfGlossary.json"
+            "$ref": "./examples/Discovery_Query_TermAssignment.json"
           },
           "Discovery_Query_Facet": {
             "$ref": "./examples/Discovery_Query_Facet.json"
@@ -3084,11 +3176,11 @@
           "Discovery_Query_Collection": {
             "$ref": "./examples/Discovery_Query_Collection.json"
           },
-          "Discovery_Query_SystemTime": {
-            "$ref": "./examples/Discovery_Query_SystemTime.json"
+          "Discovery_Query_GlossaryTerm": {
+            "$ref": "./examples/Discovery_Query_GlossaryTerm.json"
           },
-          "Discovery_Query_BusinessMetadataAttribute": {
-            "$ref": "./examples/Discovery_Query_BusinessMetadataAttribute.json"
+          "Discovery_Query_ObjectType": {
+            "$ref": "./examples/Discovery_Query_ObjectType.json"
           }
         },
         "parameters": [
@@ -3351,7 +3443,7 @@
         "tags": [
           "Lineage"
         ],
-        "description": "Returns lineage info about entity.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName",
+        "description": "Returns lineage info about entity.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nGET /v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Lineage_GetLineageByUniqueAttribute",
         "produces": [
           "application/json"
@@ -3374,6 +3466,13 @@
           },
           {
             "$ref": "#/parameters/getDerivedLineage"
+          },
+          {
+            "name": "attr:qualifiedName",
+            "in": "query",
+            "description": "The qualified name of the entity.(This is only an example. qualifiedName can be changed to other unique attributes)",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3735,8 +3834,7 @@
                 ]
               }
             },
-            "description": "Bad query parameters",
-            "x-ms-error-response": true
+            "description": "Bad query parameters"
           },
           "404": {
             "examples": {
@@ -3914,8 +4012,7 @@
                 ]
               }
             },
-            "description": "If no lineage is found for the given entity",
-            "x-ms-error-response": true
+            "description": "If no lineage is found for the given entity"
           }
         }
       }
@@ -4088,8 +4185,7 @@
             "description": "On successful lookup of the the businessMetadata definition by it's guid"
           },
           "404": {
-            "description": "On Failed lookup for the given guid",
-            "x-ms-error-response": true
+            "description": "On Failed lookup for the given guid"
           }
         }
       }
@@ -4122,8 +4218,7 @@
             "description": "On successful lookup of the the businessMetadata definition by it's name"
           },
           "404": {
-            "description": "On Failed lookup for the given name",
-            "x-ms-error-response": true
+            "description": "On Failed lookup for the given name"
           }
         }
       }
@@ -5038,7 +5133,8 @@
           "$ref": "#/definitions/TypeCategory"
         },
         "createTime": {
-          "type": "number",
+          "type": "integer",
+          "format": "int64",
           "description": "The created time of the record."
         },
         "createdBy": {
@@ -5077,7 +5173,8 @@
           "description": "The version of the type."
         },
         "updateTime": {
-          "type": "number",
+          "type": "integer",
+          "format": "int64",
           "description": "The update time of the record."
         },
         "updatedBy": {
@@ -5389,7 +5486,8 @@
               }
             },
             "createTime": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
               "description": "The created time of the record."
             },
             "createdBy": {
@@ -5453,7 +5551,8 @@
               "$ref": "#/definitions/Status"
             },
             "updateTime": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
               "description": "The update time of the record."
             },
             "updatedBy": {
@@ -5879,7 +5978,8 @@
               }
             },
             "createTime": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
               "description": "The created time of the record."
             },
             "createdBy": {
@@ -5887,7 +5987,8 @@
               "description": "The user who created the record."
             },
             "updateTime": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
               "description": "The update time of the record."
             },
             "updatedBy": {
@@ -6291,7 +6392,8 @@
         {
           "properties": {
             "createTime": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
               "description": "The created time of the record."
             },
             "createdBy": {
@@ -6325,7 +6427,8 @@
               "$ref": "#/definitions/Status_AtlasRelationship"
             },
             "updateTime": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
               "description": "The update time of the record."
             },
             "updatedBy": {
@@ -6781,7 +6884,11 @@
         "SUCCESS",
         "FAILED"
       ],
-      "description": "ImportStatus"
+      "description": "ImportStatus",
+      "x-ms-enum": {
+        "name": "importStatus",
+        "modelAsString": true
+      }
     },
     "BulkImportResponse": {
       "type": "object",
@@ -7298,9 +7405,19 @@
           "type": "string",
           "description": "The target text that contains the keyword as prefix. The keyword is wrapped with emphasis mark."
         },
-        "description": {
+        "objectType": {
           "type": "string",
-          "description": "The description of the record."
+          "description": "The object type of the record. Object type is the top-level property to distinguish whether a record is an asset or a term."
+        },
+        "createTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The create time of the record. The Unix epoch format."
+        },
+        "updateTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last update time of the record. The Unix epoch format."
         },
         "id": {
           "type": "string",
@@ -7310,17 +7427,25 @@
           "type": "string",
           "description": "The name of the record."
         },
-        "owner": {
-          "type": "string",
-          "description": "The owner of the record. This is an Atlas native attribute."
-        },
         "qualifiedName": {
           "type": "string",
           "description": "The qualified name of the record."
         },
         "entityType": {
           "type": "string",
-          "description": "The type name of the record."
+          "description": "The type name of the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the asset."
+        },
+        "endorsement": {
+          "type": "string",
+          "description": "The endorsement of the asset."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The owner of the record. This is an Atlas native attribute."
         },
         "classification": {
           "type": "array",
@@ -7331,31 +7456,54 @@
         },
         "label": {
           "type": "array",
-          "description": "The labels of the record.",
+          "description": "The labels of the asset.",
           "items": {
             "type": "string"
           }
         },
         "term": {
           "type": "array",
-          "description": "The terms assigned to the record.",
+          "description": "The terms assigned to the asset.",
           "items": {
             "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
-          "description": "The contacts of the record.",
+          "description": "The contacts of the asset.",
           "items": {
             "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
           "type": "array",
-          "description": "The asset types of the record.",
+          "description": "The asset types of the asset.",
           "items": {
             "type": "string"
           }
+        },
+        "glossaryType": {
+          "type": "string",
+          "description": "The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or AtlasGlossaryCategory."
+        },
+        "glossary": {
+          "type": "string",
+          "description": "The glossary name of the term."
+        },
+        "termStatus": {
+          "type": "string",
+          "description": "The status of the term."
+        },
+        "termTemplate": {
+          "type": "array",
+          "description": "The term template names used by the term.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "longDescription": {
+          "type": "string",
+          "description": "The definition of the term."
         }
       },
       "title": "SuggestResultValue",
@@ -7446,6 +7594,12 @@
     "SearchFacetResultValue": {
       "type": "object",
       "properties": {
+        "entityType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItemValue"
+          }
+        },
         "assetType": {
           "type": "array",
           "items": {
@@ -7458,7 +7612,7 @@
             "$ref": "#/definitions/SearchFacetItemValue"
           }
         },
-        "classificationCategory": {
+        "term": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
@@ -7470,7 +7624,7 @@
             "$ref": "#/definitions/SearchFacetItemValue"
           }
         },
-        "fileExtension": {
+        "contactType": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
@@ -7482,7 +7636,19 @@
             "$ref": "#/definitions/SearchFacetItemValue"
           }
         },
-        "term": {
+        "glossaryType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItemValue"
+          }
+        },
+        "termStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItemValue"
+          }
+        },
+        "termTemplate": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchFacetItemValue"
@@ -7527,6 +7693,10 @@
       "title": "SearchFacetItemValue",
       "description": "The content of a search facet result item."
     },
+    "SearchOrderItem": {
+      "type": "object",
+      "description": "See examples for the usage of search order."
+    },
     "SearchResultValue": {
       "type": "object",
       "properties": {
@@ -7538,13 +7708,19 @@
         "@search.highlights": {
           "$ref": "#/definitions/SearchHighlights"
         },
-        "@search.text": {
+        "objectType": {
           "type": "string",
-          "description": "The target text that contains the keyword as prefix. The keyword is wrapped with emphasis mark."
+          "description": "The object type of the record. Object type is the top-level property to distinguish whether a record is an asset or a term."
         },
-        "description": {
-          "type": "string",
-          "description": "The description of the record."
+        "createTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The create time of the record. The Unix epoch format."
+        },
+        "updateTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last update time of the record. The Unix epoch format."
         },
         "id": {
           "type": "string",
@@ -7554,17 +7730,25 @@
           "type": "string",
           "description": "The name of the record."
         },
-        "owner": {
-          "type": "string",
-          "description": "The owner of the record. This is an Atlas native attribute."
-        },
         "qualifiedName": {
           "type": "string",
           "description": "The qualified name of the record."
         },
         "entityType": {
           "type": "string",
-          "description": "The type name of the record."
+          "description": "The type name of the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the asset."
+        },
+        "endorsement": {
+          "type": "string",
+          "description": "The endorsement of the asset."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The owner of the record. This is an Atlas native attribute."
         },
         "classification": {
           "type": "array",
@@ -7575,31 +7759,54 @@
         },
         "label": {
           "type": "array",
-          "description": "The labels of the record.",
+          "description": "The labels of the asset.",
           "items": {
             "type": "string"
           }
         },
         "term": {
           "type": "array",
-          "description": "The terms assigned to the record.",
+          "description": "The terms assigned to the asset.",
           "items": {
             "$ref": "#/definitions/TermSearchResultValue"
           }
         },
         "contact": {
           "type": "array",
-          "description": "The contacts of the record.",
+          "description": "The contacts of the asset.",
           "items": {
             "$ref": "#/definitions/ContactSearchResultValue"
           }
         },
         "assetType": {
           "type": "array",
-          "description": "The asset types of the record.",
+          "description": "The asset types of the asset.",
           "items": {
             "type": "string"
           }
+        },
+        "glossaryType": {
+          "type": "string",
+          "description": "The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or AtlasGlossaryCategory."
+        },
+        "glossary": {
+          "type": "string",
+          "description": "The glossary name of the term."
+        },
+        "termStatus": {
+          "type": "string",
+          "description": "The status of the term."
+        },
+        "termTemplate": {
+          "type": "array",
+          "description": "The term template names used by the term.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "longDescription": {
+          "type": "string",
+          "description": "The definition of the term."
         }
       },
       "title": "SearchResultValue",
@@ -7745,6 +7952,13 @@
           "format": "int32",
           "description": "The limit of the number of the search result. default value is 50; maximum value is 1000."
         },
+        "orderby": {
+          "type": "array",
+          "description": "The sort order of search results, can specify multiple fields.",
+          "items": {
+            "$ref": "#/definitions/SearchOrderItem"
+          }
+        },
         "filter": {
           "type": "object",
           "description": "The filter for the search. See examples for the usage of supported filters."
@@ -7866,6 +8080,7 @@
       "properties": {
         "errorCode": {
           "type": "integer",
+          "format": "int32",
           "description": "Error code from async import job if fail"
         },
         "errorMessage": {
@@ -7889,6 +8104,78 @@
       "title": "ImportCSVOperationStatus",
       "description": "Enum of the status of import csv operation."
     },
+    "BulkDeleteOperation": {
+      "type": "object",
+      "title": "Status of bulk delete operation",
+      "description": "The status of bulk delete operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "guid string"
+        },
+        "status": {
+          "$ref": "#/definitions/BulkDeleteOperationStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The created time of the record."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The last updated time of the record."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BulkDeleteOperationProperties"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BulkDeleteOperationError"
+        }
+      }
+    },
+    "BulkDeleteOperationProperties": {
+      "type": "object",
+      "properties": {
+        "deletedTerms": {
+          "type": "string",
+          "description": "Term numbers that already deleted successfully"
+        },
+        "totalTermsDetected": {
+          "type": "string",
+          "description": "Total term numbers that detected in a bulk delete job"
+        }
+      }
+    },
+    "BulkDeleteOperationError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code from async bulk delete job if fail"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message from async bulk delete job if fail"
+        }
+      }
+    },
+    "BulkDeleteOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Succeeded",
+        "Failed",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "BulkDeleteOperationStatus",
+        "modelAsString": true
+      },
+      "title": "BulkDeleteOperationStatus",
+      "description": "Enum of the status of bulk delete operation."
+    },
     "LastModifiedTS": {
       "type": "string",
       "title": "lastModifiedTS",
@@ -7896,6 +8183,7 @@
     },
     "ErrorResponse": {
       "description": "An error response from the service",
+      "type": "object",
       "properties": {
         "requestId": {
           "type": "string",
@@ -8372,6 +8660,24 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "forceDeleteEntityAssignment": {
+      "name": "forceDeleteEntityAssignment",
+      "description": "Whether delete entity assignment",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "forceDeleteChild": {
+      "name": "forceDeleteChild",
+      "description": "Whether delete child terms together with the parent term",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     }
   }
