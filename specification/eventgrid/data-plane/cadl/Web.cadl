@@ -1,123 +1,121 @@
-@service({title:"Schema of Azure App Service events published to Azure Event Grid", version: "2018-01-01"})
+@service({
+  title: "Schema of Azure App Service events published to Azure Event Grid",
+  version: "2018-01-01",
+})
 @doc("Describes the schema of the Azure App Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace Web{
+namespace Web {
+  @doc("Detail of action on the app.")
+  model AppEventTypeDetail {
+    @doc("Type of action of the operation.")
+    action?: AppAction;
+  }
 
-@doc("Detail of action on the app.")
-model AppEventTypeDetail {
-  @doc("Type of action of the operation.")
-  action?: AppAction;
-}
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event.")
+  model WebAppUpdatedEventData is BaseEvents.WebAppBaseEventData;
 
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event.")
+  model WebBackupOperationStartedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event.")
-model WebAppUpdatedEventData is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event.")
+  model WebBackupOperationCompletedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event.")
-model WebBackupOperationStartedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event.")
+  model WebBackupOperationFailedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event.")
-model WebBackupOperationCompletedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event.")
+  model WebRestoreOperationStartedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event.")
-model WebBackupOperationFailedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event.")
+  model WebRestoreOperationCompletedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event.")
-model WebRestoreOperationStartedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event.")
+  model WebRestoreOperationFailedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event.")
-model WebRestoreOperationCompletedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event.")
+  model WebSlotSwapStartedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event.")
-model WebRestoreOperationFailedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event.")
+  model WebSlotSwapCompletedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event.")
-model WebSlotSwapStartedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event.")
+  model WebSlotSwapFailedEventData is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event.")
-model WebSlotSwapCompletedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event.")
+  model WebSlotSwapWithPreviewStartedEventData
+    is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event.")
-model WebSlotSwapFailedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event.")
+  model WebSlotSwapWithPreviewCancelledEventData
+    is BaseEvents.WebAppBaseEventData;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event.")
-model WebSlotSwapWithPreviewStartedEventData   is BaseEvents.WebAppBaseEventData;
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event.")
+  model WebAppServicePlanUpdatedEventData {
+    appServicePlanEventTypeDetail?: AppServicePlanEventTypeDetail;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event.")
-model WebSlotSwapWithPreviewCancelledEventData   is BaseEvents.WebAppBaseEventData;
-
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event.")
-model WebAppServicePlanUpdatedEventData {
-  appServicePlanEventTypeDetail?: AppServicePlanEventTypeDetail;
-
-  @doc("name of the app service plan that had this event.")
-  name?: string;
-
-  @doc("The client request id generated by the app service for the app service plan API operation that triggered this event.")
-  clientRequestId?: string;
-
-  @doc("The correlation request id generated by the app service for the app service plan API operation that triggered this event.")
-  correlationRequestId?: string;
-
-  @doc("The request id generated by the app service for the app service plan API operation that triggered this event.")
-  requestId?: string;
-
-  @doc("HTTP request URL of this operation.")
-  address?: string;
-
-  @doc("HTTP verb of this operation.")
-  verb?: string;
-
-  @doc("sku of app service plan.")
-  sku?: BaseEvents.sku;
-}
-
-@knownValues(BaseEvents.AppActionKV)
-model AppAction is string {}
-
-@knownValues(BaseEvents.StampKindKV)
-model StampKind is string {}
-
-@knownValues(BaseEvents.AppServicePlanActionKV)
-model AppServicePlanAction is string {}
-
-@doc("Detail of action on the app service plan.")
-model AppServicePlanEventTypeDetail {
-  @doc("Kind of environment where app service plan is.")
-  stampKind?: StampKind;
-
-  @doc("Type of action on the app service plan.")
-  action?: AppServicePlanAction;
-  status?: AsyncStatus;
-}
-
-@knownValues(BaseEvents.AsyncStatusKV)
-model AsyncStatus is string {}
-
-
-}
-
-
-
-namespace BaseEvents{
-
-  model WebAppBaseEventData {
-    appEventTypeDetail?: Web.AppEventTypeDetail;
-  
-    @doc("name of the web site that had this event.")
+    @doc("name of the app service plan that had this event.")
     name?: string;
-  
-    @doc("The client request id generated by the app service for the site API operation that triggered this event.")
+
+    @doc("The client request id generated by the app service for the app service plan API operation that triggered this event.")
     clientRequestId?: string;
-  
-    @doc("The correlation request id generated by the app service for the site API operation that triggered this event.")
+
+    @doc("The correlation request id generated by the app service for the app service plan API operation that triggered this event.")
     correlationRequestId?: string;
-  
-    @doc("The request id generated by the app service for the site API operation that triggered this event.")
+
+    @doc("The request id generated by the app service for the app service plan API operation that triggered this event.")
     requestId?: string;
-  
+
     @doc("HTTP request URL of this operation.")
     address?: string;
-  
+
+    @doc("HTTP verb of this operation.")
+    verb?: string;
+
+    @doc("sku of app service plan.")
+    sku?: BaseEvents.sku;
+  }
+
+  @knownValues(BaseEvents.AppActionKV)
+  model AppAction is string;
+
+  @knownValues(BaseEvents.StampKindKV)
+  model StampKind is string;
+
+  @knownValues(BaseEvents.AppServicePlanActionKV)
+  model AppServicePlanAction is string;
+
+  @doc("Detail of action on the app service plan.")
+  model AppServicePlanEventTypeDetail {
+    @doc("Kind of environment where app service plan is.")
+    stampKind?: StampKind;
+
+    @doc("Type of action on the app service plan.")
+    action?: AppServicePlanAction;
+    status?: AsyncStatus;
+  }
+
+  @knownValues(BaseEvents.AsyncStatusKV)
+  model AsyncStatus is string;
+}
+
+namespace BaseEvents {
+  model WebAppBaseEventData {
+    appEventTypeDetail?: Web.AppEventTypeDetail;
+
+    @doc("name of the web site that had this event.")
+    name?: string;
+
+    @doc("The client request id generated by the app service for the site API operation that triggered this event.")
+    clientRequestId?: string;
+
+    @doc("The correlation request id generated by the app service for the site API operation that triggered this event.")
+    correlationRequestId?: string;
+
+    @doc("The request id generated by the app service for the site API operation that triggered this event.")
+    requestId?: string;
+
+    @doc("HTTP request URL of this operation.")
+    address?: string;
+
     @doc("HTTP verb of this operation.")
     verb?: string;
   }
@@ -128,30 +126,34 @@ namespace BaseEvents{
     name?: string;
 
     @doc("tier of app service plan sku.")
-    Tier?:string;
+    Tier?: string;
 
     @doc("size of app service plan sku.")
-    Size?:string;
+    Size?: string;
 
     @doc("family of app service plan sku.")
-    Family?:string;
+    Family?: string;
 
     @doc("capacity of app service plan sku.")
-    Capacity?:string;
+    Capacity?: string;
   }
-
 
   enum AppActionKV {
     @doc("Web app was restarted.")
     Restarted,
+
     @doc("Web app was stopped.")
     Stopped,
+
     @doc("There was an operation to change app setting on the web app.")
     ChangedAppSettings,
+
     @doc("The job has started.")
     Started,
+
     @doc("The job has completed.")
     Completed,
+
     @doc("The job has failed to complete.")
     Failed,
   }
@@ -159,12 +161,13 @@ namespace BaseEvents{
   enum StampKindKV {
     @doc("App Service Plan is running on a public stamp.")
     Public,
+
     @doc("App Service Plan is running on an App Service Environment V1.")
     AseV1,
+
     @doc("App Service Plan is running on an App Service Environment V2.")
     AseV2,
   }
-
 
   enum AppServicePlanActionKV {
     @doc("App Service plan is being updated.")
@@ -174,8 +177,10 @@ namespace BaseEvents{
   enum AsyncStatusKV {
     @doc("Async operation has started.")
     Started,
+
     @doc("Async operation has completed.")
     Completed,
+
     @doc("Async operation failed to complete.")
     Failed,
   }
