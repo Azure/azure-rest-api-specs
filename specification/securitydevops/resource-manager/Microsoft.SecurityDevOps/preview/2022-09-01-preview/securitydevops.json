@@ -570,6 +570,12 @@
               "$ref": "#/definitions/AzureDevOpsOrg"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -790,7 +796,7 @@
           {
             "in": "body",
             "name": "azureDevOpsProject",
-            "description": "Azure DevOps Org resource payload.",
+            "description": "Azure DevOps Project resource payload.",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsProject"
             }
@@ -799,6 +805,12 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsProject"
             }
@@ -981,6 +993,12 @@
               "$ref": "#/definitions/AzureDevOpsRepo"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1002,7 +1020,7 @@
         "tags": [
           "default"
         ],
-        "summary": "Update monitored AzureDevOps Project details.",
+        "summary": "Update monitored AzureDevOps Repo details.",
         "operationId": "AzureDevOpsRepo_Update",
         "consumes": [
           "application/json"
@@ -1035,7 +1053,7 @@
           {
             "in": "body",
             "name": "azureDevOpsRepo",
-            "description": "Azure DevOps Org resource payload.",
+            "description": "Azure DevOps Repo resource payload.",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsRepo"
             }
@@ -1044,6 +1062,12 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsRepo"
             }
@@ -1585,7 +1609,7 @@
         "tags": [
           "default"
         ],
-        "summary": "Patch a monitored GitHub repository.",
+        "summary": "Update a monitored GitHub repository.",
         "operationId": "GitHubOwner_Update",
         "consumes": [
           "application/json"
@@ -1621,6 +1645,12 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/GitHubOwner"
             }
@@ -1816,7 +1846,7 @@
         "tags": [
           "default"
         ],
-        "summary": "Patch a monitored GitHub repository.",
+        "summary": "Update a monitored GitHub repository.",
         "operationId": "GitHubRepo_Update",
         "consumes": [
           "application/json"
@@ -1855,6 +1885,12 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/GitHubRepo"
             }
@@ -2022,6 +2058,7 @@
       }
     },
     "ActionableRemediationState": {
+      "description": "ActionableRemediation Setting.\r\nNone - the setting was never set.\r\nEnabled - ActionableRemediation is enabled.\r\nDisabled - ActionableRemediation is disabled.",
       "enum": [
         "None",
         "Disabled",
@@ -2038,7 +2075,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.",
+          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\r\n\r\nOnly used during PUT operations. The secret is cleared during GET.\r\nIn general, RPaaS does not return any property marked as a secret.",
           "type": "string",
           "example": "00000000000000000000.",
           "x-ms-secret": true
@@ -2281,12 +2318,12 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
         },
-        "projectId": {
-          "description": "Gets or sets AzureDevOps Project Id.",
+        "orgName": {
+          "description": "Gets or sets AzureDevOps org Name.",
           "type": "string"
         },
-        "orgName": {
-          "description": "Gets or sets AzureDevOps Org Name.",
+        "projectId": {
+          "description": "Gets or sets AzureDevOps Project Id.",
           "type": "string"
         },
         "autoDiscovery": {
@@ -2332,25 +2369,30 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
         },
+        "orgName": {
+          "description": "Gets or sets AzureDevOps org Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "projectName": {
+          "description": "Gets or sets AzureDevOps project Name.",
+          "type": "string",
+          "readOnly": true
+        },
         "repoId": {
           "description": "Gets or sets Azure DevOps repo id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "repoUrl": {
           "description": "Gets or sets AzureDevOps repo url.",
-          "type": "string"
-        },
-        "orgName": {
-          "description": "Gets or sets AzureDevOps Org Name.",
-          "type": "string"
-        },
-        "projectName": {
-          "description": "Gets or sets AzureDevOps Project Name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "visibility": {
           "description": "Gets or sets AzureDevOps repo visibility, whether it is public or private etc.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "actionableRemediation": {
           "$ref": "#/definitions/ActionableRemediation"
@@ -2396,7 +2438,7 @@
           "$ref": "#/definitions/ProvisioningState"
         },
         "code": {
-          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.",
+          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\r\n\r\nOnly used during PUT operations. The secret is cleared during GET.\r\nIn general, RPaaS does not return any property marked as a secret.",
           "type": "string",
           "example": "00000000000000000000.",
           "x-ms-secret": true
@@ -2580,7 +2622,8 @@
         "name": "ProvisioningState",
         "modelAsString": true,
         "modelAsExtensible": true
-      }
+      },
+      "readOnly": true
     },
     "RuleCategory": {
       "enum": [
