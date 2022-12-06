@@ -1,10 +1,24 @@
 {
   "parameters": {
-    "api-version": "2023-01-01-preview",
+    "api-version": "2022-10-01-preview",
+    "domains": {
+      "xyz.biz": {
+        "type": "Custom"
+      }
+    },
     "body": {
+      "domains": {
+        "xyz.biz": {
+          "enabled": true
+        },
+        "abc.biz": {
+          "enabled": true
+        }
+      },
       "trunks": {
         "vendor.xyz.biz": {
-          "sipSignalingPort": 5061
+          "sipSignalingPort": 5061,
+          "enabled": true
         }
       },
       "routes": [
@@ -24,9 +38,18 @@
     "200": {
       "headers": {},
       "body": {
+        "domains": {
+          "xyz.biz": {
+            "enabled": true
+          },
+          "abc.biz": {
+            "enabled": true
+          }
+        },
         "trunks": {
           "vendor.xyz.biz": {
-            "sipSignalingPort": 5061
+            "sipSignalingPort": 5061,
+            "enabled": true
           }
         },
         "routes": [
