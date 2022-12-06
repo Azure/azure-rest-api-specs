@@ -26,7 +26,7 @@ These are the global settings for the extendedLocation.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-08-15
+tag: package-2021-08-31-preview
 ```
 
 ### Tag: package-2021-03-15-preview
@@ -72,7 +72,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:

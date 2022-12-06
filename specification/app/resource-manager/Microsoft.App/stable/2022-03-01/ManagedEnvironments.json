@@ -289,6 +289,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironment"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -666,7 +672,7 @@
       "properties": {
         "internal": {
           "type": "boolean",
-          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId and AppSubnetResourceId if enabling this property",
+          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property",
           "x-ms-mutability": [
             "create",
             "read"

@@ -4386,6 +4386,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
           }
         ],
         "responses": {
@@ -5517,6 +5526,7 @@
           "type": "string"
         },
         "policyType": {
+          "description": "Type of backup policy type",
           "enum": [
             "Invalid",
             "V1",
