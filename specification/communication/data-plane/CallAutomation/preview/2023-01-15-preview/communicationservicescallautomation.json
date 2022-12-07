@@ -1008,7 +1008,7 @@
           "$ref": "#/definitions/MediaStreamingConfiguration",
           "description": "Media Streaming Configuration."
         },
-        "azureCognitiveServiceDomainName": {
+        "azureCognitiveServicesEndpointUrl": {
           "description": "The identifier of the Cognitive Service resource assigned to this call.",
           "type": "string"
         }
@@ -1291,8 +1291,8 @@
           "$ref": "#/definitions/MediaStreamingConfiguration",
           "description": "Media Streaming Configuration."
         },
-        "azureCognitiveServiceDomainName": {
-          "description": "The identifier of the Cognitive Service resource assigned to this call.",
+        "azureCognitiveServicesEndpointUrl": {
+          "description": "The endpoint URL of the Azure Cognitive Services resource attached",
           "type": "string"
         }
       }
@@ -2375,19 +2375,19 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "endpoint",
-        "description": "The endpoint of the Azure Communication resource.",
-        "required": true,
-        "type": "string",
-        "format": "url",
-        "in": "path",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
-      }
-    ]
+      "hostTemplate": "{endpoint}",
+      "useSchemePrefix": false,
+      "parameters": [
+          {
+              "name": "endpoint",
+              "description": "The endpoint of the Azure Communication resource.",
+              "required": true,
+              "type": "string",
+              "format": "url",
+              "in": "path",
+              "x-ms-skip-url-encoding": true,
+              "x-ms-parameter-location": "client"
+          }
+      ]
   }
 }
