@@ -4888,7 +4888,8 @@
             "Protected",
             "ProtectionError",
             "ProtectionStopped",
-            "ProtectionPaused"
+            "ProtectionPaused",
+            "BackupsSuspended"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4976,6 +4977,13 @@
           "format": "int32",
           "description": "Contains recovery point size",
           "type": "integer"
+        },
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointProperties"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureFileShareRecoveryPoint"
@@ -5474,7 +5482,8 @@
             "Protected",
             "ProtectionError",
             "ProtectionStopped",
-            "ProtectionPaused"
+            "ProtectionPaused",
+            "BackupsSuspended"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5646,7 +5655,8 @@
             "Protected",
             "ProtectionError",
             "ProtectionStopped",
-            "ProtectionPaused"
+            "ProtectionPaused",
+            "BackupsSuspended"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5858,7 +5868,8 @@
             "Protected",
             "ProtectionError",
             "ProtectionStopped",
-            "ProtectionPaused"
+            "ProtectionPaused",
+            "BackupsSuspended"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6204,6 +6215,13 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointProperties"
           }
         }
       },
@@ -6909,7 +6927,8 @@
             "Protected",
             "ProtectionError",
             "ProtectionStopped",
-            "ProtectionPaused"
+            "ProtectionPaused",
+            "BackupsSuspended"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7244,7 +7263,8 @@
             "Protected",
             "ProtectionError",
             "ProtectionStopped",
-            "ProtectionPaused"
+            "ProtectionPaused",
+            "BackupsSuspended"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7296,6 +7316,13 @@
         "recoveryPointAdditionalInfo": {
           "description": "Additional information associated with this backup copy.",
           "type": "string"
+        },
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointProperties"
+          }
         }
       },
       "x-ms-discriminator-value": "GenericRecoveryPoint"
@@ -7388,6 +7415,13 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointProperties"
           }
         }
       },
@@ -12580,6 +12614,21 @@
           }
         }
       }
+    },
+   "RecoveryPointProperties": {
+      "description": "Properties of Recovery Point",
+      "type": "object",
+      "properties": {
+         "expiryTime": {
+           "format": "date-time",
+           "description": "Expiry time of Recovery Point in UTC.",
+           "type": "string"
+         },
+         "ruleName": {
+           "description": "Rule name tagged on Recovery Point that governs life cycle",
+           "type": "string"
+         }
+       }
     },
     "ListRecoveryPointsRecommendedForMoveRequest": {
       "description": "ListRecoveryPointsRecommendedForMoveRequest Request",
