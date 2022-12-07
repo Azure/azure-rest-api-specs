@@ -360,10 +360,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -375,7 +375,7 @@
             "$ref": "#/parameters/SkipTokenParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -408,10 +408,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -420,7 +420,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -463,10 +463,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -475,7 +475,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -503,10 +503,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -515,7 +515,7 @@
             "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -563,7 +563,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a federated identity credential."
@@ -734,6 +734,9 @@
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
           },
+          "x-ms-identifiers": [
+            "id"
+          ],
           "description": "The collection of federated identity credentials returned by the listing operation."
         },
         "nextLink": {
@@ -926,6 +929,7 @@
       "description": "The name of the federated identity credential resource.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$",
       "x-ms-parameter-location": "method"
     }
   }
