@@ -2,9 +2,10 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Rest;
+using Cadl.Http;
 using Azure.Core;
 
-namespace MicrosoftCognitiveLanguageServiceGenerateQuestionandAnswerpairs;
+namespace Microsoft.Language.GenerateQuestionAnswers;
 
 enum DocumentKindKnownValues {
   "Raw",
@@ -76,7 +77,6 @@ model State is string;
 model GenerationRequest {
   @doc("The set of documents to process as part of question answers generation job.")
   documents?: GenerationDocument[];
-
   @doc("""
 Parameters that define max number of question answers to be generated, fetch
 raw contents of documents or not, etc.
@@ -93,7 +93,7 @@ model GenerationDocument {
   content: string;
 
   @doc("Document type.")
-  documentKind?: DocumentKind;
+  documentKind: DocumentKind;
 
   @doc("""
 (Optional) This is the 2 letter ISO 639-1 representation of a language. For
@@ -177,24 +177,36 @@ the error.
 Generation Job state represents the job metadata and any errors and a result
 object if job succeeded.
 """)
-@resource("generate-questionanswers/jobs/{jobId}")
 model GenerationJobState {
   ...JobState;
   ...GenerationJobResult;
 }
 
+@doc("JobState")
 model JobState {
+  @doc("displayName")
   displayName?: string;
+  @doc("displayName")
   createdDateTime: zonedDateTime;
+  @doc("displayName")
   expirationDateTime?: zonedDateTime;
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-
-  @key
+  @doc("displayName")
   jobId: string;
+  @doc("displayName")
   lastUpdatedDateTime: zonedDateTime;
+  @doc("displayName")
   status: State;
+  @doc("displayName")
   errors?: Error[];
+  @doc("displayName")
   nextLink?: string;
+}
+
+@doc("The JobId parameter")
+model JobIdParameter {
+  @path
+  @doc("jobId")
+  "jobId": string;
 }
 
 @doc("""
