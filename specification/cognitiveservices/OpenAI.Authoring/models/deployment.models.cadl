@@ -21,11 +21,11 @@ model Deployment {
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
-  createdAt: int32;
+  created_at: int32;
 
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
-  updatedAt: int32;
+  updated_at: int32;
 
   @doc("The identifier of the deployment")
   @key("deploymentId")
@@ -46,12 +46,12 @@ supported.
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
-  scaleSettings: ScaleSettings;
+  scale_settings: ScaleSettings;
 }
 
 @doc("""
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.
 """)
-@discriminator("scaleType")
+@discriminator("scale_type")
 model ScaleSettings {}
