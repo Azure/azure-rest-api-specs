@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-04-01-preview",
+    "version": "2022-12-01-preview",
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
@@ -24,6 +24,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -43,11 +44,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "OperationsGet": {
-            "$ref": "./examples/OperationsGet.json"
-          }
         }
       }
     },
@@ -60,9 +56,11 @@
         "operationId": "AvailableSkus_List",
         "parameters": [
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -82,11 +80,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AvailableSkus": {
-            "$ref": "./examples/AvailableSkusList.json"
-          }
         }
       }
     },
@@ -99,9 +92,11 @@
         "operationId": "Devices_ListBySubscription",
         "parameters": [
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -128,11 +123,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataBoxEdgeDeviceGetBySubscription": {
-            "$ref": "./examples/DataBoxEdgeDeviceGetBySubscription.json"
-          }
         }
       }
     },
@@ -145,12 +135,15 @@
         "operationId": "Devices_ListByResourceGroup",
         "parameters": [
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -177,11 +170,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DataBoxEdgeDeviceGetByResourceGroup": {
-            "$ref": "./examples/DataBoxEdgeDeviceGetByResourceGroup.json"
-          }
         }
       }
     },
@@ -201,12 +189,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -222,14 +213,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataBoxEdgeDeviceGetByName": {
-            "$ref": "./examples/DataBoxEdgeDeviceGetByName.json"
-          },
-          "DataBoxEdgeDeviceGetByNameWithDataResidency": {
-            "$ref": "./examples/DataBoxEdgeDeviceGetByNameWithDataResidency.json"
           }
         }
       },
@@ -257,12 +240,15 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -278,14 +264,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataBoxEdgeDevicePut": {
-            "$ref": "./examples/DataBoxEdgeDevicePut.json"
-          },
-          "DataBoxEdgeDevicePutWithDataResidency": {
-            "$ref": "./examples/DataBoxEdgeDevicePutWithDataResidency.json"
           }
         }
       },
@@ -304,32 +282,30 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the resource."
-          },
           "204": {
             "description": "The resource is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataBoxEdgeDeviceDelete": {
-            "$ref": "./examples/DataBoxEdgeDeviceDelete.json"
           }
         }
       },
@@ -357,12 +333,15 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -378,11 +357,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataBoxEdgeDevicePatch": {
-            "$ref": "./examples/DataBoxEdgeDevicePatch.json"
           }
         }
       }
@@ -403,12 +377,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -428,11 +405,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AlertGetAllInDevice": {
-            "$ref": "./examples/AlertGetAllInDevice.json"
-          }
         }
       }
     },
@@ -459,12 +431,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -480,11 +455,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AlertGet": {
-            "$ref": "./examples/AlertGet.json"
           }
         }
       }
@@ -505,12 +475,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -530,11 +503,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "BandwidthScheduleGetAllInDevice": {
-            "$ref": "./examples/BandwidthScheduleGetAllInDevice.json"
-          }
         }
       }
     },
@@ -561,12 +529,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -582,11 +553,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "BandwidthScheduleGet": {
-            "$ref": "./examples/BandwidthScheduleGet.json"
           }
         }
       },
@@ -621,24 +587,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the bandwidth schedule."
+          },
           "200": {
             "description": "Successfully created or updated the bandwidth schedule.",
             "schema": {
               "$ref": "#/definitions/BandwidthSchedule"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the bandwidth schedule."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -647,12 +616,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BandwidthSchedulePut": {
-            "$ref": "./examples/BandwidthSchedulePut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -676,24 +640,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted the request to delete the bandwidth schedule."
           },
           "204": {
             "description": "Successfully deleted the bandwidth schedule."
+          },
+          "200": {
+            "description": "Success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -702,12 +669,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "BandwidthScheduleDelete": {
-            "$ref": "./examples/BandwidthScheduleDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityCheck": {
@@ -718,15 +680,6 @@
         "description": "Posts the device capacity request info to check feasibility.",
         "operationId": "DeviceCapacityCheck_CheckResourceCreationFeasibility",
         "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
           {
             "name": "deviceName",
             "in": "path",
@@ -746,9 +699,21 @@
           {
             "name": "capacityName",
             "in": "query",
-            "description": "The capacity name.",
+            "description": "The device name.",
             "required": false,
             "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -765,15 +730,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "DeviceCapacityRequestPost": {
-            "$ref": "./examples/DeviceCapacityRequestPost.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityInfo/default": {
@@ -785,25 +742,28 @@
         "operationId": "DeviceCapacityInfo_GetDeviceCapacityInfo",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "name": "deviceName",
             "in": "path",
             "description": "The device name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The device capacity info result.",
+            "description": "The device capacity check result.",
             "schema": {
               "$ref": "#/definitions/DeviceCapacityInfo"
             }
@@ -813,11 +773,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceCapacityGet": {
-            "$ref": "./examples/DeviceCapacityGet.json"
           }
         }
       }
@@ -838,12 +793,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -859,11 +817,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetDiagnosticProactiveLogCollectionSettings": {
-            "$ref": "./examples/GetDiagnosticProactiveLogCollectionSettings.json"
           }
         }
       },
@@ -891,24 +844,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to update the proactive log collection settings."
+          },
           "200": {
             "description": "Successfully updated the proactive log collection settings.",
             "schema": {
               "$ref": "#/definitions/DiagnosticProactiveLogCollectionSettings"
             }
-          },
-          "202": {
-            "description": "Accepted the request to update the proactive log collection settings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -917,12 +873,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "UpdateDiagnosticProactiveLogCollectionSettings": {
-            "$ref": "./examples/UpdateDiagnosticProactiveLogCollectionSettings.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticRemoteSupportSettings/default": {
@@ -941,12 +892,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -962,11 +916,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetDiagnosticRemoteSupportSettings": {
-            "$ref": "./examples/GetDiagnosticRemoteSupportSettings.json"
           }
         }
       },
@@ -994,12 +943,15 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1020,12 +972,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "UpdateDiagnosticRemoteSupportSettings": {
-            "$ref": "./examples/UpdateDiagnosticRemoteSupportSettings.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/downloadUpdates": {
@@ -1044,21 +991,24 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully downloaded the updates on the device."
-          },
           "202": {
             "description": "Accepted the request to download the updates on the device."
+          },
+          "200": {
+            "description": "Successfully downloaded the updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1067,12 +1017,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DownloadUpdatesPost": {
-            "$ref": "./examples/DownloadUpdatesPost.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/generateCertificate": {
@@ -1091,12 +1036,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1112,11 +1060,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GenerateCertificate": {
-            "$ref": "./examples/GenerateCertificate.json"
           }
         }
       }
@@ -1137,12 +1080,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1158,11 +1104,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ExtendedInfoPost": {
-            "$ref": "./examples/ExtendedInfoPost.json"
           }
         }
       }
@@ -1183,21 +1124,24 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully installed updates on the device."
-          },
           "202": {
             "description": "Accepted the request to install updates on the device."
+          },
+          "200": {
+            "description": "Successfully installed updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1206,12 +1150,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "InstallUpdatesPost": {
-            "$ref": "./examples/InstallUpdatesPost.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/jobs/{name}": {
@@ -1237,12 +1176,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1258,11 +1200,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobsGet": {
-            "$ref": "./examples/JobsGet.json"
           }
         }
       }
@@ -1283,12 +1220,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1304,11 +1244,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkSettingsGet": {
-            "$ref": "./examples/NetworkSettingsGet.json"
           }
         }
       }
@@ -1329,12 +1264,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1354,10 +1292,52 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "NodesGetAllInDevice": {
-            "$ref": "./examples/NodeGetAllInDevice.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns list of all offers",
+        "operationId": "MarketplaceImageOffer_ListOffers",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffers is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -1385,12 +1365,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1406,11 +1389,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "OperationsStatusGet": {
-            "$ref": "./examples/OperationsStatusGet.json"
           }
         }
       }
@@ -1431,12 +1409,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1456,11 +1437,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "OrderGetAllInDevice": {
-            "$ref": "./examples/OrderGetAllInDevice.json"
-          }
         }
       }
     },
@@ -1480,12 +1456,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1501,11 +1480,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "OrderGet": {
-            "$ref": "./examples/OrderGet.json"
           }
         }
       },
@@ -1533,24 +1507,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the order."
+          },
           "200": {
             "description": "Successfully created or updated the order.",
             "schema": {
               "$ref": "#/definitions/Order"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1559,12 +1536,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OrderPut": {
-            "$ref": "./examples/OrderPut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1581,24 +1553,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the order."
-          },
           "202": {
             "description": "Accepted the request to delete the order."
           },
           "204": {
             "description": "The order is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1607,12 +1582,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "OrderDelete": {
-            "$ref": "./examples/OrderDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default/listDCAccessCode": {
@@ -1631,12 +1601,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1653,12 +1626,392 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetDCAccessCode": {
-            "$ref": "./examples/GetDCAccessCode.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers": {
+      "get": {
+        "tags": [
+          "MarketplaceImagePublisher"
+        ],
+        "summary": "Returns list of publishers",
+        "operationId": "MarketplaceImagePublisher_ListPublishers",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListPublishers is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns List of Offers by Publisher name",
+        "operationId": "MarketplaceImageOffer_ListOffersbyPublisher",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffersbyPublisher is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus": {
+      "get": {
+        "tags": [
+          "MarketplaceImageSku"
+        ],
+        "summary": "Returns List of SKUs Within Offer",
+        "operationId": "MarketplaceImageSku_ListSKUsWithinOffer",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListSKUsWithinOffer is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "summary": "Returns List of Versions within SKU",
+        "operationId": "MarketplaceImageVersion_ListVersionswithinSKU",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListVersionswithinSKU is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "description": "Get Particular Image",
+        "operationId": "MarketplaceImageVersion_GetParticularImage",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetParticularImage is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}/generatesastoken": {
+      "post": {
+        "tags": [
+          "MarketplaceImageSasToken"
+        ],
+        "summary": "Returns SASToken",
+        "operationId": "MarketplaceImageSasToken_GetSASToken",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to start VM Image Download",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "200": {
+            "description": "GetSASToken is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles": {
@@ -1677,12 +2030,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1702,11 +2058,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "RoleGetAllInDevice": {
-            "$ref": "./examples/RoleGetAllInDevice.json"
-          }
         }
       }
     },
@@ -1733,12 +2084,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1754,11 +2108,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "RoleGet": {
-            "$ref": "./examples/RoleGet.json"
           }
         }
       },
@@ -1793,24 +2142,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the role."
+          },
           "200": {
             "description": "Successfully created or updated the role.",
             "schema": {
               "$ref": "#/definitions/Role"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1819,12 +2171,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RolePut": {
-            "$ref": "./examples/RolePut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1848,24 +2195,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the role."
-          },
           "202": {
             "description": "Accepted the request to delete the role."
           },
           "204": {
             "description": "The role is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1874,12 +2224,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RoleDelete": {
-            "$ref": "./examples/RoleDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/addons": {
@@ -1905,12 +2250,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1930,11 +2278,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "RoleListAddOns": {
-            "$ref": "./examples/RoleListAddOns.json"
-          }
         }
       }
     },
@@ -1968,12 +2311,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1989,11 +2335,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetAddOns": {
-            "$ref": "./examples/GetAddons.json"
           }
         }
       },
@@ -2035,24 +2376,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the addon."
+          },
           "200": {
             "description": "Successfully created or updated the addon.",
             "schema": {
               "$ref": "#/definitions/Addon"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the addon."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2061,12 +2405,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PutAddOns": {
-            "$ref": "./examples/PutAddons.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -2097,24 +2436,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the addon."
-          },
           "202": {
             "description": "Accepted the request to delete the addon."
           },
           "204": {
             "description": "The addon is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the addon."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2123,12 +2465,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DeleteAddOns": {
-            "$ref": "./examples/DeleteAddons.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/monitoringConfig": {
@@ -2154,12 +2491,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2179,11 +2519,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListMonitoringConfig": {
-            "$ref": "./examples/ListMonitoringConfig.json"
-          }
         }
       }
     },
@@ -2210,12 +2545,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2231,11 +2569,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetMonitoringConfig": {
-            "$ref": "./examples/GetMonitoringConfig.json"
           }
         }
       },
@@ -2270,24 +2603,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the metrics configuration."
+          },
           "200": {
             "description": "Successfully created or updated the metrics configuration.",
             "schema": {
               "$ref": "#/definitions/MonitoringMetricConfiguration"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the metrics configuration."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2296,12 +2632,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PutMonitoringConfig": {
-            "$ref": "./examples/PutMonitoringConfig.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -2325,12 +2656,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2351,12 +2685,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DeleteMonitoringConfig": {
-            "$ref": "./examples/DeleteMonitoringConfig.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/scanForUpdates": {
@@ -2375,21 +2704,24 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully scanned the device for updates."
-          },
           "202": {
             "description": "Accepted the request to scan for updates on the device."
+          },
+          "200": {
+            "description": "Successfully scanned the device for updates."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2398,12 +2730,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ScanForUpdatesPost": {
-            "$ref": "./examples/ScanForUpdatesPost.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/securitySettings/default/update": {
@@ -2431,12 +2758,15 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2454,12 +2784,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CreateOrUpdateSecuritySettings": {
-            "$ref": "./examples/SecuritySettingsUpdatePost.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares": {
@@ -2478,12 +2803,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2503,11 +2831,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ShareGetAllInDevice": {
-            "$ref": "./examples/ShareGetAllInDevice.json"
-          }
         }
       }
     },
@@ -2534,12 +2857,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2555,11 +2881,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ShareGet": {
-            "$ref": "./examples/ShareGet.json"
           }
         }
       },
@@ -2594,24 +2915,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the share."
+          },
           "200": {
             "description": "Successfully created or updated the share.",
             "schema": {
               "$ref": "#/definitions/Share"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2620,12 +2944,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SharePut": {
-            "$ref": "./examples/SharePut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -2649,24 +2968,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the share."
-          },
           "202": {
             "description": "Accepted the request to delete the share."
           },
           "204": {
             "description": "The share is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2675,12 +2997,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ShareDelete": {
-            "$ref": "./examples/ShareDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares/{name}/refresh": {
@@ -2706,21 +3023,24 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully refreshed the share on the device."
-          },
           "202": {
             "description": "Accepted the request to refresh the share on the device."
+          },
+          "200": {
+            "description": "Successfully refreshed the share on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2729,12 +3049,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ShareRefreshPost": {
-            "$ref": "./examples/ShareRefreshPost.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccountCredentials": {
@@ -2753,12 +3068,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2778,11 +3096,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "SACGetAllInDevice": {
-            "$ref": "./examples/SACGetAllInDevice.json"
-          }
         }
       }
     },
@@ -2809,12 +3122,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2830,11 +3146,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SACGet": {
-            "$ref": "./examples/SACGet.json"
           }
         }
       },
@@ -2869,24 +3180,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the storage account credential."
+          },
           "200": {
             "description": "Successfully created or updated the storage account credential.",
             "schema": {
               "$ref": "#/definitions/StorageAccountCredential"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2895,12 +3209,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SACPut": {
-            "$ref": "./examples/SACPut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -2924,24 +3233,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the storage account credential."
-          },
           "202": {
             "description": "Accepted the request to delete the storage account credential."
           },
           "204": {
             "description": "The storage account credential is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2950,12 +3262,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SACDelete": {
-            "$ref": "./examples/SACDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts": {
@@ -2974,12 +3281,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2999,11 +3309,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "StorageAccountGetAllInDevice": {
-            "$ref": "./examples/StorageAccountGetAllInDevice.json"
-          }
         }
       }
     },
@@ -3030,12 +3335,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3051,11 +3359,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StorageAccountGet": {
-            "$ref": "./examples/StorageAccountGet.json"
           }
         }
       },
@@ -3090,24 +3393,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the StorageAccount."
+          },
           "200": {
             "description": "Successfully created or updated the StorageAccount.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the StorageAccount."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3116,12 +3422,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "StorageAccountPut": {
-            "$ref": "./examples/StorageAccountPut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -3145,12 +3446,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3168,12 +3472,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "StorageAccountDelete": {
-            "$ref": "./examples/StorageAccountDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers": {
@@ -3199,12 +3498,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3224,11 +3526,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ContainerListAllInDevice": {
-            "$ref": "./examples/ContainerListAllInDevice.json"
-          }
         }
       }
     },
@@ -3262,12 +3559,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3283,11 +3583,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ContainerGet": {
-            "$ref": "./examples/ContainerGet.json"
           }
         }
       },
@@ -3329,24 +3624,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the container."
+          },
           "200": {
             "description": "Successfully created or updated the container.",
             "schema": {
               "$ref": "#/definitions/Container"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the container."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3355,12 +3653,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ContainerPut": {
-            "$ref": "./examples/ContainerPut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -3391,12 +3684,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3414,12 +3710,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ContainerDelete": {
-            "$ref": "./examples/ContainerDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers/{containerName}/refresh": {
@@ -3452,21 +3743,24 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully refreshed the container on the device."
-          },
           "202": {
             "description": "Accepted the request to refresh the container on the device."
+          },
+          "200": {
+            "description": "Successfully refreshed the container on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3475,12 +3769,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ContainerRefresh": {
-            "$ref": "./examples/ContainerRefresh.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggers": {
@@ -3499,12 +3788,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -3531,11 +3823,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "TriggerGetAllInDevice": {
-            "$ref": "./examples/TriggerGetAllInDevice.json"
-          }
         }
       }
     },
@@ -3562,12 +3849,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3583,11 +3873,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "TriggerGet": {
-            "$ref": "./examples/TriggerGet.json"
           }
         }
       },
@@ -3622,24 +3907,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the trigger."
+          },
           "200": {
             "description": "Successfully created or updated the trigger.",
             "schema": {
               "$ref": "#/definitions/Trigger"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3648,12 +3936,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "TriggerPut": {
-            "$ref": "./examples/TriggerPut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -3677,24 +3960,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the trigger."
-          },
           "202": {
             "description": "Accepted the request to delete the trigger."
           },
           "204": {
             "description": "The trigger is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3703,12 +3989,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "TriggerDelete": {
-            "$ref": "./examples/TriggerDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggerSupportPackage": {
@@ -3736,21 +4017,24 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully triggered support package on the device."
-          },
           "202": {
             "description": "Accepted the request to trigger support package on the device."
+          },
+          "200": {
+            "description": "Successfully triggered support package on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3759,12 +4043,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "TriggerSupportPackage": {
-            "$ref": "./examples/TriggerSupportPackage.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateExtendedInformation": {
@@ -3792,12 +4071,15 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3813,11 +4095,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetUpdateExtendedInfo": {
-            "$ref": "./examples/GetUpdateExtendedInfo.json"
           }
         }
       }
@@ -3838,12 +4115,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3859,11 +4139,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateSummaryGet": {
-            "$ref": "./examples/UpdateSummaryGet.json"
           }
         }
       }
@@ -3893,12 +4168,15 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -3914,11 +4192,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "UploadCertificatePost": {
-            "$ref": "./examples/UploadCertificatePost.json"
           }
         }
       }
@@ -3939,12 +4212,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
@@ -3971,11 +4247,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "UserGetAllInDevice": {
-            "$ref": "./examples/UserGetAllInDevice.json"
-          }
         }
       }
     },
@@ -4002,12 +4273,15 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -4023,11 +4297,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "UserGet": {
-            "$ref": "./examples/UserGet.json"
           }
         }
       },
@@ -4062,24 +4331,27 @@
             }
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the user."
+          },
           "200": {
             "description": "Successfully created or updated the user.",
             "schema": {
               "$ref": "#/definitions/User"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4088,12 +4360,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "UserPut": {
-            "$ref": "./examples/UserPut.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -4117,24 +4384,27 @@
             "type": "string"
           },
           {
+            "required": false,
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
+            "required": false,
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the user."
-          },
           "202": {
             "description": "Accepted the request to delete the user."
           },
           "204": {
             "description": "The user is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4143,12 +4413,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "UserDelete": {
-            "$ref": "./examples/UserDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -4178,7 +4443,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Addon",
           "readOnly": true
         }
@@ -4196,8 +4461,7 @@
           "items": {
             "$ref": "#/definitions/Addon"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -4259,7 +4523,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Alert",
           "readOnly": true
         }
@@ -4298,8 +4562,7 @@
           "items": {
             "$ref": "#/definitions/Alert"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -4511,8 +4774,8 @@
         },
         "encryptionCertThumbprint": {
           "description": "Thumbprint certificate used to encrypt \\\"Value\\\". If the value is unencrypted, it will be null.",
-          "x-ms-secret": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "encryptionAlgorithm": {
           "description": "The algorithm used to encrypt \"Value\".",
@@ -4589,7 +4852,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of BandwidthSchedule",
           "readOnly": true
         }
@@ -4636,8 +4899,7 @@
             "x-ms-enum": {
               "name": "DayOfWeek",
               "modelAsString": true
-            },
-            "x-ms-identifiers": []
+            }
           }
         }
       }
@@ -4653,7 +4915,6 @@
           "items": {
             "$ref": "#/definitions/BandwidthSchedule"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -4766,7 +5027,6 @@
     },
     "CloudError": {
       "description": "An error response from the service.",
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
@@ -4777,7 +5037,6 @@
     },
     "CloudErrorBody": {
       "description": "An error response from the service.",
-      "type": "object",
       "properties": {
         "code": {
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
@@ -4792,8 +5051,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "x-ms-external": true
@@ -5032,8 +5290,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5055,7 +5312,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Container",
           "readOnly": true
         }
@@ -5072,7 +5329,6 @@
           "items": {
             "$ref": "#/definitions/Container"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -5164,13 +5420,11 @@
         },
         "etag": {
           "description": "The etag for the devices.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
-          "description": "Msi identity of the resource",
-          "readOnly": true
+          "description": "Msi identity of the resource"
         },
         "kind": {
           "description": "The kind of the device.",
@@ -5181,16 +5435,11 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "DataBoxEdge Resource",
-          "readOnly": true
+          }
         },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
@@ -5214,7 +5463,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of DataBoxEdgeDevice",
           "readOnly": true
         }
@@ -5367,7 +5616,6 @@
           "items": {
             "$ref": "#/definitions/DataBoxEdgeDevice"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -5403,11 +5651,6 @@
       "description": "The properties of the Data Box Edge/Gateway device.",
       "type": "object",
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "DataBoxEdge Device Properties",
-          "readOnly": true
-        },
         "dataBoxEdgeDeviceStatus": {
           "description": "The status of the Data Box Edge/Gateway device.",
           "enum": [
@@ -5507,8 +5750,7 @@
             "x-ms-enum": {
               "name": "RoleTypes",
               "modelAsString": true
-            },
-            "x-ms-identifiers": []
+            }
           },
           "readOnly": true
         },
@@ -5541,6 +5783,22 @@
           "description": "Type of Kubernetes Platform",
           "type": "string",
           "readOnly": true
+        },
+        "licenseState": {
+          "description": "LicenseState",
+          "enum": [
+            "None",
+            "Pending",
+            "Failed",
+            "Active",
+            "InActive"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "LicenseState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5572,8 +5830,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5660,8 +5917,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "apiVersions": {
           "description": "The API versions in which Sku is available.",
@@ -5670,8 +5926,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "locationInfo": {
           "description": "Availability of the Sku for the location/zone/site.",
@@ -5680,9 +5935,6 @@
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
           },
-          "x-ms-identifiers": [
-            "location"
-          ],
           "readOnly": true
         },
         "costs": {
@@ -5692,9 +5944,6 @@
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
-          "x-ms-identifiers": [
-            "meterId"
-          ],
           "readOnly": true
         },
         "signupOption": {
@@ -5752,8 +6001,7 @@
               "modelAsString": true
             }
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "capabilities": {
           "description": "The capability info of the SKU.",
@@ -5762,9 +6010,6 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "readOnly": true
         }
       }
@@ -5780,10 +6025,6 @@
           "items": {
             "$ref": "#/definitions/DataBoxEdgeSku"
           },
-          "x-ms-identifiers": [
-            "name",
-            "resourceType"
-          ],
           "readOnly": true
         },
         "nextLink": {
@@ -5847,8 +6088,8 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to device capacity info.",
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to device capacity info sent from device",
           "readOnly": true
         }
       }
@@ -5910,8 +6151,7 @@
             "items": {
               "type": "string"
             }
-          },
-          "x-ms-identifiers": []
+          }
         },
         "vmPlacementResults": {
           "description": "Array of the VMs of the sizes in VmSizes can be provisioned on the appliance.",
@@ -5919,8 +6159,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VmPlacementRequestResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5942,7 +6181,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of DiagnosticProactiveLogCollectionSettings",
           "readOnly": true
         }
@@ -5966,7 +6205,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Represents resource creation and updation time",
           "readOnly": true
         }
@@ -5982,10 +6221,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RemoteSupportSettings"
-          },
-          "x-ms-identifiers": [
-            "remoteApplicationType"
-          ]
+          }
         }
       }
     },
@@ -6216,8 +6452,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NumaNodeData"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6362,10 +6597,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MountPointMap"
-          },
-          "x-ms-identifiers": [
-            "shareId"
-          ]
+          }
         },
         "ioTEdgeAgentInfo": {
           "$ref": "#/definitions/IoTEdgeAgentInfo",
@@ -6524,7 +6756,6 @@
           "items": {
             "$ref": "#/definitions/JobErrorItem"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "code": {
@@ -6550,8 +6781,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "code": {
           "description": "The code intended for programmatic access.",
@@ -6668,10 +6898,6 @@
           "items": {
             "$ref": "#/definitions/NodeInfo"
           },
-          "x-ms-identifiers": [
-            "name",
-            "type"
-          ],
           "readOnly": true
         },
         "version": {
@@ -6876,7 +7102,7 @@
       }
     },
     "KubernetesRoleResources": {
-      "description": "Kubernetes role resources",
+      "description": "Kubernetes role resoures",
       "required": [
         "compute"
       ],
@@ -6908,10 +7134,6 @@
           "items": {
             "$ref": "#/definitions/KubernetesRoleStorageClassInfo"
           },
-          "x-ms-identifiers": [
-            "name",
-            "type"
-          ],
           "readOnly": true
         },
         "endpoints": {
@@ -6920,10 +7142,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MountPointMap"
-          },
-          "x-ms-identifiers": [
-            "shareId"
-          ]
+          }
         }
       }
     },
@@ -7084,8 +7303,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricCounterSet"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -7110,10 +7328,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          },
-          "x-ms-identifiers": [
-            "sourceName"
-          ]
+          }
         },
         "additionalDimensions": {
           "description": "The additional dimensions to be added to metric.",
@@ -7121,10 +7336,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          },
-          "x-ms-identifiers": [
-            "sourceName"
-          ]
+          }
         }
       }
     },
@@ -7141,10 +7353,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricCounter"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -7241,10 +7450,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension_V1"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "fillGapWithZero": {
           "description": "Set true to fill the gaps with zero.",
@@ -7329,7 +7535,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of MonitoringConfiguration",
           "readOnly": true
         }
@@ -7346,8 +7552,7 @@
           "items": {
             "$ref": "#/definitions/MonitoringMetricConfiguration"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7369,8 +7574,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -7533,8 +7737,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -7580,7 +7783,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of NetworkSettings",
           "readOnly": true
         }
@@ -7597,9 +7800,6 @@
           "items": {
             "$ref": "#/definitions/NetworkAdapter"
           },
-          "x-ms-identifiers": [
-            "adapterId"
-          ],
           "readOnly": true
         }
       }
@@ -7653,11 +7853,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/KubernetesIPConfiguration"
-          },
-          "x-ms-identifiers": [
-            "ipAddress",
-            "port"
-          ]
+          }
         },
         "componentType": {
           "description": "ComponentType of the Kubernetes node.",
@@ -7689,8 +7885,7 @@
           "items": {
             "$ref": "#/definitions/Node"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7876,10 +8071,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7902,7 +8094,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Order",
           "readOnly": true
         },
@@ -7924,8 +8116,7 @@
           "items": {
             "$ref": "#/definitions/Order"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -7963,9 +8154,6 @@
           "items": {
             "$ref": "#/definitions/OrderStatus"
           },
-          "x-ms-identifiers": [
-            "trackingInformation/serialNumber"
-          ],
           "readOnly": true
         },
         "serialNumber": {
@@ -7980,9 +8168,6 @@
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
-          "x-ms-identifiers": [
-            "serialNumber"
-          ],
           "readOnly": true
         },
         "returnTrackingInfo": {
@@ -7992,9 +8177,6 @@
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
-          "x-ms-identifiers": [
-            "serialNumber"
-          ],
           "readOnly": true
         },
         "shipmentType": {
@@ -8023,7 +8205,7 @@
           "description": "Status of the order as per the allowed status types.",
           "enum": [
             "Untracked",
-            "AwaitingFulfillment",
+            "AwaitingFulfilment",
             "AwaitingPreparation",
             "AwaitingShipment",
             "Shipped",
@@ -8344,7 +8526,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Role",
           "readOnly": true
         }
@@ -8362,8 +8544,7 @@
           "items": {
             "$ref": "#/definitions/Role"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8441,10 +8622,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification_V1"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -8466,7 +8644,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Share",
           "readOnly": true
         }
@@ -8510,8 +8688,7 @@
           "items": {
             "$ref": "#/definitions/Share"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8582,10 +8759,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserAccessRight"
-          },
-          "x-ms-identifiers": [
-            "userId"
-          ]
+          }
         },
         "clientAccessRights": {
           "description": "List of IP addresses and corresponding access rights on the share(required for NFS protocol).",
@@ -8593,10 +8767,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientAccessRight"
-          },
-          "x-ms-identifiers": [
-            "client"
-          ]
+          }
         },
         "refreshDetails": {
           "$ref": "#/definitions/RefreshDetails",
@@ -8609,9 +8780,6 @@
           "items": {
             "$ref": "#/definitions/MountPointMap"
           },
-          "x-ms-identifiers": [
-            "shareId"
-          ],
           "readOnly": true
         },
         "dataPolicy": {
@@ -8738,8 +8906,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "sites": {
           "description": "The sites.",
@@ -8748,8 +8915,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -8771,7 +8937,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of StorageAccount",
           "readOnly": true
         }
@@ -8795,7 +8961,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of StorageAccountCredential",
           "readOnly": true
         }
@@ -8812,8 +8978,7 @@
           "items": {
             "$ref": "#/definitions/StorageAccountCredential"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8892,8 +9057,7 @@
           "items": {
             "$ref": "#/definitions/StorageAccount"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8977,10 +9141,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubscriptionRegisteredFeatures"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -9022,6 +9183,44 @@
         "connectionString": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Connection string based on the symmetric key."
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Provides details about resource creation and updation time",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -9072,7 +9271,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of Trigger",
           "readOnly": true
         }
@@ -9090,8 +9289,7 @@
           "items": {
             "$ref": "#/definitions/Trigger"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -9291,7 +9489,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of UpdateSummary",
           "readOnly": true
         }
@@ -9472,21 +9670,12 @@
           "items": {
             "$ref": "#/definitions/UpdateDetails"
           },
-          "x-ms-identifiers": [
-            "updateTitle"
-          ],
           "readOnly": true
         },
         "totalUpdateSizeInBytes": {
           "format": "double",
           "description": "The total size of updates available for download in bytes.",
           "type": "number",
-          "readOnly": true
-        },
-        "totalTimeInMinutes": {
-          "format": "int32",
-          "description": "The total time in Minutes",
-          "type": "integer",
           "readOnly": true
         }
       }
@@ -9576,7 +9765,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of User",
           "readOnly": true
         }
@@ -9620,8 +9809,7 @@
           "items": {
             "$ref": "#/definitions/User"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -9632,9 +9820,6 @@
     },
     "UserProperties": {
       "description": "The user properties.",
-      "required": [
-        "userType"
-      ],
       "type": "object",
       "properties": {
         "encryptedPassword": {
@@ -9648,9 +9833,6 @@
           "items": {
             "$ref": "#/definitions/ShareAccessRight"
           },
-          "x-ms-identifiers": [
-            "shareId"
-          ],
           "readOnly": true
         },
         "userType": {
@@ -9685,11 +9867,11 @@
       }
     },
     "VmPlacementRequestResult": {
-      "description": "List of VM sizes being checked for creation on appliance along with corresponding result.",
+      "description": "List of VM sizes being checked for creation on appliance along with corresponding result.",
       "type": "object",
       "properties": {
         "vmSize": {
-          "description": "List of VM sizes being checked.",
+          "description": "List of VM sizes being checked.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -9744,7 +9926,7 @@
     }
   },
   "securityDefinitions": {
-    "azure_auth": {
+    "Azure-Auth": {
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
