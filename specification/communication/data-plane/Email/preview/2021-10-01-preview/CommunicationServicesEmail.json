@@ -97,11 +97,11 @@
           },
           {
             "in": "body",
-            "name": "emailMessage",
+            "name": "message",
             "description": "Message payload for sending an email",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmailMessage"
+              "$ref": "#/definitions/Message"
             }
           }
         ],
@@ -149,10 +149,10 @@
     }
   },
   "definitions": {
-    "EmailMessage": {
+    "Message": {
       "description": "Message payload for sending an email",
       "required": [
-        "sender",
+        "senderEmail",
         "content",
         "recipients"
       ],
@@ -166,7 +166,7 @@
             "$ref": "#/definitions/EmailCustomHeader"
           }
         },
-        "sender": {
+        "senderEmail": {
           "description": "Sender email address from a verified domain.",
           "type": "string",
           "example": "info@contoso.com"
