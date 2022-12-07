@@ -449,19 +449,26 @@
       "description": "The SKU (tier) of a workspace."
     },
     "Bcdr": {
-      "description": "BCDR configuration."
+      "description": "BCDR configuration.",
       "properties": {
-        "IsBcdrFailoverEnabled": {
-          "type": "boolean",
+        "activeRegion": {
+          "type": "string",
           "description": "Describes whether BCDR failover was enabled."
         },
         "primaryRegion": {
           "type": "string",
           "description": "Primary workspace Location"
-      },
+        },
         "secondaryRegion": {
           "type": "string",
           "description": "Secondary workspace Location"
+        },
+        "lastBcdrUpdate": {
+          "type": "string",
+          "description": "The last time when BCDR configuration had been changed.",
+          "readOnly": true
+        }
+      }
     },
     "WorkspaceCapping": {
       "description": "The daily volume cap for ingestion.",
