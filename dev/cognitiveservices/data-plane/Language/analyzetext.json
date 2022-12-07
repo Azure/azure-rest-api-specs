@@ -3709,6 +3709,13 @@
       "type": "object",
       "description": "An object representing the summarization result of a single document.",
       "properties": {
+        "recommendedControlPhrases": {
+          "type": "array",
+          "description": "Recommended control phrases for user to choose to be used in the next round of summarization.",
+          "items": {
+            "$ref": "common.json#/definitions/PhraseControl"
+          }
+        },
         "summaries": {
           "type": "array",
           "description": "A list of abstractive summaries.",
