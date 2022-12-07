@@ -36,13 +36,13 @@ tag: package-flexibleserver-2021-06
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2022-11
+tag: package-2020-01-01
 ```
 
 
-### Tag: package-preview-2022-11
+### Tag: package-flexibleserver-2022-11-preview
 
-These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-11-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2022-11'
 input-file:
