@@ -461,6 +461,29 @@
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
           }
         ],
         "responses": {
@@ -2313,13 +2336,36 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -3354,6 +3400,29 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
           }
         ],
         "responses": {
