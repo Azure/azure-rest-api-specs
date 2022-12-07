@@ -378,6 +378,56 @@
         "modelAsString": true
       }
     },
+    "EnableStatusEnum": {
+      "type": "string",
+      "description": "Enum to indicate whether value is 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnableStatusEnum",
+        "modelAsString": true
+      }
+    },
+    "IopsTierEnum": {
+      "type": "string",
+      "description": "Enum to indicate Storage perfornamce tier",
+      "enum": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P6",
+        "P7",
+        "P10",
+        "P15",
+        "P20",
+        "P30",
+        "P40",
+        "P50",
+        "P60",
+        "P70",
+        "P80"
+      ],
+      "x-ms-enum": {
+        "name": "IopsTierEnum",
+        "modelAsString": true
+      }
+    },
+    "SkuTierEnum": {
+      "type": "string",
+      "description": "Enum to indicate Sku tier",
+      "enum": [
+        "Burstable",
+        "GeneralPurpose",
+        "MemoryOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTierEnum",
+        "modelAsString": true
+      }
+    },
     "ServerProperties": {
       "type": "object",
       "properties": {
@@ -688,17 +738,8 @@
           "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
         },
         "tier": {
-          "type": "string",
           "description": "The tier of the particular SKU, e.g. Burstable.",
-          "enum": [
-            "Burstable",
-            "GeneralPurpose",
-            "MemoryOptimized"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SkuTierEnum"
         }
       },
       "required": [
@@ -714,6 +755,19 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage IOPS for the server."
+        },
+        "iopsTier":{
+          "description": "Storage IOPS for the server.",
+          "$ref": "#/definitions/IopsTierEnum"
+        },
+        "autoGrow":{
+          "description": "Enable Storage Auto Grow or not.",
+          "$ref": "#/definitions/EnableStatusEnum"
         }
       },
       "description": "Storage properties of a server"
