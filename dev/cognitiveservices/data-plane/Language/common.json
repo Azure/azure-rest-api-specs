@@ -808,9 +808,63 @@
           "format": "int32",
           "description": "It controls the approximate number of sentences in the output summaries."
         },
+        "phraseControls": {
+          "type": "array",
+          "description": "Control the phrases to be used in the summary.",
+          "items": {
+            "$ref": "#/definitions/PhraseControl"
+          }
+        },
+        "prefix": {
+          "type": "string",
+          "description": "The prefix comes before the inserted summary text."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix comes after the inserted summary text."
+        },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
+      }
+    },
+    "PhraseControl": {
+      "type": "object",
+      "description": "Control the phrases to be used in the summary.",
+      "required": [
+        "targetPhrase",
+        "strategy"
+      ],
+      "properties": {
+        "targetPhrase": {
+          "type": "string",
+          "description": "The target phrase to control."
+        },
+        "strategy": {
+          "$ref": "#/definitions/PhraseControlStrategy"
+        }
+      }
+    },
+    "PhraseControlStrategy": {
+      "enum": [
+        "encourage",
+        "discourage"
+      ],
+      "type": "string",
+      "description": "The strategy to use in phrase control.",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "PhraseControlStrategy",
+        "values": [
+          {
+            "value": "encourage",
+            "description": "The model will have higher probability to select the target phrase in the summary if there are multiple alternates."
+          },
+          {
+            "value": "discourage",
+            "description": "The model will have lower probability to select the target phrase in the summary if there are multiple alternates."
+          }
+        ]
       }
     },
     "SummaryContext": {
