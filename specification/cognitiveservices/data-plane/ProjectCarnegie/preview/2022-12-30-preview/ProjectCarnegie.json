@@ -347,7 +347,7 @@
           "application/json"
         ]
       },
-      "put": {
+      "patch": {
         "tags": [
           "Text List Management"
         ],
@@ -550,7 +550,7 @@
           "application/json"
         ]
       },
-      "put": {
+      "patch": {
         "tags": [
           "Text List Management"
         ],
@@ -618,16 +618,8 @@
       }
     },
     "TextDetectStrategy":{
-      "type": "string",
-      "x-nullable": false,
-      "enum": [
-        "Comprehensive",
-        "Shortcut"
-      ],
-      "x-ms-enum": {
-        "name": "TextCategory",
-        "modelAsString": true
-      }
+      "type": "boolean",
+      "x-nullable": false
     },
     "TextListMatchResult": {
       "description": "The result of custom list match",
@@ -703,11 +695,10 @@
             "description": "listId"
           }
         },
-        "strategy": {
-          "type": "string",
-          "description": "Analyze strategy. When set to \"Shortcut\", other analysis will be skipped once any of configured blocklists was hit. When set to comprehensive, all the analysis will be done even when blocklists were hit.",
+        "breakByBlocklists": {
           "$ref": "#/definitions/TextDetectStrategy",
-          "default": "Comprehensive"
+          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit.",
+          "default": false
         }
       }
     },
@@ -741,15 +732,15 @@
       "type": "object",
       "required": [
         "textId",
-        "uri"
+        "url"
       ],
       "properties": {
         "textId": {
           "description": "Id of text batch item",
           "type": "string"
         },
-        "uri": {
-          "description": "Uri of text batch item, it should be a blob url of text file that contains content to analyze",
+        "url": {
+          "description": "Url of text batch item, it should be a blob url of text file that contains content to analyze",
           "type": "string",
           "format": "url"
         }
@@ -783,11 +774,10 @@
             "description": "listId"
           }
         },
-        "strategy": {
-          "type": "string",
-          "description": "Analyze strategy. When set to \"Shortcut\", other analysis will be skipped once any of configured blocklists was hit. When set to comprehensive, all the analysis will be done even when blocklists were hit.",
+        "breakByBlocklists": {
           "$ref": "#/definitions/TextDetectStrategy",
-          "default": "Comprehensive"
+          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit.",
+          "default": false
         }
       }
     },
@@ -956,9 +946,9 @@
           "type": "string"
         },
         "url": {
-          "description": "The blob uri of image",
+          "description": "The blob url of image",
           "type": "string",
-          "format": "uri"
+          "format": "url"
         }
       }
     },
@@ -1127,11 +1117,7 @@
     },
     "TextList": {
       "description": "Text List.",
-      "required": [
-        "listId",
-        "name",
-        "defaultLanguage"
-      ],
+      "required": [],
       "properties": {
         "listId": {
           "description": "Text List Id.",
@@ -1144,19 +1130,12 @@
         "description": {
           "description": "Description for Text List.",
           "type": "string"
-        },
-        "defaultLanguage": {
-          "description": "Language hint for text analysis, could not be updated after list created. Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").",
-          "type": "string"
         }
       }
     },
     "TextListItem": {
       "description": "Text data",
-      "required": [
-        "itemId",
-        "text"
-      ],
+      "required": [],
       "properties": {
         "itemId": {
           "description": "Item id",
@@ -1171,7 +1150,7 @@
           "type": "string"
         },
         "language": {
-          "description": "Language of this item, Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\"). If not assigned, the list defaultLanguage will be used",
+          "description": "Language of this item, Value may contain only the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\"). If not assigned, \"en\" will be used",
           "type": "string"
         }
       }
