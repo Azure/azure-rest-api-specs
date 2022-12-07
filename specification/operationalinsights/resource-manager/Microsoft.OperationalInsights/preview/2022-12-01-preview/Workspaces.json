@@ -448,6 +448,21 @@
       ],
       "description": "The SKU (tier) of a workspace."
     },
+    "Bcdr": {
+      "description": "BCDR configuration."
+      "properties": {
+        "IsBcdrFailoverEnabled": {
+          "type": "boolean",
+          "description": "Describes whether BCDR failover was enabled."
+        },
+        "primaryRegion": {
+          "type": "string",
+          "description": "Primary workspace Location"
+      },
+        "secondaryRegion": {
+          "type": "string",
+          "description": "Secondary workspace Location"
+    },
     "WorkspaceCapping": {
       "description": "The daily volume cap for ingestion.",
       "properties": {
@@ -544,6 +559,10 @@
         "workspaceCapping": {
           "$ref": "#/definitions/WorkspaceCapping",
           "description": "The daily volume cap for ingestion."
+        },
+        "bcdr": {
+          "$ref": "#/definitions/Bcdr",
+          "description": "BCDR configuration."
         },
         "createdDate": {
           "type": "string",
