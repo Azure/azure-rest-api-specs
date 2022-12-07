@@ -1,0 +1,119 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Microsoft Sentinel Upload Indicators API",
+        "description": "Spec for Microsoft Sentinel Upload Indicators API.",
+        "version": "1.0.0"
+    },
+    "host": "sentinelus.azure-api.net",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/{workspaceId}/threatintelligence:upload-indicators": {
+            "post": {
+                "operationId": "UploadIndicators",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "workspaceId",
+                        "description": "The workspace ID for the indicators to be uploaded.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/uploadIndicatorsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The API returns 200 when one or many indicators are successfully validated and published.",
+                        "schema": {
+                            "$ref": "#/definitions/uploadIndicatorsResponse"
+                        }
+                    },
+                    "429": {
+                        "description": "The API will return HTTP 429, if there are too many requests in a minute per user. The user will have to wait until the next minute before the next request will succeed.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "headers": {
+                            "Retry-After": {
+                                "description": "How many seconds an user need to wait before retry.",
+                                "type": "Int32"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The API will return 401 if the user does not have enough permissions to the workspace."
+                    },
+                    "400": {
+                        "description": "The API returns 400 if the request is not formatted correctly or does not contain required information."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "jsonPropertyBag": {
+            "type": "object"
+        },
+        "uploadIndicatorsRequest": {
+            "type": "object",
+            "properties": {
+                "sourcesystem": {
+                    "description": "Source system name cannot be Microsoft Sentinel.",
+                    "type": "string"
+                },
+                "value": {
+                    "format": "string",
+                    "description": "The value param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/jsonPropertyBag"
+                    }
+                }
+            }
+        },
+        "uploadIndicatorsResponse": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "description": "List of indicator validation errors",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/uploadIndicatorsValidationError"
+                    }
+                }
+            }
+        },
+        "uploadIndicatorsValidationError": {
+            "type": "object",
+            "properties": {
+                "recordIndex": {
+                    "format": "int64",
+                    "description": "Index of the indicator in indicators array from request.",
+                    "type": "integer"
+                },
+                "errorMessages": {
+                    "description": "List of error messages.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
