@@ -808,6 +808,10 @@
           "format": "int32",
           "description": "It controls the approximate number of sentences in the output summaries."
         },
+        "detailLevel": {
+          "$ref": "#/definitions/DetailLevel",
+          "description": "It controls the detail level of the summary. Use this parameter exclusively with sentenceCount parameter."
+        },
         "phraseControls": {
           "type": "array",
           "description": "Control the phrases to be used in the summary.",
@@ -815,13 +819,21 @@
             "$ref": "#/definitions/PhraseControl"
           }
         },
+        "sessionId": {
+          "type": "string",
+          "description": "The session id for interactive summarization experience. We cache the session state on service side and the session expires in 48 hours. The session state we cache includes but not limited to the previous document, parameters and generated summaries."
+        },
+        "enableInteractiveSummarizationSession": {
+          "type": "boolean",
+          "description": "By enabling interactive summarization session, the service will return suggested keywords for encourage and discourage, and cache the session state by session id."
+        },
         "prefix": {
           "type": "string",
-          "description": "The prefix comes before the inserted summary text."
+          "description": "The prefix comes before the inserted summary text. Used for the insert in the middle summarization experience."
         },
         "suffix": {
           "type": "string",
-          "description": "The suffix comes after the inserted summary text."
+          "description": "The suffix comes after the inserted summary text. Used for the insert in the middle summarization experience."
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
@@ -843,6 +855,33 @@
         "strategy": {
           "$ref": "#/definitions/PhraseControlStrategy"
         }
+      }
+    },
+    "DetailLevel":{
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "type": "string",
+      "description": "The detail level of the summary.",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "DetailLevel",
+        "values": [
+          {
+            "value": "high",
+            "description": "High level summary is usually shorter and contains less details."
+          },
+          {
+            "value": "medium",
+            "description": "Medium level summary is in between high level and low level."
+          },
+          {
+            "value": "low",
+            "description": "Low level summary is usually longer and contains more details."
+          }
+        ]
       }
     },
     "PhraseControlStrategy": {
