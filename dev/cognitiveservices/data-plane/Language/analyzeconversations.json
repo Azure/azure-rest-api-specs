@@ -2110,6 +2110,9 @@
         "summaryAspects"
       ],
       "properties": {
+        "chapteringParameters":{
+          "$ref": "#/definitions/ChapteringParameters"
+        },
         "summaryAspects": {
           "type": "array",
           "items": {
@@ -2202,6 +2205,12 @@
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
           }
+        },
+        "chapters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Chapter"
+          }
         }
       },
       "allOf": [
@@ -2209,6 +2218,52 @@
           "$ref": "#/definitions/ConversationResultBase"
         }
       ]
+    },
+    "ChapteringParameters":{
+      "type": "object",
+      "description": "The parameters to control the chaptering.",
+      "properties": {
+        "levels":{
+          "type": "integer",
+          "format": "int32",
+          "description": "The default value is 0. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters."
+        },
+        "maxChapterLengthInCharacters":{
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of characters in each chapter. If not specified, the model will determine the chapter length smartly."
+        },
+        "minChapterLengthInCharacters":{
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of characters in each chapter. If not specified, the model will determine the chapter length smartly."
+        }
+      }
+    },
+    "Chapter": {
+      "type": "object",
+      "description": "A predicted chapter of the conversation. Only used for client application CTS, MCU, SCIS and MeTA.",
+      "properties": {
+        "chapterStartTimeTick": {
+          "description": "Chapter start time offset from start of speech audio, in ticks. 1 tick = 100 ns. This field is only available if the input transcript has conversation item level audio timing.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "summaries": {
+          "type": "array",
+          "description": "A list of summaries, one for each requested aspect.",
+          "items": {
+            "$ref": "#/definitions/SummaryResultItem"
+          }
+        },
+        "subChapters": {
+          "type": "array",
+          "description": "A list of sub chapters.",
+          "items": {
+            "$ref": "#/definitions/Chapter"
+          }
+        }
+      }
     },
     "SummaryResultItem": {
       "type": "object",
