@@ -63,24 +63,8 @@ namespace HealthCareApis {
 
   // model HealthcareFhirResourceType is string {}
 
-  @knownValues(BaseEvent.HealthcareFhirResourceTypeKV)
   @doc("Schema of FHIR resource type enumeration.")
-  model HealthcareFhirResourceType is string;
-}
-
-namespace BaseEvent {
-  model HealthcareFhirResourceBaseEventData {
-    @doc("Domain name of FHIR account for this resource.")
-    resourceFhirAccount?: string;
-
-    @doc("Id of HL7 FHIR resource.")
-    resourceFhirId?: string;
-
-    @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
-    resourceVersionId?: int64;
-  }
-
-  enum HealthcareFhirResourceTypeKV {
+  enum HealthcareFhirResourceType {
     @doc("The FHIR resource type defined in STU3 and R4.")
     Account,
 
@@ -563,5 +547,19 @@ namespace BaseEvent {
 
     @doc("The FHIR resource type defined in STU3 and R4.")
     VisionPrescription,
+  }
+  
+}
+
+namespace BaseEvent {
+  model HealthcareFhirResourceBaseEventData {
+    @doc("Domain name of FHIR account for this resource.")
+    resourceFhirAccount?: string;
+
+    @doc("Id of HL7 FHIR resource.")
+    resourceFhirId?: string;
+
+    @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
+    resourceVersionId?: int64;
   }
 }

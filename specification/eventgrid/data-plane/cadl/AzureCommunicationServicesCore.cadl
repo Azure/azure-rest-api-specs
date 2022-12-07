@@ -37,10 +37,7 @@ model CommunicationUserIdentifierModel {
   id: string;
 }
 
-@knownValues(CommunicationCloudEnvironmentModelKV)
-@doc("The cloud that the identifier belongs to.")
-model CommunicationCloudEnvironmentModel is string;
-enum CommunicationCloudEnvironmentModelKV {
+enum CommunicationCloudEnvironmentModel {
   public,
   dod,
   gcch,
