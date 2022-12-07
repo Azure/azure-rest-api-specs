@@ -10,7 +10,7 @@
     "http"
   ],
   "paths": {
-    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases/{purchaseId}": {
+    "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/purchases/{requestId}": {
       "put": {
         "tags": [
           "Resource Provider APIs"
@@ -28,21 +28,21 @@
           {
             "in": "path",
             "name": "billingAccountId",
-            "description": "The customer billing account ID",
+            "description": "The ID the uniquely identifies a billing account. e.g 017a3182-ebbc-5fbd-0ef8-f4fad1826350:25883f78-3e8c-402c-bf04-4c0c80063a94_2019-05-31",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "billingProfileId",
-            "description": "The customer billing profile ID",
+            "description": "The customer billing profile ID. e.g. YKAA-257R-BG7-M77W-SGB",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "purchaseId",
-            "description": "The purchase ID",
+            "name": "requestId",
+            "description": "The request ID that uniquely identifies a transaction",
             "required": true,
             "type": "string"
           },
@@ -79,7 +79,7 @@
           "202": {
             "description": "Status Urls for Purchase Task",
             "schema": {
-              "$ref": "#/definitions/httpManagementPayload"
+              "$ref": "#/definitions/asyncOperationResponse"
             },
             "headers": {
               "Location": {
@@ -116,21 +116,21 @@
           {
             "in": "path",
             "name": "billingAccountId",
-            "description": "The customer billing account ID",
+            "description": "The ID the uniquely identifies a billing account. e.g 017a3182-ebbc-5fbd-0ef8-f4fad1826350:25883f78-3e8c-402c-bf04-4c0c80063a94_2019-05-31",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "billingProfileId",
-            "description": "The customer billing profile ID",
+            "description": "The customer billing profile ID. e.g. YKAA-257R-BG7-M77W-SGB",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "purchaseId",
-            "description": "The unique ID for the purchase to be cancelled",
+            "name": "requestId",
+            "description": "The request ID that uniquely identifies a transaction",
             "required": true,
             "type": "string"
           },
@@ -199,21 +199,21 @@
           {
             "in": "path",
             "name": "billingAccountId",
-            "description": "The customer billing account ID",
+            "description": "The ID the uniquely identifies a billing account. e.g 017a3182-ebbc-5fbd-0ef8-f4fad1826350:25883f78-3e8c-402c-bf04-4c0c80063a94_2019-05-31",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "billingProfileId",
-            "description": "The customer billing profile ID",
+            "description": "The customer billing profile ID. e.g. YKAA-257R-BG7-M77W-SGB",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "purchaseId",
-            "description": "The customer support purchase ID",
+            "name": "requestId",
+            "description": "The request ID that uniquely identifies a transaction",
             "required": true,
             "type": "string"
           },
@@ -232,7 +232,7 @@
               "$ref": "#/definitions/purchaseResult"
             },
             "examples": {
-              "application/json": "{\"id\":\"522ab5a7-f6a2-46ec-bd5f-6dfb5482b3ba\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"522ab5a7-f6a2-46ec-bd5f-6dfb5482b3ba\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"95ca9131-bade-49f3-9451-e4a27bf6f93b\",\"invoiceSectionId\":\"a51bd30e-0114-4615-ad96-b9eb55237e9f\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"b8915e5b-ba43-4ac0-a9ad-5a2d6ec92e79\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
+              "application/json": "{\"id\":\"e43b48cf-38af-439d-87dc-66c46921e38a\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"e43b48cf-38af-439d-87dc-66c46921e38a\",\"autoRenew\":true,\"assetId\":null,\"billingAccountId\":null,\"billingGroupId\":\"60752a37-a13a-446f-ab44-b76617fcf52c\",\"projectId\":\"10d91939-4593-4e6b-9809-d30505d1aabb\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"992c3312-6bbd-44cb-ae4c-5227c3c7ac3c\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"upn\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}"
             }
           },
           "default": {
@@ -264,14 +264,14 @@
           {
             "in": "path",
             "name": "billingAccountId",
-            "description": "The customer billing account ID",
+            "description": "The ID the uniquely identifies a billing account. e.g 017a3182-ebbc-5fbd-0ef8-f4fad1826350:25883f78-3e8c-402c-bf04-4c0c80063a94_2019-05-31",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "billingProfileId",
-            "description": "The customer billing profile ID",
+            "description": "The customer billing profile ID. e.g. YKAA-257R-BG7-M77W-SGB",
             "required": true,
             "type": "string"
           },
@@ -284,8 +284,8 @@
           },
           {
             "in": "path",
-            "name": "purchaseId",
-            "description": "The unique ID for the purchase to be cancelled",
+            "name": "requestId",
+            "description": "The request ID that uniquely identifies a transaction",
             "required": true,
             "type": "string"
           },
@@ -335,6 +335,48 @@
         }
       }
     },
+    "/status/{instanceId}": {
+      "get": {
+        "tags": [
+          "Resource Provider APIs"
+        ],
+        "summary": "Purchase Enterprise Support",
+        "description": "",
+        "operationId": "GetStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "instanceId",
+            "description": "The orchestration instance ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload of DurableOrchestrationStatus",
+            "schema": {
+              "$ref": "#/definitions/durableOrchestrationStatus"
+            },
+            "x-ms-summary": "status"
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "#/definitions/purchaseError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetStatus": {
+            "$ref": "./examples/EnterpriseSupportGetStatus.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.EnterpriseSupport/billingAccounts/{billingAccountId}/purchases": {
       "get": {
         "tags": [
@@ -349,7 +391,7 @@
           {
             "in": "path",
             "name": "billingAccountId",
-            "description": "The customer billing account ID",
+            "description": "The ID the uniquely identifies a billing account. e.g 017a3182-ebbc-5fbd-0ef8-f4fad1826350:25883f78-3e8c-402c-bf04-4c0c80063a94_2019-05-31",
             "required": true,
             "type": "string"
           },
@@ -365,10 +407,10 @@
           "200": {
             "description": "A collection of purchases for a billing account",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/purchaseResult"
-              }
+              "$ref": "#/definitions/purchaseResultList"
+            },
+            "examples": {
+              "application/json": "{\"value\":[{\"id\":\"ad9e52d9-b695-4110-8664-6e81d34af592\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"ad9e52d9-b695-4110-8664-6e81d34af592\",\"autoRenew\":true,\"assetId\":null,\"billingAccountId\":null,\"billingGroupId\":\"b71717be-b2cc-4861-87dc-08a0d4d79a05\",\"projectId\":\"1edd43d9-c586-45b6-934f-aa46c99e679d\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"7b511f70-c5d9-4c90-b8a2-ee08a4d499db\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"upn\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}]}"
             }
           },
           "default": {
@@ -399,14 +441,14 @@
           {
             "in": "path",
             "name": "billingAccountId",
-            "description": "The customer billing account ID",
+            "description": "The ID the uniquely identifies a billing account. e.g 017a3182-ebbc-5fbd-0ef8-f4fad1826350:25883f78-3e8c-402c-bf04-4c0c80063a94_2019-05-31",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "billingProfileId",
-            "description": "The customer billing profile ID",
+            "description": "The customer billing profile ID. e.g. YKAA-257R-BG7-M77W-SGB",
             "required": true,
             "type": "string"
           },
@@ -435,10 +477,10 @@
           "200": {
             "description": "A collection of purchases for a billing profile",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/purchaseResult"
-              }
+              "$ref": "#/definitions/purchaseResultList"
+            },
+            "examples": {
+              "application/json": "{\"value\":[{\"id\":\"e074652b-5a8c-4e71-ad9f-dbf4f0d6bd8e\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"e074652b-5a8c-4e71-ad9f-dbf4f0d6bd8e\",\"autoRenew\":true,\"assetId\":null,\"billingAccountId\":null,\"billingGroupId\":\"63bdc32f-a32d-459a-9701-1f0b130816fe\",\"projectId\":\"71bf82b2-0e68-4598-98e1-ef79a60cd4dd\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"8e1a84b4-3e32-4b48-bfb6-6d06fe92ea37\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"upn\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}]}"
             }
           },
           "default": {
@@ -493,6 +535,14 @@
     }
   },
   "definitions": {
+    "asyncOperationResponse": {
+      "type": "object",
+      "properties": {
+        "statusUrl": {
+          "type": "string"
+        }
+      }
+    },
     "availableOperations": {
       "type": "object",
       "properties": {
@@ -521,6 +571,53 @@
         },
         "description": {
           "type": "string"
+        }
+      }
+    },
+    "durableOrchestrationStatus": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceId": {
+          "type": "string"
+        },
+        "createdTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        },
+        "runtimeStatus": {
+          "format": "int32",
+          "default": 0,
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            -1
+          ],
+          "type": "integer"
+        },
+        "customStatus": {
+          "type": "object"
+        },
+        "history": {
+          "type": "object"
         }
       }
     },
@@ -580,7 +677,7 @@
           "$ref": "#/definitions/purchaseBase"
         }
       },
-      "example": "{\"properties\":{\"billingAccountId\":\"75930dab-1d35-4c7e-b621-71cad476f5ec\",\"billingGroupId\":\"2d068320-0222-4df3-a972-246af6c7472b\",\"invoiceSectionId\":\"42bbf508-3426-4693-b347-4ee1ac97e37f\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"380fd06e-1c7f-4877-ab77-cdaaa54e7949\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}}"
+      "example": "{\"properties\":{\"billingAccountId\":\"afd47a55-5340-4b9b-b4e5-308f1662cb79:88123fc2-4b19-4428-8231-28acfcc35f39_2019-05-31\",\"billingGroupId\":\"6532fca8-edd9-4727-b7be-eb10f1347707\",\"projectId\":\"YKAA-257R-BG7-M77W-SGB\",\"productId\":\"DZH318Z0KDH6\",\"skuId\":\"0001\",\"availabilityId\":\"084R5MQ9QF31\",\"termId\":\"gmz7xq9ge3py\",\"upn\":\"0002c8b7-0000-0160-2654-64a36bcef7ba\",\"csam\":\"microsoftAlias1\",\"csmAdmin\":\"customerAADObjid\",\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}}"
     },
     "purchase": {
       "type": "object",
@@ -595,16 +692,13 @@
         "assetId": {
           "type": "string"
         },
-        "mcapiOrgId": {
-          "type": "string"
-        },
         "billingAccountId": {
           "type": "string"
         },
         "billingGroupId": {
           "type": "string"
         },
-        "invoiceSectionId": {
+        "projectId": {
           "type": "string"
         },
         "billingCurrency": {
@@ -620,6 +714,9 @@
           "type": "string"
         },
         "availabilityId": {
+          "type": "string"
+        },
+        "upn": {
           "type": "string"
         },
         "quantity": {
@@ -666,7 +763,7 @@
         "billingGroupId": {
           "type": "string"
         },
-        "invoiceSectionId": {
+        "projectId": {
           "type": "string"
         },
         "productId": {
@@ -679,6 +776,9 @@
           "type": "string"
         },
         "termId": {
+          "type": "string"
+        },
+        "upn": {
           "type": "string"
         },
         "csam": {
@@ -724,7 +824,7 @@
     "purchaseRequest": {
       "type": "object",
       "properties": {
-        "purchaseId": {
+        "requestId": {
           "type": "string"
         },
         "billingAccountId": {
@@ -733,7 +833,7 @@
         "billingGroupId": {
           "type": "string"
         },
-        "invoiceSectionId": {
+        "projectId": {
           "type": "string"
         },
         "productId": {
@@ -746,6 +846,9 @@
           "type": "string"
         },
         "termId": {
+          "type": "string"
+        },
+        "upn": {
           "type": "string"
         },
         "csam": {
@@ -763,7 +866,7 @@
           "type": "string"
         }
       },
-      "example": "{\"purchaseId\":\"93cf08a5-e9ba-4d50-9ed3-07b55325ab54\",\"billingAccountId\":\"a58fa3a1-c569-4655-8d8e-70fa9523cad8\",\"billingGroupId\":\"4069b753-f566-4af7-aa74-4fad79399754\",\"invoiceSectionId\":\"40555932-7165-435c-9593-02dfe846e198\",\"productId\":\"SupportAddon\",\"skuId\":\"Base-Package-123\",\"availabilityId\":\"61b2a7f2-9c11-4ad9-908c-f9fd7fb1e459\",\"termId\":\"\",\"csam\":\"alias1\",\"csmAdmin\":\"alias2\",\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
+      "example": "{\"requestId\":\"18a37b67-a1c4-4a62-8227-e1736f4f1943\",\"billingAccountId\":\"0c739ec4-3b96-4369-8fef-8ac850715dc4:178b7b95-cfb0-4e09-bac0-e98435e5d180_2019-05-31\",\"billingGroupId\":\"592b0da3-1667-4964-9d57-8657414b9875\",\"projectId\":\"YKAA-257R-BG7-M77W-SGB\",\"productId\":\"DZH318Z0KDH6\",\"skuId\":\"0001\",\"availabilityId\":\"084R5MQ9QF31\",\"termId\":\"gmz7xq9ge3py\",\"upn\":\"0002c8b7-0000-0160-2654-64a36bcef7ba\",\"csam\":\"microsoftAlias1\",\"csmAdmin\":\"customerAADObjid\",\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\"}"
     },
     "purchaseResult": {
       "type": "object",
@@ -784,8 +887,20 @@
           "$ref": "#/definitions/purchase"
         }
       },
-      "example": "{\"id\":\"34348c28-c7f1-4b25-af56-1bcaba1b7d47\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"34348c28-c7f1-4b25-af56-1bcaba1b7d47\",\"autoRenew\":true,\"assetId\":null,\"mcapiOrgId\":null,\"billingAccountId\":null,\"billingGroupId\":\"d088cc17-76bd-4561-8149-5b753ee4e45a\",\"invoiceSectionId\":\"0fe07693-dfc1-4e9d-a05e-d23a7427af32\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"426d9b51-46ff-480f-a47c-d9b399cee431\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}",
+      "example": "{\"id\":\"def93b32-5648-44ee-9d0a-b1b317de9812\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"def93b32-5648-44ee-9d0a-b1b317de9812\",\"autoRenew\":true,\"assetId\":null,\"billingAccountId\":null,\"billingGroupId\":\"7573584a-50b0-4c28-b120-310ec54a2d8f\",\"projectId\":\"65c32886-fdd6-4a89-9fe2-774c6eda6b39\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"cd6edd27-c50c-4a2d-9d78-8c9b3d9ee44c\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"upn\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}",
       "x-ms-azure-resource": true
+    },
+    "purchaseResultList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/purchaseResult"
+          }
+        }
+      },
+      "example": "{\"value\":[{\"id\":\"fa438094-a64f-4dee-a191-2840ea20b720\",\"name\":null,\"type\":null,\"properties\":{\"id\":\"fa438094-a64f-4dee-a191-2840ea20b720\",\"autoRenew\":true,\"assetId\":null,\"billingAccountId\":null,\"billingGroupId\":\"73644d27-b056-4a94-b880-6565682b9180\",\"projectId\":\"a1952ba7-fa31-4660-bc52-7c2cb863a735\",\"billingCurrency\":null,\"productId\":\"SupportAddon\",\"termId\":\"d85240f0-febf-4a8f-9bb0-7446247ee714\",\"skuId\":\"BIGCAT-SKU\",\"availabilityId\":null,\"upn\":null,\"quantity\":1,\"isTest\":false,\"csam\":null,\"csmAdmin\":null,\"serviceStartDate\":\"2022-05-01T08:06:32+01:00\",\"serviceEndDate\":\"2023-05-01T08:06:32+01:00\",\"updatedTimestamp\":\"0001-01-01T00:00:00+00:00\",\"purchaseDate\":\"2022-05-01T08:06:32+01:00\",\"cancellationDate\":\"2023-05-01T08:06:32+01:00\"}}]}"
     }
   },
   "security": [
