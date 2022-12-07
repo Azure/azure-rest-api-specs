@@ -4703,10 +4703,42 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
         }
       }
+    },
+    "Identity": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+        ],
+      "properties": {
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+        }
+        ],
+      "properties": {
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        }
+      },
+      "description": "UserAssignedIdentity for the resource."
     },
     "netAppAccountPatch": {
       "description": "NetApp account patch resource",
@@ -7775,8 +7807,9 @@
           ]
         },
         "restoreFilePath": {
-          "description": "Destination folder where the files will be restored, if present it should start with a '/'",
+          "description": "Destination folder where the files will be restored, the path name should start with a forward slash /. Default to root of filesystem",
           "type": "string",
+          "pattern": "^\\/.*$",
           "example": "/AVSdataStore"
         },
         "destinationVolumeId": {
