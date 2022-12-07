@@ -2231,12 +2231,12 @@
         "maxChapterLengthInCharacters":{
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of characters in each chapter. If not specified, the model will determine the chapter length smartly."
+          "description": "The maximum number of characters in each chapter. If not specified, the model will determine the chapter length automatically."
         },
         "minChapterLengthInCharacters":{
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of characters in each chapter. If not specified, the model will determine the chapter length smartly."
+          "description": "The minimum number of characters in each chapter. If not specified, the model will determine the chapter length automatically."
         }
       }
     },
@@ -2250,6 +2250,11 @@
         },
         "startTimeTick": {
           "description": "Chapter start time offset from start of speech audio, in ticks. 1 tick = 100 ns. This field is only available if the input transcript has conversation item level audio timing.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "durationTick": {
+          "description": "Chapter duration in ticks. 1 tick = 100 ns. This field is only available if the input transcript has conversation item level audio timing.",
           "type": "integer",
           "format": "int64"
         },
