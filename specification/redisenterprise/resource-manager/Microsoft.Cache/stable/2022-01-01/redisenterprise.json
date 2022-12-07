@@ -90,7 +90,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/operationsStatus/{operationId}": {
+    "/subscriptions/{subscriptionId}/locations/{location}/providers/Microsoft.Cache/operationsStatus/{operationId}": {
       "get": {
         "tags": [
           "OperationsStatus"
@@ -790,6 +790,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -799,9 +802,6 @@
                 "format": "int32"
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -862,8 +862,18 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -871,7 +881,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/import": {
@@ -920,6 +934,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -929,9 +946,6 @@
                 "format": "int32"
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
