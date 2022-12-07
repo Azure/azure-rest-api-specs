@@ -74,14 +74,41 @@ namespace Web {
     sku?: BaseEvents.sku;
   }
 
-  @knownValues(BaseEvents.AppActionKV)
-  model AppAction is string;
+  enum AppAction {
+    @doc("Web app was restarted.")
+    Restarted,
 
-  @knownValues(BaseEvents.StampKindKV)
-  model StampKind is string;
+    @doc("Web app was stopped.")
+    Stopped,
 
-  @knownValues(BaseEvents.AppServicePlanActionKV)
-  model AppServicePlanAction is string;
+    @doc("There was an operation to change app setting on the web app.")
+    ChangedAppSettings,
+
+    @doc("The job has started.")
+    Started,
+
+    @doc("The job has completed.")
+    Completed,
+
+    @doc("The job has failed to complete.")
+    Failed,
+  }
+
+  enum StampKind {
+    @doc("App Service Plan is running on a public stamp.")
+    Public,
+
+    @doc("App Service Plan is running on an App Service Environment V1.")
+    AseV1,
+
+    @doc("App Service Plan is running on an App Service Environment V2.")
+    AseV2,
+  }
+
+  enum AppServicePlanAction {
+    @doc("App Service plan is being updated.")
+    Updated,
+  }
 
   @doc("Detail of action on the app service plan.")
   model AppServicePlanEventTypeDetail {
@@ -93,8 +120,16 @@ namespace Web {
     status?: AsyncStatus;
   }
 
-  @knownValues(BaseEvents.AsyncStatusKV)
-  model AsyncStatus is string;
+  enum AsyncStatus {
+    @doc("Async operation has started.")
+    Started,
+
+    @doc("Async operation has completed.")
+    Completed,
+
+    @doc("Async operation failed to complete.")
+    Failed,
+  }
 }
 
 namespace BaseEvents {
@@ -138,50 +173,4 @@ namespace BaseEvents {
     Capacity?: string;
   }
 
-  enum AppActionKV {
-    @doc("Web app was restarted.")
-    Restarted,
-
-    @doc("Web app was stopped.")
-    Stopped,
-
-    @doc("There was an operation to change app setting on the web app.")
-    ChangedAppSettings,
-
-    @doc("The job has started.")
-    Started,
-
-    @doc("The job has completed.")
-    Completed,
-
-    @doc("The job has failed to complete.")
-    Failed,
-  }
-
-  enum StampKindKV {
-    @doc("App Service Plan is running on a public stamp.")
-    Public,
-
-    @doc("App Service Plan is running on an App Service Environment V1.")
-    AseV1,
-
-    @doc("App Service Plan is running on an App Service Environment V2.")
-    AseV2,
-  }
-
-  enum AppServicePlanActionKV {
-    @doc("App Service plan is being updated.")
-    Updated,
-  }
-
-  enum AsyncStatusKV {
-    @doc("Async operation has started.")
-    Started,
-
-    @doc("Async operation has completed.")
-    Completed,
-
-    @doc("Async operation failed to complete.")
-    Failed,
-  }
 }

@@ -210,23 +210,19 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   receivedTimestamp?: zonedDateTime;
 }
 
-@knownValues(recordingContentTypeKV)
-model recordingContentType is string;
-enum recordingContentTypeKV {
+// @knownValues(recordingContentTypeKV)
+// model recordingContentType is string;
+enum recordingContentType {
   AudioVideo,
   Audio,
 }
 
-@knownValues(recordingChannelTypeKV)
-model recordingChannelType is string;
-enum recordingChannelTypeKV {
+enum recordingChannelType {
   Mixed,
   Unmixed,
 }
 
-@knownValues(recordingFormatTypeKV)
-model recordingFormatType is string;
-enum recordingFormatTypeKV {
+enum recordingFormatType {
   Wav,
   Mp3,
   Mp4,
