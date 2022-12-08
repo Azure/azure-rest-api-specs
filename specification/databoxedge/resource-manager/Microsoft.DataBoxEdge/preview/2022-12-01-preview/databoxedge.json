@@ -1681,11 +1681,8 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
             "required": false,
@@ -1733,11 +1730,8 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
             "required": false,
@@ -1785,18 +1779,12 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
-            "name": "publisherName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
           },
           {
             "required": false,
@@ -1844,25 +1832,16 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
-            "name": "publisherName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
           },
           {
-            "name": "offerName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
           },
           {
             "required": false,
@@ -1910,32 +1889,20 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
-            "name": "publisherName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
           },
           {
-            "name": "offerName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
           },
           {
-            "name": "skuName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/skuNameParameter"
           },
           {
             "required": false,
@@ -1983,34 +1950,24 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
-            "name": "publisherName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
           },
           {
-            "name": "offerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
           },
           {
-            "name": "skuName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/skuNameParameter"
           },
           {
-            "name": "versionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/versionNameParameter"
           },
           {
             "required": false,
@@ -2061,39 +2018,24 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
           },
           {
-            "name": "publisherName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
           },
           {
-            "name": "offerName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
           },
           {
-            "name": "skuName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/skuNameParameter"
           },
           {
-            "name": "versionName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "$ref": "#/parameters/versionNameParameter"
           },
           {
             "required": false,
@@ -10206,6 +10148,43 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "The subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "deviceNameParameter": {
+      "name": "deviceName",
+      "in": "path",
+      "description": "The device ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "publisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "description": "The publisher ID.",
+      "required": true,
+      "type": "string"
+    },
+    "offerNameParameter": {
+      "name": "offerName",
+      "in": "path",
+      "description": "The offer ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "skuNameParameter": {
+      "name": "skuName",
+      "in": "path",
+      "description": "The sku ID.",
+      "required": true,
+      "type": "string"
+    },
+    "versionNameParameter": {
+      "name": "versionName",
+      "in": "path",
+      "description": "The version ID.",
       "required": true,
       "type": "string"
     }
