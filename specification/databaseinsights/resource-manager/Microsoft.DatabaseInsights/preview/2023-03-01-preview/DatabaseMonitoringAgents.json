@@ -1,0 +1,1050 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DatabaseInsights",
+    "version": "2023-03-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DatabaseMonitoringAgents"
+    },
+    {
+      "name": "MonitoringTargets"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DatabaseInsights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_9": {
+            "$ref": "./examples/Operations_List_200.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DatabaseInsights/databaseMonitoringAgents": {
+      "get": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_ListBySubscription",
+        "description": "List DatabaseMonitoringAgent resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_ListBySubscription_1": {
+            "$ref": "./examples/DatabaseMonitoringAgents_ListBySubscription_200.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseInsights/databaseMonitoringAgents": {
+      "get": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_ListByResourceGroup",
+        "description": "List DatabaseMonitoringAgent resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_ListByResourceGroup_2": {
+            "$ref": "./examples/DatabaseMonitoringAgents_ListByResourceGroup_200.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseInsights/databaseMonitoringAgents/{databaseMonitoringAgentName}": {
+      "get": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_Get",
+        "description": "Get a DatabaseMonitoringAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_Get_3": {
+            "$ref": "./examples/DatabaseMonitoringAgents_Get_200.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_CreateOrUpdate",
+        "description": "Create a DatabaseMonitoringAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgent"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_CreateOrUpdate_0": {
+            "$ref": "./examples/DatabaseMonitoringAgents_CreateOrUpdate_200.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_Update",
+        "description": "Update a DatabaseMonitoringAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_Update_4": {
+            "$ref": "./examples/DatabaseMonitoringAgents_Update_200.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_Delete",
+        "description": "Delete a DatabaseMonitoringAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_Delete_11": {
+            "$ref": "./examples/DatabaseMonitoringAgents_Delete_200.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseInsights/databaseMonitoringAgents/{databaseMonitoringAgentName}/monitoringTargets": {
+      "get": {
+        "tags": [
+          "MonitoringTargets"
+        ],
+        "operationId": "MonitoringTargets_ListByDatabaseMonitoringAgent",
+        "description": "List MonitoringTarget resources by DatabaseMonitoringAgent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTargetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitoringTargets_ListByDatabaseMonitoringAgent_7": {
+            "$ref": "./examples/MonitoringTargets_ListByDatabaseMonitoringAgent_200.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseInsights/databaseMonitoringAgents/{databaseMonitoringAgentName}/monitoringTargets/{monitoringTargetName}": {
+      "get": {
+        "tags": [
+          "MonitoringTargets"
+        ],
+        "operationId": "MonitoringTargets_Get",
+        "description": "Get a MonitoringTarget",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          },
+          {
+            "name": "monitoringTargetName",
+            "in": "path",
+            "required": true,
+            "description": "Monitoring target resource name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTarget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoringTargets_Get_8": {
+            "$ref": "./examples/MonitoringTargets_Get_200.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitoringTargets"
+        ],
+        "operationId": "MonitoringTargets_CreateOrUpdate",
+        "description": "Create a MonitoringTarget",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          },
+          {
+            "name": "monitoringTargetName",
+            "in": "path",
+            "required": true,
+            "description": "Monitoring target resource name",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTarget"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTarget"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/MonitoringTarget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoringTargets_CreateOrUpdate_6": {
+            "$ref": "./examples/MonitoringTargets_CreateOrUpdate_200.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MonitoringTargets"
+        ],
+        "operationId": "MonitoringTargets_Delete",
+        "description": "Delete a MonitoringTarget",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          },
+          {
+            "name": "monitoringTargetName",
+            "in": "path",
+            "required": true,
+            "description": "Monitoring target resource name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoringTargets_Delete_10": {
+            "$ref": "./examples/MonitoringTargets_Delete_200.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseInsights/databaseMonitoringAgents/{databaseMonitoringAgentName}/startAgent": {
+      "post": {
+        "tags": [
+          "DatabaseMonitoringAgents"
+        ],
+        "operationId": "DatabaseMonitoringAgents_StartAgent",
+        "description": "Action to start monitoring all monitoring targets in a given Database Monitoring Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "databaseMonitoringAgentName",
+            "in": "path",
+            "required": true,
+            "description": "Database Monitoring Agent name",
+            "pattern": "^[a-zA-Z0-9-]{3,60}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMonitoringAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMonitoringAgents_StartAgent_5": {
+            "$ref": "./examples/DatabaseMonitoringAgents_StartAgent_200.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DatabaseMonitoringAgent": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseMonitoringAgentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A DatabaseInsightsProviderHub resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DatabaseMonitoringAgentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseMonitoringAgent"
+          },
+          "x-cadl-name": "DatabaseMonitoringAgent[]",
+          "description": "The DatabaseMonitoringAgent items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DatabaseMonitoringAgent>"
+        }
+      },
+      "description": "The response of a DatabaseMonitoringAgent list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseMonitoringAgentProperties": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "description": "Principal Id of the identity assigned to DBMA that has access to monitoring targets (database instances), Key Vault secrets (if used to store database authentication credentials), and an Azure Data Explorer database used as the monitoring data store"
+        },
+        "datastore": {
+          "$ref": "#/definitions/Datastore",
+          "description": "A data store for collected monitoring data"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "rp specific properties of the resource DatabaseMonitoring Agent",
+      "required": [
+        "provisioningState"
+      ]
+    },
+    "DatabaseMonitoringAgentUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseMonitoringAgentUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the DatabaseMonitoringAgent."
+    },
+    "DatabaseMonitoringAgentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "description": "Principal Id of the identity assigned to DBMA that has access to monitoring targets (database instances), Key Vault secrets (if used to store database authentication credentials), and an Azure Data Explorer database used as the monitoring data store"
+        },
+        "datastore": {
+          "$ref": "#/definitions/Datastore",
+          "description": "A data store for collected monitoring data"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The updatable properties of the DatabaseMonitoringAgent."
+    },
+    "Datastore": {
+      "type": "object",
+      "properties": {
+        "adxDatabaseResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of an Azure Data Explorer database"
+        },
+        "adxClusterUri": {
+          "type": "string",
+          "description": "URI of an Azure Data Explorer Cluster"
+        }
+      },
+      "description": "Properties of data store",
+      "required": [
+        "adxDatabaseResourceId",
+        "adxClusterUri"
+      ]
+    },
+    "ElasticPoolTargetProperties": {
+      "type": "object",
+      "properties": {
+        "sqlEpResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of an Azure SQL DB elastic pool target"
+        },
+        "anchorDatabaseResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of the anchor database used to connect to an elastic pool"
+        },
+        "readIntent": {
+          "type": "boolean",
+          "description": "Set to true to monitor a high availability replica of specified monitoring target, if any"
+        }
+      },
+      "description": "Properties specific to elastic pool in Azure SQL Database",
+      "required": [
+        "sqlEpResourceId",
+        "anchorDatabaseResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringTargetProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlEp"
+    },
+    "ManagedInstanceTargetProperties": {
+      "type": "object",
+      "properties": {
+        "sqlMiResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of an Azure SQL Managed Instance target"
+        },
+        "connectionTCPPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target"
+        },
+        "readIntent": {
+          "type": "boolean",
+          "description": "Set to true to monitor a high availability replica of specified monitoring target, if any"
+        }
+      },
+      "description": "Properties specific to Azure SQL Managed Instance targets",
+      "required": [
+        "sqlMiResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringTargetProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlMi"
+    },
+    "MonitoringTarget": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitoringTargetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MonitoringTargetCollectionStatus": {
+      "type": "string",
+      "description": "Monitoring target states",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringTargetCollectionStatus",
+        "modelAsString": false
+      }
+    },
+    "MonitoringTargetListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTarget"
+          },
+          "x-cadl-name": "MonitoringTarget[]",
+          "description": "The MonitoringTarget items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<MonitoringTarget>"
+        }
+      },
+      "description": "The response of a MonitoringTarget list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "MonitoringTargetProperties": {
+      "type": "object",
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "description": "Discriminator property for MonitoringTargetProperties."
+        },
+        "targetVault": {
+          "$ref": "#/definitions/VaultSecret",
+          "description": "To use SQL authentication for monitoring targets, specify the vault where username and password secrets are stored"
+        },
+        "connectionServerName": {
+          "type": "string",
+          "description": "The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.",
+          "maxLength": 200
+        },
+        "targetCollectionStatus": {
+          "type": "string",
+          "description": "Monitoring target collection status",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "string",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "Generic properties of a monitoring target",
+      "discriminator": "targetType",
+      "required": [
+        "targetType",
+        "connectionServerName",
+        "provisioningState"
+      ]
+    },
+    "SQLVMTargetProperties": {
+      "type": "object",
+      "properties": {
+        "sqlVmResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of an Azure SQL VM target"
+        },
+        "connectionTCPPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target"
+        },
+        "sqlNamedInstanceName": {
+          "type": "string",
+          "description": "The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target"
+        }
+      },
+      "description": "Properties specific to Azure SQL VM targets",
+      "required": [
+        "sqlVmResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringTargetProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlVm"
+    },
+    "SqlDbTargetProperties": {
+      "type": "object",
+      "properties": {
+        "sqlDbResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of an Azure SQL DB single database target"
+        },
+        "readIntent": {
+          "type": "boolean",
+          "description": "Set to true to monitor a high availability replica of specified monitoring target, if any"
+        }
+      },
+      "description": "Properties specific to single database in Azure SQL Database",
+      "required": [
+        "sqlDbResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringTargetProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SqlDb"
+    },
+    "VaultSecret": {
+      "type": "object",
+      "properties": {
+        "akvResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of the Key Vault instance storing database authentication secrets"
+        },
+        "akvTargetUser": {
+          "type": "string",
+          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a monitoring target"
+        },
+        "akvTargetPassword": {
+          "type": "string",
+          "description": "The path to the Key Vault secret storing the password for authentication to a monitoring target"
+        }
+      },
+      "description": "Vault specific details required if using SQL authentication to connect to a target"
+    }
+  },
+  "parameters": {}
+}
