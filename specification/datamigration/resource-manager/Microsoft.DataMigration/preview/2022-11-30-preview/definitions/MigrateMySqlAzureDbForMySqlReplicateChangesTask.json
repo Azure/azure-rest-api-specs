@@ -1,0 +1,262 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-11-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput": {
+      "type": "object",
+      "description": "Input for the task that migrates MySQL databases to Azure Database for MySQL for the replicate changes migrations",
+      "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for source MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Connection information for target Azure Database for MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput"
+          }
+        },
+        "makeSourceServerReadOnly": {
+          "type": "boolean",
+          "description": "Setting to set the source server read only",
+          "default": false
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Parameter to specify when the migration started"
+        },
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the source server if it is an azure instance"
+        },
+        "targetServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the target server"
+        },
+        "optionalAgentSettings": {
+          "type": "object",
+          "description": "Optional parameters for fine tuning the data transfer rate during migration",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "binLogInfo": {
+          "description": "The binlog position to start replicating changes at",
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionInput"
+        },
+        "encryptedKeyForSecureFields": {
+          "type": "string",
+          "description": "encrypted key for secure fields"
+        }
+      },
+      "required": [
+        "sourceConnectionInfo",
+        "targetConnectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for MySQL to Azure Database for MySQL migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of target database. Note: Target database will be truncated before starting migration."
+        },
+        "tableMap": {
+          "type": "object",
+          "description": "Mapping of source to target tables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for for the replicate changes migrations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationStatus",
+          "description": "Current status of migration",
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the migration status storage was updated",
+          "readOnly": true
+        },
+        "migrationId": {
+          "type": "string",
+          "description": "Migration Identifier",
+          "readOnly": true
+        },
+        "hasServerLevelError": {
+          "type": "boolean",
+          "description": "Indicates that the migration has server level error",
+          "readOnly": true
+        },
+        "retryingSummary": {
+          "type": "object",
+          "description": "Retrying summary",
+          "readOnly": true
+        },
+        "totalRetryingTime": {
+          "type": "string",
+          "pattern": "^(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}$",
+          "description": "Total amount of time during the migration where operations were impacted by transient errors",
+          "readOnly": true
+        },
+        "totalSourceRetryCount": {
+          "type": "integer",
+          "description": "Total number of retries that have occurred due to transient errors raised by the source server",
+          "readOnly": true
+        },
+        "totalTargetRetryCount": {
+          "type": "integer",
+          "description": "Total number of retries that have occurred due to transient errors raised by the target server",
+          "readOnly": true
+        },
+        "totalOtherRetryCount": {
+          "type": "integer",
+          "description": "Total number of retries that have occurred due to transient errors raised by the unknown source",
+          "readOnly": true
+        },
+        "continuousDataMovementProgress": {
+          "$ref": "#/definitions/MySqlContinuousDataMovementProgress",
+          "description": "Migration progress",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput"
+        }
+      ]
+    },
+    "MySqlContinuousDataMovementProgress": {
+        "type": "object",
+        "properties": {
+          "binlogPosition": {
+            "description": "Current binlog position of the last event committed at target",
+            "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionOutput",
+            "readOnly": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp exposed by the last binlog event that has been committed at target",
+            "readOnly": true
+          },
+          "numberOfRowsInserted": {
+            "type": "integer",
+            "description": "The total number of rows inserted at target",
+            "readOnly": true
+          },
+          "numberOfRowsUpdated": {
+            "type": "integer",
+            "description": "The total number of rows updated at target",
+            "readOnly": true
+          },
+          "numberOfRowsDeleted": {
+            "type": "integer",
+            "description": "The total number of rows deleted at target",
+            "readOnly": true
+          },
+          "numberOfQueryEventsProcessed": {
+            "type": "integer",
+            "description": "The total number of query events executed at target, such as DDL, or DML when using mixed binlog mode",
+            "readOnly": true
+          },
+          "numberOfWriteRowsEventsProcessed": {
+            "type": "integer",
+            "description": "The the total number of the WRITE_ROWS_EVENTs processed",
+            "readOnly": true
+          },
+          "numberOfUpdateRowsEventsProcessed": {
+            "type": "integer",
+            "description": "The the total number of the UPDATE_ROWS_EVENTs processed",
+            "readOnly": true
+          },
+          "numberOfDeleteRowsEventsProcessed": {
+            "type": "integer",
+            "description": "The total number of the DELETE_ROWS_EVENTs processed",
+            "readOnly": true
+          },
+          "secondsBehindSource": {
+            "type": "integer",
+            "description": "The the number of seconds the replica server is behind the source server",
+            "readOnly": true
+          }
+        }
+    }
+  }
+}
