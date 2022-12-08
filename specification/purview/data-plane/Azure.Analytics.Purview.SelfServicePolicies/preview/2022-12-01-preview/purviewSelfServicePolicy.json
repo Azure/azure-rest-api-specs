@@ -11,7 +11,7 @@
           "SelfServicePolicies"
         ],
         "description": "List Self-service policies",
-        "operationId": "SelfServicePolicy_List",
+        "operationId": "SelfServicePolicies_List",
         "produces": [
           "application/json"
         ],
@@ -57,7 +57,7 @@
           "SelfServicePolicies"
         ],
         "description": "Get Self-service policy",
-        "operationId": "SelfServicePolicy_Get",
+        "operationId": "SelfServicePolicies_Get",
         "produces": [
           "application/json"
         ],
@@ -104,14 +104,15 @@
           "SelfServicePolicies"
         ],
         "description": "Delete a Self-service policy",
-        "operationId": "SelfServicePolicy_Delete",
+        "operationId": "SelfServicePolicies_Delete",
         "parameters": [
           {
             "in": "path",
             "name": "workflowRunId",
             "description": "The workFlowRunId of the workflow which created this policy. System.String.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 100
           },
           {
             "$ref": "#/parameters/api-version"
@@ -145,6 +146,7 @@
   "definitions": {
     "SelfServicePolicyDecisionRule": {
       "type": "object",
+      "description": "The decision rule of a SelfServicePolicy",
       "required": [
         "effect",
         "purviewRoleName",
@@ -220,6 +222,7 @@
       }
     },
     "SelfServicePolicy": {
+      "description": "The Self-service policy model",
       "required": [
         "decisionRule",
         "workflowRunId"
@@ -248,6 +251,7 @@
       }
     },
     "SelfServicePoliciesList": {
+      "description": "List of Self-service policies",
       "required": [
         "value"
       ],
@@ -268,6 +272,7 @@
     },
     "SystemData": {
       "type": "object",
+      "description": "The system data",
       "readOnly": true,
       "properties": {
         "createdBy": {
@@ -298,14 +303,16 @@
       "description": "The api version to use.",
       "required": true,
       "type": "string",
-      "x-ms-client-name": "ApiVersion"
+      "x-ms-client-name": "ApiVersion",
+      "x-ms-parameter-location": "method"
     },
-    "Endpoint": {
+    "endpoint": {
       "in": "path",
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }
@@ -322,11 +329,11 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/endpoint"
       }
     ]
   },
