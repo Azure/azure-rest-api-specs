@@ -2110,7 +2110,7 @@
         "summaryAspects"
       ],
       "properties": {
-        "chapteringParameters":{
+        "chapteringParameters": {
           "$ref": "#/definitions/ChapteringParameters"
         },
         "summaryAspects": {
@@ -2202,12 +2202,14 @@
       "properties": {
         "summaries": {
           "type": "array",
+          "description": "Summaries describe the aspect and text of the summaries with precise context of the generated text.",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
           }
         },
         "chapters": {
           "type": "array",
+          "description": "Chapters describe the tree-like semantic structure of the conversation.",
           "items": {
             "$ref": "#/definitions/Chapter"
           }
@@ -2219,24 +2221,19 @@
         }
       ]
     },
-    "ChapteringParameters":{
+    "ChapteringParameters": {
       "type": "object",
       "description": "The parameters to control the chaptering.",
       "properties": {
-        "levels":{
+        "levels": {
           "type": "integer",
           "format": "int32",
-          "description": "The default value is 0. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters. In result, the summaries field is populated if level is 0 or no specified, and the chapters field is populated if level > 0."
+          "description": " The supported values are 0, 1, 2. The default value is 0. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters."
         },
-        "maxChapterLengthInCharacters":{
+        "maxTopLevelChaptersCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of characters in each chapter. If not specified, the model will determine the chapter length automatically."
-        },
-        "minChapterLengthInCharacters":{
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum number of characters in each chapter. If not specified, the model will determine the chapter length automatically."
+          "description": "The maximum number of top level chapters. Applicable only if levels > 1."
         }
       }
     },
@@ -2258,11 +2255,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "summaries": {
+        "summaryIds": {
           "type": "array",
           "description": "A list of summaries, one for each requested aspect.",
           "items": {
-            "$ref": "#/definitions/SummaryResultItem"
+            "type": "string"
           }
         },
         "subChapters": {
@@ -2277,6 +2274,9 @@
     "SummaryResultItem": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "aspect": {
           "type": "string"
         },
