@@ -1,0 +1,53 @@
+{
+  "title": "AnalysisIntentList",
+  "parameters": {
+    "api-version": "2022-12-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkVerifierName": "testNetworkVerifier"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.Network/NetworkVerifiers/AnalysisIntents",
+            "properties": {
+              "description": "This is a test Analysis Intent",
+              "sourceResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+              "destinationResourceId": "internet",
+              "ipTraffic": {
+                "sourceIps": [
+                  "*"
+                ],
+                "destinationIps": [
+                  "*"
+                ],
+                "sourcePorts": [
+                  "*"
+                ],
+                "destinationPorts": [
+                  "*"
+                ],
+                "protocols": [
+                  "TCP"
+                ]
+              }
+            },
+            "name": "testAnalysisIntent",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents/testAnalysisIntent",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2022-12-01T01:01:01.2089283Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-12-01T01:01:01.4740577Z"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkVerifiers/testNetworkVerifier/analysisIntents?api-version=2022-12-01-preview&$skipToken=10"
+      }
+    }
+  }
+}
