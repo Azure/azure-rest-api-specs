@@ -2106,9 +2106,6 @@
     "ConversationSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an conversational summarization task.",
-      "required": [
-        "summaryAspects"
-      ],
       "properties": {
         "chapteringParameters": {
           "$ref": "#/definitions/ChapteringParameters"
@@ -2202,7 +2199,7 @@
       "properties": {
         "summaries": {
           "type": "array",
-          "description": "Summaries describe the aspect and text of the summaries with precise context of the generated text.",
+          "description": "Summaries describe the aspect and text of the summaries with precise context of the generated text. This summary field will be deprecated and clients should start to use chapters field.",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
           }
@@ -2230,10 +2227,13 @@
           "format": "int32",
           "description": " The supported values are 0, 1, 2. If not specified, the value is determined automatically by the service. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters."
         },
-        "maxTopLevelChaptersCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of top level chapters. Applicable only if levels > 1."
+        "maxChaptersCountOnEachLevel": {
+          "description": "The maximum number of top level chapters on each level under the parent node. The array length must be the same as levels. For example, levels=2, maxChaptersCountOnEachLevel=[6,3] means client need at most 6 high level chapters, each of them has at most 3 child sub chapters. If not specified, the service will determine the chapters count automatically on all levels. If the array element is -1, the service will determine the chapters count automatically on that level. For example, levels=2, maxChaptersCountOnEachLevel=[3,-1], it means at most 3 high level chapters, each of them can have any number of sub chapters.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       }
     },
@@ -2255,11 +2255,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "summaryIds": {
+        "summaries": {
           "type": "array",
           "description": "A list of summaries, one for each requested aspect.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SummaryResultItem"
           }
         },
         "subChapters": {
@@ -2285,7 +2285,7 @@
         },
         "contexts": {
           "type": "array",
-          "description": "The context list of the summary.",
+          "description": "The context list of the summary. Comparing the parent chapter scope, the summary context can be more precise.",
           "items": {
             "$ref": "#/definitions/ItemizedSummaryContext"
           }
