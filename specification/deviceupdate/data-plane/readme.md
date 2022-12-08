@@ -26,7 +26,7 @@ These are the global settings for the deviceupdate.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-07-01-preview
+tag: package-2022-10-01
 ```
 
 ### Tag: package-2020-09-01
@@ -56,12 +56,24 @@ input-file:
   - Microsoft.DeviceUpdate/preview/2022-07-01-preview/deviceupdate.json
 ```
 
+### Tag: package-2022-10-01
+
+These settings apply only when `--tag=package-2022-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10-01'
+input-file:
+  - Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
+```
+
 ## Suppressions
 
 ``` yaml
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
+  - supress: R2010
+    reason: Approved by SDK team.
+    from: Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
   - supress: R2010
     reason: Approved by SDK team.
     from: Microsoft.DeviceUpdate/preview/2022-07-01-preview/deviceupdate.json
@@ -108,7 +120,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DeviceUpdate/preview/2022-07-01-preview/deviceupdate.json
+  - $(this-folder)/Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
 
 ```
 

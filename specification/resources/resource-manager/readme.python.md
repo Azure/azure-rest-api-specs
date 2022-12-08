@@ -32,6 +32,7 @@ batch:
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
   - tag: package-managedapplications-2018-06
+  - multiapiscript-managedapplications: true
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
@@ -44,6 +45,7 @@ batch:
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
+  - tag: package-resources-2022-09
   - tag: package-resources-2021-04
   - tag: package-resources-2021-01
   - tag: package-resources-2020-10
@@ -143,6 +145,13 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
+```yaml $(multiapiscript-managedapplications)
+package-name: azure-mgmt-resource#managedapplications
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+perform-load: false
+```
+
 ```yaml $(multiapiscript-links)
 package-name: azure-mgmt-resource#links
 multiapiscript: true
@@ -226,8 +235,8 @@ These settings apply only when `--tag=package-managedapplications-2018-06 --pyth
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
-namespace: azure.mgmt.resource.managedapplications
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+namespace: azure.mgmt.resource.managedapplications.v2018_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2018_06_01
 ```
 
 ### Tag: package-policy-2021-06 and python
@@ -338,6 +347,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-policy-2015-10'
 namespace: azure.mgmt.resource.policy.v2015_10_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2022-09 and python
+
+These settings apply only when `--tag=package-resources-2022-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2022-09'
+namespace: azure.mgmt.resource.resources.v2022_09_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2022_09_01
 ```
 
 ### Tag: package-resources-2021-04 and python

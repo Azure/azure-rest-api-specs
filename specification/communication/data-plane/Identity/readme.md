@@ -26,9 +26,17 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2022-06
+tag: package-2022-10
 ```
 
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - stable/2022-10-01/CommunicationIdentity.json
+```
 
 ### Tag: package-2022-06
 
