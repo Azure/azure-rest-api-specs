@@ -6478,33 +6478,12 @@
       "description": "Snapshot of a Volume",
       "type": "object",
       "x-ms-azure-resource": true,
-      "required": [
-        "location"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "description": "Snapshot Properties",
           "$ref": "#/definitions/snapshotProperties",
@@ -6926,30 +6905,12 @@
         "location",
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
         "properties": {
           "description": "Backup Properties",
           "$ref": "#/definitions/backupProperties",
@@ -7145,36 +7106,13 @@
     },
     "backupPolicyDetails": {
       "description": "Backup policy properties",
-      "x-ms-azure-resource": true,
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
-        },
         "properties": {
           "description": "Backup policy Properties",
           "$ref": "#/definitions/backupPolicyProperties",
@@ -7303,11 +7241,6 @@
           "format": "int64",
           "readOnly": true,
           "description": "Displays the total bytes transferred"
-        },
-        "lastTransferDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Displays the time taken in seconds for the last transfer to complete"
         }
       }
     },
@@ -7785,7 +7718,6 @@
     "backupRestoreFiles": {
       "description": "Restore payload for single file backup restore",
       "type": "object",
-      "x-ms-azure-resource": true,
       "required": [
         "fileList",
         "destinationVolumeId"
