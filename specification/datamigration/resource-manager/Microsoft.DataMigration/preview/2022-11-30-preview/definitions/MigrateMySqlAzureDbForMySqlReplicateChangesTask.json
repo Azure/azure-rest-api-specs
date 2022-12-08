@@ -121,6 +121,13 @@
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "type": "object",
       "properties": {
+        "migrationType": {
+          "enum": [
+            "Cdc"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
         "startedOn": {
           "type": "string",
           "format": "date-time",
