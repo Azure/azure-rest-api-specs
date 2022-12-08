@@ -25,9 +25,10 @@ fine-tuned models owned by the Azure OpenAI resource.
 """)
   @route("/models")
   @get
-  List is ServiceCustomizations.OpenAIListOperation<Model, TypeDiscriminatorKnownValues.Model>;
+  // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
+  ListModels is ServiceCustomizations.OpenAIListOperation<Model, "model">;
 
   @summary("Gets details for the model specified by the given model_id.")
   @doc("Gets details for the model specified by the given model_id.")
-  Get is ResourceRead<Model>;
+  GetModel is ResourceRead<Model>;
 }

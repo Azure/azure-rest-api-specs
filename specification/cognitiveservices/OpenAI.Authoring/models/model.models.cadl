@@ -7,18 +7,6 @@ using Azure.Core;
 
 namespace Azure.OpenAI;
 
-/*
-@doc("Represents a list of models.")
-model ModelList {
-  @doc("Defines the type of an object.")
-  @visibility("read")
-  object?: TypeDiscriminatorKnownValues.Model;
-
-  @doc("The list of items.")
-  @visibility("read")
-  data?: Model[];
-}
-*/
 @doc("A model is either a base model or the result of a successful fine tune job.")
 @resource("models")
 model Model {
@@ -32,11 +20,11 @@ model Model {
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
-  createdAt?: int32;
+  created_at?: int32;
 
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
-  updatedAt?: int32;
+  updated_at?: int32;
 
   @doc("The identity of this item.")
   @visibility("read")
@@ -49,7 +37,7 @@ model Model {
 
   @doc("The fine tune job ID if this is a fine tune model; otherwise `null`.")
   @visibility("read")
-  fineTuneId?: string;
+  fine_tune?: string;
 
   @doc("The capabilities of a base or fine tune model.")
   capabilities?: Capabilities;
@@ -69,7 +57,7 @@ models. The exact dates are specified in the properties.
 model Capabilities {
   @doc("A value indicating whether a model can be used for fine tuning.")
   @visibility("read")
-  fineTune?: boolean;
+  fine_tune?: boolean;
 
   @doc("A value indicating whether a model can be deployed.")
   @visibility("read")
@@ -85,7 +73,7 @@ model Capabilities {
 
   @doc("The supported scale types for deployments of this model.")
   @visibility("read")
-  scaleTypes?: ScaleType[];
+  scale_types?: ScaleType[];
 }
 
 @doc("""
@@ -102,7 +90,7 @@ The end date of fine tune support of this model. Will be `null` for fine tune
 models.
 """)
   @visibility("read")
-  fineTuneEndDate?: int32;
+  fine_tune_end_date?: int32;
 
   @doc("The end date of inference support of this model.")
   @visibility("read")
@@ -115,24 +103,11 @@ model ManualScaleSettings extends ScaleSettings {
   capacity: int32;
 
   @doc("Defines how scaling operations will be executed.")
-  scaleType: "manual";
+  scale_type: "manual";
 }
-
-
-/*
-@doc("Settings for the manual scale type.")
-model ManualScaleSettingsUpdate extends ScaleSettingsUpdate {
-  @doc("The constant reserved capacity of the inference endpoint for this deployment.")
-  capacity?: int32;
-
-  @doc("Defines how scaling operations will be executed.")
-  scaleType: "manual";
-}
-*/
-
 
 @doc("Settings for the standard scale type.")
 model StandardScaleSettings extends ScaleSettings {
   @doc("Defines how scaling operations will be executed.")
-  scaleType: "standard";
+  scale_type: "standard";
 }

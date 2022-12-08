@@ -10,16 +10,14 @@ using Azure.Core;
 
 namespace Azure.OpenAI;
 
-  interface Operations {
-    @doc("Return the embeddings for a given prompt.")
-  @Cadl.Rest.segmentSeparator("/")
+interface Operations {
+  @doc("Return the embeddings for a given prompt.")
+  @Cadl.Rest.actionSeparator("/")
   embeddings is Azure.Core.ResourceAction<Deployment, EmbeddingsRequest, object>;
 
 
   @doc("Return the completions for a given prompt.")
-  @Cadl.Rest.segmentSeparator("/")
+  @Cadl.Rest.actionSeparator("/")
   completions is Azure.Core.ResourceAction<Deployment, CompletionsRequest, Completions>;
-
-
 }
 

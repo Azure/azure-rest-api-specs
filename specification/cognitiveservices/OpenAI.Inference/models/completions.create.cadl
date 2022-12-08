@@ -42,7 +42,7 @@ both.
 Minimum of 0 and maximum of 1 allowed.
 
 """)
-    topP?: float32;
+    top_p?: float32;
 
     @doc("""
 Defaults to null. Modify the likelihood of specified tokens appearing in the
@@ -56,7 +56,7 @@ like -100 or 100 should result in a ban or exclusive selection of the relevant
 token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
-    logitBias?: object;
+    logit_bias?: object;
 
     @doc("The ID of the end-user, for use in tracking and rate-limiting.")
     user?: string;
@@ -88,36 +88,35 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
     echo?: boolean;
 
     @doc("A sequence which indicates the end of the current document.")
-    stop?: CompletionsStopSequence;
-
+    stop?: CompletionsStop;
 
     @doc("Completion configuration")
-    completionConfig?: string;
+    completion_config?: string;
 
     @doc("""
 can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
 enabled, 2=full cache
 """)
-    cacheLevel?: int32;
+    cache_level?: int32;
 
     @doc("""
 How much to penalize new tokens based on their existing frequency in the text
 so far. Decreases the model's likelihood to repeat the same line verbatim. Has
 minimum of -2 and maximum of 2.
 """)
-    presencePenalty?: float32;
+    presence_penalty?: float32;
 
     @doc("""
 How much to penalize new tokens based on whether they appear in the text so
 far. Increases the model's likelihood to talk about new topics.
 """)
-    frequencyPenalty?: float32;
+    frequency_penalty?: float32;
 
     @doc("""
 How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.
 """)
-    bestOf?: int32;
+    best_of?: int32;
 }
 
 @doc("""
@@ -132,7 +131,7 @@ from the beginning of a new document. Maximum allowed size of string list is
 model CompletionsPrompt {}
 
 @doc("A sequence which indicates the end of the current document.")
-model CompletionsStopSequence {}
+model CompletionsStop {}
 
 @doc("Expected response schema to completion request")
 model Completions {
@@ -147,11 +146,11 @@ model Completions {
     @doc("Model used for completion response")
     "model"?: string;
     @doc("Array of choices returned containing text completions to prompts sent")
-    choices?: CompletionsChoice[];
+    choices?: Choice[];
 }
 
 @doc("Choice model within completion response")
-model CompletionsChoice {
+model Choice {
     @doc("Generated text for given completion prompt")
     text?: string;
     @doc("Index")
@@ -159,7 +158,7 @@ model CompletionsChoice {
     @doc("Log Prob Model")
     logprobs?: CompletionsLogProbsModel;
     @doc("Reason for finishing")
-    finishReason?: string;
+    finish_reason?: string;
 }
 
 @doc("LogProbs model within completion choice")
@@ -167,9 +166,9 @@ model CompletionsLogProbsModel {
     @doc("Tokens")
     tokens?: string[];
     @doc("LogProbs of Tokens")
-    tokenLogprobs?: float32[];
+    token_logprobs?: float32[];
     @doc("Top LogProbs")
-    topLogprobs?: Record<float32>[];
+    top_logprobs?: Record<float32>[];
     @doc("Text offset")
-    textOffset?: int32[];
+    text_offset?: int32[];
 }

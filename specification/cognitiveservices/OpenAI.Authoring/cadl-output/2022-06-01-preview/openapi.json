@@ -57,7 +57,7 @@
   "paths": {
     "/deployments": {
       "get": {
-        "operationId": "Deployments_List",
+        "operationId": "Deployments_ListDeployments",
         "summary": "Gets the list of deployments owned by the Azure OpenAI resource.",
         "description": "Gets the list of deployments owned by the Azure OpenAI resource.",
         "parameters": [
@@ -81,7 +81,7 @@
         }
       },
       "post": {
-        "operationId": "Deployments_Create",
+        "operationId": "Deployments_CreateDeployment",
         "summary": "Creates a new deployment for the Azure OpenAI resource according to the given\nspecification.",
         "description": "Creates a new deployment for the Azure OpenAI resource according to the given\nspecification.",
         "parameters": [
@@ -98,14 +98,15 @@
                   "type": "string",
                   "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
                 },
-                "scaleSettings": {
+                "scale_settings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "description": "The template for adding updateable properties.",
               "required": [
-                "scaleSettings"
+                "model",
+                "scale_settings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrReplaceModel<Deployment>"
             }
@@ -134,13 +135,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "createdAt": {
+                "created_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updatedAt": {
+                "updated_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -160,14 +161,18 @@
                   "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
                   "readOnly": true
                 },
-                "scaleSettings": {
+                "scale_settings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "required": [
+                "status",
+                "created_at",
+                "updated_at",
                 "id",
-                "scaleSettings"
+                "model",
+                "scale_settings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.CustomResponseFields<(anonymous model)>"
             }
@@ -183,9 +188,9 @@
     },
     "/deployments/{deploymentId}": {
       "get": {
-        "operationId": "Deployments_Get",
-        "summary": "Gets details for a single deployment specified by the given deploymentId.",
-        "description": "Gets details for a single deployment specified by the given deploymentId.",
+        "operationId": "Deployments_GetDeployment",
+        "summary": "Gets details for a single deployment specified by the given deployment_id.",
+        "description": "Gets details for a single deployment specified by the given deployment_id.",
         "parameters": [
           {
             "name": "deploymentId",
@@ -214,9 +219,9 @@
         }
       },
       "patch": {
-        "operationId": "Deployments_Update",
-        "summary": "Updates the mutable details of the deployment with the given deploymentId.",
-        "description": "Updates the mutable details of the deployment with the given deploymentId.",
+        "operationId": "Deployments_UpdateDeployment",
+        "summary": "Updates the mutable details of the deployment with the given deployment_id.",
+        "description": "Updates the mutable details of the deployment with the given deployment_id.",
         "parameters": [
           {
             "name": "deploymentId",
@@ -238,7 +243,7 @@
                   "type": "string",
                   "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
                 },
-                "scaleSettings": {
+                "scale_settings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
@@ -264,13 +269,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "createdAt": {
+                "created_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updatedAt": {
+                "updated_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -290,14 +295,18 @@
                   "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
                   "readOnly": true
                 },
-                "scaleSettings": {
+                "scale_settings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "required": [
+                "status",
+                "created_at",
+                "updated_at",
                 "id",
-                "scaleSettings"
+                "model",
+                "scale_settings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<Azure.Core.(anonymous model)>"
             }
@@ -317,13 +326,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "createdAt": {
+                "created_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updatedAt": {
+                "updated_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -343,15 +352,19 @@
                   "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
                   "readOnly": true
                 },
-                "scaleSettings": {
+                "scale_settings": {
                   "$ref": "#/definitions/ScaleSettings",
                   "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
                 }
               },
               "description": "A  resource was successfully created.",
               "required": [
+                "status",
+                "created_at",
+                "updated_at",
                 "id",
-                "scaleSettings"
+                "model",
+                "scale_settings"
               ],
               "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<Azure.Core.(anonymous model)>"
             }
@@ -368,9 +381,9 @@
         ]
       },
       "delete": {
-        "operationId": "Deployments_Delete",
-        "summary": "Deletes the deployment specified by the given deploymentId.",
-        "description": "Deletes the deployment specified by the given deploymentId.",
+        "operationId": "Deployments_DeleteDeployment",
+        "summary": "Deletes the deployment specified by the given deployment_id.",
+        "description": "Deletes the deployment specified by the given deployment_id.",
         "parameters": [
           {
             "name": "deploymentId",
@@ -398,7 +411,7 @@
     },
     "/files": {
       "get": {
-        "operationId": "Files_List",
+        "operationId": "Files_ListFiles",
         "summary": "Gets a list of all files owned by the Azure OpenAI resource.\nThese include user uploaded content like files with purpose \"fine-tune\" for training or\nvalidation of fine-tunes models as well as files that are generated by the\nservice such as \"fine-tune-results\" which contains various metrics for the\ncorresponding fine-tune job.",
         "description": "Gets a list of all files owned by the Azure OpenAI resource.\nThese include user uploaded content like files with purpose \"fine-tune\" for training or\nvalidation of fine-tunes models\nas well as files that are generated by the\nservice such as \"fine-tune-results\" which contains various metrics for the\ncorresponding fine-tune job.",
         "parameters": [
@@ -422,7 +435,7 @@
         }
       },
       "post": {
-        "operationId": "Files_Upload",
+        "operationId": "Files_UploadFile",
         "summary": "Creates a new file entity by uploading data from a local machine. Uploaded\nfiles can, for example, be used for training or evaluating fine-tuned models.",
         "description": "Creates a new file entity by uploading data from a local machine. Uploaded\nfiles can, for example, be used for training or evaluating fine-tuned models.",
         "parameters": [
@@ -476,13 +489,13 @@
                   "description": "The state of a job or item.",
                   "readOnly": true
                 },
-                "createdAt": {
+                "created_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was created (in unix epochs).",
                   "readOnly": true
                 },
-                "updatedAt": {
+                "updated_at": {
                   "type": "integer",
                   "format": "int32",
                   "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -527,9 +540,9 @@
     },
     "/files/{fileId}": {
       "get": {
-        "operationId": "Files_Get",
-        "summary": "Gets details for a single file specified by the given fileId including status,\nsize, purpose, etc.",
-        "description": "Gets details for a single file specified by the given fileId including status,\nsize, purpose, etc.",
+        "operationId": "Files_GetFile",
+        "summary": "Gets details for a single file specified by the given file_id including status,\nsize, purpose, etc.",
+        "description": "Gets details for a single file specified by the given file_id including status,\nsize, purpose, etc.",
         "parameters": [
           {
             "name": "fileId",
@@ -558,9 +571,9 @@
         }
       },
       "delete": {
-        "operationId": "Files_Delete",
-        "summary": "Deletes the file with the given fileId.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
-        "description": "Deletes the file with the given fileId.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
+        "operationId": "Files_DeleteFile",
+        "summary": "Deletes the file with the given file_id.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
+        "description": "Deletes the file with the given file_id.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
         "parameters": [
           {
             "name": "fileId",
@@ -589,8 +602,8 @@
     "/files/{fileId}/content": {
       "get": {
         "operationId": "Files_GetFileContent",
-        "summary": "Gets the content of the file specified by the given fileId.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
-        "description": "Gets the content of the file specified by the given fileId.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
+        "summary": "Gets the content of the file specified by the given file_id.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
+        "description": "Gets the content of the file specified by the given file_id.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
         "parameters": [
           {
             "name": "fileId",
@@ -621,7 +634,7 @@
     },
     "/files/import": {
       "post": {
-        "operationId": "Files_Import",
+        "operationId": "Files_ImportFile",
         "summary": "Creates a new file entity by importing data from a provided url. Uploaded files\ncan, for example, be used for training or evaluating fine-tuned models.",
         "description": "Creates a new file entity by importing data from a provided url. Uploaded files\ncan, for example, be used for training or evaluating fine-tuned models.",
         "parameters": [
@@ -663,7 +676,7 @@
     },
     "/fine-tunes": {
       "get": {
-        "operationId": "FineTunes_List",
+        "operationId": "FineTunes_ListFineTunes",
         "summary": "Gets a list of all fine-tune jobs owned by the Azure OpenAI resource.\nThe details that are returned for each fine-tune job contain besides its\nidentifier the base model, training and validation files, hyper parameters,\ntime stamps, status and events.  Events are created when the job status\nchanges, e.g. running or complete, and when results are uploaded.",
         "description": "Gets a list of all fine-tune jobs owned by the Azure OpenAI resource.\nThe details that are returned for each fine-tune job contain besides its\nidentifier the base model, training and validation files, hyper parameters,\ntime stamps, status and events. Events are created when the job status\nchanges, e.g. running or complete, and when results are uploaded.",
         "parameters": [
@@ -687,7 +700,7 @@
         }
       },
       "post": {
-        "operationId": "FineTunes_Create",
+        "operationId": "FineTunes_CreateFineTune",
         "summary": "Creates a job that fine-tunes a specified model from a given training\nfile.\nResponse includes details of the enqueued job including job status and\nhyper parameters.\nThe name of the fine-tuned model is added to the response\nonce complete.",
         "description": "Creates a job that fine-tunes a specified model from a given training\nfile.\nResponse includes details of the enqueued job including job status and\nhyper parameters.\nThe name of the fine-tuned model is added to the response\nonce complete.",
         "parameters": [
@@ -727,9 +740,9 @@
     },
     "/fine-tunes/{fineTuneId}": {
       "get": {
-        "operationId": "FineTunes_Get",
-        "summary": "Gets details for a single fine-tune job specified by the given\nfineTuneId.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
-        "description": "Gets details for a single fine-tune job specified by the given\nfineTuneId.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
+        "operationId": "FineTunes_GetFineTune",
+        "summary": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
+        "description": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
         "parameters": [
           {
             "name": "fineTuneId",
@@ -758,9 +771,9 @@
         }
       },
       "delete": {
-        "operationId": "FineTunes_Delete",
-        "summary": "Deletes the fine-tune job specified by the given fineTuneId.",
-        "description": "Deletes the fine-tune job specified by the given fineTuneId.",
+        "operationId": "FineTunes_DeleteFineTune",
+        "summary": "Deletes the fine-tune job specified by the given fine_tune_id.",
+        "description": "Deletes the fine-tune job specified by the given fine_tune_id.",
         "parameters": [
           {
             "name": "fineTuneId",
@@ -788,9 +801,9 @@
     },
     "/fine-tunes/{fineTuneId}/cancel": {
       "post": {
-        "operationId": "FineTunes_Cancel",
-        "summary": "Cancels the processing of the fine-tune job specified by the given fineTuneId.",
-        "description": "Cancels the processing of the fine-tune job specified by the given fineTuneId.",
+        "operationId": "FineTunes_CancelFineTune",
+        "summary": "Cancels the processing of the fine-tune job specified by the given fine_tune_id.",
+        "description": "Cancels the processing of the fine-tune job specified by the given fine_tune_id.",
         "parameters": [
           {
             "name": "fineTuneId",
@@ -819,11 +832,11 @@
         }
       }
     },
-    "/fine-tunes/{fineTuneId}/events": {
+    "/fine-tunes/{fineTuneId}/listFineTuneEvents": {
       "get": {
-        "operationId": "FineTunes_Events",
-        "summary": "List events for the fine-tune job specified by the given fineTuneId.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
-        "description": "List events for the fine-tune job specified by the given fineTuneId.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
+        "operationId": "FineTunes_ListFineTuneEvents",
+        "summary": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
+        "description": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
         "parameters": [
           {
             "name": "fineTuneId",
@@ -861,7 +874,7 @@
     },
     "/models": {
       "get": {
-        "operationId": "Models_List",
+        "operationId": "Models_ListModels",
         "summary": "Gets a list of all models that are accessible by the Azure OpenAI\nresource.\nThese include base models as well as all successfully completed\nfine-tuned models owned by the Azure OpenAI resource.",
         "description": "Gets a list of all models that are accessible by the Azure OpenAI\nresource.\nThese include base models as well as all successfully completed\nfine-tuned models owned by the Azure OpenAI resource.",
         "parameters": [
@@ -887,7 +900,7 @@
     },
     "/models/{model_id}": {
       "get": {
-        "operationId": "Models_Get",
+        "operationId": "Models_GetModel",
         "summary": "Gets details for the model specified by the given model_id.",
         "description": "Gets details for the model specified by the given model_id.",
         "parameters": [
@@ -920,11 +933,6 @@
     }
   },
   "definitions": {
-    "AcceptedResponse": {
-      "type": "object",
-      "properties": {},
-      "description": "Accepted Response"
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "properties": {
@@ -994,7 +1002,7 @@
     "Capabilities": {
       "type": "object",
       "properties": {
-        "fineTune": {
+        "fine_tune": {
           "type": "boolean",
           "description": "A value indicating whether a model can be used for fine tuning.",
           "readOnly": true
@@ -1014,7 +1022,7 @@
           "description": "A value indicating whether a model supports embeddings.",
           "readOnly": true
         },
-        "scaleTypes": {
+        "scale_types": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScaleType"
@@ -1025,6 +1033,11 @@
         }
       },
       "description": "The capabilities of a base or fine tune model."
+    },
+    "CreatedResponse": {
+      "type": "object",
+      "properties": {},
+      "description": "Created Response"
     },
     "Deployment": {
       "type": "object",
@@ -1039,13 +1052,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "createdAt": {
+        "created_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updatedAt": {
+        "updated_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1065,15 +1078,19 @@
           "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
           "readOnly": true
         },
-        "scaleSettings": {
+        "scale_settings": {
           "$ref": "#/definitions/ScaleSettings",
           "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
         }
       },
       "description": "Deployments manage the reserved quota for Azure OpenAI models and make them\navailable for inference requests.",
       "required": [
+        "status",
+        "created_at",
+        "updated_at",
         "id",
-        "scaleSettings"
+        "model",
+        "scale_settings"
       ]
     },
     "DeploymentList": {
@@ -1084,6 +1101,9 @@
           "enum": [
             "deployment"
           ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
           "description": "Defines the type of this object"
         },
         "data": {
@@ -1099,7 +1119,7 @@
     "Deprecation": {
       "type": "object",
       "properties": {
-        "fineTuneEndDate": {
+        "fine_tune_end_date": {
           "type": "integer",
           "format": "int32",
           "description": "The end date of fine tune support of this model. Will be `null` for fine tune\nmodels.",
@@ -1234,7 +1254,7 @@
           "description": "Defines the type of an object.",
           "readOnly": true
         },
-        "createdAt": {
+        "created_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this event was created (in unix epochs).",
@@ -1257,7 +1277,7 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/TypeDiscriminatorKnownValues",
+          "$ref": "#/definitions/TypeDiscriminator",
           "description": "Defines the type of this object"
         },
         "data": {
@@ -1284,13 +1304,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "createdAt": {
+        "created_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updatedAt": {
+        "updated_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1373,6 +1393,9 @@
           "enum": [
             "file"
           ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
           "description": "Defines the type of this object"
         },
         "data": {
@@ -1398,13 +1421,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "createdAt": {
+        "created_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updatedAt": {
+        "updated_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1515,6 +1538,9 @@
           "enum": [
             "fine-tune"
           ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
           "description": "Defines the type of this object"
         },
         "data": {
@@ -1666,13 +1692,13 @@
           "description": "The state of a job or item.",
           "readOnly": true
         },
-        "createdAt": {
+        "created_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was created (in unix epochs).",
           "readOnly": true
         },
-        "updatedAt": {
+        "updated_at": {
           "type": "integer",
           "format": "int32",
           "description": "A timestamp when this job or item was modified last (in unix epochs).",
@@ -1688,7 +1714,7 @@
           "description": "The base model ID if this is a fine tune model; otherwise `null`.",
           "readOnly": true
         },
-        "fineTuneId": {
+        "fine_tune": {
           "type": "string",
           "description": "The fine tune job ID if this is a fine tune model; otherwise `null`.",
           "readOnly": true
@@ -1715,6 +1741,9 @@
           "enum": [
             "model"
           ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
           "description": "Defines the type of this object"
         },
         "data": {
@@ -1772,15 +1801,15 @@
     "ScaleSettings": {
       "type": "object",
       "properties": {
-        "scaleType": {
+        "scale_type": {
           "type": "string",
           "description": "Discriminator property for ScaleSettings."
         }
       },
       "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity.",
-      "discriminator": "scaleType",
+      "discriminator": "scale_type",
       "required": [
-        "scaleType"
+        "scale_type"
       ]
     },
     "ScaleType": {

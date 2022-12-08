@@ -20,13 +20,9 @@ model EmbeddingsRequest {
     An input to embed, encoded as a string, a list of strings, or a list of token
     lists
     """)
-    input: EmbeddingsInput;
+    input: string | string[] | integer[] | integer[][];
     // https://stackoverflow.com/questions/70112647/equivalent-use-of-oneof-from-openapi-3-in-openapi-2
     // we technically have string, string[], integer[], and integer[][]
     // but since we are targeting openAPIv2 we are not able to use polymorphism effectively, we need to simply
     // have a typeless object as part of the response
-}
-
-@doc("Embedding request body schema, base fields")
-model EmbeddingsInput {
 }
