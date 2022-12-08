@@ -8,10 +8,9 @@
   "responses": {
     "200": {
       "body": {
-        "idPrefix": "UNIT",
-        "name": "unit",
-        "description": "A physical and non-overlapping area which might be occupied and traversed by a navigating agent. Can be a hallway, a room, a courtyard, etc. It is surrounded by physical obstruction (wall), unless the isOpenArea attribute is equal to true, and one must add openings where the obstruction shouldn't be there. If isOpenArea attribute is equal to true, all the sides are assumed open to the surroundings and walls are to be added where needed. Walls for open areas are represented as a lineElement or areaElement with isObstruction equal to true.",
-        "ontology": "Facility-2.0",
+        "id": "unit",
+        "title": "Unit",
+        "description": "The unit feature class defines a physical and non-overlapping area that can be occupied and traversed by a navigating agent. A unit can be a hallway, a room, a courtyard, and so on.",        "ontology": "Facility-2.0",
         "geometryType": "Polygon",
         "properties": [
           {
@@ -37,44 +36,7 @@
             "type": "boolean"
           },
           {
-            "name": "navigableBy",
-            "required": false,
-            "type": {
-              "array": {
-                "enum": [
-                  "pedestrian",
-                  "wheelchair",
-                  "machine",
-                  "bicycle",
-                  "automobile",
-                  "hiredAuto",
-                  "bus",
-                  "railcar",
-                  "emergency",
-                  "ferry",
-                  "boat"
-                ]
-              }
-            }
-          },
-          {
             "name": "isRoutable",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "routeThroughBehavior",
-            "required": false,
-            "type": {
-              "enum": [
-                "disallowed",
-                "allowed",
-                "preferred"
-              ]
-            }
-          },
-          {
-            "name": "nonPublic",
             "required": false,
             "type": "boolean"
           },
@@ -135,14 +97,14 @@
         ],
         "links": [
           {
-            "href": "https://us.atlas.microsoft.com/features/datasets/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/definition?api-version=2022-09-01-preview",
+            "href": "https://us.atlas.microsoft.com/features/datasets/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/definition",
             "rel": "self",
             "title": "Metadata catalogue for unit"
           },
           {
-            "href": "https://us.atlas.microsoft.com/features/datasets/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/items?api-version=2022-09-01-preview",
-            "rel": "data",
-            "title": "unit"
+            "href": "https://us.atlas.microsoft.com/features/datasets/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/items",
+            "rel": "items",
+            "title": "Unit"
           }
         ]
       }
