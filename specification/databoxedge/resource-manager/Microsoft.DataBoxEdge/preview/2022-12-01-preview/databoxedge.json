@@ -10157,6 +10157,7 @@
       "description": "The device ID.",
       "required": true,
       "type": "string",
+      "pattern": "[0-9a-zA-Z]",
       "x-ms-parameter-location": "method"
     },
     "publisherNameParameter": {
@@ -10164,7 +10165,9 @@
       "in": "path",
       "description": "The publisher ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
     },
     "offerNameParameter": {
       "name": "offerName",
@@ -10172,6 +10175,7 @@
       "description": "The offer ID.",
       "required": true,
       "type": "string",
+      "pattern": "[0-9a-zA-Z]",
       "x-ms-parameter-location": "method"
     },
     "skuNameParameter": {
@@ -10179,14 +10183,18 @@
       "in": "path",
       "description": "The sku ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
     },
     "versionNameParameter": {
       "name": "versionName",
       "in": "path",
       "description": "The version ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
