@@ -1661,6 +1661,473 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns list of all offers",
+        "operationId": "MarketplaceImageOffer_ListOffers",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffers is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListOffers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers": {
+      "get": {
+        "tags": [
+          "MarketplaceImagePublisher"
+        ],
+        "summary": "Returns list of publishers",
+        "operationId": "MarketplaceImagePublisher_ListPublishers",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListPublishers is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListPublishers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns List of Offers by Publisher name",
+        "operationId": "MarketplaceImageOffer_ListOffersbyPublisher",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffersbyPublisher is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListOffersbyPublisher.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus": {
+      "get": {
+        "tags": [
+          "MarketplaceImageSku"
+        ],
+        "summary": "Returns List of SKUs Within Offer",
+        "operationId": "MarketplaceImageSku_ListSKUsWithinOffer",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListSKUsWithinOffer is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListSKUsWithinOffer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "summary": "Returns List of Versions within SKU",
+        "operationId": "MarketplaceImageVersion_ListVersionswithinSKU",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListVersionswithinSKU is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListVersionswithinSKU.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "description": "Get Particular Image",
+        "operationId": "MarketplaceImageVersion_GetParticularImage",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetParticularImage is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/GetParticularImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}/generatesastoken": {
+      "post": {
+        "tags": [
+          "MarketplaceImageSasToken"
+        ],
+        "summary": "Returns SASToken",
+        "operationId": "MarketplaceImageSasToken_GetSASToken",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to start VM Image Download",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "200": {
+            "description": "GetSASToken is working fine",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/GetSASToken.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles": {
       "get": {
         "tags": [
