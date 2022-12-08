@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository is the canonical source for REST API specifications for Microsoft Azure.
+This repository is the canonical source for REST API specifications for  Microsoft Azure.
 
 ## Getting started
 If you're a Microsoft employee looking for information about all of the repositories and steps for Azure SDK Libraries Releases, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). To get access to the wiki, you need to request access to the [Azure SDK Release Partners](https://aka.ms/azsdk/join/azuresdkpartners) security group. This is a MyAccess group and requests to join will need to be approved by your manager.
