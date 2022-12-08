@@ -27,9 +27,17 @@ These are the global settings for the loadtestservice.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-04-15-preview
+tag: package-2022-12-01
 ```
 
+### Tag: package-2022-12-01
+
+These settings apply only when `--tag=package-2022-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01'
+input-file:
+  - Microsoft.LoadTestService/stable/2022-12-01/loadtestservice.json
+```
 
 ### Tag: package-2022-04-15-preview
 
@@ -59,11 +67,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_loadtestservice']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_loadtesting']
   - repo: azure-powershell
 ```
 

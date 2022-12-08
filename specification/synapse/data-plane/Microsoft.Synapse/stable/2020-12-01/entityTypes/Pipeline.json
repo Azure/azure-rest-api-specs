@@ -2055,6 +2055,33 @@
         }
       }
     },
+    "SapOdpSource": {
+      "description": "A copy activity source for SAP ODP source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "extractionMode": {
+          "type": "object",
+          "description": "The extraction mode. Allowed value include: Full, Delta and Recovery. The default value is Full. Type: string (or Expression with resultType string)."
+        },
+        "subscriberProcess": {
+          "type": "object",
+          "description": "The subscriber process to manage the delta process. Type: string (or Expression with resultType string)."
+        },
+        "selection": {
+          "type": "object",
+          "description": "Specifies the selection conditions from source data. Type: array of objects(selection) (or Expression with resultType array of objects)."
+        },
+        "projection": {
+          "type": "object",
+          "description": "Specifies the columns to be selected from source data. Type: array of objects(projection) (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "SapTableSource": {
       "description": "A copy activity source for SAP Table source.",
       "type": "object",
@@ -3643,7 +3670,10 @@
           "$ref": "#/definitions/SnowflakeExportCopyCommand",
           "description": "Snowflake export settings."
         }
-      }
+      },
+      "required": [
+        "exportSettings"
+      ]
     },
     "ExportSettings": {
       "description": "Export command settings.",
@@ -7403,6 +7433,23 @@
           "additionalProperties": {
             "$ref": "#/definitions/NotebookParameter"
           }
+        },
+        "executorSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the session, which will be used for overriding 'executorCores' and 'executorMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
+        },
+        "conf": {
+          "type": "object",
+          "description": "Spark configuration properties, which will override the 'conf' of the notebook you provide."
+        },
+        "driverSize": {
+          "type": "object",
+          "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
@@ -7443,7 +7490,8 @@
           "type": "array",
           "items": {
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
         },
         "file": {
           "type": "object",
@@ -7454,11 +7502,31 @@
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "files": {
-          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "description": "(Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
           "type": "array",
           "items": {
+            "type": "object",
             "description": "Type: string (or Expression with resultType string)."
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "pythonCodeReference": {
+          "description": "Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "filesV2": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
         },
         "targetBigDataPool": {
           "$ref": "../artifacts.json#/definitions/BigDataPoolParametrizationReference",
@@ -7478,7 +7546,8 @@
         },
         "numExecutors": {
           "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
