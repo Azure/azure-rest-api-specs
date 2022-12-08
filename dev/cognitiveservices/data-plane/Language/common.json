@@ -823,9 +823,8 @@
           "type": "string",
           "description": "The session id for interactive summarization experience. We cache the session state on service side and the session expires in 48 hours. The session state we cache includes but not limited to the previous document, parameters and generated summaries."
         },
-        "enableControlPhrasesRecommendation": {
-          "type": "boolean",
-          "description": "By enabling control phrases recommendation, the result will include the suggested phrases for control."
+        "phraseControlsRecommendationOption": {
+          "$ref": "#/definitions/PhraseControlsRecommendationOption"
         },
         "enableInteractiveSummarizationSession": {
           "type": "boolean",
@@ -842,6 +841,33 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
+      }
+    },
+    "PhraseControlsRecommendationOption":{
+      "enum": [
+        "SummaryAndPhraseControlsRecommendation",
+        "SummaryOnly",
+        "PhraseControlsRecommendationOnly"
+      ],
+      "type": "string",
+      "description": "The option of phrase controls recommendation. The default value is SummaryOnly.",
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "PhraseControlsRecommendationOption",
+        "values": [
+          {
+            "value": "SummaryAndPhraseControlsRecommendation",
+            "description": "Output both summary and phrase controls recommendation."
+          },
+          {
+            "value": "SummaryOnly",
+            "description": "Output summary only."
+          },
+          {
+            "value": "PhraseControlsRecommendationOnly",
+            "description": "Output phrase controls recommendation only."
+          }
+        ]
       }
     },
     "PhraseControl": {
