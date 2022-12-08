@@ -5328,13 +5328,16 @@
           "$ref": "#/definitions/ComputePowerAction"
         },
         "triggerType": {
+          "description": "[Required] The schedule trigger type.",
           "$ref": "./mfe.json#/definitions/TriggerType"
         },
         "recurrence": {
-          "$ref": "#/definitions/Recurrence"
+          "description": "Required if triggerType is Recurrence.",
+          "$ref": "./mfe.json#/definitions/RecurrenceTrigger"
         },
         "cron": {
-          "$ref": "#/definitions/Cron"
+          "description": "Required if triggerType is Cron.",
+          "$ref": "./mfe.json#/definitions/CronTrigger"
         },
         "schedule": {
           "description": "[Deprecated] Not used any more.",
@@ -5415,55 +5418,6 @@
       "x-ms-enum": {
         "name": "ComputePowerAction",
         "modelAsString": true
-      }
-    },
-    "Recurrence": {
-      "type": "object",
-      "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
-      "properties": {
-        "frequency": {
-          "description": "[Required] The frequency to trigger schedule.",
-          "$ref": "./mfe.json#/definitions/RecurrenceFrequency"
-        },
-        "interval": {
-          "description": "[Required] Specifies schedule interval in conjunction with frequency",
-          "type": "integer",
-          "format": "int32"
-        },
-        "startTime": {
-          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "timeZone": {
-          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
-          "default": "UTC",
-          "type": "string"
-        },
-        "schedule": {
-          "description": "[Required] The recurrence schedule.",
-          "$ref": "./mfe.json#/definitions/RecurrenceSchedule"
-        }
-      }
-    },
-    "Cron": {
-      "type": "object",
-      "description": "The workflow trigger cron for ComputeStartStop schedule type.",
-      "properties": {
-        "startTime": {
-          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "timeZone": {
-          "description": "Specifies time zone in which the schedule runs.\r\nTimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11",
-          "type": "string",
-          "default": "UTC"
-        },
-        "expression": {
-          "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
-          "type": "string"
-        }
       }
     },
     "ComputeInstanceDataMount": {
