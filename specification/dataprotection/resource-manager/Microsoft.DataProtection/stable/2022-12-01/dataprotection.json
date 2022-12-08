@@ -5125,7 +5125,7 @@
       "title": "List Resource",
       "type": "object"
     },
-    "DppTrackedResource": {
+    "DppBaseTrackedResource": {
       "properties": {
         "eTag": {
           "description": "Optional ETag.",
@@ -5135,10 +5135,6 @@
           "description": "Resource Id represents the complete path to the resource.",
           "readOnly": true,
           "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/DppIdentityDetails",
-          "description": "Input Managed Identity Details"
         },
         "location": {
           "description": "Resource location.",
@@ -5163,6 +5159,21 @@
         },
         "systemData": {
           "$ref": "#/definitions/systemData"
+        }
+      },
+      "type": "object",
+      "x-ms-azure-resource": true
+    },
+    "DppTrackedResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppBaseTrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/DppIdentityDetails",
+          "description": "Input Managed Identity Details"
         }
       },
       "type": "object",
@@ -6758,7 +6769,7 @@
     "ResourceGuardResource": {
       "allOf": [
         {
-          "$ref": "#/definitions/DppTrackedResource"
+          "$ref": "#/definitions/DppBaseTrackedResource"
         }
       ],
       "type": "object",
