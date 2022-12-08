@@ -123,7 +123,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/clusterNameParameter"
@@ -691,362 +691,575 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairStatus": {
-      "post": {
-        "tags": [
-          "ClusterRepairStatus"
-        ],
-        "operationId": "GetRepairClusterStatus",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CassandraReaperClusterStatus"
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairStatus": {
+        "post": {
+          "tags": [
+            "ClusterRepairStatus"
+          ],
+          "operationId": "GetRepairClusterStatus",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
             }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairTables": {
-      "post": {
-        "tags": [
-          "ClusterRepairTableStatus"
-        ],
-        "operationId": "GetRepairTableStatus",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "type": "string"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/CassandraReaperClusterStatus"
+                  }
                 }
               }
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns": {
-      "post": {
-        "tags": [
-          "RepairRunCreate"
-        ],
-        "operationId": "CreateRepairRun",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CassandraClusterRepairPublicResource"
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairTables": {
+        "post": {
+          "tags": [
+            "ClusterRepairTableStatus"
+          ],
+          "operationId": "GetRepairTableStatus",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
             },
-            "description": "The properties specifying the desired state of repairRun to be created."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CassandraReaperRunStatus"
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
             }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}": {
-      "delete": {
-        "tags": [
-          "RepairRunDelete"
-        ],
-        "operationId": "DeleteRepairRun",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/list": {
-      "post": {
-        "tags": [
-          "RepairRunList"
-        ],
-        "operationId": "ListRepairRuns",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CassandraReaperRunStatus"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/pause": {
-      "post": {
-        "tags": [
-          "RepairRunPause"
-        ],
-        "operationId": "PauseRepairRun",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns": {
+        "post": {
+          "tags": [
+            "RepairRunCreate"
+          ],
+          "operationId": "CreateRepairRun",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/CassandraClusterRepairPublicResource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/definitions/CassandraClusterRepairPublicResource"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/definitions/CassandraClusterRepairPublicResource"
+                }
+              }
+            }
           },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/resume": {
-      "post": {
-        "tags": [
-          "RepairRunResume"
-        ],
-        "operationId": "ResumeRepairRun",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/segments": {
-      "post": {
-        "tags": [
-          "RepairRunSegmentsList"
-        ],
-        "operationId": "ListRepairSegments",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CassandraRepairSegmentResourceFeedResponse"
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/CassandraReaperRunStatus"
+                  }
+                }
+              }
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/show": {
-      "post": {
-        "tags": [
-          "RepairRunShow"
-        ],
-        "operationId": "ShowRepairRun",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CassandraReaperRunStatus"
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}": {
+        "delete": {
+          "tags": [
+            "RepairRunDelete"
+          ],
+          "operationId": "DeleteRepairRun",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/segments/{segmentId}/abort": {
-      "post": {
-        "tags": [
-          "RepairSegmentAbort"
-        ],
-        "operationId": "AbortSegment",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "#/parameters/segmentId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/list": {
+        "post": {
+          "tags": [
+            "RepairRunList"
+          ],
+          "operationId": "ListRepairRuns",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/CassandraReaperRunStatus"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/intensity/{intensityValue}": {
-      "post": {
-        "tags": [
-          "RepairUpdateIntensity"
-        ],
-        "operationId": "UpdateRepairIntensity",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/repairRunId"
-          },
-          {
-            "$ref": "#/parameters/intensityValue"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}/pause": {
+        "post": {
+          "tags": [
+            "RepairRunPause"
+          ],
+          "operationId": "PauseRepairRun",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}/resume": {
+        "post": {
+          "tags": [
+            "RepairRunResume"
+          ],
+          "operationId": "ResumeRepairRun",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}/segments": {
+        "post": {
+          "tags": [
+            "RepairRunSegmentsList"
+          ],
+          "operationId": "ListRepairSegments",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/CassandraRepairSegmentResourceFeedResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}/show": {
+        "post": {
+          "tags": [
+            "RepairRunShow"
+          ],
+          "operationId": "ShowRepairRun",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/CassandraReaperRunStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}/segments/{segmentId}/abort": {
+        "post": {
+          "tags": [
+            "RepairSegmentAbort"
+          ],
+          "operationId": "AbortSegment",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "segmentId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{cassandraClusterResource}/repairRuns/{repairRunId}/intensity/{intensityValue}": {
+        "post": {
+          "tags": [
+            "RepairUpdateIntensity"
+          ],
+          "operationId": "UpdateRepairIntensity",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "resourceGroup",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "cassandraClusterResource",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repairRunId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "intensityValue",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
           }
         }
       }
@@ -1085,26 +1298,6 @@
       "minLength": 1,
       "maxLength": 15,
       "pattern": "^[0-9]+$"
-    },
-    "repairRunId": {
-      "name": "repairRunId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Id of repair run created to repair Cassandra cluster."
-    },
-    "intensityValue": {
-      "name": "intensityValue",
-      "in": "path",
-      "required": true,
-      "type": "string"
-    },
-    "segmentId": {
-      "name": "segmentId",
-      "in": "path",
-      "required": true,
-      "type": "string"
     }
   },
   "definitions": {
@@ -1687,55 +1880,67 @@
       "type": "object",
       "properties": {
         "keyspace": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "owner": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "cause": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "tables": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "segmentCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "nullable": true
         },
         "repairParallelism": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "intensity": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "nullable": true
         },
         "incrementalRepair": {
-          "type": "boolean"
+          "type": "boolean",
+          "nullable": true
         },
         "nodes": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "dataCenters": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "blackListedTables": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "repairThreadCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -1744,13 +1949,16 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "properties": {
           "$ref": "#/definitions/CassandraClusterRepairPublicProperties"
@@ -1762,10 +1970,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "jmxUserName": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "jmxPasswordIsSet": {
           "type": "boolean"
@@ -1774,19 +1984,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "repairRuns": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CassandraReaperRunStatus"
-          }
+          },
+          "nullable": true
         },
         "repairSchedules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CassandraReaperScheduleStatus"
-          }
+          },
+          "nullable": true
         },
         "nodesStatus": {
           "$ref": "#/definitions/CassandraReaperNodeStatus"
@@ -1798,36 +2011,44 @@
       "type": "object",
       "properties": {
         "endpoint": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "hostId": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "dataCenter": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "rack": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "severity": {
           "type": "number",
           "format": "double"
         },
         "releaseVersion": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "tokens": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "load": {
           "type": "number",
           "format": "double"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -1836,7 +2057,8 @@
       "type": "object",
       "properties": {
         "sourceNode": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "endpoints": {
           "type": "object",
@@ -1848,7 +2070,8 @@
                 "$ref": "#/definitions/CassandraReaperEndpointState"
               }
             }
-          }
+          },
+          "nullable": true
         },
         "totalLoad": {
           "type": "number",
@@ -1858,7 +2081,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -1870,7 +2094,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CassandraReaperGossipInfo"
-          }
+          },
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -1879,28 +2104,35 @@
       "type": "object",
       "properties": {
         "cause": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "owner": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "clusterName": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "columnFamilies": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "keyspaceName": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "repairState": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "intensity": {
           "type": "number",
@@ -1914,42 +2146,49 @@
           "format": "int32"
         },
         "repairParallelism": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "segmentsRepaired": {
           "type": "integer",
           "format": "int32"
         },
         "lastEvent": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "duration": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "nodes": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "datacenters": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "blacklistedTables": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "repairThreadCount": {
           "type": "integer",
           "format": "int32"
         },
         "repairUnitId": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -1958,32 +2197,39 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "owner": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "intensity": {
           "type": "number",
           "format": "double"
         },
         "clusterName": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "keyspaceName": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "columnFamilies": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "repairParallelism": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "incrementalRepair": {
           "type": "boolean"
@@ -1996,19 +2242,22 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "datacenters": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "blacklistedTables": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "nullable": true
         },
         "segmentCountPerNode": {
           "type": "integer",
@@ -2019,16 +2268,20 @@
           "format": "int32"
         },
         "repairUnitId": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "nextActivation": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "creationTime": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "pauseTime": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "segmentTimeout": {
           "type": "integer",
@@ -2048,10 +2301,12 @@
       "type": "object",
       "properties": {
         "start": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "end": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -2060,13 +2315,16 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "runId": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "repairUnitId": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "tokenRange": {
           "$ref": "#/definitions/CassandraRepairTokenRange"
@@ -2076,22 +2334,27 @@
           "format": "int32"
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "coordinatorHost": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "startTime": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "endTime": {
-          "type": "string"
+          "type": "string",
+          "nullable": true
         },
         "replicas": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "nullable": true
         }
       },
       "additionalProperties": false
@@ -2103,7 +2366,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CassandraRepairSegment"
+<<<<<<< HEAD
           }
+=======
+          },
+          "nullable": true
+>>>>>>> parent of 5d784f713b (fix validation errors.)
         }
       },
       "additionalProperties": false
@@ -2118,13 +2386,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CassandraRepairRingRange"
-          }
+          },
+          "nullable": true
         },
         "replicas": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "nullable": true
         }
       },
       "additionalProperties": false
