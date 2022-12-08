@@ -1332,7 +1332,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/start/operationstatuses/{integrationRuntimeOperationId}": {
       "get": {
-        "operationId": "IntegrationRuntime Start Operation Status",
+        "operationId": "Get_IntegrationRuntimeStart",
         "summary": "Get integration runtime start operation status",
         "description": "Get an integration runtime start operation status",
         "tags": [
@@ -1354,13 +1354,6 @@
           },
           {
             "$ref": "#/parameters/IntegrationRuntimeNameParameter"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "ETag of the integration runtime entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
           },
           {
             "type": "string",
@@ -3136,13 +3129,11 @@
           "format": "int32"
         }
       }
-    }
-  },
-  "IntegrationRuntimeOperationStatus": {
-    "description": "Integration Runtime Operation Status",
-    "type": "object",
-    "properties": {
-      "status": {
+    },
+    "IntegrationRuntimeOperationStatus": {
+      "description": "Integration Runtime Operation Status Properties",
+      "type": "object",
+      "properties": {
         "status": {
           "enum": [
             "InProgress",
@@ -3155,19 +3146,19 @@
             "name": "Workspace status",
             "modelAsString": true
           }
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
         }
-      },
-      "name": {
-        "type": "string",
-        "description": "The operation name."
-      },
-      "properties": {
-        "type": "object",
-        "description": "The operation properties."
-      },
-      "error": {
-        "type": "string",
-        "description": "The operation error message."
       }
     }
   },
