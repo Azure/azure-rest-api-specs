@@ -2783,7 +2783,7 @@
             "description": "Request body for operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchResourceRequestInput"
+              "$ref": "#/definitions/PatchResourceGuardInput"
             }
           }
         ],
@@ -5783,6 +5783,20 @@
         }
       },
       "title": "PatchResourceRequestInput",
+      "type": "object"
+    },
+    "PatchResourceGuardInput": {
+      "description": "Patch Request content for Microsoft.DataProtection Resource Guard resources",
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Guard tags.",
+          "type": "object"
+        }
+      },
+      "title": "PatchResourceGuardInput",
       "type": "object"
     },
     "PolicyInfo": {
