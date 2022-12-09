@@ -183,7 +183,7 @@
         }
       },
       "put": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe `Register` request is used to register data in an Azure Storage Account with an Azure Maps account.\n\nThis is useful in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/azure/azure-maps/drawing-requirements) for use in the Azure Maps Creator [Conversion Service](https://docs.microsoft.com/rest/api/maps/v2/conversion).\n\nThe data registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\n## Submit Register or Replace Request\n\nThe `Register` and `Replace` requests are both [long-running operations](https://aka.ms/am-creator-lrt-v2) that contain an [AzureBlob](#azureblob) JSON object in the body of the request that defines the data registry details.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe `Register` request is used to register data in an Azure Storage Account with an Azure Maps account. The maximum file size that can be registered is one gigabyte.\n\nThis is useful in scenarios like registering a collection of Geofences in `GeoJSON` format for use in [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial), or registering a set of DWG design files as a zipped [Drawing Package](https://docs.microsoft.com/azure/azure-maps/drawing-requirements) for use in the Azure Maps Creator [Conversion Service](https://docs.microsoft.com/rest/api/maps/v2/conversion).\n\nThe data registry service endpoint is limited in scope to the region of your Azure Maps account and is not available for global Azure Maps accounts.\n\n## Submit Register or Replace Request\n\nThe `Register` and `Replace` requests are both long-running operations that contain an [AzureBlob](#azureblob) JSON object in the body of the request that defines the data registry details.",
         "operationId": "DataRegistries_RegisterOrReplace",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -227,7 +227,7 @@
               },
               "Operation-Location": {
                 "type": "string",
-                "description": "A URL used to check the status or results of the request when it is a [long-running operation](https://aka.ms/am-creator-lrt-v2). `api-version` is not included in the URL."
+                "description": "A URL used to check the status or results of the request when it is a long-running operation. `api-version` is not included in the URL."
               }
             },
             "schema": {
@@ -243,7 +243,7 @@
               },
               "Operation-Location": {
                 "type": "string",
-                "description": "New URL to check for the results of the [long-running operation](https://aka.ms/am-creator-lrt-v2). `api-version` is not included in the URL."
+                "description": "New URL to check for the results of the long-running operation. `api-version` is not included in the URL."
               }
             },
             "schema": {
@@ -314,7 +314,7 @@
           }
         },
         "produces": [
-          "application/geojson",
+          "application/geo+json",
           "application/zip"
         ],
         "parameters": [
@@ -382,7 +382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The status of the [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+            "description": "The status of the long-running operation.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -537,7 +537,7 @@
       }
     },
     "LongRunningOperationStatus": {
-      "description": "The status of a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+      "description": "The status of a long-running operation.",
       "type": "string",
       "readOnly": true,
       "enum": [
@@ -565,7 +565,7 @@
       }
     },
     "LongRunningOperationResult": {
-      "description": "The response model for a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+      "description": "The response model for a long-running operation.",
       "type": "object",
       "properties": {
         "id": {
