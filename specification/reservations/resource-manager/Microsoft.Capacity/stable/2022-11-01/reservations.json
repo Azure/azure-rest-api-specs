@@ -1378,7 +1378,9 @@
           "items": {
             "$ref": "#/definitions/ReservationToReturn"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "reservationId"
+          ]
         }
       }
     },
@@ -2247,7 +2249,9 @@
           "items": {
             "$ref": "#/definitions/ReservationToExchange"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "reservationId"
+          ]
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
@@ -2277,7 +2281,9 @@
           "items": {
             "$ref": "#/definitions/ReservationToPurchaseExchange"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "reservationId"
+          ]
         },
         "savingsPlansToPurchase": {
           "type": "array",
@@ -2285,7 +2291,9 @@
           "items": {
             "$ref": "#/definitions/SavingsPlanToPurchaseExchange"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "savingsPlanId"
+          ]
         },
         "reservationsToExchange": {
           "type": "array",
@@ -2293,7 +2301,9 @@
           "items": {
             "$ref": "#/definitions/ReservationToReturnForExchange"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "reservationId"
+          ]
         },
         "policyResult": {
           "$ref": "#/definitions/ExchangePolicyErrors"
@@ -3062,7 +3072,8 @@
           "items": {
             "type": "string",
             "description": "Reservation resource Id. \"/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}\""
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -3247,7 +3258,7 @@
     },
     "BillingScopeId": {
       "type": "string",
-      "description": "Subscription that will be charged for purchasing Reservation or Savings Plan"
+      "description": "Subscription that will be charged for purchasing reservation or savings plan"
     },
     "Price": {
       "type": "object",
