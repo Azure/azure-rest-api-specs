@@ -11,59 +11,56 @@
         "environment": "Prod",
         "sapProduct": "S4HANA",
         "configuration": {
-          "configurationType": "Deployment",
+          "configurationType": "DeploymentWithOSConfig",
           "appLocation": "eastus",
           "infrastructureConfiguration": {
-            "deploymentType": "ThreeTier",
             "appResourceGroup": "X00-RG",
+            "deploymentType": "ThreeTier",
+            "highAvailabilityConfig": {
+              "highAvailabilityType": "AvailabilityZone"
+            },
             "centralServer": {
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
               "virtualMachineConfiguration": {
                 "vmSize": "Standard_E16ds_v4",
                 "imageReference": {
-                  "sku": "7.4",
+                  "sku": "84sapha-gen2",
                   "publisher": "RedHat",
-                  "version": "7.4.2019062505",
-                  "offer": "RHEL-SAP"
+                  "version": "8.4.2021091202",
+                  "offer": "RHEL-SAP-HA"
                 },
                 "osProfile": {
                   "adminUsername": "{your-username}",
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
+                    "sshKeyPair": {
+                      "publicKey": "abc",
+                      "privateKey": "xyz"
                     }
                   }
                 }
               },
-              "instanceCount": 1
+              "instanceCount": 2
             },
             "applicationServer": {
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
               "virtualMachineConfiguration": {
                 "vmSize": "Standard_E32ds_v4",
                 "imageReference": {
-                  "sku": "7.4",
+                  "sku": "84sapha-gen2",
                   "publisher": "RedHat",
-                  "version": "7.4.2019062505",
-                  "offer": "RHEL-SAP"
+                  "version": "8.4.2021091202",
+                  "offer": "RHEL-SAP-HA"
                 },
                 "osProfile": {
                   "adminUsername": "{your-username}",
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
+                    "sshKeyPair": {
+                      "publicKey": "abc",
+                      "privateKey": "xyz"
                     }
                   }
                 }
@@ -76,28 +73,67 @@
               "virtualMachineConfiguration": {
                 "vmSize": "Standard_M32ts",
                 "imageReference": {
-                  "sku": "7.4",
+                  "sku": "84sapha-gen2",
                   "publisher": "RedHat",
-                  "version": "7.4.2019062505",
-                  "offer": "RHEL-SAP"
+                  "version": "8.4.2021091202",
+                  "offer": "RHEL-SAP-HA"
                 },
                 "osProfile": {
                   "adminUsername": "{your-username}",
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "keyData": "ssh-rsa public key"
-                        }
-                      ]
+                    "sshKeyPair": {
+                      "publicKey": "abc",
+                      "privateKey": "xyz"
                     }
                   }
                 }
               },
-              "instanceCount": 1
+              "diskConfiguration": {
+                "diskVolumeConfigurations": {
+                  "hana/data": {
+                    "count": 4,
+                    "sizeGB": 128,
+                    "sku": {
+                      "name": "Premium_LRS"
+                    }
+                  },
+                  "hana/log": {
+                    "count": 3,
+                    "sizeGB": 128,
+                    "sku": {
+                      "name": "Premium_LRS"
+                    }
+                  },
+                  "hana/shared": {
+                    "count": 1,
+                    "sizeGB": 256,
+                    "sku": {
+                      "name": "StandardSSD_LRS"
+                    }
+                  },
+                  "usr/sap": {
+                    "count": 1,
+                    "sizeGB": 128,
+                    "sku": {
+                      "name": "Premium_LRS"
+                    }
+                  },
+                  "os": {
+                    "count": 1,
+                    "sizeGB": 64,
+                    "sku": {
+                      "name": "StandardSSD_LRS"
+                    }
+                  }
+                }
+              },
+              "instanceCount": 2
             }
+          },
+          "osSapConfiguration": {
+            "sapFqdn": "xyz.test.com"
           }
         }
       }
@@ -123,59 +159,54 @@
           "environment": "Prod",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "Deployment",
+            "configurationType": "DeploymentWithOSConfig",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
-              "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "deploymentType": "ThreeTier",
+              "highAvailabilityConfig": {
+                "highAvailabilityType": "AvailabilityZone"
+              },
               "centralServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
                   "vmSize": "Standard_E16ds_v4",
                   "imageReference": {
-                    "sku": "7.4",
+                    "sku": "84sapha-gen2",
                     "publisher": "RedHat",
-                    "version": "7.4.2019062505",
-                    "offer": "RHEL-SAP"
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               },
               "applicationServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
                   "vmSize": "Standard_E32ds_v4",
                   "imageReference": {
-                    "sku": "7.4",
+                    "sku": "84sapha-gen2",
                     "publisher": "RedHat",
-                    "version": "7.4.2019062505",
-                    "offer": "RHEL-SAP"
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
@@ -188,28 +219,73 @@
                 "virtualMachineConfiguration": {
                   "vmSize": "Standard_M32ts",
                   "imageReference": {
-                    "sku": "7.4",
+                    "sku": "84sapha-gen2",
                     "publisher": "RedHat",
-                    "version": "7.4.2019062505",
-                    "offer": "RHEL-SAP"
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "diskConfiguration": {
+                  "diskVolumeConfigurations": {
+                    "hana/data": {
+                      "count": 4,
+                      "sizeGB": 128,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    "hana/log": {
+                      "count": 3,
+                      "sizeGB": 128,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    "hana/shared": {
+                      "count": 1,
+                      "sizeGB": 256,
+                      "sku": {
+                        "name": "StandardSSD_LRS"
+                      }
+                    },
+                    "usr/sap": {
+                      "count": 1,
+                      "sizeGB": 128,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    "backup": {
+                      "count": 2,
+                      "sizeGB": 256,
+                      "sku": {
+                        "name": "StandardSSD_LRS"
+                      }
+                    },
+                    "os": {
+                      "count": 1,
+                      "sizeGB": 64,
+                      "sku": {
+                        "name": "StandardSSD_LRS"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 2
               }
+            },
+            "osSapConfiguration": {
+              "sapFqdn": "xyz.test.com"
             }
           },
           "status": "Unknown",
@@ -238,59 +314,54 @@
           "environment": "Prod",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "Deployment",
+            "configurationType": "DeploymentWithOSConfig",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
-              "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "deploymentType": "ThreeTier",
+              "highAvailabilityConfig": {
+                "highAvailabilityType": "AvailabilityZone"
+              },
               "centralServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
                   "vmSize": "Standard_E16ds_v4",
                   "imageReference": {
-                    "sku": "7.4",
+                    "sku": "84sapha-gen2",
                     "publisher": "RedHat",
-                    "version": "7.4.2019062505",
-                    "offer": "RHEL-SAP"
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               },
               "applicationServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
                   "vmSize": "Standard_E32ds_v4",
                   "imageReference": {
-                    "sku": "7.4",
+                    "sku": "84sapha-gen2",
                     "publisher": "RedHat",
-                    "version": "7.4.2019062505",
-                    "offer": "RHEL-SAP"
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
@@ -303,28 +374,73 @@
                 "virtualMachineConfiguration": {
                   "vmSize": "Standard_M32ts",
                   "imageReference": {
-                    "sku": "7.4",
+                    "sku": "84sapha-gen2",
                     "publisher": "RedHat",
-                    "version": "7.4.2019062505",
-                    "offer": "RHEL-SAP"
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
                   },
                   "osProfile": {
                     "adminUsername": "{your-username}",
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "ssh": {
-                        "publicKeys": [
-                          {
-                            "keyData": "ssh-rsa public key"
-                          }
-                        ]
+                      "sshKeyPair": {
+                        "publicKey": "abc"
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "diskConfiguration": {
+                  "diskVolumeConfigurations": {
+                    "hana/data": {
+                      "count": 4,
+                      "sizeGB": 128,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    "hana/log": {
+                      "count": 3,
+                      "sizeGB": 128,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    "hana/shared": {
+                      "count": 1,
+                      "sizeGB": 256,
+                      "sku": {
+                        "name": "StandardSSD_LRS"
+                      }
+                    },
+                    "usr/sap": {
+                      "count": 1,
+                      "sizeGB": 128,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    "backup": {
+                      "count": 2,
+                      "sizeGB": 256,
+                      "sku": {
+                        "name": "StandardSSD_LRS"
+                      }
+                    },
+                    "os": {
+                      "count": 1,
+                      "sizeGB": 64,
+                      "sku": {
+                        "name": "StandardSSD_LRS"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 2
               }
+            },
+            "osSapConfiguration": {
+              "sapFqdn": "xyz.test.com"
             }
           },
           "status": "Unknown",
