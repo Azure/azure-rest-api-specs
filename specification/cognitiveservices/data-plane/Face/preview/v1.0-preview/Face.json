@@ -2543,11 +2543,13 @@
             "in": "query",
             "name": "start",
             "format": "uuid",
+            "description": "List persons from the least personId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "top",
+            "description": "The number of persons to list, ranging in [1, 1000]. Default is 1000.",
             "type": "string"
           }
         ],
@@ -2591,6 +2593,7 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/EnrollmentRequest"
             }
@@ -2640,6 +2643,7 @@
           {
             "in": "path",
             "name": "personId",
+            "description": "Person id to update.",
             "required": true,
             "format": "uuid",
             "type": "string"
@@ -2648,6 +2652,7 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/EnrollmentRequest"
             }
@@ -2683,6 +2688,7 @@
           {
             "in": "path",
             "name": "personId",
+            "description": "Person id to delete.",
             "required": true,
             "format": "uuid",
             "type": "string"
@@ -5253,13 +5259,16 @@
         "personId": {
           "format": "uuid",
           "type": "string",
+          "description": "Person id.",
           "x-nullable": false
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         }
       }
     },
@@ -5277,10 +5286,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         }
       }
     },
@@ -5358,13 +5369,16 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         },
         "addPersonIds": {
           "type": "array",
+          "description": "Person ids to add to the dynamic person group.",
           "items": {
             "format": "uuid",
             "type": "string",
@@ -5378,18 +5392,22 @@
       "properties": {
         "removePersonIds": {
           "type": "array",
+          "description": "Person ids to remove from the dynamic person group.",
           "items": {
             "type": "string"
           }
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "User defined name, maximum length is 128."
         },
         "userData": {
-          "type": "string"
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB."
         },
         "addPersonIds": {
           "type": "array",
+          "description": "Person ids to add to the dynamic person group.",
           "items": {
             "format": "uuid",
             "type": "string",
@@ -5663,7 +5681,7 @@
       "name": "returnFaceId",
       "in": "query",
       "x-ms-parameter-location": "method",
-      "description": "A value indicating whether the operation should return faceIds of detected faces. Detecting with this value set to true requires additional permissions.",
+      "description": "A value indicating whether the operation should return faceIds of detected faces. Detecting with this value set to true requires additional access approvals at https://aka.ms/facerecognition.",
       "type": "boolean"
     },
     "returnFaceLandmarks": {
