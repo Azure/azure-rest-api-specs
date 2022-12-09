@@ -10,25 +10,11 @@ using Azure.Core;
 
 namespace Azure.OpenAI;
 
-interface Operations {
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-  @summary("Create a completion from a chosen model")
-  @doc("Create a completion from a chosen model")
-  @route("/deployments/{deploymentId}/completions")
-  @post
-  CompletionsCreate is Foundations.Operation<
-    CompletionsCreateRequest,
-    CompletionsCreateResponse
-  >;
+@doc("Return the embeddings for a given prompt.")
+@Cadl.Rest.actionSeparator("/")
+op embeddings is Azure.Core.ResourceAction<Deployment, Embeddings.EmbeddingsRequest, Embeddings.Embeddings>;
 
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-  @summary("Return the embeddings for a given prompt.")
-  @doc("Return the embeddings for a given prompt.")
-  @route("/deployments/{deploymentId}/embeddings")
-  @post
-  EmbeddingsCreate is Foundations.Operation<
-    EmbeddingsCreateRequest,
-    object // using "void" as a type will generate a 204 response with no body, we are aiming for a 200 with an empty object
-  >;
-}
 
+@doc("Return the completions for a given prompt.")
+@Cadl.Rest.actionSeparator("/")
+op completions is Azure.Core.ResourceAction<Deployment, Completions.CompletionsRequest, Completions.Completion>;
