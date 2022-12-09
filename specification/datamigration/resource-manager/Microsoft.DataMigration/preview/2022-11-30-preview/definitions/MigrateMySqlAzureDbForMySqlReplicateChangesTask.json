@@ -104,7 +104,7 @@
         {
           "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
         }
-     ]
+      ]
     },
     "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",
@@ -199,60 +199,60 @@
       ]
     },
     "MySqlContinuousDataMovementProgress": {
-        "type": "object",
-        "properties": {
-          "binlogPosition": {
-            "description": "Current binlog position of the last event committed at target",
-            "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionOutput",
-            "readOnly": true
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The timestamp exposed by the last binlog event that has been committed at target",
-            "readOnly": true
-          },
-          "numberOfRowsInserted": {
-            "type": "integer",
-            "description": "The total number of rows inserted at target",
-            "readOnly": true
-          },
-          "numberOfRowsUpdated": {
-            "type": "integer",
-            "description": "The total number of rows updated at target",
-            "readOnly": true
-          },
-          "numberOfRowsDeleted": {
-            "type": "integer",
-            "description": "The total number of rows deleted at target",
-            "readOnly": true
-          },
-          "numberOfQueryEventsProcessed": {
-            "type": "integer",
-            "description": "The total number of query events executed at target, such as DDL, or DML when using mixed binlog mode",
-            "readOnly": true
-          },
-          "numberOfWriteRowsEventsProcessed": {
-            "type": "integer",
-            "description": "The the total number of the WRITE_ROWS_EVENTs processed",
-            "readOnly": true
-          },
-          "numberOfUpdateRowsEventsProcessed": {
-            "type": "integer",
-            "description": "The the total number of the UPDATE_ROWS_EVENTs processed",
-            "readOnly": true
-          },
-          "numberOfDeleteRowsEventsProcessed": {
-            "type": "integer",
-            "description": "The total number of the DELETE_ROWS_EVENTs processed",
-            "readOnly": true
-          },
-          "secondsBehindSource": {
-            "type": "integer",
-            "description": "The the number of seconds the replica server is behind the source server",
-            "readOnly": true
-          }
+      "type": "object",
+      "properties": {
+        "binlogPosition": {
+          "description": "Current binlog position of the last event committed at target",
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionOutput",
+          "readOnly": true
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp exposed by the last binlog event that has been committed at target",
+          "readOnly": true
+        },
+        "numberOfRowsInserted": {
+          "type": "integer",
+          "description": "The total number of rows inserted at target",
+          "readOnly": true
+        },
+        "numberOfRowsUpdated": {
+          "type": "integer",
+          "description": "The total number of rows updated at target",
+          "readOnly": true
+        },
+        "numberOfRowsDeleted": {
+          "type": "integer",
+          "description": "The total number of rows deleted at target",
+          "readOnly": true
+        },
+        "numberOfQueryEventsProcessed": {
+          "type": "integer",
+          "description": "The total number of query events executed at target, such as DDL, or DML when using mixed binlog mode",
+          "readOnly": true
+        },
+        "numberOfWriteRowsEventsProcessed": {
+          "type": "integer",
+          "description": "The the total number of the WRITE_ROWS_EVENTs processed",
+          "readOnly": true
+        },
+        "numberOfUpdateRowsEventsProcessed": {
+          "type": "integer",
+          "description": "The the total number of the UPDATE_ROWS_EVENTs processed",
+          "readOnly": true
+        },
+        "numberOfDeleteRowsEventsProcessed": {
+          "type": "integer",
+          "description": "The total number of the DELETE_ROWS_EVENTs processed",
+          "readOnly": true
+        },
+        "secondsBehindSource": {
+          "type": "integer",
+          "description": "The the number of seconds the replica server is behind the source server",
+          "readOnly": true
         }
+      }
     }
   }
 }
