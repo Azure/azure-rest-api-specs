@@ -15,6 +15,7 @@ directive:
     where: $.parameters.ResourceGroupName
     transform: >
       $["x-ms-parameter-location"] = "method"; 
+      
   - from: swagger-document
     where: $.parameters.ResourceName
     transform: >
