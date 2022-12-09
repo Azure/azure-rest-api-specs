@@ -160,10 +160,9 @@
       "properties": {
         "headers": {
           "description": "Custom email headers to be passed.",
-          "type": "array",
-          "x-ms-client-name": "CustomHeaders",
-          "items": {
-            "$ref": "#/definitions/EmailCustomHeader"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "senderEmail": {
@@ -200,26 +199,6 @@
         "disableUserEngagementTracking": {
           "description": "Indicates whether user engagement tracking should be disabled for this request if the resource-level user engagement tracking setting was already enabled in the control plane.",
           "type": "boolean"
-        }
-      }
-    },
-    "EmailCustomHeader": {
-      "description": "Custom header for email.",
-      "type": "object",
-      "required": [
-        "name",
-        "value"
-      ],
-      "properties": {
-        "name": {
-          "description": "Header name.",
-          "type": "string",
-          "example": ""
-        },
-        "value": {
-          "description": "Header value.",
-          "type": "string",
-          "example": ""
         }
       }
     },
