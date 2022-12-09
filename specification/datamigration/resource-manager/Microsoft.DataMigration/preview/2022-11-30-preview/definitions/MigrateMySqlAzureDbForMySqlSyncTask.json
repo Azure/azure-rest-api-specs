@@ -70,21 +70,11 @@
     "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
       "type": "object",
       "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Result identifier",
-          "readOnly": true
-        },
-        "resultType": {
-          "description": "Result type",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
         }
-      },
-      "required": [
-        "resultType"
-      ],
-      "discriminator": "resultType"
+      ]
     },
     "MigrateMySqlAzureDbForMySqlSyncDatabaseInput": {
       "type": "object",
