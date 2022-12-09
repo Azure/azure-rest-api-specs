@@ -1693,7 +1693,7 @@
           "200": {
             "description": "ListOffers is working fine",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AseVMOffersList"
             }
           },
           "default": {
@@ -1742,7 +1742,7 @@
           "200": {
             "description": "ListPublishers is working fine",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AseVMPublishersList"
             }
           },
           "default": {
@@ -1795,7 +1795,7 @@
           "200": {
             "description": "ListOffersbyPublisher is working fine",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AseVMOffersList"
             }
           },
           "default": {
@@ -1852,7 +1852,7 @@
           "200": {
             "description": "ListSKUsWithinOffer is working fine",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AseVMSkusList"
             }
           },
           "default": {
@@ -1913,7 +1913,7 @@
           "200": {
             "description": "ListVersionswithinSKU is working fine",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AseVMVersionsList"
             }
           },
           "default": {
@@ -1978,7 +1978,7 @@
           "200": {
             "description": "GetParticularImage is working fine",
             "schema": {
-              "type": "string"
+            "$ref": "#/definitions/AseVMVersion"
             }
           },
           "default": {
@@ -1987,9 +1987,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "OrderGet": {
@@ -2046,13 +2043,13 @@
           "202": {
             "description": "Accepted the request to start VM Image Download",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/GetSASToken202"
             }
           },
           "200": {
             "description": "GetSASToken is working fine",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/GetSASToken200"
             }
           },
           "default": {
@@ -2063,6 +2060,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "OrderGet": {
             "$ref": "./examples/GetSASToken.json"
@@ -4938,6 +4938,272 @@
         }
       }
     },
+    "AseVMPublishersList": {
+      "description": "The collection of Publishers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Publishers.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMPublisher"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMPublisher": {
+      "description": "The Publisher details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMPublisherProperties",
+          "description": "The properties of the Publisher."
+        }
+      }
+    },
+    "AseVMPublisherProperties": {
+      "description": "The properties of the Publisher.",
+      "required": [
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "contentversion": {
+          "description": "The content version",
+          "type": "string"
+        },
+        "skumappings": {
+          "description": "The sku mappings",
+          "type": "string"
+        },
+        "content ": {
+          "description": "The content",
+          "type": "string"
+        }
+      }
+    },
+    "AseVMOffersList": {
+      "description": "The collection of Offers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Offers.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMOffer"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMOffer": {
+      "description": "The Offer details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMOfferProperties",
+          "description": "The properties of the Offer."
+        }
+      }
+    },
+    "AseVMOfferProperties": {
+      "description": "The properties of the Offer.",
+      "required": [
+        "publisherId",
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "The publisher Id",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "contentversion": {
+          "description": "The content version",
+          "type": "string"
+        },
+        "skumappings": {
+          "description": "The sku mappings",
+          "type": "string"
+        },
+        "content ": {
+          "description": "The content",
+          "type": "string"
+        }
+      }
+    },
+    "AseVMSkusList": {
+      "description": "The collection of Skus.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Skus.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMSku"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMSku": {
+      "description": "The Sku details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMSkuProperties",
+          "description": "The properties of the Sku."
+        }
+      }
+    },
+    "AseVMSkuProperties": {
+      "description": "The properties of the Sku.",
+      "required": [
+        "publisherId",
+        "offerId",
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "The publisher Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The offer Id",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "contentversion": {
+          "description": "The content version",
+          "type": "string"
+        },
+        "skumappings": {
+          "description": "The sku mappings",
+          "type": "string"
+        },
+        "content ": {
+          "description": "The content",
+          "type": "string"
+        }
+      }
+    },
+    "AseVMVersionsList": {
+      "description": "The collection of Versions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Versions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMVersion"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMVersion": {
+      "description": "The Version details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMVersionProperties",
+          "description": "The properties of the Version."
+        }
+      }
+    },
+    "AseVMVersionProperties": {
+      "description": "The properties of the Version.",
+      "required": [
+        "publisherId",
+        "offerId",
+        "skuId",
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "contentversion": {
+          "description": "The content version",
+          "type": "string"
+        },
+        "skumappings": {
+          "description": "The sku mappings",
+          "type": "string"
+        },
+        "content ": {
+          "description": "The content",
+          "type": "string"
+        }
+      }
+    },
     "Authentication": {
       "description": "Authentication mechanism for IoT devices.",
       "type": "object",
@@ -6586,6 +6852,36 @@
         },
         "expiryTimeInUTC": {
           "description": "Gets or sets expiry time in UTC",
+          "type": "string"
+        }
+      }
+    },
+    "GetSASToken200": {
+      "description": "The properties of the get sas token 200.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status",
+          "type": "string"
+        },
+        "sasUri": {
+          "description": "The sas Uri",
+          "type": "string"
+        }
+      }
+    },
+    "GetSASToken202": {
+      "description": "The properties of the get sas token 202.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status",
           "type": "string"
         }
       }
