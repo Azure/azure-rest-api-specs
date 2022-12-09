@@ -29,14 +29,14 @@ https://westus.api.cognitive.microsoft.com).
     endpoint: string,
   }
 )
-@versioned(Azure.OpenAI.Versions)
+@versioned(ServiceApiVersions)
 @versionedDependency(
-  [[Azure.OpenAI.Versions.v2022_06_01_preview, Azure.Core.Versions.v1_0_Preview_1]]
+  [[ServiceApiVersions.v2022_06_01_preview, Azure.Core.Versions.v1_0_Preview_1]]
 )
 @doc("Azure OpenAI APIs for completions and search")
 namespace Azure.OpenAI;
 
-enum Versions {
+enum ServiceApiVersions {
   v2022_06_01_preview: "2022-06-01-preview",
 }
 

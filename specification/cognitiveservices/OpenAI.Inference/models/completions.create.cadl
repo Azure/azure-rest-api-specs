@@ -3,10 +3,10 @@ import "@cadl-lang/rest";
 using Cadl.Rest;
 using Cadl.Http;
 
-namespace Azure.OpenAI;
+namespace Azure.OpenAI.Completions;
 
-@doc("Post body schema to create a prompt completion from a deployment")
-model CompletionsRequest {
+//@doc("Post body schema to create a prompt completion from a deployment")
+alias CompletionsRequest = {
     @doc("""
 An optional prompt to complete from, encoded as a string, a list of strings, or
 a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -56,7 +56,7 @@ like -100 or 100 should result in a ban or exclusive selection of the relevant
 token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
-    logit_bias?: object;
+    logit_bias?: Record<int32>;
 
     @doc("The ID of the end-user, for use in tracking and rate-limiting.")
     user?: string;
@@ -117,30 +117,20 @@ How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.
 """)
     best_of?: int32;
-}
+};
 
-@doc("""
-An optional prompt to complete from, encoded as a string, a list of strings, or
-a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
-If you would like to provide multiple prompts, use the POST variant of this
-method. Note that <|endoftext|> is the document separator that the model sees
-during training, so if a prompt is not specified the model will generate as if
-from the beginning of a new document. Maximum allowed size of string list is
-2048.
-""")
-model CompletionsPrompt {}
+alias CompletionsPrompt = string | string[] | string[][];
 
-@doc("A sequence which indicates the end of the current document.")
-model CompletionsStop {}
+alias CompletionsStop = string | string[];
 
 @doc("Expected response schema to completion request")
-model Completions {
+model Completion {
     @doc("Request ID for troubleshooting purposes")
     @header "apim-request-id": string;
     @doc("Id for completion response")
     id?: string;
     @doc("Object for completion response")
-    object?: string;
+    object: "text_completion";
     @doc("Created time for completion response")
     created?: int32;
     @doc("Model used for completion response")
