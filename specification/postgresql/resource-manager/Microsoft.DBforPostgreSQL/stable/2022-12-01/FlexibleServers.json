@@ -721,14 +721,30 @@
     "AuthConfig": {
       "type": "object",
       "properties": {
-        "activeDirectoryAuthEnabled": {
-          "type": "boolean",
-          "description": "If true, Azure Active Directory authentication is enabled."
+        "activeDirectoryAuth": {
+          "type": "string",
+          "description": "If Enabled, Azure Active Directory authentication is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "activeDirectoryAuthEnum",
+            "modelAsString": true
+          }
         },
-        "passwordAuthEnabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "If true, Password authentication is enabled."
+        "passwordAuth": {
+          "type": "string",
+          "default": "Enabled",
+          "description": "If Enabled, Password authentication is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "passwordAuthEnum",
+            "modelAsString": true
+          }
         },
         "tenantId": {
           "type": "string",
