@@ -2199,7 +2199,7 @@
       "properties": {
         "summaries": {
           "type": "array",
-          "description": "This summaries field will be deprecated and clients should start to use chapters field.",
+          "description": "Conversation level summaries.",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
           }
@@ -2227,12 +2227,29 @@
           "format": "int32",
           "description": " The supported values are 0, 1, 2. If not specified, the value is determined automatically by the service. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters."
         },
-        "maxChaptersCountOnEachLevel": {
-          "description": "The maximum number of top level chapters on each level under the parent node. The array length must be the same as levels. For example, levels=2, maxChaptersCountOnEachLevel=[6,3] means client need at most 6 high level chapters, each of them has at most 3 child sub chapters. If not specified, the service will determine the chapters count automatically on all levels. If the array element is -1, the service will determine the chapters count automatically on that level. For example, levels=2, maxChaptersCountOnEachLevel=[3,-1], it means at most 3 high level chapters, each of them can have any number of sub chapters.",
+        "parametersOnEachLevel": {
+          "description": "The parameters on each level. The array length must be the same as levels.",
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/definitions/ChapteringParametersOnOneLevel"
+          }
+        }
+      }
+    },
+    "ChapteringParametersOnOneLevel": {
+      "type": "object",
+      "description": "The parameters to control the chaptering on specific level.",
+      "properties": {
+        "maxChaptersCount": {
+          "description": "The maximum number of chapters under the parent node. If not specified, the service will determine automatically.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "summaryAspects": {
+          "description": "The summary aspects to enable on current level",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -2257,7 +2274,7 @@
         },
         "summaries": {
           "type": "array",
-          "description": "A list of summaries, one for each requested aspect.",
+          "description": "A list of summaries, 0 or multiple for each requested aspect.",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
           }
