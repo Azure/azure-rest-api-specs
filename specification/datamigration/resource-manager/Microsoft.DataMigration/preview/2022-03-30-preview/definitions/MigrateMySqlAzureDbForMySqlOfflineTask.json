@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2022-03-30-preview"
+    "version": "2022-11-30-preview"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -46,9 +46,24 @@
           "format": "date-time",
           "description": "Parameter to specify when the migration started"
         },
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the source server if it is an azure instance"
+        },
+        "targetServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the target server"
+        },
         "optionalAgentSettings": {
           "type": "object",
           "description": "Optional parameters for fine tuning the data transfer rate during migration",
+          "properties": {
+            "enableConsistentBackup": {
+              "type": "boolean",
+              "description": "Setting to enable transactional consistency",
+              "default": false
+            }
+          },
           "additionalProperties": {
             "type": "string"
           }
@@ -58,6 +73,11 @@
           "description": "encrypted key for secure fields"
         }
       },
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlSchemaMigrationOptions"
+        }
+      ],
       "required": [
         "sourceConnectionInfo",
         "targetConnectionInfo",
@@ -67,26 +87,23 @@
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutput": {
       "type": "object",
       "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Result identifier",
-          "readOnly": true
-        },
-        "resultType": {
-          "description": "Result type",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
         }
-      },
-      "required": [
-        "resultType"
-      ],
-      "discriminator": "resultType"
+      ]
     },
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "type": "object",
       "properties": {
+        "migrationType": {
+          "enum": [
+            "InitialLoad"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
         "startedOn": {
           "type": "string",
           "format": "date-time",
@@ -172,6 +189,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Last time the storage was updated",
+          "readOnly": true
+        },
+        "sourceBinlogPosition": {
+          "description": "The binlog position when the consistent snapshot was taken",
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionOutput",
           "readOnly": true
         }
       },

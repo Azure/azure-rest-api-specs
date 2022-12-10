@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-11-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateMySqlAzureDbForMySqlTaskResult": {
+      "type": "object",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MySqlBinlogPositionInput": {
+      "type": "object",
+      "description": "MySQL binlog reference",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Specifies the MySQL binlog file name"
+        },
+        "position": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the position in the binlog file"
+        }
+      }
+    },
+    "MySqlBinlogPositionOutput": {
+      "type": "object",
+      "description": "MySQL binlog reference",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specifies the MySQL binlog file name",
+          "readOnly": true
+        },
+        "position": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the position in the binlog file",
+          "readOnly": true
+        },
+        "fileSeqNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the the sequential number of the binlog fie, extracted from the file name"
+        }
+      }
+    },
+    "MySqlSchemaMigrationOptions": {
+      "type": "object",
+      "description": "MySQL schema migration options",
+      "properties": {
+        "migrateAllViews": {
+          "type": "boolean",
+          "description": "If true, all view definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllTriggers": {
+          "type": "boolean",
+          "description": "If true, all trigger definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllEvents": {
+          "type": "boolean",
+          "description": "If true, all event definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllRoutines": {
+          "type": "boolean",
+          "description": "If true, all routine definitions will be migrated in the selected databases",
+          "default": false
+        }
+      }
+    }
+  }
+}
