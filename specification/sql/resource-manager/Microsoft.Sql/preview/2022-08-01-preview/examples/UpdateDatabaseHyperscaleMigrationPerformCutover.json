@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "databaseName": "testdb",
+    "api-version": "2022-08-01-preview",
+    "parameters": {
+      "identity": {
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/userAssignedIdentities/umi": {},
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/userAssignedIdentities/umiToDelete": null
+        },
+        "type": "UserAssigned"
+      },
+      "location": "southeastasia",
+      "properties": {
+        "performCutover": "true"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "body": {
+        "operation": "UpdateLogicalDatabase",
+        "startTime": "2022-12-09T08:18:15.743Z"
+      }
+    }
+  }
+}
