@@ -1,0 +1,720 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ModSimWorkbench",
+    "description": "Microsoft.ModSimWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/start": {
+      "post": {
+        "tags": [
+          "workloads_Start"
+        ],
+        "summary": "Perform Start operation.",
+        "operationId": "workloads_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the workload name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Workloads Start": {
+            "$ref": "./examples/WorkloadsStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/stop": {
+      "post": {
+        "tags": [
+          "workloads_Stop"
+        ],
+        "summary": "Perform Stop operation.",
+        "operationId": "workloads_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the workload name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Workloads Stop": {
+            "$ref": "./examples/WorkloadsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/restart": {
+      "post": {
+        "tags": [
+          "workloads_Restart"
+        ],
+        "summary": "Perform Restart operation.",
+        "operationId": "workloads_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the workload name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Workloads Restart": {
+            "$ref": "./examples/WorkloadsRestart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{workloadName}": {
+      "put": {
+        "tags": [
+          "workloads_CreateOrUpdate"
+        ],
+        "operationId": "workloads_CreateOrUpdate",
+        "description": "Creates or updates the specified workload.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "workloadName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workload."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update workload operation.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting workload resource.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting workload resource.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Workload": {
+            "$ref": "./examples/WorkloadCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "workloads_Update"
+        ],
+        "operationId": "workloads_Update",
+        "description": "Updates the specified workload.",
+        "consumes": [
+          "application/merge-patch+json",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "workloadName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workload."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update workload operation.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting workload resource.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Workload resource.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update workload": {
+            "$ref": "./examples/WorkloadPatch.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "workloads_Get"
+        ],
+        "operationId": "workloads_Get",
+        "description": "Gets information about the specified workload.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "workloadName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workload."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the specified workload.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get Workload": {
+            "$ref": "./examples/WorkloadGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "workloads_Delete"
+        ],
+        "operationId": "workloads_Delete",
+        "description": "Deletes the specified workload.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "workloadName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workload."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed successfully",
+            "schema": {
+              "$ref": "#/definitions/Workload"
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource with the specified name does not exist."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Workload": {
+            "$ref": "./examples/WorkloadDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads": {
+      "get": {
+        "tags": [
+          "workloads_List"
+        ],
+        "operationId": "workloads_List",
+        "description": "Lists all workloads.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all workloads",
+            "schema": {
+              "$ref": "#/definitions/WorkloadPageableList"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all workloads": {
+            "$ref": "./examples/WorkloadList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkloadPageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workload"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        }
+      }
+    },
+    "WorkloadPropertiesFormat": {
+      "description": "Workload properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the workload at the time the operation was called"
+        },
+        "vmSize": {
+          "description": "Gets or sets the VmSize.",
+          "type": "string"
+        },
+        "edaType": {
+          "description": "Gets or sets the edaType.",
+          "type": "string",
+          "enum": [
+            "Cadence",
+            "Siemens",
+            "Synopsys",
+            "Ansys",
+            "Common"
+          ],
+          "default": "Common",
+          "x-ms-enum": {
+            "name": "EdaType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Gets or sets the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIP": {
+          "description": "Gets or sets the private IpAddress of workload.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Workload": {
+      "description": "Workload resource",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkloadPropertiesFormat",
+          "description": "Workload properties.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./modsimworkbench.json#/definitions/Resource"
+        }
+      ]
+    }
+  }
+}

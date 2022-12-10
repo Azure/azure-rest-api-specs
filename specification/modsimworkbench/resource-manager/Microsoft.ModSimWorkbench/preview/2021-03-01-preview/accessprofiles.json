@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ModSimWorkbench",
+    "description": "Microsoft.ModSimWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles/{name}/sync": {
+      "post": {
+        "tags": [
+          "accessProfiles_Sync"
+        ],
+        "operationId": "accessProfiles_Sync",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chamberName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessProfileOperationsResponse"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create accessProfile": {
+            "$ref": "./examples/AccessProfilesSync.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles/{accessProfileName}": {
+      "put": {
+        "tags": [
+          "accessProfiles_CreateOrUpdate"
+        ],
+        "operationId": "accessProfiles_CreateOrUpdate",
+        "description": "Creates or updates the specified AccessProfile.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "accessProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the accessProfile."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update accessProfile operation.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting accessProfile resource.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting accessProfile resource.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create accessProfile": {
+            "$ref": "./examples/AccessProfilesCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "accessProfiles_Update"
+        ],
+        "operationId": "accessProfiles_Update",
+        "description": "Updates the specified accessProfile.",
+        "consumes": [
+          "application/merge-patch+json",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "accessProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the accessProfile."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update accessProfile operation.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting AccessProfile resource.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update AccessProfile": {
+            "$ref": "./examples/AccessProfilesPatch.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "accessProfiles_Get"
+        ],
+        "operationId": "accessProfiles_Get",
+        "description": "Gets information about the specified accessProfile.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "accessProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the accessProfile."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the specified accessProfile.",
+            "schema": {
+              "$ref": "#/definitions/AccessProfile"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get AccessProfile": {
+            "$ref": "./examples/AccessProfilesGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "accessProfiles_Delete"
+        ],
+        "operationId": "accessProfiles_Delete",
+        "description": "Deletes the specified accessProfile.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "accessProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the accessProfile."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request is successful. Resource with the specified name does not exist."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete AccessProfile": {
+            "$ref": "./examples/AccessProfilesDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/accessProfiles": {
+      "get": {
+        "tags": [
+          "accessProfiles_List"
+        ],
+        "operationId": "accessProfiles_List",
+        "description": "Lists all AccessProfiles.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all AccessProfiles",
+            "schema": {
+              "$ref": "#/definitions/AccessProfilePageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all AccessProfiles": {
+            "$ref": "./examples/AccessProfilesList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationStatus": {
+      "description": "Operation status enumeration.",
+      "enum": [
+        "Success",
+        "Failed"
+      ],
+      "type": "string"
+    },
+    "AccessProfilePageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessProfile"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        }
+      }
+    },
+    "AccessProfileOperationsResponse": {
+      "description": "Model class to represent AccessProfile status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
+    "AccessProfilePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "consortiumId": {
+          "description": "Gets or sets the consortiumId.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the accessProfile at the time the operation was called"
+        }
+      },
+      "description": "AccessProfile properties."
+    },
+    "OperationResponse": {
+      "description": "Generic model class to represent arm facade operation api response.",
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "type": "string"
+        },
+        "resourceId": {
+          "$ref": "./modsimworkbench.json#/definitions/ArmId"
+        },
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "errorMessages"
+          ]
+        }
+      }
+    },
+    "AccessProfile": {
+      "description": "AccessProfile resource",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessProfilePropertiesFormat",
+          "description": "AccessProfile properties.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./modsimworkbench.json#/definitions/Resource"
+        }
+      ]
+    }
+  }
+}

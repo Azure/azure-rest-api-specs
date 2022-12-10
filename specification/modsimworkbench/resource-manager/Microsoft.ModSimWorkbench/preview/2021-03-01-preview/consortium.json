@@ -1,0 +1,841 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ModSimWorkbench",
+    "description": "Microsoft.ModSimWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/start": {
+      "post": {
+        "tags": [
+          "consortiums_Start"
+        ],
+        "summary": "Perform Start operation.",
+        "operationId": "consortiums_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string",
+            "description": "Name of the resource group"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the instance"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "Name of the consortium"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Consortiums Start": {
+            "$ref": "./examples/ConsortiumsStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/stop": {
+      "post": {
+        "tags": [
+          "consortiums_Stop"
+        ],
+        "summary": "Perform Stop operation.",
+        "operationId": "consortiums_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the consortium name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Consortiums stop": {
+            "$ref": "./examples/ConsortiumsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/restart": {
+      "post": {
+        "tags": [
+          "consortiums_Restart"
+        ],
+        "summary": "Perform Restart operation.",
+        "operationId": "consortiums_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the consortium name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Consortiums Restart": {
+            "$ref": "./examples/ConsortiumsRestart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{consortiumName}": {
+      "put": {
+        "tags": [
+          "consortiums_CreateOrUpdate"
+        ],
+        "operationId": "consortiums_CreateOrUpdate",
+        "description": "Creates or updates the specified consortium.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "consortiumName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the consortium."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update consortium operation.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Consortium resource.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Consortium resource.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Consortium": {
+            "$ref": "./examples/ConsortiumsCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "consortiums_Update"
+        ],
+        "operationId": "consortiums_Update",
+        "description": "Updates the specified consortium.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "consortiumName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the consortium."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update consortium operation.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Consortium resource.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Consortium resource.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update Consortium": {
+            "$ref": "./examples/ConsortiumsPatch.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "consortiums_Get"
+        ],
+        "operationId": "consortiums_Get",
+        "description": "Gets information about the specified consortium.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "consortiumName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the consortium."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the specified consortium.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get Consortium": {
+            "$ref": "./examples/ConsortiumsGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "consortiums_Delete"
+        ],
+        "operationId": "consortiums_Delete",
+        "description": "Deletes the specified consortium.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "consortiumName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the consortium."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed successfully",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource with the specified name does not exist."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Consortium": {
+            "$ref": "./examples/ConsortiumsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums": {
+      "get": {
+        "tags": [
+          "consortiums_List"
+        ],
+        "operationId": "consortiums_List",
+        "description": "Lists all consortiums.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all consortiums",
+            "schema": {
+              "$ref": "#/definitions/ConsortiumPageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all consortiums": {
+            "$ref": "./examples/ConsortiumsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/licenseAdd": {
+      "post": {
+        "tags": [
+          "consortiums_LicenseAdd"
+        ],
+        "description": "Add license to an ModSim Workbench consortium.",
+        "operationId": "consortiums_LicenseAdd",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "The name of the consortium."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "License key parameters",
+            "schema": {
+              "$ref": "#/definitions/LicenseKeyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Consortiums License Add": {
+            "$ref": "./examples/ConsortiumsLicenseAdd.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "RemoteDesktop": {
+      "type": "object",
+      "description": "Remote Desktop properties.",
+      "properties": {
+        "etx": {
+          "$ref": "#/definitions/Etx",
+          "description": "The etx object."
+        }
+      }
+    },
+    "Etx": {
+      "type": "object",
+      "properties": {
+        "connectionNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The connection node count."
+        },
+        "licenseActivated": {
+          "description": "The license activated.",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "licenseActivated",
+            "modelAsString": true
+          }
+        },
+        "replyUrlEtx": {
+          "description": "The reply URL of ETX Server for Azure AD app.",
+          "type": "string"
+        },
+        "replyUrlOtds": {
+          "description": "The reply URL of OTDS for Azure AD app.",
+          "type": "string"
+        },
+        "licenseKeyUri": {
+          "description": "The license key uri.",
+          "type": "string"
+        }
+      },
+      "description": "Etx properties."
+    },
+    "AccessConfiguration": {
+      "type": "object",
+      "description": "Access configuration properties.",
+      "properties": {
+        "accessType": {
+          "description": "Gets or sets the AccessType.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "GUI"
+          ],
+          "x-ms-enum": {
+            "name": "AccessType",
+            "modelAsString": true
+          }
+        },
+        "gatewayType": {
+          "description": "Gets or sets the GatewayType.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "ExpressRoute",
+            "None",
+            "Vpn"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayType",
+            "modelAsString": true
+          }
+        },
+        "gatewayVnetId": {
+          "type": "string",
+          "description": "Gets or sets the GatewayVnetId."
+        },
+        "accessUrl": {
+          "type": "string",
+          "description": "Gets or sets the AccessUrl."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Gets or sets the IpAddress."
+        }
+      }
+    },
+    "NetworkAcls": {
+      "type": "object",
+      "description": "Access configuration properties.",
+      "properties": {
+        "allowedAddressSpaces": {
+          "type": "array",
+          "description": "Gets or sets the AllowedAddressSpaces.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "allowedAddressSpaces"
+          ]
+        }
+      }
+    },
+    "ConsortiumPageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Consortium"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        }
+      }
+    },
+    "ConsortiumPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "accessConfigurations": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AccessConfiguration"
+          },
+          "description": "Gets or sets the Access Configuration."
+        },
+        "remoteDesktop": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/RemoteDesktop"
+          },
+          "description": "Gets or sets the Remote Desktop."
+        },
+        "networkAcls": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/NetworkAcls"
+          },
+          "description": "Specifies set of source IP address ranges to allow access the Modsim Workbench instance."
+        },
+        "provisioningState": {
+          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the consortium at the time the operation was called"
+        }
+      },
+      "description": "Consortium properties."
+    },
+    "Consortium": {
+      "description": "Consortium resource",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConsortiumPropertiesFormat",
+          "description": "Consortium properties.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./modsimworkbench.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LicenseKeyParameters": {
+      "type": "object",
+      "description": "License Key Parameters",
+      "properties": {
+        "licenseKey": {
+          "x-ms-secret": true,
+          "description": "Value of License Key",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

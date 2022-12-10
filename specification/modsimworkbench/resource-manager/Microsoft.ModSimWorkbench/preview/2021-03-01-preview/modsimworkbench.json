@@ -1,0 +1,638 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ModSimWorkbench",
+    "description": "Microsoft.ModSimWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.ModSimWorkbench/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists Operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists Operations": {
+            "$ref": "./examples/InstancesOperationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ModSimWorkbench/instances": {
+      "get": {
+        "tags": [
+          "instances_ListBySubscription"
+        ],
+        "operationId": "instances_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InstancePageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Instances by Subscription": {
+            "$ref": "./examples/InstancesListBySubscription.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances": {
+      "get": {
+        "tags": [
+          "instances_ListByResourceGroup"
+        ],
+        "operationId": "instances_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InstancePageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Instances by Resource Group": {
+            "$ref": "./examples/InstancesListByResourceGroup.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{name}": {
+      "get": {
+        "tags": [
+          "instances_Get"
+        ],
+        "operationId": "instances_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances Get": {
+            "$ref": "./examples/InstancesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "instances_CreateOrUpdate"
+        ],
+        "operationId": "instances_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Instance resource.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Instances create or update": {
+            "$ref": "./examples/InstancesCreateOrUpdate.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "instances_Patch"
+        ],
+        "operationId": "instances_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Instance resource.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Instances Update": {
+            "$ref": "./examples/InstancesPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "instances_Delete"
+        ],
+        "operationId": "instances_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "204": {
+            "description": "Success, no content"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances Update": {
+            "$ref": "./examples/InstancesDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmId": {
+      "description": "Structure that represents the components of an ARM Resource Identifier.",
+      "type": "string"
+    },
+    "AzureRegion": {
+      "description": "Handles Azure Region strings by parsing either key (e.g eastus) or friendly name (e.g. East US).",
+      "type": "string"
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details.",
+          "x-ms-identifiers": [
+            "details"
+          ]
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info.",
+          "x-ms-identifiers": [
+            "additionalInfo"
+          ]
+        }
+      }
+    },
+    "InstancePageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Instance"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state of resource.",
+      "enum": [
+        "Unknown",
+        "Validating",
+        "Processing",
+        "Deleting",
+        "Accepted",
+        "Canceled",
+        "Completed",
+        "Succeeded",
+        "Failed",
+        "Deleted"
+      ],
+      "type": "string",
+      "readOnly": true
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "systemData": {
+          "description": "system data",
+          "title": "system data",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Name of SKU."
+        }
+      }
+    },
+    "CidrBlock": {
+      "description": "this is an extension of IPAddress which includes logic related to Classes Interdomain Routing (CIDR) formatted IP Addresses.  \r\nE.g. 192.168.0.0/24, most people's default class C RFC 1918 IP space for their home router",
+      "type": "string"
+    },
+    "AppOidc": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id"
+        },
+        "secretUri": {
+          "type": "string",
+          "description": "Client secret"
+        }
+      }
+    },
+    "InstancePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressSpace": {
+          "$ref": "#/definitions/CidrBlock"
+        },
+        "appOidc": {
+          "$ref": "#/definitions/AppOidc"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Name of SKU."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the instance at the time the operation was called"
+        }
+      },
+      "required": [
+        "appOidc"
+      ],
+      "description": "Instance properties."
+    },
+    "Instance": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InstancePropertiesFormat",
+          "description": "Instance properties",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Instance resource"
+    }
+  }
+}
