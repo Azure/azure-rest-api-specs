@@ -341,6 +341,174 @@
         }
       }
     },
+    "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/impactedResources": {
+      "get": {
+        "tags": [
+          "EventImpactedResources"
+        ],
+        "operationId": "ImpactedResources_ListByTenantIdAndEventId",
+        "description": "Lists impacted resources in the tenant by an event.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of impacted resources in the tenant by an event.",
+            "schema": {
+              "$ref": "#/definitions/eventImpactedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListEventsByTenantId": {
+            "$ref": "./examples/ImpactedResources_ListByTenantId_ListByEventId.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/impactedResources/{impactedResourceName}": {
+      "get": {
+        "tags": [
+          "EventImpactedResources"
+        ],
+        "operationId": "ImpactedResources_GetByTenantId",
+        "description": "Gets the specific impacted resource in the tenant by an event.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ImpactedResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of Impacted Resource.",
+            "schema": {
+              "$ref": "#/definitions/eventImpactedResource"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImpactedResourcesGet": {
+            "$ref": "./examples/ImpactedResources_GetByTenantId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/listSecurityAdvisoryImpactedResources": {
+      "post": {
+        "tags": [
+          "SecurityAdvisoryImpactedResources"
+        ],
+        "operationId": "SecurityAdvisoryImpactedResources_ListBySubscriptionIdAndEventId",
+        "description": "Lists impacted resources in the subscription by an event (Security Advisory).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of impacted resources in the subscription by an event (Security Advisory).",
+            "schema": {
+              "$ref": "#/definitions/eventImpactedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListSecurityAdvisoryImpactedResourcesBySubscriptionId": {
+            "$ref": "./examples/SecurityAdvisoryImpactedResources_ListBySubscriptionId_ListByEventId.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/listSecurityAdvisoryImpactedResources": {
+      "post": {
+        "tags": [
+          "SecurityAdvisoryImpactedResources"
+        ],
+        "operationId": "SecurityAdvisoryImpactedResources_ListByTenantIdAndEventId",
+        "description": "Lists impacted resources in the tenant by an event (Security Advisory).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of impacted resources in the tenant by an event (Security Advisory).",
+            "schema": {
+              "$ref": "#/definitions/eventImpactedResourceListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListSecurityAdvisoryImpactedResourcesByTenantId": {
+            "$ref": "./examples/SecurityAdvisoryImpactedResources_ListByTenantId_ListByEventId.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
@@ -1507,6 +1675,7 @@
       "description": "Name of the Impacted Resource.",
       "required": true,
       "type": "string",
+      "pattern": "^[^*#&+:<>%?]+$",
       "x-ms-parameter-location": "method"
     }
   }
