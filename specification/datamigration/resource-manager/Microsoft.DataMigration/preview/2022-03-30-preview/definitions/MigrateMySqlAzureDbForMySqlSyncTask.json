@@ -69,10 +69,94 @@
     },
     "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for sync migrations",
       "allOf": [
         {
           "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
+        }
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlOfflineTask.json#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlReplicateChangesTask.json#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlOfflineTask.json#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TableLevelOutput",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlOfflineTask.json#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "error": {
+          "$ref": "./Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlOfflineTask.json#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutputError"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlReplicateChangesTask.json#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelErrorOutput",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/SyncMigrationDatabaseErrorEvent"
+          },
+          "description": "List of error events."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
         }
       ]
     },
@@ -87,27 +171,6 @@
         "targetDatabaseName": {
           "type": "string",
           "description": "Name of target database. Note: Target database will be truncated before starting migration."
-        },
-        "migrationSetting": {
-          "type": "object",
-          "description": "Migration settings which tune the migration behavior",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sourceSetting": {
-          "type": "object",
-          "description": "Source settings to tune source endpoint migration behavior",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetSetting": {
-          "type": "object",
-          "description": "Target settings to tune target endpoint migration behavior",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "tableMap": {
           "type": "object",
