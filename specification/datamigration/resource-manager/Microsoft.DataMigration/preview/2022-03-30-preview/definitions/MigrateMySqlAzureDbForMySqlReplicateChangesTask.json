@@ -76,27 +76,6 @@
         "selectedDatabases"
       ]
     },
-    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputError": {
-      "type": "object",
-      "x-ms-discriminator-value": "ErrorOutput",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the exception",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "./Common.json#/definitions/ReportableException",
-          "description": "Migration error",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput"
-        }
-      ]
-    },
     "MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput": {
       "type": "object",
       "description": "Database specific information for MySQL to Azure Database for MySQL migration task inputs",
