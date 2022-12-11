@@ -30,14 +30,24 @@ These are the global settings for the Database Migration Service API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-preview-2022-03
+tag: package-preview-2022-11
 ```
 
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.DataMigration/preview/2022-11-30-preview/datamigration.json
+  - Microsoft.DataMigration/preview/2022-11-30-preview/sqlmigration.json
+```
 ### Tag: package-preview-2022-03
 
 These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-03'
+``` yaml $(tag) == 'package-preview-2022-03'
 input-file:
   - Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
   - Microsoft.DataMigration/preview/2022-03-30-preview/datamigration.json
@@ -112,7 +122,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.DataMigration/preview/2022-01-30-preview/sqlmigration.json
   - Microsoft.DataMigration/preview/2022-01-30-preview/datamigration.json
@@ -174,11 +184,12 @@ directive:
     where: $.definitions.DatabaseMigrationSqlVm
     reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
 ```
+
 ### Tag: package-preview-2021-10
 
 These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-10'
+``` yaml $(tag) == 'package-preview-2021-10'
 input-file:
   - Microsoft.DataMigration/preview/2021-10-30-preview/sqlmigration.json
   - Microsoft.DataMigration/preview/2021-10-30-preview/datamigration.json
@@ -240,6 +251,7 @@ directive:
     where: $.definitions.DatabaseMigrationSqlVm
     reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
 ```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
