@@ -41,6 +41,14 @@ directive:
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
 
+### Tag: package-2022-08-01-preview-only
+
+These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line
+
+``` yaml $(tag) == 'Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json'
+input-file:
+- Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json
+```
 
 ### Tag: package-preview-2022-08
 
@@ -95,7 +103,7 @@ input-file:
 - Microsoft.Insights/stable/2018-01-01/metrics_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
-- Microsoft.Insights/stable/2022-06-15/scheduledQueryRule_API.json
+- Microsoft.Insights/stable/2022-08-01-preview/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
