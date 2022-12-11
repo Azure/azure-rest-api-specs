@@ -91,7 +91,11 @@
         {
           "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
         }
-      ]
+      ],
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
     },
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",

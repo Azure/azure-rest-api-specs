@@ -69,7 +69,7 @@
     },
     "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for sync migrations",
       "allOf": [
         {
           "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
@@ -87,27 +87,6 @@
         "targetDatabaseName": {
           "type": "string",
           "description": "Name of target database. Note: Target database will be truncated before starting migration."
-        },
-        "migrationSetting": {
-          "type": "object",
-          "description": "Migration settings which tune the migration behavior",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sourceSetting": {
-          "type": "object",
-          "description": "Source settings to tune source endpoint migration behavior",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetSetting": {
-          "type": "object",
-          "description": "Target settings to tune target endpoint migration behavior",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "tableMap": {
           "type": "object",
