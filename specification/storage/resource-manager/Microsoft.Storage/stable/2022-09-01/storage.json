@@ -5133,7 +5133,15 @@
         },
         "service": {
           "type": "string",
-          "description": "The service used by the local user, e.g. blob, file."
+          "description": "The service used by the local user, e.g. blob, file.",
+          "enum": [
+              "blob",
+              "file"
+          ],
+          "x-ms-enum": {
+            "name": "PermissionScopeServiceName",
+            "modelAsString": true
+          }
         },
         "resourceName": {
           "type": "string",
