@@ -1,22 +1,22 @@
 @doc("Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace HealthCareApis {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.")
-  model HealthcareFhirResourceCreatedEventData
-    is BaseEvent.HealthcareFhirResourceBaseEventData {
+  model HealthcareFhirResourceCreatedEventData {
+    ...HealthcareFhirResourceBaseEventData;
     @doc("Type of HL7 FHIR resource.")
     resourceType?: HealthcareFhirResourceType;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.")
-  model HealthcareFhirResourceUpdatedEventData
-    is BaseEvent.HealthcareFhirResourceBaseEventData {
+  model HealthcareFhirResourceUpdatedEventData {
+    ...HealthcareFhirResourceBaseEventData;
     @doc("Type of HL7 FHIR resource.")
     resourceType?: HealthcareFhirResourceType;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.")
-  model HealthcareFhirResourceDeletedEventData
-    is BaseEvent.HealthcareFhirResourceBaseEventData {
+  model HealthcareFhirResourceDeletedEventData {
+    ...HealthcareFhirResourceBaseEventData;
     @doc("Type of HL7 FHIR resource.")
     resourceType?: HealthcareFhirResourceType;
   }
@@ -545,10 +545,7 @@ namespace HealthCareApis {
     VisionPrescription,
   }
   
-}
-
-namespace BaseEvent {
-  model HealthcareFhirResourceBaseEventData {
+  alias HealthcareFhirResourceBaseEventData = {
     @doc("Domain name of FHIR account for this resource.")
     resourceFhirAccount?: string;
 
@@ -557,5 +554,5 @@ namespace BaseEvent {
 
     @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
     resourceVersionId?: int64;
-  }
+  };
 }

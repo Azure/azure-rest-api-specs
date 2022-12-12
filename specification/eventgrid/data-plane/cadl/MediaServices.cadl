@@ -238,12 +238,13 @@ namespace MediaServices {
     extends MediaJobOutputStateChangeEventData {}
 
   @doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.")
-  model MediaLiveEventEncoderConnectedEventData
-    is BaseEvents.MediaLiveEventConnectionBaseData;
+  model MediaLiveEventEncoderConnectedEventData{
+    ...MediaLiveEventConnectionBaseData;
+  }
 
   @doc("Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event.")
   model MediaLiveEventConnectionRejectedEventData {
-    ...BaseEvents.MediaLiveEventConnectionBaseData;
+    ...MediaLiveEventConnectionBaseData;
 
     @doc("Gets the result code.")
     resultCode?: string;
@@ -251,7 +252,7 @@ namespace MediaServices {
 
   @doc("Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event.")
   model MediaLiveEventEncoderDisconnectedEventData {
-    ...BaseEvents.MediaLiveEventConnectionBaseData;
+    ...MediaLiveEventConnectionBaseData;
 
     @doc("Gets the result code.")
     resultCode?: string;
@@ -430,10 +431,8 @@ namespace MediaServices {
     @doc("Gets the latency result code.")
     latencyResultCode: string;
   }
-}
 
-namespace BaseEvents {
-  model MediaLiveEventConnectionBaseData {
+  alias MediaLiveEventConnectionBaseData = {
     @doc("Gets the ingest URL provided by the live event.")
     ingestUrl?: string;
 
@@ -445,5 +444,5 @@ namespace BaseEvents {
 
     @doc("Gets the remote port.")
     encoderPort?: string;
-  }
+  };
 }

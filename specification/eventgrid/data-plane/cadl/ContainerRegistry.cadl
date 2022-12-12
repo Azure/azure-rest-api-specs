@@ -62,14 +62,14 @@ namespace ContainerRegistry {
   }
 
   @doc("The target of the event.")
-  model ContainerRegistryEventTarget
-    is BaseEvent.ContainerRegistryBaseEventTarget<
+  model ContainerRegistryEventTarget{
+    ...ContainerRegistryBaseEventTarget<
       "The MIME type of the referenced object.",
       "The number of bytes of the content. Same as Length field.",
       "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
       "The repository name.",
       "The tag name."
-    > {
+    >;
     @doc("The number of bytes of the content. Same as Size field.")
     length?: int64;
 
@@ -78,14 +78,14 @@ namespace ContainerRegistry {
   }
 
   @doc("The target of the event.")
-  model ContainerRegistryArtifactEventTarget
-    is BaseEvent.ContainerRegistryBaseEventTarget<
+  model ContainerRegistryArtifactEventTarget {
+   ...ContainerRegistryBaseEventTarget<
       "The MIME type of the artifact.",
       "The size in bytes of the artifact.",
       "The digest of the artifact.",
       "The repository name of the artifact.",
       "The tag of the artifact."
-    > {
+    >;
     @doc("The name of the artifact.")
     name?: string;
 
@@ -131,16 +131,14 @@ namespace ContainerRegistry {
     @doc("The name of the connected registry that generated this event.")
     name?: string;
   }
-}
 
-namespace BaseEvent {
-  model ContainerRegistryBaseEventTarget<
+  alias ContainerRegistryBaseEventTarget<
     TmediaType extends string,
     Tsize extends string,
     Tdigest extends string,
     Trepository extends string,
     Ttag extends string
-  > {
+  > = {
     @doc(TmediaType)
     mediaType?: string;
 
@@ -155,5 +153,5 @@ namespace BaseEvent {
 
     @doc(Ttag)
     tag?: string;
-  }
+  };
 }
