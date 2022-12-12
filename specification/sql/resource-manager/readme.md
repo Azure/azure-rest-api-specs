@@ -848,6 +848,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevert.json
 
+
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
