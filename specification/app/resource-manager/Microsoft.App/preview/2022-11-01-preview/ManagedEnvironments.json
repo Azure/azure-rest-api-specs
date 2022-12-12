@@ -1086,7 +1086,7 @@
       "properties": {
         "internal": {
           "type": "boolean",
-          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property",
+          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide infrastructureSubnetId if enabling this property",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1094,15 +1094,7 @@
         },
         "infrastructureSubnetId": {
           "type": "string",
-          "description": "Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "runtimeSubnetId": {
-          "type": "string",
-          "description": "This field is deprecated and not used. If you wish to provide your own subnet that Container App containers are injected into, then you should leverage the infrastructureSubnetId.",
+          "description": "Resource ID of a subnet for infrastructure components. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
