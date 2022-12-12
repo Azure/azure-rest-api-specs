@@ -2044,11 +2044,6 @@
             "description": "Accepted the request to start VM Image Download",
             "schema": {
               "$ref": "#/definitions/GetSASToken202"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "200": {
@@ -2066,7 +2061,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "OrderGet": {
