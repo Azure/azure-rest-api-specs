@@ -3605,7 +3605,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3721,7 +3721,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4127,7 +4127,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4233,6 +4233,187 @@
         }
       }
     },
+    "Resource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AuthCredential": {
+      "description": "Authentication credential stored for an upstream.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the credential.",
+          "enum": [
+            "Credential1"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialName",
+            "modelAsString": true
+          }
+        },
+        "usernameSecretIdentifier": {
+          "description": "KeyVault Secret URI for accessing the username.",
+          "type": "string"
+        },
+        "passwordSecretIdentifier": {
+          "description": "KeyVault Secret URI for accessing the password.",
+          "type": "string"
+        },
+        "credentialHealth": {
+          "$ref": "#/definitions/CredentialHealth",
+          "description": "This provides data pertaining to the health of the auth credential.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CredentialHealth": {
+      "description": "The health of the auth credential.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The health status of credential.",
+          "enum": [
+            "Healthy",
+            "Unhealthy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "description": "Error code representing the health check error.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Descriptive message representing the health check error.",
+          "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource modification (UTC).",
+          "type": "string"
+        }
+      },
+      "readOnly": true
+    },
     "ErrorResponseBody": {
       "description": "An error response from the Azure Container Registry service.",
       "required": [
@@ -4265,68 +4446,12 @@
         }
       }
     },
-    "AuthCredential": {
-      "description": "Authentication credential stored for an upstream.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the credential.",
-          "enum": [
-            "Credential1"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CredentialName",
-            "modelAsString": true
-          }
-        },
-        "usernameSecretIdentifier": {
-          "description": "KeyVault Secret URI for accessing the username.",
-          "type": "string"
-        },
-        "passwordSecretIdentifier": {
-          "description": "KeyVault Secret URI for accessing the password.",
-          "type": "string"
-        },
-        "credentialHealth": {
-          "$ref": "#/definitions/CredentialHealth",
-          "description": "This provides data pertaining to the health of the auth credential.",
-          "readOnly": true
-        }
-      }
-    },
     "ErrorResponse": {
       "description": "An error response from the Azure Container Registry service.",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorResponseBody",
           "description": "Azure container registry build API error body."
-        }
-      }
-    },
-    "CredentialHealth": {
-      "description": "The health of the auth credential.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The health status of credential.",
-          "enum": [
-            "Healthy",
-            "Unhealthy"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CredentialHealthStatus",
-            "modelAsString": true
-          }
-        },
-        "errorCode": {
-          "description": "Error code representing the health check error.",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "Descriptive message representing the health check error.",
-          "type": "string"
         }
       }
     },
@@ -4383,7 +4508,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4571,7 +4696,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4921,7 +5046,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5140,7 +5265,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -5253,7 +5378,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -6043,7 +6168,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -6149,7 +6274,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -6258,7 +6383,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -6521,7 +6646,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
