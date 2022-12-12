@@ -1661,6 +1661,420 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns list of all offers",
+        "operationId": "MarketplaceImageOffer_ListOffers",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffers is working fine",
+            "schema": {
+              "$ref": "#/definitions/AseVMOffersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListOffers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers": {
+      "get": {
+        "tags": [
+          "MarketplaceImagePublisher"
+        ],
+        "summary": "Returns list of publishers",
+        "operationId": "MarketplaceImagePublisher_ListPublishers",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListPublishers is working fine",
+            "schema": {
+              "$ref": "#/definitions/AseVMPublishersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListPublishers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers": {
+      "get": {
+        "tags": [
+          "MarketplaceImageOffer"
+        ],
+        "summary": "Returns List of Offers by Publisher name",
+        "operationId": "MarketplaceImageOffer_ListOffersbyPublisher",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListOffersbyPublisher is working fine",
+            "schema": {
+              "$ref": "#/definitions/AseVMOffersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListOffersbyPublisher.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus": {
+      "get": {
+        "tags": [
+          "MarketplaceImageSku"
+        ],
+        "summary": "Returns List of SKUs Within Offer",
+        "operationId": "MarketplaceImageSku_ListSKUsWithinOffer",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListSKUsWithinOffer is working fine",
+            "schema": {
+              "$ref": "#/definitions/AseVMSkusList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListSKUsWithinOffer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "summary": "Returns List of Versions within SKU",
+        "operationId": "MarketplaceImageVersion_ListVersionswithinSKU",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/skuNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ListVersionswithinSKU is working fine",
+            "schema": {
+              "$ref": "#/definitions/AseVMVersionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/ListVersionswithinSKU.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "MarketplaceImageVersion"
+        ],
+        "description": "Get Particular Image",
+        "operationId": "MarketplaceImageVersion_GetParticularImage",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/skuNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/versionNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetParticularImage is working fine",
+            "schema": {
+              "$ref": "#/definitions/AseVMVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/GetParticularImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}/versions/{versionName}/generatesastoken": {
+      "post": {
+        "tags": [
+          "MarketplaceImageSasToken"
+        ],
+        "summary": "Returns SASToken",
+        "operationId": "MarketplaceImageSasToken_GetSASToken",
+        "produces": [
+          "Application/json"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/publisherNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/offerNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/skuNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/versionNameParameter"
+          },
+          {
+            "required": false,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to start VM Image Download",
+            "schema": {
+              "$ref": "#/definitions/GetSASToken202"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "GetSASToken is working fine",
+            "schema": {
+              "$ref": "#/definitions/GetSASToken200"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "OrderGet": {
+            "$ref": "./examples/GetSASToken.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles": {
       "get": {
         "tags": [
@@ -4529,6 +4943,224 @@
         }
       }
     },
+    "AseVMPublishersList": {
+      "description": "The collection of Publishers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Publishers.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMPublisher"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMPublisher": {
+      "description": "The Publisher details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMPublisherProperties",
+          "description": "The properties of the Publisher."
+        }
+      }
+    },
+    "AseVMPublisherProperties": {
+      "description": "The properties of the Publisher.",
+      "required": [
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        }
+      }
+    },
+    "AseVMOffersList": {
+      "description": "The collection of Offers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Offers.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMOffer"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMOffer": {
+      "description": "The Offer details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMOfferProperties",
+          "description": "The properties of the Offer."
+        }
+      }
+    },
+    "AseVMOfferProperties": {
+      "description": "The properties of the Offer.",
+      "required": [
+        "publisherId",
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "The publisher Id",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        }
+      }
+    },
+    "AseVMSkusList": {
+      "description": "The collection of Skus.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Skus.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMSku"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMSku": {
+      "description": "The Sku details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMSkuProperties",
+          "description": "The properties of the Sku."
+        }
+      }
+    },
+    "AseVMSkuProperties": {
+      "description": "The properties of the Sku.",
+      "required": [
+        "publisherId",
+        "offerId",
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "The publisher Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The offer Id",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        }
+      }
+    },
+    "AseVMVersionsList": {
+      "description": "The collection of Versions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Versions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseVMVersion"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "AseVMVersion": {
+      "description": "The Version details.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AseVMVersionProperties",
+          "description": "The properties of the Version."
+        }
+      }
+    },
+    "AseVMVersionProperties": {
+      "description": "The properties of the Version.",
+      "required": [
+        "publisherId",
+        "offerId",
+        "skuId",
+        "provisioningState"
+      ],
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        }
+      }
+    },
     "Authentication": {
       "description": "Authentication mechanism for IoT devices.",
       "type": "object",
@@ -6177,6 +6809,36 @@
         },
         "expiryTimeInUTC": {
           "description": "Gets or sets expiry time in UTC",
+          "type": "string"
+        }
+      }
+    },
+    "GetSASToken200": {
+      "description": "The properties of the get sas token 200.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status",
+          "type": "string"
+        },
+        "sasUri": {
+          "description": "The sas Uri",
+          "type": "string"
+        }
+      }
+    },
+    "GetSASToken202": {
+      "description": "The properties of the get sas token 202.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status",
           "type": "string"
         }
       }
@@ -9741,6 +10403,51 @@
       "description": "The subscription ID.",
       "required": true,
       "type": "string"
+    },
+    "deviceNameParameter": {
+      "name": "deviceName",
+      "in": "path",
+      "description": "The device ID.",
+      "required": true,
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
+    },
+    "publisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "description": "The publisher ID.",
+      "required": true,
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
+    },
+    "offerNameParameter": {
+      "name": "offerName",
+      "in": "path",
+      "description": "The offer ID.",
+      "required": true,
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
+    },
+    "skuNameParameter": {
+      "name": "skuName",
+      "in": "path",
+      "description": "The sku ID.",
+      "required": true,
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
+    },
+    "versionNameParameter": {
+      "name": "versionName",
+      "in": "path",
+      "description": "The version ID.",
+      "required": true,
+      "type": "string",
+      "pattern": "[0-9a-zA-Z]",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
