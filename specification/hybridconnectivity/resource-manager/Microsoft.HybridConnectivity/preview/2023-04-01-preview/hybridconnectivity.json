@@ -1,0 +1,1396 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "description": "REST API for Hybrid Connectivity used for connectivity of on premises resources",
+    "version": "2023-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.HybridConnectivity/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available Hybrid Connectivity REST API operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityOperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Retrieve the list of endpoints.",
+        "operationId": "Endpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsGet": {
+            "$ref": "./examples/EndpointsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of endpoints.",
+            "schema": {
+              "$ref": "#/definitions/EndpointsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Retrieve the endpoint resource associated with given endpoint name.",
+        "operationId": "Endpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsGetDefault": {
+            "$ref": "./examples/EndpointsGetDefault.json"
+          },
+          "HybridConnectivityEndpointsGetCustom": {
+            "$ref": "./examples/EndpointsGetCustom.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint details",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Create or update the endpoint to the target resource.",
+        "operationId": "Endpoints_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPutDefault": {
+            "$ref": "./examples/EndpointsPutDefault.json"
+          },
+          "HybridConnectivityEndpointsPutCustom": {
+            "$ref": "./examples/EndpointsPutCustom.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "name": "EndpointResource",
+            "description": "Endpoint details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint details.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Update the endpoint to the target resource.",
+        "operationId": "Endpoints_Update",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPatchDefault": {
+            "$ref": "./examples/EndpointsPatchDefault.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "name": "EndpointResource",
+            "description": "Endpoint details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint resource.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Deletes the endpoint access to the target resource.",
+        "operationId": "Endpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsDeleteDefault": {
+            "$ref": "./examples/EndpointsDeleteDefault.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The endpoint is deleted successfully."
+          },
+          "204": {
+            "description": "The endpoint has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets the endpoint access credentials to the resource.",
+        "operationId": "Endpoints_ListCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListCredentials": {
+            "$ref": "./examples/EndpointsPostListCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoint access credentials",
+            "schema": {
+              "$ref": "#/definitions/EndpointAccessResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listIngressGatewayCredentials": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Gets the ingress gateway endpoint credentials ",
+        "operationId": "Endpoints_ListIngressGatewayCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListIngressGatewayCredentials": {
+            "$ref": "./examples/EndpointsPostListIngressGatewayCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ingress gateway access",
+            "schema": {
+              "$ref": "#/definitions/IngressGatewayResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listManagedProxyDetails": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Fetches the managed proxy details ",
+        "operationId": "Endpoints_ListManagedProxyDetails",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListManagedProxyDetails": {
+            "$ref": "./examples/EndpointsPostListManagedProxyDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "name": "ManagedProxyRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedProxyRequest"
+            },
+            "description": "Object of type ManagedProxyRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managed Proxy",
+            "schema": {
+              "$ref": "#/definitions/ManagedProxyResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/solutionTypes": {
+      "get": {
+        "tags": [
+          "SolutionTypes"
+        ],
+        "description": "Retrieve the list of available solution types.",
+        "operationId": "SolutionTypes_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionTypesListBySubscription": {
+            "$ref": "./examples/SolutionTypesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of solution types available",
+            "schema": {
+              "$ref": "#/definitions/SolutionTypeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/solutionTypes/{solutionType}": {
+      "get": {
+        "tags": [
+          "SolutionTypes"
+        ],
+        "description": "Retrieve the solution type by provided solution type.",
+        "operationId": "SolutionTypes_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionTypesGet": {
+            "$ref": "./examples/SolutionTypesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionTypeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Solution type details",
+            "schema": {
+              "$ref": "#/definitions/SolutionTypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations": {
+      "get": {
+        "tags": [
+          "SolutionConfiguration"
+        ],
+        "description": "Retrieve the List of solution configuration resources.",
+        "operationId": "SolutionConfiguration_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionConfigurationsGet": {
+            "$ref": "./examples/SolutionConfigurationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of solution configuration resources.",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionName}": {
+      "put": {
+        "tags": [
+          "SolutionConfiguration"
+        ],
+        "description": "Creates solution configuration with provided solution name",
+        "operationId": "SolutionConfiguration_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionConfigurationPut": {
+            "$ref": "./examples/SolutionConfigurationsPut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionNameParameter"
+          },
+          {
+            "name": "SolutionConfigurationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationResource"
+            },
+            "description": "Object of type SolutionConfigurationRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Solution Configuration response",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "SolutionConfiguration"
+        ],
+        "description": "Retrieve the solution configuration identified by solution name.",
+        "operationId": "SolutionConfiguration_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionConfigurationGet": {
+            "$ref": "./examples/SolutionConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Solution COnfiguration response",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "SolutionConfiguration"
+        ],
+        "description": "Updates the solution configuration for solution name.",
+        "operationId": "SolutionConfiguration_Update",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionConfigurationPatch": {
+            "$ref": "./examples/SolutionConfigurationsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionNameParameter"
+          },
+          {
+            "name": "SolutionConfigurationRequest",
+            "description": "Solution configurations details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Solution Configuration response",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SolutionConfiguration"
+        ],
+        "description": "Deletes the solution configuration with provided solution name.",
+        "operationId": "SolutionConfiguration_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "HybridConnectivitySolutionConfigurationDelete": {
+            "$ref": "./examples/SolutionConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The solution configuration is deleted successfully."
+          },
+          "204": {
+            "description": "The solution configuration has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionName}/inventory/{inventoryId}": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Retrieve the inventory identified by inventory id.",
+        "operationId": "Inventory_GetBySolution",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get inventory": {
+            "$ref": "./examples/InventoryGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InventoryIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inventory details",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionName}/inventory": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Retrieve a list of inventory by solution name.",
+        "operationId": "Inventory_ListBySolution",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List inventory by solution name": {
+            "$ref": "./examples/InventoryList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List inventory details by solution name",
+            "schema": {
+              "$ref": "#/definitions/InventoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "RelayNamespaceAccessProperties": {
+      "type": "object",
+      "description": "Azure relay hybrid connection access properties",
+      "required": [
+        "namespaceName",
+        "namespaceNameSuffix",
+        "hybridConnectionName"
+      ],
+      "properties": {
+        "namespaceName": {
+          "type": "string",
+          "description": "The namespace name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "namespaceNameSuffix": {
+          "type": "string",
+          "description": "The suffix domain name of relay namespace.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "hybridConnectionName": {
+          "type": "string",
+          "description": "Azure Relay hybrid connection name for the resource."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Access key for hybrid connection.",
+          "readOnly": true
+        },
+        "expiresOn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration of access key in unix time."
+        }
+      }
+    },
+    "IngressGatewayResource": {
+      "description": "The ingress gateway access credentials",
+      "type": "object",
+      "properties": {
+        "relay": {
+          "$ref": "#/definitions/RelayNamespaceAccessProperties",
+          "x-ms-client-flatten": true
+        },
+        "ingress": {
+          "$ref": "#/definitions/IngressProfileProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IngressProfileProperties": {
+      "type": "object",
+      "description": "Ingress gateway profile",
+      "required": [
+        "hostname",
+        "aadProfile"
+      ],
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "The ingress hostname."
+        },
+        "aadProfile": {
+          "$ref": "#/definitions/AADProfileProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AADProfileProperties": {
+      "type": "object",
+      "description": "The AAD Profile",
+      "required": [
+        "serverId",
+        "tenantId"
+      ],
+      "properties": {
+        "serverId": {
+          "type": "string",
+          "description": "The arc ingress gateway server app id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The target resource home tenant id."
+        }
+      }
+    },
+    "EndpointAccessResource": {
+      "description": "The endpoint access for the target resource.",
+      "type": "object",
+      "properties": {
+        "relay": {
+          "$ref": "#/definitions/RelayNamespaceAccessProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "description": "Endpoint details",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of endpoint.",
+          "enum": [
+            "default",
+            "custom"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the connectivity endpoint (optional)."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EndpointResource": {
+      "description": "The endpoint for the target resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The endpoint properties.",
+          "$ref": "#/definitions/EndpointProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EndpointsList": {
+      "description": "The list of endpoints.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of endpoints list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointResource"
+          }
+        }
+      }
+    },
+    "ManagedProxyResource": {
+      "type": "object",
+      "description": "Managed Proxy",
+      "required": [
+        "proxy",
+        "expiresOn"
+      ],
+      "properties": {
+        "proxy": {
+          "type": "string",
+          "description": "The short lived proxy name."
+        },
+        "expiresOn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration time of short lived proxy name in unix epoch."
+        }
+      }
+    },
+    "ManagedProxyRequest": {
+      "type": "object",
+      "description": "Represent ManageProxy Request object.",
+      "required": [
+        "service"
+      ],
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The name of the service."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The target host name."
+        }
+      }
+    },
+    "SolutionConfigurationList": {
+      "description": "The list of solution configuration.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of solution configuration list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of solution configuration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionConfigurationResource"
+          }
+        }
+      }
+    },
+    "SolutionConfigurationResource": {
+      "type": "object",
+      "description": "Represent Solution configuration resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The solution configuration properties",
+          "$ref": "#/definitions/SolutionConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SolutionConfigurationProperties": {
+      "type": "object",
+      "description": "The properties of Solution Configuration",
+      "required": [
+        "solutionType"
+      ],
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "type": "object",
+          "description": "solution settings",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of solution configurations",
+          "enum": [
+            "New",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "solutionConfigurationStatus",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed message of status details"
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The last execution time of solution configuration"
+        }
+      }
+    },
+    "SolutionTypeList": {
+      "type": "object",
+      "description": "Response for solution types api",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of solution type list.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "description": "The list of solution types.",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeResource"
+          }
+        }
+      }
+    },
+    "SolutionTypeResource": {
+      "type": "object",
+      "description": "Represent Solution type resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The solution type properties",
+          "$ref": "#/definitions/SolutionTypeProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SolutionTypeProperties": {
+      "type": "object",
+      "description": "The properties of each solution",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The name of the solution type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of solution type"
+        },
+        "awsIamConfigurationTemplateUri": {
+          "type": "string",
+          "description": "The link to aws cloud formation template."
+        },
+        "gcpProjectConfigurationTemplateUri": {
+          "type": "string",
+          "description": "The link to gcp script."
+        },
+        "supportedAzureRegions": {
+          "type": "array",
+          "description": "The locations this solution is supported",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Inventory": {
+      "type": "object",
+      "description": "Definition of inventory.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InventoryProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the id of the inventory."
+        }
+      }
+    },
+    "InventoryProperties": {
+      "type": "object",
+      "description": "Definition of inventory.",
+      "properties": {
+        "cloudNativeType": {
+          "type": "string",
+          "description": "Gets or sets the cloud native resource type.",
+          "enum": [
+            "ec2"
+          ],
+          "x-ms-enum": {
+            "name": "cloudNativeResourceType",
+            "modelAsString": true
+          }
+        },
+        "cloudNativeResourceId": {
+          "type": "string",
+          "description": "Gets or sets the cloud native resource name."
+        },
+        "azureResourceId": {
+          "type": "string",
+          "description": "Gets or sets the mapped azure resource id."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the status of the inventory.",
+          "enum": [
+            "New",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "inventoryStatus",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Gets or sets the status details."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "InventoryListResult": {
+      "type": "object",
+      "description": "The response model for the list of inventory operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Inventory"
+          },
+          "description": "A list of inventory."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointNameParameter": {
+      "name": "endpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The endpoint name.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "AccessTokenExpirationParameter": {
+      "name": "expiresin",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "default": 10800,
+      "minimum": 600,
+      "maximum": 10800,
+      "description": "The is how long the endpoint access token is valid (in seconds).",
+      "x-ms-parameter-location": "method"
+    },
+    "SolutionNameParameter": {
+      "name": "solutionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The solution name.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SolutionTypeParameter": {
+      "name": "solutionType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of solution type to fetch the details",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "InventoryIdParameter": {
+      "name": "inventoryId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The inventory id.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
