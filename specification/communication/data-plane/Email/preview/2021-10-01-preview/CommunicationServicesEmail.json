@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunicationEmailClient",
     "description": "Azure Communication Email Service",
-    "version": "2023-15-01-preview"
+    "version": "2021-10-01-preview"
   },
   "paths": {
     "/emails/{messageId}/status": {
@@ -93,24 +93,15 @@
             "required": true
           },
           {
-            "in": "header",
-            "name": "x-ms-client-request-id",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "type": "string",
-            "required": false,
-            "format": "uuid",
-            "x-ms-client-name": "ClientRequestId"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
-            "name": "message",
+            "name": "emailMessage",
             "description": "Message payload for sending an email",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Message"
+              "$ref": "#/definitions/EmailMessage"
             }
           }
         ],
@@ -158,10 +149,10 @@
     }
   },
   "definitions": {
-    "Message": {
+    "EmailMessage": {
       "description": "Message payload for sending an email",
       "required": [
-        "senderEmail",
+        "sender",
         "content",
         "recipients"
       ],
@@ -169,12 +160,13 @@
       "properties": {
         "headers": {
           "description": "Custom email headers to be passed.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "type": "array",
+          "x-ms-client-name": "CustomHeaders",
+          "items": {
+            "$ref": "#/definitions/EmailCustomHeader"
           }
         },
-        "senderEmail": {
+        "sender": {
           "description": "Sender email address from a verified domain.",
           "type": "string",
           "example": "info@contoso.com"
@@ -208,6 +200,26 @@
         "disableUserEngagementTracking": {
           "description": "Indicates whether user engagement tracking should be disabled for this request if the resource-level user engagement tracking setting was already enabled in the control plane.",
           "type": "boolean"
+        }
+      }
+    },
+    "EmailCustomHeader": {
+      "description": "Custom header for email.",
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "description": "Header name.",
+          "type": "string",
+          "example": ""
+        },
+        "value": {
+          "description": "Header value.",
+          "type": "string",
+          "example": ""
         }
       }
     },
@@ -273,7 +285,7 @@
       "type": "object",
       "required": [
         "name",
-        "type",
+        "attachmentType",
         "contentBytesBase64"
       ],
       "properties": {
@@ -282,16 +294,52 @@
           "type": "string",
           "example": "attachment.pdf"
         },
-        "type": {
-          "description": "MIME type of the content being attached.",
-          "type": "string",
-          "example": "text/plain"
+        "attachmentType": {
+          "$ref": "#/definitions/EmailAttachmentType"
         },
         "contentBytesBase64": {
           "description": "Base64 encoded contents of the attachment",
           "type": "string",
           "example": "TWFueSBoYW5kcyBtYWtlIGxpZ2h0I"
         }
+      }
+    },
+    "EmailAttachmentType": {
+      "description": "The type of attachment file.",
+      "enum": [
+        "avi",
+        "bmp",
+        "doc",
+        "docm",
+        "docx",
+        "gif",
+        "jpeg",
+        "mp3",
+        "one",
+        "pdf",
+        "png",
+        "ppsm",
+        "ppsx",
+        "ppt",
+        "pptm",
+        "pptx",
+        "pub",
+        "rpmsg",
+        "rtf",
+        "tif",
+        "txt",
+        "vsd",
+        "wav",
+        "wma",
+        "xls",
+        "xlsb",
+        "xlsm",
+        "xlsx"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EmailAttachmentType",
+        "modelAsString": true
       }
     },
     "EmailRecipients": {
