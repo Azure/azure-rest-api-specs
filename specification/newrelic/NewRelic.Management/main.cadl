@@ -667,7 +667,8 @@ model PlanDataResponse {
 @doc("Billing source")
 enum BillingSourceValues {
   @doc("Billing source is Azure")
-  "AZURE"
+  "AZURE",
+  "NEWRELIC"
 }
 
 @knownValues(BillingSourceValues)
@@ -677,7 +678,10 @@ model BillingSource is string {
 @doc("Source of Org creation")
 enum OrgCreationSourceValues {
   @doc("Org is created from LIFTR")
-  "LIFTR"
+  "LIFTR",
+
+  @doc("Org is created from NEWRELIC")
+  "NEWRELIC"
 }
 
 @knownValues(OrgCreationSourceValues)
@@ -686,8 +690,11 @@ model OrgCreationSource is string {
 
 @doc("Source of Account creation")
 enum AccountCreationSourceValues {
-  @doc("Org is created from LIFTR")
-  "LIFTR"
+  @doc("Account is created from LIFTR")
+  "LIFTR",
+
+  @doc("Account is created from NEWRELIC")
+  "NEWRELIC"
 }
 
 @knownValues(AccountCreationSourceValues)
