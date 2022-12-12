@@ -1,31 +1,49 @@
 @doc("Describes the schema of the Azure resource events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace Resources {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.")
-  model ResourceWriteSuccessData is BaseEvents.ResourceBaseEventData;
+  model ResourceWriteSuccessData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteFailure event. This is raised when a resource create or update operation fails.")
-  model ResourceWriteFailureData is BaseEvents.ResourceBaseEventData;
+  model ResourceWriteFailureData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled.")
-  model ResourceWriteCancelData is BaseEvents.ResourceBaseEventData;
+  model ResourceWriteCancelData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteSuccess event. This is raised when a resource delete operation succeeds.")
-  model ResourceDeleteSuccessData is BaseEvents.ResourceBaseEventData;
+  model ResourceDeleteSuccessData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteFailure event. This is raised when a resource delete operation fails.")
-  model ResourceDeleteFailureData is BaseEvents.ResourceBaseEventData;
+  model ResourceDeleteFailureData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteCancel event. This is raised when a resource delete operation is canceled.")
-  model ResourceDeleteCancelData is BaseEvents.ResourceBaseEventData;
+  model ResourceDeleteCancelData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionSuccess event. This is raised when a resource action operation succeeds.")
-  model ResourceActionSuccessData is BaseEvents.ResourceBaseEventData;
+  model ResourceActionSuccessData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionFailure event. This is raised when a resource action operation fails.")
-  model ResourceActionFailureData is BaseEvents.ResourceBaseEventData;
+  model ResourceActionFailureData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionCancel event. This is raised when a resource action operation is canceled.")
-  model ResourceActionCancelData is BaseEvents.ResourceBaseEventData;
+  model ResourceActionCancelData{
+    ...ResourceBaseEventData;
+  }
 
   @doc("The details of the HTTP request.")
   model ResourceHttpRequest {
@@ -53,10 +71,8 @@ namespace Resources {
     @doc("The evidence for the authorization.")
     evidence?: Record<string>;
   }
-}
 
-namespace BaseEvents {
-  model ResourceBaseEventData {
+  alias ResourceBaseEventData = {
     @doc("The tenant ID of the resource.")
     tenantId?: string;
 
@@ -89,5 +105,5 @@ namespace BaseEvents {
 
     @doc("The details of the operation.")
     httpRequest?: Resources.ResourceHttpRequest;
-  }
+  };
 }

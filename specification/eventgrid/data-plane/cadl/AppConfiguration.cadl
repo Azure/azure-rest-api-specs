@@ -1,44 +1,44 @@
 @doc("Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace AppConfiguration;
+namespace AppConfiguration{
 
-enum AppConfigurationEventTypes {
-  "modified",
-  "deleted",
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.")
+  model AppConfigurationKeyValueModifiedEventData{
+    ...AppConfigurationBase<"modified">;
+  };
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.")
+  model AppConfigurationKeyValueDeletedEventData{
+    ...AppConfigurationBase<"deleted">;
+  };
+
+
+  alias AppConfigurationBase<TEventType> = {
+    @doc(
+      "The key used to identify the key-value that was {name}.",
+      {
+        name: TEventType,
+      }
+    )
+    key?: string;
+
+    @doc(
+      "The label, if any, used to identify the key-value that was {name}.",
+      {
+        name: TEventType,
+      }
+    )
+    label?: string;
+
+    @doc(
+      "The etag representing the key-value that was {name}.",
+      {
+        name: TEventType,
+      }
+    )
+    etag?: string;
+
+    @doc("The sync token representing the server state after the event.")
+    syncToken?: string;
+  };
+  
 }
-
-model AppConfigurationBase<TEventType> {
-  @doc(
-    "The key used to identify the key-value that was {name}.",
-    {
-      name: TEventType,
-    }
-  )
-  key?: string;
-
-  @doc(
-    "The label, if any, used to identify the key-value that was {name}.",
-    {
-      name: TEventType,
-    }
-  )
-  label?: string;
-
-  @doc(
-    "The etag representing the key-value that was {name}.",
-    {
-      name: TEventType,
-    }
-  )
-  etag?: string;
-
-  @doc("The sync token representing the server state after the event.")
-  syncToken?: string;
-}
-
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.")
-model AppConfigurationKeyValueModifiedEventData
-  is AppConfigurationBase<AppConfigurationEventTypes.modified>;
-
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.")
-model AppConfigurationKeyValueDeletedEventData
-  is AppConfigurationBase<AppConfigurationEventTypes.deleted>;

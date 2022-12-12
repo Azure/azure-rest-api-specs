@@ -1,20 +1,22 @@
 @doc("Describes the schema of the Azure Policy events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace PolicyInsights {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event.")
-  model PolicyInsightsPolicyStateCreatedEventData
-    is BaseEvents.PolicyInsightsBaseEventData;
+  model PolicyInsightsPolicyStateCreatedEventData{
+    ...PolicyInsightsBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event.")
-  model PolicyInsightsPolicyStateChangedEventData
-    is BaseEvents.PolicyInsightsBaseEventData;
+  model PolicyInsightsPolicyStateChangedEventData{
+    ...PolicyInsightsBaseEventData;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateDeleted event.")
-  model PolicyInsightsPolicyStateDeletedEventData
-    is BaseEvents.PolicyInsightsBaseEventData;
-}
+  model PolicyInsightsPolicyStateDeletedEventData{
+    ...PolicyInsightsBaseEventData;
+  }
 
-namespace BaseEvents {
-  model PolicyInsightsBaseEventData {
+
+  alias PolicyInsightsBaseEventData = {
     @doc("The time that the resource was scanned by Azure Policy in the Universal ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ.")
     timestamp?: zonedDateTime;
 
@@ -35,5 +37,5 @@ namespace BaseEvents {
 
     @doc("The compliance reason code. May be empty.")
     complianceReasonCode?: string;
-  }
+  };
 }

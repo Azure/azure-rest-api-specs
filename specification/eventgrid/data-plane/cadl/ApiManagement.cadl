@@ -1,57 +1,82 @@
 @doc("Describes the schema of the Azure API Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace ApiManagement {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event.")
-  model ApiManagementUserCreatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementUserCreatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserUpdated event.")
-  model ApiManagementUserUpdatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementUserUpdatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserDeleted event.")
-  model ApiManagementUserDeletedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementUserDeletedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionCreated event.")
-  model ApiManagementSubscriptionCreatedEventData
-    is BaseEvents.ApiManagementBase;
+  model ApiManagementSubscriptionCreatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionUpdated event.")
-  model ApiManagementSubscriptionUpdatedEventData
-    is BaseEvents.ApiManagementBase;
+  model ApiManagementSubscriptionUpdatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionDeleted event.")
-  model ApiManagementSubscriptionDeletedEventData
-    is BaseEvents.ApiManagementBase;
+  model ApiManagementSubscriptionDeletedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductCreated event.")
-  model ApiManagementProductCreatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementProductCreatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductUpdated event.")
-  model ApiManagementProductUpdatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementProductUpdatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductDeleted event.")
-  model ApiManagementProductDeletedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementProductDeletedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event.")
-  model ApiManagementApiCreatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementApiCreatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIUpdated event.")
-  model ApiManagementApiUpdatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementApiUpdatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIDeleted event.")
-  model ApiManagementApiDeletedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementApiDeletedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseCreated event.")
-  model ApiManagementApiReleaseCreatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementApiReleaseCreatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseUpdated event.")
-  model ApiManagementApiReleaseUpdatedEventData is BaseEvents.ApiManagementBase;
+  model ApiManagementApiReleaseUpdatedEventData{
+    ...ApiManagementBase;
+  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseDeleted event.")
-  model ApiManagementApiReleaseDeletedEventData is BaseEvents.ApiManagementBase;
-}
+  model ApiManagementApiReleaseDeletedEventData{
+    ...ApiManagementBase;
+  }
 
-namespace BaseEvents {
-  model ApiManagementBase {
+  alias ApiManagementBase = {
     @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`")
     resourceUri?: string;
-  }
+  };
 }
