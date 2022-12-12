@@ -273,7 +273,7 @@
       "type": "object",
       "required": [
         "name",
-        "attachmentType",
+        "type",
         "contentBytesBase64"
       ],
       "properties": {
@@ -282,52 +282,16 @@
           "type": "string",
           "example": "attachment.pdf"
         },
-        "attachmentType": {
-          "$ref": "#/definitions/EmailAttachmentType"
+        "type": {
+          "description": "MIME type of the content being attached.",
+          "type": "string",
+          "example": "text/plain"
         },
         "contentBytesBase64": {
           "description": "Base64 encoded contents of the attachment",
           "type": "string",
           "example": "TWFueSBoYW5kcyBtYWtlIGxpZ2h0I"
         }
-      }
-    },
-    "EmailAttachmentType": {
-      "description": "The type of attachment file.",
-      "enum": [
-        "avi",
-        "bmp",
-        "doc",
-        "docm",
-        "docx",
-        "gif",
-        "jpeg",
-        "mp3",
-        "one",
-        "pdf",
-        "png",
-        "ppsm",
-        "ppsx",
-        "ppt",
-        "pptm",
-        "pptx",
-        "pub",
-        "rpmsg",
-        "rtf",
-        "tif",
-        "txt",
-        "vsd",
-        "wav",
-        "wma",
-        "xls",
-        "xlsb",
-        "xlsm",
-        "xlsx"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "EmailAttachmentType",
-        "modelAsString": true
       }
     },
     "EmailRecipients": {
