@@ -547,20 +547,6 @@
           "description": "Maximum duration of the job.",
           "type": "integer"
         },
-        "identity": { // Check Identity property - Container App has reference to ManagedIdentity
-          "description": "Identity used by a Container app",
-          "type": "object",
-          "properties": {
-            "authenticationEndpointEnabled": {
-              "description": "Boolean describing if authentication endpoint is enabled",
-              "type": "boolean"
-            },
-            "identity": {
-              "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
-              "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
-            }
-          }
-        },
         "manualTriggerConfig": {
           "type": "object",
           "required": [
@@ -651,79 +637,114 @@
     "ContainerAppsJob": {
       "type": "object",
       "description": "Container App Job",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "args": {
-          "items": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
+        "identity": {
+          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "args": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "command": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "provisioningState": {
+            "description": "Provisioning state of the Container Apps Job.",
+            "enum": [
+              "InProgress",
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "Deleting"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ContainerAppsJobProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "env": { // Should this be a seperate definition?
+            "description": "Collection of environment",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "image": {
+            "description": "Image for the Container App Job",
             "type": "string"
           },
-          "type": "array"
-        },
-        "command": {
-          "items": {
+          "name": {
+            "description": "Name of the Container App Job.",
             "type": "string"
           },
-          "type": "array"
-        },
-        "env": { // Should this be a seperate definition?
-          "description": "Collection of environment",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Environment"
-          }
-        },
-        "image": {
-          "description": "Image for the Container App Job",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the Container App Job.",
-          "type": "string"
-        },
-        "ContainerAppsJobProbe": {
-          "description": "Container Apps Job Probe configurations.",
-          "type": "object",
-          "properties": {
-            "livenessProbe": {
-              "$ref": "#/definitions/ExecProbe",
-              "description": "Liveness Probe Configurations",
-              "type": "object"
-            },
-            "readinessProbe": {
-              "$ref": "#/definitions/ExecProbe",
-              "description": "Readiness Probe Configurations",
-              "type": "object"
-            },
-            "startupProbe": {
-              "$ref": "#/definitions/ExecProbe",
-              "description": "Startup Probe Configurations",
-              "type": "object"
+          "configuration": {
+            "$ref": "#/definitions/Configuration",
+            "description": "Non versioned Container Apps Job configuration properties."
+          },
+          "ContainerAppsJobProbe": {
+            "description": "Container Apps Job Probe configurations.",
+            "type": "object",
+            "properties": {
+              "livenessProbe": {
+                "$ref": "#/definitions/ExecProbe",
+                "description": "Liveness Probe Configurations",
+                "type": "object"
+              },
+              "readinessProbe": {
+                "$ref": "#/definitions/ExecProbe",
+                "description": "Readiness Probe Configurations",
+                "type": "object"
+              },
+              "startupProbe": {
+                "$ref": "#/definitions/ExecProbe",
+                "description": "Startup Probe Configurations",
+                "type": "object"
+              }
             }
-          }
-        },
-        "resources": {
-          "required": [
-            "cpu",
-            "memory"
-          ],
-          "type": "object",
-          "properties": {
-            "cpu": {
-              "type": "string"
-            },
-            "ephemeral-storage": {
-              "type": "string"
-            },
-            "memory": {
-              "type": "string"
+          },
+          "resources": {
+            "required": [
+              "cpu",
+              "memory"
+            ],
+            "type": "object",
+            "properties": {
+              "cpu": {
+                "type": "string"
+              },
+              "ephemeral-storage": {
+                "type": "string"
+              },
+              "memory": {
+                "type": "string"
+              }
             }
-          }
-        },
-        "Operations": {
-          "description": "Collection of all the operations by this job.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContainerAppsJobOperation"
-          }
+          },
+          "Operations": {
+            "description": "Collection of all the operations by this job.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ContainerAppsJobOperation"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
