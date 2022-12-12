@@ -3959,6 +3959,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "zoneDetails": {
+          "description": "Gets details of capabilities available to a SKU in specific zones.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          }
         }
       }
     },
@@ -6260,6 +6268,45 @@
         "modelAsString": true
       },
       "description": "The origin of the following setup."
+    },
+    "ResourceSkuCapabilities": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An invariant to describe the feature."
+        },
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An invariant if the feature is measured by quantity."
+        }
+      },
+      "description": "Describes The SKU capabilities object."
+    },
+    "ResourceSkuZoneDetails": {
+      "properties": {
+        "name": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of zones that the SKU is available in with the specified capabilities."
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+        }
+      },
+      "description": "Describes The zonal capabilities of a SKU."
     }
   },
   "parameters": {
