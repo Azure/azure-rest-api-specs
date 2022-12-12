@@ -7,17 +7,17 @@ namespace Storage {
 
     @doc("The offset of the blob in bytes.")
     contentOffset?: int64;
-    ...BaseEvents.StorageBaseEventData<"blob">;
-    ...BaseEvents.StorageUrlBaseEventData;
-    ...BaseEvents.StorageBaseTypeData;
+    ...StorageBaseEventData<"blob">;
+    ...StorageUrlBaseEventData;
+    ...StorageBaseTypeData;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event.")
   model StorageBlobDeletedEventData {
     @doc("The path to the blob.")
     url?: string;
-    ...BaseEvents.StorageBaseEventData<"blob">;
-    ...BaseEvents.StorageBaseTypeData;
+    ...StorageBaseEventData<"blob">;
+    ...StorageBaseTypeData;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event.")
@@ -27,7 +27,7 @@ namespace Storage {
 
     @doc("The path to the directory.")
     url?: string;
-    ...BaseEvents.StorageBaseEventData<"directory">;
+    ...StorageBaseEventData<"directory">;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryDeleted event.")
@@ -37,7 +37,7 @@ namespace Storage {
 
     @doc("Is this event for a recursive delete operation.")
     recursive?: string;
-    ...BaseEvents.StorageBaseEventData<"directory">;
+    ...StorageBaseEventData<"directory">;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobRenamed event.")
@@ -47,7 +47,7 @@ namespace Storage {
 
     @doc("The new path to the blob after the rename operation.")
     destinationUrl?: string;
-    ...BaseEvents.StorageBaseEventData<"blob">;
+    ...StorageBaseEventData<"blob">;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryRenamed event.")
@@ -57,7 +57,7 @@ namespace Storage {
 
     @doc("The new path to the directory after the rename operation.")
     destinationUrl?: string;
-    ...BaseEvents.StorageBaseEventData<"directory">;
+    ...StorageBaseEventData<"directory">;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.LifecyclePolicyCompleted event.")
@@ -83,16 +83,16 @@ namespace Storage {
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event.")
   model StorageBlobTierChangedEventData {
-    ...BaseEvents.StorageBaseEventData<"blob">;
-    ...BaseEvents.StorageUrlBaseEventData;
-    ...BaseEvents.StorageBaseTypeData;
+    ...StorageBaseEventData<"blob">;
+    ...StorageUrlBaseEventData;
+    ...StorageBaseTypeData;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event.")
   model StorageAsyncOperationInitiatedEventData {
-    ...BaseEvents.StorageBaseEventData<"blob">;
-    ...BaseEvents.StorageUrlBaseEventData;
-    ...BaseEvents.StorageBaseTypeData;
+    ...StorageBaseEventData<"blob">;
+    ...StorageUrlBaseEventData;
+    ...StorageBaseTypeData;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event.")
@@ -118,15 +118,8 @@ namespace Storage {
     @doc("The blob URL for manifest file for inventory run.")
     manifestBlobUrl?: string;
   }
-}
 
-namespace BaseEvents {
-  enum StorageType {
-    blob: "blob",
-    directory: "directory",
-  }
-
-  model StorageBaseEventData<TStorageType extends string> {
+  alias StorageBaseEventData<TStorageType extends string>  = {
     @doc("The name of the API/operation that triggered this event.")
     api?: string;
 
@@ -149,21 +142,21 @@ namespace BaseEvents {
 
     @doc("For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.")
     storageDiagnostics?: Record<string>;
-  }
+  };
 
-  model StorageBaseTypeData {
+  alias StorageBaseTypeData = {
     @doc("The content type of the blob. This is the same as what would be returned in the Content-Type header from the blob.")
     contentType?: string;
 
     @doc("The type of blob.")
     blobType?: string;
-  }
+  };
 
-  model StorageUrlBaseEventData {
+  alias StorageUrlBaseEventData = {
     @doc("The size of the blob in bytes. This is the same as what would be returned in the Content-Length header from the blob.")
     contentLength?: int64;
 
     @doc("The path to the blob.")
     url?: string;
-  }
+  };
 }
