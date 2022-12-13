@@ -139,10 +139,6 @@
                 "description": "Location url of where to poll the status of this message from.",
                 "type": "string"
               },
-              "Retry-After": {
-                "description": "Amount of time client should wait before retrying the request, specified in seconds ",
-                "type": "integer"
-              },
               "x-ms-request-id": {
                 "description": "System generated GUID indicating the id of this specific message, to be used for tracking purposes.",
                 "type": "string"
@@ -193,7 +189,7 @@
           "$ref": "#/definitions/EmailRecipients"
         },
         "attachments": {
-          "description": "list of attachments",
+          "description": "List of attachments. Please note that we limit the total size of an email request (which includes attachments) to 10MB.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EmailAttachment"
@@ -309,16 +305,18 @@
             "$ref": "#/definitions/EmailAddress"
           }
         },
-        "CC": {
+        "cc": {
           "description": "Email CC recipients",
           "type": "array",
+          "x-ms-client-name": "CC",
           "items": {
             "$ref": "#/definitions/EmailAddress"
           }
         },
-        "bCC": {
+        "bcc": {
           "description": "Email BCC recipients",
           "type": "array",
+          "x-ms-client-name": "BCC",
           "items": {
             "$ref": "#/definitions/EmailAddress"
           }
