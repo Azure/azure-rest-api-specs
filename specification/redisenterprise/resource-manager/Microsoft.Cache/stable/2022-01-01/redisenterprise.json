@@ -1468,6 +1468,27 @@
         "secondaryKey"
       ]
     },
+    "AofFrequency": {
+      "type": "string",
+      "enum": [
+        "1s",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "AofFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "perSecond",
+            "value": "1s"
+          },
+          {
+            "name": "always",
+            "value": "always"
+          }
+        ]
+      }
+    },
     "ClientProtocol": {
       "type": "string",
       "enum": [
@@ -1519,9 +1540,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<Cluster>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "The response of a Cluster list operation.",
@@ -1640,9 +1661,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<Database>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "The response of a Database list operation.",
@@ -1662,10 +1683,14 @@
             "create"
           ]
         },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicy",
+          "description": "Redis eviction policy - default is VolatileLRU"
+        },
         "port": {
           "type": "integer",
-          "format": "int32",
-          "description": "Port number for the database to listen on. E.g. 10000.",
+          "format": "int16",
+          "description": "Port number for the database to listen on. The only valid value currently, is 10000. Other values may be valid in the future.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1675,25 +1700,62 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the database",
           "readOnly": true
+        },
+        "persistence": {
+          "$ref": "#/definitions/Persistence",
+          "description": "Persistence settings"
         }
       },
       "description": "Properties of a Database on a RedisEnterprise cluster",
       "required": [
+        "evictionPolicy",
         "port",
-        "provisioningState"
+        "provisioningState",
+        "persistence"
       ]
+    },
+    "DatabaseResourceId": {
+      "type": "string",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Cache/redisEnterprise"
+          }
+        ]
+      }
     },
     "DatabaseUpdate": {
       "type": "object",
       "properties": {},
       "description": "The type used for update operations of the Database."
     },
+    "EvictionPolicy": {
+      "type": "string",
+      "enum": [
+        "AllKeysLFU",
+        "AllKeysLRU",
+        "AllKeysRandom",
+        "VolatileLRU",
+        "VolatileLFU",
+        "VolatileTTL",
+        "VolatileRandom",
+        "NoEviction"
+      ],
+      "x-ms-enum": {
+        "name": "EvictionPolicy",
+        "modelAsString": true
+      }
+    },
     "ExportParameters": {
       "type": "object",
       "properties": {
         "sasUris": {
           "$ref": "#/definitions/SasUri",
-          "description": "SAS URI for the target container directory to export from"
+          "description": "SAS URI for the target container directory to export from",
+          "format": "password",
+          "x-ms-secret": true
         }
       },
       "description": "Export request. Parameters for a Redis Enterprise export operation.",
@@ -1707,9 +1769,9 @@
         "ids": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/DatabaseResourceId"
           },
-          "x-cadl-name": "string[]",
+          "x-cadl-name": "DatabaseResourceId[]",
           "description": "The resource IDs of the database resources to be unlinked"
         }
       },
@@ -1770,6 +1832,32 @@
       "type": "object",
       "properties": {}
     },
+    "Persistence": {
+      "type": "object",
+      "properties": {
+        "aofEnabled": {
+          "type": "boolean",
+          "description": "Sets whether AOF is enabled. Defaults to false."
+        },
+        "rdbEnabled": {
+          "type": "boolean",
+          "description": "Sets whether RDB is enabled. Defaults to false."
+        },
+        "aofFrequency": {
+          "$ref": "#/definitions/AofFrequency",
+          "description": "Sets the frequency at which data is written to disk."
+        },
+        "rdbFrequency": {
+          "$ref": "#/definitions/RdbFrequency",
+          "description": "Sets the frequency at which a snapshot of the database is created."
+        }
+      },
+      "description": "Persistence-related configuration for the RedisEnterprise database",
+      "required": [
+        "aofEnabled",
+        "rdbEnabled"
+      ]
+    },
     "PrivateEndpoint": {
       "type": "object",
       "properties": {
@@ -1813,9 +1901,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<PrivateEndpointConnection>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "The response of a PrivateEndpointConnection list operation.",
@@ -1912,9 +2000,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<PrivateLink>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "The response of a PrivateLink list operation.",
@@ -1990,6 +2078,32 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      }
+    },
+    "RdbFrequency": {
+      "type": "string",
+      "enum": [
+        "1h",
+        "6h",
+        "12h"
+      ],
+      "x-ms-enum": {
+        "name": "RdbFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "perHour",
+            "value": "1h"
+          },
+          {
+            "name": "per6Hours",
+            "value": "6h"
+          },
+          {
+            "name": "per12Hours",
+            "value": "12h"
+          }
+        ]
       }
     },
     "RegenerateKeyParameters": {
