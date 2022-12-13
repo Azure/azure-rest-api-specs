@@ -594,6 +594,7 @@
     "LoadTestResourcePageList": {
       "description": "List of resources page result.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingResourcePageList",
       "properties": {
         "value": {
           "description": "List of resources in current page.",
@@ -611,6 +612,7 @@
     "LoadTestResource": {
       "type": "object",
       "description": "LoadTest details",
+      "x-ms-client-name": "LoadTestingResource",
       "properties": {
         "properties": {
           "description": "Load Test resource properties",
@@ -631,6 +633,7 @@
     "LoadTestResourcePatchRequestBody": {
       "description": "LoadTest resource patch request body.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingResourcePatch",
       "properties": {
         "tags": {
           "description": "Resource tags.",
@@ -666,6 +669,7 @@
     "LoadTestProperties": {
       "description": "LoadTest resource properties.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingProperties",
       "properties": {
         "description": {
           "description": "Description of the resource.",
@@ -693,13 +697,16 @@
     "EncryptionProperties": {
       "description": "Key and identity details for Customer Managed Key encryption of load test resource",
       "type": "object",
+      "x-ms-client-name": "CustomerManagedKeyEncryptionProperties",
       "properties": {
         "identity": {
           "type": "object",
+          "x-ms-client-name": "CustomerManagedKeyIdentity",
           "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
           "properties": {
             "type": {
               "type": "string",
+              "x-ms-client-name": "CustomerManagedKeyIdentityType",
               "enum": [
                 "SystemAssigned",
                 "UserAssigned"
@@ -712,6 +719,7 @@
             },
             "resourceId": {
               "type": "string",
+              "x-ms-client-name": "ResourceIdentifier",
               "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId",
               "x-nullable": true
             }
@@ -731,6 +739,7 @@
         "Canceled",
         "Deleted"
       ],
+      "x-ms-client-name": "LoadTestingProvisioningState",
       "type": "string",
       "x-ms-enum": {
         "name": "ResourceState",
@@ -740,6 +749,7 @@
     "QuotaResourceList": {
       "description": "List of quota bucket objects. It contains a URL link to get the next set of results.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingQuotaListResult",
       "properties": {
         "value": {
           "type": "array",
@@ -762,6 +772,7 @@
     "QuotaResource": {
       "type": "object",
       "description": "Quota bucket details object.",
+      "x-ms-client-name": "LoadTestingQuota",
       "properties": {
         "properties": {
           "description": "Quota bucket resource properties.",
@@ -778,6 +789,7 @@
     "QuotaResourceProperties": {
       "description": "Quota bucket resource properties.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingQuotaProperties",
       "properties": {
         "limit": {
           "description": "Current quota limit of the quota bucket.",
@@ -801,6 +813,7 @@
     "CheckQuotaAvailabilityResponse": {
       "description": "Check quota availability response object.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingQuotaAvailabilityResponse",
       "properties": {
         "properties": {
           "description": "Check quota availability response properties.",
@@ -817,6 +830,7 @@
     "CheckQuotaAvailabilityResponseProperties": {
       "description": "Check quota availability response properties.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingQuotaAvailabilityResponseProperties",
       "properties": {
         "isAvailable": {
           "description": "True/False indicating whether the quota request be granted based on availability.",
@@ -831,6 +845,7 @@
     "QuotaBucketRequest": {
       "description": "Request object of new quota for a quota bucket.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingQuotaBucketContent",
       "properties": {
         "properties": {
           "description": "New quota request request properties.",
@@ -847,6 +862,7 @@
     "QuotaBucketRequestProperties": {
       "description": "New quota request request properties.",
       "type": "object",
+      "x-ms-client-name": "LoadTestingQuotaBucketProperties",
       "properties": {
         "currentUsage": {
           "description": "Current quota usage of the quota bucket.",
@@ -869,6 +885,7 @@
         "dimensions": {
           "description": "Dimensions for new quota request.",
           "type": "object",
+          "x-ms-client-name": "LoadTestingQuotaBucketDimensions",
           "properties": {
             "subscriptionId": {
               "description": "Subscription Id dimension for new quota request of the quota bucket.",
@@ -886,6 +903,7 @@
     },
     "OutboundEnvironmentEndpointCollection": {
       "type": "object",
+      "x-ms-client-name": "OutboundEnvironmentEndpointListResult",
       "properties": {
         "value": {
           "type": "array",
@@ -927,6 +945,7 @@
     },
     "EndpointDependency": {
       "type": "object",
+      "x-ms-client-name": "LoadTestingEndpointDependency",
       "properties": {
         "domainName": {
           "type": "string",
@@ -954,6 +973,7 @@
     },
     "EndpointDetail": {
       "type": "object",
+      "x-ms-client-name": "LoadTestingEndpointDetail",
       "properties": {
         "port": {
           "type": "integer",
