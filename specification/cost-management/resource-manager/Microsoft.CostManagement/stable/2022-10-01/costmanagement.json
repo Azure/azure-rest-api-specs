@@ -1481,18 +1481,22 @@
       "description": "The type of the column in the report.",
       "type": "string",
       "enum": [
-        {
-          "code": "TagKey",
-          "description": "The tag associated with the cost data."
-        },
-        {
-          "code": "Dimension",
-          "description": "The dimension of cost data."
-        }
+        "TagKey",
+        "Dimension"
       ],
       "x-ms-enum": {
-        "name": "ReportConfigColumnType",
-        "modelAsString": true
+        "name": "QueryColumnType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TagKey",
+            "description": "The tag associated with the cost data."
+          },
+          {
+            "value": "Dimension",
+            "description": "The dimension of cost data."
+          }
+        ]
       }
     },
     "ReportConfigComparisonExpression": {
@@ -2748,18 +2752,22 @@
       "description": "The type of the column in the export.",
       "type": "string",
       "enum": [
-        {
-          "code": "TagKey",
-          "description": "The tag associated with the cost data."
-        },
-        {
-          "code": "Dimension",
-          "description": "The dimension of cost data."
-        }
+        "TagKey",
+        "Dimension"
       ],
       "x-ms-enum": {
         "name": "QueryColumnType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TagKey",
+            "description": "The tag associated with the cost data."
+          },
+          {
+            "value": "Dimension",
+            "description": "The dimension of cost data."
+          }
+        ]
       }
     },
     "QueryComparisonExpression": {
