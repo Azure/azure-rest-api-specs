@@ -1922,7 +1922,7 @@
         "tags": [
           "BackupInstances"
         ],
-        "description": "This operation will stop backups for backup instance",
+        "description": "This operation will stop backup for a backup instance and retains the backup data as per the policy (except latest Recovery point, which will be retained forever)",
         "operationId": "BackupInstances_SuspendBackups",
         "produces": [
           "application/json"
@@ -4320,6 +4320,11 @@
           },
           "x-ms-identifiers": [],
           "type": "array"
+        },
+        "isVaultProtectedByResourceGuard": {
+          "description": "Is vault protected by resource guard",
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "required": [
@@ -6108,7 +6113,7 @@
           "description": "Gets or sets the type of the datastore.",
           "enum": [
             "ArchiveStore",
-            "SnapshotStore",
+            "OperationalStore",
             "VaultStore"
           ],
           "type": "string",
