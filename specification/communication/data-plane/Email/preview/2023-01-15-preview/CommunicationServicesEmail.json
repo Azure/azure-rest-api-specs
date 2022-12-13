@@ -106,11 +106,12 @@
           },
           {
             "in": "body",
-            "name": "message",
+            "name": "emailMessage",
             "description": "Message payload for sending an email",
             "required": true,
+            "x-ms-client-name": "message",
             "schema": {
-              "$ref": "#/definitions/Message"
+              "$ref": "#/definitions/EmailMessage"
             }
           }
         ],
@@ -158,7 +159,7 @@
     }
   },
   "definitions": {
-    "Message": {
+    "EmailMessage": {
       "description": "Message payload for sending an email",
       "required": [
         "senderEmail",
