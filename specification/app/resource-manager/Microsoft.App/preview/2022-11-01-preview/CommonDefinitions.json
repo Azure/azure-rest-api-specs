@@ -1069,7 +1069,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ContainerAppsJobBaseContainer"
+          "$ref": "#/definitions/BaseContainer"
         }
       ],
       "properties": {
@@ -1270,61 +1270,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ContainerAppsJobBaseContainer"
+          "$ref": "#/definitions/BaseContainer"
         }
       ]
-    },
-    "ContainerAppsJobBaseContainer": {
-      "description": "Container Apps Job base container definition.",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "Container image tag.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Custom container name.",
-          "type": "string"
-        },
-        "command": {
-          "description": "Container start command.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "args": {
-          "description": "Container start command arguments.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "env": {
-          "description": "Container environment variables.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVar"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/ContainerResources",
-          "description": "Container resource requirements."
-        },
-        "volumeMounts": {
-          "description": "Container volume mounts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VolumeMount"
-          },
-          "x-ms-identifiers": [
-            "volumeName"
-          ]
-        }
-      }
     }
   },
   "securityDefinitions": {
