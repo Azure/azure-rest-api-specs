@@ -32,7 +32,6 @@ tag: package-flexibleserver-2021-06
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2022-12-01
 tag: package-flexibleserver-2021-06
 ```
 
