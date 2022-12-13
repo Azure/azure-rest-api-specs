@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "api-version": "2022-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerAppsJob/testcontainerAppsJob0",
+            "name": "testcontainerAppsJob0",
+            "type": "Microsoft.App/containerAppsJobs",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+              "configuration": {
+                "activeDeadlineSeconds": 10,
+                "replicaRetryLimit": 10,
+                "manualTriggerConfig": {
+                  "completions": 4,
+                  "parallelism": 1
+                },
+                "triggerType": "Manual"
+              },
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testinitcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerAppsJob/testcontainerAppsJob1",
+            "name": "testcontainerAppsJob1",
+            "type": "Microsoft.App/containerAppsJobs",
+            "location": "East US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+              "configuration": {
+                "activeDeadlineSeconds": 10,
+                "replicaRetryLimit": 10,
+                "scheduleTriggerConfig": {
+                  "completions": 10,
+                  "cronExpression": "* * * * 5",
+                  "parallelism": 1
+                },
+                "triggerType": "Scheduled"
+              },
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "image": "repo/testcontainerApp0:v4",
+                    "name": "testinitcontainerApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

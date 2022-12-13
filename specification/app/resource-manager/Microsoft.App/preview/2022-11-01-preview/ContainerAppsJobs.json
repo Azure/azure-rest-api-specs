@@ -338,12 +338,6 @@
             "required": true,
             "type": "string"
           },
-          // {
-          //   "name": "configuration", //TODO:Check --> Should be State (state/status of job)
-          //   "in": "query",
-          //   "description": "Properties of the Container Apps Job trigger.",
-          //   "type": "string"
-          // },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
@@ -411,120 +405,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/containerAppsJobOperationStatus/{operationId}": {
-      "get": {
-        "tags": [
-          "ContainerAppsJobs"
-        ],
-        "summary": "Get Container Apps Jobs operation status",
-        "operationId": "ContainerAppsJob_ContainerAppsJobOperationStatus",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation Id for Container Apps Job operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJobOperation"
-            }
-          },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Container Apps Job Operation Status": {
-            "$ref": "./examples/ContainerApps_ContainerAppsJobOperationStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/containerAppsJobOperationResult/{operationId}": {
-      "get": {
-        "tags": [
-          "ContainerAppsJobs"
-        ],
-        "summary": "Get Container Apps Jobs operation result",
-        "operationId": "ContainerAppsJob_ContainerAppsJobOperationResult",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation Id for Container Apps Job operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJobOperation"
-            }
-          },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Container Apps Job Operation Result": {
-            "$ref": "./examples/ContainerApps_ContainerAppsJobOperationResult.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -537,6 +417,16 @@
         "triggerType"
       ],
       "properties": {
+        "secrets": {
+          "description": "Collection of secrets used by a Container app",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "activeDeadlineSeconds": {
           "description": "Maximum duration of the job.",
           "format": "int32",
@@ -600,26 +490,8 @@
             "server"
           ]
         },
-        "secrets": { // Container App has reference to ./CommonDefinitions.json#/definitions/Secret
-          "type": "array",
-          "items": {
-            "required": [
-              "name",
-              "value"
-            ],
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            }
-          }
-        },
         "triggerType": {
-          "description": "Type of the job - Schedule | Event | Manual", // Should be an enum
+          "description": "Type of the job - Schedule | Event | Manual",
           "enum": [
             "Scheduled",
             "Event",
@@ -679,440 +551,52 @@
               "modelAsString": true
             }
           },
-          "env": { // Should this be a seperate definition?
-            "description": "Collection of environment",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Environment"
-            }
+          "managedEnvironmentId": {
+            "description": "Deprecated. Resource ID of the Container App's environment.",
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
-          "image": {
-            "description": "Image for the Container App Job",
-            "type": "string"
-          },
-          "name": {
-            "description": "Name of the Container App Job.",
-            "type": "string"
+          "environmentId": {
+            "description": "Resource ID of environment.",
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
           "configuration": {
             "$ref": "#/definitions/Configuration",
             "description": "Non versioned Container Apps Job configuration properties."
           },
-          "ContainerAppsJobProbe": {
-            "description": "Container Apps Job Probe configurations.",
-            "type": "object",
-            "properties": {
-              "livenessProbe": {
-                "$ref": "#/definitions/ExecProbe",
-                "description": "Liveness Probe Configurations",
-                "type": "object"
-              },
-              "readinessProbe": {
-                "$ref": "#/definitions/ExecProbe",
-                "description": "Readiness Probe Configurations",
-                "type": "object"
-              },
-              "startupProbe": {
-                "$ref": "#/definitions/ExecProbe",
-                "description": "Startup Probe Configurations",
-                "type": "object"
-              }
-            }
-          },
-          "resources": {
-            "required": [
-              "cpu",
-              "memory"
-            ],
-            "type": "object",
-            "properties": {
-              "cpu": {
-                "type": "string"
-              },
-              "ephemeral-storage": {
-                "type": "string"
-              },
-              "memory": {
-                "type": "string"
-              }
-            }
-          },
-          "Operations": {
-            "description": "Collection of all the operations by this job.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ContainerAppsJobOperation"
-            }
+          "template": {
+            "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+            "description": "Container App versioned application definition."
           },
           "x-ms-client-flatten": true
         }
       }
     },
-    "ContainerAppsJobOperation": {
-      "description": "Container Apps Job Operation",
-      "type": "object",
-      "properties": {
-        "OperationId": {
-          "description": "Operation Id for specific execution by a Container Apps Job",
-          "type": "integer"
-        },
-        "JobName:": {
-          "description": "Name of the Container Apps Job",
-          "type" : "string"
-        },
-        "Result": {
-          "description": "Execution result of a Container Apps Job",
-          "type": "string"
-        },
-        "State": {
-          "description": "State of individual jobs",
-          "type": "string",
-          "default": "Single",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Completed",
-            "Failed"
-          ]
-        }
-      }
-    },
-    "ExecProbe": { // For the probes object, should we have a independent exec probe?
-      "description": "Probe describes a health check to be performed against\na container to determine whether it is alive or ready to receive\ntraffic.",
-      "type": "object",
-      "properties": {
-        "exec": {
-          "description": "Exec specifies the action to take.",
-          "properties": {
-            "command": {
-              "description": "Command is the command line to execute inside\nthe container, the working directory for the command  is\nroot ('/') in the container's filesystem. The command\nis simply exec'd, it is not run inside a shell, so traditional\nshell instructions ('|', etc) won't work. To use a shell,\nyou need to explicitly call out to that shell. Exit\nstatus of 0 is treated as live/healthy and non-zero\nis unhealthy.",
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
-        },
-        "failureThreshold": {
-          "description": "Minimum consecutive failures for the probe to\nbe considered failed after having succeeded. Defaults to\n3. Minimum value is 1.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "grpc": {
-          "description": "GRPC specifies an action involving a GRPC port.\nThis is a beta field and requires enabling GRPCContainerProbe\nfeature gate.",
-          "properties": {
-            "port": {
-              "description": "Port number of the gRPC service. Number must\nbe in the range 1 to 65535.",
-              "format": "int32",
-              "type": "integer"
-            },
-            "service": {
-              "description": "Service is the name of the service to place\nin the gRPC HealthCheckRequest (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).\n\n If this is not specified, the default behavior is\ndefined by gRPC.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "port"
-          ],
-          "type": "object"
-        },
-        "httpGet": {
-          "description": "HTTPGet specifies the http request to perform.",
-          "properties": {
-            "host": {
-              "description": "Host name to connect to, defaults to the\npod IP. You probably want to set \"Host\" in httpHeaders\ninstead.",
-              "type": "string"
-            },
-            "httpHeaders": {
-              "description": "Custom headers to set in the request. HTTP\nallows repeated headers.",
-              "items": {
-                "description": "HTTPHeader describes a custom header to\nbe used in HTTP probes",
-                "properties": {
-                  "name": {
-                    "description": "The header field name",
-                    "type": "string"
-                  },
-                  "value": {
-                    "description": "The header field value",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "value"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "path": {
-              "description": "Path to access on the HTTP server.",
-              "type": "string"
-            },
-            "port": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "string"
-                }
-              ],
-              "description": "Name or number of the port to access on the\ncontainer. Number must be in the range 1 to 65535. Name\nmust be an IANA_SVC_NAME.",
-              "x-kubernetes-int-or-string": true
-            },
-            "scheme": {
-              "description": "Scheme to use for connecting to the host.\nDefaults to HTTP.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "port"
-          ],
-          "type": "object"
-        },
-        "initialDelaySeconds": {
-          "description": "Number of seconds after the container has started\nbefore liveness probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
-          "format": "int32",
-          "type": "integer"
-        },
-        "periodSeconds": {
-          "description": "How often (in seconds) to perform the probe.\nDefault to 10 seconds. Minimum value is 1.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "successThreshold": {
-          "description": "Minimum consecutive successes for the probe to\nbe considered successful after having failed. Defaults to\n1. Must be 1 for liveness and startup. Minimum value is\n1.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "tcpSocket": {
-          "description": "TCPSocket specifies an action involving a TCP\nport.",
-          "properties": {
-            "host": {
-              "description": "Optional: Host name to connect to, defaults\nto the pod IP.",
-              "type": "string"
-            },
-            "port": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "string"
-                }
-              ],
-              "description": "Number or name of the port to access on the\ncontainer. Number must be in the range 1 to 65535. Name\nmust be an IANA_SVC_NAME.",
-              "x-kubernetes-int-or-string": true
-            }
-          },
-          "required": [
-            "port"
-          ],
-          "type": "object"
-        },
-        "terminationGracePeriodSeconds": {
-          "description": "Optional duration in seconds the pod needs to\nterminate gracefully upon probe failure. The grace period\nis the duration in seconds after the processes running in\nthe pod are sent a termination signal and the time when\nthe processes are forcibly halted with a kill signal. Set\nthis value longer than the expected cleanup time for your\nprocess. If this value is nil, the pod's terminationGracePeriodSeconds\nwill be used. Otherwise, this value overrides the value\nprovided by the pod spec. Value must be non-negative integer.\nThe value zero indicates stop immediately via the kill signal\n(no opportunity to shut down). This is a beta field and\nrequires enabling ProbeTerminationGracePeriod feature gate.\nMinimum value is 1. spec.terminationGracePeriodSeconds is\nused if unset.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "timeoutSeconds": {
-          "description": "Number of seconds after which the probe times\nout. Defaults to 1 second. Minimum value is 1. More info:\nhttps://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "initContainers": {
-      "type": "object",
-      "properties": {
-        "args": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "command": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "env": {
-          "items": {
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "secretRef": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name"
-            ],
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "image": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "probes": {
-          "type": "object",
-          "properties": {
-            "livenessProbe": {
-              "$ref": "#/definitions/ExecProbe",
-              "description": "Liveness Probe Configurations",
-              "type": "object"
-            },
-            "readinessProbe": {
-              "$ref": "#/definitions/ExecProbe",
-              "description": "Readiness Probe Configurations",
-              "type": "object"
-            },
-            "startupProbe": {
-              "$ref": "#/definitions/ExecProbe",
-              "description": "Startup Probe Configurations",
-              "type": "object"
-            }
-          }
-        },
-        "resources": {
-          "properties": {
-            "cpu": {
-              "type": "string"
-            },
-            "ephemeral-storage": {
-              "type": "string"
-            },
-            "memory": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "cpu",
-            "memory"
-          ],
-          "type": "object"
-        }
-      }
-    },
-    "storage": {
-      "type": "object",
-      "properties": {
-        "mounts": {
-          "description": "Collection of Volume Mounts",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VolumeMounts"
-          }
-        },
-        "volumes": {
-          "description": "Collection of Volumes",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Volumes"
-          }
-        }
-      }
-    },
-    "Environment": {
+    "ContainerAppsJobsCollection": {
+      "description": "Container Apps Jobs collection ARM resource.",
       "required": [
-        "name"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "secretRef": {
-          "type": "string"
-        },
         "value": {
-          "type": "string"
-        }
-      }
-    },
-    "VolumeMounts": {
-      "type": "object",
-      "properties": {
-        "containerName": {
-          "type": "string"
-        },
-        "volumeMounts": {
+          "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "required": [
-              "mountPath",
-              "name"
-            ],
-            "type": "object",
-            "description": "VolumeMount describes a mounting of a\nVolume within a container.",
-            "properties": {
-              "mountPath": {
-                "description": "Path within the container at which\nthe volume should be mounted.  Must not contain\n':'.",
-                "type": "string"
-              },
-              "mountPropagation": {
-                "description": "mountPropagation determines how mounts\nare propagated from the host to container and\nthe other way around. When not set, MountPropagationNone\nis used. This field is beta in 1.10.",
-                "type": "string"
-              },
-              "name": {
-                "description": "This must match the Name of a Volume.",
-                "type": "string"
-              },
-              "readOnly": {
-                "description": "Mounted read-only if true, read-write\notherwise (false or unspecified). Defaults to\nfalse.",
-                "type": "boolean"
-              },
-              "subPath": {
-                "description": "Path within the volume from which\nthe container's volume should be mounted. Defaults\nto \"\" (volume's root).",
-                "type": "string"
-              },
-              "subPathExpr": {
-                "description": "Expanded path within the volume from\nwhich the container's volume should be mounted.\nBehaves similarly to SubPath but environment\nvariable references $(VAR_NAME) are expanded\nusing the container's environment. Defaults\nto \"\" (volume's root). SubPathExpr and SubPath\nare mutually exclusive.",
-                "type": "string"
-              }
-            }
+            "$ref": "#/definitions/ContainerAppsJob"
           }
-        }
-      }
-    },
-    "Volumes": {
-      "type": "object",
-      "properties": {
-        "azureFileVolumeSource": {
-          "description": "AzureFile represents an Azure File Service\nmount on the host and bind mount to the pod.",
-          "properties": {
-            "readOnly": {
-              "description": "readOnly defaults to false (read/write).\nReadOnly here will force the ReadOnly setting\nin VolumeMounts.",
-              "type": "boolean"
-            },
-            "secretName": {
-              "description": "secretName is the  name of secret that\ncontains Azure Storage Account Name and Key",
-              "type": "string"
-            },
-            "shareName": {
-              "description": "shareName is the azure share Name",
-              "type": "string"
-            }
-          },
-          "required": [
-            "secretName",
-            "shareName"
-          ],
-          "type": "object"
         },
-        "name": {
-          "type": "string"
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
