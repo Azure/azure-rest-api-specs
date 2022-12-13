@@ -64,7 +64,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-03-preview'
+```yaml $(tag) == 'package-flexibleserver-2022-03-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json

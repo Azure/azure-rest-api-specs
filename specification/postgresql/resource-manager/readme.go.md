@@ -28,6 +28,7 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-flexibleserver-2022-12-01
   - tag: package-flexibleserver-2022-03-preview
   - tag: package-flexibleserver-2022-03-privatepreview
   - tag: package-flexibleserver-2021-06
@@ -37,6 +38,17 @@ batch:
   - tag: package-2020-01-01
   - tag: package-2017-12-01-preview
   - tag: package-2017-12-01
+```
+
+### Tag: package-flexibleserver-2022-12-01 and go
+
+These settings apply only when `--tag=package-flexibleserver-2022-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-12-01' && $(go)
+rpname: postgresql
+namespace: postgresqlflexibleservers
+output-folder: $(go-sdk-folder)/services/$(rpname)/mgmt/2022-12-01/$(namespace)
 ```
 
 ### Tag: package-flexibleserver-2022-03-preview and go
