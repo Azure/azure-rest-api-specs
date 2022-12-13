@@ -2003,6 +2003,17 @@
         }
       }
     },
+    "ConfigurationNameItem": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-nullable": true,
+          "description": "The result detail.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConfigurationNames"
+        }
+      }
+    },
     "ConfigurationNames": {
       "type": "object",
       "description": "The configuration names which will be set based on specific target resource, client type, auth type.",
@@ -2049,7 +2060,7 @@
           "description": "Expected configuration names for each target service.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfigurationNames"
+            "$ref": "#/definitions/ConfigurationNameItem"
           },
           "x-ms-identifiers": []
         },
