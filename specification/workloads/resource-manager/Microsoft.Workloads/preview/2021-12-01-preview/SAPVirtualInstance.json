@@ -287,14 +287,14 @@
           "Create Infrastructure only for Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
           },
-          "Create Infrastructure without SAP Trans Fileshare": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_SkipTransMount.json"
+          "Create Infrastructure without SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_SkipTransport.json"
           },
-          "Create Infrastructure with a new SAP Trans Fileshare": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_CreateTrans.json"
+          "Create Infrastructure with a new SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_CreateTransport.json"
           },
-          "Create Infrastructure with an existing SAP Trans Fileshare": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_MountTrans.json"
+          "Create Infrastructure with an existing SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_MountTransport.json"
           },
           "Detect SAP Software Installation on a Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_SingleServer.json"
@@ -2531,7 +2531,7 @@
     },
     "SkipFileShareConfiguration": {
       "x-ms-discriminator-value": "Skip",
-      "description": "Gets or sets the skip file share configuration",
+      "description": "Gets or sets the file share configuration where we don't create a transport directory fileshare.",
       "type": "object",
       "allOf": [
         {
@@ -2541,7 +2541,7 @@
     },
     "CreateAndMountFileShareConfiguration": {
       "x-ms-discriminator-value": "CreateAndMount",
-      "description": "Gets or sets the file share configuration for file share created with the VIS case.",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare is created and mounted as a part of the create infra flow.",
       "type": "object",
       "allOf": [
         {
@@ -2561,7 +2561,7 @@
     },
     "MountFileShareConfiguration": {
       "x-ms-discriminator-value": "Mount",
-      "description": "Gets or sets the file share configuration for externally mounted cases.",
+      "description": "Gets or sets the file share configuration where the transport fileshare is already created, and user wishes to mount the fileshare as a part of the create infra flow.",
       "type": "object",
       "allOf": [
         {
