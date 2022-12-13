@@ -1,0 +1,504 @@
+import "@cadl-lang/rest";
+import "./model.common.request.cadl";
+import "./model.common.response.cadl";
+import "./model.common.shared.cadl";
+
+using Cadl.Rest;
+
+namespace HealthDecisionSupportAPI;
+
+
+@doc("The body of the Trial Matcher request.")
+model TrialMatcherRequest extends Request {
+  @doc("Configuration affecting the Trial Matcher model's inference.")
+  configuration?: TrialMatcherModelConfiguration;
+}
+
+@doc("Configuration affecting the Trial Matcher model's inference.")
+model TrialMatcherModelConfiguration extends ModelConfiguration{
+  @doc("""
+The clinical trials that the patient(s) should be matched to. <br />The trial
+selection can be given as a list of custom clinical trials and/or a list of
+filters to known clinical trial registries. In case both are given, the
+resulting trial set is a union of the two sets.
+""")
+  clinicalTrials: ClinicalTrials;
+}
+
+
+@resource("trialmatcher/jobs")
+@doc("The response for the Trial Matcher request.")
+model TrialMatcherResponse {
+  ...Response;
+
+  @doc("The inference results for the Trial Matcher request.")
+  results?: TrialMatcherResults;
+}
+
+
+@doc("The inference results for the Trial Matcher request.")
+model TrialMatcherResults {
+  @doc("Results for the patients given in the request.")
+  patients: TrialMatcherPatientResult[];
+
+  @doc("The version of the model used for inference, expressed as the model date.")
+  modelVersion: plainDate;
+
+  @doc("The date when the clinical trials knowledge graph was last updated.")
+  knowledgeGraphLastUpdateDate?: plainDate;
+}
+
+@doc("The results of the model's work for a single patient.")
+model TrialMatcherPatientResult {
+  @doc("The identifier given for the patient in the request.")
+  id: string;
+
+  @doc("The model's inferences for the given patient.")
+  inferences: TrialMatcherInference[];
+
+  @doc("""
+Clinical information which is needed to provide better trial matching results
+for the patient.
+""")
+  neededClinicalInfo?: ExtendedClinicalCodedElement[];
+}
+
+
+@doc("""
+A piece of clinical information, expressed as a code in a clinical coding
+system, extended by semantic information.
+""")
+model ExtendedClinicalCodedElement {
+  ...ClinicalCodedElement;
+
+  @doc("""
+The [UMLS semantic
+type](https://www.nlm.nih.gov/research/umls/META3_current_semantic_types.html)
+associated with the coded concept.
+""")
+  semanticType?: string;
+
+  @doc("""
+The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom,
+Medication, Examination.
+""")
+  category?: string;
+}
+
+@doc("A piece of evidence from a clinical note (text document).")
+model ClinicalNoteEvidence {
+  @doc("The identifier of the document containing the evidence.")
+  id: string;
+
+  @doc("The actual text span which is evidence for the inference.")
+  text?: string;
+
+  @doc("The start index of the evidence text span in the document (0 based).")
+  offset: int32;
+
+  @doc("The length of the evidence text span.")
+  length: int32;
+}
+
+@doc("A piece of evidence corresponding to an inference.")
+model InferenceEvidence {
+  @doc("A piece of evidence from a clinical note (text document).")
+  patientDataEvidence?: ClinicalNoteEvidence;
+
+  @doc("""
+A piece of clinical information, expressed as a code in a clinical coding
+system.
+""")
+  patientInfoEvidence?: ClinicalCodedElement;
+
+  @doc("A value indicating how important this piece of evidence is for the inference.")
+  importance?: float32;
+}
+
+@doc("A piece of evidence corresponding to a Trial Matcher inference.")
+model TrialMatcherInferenceEvidence {
+  ...InferenceEvidence;
+
+  @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
+  eligibilityCriteriaEvidence?: string;
+}
+
+
+@doc("An inference made by the Trial Matcher model regarding a patient.")
+model TrialMatcherInference {
+  ...Inference;
+
+  @doc("The identifier of the clinical trial.")
+  id?: string;
+
+  @doc("Possible sources of a clinical trial.")
+  source?: ClinicalTrialSource;
+
+  @doc("Trial data which is of interest to the potential participant.")
+  metadata?: ClinicalTrialMetadata;
+}
+
+
+@doc("""
+The clinical trials that the patient(s) should be matched to. <br />The trial
+selection can be given as a list of custom clinical trials and/or a list of
+filters to known clinical trial registries. In case both are given, the
+resulting trial set is a union of the two sets.
+""")
+model ClinicalTrials {
+  @doc("A list of clinical trials.")
+  @minItems(1)
+  customTrials?: ClinicalTrialDetails[];
+
+  @doc("""
+A list of filters, each one creating a selection of trials from a given
+clinical trial registry.
+""")
+  @minItems(1)
+  registryFilters?: ClinicalTrialRegistryFilter[];
+}
+
+
+@doc("""
+A filter defining a subset of clinical trials from a given clinical trial
+registry (e.g. clinicaltrials.gov).
+""")
+model ClinicalTrialRegistryFilter {
+  @doc("""
+Trials with any of the given medical conditions will be included in the
+selection (provided that other limitations are satisfied). Leaving this list
+empty will not limit the medical conditions.
+""")
+  conditions?: string[];
+
+  @doc("""
+Trials with any of the given study types will be included in the selection
+(provided that other limitations are satisfied). Leaving this list empty will
+not limit the study types.
+""")
+  studyTypes?: ClinicalTrialStudyType[];
+
+  @doc("""
+Trials with any of the given recruitment statuses will be included in the
+selection (provided that other limitations are satisfied). Leaving this list
+empty will not limit the recruitment statuses.
+""")
+  recruitmentStatuses?: ClinicalTrialRecruitmentStatus[];
+
+  @doc("""
+Trials with any of the given sponsors will be included in the selection
+(provided that other limitations are satisfied). Leaving this list empty will
+not limit the sponsors.
+""")
+  sponsors?: string[];
+
+  @doc("""
+Trials with any of the given phases will be included in the selection (provided
+that other limitations are satisfied). Leaving this list empty will not limit
+the phases.
+""")
+  phases?: ClinicalTrialPhase[];
+
+  @doc("""
+Trials with any of the given purposes will be included in the selection
+(provided that other limitations are satisfied). Leaving this list empty will
+not limit the purposes.
+""")
+  purposes?: ClinicalTrialPurpose[];
+
+  @doc("""
+Trials with any of the given identifiers will be included in the selection
+(provided that other limitations are satisfied). Leaving this list empty will
+not limit the trial identifiers.
+""")
+  ids?: string[];
+
+  @doc("""
+Trials with any of the given sources will be included in the selection
+(provided that other limitations are satisfied). Leaving this list empty will
+not limit the sources.
+""")
+  sources?: ClinicalTrialSource[];
+
+  @doc("""
+Trials with any of the given facility names will be included in the selection
+(provided that other limitations are satisfied). Leaving this list empty will
+not limit the trial facility names.
+""")
+  facilityNames?: string[];
+
+  @doc("""
+Trials with any of the given facility locations will be included in the
+selection (provided that other limitations are satisfied). Leaving this list
+empty will not limit the trial facility locations.
+""")
+  facilityLocations?: Location[];
+
+  @doc("""
+Trials with any of the given facility area boundaries will be included in the
+selection (provided that other limitations are satisfied). Leaving this list
+empty will not limit the trial facility area boundaries.
+""")
+  facilityAreas?: Area[];
+}
+
+
+@doc("""
+A geographical area, expressed as a `Circle` geometry represented using a
+`GeoJSON Feature` (see [GeoJSON spec](https://tools.ietf.org/html/rfc7946)).
+""")
+model Area {
+  @doc("`GeoJSON` type.")
+  type: GeoJsonType;
+
+  @doc("`GeoJSON` geometry, representing the area circle's center.")
+  geometry: AreaGeometry;
+
+  @doc("`GeoJSON` object properties.")
+  properties: AreaProperties;
+}
+
+@doc("`GeoJSON` geometry, representing the area circle's center.")
+model AreaGeometry {
+  @doc("`GeoJSON` geometry type.")
+  type: GeoJsonGeometryType;
+
+  @doc("""
+Coordinates of the area circle's center, represented according to the `GeoJSON`
+standard. <br />This is an array of 2 decimal numbers, longitude and latitude
+(precisely in this order).
+""")
+  coordinates: float32[];
+}
+
+@doc("`GeoJSON` object properties.")
+model AreaProperties {
+  @doc("`GeoJSON` object sub-type.")
+  subType: GeoJsonPropertiesSubType;
+
+  @doc("The radius of the area's circle, in meters.")
+  radius: float32;
+}
+
+
+@doc("A description of a clinical trial.")
+model ClinicalTrialDetails {
+  @doc("""
+A given identifier for the clinical trial. Has to be unique within a list of
+clinical trials.
+""")
+  id: string;
+
+  @doc("""
+The eligibility criteria of the clinical trial (inclusion and exclusion), given
+as text.
+""")
+  eligibilityCriteriaText?: string;
+
+  @doc("Demographic criteria for a clinical trial.")
+  demographics?: ClinicalTrialDemographics;
+
+  @doc("Trial data which is of interest to the potential participant.")
+  metadata: ClinicalTrialMetadata;
+}
+
+@doc("Demographic criteria for a clinical trial.")
+model ClinicalTrialDemographics {
+  @doc("A list of genders accepted by a clinical trial.")
+  acceptedGenders?: ClinicalTrialAcceptedGender[];
+
+  @doc("""
+A definition of the range of ages accepted by a clinical trial. Contains a
+minimum age and/or a maximum age.
+""")
+  acceptedAgeRange?: ClinicalTrialDemographicsAcceptedAgeRange;
+}
+
+@doc("""
+A definition of the range of ages accepted by a clinical trial. Contains a
+minimum age and/or a maximum age.
+""")
+model ClinicalTrialDemographicsAcceptedAgeRange {
+  @doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
+  minimumAge?: Age;
+
+  @doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
+  maximumAge?: Age;
+}
+
+
+@doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
+model Age {
+  @doc("Possible units for a person's age.")
+  unit: AgeUnit;
+
+  @doc("The number of years/months/days that represents the person's age.")
+  @minValue(0.0)
+  value: float32;
+}
+
+@doc("Trial data which is of interest to the potential participant.")
+model ClinicalTrialMetadata {
+  @doc("""
+Phases which are relevant for the clinical trial. <br />Each clinical trial can
+be in a certain phase or in multiple phases.
+""")
+  phases?: ClinicalTrialPhase[];
+
+  @doc("Possible study types of a clinical trial.")
+  studyType?: ClinicalTrialStudyType;
+
+  @doc("Possible recruitment status of a clinical trial.")
+  recruitmentStatus?: ClinicalTrialRecruitmentStatus;
+
+  @doc("""
+Medical conditions and their synonyms which are relevant for the clinical
+trial, given as strings.
+""")
+  conditions: string[];
+
+  @doc("Sponsors/collaborators involved with the trial.")
+  sponsors?: string[];
+
+  @doc("""
+Contact details of the trial administrators, for patients that want to
+participate in the trial.
+""")
+  contacts?: ContactDetails[];
+
+  @doc("Research facilities where the clinical trial is conducted.")
+  facilities?: ClinicalTrialResearchFacility[];
+}
+
+@doc("A person's contact details.")
+model ContactDetails {
+  @doc("The person's name.")
+  name?: string;
+
+  @doc("The person's email.")
+  email?: string;
+
+  @doc("A person's phone number.")
+  phone?: string;
+}
+
+@doc("Details of a research facility where a clinical trial is conducted.")
+model ClinicalTrialResearchFacility {
+  ...Location;
+
+  @doc("The facility's name.")
+  name: string;
+}
+
+@doc("Gender definitions as accepted by clinical trials.")
+@knownValues(ClinicalTrialAcceptedGenderKnownValues)
+model ClinicalTrialAcceptedGender is string;
+enum ClinicalTrialAcceptedGenderKnownValues {
+    Female: "female",
+    Male: "male",
+}
+
+
+@doc("Possible units for a person's age.")
+@knownValues(AgeUnitKnownValues)
+model AgeUnit is string;
+enum AgeUnitKnownValues {
+    Years: "years",
+    Months: "months",
+    Days: "days",
+}
+
+
+@doc("Possible phases of a clinical trial.")
+@knownValues(ClinicalTrialPhaseKnownValues)
+model ClinicalTrialPhase is string;
+enum ClinicalTrialPhaseKnownValues {
+    NotApplicable: "notApplicable",
+    EarlyPhase1: "earlyPhase1",
+    Phase1: "phase1",
+    Phase2: "phase2",
+    Phase3: "phase3",
+    Phase4: "phase4",
+}
+
+
+@doc("Possible study types of a clinical trial.")
+@knownValues(ClinicalTrialStudyTypeKnownValues)
+model ClinicalTrialStudyType is string;
+enum ClinicalTrialStudyTypeKnownValues {
+    Interventional: "interventional",
+    Observational: "observational",
+    ExpandedAccess: "expandedAccess",
+    PatientRegistries: "patientRegistries",
+}
+
+
+@doc("Possible recruitment status of a clinical trial.")
+@knownValues(ClinicalTrialRecruitmentStatusKnownValues)
+model ClinicalTrialRecruitmentStatus is string;
+enum ClinicalTrialRecruitmentStatusKnownValues {
+    UnknownStatus: "unknownStatus",
+    NotYetRecruiting: "notYetRecruiting",
+    Recruiting: "recruiting",
+    EnrollingByInvitation: "enrollingByInvitation",
+}
+
+
+@doc("Possible purposes of a clinical trial.")
+@knownValues(ClinicalTrialPurposeKnownValues)
+model ClinicalTrialPurpose is string;
+enum ClinicalTrialPurposeKnownValues {
+    NotApplicable: "notApplicable",
+    Screening: "screening",
+    Diagnostic: "diagnostic",
+    Prevention: "prevention",
+    HealthServicesResearch: "healthServicesResearch",
+    Treatment: "treatment",
+    DeviceFeasibility: "deviceFeasibility",
+    SupportiveCare: "supportiveCare",
+    BasicScience: "basicScience",
+    Other: "other",
+}
+
+
+@doc("Possible sources of a clinical trial.")
+@knownValues(ClinicalTrialSourceKnownValues)
+model ClinicalTrialSource is string;
+enum ClinicalTrialSourceKnownValues {
+    Custom: "custom",
+    ClinicaltrialsGov: "clinicaltrials.gov",
+}
+  
+
+@doc("`GeoJSON` type.")
+@knownValues(GeoJsonTypeKnownValues)
+model GeoJsonType is string;
+enum GeoJsonTypeKnownValues {
+    Feature: "Feature",
+}
+
+
+@doc("`GeoJSON` geometry type.")
+@knownValues(GeoJsonGeometryTypeKnownValues)
+model GeoJsonGeometryType is string;
+enum GeoJsonGeometryTypeKnownValues {
+    Point : "Point",
+}
+
+
+@doc("`GeoJSON` object sub-type.")
+@knownValues(GeoJsonPropertiesSubTypeKnownValues)
+model GeoJsonPropertiesSubType is string;
+enum GeoJsonPropertiesSubTypeKnownValues {
+    Circle: "Circle",
+}
+
+
+@doc("The type of the Trial Matcher inference.")
+@knownValues(TrialMatcherInferenceTypeKnownValues)
+model TrialMatcherInferenceType is string;
+enum TrialMatcherInferenceTypeKnownValues {
+    TrialEligibility: "trialEligibility",
+}
+
+  

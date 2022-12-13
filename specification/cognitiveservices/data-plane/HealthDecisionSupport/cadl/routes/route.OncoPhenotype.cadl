@@ -1,0 +1,30 @@
+import "@azure-tools/cadl-azure-core";
+import "../models/model.OncoPhenotype.cadl";
+import "../primitives.cadl";
+
+using Azure.Core;
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace HealthDecisionSupportAPI;
+
+interface OncoPhenotype {
+  @summary("Create Onco Phenotype job")
+  @doc("Creates an Onco Phenotype job with the given request body.")
+  @route("/oncophenotype/jobs")
+  @post
+  CreateJob is Azure.Core.Foundations.LongRunningOperation<
+    {
+      ...RepeatabilityRequestHeaders;
+
+      @doc("The body of an Onco Phenotype request.")
+      @body
+      body: OncoPhenotypeRequest;
+    },
+    SuccessfulPostJobResponse
+  >;
+
+  @summary("Get Onco Phenotype job details")
+  @doc("Gets the status and details of the Onco Phenotype job.")
+  GetJob is Azure.Core.ResourceRead<OncoPhenotypeResponse>;
+}

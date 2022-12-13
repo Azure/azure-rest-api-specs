@@ -1,0 +1,158 @@
+import "@cadl-lang/rest";
+import "./model.common.shared.cadl";
+
+using Cadl.Rest;
+
+namespace HealthDecisionSupportAPI;
+
+@doc("The generic part of the Health Decision Support request, common to all models.")
+model Request {
+  @doc("The list of patients, including their clinical information and data.")
+  patients: Patient[];
+}
+
+
+@doc("General configuration common to all models.")
+model ModelConfiguration {
+  @doc("An indication whether the model should produce verbose output.")
+  verbose?: boolean;
+
+  @doc("""
+An indication whether the model's output should include evidence for the
+inferences.
+""")
+  includeEvidence?: boolean;
+}
+
+
+@doc("A patient record, including their clinical information and data.")
+model Patient {
+  @doc("""
+A given identifier for the patient. Has to be unique across all patients in a
+single request.
+""")
+  id: string;
+
+  @doc("""
+Patient structured information, including demographics and known structured
+clinical information.
+""")
+  info?: PatientInfo;
+
+  @doc("Patient unstructured clinical data, given as documents.")
+  data?: PatientDocument[];
+}
+
+
+@doc("""
+Patient structured information, including demographics and known structured
+clinical information.
+""")
+model PatientInfo {
+  @doc("The patient's gender.")
+  gender?: PatientInfoGender;
+
+  @doc("The patient's date of birth.")
+  birthDate?: plainDate;
+
+  @doc("Known clinical information for the patient, structured.")
+  clinicalInfo?: ClinicalCodedElement[];
+}
+
+
+@doc("The patient's date of birth.")
+@knownValues(PatientInfoGenderKnownValues)
+model PatientInfoGender is string;
+enum PatientInfoGenderKnownValues {
+    Female: "female",
+    Male: "male",
+    Unspecified: "unspecified",
+  }
+
+@doc("""
+The type of the patient document, such as 'note' (text document) or
+'fhirBundle' (FHIR JSON document).
+""")
+@knownValues(DocumentTypeKnownValues)
+model DocumentType is string;
+enum DocumentTypeKnownValues {
+  Note: "note",
+  FhirBundle: "fhirBundle",
+  Dicom: "dicom",
+  GenomicSequencing: "genomicSequencing",
+}
+
+@doc("The type of the clinical document.")
+@knownValues(ClinicalDocumentTypeKnownValues)
+model ClinicalDocumentType is string;
+enum ClinicalDocumentTypeKnownValues {
+  Consultation: "consultation",
+  DischargeSummary: "dischargeSummary",
+  HistoryAndPhysical: "historyAndPhysical",
+  Procedure: "procedure",
+  Progress: "progress",
+  Imaging: "imaging",
+  Laboratory: "laboratory",
+  Pathology: "pathology",
+}
+
+@doc("""
+The type of the content's source. <br />In case the source type is
+ 'inline', the content is given as a string (for instance, text). 
+ <br/>In case the source type is 'reference', the content is given as a URI.
+""")
+@knownValues(DocumentContentSourceTypeKnownValues)
+model DocumentContentSourceType is string;
+enum DocumentContentSourceTypeKnownValues {
+  Inline: "inline",
+  Reference: "reference",
+}
+
+
+
+@doc("""
+A clinical document related to a patient. Document here is in the wide sense -
+not just a text document (note).
+""")
+model PatientDocument {
+  @doc("""
+The type of the patient document, such as 'note' (text document) or
+'fhirBundle' (FHIR JSON document).
+""")
+  type: DocumentType;
+
+  @doc("The type of the clinical document.")
+  clinicalType?: ClinicalDocumentType;
+
+  @doc("""
+A given identifier for the document. Has to be unique across all documents for
+a single patient.
+""")
+  id: string;
+
+  @doc("A 2 letter ISO 639-1 representation of the language of the document.")
+  language?: string;
+
+  @doc("The date and time when the document was created.")
+  createdDateTime?: zonedDateTime;
+
+  @doc("The content of the patient document.")
+  content: DocumentContent;
+}
+
+
+@doc("The content of the patient document.")
+model DocumentContent {
+  @doc("""
+The type of the content's source. <br />In case the source type is 'inline',
+the content is given as a string (for instance, text). <br />In case the source
+type is 'reference', the content is given as a URI.
+""")
+  sourceType: DocumentContentSourceType;
+
+  @doc("""
+The content of the document, given either inline (as a string) or as a
+reference (URI).
+""")
+  value: string;
+}

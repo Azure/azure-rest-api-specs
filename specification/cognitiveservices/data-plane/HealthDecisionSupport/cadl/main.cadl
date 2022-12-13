@@ -1,0 +1,36 @@
+import "@cadl-lang/rest";
+import "./routes/route.OncoPhenotype.cadl";
+import "./routes/route.TrialMatcher.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+using Cadl.Versioning;
+
+@service({title: "Health Decision Support API"})
+@versioned(QueryApiVersion)
+
+@server(
+  "{endpoint}/healthdecisionsupport",
+  "Health Decision Support provides an API that serves decision support models, specific for Health & Life Sciences, that perform a decision support inference to be used by a human.",
+  {
+    @doc("""
+Supported Cognitive Services endpoints (protocol and hostname, for example:
+https://westus2.api.cognitive.microsoft.com).
+""")
+  endpoint: string,
+  }
+)
+
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+
+@doc("""
+Health Decision Support provides an API that serves decision support models,
+specific for Health & Life Sciences, that perform a decision support inference
+to be used by a human.
+""")
+namespace HealthDecisionSupportAPI;
+
+enum QueryApiVersion {
+  v2022_01_01_preview: "2022-01-01-preview"
+}
+

@@ -1,0 +1,157 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2022-01-01-preview",
+    "body": {
+      "patients": [
+        {
+          "id": "Patient ID Example 2",
+          "info": {
+            "gender": "female",
+            "birthDate": "1976-09-10",
+            "clinicalInfo": [
+              {
+                "system": "UMLS",
+                "code": "C0041296",
+                "name": "Tuberculosis"
+              },
+              {
+                "system": "UMLS",
+                "code": "C0027646",
+                "name": "Diagnostic Neoplasm Staging",
+                "value": "3"
+              }
+            ]
+          }
+        }
+      ],
+      "configuration": {
+        "verbose": true,
+        "includeEvidence": true,
+        "clinicalTrials": {
+          "customTrials": [
+            {
+              "id": "1",
+              "eligibilityCriteriaText": "Inclusion criteria: In-patients female with acute tuberculosis, suspected tuberculosis or other pulmonary diseases (pneumonia, Bronchitis, COPD)",
+              "demographics": {
+                "acceptedGenders": [
+                  "female"
+                ],
+                "acceptedAgeRange": {
+                  "minimumAge": {
+                    "unit": "years",
+                    "value": 30
+                  }
+                }
+              },
+              "metadata": {
+                "phases": [
+                  "phase2"
+                ],
+                "studyType": "interventional",
+                "recruitmentStatus": "recruiting",
+                "conditions": [
+                  "tuberculosis"
+                ],
+                "sponsors": [
+                  "University Hospital, Basel, Switzerland"
+                ],
+                "contacts": [
+                  {
+                    "name": "Jean Epstein, PD Dr. Med",
+                    "email": "Jean@baselU.com",
+                    "phone": "+41-755-5543-23"
+                  }
+                ],
+                "facilities": [
+                  {
+                    "name": "University Hospital, Basel",
+                    "city": "Basel",
+                    "state": "Basel-Stadt",
+                    "country": "Switzerland"
+                  }
+                ]
+              }
+            }
+          ],
+          "registryFilters": [
+            {
+              "studyTypes": [
+                "interventional",
+                "observational"
+              ],
+              "recruitmentStatuses": [
+                "recruiting",
+                "enrollingByInvitation"
+              ],
+              "phases": [
+                "phase2",
+                "phase3"
+              ],
+              "purposes": [
+                "diagnostic",
+                "prevention",
+                "basicScience"
+              ],
+              "sources": [
+                "clinicaltrials.gov"
+              ],
+              "facilityLocations": [
+                {
+                  "city": "Basel",
+                  "country": "Switzerland"
+                },
+                {
+                  "city": "Allschwil",
+                  "country": "Switzerland"
+                }
+              ]
+            },
+            {
+              "sponsors": [
+                "Janssen"
+              ],
+              "sources": [
+                "clinicaltrials.gov"
+              ],
+              "facilityAreas": [
+                {
+                  "type": "Feature",
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                      7.588576,
+                      47.559601
+                    ]
+                  },
+                  "properties": {
+                    "subType": "Circle",
+                    "radius": 80000
+                  }
+                }
+              ]
+            },
+            {
+              "ids": [
+                "NCT04006015",
+                "NCT04545788",
+                "NCT04773711"
+              ],
+              "sources": [
+                "clinicaltrials.gov"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/healthdecisionsupport/trialmatcher/jobs/{jobId}?api-version=2022-01-01-preview",
+        "Retry-After": "1"
+      }
+    }
+  }
+}

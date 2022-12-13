@@ -1,0 +1,61 @@
+import "@cadl-lang/rest";
+import "./model.common.shared.cadl";
+
+using Cadl.Rest;
+
+namespace HealthDecisionSupportAPI;
+
+
+@doc("The generic part of the Health Decision Support response, common to all models.")
+model Response {
+  @doc("A processing job identifier.")
+  @key
+  jobId: string;
+
+  @doc("The date and time when the processing job was created.")
+  createdDateTime: zonedDateTime;
+
+  @doc("The date and time when the processing job is set to expire.")
+  expirationDateTime: zonedDateTime;
+
+  @doc("The date and time when the processing job was last updated.")
+  lastUpdateDateTime: zonedDateTime;
+
+  @doc("The status of the processing job.")
+  status: JobStatus;
+
+  @doc("An array of errors, if any errors occurred during the processing job.")
+  errors?: Error[];
+}
+
+@doc("Error response object.")
+@error
+model ErrorResponse {
+  @doc("Error information.")
+  error: Error;
+}
+
+
+@doc("An inference made by the model regarding a patient.")
+model Inference {
+  @doc("The value of the inference, as relevant for the given inference type.")
+  value: string;
+
+  @doc("The description corresponding to the inference value.")
+  description?: string;
+
+  @doc("Confidence score for this inference.")
+  confidenceScore?: float32;
+}
+
+
+@doc("The status of the processing job.")
+@knownValues(JobStatusKnownValues)
+model JobStatus is string;
+enum JobStatusKnownValues {
+  NotStarted: "notStarted",
+  Running: "running",
+  Succeeded: "succeeded",
+  Failed: "failed",
+  PartiallyCompleted: "partiallyCompleted",
+}

@@ -1,0 +1,27 @@
+// client.cadl
+// Separate operations (interfaces) into separate clients for SDKs
+import "./main.cadl";
+import "./routes/route.TrialMatcher.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+namespace Azure.AI.HealthDecisionSupport; // this namespace name doesn't affect anything
+
+@client({
+    name: "TrialMatcherClient",
+    service: HealthDecisionSupportAPI
+})
+interface TrialMatcherClient {
+  CreateJob is HealthDecisionSupportAPI.TrialMatcher.CreateJob;
+  GetJob is HealthDecisionSupportAPI.TrialMatcher.GetJob;
+}
+
+@client({
+name: "OncoPhenotypeClient",
+service: HealthDecisionSupportAPI
+})
+interface OncoPhenotypeClient {
+  CreateJob is HealthDecisionSupportAPI.OncoPhenotype.CreateJob;
+  GetJob is HealthDecisionSupportAPI.OncoPhenotype.GetJob;
+}
