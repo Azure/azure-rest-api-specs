@@ -2102,17 +2102,17 @@
             "description": "Accepted the request to start VM Image Download",
             "schema": {
               "$ref": "#/definitions/MarketplaceSasToken"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "GetSASToken is working fine",
             "schema": {
               "$ref": "#/definitions/MarketplaceSasToken"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -7508,7 +7508,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuMapping"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7592,7 +7593,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuMapping"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "type": "string"
