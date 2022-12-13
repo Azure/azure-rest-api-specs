@@ -1,143 +1,143 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Microsoft Sentinel Upload Indicators API",
-        "description": "Spec for Microsoft Sentinel Upload Indicators API.",
-        "version": "2022-12-01-preview"
-    },
-    "host": "sentinelus.azure-api.net",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/{workspaceId}/threatintelligence:upload-indicators": {
-            "post": {
-                "x-ms-examples": {
-                    "Upload Threat Intelligence indicators": {
-                        "$ref": "./examples/threatintelligence/UploadThreatIntelligence.json"
-                    }
-                },
-                "operationId": "UploadIndicators",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "workspaceId",
-                        "description": "The workspace ID for the indicators to be uploaded.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/uploadIndicatorsRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The API returns 200 when one or many indicators are successfully validated and published.",
-                        "schema": {
-                            "$ref": "#/definitions/uploadIndicatorsResponse"
-                        }
-                    },
-                    "429": {
-                        "description": "The API will return HTTP 429, if there are too many requests in a minute per user. The user will have to wait until the next minute before the next request will succeed.",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "headers": {
-                            "Retry-After": {
-                                "description": "How many seconds a user need to wait before retry.",
-                                "type": "integer",
-                                "format": "Int32"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "The API will return 401 if the user does not have enough permissions to the workspace."
-                    },
-                    "400": {
-                        "description": "The API returns 400 if the request is not formatted correctly or does not contain required information."
-                    }
-                },
-                "security": [
-                    {
-                        "azure_auth": [
-                            "user_impersonation"
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "definitions": {
-        "jsonPropertyBag": {
-            "type": "object"
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Sentinel Upload Indicators API",
+    "description": "Spec for Microsoft Sentinel Upload Indicators API.",
+    "version": "2022-12-01-preview"
+  },
+  "host": "sentinelus.azure-api.net",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/{workspaceId}/threatintelligence:upload-indicators": {
+      "post": {
+        "x-ms-examples": {
+          "Upload Threat Intelligence indicators": {
+            "$ref": "./examples/threatintelligence/UploadThreatIntelligence.json"
+          }
         },
-        "uploadIndicatorsRequest": {
-            "type": "object",
-            "properties": {
-                "sourcesystem": {
-                    "description": "Source system name cannot be Microsoft Sentinel.",
-                    "type": "string"
-                },
-                "value": {
-                    "format": "string",
-                    "description": "The value param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/jsonPropertyBag"
-                    }
-                }
+        "operationId": "UploadIndicators",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "workspaceId",
+            "description": "The workspace ID for the indicators to be uploaded.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/uploadIndicatorsRequest"
             }
-        },
-        "uploadIndicatorsResponse": {
-            "type": "object",
-            "properties": {
-                "errors": {
-                    "description": "List of indicator validation errors",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/uploadIndicatorsValidationError"
-                    }
-                }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API returns 200 when one or many indicators are successfully validated and published.",
+            "schema": {
+              "$ref": "#/definitions/uploadIndicatorsResponse"
             }
-        },
-        "uploadIndicatorsValidationError": {
-            "type": "object",
-            "properties": {
-                "recordIndex": {
-                    "format": "int64",
-                    "description": "Index of the indicator in indicators array from request.",
-                    "type": "integer"
-                },
-                "errorMessages": {
-                    "description": "List of error messages.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "flow": "implicit",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+          },
+          "429": {
+            "description": "The API will return HTTP 429, if there are too many requests in a minute per user. The user will have to wait until the next minute before the next request will succeed.",
+            "schema": {
+              "type": "string"
             },
-            "description": "Azure Active Directory OAuth2 Flow"
-        }
+            "headers": {
+              "Retry-After": {
+                "description": "How many seconds a user need to wait before retry.",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "401": {
+            "description": "The API will return 401 if the user does not have enough permissions to the workspace."
+          },
+          "400": {
+            "description": "The API returns 400 if the request is not formatted correctly or does not contain required information."
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
+      }
     }
+  },
+  "definitions": {
+    "jsonPropertyBag": {
+      "type": "object"
+    },
+    "uploadIndicatorsRequest": {
+      "type": "object",
+      "properties": {
+        "sourcesystem": {
+          "description": "Source system name cannot be Microsoft Sentinel.",
+          "type": "string"
+        },
+        "value": {
+          "format": "string",
+          "description": "The value param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/jsonPropertyBag"
+          }
+        }
+      }
+    },
+    "uploadIndicatorsResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "description": "List of indicator validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/uploadIndicatorsValidationError"
+          }
+        }
+      }
+    },
+    "uploadIndicatorsValidationError": {
+      "type": "object",
+      "properties": {
+        "recordIndex": {
+          "format": "int64",
+          "description": "Index of the indicator in indicators array from request.",
+          "type": "integer"
+        },
+        "errorMessages": {
+          "description": "List of error messages.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  }
 }
