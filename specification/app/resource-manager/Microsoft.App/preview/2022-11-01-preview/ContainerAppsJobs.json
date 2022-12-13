@@ -370,7 +370,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+<<<<<<< HEAD
             "$ref": "#/definitions/ContainerAppsJobName"
+=======
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
           }
         ],
         "responses": {
@@ -388,7 +396,11 @@
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
           "List Container Apps Job Secrets": {
+=======
+          "List Container Apps Secrets": {
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
             "$ref": "./examples/ContainerAppsJob_ListSecrets.json"
           }
         }
@@ -430,17 +442,26 @@
           }
         },
         "replicaTimeout": {
+<<<<<<< HEAD
           "description": "Maximum number of seconds a replica is allowed to run.",
+=======
+          "description": "Number of seconds from the startTime for each replica after which the system terminate it.",
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
           "format": "int32",
           "type": "integer"
         },
         "replicaRetryLimit": {
           "format": "int32",
+<<<<<<< HEAD
           "description": "Maximum number of retries before failing the job.",
+=======
+          "description": "Maximum number of replica retries before failing the whole job.",
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
           "type": "integer"
         },
         "manualTriggerConfig": {
           "type": "object",
+<<<<<<< HEAD
           "description": "Manual trigger configuration for a single execution job. Properties replicaCount and parellelism would be set to 1 by default",
           "properties": {
             "replicaCount": {
@@ -448,17 +469,35 @@
             },
             "parallelism": {
               "$ref": "#/definitions/parallelism"
+=======
+          "description": "Manual Trigger configurations. Properties replicaCount and parellelism would be set to 1 by default",
+          "properties": {
+            "replicaCount": {
+              "description": "Number of replicas that will be created when the Container App Job is triggered.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "parallelism": {
+              "description": "Number of parallel jobs that can run at a given time.",
+              "format": "int32",
+              "type": "integer"
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
             }
           }
         },
         "scheduleTriggerConfig": {
+<<<<<<< HEAD
           "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parellelism would be set to 1 by default",
+=======
+          "description": "Scheduled Trigger configurations. Properties completions and parellelism would be set to 1 by default",
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
           "required": [
             "cronExpression"
           ],
           "type": "object",
           "properties": {
             "replicaCount": {
+<<<<<<< HEAD
               "$ref": "#/definitions/ReplicaCount"
             },
             "cronExpression": {
@@ -467,11 +506,29 @@
             },
             "parallelism": {
               "$ref": "#/definitions/parallelism"
+=======
+              "description": "Number of replicas that will be created when the Container App Job is triggered.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "cronExpression": {
+              "description": "Cron formatted repeating schedule (\"* * * * *\")\nfor cronjobs.",
+              "type": "string"
+            },
+            "parallelism": {
+              "description": "Number of parallel jobs that can run at a given\ntime.",
+              "format": "int32",
+              "type": "integer"
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
             }
           }
         },
         "registries": {
+<<<<<<< HEAD
           "description": "Collection of private container registry credentials used by a Container apps job",
+=======
+          "description": "Collection of private container registry credentials for containers used by the Container apps job",
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegistryCredentials"
@@ -553,6 +610,19 @@
             "type": "string",
             "readOnly": true
           },
+          "outboundIpAddresses": {
+            "description": "Outbound IP Addresses for container apps job.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "eventStreamEndpoint": {
+            "description": "The endpoint of the eventstream of the container apps job.",
+            "type": "string",
+            "readOnly": true
+          },
           "x-ms-client-flatten": true
         }
       }
@@ -602,7 +672,12 @@
           "x-ms-enum": {
             "name": "appProtocol",
             "modelAsString": true
+<<<<<<< HEAD
           }
+=======
+          },
+          "default": "http"
+>>>>>>> feaac96764 (Adding Container App Jobs specs for review | Draft)
         },
         "appPort": {
           "format": "int32",
