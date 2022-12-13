@@ -19,37 +19,6 @@ model SuccessfulPostJobResponse{
 }
 
 
-//@doc("Repeatability Request headers")
-// model RepeatabilityRequestHeaders {
-//   @doc("""
-//   An optional header, one of two request headers required to facilitate the
-//   ability to retry requests without the server executing the request multiple
-//   times (see [OASIS Repeatable Requests Version
-//   1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityRequestID)).
-//   <br />The value should be an opaque string representing a client-generated,
-//   globally unique for all time, identifier for the request. It is recommended to
-//   use version 4 (random) UUIDs (see [RFC
-//   4122](https://tools.ietf.org/html/rfc4122)).
-//   """)
-//         @header("Repeatability-Request-ID")
-//         repeatabilityRequestId: string;
-
-//         @doc("""
-//   An optional header, one of two request headers required to facilitate the
-//   ability to retry requests without the server executing the request multiple
-//   times (see [OASIS Repeatable Requests Version
-//   1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityFirstSent)).
-//   <br />This header is used to specify the date and time at which the request was
-//   first created. The value must be expressed using the IMF-fixdate form of
-//   HTTP-date as defined in [RFC 7231](https://tools.ietf.org/html/rfc7231), e.g.
-//   `Mon, 03 Jan 2022 09:25:37 GMT`.
-//   """)
-//         @header("Repeatability-First-Sent")
-//         repeatabilityFirstSent : string;
-
-// }
-
-
 @doc("""
 "The result of a repeatable request (`accepted`/`rejected`), as specified in
 [OASIS Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityResult).
