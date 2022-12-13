@@ -1,0 +1,118 @@
+{
+    "parameters": {
+        "workspaceId": "2fbb45c5-e02d-4cfd-be3b-61e88c2d81d5",
+        "body": {
+            "sourcesystem": "PerformanceTest",
+            "value": [
+                {
+                    "type": "indicator",
+                    "spec_version": "2.1",
+                    "id": "indicator--10000001-71a2-445c-ab86-927291df48f8",
+                    "created": "2010-03-26T18:29:07.778Z",
+                    "modified": "2011-02-26T18:29:07.778Z",
+                    "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
+                    "revoked": true,
+                    "labels": [
+                        "heartbleed",
+                        "has-logo"
+                    ],
+                    "confidence": 55,
+                    "lang": "en",
+                    "external_references": [
+                        {
+                            "source_name": "veris",
+                            "description": "Threat report",
+                            "external_id": "0001AA7F-C601-424A-B2B8-BE6C9F5164E7",
+                            "url": "https://abc.com//example.json",
+                            "hashes": {
+                                "SHA-256": "6db12788c37247f2316052e142f42f4b259d6561751e5f401a1ae2a6df9c674b"
+                            }
+                        }
+                    ],
+                    "object_marking_refs": [
+                        "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+                    ],
+                    "granular_markings": [
+                        {
+                            "marking_ref": "marking-definition--089a6ecb-cc15-43cc-9494-767639779123",
+                            "selectors": [
+                                "description",
+                                "labels"
+                            ],
+                            "lang": "en"
+                        }
+                    ],
+                    "extensions": {
+                        "extension-definition--d83fce45-ef58-4c6c-a3f4-1fbc32e98c6e": {
+                            "extension_type": "property-extension",
+                            "rank": 5,
+                            "toxicity": 8
+                        }
+                    },
+                    "name": "bot_ip: 94.102.52.185",
+                    "description": "TS ID: 35766958; iType: bot_ip; State: active; Org: 52.3667; Source: Emerging Threats - Compromised",
+                    "indicator_types": [
+                        "threatstream-severity-low",
+                        "threatstream-confidence-80"
+                    ],
+                    "pattern": "[ipv4-addr:value = '1.2.3.4']",
+                    "pattern_type": "stix",
+                    "pattern_version": "2.1",
+                    "valid_from": "2015-02-26T18:29:07.778Z",
+                    "valid_until": "2016-02-26T18:29:07.778Z",
+                    "kill_chain_phases": [
+                        {
+                            "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+                            "phase_name": "reconnaissance"
+                        }
+                    ]
+                },
+                {
+                    "type": "indicator",
+                    "spec_version": "2.1",
+                    "created": "2010-02-26T18:29:07.778Z",
+                    "modified": "2011-02-26T18:29:07.778Z",
+                    "name": "Prod Test",
+                    "pattern": "[ipv4-addr:value = '21.22.23.24']",
+                    "pattern_type": "stix",
+                    "valid_from": "2015-02-26T18:29:07.778Z",
+                    "confidence": 100
+                }
+            ]
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "errors": [
+                    {
+                        "recordIndex": 1,
+                        "errorMessages": [
+                            "Error for Property=id: Required property is missing. Actual value: NULL."
+                        ]
+                    }
+                ]
+            }
+        },
+        "400": {
+            "body": {
+                "error": {
+                    "code": "InvalidRequestBodyProperty(RequestBody)",
+                    "message": "Body of the request cannot be empty.",
+                    "details": [],
+                    "target": null,
+                    "additionalInfo": null
+                }
+            }
+        },
+        "401": {
+            "body": {
+                "statusCode": 401,
+                "message": "Unauthorized. Access token is missing or invalid."
+            }
+        },
+        "429": {
+            "body": {}
+        }
+    }
+}

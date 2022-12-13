@@ -12,6 +12,11 @@
     "paths": {
         "/{workspaceId}/threatintelligence:upload-indicators": {
             "post": {
+                "x-ms-examples": {
+                    "Upload Threat Intelligence indicators": {
+                        "$ref": "./examples/threatintelligence/UploadThreatIntelligence.json"
+                    }
+                },
                 "operationId": "UploadIndicators",
                 "consumes": [
                     "application/json"
@@ -62,7 +67,14 @@
                     "400": {
                         "description": "The API returns 400 if the request is not formatted correctly or does not contain required information."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "azure_auth": [
+                            "user_impersonation"
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -115,6 +127,17 @@
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            },
+            "description": "Azure Active Directory OAuth2 Flow"
         }
     }
 }
