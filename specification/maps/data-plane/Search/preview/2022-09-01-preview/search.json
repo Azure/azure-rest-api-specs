@@ -101,7 +101,7 @@
     "View": {
       "name": "view",
       "in": "query",
-      "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
+      "description": "A string that an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -429,7 +429,7 @@
           "application/geo+json"
         ],
         "x-ms-examples": {
-          "Get polygon for a city at coordinates 47.612560,-122.204141": {
+          "Get polygon for a city at coordinates -122.204141,47.612560": {
             "$ref": "./examples/GetPolygon.json"
           }
         },
@@ -444,9 +444,9 @@
             "$ref": "#/parameters/Accept-Language"
           },
           {
-            "name": "location",
+            "name": "coordinates",
             "in": "query",
-            "description": "A point on the earth specified as a latitude and longitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &location=lon,lat",
+            "description": "A point on the earth specified as a longitude and latitude. Example: &coordinates=lon,lat",
             "required": true,
             "type": "array",
             "items": {
@@ -459,7 +459,7 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/View"
+            "$ref": "#/parameters/View"
           },
           {
             "$ref": "#/parameters/ResultType"
@@ -912,7 +912,7 @@
       }
     },
     "Boundary": {
-      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.",
+      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.\n\nPlease note for the Boundary search Polygon API, the GeometryCollection Polygon and MultiPolygon are the only geometry objects expected in the main response for now.",
       "type": "object",
       "allOf": [
         {
