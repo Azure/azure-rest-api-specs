@@ -181,10 +181,6 @@
           "description": "Email content to be sent.",
           "$ref": "#/definitions/EmailContent"
         },
-        "importance": {
-          "description": "The importance type for the email.",
-          "$ref": "#/definitions/EmailImportance"
-        },
         "recipients": {
           "description": "Recipients for the email.",
           "$ref": "#/definitions/EmailRecipients"
@@ -250,20 +246,6 @@
           "type": "string",
           "example": "<html><head><title>Exciting offer!</title></head><body><h1>This exciting offer was created especially for you, our most loyal customer.</h1></body></html>"
         }
-      }
-    },
-    "EmailImportance": {
-      "description": "The importance type for the email.",
-      "enum": [
-        "high",
-        "normal",
-        "low"
-      ],
-      "type": "string",
-      "default": "normal",
-      "x-ms-enum": {
-        "name": "EmailImportance",
-        "modelAsString": true
       }
     },
     "EmailAttachment": {
