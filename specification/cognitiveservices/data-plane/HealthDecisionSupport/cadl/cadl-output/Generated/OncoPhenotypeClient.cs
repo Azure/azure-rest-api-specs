@@ -189,7 +189,7 @@ namespace Azure.AI.HealthDecisionSupport
             }
             if (repeatabilityFirstSent != null)
             {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value);
+                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value));
             }
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
