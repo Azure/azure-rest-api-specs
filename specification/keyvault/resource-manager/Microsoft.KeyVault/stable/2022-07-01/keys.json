@@ -42,7 +42,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{1,127}$",
-            "description": "The name of the key to be created."
+            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -555,6 +555,7 @@
           "items": {
             "$ref": "#/definitions/LifetimeAction"
           },
+          "x-ms-identifiers": [],
           "description": "The lifetimeActions for key rotation action."
         }
       },

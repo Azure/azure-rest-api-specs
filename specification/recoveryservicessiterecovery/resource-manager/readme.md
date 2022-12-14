@@ -54,7 +54,7 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-08
+tag: package-2022-10
 directive:
   - where:
       - $.paths
@@ -63,14 +63,32 @@ directive:
 ```
 
 
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-10-01/service.json
+```
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-09-10/service.json
+```
+
 ### Tag: package-2022-08
 
 These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08'
+``` yaml $(tag) == 'package-2022-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-08-01/service.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
@@ -235,7 +253,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

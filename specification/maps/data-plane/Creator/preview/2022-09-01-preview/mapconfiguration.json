@@ -92,7 +92,7 @@
     },
     "Alias": {
       "name": "alias",
-      "description": "The alias of the map configuration. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
+      "description": "The alias of the map configuration. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a reserved prefix. Alias can be provided optionally during creating a map configuration, and can be used as same as mapConfigurationId after map configuration creation.",
       "type": "string",
       "in": "query",
       "required": false,
@@ -102,7 +102,7 @@
   "paths": {
     "/styles/mapconfigurations": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Map Configuration Create API allows the caller to create a map configuration from their map configuration file.\n\n## Submit Create Request\n\nTo create your map configuration you will make a `POST` request with a map configuration file. \n\n### POST Body for Create Request\nTo send the _create map configuration_ request you will use a `POST` request where the request body will contain a `json` or `zip` file. If `json` file is provided, the request body will contain a map configuration file in `json` format and the `Content-Type` header will be set to `application/json`, and if `zip` file is provided, the request body will contain a `zip` file including the map configuration json file and thumbnail images referenced in the configuration json file and the `Content-Type` header will be set to `application/zip`. Note: `json` file size limit is 1 MB and `zip` file size limit is 23 MB. Here's a sample map configuration json, refer to [map configuration specification](/rest/api/documentation-preview/map-configuration/create?#mapconfiguration) for more details:\n\n\n```json\n{\n  \"version\": 1.0,\n  \"description\": \"First indoor map configuration!\",\n  \"defaultStyle\": \"indoor_light\",\n  \"styles\": [\n    {\n      \"name\": \"indoor_light\",\n      \"displayName\": \"Indoor light\",\n      \"theme\": \"light\",\n      \"thumbnail\": \"indoor_2022-01-01.png\",\n      \"baseMap\": \"microsoft_light\",\n      \"layers\": [\n        {\n         \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n         \"styleId\": \"microsoft-maps:indoor_2022-01-01\"\n        }\n       ] \n    },\n    {\n      \"name\": \"indoor_dark\",\n      \"displayName\": \"Indoor dark\",\n      \"theme\": \"dark\",\n      \"baseMap\": \"microsoft_dark\",\n      \"thumbnail\": \"indoor_dark_2022-01-01.png\",\n      \"layers\": [\n        {\n          \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n          \"styleId\": \"microsoft-maps:indoor_dark_2022-01-01\"\n        }\n      ]\n    }\n  ]\n}\n```     \n\n Since the map configuration json contains two thumbnail image references 'indoor_2022-01-01.png' and 'indoor_dark_2022-01-01.png', a zip file including the map configuration json file and two thumbnail images should be provided as request body to make a valid create request. \n\nThe Create Map Configuration API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Map Configuration Create request allows the caller to create a map configuration in their Azure Maps account.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n## Submit Create Request\n\nTo create your map configuration you will make a `POST` request with a map configuration file. \n\n### POST Body for Create Request\nAn `HTTP POST` request with the map configuration data in the body of the request is required to create a new map configuration in your Azure Maps account.  The map configuration data must be in JSON format with `Content-Type` set to `application/json` in the header. Alternatively, you can send the map configuration JSON in a ZIP file along with any thumbnail images it references, with `Content-Type` set to `application/zip` in the header. \n\n Note: The embedded JSON size limit is 1 MB and zip file size limit is 23 MB.\n\n\n Here's a sample map configuration json:\n\n\n```json\n{\n  \"version\": 1.0,\n  \"description\": \"First indoor map configuration!\",\n  \"defaultConfiguration\": \"indoor_light\",\n  \"configurations\": [\n    {\n      \"name\": \"indoor_light\",\n      \"displayName\": \"Indoor light\",\n      \"theme\": \"light\",\n      \"thumbnail\": \"indoor_2022-01-01.png\",\n      \"baseMap\": \"microsoft_light\",\n      \"layers\": [\n        {\n         \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n         \"styleId\": \"microsoft-maps:indoor_2022-01-01\"\n        }\n       ] \n    },\n    {\n      \"name\": \"indoor_dark\",\n      \"displayName\": \"Indoor dark\",\n      \"theme\": \"dark\",\n      \"baseMap\": \"microsoft_dark\",\n      \"thumbnail\": \"indoor_dark_2022-01-01.png\",\n      \"layers\": [\n        {\n          \"tilesetId\": \"9601b149-cff6-dae6-af94-396f1b795fdb\",\n          \"styleId\": \"microsoft-maps:indoor_dark_2022-01-01\"\n        }\n      ]\n    }\n  ]\n}\n```     \n\n Since the map configuration json contains two thumbnail image references 'indoor_2022-01-01.png' and 'indoor_dark_2022-01-01.png', a zip file including the map configuration json file and two thumbnail images should be provided as request body to make a valid create request. \n\nThe Create Map Configuration API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "MapConfiguration_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -113,6 +113,10 @@
             "$ref": "./examples/mapconfiguration/MapConfiguration_Create.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -146,7 +150,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all map configurations created. You will see all the default map configurations which are created during tileset creation.  \n<br>",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Map Configuration List request allows the caller to fetch a list of all map configurations created. You will see all the default map configurations which are created during tileset creation.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.  \n<br>",
         "operationId": "MapConfiguration_List",
         "x-ms-examples": {
           "Get a list of all map configurations": {
@@ -180,7 +184,7 @@
     },
     "/styles/mapconfigurations/{mapConfigurationId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a map configuration, the response contains a zip file which was originally used to create that map configuration. You can always get the default map configuration using predefined alias `defaultIndoor_{tilesetId}` for a given tileset if you deleted the auto-generated map configuration. The two predefined styles used in default map configuration are `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01`.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Map Configuration Get request allows the caller to fetch a map configuration. The response contains a zip file with the map configuration JSON and any image files it references. You can always get the default map configuration using predefined alias `defaultIndoor_{tilesetId}` for a given tileset if you deleted the auto-generated map configuration. The two predefined styles used in default map configuration are `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01`.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n",
         "operationId": "MapConfiguration_Get",
         "x-ms-examples": {
           "Gets the details for a single map configuration": {
@@ -222,7 +226,7 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete a created map configuration.<br>    \nYou can use this API if a map configuration is no longer needed. \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `mapConfigurationId` of the map configuration to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Map Configuration Delete API returns a HTTP `204 No Content` response with an empty body, if the map configuration was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the map configuration with the passed-in `mapConfigurationId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - MapConfiguration Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Map Configuration Delete request allows the caller to remove a map configuration from their Azure Maps account. You can use this API if a map configuration is no longer needed. \n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n### Submit Delete Request\n\nAn `HTTP DELETE` request with the `mapConfigurationId` in the path of the request is required to remove an existing map configuration from your Azure Maps account.<br>    \n\n#### Delete request \"Successful\"\n\nThe Map Configuration Delete API returns a HTTP `204 No Content` response with an empty body, if the map configuration was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the map configuration with the passed-in `mapConfigurationId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - MapConfiguration Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "MapConfiguration_Delete",
         "x-ms-examples": {
           "Delete a created map configuration": {
@@ -252,7 +256,7 @@
     },
     "/styles/mapconfigurations/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to create a map configuration.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "description": "The Map Configuration Get Operation request is obtained from the call to create a map configuration. It is returned in the response headers Resource-Location key once the creation process has completed successfully.",
         "operationId": "MapConfiguration_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
@@ -325,7 +329,7 @@
           "readOnly": true
         },
         "alias": {
-          "description": "The alias used for the map configuration. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
+          "description": "The alias used for the map configuration. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a reserved prefix.",
           "type": "string",
           "readOnly": true
         },
@@ -340,6 +344,9 @@
     "MapConfiguration": {
       "description": "A map configuration object which describes the map configuration json format.",
       "type": "object",
+      "required": [
+        "version"
+      ],
       "properties": {
         "version": {
           "description": "The version of the map configuration, currently only version 1.0 is supported.",
@@ -350,44 +357,66 @@
           "description": "The description the caller provided when creating the map configuration. Maximum length 1024 characters.",
           "type": "string"
         },
-        "defaultStyle": {
-          "description": "The default style for the map configuration. The value can be one of the 'name' field in StyleObject under styles array.",
+        "defaultConfiguration": {
+          "description": "The default configuration for the map configuration. The value should be one of the 'name' field in ConfigurationObject under 'configurations' array. If not provided, first entry in the 'configurations' list will be used.",
           "type": "string"
         },
-        "styles": {
-          "description": "Styles array will allow customer to configure different map representations for their tileset. Each style configured here will be reflected as one style in style picker in client SDK. The name should be unique in the styles array.",
+        "configurations": {
+          "description": "'Configurations' array will allow customer to configure different map representations for their tileset. Each configuration configured here will be reflected as one map style in style picker in client SDK. The name should be unique in the configurations array.",
           "items": {
-            "$ref": "#/definitions/StyleObject"
+            "$ref": "#/definitions/ConfigurationObject"
           }
         }
       }
     },
-    "StyleObject": {
+    "ConfigurationObject": {
       "description": "Define the format to configure a style picker and the associated map in client SDK.",
       "type": "object",
+      "required": [
+        "name",
+        "layers"
+      ],
       "properties": {
         "name": {
-          "description": "The name for the style.",
+          "description": "The name for the style. Maximum length 255 characters.",
           "type": "string"
         },
         "displayName": {
-          "description": "The display name for the style picker in client SDK.",
+          "description": "The display name for the style picker in client SDK. Maximum length 255 characters.",
           "type": "string"
         },
         "description": {
-          "description": "The description for the style. Maximum length 1024 characters.",
+          "description": "The description for the style. Maximum length 500 characters.",
           "type": "string"
         },
         "theme": {
-          "description": "The theme for client SDK widgets(style picker, zoom, level).",
-          "type": "string"
+          "description": "The theme for client SDK widgets(style picker, zoom, level picker).",
+          "type": "string",
+          "enum": [
+            "light",
+            "dark"
+          ],
+          "x-ms-enum": {
+            "name": "theme",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "light",
+                "description": "The light theme for client SDK widgets(style picker, zoom, level picker)."
+              },
+              {
+                "value": "dark",
+                "description": "The dark theme for client SDK widgets(style picker, zoom, level picker)."
+              }
+            ]
+          }
         },
         "thumbnail": {
-          "description": "The thumbnail for the style picker in client SDK.",
+          "description": "The thumbnail image file for the style picker in client SDK. Maximum length 255 characters. The size limit is 400KB and pixel limit is 512*512.",
           "type": "string"
         },
         "baseMap": {
-          "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided.",
+          "description": "The base map is a background layer for private indoor map. This property is optional, no base map will show if not provided. Maximum length 100 characters.",
           "$ref": "#/definitions/BaseMapType"
         },
         "layers": {
@@ -401,13 +430,17 @@
     "TilesetStyleTuple": {
       "description": "TilesetId and StyleId tuple",
       "type": "object",
+      "required": [
+        "tilesetId",
+        "styleId"
+      ],
       "properties": {
         "tilesetId": {
-          "description": "The unique id for a tileset.",
+          "description": "The unique id of a tileset.",
           "type": "string"
         },
         "styleId": {
-          "description": "The unique id for an azure map style.",
+          "description": "The unique id of an azure map style. Two predefined styleId aliases are `microsoft-maps:indoor_2022-01-01` for indoor light and `microsoft-maps:indoor_dark_2022-01-01` for indoor dark.",
           "type": "string"
         }
       }

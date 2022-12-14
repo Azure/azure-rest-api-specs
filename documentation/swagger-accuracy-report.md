@@ -43,7 +43,7 @@ token=$(jq -r '.accessToken' token.json)
 
 echo "{'user1':{}, 'user2':{}}"
 echo "Authorization: bearer ${token}"
-echo
+echo "Authorization: shadow_unit_test_token"
 ```
 
 You can remove the `--scope` keyword from the `az account` command if the service does not require a specific scope.

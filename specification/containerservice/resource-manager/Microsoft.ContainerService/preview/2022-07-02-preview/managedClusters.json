@@ -1339,7 +1339,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
@@ -1391,7 +1397,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
@@ -1472,7 +1484,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -1515,7 +1533,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -1559,7 +1583,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -1603,7 +1633,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -2008,7 +2044,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
@@ -4355,7 +4397,7 @@
         "enableNamespaceResources": {
           "type": "boolean",
           "title": "Enable namespace as Azure resource.",
-          "description": "The default value is false. It can be enabled/disabled on creation and updation of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource."
+          "description": "The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource."
         },
         "networkProfile": {
           "$ref": "#/definitions/ContainerServiceNetworkProfile",
@@ -4946,9 +4988,11 @@
           "description": "The current provisioning state of the pod identity.",
           "enum": [
             "Assigned",
-            "Updating",
+            "Canceled",
             "Deleting",
-            "Failed"
+            "Failed",
+            "Succeeded",
+            "Updating"
           ],
           "x-ms-enum": {
             "name": "ManagedClusterPodIdentityProvisioningState",
@@ -5515,10 +5559,11 @@
           "readOnly": true,
           "description": "The current provisioning state.",
           "enum": [
-            "Succeeded",
+            "Canceled",
             "Creating",
             "Deleting",
-            "Failed"
+            "Failed",
+            "Succeeded"
           ],
           "x-ms-enum": {
             "name": "PrivateEndpointConnectionProvisioningState",
@@ -6785,10 +6830,11 @@
           "readOnly": true,
           "description": "The current provisioning state of trusted access role binding.",
           "enum": [
-            "Succeeded",
+            "Canceled",
+            "Deleting",
             "Failed",
-            "Updating",
-            "Deleting"
+            "Succeeded",
+            "Updating"
           ],
           "x-ms-enum": {
             "name": "TrustedAccessRoleBindingProvisioningState",

@@ -559,6 +559,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The scale streaming job request succeeded."
+          },
           "202": {
             "description": "The scale streaming job request was successfully initiated."
           },
@@ -570,6 +573,51 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/skus": {
+      "get": {
+        "tags": [
+          "StreamingJobs"
+        ],
+        "operationId": "Sku_List",
+        "description": "Gets a list of available SKUs about the specified streaming job.",
+        "x-ms-examples": {
+          "Get valid SKUs list for the specified streaming job": {
+            "$ref": "./examples/StreamingJob_GetSkus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/StreamingJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the valid SKUs for the specified streaming job.",
+            "schema": {
+              "$ref": "#/definitions/GetStreamingJobSkuResults"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
@@ -584,7 +632,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -644,6 +693,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "description": "Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.",
+          "$ref": "#/definitions/Sku"
+        },
         "properties": {
           "$ref": "#/definitions/StreamingJobProperties",
           "description": "The properties that are associated with a streaming job.  Required on PUT (CreateOrReplace) requests.",
@@ -818,6 +871,11 @@
             "name": "SkuName",
             "modelAsString": true
           }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity of the SKU."
         }
       }
     },
@@ -1011,6 +1069,127 @@
       "x-ms-enum": {
         "name": "UpdatableUdfRefreshType",
         "modelAsString": true
+      }
+    },
+    "GetStreamingJobSkuResults": {
+      "type": "object",
+      "description": "Result of the request to get streaming job SKUs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GetStreamingJobSkuResult"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of available SKUs that the streaming job can use."
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GetStreamingJobSkuResult": {
+      "type": "object",
+      "description": "Describes an available SKU information.",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to.",
+          "enum": [
+            "Microsoft.StreamAnalytics/streamingjobs"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": true
+          }
+        },
+        "sku": {
+          "type": "object",
+          "description": "The properties that are associated with a SKU.",
+          "readOnly": true,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the SKU.",
+              "enum": [
+                "Standard"
+              ],
+              "x-ms-enum": {
+                "name": "SkuName",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuCapacity"
+        }
+      }
+    },
+    "SkuCapacity": {
+      "type": "object",
+      "description": "Describes scaling information of a SKU.",
+      "readOnly": true,
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the minimum streaming units that the streaming job can use."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the maximum streaming units that the streaming job can use."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Specifies the default streaming units that the streaming job can use."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the SKU.",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "SkuCapacityScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "none",
+                "description": "Scaling not supported."
+              }
+            ]
+          }
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Specifies the valid streaming units a streaming job can scale to.",
+          "readOnly": true,
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Specifies the number of streaming units that the streaming job can use."
+          }
+        }
       }
     }
   }
