@@ -6,8 +6,7 @@ import "./routes.cadl";
 using Cadl.Rest;
 using Cadl.Http;
 
-@serviceTitle("Microsoft Cognitive Language Service - Generate Question and Answer pairs ")
-@serviceVersion("2022-10-01-preview")
+@service({title : "Microsoft Cognitive Language Service - Generate Question and Answer pairs ", version : "2022-10-01-preview"})
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/language",
@@ -28,14 +27,17 @@ phrase extraction, language detection, question answering and question answers
 generation. Further documentation can be found in <a
 href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.
 """)
-namespace MicrosoftCognitiveLanguageServiceGenerateQuestionandAnswerpairs;
+namespace Microsoft.Language.GenerateQuestionAnswers;
 
 @doc("The Azure Active Directory OAuth2 Flow")
 model AADToken
   is OAuth2Auth<[
     {
+      @doc("type")
       type: OAuth2FlowType.implicit;
+      @doc("url")
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      @doc("scopes")
       scopes: {name : "https://cognitiveservices.azure.com/.default", value :"https://cognitiveservices.azure.com/.default"};
     }
   ]>;

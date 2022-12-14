@@ -5,7 +5,7 @@ using Cadl.Rest;
 using Cadl.Http;
 using Azure.Core;
 
-namespace MicrosoftCognitiveLanguageServiceGenerateQuestionandAnswerpairs;
+namespace Microsoft.Language.GenerateQuestionAnswers;
 
 enum DocumentKindKnownValues {
   "Raw",
@@ -182,21 +182,31 @@ model GenerationJobState {
   ...GenerationJobResult;
 }
 
+@doc("JobState")
 model JobState {
+  @doc("displayName")
   displayName?: string;
+  @doc("displayName")
   createdDateTime: zonedDateTime;
+  @doc("displayName")
   expirationDateTime?: zonedDateTime;
-  JobId: string;
+  @doc("displayName")
+  jobId: string;
+  @doc("displayName")
   lastUpdatedDateTime: zonedDateTime;
+  @doc("displayName")
   status: State;
+  @doc("displayName")
   errors?: Error[];
+  @doc("displayName")
   nextLink?: string;
 }
 
 @doc("The JobId parameter")
 model JobIdParameter {
   @path
-  "JobId": string;
+  @doc("jobId")
+  "jobId": string;
 }
 
 @doc("""

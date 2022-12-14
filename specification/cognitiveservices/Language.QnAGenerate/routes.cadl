@@ -2,27 +2,17 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
-
 import "./models.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
 using Autorest;
 using Cadl.Versioning;
+using Azure.Core;
 
-namespace MicrosoftCognitiveLanguageServiceGenerateQuestionandAnswerpairs;
+namespace Microsoft.Language.GenerateQuestionAnswers;
 
 interface GenerateQuestionAnswersOperations {
-
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-  @route("/generate-questionanswers")
-  @summary("Generate Question and Answers from a set of documents.")
-  @doc("Generate Question and Answers from a set of documents.")
-  @example("./examples/SuccessfulQAGenerationJob_UseMarkedAnswer.json", "Succesful Marked Answer QAGeneration Request")
-  @example("./examples/SuccesfulSubmitQAGeneration_URL.json", "Succesfull QAGeneration Request")
-  @post
-  SubmitJob is Azure.Core.Foundations.LongRunningOperation<GenerationRequest>;
-
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @route("/generate-questionanswers/jobs")
   @summary("Gets the status of a question answers generation job.")
@@ -33,4 +23,14 @@ interface GenerateQuestionAnswersOperations {
   GetJobStatus is Azure.Core.Foundations.Operation<{ 
     ...JobIdParameter;
   }, GenerationJobState>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+  @route("/generate-questionanswers")
+  @summary("Generate Question and Answers from a set of documents.")
+  @doc("Generate Question and Answers from a set of documents.")
+  @example("./examples/SuccessfulQAGenerationJob_UseMarkedAnswer.json", "Succesful Marked Answer QAGeneration Request")
+  @example("./examples/SuccesfulSubmitQAGeneration_URL.json", "Succesfull QAGeneration Request")
+  @post
+  @pollingOperation(GenerateQuestionAnswersOperations.GetJobStatus)
+  SubmitJob is Azure.Core.Foundations.LongRunningOperation<GenerationRequest>;
 }
