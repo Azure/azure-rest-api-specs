@@ -7,16 +7,13 @@ using Azure.Core;
 
 namespace Microsoft.Language.GenerateQuestionAnswers;
 
-enum DocumentKindKnownValues {
+enum DocumentKind {
   "Raw",
   "URL",
   Html: "HTML",
 }
 
-@knownValues(DocumentKindKnownValues)
-model DocumentKind is string;
-
-enum ErrorCodeKnownValues {
+enum ErrorCode {
   "InvalidRequest",
   "InvalidArgument",
   "Unauthorized",
@@ -37,10 +34,7 @@ enum ErrorCodeKnownValues {
   "Warning",
 }
 
-@knownValues(ErrorCodeKnownValues)
-model ErrorCode is string;
-
-enum InnerErrorCodeKnownValues {
+enum InnerErrorCode {
   "InvalidRequest",
   "InvalidParameterValue",
   "KnowledgeBaseNotFound",
@@ -57,10 +51,7 @@ enum InnerErrorCodeKnownValues {
   "InvalidCountryHint",
 }
 
-@knownValues(InnerErrorCodeKnownValues)
-model InnerErrorCode is string;
-
-enum StateKnownValues {
+enum State {
   NotStarted: "notStarted",
   Running: "running",
   Succeeded: "succeeded",
@@ -69,9 +60,6 @@ enum StateKnownValues {
   Cancelled: "cancelled",
   Cancelling: "cancelling",
 }
-
-@knownValues(StateKnownValues)
-model State is string;
 
 @doc("Question Answers Generation job with documents and parameters.")
 model GenerationRequest {
@@ -117,7 +105,7 @@ Telugu-speaking Hindu family.
   useMarkedAnswer?: boolean;
 
   @doc("Maximum number of question answer pairs to be generated.")
-  maxQACount?: int32;
+  maxQaCount?: int32;
 }
 
 @doc("Error response.")
@@ -224,11 +212,11 @@ model GenerationResult {
   documents?: GenerationDocument[];
 
   @doc("The set of question and answers generated in the generation job.")
-  value?: GeneratedQA[][];
+  value?: GeneratedQa[][];
 }
 
 @doc("Question and Answer generated from the document.")
-model GeneratedQA {
+model GeneratedQa {
   @doc("A question generated for a specific answer from a document in the job.")
   question?: string;
 
