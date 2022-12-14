@@ -30,14 +30,13 @@
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/availableScopes": {
       "post": {
         "summary": "Get Available Scopes for `Reservation`.",
-        "description": "Get Available Scopes for `Reservation`.\n",
+        "description": "Check whether the scopes from request is valid for `Reservation`.\n",
         "operationId": "Reservation_AvailableScopes",
         "x-ms-examples": {
           "AvailableScopes": {
             "$ref": "./examples/GetAvailableScope.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -201,7 +200,7 @@
         "description": "Calculate price for placing a `ReservationOrder`.",
         "operationId": "ReservationOrder_Calculate",
         "x-ms-examples": {
-          "Purchase": {
+          "CalculatePrice": {
             "$ref": "./examples/CalculateReservationOrder.json"
           }
         },
@@ -306,6 +305,17 @@
           },
           "202": {
             "description": "The request is accepted and is being processed. Operation result link is in location header.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ReservationOrderResponse"
             }
@@ -323,7 +333,7 @@
         "description": "Get the details of the `ReservationOrder`.",
         "operationId": "ReservationOrder_Get",
         "x-ms-examples": {
-          "GetReservation": {
+          "GetReservationOrder": {
             "$ref": "./examples/GetReservationOrderDetails.json"
           },
           "GetReservationWithExpandPayments": {
@@ -578,6 +588,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -670,7 +683,7 @@
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/unarchive": {
       "post": {
         "summary": "Unarchive a `Reservation`.",
-        "description": "Moves a `Reservation` to the state it was before archiving.\n",
+        "description": "Restores a `Reservation` to the state it was before archiving.\n",
         "operationId": "Reservation_Unarchive",
         "x-ms-examples": {
           "Unarchive": {
@@ -790,7 +803,7 @@
         "description": "Calculate price for returning `Reservations` if there are no policy errors.\n",
         "operationId": "CalculateRefund_Post",
         "x-ms-examples": {
-          "Purchase": {
+          "CalculateRefund": {
             "$ref": "./examples/CalculateRefund.json"
           }
         },
@@ -827,12 +840,16 @@
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/return": {
       "post": {
         "summary": "Return a reservation.",
-        "description": "Return a reservation.",
+        "description": "Return a reservation and get refund information.",
         "operationId": "Return_Post",
         "x-ms-examples": {
-          "Purchase": {
+          "Return": {
             "$ref": "./examples/Return.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "parameters": [
           {
@@ -881,7 +898,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "parameters": [
           {
@@ -992,7 +1009,7 @@
         "description": "List the reservations and the roll up counts of reservations group by provisioning states that the user has access to in the current tenant.",
         "operationId": "Reservation_ListAll",
         "x-ms-examples": {
-          "Catalog": {
+          "ReservationListAll": {
             "$ref": "./examples/GetReservations.json"
           }
         },
@@ -1106,6 +1123,7 @@
   "definitions": {
     "ErrorResponseCode": {
       "type": "string",
+      "description": "Error code describing the reason that service is not able to process the incoming request",
       "enum": [
         "NotSpecified",
         "InternalServerError",
@@ -1403,7 +1421,7 @@
       "properties": {
         "reservationId": {
           "type": "string",
-          "description": "Fully qualified identifier of the Reservation being returned"
+          "description": "Fully qualified identifier of the reservation being returned"
         },
         "quantity": {
           "type": "integer",
@@ -1418,7 +1436,7 @@
       "properties": {
         "reservationId": {
           "type": "string",
-          "description": "Fully qualified id of the Reservation being returned."
+          "description": "Fully qualified id of the reservation being returned."
         },
         "quantity": {
           "type": "integer",
@@ -1761,12 +1779,12 @@
         "expiryDate": {
           "type": "string",
           "format": "date",
-          "description": "This is the date when the Reservation will expire."
+          "description": "This is the date when the reservation will expire."
         },
         "expiryDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the Reservation will expire."
+          "description": "This is the date-time when the reservation will expire."
         },
         "benefitStartTime": {
           "type": "string",
@@ -1776,7 +1794,7 @@
         "originalQuantity": {
           "type": "integer",
           "format": "int32",
-          "description": "Total Quantity of the SKUs purchased in the Reservation."
+          "description": "Total Quantity of the SKUs purchased in the reservation."
         },
         "term": {
           "$ref": "#/definitions/ReservationTerm"
@@ -1806,7 +1824,7 @@
     },
     "DisplayProvisioningState": {
       "type": "string",
-      "description": "Represent the current display state of the Reservation.",
+      "description": "Represent the current display state of the reservation.",
       "enum": [
         "Succeeded",
         "Expiring",
@@ -1855,7 +1873,7 @@
     },
     "ReservationTerm": {
       "type": "string",
-      "description": "Represent the term of Reservation.",
+      "description": "Represent the term of reservation.",
       "enum": [
         "P1Y",
         "P3Y",
@@ -1946,7 +1964,7 @@
     "ReservationQuantity": {
       "type": "integer",
       "format": "int32",
-      "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
+      "description": "Quantity of the SKUs that are part of the reservation. Must be greater than zero."
     },
     "AvailableScopeProperties": {
       "type": "object",
@@ -2386,7 +2404,7 @@
       "properties": {
         "reservationId": {
           "type": "string",
-          "description": "Fully qualified id of the Reservation being returned."
+          "description": "Fully qualified id of the reservation being returned."
         },
         "quantity": {
           "type": "integer",
@@ -2431,11 +2449,11 @@
       "properties": {
         "reservationOrderId": {
           "type": "string",
-          "description": "Fully qualified id of the ReservationOrder being purchased"
+          "description": "Fully qualified id of the reservationOrder being purchased"
         },
         "reservationId": {
           "type": "string",
-          "description": "Fully qualified id of the Reservation being purchased. This value is only guaranteed to be non-null if the purchase is successful."
+          "description": "Fully qualified id of the reservation being purchased. This value is only guaranteed to be non-null if the purchase is successful."
         },
         "properties": {
           "$ref": "#/definitions/PurchaseRequest"
@@ -2527,7 +2545,7 @@
           "type": "string"
         },
         "quantity": {
-          "description": "Quantity of the SKUs that are part of the Reservation.",
+          "description": "Quantity of the SKUs that are part of the reservation.",
           "$ref": "#/definitions/ReservationQuantity"
         },
         "provisioningState": {
@@ -2537,7 +2555,7 @@
         "effectiveDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "DateTime of the Reservation starting when this version is effective from."
+          "description": "DateTime of the reservation starting when this version is effective from."
         },
         "benefitStartTime": {
           "type": "string",
@@ -2547,18 +2565,18 @@
         "lastUpdatedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "DateTime of the last time the Reservation was updated.",
+          "description": "DateTime of the last time the reservation was updated.",
           "readOnly": true
         },
         "expiryDate": {
           "type": "string",
           "format": "date",
-          "description": "This is the date when the Reservation will expire."
+          "description": "This is the date when the reservation will expire."
         },
         "expiryDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the Reservation will expire."
+          "description": "This is the date-time when the reservation will expire."
         },
         "reviewDateTime": {
           "type": "string",
@@ -2583,19 +2601,19 @@
           "readOnly": true
         },
         "provisioningSubState": {
-          "description": "The provisioning sub state of the reservation, e.g. Succeeded",
+          "description": "The provisioning sub-state of the reservation, e.g. Succeeded",
           "type": "string",
           "readOnly": true
         },
         "purchaseDate": {
           "type": "string",
           "format": "date",
-          "description": "This is the date when the Reservation was purchased."
+          "description": "This is the date when the reservation was purchased."
         },
         "purchaseDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the Reservation was purchased."
+          "description": "This is the date-time when the reservation was purchased."
         },
         "splitProperties": {
           "$ref": "#/definitions/ReservationSplitProperties"
@@ -2628,7 +2646,7 @@
           "$ref": "#/definitions/RenewPropertiesResponse"
         },
         "term": {
-          "description": "Represent the term of Reservation.",
+          "description": "Represent the term of reservation.",
           "$ref": "#/definitions/ReservationTerm"
         },
         "userFriendlyAppliedScopeType": {
@@ -2670,11 +2688,11 @@
           "items": {
             "type": "string"
           },
-          "description": "List of destination Resource Id that are created due to split. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+          "description": "List of destination resource id that are created due to split. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         },
         "splitSource": {
           "type": "string",
-          "description": "Resource Id of the Reservation from which this is split. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+          "description": "Resource id of the reservation from which this is split. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
       }
     },
@@ -2683,14 +2701,14 @@
       "properties": {
         "mergeDestination": {
           "type": "string",
-          "description": "Reservation Resource Id Created due to the merge. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+          "description": "Reservation resource id Created due to the merge. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         },
         "mergeSources": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Resource Ids of the Source Reservation's merged to form this Reservation. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+          "description": "Resource ids of the source reservation's merged to form this reservation. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
       }
     },
@@ -2699,11 +2717,11 @@
       "properties": {
         "swapSource": {
           "type": "string",
-          "description": "Resource Id of the Source Reservation that gets swapped. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+          "description": "Resource id of the source reservation that gets swapped. Format of the resource id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         },
         "swapDestination": {
           "type": "string",
-          "description": "Reservation Resource Id that the original resource gets swapped to. Format of the resource Id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+          "description": "Reservation resource id that the original resource gets swapped to. Format of the resource id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
       }
     },
@@ -2723,12 +2741,12 @@
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "quantity": {
-          "description": "Quantity of the SKUs that are part of the Reservation.",
+          "description": "Quantity of the SKUs that are part of the reservation.",
           "$ref": "#/definitions/ReservationQuantity"
         },
         "displayName": {
           "type": "string",
-          "description": "Friendly name of the Reservation"
+          "description": "Friendly name of the reservation"
         },
         "appliedScopeType": {
           "$ref": "#/definitions/AppliedScopeType"
@@ -2754,16 +2772,17 @@
         "reviewDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
+          "description": "This is the date-time when the Azure hybrid benefit needs to be reviewed."
         }
       }
     },
     "SavingsPlanPurchaseRequestProperties": {
       "type": "object",
+      "description": "Properties of a savings plan purchase",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Friendly name of the Savings Plan"
+          "description": "Friendly name of the savings plan"
         },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
@@ -2879,7 +2898,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the Reservation"
+          "description": "Display name of the reservation"
         },
         "renew": {
           "$ref": "#/definitions/Renew"
@@ -2895,7 +2914,7 @@
         "reviewDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
+          "description": "This is the date-time when the Azure hybrid benefit needs to be reviewed."
         }
       }
     },
@@ -2957,6 +2976,7 @@
     },
     "SavingsPlanPurchaseRequest": {
       "type": "object",
+      "description": "Request body for savings plan purchase",
       "properties": {
         "sku": {
           "$ref": "#/definitions/SkuName"
@@ -3074,7 +3094,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Reservation resource Id. \"/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}\""
+            "description": "Reservation resource id. \"/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}\""
           },
           "x-ms-identifiers": []
         },
@@ -3476,7 +3496,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Id of the Reservation Item"
+      "description": "Id of the reservation item"
     },
     "MergeParameter": {
       "name": "body",
@@ -3512,6 +3532,7 @@
       "name": "body",
       "x-ms-parameter-location": "method",
       "in": "body",
+      "description": "Scopes to be checked for eligibility.",
       "required": true,
       "schema": {
         "$ref": "#/definitions/AvailableScopeRequest"
