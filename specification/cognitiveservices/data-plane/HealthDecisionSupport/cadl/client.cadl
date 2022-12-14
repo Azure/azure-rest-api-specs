@@ -1,7 +1,6 @@
 // client.cadl
 // Separate operations (interfaces) into separate clients for SDKs
 import "./main.cadl";
-import "./routes/route.TrialMatcher.cadl";
 import "@azure-tools/cadl-dpg";
 
 using Azure.DPG;
@@ -13,7 +12,9 @@ namespace Azure.AI.HealthDecisionSupport; // this namespace name doesn't affect 
     service: HealthDecisionSupportAPI
 })
 interface TrialMatcherClient {
+  @convenienceAPI
   CreateJob is HealthDecisionSupportAPI.TrialMatcher.CreateJob;
+  @convenienceAPI
   GetJob is HealthDecisionSupportAPI.TrialMatcher.GetJob;
 }
 
@@ -22,6 +23,8 @@ name: "OncoPhenotypeClient",
 service: HealthDecisionSupportAPI
 })
 interface OncoPhenotypeClient {
+  @convenienceAPI
   CreateJob is HealthDecisionSupportAPI.OncoPhenotype.CreateJob;
+  @convenienceAPI
   GetJob is HealthDecisionSupportAPI.OncoPhenotype.GetJob;
 }
