@@ -111,11 +111,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -149,8 +145,8 @@
         "tags": [
           "ContainerAppsJobs"
         ],
-        "summary": "Create or update a Container Apps Job.",
-        "description": "Create or update a Container Apps Job.",
+        "summary": "Create or Update a Container Apps Job.",
+        "description": "Create or Update a Container Apps Job.",
         "operationId": "ContainerAppsJob_CreateOrUpdate",
         "parameters": [
           {
@@ -160,34 +156,18 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           },
           {
-            "name": "containerAppsJobEnvelope",
-            "in": "body",
-            "description": "Properties used to create a container apps job",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
-            }
+            "$ref": "#/definitions/ContainerAppsJobEnvelope"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "No change performed on the Container Apps Job.",
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
-            }
-          },
-          "201": {
-            "description": "Container Apps Job create or update has been started.",
+          "202": {
+            "description": "Container Apps Job create has been started.",
             "schema": {
               "$ref": "#/definitions/ContainerAppsJob"
             }
@@ -221,24 +201,17 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Container Apps Job deleted successfully."
-          },
           "202": {
             "description": "Delete operation is in progress."
           },
-          "204": {
+          "404": {
             "description": "Container Apps Job does not exist."
           },
           "default": {
@@ -270,32 +243,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           },
           {
-            "name": "containerAppsJobEnvelope",
-            "in": "body",
-            "required": true,
-            "description": "Properties of a Container Apps Job that need to be updated",
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
-            }
+            "$ref": "#/definitions/ContainerAppsJobEnvelope"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Ok",
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
-            }
-          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -329,18 +286,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Configuration"
@@ -378,15 +331,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "OK"
           },
           "default": {
@@ -421,11 +370,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "containerAppsJobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/definitions/ContainerAppsJobName"
           }
         ],
         "responses": {
@@ -443,7 +388,7 @@
           }
         },
         "x-ms-examples": {
-          "List Container Apps Secrets": {
+          "List Container Apps Job Secrets": {
             "$ref": "./examples/ContainerAppsJob_ListSecrets.json"
           }
         }
@@ -452,7 +397,7 @@
   },
   "definitions": {
     "Configuration": {
-      "description": "Non versioned Container Apps Job configuration properties that define the mutable settings of a Container apps job",
+      "description": "Non versioned Container Apps Job configuration properties",
       "type": "object",
       "required": [
         "replicaTimeout",
@@ -485,56 +430,48 @@
           }
         },
         "replicaTimeout": {
-          "description": "Number of seconds from the startTime for each replica after which the system terminate it.",
+          "description": "Maximum number of seconds a replica is allowed to run.",
           "format": "int32",
           "type": "integer"
         },
         "replicaRetryLimit": {
           "format": "int32",
-          "description": "Maximum number of replica retries before failing the whole job.",
+          "description": "Maximum number of retries before failing the job.",
           "type": "integer"
         },
         "manualTriggerConfig": {
           "type": "object",
-          "description": "Manual Trigger configurations. Properties replicaCount and parellelism would be set to 1 by default",
+          "description": "Manual trigger configuration for a single execution job. Properties replicaCount and parellelism would be set to 1 by default",
           "properties": {
             "replicaCount": {
-              "description": "Number of replicas that will be created when the Container App Job is triggered.",
-              "format": "int32",
-              "type": "integer"
+              "$ref": "#/definitions/ReplicaCount"
             },
             "parallelism": {
-              "description": "Number of parallel jobs that can run at a given time.",
-              "format": "int32",
-              "type": "integer"
+              "$ref": "#/definitions/parallelism"
             }
           }
         },
         "scheduleTriggerConfig": {
-          "description": "Scheduled Trigger configurations. Properties completions and parellelism would be set to 1 by default",
+          "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parellelism would be set to 1 by default",
           "required": [
             "cronExpression"
           ],
           "type": "object",
           "properties": {
             "replicaCount": {
-              "description": "Number of replicas that will be created when the Container App Job is triggered.",
-              "format": "int32",
-              "type": "integer"
+              "$ref": "#/definitions/ReplicaCount"
             },
             "cronExpression": {
-              "description": "Cron formatted repeating schedule (\"* * * * *\")\nfor cronjobs.",
+              "description": "Cron formatted repeating schedule (\"* * * * *\") of a Cron Job.",
               "type": "string"
             },
             "parallelism": {
-              "description": "Number of parallel jobs that can run at a given\ntime.",
-              "format": "int32",
-              "type": "integer"
+              "$ref": "#/definitions/parallelism"
             }
           }
         },
         "registries": {
-          "description": "Collection of private container registry credentials for containers used by the Container apps job",
+          "description": "Collection of private container registry credentials used by a Container apps job",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegistryCredentials"
@@ -562,7 +499,7 @@
           "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
         },
         "identity": {
-          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
@@ -597,14 +534,14 @@
           },
           "configuration": {
             "$ref": "#/definitions/Configuration",
-            "description": "Non versioned Container Apps Job configuration properties."
+            "description": "Container Apps Job configuration properties."
           },
           "template": {
             "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
-            "description": "Container App versioned application definition."
+            "description": "Container Apps job definition."
           },
           "outboundIpAddresses": {
-            "description": "Outbound IP Addresses for container apps job.",
+            "description": "Outbound IP Addresses of a container apps job.",
             "type": "array",
             "items": {
               "type": "string"
@@ -760,6 +697,32 @@
           "readOnly": true
         }
       }
+    },
+    "ContainerAppsJobName" : {
+      "name": "containerAppsJobName",
+      "in": "path",
+      "description": "Name of the Container Apps Job.",
+      "required": true,
+      "type": "string"
+    },
+    "ContainerAppsJobEnvelope" : {
+      "name": "containerAppsJobEnvelope",
+      "in": "body",
+      "description": "Properties used to create a container apps job",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ContainerAppsJob"
+      }
+    },
+    "ReplicaCount": {
+      "description": "Minimum number of successful replica completions before overall job completion.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Parallelism": {
+      "description": "Number of parallel replicas of a job that can run at a given time..",
+      "format": "int32",
+      "type": "integer"
     }
   },
   "securityDefinitions": {

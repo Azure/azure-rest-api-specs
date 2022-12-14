@@ -18,19 +18,19 @@
               "provisioningState": "Succeeded",
               "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
               "configuration": {
-                "activeDeadlineSeconds": 10,
+                "replicaTimeout": 10,
                 "replicaRetryLimit": 10,
                 "manualTriggerConfig": {
-                  "completions": 4,
-                  "parallelism": 1
+                  "replicaCount": 1,
+                  "parallelism": 4
                 },
                 "triggerType": "Manual"
               },
               "template": {
                 "containers": [
                   {
-                    "image": "repo/testcontainerApp0:v4",
-                    "name": "testcontainerApp0",
+                    "image": "repo/testcontainerAppsJob0:v4",
+                    "name": "testcontainerAppsJob0",
                     "resources": {
                       "cpu": 0.2,
                       "memory": "100Mi"
@@ -39,8 +39,8 @@
                 ],
                 "initContainers": [
                   {
-                    "image": "repo/testcontainerApp0:v4",
-                    "name": "testinitcontainerApp0",
+                    "image": "repo/testcontainerAppsJob0:v4",
+                    "name": "testinitcontainerAppsJob0",
                     "resources": {
                       "cpu": 0.2,
                       "memory": "100Mi"
@@ -59,19 +59,19 @@
               "provisioningState": "Succeeded",
               "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
               "configuration": {
-                "activeDeadlineSeconds": 10,
+                "replicaTimeout": 10,
                 "replicaRetryLimit": 10,
                 "scheduleTriggerConfig": {
-                  "completions": 10,
+                  "replicaCount": 1,
                   "cronExpression": "* * * * 5",
-                  "parallelism": 1
+                  "parallelism": 4
                 },
                 "triggerType": "Scheduled"
               },
               "template": {
                 "containers": [
                   {
-                    "image": "repo/testcontainerApp0:v4",
+                    "image": "repo/testcontainerAppsJob1:v4",
                     "name": "testcontainerApp0",
                     "resources": {
                       "cpu": 0.2,
@@ -81,7 +81,7 @@
                 ],
                 "initContainers": [
                   {
-                    "image": "repo/testcontainerApp0:v4",
+                    "image": "repo/testinitcontainerAppsJob1:v4",
                     "name": "testinitcontainerApp0",
                     "resources": {
                       "cpu": 0.2,
