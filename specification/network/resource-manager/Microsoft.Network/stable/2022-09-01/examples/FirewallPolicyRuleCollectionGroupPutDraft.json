@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "firewallPolicyName": "firewallPolicy",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "parameters": {
+      "properties": {
+        "priority": 100,
+        "ruleCollections": [
+          {
+            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+            "name": "Example-Filter-Rule-Collection",
+            "priority": 100,
+            "action": {
+              "type": "Deny"
+            },
+            "rules": [
+              {
+                "ruleType": "NetworkRule",
+                "name": "network-rule1",
+                "sourceAddresses": [
+                  "10.1.25.0/24"
+                ],
+                "destinationAddresses": [
+                  "*"
+                ],
+                "ipProtocols": [
+                  "TCP"
+                ],
+                "destinationPorts": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "priority": 100,
+          "ruleCollections": [
+            {
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "name": "Example-Filter-Rule-Collection",
+              "priority": 100,
+              "action": {
+                "type": "Deny"
+              },
+              "rules": [
+                {
+                  "ruleType": "NetworkRule",
+                  "name": "network-rule1",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
+                  ],
+                  "destinationAddresses": [
+                    "*"
+                  ],
+                  "ipProtocols": [
+                    "TCP"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "priority": 100,
+          "ruleCollections": [
+            {
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "name": "Example-Filter-Rule-Collection",
+              "priority": 100,
+              "action": {
+                "type": "Deny"
+              },
+              "rules": [
+                {
+                  "ruleType": "NetworkRule",
+                  "name": "network-rule1",
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
+                  ],
+                  "destinationAddresses": [
+                    "*"
+                  ],
+                  "ipProtocols": [
+                    "TCP"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
