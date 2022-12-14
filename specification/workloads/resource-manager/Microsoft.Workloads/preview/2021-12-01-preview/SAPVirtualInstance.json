@@ -2531,7 +2531,7 @@
     },
     "SkipFileShareConfiguration": {
       "x-ms-discriminator-value": "Skip",
-      "description": "Gets or sets the file share configuration where we don't create a transport directory fileshare.",
+      "description": "Gets or sets the file share configuration for scenarios where transport directory fileshare is not created or required.",
       "type": "object",
       "allOf": [
         {
@@ -2561,7 +2561,7 @@
     },
     "MountFileShareConfiguration": {
       "x-ms-discriminator-value": "Mount",
-      "description": "Gets or sets the file share configuration where the transport fileshare is already created, and user wishes to mount the fileshare as a part of the create infra flow.",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare already exists, and user wishes to mount the fileshare as a part of the create infra flow.",
       "type": "object",
       "allOf": [
         {
