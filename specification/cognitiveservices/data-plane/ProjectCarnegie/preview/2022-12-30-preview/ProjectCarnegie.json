@@ -659,11 +659,6 @@
         "category": {
           "$ref": "#/definitions/TextCategory"
         },
-        "confidenceScore": {
-          "description": "The confidence score of analysis result",
-          "type": "number",
-          "format": "float"
-        },
         "riskLevel": {
           "$ref": "#/definitions/RiskLevel"
         }
@@ -949,6 +944,11 @@
           "description": "The blob url of image",
           "type": "string",
           "format": "url"
+        },
+        "format": {
+          "description": "The format of image",
+          "type": "string",
+          "default": "jpeg"
         }
       }
     },
@@ -981,10 +981,8 @@
         "category": {
           "$ref": "#/definitions/ImageCategory"
         },
-        "confidenceScore": {
-          "description": "The confidence score of analysis result",
-          "type": "number",
-          "format": "float"
+        "riskLevel": {
+          "type": "integer"
         }
       }
     },
@@ -1022,6 +1020,10 @@
           "description": "Url of image batch item, it should be a blob url of image file to analyze",
           "type": "string",
           "format": "url"
+        },
+        "format": {
+          "type": "string",
+          "default": "jpeg"
         }
       }
     },
