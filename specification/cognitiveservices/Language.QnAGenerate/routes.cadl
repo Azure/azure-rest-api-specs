@@ -2,7 +2,6 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
-
 import "./models.cadl";
 
 using Cadl.Rest;
@@ -13,16 +12,7 @@ using Azure.Core;
 
 namespace Microsoft.Language.GenerateQuestionAnswers;
 
-// @resource("generationrequests")
-// model GenerationRequestResource{
-//   @key("")
-//   @doc("")
-//   @visibility("read")
-//   name : string;
-// }
-
 interface GenerateQuestionAnswersOperations {
-
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @route("/generate-questionanswers/jobs")
   @summary("Gets the status of a question answers generation job.")
