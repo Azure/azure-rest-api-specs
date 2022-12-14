@@ -129,7 +129,7 @@
             }
           },
           "202": {
-            "description": "Message accepted, the `Operation-Location` header contains the URL to poll for the message status.",
+            "description": "The service has accepted the request and will start processing the message later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation/message status using the URL specified in 'Operation-Location' header.",
             "headers": {
               "Repeatability-Result": {
                 "description": "Status of a repeatable request.",
@@ -146,6 +146,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Send Email": {
             "$ref": "./examples/SendEmail.json"
