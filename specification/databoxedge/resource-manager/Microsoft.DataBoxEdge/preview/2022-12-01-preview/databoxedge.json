@@ -327,6 +327,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DataBoxEdgeDeviceDelete": {
             "$ref": "./examples/DataBoxEdgeDeviceDelete.json"
@@ -5615,13 +5616,11 @@
         },
         "etag": {
           "description": "The etag for the devices.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
-          "description": "Msi identity of the resource",
-          "readOnly": true
+          "description": "Msi identity of the resource"
         },
         "kind": {
           "description": "The kind of the device.",
@@ -6691,6 +6690,109 @@
         "password": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Repository user password."
+        }
+      }
+    },
+    "IoTAddon": {
+      "description": "IoT Addon.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Addon"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTAddonProperties",
+          "description": "Properties specific to IOT addon.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The object name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "IotEdge"
+    },
+    "IoTAddonProperties": {
+      "description": "IoT addon properties.",
+      "required": [
+        "ioTDeviceDetails",
+        "ioTEdgeDeviceDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "ioTDeviceDetails": {
+          "$ref": "#/definitions/IoTDeviceInfo",
+          "description": "IoT device metadata to which appliance needs to be connected."
+        },
+        "ioTEdgeDeviceDetails": {
+          "$ref": "#/definitions/IoTDeviceInfo",
+          "description": "IoT edge device to which the IoT Addon needs to be configured."
+        },
+        "version": {
+          "description": "Version of IoT running on the appliance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostPlatform": {
+          "description": "Host OS supported by the IoT addon.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PlatformType",
+            "modelAsString": true
+          }
+        },
+        "hostPlatformType": {
+          "description": "Platform where the runtime is hosted.",
+          "enum": [
+            "KubernetesCluster",
+            "LinuxVM"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostPlatformType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Addon Provisioning State",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Created",
+            "Updating",
+            "Reconfiguring",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddonState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -8587,6 +8689,9 @@
     "OrderProperties": {
       "description": "Order properties.",
       "type": "object",
+      "required": [
+        "contactInformation"
+      ],
       "properties": {
         "orderId": {
           "description": "It specify the order resource id.",
