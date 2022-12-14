@@ -14,7 +14,10 @@
         "rules": [
           {
             "record": "job_type:billing_jobs_duration_seconds:99p5m",
-            "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
+            "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))",
+            "labels": {
+              "team": "prod"
+            }
           },
           {
             "alert": "Billing_Processing_Very_Slow",
@@ -61,7 +64,10 @@
           "rules": [
             {
               "record": "job_type:billing_jobs_duration_seconds:99p5m",
-              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
+              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))",
+              "labels": {
+                "team": "prod"
+              }
             },
             {
               "alert": "Billing_Processing_Very_Slow",
@@ -115,7 +121,10 @@
           "rules": [
             {
               "record": "job_type:billing_jobs_duration_seconds:99p5m",
-              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
+              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))",
+              "labels": {
+                "team": "prod"
+              }
             },
             {
               "alert": "Billing_Processing_Very_Slow",
