@@ -683,7 +683,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseRestoreDetails.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabases.json
@@ -699,6 +699,8 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevert.json
 
 
 # Needed when there is more than one input file
