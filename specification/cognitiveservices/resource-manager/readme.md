@@ -96,6 +96,15 @@ input-file:
 - Microsoft.CognitiveServices/preview/2016-02-01-preview/cognitiveservices.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: cognitiveservices.json
+    where: $..paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}"]
+    reason: The resource accounts/commitmentPlans is not a tracked resource
+```
+
 ---
 
 # Code Generation
