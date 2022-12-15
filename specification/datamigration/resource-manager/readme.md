@@ -42,6 +42,34 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 input-file:
   - Microsoft.DataMigration/preview/2022-11-30-preview/datamigration.json
   - Microsoft.DataMigration/preview/2022-11-30-preview/sqlmigration.json
+directive:
+  - suppress: R4009
+  - suppress: R4013
+  - suppress: R4037
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlMi
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Managed Instance.
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlVm
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
+  - suppress: R4017
+    from: Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlDb
+    reason: DatabaseMigration does not support list by subscription. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Database.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlMi
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Managed Instance.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlVm
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Virtual Machine.
+  - suppress: R4016
+    from: Microsoft.DataMigration/preview/2022-03-30-preview/sqlmigration.json
+    where: $.definitions.DatabaseMigrationSqlDb
+    reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Database.
 ```
 ### Tag: package-preview-2022-03
 
