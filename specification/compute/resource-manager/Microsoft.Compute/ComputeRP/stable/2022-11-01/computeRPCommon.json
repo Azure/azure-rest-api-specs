@@ -1724,6 +1724,10 @@
         "terminateNotificationProfile": {
           "$ref": "#/definitions/TerminateNotificationProfile",
           "description": "Specifies Terminate Scheduled Event related configurations."
+        },
+        "osImageNotificationProfile": {
+          "$ref": "#/definitions/OSImageNotificationProfile",
+          "description": "Specifies OS Image Scheduled Event related configurations."
         }
       }
     },
@@ -1737,6 +1741,19 @@
         "enable": {
           "type": "boolean",
           "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
+        }
+      }
+    },
+    "OSImageNotificationProfile": {
+      "type": "object",
+      "properties": {
+        "notBeforeTimeout": {
+          "type": "string",
+          "description": "Length of time a Virtual Machine being reimaged or having its OS upgraded will have to potentially approve the OS Image Scheduled Event before the event is auto approved (timed out). The configuration is specified in ISO 8601 format, with the value set to 15 minutes (PT15M)"
+        },
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether the OS Image Scheduled event is enabled or disabled."
         }
       }
     },

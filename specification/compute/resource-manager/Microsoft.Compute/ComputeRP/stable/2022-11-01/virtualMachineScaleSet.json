@@ -186,6 +186,9 @@
           "Create a scale set with terminate scheduled events enabled.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithTerminateScheduledEventEnabled.json"
           },
+          "Create a scale set with OS image scheduled events enabled.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithOSImageScheduledEventEnabled.json"
+          },
           "Create a scale set with automatic repairs enabled": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithAutomaticRepairs.json"
           },
@@ -248,6 +251,9 @@
           },
           "Create a scale set where nic config has DisableTcpStateTracking property": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithDisableTcpStateTrackingNetworkInterface.json"
+          },
+          "Create a scale set with Service Artifact Reference": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithServiceArtifactReference.json"
           }
         }
       },
@@ -3591,6 +3597,10 @@
         "rollbackFailedInstancesOnPolicyBreach": {
           "type": "boolean",
           "description": "Rollback failed instances to previous model if the Rolling Upgrade policy is violated."
+        },
+        "maxSurge": {
+          "type": "boolean",
+          "description": "Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch."
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
@@ -3738,6 +3748,10 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. <br><br>This may only be set to False when no extensions are present on the virtual machine scale set."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Optional property which must either be set to True or omitted."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."
@@ -4704,6 +4718,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
           "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
+        },
+        "serviceArtifactReference": {
+          "$ref": "#/definitions/ServiceArtifactReference",
+          "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -4835,6 +4853,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine Scale Set resource was created.<br><br>Minimum api-version: 2021-11-01."
+        },
+        "constrainedMaximumCapacity": {
+          "type": "boolean",
+          "description": "Optional property which must either be set to True or omitted."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -5762,6 +5784,15 @@
         "serviceName",
         "action"
       ]
+    },
+    "ServiceArtifactReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        }
+      },
+      "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
     }
   }
 }
