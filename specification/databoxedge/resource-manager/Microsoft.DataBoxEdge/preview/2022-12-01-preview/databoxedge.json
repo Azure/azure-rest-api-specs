@@ -1402,6 +1402,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "OrderGet": {
             "$ref": "./examples/ListOffers.json"
@@ -1748,6 +1751,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "OrderGet": {
             "$ref": "./examples/ListPublishers.json"
@@ -1802,6 +1808,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "OrderGet": {
@@ -1865,6 +1874,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "OrderGet": {
@@ -1936,6 +1948,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "OrderGet": {
@@ -7462,6 +7477,10 @@
           "items": {
             "$ref": "#/definitions/MarketplaceImageOffer"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7513,6 +7532,10 @@
           "items": {
             "$ref": "#/definitions/MarketplaceImagePublisher"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7547,6 +7570,10 @@
           "items": {
             "$ref": "#/definitions/MarketplaceImageSku"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7601,6 +7628,10 @@
           "items": {
             "$ref": "#/definitions/MarketplaceImageVersion"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7634,7 +7665,8 @@
           "type": "string"
         },
         "sasUri": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
