@@ -101,7 +101,7 @@ input-file:
 directive:
   - suppress: TrackedResourcePatchOperation
     from: cognitiveservices.json
-    where: $..paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}"]
     reason: The resource accounts/commitmentPlans is not a tracked resource
 ```
 
