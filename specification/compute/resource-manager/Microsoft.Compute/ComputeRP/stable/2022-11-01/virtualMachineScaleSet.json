@@ -251,6 +251,9 @@
           },
           "Create a scale set where nic config has DisableTcpStateTracking property": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithDisableTcpStateTrackingNetworkInterface.json"
+          },
+          "Create a scale set with Service Artifact Reference": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithServiceArtifactReference.json"
           }
         }
       },
@@ -4711,6 +4714,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
           "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
+        },
+        "serviceArtifactReference": {
+          "$ref": "#/definitions/ServiceArtifactReference",
+          "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -5773,6 +5780,15 @@
         "serviceName",
         "action"
       ]
+    },
+    "ServiceArtifactReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        }
+      },
+      "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
     }
   }
 }
