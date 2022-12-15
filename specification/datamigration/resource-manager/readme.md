@@ -42,6 +42,9 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 input-file:
   - Microsoft.DataMigration/preview/2022-11-30-preview/datamigration.json
   - Microsoft.DataMigration/preview/2022-11-30-preview/sqlmigration.json
+  - Microsoft.DataMigration/preview/2022-11-30-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
+  - Microsoft.DataMigration/preview/2022-11-30-preview/definitions/ServiceFeatureOCITask.json
+  - Microsoft.DataMigration/preview/2022-11-30-preview/definitions/ServiceTasks.json
 directive:
   - suppress: R4009
   - suppress: R4013
