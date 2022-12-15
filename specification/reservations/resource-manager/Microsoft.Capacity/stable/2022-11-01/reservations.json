@@ -1305,6 +1305,7 @@
     },
     "CalculateRefundRequest": {
       "type": "object",
+      "description": "Request containing information needed for calculating refund.",
       "properties": {
         "id": {
           "type": "string",
@@ -1317,6 +1318,7 @@
     },
     "RefundRequest": {
       "type": "object",
+      "description": "Request containing information needed for returning reservation.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RefundRequestProperties"
@@ -1325,6 +1327,7 @@
     },
     "CalculateRefundRequestProperties": {
       "type": "object",
+      "description": "Properties needed for calculate refund including the scope and the reservation to be returned.",
       "properties": {
         "scope": {
           "type": "string",
@@ -1337,6 +1340,7 @@
     },
     "RefundRequestProperties": {
       "type": "object",
+      "description": "Properties needed for refund request including the session id from calculte refund, the scope, the reservation to be returned and the return reason.",
       "properties": {
         "sessionId": {
           "type": "string",
@@ -1524,6 +1528,7 @@
     },
     "Catalog": {
       "type": "object",
+      "description": "Product details of a type of resource.",
       "properties": {
         "resourceType": {
           "type": "string",
@@ -1566,7 +1571,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuProperty"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "msrp": {
           "type": "object",
@@ -1585,7 +1593,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuRestriction"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tier": {
           "type": "string",
@@ -1602,12 +1611,16 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuCapability"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
     "SkuCapability": {
       "type": "object",
+      "description": "Capability of a sku.",
       "properties": {
         "name": {
           "type": "string",
@@ -1621,6 +1634,7 @@
     },
     "SkuProperty": {
       "type": "object",
+      "description": "Property of a sku.",
       "properties": {
         "name": {
           "type": "string",
@@ -1634,6 +1648,7 @@
     },
     "SkuRestriction": {
       "type": "object",
+      "description": "Restriction of a sku.",
       "properties": {
         "type": {
           "type": "string",
@@ -1654,6 +1669,7 @@
     },
     "ReservationOrderResponse": {
       "type": "object",
+      "description": "Details of a reservation order being returned.",
       "x-ms-azure-resource": true,
       "properties": {
         "etag": {
@@ -1755,12 +1771,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "ReservationOrderProperties": {
       "type": "object",
+      "description": "Properties of a reservation order.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -1920,7 +1938,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The Azure Region where the reserved resource lives."
+          "description": "The Azure Region where the reserved resource lives.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "etag": {
           "type": "integer",
@@ -1954,6 +1976,7 @@
     },
     "AvailableScopeProperties": {
       "type": "object",
+      "description": "The response of available scope api containing scopes and their eligibilities.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionScopeProperties"
@@ -1962,17 +1985,20 @@
     },
     "SubscriptionScopeProperties": {
       "type": "object",
+      "description": "The scopes checked by the available scope api.",
       "properties": {
         "scopes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScopeProperties"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "ScopeProperties": {
       "type": "object",
+      "description": "The scope and whether it is valid.",
       "properties": {
         "scope": {
           "type": "string"
@@ -2660,7 +2686,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ReservationUtilizationAggregates"
-              }
+              },
+              "x-ms-identifiers": []
             }
           }
         }
@@ -2953,7 +2980,10 @@
         "location": {
           "type": "string",
           "description": "The Azure Region where the reserved resource lives.",
-          "x-ms-mutability": [ "create", "read" ]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3098,7 +3128,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResponse"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3375,7 +3408,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3531,7 +3565,7 @@
       "description": "Supported version.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location":"client"
+      "x-ms-parameter-location": "client"
     },
     "ExpandRenewPropertiesParameter": {
       "name": "$expand",
