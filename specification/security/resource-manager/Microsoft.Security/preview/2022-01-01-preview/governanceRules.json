@@ -719,7 +719,7 @@
           "GovernanceRules"
         ],
         "description": "Get governance rule long run operation status for the requested scope by ruleId and operationId",
-        "operationId": "SubscriptionGovernanceRulesLongRunOperationStatus_Get",
+        "operationId": "SubscriptionGovernanceRulesOperationResult_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -738,7 +738,7 @@
           "200": {
             "description": "OK - The operation completed",
             "schema": {
-              "$ref": "#/definitions/LongRunOperationStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "202": {
@@ -770,7 +770,7 @@
           "GovernanceRules"
         ],
         "description": "Get governance rule long run operation status for the requested scope by ruleId and operationId",
-        "operationId": "SecurityConnectorGovernanceRulesLongRunOperationStatus_Get",
+        "operationId": "SecurityConnectorGovernanceRulesOperationResult_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -795,7 +795,7 @@
           "200": {
             "description": "OK - The operation completed",
             "schema": {
-              "$ref": "#/definitions/LongRunOperationStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "202": {
@@ -827,7 +827,7 @@
           "GovernanceRules"
         ],
         "description": "Get governance rule long run operation status for the requested scope by ruleId and operationId",
-        "operationId": "ManagementGroupGovernanceRulesLongRunOperationStatus_Get",
+        "operationId": "ManagementGroupGovernanceRulesOperationResult_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -846,7 +846,7 @@
           "200": {
             "description": "OK - The operation completed",
             "schema": {
-              "$ref": "#/definitions/LongRunOperationStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "202": {
@@ -1157,13 +1157,13 @@
         }
       }
     },
-    "LongRunOperationStatus": {
+    "OperationResult": {
       "type": "object",
       "description": "Long run operation status of governance rule over a given scope",
       "properties": {
         "status": {
           "type": "string",
-          "description": "The status of the long run operation status of governance rule",
+          "description": "The status of the long run operation result of governance rule",
           "readOnly": true,
           "enum": [
             "Succeeded",
@@ -1171,7 +1171,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "OperationResultStatus",
+            "name": "OperationResult",
             "modelAsString": true,
             "values": [
               {
