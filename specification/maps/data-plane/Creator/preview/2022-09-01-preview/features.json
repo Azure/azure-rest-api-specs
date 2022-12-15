@@ -72,7 +72,7 @@
       "in": "query",
       "type": "integer",
       "minimum": 1,
-      "maximum": 500,
+      "maximum": 5000,
       "description": "The optional limit parameter limits the number of features that are presented in the response document.\nOnly features that are on the first level of the collection in the response document are counted. Nested objects contained within the explicitly requested features shall not be counted.\n* Minimum = 1 * Maximum = 500 * Default = 10",
       "x-ms-parameter-location": "method"
     },
@@ -610,6 +610,13 @@
         "ontology": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
+        "collections": {
+          "description": "All the collections in a given dataset.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          }
+        },
         "links": {
           "description": "Links to other Features endpoints.",
           "type": "array",
@@ -636,13 +643,6 @@
               "title": "XML schema for Acme Corporation data"
             }
           ]
-        },
-        "collections": {
-          "description": "All the collections in a given dataset.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Collection"
-          }
         }
       }
     },
@@ -653,7 +653,7 @@
         "links"
       ],
       "properties": {
-        "name": {
+        "id": {
           "description": "identifier of the collection used, for example, in URIs",
           "type": "string",
           "example": "buildings"
@@ -665,6 +665,11 @@
         },
         "ontology": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+        },
+        "itemType": {
+          "description": "The type of the items in the collection.",
+          "type": "string",
+          "example": "feature"
         },
         "description": {
           "description": "a description of the features in the collection",
@@ -680,15 +685,21 @@
           "example": [
             {
               "href": "http://data.example.org/collections/buildings/items",
-              "rel": "item",
+              "rel": "items",
               "type": "application/geo+json",
               "title": "Buildings"
             },
             {
-              "href": "http://example.org/concepts/building.html",
+              "href": "http://data.example.org/collections/buildings/definition",
               "rel": "describedBy",
-              "type": "text/html",
-              "title": "Feature catalogue for buildings"
+              "type": "application/geo+json",
+              "title": "Metadata catalogue for unit"
+            },
+            {
+              "href": "http://data.example.org/collections/buildings",
+              "rel": "self",
+              "type": "application/geo+json",
+              "title": "Information for unit collection"
             }
           ]
         }
@@ -698,21 +709,12 @@
       "description": "collection of GeoJSON features",
       "type": "object",
       "required": [
-        "idPrefix",
-        "name",
+        "id",
+        "title",
         "geometryType"
       ],
       "properties": {
-        "description": {
-          "description": "describes the collection",
-          "type": "string"
-        },
-        "idPrefix": {
-          "description": "prefix of the collection used",
-          "type": "string",
-          "example": "BLD"
-        },
-        "name": {
+        "id": {
           "description": "identifier of the collection used, for example, in URIs",
           "type": "string",
           "example": "buildings"
@@ -724,6 +726,15 @@
         },
         "ontology": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
+        },
+        "itemType": {
+          "description": "The type of the items in the collection.",
+          "type": "string",
+          "example": "feature"
+        },
+        "description": {
+          "description": "describes the collection",
+          "type": "string"
         },
         "geometryType": {
           "description": "type of geometry returned",
