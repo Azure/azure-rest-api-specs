@@ -26,8 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-05
-
+tag: package-2022-11
 directive:
   - where:
       - $.definitions.Machine.properties
@@ -36,15 +35,35 @@ directive:
 ```
 
 
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.HybridCompute/stable/2022-11-10/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2022-11-10/privateLinkScopes.json
+```
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.HybridCompute/preview/2022-08-11-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2022-08-11-preview/privateLinkScopes.json
+```
+
 ### Tag: package-preview-2022-05
 
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.HybridCompute/preview/2022-05-10-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2022-05-10-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -191,7 +210,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
