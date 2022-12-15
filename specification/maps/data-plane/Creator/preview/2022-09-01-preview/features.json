@@ -583,17 +583,6 @@
           "type": "string",
           "example": "prev"
         },
-        "type": {
-          "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
-          "type": "string",
-          "example": "application/geo+json"
-        },
-        "hreflang": {
-          "x-ms-client-name": "hrefLang",
-          "description": "A hint indicating what the language of the result of dereferencing the link should be.",
-          "type": "string",
-          "example": "en"
-        },
         "title": {
           "description": "Used to label the destination of a link such that it can be used as a human-readable identifier (e.g., a menu entry) in the language indicated by the Content-Language header field (if present).",
           "type": "string"
@@ -627,20 +616,7 @@
             {
               "href": "http://data.example.org/collections.json",
               "rel": "self",
-              "type": "application/json",
               "title": "this document"
-            },
-            {
-              "href": "http://data.example.org/collections.html",
-              "rel": "alternate",
-              "type": "text/html",
-              "title": "this document as HTML"
-            },
-            {
-              "href": "http://schemas.example.org/1.0/foobar.xsd",
-              "rel": "describedBy",
-              "type": "application/xml",
-              "title": "XML schema for Acme Corporation data"
             }
           ]
         }
@@ -686,19 +662,16 @@
             {
               "href": "http://data.example.org/collections/buildings/items",
               "rel": "items",
-              "type": "application/geo+json",
               "title": "Buildings"
             },
             {
               "href": "http://data.example.org/collections/buildings/definition",
               "rel": "describedBy",
-              "type": "application/geo+json",
               "title": "Metadata catalogue for unit"
             },
             {
               "href": "http://data.example.org/collections/buildings",
               "rel": "self",
-              "type": "application/geo+json",
               "title": "Information for unit collection"
             }
           ]
