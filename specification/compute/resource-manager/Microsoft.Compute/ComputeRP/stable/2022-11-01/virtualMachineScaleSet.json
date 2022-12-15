@@ -186,6 +186,9 @@
           "Create a scale set with terminate scheduled events enabled.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithTerminateScheduledEventEnabled.json"
           },
+          "Create a scale set with OS image scheduled events enabled.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithOSImageScheduledEventEnabled.json"
+          },
           "Create a scale set with automatic repairs enabled": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithAutomaticRepairs.json"
           },
@@ -3587,6 +3590,10 @@
         "prioritizeUnhealthyInstances": {
           "type": "boolean",
           "description": "Upgrade all unhealthy instances in a scale set before any healthy instances."
+        },
+        "maxSurge": {
+          "type": "boolean",
+          "description": "Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch."
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
