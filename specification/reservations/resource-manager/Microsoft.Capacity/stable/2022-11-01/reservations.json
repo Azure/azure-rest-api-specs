@@ -548,10 +548,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ReservationIdParameter"
+            "$ref": "#/parameters/ReservationOrderIdParameter"
           },
           {
-            "$ref": "#/parameters/ReservationOrderIdParameter"
+            "$ref": "#/parameters/ReservationIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -732,10 +732,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ReservationIdParameter"
+            "$ref": "#/parameters/ReservationOrderIdParameter"
           },
           {
-            "$ref": "#/parameters/ReservationOrderIdParameter"
+            "$ref": "#/parameters/ReservationIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -898,7 +898,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -1912,6 +1912,11 @@
       "description": "The definition of the reservation.",
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "location": {
           "type": "string",
@@ -1921,16 +1926,6 @@
           "type": "integer",
           "format": "int32"
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Identifier of the reservation"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the reservation"
-        },
         "sku": {
           "description": "The sku information associated to this reservation ",
           "$ref": "#/definitions/SkuName"
@@ -1938,11 +1933,6 @@
         "properties": {
           "description": "The properties associated to this reservation ",
           "$ref": "#/definitions/ReservationsProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
         },
         "kind": {
           "type": "string",
@@ -1954,10 +1944,6 @@
             "name": "Kind",
             "modelAsString": false
           }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
-          "readOnly": true
         }
       }
     },
@@ -2966,7 +2952,8 @@
         },
         "location": {
           "type": "string",
-          "description": "The Azure Region where the reserved resource lives."
+          "description": "The Azure Region where the reserved resource lives.",
+          "x-ms-mutability": [ "create", "read" ]
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3543,7 +3530,8 @@
       "in": "query",
       "description": "Supported version.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location":"client"
     },
     "ExpandRenewPropertiesParameter": {
       "name": "$expand",
