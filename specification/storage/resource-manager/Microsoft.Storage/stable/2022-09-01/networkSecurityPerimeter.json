@@ -21,7 +21,7 @@
         "tags": [
           "StorageAccounts NetworkSecurityPerimeterConfigurations"
         ],
-        "operationId": "NetworkSecurityPerimeterConfiguration_List",
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
         "x-ms-examples": {
           "NamspaceNetworkSecurityPerimeterConfigurationList": {
             "$ref": "./examples/NetworkSecurityPerimeterConfigurationList.json"
@@ -58,12 +58,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations/{resourceAssociationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
       "get": {
         "tags": [
           "StorageAccounts NetworkSecurityPerimeterConfigurations"
         ],
-        "operationId": "NetworkSecurityPerimeterConfiguration_Get",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
         "x-ms-examples": {
           "NamspaceNetworkSecurityPerimeterConfigurationList": {
             "$ref": "./examples/NetworkSecurityPerimeterConfigurationGet.json"
@@ -81,7 +81,7 @@
             "$ref": "./storage.json#/parameters/StorageAccountName"
           },
           {
-            "$ref": "#/parameters/resourceAssociationId"
+            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -103,7 +103,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations/{resourceAssociationId}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
       "post": {
         "tags": [
           "StorageAccounts NetworkSecurityPerimeterConfigurations"
@@ -126,7 +126,7 @@
             "$ref": "./storage.json#/parameters/StorageAccountName"
           },
           {
-            "$ref": "#/parameters/resourceAssociationId"
+            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -414,12 +414,12 @@
     }
   },
   "parameters": {
-    "resourceAssociationId": {
-      "name": "resourceAssociationId",
+    "networkSecurityPerimeterConfigurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The unique Network Security Perimeter association id",
+      "description": "The name for Network Security Perimeter configuration",
       "x-ms-parameter-location": "method"
     }
   }
