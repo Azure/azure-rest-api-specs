@@ -310,6 +310,9 @@
           },
           {
             "$ref": "#/parameters/WorkspaceManagerAssignmentName"
+          },
+          {
+            "$ref": "#/parameters/Job"
           }
         ],
         "responses": {
@@ -689,6 +692,13 @@
       "name": "jobName",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Job": {
+      "description": "The job body",
+      "in": "body",
+      "name": "job",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   }
