@@ -3741,6 +3741,10 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. <br><br>This may only be set to False when no extensions are present on the virtual machine scale set."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Optional property which must either be set to True or omitted."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."
@@ -4838,6 +4842,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine Scale Set resource was created.<br><br>Minimum api-version: 2021-11-01."
+        },
+        "constrainedMaximumCapacity": {
+          "type": "boolean",
+          "description": "Optional property which must either be set to True or omitted."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
