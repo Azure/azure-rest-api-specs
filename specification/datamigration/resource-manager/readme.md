@@ -40,8 +40,8 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - Microsoft.DataMigration/preview/2022-11-30-preview/datamigration.json
   - Microsoft.DataMigration/preview/2022-11-30-preview/sqlmigration.json
+  - Microsoft.DataMigration/preview/2022-11-30-preview/datamigration.json
   - Microsoft.DataMigration/preview/2022-11-30-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
   - Microsoft.DataMigration/preview/2022-11-30-preview/definitions/ServiceFeatureOCITask.json
   - Microsoft.DataMigration/preview/2022-11-30-preview/definitions/ServiceTasks.json
