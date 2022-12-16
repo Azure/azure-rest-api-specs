@@ -15,13 +15,20 @@ openapi-type: data-plane
 
 # Releases
 
+### Release 2022-08-31
+These settings apply only when `--tag=2022-08-31` is specified on the command line.
+``` yaml $(tag) == '2022-08-31'
+input-file:
+  - stable/2022-08-31/FormRecognizer.json
+```  
+
 ### Release 2022-06-30-preview
 These settings apply only when `--tag=2022-06-30-preview` is specified on the command line.
 ``` yaml $(tag) == '2022-06-30-preview'
 input-file:
   - preview/2022-06-30-preview/FormRecognizer.json
-
 ```
+
 ### Release 2022-01-30-preview
 These settings apply only when `--tag=2022-01-30-preview` is specified on the command line.
 ``` yaml $(tag) == '2022-01-30-preview'

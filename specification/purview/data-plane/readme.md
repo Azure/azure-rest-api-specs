@@ -24,11 +24,19 @@ To see additional help and options, run:
 
 These are the global settings for the Azure Purview Catalog API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-preview-2022-03
 ```
 
+### Tag: package-2022-11-01-preview
+
+These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-01-preview'
+input-file:
+  - Azure.Analytics.Purview.DevopsPolicies/preview/2022-11-01-preview/purviewDevopsPolicy.json
+```
 
 ### Tag: package-preview-2022-03
 
@@ -38,30 +46,42 @@ These settings apply only when `--tag=package-preview-2022-03` is specified on t
 input-file:
   - Azure.Analytics.Purview.Catalog/preview/2022-03-01-preview/purviewcatalog.json
 ```
+
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-05-01-preview'
+```yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-- Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
+  - Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
 ```
 
 These are the global settings for the Purview Scanning API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2018-12-01-preview
 title: PurviewScanningClient
+```
+
+### Tag: package-2022-07-01-preview
+
+These settings apply only when `--tag=package-2022-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07-01-preview'
+input-file:
+  - Azure.Analytics.Purview.Scanning/preview/2022-07-01-preview/scanningService.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2022-02-01-preview
 
 These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-02-01-preview'
+```yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
-- Azure.Analytics.Purview.Scanning/preview/2022-02-01-preview/scanningService.json
+  - Azure.Analytics.Purview.Scanning/preview/2022-02-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -70,9 +90,9 @@ modelerfour:
 
 These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-10-01-preview'
+```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-- Azure.Analytics.Purview.Scanning/preview/2021-10-01-preview/scanningService.json
+  - Azure.Analytics.Purview.Scanning/preview/2021-10-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -81,16 +101,16 @@ modelerfour:
 
 These settings apply only when `--tag=package-2018-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-12-01-preview'
+```yaml $(tag) == 'package-2018-12-01-preview'
 input-file:
-- Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
+  - Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
 
 These are the global settings for the Purview API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2021-07-01-preview
 title: PurviewMetadataPolicyClient
@@ -100,14 +120,14 @@ title: PurviewMetadataPolicyClient
 
 These settings apply only when `--tag=package-2021-07-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-01-preview'
+```yaml $(tag) == 'package-2021-07-01-preview'
 input-file:
-- Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
+  - Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
 modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2021-09-01-preview
 title: PurviewShareClient
@@ -117,9 +137,24 @@ title: PurviewShareClient
 
 These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-09-01-preview'
+```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
-- Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
+  - Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
+```
+
+``` yaml
+openapi-type: data-plane
+tag: package-2022-11-01-preview
+title: PurviewPDSClient
+```
+
+### Tag: package-2022-11-01-preview
+
+These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11-01-preview'
+input-file:
+- Azure.Analytics.Purview.PDS/preview/2022-11-01-preview/pds.json
 ```
 
 ---
@@ -131,7 +166,7 @@ input-file:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Purview.CatalogClient
@@ -145,7 +180,7 @@ csharp:
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
+```yaml $(java)
 java:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Purview.CatalogClient
@@ -166,24 +201,24 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: R3013
 where:
   - $.paths[\"/atlas/v2/glossary/terms/{termGuid}/assignedEntities\"].delete.parameters[1]
   - $.paths[\"/atlas/v2/types/typedefs\"].delete.parameters[0]
 from: purviewcatalog.json
-reason:  This property is the discriminator for polymorph, but it can not be in request body.
+reason: This property is the discriminator for polymorph, but it can not be in request body.
 ```
 
-``` yaml
+```yaml
 directive:
   - suppress: R2026
 from: purviewcatalog.json
 reason: Should be compatible with Atlas swagger.
 ```
 
-``` yaml
+```yaml
 directive:
   - suppress: D5001
 where:
@@ -198,7 +233,7 @@ reason: It doesn't support file annotation in example file.
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
 ```
