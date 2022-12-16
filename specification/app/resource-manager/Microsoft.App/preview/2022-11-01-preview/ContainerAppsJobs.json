@@ -1,0 +1,746 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-11-01-preview",
+    "title": "ContainerAppsJobs API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/containerAppsJobs": {
+      "get": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Get the Container Apps Jobs in a given subscription.",
+        "operationId": "ContainerAppsJobs_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJobsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Jobs by subscription": {
+            "$ref": "./examples/ContainerAppsJobs_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs": {
+      "get": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Get the Container Apps Jobs in a given resource group.",
+        "operationId": "ContainerAppsJobs_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJobsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Jobs by resource group": {
+            "$ref": "./examples/ContainerAppsJobs_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}": {
+      "get": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Get the properties of a Container Apps Job.",
+        "operationId": "ContainerAppsJob_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container Apps Job": {
+            "$ref": "./examples/ContainerAppsJob_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Create or Update a Container Apps Job.",
+        "description": "Create or Update a Container Apps Job.",
+        "operationId": "ContainerAppsJob_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobEnvelope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Container Apps Job create has been started.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Container Apps Job": {
+            "$ref": "./examples/ContainerAppsJob_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Delete a Container Apps Job.",
+        "description": "Delete a Container Apps Job.",
+        "operationId": "ContainerAppsJob_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Delete operation is in progress."
+          },
+          "404": {
+            "description": "Container Apps Job does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Container Apps Job": {
+            "$ref": "./examples/ContainerAppsJob_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Update properties of a Container Apps Job",
+        "description": "Patches a Container Apps Job using JSON Merge Patch",
+        "operationId": "ContainerAppsJob_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobEnvelope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Patch operation is in progress."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Container Apps Job": {
+            "$ref": "./examples/ContainerAppsJob_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/run": {
+      "post": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Runs a Container Apps Job",
+        "operationId": "ContainerAppsJob_run",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Run a Container Apps Job": {
+            "$ref": "./examples/ContainerAppsJob_Run.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/terminate": {
+      "post": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "Terminates execution of a running container apps job",
+        "operationId": "ContainerAppsJob_terminate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Terminate a Container Apps Job": {
+            "$ref": "./examples/ContainerAppsJob_Terminate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/listSecrets": {
+      "post": {
+        "tags": [
+          "ContainerAppsJobs"
+        ],
+        "summary": "List secrets for a container apps job",
+        "operationId": "ContainerApps_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/definitions/ContainerAppsJobName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Job Secrets": {
+            "$ref": "./examples/ContainerAppsJob_ListSecrets.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Configuration": {
+      "description": "Non versioned Container Apps Job configuration properties",
+      "type": "object",
+      "required": [
+        "replicaTimeout",
+        "crashLoopRetryLimit",
+        "triggerType"
+      ],
+      "properties": {
+        "secrets": {
+          "description": "Collection of secrets used by a Container app",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "triggerType": {
+          "description": "Type of the job - Schedule | Event | Manual",
+          "enum": [
+            "Scheduled",
+            "Event",
+            "Manual"
+          ],
+          "type": "string",
+          "default": "Single",
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": true
+          }
+        },
+        "replicaTimeout": {
+          "description": "Maximum number of seconds a replica is allowed to run.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "replicaRetryLimit": {
+          "format": "int32",
+          "description": "Maximum number of retries before failing the job.",
+          "type": "integer"
+        },
+        "manualTriggerConfig": {
+          "type": "object",
+          "description": "Manual trigger configuration for a single execution job. Properties replicaCount and parellelism would be set to 1 by default",
+          "properties": {
+            "replicaCount": {
+              "$ref": "#/definitions/ReplicaCount"
+            },
+            "parallelism": {
+              "$ref": "#/definitions/parallelism"
+            }
+          }
+        },
+        "scheduleTriggerConfig": {
+          "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parellelism would be set to 1 by default",
+          "required": [
+            "cronExpression"
+          ],
+          "type": "object",
+          "properties": {
+            "replicaCount": {
+              "$ref": "#/definitions/ReplicaCount"
+            },
+            "cronExpression": {
+              "description": "Cron formatted repeating schedule (\"* * * * *\") of a Cron Job.",
+              "type": "string"
+            },
+            "parallelism": {
+              "$ref": "#/definitions/parallelism"
+            }
+          }
+        },
+        "registries": {
+          "description": "Collection of private container registry credentials used by a Container apps job",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryCredentials"
+          },
+          "x-ms-identifiers": [
+            "server"
+          ]
+        },
+        "dapr": {
+          "$ref": "#/definitions/Dapr",
+          "description": "Dapr configuration for the Container App."
+        }
+      }
+    },
+    "ContainerAppsJob": {
+      "type": "object",
+      "description": "Container App Job",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
+        "identity": {
+          "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "ContainerAppsJob resource specific properties",
+          "provisioningState": {
+            "description": "Provisioning state of the Container Apps Job.",
+            "enum": [
+              "InProgress",
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "Deleting"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ContainerAppsJobProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "environmentId": {
+            "description": "Resource ID of environment.",
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
+          },
+          "workloadProfileType": {
+            "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
+            "description": "Workload profile type to pin for container apps job execution."
+          },
+          "configuration": {
+            "$ref": "#/definitions/Configuration",
+            "description": "Container Apps Job configuration properties."
+          },
+          "template": {
+            "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+            "description": "Container Apps job definition."
+          },
+          "outboundIpAddresses": {
+            "description": "Outbound IP Addresses of a container apps job.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "eventStreamEndpoint": {
+            "description": "The endpoint of the eventstream of the container apps job.",
+            "type": "string",
+            "readOnly": true
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerAppsJobsCollection": {
+      "description": "Container Apps Jobs collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsJob"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Dapr": {
+      "description": "Container Apps Job Dapr configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Boolean indicating if the Dapr side car is enabled",
+          "type": "boolean",
+          "default": false
+        },
+        "appId": {
+          "description": "Dapr application identifier",
+          "type": "string"
+        },
+        "appProtocol": {
+          "description": "Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http",
+          "enum": [
+            "http",
+            "grpc"
+          ],
+          "type": "string",
+          "default": "http",
+          "x-ms-enum": {
+            "name": "appProtocol",
+            "modelAsString": true
+          },
+          "default": "http"
+        },
+        "appPort": {
+          "format": "int32",
+          "description": "Tells Dapr which port your application is listening on",
+          "type": "integer"
+        },
+        "httpReadBufferSize": {
+          "type": "integer",
+          "description": "Dapr max size of http header read buffer in KB to handle when sending multi-KB headers. Default is 65KB.",
+          "format": "int32"
+        },
+        "httpMaxRequestSize": {
+          "type": "integer",
+          "description": "Increasing max size of request body http and grpc servers parameter in MB to handle uploading of big files. Default is 4 MB.",
+          "format": "int32"
+        },
+        "logLevel": {
+          "description": "Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default is info.",
+          "enum": [
+            "info",
+            "debug",
+            "warn",
+            "error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "logLevel",
+            "modelAsString": true
+          }
+        },
+        "enableApiLogging": {
+          "description": "Enables API logging for the Dapr sidecar",
+          "type": "boolean"
+        }
+      }
+    },
+    "RegistryCredentials": {
+      "description": "Container App Private Registry",
+      "type": "object",
+      "properties": {
+        "server": {
+          "description": "Container Registry Server",
+          "type": "string"
+        },
+        "username": {
+          "description": "Container Registry Username",
+          "type": "string"
+        },
+        "passwordSecretRef": {
+          "description": "The name of the Secret that contains the registry login password",
+          "type": "string"
+        },
+        "identity": {
+          "description": "A Managed Identity to use to authenticate with Azure Container Registry. For user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned identities, use 'system'",
+          "type": "string"
+        }
+      }
+    },
+    "SecretsCollection": {
+      "description": "Container Apps Job Secrets Collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppsJobSecret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ContainerAppsJobSecret": {
+      "description": "Container App Secret.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-secret": true,
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerAppsJobName" : {
+      "name": "containerAppsJobName",
+      "in": "path",
+      "description": "Name of the Container Apps Job.",
+      "required": true,
+      "type": "string"
+    },
+    "ContainerAppsJobEnvelope" : {
+      "name": "containerAppsJobEnvelope",
+      "in": "body",
+      "description": "Properties used to create a container apps job",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ContainerAppsJob"
+      }
+    },
+    "ReplicaCount": {
+      "description": "Minimum number of successful replica completions before overall job completion.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Parallelism": {
+      "description": "Number of parallel replicas of a job that can run at a given time..",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
