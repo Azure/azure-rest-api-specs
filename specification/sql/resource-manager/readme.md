@@ -121,6 +121,7 @@ input-file:
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedInstanceTdeCertificates.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedInstanceVulnerabilityAssessments.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
+  - Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedServerDnsAliases.json
   - Microsoft.Sql/preview/2022-08-01-preview/ManagedServerSecurityAlertPolicies.json
@@ -843,7 +844,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
-
+- ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
 
 # Needed when there is more than one input file
 override-info:
