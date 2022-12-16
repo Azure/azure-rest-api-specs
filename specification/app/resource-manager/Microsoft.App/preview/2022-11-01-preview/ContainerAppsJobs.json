@@ -111,7 +111,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -156,18 +161,39 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobEnvelope"
+            "name": "containerAppsJobEnvelope",
+            "in": "body",
+            "description": "Properties used to create a container apps job",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "No change performed on the Container Apps Job.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
+            }
+          },
           "202": {
-            "description": "Container Apps Job create has been started."
+            "description": "Container Apps Job create has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -198,7 +224,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -206,7 +236,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Delete operation is in progress."
+            "description": "Delete operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "404": {
             "description": "Container Apps Job does not exist."
@@ -240,16 +275,32 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobEnvelope"
+            "name": "containerAppsJobEnvelope",
+            "in": "body",
+            "description": "Properties used to create a container apps job",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -283,7 +334,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -291,10 +346,7 @@
         ],
         "responses": {
           "202": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Common error response.",
@@ -328,7 +380,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -367,7 +423,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/ContainerAppsJobName"
+            "name": "containerAppsJobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -398,7 +458,6 @@
       "type": "object",
       "required": [
         "replicaTimeout",
-        "crashLoopRetryLimit",
         "triggerType"
       ],
       "properties": {
@@ -503,55 +562,55 @@
           "description": "ContainerApp resource specific properties",
           "type": "object",
           "properties": {
-              "provisioningState": {
-                "description": "Provisioning state of the Container Apps Job.",
-                "enum": [
-                  "InProgress",
-                  "Succeeded",
-                  "Failed",
-                  "Canceled",
-                  "Deleting"
-                ],
-                "type": "string",
-                "readOnly": true,
-                "x-ms-enum": {
-                  "name": "ContainerAppsJobProvisioningState",
-                  "modelAsString": true
-                }
-              },
-              "environmentId": {
-                "description": "Resource ID of environment.",
-                "type": "string",
-                "x-ms-mutability": [
-                  "create",
-                  "read"
-                ]
-              },
-              "workloadProfileType": {
-                "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
-                "description": "Workload profile type to pin for container apps job execution."
-              },
-              "configuration": {
-                "$ref": "#/definitions/Configuration",
-                "description": "Container Apps Job configuration properties."
-              },
-              "template": {
-                "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
-                "description": "Container Apps job definition."
-              },
-              "outboundIpAddresses": {
-                "description": "Outbound IP Addresses of a container apps job.",
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "readOnly": true
-              },
-              "eventStreamEndpoint": {
-                "description": "The endpoint of the eventstream of the container apps job.",
-                "type": "string",
-                "readOnly": true
+            "provisioningState": {
+              "description": "Provisioning state of the Container Apps Job.",
+              "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ContainerAppsJobProvisioningState",
+                "modelAsString": true
               }
+            },
+            "environmentId": {
+              "description": "Resource ID of environment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "workloadProfileType": {
+              "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
+              "description": "Workload profile type to pin for container apps job execution."
+            },
+            "configuration": {
+              "$ref": "#/definitions/Configuration",
+              "description": "Container Apps Job configuration properties."
+            },
+            "template": {
+              "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+              "description": "Container Apps job definition."
+            },
+            "outboundIpAddresses": {
+              "description": "Outbound IP Addresses of a container apps job.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "eventStreamEndpoint": {
+              "description": "The endpoint of the eventstream of the container apps job.",
+              "type": "string",
+              "readOnly": true
+            }
           },
           "x-ms-client-flatten": true
         }
@@ -695,22 +754,6 @@
           "x-ms-secret": true,
           "readOnly": true
         }
-      }
-    },
-    "ContainerAppsJobName": {
-      "name": "containerAppsJobName",
-      "in": "path",
-      "description": "Name of the Container Apps Job.",
-      "required": true,
-      "type": "string"
-    },
-    "ContainerAppsJobEnvelope": {
-      "name": "containerAppsJobEnvelope",
-      "in": "body",
-      "description": "Properties used to create a container apps job",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ContainerAppsJob"
       }
     },
     "ReplicaCount": {
