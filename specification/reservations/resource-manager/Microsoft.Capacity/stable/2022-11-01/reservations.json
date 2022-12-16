@@ -1340,7 +1340,7 @@
     },
     "RefundRequestProperties": {
       "type": "object",
-      "description": "Properties needed for refund request including the session id from calculte refund, the scope, the reservation to be returned and the return reason.",
+      "description": "Properties needed for refund request including the session id from calculate refund, the scope, the reservation to be returned and the return reason.",
       "properties": {
         "sessionId": {
           "type": "string",
@@ -1532,17 +1532,17 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "The type of resource the SKU applies to.",
+          "description": "The type of resource the sku applies to.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of SKU",
+          "description": "The name of sku",
           "readOnly": true
         },
         "billingPlans": {
           "type": "object",
-          "description": "The billing plan options available for this SKU.",
+          "description": "The billing plan options available for this sku.",
           "additionalProperties": {
             "type": "array",
             "items": {
@@ -1563,7 +1563,7 @@
           "readOnly": true,
           "items": {
             "type": "string",
-            "description": "The set of locations that the SKU is available. If not specified, the SKU is available in all locations."
+            "description": "The set of locations that the sku is available. If not specified, the sku is available in all locations."
           }
         },
         "skuProperties": {
@@ -1579,7 +1579,7 @@
         "msrp": {
           "type": "object",
           "readOnly": true,
-          "description": "Pricing information about the SKU",
+          "description": "Pricing information about the sku",
           "properties": {
             "p1Y": {
               "type": "object",
@@ -1598,12 +1598,12 @@
         },
         "tier": {
           "type": "string",
-          "description": "The tier of this SKU",
+          "description": "The tier of this sku",
           "readOnly": true
         },
         "size": {
           "type": "string",
-          "description": "The size of this SKU",
+          "description": "The size of this sku",
           "readOnly": true
         },
         "capabilities": {
@@ -1659,7 +1659,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the sku is restricted."
         },
         "reasonCode": {
           "type": "string",
@@ -1812,7 +1812,7 @@
         "originalQuantity": {
           "type": "integer",
           "format": "int32",
-          "description": "Total Quantity of the SKUs purchased in the reservation."
+          "description": "Total Quantity of the skus purchased in the reservation."
         },
         "term": {
           "$ref": "#/definitions/ReservationTerm"
@@ -1972,7 +1972,7 @@
     "ReservationQuantity": {
       "type": "integer",
       "format": "int32",
-      "description": "Quantity of the SKUs that are part of the reservation. Must be greater than zero."
+      "description": "Quantity of the skus that are part of the reservation. Must be greater than zero."
     },
     "AvailableScopeProperties": {
       "type": "object",
@@ -2070,6 +2070,7 @@
     },
     "RenewPropertiesResponse": {
       "type": "object",
+      "description": "The renew properties for a reservation.",
       "properties": {
         "purchaseProperties": {
           "$ref": "#/definitions/PurchaseRequest"
@@ -2104,6 +2105,7 @@
     },
     "SkuName": {
       "type": "object",
+      "description": "The name of sku",
       "properties": {
         "name": {
           "type": "string"
@@ -2112,6 +2114,7 @@
     },
     "CalculateRefundResponse": {
       "type": "object",
+      "description": "The response of calculate refund containing refund information of reservation",
       "properties": {
         "id": {
           "type": "string",
@@ -2124,6 +2127,7 @@
     },
     "RefundResponse": {
       "type": "object",
+      "description": "The response of refund request containing refund information of reservation",
       "properties": {
         "id": {
           "type": "string",
@@ -2136,6 +2140,7 @@
     },
     "RefundResponseProperties": {
       "type": "object",
+      "description": "The refund properties of reservation",
       "properties": {
         "sessionId": {
           "type": "string",
@@ -2557,7 +2562,7 @@
           "type": "string"
         },
         "quantity": {
-          "description": "Quantity of the SKUs that are part of the reservation.",
+          "description": "Quantity of the skus that are part of the reservation.",
           "$ref": "#/definitions/ReservationQuantity"
         },
         "provisioningState": {
@@ -2597,14 +2602,14 @@
         },
         "skuDescription": {
           "type": "string",
-          "description": "Description of the SKU in english."
+          "description": "Description of the sku in english."
         },
         "extendedStatusInfo": {
           "description": "The message giving detailed information about the status code.",
           "$ref": "#/definitions/ExtendedStatusInfo"
         },
         "billingPlan": {
-          "description": "The billing plan options available for this SKU.",
+          "description": "The billing plan options available for this sku.",
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "displayProvisioningState": {
@@ -2695,6 +2700,7 @@
     },
     "ReservationSplitProperties": {
       "type": "object",
+      "description": "Properties of reservation split",
       "properties": {
         "splitDestinations": {
           "type": "array",
@@ -2711,6 +2717,7 @@
     },
     "ReservationMergeProperties": {
       "type": "object",
+      "description": "Properties of reservation merge",
       "properties": {
         "mergeDestination": {
           "type": "string",
@@ -2727,6 +2734,7 @@
     },
     "ReservationSwapProperties": {
       "type": "object",
+      "description": "Properties of reservation swap",
       "properties": {
         "swapSource": {
           "type": "string",
@@ -2740,6 +2748,7 @@
     },
     "PurchaseRequestProperties": {
       "type": "object",
+      "description": "Properties of reservation purchase request",
       "properties": {
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType"
@@ -2754,7 +2763,7 @@
           "$ref": "#/definitions/ReservationBillingPlan"
         },
         "quantity": {
-          "description": "Quantity of the SKUs that are part of the reservation.",
+          "description": "Quantity of the skus that are part of the reservation.",
           "$ref": "#/definitions/ReservationQuantity"
         },
         "displayName": {
@@ -2896,6 +2905,7 @@
     },
     "PatchProperties": {
       "type": "object",
+      "description": "Properties for reservation patch",
       "properties": {
         "appliedScopeType": {
           "$ref": "#/definitions/AppliedScopeType"
@@ -2933,6 +2943,7 @@
     },
     "SplitProperties": {
       "type": "object",
+      "description": "Properties for reservation split",
       "properties": {
         "quantities": {
           "type": "array",
@@ -2952,6 +2963,7 @@
     },
     "MergeProperties": {
       "type": "object",
+      "description": "Properties for reservation merge",
       "properties": {
         "sources": {
           "type": "array",
@@ -2964,6 +2976,7 @@
     },
     "MergeRequest": {
       "type": "object",
+      "description": "The request for reservation merge",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2973,6 +2986,7 @@
     },
     "PurchaseRequest": {
       "type": "object",
+      "description": "The request for reservation purchase",
       "properties": {
         "sku": {
           "$ref": "#/definitions/SkuName"
@@ -3006,6 +3020,7 @@
     },
     "Patch": {
       "type": "object",
+      "description": "The request for reservation patch",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3015,6 +3030,7 @@
     },
     "SplitRequest": {
       "type": "object",
+      "description": "The request for reservation split",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3034,6 +3050,7 @@
     },
     "Error": {
       "type": "object",
+      "description": "Error inofrmation",
       "properties": {
         "error": {
           "$ref": "#/definitions/ExtendedErrorInfo"
@@ -3042,6 +3059,7 @@
     },
     "ExtendedErrorInfo": {
       "type": "object",
+      "description": "Extended error information including error code and error message",
       "properties": {
         "code": {
           "$ref": "#/definitions/ErrorResponseCode"
@@ -3074,6 +3092,7 @@
     },
     "AppliedReservations": {
       "type": "object",
+      "description": "The response for applied reservations api",
       "properties": {
         "id": {
           "type": "string",
@@ -3098,6 +3117,7 @@
     },
     "AppliedReservationsProperties": {
       "type": "object",
+      "description": "Properties for applied reservations returned",
       "properties": {
         "reservationOrderIds": {
           "$ref": "#/definitions/AppliedReservationList"
@@ -3106,6 +3126,7 @@
     },
     "AppliedReservationList": {
       "type": "object",
+      "description": "Paginated list of applied reservations",
       "properties": {
         "value": {
           "type": "array",
@@ -3123,6 +3144,7 @@
     },
     "OperationList": {
       "type": "object",
+      "description": "Paginated list of operations",
       "properties": {
         "value": {
           "type": "array",
@@ -3141,6 +3163,7 @@
     },
     "OperationResponse": {
       "type": "object",
+      "description": "The response containing operation information",
       "properties": {
         "name": {
           "description": "Name of the operation",
@@ -3166,6 +3189,7 @@
     },
     "OperationDisplay": {
       "type": "object",
+      "description": "Information about an operation",
       "properties": {
         "provider": {
           "type": "string"
@@ -3188,6 +3212,7 @@
     },
     "ReservationList": {
       "type": "object",
+      "description": "List of `Reservation`s",
       "properties": {
         "value": {
           "type": "array",
@@ -3203,6 +3228,7 @@
     },
     "ReservationOrderList": {
       "type": "object",
+      "description": "List of `ReservationOrder`s",
       "properties": {
         "value": {
           "type": "array",
@@ -3305,6 +3331,7 @@
     },
     "Price": {
       "type": "object",
+      "description": "Pricing information containing the amount and the currency code",
       "properties": {
         "currencyCode": {
           "type": "string",
@@ -3332,6 +3359,7 @@
     },
     "CalculatePriceResponse": {
       "type": "object",
+      "description": "The response of calculate price for reservation.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CalculatePriceResponseProperties"
@@ -3340,6 +3368,7 @@
     },
     "CalculatePriceResponseProperties": {
       "type": "object",
+      "description": "Properties for calculate price response",
       "properties": {
         "billingCurrencyTotal": {
           "type": "object",
@@ -3384,11 +3413,11 @@
           "type": "string"
         },
         "skuTitle": {
-          "description": "Title of SKU that is being purchased.",
+          "description": "Title of sku that is being purchased.",
           "type": "string"
         },
         "skuDescription": {
-          "description": "Description of SKU that is being purchased.",
+          "description": "Description of sku that is being purchased.",
           "type": "string"
         },
         "pricingCurrencyTotal": {
