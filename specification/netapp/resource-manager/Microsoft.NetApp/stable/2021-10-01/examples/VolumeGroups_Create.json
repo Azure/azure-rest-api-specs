@@ -12,13 +12,13 @@
           "groupDescription": "Volume group",
           "applicationType": "SAP-HANA",
           "applicationIdentifier": "DEV",
-          "deploymentSpecId": "20542149-bfca-5618-1879-9863dc6767f1"
+          "deploymentSpecId": "fb04dbeb-005d-2703-197e-6208dfadb5d9"
         },
         "volumes": [
           {
-            "name": "test-data-mnt00001",
+            "name": "testVol1",
             "properties": {
-              "creationToken": "test-data-mnt00001",
+              "creationToken": "testVol1",
               "serviceLevel": "Premium",
               "throughputMibps": 10,
               "subnetId": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
@@ -29,9 +29,9 @@
             }
           },
           {
-            "name": "test-log-mnt00001",
+            "name": "testVol2",
             "properties": {
-              "creationToken": "test-log-mnt00001",
+              "creationToken": "testVol2",
               "serviceLevel": "Premium",
               "throughputMibps": 10,
               "subnetId": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
@@ -42,9 +42,9 @@
             }
           },
           {
-            "name": "test-shared",
+            "name": "testVol3",
             "properties": {
-              "creationToken": "test-shared",
+              "creationToken": "testVol3",
               "serviceLevel": "Premium",
               "throughputMibps": 10,
               "subnetId": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
@@ -74,9 +74,7 @@
           },
           "volumes": [
             {
-              "id": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-data-mnt00001",
-              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
-              "name": "test-data-mnt00001",
+              "name": "testVol1",
               "properties": {
                 "throughputMibps": 10.0,
                 "proximityPlacementGroup": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
@@ -88,9 +86,7 @@
               }
             },
             {
-              "id": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-log-mnt00001",
-              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
-              "name": "test-log-mnt00001",
+              "name": "testVol2",
               "properties": {
                 "throughputMibps": 10.0,
                 "proximityPlacementGroup": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
@@ -102,9 +98,7 @@
               }
             },
             {
-              "id": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-shared",
-              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
-              "name": "test-shared",
+              "name": "testVol3",
               "properties": {
                 "throughputMibps": 10.0,
                 "proximityPlacementGroup": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
