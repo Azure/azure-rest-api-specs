@@ -3,14 +3,7 @@
   "type": "object",
   "properties": {
     "scope": {
-      "type": "string",
-      "enum": [
-        "ResourceGroup",
-        "Subscription",
-        "Tenant",
-        "None"
-      ],
-      "default": "ResourceGroup"
+      "$ref": "#/definitions/Scope"
     },
     "authentication": {
       "$ref": "#/definitions/Authentication"
@@ -131,6 +124,19 @@
               "additionalProperties": false
             }
           }
+        }
+      ]
+    },
+    "Scope": {
+      "type": "string",
+      "oneOf": [
+        {
+          "enum": ["ResourceGroup", "Subscription", "Tenant", "None"],
+          "default": "ResourceGroup"
+        },
+        {
+          "format": "uri-reference",
+          "pattern": "^.+\\.(yaml|yml)$"
         }
       ]
     },
