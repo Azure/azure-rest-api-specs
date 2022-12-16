@@ -239,7 +239,7 @@
             "description": "The parameters for updating a machine learning workspace.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkspaceUpdateParameters"
+              "$ref": "#/definitions/WorkspaceUpdateParametersBase"
             }
           }
         ],
@@ -2452,7 +2452,7 @@
         }
       }
     },
-    "WorkspaceUpdateParameters": {
+    "WorkspaceUpdateParametersBase": {
       "type": "object",
       "description": "The parameters for updating a machine learning workspace.",
       "required": [
@@ -2481,11 +2481,11 @@
       },
       "discriminator": "kind"
     },
-    "NormalWorkspaceUpdateParameters": {
+    "WorkspaceUpdateParameters": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/WorkspaceUpdateParameters"
+          "$ref": "#/definitions/WorkspaceUpdateParametersBase"
         }
       ],
       "properties": {
@@ -2501,7 +2501,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/WorkspaceUpdateParameters"
+          "$ref": "#/definitions/WorkspaceUpdateParametersBase"
         }
       ],
       "properties": {
