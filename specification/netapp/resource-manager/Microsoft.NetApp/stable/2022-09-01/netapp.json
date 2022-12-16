@@ -4701,40 +4701,12 @@
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "Identity": {
-      "type": "object",
-      "allOf": [
-        {
+        },
+        "identity": {
+          "description": "The identity used for the resource.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
-      ],
-      "properties": {
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
-        }
       }
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
-        }
-      ],
-      "properties": {
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        }
-      },
-      "description": "UserAssignedIdentity for the resource."
     },
     "netAppAccountPatch": {
       "description": "NetApp account patch resource",
