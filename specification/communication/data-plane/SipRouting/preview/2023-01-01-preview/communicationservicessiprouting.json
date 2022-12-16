@@ -166,57 +166,6 @@
     }
   },
   "definitions": {
-    "Trunk": {
-      "description": "Represents a SIP trunk for routing calls. See RFC 4904. Can be expanded with additional data.",
-      "required": [
-        "sipSignalingPort",
-        "enabled"
-      ],
-      "type": "object",
-      "properties": {
-        "sipSignalingPort": {
-          "format": "int32",
-          "description": "Gets or sets SIP signaling port of the trunk.",
-          "type": "integer"
-        },
-        "enabled": {
-          "description": "Enabled flag",
-          "$ref": "#/definitions/Enabled"
-        },
-        "health": {
-          "description": "Represents health state of a SIP trunk for routing calls.",
-          "type": "object",
-          "readOnly": true,
-          "$ref": "#/definitions/Health"
-        }
-      }
-    },
-    "Health": {
-      "description": "Represents health state of a SIP trunk for routing calls.",
-      "type": "object",
-      "required": [
-        "tls",
-        "ping",
-        "overall"
-      ],
-      "properties": {
-        "tls": {
-          "type": "object",
-          "description": "The status of the TLS connections of the Trunk.",
-          "$ref": "#/definitions/Tls"
-        },
-        "ping": {
-          "type": "object",
-          "description": "The status of SIP OPTIONS message sent by Trunk.",
-          "$ref": "#/definitions/Ping"
-        },
-        "overall": {
-          "type": "object",
-          "description": "The overall health status of Trunk.",
-          "$ref": "#/definitions/OverallHealth"
-        }
-      }
-    },
     "Tls": {
       "type": "object",
       "description": "The status of the TLS connections of the Trunk.",
@@ -359,6 +308,58 @@
               }
             ]
           }
+        }
+      }
+    },
+    "Health": {
+      "description": "Represents health state of a SIP trunk for routing calls.",
+      "type": "object",
+      "required": [
+        "tls",
+        "ping",
+        "overall"
+      ],
+      "properties": {
+        "tls": {
+          "type": "object",
+          "description": "The status of the TLS connections of the Trunk.",
+          "$ref": "#/definitions/Tls"
+        },
+        "ping": {
+          "type": "object",
+          "description": "The status of SIP OPTIONS message sent by Trunk.",
+          "$ref": "#/definitions/Ping"
+        },
+        "overall": {
+          "type": "object",
+          "description": "The overall health status of Trunk.",
+          "$ref": "#/definitions/OverallHealth"
+        }
+      }
+    },
+    "Trunk": {
+      "description": "Represents a SIP trunk for routing calls. See RFC 4904. Can be expanded with additional data.",
+      "required": [
+        "sipSignalingPort",
+        "enabled"
+      ],
+      "type": "object",
+      "properties": {
+        "sipSignalingPort": {
+          "format": "int32",
+          "description": "Gets or sets SIP signaling port of the trunk.",
+          "type": "integer"
+        },
+        "enabled": {
+          "description": "Enabled flag",
+          "type": "boolean",
+          "$ref": "#/definitions/Enabled"
+        },
+        "health": {
+          "description": "Represents health state of a SIP trunk for routing calls.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/Health"
         }
       }
     },
