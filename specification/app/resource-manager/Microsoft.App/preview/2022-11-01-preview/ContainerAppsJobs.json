@@ -441,7 +441,7 @@
         },
         "manualTriggerConfig": {
           "type": "object",
-          "description": "Manual trigger configuration for a single execution job. Properties replicaCount and parellelism would be set to 1 by default",
+          "description": "Manual trigger configuration for a single execution job. Properties replicaCount and parallelism would be set to 1 by default",
           "properties": {
             "replicaCount": {
               "$ref": "#/definitions/ReplicaCount"
@@ -452,7 +452,7 @@
           }
         },
         "scheduleTriggerConfig": {
-          "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parellelism would be set to 1 by default",
+          "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parallelism would be set to 1 by default",
           "required": [
             "cronExpression"
           ],
@@ -602,8 +602,7 @@
           "x-ms-enum": {
             "name": "appProtocol",
             "modelAsString": true
-          },
-          "default": "http"
+          }
         },
         "appPort": {
           "format": "int32",
@@ -720,7 +719,7 @@
       "type": "integer"
     },
     "Parallelism": {
-      "description": "Number of parallel replicas of a job that can run at a given time..",
+      "description": "Number of parallel replicas of a job that can run at a given time.",
       "format": "int32",
       "type": "integer"
     }
