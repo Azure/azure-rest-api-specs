@@ -1,15 +1,53 @@
 {
   "parameters": {
     "api-version": "2022-08-29-preview",
-    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27",
-    "resourceGroupName": "firewall-rg",
     "localRulestackName": "lrs1",
     "priority": "1",
     "resource": {
       "properties": {
-        "etag": "c18e6eef-ba3e-49ee-8a85-2b36c863a9d0",
-        "ruleName": "localRule1",
+        "actionType": "Allow",
+        "applications": [
+          "app1"
+        ],
+        "auditComment": "example comment",
+        "category": {
+          "feeds": [
+            "feed"
+          ],
+          "urlCustom": [
+            "https://microsoft.com"
+          ]
+        },
+        "decryptionRuleType": "SSLOutboundInspection",
         "description": "description of local rule",
+        "destination": {
+          "cidrs": [
+            "1.0.0.1/10"
+          ],
+          "countries": [
+            "India"
+          ],
+          "feeds": [
+            "feed"
+          ],
+          "fqdnLists": [
+            "FQDN1"
+          ],
+          "prefixLists": [
+            "PL1"
+          ]
+        },
+        "enableLogging": "DISABLED",
+        "etag": "c18e6eef-ba3e-49ee-8a85-2b36c863a9d0",
+        "inboundInspectionCertificate": "cert1",
+        "negateDestination": "TRUE",
+        "negateSource": "TRUE",
+        "protocol": "HTTP",
+        "protocolPortList": [
+          "80"
+        ],
+        "provisioningState": "Accepted",
+        "ruleName": "localRule1",
         "ruleState": "DISABLED",
         "source": {
           "cidrs": [
@@ -25,63 +63,67 @@
             "PL1"
           ]
         },
-        "negateSource": "TRUE",
-        "destination": {
-          "cidrs": [
-            "1.0.0.1/10"
-          ],
-          "countries": [
-            "India"
-          ],
-          "feeds": [
-            "feed"
-          ],
-          "prefixLists": [
-            "PL1"
-          ],
-          "fqdnLists": [
-            "FQDN1"
-          ]
-        },
-        "negateDestination": "TRUE",
-        "applications": [
-          "app1"
-        ],
-        "category": {
-          "urlCustom": [
-            "https://microsoft.com"
-          ],
-          "feeds": [
-            "feed"
-          ]
-        },
-        "protocol": "HTTP",
-        "protocolPortList": [
-          "80"
-        ],
-        "inboundInspectionCertificate": "cert1",
-        "auditComment": "example comment",
-        "actionType": "Allow",
-        "enableLogging": "DISABLED",
-        "decryptionRuleType": "SSLOutboundInspection",
         "tags": [
           {
-            "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "value": "aaaaaaaaaaaaaaaaaaaaaa"
+            "key": "keyName",
+            "value": "value"
           }
-        ],
-        "provisioningState": "Accepted"
+        ]
       }
-    }
+    },
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "aaaaaaaaaaaaaaaaaaa",
+        "name": "aaaaaaaaa",
         "properties": {
-          "etag": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-          "ruleName": "aaaaaa",
-          "priority": 13,
+          "actionType": "Allow",
+          "applications": [
+            "aaaaaaaaaaaaaaaaaaa"
+          ],
+          "auditComment": "aaaaaaaaaaaaaaaaaaaaaaa",
+          "category": {
+            "feeds": [
+              "aaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "urlCustom": [
+              "aa"
+            ]
+          },
+          "decryptionRuleType": "SSLOutboundInspection",
           "description": "aaaaaaa",
+          "destination": {
+            "cidrs": [
+              "aaaaaaaaaaaa"
+            ],
+            "countries": [
+              "aaaaa"
+            ],
+            "feeds": [
+              "aaaaaaa"
+            ],
+            "fqdnLists": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "prefixLists": [
+              "aaaaaaaaaaaaa"
+            ]
+          },
+          "enableLogging": "DISABLED",
+          "etag": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+          "inboundInspectionCertificate": "aaaaaaaaaaaaaaaa",
+          "negateDestination": "TRUE",
+          "negateSource": "TRUE",
+          "priority": 13,
+          "protocol": "aaaaaaaaaaaa",
+          "protocolPortList": [
+            "aaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "provisioningState": "Accepted",
+          "ruleName": "aaaaaa",
           "ruleState": "DISABLED",
           "source": {
             "cidrs": [
@@ -97,76 +139,73 @@
               "aaaaaaaaaaaaaaaaaaaa"
             ]
           },
-          "negateSource": "TRUE",
-          "destination": {
-            "cidrs": [
-              "aaaaaaaaaaaa"
-            ],
-            "countries": [
-              "aaaaa"
-            ],
-            "feeds": [
-              "aaaaaaa"
-            ],
-            "prefixLists": [
-              "aaaaaaaaaaaaa"
-            ],
-            "fqdnLists": [
-              "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            ]
-          },
-          "negateDestination": "TRUE",
-          "applications": [
-            "aaaaaaaaaaaaaaaaaaa"
-          ],
-          "category": {
-            "urlCustom": [
-              "aa"
-            ],
-            "feeds": [
-              "aaaaaaaaaaaaaaaaaaaaaaaa"
-            ]
-          },
-          "protocol": "aaaaaaaaaaaa",
-          "protocolPortList": [
-            "aaaaaaaaaaaaaaaaaaaaaa"
-          ],
-          "inboundInspectionCertificate": "aaaaaaaaaaaaaaaa",
-          "auditComment": "aaaaaaaaaaaaaaaaaaaaaaa",
-          "actionType": "Allow",
-          "enableLogging": "DISABLED",
-          "decryptionRuleType": "SSLOutboundInspection",
           "tags": [
             {
-              "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "value": "aaaaaaaaaaaaaaaaaaaaaa"
+              "key": "keyName",
+              "value": "value"
             }
-          ],
-          "provisioningState": "Accepted"
+          ]
         },
         "systemData": {
-          "createdBy": "aaa",
-          "createdByType": "User",
           "createdAt": "2022-09-09T05:08:24.229Z",
-          "lastModifiedBy": "aaaaaaa",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-09-09T05:08:24.229Z"
+          "createdBy": "praval",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
+          "lastModifiedByType": "User"
         },
-        "id": "aaaaaaaaaaaaaaaaaaa",
-        "name": "aaaaaaaaa",
         "type": "aaaaaaaaa"
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://foo.com/operationstatus"
-      },
       "body": {
+        "id": "aaaaaaaaaaaaaaaaaaa",
+        "name": "aaaaaaaaa",
         "properties": {
-          "etag": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-          "ruleName": "aaaaaa",
-          "priority": 13,
+          "actionType": "Allow",
+          "applications": [
+            "aaaaaaaaaaaaaaaaaaa"
+          ],
+          "auditComment": "aaaaaaaaaaaaaaaaaaaaaaa",
+          "category": {
+            "feeds": [
+              "aaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "urlCustom": [
+              "aa"
+            ]
+          },
+          "decryptionRuleType": "SSLOutboundInspection",
           "description": "aaaaaaa",
+          "destination": {
+            "cidrs": [
+              "aaaaaaaaaaaa"
+            ],
+            "countries": [
+              "aaaaa"
+            ],
+            "feeds": [
+              "aaaaaaa"
+            ],
+            "fqdnLists": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ],
+            "prefixLists": [
+              "aaaaaaaaaaaaa"
+            ]
+          },
+          "enableLogging": "DISABLED",
+          "etag": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+          "inboundInspectionCertificate": "aaaaaaaaaaaaaaaa",
+          "negateDestination": "TRUE",
+          "negateSource": "TRUE",
+          "priority": 13,
+          "protocol": "aaaaaaaaaaaa",
+          "protocolPortList": [
+            "aaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "provisioningState": "Accepted",
+          "ruleName": "aaaaaa",
           "ruleState": "DISABLED",
           "source": {
             "cidrs": [
@@ -182,64 +221,25 @@
               "aaaaaaaaaaaaaaaaaaaa"
             ]
           },
-          "negateSource": "TRUE",
-          "destination": {
-            "cidrs": [
-              "aaaaaaaaaaaa"
-            ],
-            "countries": [
-              "aaaaa"
-            ],
-            "feeds": [
-              "aaaaaaa"
-            ],
-            "prefixLists": [
-              "aaaaaaaaaaaaa"
-            ],
-            "fqdnLists": [
-              "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            ]
-          },
-          "negateDestination": "TRUE",
-          "applications": [
-            "aaaaaaaaaaaaaaaaaaa"
-          ],
-          "category": {
-            "urlCustom": [
-              "aa"
-            ],
-            "feeds": [
-              "aaaaaaaaaaaaaaaaaaaaaaaa"
-            ]
-          },
-          "protocol": "aaaaaaaaaaaa",
-          "protocolPortList": [
-            "aaaaaaaaaaaaaaaaaaaaaa"
-          ],
-          "inboundInspectionCertificate": "aaaaaaaaaaaaaaaa",
-          "auditComment": "aaaaaaaaaaaaaaaaaaaaaaa",
-          "actionType": "Allow",
-          "enableLogging": "DISABLED",
-          "decryptionRuleType": "SSLOutboundInspection",
           "tags": [
             {
-              "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "value": "aaaaaaaaaaaaaaaaaaaaaa"
+              "key": "keyName",
+              "value": "value"
             }
-          ],
-          "provisioningState": "Accepted"
+          ]
         },
         "systemData": {
-          "createdBy": "aaa",
-          "createdByType": "User",
           "createdAt": "2022-09-09T05:08:24.229Z",
-          "lastModifiedBy": "aaaaaaa",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-09-09T05:08:24.229Z"
+          "createdBy": "praval",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
+          "lastModifiedByType": "User"
         },
-        "id": "aaaaaaaaaaaaaaaaaaa",
-        "name": "aaaaaaaaa",
         "type": "aaaaaaaaa"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
   }

@@ -1,394 +1,394 @@
 {
   "parameters": {
     "api-version": "2022-08-29-preview",
-    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27",
-    "resourceGroupName": "firewall-rg",
     "firewallName": "firewall1",
     "resource": {
-      "properties": {
-        "panEtag": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
-        "networkProfile": {
-          "vnetConfiguration": {
-            "vnet": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet",
-              "addressSpace": "10.1.0.0/16"
-            },
-            "trustSubnet": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet",
-              "addressSpace": "10.1.1.0/24"
-            },
-            "unTrustSubnet": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
-              "addressSpace": "10.1.1.0/24"
-            },
-            "ipOfTrustSubnetForUdr": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
-              "address": "10.1.1.0/24"
-            }
-          },
-          "vwanConfiguration": {
-            "networkVirtualApplianceId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
-            "vHub": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
-              "addressSpace": "10.1.1.0/24"
-            },
-            "trustSubnet": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet",
-              "addressSpace": "10.1.1.0/24"
-            },
-            "unTrustSubnet": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
-              "addressSpace": "10.1.1.0/24"
-            },
-            "ipOfTrustSubnetForUdr": {
-              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet",
-              "address": "10.1.1.0/24"
-            }
-          },
-          "networkType": "VNET",
-          "publicIps": [
-            {
-              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-publicIp1",
-              "address": "20.22.90.106"
-            }
-          ],
-          "enableEgressNat": "ENABLED",
-          "egressNatIp": [
-            {
-              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1",
-              "address": "20.22.92.111"
-            }
-          ]
-        },
-        "associatedRulestack": {
-          "resourceId": "lrs1",
-          "rulestackId": "PANRSID",
-          "location": "Central US EUAP"
-        },
-        "dnsSettings": {
-          "enableDnsProxy": "DISABLED",
-          "enabledDnsType": "CUSTOM",
-          "dnsServers": [
-            {
-              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1",
-              "address": "20.22.92.111"
-            }
-          ]
-        },
-        "frontEndSettings": [
-          {
-            "name": "frontendsetting11",
-            "protocol": "TCP",
-            "frontendConfiguration": {
-              "port": "80",
-              "address": {
-                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp1",
-                "address": "20.22.91.251"
-              }
-            },
-            "backendConfiguration": {
-              "port": "80",
-              "address": {
-                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp2",
-                "address": "20.22.32.136"
-              }
-            }
-          }
-        ],
-        "provisioningState": "Accepted",
-        "planData": {
-          "usageType": "PAYG",
-          "billingCycle": "MONTHLY",
-          "planId": "liftrpantestplan"
-        },
-        "marketplaceDetails": {
-          "offerId": "liftr-pan-ame-test",
-          "publisherId": "isvtestuklegacy"
-        }
-      },
       "identity": {
         "type": "None",
         "userAssignedIdentities": {
           "key16": {
-            "clientId": "",
+            "clientId": "aaaa",
             "principalId": "aaaaaaaaaaaaaaa"
           }
         }
       },
-      "tags": {
-        "key922": "aaaaaaaaaaaaaaaaaaaaa"
+      "location": "Central US EUAP",
+      "properties": {
+        "associatedRulestack": {
+          "location": "Central US EUAP",
+          "resourceId": "lrs1",
+          "rulestackId": "PANRSID"
+        },
+        "dnsSettings": {
+          "dnsServers": [
+            {
+              "address": "20.22.92.111",
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1"
+            }
+          ],
+          "enableDnsProxy": "DISABLED",
+          "enabledDnsType": "CUSTOM"
+        },
+        "frontEndSettings": [
+          {
+            "backendConfiguration": {
+              "address": {
+                "address": "20.22.32.136",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp2"
+              },
+              "port": "80"
+            },
+            "frontendConfiguration": {
+              "address": {
+                "address": "20.22.91.251",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp1"
+              },
+              "port": "80"
+            },
+            "name": "frontendsetting11",
+            "protocol": "TCP"
+          }
+        ],
+        "marketplaceDetails": {
+          "offerId": "liftr-pan-ame-test",
+          "publisherId": "isvtestuklegacy"
+        },
+        "networkProfile": {
+          "egressNatIp": [
+            {
+              "address": "20.22.92.111",
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1"
+            }
+          ],
+          "enableEgressNat": "ENABLED",
+          "networkType": "VNET",
+          "publicIps": [
+            {
+              "address": "20.22.92.11",
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-PublicIp1"
+            }
+          ],
+          "vnetConfiguration": {
+            "ipOfTrustSubnetForUdr": {
+              "address": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+            },
+            "trustSubnet": {
+              "addressSpace": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet"
+            },
+            "unTrustSubnet": {
+              "addressSpace": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+            },
+            "vnet": {
+              "addressSpace": "10.1.0.0/16",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet"
+            }
+          },
+          "vwanConfiguration": {
+            "ipOfTrustSubnetForUdr": {
+              "address": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+            },
+            "networkVirtualApplianceId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
+            "trustSubnet": {
+              "addressSpace": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet"
+            },
+            "unTrustSubnet": {
+              "addressSpace": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+            },
+            "vHub": {
+              "addressSpace": "10.1.1.0/24",
+              "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+            }
+          }
+        },
+        "panEtag": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
+        "planData": {
+          "billingCycle": "MONTHLY",
+          "planId": "liftrpantestplan",
+          "usageType": "PAYG"
+        },
+        "provisioningState": "Accepted"
       },
-      "location": "Central US EUAP"
-    }
+      "tags": {
+        "tagName": "value"
+      }
+    },
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "panEtag": "aaaaaaaaa",
-          "networkProfile": {
-            "vnetConfiguration": {
-              "vnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "trustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "unTrustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "ipOfTrustSubnetForUdr": {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            },
-            "vwanConfiguration": {
-              "networkVirtualApplianceId": "aaaaaaaaaaaaaaaaaaaaaaa",
-              "vHub": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "trustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "unTrustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "ipOfTrustSubnetForUdr": {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            },
-            "networkType": "VNET",
-            "publicIps": [
-              {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            ],
-            "enableEgressNat": "DISABLED",
-            "egressNatIp": [
-              {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            ]
-          },
-          "associatedRulestack": {
-            "resourceId": "aaaaaaaaaa",
-            "rulestackId": "aaaaaaaaaaaaaaaa",
-            "location": "aaaaa"
-          },
-          "dnsSettings": {
-            "enableDnsProxy": "DISABLED",
-            "enabledDnsType": "CUSTOM",
-            "dnsServers": [
-              {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            ]
-          },
-          "frontEndSettings": [
-            {
-              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "protocol": "TCP",
-              "frontendConfiguration": {
-                "port": "aaaaaaa",
-                "address": {
-                  "resourceId": "aa",
-                  "address": "aaaaaaaaaaaaaaaaaa"
-                }
-              },
-              "backendConfiguration": {
-                "port": "aaaaaaa",
-                "address": {
-                  "resourceId": "aa",
-                  "address": "aaaaaaaaaaaaaaaaaa"
-                }
-              }
-            }
-          ],
-          "provisioningState": "Accepted",
-          "planData": {
-            "usageType": "PAYG",
-            "billingCycle": "WEEKLY",
-            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "effectiveDate": "2022-09-13T00:46:05.283Z"
-          },
-          "marketplaceDetails": {
-            "marketplaceSubscriptionId": "aa",
-            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "publisherId": "aaaa"
-          }
-        },
-        "systemData": {
-          "createdBy": "praval",
-          "createdByType": "User",
-          "createdAt": "2022-09-09T05:08:24.229Z",
-          "lastModifiedBy": "praval",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-09-09T05:08:24.229Z"
-        },
+        "id": "/providers/PaloAltoNetworks.Cloudngfw/globalrulestacks/armid1/firewalls/armid1",
         "identity": {
-          "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "principalId": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "type": "None",
           "userAssignedIdentities": {
             "key16": {
-              "clientId": "aaaaaaaaaaaaaaaaaaaaaa",
+              "clientId": "aaaa",
               "principalId": "aaaaaaaaaaaaaaa"
             }
           }
         },
-        "tags": {
-          "key922": "value"
-        },
-        "id": "/providers/PaloAltoNetworks.Cloudngfw/globalrulestacks/armid1/firewalls/armid1",
+        "location": "Central US EUAP",
         "name": "armid1",
-        "type": "firewalls",
-        "location": "Central US EUAP"
+        "properties": {
+          "associatedRulestack": {
+            "location": "aaaaa",
+            "resourceId": "aaaaaaaaaa",
+            "rulestackId": "aaaaaaaaaaaaaaaa"
+          },
+          "dnsSettings": {
+            "dnsServers": [
+              {
+                "address": "20.22.92.111",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1"
+              }
+            ],
+            "enableDnsProxy": "DISABLED",
+            "enabledDnsType": "CUSTOM"
+          },
+          "frontEndSettings": [
+            {
+              "backendConfiguration": {
+                "address": {
+                  "address": "20.22.32.136",
+                  "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp2"
+                },
+                "port": "80"
+              },
+              "frontendConfiguration": {
+                "address": {
+                  "address": "20.22.91.251",
+                  "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp1"
+                },
+                "port": "80"
+              },
+              "name": "frontendsetting11",
+              "protocol": "TCP"
+            }
+          ],
+          "marketplaceDetails": {
+            "marketplaceSubscriptionId": "aa",
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
+          },
+          "networkProfile": {
+            "egressNatIp": [
+              {
+                "address": "20.22.92.111",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1"
+              }
+            ],
+            "enableEgressNat": "ENABLED",
+            "networkType": "VNET",
+            "publicIps": [
+              {
+                "address": "20.22.92.11",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-PublicIp1"
+              }
+            ],
+            "vnetConfiguration": {
+              "ipOfTrustSubnetForUdr": {
+                "address": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "trustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet"
+              },
+              "unTrustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "vnet": {
+                "addressSpace": "10.1.0.0/16",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet"
+              }
+            },
+            "vwanConfiguration": {
+              "ipOfTrustSubnetForUdr": {
+                "address": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "networkVirtualApplianceId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
+              "trustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet"
+              },
+              "unTrustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "vHub": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              }
+            }
+          },
+          "panEtag": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
+          "planData": {
+            "billingCycle": "WEEKLY",
+            "effectiveDate": "2022-09-13T00:46:05.283Z",
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "usageType": "PAYG"
+          },
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2022-09-09T05:08:24.229Z",
+          "createdBy": "praval",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "tagName": "value"
+        },
+        "type": "firewalls"
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://foo.com/operationstatus"
-      },
       "body": {
-        "properties": {
-          "panEtag": "aaaaaaaaa",
-          "networkProfile": {
-            "vnetConfiguration": {
-              "vnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "trustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "unTrustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "ipOfTrustSubnetForUdr": {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            },
-            "vwanConfiguration": {
-              "networkVirtualApplianceId": "aaaaaaaaaaaaaaaaaaaaaaa",
-              "vHub": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "trustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "unTrustSubnet": {
-                "resourceId": "aaaaaaaaaaaaaaaaaaaaa",
-                "addressSpace": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-              },
-              "ipOfTrustSubnetForUdr": {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            },
-            "networkType": "VNET",
-            "publicIps": [
-              {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            ],
-            "enableEgressNat": "DISABLED",
-            "egressNatIp": [
-              {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            ]
-          },
-          "associatedRulestack": {
-            "resourceId": "aaaaaaaaaa",
-            "rulestackId": "aaaaaaaaaaaaaaaa",
-            "location": "aaaaa"
-          },
-          "dnsSettings": {
-            "enableDnsProxy": "DISABLED",
-            "enabledDnsType": "CUSTOM",
-            "dnsServers": [
-              {
-                "resourceId": "aa",
-                "address": "aaaaaaaaaaaaaaaaaa"
-              }
-            ]
-          },
-          "frontEndSettings": [
-            {
-              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              "protocol": "TCP",
-              "frontendConfiguration": {
-                "port": "aaaaaaa",
-                "address": {
-                  "resourceId": "aa",
-                  "address": "aaaaaaaaaaaaaaaaaa"
-                }
-              },
-              "backendConfiguration": {
-                "port": "aaaaaaa",
-                "address": {
-                  "resourceId": "aa",
-                  "address": "aaaaaaaaaaaaaaaaaa"
-                }
-              }
-            }
-          ],
-          "provisioningState": "Accepted",
-          "planData": {
-            "usageType": "PAYG",
-            "billingCycle": "WEEKLY",
-            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "effectiveDate": "2022-09-13T00:46:05.283Z"
-          },
-          "marketplaceDetails": {
-            "marketplaceSubscriptionId": "aa",
-            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "publisherId": "aaaa"
-          }
-        },
-        "systemData": {
-          "createdBy": "aaaaaaaaaaaaa",
-          "createdByType": "User",
-          "createdAt": "2022-09-13T00:45:41.884Z",
-          "lastModifiedBy": "aaaaaaaaa",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-09-13T00:45:41.884Z"
-        },
+        "id": "aaaaaaaaaaaaaaaaaaaaaaaa",
         "identity": {
-          "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "principalId": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "type": "None",
           "userAssignedIdentities": {
             "key16": {
-              "clientId": "aaaaaaaaaaaaaaaaaaaaaa",
+              "clientId": "aaaa",
               "principalId": "aaaaaaaaaaaaaaa"
             }
           }
         },
-        "tags": {
-          "key922": "aaaaaaaaaaaaaaaaaaaaa"
-        },
         "location": "aaaaaaaaaaaaaaaaa",
-        "id": "aaaaaaaaaaaaaaaaaaaaaaaa",
         "name": "aaaaaaaaaaaaa",
+        "properties": {
+          "associatedRulestack": {
+            "location": "aaaaa",
+            "resourceId": "aaaaaaaaaa",
+            "rulestackId": "aaaaaaaaaaaaaaaa"
+          },
+          "dnsSettings": {
+            "dnsServers": [
+              {
+                "address": "20.22.92.111",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1"
+              }
+            ],
+            "enableDnsProxy": "DISABLED",
+            "enabledDnsType": "CUSTOM"
+          },
+          "frontEndSettings": [
+            {
+              "backendConfiguration": {
+                "address": {
+                  "address": "20.22.32.136",
+                  "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp2"
+                },
+                "port": "80"
+              },
+              "frontendConfiguration": {
+                "address": {
+                  "address": "20.22.91.251",
+                  "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-frontendSettingIp1"
+                },
+                "port": "80"
+              },
+              "name": "frontendsetting11",
+              "protocol": "TCP"
+            }
+          ],
+          "marketplaceDetails": {
+            "marketplaceSubscriptionId": "aa",
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
+          },
+          "networkProfile": {
+            "egressNatIp": [
+              {
+                "address": "20.22.92.111",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-egressNatIp1"
+              }
+            ],
+            "enableEgressNat": "ENABLED",
+            "networkType": "VNET",
+            "publicIps": [
+              {
+                "address": "20.22.92.11",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-PublicIp1"
+              }
+            ],
+            "vnetConfiguration": {
+              "ipOfTrustSubnetForUdr": {
+                "address": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "trustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet"
+              },
+              "unTrustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "vnet": {
+                "addressSpace": "10.1.0.0/16",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet"
+              }
+            },
+            "vwanConfiguration": {
+              "ipOfTrustSubnetForUdr": {
+                "address": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "networkVirtualApplianceId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
+              "trustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-trust-subnet"
+              },
+              "unTrustSubnet": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              },
+              "vHub": {
+                "addressSpace": "10.1.1.0/24",
+                "resourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/os-liftr-integration/providers/Microsoft.Network/virtualNetworks/os-liftr-integration-vnet/subnets/os-liftr-integration-untrust-subnet"
+              }
+            }
+          },
+          "panEtag": "2bf4a339-294d-4c25-b0b2-ef649e9f5c12",
+          "planData": {
+            "billingCycle": "WEEKLY",
+            "effectiveDate": "2022-09-13T00:46:05.283Z",
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "usageType": "PAYG"
+          },
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2022-09-09T05:08:24.229Z",
+          "createdBy": "praval",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "tagName": "value"
+        },
         "type": "aaaaaa"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
   }

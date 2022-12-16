@@ -4312,6 +4312,73 @@
         "modelAsString": true
       }
     },
+    "AppSeenData": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of rows"
+        },
+        "appSeenList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppSeenInfo"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AppSeenInfo[]",
+          "description": "array of appSeen"
+        }
+      },
+      "description": "Data Type for App Seen",
+      "required": [
+        "count",
+        "appSeenList"
+      ]
+    },
+    "AppSeenInfo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "title"
+        },
+        "category": {
+          "type": "string",
+          "description": "category"
+        },
+        "subCategory": {
+          "type": "string",
+          "description": "subCategory"
+        },
+        "risk": {
+          "type": "string",
+          "description": "risk"
+        },
+        "tag": {
+          "type": "string",
+          "description": "tag"
+        },
+        "technology": {
+          "type": "string",
+          "description": "technology"
+        },
+        "standardPorts": {
+          "type": "string",
+          "description": "standardPorts"
+        }
+      },
+      "description": "Definition for App Seen",
+      "required": [
+        "title",
+        "category",
+        "subCategory",
+        "risk",
+        "tag",
+        "technology",
+        "standardPorts"
+      ]
+    },
     "ApplicationInsights": {
       "type": "object",
       "properties": {
@@ -4594,11 +4661,21 @@
           },
           "x-cadl-name": "string[]",
           "description": "list of changes"
+        },
+        "lastCommitted": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "description": "Changelog list",
       "required": [
-        "changes"
+        "changes",
+        "lastCommitted",
+        "lastModified"
       ]
     },
     "CountriesResponse": {
@@ -4684,6 +4761,19 @@
       ],
       "x-ms-enum": {
         "name": "DecryptionRuleTypeEnum",
+        "modelAsString": true
+      }
+    },
+    "DefaultMode": {
+      "type": "string",
+      "description": "Type for Default Mode for rules creation",
+      "enum": [
+        "IPS",
+        "FIREWALL",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultMode",
         "modelAsString": true
       }
     },
@@ -5238,6 +5328,10 @@
           "type": "string",
           "description": "rulestack description"
         },
+        "defaultMode": {
+          "$ref": "#/definitions/DefaultMode",
+          "description": "Mode for default rules creation"
+        },
         "minAppIdVersion": {
           "type": "string",
           "description": "minimum version"
@@ -5466,6 +5560,10 @@
         "description": {
           "type": "string",
           "description": "rulestack description"
+        },
+        "defaultMode": {
+          "$ref": "#/definitions/DefaultMode",
+          "description": "Mode for default rules creation"
         },
         "minAppIdVersion": {
           "type": "string",
@@ -6041,24 +6139,23 @@
           "format": "int32",
           "description": "hit count"
         },
-        "appsSeen": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
+        "appSeen": {
+          "$ref": "#/definitions/AppSeenData",
           "description": "apps seen"
         },
         "timestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "timestamp of response"
         },
         "requestTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "timestamp of request"
         },
         "lastUpdatedTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "last updated timestamp"
         }
       },
@@ -6245,6 +6342,10 @@
         "description": {
           "type": "string",
           "description": "rulestack description"
+        },
+        "defaultMode": {
+          "$ref": "#/definitions/DefaultMode",
+          "description": "Mode for default rules creation"
         },
         "minAppIdVersion": {
           "type": "string",
