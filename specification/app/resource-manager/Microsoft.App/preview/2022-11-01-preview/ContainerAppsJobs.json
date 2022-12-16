@@ -500,55 +500,58 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
-          "description": "ContainerAppsJob resource specific properties",
-          "provisioningState": {
-            "description": "Provisioning state of the Container Apps Job.",
-            "enum": [
-              "InProgress",
-              "Succeeded",
-              "Failed",
-              "Canceled",
-              "Deleting"
-            ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "ContainerAppsJobProvisioningState",
-              "modelAsString": true
-            }
-          },
-          "environmentId": {
-            "description": "Resource ID of environment.",
-            "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "read"
-            ]
-          },
-          "workloadProfileType": {
-            "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
-            "description": "Workload profile type to pin for container apps job execution."
-          },
-          "configuration": {
-            "$ref": "#/definitions/Configuration",
-            "description": "Container Apps Job configuration properties."
-          },
-          "template": {
-            "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
-            "description": "Container Apps job definition."
-          },
-          "outboundIpAddresses": {
-            "description": "Outbound IP Addresses of a container apps job.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "eventStreamEndpoint": {
-            "description": "The endpoint of the eventstream of the container apps job.",
-            "type": "string",
-            "readOnly": true
+          "description": "ContainerApp resource specific properties",
+          "type": "object",
+          "properties": {
+              "provisioningState": {
+                "description": "Provisioning state of the Container Apps Job.",
+                "enum": [
+                  "InProgress",
+                  "Succeeded",
+                  "Failed",
+                  "Canceled",
+                  "Deleting"
+                ],
+                "type": "string",
+                "readOnly": true,
+                "x-ms-enum": {
+                  "name": "ContainerAppsJobProvisioningState",
+                  "modelAsString": true
+                }
+              },
+              "environmentId": {
+                "description": "Resource ID of environment.",
+                "type": "string",
+                "x-ms-mutability": [
+                  "create",
+                  "read"
+                ]
+              },
+              "workloadProfileType": {
+                "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
+                "description": "Workload profile type to pin for container apps job execution."
+              },
+              "configuration": {
+                "$ref": "#/definitions/Configuration",
+                "description": "Container Apps Job configuration properties."
+              },
+              "template": {
+                "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+                "description": "Container Apps job definition."
+              },
+              "outboundIpAddresses": {
+                "description": "Outbound IP Addresses of a container apps job.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "readOnly": true
+              },
+              "eventStreamEndpoint": {
+                "description": "The endpoint of the eventstream of the container apps job.",
+                "type": "string",
+                "readOnly": true
+              }
           },
           "x-ms-client-flatten": true
         }
