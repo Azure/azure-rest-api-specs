@@ -308,10 +308,10 @@
     "/features/datasets/{datasetId}/collections/{collectionId}/items": {
       "get": {
         "description": "The Get Features API returns the list of features in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset/create). Datasets consist of multiple feature collections, which are a collection of features of a similar type based on a common schema referred to as ontology. For more information with regards to ontology, please read this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2) describing the Facility ontology.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_GetFeatures",
+        "operationId": "Features_GetItems",
         "x-ms-examples": {
           "GetFeatures": {
-            "$ref": "./examples/features/Features_GetFeatures.json"
+            "$ref": "./examples/features/Features_GetItems.json"
           }
         },
         "parameters": [
@@ -351,10 +351,10 @@
       },
       "post": {
         "description": "The Post Feature API creates a feature with the provided attributes in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset/create). Datasets consist of multiple feature collections, which are a collection of features of a similar type based on a common schema referred to as ontology. For more information with regards to ontology, please read this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2) describing the Facility ontology.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_CreateFeature",
+        "operationId": "Features_Create",
         "x-ms-examples": {
           "PostFeature": {
-            "$ref": "./examples/features/Features_PostFeature.json"
+            "$ref": "./examples/features/Features_Create.json"
           }
         },
         "consumes": [
@@ -390,10 +390,10 @@
     "/features/datasets/{datasetId}/collections/{collectionId}/items/{featureId}": {
       "get": {
         "description": "The Get Feature API returns the feature identified by the provided id in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset/create). Datasets consist of multiple feature collections, which are a collection of features of a similar type based on a common schema referred to as ontology. For more information with regards to ontology, please read this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2) describing the Facility ontology.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_GetFeature",
+        "operationId": "Features_Get",
         "x-ms-examples": {
           "GetFeature": {
-            "$ref": "./examples/features/Features_GetFeature.json"
+            "$ref": "./examples/features/Features_Get.json"
           }
         },
         "parameters": [
@@ -424,10 +424,10 @@
       },
       "put": {
         "description": "The Put Feature API updates the feature identified by the provided id in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset/create). Datasets consist of multiple feature collections, which are a collection of features of a similar type based on a common schema referred to as ontology. For more information with regards to ontology, please read this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2) describing the Facility ontology.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_PutFeature",
+        "operationId": "Features_Put",
         "x-ms-examples": {
           "PutFeature": {
-            "$ref": "./examples/features/Features_PutFeature.json"
+            "$ref": "./examples/features/Features_Put.json"
           }
         },
         "consumes": [
@@ -461,10 +461,10 @@
       },
       "patch": {
         "description": "The Patch Feature API updates attributes of a feature identified by the provided id in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset/create). Datasets consist of multiple feature collections, which are a collection of features of a similar type based on a common schema referred to as ontology. For more information with regards to ontology, please read this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2) describing the Facility ontology.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_PatchFeature",
+        "operationId": "Features_Patch",
         "x-ms-examples": {
           "PatchFeature": {
-            "$ref": "./examples/features/Features_PatchFeature.json"
+            "$ref": "./examples/features/Features_Patch.json"
           }
         },
         "consumes": [
@@ -498,10 +498,10 @@
       },
       "delete": {
         "description": "The Delete Feature API deletes the feature identified by the provided id in the given collection. At this point this API supports only facility features. Deleting a facility feature deletes all the child features of that facility recursively.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset/create). Datasets consist of multiple feature collections, which are a collection of features of a similar type based on a common schema referred to as ontology. For more information with regards to ontology, please read this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2) describing the Facility ontology.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_DeleteFeature",
+        "operationId": "Features_Delete",
         "x-ms-examples": {
           "DeleteFeature": {
-            "$ref": "./examples/features/Features_DeleteFeature.json"
+            "$ref": "./examples/features/Features_Delete.json"
           }
         },
         "parameters": [
@@ -918,6 +918,7 @@
       ]
     },
     "FeatureId": {
+      "type": "object",
       "properties": {
         "id": {
           "description": "Case sensitive identifier of a specific feature.",
