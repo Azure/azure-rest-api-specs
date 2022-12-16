@@ -68,11 +68,6 @@
       "type": "object",
       "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Result identifier",
-          "readOnly": true
-        },
         "resultType": {
           "description": "Result type",
           "type": "string"
@@ -80,6 +75,11 @@
       },
       "required": [
         "resultType"
+      ],
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
+        }
       ],
       "discriminator": "resultType"
     },
