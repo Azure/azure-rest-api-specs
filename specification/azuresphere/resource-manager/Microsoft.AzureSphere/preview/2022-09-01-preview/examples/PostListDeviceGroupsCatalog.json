@@ -1,9 +1,14 @@
 {
+  "operationId": "Catalogs_ListDeviceGroups",
+  "title": "Catalogs_ListDeviceGroups",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MyResourceGroup1",
     "catalogName": "MyCatalog1",
-    "api-version": "2022-02-01-privatepreview"
+    "api-version": "2022-09-01-preview",
+    "request": {
+      "deviceGroupName": "MyDeviceGroup1"
+    }
   },
   "responses": {
     "200": {
@@ -20,8 +25,7 @@
             "name": "MyDeviceGroup2",
             "type": "microsoft.azureSphere/catalogs/products/devicegroups"
           }
-        ],
-        "nextLink": "link/to/nextPage"
+        ]
       }
     }
   }

@@ -1,23 +1,27 @@
 {
+  "operationId": "Devices_Get",
+  "title": "Devices_Get",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MyResourceGroup1",
     "catalogName": "MyCatalog1",
+    "productName": "MyProduct1",
+    "deviceGroupName": "myDeviceGroup1",
     "deviceId": "MyDeviceId1",
-    "api-version": "2022-02-01-privatepreview"
+    "api-version": "2022-09-01-preview"
   },
   "responses": {
     "200": {
       "description": "The details of an Azure Sphere device.",
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/devices/MyDeviceId1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/myProduct1/deviceGroups/myDeviceGroup1/devices/MyDeviceId1",
         "name": "MyDeviceId1",
         "properties": {
           "chipSku": "MyChipSku1",
           "lastAvailableOsVersion": "AvailableOsVersion1",
           "lastInstalledOsVersion": "InstalledOsVersion1",
-          "lastOsUpdateUtc": "2021-09-30T23:54:21.96Z",
-          "lastUpdateRequestUtc": "2021-10-01T23:54:21.96Z"
+          "lastOsUpdateUtc": "2022-09-30T23:54:21.96Z",
+          "lastUpdateRequestUtc": "2022-10-01T23:54:21.96Z"
         }
       }
     }

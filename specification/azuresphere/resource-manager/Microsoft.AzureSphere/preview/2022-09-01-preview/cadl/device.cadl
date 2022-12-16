@@ -1,0 +1,101 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.AzureSphere;
+
+// Devices
+@doc("An device resource belonging to a device group resource.")
+@parentResource(DeviceGroup)
+model Device is ProxyResource<DeviceProperties> {
+  @doc("ID of Device")
+  @pattern("^[a-zA-Z0-9-]{3,150}$")
+  @key("deviceId")
+  @path
+  @segment("devices")
+  name: string;
+}
+
+interface ProxyResourceOperationsDevice<
+    TResource extends ArmResource,
+    TListParameters extends object = {}>
+    extends Azure.ResourceManager.ResourceRead<TResource>,
+    ResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>,
+    ResourceCreate<TResource>,
+    Azure.ResourceManager.ResourceDelete<TResource>,
+    ProxyResourceUpdate<Device, DevicePatchProperties>{}
+
+@armResourceOperations
+interface Devices extends ProxyResourceOperationsDevice<Device>{
+  @autoRoute
+  @armResourceAction(Device)
+  @post
+  @doc("Generates the capability image for the device.")
+  op generateCapabilityImage(
+    ...ResourceInstanceParameters<Device>, 
+    @doc("Generate capability image request body.")
+    @body request: GenerateCapabilityImageRequest
+  ): ArmResponse<SignedCapabilityImageResponse> | ErrorResponse;
+}
+
+@doc("The properties of device")
+model DeviceProperties {
+  @doc("SKU of the chip")
+  @visibility("read")
+  chipSku?: string;
+
+  @doc("OS version available for installation when update requested")
+  @visibility("read")
+  lastAvailableOsVersion?: string;
+
+  @doc("OS version running on device when update requested")
+  @visibility("read")
+  lastInstalledOsVersion?: string;
+
+  @doc("Time when update requested and new OS version available")
+  @visibility("read")
+  lastOsUpdateUtc?: zonedDateTime;
+
+  @doc("Time when update was last requested")
+  @visibility("read")
+  lastUpdateRequestUtc?: zonedDateTime;
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+// Device models
+@doc("Request of the action to create a signed device capability image")
+model GenerateCapabilityImageRequest {
+  @doc("List of capabilities to create")
+  capabilities: CapabilityType[];
+}
+
+@doc("Signed device capability image response")
+model SignedCapabilityImageResponse {
+  @doc("The signed device capability image as a UTF-8 encoded base 64 string.")
+  @visibility("read")
+  image?: string;
+}
+
+@doc("Capability image type")
+enum CapabilityType {
+  ApplicationDevelopment,
+  FieldServicing
+}
+
+@doc("The properties of device patch")
+model DevicePatchProperties {
+  @doc("Device group id")
+  deviceGroupId: string;
+}

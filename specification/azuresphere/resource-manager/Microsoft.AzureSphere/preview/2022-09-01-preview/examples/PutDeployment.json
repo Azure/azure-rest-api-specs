@@ -1,6 +1,6 @@
 {
-  "operationId": "Deployments_Get",
-  "title": "Deployments_Get",
+  "operationId": "Deployments_CreateOrUpdate",
+  "title": "Deployments_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MyResourceGroup1",
@@ -8,11 +8,12 @@
     "productName": "MyProduct1",
     "deviceGroupName": "myDeviceGroup1",
     "deploymentName": "MyDeployment1",
-    "api-version": "2022-09-01-preview"
+    "api-version": "2022-09-01-preview",
+    "resource": {}
   },
   "responses": {
     "200": {
-      "description": "The details of an Azure Sphere deployment.",
+      "description": "The Azure Sphere device was claimed successfully.",
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/deviceGroups/MyDeviceGroup1/deployments/MyDeployment1",
         "name": "MyDeployment1",
@@ -22,16 +23,23 @@
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/images/MyImage1",
               "properties": {
                 "image": "dGVzdGltYWdl",
-                "regionalDataBoundary": "None",
                 "uri": "imageUri",
-                "description": "description",
-                "componentId": "componentId",
-                "imageType": "ImageType",
+                "regionalDataBoundary": "None",
+                "imageType": "InvalidImageType",
                 "provisioningState": "Succeeded"
               }
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
         }
+      }
+    },
+    "201": {
+      "description": "The images requested to be deployed successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/myProduct1/deviceGroups/myDeviceGroup1/deployments/MyDeployment1",
+        "name": "MyDeployment1",
+        "type": "Microsoft.AzureSphere/catalogs/products/deviceGroups/deployments"
       }
     }
   }
