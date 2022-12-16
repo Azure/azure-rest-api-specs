@@ -1,7 +1,13 @@
 parameters:
   java-sdk-folder:
     default: "{cwd}/azure-sdk-for-java"
+  service-directory-name:
+    default: mycadlproject
 options:
   "@azure-tools/cadl-java":
-    "emitter-output-dir": "{java-sdk-folder}/sdk/mycadlproject/azure-mycadlproject"
+    "emitter-output-dir": "{java-sdk-folder}/sdk/{service-directory-name}/azure-mycadlproject"
     namespace: com.azure.mycadlproject
+  "@azure-tools/cadl-python":
+    "package-name": "azure-contosowidgetmanager"
+    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    "package-mode": "dataplane"
