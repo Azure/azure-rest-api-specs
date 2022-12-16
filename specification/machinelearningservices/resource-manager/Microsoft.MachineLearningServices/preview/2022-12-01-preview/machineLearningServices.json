@@ -2141,12 +2141,10 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
+      "required": [
+        "kind"
+      ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkspaceProperties",
-          "description": "The properties of the machine learning workspace.",
-          "x-ms-client-flatten": true
-        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
@@ -2165,6 +2163,124 @@
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
           "description": "The sku of the workspace."
+        },
+        "kind": {
+          "type": "string",
+          "default": ""
+        }
+      },
+      "discriminator": "kind"
+    },
+    "WorkspaceResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Workspace"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a machine learning workspace.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkspaceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": ""
+    },
+    "FeatureStoreWorkspaceResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Workspace"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeatureStoreWorkspaceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "FeatureStore"
+    },
+    "FeatureStoreWorkspaceProperties": {
+      "type": "object",
+      "properties": {
+        "computeRuntime": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ComputeRuntimeDto"
+            }
+          ]
+        },
+        "offlineStoreConnectionName": {
+          "type": "string"
+        },
+        "onlineStoreConnectionName": {
+          "type": "string"
+        },
+        "storageArmId": {
+          "type": "string"
+        },
+        "keyVaultArmId": {
+          "type": "string"
+        },
+        "appInsightsArmId": {
+          "type": "string"
+        },
+        "acrArmId": {
+          "type": "string"
+        },
+        "encryption": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/EncryptionProperty"
+            }
+          ]
+        },
+        "imageBuildCompute": {
+          "type": "string"
+        },
+        "systemDatastoresAuthMode": {
+          "type": "string"
+        },
+        "primaryUserAssignedIdentity": {
+          "type": "string"
+        },
+        "publicNetworkAccess": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublicNetworkAccessType"
+            }
+          ]
+        },
+        "sharedPrivateLinkResources": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SharedPrivateLinkResource"
+              }
+            ]
+          }
+        },
+        "allowRoleAssignmentsOnResourceGroupLevel": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ComputeRuntimeDto": {
+      "type": "object",
+      "properties": {
+        "sparkRuntimeVersion": {
+          "type": "string"
         }
       }
     },
@@ -2339,6 +2455,9 @@
     "WorkspaceUpdateParameters": {
       "type": "object",
       "description": "The parameters for updating a machine learning workspace.",
+      "required": [
+        "kind"
+      ],
       "properties": {
         "tags": {
           "description": "The resource tags for the machine learning workspace.",
@@ -2355,12 +2474,47 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
+        "kind": {
+          "type": "string",
+          "default": ""
+        }
+      },
+      "discriminator": "kind"
+    },
+    "NormalWorkspaceUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceUpdateParameters"
+        }
+      ],
+      "properties": {
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
           "description": "The properties that the machine learning workspace will be updated with.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-discriminator-value": ""
+    },
+    "FeatureStoreWorkspaceUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceUpdateParameters"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeatureStoreWorkspaceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "FeatureStore"
     },
     "WorkspacePropertiesUpdateParameters": {
       "type": "object",
@@ -6212,6 +6366,17 @@
           "type": "string",
           "description": "Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days."
         }
+      }
+    },
+    "PublicNetworkAccessType": {
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
       }
     }
   }
