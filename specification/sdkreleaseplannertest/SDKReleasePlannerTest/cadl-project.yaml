@@ -1,0 +1,36 @@
+parameters:
+  "python-sdk-folder":
+    default: "{cwd}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{cwd}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{cwd}/azure-sdk-for-java/"
+  "csharp-sdk-folder":
+    default: "{cwd}/azure-sdk-for-java/"
+  "openapi-folder":
+    default: "{project-root}/../dataplane/"
+  "service-directory-name":
+    default: "sdkreleaseplannertest"
+emit:
+  - "@azure-tools/cadl-autorest"
+options:
+  "@azure-tools/cadl-python":
+    "package-mode": "dataplane"
+    "package-name": "azure-security-sdkreleaseplannertest"
+    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+  "@azure-tools/cadl-csharp":
+    namespace: Azure.Security.SDKReleasePlannerTest
+    "emitter-output-dir": "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+  "@azure-tools/cadl-typescript":
+    "sdk-folder": sdk/sdkreleaseplannertest/sdkreleaseplannertest-rest
+    "emitter-output-dir": "{js-sdk-folder}/sdk/{service-directory-name}/sdkreleaseplannertest-rest"
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    packageDetails:
+      name: "@azure-rest/sdkreleaseplannertest-rest"
+      description: "Cadl Test Service"
+  "@azure-tools/cadl-java":
+    "sdk-folder": sdk/sdkreleaseplannertest/azure-sdkreleaseplannertest
+    "emitter-output-dir": "{js-sdk-folder}/sdk/{service-directory-name}/azure-sdkreleaseplannertest"
+    namespace: com.azure.sdkreleaseplannertest
