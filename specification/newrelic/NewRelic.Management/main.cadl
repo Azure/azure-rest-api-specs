@@ -619,11 +619,20 @@ model AppServiceInfo {
   agentStatus?: string;
 }
 
+@doc("The details of a Organization resource.")
+model OrganizationResource is ProxyResource<OrganizationProperties> {
+  @key("organization")
+  @segment("organizations")
+  @doc("The name of the Organization resource")
+  @path
+  name: string;
+}
+
 @doc("Response of get all organizations Operation.")
-model OrganizationsListResponse extends Azure.Core.Page<OrganizationResponse> {}
+model OrganizationsListResponse extends Azure.Core.Page<OrganizationResource> {}
 
 @doc("Details of Organizations")
-model OrganizationResponse {
+model OrganizationProperties {
   @doc("organization id")
   organizationId?: string;
 
@@ -634,11 +643,17 @@ model OrganizationResponse {
   billingSource?: BillingSource;
 }
 
-@doc("Response of get all accounts Operation.")
-model AccountsListResponse extends Azure.Core.Page<AccountResponse> {}
+@doc("The details of a account resource.")
+model AccountResource is ProxyResource<AccountProperties> {
+  @key("account")
+  @segment("accounts")
+  @doc("The name of the Account resource")
+  @path
+  name: string;
+}
 
 @doc("List of all the New relic accounts for the given user")
-model AccountResponse {
+model AccountProperties {
   @doc("organization id")
   organizationId?: string;
 
@@ -652,11 +667,23 @@ model AccountResponse {
   region?: string;
 }
 
+@doc("Response of get all accounts Operation.")
+model AccountsListResponse extends Azure.Core.Page<AccountResource> {}
+
+@doc("The details of a PlanData resource.")
+model PlanDataResource is ProxyResource<PlanDataProperties> {
+  @key("plan")
+  @segment("plans")
+  @doc("The name of the PlanData resource")
+  @path
+  name: string;
+}
+
 @doc("Response of get all plan data Operation.")
-model PlanDataListResponse extends Azure.Core.Page<PlanDataResponse> {}
+model PlanDataListResponse extends Azure.Core.Page<PlanDataResource> {}
 
 @doc("Plan details")
-model PlanDataResponse {
+model PlanDataProperties {
   @doc("Plan details")
   planData?: PlanData;
 

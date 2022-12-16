@@ -1259,7 +1259,7 @@
       },
       "description": "Account Info of the NewRelic account"
     },
-    "AccountResponse": {
+    "AccountProperties": {
       "type": "object",
       "properties": {
         "organizationId": {
@@ -1287,24 +1287,41 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AccountResponse"
+            "$ref": "#/definitions/AccountResource"
           },
-          "x-ms-identifiers": [
-            "accountId"
-          ],
-          "x-cadl-name": "AccountResponse[]",
-          "description": "The AccountResponse items on this page"
+          "x-cadl-name": "AccountResource[]",
+          "description": "The AccountResource items on this page"
         },
         "nextLink": {
           "type": "string",
           "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<AccountResponse>"
+          "x-cadl-name": "Rest.ResourceLocation<AccountResource>"
         }
       },
       "description": "Response of get all accounts Operation.",
       "required": [
         "value"
+      ]
+    },
+    "AccountResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The details of a account resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "AppServiceInfo": {
@@ -2121,7 +2138,7 @@
       },
       "description": "Organization Info of the NewRelic account"
     },
-    "OrganizationResponse": {
+    "OrganizationProperties": {
       "type": "object",
       "properties": {
         "organizationId": {
@@ -2145,22 +2162,41 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrganizationResponse"
+            "$ref": "#/definitions/OrganizationResource"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "OrganizationResponse[]",
-          "description": "The OrganizationResponse items on this page"
+          "x-cadl-name": "OrganizationResource[]",
+          "description": "The OrganizationResource items on this page"
         },
         "nextLink": {
           "type": "string",
           "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<OrganizationResponse>"
+          "x-cadl-name": "Rest.ResourceLocation<OrganizationResource>"
         }
       },
       "description": "Response of get all organizations Operation.",
       "required": [
         "value"
+      ]
+    },
+    "OrganizationResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrganizationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The details of a Organization resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "PlanData": {
@@ -2186,23 +2222,42 @@
       },
       "description": "Plan data of NewRelic Monitor resource"
     },
+    "PlanDataResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlanDataProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The details of a PlanData resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "PlanDataListResponse": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PlanDataResponse"
+            "$ref": "#/definitions/PlanDataResource"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "PlanDataResponse[]",
-          "description": "The PlanDataResponse items on this page"
+          "x-cadl-name": "PlanDataResource[]",
+          "description": "The PlanDataResource items on this page"
         },
         "nextLink": {
           "type": "string",
           "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<PlanDataResponse>"
+          "x-cadl-name": "Rest.ResourceLocation<PlanDataResource>"
         }
       },
       "description": "Response of get all plan data Operation.",
@@ -2210,7 +2265,7 @@
         "value"
       ]
     },
-    "PlanDataResponse": {
+    "PlanDataProperties": {
       "type": "object",
       "properties": {
         "planData": {
