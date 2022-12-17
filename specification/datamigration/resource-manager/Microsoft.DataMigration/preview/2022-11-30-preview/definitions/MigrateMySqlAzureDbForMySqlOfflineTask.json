@@ -61,6 +61,36 @@
             "type": "string"
           }
         },
+        "migrateAllViews": {
+          "type": "boolean",
+          "description": "If true, all view definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllTriggers": {
+          "type": "boolean",
+          "description": "If true, all trigger definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllEvents": {
+          "type": "boolean",
+          "description": "If true, all event definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllRoutines": {
+          "type": "boolean",
+          "description": "If true, all routine definitions will be migrated in the selected databases",
+          "default": false
+        },
+        "migrateAllTablesSchema": {
+          "type": "boolean",
+          "description": "If true, all table's schemas will be migrated",
+          "default": false
+        },
+        "migrateUserSystemTables": {
+          "type": "boolean",
+          "description": "If true, all users/grants will be migrated",
+          "default": false
+        },
         "encryptedKeyForSecureFields": {
           "type": "string",
           "description": "encrypted key for secure fields"
@@ -70,11 +100,6 @@
         "sourceConnectionInfo",
         "targetConnectionInfo",
         "selectedDatabases"
-      ],
-      "allOf": [
-        {
-          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlSchemaMigrationOptions"
-        }
       ]
     },
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutput": {
@@ -406,6 +431,13 @@
         "tableMap": {
           "type": "object",
           "description": "Mapping of source to target tables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tablesToMigrateSchema": {
+          "type": "object",
+          "description": "Mapping of source to target tables for schema migration",
           "additionalProperties": {
             "type": "string"
           }
