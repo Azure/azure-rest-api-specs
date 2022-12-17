@@ -100,11 +100,22 @@
     "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput": {
       "type": "object",
       "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for the replicate changes migrations",
-      "allOf": [
-        {
-          "$ref": "./MigrateMySqlCommon.json#/definitions/MigrateMySqlAzureDbForMySqlTaskResult"
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string",
+          "readOnly": true
         }
-      ]
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
     },
     "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",
