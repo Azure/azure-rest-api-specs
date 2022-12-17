@@ -46,6 +46,7 @@
             "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
             "Migrate.SqlServer.SqlDb",
             "Migrate.SqlServer.AzureSqlDb.Sync",
+            "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
             "Migrate.MySql.AzureDbForMySql.Sync",
             "Migrate.MySql.AzureDbForMySql",
             "Migrate.PostgreSql.AzureDbForPostgreSql.SyncV2",
@@ -767,6 +768,38 @@
             "$ref": "./MigrateMySqlAzureDbForMySqlSyncTask.json#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
           },
           "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlReplicateChangesTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.MySql.AzureDbForMySql.ReplicateChanges",
+      "type": "object",
+      "description": "Properties for the task that migrates MySQL databases to Azure Database for MySQL for replicate changes migrations",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateMySqlAzureDbForMySqlReplicateChangesTask.json#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateMySqlAzureDbForMySqlReplicateChangesTask.json#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput"
+          },
+          "readOnly": true
+        },
+        "isCloneable": {
+          "type": "boolean",
+          "description": "whether the task can be cloned or not"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "Task id "
         }
       },
       "allOf": [

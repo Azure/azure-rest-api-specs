@@ -35,8 +35,42 @@
           "items": {
             "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncDatabaseInput"
           }
+        },
+        "makeSourceServerReadOnly": {
+          "type": "boolean",
+          "description": "Setting to set the source server read only",
+          "default": false
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Parameter to specify when the migration started"
+        },
+        "sourceServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the source server if it is an azure instance"
+        },
+        "targetServerResourceId": {
+          "type": "string",
+          "description": "Optional resource Id of the target server"
+        },
+        "optionalAgentSettings": {
+          "type": "object",
+          "description": "Optional parameters for fine tuning the data transfer rate during migration",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "encryptedKeyForSecureFields": {
+          "type": "string",
+          "description": "encrypted key for secure fields"
         }
       },
+      "allOf": [
+        {
+          "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlSchemaMigrationOptions"
+        }
+      ],
       "required": [
         "sourceConnectionInfo",
         "targetConnectionInfo",
@@ -321,6 +355,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevelV2": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+        },
+        {
+          "$ref": "./MigrateMySqlAzureDbForMySqlReplicateChangesTask.json#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutputMigrationLevel"
         }
       ]
     },
