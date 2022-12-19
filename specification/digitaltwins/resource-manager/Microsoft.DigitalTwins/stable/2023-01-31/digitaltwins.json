@@ -1094,6 +1094,9 @@
           },
           {
             "$ref": "#/parameters/timeSeriesDatabaseConnectionName"
+          },
+          {
+            "$ref": "#/parameters/cleanupConnectionArtifacts"
           }
         ],
         "responses": {
@@ -2169,9 +2172,19 @@
           "type": "string"
         },
         "adxTableName": {
-          "description": "The name of the Azure Data Explorer table. Defaults to AdtPropertyEvents.",
+          "description": "The name of the Azure Data Explorer table used for storing updates to properties of twins and relationships. Defaults to AdtPropertyEvents.",
           "type": "string",
           "default": "AdtPropertyEvents",
+          "x-nullable": true
+        },
+        "adxTwinLifecycleEventsTableName": {
+          "description": "The name of the Azure Data Explorer table used for recording twin lifecycle events. The table will not be created if this property is left unspecified.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "adxRelationshipLifecycleEventsTableName": {
+          "description": "The name of the Azure Data Explorer table used for recording relationship lifecycle events. The table will not be created if this property is left unspecified.",
+          "type": "string",
           "x-nullable": true
         },
         "eventHubEndpointUri": {
@@ -2190,6 +2203,12 @@
           "description": "The EventHub consumer group to use when ADX reads from EventHub. Defaults to $Default.",
           "type": "string",
           "default": "$Default",
+          "x-nullable": true
+        },
+        "recordPropertyAndItemRemovals": {
+          "description": "Specifies whether or not to record twin / relationship property and item removals, including removals of indexed or keyed values (such as map entries, array elements, etc.). This feature is de-activated unless explicitly set to 'true'. Setting this property to 'true' will generate an additional column in the property events table in ADX.",
+          "type": "boolean",
+          "default": false,
           "x-nullable": true
         }
       }
@@ -2296,6 +2315,14 @@
       "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
       "minLength": 2,
       "maxLength": 49
+    },
+    "cleanupConnectionArtifacts": {
+      "name": "cleanupConnectionArtifacts",
+      "in": "query",
+      "description": "Specifies whether or not to attempt to clean up artifacts that were created in order to establish a connection to the time series database. This is a best-effort attempt that will fail if appropriate permissions are not in place. Setting this to 'true' does not delete any recorded data.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
     }
   }
 }
