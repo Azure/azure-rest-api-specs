@@ -1,0 +1,160 @@
+{
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "subid",
+    "validationRequestInputs": {
+      "aggregateErrors": "False",
+      "deviceMapping": {
+        "content": {
+          "templateType": "CollectionContent",
+          "template": [
+            {
+              "templateType": "JsonPathContent",
+              "template": {
+                "typeName": "heartrate",
+                "typeMatchExpression": "$..[?(@heartrate)]",
+                "deviceIdExpression": "$.deviceId",
+                "timestampExpression": "$.endDate"
+              }
+            }
+          ]
+        }
+      },
+      "fhirMapping": {
+        "content": {
+          "templateType": "CollectionFhir",
+          "template": [
+            {
+              "templateType": "CodeValueFhir",
+              "template": {
+                "codes": [
+                  {
+                    "code": "85354-9",
+                    "display": "Blood pressure panel",
+                    "system": "http://loinc.org"
+                  }
+                ],
+                "periodInterval": 60,
+                "typeName": "bloodpressure",
+                "components": [
+                  {
+                    "codes": [
+                      {
+                        "code": "85354-9",
+                        "display": "Blood pressure panel",
+                        "system": "http://loinc.org"
+                      }
+                    ],
+                    "value": {
+                      "defaultPeriod": 1000,
+                      "unit": "mmHg",
+                      "valueName": "diastolic",
+                      "valueType": "SampledData"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "deviceEvents": [
+        {
+          "heartrate": "100",
+          "deviceId": "abc1",
+          "endDate": "2022-04-01T21:23:23.8429459Z",
+          "session": "abcdefg",
+          "patient": "patient123"
+        },
+        {
+          "heartrate": "100",
+          "deviceId": "abc2",
+          "endDate": "2022-04-01T21:23:23.8429459Z",
+          "session": "abcdefg",
+          "patient": "patient123"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "templateResult": {
+          "exceptions": [
+            {
+              "message": "No matching Fhir Template exists for Device Mapping [heartrate]. Ensure case matches. Available Fhir Templates: [bloodpressure].",
+              "level": "WARN",
+              "category": "FHIRTRANSFORMATION",
+              "lineInfo": {
+                "lineNumber": 3,
+                "linePosition": 16
+              }
+            }
+          ]
+        },
+        "deviceResults": [
+          {
+            "deviceEvent": {
+              "heartrate": "100",
+              "deviceId": "abc1",
+              "endDate": "2022-04-01T21:28:22.5789234Z",
+              "session": "abcdefg",
+              "patient": "patient123"
+            },
+            "measurements": [
+              {
+                "type": "heartrate",
+                "occurrenceTimeUtc": "2022-04-01T21:28:22.5789234Z",
+                "deviceId": "abc1",
+                "properties": []
+              }
+            ],
+            "observations": [],
+            "exceptions": [
+              {
+                "message": "No Fhir Template exists with the type name [heartrate]. Ensure that all Fhir Template type names match Device Mapping type names (including casing)",
+                "level": "ERROR",
+                "category": "FHIRTRANSFORMATION",
+                "lineInfo": {
+                  "lineNumber": 3,
+                  "linePosition": 16
+                }
+              }
+            ],
+            "aggregatedCount": 0
+          },
+          {
+            "deviceEvent": {
+              "heartrate": "100",
+              "deviceId": "abc2",
+              "endDate": "2022-04-01T21:28:22.5789234Z",
+              "session": "abcdefg",
+              "patient": "patient123"
+            },
+            "measurements": [
+              {
+                "type": "heartrate",
+                "occurrenceTimeUtc": "2022-04-01T21:28:22.5789234Z",
+                "deviceId": "abc2",
+                "properties": []
+              }
+            ],
+            "observations": [],
+            "exceptions": [
+              {
+                "message": "No Fhir Template exists with the type name [heartrate]. Ensure that all Fhir Template type names match Device Mapping type names (including casing)",
+                "level": "ERROR",
+                "category": "FHIRTRANSFORMATION",
+                "lineInfo": {
+                  "lineNumber": 3,
+                  "linePosition": 16
+                }
+              }
+            ],
+            "aggregatedCount": 0
+          }
+        ]
+      }
+    }
+  }
+}
