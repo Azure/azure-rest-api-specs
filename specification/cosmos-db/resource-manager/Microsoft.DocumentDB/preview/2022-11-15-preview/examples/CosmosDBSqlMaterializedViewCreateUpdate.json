@@ -12,9 +12,31 @@
       "properties": {
         "resource": {
           "id": "mvContainerName",
+          "indexingPolicy": {
+            "indexingMode": "consistent",
+            "automatic": true,
+            "includedPaths": [
+              {
+                "path": "/*",
+                "indexes": [
+                  {
+                    "kind": "Range",
+                    "dataType": "String",
+                    "precision": -1
+                  },
+                  {
+                    "kind": "Range",
+                    "dataType": "Number",
+                    "precision": -1
+                  }
+                ]
+              }
+            ],
+            "excludedPaths": []
+          },
           "partitionKey": {
             "paths": [
-              "/pk"
+              "/mvpk"
             ],
             "kind": "Hash"
           },
@@ -54,7 +76,7 @@
             },
             "partitionKey": {
               "paths": [
-                "/pk"
+                "/mvpk"
               ],
               "kind": "Hash"
             },
@@ -68,13 +90,13 @@
               "conflictResolutionProcedure": ""
             },
             "materializedViewDefinition": {
-              "sourceCollectionRid": "e9N-s6Ua-4Y=",
+              "sourceCollectionRid": "vb0sn6nEu9A=",
               "sourceCollectionId": "sourceContainerName",
               "definition": "select * from ROOT"
             },
-            "_rid": "e9N-s+nr644=",
-            "_ts": 1666700363,
-            "_etag": "\"00004700-0000-0800-0000-6357d44b0000\""
+            "_rid": "vb0sn8MDxLw=",
+            "_ts": 1671427656,
+            "_etag": "\"00000800-0000-0200-0000-639ff6480000\""
           }
         }
       }
