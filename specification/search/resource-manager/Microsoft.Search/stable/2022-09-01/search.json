@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1416,6 +1421,58 @@
             }
           },
           "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the private link service connection is for."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the private link service connection. Can be Updating, Deleting, Failed, Succeeded, or Incomplete",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Succeeded",
+            "Incomplete",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updating",
+                "name": "Updating",
+                "description": "The private link service connection is in the process of being created along with other resources for it to be fully functional."
+              },
+              {
+                "value": "Deleting",
+                "name": "Deleting",
+                "description": "The private link service connection is in the process of being deleted."
+              },
+              {
+                "value": "Failed",
+                "name": "Failed",
+                "description": "The private link service connection has failed to be provisioned or deleted."
+              },
+              {
+                "value": "Succeeded",
+                "name": "Succeeded",
+                "description": "The private link service connection has finished provisioning and is ready for approval."
+              },
+              {
+                "value": "Incomplete",
+                "name": "Incomplete",
+                "description": "Provisioning request for the private link service connection resource has been accepted but the process of creation has not commenced yet."
+              },
+              {
+                "value": "Canceled",
+                "name": "Canceled",
+                "description": "Provisioning request for the private link service connection resource has been canceled"
+              }
+            ]
+          }
         }
       },
       "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
