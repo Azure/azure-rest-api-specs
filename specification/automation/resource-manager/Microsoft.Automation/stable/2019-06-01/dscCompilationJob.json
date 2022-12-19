@@ -204,7 +204,7 @@
         "x-ms-odata": "#/definitions/DscCompilationJob"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{compilationJobName}/streams": {
       "get": {
         "tags": [
           "DscCompilationJob"
@@ -227,12 +227,12 @@
             "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "jobId",
+            "name": "compilationJobName",
             "in": "path",
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "The job id."
+            "description": "The DSC configuration Id."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -257,7 +257,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/{jobStreamId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{compilationJobName}/streams/{jobStreamId}": {
       "get": {
         "tags": [
           "DscCompilationJob"
@@ -280,12 +280,12 @@
             "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "jobId",
+            "name": "compilationJobName",
             "in": "path",
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "The job id."
+            "description": "The DSC configuration Id."
           },
           {
             "name": "jobStreamId",

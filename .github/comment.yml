@@ -3,7 +3,7 @@
     type: checkbox
     keywords:
       - "WaitForARMFeedback"
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)"
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||BreakingChangeReviewRequired)"
     onCheckedLabels:
       - WaitForARMFeedback
       - ARMReview
@@ -15,6 +15,16 @@
     variables:
         openapiHub: https://portal.azure-devex-tools.com
     onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Please check out the breaking change(s), and provide business justification in the PR comment and @ PR assignee why you must have these change(s), and how external customer impact can be mitigated. Please ensure to follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. </br>**Action**: To initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).</br> If you want to know the production traffic statistic, please see [ARM Traffic statistic](${openapiHub}/api/pr/query-traffic?pr=${owner}/${repo}/${PRNumber}&days=5). </br> If you think it is false positive breaking change, please provide the reasons in the PR comment, report to Swagger Tooling Team via https://aka.ms/swaggerfeedback. </br> **Note**: To avoid breaking change, you can refer to [Shift Left Solution](https://aka.ms/shiftleft) for detecting breaking change in early phase at your service code repository."
+
+- rule:
+    type: label
+    label: SuppressionReviewRequired
+    onLabeledComments: "Hi @${PRAuthor}, one or multiple validation error/warning suppression(s) is detected in your PR. Please follow the [Swagger-Suppression-Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) to get approval."
+
+- rule:
+    type: label
+    label: "CI-MissingBaseCommit"
+    onLabeledComments: "Hi, @${PRAuthor}, For review efficiency consideration, when creating a new api version, it is required to place API specs of the base version in the first commit, and push new version updates into successive commits. You can use OpenAPIHub to initialize the PR for adding a new version. For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version). Or you could onboard [API spec pipeline](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/606/Enable-API-Spec-Pipeline)"
 
 - rule:
     type: label
@@ -30,6 +40,21 @@
     type: label
     label: NewApiVersionRequired
     onLabeledComments: "<b>NewApiVersionRequired reason:</b></br> </br><b>A service’s API is a contract with customers and is represented by using the api-version query parameter. Changes such as adding an optional property to a request/response or introducing a new operation is a change to the service’s contract and therefore requires a new api-version value. This is critically important for documentation, client libraries, and customer support. </b> </br></br> EXAMPLE: if a customer calls a service in the public cloud using <b>api-version=2020-07-27</b>, the new property or operation may exist but if they call the service in a government cloud, air-gapped cloud, or Azure Stack Hub cloud using the same api-version, the property or operation may not exist. Because there is no clear relationship between the service api-version and the new property/operation, customers can’t trust the documentation and Azure customer have difficulty helping customers diagnose issues. In addition, each client library version documents the service version it supports. When an optional property or new operation is added to a service and its Swagger, new client libraries must be produced to expose this functionality to customers. Without updating the api-version, it is unclear to customers which version of a client library supports these new features.  "
+
+- rule:
+    type: label
+    label: CI-NewRPNamespaceWithoutRPaaS
+    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for introducing a new RP namespace that is not being onboarded with [RPaaS](https://armwiki.azurewebsites.net/rpaas/overview.html). Merging this PR to the main branch will be blocked as RPaaS is required for new RPs. To resolve this and allow the PR to be merged into the main branch, please [use RPaaS to onboard the new RP](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html)."
+
+- rule:
+    type: label
+    label: CI-RpaaSRPNotInPrivateRepo
+    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for attempting to introduce a new RP namespace to the main branch without first merging the new RP to the RPSaaSMaster branch. Please add the new RP in a merge to RPSaaSMaster before continuing the merge to main."
+
+- rule:
+    type: label
+    label: ArcReview
+    onLabeledComments: "Hi @${PRAuthor} and @arcboard, one or more change(s) have been detected in your Arc enabled VM's or Arc enabled Server's RPs. Please review the changes and ensure that no gaps have been introduced with respect to the ARM API modeling consistency across Azure Arc and Azure Compute. For further details, see guidelines at [Consistency in ARM Modeling](https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=general-design-guidance). To approve the change(s), set the label to ArcSignedOff. If you have any questions, please mail to arcboard@microsoft.com."
 
 - rule:
     type: label
@@ -76,6 +101,13 @@
     label: ARMChangesRequested
     onLabeledComments: "Please ensure to respond feedbacks from the ARM API reviewer. When you are ready to continue the ARM API review, please remove `ARMChangesRequested`"
     onLabeledRemoveLabels:
+        - WaitForARMFeedback
+
+- rule:
+    type: label
+    label: Approved-BreakingChange
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    onLabeledAddLabels:
         - WaitForARMFeedback
       
         
