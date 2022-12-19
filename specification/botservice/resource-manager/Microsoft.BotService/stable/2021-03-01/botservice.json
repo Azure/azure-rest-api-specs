@@ -1250,7 +1250,11 @@
       "x-ms-enum": {
         "name": "Kind",
         "modelAsString": true
-      }
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
     },
     "Bot": {
       "type": "object",
@@ -1440,7 +1444,8 @@
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot",
-          "default": "0.0"
+          "x-nullable": true,
+          "default": null
         },
         "storageResourceId": {
           "type": "string",
@@ -1541,12 +1546,12 @@
         "extensionKey1": {
           "type": "string",
           "description": "The extensionKey1",
-          "readOnly": true
+          "default": ""
         },
         "extensionKey2": {
           "type": "string",
           "description": "The extensionKey2",
-          "readOnly": true
+          "default": ""
         },
         "sites": {
           "type": "array",
@@ -1582,6 +1587,11 @@
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+        },
+        "requireTermsAgreement": {
+          "type": "boolean",
+          "description": "Whether customer needs to agree to new terms.",
+          "x-ms-nullable": true
         }
       }
     },
@@ -1597,7 +1607,11 @@
         "etag": {
           "type": "string",
           "description": "Entity Tag of the resource",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -2037,12 +2051,12 @@
         "extensionKey1": {
           "type": "string",
           "description": "The extensionKey1",
-          "readOnly": true
+          "default": ""
         },
         "extensionKey2": {
           "type": "string",
           "description": "The extensionKey2",
-          "readOnly": true
+          "default": ""
         },
         "DirectLineEmbedCode": {
           "type": "string",
@@ -2329,6 +2343,16 @@
       },
       "description": "The parameters to provide for the DirectLine Speech channel."
     },
+    "Omnichannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "Omnichannel",
+      "description": "Omnichannel channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ]
+    },
     "TelephonyChannel": {
       "type": "object",
       "x-ms-discriminator-value": "TelephonyChannel",
@@ -2374,17 +2398,17 @@
         },
         "defaultLocale": {
           "type": "string",
-          "description": "Direct Line embed code of the resource",
+          "description": "The default locale of the channel",
           "x-nullable": true
         },
         "premiumSKU": {
           "type": "string",
-          "description": "Direct Line embed code of the resource",
+          "description": "The premium SKU applied to the channel",
           "x-nullable": true
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Direct Line embed code of the resource"
+          "description": "Whether the channel is enabled"
         }
       },
       "description": "The parameters to provide for the Direct Line channel."
@@ -2446,7 +2470,11 @@
         },
         "siteName": {
           "type": "string",
-          "description": "Site name"
+          "description": "Site name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "key": {
           "type": "string",
@@ -2501,11 +2529,15 @@
         },
         "isV1Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol."
+          "description": "Whether this site is enabled for Bot Framework V1 protocol.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "isV3Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol."
+          "description": "Whether this site is enabled for Bot Framework V3 protocol."
         },
         "isSecureSiteEnabled": {
           "type": "boolean",
@@ -2539,7 +2571,11 @@
       "properties": {
         "siteName": {
           "type": "string",
-          "description": "The site name"
+          "description": "The site name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "key": {
           "type": "string",
@@ -2586,11 +2622,13 @@
         },
         "cognitiveServiceSubscriptionKey": {
           "type": "string",
-          "description": "The subscription key of cognitive service."
+          "description": "The subscription key of cognitive service.",
+          "x-nullable": true
         },
         "cognitiveServiceRegion": {
           "type": "string",
-          "description": "The service region of cognitive service."
+          "description": "The service region of cognitive service.",
+          "x-nullable": true
         },
         "cognitiveServiceResourceId": {
           "type": "string",
@@ -2666,11 +2704,19 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Id associated with the Connection Setting."
+          "description": "Id associated with the Connection Setting.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "name": {
           "type": "string",
-          "description": "Name associated with the Connection Setting."
+          "description": "Name associated with the Connection Setting.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "clientId": {
           "type": "string",
@@ -2688,7 +2734,8 @@
         },
         "scopes": {
           "type": "string",
-          "description": "Scopes associated with the Connection Setting"
+          "description": "Scopes associated with the Connection Setting",
+          "readOnly": true
         },
         "serviceProviderId": {
           "type": "string",
@@ -2833,18 +2880,18 @@
         },
         "serviceProviderName": {
           "type": "string",
-          "description": "Display Name of the Service Provider",
+          "description": "Name of the Service Provider",
           "readOnly": true
         },
         "devPortalUrl": {
           "type": "string",
-          "description": "Display Name of the Service Provider",
+          "description": "URL of Dev Portal",
           "readOnly": true
         },
         "iconUrl": {
           "type": "string",
-          "description": "Display Name of the Service Provider",
-          "readOnly": true
+          "description": "The URL of icon",
+          "default": ""
         },
         "parameters": {
           "description": "The list of parameters for the Service Provider",
@@ -2985,6 +3032,11 @@
         "message": {
           "description": "additional message from the bot management api showing why a bot name is not available",
           "type": "string"
+        },
+        "absCode": {
+          "description": "response code from ABS",
+          "type": "string",
+          "x-ms-nullable": true
         }
       }
     },
