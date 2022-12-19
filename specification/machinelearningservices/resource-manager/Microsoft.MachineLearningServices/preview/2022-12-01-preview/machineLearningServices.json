@@ -5786,8 +5786,22 @@
       }
     },
     "ConnectionCategory": {
+      "enum": [
+        "PythonFeed",
+        "ContainerRegistry",
+        "Git",
+        "FeatureStore",
+        "S3",
+        "Snowflake",
+        "AzureSqlDb",
+        "AzureSynapseAnalytics"
+      ],
       "type": "string",
-      "description": "Category of the connection"
+      "description": "Category of the connection",
+      "x-ms-enum": {
+        "name": "ConnectionCategory",
+        "modelAsString": true
+      }
     },
     "WorkspaceConnectionUsernamePassword": {
       "type": "object",
