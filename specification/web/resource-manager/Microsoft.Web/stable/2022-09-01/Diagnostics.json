@@ -15,6 +15,129 @@
     "application/json"
   ],
   "paths": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/detectors": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "List Provider Detector Responses",
+        "description": "Description for List Provider Detector Responses",
+        "operationId": "Diagnostics_ListProviderDetectorResponses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+			"$ref": "#/parameters/ResourceTypeParameter"
+		  },
+		  {
+			"$ref": "#/parameters/LocationParameter"
+		  }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Provider Detector Responses": {
+            "$ref": "./examples/Diagnostics_ListProviderDetectorResponses.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/detectors/{detectorName}": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Get Provider Detector Response",
+        "description": "Description for Get Provider Detector Response",
+        "operationId": "Diagnostics_GetProviderDetectorResponse",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "description": "Detector Resource Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time Grain",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+			"$ref": "#/parameters/ResourceTypeParameter"
+		  },
+		  {
+			"$ref": "#/parameters/LocationParameter"
+		  }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Provider Detector Response": {
+            "$ref": "./examples/Diagnostics_GetProviderDetectorResponse.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors": {
       "get": {
         "tags": [
@@ -2140,6 +2263,22 @@
       "description": "API Version",
       "required": true,
       "type": "string"
+    }
+	"LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of a supported Azure region.",
+      "x-ms-parameter-location": "method"
+	},
+	"ResourceTypeParameter": {
+      "name": "resource-type",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Resource type for which detectors are being requested.",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
