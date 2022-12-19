@@ -1,0 +1,888 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Schema of Azure Communication Services events published to Azure Event Grid",
+    "version": "2018-01-01",
+    "description": "Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "AcsChatEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "recipientCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the target user"
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "The transaction id will be used as co-relation vector"
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The chat thread id"
+        }
+      },
+      "description": "Schema of common properties of all chat events"
+    },
+    "AcsChatEventInThreadBaseProperties": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string",
+          "description": "The transaction id will be used as co-relation vector"
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The chat thread id"
+        }
+      },
+      "description": "Schema of common properties of all thread-level chat events"
+    },
+    "AcsChatMessageDeletedEventData": {
+      "type": "object",
+      "properties": {
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was deleted"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageDeletedInThreadEventData": {
+      "type": "object",
+      "properties": {
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was deleted"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEditedEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The chat message metadata"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was edited"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEditedInThreadEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The chat message metadata"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was edited"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The chat message id"
+        },
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        },
+        "composeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original compose time of the message"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the message"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the message"
+        }
+      },
+      "description": "Schema of common properties of all chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEventInThreadBaseProperties": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The chat message id"
+        },
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        },
+        "composeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original compose time of the message"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the message"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the message"
+        }
+      },
+      "description": "Schema of common properties of all thread-level chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The chat message metadata"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageReceivedInThreadEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The chat message metadata"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantAddedToThreadEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was added to the thread"
+        },
+        "addedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who added the user"
+        },
+        "participantAdded": {
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was added"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantAddedToThreadWithUserEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was added to the thread"
+        },
+        "addedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who added the user"
+        },
+        "participantAdded": {
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was added"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantRemovedFromThreadEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was removed to the thread"
+        },
+        "removedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who removed the user"
+        },
+        "participantRemoved": {
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was removed"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantRemovedFromThreadWithUserEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was removed to the thread"
+        },
+        "removedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who removed the user"
+        },
+        "participantRemoved": {
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was removed"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadCreatedEventData": {
+      "type": "object",
+      "properties": {
+        "createdByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who created the thread"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The thread properties"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AcsChatThreadParticipantProperties[]",
+          "description": "The list of properties of participants who are part of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadCreatedWithUserEventData": {
+      "type": "object",
+      "properties": {
+        "createdByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who created the thread"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The thread properties"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AcsChatThreadParticipantProperties[]",
+          "description": "The list of properties of participants who are part of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadDeletedEventData": {
+      "type": "object",
+      "properties": {
+        "deletedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who deleted the thread"
+        },
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion time of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original creation time of the thread"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadEventInThreadBaseProperties": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original creation time of the thread"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadParticipantProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the user"
+        },
+        "participantCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user"
+        }
+      },
+      "description": "Schema of the chat thread participant"
+    },
+    "AcsChatThreadPropertiesUpdatedEventData": {
+      "type": "object",
+      "properties": {
+        "editedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who updated the thread properties"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the properties of the thread were updated"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The updated thread properties"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadPropertiesUpdatedPerUserEventData": {
+      "type": "object",
+      "properties": {
+        "editedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who updated the thread properties"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the properties of the thread were updated"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The updated thread properties"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadWithUserDeletedEventData": {
+      "type": "object",
+      "properties": {
+        "deletedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who deleted the thread"
+        },
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion time of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsRecordingChunkInfoProperties": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "description": "The documentId of the recording chunk"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The index of the recording chunk"
+        },
+        "endReason": {
+          "type": "string",
+          "description": "The reason for ending the recording chunk"
+        },
+        "metadataLocation": {
+          "type": "string",
+          "description": "The location of the metadata for this chunk"
+        },
+        "contentLocation": {
+          "type": "string",
+          "description": "The location of the content for this chunk"
+        },
+        "deleteLocation": {
+          "type": "string",
+          "description": "The location to delete all chunk storage"
+        }
+      },
+      "description": "Schema for all properties of  Recording Chunk Information."
+    },
+    "AcsRecordingFileStatusUpdatedEventData": {
+      "type": "object",
+      "properties": {
+        "recordingStorageInfo": {
+          "$ref": "#/definitions/AcsRecordingStorageInfoProperties",
+          "description": "The details of recording storage information"
+        },
+        "recordingStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the recording started"
+        },
+        "recordingDurationMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The recording duration in milliseconds"
+        },
+        "recordingContentType": {
+          "$ref": "#/definitions/recordingContentType",
+          "description": "The recording content type- AudioVideo, or Audio"
+        },
+        "recordingChannelType": {
+          "$ref": "#/definitions/recordingChannelType",
+          "description": "The recording  channel type - Mixed, Unmixed"
+        },
+        "recordingFormatType": {
+          "$ref": "#/definitions/recordingFormatType",
+          "description": "The recording format type - Mp4, Mp3, Wav"
+        },
+        "sessionEndReason": {
+          "type": "string",
+          "description": "The reason for ending recording session"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event."
+    },
+    "AcsRecordingStorageInfoProperties": {
+      "type": "object",
+      "properties": {
+        "recordingChunks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AcsRecordingChunkInfoProperties[]",
+          "description": "List of details of recording chunks information"
+        }
+      },
+      "description": "Schema for all properties of Recording Storage Information."
+    },
+    "AcsSmsDeliveryAttemptProperties": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "TimeStamp when delivery was attempted"
+        },
+        "segmentsSucceeded": {
+          "description": "Number of segments that were successfully delivered"
+        },
+        "segmentsFailed": {
+          "description": "Number of segments whose delivery failed"
+        }
+      },
+      "description": "Schema for details of a delivery attempt"
+    },
+    "AcsSmsDeliveryReportReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "deliveryStatus": {
+          "type": "string",
+          "description": "Status of Delivery"
+        },
+        "deliveryStatusDetails": {
+          "type": "string",
+          "description": "Details about Delivery Status"
+        },
+        "deliveryAttempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AcsSmsDeliveryAttemptProperties[]",
+          "description": "List of details of delivery attempts made"
+        },
+        "receivedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the SMS delivery report was received"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Customer Content"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsSmsEventBaseProperties"
+        }
+      ]
+    },
+    "AcsSmsEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The identity of the SMS message"
+        },
+        "from": {
+          "type": "string",
+          "description": "The identity of SMS message sender"
+        },
+        "to": {
+          "type": "string",
+          "description": "The identity of SMS message receiver"
+        }
+      },
+      "description": "Schema of common properties of all SMS events"
+    },
+    "AcsSmsReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The SMS content"
+        },
+        "receivedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the SMS was received"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsSmsEventBaseProperties"
+        }
+      ]
+    },
+    "AcsUserDisconnectedEventData": {
+      "type": "object",
+      "properties": {
+        "userCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who was disconnected"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event."
+    },
+    "CommunicationCloudEnvironmentModel": {
+      "type": "string",
+      "enum": [
+        "public",
+        "dod",
+        "gcch"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationCloudEnvironmentModel",
+        "modelAsString": true
+      }
+    },
+    "CommunicationIdentifierModel": {
+      "type": "object",
+      "properties": {
+        "rawId": {
+          "type": "string",
+          "description": "Raw Id of the identifier. Optional in requests, required in responses."
+        },
+        "communicationUser": {
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "The communication user."
+        },
+        "phoneNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The phone number."
+        },
+        "microsoftTeamsUser": {
+          "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
+          "description": "The Microsoft Teams user."
+        }
+      },
+      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set."
+    },
+    "CommunicationUserIdentifierModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Id of the communication user."
+        }
+      },
+      "description": "A user that got created with an Azure Communication Services resource.",
+      "required": [
+        "id"
+      ]
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The Id of the Microsoft Teams user. If not anonymous, this is the AAD object Id of the user."
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "True if the Microsoft Teams user is anonymous. By default false if missing."
+        },
+        "cloud": {
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
+          "description": "The cloud that the Microsoft Teams user belongs to. By default 'public' if missing."
+        }
+      },
+      "description": "A Microsoft Teams user.",
+      "required": [
+        "userId"
+      ]
+    },
+    "PhoneNumberIdentifierModel": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The phone number in E.164 format."
+        }
+      },
+      "description": "A phone number.",
+      "required": [
+        "value"
+      ]
+    },
+    "recordingChannelType": {
+      "type": "string",
+      "enum": [
+        "Mixed",
+        "Unmixed"
+      ],
+      "x-ms-enum": {
+        "name": "recordingChannelType",
+        "modelAsString": true
+      }
+    },
+    "recordingContentType": {
+      "type": "string",
+      "enum": [
+        "AudioVideo",
+        "Audio"
+      ],
+      "x-ms-enum": {
+        "name": "recordingContentType",
+        "modelAsString": true
+      }
+    },
+    "recordingFormatType": {
+      "type": "string",
+      "enum": [
+        "Wav",
+        "Mp3",
+        "Mp4"
+      ],
+      "x-ms-enum": {
+        "name": "recordingFormatType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {}
+}
