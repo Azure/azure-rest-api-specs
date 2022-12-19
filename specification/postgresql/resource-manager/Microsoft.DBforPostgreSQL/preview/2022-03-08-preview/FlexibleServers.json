@@ -630,6 +630,10 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "Replication role of the server"
         }
       }
     },
@@ -811,6 +815,7 @@
       "type": "string",
       "description": "Used to indicate role of the server in replication set.",
       "enum": [
+        "None",
         "Primary",
         "Secondary",
         "WalReplica",
