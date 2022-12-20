@@ -195,7 +195,7 @@
         "tags": [
           "UserRequests"
         ],
-        "description": "Submit a user request for requestor, a user  request describes user ask to do operation(s) on Purview. If any workflow’s trigger matches with an operation in request, a run of the workflow is created.",
+        "description": "Submit a user request for requestor, a user  request describes user ask to do operation(s) on Purview. If any workflow's trigger matches with an operation in request, a run of the workflow is created.",
         "operationId": "SubmitUserRequests",
         "x-ms-examples": {
           "UserRequests_Submit": {
@@ -955,7 +955,7 @@
         "Failed",
         "Completed",
         "Canceling",
-        "CancelationFailed",
+        "CancellationFailed",
         "Canceled"
       ],
       "x-ms-enum": {
@@ -1293,6 +1293,7 @@
     "ApprovalDetail": {
       "x-ms-discriminator-value": "approval",
       "description": "The workflow approval task properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowTask"
