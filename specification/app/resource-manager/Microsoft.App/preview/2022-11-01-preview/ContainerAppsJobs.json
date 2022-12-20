@@ -181,18 +181,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "No change performed on the Container Apps Job.",
-            "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
-            }
-          },
-          "202": {
+          "201": {
             "description": "Container Apps Job create has been started.",
             "headers": {
               "Location": {
                 "type": "string"
               }
+            }
+          },
+          "200": {
+            "description": "No change performed on the Container Apps Job.",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppsJob"
             }
           },
           "default": {
@@ -207,7 +207,10 @@
             "$ref": "./examples/ContainerAppsJob_CreateorUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -244,7 +247,8 @@
             }
           },
           "404": {
-            "description": "Container Apps Job does not exist."
+            "description": "Container Apps Job does not exist.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Common error response.",
@@ -258,7 +262,10 @@
             "$ref": "./examples/ContainerAppsJob_Delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -302,7 +309,12 @@
             }
           },
           "202": {
-            "description": "Patch operation is in progress."
+            "description": "Patch operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -338,7 +350,8 @@
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -346,7 +359,12 @@
         ],
         "responses": {
           "202": {
-            "description": "OK"
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -359,6 +377,10 @@
           "Run a Container Apps Job": {
             "$ref": "./examples/ContainerAppsJob_Run.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -384,12 +406,18 @@
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
         "responses": {
           "202": {
-            "description": "OK"
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -402,6 +430,10 @@
           "Terminate a Container Apps Job": {
             "$ref": "./examples/ContainerAppsJob_Terminate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -427,7 +459,8 @@
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
         "responses": {
@@ -479,7 +512,7 @@
             "Manual"
           ],
           "type": "string",
-          "default": "Single",
+          "default": "Manual",
           "x-ms-enum": {
             "name": "TriggerType",
             "modelAsString": true

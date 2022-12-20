@@ -70,6 +70,50 @@
       "headers": {
         "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/containerappsjobOperationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2022-11-01-preview"
       }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerAppsJobs/testcontainerAppsJob0",
+        "name": "testcontainerAppsJob0",
+        "type": "Microsoft.App/containerAppsJobs",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "configuration": {
+            "replicaTimeout": 10,
+            "replicaRetryLimit": 10,
+            "manualTriggerConfig": {
+              "replicaCount": 1,
+              "parallelism": 4
+            },
+            "triggerType": "Manual"
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }

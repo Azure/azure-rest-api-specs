@@ -8,7 +8,6 @@
       "location": "East US",
       "properties": {
         "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-        "workloadProfileType": "GeneralPurpose",
         "configuration": {
           "replicaTimeout": 10,
           "replicaRetryLimit": 10,
@@ -64,7 +63,7 @@
     }
   },
   "responses": {
-    "202": {
+    "200": {
       "headers": {},
       "body": {
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppsJob0",
@@ -73,7 +72,7 @@
         "location": "East US",
         "properties": {
           "provisioningState": "InProgress",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "configuration": {
             "replicaTimeout": 10,
             "replicaRetryLimit": 10,
@@ -137,6 +136,11 @@
           },
           "eventStreamEndpoint": "testEndpoint"
         }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "location"
       }
     }
   }
