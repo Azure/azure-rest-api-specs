@@ -12,7 +12,7 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Serial Number of the device associated with the event, separated by comma delimiter incase of multiple",
+          "description": "Serial Number of the device associated with the event, separated by comma delimiter in case of multiple",
           "type": "string"
         },
         "stageDetails": {
@@ -25,7 +25,7 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Serial Number of the device associated with the event, separated by comma delimiter incase of multiple",
+          "description": "Serial Number of the device associated with the event, separated by comma delimiter in case of multiple",
           "type": "string"
         },
         "stageDetails": {
@@ -38,7 +38,7 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Serial Number of the device associated with the event, separated by comma delimiter incase of multiple",
+          "description": "Serial Number of the device associated with the event, separated by comma delimiter in case of multiple",
           "type": "string"
         },
         "stageDetails": {
@@ -51,8 +51,17 @@
       "type": "object",
       "properties": {
         "name": {
+          "type": "string",
           "description": "Name of the current Stage",
-          "type": "string"
+          "enum": [
+            "CopyStarted",
+            "CopyCompleted",
+            "OrderCompleted"
+          ],
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          }
         },
         "time": {
           "description": "The time at which the stage happened.",
