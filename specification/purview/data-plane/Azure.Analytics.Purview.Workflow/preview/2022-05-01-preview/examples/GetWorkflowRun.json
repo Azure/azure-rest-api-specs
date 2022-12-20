@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "x-ms-client-request-id": "1e903f7e-f127-11ec-8ea0-0242ac120002",
+    "workflowRunId": "04334a74-3400-11ed-a261-0242ac120002",
+    "api-version": "2022-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "c3e0138c-39f1-4720-ad54-06561793dee5",
+        "workflowId": "0c838aad-de31-4109-ae00-840d68b083b3",
+        "startTime": "2022-09-07T06:24:26.136961800Z",
+        "requestor": "36e42dc0-3401-11ed-a261-0242ac120002",
+        "userRequestId": "80a7619c-7b92-11ed-a1eb-0242ac120002",
+        "runPayload": {
+          "type": "CreateTerm",
+          "targetValue": "term-sample",
+          "payload": {
+            "name": "term-sample",
+            "anchor": {
+              "glossaryGuid": "1d9d4db5-611d-4f07-9b3d-a3a44da72ebb"
+            },
+            "status": "Approved",
+            "nickName": "term-sample",
+            "attributes": {}
+          }
+        },
+        "status": "InProgress",
+        "actionDAG": {
+          "actions": {
+            "Start and wait for an approval": {
+              "type": "Approval",
+              "inputs": {
+                "parameters": {
+                  "approvalType": "PendingOnAll",
+                  "title": "Approval Request for Create Glossary Term",
+                  "assignedTo": [
+                    "eece94d9-0619-4669-bb8a-d6ecec5220bc"
+                  ]
+                }
+              },
+              "runAfter": {}
+            },
+            "Condition": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@outputs('Start and wait for an approval')['body/outcome']",
+                      "Approved"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Create glossary term": {
+                  "type": "CreateTerm",
+                  "runAfter": {}
+                },
+                "Send email notification": {
+                  "type": "EmailNotification",
+                  "inputs": {
+                    "parameters": {
+                      "emailSubject": "Glossary Term Create - APPROVED",
+                      "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is approved.",
+                      "emailRecipients": [
+                        "@{triggerBody()['request']['requestor']}"
+                      ]
+                    }
+                  },
+                  "runAfter": {
+                    "Create glossary term": [
+                      "Succeeded"
+                    ]
+                  },
+                  "runtimeConfiguration": {
+                    "secureInput": false,
+                    "secureOutput": false
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Send reject email notification": {
+                    "type": "EmailNotification",
+                    "inputs": {
+                      "parameters": {
+                        "emailSubject": "Glossary Term Create - REJECTED",
+                        "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is rejected.",
+                        "emailRecipients": [
+                          "@{triggerBody()['request']['requestor']}"
+                        ]
+                      }
+                    },
+                    "runAfter": {},
+                    "runtimeConfiguration": {
+                      "secureInput": false,
+                      "secureOutput": false
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Start and wait for an approval": [
+                  "Succeeded"
+                ]
+              }
+            }
+          }
+        },
+        "detail": {
+          "runInput": {},
+          "actions": {
+            "Start and wait for an approval": {
+              "startTime": "2022-12-19T09:08:25.311263300Z",
+              "status": {
+                "type": "Running"
+              },
+              "input": {
+                "type": "inlined",
+                "parameters": {
+                  "approvalType": "PendingOnAll",
+                  "title": "Approval Request for Create Glossary Term",
+                  "assignedTo": [
+                    "eece94d9-0619-4669-bb8a-d6ecec5220bc"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

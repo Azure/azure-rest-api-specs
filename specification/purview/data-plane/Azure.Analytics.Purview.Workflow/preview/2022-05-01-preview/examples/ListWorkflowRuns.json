@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01-preview",
+    "timeWindow": "30d",
+    "orderby": "submittedTime desc",
+    "runStatues": "InProgress, Completed",
+    "userRequestIds": "bd6bdd46-7b8e-11ed-a1eb-0242ac120002, c2e169c6-7b8e-11ed-a1eb-0242ac120002",
+    "workflowIds": "cdc61bfc-7b8e-11ed-a1eb-0242ac120002, d11c38e0-7b8e-11ed-a1eb-0242ac120002",
+    "maxpagesize": 1000,
+    "continuationToken": ""
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "ba6a9e81-c7fa-4bd0-a8fe-1615cd83db79",
+            "workflowId": "cdc61bfc-7b8e-11ed-a1eb-0242ac120002",
+            "startTime": "2022-06-18T10:43:14.351600012Z",
+            "requestor": "8f8b228e-f113-11ec-8ea0-0242ac120002",
+            "userRequestId": "bd6bdd46-7b8e-11ed-a1eb-0242ac120002",
+            "runPayload": {
+              "type": "CreateTerm",
+              "targetValue": "sample_term"
+            },
+            "status": "InProgress"
+          },
+          {
+            "id": "c43ace64-0f89-481e-b249-a4cb00007272",
+            "workflowId": "d11c38e0-7b8e-11ed-a1eb-0242ac120002",
+            "startTime": "2022-06-18T10:43:00.809362499Z",
+            "requestor": "8f8b228e-f113-11ec-8ea0-0242ac120002",
+            "userRequestId": "c2e169c6-7b8e-11ed-a1eb-0242ac120002",
+            "runPayload": {
+              "type": "CreateTerm",
+              "targetValue": "sample_term_2"
+            },
+            "status": "Completed",
+            "endTime": "2022-06-18T10:44:44.374125822Z"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,26 +1,18 @@
 {
   "parameters": {
     "api-version": "2022-05-01-preview",
-    "x-ms-client-request-id": "1e903f7e-f127-11ec-8ea0-0242ac120002",
-    "workflowDefinitionId": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
-    "workflowDefinitionCreateOrUpdateCommand": {
-      "workflowName": "Create glossary term",
+    "workflowId": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
+    "workflowCreateOrUpdateCommand": {
+      "name": "Create glossary term",
       "description": "",
-      "scenarioType": "CreateTerm",
-      "boundScopes": [
+      "triggers": [
         {
-          "type": "PathReference",
-          "referenceSource": "Catalog",
-          "referenceName": "/catalog/api/atlas/v2/glossary/04dc91ea-c4d4-4d31-a212-e3ff5cae4feb"
+          "type": "when_term_creation_is_requested",
+          "underTermHierarchy": "/terms/847b8b5a-7aba-11ed-a1eb-0242ac120002"
         }
       ],
       "isEnabled": true,
-      "definition": {
-        "triggers": {
-          "When term creation request is submitted": {
-            "type": "GlossaryTermTrigger"
-          }
-        },
+      "actionDAG": {
         "actions": {
           "Start and wait for an approval": {
             "type": "Approval",
@@ -101,26 +93,19 @@
     "200": {
       "body": {
         "id": "4afb5752-e47f-43a1-8ba7-c696bf8d2745",
-        "scenarioType": "CreateTerm",
-        "boundScopes": [
+        "triggers": [
           {
-            "type": "PathReference",
-            "referenceSource": "Catalog",
-            "referenceName": "/catalog/api/atlas/v2/glossary/04dc91ea-c4d4-4d31-a212-e3ff5cae4feb"
+            "type": "when_term_creation_is_requested",
+            "underTermHierarchy": "/terms/847b8b5a-7aba-11ed-a1eb-0242ac120002"
           }
         ],
         "createdTime": "2022-05-30T08:35:49.690711398Z",
         "createdBy": "d95bd15c-fbc9-46a8-b02b-83e80262ffc9",
         "lastUpdateTime": "2022-05-30T08:35:49.690711398Z",
         "updatedBy": "d95bd15c-fbc9-46a8-b02b-83e80262ffc9",
-        "workflowName": "Create glossary term",
+        "name": "Create glossary term",
         "isEnabled": true,
-        "definition": {
-          "triggers": {
-            "When term creation request is submitted": {
-              "type": "GlossaryTermTrigger"
-            }
-          },
+        "actionDAG": {
           "actions": {
             "Start and wait for an approval": {
               "type": "Approval",
