@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/detectors": {
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/detectors": {
       "get": {
         "tags": [
           "Diagnostics"
@@ -24,9 +24,6 @@
         "description": "Description for List Provider Detector Responses",
         "operationId": "Diagnostics_ListProviderDetectorResponses",
         "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -64,7 +61,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/detectors/{detectorName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/detectors/{detectorName}": {
       "get": {
         "tags": [
           "Diagnostics"
@@ -73,9 +70,6 @@
         "description": "Description for Get Provider Detector Response",
         "operationId": "Diagnostics_GetProviderDetectorResponse",
         "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
           {
             "name": "detectorName",
             "in": "path",
