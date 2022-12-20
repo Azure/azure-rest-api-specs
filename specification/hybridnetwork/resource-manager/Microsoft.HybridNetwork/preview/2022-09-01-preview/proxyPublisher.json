@@ -975,6 +975,11 @@
     "NetworkFunctionDefinitionVersionArtifactPropertiesFormat": {
       "type": "object",
       "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "$ref": "#/definitions/NetworkFunctionPublisherArtifactType"
+        },
         "artifactVersions": {
           "type": "array",
           "items": {
@@ -983,6 +988,13 @@
           "x-ms-identifiers": [
             "artifactVersion"
           ]
+        },
+        "imageList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionDefinitionVersionArtifactImageOverview"
+          },
+          "description": "The image list under helm chart."
         }
       },
       "description": "Network function definition version artifact overview properties."
@@ -994,10 +1006,10 @@
           "type": "string",
           "description": "The artifact version."
         },
-        "artifactType": {
+        "artifactState": {
           "type": "string",
           "description": "The artifact type.",
-          "$ref": "#/definitions/NetworkFunctionPublisherArtifactType"
+          "$ref": "#/definitions/NetworkFunctionPublisherArtifactState"
         }
       }
     },
@@ -1014,6 +1026,32 @@
       "x-ms-enum": {
         "name": "NetworkFunctionPublisherArtifactType",
         "modelAsString": true
+      }
+    },
+    "NetworkFunctionPublisherArtifactState": {
+      "type": "string",
+      "description": "Network Function publisher artifact state.",
+      "enum": [
+        "Unknown",
+        "active",
+        "deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionPublisherArtifactState",
+        "modelAsString": true
+      }
+    },
+    "NetworkFunctionDefinitionVersionArtifactImageOverview": {
+      "type": "object",
+      "properties": {
+        "imageName": {
+          "type": "string",
+          "description": "The image name."
+        },
+        "imageVersion": {
+          "type": "string",
+          "description": "The image version."
+        }
       }
     },
     "ArtifactStoreOverviewListResult": {
