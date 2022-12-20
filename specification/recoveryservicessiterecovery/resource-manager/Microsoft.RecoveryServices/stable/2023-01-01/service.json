@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-01",
+    "version": "2023-01-01",
     "title": "SiteRecoveryManagementClient",
     "x-ms-code-generation-settings": {
       "header": "MICROSOFT_MIT_NO_VERSION"
@@ -4545,6 +4545,594 @@
         }
       }
     },
+	"/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters":{
+         "get":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Gets the list of Replication protection clusters in items.",
+            "description":"Gets the list of ASR replication protected items in the protection container.",
+            "operationId":"ReplicationProtectionClusters_ListByReplicationProtectionContainers",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Fabric name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ReplicationProtectionClusterCollection"
+                  }
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-pageable":{
+               "nextLinkName":"nextLink"
+            },
+            "x-ms-examples":{
+               "Gets the list of Replication protection clusters in items.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_ListByReplicationProtectionContainers.json"
+               }
+            }
+         }
+      },
+      "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}":{
+         "get":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Gets the details of a Replication protection cluster.",
+            "description":"Gets the details of an ASR replication protection cluster.",
+            "operationId":"ReplicationProtectionClusters_Get",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Fabric unique name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"Replication protection cluster name.",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ReplicationProtectionCluster"
+                  }
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-examples":{
+               "Gets the details of a Replication protection cluster.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_Get.json"
+               }
+            }
+         },
+         "put":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Create Replication protection Cluster.",
+            "description":"The operation to create an ASR replication protection cluster item.",
+            "operationId":"ReplicationProtectionClusters_Create",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Name of the fabric.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"A name for the replication protected item.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"input",
+                  "in":"body",
+                  "description":"Create replication protection cluster Input.",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/CreateReplicationProtectionClusterInput"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ReplicationProtectionCluster"
+                  }
+               },
+               "202":{
+                  "description":"Accepted"
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-long-running-operation":true,
+            "x-ms-examples":{
+               "Create Replication protection Cluster.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_Create.json"
+               }
+            }
+         },
+         "delete":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Purge the replication protection cluster.",
+            "description":"The operation to purge the replication protection cluster. This operation will force delete the replication protection cluster. Use the remove operation on replication protection cluster to perform a clean disable replication protection cluster.",
+            "operationId":"ReplicationProtectionClusters_Purge",
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Fabric name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"Replication protection cluster name.",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "202":{
+                  "description":"Accepted"
+               },
+               "204":{
+                  "description":"NoContent"
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-long-running-operation":true,
+            "x-ms-examples":{
+               "Purge the replication protection cluster.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_Purge.json"
+               }
+            }
+         }
+      },
+      "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/operationresults/{jobId}":{
+         "get":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Tracks the Replication protection cluster async operation.",
+            "description":"Track the results of an asynchronous operation on the replication protection cluster.",
+            "operationId":"ReplicationProtectionClusters_GetOperationResults",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Fabric name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"Replication protection cluster name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"jobId",
+                  "in":"path",
+                  "description":"job id to track.",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ReplicationProtectionCluster"
+                  }
+               },
+               "202":{
+                  "description":"Accepted"
+               },
+               "204":{
+                  "description":"NoContent"
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-examples":{
+               "Tracks the Replication protection cluster async operation.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_GetOperationResults.json"
+               }
+            }
+         }
+      },
+      "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/remove":{
+         "post":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Delete replication protection cluster.",
+            "description":"The operation to delete replication protection cluster.",
+            "operationId":"ReplicationProtectionClusters_Delete",
+            "consumes":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Fabric name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"Replication protection cluster name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"deleteProtectionClusterInput",
+                  "in":"body",
+                  "description":"Delete Cluster protection input.",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/DeleteReplicationProtectionClusterInput"
+                  }
+               }
+            ],
+            "responses":{
+               "202":{
+                  "description":"Accepted"
+               },
+               "204":{
+                  "description":"NoContent"
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-long-running-operation":true,
+            "x-ms-examples":{
+               "Delete replication protection cluster.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_Delete.json"
+               }
+            }
+         }
+      },
+      "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/repairReplication":{
+         "post":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Resynchronize or repair replication of protection cluster.",
+            "description":"The operation to repair replication protection cluster.",
+            "operationId":"ReplicationProtectionClusters_RepairReplication",
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Fabric name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"Replication protection cluster name.",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ReplicationProtectionCluster"
+                  }
+               },
+               "202":{
+                  "description":"Accepted"
+               },
+               "204":{
+                  "description":"NoContent"
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-long-running-operation":true,
+            "x-ms-examples":{
+               "Resynchronize or repair replication of protection cluster.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_RepairReplication.json"
+               }
+            }
+         }
+      },
+      "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/unplannedFailover":{
+         "post":{
+            "tags":[
+               "ReplicationProtectionClusters"
+            ],
+            "summary":"Execute unplanned cluster failover.",
+            "description":"Operation to initiate a failover of the replication protection cluster.",
+            "operationId":"ReplicationProtectionClusters_UnplannedFailover",
+            "consumes":[
+               "application/json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/ApiVersion"
+               },
+               {
+                  "$ref":"#/parameters/ResourceName"
+               },
+               {
+                  "$ref":"#/parameters/ResourceGroupName"
+               },
+               {
+                  "$ref":"#/parameters/SubscriptionId"
+               },
+               {
+                  "name":"fabricName",
+                  "in":"path",
+                  "description":"Unique fabric name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"protectionContainerName",
+                  "in":"path",
+                  "description":"Protection container name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"replicationProtectionClusterName",
+                  "in":"path",
+                  "description":"Replication protection cluster name.",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "name":"failoverInput",
+                  "in":"body",
+                  "description":"Failover input.",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/ClusterUnplannedFailoverInput"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/ReplicationProtectionCluster"
+                  }
+               },
+               "202":{
+                  "description":"Accepted"
+               },
+               "default":{
+                  "description":"Automation error response describing why the operation failed.",
+                  "schema":{
+                     "$ref":"#/definitions/ServiceDefaultError"
+                  }
+               }
+            },
+            "x-ms-long-running-operation":true,
+            "x-ms-examples":{
+               "Execute unplanned cluster failover.":{
+                  "$ref":"./examples/ReplicationProtectionClusters_UnplannedFailover.json"
+               }
+            }
+         }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings": {
       "get": {
         "tags": [
@@ -8167,6 +8755,29 @@
       "properties": {},
       "x-ms-discriminator-value": "A2A"
     },
+	"A2AClusterUnplannedFailoverInput":{
+         "description":"A2A provider specific input for unplanned cluster failover.",
+         "type":"object",
+         "allOf":[
+            {
+               "$ref":"#/definitions/ClusterUnplannedFailoverProviderSpecificInput"
+            }
+         ],
+         "properties":{
+            "clusterRecoveryPointId":{
+               "description":"The cluster recovery point id to be passed to failover to a particular recovery point.",
+               "type":"string"
+            },
+            "individualNodeRecoveryPoints":{
+               "description":"The list of individual node recovery points.",
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         },
+         "x-ms-discriminator-value":"A2A"
+      },
     "A2AContainerCreationInput": {
       "description": "A2A cloud creation input.",
       "type": "object",
@@ -8367,6 +8978,22 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+	"A2ACreateReplicationProtectionClusterInput":{
+         "description":"A2A create protection cluster.",
+         "type":"object",
+         "allOf":[
+            {
+               "$ref":"#/definitions/CreateReplicationClusterProviderSpecificInput"
+            }
+         ],
+         "properties":{
+            "recoveryContainerId":{
+               "description":"The recovery container Id.",
+               "type":"string"
+            }
+         },
+         "x-ms-discriminator-value":"A2A"
+      },
     "A2ACrossClusterMigrationApplyRecoveryPointInput": {
       "description": "ApplyRecoveryPoint input specific to A2ACrossClusterMigration provider.",
       "required": [
@@ -8515,6 +9142,10 @@
         },
         "multiVmGroupId": {
           "description": "The multi vm group id.",
+          "type": "string"
+        },
+		"protectionClusterId": {
+          "description": "The replication protection cluster Id.",
           "type": "string"
         },
         "recoveryBootDiagStorageAccountId": {
@@ -9138,6 +9769,14 @@
         "managementId": {
           "description": "The management Id.",
           "type": "string"
+        },		
+		"protectionClusterId": {
+          "description": "The replication protection cluster Id.",
+          "type": "string"
+        },
+		"isClusterInfraReady": {
+          "description": "A value indicating if the cluster infra is ready or not.",
+          "type": "boolean"
         },
         "protectedDisks": {
           "description": "The list of protected disks.",
@@ -9482,6 +10121,108 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+	"A2AReplicationProtectionClusterDetails":{
+         "description":"A2A provider specific settings.",
+         "type":"object",
+         "allOf":[
+            {
+               "$ref":"#/definitions/ReplicationClusterProviderSpecificSettings"
+            }
+         ],
+         "properties":{
+            "multiVmGroupId":{
+               "description":"The multi vm group Id.",
+               "type":"string"
+            },
+            "multiVmGroupName":{
+               "description":"The multi vm group name.",
+               "type":"string"
+            },
+            "multiVmGroupCreateOption":{
+               "description":"Whether Multi VM group is auto created or specified by user.",
+               "enum":[
+                  "AutoCreated",
+                  "UserSpecified"
+               ],
+               "type":"string",
+               "x-ms-enum":{
+                  "name":"MultiVmGroupCreateOption",
+                  "modelAsString":true
+               }
+            },
+            "primaryFabricLocation":{
+               "description":"Primary fabric location.",
+               "type":"string"
+            },
+            "recoveryFabricLocation":{
+               "description":"The recovery fabric location.",
+               "type":"string"
+            },
+            "failoverRecoveryPointId":{
+               "description":"The recovery point Id to which the cluster was failed over.",
+               "type":"string"
+            },
+            "clusterManagementId":{
+               "description":"The cluster management Id.",
+               "type":"string"
+            },
+            "rpoInSeconds":{
+               "format":"int64",
+               "description":"The last RPO value in seconds.",
+               "type":"integer"
+            },
+            "lastRpoCalculatedTime":{
+               "format":"date-time",
+               "description":"The time (in UTC) when the last RPO value was calculated by Protection Service.",
+               "type":"string"
+            },
+            "initialPrimaryZone":{
+               "description":"The initial primary availability zone.",
+               "type":"string"
+            },
+            "initialPrimaryFabricLocation":{
+               "description":"The initial primary fabric location.",
+               "type":"string"
+            },
+            "initialRecoveryZone":{
+               "description":"The initial recovery availability zone.",
+               "type":"string"
+            },
+            "initialRecoveryFabricLocation":{
+               "description":"The initial recovery fabric location.",
+               "type":"string"
+            },
+            "initialPrimaryExtendedLocation":{
+               "$ref":"#/definitions/ExtendedLocation",
+               "description":"The initial primary extended location."
+            },
+            "initialRecoveryExtendedLocation":{
+               "$ref":"#/definitions/ExtendedLocation",
+               "description":"The initial recovery extended location."
+            },
+            "primaryAvailabilityZone":{
+               "description":"The primary availability zone.",
+               "type":"string"
+            },
+            "recoveryAvailabilityZone":{
+               "description":"The recovery availability zone.",
+               "type":"string"
+            },
+            "primaryExtendedLocation":{
+               "$ref":"#/definitions/ExtendedLocation",
+               "description":"The primary Extended Location."
+            },
+            "recoveryExtendedLocation":{
+               "$ref":"#/definitions/ExtendedLocation",
+               "description":"The recovery Extended Location."
+            },
+            "lifecycleId":{
+               "description":"An id that survives actions like switch protection which change the backing PE/CPE objects internally.The lifecycle id gets carried forward to have a link/continuity in being able to have an Id that denotes the \"same\" protected cluster even though other internal Ids/ARM Id might be changing.",
+               "type":"string"
+            }
+         },
+         "x-ms-discriminator-value":"A2A"
+      },
     "A2AReprotectInput": {
       "description": "Azure specific reprotect input.",
       "type": "object",
@@ -9521,6 +10262,105 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+	"A2ASharedDiskIRErrorDetails":{
+         "description":"Extended location of the resource.",
+         "type":"object",
+         "properties":{
+            "errorCode":{
+               "description":"The error code.",
+               "type":"string",
+               "readOnly":true
+            },
+            "errorCodeEnum":{
+               "description":"The error code enum.",
+               "type":"string",
+               "readOnly":true
+            },
+            "errorMessage":{
+               "description":"The error message.",
+               "type":"string",
+               "readOnly":true
+            },
+            "possibleCauses":{
+               "description":"The possible causes.",
+               "type":"string",
+               "readOnly":true
+            },
+            "recommendedAction":{
+               "description":"The recommended action.",
+               "type":"string",
+               "readOnly":true
+            }
+         }
+      },
+	"A2ASharedDiskReplicationDetails":{
+         "description":"A2A provider specific settings.",
+         "type":"object",
+         "allOf":[
+            {
+               "$ref":"#/definitions/SharedDiskReplicationProviderSpecificSettings"
+            }
+         ],
+         "properties":{
+            "managementId":{
+               "description":"The management Id.",
+               "type":"string"
+            },
+            "unprotectedDisks":{
+               "description":"The list of unprotected disks.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/A2AUnprotectedDiskDetails"
+               }
+            },
+            "protectedManagedDisks":{
+               "description":"The list of protected managed disks.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/A2AProtectedManagedDiskDetails"
+               }
+            },
+            "primaryFabricLocation":{
+               "description":"Primary fabric location.",
+               "type":"string"
+            },
+            "recoveryFabricLocation":{
+               "description":"The recovery fabric location.",
+               "type":"string"
+            },
+            "failoverRecoveryPointId":{
+               "description":"The recovery point id to which the Virtual node was failed over.",
+               "type":"string"
+            },
+            "monitoringPercentageCompletion":{
+               "format":"int32",
+               "description":"The percentage of the monitoring job. The type of the monitoring job is defined by MonitoringJobType property.",
+               "type":"integer"
+            },
+            "monitoringJobType":{
+               "description":"The type of the monitoring job. The progress is contained in MonitoringPercentageCompletion property.",
+               "type":"string"
+            },
+            "rpoInSeconds":{
+               "format":"int64",
+               "description":"The last RPO value in seconds.",
+               "type":"integer"
+            },
+            "lastRpoCalculatedTime":{
+               "format":"date-time",
+               "description":"The time (in UTC) when the last RPO value was calculated by Protection Service.",
+               "type":"string"
+            },
+            "sharedDiskIRErrors":{
+               "description":"The IR Errors.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/A2ASharedDiskIRErrorDetails"
+               }
+            }
+         },
+         "x-ms-discriminator-value":"A2A"
+      },
     "A2ASwitchProtectionInput": {
       "description": "A2A specific switch protection input.",
       "type": "object",
@@ -10474,6 +11314,48 @@
         }
       }
     },
+	"ClusterUnplannedFailoverInput":{
+         "description":"Input definition for unplanned cluster failover.",
+         "required":[
+            "properties"
+         ],
+         "type":"object",
+         "properties":{
+            "properties":{
+               "$ref":"#/definitions/ClusterUnplannedFailoverInputProperties",
+               "description":"Unplanned failover input properties."
+            }
+         }
+      },
+      "ClusterUnplannedFailoverInputProperties":{
+         "description":"Input definition for unplanned failover input properties.",
+         "type":"object",
+         "properties":{
+            "failoverDirection":{
+               "description":"Failover direction.",
+               "type":"string"
+            },
+            "sourceSiteOperations":{
+               "description":"Source site operations status.",
+               "type":"string"
+            },
+            "providerSpecificDetails":{
+               "$ref":"#/definitions/ClusterUnplannedFailoverProviderSpecificInput",
+               "description":"Provider specific settings."
+            }
+         }
+      },
+      "ClusterUnplannedFailoverProviderSpecificInput":{
+         "description":"Provider specific unplanned cluster failover input.",
+         "type":"object",
+         "properties":{
+            "instanceType":{
+               "description":"The class type.",
+               "type":"string"
+            }
+         },
+         "discriminator":"instanceType"
+      },
     "ComputeSizeErrorDetails": {
       "description": "Represents the error used to indicate why the target compute size is not applicable.",
       "type": "object",
@@ -10750,6 +11632,41 @@
         }
       }
     },
+	"CreateReplicationClusterProviderSpecificInput":{
+         "description":"Create replication cluster provider specific input.",
+         "type":"object",
+         "properties":{
+            "instanceType":{
+               "description":"The class type.",
+               "type":"string"
+            }
+         },
+         "discriminator":"instanceType"
+      },
+      "CreateReplicationProtectionClusterInput":{
+         "description":"Create Protection Cluster Input.",
+         "type":"object",
+         "properties":{
+            "properties":{
+               "$ref":"#/definitions/CreateReplicationProtectionClusterInputProperties",
+               "description":"Create protection cluster input properties."
+            }
+         }
+      },
+      "CreateReplicationProtectionClusterInputProperties":{
+         "description":"Create protection cluster input properties.",
+         "type":"object",
+         "properties":{
+            "policyId":{
+               "description":"The Policy Id.",
+               "type":"string"
+            },
+            "providerSpecificDetails":{
+               "$ref":"#/definitions/CreateReplicationClusterProviderSpecificInput",
+               "description":"The ReplicationProviderInput. For HyperVReplicaAzure provider, it will be AzureEnableProtectionInput object. For San provider, it will be SanEnableProtectionInput object. For HyperVReplicaAzure provider, it can be null."
+            }
+         }
+      },
     "CriticalJobHistoryDetails": {
       "description": "Critical past job details of the migration item.",
       "type": "object",
@@ -10844,6 +11761,39 @@
         }
       }
     },
+	"DeleteReplicationProtectionClusterInput":{
+         "description":"Delete protection cluster input.",
+         "required":[
+            "properties"
+         ],
+         "type":"object",
+         "properties":{
+            "properties":{
+               "$ref":"#/definitions/DeleteReplicationProtectionClusterInputProperties",
+               "description":"Delete protection cluster input properties."
+            }
+         }
+      },
+      "DeleteReplicationProtectionClusterInputProperties":{
+         "description":"Delete protection cluster input properties.",
+         "type":"object",
+         "properties":{
+            "replicationProviderInput":{
+               "$ref":"#/definitions/DeleteReplicationProtectionClusterProviderSpecificInput",
+               "description":"Replication provider specific input."
+            }
+         }
+      },
+      "DeleteReplicationProtectionClusterProviderSpecificInput":{
+         "description":"Delete protection cluster provider specific input.",
+         "type":"object",
+         "properties":{
+            "instanceType":{
+               "description":"The class type.",
+               "type":"string"
+            }
+         }
+      },
     "DisableProtectionInput": {
       "description": "Disable protection input.",
       "required": [
@@ -20947,6 +21897,28 @@
       },
       "discriminator": "resourceType"
     },
+	"RegisteredClusterNodes":{
+         "description":"Extended location of the resource.",
+         "type":"object",
+         "properties":{
+            "clusterNodeFQDN":{
+               "description":"The cluster node name.",
+               "type":"string"
+            },
+            "machineId":{
+               "description":"The machine ID.",
+               "type":"string"
+            },
+            "biosId":{
+               "description":"The BIOS ID.",
+               "type":"string"
+            },
+            "isSharedDiskVirtualNode":{
+               "description":"A value indicating whether this represents virtual entity hosting all the shared disks.",
+               "type":"boolean"
+            }
+         }
+      },
     "RemoveDisksInput": {
       "description": "Input for remove disk(s) operation.",
       "type": "object",
@@ -21106,6 +22078,18 @@
         }
       }
     },
+	"ReplicationClusterProviderSpecificSettings":{
+         "description":"Replication cluster provider specific settings.",
+         "type":"object",
+         "properties":{
+            "instanceType":{
+               "description":"Gets the Instance type.",
+               "type":"string",
+               "readOnly":true
+            }
+         },
+         "discriminator":"instanceType"
+      },
     "ReplicationEligibilityResults": {
       "description": "Replication eligibility results response model.",
       "type": "object",
@@ -21369,6 +22353,179 @@
         }
       }
     },
+	"ReplicationProtectionCluster":{
+		 "description":"Replication protection Cluster.",
+		 "type":"object",
+		 "properties":{
+			"id":{
+			   "description":"The Id.",
+			   "type":"string"
+			},
+			"name":{
+			   "description":"The name.",
+			   "type":"string"
+			},
+			"type":{
+			   "description":"The Type of the object.",
+			   "type":"string"
+			},
+			"properties":{
+			   "$ref":"#/definitions/ReplicationProtectionClusterProperties",
+			   "description":"The custom data."
+			}
+		 }
+	  },
+      "ReplicationProtectionClusterCollection":{
+         "description":"Replication protected item collection.",
+         "type":"object",
+         "properties":{
+            "value":{
+               "description":"The Replication protection cluster details.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/ReplicationProtectionCluster"
+               }
+            },
+            "nextLink":{
+               "description":"The value of next link.",
+               "type":"string"
+            }
+         }
+      },
+      "ReplicationProtectionClusterProperties":{
+         "description":"Replication protection cluster custom data details.",
+         "type":"object",
+         "properties":{
+            "friendlyName":{
+               "description":"The name.",
+               "type":"string"
+            },
+            "protectionClusterType":{
+               "description":"The type of protection cluster type.",
+               "type":"string"
+            },
+            "primaryFabricFriendlyName":{
+               "description":"The friendly name of the primary fabric.",
+               "type":"string"
+            },
+            "primaryFabricProvider":{
+               "description":"The fabric provider of the primary fabric.",
+               "type":"string"
+            },
+            "recoveryFabricFriendlyName":{
+               "description":"The friendly name of recovery fabric.",
+               "type":"string"
+            },
+            "recoveryFabricId":{
+               "description":"The Arm Id of recovery fabric.",
+               "type":"string"
+            },
+            "primaryProtectionContainerFriendlyName":{
+               "description":"The name of primary protection container friendly name.",
+               "type":"string"
+            },
+            "recoveryProtectionContainerFriendlyName":{
+               "description":"The name of recovery container friendly name.",
+               "type":"string"
+            },
+            "protectionState":{
+               "description":"The protection status.",
+               "type":"string"
+            },
+            "protectionStateDescription":{
+               "description":"The protection state description.",
+               "type":"string"
+            },
+            "activeLocation":{
+               "description":"The Current active location of the Prptection cluster.",
+               "type":"string"
+            },
+            "allowedOperations":{
+               "description":"The allowed operations on the Replication protection cluster.",
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "replicationHealth":{
+               "description":"The consolidated protection health for the VM taking any issues with SRS as well as all the replication units associated with the VM's replication group into account. This is a string representation of the ProtectionHealth enumeration.",
+               "type":"string"
+            },
+            "healthErrors":{
+               "description":"List of health errors.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/HealthError"
+               }
+            },
+            "lastSuccessfulFailoverTime":{
+               "format":"date-time",
+               "description":"The last successful failover time.",
+               "type":"string"
+            },
+            "policyId":{
+               "description":"The ID of Policy governing this PE.",
+               "type":"string"
+            },
+            "policyFriendlyName":{
+               "description":"The name of Policy governing this PE.",
+               "type":"string"
+            },
+            "currentScenario":{
+               "$ref":"#/definitions/CurrentScenarioDetails",
+               "description":"The current scenario."
+            },
+            "recoveryContainerId":{
+               "description":"The recovery container Id.",
+               "type":"string"
+            },
+            "agentClusterId":{
+               "description":"The Agent cluster Id.",
+               "type":"string"
+            },
+            "clusterFQDN":{
+               "description":"The cluster FQDN.",
+               "type":"string"
+            },
+            "clusterNodeFQDNs":{
+               "description":"The List of cluster Node FQDN's.",
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "clusterProtectedItemIds":{
+               "description":"The List of Protected Item Id's.",
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "protectionClusterStatus":{
+               "description":"The status.",
+               "type":"string"
+            },
+            "areAllClusterNodesRegistered":{
+               "description":"A value indicating whether all nodes of the cluster are registered or not.",
+               "type":"boolean"
+            },
+            "clusterRegisteredNodes":{
+               "description":"The registered node details.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/RegisteredClusterNodes"
+               }
+            },
+            "providerSpecificDetails":{
+               "$ref":"#/definitions/ReplicationClusterProviderSpecificSettings",
+               "description":"The Replication cluster provider custom settings."
+            },
+            "sharedDiskProperties":{
+               "$ref":"#/definitions/SharedDiskReplicationItemProperties",
+               "description":"The shared disk properties."
+            }
+         }
+      },
     "ReplicationProtectionIntent": {
       "description": "Replication protection intent.",
       "type": "object",
@@ -21947,6 +23104,58 @@
         }
       }
     },
+	"SharedDiskReplicationItemProperties":{
+         "description":"Shared Disk Replication item custom data details.",
+         "type":"object",
+         "properties":{
+            "protectionState":{
+               "description":"The protection state of shared disk.",
+               "type":"string"
+            },
+            "activeLocation":{
+               "description":"The Current active location of the PE.",
+               "type":"string"
+            },
+            "allowedOperations":{
+               "description":"The allowed operations on the Replication protected item.",
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "replicationHealth":{
+               "description":"The consolidated protection health for the VM taking any issues with SRS as well as all the replication units associated with the VM's replication group into account. This is a string representation of the ProtectionHealth enumeration.",
+               "type":"string"
+            },
+            "healthErrors":{
+               "description":"List of health errors.",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/HealthError"
+               }
+            },
+            "currentScenario":{
+               "$ref":"#/definitions/CurrentScenarioDetails",
+               "description":"The current scenario."
+            },
+            "sharedDiskProviderSpecificDetails":{
+               "$ref":"#/definitions/SharedDiskReplicationProviderSpecificSettings",
+               "description":"The Replication provider custom settings."
+            }
+         }
+      },
+      "SharedDiskReplicationProviderSpecificSettings":{
+         "description":"Replication provider specific settings.",
+         "type":"object",
+         "properties":{
+            "instanceType":{
+               "description":"Gets the Instance type.",
+               "type":"string",
+               "readOnly":true
+            }
+         },
+         "discriminator":"instanceType"
+      },
     "IPConfigDetails": {
       "type": "object",
       "properties": {
