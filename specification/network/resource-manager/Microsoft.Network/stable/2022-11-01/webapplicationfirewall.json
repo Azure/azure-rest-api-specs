@@ -453,12 +453,29 @@
           "type": "boolean",
           "description": "Whether to allow WAF to check request Body."
         },
+        "requestBodyInspectLimitInKB": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "description": "Max inspection limit in KB for request body inspection for WAF."
+        },
+        "requestBodyEnforcement": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether allow WAF to enforce request body limits."
+        },
         "maxRequestBodySizeInKb": {
           "type": "integer",
           "format": "int32",
           "minimum": 8,
           "exclusiveMinimum": false,
           "description": "Maximum request body size in Kb for WAF."
+        },
+        "fileUploadEnforcement": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether allow WAF to enforce file upload limits."
         },
         "fileUploadLimitInMb": {
           "type": "integer",
