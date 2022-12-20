@@ -62,7 +62,7 @@
           }
         },
         "binLogInfo": {
-          "description": "The binlog position to start replicating changes at",
+          "description": "The binlog position to start replicating the changes at",
           "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionInput"
         },
         "encryptedKeyForSecureFields": {
@@ -73,7 +73,8 @@
       "required": [
         "sourceConnectionInfo",
         "targetConnectionInfo",
-        "selectedDatabases"
+        "selectedDatabases",
+        "binLogInfo"
       ]
     },
     "MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput": {
