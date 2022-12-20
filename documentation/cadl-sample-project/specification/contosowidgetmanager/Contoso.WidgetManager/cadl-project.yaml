@@ -6,9 +6,7 @@ parameters:
   "js-sdk-folder":
     default: "{cwd}/azure-sdk-for-js/"
   "csharp-sdk-folder":
-    default: "{cwd}/azure-sdk-for-csharp/"
-  "openapi-folder":
-    default: "{project-root}/../data-plane/"
+    default: "{cwd}/azure-sdk-for-csharp/"  
   "service-directory-name":
     default: "contosowidgetmanager"
 emit:
@@ -16,7 +14,7 @@ emit:
 options:
   "@azure-tools/cadl-autorest":
     output-file: widgets.json
-    azure-resource-provider-folder: ../../data-plane
+    azure-resource-provider-folder: ../../../../data-plane
     examples-directory: ./examples
   "@azure-tools/cadl-python":
     "package-name": "azure-contosowidgetmanager"

@@ -58,9 +58,9 @@
                 },
                 "nextLink": {
                   "type": "string",
-                  "description": "The link to the next page of items",
                   "format": "uri",
-                  "x-cadl-name": "Rest.ResourceLocation<Widget>"
+                  "description": "The link to the next page of items",
+                  "x-cadl-name": "Rest.ResourceLocation"
                 }
               },
               "description": "Paged collection of Widget items",
@@ -142,9 +142,9 @@
                   "type": "string",
                   "description": "The ID of the widget's manufacturer."
                 },
-                "tag": {
-                  "$ref": "#/definitions/CustomEtag",
-                  "description": "The etag of the widget."
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
                 }
               },
               "description": "The template for adding optional properties.",
@@ -174,9 +174,9 @@
                   "type": "string",
                   "description": "The ID of the widget's manufacturer."
                 },
-                "tag": {
-                  "$ref": "#/definitions/CustomEtag",
-                  "description": "The etag of the widget."
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
                 }
               },
               "required": [
@@ -207,9 +207,9 @@
                   "type": "string",
                   "description": "The ID of the widget's manufacturer."
                 },
-                "tag": {
-                  "$ref": "#/definitions/CustomEtag",
-                  "description": "The etag of the widget."
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
                 }
               },
               "description": "A  resource was successfully created.",
@@ -441,22 +441,22 @@
         "modelAsString": true
       }
     },
-    "CustomEtag": {
+    "FakedSharedModel": {
       "type": "object",
       "properties": {
-        "etag": {
+        "tag": {
           "type": "string",
-          "description": "The customized entity tag."
+          "description": "The tag."
         },
         "createdDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The customized entity tag."
+          "description": "The created date."
         }
       },
-      "description": "Custom etag",
+      "description": "Faked shared model",
       "required": [
-        "etag",
+        "tag",
         "createdDate"
       ]
     },
@@ -467,7 +467,7 @@
       ],
       "x-ms-enum": {
         "name": "Versions",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "v2022_11_01_Preview",
@@ -488,9 +488,9 @@
           "type": "string",
           "description": "The ID of the widget's manufacturer."
         },
-        "tag": {
-          "$ref": "#/definitions/CustomEtag",
-          "description": "The etag of the widget."
+        "sharedModel": {
+          "$ref": "#/definitions/FakedSharedModel",
+          "description": "The faked shared model."
         }
       },
       "description": "A widget.",
@@ -506,6 +506,7 @@
       "in": "query",
       "required": true,
       "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
       "minLength": 1,
       "type": "string",
       "x-ms-parameter-location": "method"
