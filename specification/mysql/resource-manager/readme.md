@@ -36,9 +36,25 @@ tag: package-flexibleserver-2021-12-01-preview
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-2020-01-01
+tag: package-preview-2022-09
 ```
 
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/AzureADAdministrator.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/Backups.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/Configurations.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/Databases.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/FirewallRules.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/FlexibleServers.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/LogFiles.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/ServiceOperations.json
+```
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
