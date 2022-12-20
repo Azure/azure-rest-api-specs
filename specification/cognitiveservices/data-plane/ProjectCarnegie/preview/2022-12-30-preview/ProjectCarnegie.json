@@ -571,11 +571,8 @@
             "schema": {
               "type": "object",
               "properties": {
-                "values": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/TextListItem"
-                  }
+                "items": {
+                  "$ref": "#/definitions/TextListItem"
                 }
               }
             },
@@ -648,7 +645,8 @@
       "type": "integer",
       "format": "int32",
       "minimum": 0,
-      "maximum": 7
+      "maximum": 7,
+      "default": 0
     },
     "TextDetectResult": {
       "type": "object",
