@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/providers/Microsoft.Network/networkGroupMemberships/Default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/providers/Microsoft.Network/networkGroupMemberships": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -47,19 +47,25 @@
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
+        },
+		{
+          "$ref": "./network.json#/parameters/FirstIndexParameter"
+        },
+		{
+          "$ref": "./network.json#/parameters/PageSizeParameter"
+        },
       ],
       "get": {
         "tags": [
-          "NetworkGroupMemberships_Get"
+          "NetworkGroupMemberships_List"
         ],
-        "operationId": "GetNetworkGroupMemberships",
-        "description": "Get networkGroupMemberships applied on a virtual network.",
+        "operationId": "ListNetworkGroupMemberships",
+        "description": "List networkGroupMemberships applied on a virtual network.",
         "responses": {
           "200": {
             "description": "OK - Returns information about the configurations.",
             "schema": {
-              "$ref": "#/definitions/NetworkGroupMembership"
+              "$ref": "#/definitions/NetworkGroupMembershipsListResult"
             }
           },
           "default": {
@@ -78,6 +84,23 @@
     }
   },
   "definitions": {
+    "NetworkGroupMembershipsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkGroupMembership"
+          },
+          "description": "Gets a page of NetworkGroupMembership"
+        },
+		"nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NetworkGroupMembership."
+    },
     "NetworkGroupMembership": {
       "type": "object",
       "properties": {
@@ -90,9 +113,24 @@
           "type": "string",
           "description": "Resource ID."
         },
-		"location": {
+        "location": {
           "type": "string",
           "description": "Resource Location."
+        },
+		"name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+		"systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
         }
       },
       "description": "Resource of networkGroupMembership."
@@ -153,7 +191,7 @@
       "type": "object",
       "properties": {
         "StaticMemberId": {
-		  "type": "string",
+          "type": "string",
           "description": "Static Member Id."
         }
       },
@@ -164,19 +202,19 @@
       "type": "object",
       "properties": {
         "PolicyAssignmentId": {
-		  "type": "string",
+          "type": "string",
           "description": "Policy Assignment Id."
         },
-		"PolicySetDefinitionId": {
-		  "type": "string",
+        "PolicySetDefinitionId": {
+          "type": "string",
           "description": "Policy Set Definition Id."
         },
-		"PolicyDefinitionId": {
-		  "type": "string",
+        "PolicyDefinitionId": {
+          "type": "string",
           "description": "Policy Definition Id."
         },
-		"PolicyDefinitionReferenceId": {
-		  "type": "string",
+        "PolicyDefinitionReferenceId": {
+          "type": "string",
           "description": "Policy Definition Reference Id."
         }
       },
@@ -200,6 +238,27 @@
       "type": "string",
       "description": "The name of the virtual network.",
       "x-ms-parameter-location": "method"
-    }
+    },
+	"PageSizeParameter": {
+		  "name": "pageSize",
+		  "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+		  "in": "query",
+		  "required": false,
+		  "type": "integer",
+		  "format": "int32",
+		  "minimum": 1,
+		  "maximum": 20,
+		  "x-ms-parameter-location": "method"
+	},
+	"FirstIndexParameter": {
+	  "name": "firstIndex",
+	  "description": "An optional query parameter which specifies the first index of records to be returned by the server.",
+	  "in": "query",
+	  "required": false,
+	  "type": "integer",
+	  "format": "int32",
+	  "minimum": 0,
+	  "x-ms-parameter-location": "method"
+	}
   }
 }
