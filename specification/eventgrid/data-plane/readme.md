@@ -14,7 +14,7 @@ This enables customers to download one EventGrid data plane library instead of h
 
 ### Guidelines for defining a new event 
 
-> **_NOTE:_** New events should not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main.
+> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main.
 
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
