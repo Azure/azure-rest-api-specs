@@ -1,6 +1,6 @@
-# Security Insight
+# Security Insights
 
-> see <https://aka.ms/autorest>
+> see https://aka.ms/autorest
 
 This is the AutoRest configuration file for SecurityInsights.
 
@@ -28,8 +28,7 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 input-file:
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/ThreatIntelligence.json
 ```
-
-## Supressions
+### Supressions
 
 ```yaml
 directive:
