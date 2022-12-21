@@ -599,6 +599,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/fetchEventDetails": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event_fetchDetailsBySubscriptionIdAndTrackingId",
+        "description": "Service health event details in the subscription by event tracking id. This can be used to fetch sensitive properties for Security Advisory events",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Health Event details in the subscription requested by tracking id.",
+            "schema": {
+              "$ref": "#/definitions/event"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventDetailsBySubscriptionIdAndTrackingId": {
+            "$ref": "./examples/Event_fetchDetailsBySubscriptionIdAndTrackingId.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
@@ -679,6 +718,42 @@
         "x-ms-examples": {
           "EventByTenantIdAndTrackingId": {
             "$ref": "./examples/Event_GetByTenantIdAndTrackingId.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/fetchEventDetails": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "operationId": "Event_fetchDetailsByTenantIdAndTrackingId",
+        "description": "Service health event details in the tenant by event tracking id. This can be used to fetch sensitive properties for Security Advisory events",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EventTrackingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service health event details in the tenant by event tracking id.",
+            "schema": {
+              "$ref": "#/definitions/event"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventDetailsByTenantIdAndTrackingId": {
+            "$ref": "./examples/Event_fetchDetailsByTenantIdAndTrackingId.json"
           }
         }
       }
