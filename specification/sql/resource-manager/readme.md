@@ -802,7 +802,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
@@ -845,6 +844,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/Servers.json
 
 # Needed when there is more than one input file
 override-info:
