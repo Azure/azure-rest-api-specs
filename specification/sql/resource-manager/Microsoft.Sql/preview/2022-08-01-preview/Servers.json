@@ -433,7 +433,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully refreshed external governance enablement status."
+            "description": "Successfully refreshed external governance enablement status.",
+            "schema": {
+              "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResult"
+            }
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
@@ -809,6 +812,59 @@
             "name": "PrivateLinkServiceConnectionStateActionsRequire",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "RefreshExternalGovernanceStatusOperationResult": {
+      "description": "An RefreshExternalGovernanceStatus operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RefreshExternalGovernanceStatusOperationResultProperties": {
+      "description": "Contains the operation result properties for refresh external governance status operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestType": {
+          "description": "Request type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "Server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
