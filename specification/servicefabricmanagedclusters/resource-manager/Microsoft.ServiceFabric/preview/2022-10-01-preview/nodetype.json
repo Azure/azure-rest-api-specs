@@ -966,6 +966,13 @@
             ]
           },
           "description": "Indicates the resource id of the subnet for the node type."
+        },
+        "vmSetupActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSetupAction"
+          },
+          "description": "Specifies the actions to be performed on the vms before bootstrapping the service fabric runtime."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1237,6 +1244,28 @@
         }
       },
       "description": "Managed data disk description."
+    },
+    "VmSetupAction": {
+      "type": "string",
+      "description": "action to be performed on the vms before bootstrapping the service fabric runtime.",
+      "enum": [
+        "EnableContainers",
+        "EnableHyperV"
+      ],
+      "x-ms-enum": {
+        "name": "VmSetupAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EnableContainers",
+            "description": "Enable windows containers feature."
+          },
+          {
+            "value": "EnableHyperV",
+            "description": "Enables windows HyperV feature."
+          }
+        ]
+      }
     },
     "VMSSExtension": {
       "type": "object",
