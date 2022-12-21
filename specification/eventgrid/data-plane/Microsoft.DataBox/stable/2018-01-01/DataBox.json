@@ -16,7 +16,28 @@
           "type": "string"
         },
         "stageDetails": {
-          "$ref": "#/definitions/StageDetail"
+          "description": "Metadata related to the stage detail",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the current Stage",
+              "enum": [
+                "CopyStarted",
+                "CopyCompleted",
+                "OrderCompleted"
+              ],
+              "x-ms-enum": {
+                "name": "name",
+                "modelAsString": true
+              }
+            },
+            "time": {
+              "description": "The time at which the stage happened.",
+              "format": "date-time",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -29,7 +50,28 @@
           "type": "string"
         },
         "stageDetails": {
-          "$ref": "#/definitions/StageDetail"
+          "description": "Metadata related to the stage detail",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the current Stage",
+              "enum": [
+                "CopyStarted",
+                "CopyCompleted",
+                "OrderCompleted"
+              ],
+              "x-ms-enum": {
+                "name": "name",
+                "modelAsString": true
+              }
+            },
+            "time": {
+              "description": "The time at which the stage happened.",
+              "format": "date-time",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -42,31 +84,28 @@
           "type": "string"
         },
         "stageDetails": {
-          "$ref": "#/definitions/StageDetail"
-        }
-      }
-    },
-    "StageDetail": {
-      "description": "Metadata related to the stage detail",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the current Stage",
-          "enum": [
-            "CopyStarted",
-            "CopyCompleted",
-            "OrderCompleted"
-          ],
-          "x-ms-enum": {
-            "name": "name",
-            "modelAsString": true
+          "description": "Metadata related to the stage detail",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the current Stage",
+              "enum": [
+                "CopyStarted",
+                "CopyCompleted",
+                "OrderCompleted"
+              ],
+              "x-ms-enum": {
+                "name": "name",
+                "modelAsString": true
+              }
+            },
+            "time": {
+              "description": "The time at which the stage happened.",
+              "format": "date-time",
+              "type": "string"
+            }
           }
-        },
-        "time": {
-          "description": "The time at which the stage happened.",
-          "format": "date-time",
-          "type": "string"
         }
       }
     }
