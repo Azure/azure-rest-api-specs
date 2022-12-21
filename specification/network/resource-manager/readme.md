@@ -28,15 +28,32 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2022-06
 ```
 
 
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.Network/preview/2022-06-01-preview/network.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManager.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerConnection.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerScopeConnection.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/preview/2022-06-01-preview/networkManagerSecurityUserConfiguration.json
+```
 ### Tag: package-2022-07
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+``` yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.Network/stable/2022-07-01/applicationGateway.json
   - Microsoft.Network/stable/2022-07-01/applicationGatewayWafDynamicManifests.json
@@ -100,6 +117,7 @@ input-file:
   - Microsoft.Network/stable/2022-07-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2022-07-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
