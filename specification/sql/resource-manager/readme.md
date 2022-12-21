@@ -131,7 +131,6 @@ input-file:
   - Microsoft.Sql/preview/2022-08-01-preview/PrivateLinkResources.json
   - Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
   - Microsoft.Sql/preview/2022-08-01-preview/RecoverableManagedDatabases.json
-  - Microsoft.Sql/preview/2022-08-01-preview/RefreshExternalGovernanceStatus.json
   - Microsoft.Sql/preview/2022-08-01-preview/ReplicationLinks.json
   - Microsoft.Sql/preview/2022-08-01-preview/RestorableDroppedDatabases.json
   - Microsoft.Sql/preview/2022-08-01-preview/RestorableDroppedManagedDatabases.json
@@ -846,7 +845,6 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/RefreshExternalGovernanceStatus.json
 
 # Needed when there is more than one input file
 override-info:
