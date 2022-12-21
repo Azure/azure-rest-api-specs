@@ -151,7 +151,19 @@
             ],
             "x-ms-enum": {
               "name": "AdminKeyKind",
-              "modelAsString": false
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "primary",
+                  "name": "Primary",
+                  "description": "The primary API key for the search service."
+                },
+                {
+                  "value": "secondary",
+                  "name": "Secondary",
+                  "description": "The secondary API key for the search service."
+                }
+              ]
             },
             "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'."
           },
@@ -363,6 +375,12 @@
           },
           "SearchCreateOrUpdateServiceWithIdentity": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
+          },
+          "SearchCreateOrUpdateServiceAuthOptions": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceAuthOptions.json"
+          },
+          "SearchCreateOrUpdateServiceDisableLocalAuth": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceDisableLocalAuth.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -433,11 +451,17 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "searchUpdateServiceToAllowAccessFromPublicCustomIPs": {
+          "SearchUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
-          "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
+          "SearchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
+          },
+          "SearchUpdateServiceAuthOptions": {
+            "$ref": "./examples/SearchUpdateServiceAuthOptions.json"
+          },
+          "SearchUpdateServiceDisableLocalAuth": {
+            "$ref": "./examples/SearchUpdateServiceDisableLocalAuth.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -599,7 +623,7 @@
             "$ref": "./examples/SearchListServicesByResourceGroup.json"
           }
         },
-        "description": "Gets a list of all search services in the given resource group.",
+        "description": "Gets a list of all Search services in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -946,7 +970,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The details of the shared private link resource that was created.",
+            "description": "The details of the shared private link resource that was created or updated.",
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
@@ -1133,7 +1157,7 @@
             "$ref": "./examples/SearchListServicesBySubscription.json"
           }
         },
-        "description": "Gets a list of all search services in the given subscription.",
+        "description": "Gets a list of all Search services in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1237,7 +1261,14 @@
           ],
           "x-ms-enum": {
             "name": "ResourceType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "searchServices",
+                "name": "SearchServices",
+                "description": "'searchServices' is the only resource type whose name can be validated."
+              }
+            ]
           }
         }
       },
@@ -1262,7 +1293,19 @@
           ],
           "x-ms-enum": {
             "name": "UnavailableNameReason",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Invalid",
+                "name": "Invalid",
+                "description": "The search service name does not match naming requirements."
+              },
+              {
+                "value": "AlreadyExists",
+                "name": "AlreadyExists",
+                "description": "The search service name is already assigned to a different search service."
+              }
+            ]
           }
         },
         "message": {
@@ -1338,7 +1381,44 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "free",
+                "name": "Free",
+                "description": "Free tier, with no SLA guarantees and a subset of features offered to paid tiers."
+              },
+              {
+                "value": "basic",
+                "name": "Basic",
+                "description": "Paid tier dedicated service with up to 3 replicas."
+              },
+              {
+                "value": "standard",
+                "name": "Standard",
+                "description": "Paid tier dedicated service with up to 12 partitions and 12 replicas."
+              },
+              {
+                "value": "standard2",
+                "name": "Standard2",
+                "description": "Similar to 'standard', but with more capacity per search unit."
+              },
+              {
+                "value": "standard3",
+                "name": "Standard3",
+                "description": " The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity')."
+              },
+              {
+                "value": "storage_optimized_l1",
+                "name": "StorageOptimizedL1",
+                "description": "Paid tier dedicated service that supports 1TB per partition, up to 12 partitions."
+              },
+              {
+                "value": "storage_optimized_l2",
+                "name": "StorageOptimizedL2",
+                "description": "Paid tier dedicated service that supports 2TB per partition, up to 12 partitions."
+              }
+            ]
           }
         }
       },
@@ -1346,6 +1426,51 @@
       "externalDocs": {
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
+    },
+    "DataPlaneAuthOptions": {
+      "type": "object",
+      "properties": {
+        "apiKeyOnly": {
+          "type": "object",
+          "properties": {},
+          "description": "Indicates that only the API key needs to be used for authentication."
+        },
+        "aadOrApiKey": {
+          "$ref": "#/definitions/DataPlaneAadOrApiKeyAuthOption",
+          "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
+        }
+      },
+      "description": "Defines the options for how the data plane API of a Search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
+    },
+    "DataPlaneAadOrApiKeyAuthOption": {
+      "type": "object",
+      "properties": {
+        "aadAuthFailureMode": {
+          "type": "string",
+          "description": "Describes what response the data plane API of a Search service would send for requests that failed authentication.",
+          "enum": [
+            "http403",
+            "http401WithBearerChallenge"
+          ],
+          "x-ms-enum": {
+            "name": "AadAuthFailureMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "http403",
+                "name": "Http403",
+                "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden)."
+              },
+              {
+                "value": "http401WithBearerChallenge",
+                "name": "Http401WithBearerChallenge",
+                "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 401 (Unauthorized) and present a Bearer Challenge."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
     },
     "PrivateEndpointConnection": {
       "properties": {
@@ -1407,7 +1532,29 @@
               ],
               "x-ms-enum": {
                 "name": "PrivateLinkServiceConnectionStatus",
-                "modelAsString": false
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "Pending",
+                    "name": "Pending",
+                    "description": "The private endpoint connection has been created and is pending approval."
+                  },
+                  {
+                    "value": "Approved",
+                    "name": "Approved",
+                    "description": "The private endpoint connection is approved and is ready for use."
+                  },
+                  {
+                    "value": "Rejected",
+                    "name": "Rejected",
+                    "description": "The private endpoint connection has been rejected and cannot be used."
+                  },
+                  {
+                    "value": "Disconnected",
+                    "name": "Disconnected",
+                    "description": "The private endpoint connection has been removed from the service."
+                  }
+                ]
               }
             },
             "description": {
@@ -1778,7 +1925,19 @@
           ],
           "x-ms-enum": {
             "name": "HostingMode",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "default",
+                "name": "Default",
+                "description": "The limit on number of indexes is determined by the default limits for the SKU."
+              },
+              {
+                "value": "highDensity",
+                "name": "HighDensity",
+                "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+              }
+            ]
           }
         },
         "publicNetworkAccess": {
@@ -1804,11 +1963,49 @@
             "deleting",
             "degraded",
             "disabled",
-            "error"
+            "error",
+            "stopped"
           ],
           "x-ms-enum": {
             "name": "SearchServiceStatus",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "running",
+                "name": "Running",
+                "description": "The search service is running and no provisioning operations are underway."
+              },
+              {
+                "value": "provisioning",
+                "name": "Provisioning",
+                "description": "The search service is being provisioned or scaled up or down."
+              },
+              {
+                "value": "deleting",
+                "name": "Deleting",
+                "description": "The search service is being deleted."
+              },
+              {
+                "value": "degraded",
+                "name": "Degraded",
+                "description": "The search service is degraded because underlying search units are not healthy."
+              },
+              {
+                "value": "disabled",
+                "name": "Disabled",
+                "description": "The search service is disabled and all API requests will be rejected."
+              },
+              {
+                "value": "error",
+                "name": "Error",
+                "description": "The search service is in error state, indicating either a failure to provision or to be deleted."
+              },
+              {
+                "value": "stopped",
+                "name": "Stopped",
+                "description": "The search service is in a subscription that's disabled."
+              }
+            ]
           }
         },
         "statusDetails": {
@@ -1827,12 +2024,38 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "succeeded",
+                "name": "Succeeded",
+                "description": "The last provisioning operation has completed successfully."
+              },
+              {
+                "value": "provisioning",
+                "name": "Provisioning",
+                "description": "The search service is being provisioned or scaled up or down."
+              },
+              {
+                "value": "failed",
+                "name": "Failed",
+                "description": "The last provisioning operation has failed."
+              }
+            ]
           }
         },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined."
+        },
+        "authOptions": {
+          "$ref": "#/definitions/DataPlaneAuthOptions",
+          "description": "Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -1861,7 +2084,7 @@
           "items": {
             "$ref": "#/definitions/SearchService"
           },
-          "description": "The list of search services."
+          "description": "The list of Search services."
         },
         "nextLink": {
           "readOnly": true,
@@ -1988,12 +2211,12 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal ID of resource identity."
+          "description": "The principal ID of the system-assigned identity of the search service."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant ID of resource."
+          "description": "The tenant ID of the system-assigned identity of the search service."
         },
         "type": {
           "type": "string",
