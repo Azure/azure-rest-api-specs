@@ -102,10 +102,14 @@ model DeviceConnectionStateEventInfo {
 }
 
 @doc("Event data for Microsoft.Devices.DeviceCreated event.")
-model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
+model IotHubDeviceCreatedEventData{
+  ...DeviceLifeCycleEventProperties;
+} 
 
 @doc("Event data for Microsoft.Devices.DeviceDeleted event.")
-model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
+model IotHubDeviceDeletedEventData{
+  ...DeviceLifeCycleEventProperties;
+} 
 
 @doc("Event data for Microsoft.Devices.DeviceConnected event.")
 model IotHubDeviceConnectedEventData
@@ -116,7 +120,9 @@ model IotHubDeviceDisconnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
-model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
+model IotHubDeviceTelemetryEventData{
+  ...DeviceTelemetryEventProperties;
+} 
 
 model PropertiesJson {
   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
