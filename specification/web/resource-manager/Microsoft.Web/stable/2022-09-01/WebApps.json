@@ -45,6 +45,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/ListWebApps.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -87,6 +92,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/ListWebAppsByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -136,6 +146,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/GetWebApp.json"
           }
         }
       },
@@ -191,6 +206,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Publishing Credentials Policies": {
+            "$ref": "./examples/CreateOrUpdateWebApp.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -23143,7 +23163,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "OK"
           },
           "default": {
@@ -23152,8 +23172,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostruntime/runtime/webhooks/workflow/api/management/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl": {
@@ -23256,17 +23275,13 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error response describing why the trigger run failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostruntime/runtime/webhooks/workflow/api/management/workflows/{workflowName}/triggers/{triggerName}/schemas/json": {
