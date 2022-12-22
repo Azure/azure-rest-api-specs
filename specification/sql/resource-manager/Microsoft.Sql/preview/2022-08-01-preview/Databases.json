@@ -114,9 +114,6 @@
           },
           "Gets a database with database level keys expanded.": {
             "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeys.json"
-          },
-          "Gets a database with Availability zone specified.": {
-            "$ref": "./examples/GetDatabaseWithAvailabilityZone.json"
           }
         }
       },
@@ -174,7 +171,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Creates a database with default mode.": {
@@ -236,9 +233,6 @@
           },
           "Updates a database to Hyperscale tier by triggering manual cutover during Migration workflow": {
             "$ref": "./examples/UpdateDatabaseHyperscaleMigrationPerformCutover.json"
-          },
-          "Creates a database with availability zone specified.": {
-            "$ref": "./examples/CreateDatabaseWithAvailabilityZone.json"
           }
         }
       },
@@ -1323,20 +1317,6 @@
         "performCutover": {
           "description": "To trigger customer controlled manual cutover during the wait state while Scaling operation is in progress.\r\n\r\nThis property parameter is only applicable for scaling operations that are initiated along with 'manualCutover' parameter.\r\n\r\nThis property is only applicable when scaling database from Business Critical/General Purpose/Premium/Standard tier to Hyperscale tier is already in progress.\r\n\r\nWhen performCutover is specified, the scaling operation will trigger cutover and perform role-change to Hyperscale database.",
           "type": "boolean"
-        },
-        "availabilityZone": {
-          "description": "Specifies the availability zone the database is pinned to.",
-          "enum": [
-            "NoPreference",
-            "1",
-            "2",
-            "3"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AvailabilityZoneType",
-            "modelAsString": true
-          }
         }
       }
     },
