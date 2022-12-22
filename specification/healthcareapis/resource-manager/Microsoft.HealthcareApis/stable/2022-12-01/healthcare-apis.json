@@ -3798,6 +3798,10 @@
         "importConfiguration": {
           "description": "Fhir Service import configuration.",
           "$ref": "#/definitions/FhirServiceImportConfiguration"
+        },
+        "implementationGuidesConfiguration": {
+          "description": "Implementation Guides configuration.",
+          "$ref": "#/definitions/ImplementationGuidesConfiguration"
         }
       }
     },
@@ -3818,6 +3822,17 @@
         }
       }
     },
+    "ImplementationGuidesConfiguration": {
+      "description": "The settings for Implementation Guides - defining capabilities for national standards, vendor consortiums, clinical societies, etc.",
+      "type": "object",
+      "properties": {
+        "usCoreMissingData": {
+          "type": "boolean",
+          "description": "If US Core Missing Data requirement is enabled.",
+          "readOnly": false
+        }
+      }
+    },    
     "FhirResourceVersionPolicy": {
       "type": "string",
       "description": "Controls how resources are versioned on the FHIR service",
