@@ -84,7 +84,8 @@
             "type": "string",
             "pattern": "^[a-z][a-z0-9_-|s.[]'()]*$",
             "minLength": 3,
-            "maxLength": 63
+            "maxLength": 63,
+			"x-ms-parameter-location": "method"
           },
           {
             "name": "startTime",
@@ -2241,7 +2242,8 @@
       "in": "path",
       "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
-      "type": "string"
+      "type": "string",
+	  "x-ms-parameter-location": "client"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -2259,7 +2261,8 @@
       "in": "query",
       "description": "API Version",
       "required": true,
-      "type": "string"
+      "type": "string",
+	  "x-ms-parameter-location": "client"
     },
     "LocationParameter": {
       "name": "location",
