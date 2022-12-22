@@ -28,9 +28,8 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2022-06
 ```
-
 
 ### Tag: package-2022-06-preview
 
@@ -103,13 +102,11 @@ input-file:
   - Microsoft.Network/stable/2022-07-01/webapplicationfirewall.json
 ```
 
-
-
 ### Tag: package-2022-07
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+``` yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.Network/stable/2022-07-01/applicationGateway.json
   - Microsoft.Network/stable/2022-07-01/applicationGatewayWafDynamicManifests.json
@@ -173,6 +170,7 @@ input-file:
   - Microsoft.Network/stable/2022-07-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2022-07-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
