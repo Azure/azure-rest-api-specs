@@ -1,0 +1,254 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-02-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/triggeredAnalyticsRuleRuns/{ruleRunId}": {
+      "get": {
+        "tags": [
+          "triggered analytics rule run"
+        ],
+        "description": "Gets the triggered analytics rule run.",
+        "operationId": "triggeredAnalyticsRuleRun_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "ruleRunId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggeredAnalyticsRuleRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "triggeredAnalyticsRuleRun_Get": {
+            "$ref": "./examples/triggered analytics rule run/triggeredAnalyticsRuleRun_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/triggeredAnalyticsRuleRuns": {
+      "get": {
+        "tags": [
+          "triggered analytics rule runs"
+        ],
+        "description": "Gets the triggered analytics rule runs.",
+        "operationId": "triggeredAnalyticsRuleRuns_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-workspace-id",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggeredAnalyticsRuleRuns"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "triggeredAnalyticsRuleRuns_Get": {
+            "$ref": "./examples/triggered analytics rule runs/triggeredAnalyticsRuleRuns_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "example": "Accepted",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Accepted"
+          },
+          {
+            "value": "InProgress"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          }
+        ]
+      }
+    },
+    "TriggeredAnalyticsRuleRun": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriggeredAnalyticsRuleRunProperties"
+        }
+      }
+    },
+    "TriggeredAnalyticsRuleRunProperties": {
+      "required": [
+        "executionTimeUtc",
+        "provisioningState",
+        "ruleId",
+        "triggeredAnalyticsRuleRunId"
+      ],
+      "type": "object",
+      "properties": {
+        "executionTimeUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "triggeredAnalyticsRuleRunId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "ruleRunAdditionalData": {
+          "type": "object",
+          "additionalProperties": { }
+        }
+      }
+    },
+    "TriggeredAnalyticsRuleRuns": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggeredAnalyticsRuleRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "AnalyticsOnDemandArm",
+      "description": "Controller that handles requests for triggeredAnalyticsRuleRuns ARM API."
+    },
+    {
+      "name": "AnalyticsOnDemandArm",
+      "description": "Triggered Analytics Rule Runs"
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}
