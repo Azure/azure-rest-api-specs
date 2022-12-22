@@ -16,6 +16,19 @@ module-name: sdk/resourcemanager/batch/armbatch
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+  - from: BatchManagement.json
+    where: $.definitions.CIFSMountConfiguration.properties.userName
+    transform:
+      $["x-ms-client-name"] = "username"
+  - from: BatchManagement.json
+    where: $.definitions.NetworkConfiguration.properties.dynamicVnetAssignmentScope
+    transform:
+      $["x-ms-client-name"] = "dynamicVNetAssignmentScope"
+  - from: BatchManagement.json
+    where: $.definitions.PrivateLinkServiceConnectionState.properties.actionsRequired
+    transform:
+      $["x-ms-client-name"] = "actionRequired"
 ```
 
 ## Go multi-api
