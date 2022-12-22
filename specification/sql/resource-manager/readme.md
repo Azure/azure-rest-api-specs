@@ -651,7 +651,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/TransparentDataEncryptions.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/BackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
@@ -663,7 +663,7 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ManagedInstances.json
-- ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/DistributedAvailabilityGroups.json
@@ -701,6 +701,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevert.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
 
 
 # Needed when there is more than one input file

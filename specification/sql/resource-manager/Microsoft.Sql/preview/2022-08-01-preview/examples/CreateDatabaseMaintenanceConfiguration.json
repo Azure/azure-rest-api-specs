@@ -6,26 +6,16 @@
     "databaseName": "testdb",
     "api-version": "2022-08-01-preview",
     "parameters": {
-      "identity": {
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/Default-SQL-SouthEastAsia/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi": {}
-        },
-        "type": "UserAssigned"
-      },
       "location": "southeastasia",
       "sku": {
-        "name": "S0",
+        "name": "S2",
         "tier": "Standard"
       },
       "properties": {
         "createMode": "Default",
         "collation": "SQL_Latin1_General_CP1_CI_AS",
         "maxSizeBytes": 1073741824,
-        "keys": {
-          "https://your-key-vault-name.vault.azure.net/yourKey/yourKeyVersion": {},
-          "https://your-key-vault-name.vault.azure.net/yourKey2/yourKey2Version": {}
-        },
-        "encryptionProtector": "https://your-key-vault-name.vault.azure.net/yourKey/yourKeyVersion"
+        "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_SouthEastAsia_1"
       }
     }
   },
@@ -33,32 +23,31 @@
     "200": {
       "body": {
         "sku": {
-          "name": "S0",
-          "tier": "Standard",
-          "capacity": 10
+          "name": "S2",
+          "tier": "Standard"
         },
         "kind": "v12.0,user",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
           "maxSizeBytes": 1073741824,
           "status": "Online",
+          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
+          "creationDate": "2017-06-07T04:41:33.937Z",
+          "currentServiceObjectiveName": "S2",
+          "defaultSecondaryLocation": "North Europe",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "isInfraEncryptionEnabled": false,
+          "zoneRedundant": false,
+          "earliestRestoreDate": "2020-08-29T06:41:18.283Z",
+          "readScale": "Disabled",
           "currentSku": {
             "name": "Standard",
             "tier": "Standard",
-            "capacity": 10
+            "capacity": 50
           },
-          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
-          "creationDate": "2017-06-07T04:41:33.937Z",
           "currentBackupStorageRedundancy": "Geo",
-          "currentServiceObjectiveName": "S0",
-          "defaultSecondaryLocation": "North Europe",
-          "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
-          "readScale": "Disabled",
           "requestedBackupStorageRedundancy": "Geo",
-          "requestedServiceObjectiveName": "S0",
-          "isInfraEncryptionEnabled": false,
-          "zoneRedundant": false,
-          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_SouthEastAsia_1",
           "isLedgerOn": false
         },
         "location": "southeastasia",
@@ -70,32 +59,31 @@
     "201": {
       "body": {
         "sku": {
-          "name": "S0",
-          "tier": "Standard",
-          "capacity": 10
+          "name": "S2",
+          "tier": "Standard"
         },
         "kind": "v12.0,user",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
           "maxSizeBytes": 1073741824,
           "status": "Online",
+          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
+          "creationDate": "2017-06-07T04:41:33.937Z",
+          "currentServiceObjectiveName": "S2",
+          "defaultSecondaryLocation": "North Europe",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "isInfraEncryptionEnabled": false,
+          "zoneRedundant": false,
+          "earliestRestoreDate": "2020-08-29T06:41:18.283Z",
+          "readScale": "Disabled",
           "currentSku": {
             "name": "Standard",
             "tier": "Standard",
-            "capacity": 10
+            "capacity": 50
           },
-          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
-          "creationDate": "2017-06-07T04:41:33.937Z",
           "currentBackupStorageRedundancy": "Geo",
-          "currentServiceObjectiveName": "S0",
-          "defaultSecondaryLocation": "North Europe",
-          "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
-          "readScale": "Disabled",
           "requestedBackupStorageRedundancy": "Geo",
-          "requestedServiceObjectiveName": "S0",
-          "isInfraEncryptionEnabled": false,
-          "zoneRedundant": false,
-          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_SouthEastAsia_1",
           "isLedgerOn": false
         },
         "location": "southeastasia",
