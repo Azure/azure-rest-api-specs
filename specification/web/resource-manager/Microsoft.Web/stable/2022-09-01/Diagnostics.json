@@ -27,14 +27,14 @@
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
+		  {
+			"$ref": "#/parameters/LocationParameter"
+		  },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
 		  {
 			"$ref": "#/parameters/ResourceTypeParameter"
-		  },
-		  {
-			"$ref": "#/parameters/LocationParameter"
 		  }
         ],
         "responses": {
@@ -70,12 +70,21 @@
         "description": "Description for Get Provider Detector Response",
         "operationId": "Diagnostics_GetProviderDetectorResponse",
         "parameters": [
+		  {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+		  {
+			"$ref": "#/parameters/LocationParameter"
+		  },
           {
             "name": "detectorName",
             "in": "path",
             "description": "Detector Resource Name",
             "required": true,
-            "type": "string"
+            "type": "string",
+			"pattern": "^[a-z][a-z0-9_\-\|\s\.\[\]\'\(\)]*$",
+			"minLength": 3,
+			"maxLength": 63
           },
           {
             "name": "startTime",
@@ -97,18 +106,12 @@
             "description": "Time Grain",
             "type": "string",
             "pattern": "PT[1-9][0-9]+[SMH]"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
+          },          
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
 		  {
 			"$ref": "#/parameters/ResourceTypeParameter"
-		  },
-		  {
-			"$ref": "#/parameters/LocationParameter"
 		  }
         ],
         "responses": {
