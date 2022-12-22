@@ -294,7 +294,7 @@
             "required": true,
             "description": "Properties used to create a container apps job",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
+              "$ref": "#/definitions/ContainerAppsJobPatchProperties"
             }
           },
           {
@@ -645,6 +645,66 @@
         }
       },
       "required": []
+    },
+    "ContainerAppsJobPatchProperties": {
+      "type": "object",
+      "description": "ContainerApp resource specific properties.",
+      "properties": {
+        "identity": {
+          "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Container Apps Job.",
+              "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ContainerAppsJobProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "environmentId": {
+              "description": "Resource ID of environment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "configuration": {
+              "$ref": "#/definitions/Configuration",
+              "description": "Container Apps Job configuration properties."
+            },
+            "template": {
+              "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+              "description": "Container Apps job definition."
+            },
+            "outboundIpAddresses": {
+              "description": "Outbound IP Addresses of a container apps job.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "eventStreamEndpoint": {
+              "description": "The endpoint of the eventstream of the container apps job.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
     },
     "ContainerAppsJobsCollection": {
       "description": "Container Apps Jobs collection ARM resource.",
