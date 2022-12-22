@@ -8,109 +8,58 @@
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/providers/Microsoft.Web/locations/WestUS/detectors/creationfailure",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/WestUS/detectors/creationfailure",
         "name": "creationfailure",
+        "type": "Microsoft.Web/detectors",
         "properties": {
           "metadata": {
-            "description": "This detector analyzes failure while creating a resource.",
-            "category": "Availability and Performance"
+            "id": "creationfailure",
+			"name": "Creation Failure",
+			"author": "",
+			"category": "Availability and Performance",
+			"supportTopicList": [],
+			"type": "Detector",
+			"score": 0
           },
           "dataset": [
             {
               "table": {
-                "tableName": "Table_0",
+                "tableName": "",
                 "columns": [
                   {
-                    "columnName": "PreciseTimeStamp",
-                    "dataType": "DateTime",
-                    "columnType": "datetime"
+                    "columnName": "TimeStamp",
+                    "dataType": "DateTime"
                   },
                   {
-                    "columnName": "count_CreateResourceRequests",
-                    "dataType": "Int64",
-                    "columnType": "long"
+                    "columnName": "Metric",
+                    "dataType": "String"
                   },
                   {
-                    "columnName": "count_FailedCreation",
-                    "dataType": "Int64",
-                    "columnType": "long"
-                  },
-                  {
-                    "columnName": "count_SuccessCreation",
-                    "dataType": "Int64",
-                    "columnType": "long"
+                    "columnName": "Average",
+                    "dataType": "Double"
                   }
                 ],
                 "rows": [
                   [
-                    "2018-03-27T00:25:00Z",
-                    "0",
-                    "0",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T00:30:00Z",
-                    "2",
-                    "2",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T00:35:00Z",
-                    "0",
-                    "0",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T00:40:00Z",
-                    "1",
-                    "0",
-                    "1"
-                  ],
-                  [
-                    "2018-03-27T00:45:00Z",
-                    "0",
-                    "0",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T00:50:00Z",
-                    "0",
-                    "0",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T00:55:00Z",
-                    "1",
-                    "0",
-                    "1"
-                  ],
-                  [
-                    "2018-03-27T01:00:00Z",
-                    "0",
-                    "0",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T01:05:00Z",
-                    "0",
-                    "0",
-                    "0"
-                  ],
-                  [
-                    "2018-03-27T01:10:00Z",
-                    "0",
-                    "0",
-                    "0"
+                    "2022-03-15T21:35:00",
+                    "Creation Attempts",
+                    0
                   ]
                 ]
               },
               "renderingProperties": {
-                "title": "Resource creation attempt timeline",
-                "description": "This view breaks down the number of requests issued to create a resource by success vs failure."
+                "type": 8,
+                "title": "Create attempt timeline",
+                "description": "",
+                "isVisible": true
               }
             }
-          ]
+          ],
+          "status": {
+            "statusId": 3
+          }
         }
       }
     }
