@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/detectors": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/detectors": {
       "get": {
         "tags": [
           "Diagnostics"
@@ -27,15 +27,15 @@
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
-		  {
-			"$ref": "#/parameters/LocationParameter"
-		  },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
-			"$ref": "#/parameters/ResourceTypeParameter"
-		  }
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -70,21 +70,21 @@
         "description": "Description for Get Provider Detector Response",
         "operationId": "Diagnostics_GetProviderDetectorResponse",
         "parameters": [
-		  {
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
-		  {
-			"$ref": "#/parameters/LocationParameter"
-		  },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
           {
             "name": "detectorName",
             "in": "path",
             "description": "Detector Resource Name",
             "required": true,
             "type": "string",
-			"pattern": "^[a-z][a-z0-9_\-\|\s\.\[\]\'\(\)]*$",
-			"minLength": 3,
-			"maxLength": 63
+            "pattern": "^[a-z][a-z0-9_-|s.[]'()]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "name": "startTime",
@@ -106,13 +106,13 @@
             "description": "Time Grain",
             "type": "string",
             "pattern": "PT[1-9][0-9]+[SMH]"
-          },          
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
-			"$ref": "#/parameters/ResourceTypeParameter"
-		  }
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -2261,15 +2261,15 @@
       "required": true,
       "type": "string"
     },
-	"LocationParameter": {
+    "LocationParameter": {
       "name": "location",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of a supported Azure region.",
       "x-ms-parameter-location": "method"
-	},
-	"ResourceTypeParameter": {
+    },
+    "ResourceTypeParameter": {
       "name": "resource-type",
       "in": "query",
       "required": true,
