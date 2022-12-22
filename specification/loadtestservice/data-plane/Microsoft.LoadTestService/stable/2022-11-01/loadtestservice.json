@@ -12,7 +12,7 @@
           "Test"
         ],
         "summary": "Create a new test or update an existing test.",
-        "operationId": "Test_CreateOrUpdate",
+        "operationId": "LoadTestAdministration_CreateOrUpdateTest",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -73,7 +73,7 @@
           "Test"
         ],
         "summary": "Delete a test by its name.",
-        "operationId": "Test_Delete",
+        "operationId": "LoadTestAdministration_DeleteTest",
         "produces": [
           "application/json"
         ],
@@ -104,7 +104,7 @@
         },
         "x-ms-examples": {
           "Delete a test": {
-            "$ref": "./examples/DeleteLoadTest.json"
+            "$ref": "./examples/DeleteTest.json"
           }
         }
       },
@@ -113,7 +113,7 @@
           "Test"
         ],
         "summary": "Get load test details by test name",
-        "operationId": "Test_Get",
+        "operationId": "LoadTestAdministration_GetTest",
         "produces": [
           "application/json"
         ],
@@ -147,7 +147,7 @@
         },
         "x-ms-examples": {
           "Get a test by an unique name": {
-            "$ref": "./examples/GetLoadTest.json"
+            "$ref": "./examples/GetTest.json"
           }
         }
       }
@@ -158,7 +158,7 @@
           "Test"
         ],
         "summary": "Get all load tests by the fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
-        "operationId": "Test_List",
+        "operationId": "LoadTestAdministration_ListTests",
         "produces": [
           "application/json"
         ],
@@ -172,7 +172,7 @@
           {
             "in": "query",
             "name": "search",
-            "description": "Prefix based, case sensitive search on searchable fields - testId, createdBy.",
+            "description": "Prefix based, case sensitive search on searchable fields - displayName, createdBy. For example, to search for a test, with display name is Login Test, the search parameter can be Login.",
             "type": "string"
           },
           {
@@ -229,7 +229,7 @@
         },
         "x-ms-examples": {
           "Search test with filters": {
-            "$ref": "./examples/ListLoadTestSearch.json"
+            "$ref": "./examples/ListTests.json"
           }
         },
         "x-ms-pageable": {
@@ -243,7 +243,7 @@
           "Test"
         ],
         "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten. File should be provided in the request body as application/octet-stream.",
-        "operationId": "Test_UploadFile",
+        "operationId": "LoadTestAdministration_UploadTestFile",
         "consumes": [
           "application/octet-stream"
         ],
@@ -335,7 +335,7 @@
           "Test"
         ],
         "summary": "Get test file by the file name.",
-        "operationId": "Test_GetFile",
+        "operationId": "LoadTestAdministration_GetTestFile",
         "produces": [
           "application/json"
         ],
@@ -385,7 +385,7 @@
           "Test"
         ],
         "summary": "Delete file by the file name for a test",
-        "operationId": "Test_DeleteFile",
+        "operationId": "LoadTestAdministration_DeleteTestFile",
         "produces": [
           "application/json"
         ],
@@ -434,7 +434,7 @@
           "Test"
         ],
         "summary": "Get all test files.",
-        "operationId": "Test_ListFiles",
+        "operationId": "LoadTestAdministration_ListTestFiles",
         "produces": [
           "application/json"
         ],
@@ -474,7 +474,7 @@
         },
         "x-ms-examples": {
           "Get all uploaded files to a test": {
-            "$ref": "./examples/GetAllTestFiles.json"
+            "$ref": "./examples/ListTestFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -488,7 +488,7 @@
           "Test"
         ],
         "summary": "Associate an app component (collection of azure resources) to a test",
-        "operationId": "Test_CreateOrUpdateAppComponent",
+        "operationId": "LoadTestAdministration_CreateOrUpdateAppComponents",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -539,8 +539,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update app component for a test": {
-            "$ref": "./examples/CreateOrUpdateTestAppComponent.json"
+          "Create or update app components for a test": {
+            "$ref": "./examples/CreateOrUpdateTestAppComponents.json"
           }
         }
       },
@@ -549,7 +549,7 @@
           "Test"
         ],
         "summary": "Get associated app component (collection of azure resources) for the given test.",
-        "operationId": "Test_GetAppComponents",
+        "operationId": "LoadTestAdministration_GetAppComponents",
         "produces": [
           "application/json"
         ],
@@ -582,19 +582,19 @@
           }
         },
         "x-ms-examples": {
-          "Get an app component for a test": {
-            "$ref": "./examples/GetTestAppComponent.json"
+          "List app components for a test": {
+            "$ref": "./examples/ListTestAppComponents.json"
           }
         }
       }
     },
-    "/tests/{testId}/server-metric-configs": {
+    "/tests/{testId}/server-metrics-config": {
       "patch": {
         "tags": [
           "Test"
         ],
         "summary": "Configure server metrics for a test",
-        "operationId": "Test_CreateOrUpdateServerMetricsConfig",
+        "operationId": "LoadTestAdministration_CreateOrUpdateServerMetricsConfig",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -620,13 +620,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The server metric config is updated.",
+            "description": "The server metrics config is updated.",
             "schema": {
               "$ref": "#/definitions/TestServerMetricConfig"
             }
           },
           "201": {
-            "description": "The server metric config is created.",
+            "description": "The server metrics config is created.",
             "schema": {
               "$ref": "#/definitions/TestServerMetricConfig"
             }
@@ -645,7 +645,7 @@
           }
         },
         "x-ms-examples": {
-          "Configure server metric config for a test": {
+          "Configure server metrics config for a test": {
             "$ref": "./examples/CreateOrUpdateTestServerMetricsConfig.json"
           }
         }
@@ -654,8 +654,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Get server metric configuration for the given test.",
-        "operationId": "Test_GetServerMetricsConfig",
+        "summary": "List server metrics configuration for the given test.",
+        "operationId": "LoadTestAdministration_GetServerMetricsConfig",
         "produces": [
           "application/json"
         ],
@@ -669,7 +669,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Requested server metric configuration",
+            "description": "Requested server metrics configuration",
             "schema": {
               "$ref": "#/definitions/TestServerMetricConfig"
             }
@@ -688,59 +688,19 @@
           }
         },
         "x-ms-examples": {
-          "Get server metric configuration for a test": {
-            "$ref": "./examples/GetTestServerMetricsConfig.json"
+          "List server metrics configuration for a test": {
+            "$ref": "./examples/ListTestServerMetricsConfig.json"
           }
         }
       }
     },
     "/test-runs/{testRunId}": {
-      "delete": {
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Delete a test run by its name.",
-        "operationId": "TestRun_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/TestRunIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The test run is deleted."
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a test run": {
-            "$ref": "./examples/DeleteTestRun.json"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "TestRun"
         ],
         "summary": "Create and start a new test run with the given name.",
-        "operationId": "TestRun_CreateOrUpdate",
+        "operationId": "LoadTestRun_CreateOrUpdateTestRun",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -807,7 +767,7 @@
           "TestRun"
         ],
         "summary": "Get test run details by name.",
-        "operationId": "TestRun_Get",
+        "operationId": "LoadTestRun_GetTestRun",
         "produces": [
           "application/json"
         ],
@@ -844,6 +804,46 @@
             "$ref": "./examples/GetTestRun.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Delete a test run by its name.",
+        "operationId": "LoadTestRun_DeleteTestRun",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TestRunIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The test run is deleted."
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a test run": {
+            "$ref": "./examples/DeleteTestRun.json"
+          }
+        }
       }
     },
     "/test-runs/{testRunId}/files/{fileName}": {
@@ -852,7 +852,7 @@
           "TestRun"
         ],
         "summary": "Get test run file by file name.",
-        "operationId": "TestRun_GetFile",
+        "operationId": "LoadTestRun_GetTestRunFile",
         "produces": [
           "application/json"
         ],
@@ -904,7 +904,7 @@
           "TestRun"
         ],
         "summary": "Get all test runs with given filters",
-        "operationId": "TestRun_List",
+        "operationId": "LoadTestRun_ListTestRuns",
         "produces": [
           "application/json"
         ],
@@ -924,7 +924,7 @@
           {
             "in": "query",
             "name": "search",
-            "description": "Prefix based, case sensitive search on searchable fields - description, executedUser.",
+            "description": "Prefix based, case sensitive search on searchable fields - description, executedUser. For example, to search for a test run, with description 500 VUs, the search parameter can be 500.",
             "type": "string"
           },
           {
@@ -984,7 +984,7 @@
         },
         "x-ms-examples": {
           "Search test runs with filters": {
-            "$ref": "./examples/ListTestRunsSearch.json"
+            "$ref": "./examples/ListTestRuns.json"
           }
         },
         "x-ms-pageable": {
@@ -998,7 +998,7 @@
           "TestRun"
         ],
         "summary": "Stop test run by name.",
-        "operationId": "TestRun_Stop",
+        "operationId": "LoadTestRun_StopTestRun",
         "produces": [
           "application/json"
         ],
@@ -1042,8 +1042,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Lists the metric namespaces for a load test run.",
-        "operationId": "TestRun_ListMetricNamespaces",
+        "summary": "List the metric namespaces for a load test run.",
+        "operationId": "LoadTestRun_ListMetricNamespaces",
         "produces": [
           "application/json"
         ],
@@ -1077,7 +1077,7 @@
         },
         "x-ms-examples": {
           "Lists the metric namespaces for a load test run.": {
-            "$ref": "./examples/GetTestRunMetricsNamespaces.json"
+            "$ref": "./examples/ListTestRunMetricsNamespaces.json"
           }
         }
       }
@@ -1087,8 +1087,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Lists the metric definitions for a load test run.",
-        "operationId": "TestRun_ListMetricDefinitions",
+        "summary": "List the metric definitions for a load test run.",
+        "operationId": "LoadTestRun_ListMetricDefinitions",
         "produces": [
           "application/json"
         ],
@@ -1129,7 +1129,7 @@
         },
         "x-ms-examples": {
           "Lists the metric definitions for a load test run.": {
-            "$ref": "./examples/GetTestRunMetricsDefinitions.json"
+            "$ref": "./examples/ListTestRunMetricsDefinitions.json"
           }
         }
       }
@@ -1139,8 +1139,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Lists the metric values for a load test run.",
-        "operationId": "TestRun_GetMetrics",
+        "summary": "List the metric values for a load test run.",
+        "operationId": "LoadTestRun_ListMetrics",
         "consumes": [
           "application/json"
         ],
@@ -1252,18 +1252,21 @@
         },
         "x-ms-examples": {
           "Lists the metric values for a load test run.": {
-            "$ref": "./examples/GetTestRunMetrics.json"
+            "$ref": "./examples/ListTestRunMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/test-runs/{testRunId}/metric-dimension/{name}/values": {
+    "/test-runs/{testRunId}/metric-dimensions/{name}/values": {
       "get": {
         "tags": [
           "TestRun"
         ],
-        "summary": "Lists the dimension values for the given metric dimension name.",
-        "operationId": "TestRun_GetMetricDimensionValues",
+        "summary": "List the dimension values for the given metric dimension name.",
+        "operationId": "LoadTestRun_ListMetricDimensionValues",
         "produces": [
           "application/json"
         ],
@@ -1365,8 +1368,11 @@
         },
         "x-ms-examples": {
           "Lists the metric dimension values for a load test run.": {
-            "$ref": "./examples/GetMetricDimensionValues.json"
+            "$ref": "./examples/ListMetricDimensionValues.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1376,7 +1382,7 @@
           "TestRun"
         ],
         "summary": "Associate an app component (collection of azure resources) to a test run",
-        "operationId": "TestRun_CreateOrUpdateAppComponent",
+        "operationId": "LoadTestRun_CreateOrUpdateAppComponents",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1427,8 +1433,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update app component for a test run": {
-            "$ref": "./examples/CreateOrUpdateTestRunAppComponent.json"
+          "Create or update app components for a test run": {
+            "$ref": "./examples/CreateOrUpdateTestRunAppComponents.json"
           }
         }
       },
@@ -1437,7 +1443,7 @@
           "TestRun"
         ],
         "summary": "Get associated app component (collection of azure resources) for the given test run.",
-        "operationId": "TestRun_GetAppComponents",
+        "operationId": "LoadTestRun_GetAppComponents",
         "produces": [
           "application/json"
         ],
@@ -1470,19 +1476,19 @@
           }
         },
         "x-ms-examples": {
-          "Get an app component for a test run": {
-            "$ref": "./examples/GetTestRunAppComponent.json"
+          "List app components for a test run": {
+            "$ref": "./examples/ListTestRunAppComponents.json"
           }
         }
       }
     },
-    "/test-runs/{testRunId}/server-metric-configs": {
+    "/test-runs/{testRunId}/server-metrics-config": {
       "patch": {
         "tags": [
           "TestRun"
         ],
         "summary": "Configure server metrics for a test run",
-        "operationId": "TestRun_CreateOrUpdateServerMetricsConfig",
+        "operationId": "LoadTestRun_CreateOrUpdateServerMetricsConfig",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1508,13 +1514,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The server metric config is updated.",
+            "description": "The server metrics config is updated.",
             "schema": {
               "$ref": "#/definitions/TestRunServerMetricConfig"
             }
           },
           "201": {
-            "description": "The server metric config is created.",
+            "description": "The server metrics config is created.",
             "schema": {
               "$ref": "#/definitions/TestRunServerMetricConfig"
             }
@@ -1533,7 +1539,7 @@
           }
         },
         "x-ms-examples": {
-          "Configure server metric config for a test run": {
+          "Configure server metrics config for a test run": {
             "$ref": "./examples/CreateOrUpdateTestRunServerMetricsConfig.json"
           }
         }
@@ -1542,8 +1548,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get server metric configuration for the given test run.",
-        "operationId": "TestRun_GetServerMetricsConfig",
+        "summary": "List server metrics configuration for the given test run.",
+        "operationId": "LoadTestRun_GetServerMetricsConfig",
         "produces": [
           "application/json"
         ],
@@ -1557,7 +1563,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Requested server metric configuration",
+            "description": "Requested server metrics configuration",
             "schema": {
               "$ref": "#/definitions/TestRunServerMetricConfig"
             }
@@ -1576,8 +1582,8 @@
           }
         },
         "x-ms-examples": {
-          "Get server metric configuration for a test run": {
-            "$ref": "./examples/GetTestRunServerMetricsConfig.json"
+          "List server metrics configuration for a test run": {
+            "$ref": "./examples/ListTestRunServerMetricsConfig.json"
           }
         }
       }
@@ -1760,7 +1766,7 @@
           "description": "File URL.",
           "type": "string"
         },
-        "filename": {
+        "fileName": {
           "description": "Name of the file.",
           "type": "string"
         },
@@ -1832,6 +1838,10 @@
               }
             ]
           }
+        },
+        "validationFailureDetails": {
+          "description": "Validation failure error details",
+          "type": "string"
         }
       }
     },
@@ -2138,7 +2148,7 @@
       "description": "The response to a metrics query.",
       "type": "object",
       "properties": {
-        "timeseries": {
+        "value": {
           "description": "Timeseries data for metric query.",
           "type": "array",
           "items": {
@@ -2316,9 +2326,10 @@
         },
         "action": {
           "description": "Action taken after the threshold is met. Default is ‘continue’.",
+          "default": "continue",
           "enum": [
-            "stop",
-            "continue"
+            "continue",
+            "stop"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2326,12 +2337,12 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "stop",
-                "description": "Test run will stop if pass fail criteria metric is not passed."
-              },
-              {
                 "value": "continue",
                 "description": "Test will continue to run even if pass fail metric criteria metric gets failed"
+              },
+              {
+                "value": "stop",
+                "description": "Test run will stop if pass fail criteria metric is not passed."
               }
             ]
           }
@@ -2541,17 +2552,17 @@
       ],
       "type": "object",
       "properties": {
-        "testId": {
-          "description": "Test identifier",
-          "type": "string",
-          "readOnly": true
-        },
         "components": {
           "description": "Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } ",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/AppComponent"
           }
+        },
+        "testId": {
+          "description": "Test identifier",
+          "type": "string",
+          "readOnly": true
         },
         "createdDateTime": {
           "format": "date-time",
@@ -2677,6 +2688,12 @@
               }
             ]
           }
+        },
+        "virtualUsers": {
+          "format": "int32",
+          "description": "Number of virtual users, for which test has been run.",
+          "type": "integer",
+          "readOnly": true
         },
         "testRunId": {
           "description": "Unique test run name as identifier",
@@ -2811,12 +2828,6 @@
           "type": "string",
           "readOnly": true
         },
-        "virtualUsers": {
-          "format": "int32",
-          "description": "Number of virtual users, for which test has been run.",
-          "type": "integer",
-          "readOnly": true
-        },
         "portalUrl": {
           "description": "Portal url.",
           "type": "string",
@@ -2864,17 +2875,17 @@
       ],
       "type": "object",
       "properties": {
-        "testRunId": {
-          "description": "Test run identifier",
-          "type": "string",
-          "readOnly": true
-        },
         "components": {
           "description": "Azure resource collection { resource id (fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}) : resource object } ",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/AppComponent"
           }
+        },
+        "testRunId": {
+          "description": "Test run identifier",
+          "type": "string",
+          "readOnly": true
         },
         "createdDateTime": {
           "format": "date-time",
@@ -2944,16 +2955,16 @@
       "description": "The output artifacts for the test run.",
       "type": "object",
       "properties": {
-        "resultUrl": {
+        "resultFileInfo": {
           "$ref": "#/definitions/FileInfo"
         },
-        "logsUrl": {
+        "logsFileInfo": {
           "$ref": "#/definitions/FileInfo"
         }
       }
     },
     "TestRunServerMetricConfig": {
-      "description": "Test run server metric configuration",
+      "description": "Test run server metrics configuration",
       "type": "object",
       "properties": {
         "testRunId": {
@@ -3103,7 +3114,7 @@
       }
     },
     "TestServerMetricConfig": {
-      "description": "Test server metric configuration",
+      "description": "Test server metrics configuration",
       "type": "object",
       "properties": {
         "testId": {
