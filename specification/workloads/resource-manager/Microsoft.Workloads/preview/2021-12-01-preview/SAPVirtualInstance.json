@@ -287,11 +287,44 @@
           "Create Infrastructure only for Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
           },
+          "Create Infrastructure without SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_SkipTransport.json"
+          },
+          "Create Infrastructure with a new SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_CreateTransport.json"
+          },
+          "Create Infrastructure with an existing SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_MountTransport.json"
+          },
+          "Detect SAP Software Installation on a Single Server System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_SingleServer.json"
+          },
+          "Detect SAP Software Installation on a Distributed System": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_Distributed.json"
+          },
+          "Detect SAP Software Installation on an HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_HA_AvSet.json"
+          },
+          "Detect SAP Software Installation on an HA System with Availability Zone": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_HA_AvZone.json"
+          },
           "Install SAP Software on Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_SingleServer.json"
           },
           "Install SAP Software on Distributed System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Install_Distributed.json"
+          },
+          "Create Infrastructure with Disk and OS configurations for Single Server System (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_SingleServer.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for Distributed System (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_Distributed.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for HA System with Availability Set (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvSet.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for HA System with Availability Zone (Recommended)": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_DiskDetails_HA_AvZone.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -620,6 +653,9 @@
         "x-ms-examples": {
           "SAPCentralInstances_Create": {
             "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Create.json"
+          },
+          "Create SAP Central Instances for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPCentralInstances_Create_HA_AvSet.json"
           }
         },
         "description": "Creates the SAP Central Services Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
@@ -894,6 +930,9 @@
         "x-ms-examples": {
           "SAPDatabaseInstances_Create": {
             "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Create.json"
+          },
+          "Create SAP Database Instances for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPDatabaseInstances_Create_HA_AvSet.json"
           }
         },
         "description": "Creates the Database resource corresponding to the Virtual Instance for SAP solutions resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
@@ -1168,6 +1207,9 @@
         "x-ms-examples": {
           "SAPApplicationServerInstances_Create": {
             "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Create.json"
+          },
+          "Create SAP Application Server Instances for HA System with Availability Set": {
+            "$ref": "./examples/sapvirtualinstances/SAPApplicationServerInstances_Create_HA_AvSet.json"
           }
         },
         "description": "Puts the SAP Application Server Instance resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
@@ -1531,7 +1573,8 @@
       "description": "The SAP software installation Type.",
       "enum": [
         "ServiceInitiated",
-        "SAPInstallWithoutOSConfig"
+        "SAPInstallWithoutOSConfig",
+        "External"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1616,6 +1659,8 @@
         "SoftwareInstallationPending",
         "SoftwareInstallationInProgress",
         "SoftwareInstallationFailed",
+        "SoftwareDetectionInProgress",
+        "SoftwareDetectionFailed",
         "DiscoveryPending",
         "DiscoveryInProgress",
         "DiscoveryFailed",
@@ -1726,6 +1771,23 @@
       "readOnly": true,
       "x-ms-enum": {
         "name": "SapVirtualInstanceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DiskSkuName": {
+      "description": "Defines the disk sku name.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS",
+        "Premium_ZRS",
+        "StandardSSD_ZRS",
+        "PremiumV2_LRS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DiskSkuName",
         "modelAsString": true
       }
     },
@@ -2256,6 +2318,48 @@
         }
       }
     },
+    "DiskSku": {
+      "description": "The disk sku.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DiskSkuName"
+        }
+      }
+    },
+    "DiskVolumeConfiguration": {
+      "description": "The disk configuration required for the selected volume.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The total number of disks required for the concerned volume.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sizeGB": {
+          "description": "The disk size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sku": {
+          "description": "The disk SKU details.",
+          "$ref": "#/definitions/DiskSku"
+        }
+      }
+    },
+    "DiskConfiguration": {
+      "description": "The Disk Configuration Details.",
+      "type": "object",
+      "properties": {
+        "diskVolumeConfigurations": {
+          "description": "The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DiskVolumeConfiguration"
+          }
+        }
+      }
+    },
     "VirtualMachineConfiguration": {
       "description": "Defines the virtual machine configuration.",
       "type": "object",
@@ -2304,6 +2408,10 @@
         "virtualMachineConfiguration": {
           "description": "Gets or sets the virtual machine configuration.",
           "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "dbDiskConfiguration": {
+          "description": "Gets or sets the disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
         }
       },
       "required": [
@@ -2355,6 +2463,10 @@
           "description": "The number of database VMs.",
           "type": "integer",
           "format": "int64"
+        },
+        "diskConfiguration": {
+          "description": "Gets or sets the disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
         }
       },
       "required": [
@@ -2400,6 +2512,100 @@
         "highAvailabilityType"
       ]
     },
+    "FileShareConfigurationType": {
+      "description": "The type of file share config.",
+      "enum": [
+        "Skip",
+        "CreateAndMount",
+        "Mount"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "configurationType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "SkipFileShareConfiguration": {
+      "x-ms-discriminator-value": "Skip",
+      "description": "Gets or sets the file share configuration for scenarios where transport directory fileshare is not created or required.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ]
+    },
+    "CreateAndMountFileShareConfiguration": {
+      "x-ms-discriminator-value": "CreateAndMount",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare is created and mounted as a part of the create infra flow.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "The name of file share resource group. The app rg is used in case of missing input."
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of file share storage account name . A custom name is used in case of missing input."
+        }
+      }
+    },
+    "MountFileShareConfiguration": {
+      "x-ms-discriminator-value": "Mount",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare already exists, and user wishes to mount the fileshare as a part of the create infra flow.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fileshare resource ID"
+        },
+        "privateEndpointId": {
+          "type": "string",
+          "description": "The private endpoint resource ID"
+        }
+      },
+      "required": [
+        "id",
+        "privateEndpointId"
+      ]
+    },
+    "FileShareConfiguration": {
+      "description": "File Share configuration details, populated with information on storage configuration mounted on the VIS. The createAndMount option is selected in case of missing input.",
+      "type": "object",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/FileShareConfigurationType"
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "StorageConfiguration": {
+      "description": "Gets or sets the storage configuration.",
+      "type": "object",
+      "properties": {
+        "transportFileShareConfiguration": {
+          "description": "The properties of the transport directory attached to the VIS. The default for transportFileShareConfiguration is the createAndMount flow if storage configuration is missing.",
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      }
+    },
     "ThreeTierConfiguration": {
       "x-ms-discriminator-value": "ThreeTier",
       "x-ms-client-flatten": true,
@@ -2430,6 +2636,10 @@
         "highAvailabilityConfig": {
           "description": "The high availability configuration.",
           "$ref": "#/definitions/HighAvailabilityConfiguration"
+        },
+        "storageConfiguration": {
+          "description": "The storage configuration.",
+          "$ref": "#/definitions/StorageConfiguration"
         }
       },
       "required": [
@@ -2545,6 +2755,23 @@
         "sapBitsStorageAccountId",
         "softwareVersion"
       ]
+    },
+    "ExternalInstallationSoftwareConfiguration": {
+      "description": "The SAP Software configuration Input when the software is installed externally outside the service.",
+      "type": "object",
+      "x-ms-discriminator-value": "External",
+      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "properties": {
+        "centralServerVmId": {
+          "type": "string",
+          "description": "The resource ID of the virtual machine containing the central server instance."
+        }
+      }
     },
     "HighAvailabilitySoftwareConfiguration": {
       "description": "Gets or sets the HA software configuration.",
@@ -2705,6 +2932,26 @@
       },
       "discriminator": "configurationType"
     },
+    "LoadBalancerDetails": {
+      "description": "The Load Balancer details such as Load Balancer ID.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageInformation": {
+      "description": "Storage details of all the Storage accounts attached to the VM. For e.g. NFS on AFS Shared Storage. ",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CentralServerVmDetails": {
       "description": "The SAP Central Services Instance VM details.",
       "type": "object",
@@ -2715,6 +2962,15 @@
         },
         "virtualMachineId": {
           "type": "string",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -2729,6 +2985,15 @@
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -2954,6 +3219,15 @@
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
           "readOnly": true
         },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
         "health": {
           "$ref": "#/definitions/HealthState",
           "readOnly": true
@@ -3153,6 +3427,11 @@
           "readOnly": true,
           "x-nullable": true
         },
+        "loadBalancerDetails": {
+          "description": "The Load Balancer details such as LoadBalancer ID attached to ASCS Virtual Machines",
+          "$ref": "#/definitions/LoadBalancerDetails",
+          "readOnly": true
+        },
         "vmDetails": {
           "description": "The list of virtual machines corresponding to the Central Services instance.",
           "type": "array",
@@ -3218,6 +3497,11 @@
         "ipAddress": {
           "type": "string",
           "description": "Database IP Address.",
+          "readOnly": true
+        },
+        "loadBalancerDetails": {
+          "description": "The Load Balancer details such as LoadBalancer ID attached to Database Virtual Machines",
+          "$ref": "#/definitions/LoadBalancerDetails",
           "readOnly": true
         },
         "vmDetails": {
