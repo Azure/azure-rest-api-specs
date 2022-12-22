@@ -1179,6 +1179,293 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateEndpointConnections": {
+      "get": {
+        "description": "Gets list of private endpoint connections on a server group.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByServerGroup",
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a server group.": {
+            "$ref": "./examples/PrivateEndpointConnectionsListByServerGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "description": "Gets private endpoint connection.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "put": {
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name": {
+            "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "delete": {
+        "description": "Deletes a private endpoint connection with a given name.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted private endpoint connection."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateLinkResources": {
+      "get": {
+        "description": "Gets the private link resources for server group.",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByServerGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateLinkResources/{groupName}": {
+      "get": {
+        "description": "Gets a private link resource for server group.",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "Gets a private link resource for server group.": {
+            "$ref": "./examples/PrivateLinkResourcesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -2173,6 +2460,137 @@
         }
       }
     },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections"
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of private endpoint connections."
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of the private link resource."
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id."
+        },
+        "memberNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource required member names."
+        },
+        "zoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource zone names."
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "description": "The list of private link resources."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of private link resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of private link resources."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "The properties used to create a private endpoint connection",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "State of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "properties": {
+        "actionsRequired": {
+          "type": "string",
+          "description": "The actions required for private link service connection."
+        },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        }
+      }
+    },
     "CloudError": {
       "x-ms-external": true,
       "description": "An error response from the Batch service.",
@@ -2256,7 +2674,23 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server group role name.",
+      "description": "The name of the server group role.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link resource.",
       "x-ms-parameter-location": "method"
     }
   }
