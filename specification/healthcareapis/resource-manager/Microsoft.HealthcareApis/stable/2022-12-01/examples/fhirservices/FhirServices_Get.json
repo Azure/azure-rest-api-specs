@@ -15,11 +15,9 @@
         "properties": {
           "authenticationConfiguration": {
             "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
-            "audiences": [
-              "https://azurehealthcareapis.com/",
-              "https://azurehealthcareapis.com"
-            ]
-          },          
+            "audience": "https://azurehealthcareapis.com",
+            "smartProxyEnabled": true
+          },
           "corsConfiguration": {
             "origins": [
               "*"
@@ -39,12 +37,12 @@
             "allowCredentials": false
           },
           "exportConfiguration": {
-            "storageAccountName": "bar"
+            "storageAccountName": "existingStorageAccount"
           },
           "importConfiguration": {
             "enabled": false,
             "initialImportMode": false,
-            "integrationDataStore": "for"
+            "integrationDataStore": "existingStorageAccount"
           },
           "implementationGuidesConfiguration": {
             "usCoreMissingData": false
