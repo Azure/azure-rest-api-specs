@@ -9,5 +9,4 @@ typescript:
   package-name: "@azure/arm-servicebus"
   output-folder: "$(typescript-sdks-folder)/sdk/servicebus/arm-servicebus"
   generate-metadata: true
-title: ServiceNetworkingManagementClient 
 ```
