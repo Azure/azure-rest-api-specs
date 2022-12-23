@@ -1080,6 +1080,26 @@
         }
       }
     },
+    "KedaConfiguration": {
+      "type": "object",
+      "description": "Configuration properties Keda component",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of Keda"
+        }
+      }
+    },
+    "DaprConfiguration": {
+      "type": "object",
+      "description": "Configuration properties Dapr component",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of Dapr"
+        }
+      }
+    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
@@ -1247,6 +1267,14 @@
               "x-ms-identifiers": [
                 "workloadProfileType"
               ]
+            },
+            "kedaConfiguration": {
+              "$ref": "#/definitions/KedaConfiguration",
+              "description": "The configuration of Keda component."
+            },
+            "daprConfiguration": {
+              "$ref": "#/definitions/DaprConfiguration",
+              "description": "The configuration of Dapr component."
             }
           },
           "x-ms-client-flatten": true
