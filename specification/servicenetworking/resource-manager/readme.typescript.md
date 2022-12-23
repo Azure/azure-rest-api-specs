@@ -9,4 +9,5 @@ typescript:
   package-name: "@azure/arm-servicenetworking"
   output-folder: "$(typescript-sdks-folder)/sdk/servicenetworking/arm-servicenetworking"
   generate-metadata: true
+title: ServiceNetworkingManagementClient 
 ```
