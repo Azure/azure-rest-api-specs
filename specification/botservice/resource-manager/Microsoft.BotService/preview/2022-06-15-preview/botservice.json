@@ -2770,7 +2770,7 @@
           "items": {
             "$ref": "#/definitions/TelephonyChannelResourceApiConfiguration"
           },
-          "description": "The list of Telephony phone numbers"
+          "description": "The list of Telephony api configuration"
         },
         "cognitiveServiceSubscriptionKey": {
           "type": "string",
@@ -2996,15 +2996,18 @@
         },
         "acsEndpoint": {
           "type": "string",
-          "description": "The endpoint of ACS."
+          "description": "The endpoint of ACS.",
+          "x-nullable": true
         },
         "acsSecret": {
           "type": "string",
-          "description": "The secret of ACS."
+          "description": "The secret of ACS.",
+          "x-nullable": true
         },
         "acsResourceId": {
           "type": "string",
-          "description": "The resource id of ACS."
+          "description": "The resource id of ACS.",
+          "x-nullable": true
         },
         "cognitiveServiceSubscriptionKey": {
           "type": "string",
@@ -3013,15 +3016,23 @@
         },
         "cognitiveServiceRegion": {
           "type": "string",
-          "description": "The service region of cognitive service."
+          "description": "The service region of cognitive service.",
+          "x-nullable": true
         },
         "cognitiveServiceResourceId": {
           "type": "string",
-          "description": "The resource id of cognitive service."
+          "description": "The resource id of cognitive service.",
+          "x-nullable": true
         },
         "defaultLocale": {
           "type": "string",
-          "description": "The default locale of the phone number."
+          "description": "The default locale of the phone number.",
+          "x-nullable": true
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Optional Property that will determine the offering type of the phone.",
+          "x-nullable": true
         }
       },
       "description": "A telephone number for the Telephony channel"
@@ -3087,22 +3098,6 @@
     },
     "ConnectionSettingProperties": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id associated with the Connection Setting.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Name associated with the Connection Setting.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "clientId": {
           "type": "string",
           "description": "Client Id associated with the Connection Setting."
