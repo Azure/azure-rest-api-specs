@@ -2678,6 +2678,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: dscpConfiguration.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: R3023
+    from: networkManagerGroupMembership.json
+    reason: Extension Resource, not new RP.
 ```
 
 ---
