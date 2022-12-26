@@ -954,6 +954,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]{0,11}$",
+            "minLength": 1,
+            "maxLength": 12,
             "description": "The name of the agent pool."
           }
         ],
@@ -1168,6 +1171,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]{0,11}$",
+            "minLength": 1,
+            "maxLength": 12,
             "description": "The name of the agent pool."
           }
         ],
@@ -1791,6 +1797,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]{0,11}$",
+            "minLength": 1,
+            "maxLength": 12,
             "description": "The name of the agent pool."
           }
         ],
@@ -5996,7 +6005,7 @@
         "values": [
           {
             "value": "azure",
-            "description": "Return azure auth-provider kubeconfig. This format is deprecated in 1.22 and will be fully removed in 1.25."
+            "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26. See: https://aka.ms/k8s/changes-1-26."
           },
           {
             "value": "exec",
