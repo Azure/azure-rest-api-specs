@@ -321,6 +321,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/failover": {
+      "post": {
+        "tags": [
+          "Namespaces Geo DR Faliover"
+        ],
+        "operationId": "GeoDR_Failover",
+        "x-ms-examples": {
+          "NameSpaceCreate": {
+            "$ref": "./examples/NameSpaces/EHNamespaceFailover.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "primaryLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Query parameter for the new primary location after failover."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover triggered successfully.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "default": {
+            "description": "EventHubEventHub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -700,6 +748,10 @@
           "description": "The system meta data relating to this resource.",
           "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         },
+        "geoDataReplication": {
+          "$ref": "#/definitions/GeoDataReplicationProperties",
+          "description": "Geo Data Replication settings for the namespace"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
@@ -853,6 +905,48 @@
         "name"
       ],
       "description": "SKU parameters supplied to the create namespace operation"
+    },
+    "GeoDataReplicationProperties": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "maxReplicationLagDurationInSeconds": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The maximum acceptable lag for data replication operations from the primary replica to a quorum of secondary replicas.  When the lag exceeds the configured amount, operations on the primary replica will be failed."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceReplicaLocation"
+          },
+          "x-ms-client-name": "locations",
+          "description": "A list of regions where replicas of the namespace are maintained."
+        }
+      }
+    },
+    "NamespaceReplicaLocation": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "LocationName": {
+          "type": "string",
+          "description": "Azure regions where a replica of the namespace is maintained",
+          "readOnly": true
+        },
+        "RoleType": {
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "GeoDRRoleType",
+            "modelAsString": true
+          }
+        },
+        "ClusterArmId": {
+          "type": "string",
+          "description": "Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster"
+        }
+      }
     },
     "Identity": {
       "x-ms-client-flatten": true,

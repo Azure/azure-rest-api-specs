@@ -1,0 +1,55 @@
+{
+    "parameters": {
+      "namespaceName": "NamespaceGeoDRFailoverSample",
+      "resourceGroupName": "ResurceGroupSample",
+      "api-version": "2023-01-01-preview",
+      "subscriptionId": "SampleSubscription",
+      "primarylocation": "centralus"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "sku": {
+            "name": "Premium",
+            "tier": "Premium",
+            "capacity": 1
+          },
+          "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRFailoverSample",
+          "name": "NamespaceGeoDRFailoverSample",
+          "type": "Microsoft.EventHub/Namespaces",
+          "location": "East US",
+          "tags": {}
+        },
+        "properties": {
+          "geoReplication": {
+            "maxReplicationLagDurationInSeconds": 60,
+            "locations": [
+              {
+                "locationName": "centralus",
+                "roleType": "primary"
+              },
+              {
+                "locationName": "westus",
+                "roleType": "secondary"
+              },
+              {
+                "locationName": "eastus",
+                "roleType": "secondary"
+              }
+            ]
+          },
+          "zoneRedundant": false,
+          "isAutoInflateEnabled": false,
+          "disableLocalAuth": false,
+          "maximumThroughputUnits": 0,
+          "minimumTlsVersion": "1.2",
+          "kafkaEnabled": false,
+          "provisioningState": "Succeeded",
+          "metricId": "MetricGUID:NamespaceGeoDRFailoverSample",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "updatedAt": "2021-02-16T22:37:42.29Z",
+          "serviceBusEndpoint": "https://NamespaceGeoDRFailoverSample.servicebus.windows.net:443/"
+        }
+      }
+    }
+  }
