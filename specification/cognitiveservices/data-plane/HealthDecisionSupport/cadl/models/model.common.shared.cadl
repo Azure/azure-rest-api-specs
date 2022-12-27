@@ -4,41 +4,38 @@ using Cadl.Rest;
 
 namespace HealthDecisionSupportAPI;
 
+// @doc("Error information.")
+// model Error {
+//   @doc("Error code.")
+//   code: string;
 
-@doc("Error information.")
-model Error {
-  @doc("Error code.")
-  code: string;
+//   @doc("A human-readable error message.")
+//   message: string;
 
-  @doc("A human-readable error message.")
-  message: string;
+//   @doc("Target of the particular error (e.g., the name of the property in error)")
+//   target?: string;
 
-  @doc("Target of the particular error (e.g., the name of the property in error)")
-  target?: string;
+//   @doc("A list of related errors that occurred during the request.")
+//   details?: Error[];
 
-  @doc("A list of related errors that occurred during the request.")
-  details?: Error[];
+//   @doc("An object containing more specific information about the error.")
+//   innererror?: InnerError;
+// }
 
-  @doc("An object containing more specific information about the error.")
-  innererror?: InnerError;
-}
+// @doc("An object containing more specific information about the error.")
+// model InnerError {
+//   @doc("Error code.")
+//   code: string;
 
-@doc("An object containing more specific information about the error.")
-model InnerError {
-  @doc("Error code.")
-  code: string;
+//   @doc("Error message.")
+//   message?: string;
 
-  @doc("Error message.")
-  message?: string;
-
-  @doc("An object containing more specific information about the error.")
-  innererror?: InnerError;
-}
-
+//   @doc("An object containing more specific information about the error.")
+//   innererror?: InnerError;
+// }
 
 @doc("""
-A piece of clinical information, expressed as a code in a clinical coding
-system.
+A piece of clinical information, expressed as a code in a clinical coding system.
 """)
 model ClinicalCodedElement {
   @doc("The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS.")
@@ -53,7 +50,6 @@ model ClinicalCodedElement {
   @doc("A value associated with the code within the given clinical coding system.")
   value?: string;
 }
-
 
 @doc("""
 A location given as a combination of city/state/country. It could specify a

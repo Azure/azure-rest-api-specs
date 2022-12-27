@@ -25,16 +25,15 @@ model Response {
   status: JobStatus;
 
   @doc("An array of errors, if any errors occurred during the processing job.")
-  errors?: Error[];
+  errors?: Azure.Core.Foundations.Error[];
 }
 
-@doc("Error response object.")
-@error
-model ErrorResponse {
-  @doc("Error information.")
-  error: Error;
-}
-
+// @doc("Error response object.")
+// @error
+// model ErrorResponse {
+//   @doc("Error information.")
+//   error: Error;
+// }
 
 @doc("An inference made by the model regarding a patient.")
 model Inference {
@@ -45,7 +44,35 @@ model Inference {
   description?: string;
 
   @doc("Confidence score for this inference.")
+  @minValue(0)
+  @maxValue(1)
   confidenceScore?: float32;
+}
+
+
+@doc("A piece of evidence corresponding to an inference.")
+model InferenceEvidence {
+  @doc("A piece of evidence from a clinical note (text document).")
+  patientDataEvidence?: ClinicalNoteEvidence;
+
+  @doc("""
+A piece of clinical information, expressed as a code in a clinical coding
+system.
+""")
+  patientInfoEvidence?: ClinicalCodedElement;
+
+  @doc("A value indicating how important this piece of evidence is for the inference.")
+  @minValue(0)
+  @maxValue(1)
+  importance?: float32;
+}
+
+@doc("A piece of evidence corresponding to a Trial Matcher inference.")
+model TrialMatcherInferenceEvidence {
+  @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
+  eligibilityCriteriaEvidence?: string;
+  
+  ...InferenceEvidence;
 }
 
 
@@ -59,3 +86,6 @@ enum JobStatusKnownValues {
   Failed: "failed",
   PartiallyCompleted: "partiallyCompleted",
 }
+
+@doc("The version of the model used for inference, expressed as the model date.")
+model ModelVersion is plainDate;

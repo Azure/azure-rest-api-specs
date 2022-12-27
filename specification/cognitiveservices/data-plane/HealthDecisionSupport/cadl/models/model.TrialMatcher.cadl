@@ -42,11 +42,12 @@ model TrialMatcherResults {
   patients: TrialMatcherPatientResult[];
 
   @doc("The version of the model used for inference, expressed as the model date.")
-  modelVersion: plainDate;
+  modelVersion: ModelVersion;
 
   @doc("The date when the clinical trials knowledge graph was last updated.")
   knowledgeGraphLastUpdateDate?: plainDate;
 }
+
 
 @doc("The results of the model's work for a single patient.")
 model TrialMatcherPatientResult {
@@ -57,30 +58,27 @@ model TrialMatcherPatientResult {
   inferences: TrialMatcherInference[];
 
   @doc("""
-Clinical information which is needed to provide better trial matching results
-for the patient.
+Clinical information which is needed to provide better trial matching results for the patient.
 """)
-  neededClinicalInfo?: ExtendedClinicalCodedElement[];
+  neededClinicalInfo?: NeededClinicalInfo;
 }
 
+@doc("Clinical information which is needed to provide better trial matching results for the patient.")
+model NeededClinicalInfo is ExtendedClinicalCodedElement[];
 
 @doc("""
-A piece of clinical information, expressed as a code in a clinical coding
-system, extended by semantic information.
+A piece of clinical information, expressed as a code in a clinical coding system, extended by semantic information.
 """)
 model ExtendedClinicalCodedElement {
   ...ClinicalCodedElement;
 
   @doc("""
-The [UMLS semantic
-type](https://www.nlm.nih.gov/research/umls/META3_current_semantic_types.html)
-associated with the coded concept.
+The [UMLS semantic type](https://www.nlm.nih.gov/research/umls/META3_current_semantic_types.html) associated with the coded concept.
 """)
   semanticType?: string;
 
   @doc("""
-The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom,
-Medication, Examination.
+The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, Medication, Examination.
 """)
   category?: string;
 }
@@ -94,41 +92,26 @@ model ClinicalNoteEvidence {
   text?: string;
 
   @doc("The start index of the evidence text span in the document (0 based).")
+  @minValue(0)
   offset: int32;
 
   @doc("The length of the evidence text span.")
+  @minValue(1)
   length: int32;
 }
 
-@doc("A piece of evidence corresponding to an inference.")
-model InferenceEvidence {
-  @doc("A piece of evidence from a clinical note (text document).")
-  patientDataEvidence?: ClinicalNoteEvidence;
-
-  @doc("""
-A piece of clinical information, expressed as a code in a clinical coding
-system.
-""")
-  patientInfoEvidence?: ClinicalCodedElement;
-
-  @doc("A value indicating how important this piece of evidence is for the inference.")
-  importance?: float32;
-}
-
-@doc("A piece of evidence corresponding to a Trial Matcher inference.")
-model TrialMatcherInferenceEvidence {
-  ...InferenceEvidence;
-
-  @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
-  eligibilityCriteriaEvidence?: string;
-}
-
-
 @doc("An inference made by the Trial Matcher model regarding a patient.")
 model TrialMatcherInference {
+  @doc("The type of the Trial Matcher inference.")
+  type: TrialMatcherInferenceType;
+
   ...Inference;
 
+  @doc("The evidence corresponding to the inference value.")
+  evidence?: TrialMatcherInferenceEvidence[];
+
   @doc("The identifier of the clinical trial.")
+  @minLength(1) 
   id?: string;
 
   @doc("Possible sources of a clinical trial.")
@@ -140,10 +123,9 @@ model TrialMatcherInference {
 
 
 @doc("""
-The clinical trials that the patient(s) should be matched to. <br />The trial
-selection can be given as a list of custom clinical trials and/or a list of
-filters to known clinical trial registries. In case both are given, the
-resulting trial set is a union of the two sets.
+The clinical trials that the patient(s) should be matched to. 
+The trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.
+In case both are given, the resulting trial set is a union of the two sets.
 """)
 model ClinicalTrials {
   @doc("A list of clinical trials.")
@@ -160,92 +142,79 @@ clinical trial registry.
 
 
 @doc("""
-A filter defining a subset of clinical trials from a given clinical trial
-registry (e.g. clinicaltrials.gov).
+A filter defining a subset of clinical trials from a given clinical trial registry (e.g. clinicaltrials.gov).
 """)
 model ClinicalTrialRegistryFilter {
   @doc("""
-Trials with any of the given medical conditions will be included in the
-selection (provided that other limitations are satisfied). Leaving this list
-empty will not limit the medical conditions.
+Trials with any of the given medical conditions will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the medical conditions.
 """)
   conditions?: string[];
 
   @doc("""
-Trials with any of the given study types will be included in the selection
-(provided that other limitations are satisfied). Leaving this list empty will
-not limit the study types.
+Trials with any of the given study types will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the study types.
 """)
   studyTypes?: ClinicalTrialStudyType[];
 
   @doc("""
-Trials with any of the given recruitment statuses will be included in the
-selection (provided that other limitations are satisfied). Leaving this list
-empty will not limit the recruitment statuses.
+Trials with any of the given recruitment statuses will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the recruitment statuses.
 """)
   recruitmentStatuses?: ClinicalTrialRecruitmentStatus[];
 
   @doc("""
-Trials with any of the given sponsors will be included in the selection
-(provided that other limitations are satisfied). Leaving this list empty will
-not limit the sponsors.
+Trials with any of the given sponsors will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the sponsors.
 """)
   sponsors?: string[];
 
   @doc("""
-Trials with any of the given phases will be included in the selection (provided
-that other limitations are satisfied). Leaving this list empty will not limit
-the phases.
+Trials with any of the given phases will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the phases.
 """)
   phases?: ClinicalTrialPhase[];
 
   @doc("""
-Trials with any of the given purposes will be included in the selection
-(provided that other limitations are satisfied). Leaving this list empty will
-not limit the purposes.
+Trials with any of the given purposes will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the purposes.
 """)
   purposes?: ClinicalTrialPurpose[];
 
   @doc("""
-Trials with any of the given identifiers will be included in the selection
-(provided that other limitations are satisfied). Leaving this list empty will
-not limit the trial identifiers.
+Trials with any of the given identifiers will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the trial identifiers.
 """)
   ids?: string[];
 
   @doc("""
-Trials with any of the given sources will be included in the selection
-(provided that other limitations are satisfied). Leaving this list empty will
-not limit the sources.
+Trials with any of the given sources will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the sources.
 """)
   sources?: ClinicalTrialSource[];
 
   @doc("""
-Trials with any of the given facility names will be included in the selection
-(provided that other limitations are satisfied). Leaving this list empty will
-not limit the trial facility names.
+Trials with any of the given facility names will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the trial facility names.
 """)
   facilityNames?: string[];
 
   @doc("""
-Trials with any of the given facility locations will be included in the
-selection (provided that other limitations are satisfied). Leaving this list
-empty will not limit the trial facility locations.
+Trials with any of the given facility locations will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the trial facility locations.
 """)
   facilityLocations?: Location[];
 
   @doc("""
-Trials with any of the given facility area boundaries will be included in the
-selection (provided that other limitations are satisfied). Leaving this list
-empty will not limit the trial facility area boundaries.
+Trials with any of the given facility area boundaries will be included in the selection (provided that other limitations are satisfied).
+Leaving this list empty will not limit the trial facility area boundaries.
 """)
   facilityAreas?: Area[];
 }
 
 
 @doc("""
-A geographical area, expressed as a `Circle` geometry represented using a
-`GeoJSON Feature` (see [GeoJSON spec](https://tools.ietf.org/html/rfc7946)).
+A geographical area, expressed as a `Circle` geometry represented using a `GeoJSON Feature` (see [GeoJSON spec](https://tools.ietf.org/html/rfc7946)).
 """)
 model Area {
   @doc("`GeoJSON` type.")
@@ -264,10 +233,11 @@ model AreaGeometry {
   type: GeoJsonGeometryType;
 
   @doc("""
-Coordinates of the area circle's center, represented according to the `GeoJSON`
-standard. <br />This is an array of 2 decimal numbers, longitude and latitude
-(precisely in this order).
+Coordinates of the area circle's center, represented according to the `GeoJSON` standard.
+This is an array of 2 decimal numbers, longitude and latitude (precisely in this order).
 """)
+  @minItems(2)
+  @maxItems(2)
   coordinates: float32[];
 }
 
@@ -277,21 +247,22 @@ model AreaProperties {
   subType: GeoJsonPropertiesSubType;
 
   @doc("The radius of the area's circle, in meters.")
-  radius: float32;
+  @minValue(0.0)
+  //@exclusiveMinimum(true)
+  radius: float64;
 }
 
 
 @doc("A description of a clinical trial.")
 model ClinicalTrialDetails {
   @doc("""
-A given identifier for the clinical trial. Has to be unique within a list of
-clinical trials.
+A given identifier for the clinical trial. Has to be unique within a list of clinical trials.
 """)
+  @minLength(1)
   id: string;
 
   @doc("""
-The eligibility criteria of the clinical trial (inclusion and exclusion), given
-as text.
+The eligibility criteria of the clinical trial (inclusion and exclusion), given as text.
 """)
   eligibilityCriteriaText?: string;
 
@@ -305,18 +276,17 @@ as text.
 @doc("Demographic criteria for a clinical trial.")
 model ClinicalTrialDemographics {
   @doc("A list of genders accepted by a clinical trial.")
+  @minItems(1)
   acceptedGenders?: ClinicalTrialAcceptedGender[];
 
   @doc("""
-A definition of the range of ages accepted by a clinical trial. Contains a
-minimum age and/or a maximum age.
+A definition of the range of ages accepted by a clinical trial. Contains a minimum age and/or a maximum age.
 """)
   acceptedAgeRange?: ClinicalTrialDemographicsAcceptedAgeRange;
 }
 
 @doc("""
-A definition of the range of ages accepted by a clinical trial. Contains a
-minimum age and/or a maximum age.
+A definition of the range of ages accepted by a clinical trial. Contains a minimum age and/or a maximum age.
 """)
 model ClinicalTrialDemographicsAcceptedAgeRange {
   @doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
@@ -334,14 +304,15 @@ model Age {
 
   @doc("The number of years/months/days that represents the person's age.")
   @minValue(0.0)
+  //@exclusiveMinimum(true)
   value: float32;
 }
 
 @doc("Trial data which is of interest to the potential participant.")
 model ClinicalTrialMetadata {
   @doc("""
-Phases which are relevant for the clinical trial. <br />Each clinical trial can
-be in a certain phase or in multiple phases.
+Phases which are relevant for the clinical trial.
+Each clinical trial can be in a certain phase or in multiple phases.
 """)
   phases?: ClinicalTrialPhase[];
 
@@ -352,17 +323,16 @@ be in a certain phase or in multiple phases.
   recruitmentStatus?: ClinicalTrialRecruitmentStatus;
 
   @doc("""
-Medical conditions and their synonyms which are relevant for the clinical
-trial, given as strings.
+Medical conditions and their synonyms which are relevant for the clinical trial, given as strings.
 """)
+  @minItems(1)
   conditions: string[];
 
   @doc("Sponsors/collaborators involved with the trial.")
   sponsors?: string[];
 
   @doc("""
-Contact details of the trial administrators, for patients that want to
-participate in the trial.
+Contact details of the trial administrators, for patients that want to sparticipate in the trial.
 """)
   contacts?: ContactDetails[];
 
@@ -384,10 +354,10 @@ model ContactDetails {
 
 @doc("Details of a research facility where a clinical trial is conducted.")
 model ClinicalTrialResearchFacility {
-  ...Location;
-
   @doc("The facility's name.")
   name: string;
+  
+  ...Location;
 }
 
 @doc("Gender definitions as accepted by clinical trials.")
