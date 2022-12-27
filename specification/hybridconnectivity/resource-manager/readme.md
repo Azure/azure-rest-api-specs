@@ -27,12 +27,6 @@ These are the global settings for the hybridconnectivity.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-10-06-preview
-```
-
-``` yaml
-openapi-type: arm
-openapi-subtype: rpaas
 tag: package-2023-03
 ```
 
