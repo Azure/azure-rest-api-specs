@@ -294,6 +294,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade": {
+      "post": {
+        "operationId": "Extensions_Upgrade",
+        "description": "Upgrade a particular Arc Extension of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "name": "extensionUpgradeParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionUpgradeParameters"
+            },
+            "description": "Parameters supplied to the Upgrade Extensions operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Upgrade Machine Extensions": {
+            "$ref": "./examples/Extensions_Upgrade.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -408,6 +463,11 @@
           "type": "string",
           "readOnly": true
         },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler.",
+          "readOnly": true
+        },
         "state": {
           "description": "State of Arc Extension in this node.",
           "type": "string",
@@ -434,6 +494,11 @@
             "name": "NodeExtensionState",
             "modelAsString": true
           },
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/ExtensionInstanceView",
+          "description": "The extension instance view.",
           "readOnly": true
         }
       }
@@ -475,7 +540,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the version of the script handler. Latest version would be used if not specified."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -493,6 +558,70 @@
         "enableAutomaticUpgrade": {
           "type": "boolean",
           "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
+        }
+      }
+    },
+    "ExtensionInstanceView": {
+      "type": "object",
+      "description": "Describes the Extension Instance View.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"MicrosoftMonitoringAgent\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "status": {
+          "type": "object",
+          "description": "Instance view status.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "The status code."
+            },
+            "level": {
+              "type": "string",
+              "description": "The level code.",
+              "enum": [
+                "Info",
+                "Warning",
+                "Error"
+              ],
+              "x-ms-enum": {
+                "name": "StatusLevelTypes",
+                "modelAsString": true
+              }
+            },
+            "displayStatus": {
+              "type": "string",
+              "description": "The short localizable label for the status."
+            },
+            "message": {
+              "type": "string",
+              "description": "The detailed status message, including for alerts and error messages."
+            },
+            "time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The time of the status."
+            }
+          }
+        }
+      }
+    },
+    "ExtensionUpgradeParameters": {
+      "type": "object",
+      "description": "Describes the parameters for Extension upgrade.",
+      "properties": {
+        "targetVersion": {
+          "type": "string",
+          "description": "Extension Upgrade Target Version."
         }
       }
     }

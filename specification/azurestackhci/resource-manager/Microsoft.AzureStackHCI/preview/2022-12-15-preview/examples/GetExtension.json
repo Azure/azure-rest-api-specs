@@ -27,6 +27,7 @@
             "publisher": "Microsoft.Compute",
             "type": "string",
             "typeHandlerVersion": "1.10.3",
+            "enableAutomaticUpgrade": true,
             "autoUpgradeMinorVersion": false,
             "settings": {
               "workspaceId": "xx"
@@ -37,12 +38,38 @@
             {
               "name": "Node-1",
               "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MicrosoftMonitoringAgent",
-              "state": "Succeeded"
+              "typeHandlerVersion": "1.10.0",
+              "state": "Succeeded",
+              "instanceView": {
+                "name": "MicrosoftMonitoringAgent",
+                "type": "MicrosoftMonitoringAgent",
+                "typeHandlerVersion": "1.10.0",
+                "status": {
+                  "code": "success",
+                  "level": "Information",
+                  "displayStatus": "Provisioning succeeded",
+                  "message": "Finished executing command, StdOut: , StdErr:",
+                  "time": "2019-08-08T20:42:10.999Z"
+                }
+              }
             },
             {
               "name": "Node-2",
               "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2/Extensions/MicrosoftMonitoringAgent",
-              "state": "Failed"
+              "typeHandlerVersion": "1.10.3",
+              "state": "Failed",
+              "instanceView": {
+                "name": "MicrosoftMonitoringAgent",
+                "type": "MicrosoftMonitoringAgent",
+                "typeHandlerVersion": "1.10.3",
+                "status": {
+                  "code": "error",
+                  "level": "Error",
+                  "displayStatus": "Provisioning failed",
+                  "message": "Finished executing command, StdOut: , StdErr:",
+                  "time": "2019-08-08T20:42:10.999Z"
+                }
+              }
             }
           ]
         }
