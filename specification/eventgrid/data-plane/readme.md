@@ -14,6 +14,8 @@ This enables customers to download one EventGrid data plane library instead of h
 
 ### Guidelines for defining a new event 
 
+> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main.
+
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
 - The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.` Here `Microsoft.Communication.ChatMessageReceived` is the event name.
@@ -38,7 +40,9 @@ A sample valid event definition is shown below:
 ```
 ~~~
 
-In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger. This example must be in a "examples" folder close to your JSON, and called using snakeCase based on the event final name. The example should contain the envelope, but could be CloudEvent or EventGrid schema, whatever is easier. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
+In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger in the Event Grid schema and CloudEvents schema. These examples must be close to your JSON in a "examples\event-grid-schema" and "examples\cloud-events-schema" folders respectively, and called using snakeCase based on the event final name. The example should contain the envelope. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
+
+**Note:** If you already have an event type example created you can use the following [tool](https://github.com/robece/schema-converter) to convert event files from Event Grid schema to Cloud Events schema or vice versa.
 
 For the previous schema, the example file should be called "chat_message_received.json" and contains:
 ~~~ markdown
@@ -157,14 +161,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_event_grid']
 ```
 
 ## C#

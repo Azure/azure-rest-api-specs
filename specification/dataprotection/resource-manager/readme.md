@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-preview-2022-02
+tag: package-preview-2022-11
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -47,14 +47,68 @@ message-format: json
 ```
 
 
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.DataProtection/preview/2022-11-01-preview/dataprotection.json
+```
+### Tag: package-2022-10-preview
+
+These settings apply only when `--tag=package-2022-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10-preview'
+input-file:
+- Microsoft.DataProtection/preview/2022-10-01-preview/dataprotection.json
+```
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.DataProtection/preview/2022-09-01-preview/dataprotection.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.DataProtection/stable/2022-05-01/dataprotection.json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.DataProtection/stable/2022-04-01/dataprotection.json
+```
+
+### Tag: package-preview-2022-03
+
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.DataProtection/preview/2022-03-31-preview/dataprotection.json
+```
+
 ### Tag: package-preview-2022-02
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-02'
+``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.DataProtection/preview/2022-02-01-preview/dataprotection.json
 ```
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -118,7 +172,6 @@ input-file:
 - Microsoft.DataProtection/preview/2021-12-01-preview/dataprotection.json
 ```
 
-
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -139,16 +192,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_protection']
+  - repo: azure-powershell
 ```
 
 ## C#

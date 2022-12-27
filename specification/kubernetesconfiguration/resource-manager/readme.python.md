@@ -18,11 +18,15 @@ clear-output-folder: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch: 
+  - tag: package-2022-11
+  - tag: package-2022-07
   - tag: package-preview-2022-04-only
   - tag: package-2022-03
+  - tag: package-preview-2022-01-15
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
   - tag: package-2021-09
@@ -37,6 +41,24 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
 perform-load: false
+```
+
+### Tag: package-2022-11 and python
+
+These settings apply only when `--tag=package-2022-11 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_11_01
+```
+
+### Tag: package-2022-07 and python
+
+These settings apply only when `--tag=package-2022-07 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_07_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_07_01
 ```
 
 ### Tag: package-preview-2022-04-only and python
@@ -55,6 +77,15 @@ These settings apply only when `--tag=package-2022-03 --python` is specified on 
 ``` yaml $(tag) == 'package-2022-03'
 namespace: azure.mgmt.kubernetesconfiguration.v2022_03_01
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_03_01
+```
+
+### Tag: package-preview-2022-01-15 and python
+
+These settings apply only when `--tag=package-preview-2022-01-15 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01-15'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_01_15_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_01_15_preview
 ```
 
 ### Tag: package-preview-2022-01 and python

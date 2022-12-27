@@ -98,7 +98,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}": {
       "get": {
         "tags": [
           "ManagedEnvironments"
@@ -114,7 +114,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -159,7 +159,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -220,7 +220,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -269,7 +269,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
@@ -289,6 +289,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironment"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -307,7 +313,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates": {
       "get": {
         "tags": [
           "ManagedEnvironments",
@@ -323,7 +329,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "managedEnvironmentName",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
@@ -357,7 +363,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/certificates/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}": {
       "get": {
         "tags": [
           "ManagedEnvironments",
@@ -373,14 +379,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "managedEnvironmentName",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "certificateName",
             "in": "path",
             "description": "Name of the Certificate.",
             "required": true,
@@ -425,14 +431,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "managedEnvironmentName",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "certificateName",
             "in": "path",
             "description": "Name of the Certificate.",
             "required": true,
@@ -485,14 +491,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "managedEnvironmentName",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "certificateName",
             "in": "path",
             "description": "Name of the Certificate.",
             "required": true,
@@ -538,14 +544,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "managedEnvironmentName",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "certificateName",
             "in": "path",
             "description": "Name of the Certificate.",
             "required": true,
@@ -585,7 +591,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/checkNameAvailability": {
       "post": {
         "tags": [
           "ManagedEnvironments"
@@ -601,7 +607,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "managedEnvironmentName",
+            "name": "environmentName",
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
@@ -666,7 +672,7 @@
       "properties": {
         "internal": {
           "type": "boolean",
-          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId and AppSubnetResourceId if enabling this property",
+          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property",
           "x-ms-mutability": [
             "create",
             "read"
@@ -751,10 +757,16 @@
             "daprAIInstrumentationKey": {
               "type": "string",
               "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry",
+              "x-ms-secret": true
+            },
+            "daprAIConnectionString": {
+              "type": "string",
+              "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
               "x-ms-mutability": [
                 "create",
                 "read"
-              ]
+              ],
+              "x-ms-secret": true
             },
             "vnetConfiguration": {
               "description": "Vnet configuration for the environment",
@@ -778,6 +790,14 @@
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
+            },
+            "zoneRedundant": {
+              "description": "Whether or not this Managed Environment is zone-redundant.",
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             }
           },
           "x-ms-client-flatten": true

@@ -6,7 +6,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-rdbms
@@ -18,7 +18,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(track2)
+```yaml $(python)
 clear-output-folder: true
 batch:
   - tag: package-2020-10-05-privatepreview

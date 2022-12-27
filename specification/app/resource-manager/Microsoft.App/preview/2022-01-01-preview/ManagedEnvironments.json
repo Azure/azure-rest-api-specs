@@ -609,7 +609,7 @@
       "properties": {
         "internal": {
           "type": "boolean",
-          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId and AppSubnetResourceId if enabling this property",
+          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property",
           "x-ms-mutability": [
             "create",
             "read"
@@ -693,11 +693,7 @@
             },
             "daprAIInstrumentationKey": {
               "type": "string",
-              "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
+              "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry"
             },
             "vnetConfiguration": {
               "description": "Vnet configuration for the environment",
