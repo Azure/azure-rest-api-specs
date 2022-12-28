@@ -51,7 +51,7 @@
         }
       }
     },
-    "/self-service-policies/{workflowRunId}": {
+    "/self-service-policies/{policyId}": {
       "get": {
         "tags": [
           "SelfServicePolicies"
@@ -64,8 +64,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "workflowRunId",
-            "description": "The workFlowRunId of the workflow which created this policy. System.String.",
+            "name": "policyId",
+            "description": "The policyId of the self-service policy. System.String.",
             "required": true,
             "type": "string"
           },
@@ -108,8 +108,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "workflowRunId",
-            "description": "The workFlowRunId of the workflow which created this policy. System.String.",
+            "name": "policyId",
+            "description": "The policyId of the self-service policy. System.String.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -225,19 +225,19 @@
       "description": "The Self-service policy model",
       "required": [
         "decisionRule",
-        "workflowRunId"
+        "policyId"
       ],
       "type": "object",
       "properties": {
-        "workflowRunId": {
+        "policyId": {
           "type": "string",
-          "description": "The workflowRunId of the workflow which created the policy"
+          "description": "The policyId of the self-service policy"
         },
         "requestor": {
           "type": "string",
           "description": "The requestor of the self-service policy"
         },
-        "expiryDate": {
+        "expiresAt": {
           "format": "date-time",
           "type": "string",
           "description": "Expiry Date of the policy"
@@ -273,7 +273,6 @@
     "SystemData": {
       "type": "object",
       "description": "The system data",
-      "readOnly": true,
       "properties": {
         "createdBy": {
           "type": "string",
@@ -304,7 +303,7 @@
       "required": true,
       "type": "string",
       "x-ms-client-name": "ApiVersion",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "endpoint": {
       "in": "path",
