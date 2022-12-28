@@ -517,10 +517,10 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/CacheNameParameter"
@@ -541,6 +541,19 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache update has been initiated.  Poll the Cache's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -555,6 +568,10 @@
           "Caches_Update_ldap_only": {
             "$ref": "./examples/Caches_Update_ldap_only.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "tags": [
           "Caches"
@@ -1655,6 +1672,58 @@
         "description": "Update cache space allocation.",
         "operationId": "Caches_SpaceAllocation"
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/restoreDefaults": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache has restored the storage target's settings to their default values."
+          },
+          "202": {
+            "description": "Cache has started restoring the storage target's settings to their default values."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_RestoreDefaults": {
+            "$ref": "./examples/StorageTargets_RestoreDefaults.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Tells a storage target to restore its settings to their default values.",
+        "operationId": "StorageTargets_RestoreDefaults"
+      }
     }
   },
   "definitions": {
@@ -2694,6 +2763,16 @@
         "usageModel": {
           "description": "Identifies the StorageCache usage model to be used for this storage target.",
           "type": "string"
+        },
+        "verificationTimer" : {
+          "description" : "Amount of time (in seconds) the cache waits before it checks the back-end storage for file updates.",
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "writeBackTimer" : {
+          "description" : "Amount of time (in seconds) the cache waits after the last file change before it copies the changed file to back-end storage.",
+          "type" : "integer",
+          "format" : "int32"
         }
       }
     },
@@ -2736,6 +2815,16 @@
         "usageModel": {
           "description": "Identifies the StorageCache usage model to be used for this storage target.",
           "type": "string"
+        },
+        "verificationTimer" : {
+          "description" : "Amount of time (in seconds) the cache waits before it checks the back-end storage for file updates.",
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "writeBackTimer" : {
+          "description" : "Amount of time (in seconds) the cache waits after the last file change before it copies the changed file to back-end storage.",
+          "type" : "integer",
+          "format" : "int32"
         }
       }
     },
@@ -3131,7 +3220,7 @@
         },
         "primingManifestUrl": {
           "description": "The URL for the priming manifest file to download. This file must be readable from the HPC Cache. When the file is in Azure blob storage the URL should include a Shared Access Signature (SAS) granting read permissions on the blob.",
-          "$ref": "#/definitions/URLString",
+          "$ref": "string",
           "x-ms-mutability": [
             "create"
           ],
