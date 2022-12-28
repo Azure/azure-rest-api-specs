@@ -751,10 +751,6 @@
           "description": "The system meta data relating to this resource.",
           "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         },
-        "geoDataReplication": {
-          "$ref": "#/definitions/GeoDataReplicationProperties",
-          "description": "Geo Data Replication settings for the namespace"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
@@ -856,6 +852,10 @@
             "alternateName": {
               "type": "string",
               "description": "Alternate name specified when alias and namespace names are same."
+            },
+            "geoDataReplication": {
+              "$ref": "#/definitions/GeoDataReplicationProperties",
+              "description": "Geo Data Replication settings for the namespace"
             }
           },
           "description": "Namespace properties supplied for create namespace operation."
@@ -910,6 +910,7 @@
       "description": "SKU parameters supplied to the create namespace operation"
     },
     "GeoDataReplicationProperties": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
         "maxReplicationLagDurationInSeconds": {
@@ -922,12 +923,13 @@
           "items": {
             "$ref": "#/definitions/NamespaceReplicaLocation"
           },
-          "x-ms-client-name": "locations",
+          "x-ms-identifiers": [],
           "description": "A list of regions where replicas of the namespace are maintained."
         }
       }
     },
     "NamespaceReplicaLocation": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
         "LocationName": {
@@ -936,6 +938,8 @@
           "readOnly": true
         },
         "RoleType": {
+          "type": "string",
+          "description": "GeoDR Role Types",
           "enum": [
             "Primary",
             "Secondary"
