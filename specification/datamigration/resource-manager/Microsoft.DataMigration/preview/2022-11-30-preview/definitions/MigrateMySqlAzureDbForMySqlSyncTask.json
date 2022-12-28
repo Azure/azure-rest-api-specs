@@ -36,11 +36,6 @@
             "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncDatabaseInput"
           }
         },
-        "makeSourceServerReadOnly": {
-          "type": "boolean",
-          "description": "Setting to set the source server read only",
-          "default": false
-        },
         "startedOn": {
           "type": "string",
           "format": "date-time",
@@ -57,13 +52,6 @@
         "optionalAgentSettings": {
           "type": "object",
           "description": "Optional parameters for fine tuning the data migration",
-          "properties": {
-            "enableConsistentBackup": {
-              "type": "boolean",
-              "description": "Setting to enable transactional consistency",
-              "default": false
-            }
-          },
           "additionalProperties": {
             "type": "string"
           }
@@ -111,7 +99,7 @@
     },
     "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "description": "MySQL to Azure Database for MySQL online migration task output",
       "properties": {
         "id": {
           "type": "string",
@@ -132,6 +120,13 @@
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "type": "object",
       "properties": {
+        "migrationType": {
+          "enum": [
+            "InitialLoad"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
         "startedOn": {
           "type": "string",
           "format": "date-time",

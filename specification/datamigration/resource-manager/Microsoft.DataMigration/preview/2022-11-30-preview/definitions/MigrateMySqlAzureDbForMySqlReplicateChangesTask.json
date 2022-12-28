@@ -36,11 +36,6 @@
             "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlReplicateChangesDatabaseInput"
           }
         },
-        "makeSourceServerReadOnly": {
-          "type": "boolean",
-          "description": "Setting to set the source server read only",
-          "default": false
-        },
         "startedOn": {
           "type": "string",
           "format": "date-time",
@@ -87,7 +82,7 @@
         },
         "targetDatabaseName": {
           "type": "string",
-          "description": "Name of target database. Note: Target database will be truncated before starting migration."
+          "description": "Name of the target database."
         },
         "tableMap": {
           "type": "object",
@@ -96,7 +91,11 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "name",
+        "targetDatabaseName"
+      ]
     },
     "MigrateMySqlAzureDbForMySqlReplicateChangesTaskOutput": {
       "type": "object",
@@ -260,7 +259,7 @@
         },
         "secondsBehindSource": {
           "type": "integer",
-          "description": "The the number of seconds the replica server is behind the source server",
+          "description": "The number of seconds the target server is behind the source server",
           "readOnly": true
         }
       }

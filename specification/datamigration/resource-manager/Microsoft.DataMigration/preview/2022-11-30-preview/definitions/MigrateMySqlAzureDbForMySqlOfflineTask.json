@@ -111,7 +111,7 @@
     },
     "MigrateMySqlAzureDbForMySqlOfflineTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations",
+      "description": "MySQL to Azure Database for MySQL offline migration task output",
       "properties": {
         "id": {
           "type": "string",
@@ -227,7 +227,7 @@
           "readOnly": true
         },
         "sourceBinlogPosition": {
-          "description": "The binlog position when the consistent snapshot was taken",
+          "description": "The binlog position when the consistent snapshot was taken. Only returned when consistent backup is enabled in the migration inputs.",
           "$ref": "./MigrateMySqlCommon.json#/definitions/MySqlBinlogPositionOutput",
           "readOnly": true
         }
@@ -250,13 +250,13 @@
         "startedOn": {
           "type": "string",
           "format": "date-time",
-          "description": "Migration start time",
+          "description": "Database migration start time",
           "readOnly": true
         },
         "endedOn": {
           "type": "string",
           "format": "date-time",
-          "description": "Migration end time",
+          "description": "Database migration end time",
           "readOnly": true
         },
         "state": {
@@ -342,19 +342,19 @@
       "properties": {
         "objectName": {
           "type": "string",
-          "description": "Name of the item",
+          "description": "Table name",
           "readOnly": true
         },
         "startedOn": {
           "type": "string",
           "format": "date-time",
-          "description": "Migration start time",
+          "description": "Table migration start time",
           "readOnly": true
         },
         "endedOn": {
           "type": "string",
           "format": "date-time",
-          "description": "Migration end time",
+          "description": "Table migration end time",
           "readOnly": true
         },
         "state": {
