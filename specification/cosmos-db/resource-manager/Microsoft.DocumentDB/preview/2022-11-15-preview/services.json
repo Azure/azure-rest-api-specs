@@ -272,6 +272,57 @@
     }
   },
   "definitions": {
+    "ServiceResourceProperties": {
+      "description": "Services response resource.",
+      "type": "object",
+      "discriminator": "serviceType",
+      "properties": {
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last state change (ISO-8601 format)."
+        },
+        "instanceSize": {
+          "$ref": "#/definitions/ServiceResourceInstanceSize"
+        },
+        "instanceCount": {
+          "description": "Instance count for the service.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "serviceType": {
+          "$ref": "#/definitions/ServiceType"
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ServiceResourceStatus"
+        },
+        "graphApiComputeEndpoint": {
+          "type": "string",
+          "description": "GraphAPICompute endpoint for the service."
+        },
+        "sqlDedicatedGatewayEndpoint": {
+          "type": "string",
+          "description": "SqlDedicatedGateway endpoint for the service."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/RegionalServiceResource"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "serviceType"
+      ]
+    },
     "ServiceResourceCreateUpdateParameters": {
       "description": "Parameters for Create or Update Request for ServiceResource",
       "type": "object",
@@ -526,41 +577,6 @@
         {
           "$ref": "#/definitions/RegionalServiceResource"
         }
-      ]
-    },
-    "ServiceResourceProperties": {
-      "description": "Services response resource.",
-      "type": "object",
-      "discriminator": "serviceType",
-      "properties": {
-        "creationTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Time of the last state change (ISO-8601 format)."
-        },
-        "instanceSize": {
-          "$ref": "#/definitions/ServiceResourceInstanceSize"
-        },
-        "instanceCount": {
-          "description": "Instance count for the service.",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
-        },
-        "serviceType": {
-          "$ref": "#/definitions/ServiceType"
-        },
-        "status": {
-          "readOnly": true,
-          "$ref": "#/definitions/ServiceResourceStatus"
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      },
-      "required": [
-        "serviceType"
       ]
     },
     "ServiceResourceStatus": {
