@@ -1,0 +1,248 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Rest;
+using Azure.Core;
+
+namespace Azure.ConfidentialLedger;
+
+@doc("collection id parameter")
+model CollectionIdParameter {
+  @doc("The collection id.")
+  @Http.query
+  collectionId: string;
+}
+
+enum ConfidentialLedgerQueryStateKnownValues {
+  "Loading",
+  "Ready",
+}
+
+@knownValues(ConfidentialLedgerQueryStateKnownValues)
+model ConfidentialLedgerQueryState is string;
+
+enum TransactionStateKnownValues {
+  "Committed",
+  "Pending",
+}
+
+@knownValues(TransactionStateKnownValues)
+model TransactionState is string;
+
+enum ConfidentialLedgerUserRoleNameKnownValues {
+  "Administrator",
+  "Contributor",
+  "Reader",
+}
+
+@knownValues(ConfidentialLedgerUserRoleNameKnownValues)
+model ConfidentialLedgerUserRoleName is string;
+
+@doc("The governance script for the application.")
+model Constitution {
+  @doc("SHA256 digest of the constitution script.")
+  digest: string;
+
+  @doc("Contents of the constitution.")
+  script: string;
+}
+
+@doc("Describes a member of the consortium.")
+@resource("governance/members")
+model ConsortiumMember {
+  @doc("PEM-encoded certificate associated with the member.")
+  certificate: string;
+
+  @doc("Identifier assigned to the member.")
+  @key
+  id: string;
+}
+
+@doc("Information about the enclaves running the Confidential Ledger.")
+model Enclaves {
+  @doc("Id of the Confidential Ledger node responding to the request.")
+  currentNodeId: string;
+
+  @doc("Dictionary of enclave quotes, indexed by node id.")
+  enclaveQuotes: Record<EnclaveQuote>;
+}
+
+@doc("Contains the enclave quote.")
+model EnclaveQuote {
+  @doc("ID assigned to this node.")
+  nodeId: string;
+
+  @doc("MRENCLAVE value of the code running in the enclave.")
+  mrenclave?: string;
+
+  @doc("Version of the quote presented.")
+  quoteVersion: string;
+
+  @doc("Raw SGX quote, parsable by tools like Open Enclave's oeverify.")
+  raw: string;
+}
+
+@resource("collections")
+@doc("Identifier for collections.")
+model Collection {
+  @key
+  @doc("The collection id.")
+  collectionId: string;
+}
+
+@doc("Paginated ledger entries returned in response to a query.")
+@pagedResult
+model PagedLedgerEntries {
+  @doc("State of a ledger query.")
+  state: ConfidentialLedgerQueryState;
+
+  @doc("Path from which to retrieve the next page of results.")
+  @nextLink
+  nextLink?: string;
+
+  @doc("Array of ledger entries.")
+  @items
+  entries: LedgerEntry[];
+}
+
+@doc("An entry in the ledger.")
+@resource("transactions")
+model LedgerEntry {
+  @doc("Contents of the ledger entry.")
+  contents: string;
+
+  @visibility("read")
+  @doc("collection id")
+  collectionId?: string;
+
+  @doc("""
+A unique identifier for the state of the ledger. If returned as part of a
+LedgerEntry, it indicates the state from which the entry was read.
+""")
+  @visibility("read")
+  @key
+  transactionId: string;
+}
+
+
+@doc("""
+The result of querying for a ledger entry from an older transaction id. The
+ledger entry is available in the response only if the returned state is Ready.
+""")
+model LedgerQueryResult {
+  @doc("State of a ledger query.")
+  state: ConfidentialLedgerQueryState;
+
+  @doc("""
+The ledger entry found as a result of the query. This is only available if the
+query is in Ready state.
+""")
+  entry?: LedgerEntry;
+}
+
+@doc("A receipt certifying the transaction at the specified id.")
+model TransactionReceipt {
+  @doc("receipt")
+  receipt?: ReceiptContents;
+
+  @doc("State of a ledger query.")
+  state: ConfidentialLedgerQueryState;
+
+  @doc("""
+A unique identifier for the state of the ledger. If returned as part of a
+LedgerEntry, it indicates the state from which the entry was read.
+""")
+  transactionId: string;
+}
+
+@doc("Receipt contents")
+model ReceiptContents {
+  @doc("cert")
+  cert?: string;
+  @doc("leaf")
+  leaf?: string;
+  @doc("leaf components")
+  leafComponents?: ReceiptLeafComponents;
+  @doc("node id")
+  nodeId: string;
+  @doc("proof")
+  proof: ReceiptElement[];
+  @doc("root")
+  root?: string;
+  @doc("service endorsements")
+  serviceEndorsements?: string[];
+  @doc("signature")
+  signature: string;
+}
+
+@doc("Receipt leaf components")
+model ReceiptLeafComponents {
+  @doc("claims digest")
+  claimsDigest?: string;
+  @doc("commit evidence")
+  commitEvidence?: string;
+  @doc("write set digest")
+  writeSetDigest?: string;
+}
+
+@doc("Receipt element")
+model ReceiptElement {
+  @doc("Left element")
+  left?: string;
+  @doc("Right element")
+  right?: string;
+}
+
+@doc("Response returned to a query for the transaction status")
+model TransactionStatus {
+  @doc("Represents the state of the transaction.")
+  state: TransactionState;
+
+  @doc("""
+A unique identifier for the state of the ledger. If returned as part of a
+LedgerEntry, it indicates the state from which the entry was read.
+""")
+  transactionId: string;
+}
+
+@doc("Details about a Confidential Ledger user.")
+@resource("users/{userId}")
+model LedgerUser {
+  @doc("Represents an assignable role.")
+  assignedRole: ConfidentialLedgerUserRoleName;
+
+  @doc("""
+Identifier for the user. This must either be an AAD object id or a certificate
+fingerprint.
+""")
+  @visibility("read")
+  @key
+  userId: string;
+}
+
+@doc("An item in the Merkle proof.")
+model MerkleProofElement {
+  @doc("Left element")
+  left?: string;
+  @doc("Right element")
+  right?: string;
+}
+
+@doc("Object for assigning a role to a user.")
+model RoleAssignment {
+  @doc("Represents an assignable role.")
+  roleName: ConfidentialLedgerUserRoleName;
+
+  @doc("Description of the role.")
+  description?: string;
+}
+
+@Versioning.added(Azure.ConfidentialLedger.Versions.v2022_10_25)
+@doc("Wow this model is amaaaaazing")
+model AmazingNewModel {
+  @doc("Wow a string!")
+  name: string;
+
+  @doc("original")
+  age: int16;
+}
