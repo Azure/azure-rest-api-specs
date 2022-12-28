@@ -335,6 +335,7 @@
             "$ref": "./examples/NameSpaces/EHNamespaceFailover.json"
           }
         },
+        "description": "GeoDR Failover",
         "parameters": [
           {
             "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -379,7 +380,7 @@
         ],
         "operationId": "PrivateEndpointConnections_List",
         "x-ms-examples": {
-          "NameSpaceCreate": {
+          "PrivateEndPointConnectionList": {
             "$ref": "./examples/NameSpaces/PrivateEndPointConnectionList.json"
           }
         },
@@ -926,7 +927,8 @@
           "x-ms-identifiers": [],
           "description": "A list of regions where replicas of the namespace are maintained."
         }
-      }
+      },
+      "description": "GeoDR Replication properties"
     },
     "NamespaceReplicaLocation": {
       "type": "object",
@@ -952,7 +954,8 @@
           "type": "string",
           "description": "Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster"
         }
-      }
+      },
+      "description": "Namespace replication properties"
     },
     "Identity": {
       "x-ms-client-flatten": true,
