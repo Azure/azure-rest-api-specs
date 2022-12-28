@@ -8,12 +8,11 @@
       "version": 1,
       "layers": {
         "Indoor unit": {
-          "minZoom": 10,
-          "maxZoom": 18,
+          "minZoom": 15,
+          "maxZoom": 20,
           "features": {
             "featureClasses": [
-              "unit",
-              "wall"
+              "unit"
             ],
             "filter": [
               "any",
@@ -21,17 +20,9 @@
                 "!=",
                 [
                   "get",
-                  "roomType"
+                  "featureType"
                 ],
                 "conference"
-              ],
-              [
-                "!=",
-                [
-                  "get",
-                  "roomType"
-                ],
-                "restroom"
               ]
             ]
           }

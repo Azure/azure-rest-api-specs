@@ -26,7 +26,7 @@ These are the global settings for the WebPubSub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10-01
+tag: package-2022-08-01-preview
 ```
 
 ### Suppression
@@ -34,7 +34,7 @@ tag: package-2021-10-01
 ``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean
-    where: 
+    where:
     - $.definitions.NameAvailability.properties.nameAvailable
     - $.definitions.Dimension.properties.toBeExportedForShoebox
     - $.definitions.Operation.properties.isDataAction
@@ -107,7 +107,17 @@ input-file:
 - Microsoft.SignalRService/preview/2021-04-01-preview/webpubsub.json
 ```
 
+### Tag: package-2022-08-01-preview
+
+These settings apply only when `--tag=package-2022-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2022-08-01-preview/webpubsub.json
+```
+
 ---
+
 # Code Generation
 
 

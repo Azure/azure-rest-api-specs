@@ -86,13 +86,13 @@
       "name": "operationId",
       "type": "string",
       "in": "path",
-      "description": "The ID to query the status for the style import request.",
+      "description": "The ID to query the status for the style create request.",
       "required": true,
       "x-ms-parameter-location": "method"
     },
     "StyleAlias": {
       "name": "alias",
-      "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
+      "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a reserved prefix. Alias can be provided optionally during creating a style, and can be used as same as styleId after style creation. ",
       "type": "string",
       "in": "query",
       "required": false,
@@ -102,17 +102,21 @@
   "paths": {
     "/styles": {
       "post": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n The Style Import API allows the caller to import an azure maps style.\n\n## Submit Import Request\n\nTo import your style you will make a `POST` request with an azure maps style. \n\nThe Import Style API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
-        "operationId": "Style_Import",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style Create request allows the caller to create an Azure Maps style.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n## Submit Create Request\n\nTo create your style you will make a `POST` request with an azure maps style. \n\nThe Create Style API is a [long-running request](https://aka.ms/am-creator-lrt-v2).",
+        "operationId": "Style_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Import Style by providing an azure maps style json file": {
-            "$ref": "./examples/style/Style_Import.json"
+          "Create Style by providing an azure maps style json file": {
+            "$ref": "./examples/style/Style_Create.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -127,9 +131,9 @@
             "$ref": "#/parameters/StyleAlias"
           },
           {
-            "name": "ImportContent",
+            "name": "CreateContent",
             "in": "body",
-            "description": "The style content to be imported. If JSON data format is provided, then the request body should follow [Layers specification](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers) in MapLibre Style specification. If ZIP data format is provided, you should also provide the sprite sheet and associated index files which contains icons used in the style configuration json file.",
+            "description": "The style content to be uploaded. If JSON data format is provided, then the request body should follow [Layers specification](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers) in MapLibre Style specification. If ZIP data format is provided, you should also provide the sprite sheet and associated index files which contains icons used in the style configuration json file.",
             "required": true,
             "schema": {
               "type": "object"
@@ -146,7 +150,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all styles imported.   \n<br>",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style List request allows the caller to fetch a list of all styles created. The default indoor style `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01` will not show in the list response. But you can still use it as your own style by the predefined alias.\n\n  Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator. \n<br>",
         "operationId": "Style_List",
         "x-ms-examples": {
           "Get a list of all styles": {
@@ -180,11 +184,11 @@
     },
     "/styles/{styleId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to export a style. Customer can export two predefined default styles using alias `microsoft-maps:indoor_2022-01-01` for indoor light and `microsoft-maps:indoor_dark_2022-01-01` for indoor dark.",
-        "operationId": "Style_Export",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style Get request allows the caller to get a style. Customers can get two predefined default styles using alias `microsoft-maps:indoor_2022-01-01` for indoor light and `microsoft-maps:indoor_dark_2022-01-01` for indoor dark.  \n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.",
+        "operationId": "Style_Get",
         "x-ms-examples": {
-          "Exports the details for a single style": {
-            "$ref": "./examples/style/Style_Export.json"
+          "Get the details for a single style": {
+            "$ref": "./examples/style/Style_Get.json"
           }
         },
         "parameters": [
@@ -203,7 +207,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Export style request completed successfully. The response body contains a zip file with style content.",
+            "description": "Get style request completed successfully. The response body contains a zip file with style content.",
             "schema": {
               "type": "object",
               "format": "file",
@@ -222,10 +226,10 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete an imported style.<br> \n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `styleId` of the style to delete.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style Delete request allows the caller to remove a style from their Azure Maps account.<br> \n\n### Submit Delete Request\n\nAn `HTTP DELETE` request with the `styleId` in the path of the request is required to remove an existing style from your Azure Maps account.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "Style_Delete",
         "x-ms-examples": {
-          "Delete an imported style": {
+          "Delete a created style": {
             "$ref": "./examples/style/Style_Delete.json"
           }
         },
@@ -252,7 +256,7 @@
     },
     "/styles/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to create a style.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
+        "description": "The Style Get Operation request is obtained from the call to create a style. It is returned in the response headers Resource-Location key once the creation process has completed successfully.",
         "operationId": "Style_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
@@ -325,7 +329,7 @@
           "readOnly": true
         },
         "alias": {
-          "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a preserved prefix.",
+          "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a reserved prefix.",
           "type": "string",
           "readOnly": true
         },
