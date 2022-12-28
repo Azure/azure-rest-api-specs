@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Purview Workflow Service REST API Document",
+    "title": "Purview Workflow Service",
     "version": "2022-05-01-preview",
     "description": "Workflows are automated, repeatable business processes which allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.Workflow service is a micro service within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. This spec defines REST API of Purview Workflow Service, which could used for creating Purview workflow client."
   },
@@ -268,9 +268,6 @@
           },
           {
             "$ref": "#/parameters/maxpagesize"
-          },
-          {
-            "$ref": "#/parameters/continuationToken"
           }
         ],
         "responses": {
@@ -373,9 +370,9 @@
           "Tasks"
         ],
         "description": "Get all workflow tasks.",
-        "operationId": "ListTasks",
+        "operationId": "ListWorkflowTasks",
         "x-ms-examples": {
-          "Tasks_List": {
+          "WorkflowTasks_List": {
             "$ref": "./examples/ListWorkflowTasks.json"
           }
         },
@@ -409,9 +406,6 @@
           },
           {
             "$ref": "#/parameters/workflowNameKeyword"
-          },
-          {
-            "$ref": "#/parameters/continuationToken"
           }
         ],
         "responses": {
@@ -468,11 +462,11 @@
         "tags": [
           "Tasks"
         ],
-        "description": "Approve an approval request.",
-        "operationId": "ApproveApprovalRequest",
+        "description": "Approve an approval task.",
+        "operationId": "ApproveApprovalTask",
         "x-ms-examples": {
-          "ApprovalRequest_Approve": {
-            "$ref": "./examples/ApproveApprovalRequest.json"
+          "ApprovalTask_Approve": {
+            "$ref": "./examples/ApproveApprovalTask.json"
           }
         },
         "parameters": [
@@ -510,11 +504,11 @@
         "tags": [
           "Tasks"
         ],
-        "description": "Reject an approval request.",
-        "operationId": "RejectApprovalRequest",
+        "description": "Reject an approval task.",
+        "operationId": "RejectApprovalTask",
         "x-ms-examples": {
           "ApprovalRequest_Reject": {
-            "$ref": "./examples/RejectApprovalRequest.json"
+            "$ref": "./examples/RejectApprovalTask.json"
           }
         },
         "parameters": [
@@ -637,10 +631,10 @@
           "Tasks"
         ],
         "description": "Claim a DSAR task request.",
-        "operationId": "ClaimDASRTaskRequest",
+        "operationId": "ClaimDSARTaskRequest",
         "x-ms-examples": {
-          "DASRTaskRequest_Claim": {
-            "$ref": "./examples/ClaimDASRTaskRequest.json"
+          "DSARTaskRequest_Claim": {
+            "$ref": "./examples/ClaimDSARTaskRequest.json"
           }
         },
         "parameters": [
@@ -679,10 +673,10 @@
           "Tasks"
         ],
         "description": "Release a DSAR task request.",
-        "operationId": "ReleaseDASRTaskRequest",
+        "operationId": "ReleaseDSARTaskRequest",
         "x-ms-examples": {
-          "DASRTaskRequest_Release": {
-            "$ref": "./examples/ReleaseDASRTaskRequest.json"
+          "DSARTaskRequest_Release": {
+            "$ref": "./examples/ReleaseDSARTaskRequest.json"
           }
         },
         "parameters": [
@@ -1462,11 +1456,6 @@
     "DSARTaskReleaseCommand": {
       "type": "object",
       "properties": {
-        "claimedBy": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The user unclaimed this DSAR task request."
-        },
         "comment": {
           "type": "string",
           "description": "The comment when releasing a DSAR task."
@@ -1541,7 +1530,8 @@
       "required": true,
       "type": "string",
       "format": "uuid",
-      "description": "The workflow id."
+      "description": "The workflow id.",
+      "x-ms-parameter-location": "method"
     },
     "requestId": {
       "name": "requestId",
@@ -1549,7 +1539,8 @@
       "required": true,
       "type": "string",
       "format": "uuid",
-      "description": "The request id."
+      "description": "The request id.",
+      "x-ms-parameter-location": "method"
     },
     "workflowRunId": {
       "name": "workflowRunId",
@@ -1557,7 +1548,8 @@
       "required": true,
       "type": "string",
       "format": "uuid",
-      "description": "The workflow run id."
+      "description": "The workflow run id.",
+      "x-ms-parameter-location": "method"
     },
     "taskId": {
       "name": "taskId",
@@ -1565,27 +1557,26 @@
       "required": true,
       "type": "string",
       "format": "uuid",
-      "description": "The task id."
+      "description": "The task id.",
+      "x-ms-parameter-location": "method"
     },
     "timeWindow": {
       "name": "timeWindow",
       "in": "query",
       "required": false,
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "1d",
-          "7d",
-          "30d",
-          "90d"
-        ],
-        "x-ms-enum": {
-          "name": "TimeWindow",
-          "modelAsString": true
-        }
+      "type": "string",
+      "enum": [
+        "1d",
+        "7d",
+        "30d",
+        "90d"
+      ],
+      "x-ms-enum": {
+        "name": "TimeWindow",
+        "modelAsString": true
       },
-      "description": "Time window of filtering items."
+      "description": "Time window of filtering items.",
+      "x-ms-parameter-location": "method"
     },
     "orderBy": {
       "name": "orderBy",
@@ -1593,14 +1584,17 @@
       "required": false,
       "type": "string",
       "enum": [
-        "submittedTime",
-        "requestor"
+        "submittedTime desc",
+        "requestor desc",
+        "submittedTime asc",
+        "requestor asc"
       ],
       "x-ms-enum": {
-        "name": "sortKey",
+        "name": "orderBy",
         "modelAsString": true
       },
-      "description": "The key word which used to sort the results."
+      "description": "The key word which used to sort the results.",
+      "x-ms-parameter-location": "method"
     },
     "maxpagesize": {
       "name": "maxpagesize",
@@ -1608,14 +1602,8 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "description": "The maximum page size to get the items at one time."
-    },
-    "continuationToken": {
-      "name": "continuationToken",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The continuation token used for getting the next page of items."
+      "description": "The maximum page size to get the items at one time.",
+      "x-ms-parameter-location": "method"
     },
     "taskTypes": {
       "name": "taskTypes",
@@ -1633,7 +1621,8 @@
           "modelAsString": true
         }
       },
-      "description": "Filter items by workflow task type."
+      "description": "Filter items by workflow task type.",
+      "x-ms-parameter-location": "method"
     },
     "workflowIds": {
       "name": "workflowIds",
@@ -1643,7 +1632,8 @@
       "items": {
         "type": "string"
       },
-      "description": "Filter items by workflow id list."
+      "description": "Filter items by workflow id list.",
+      "x-ms-parameter-location": "method"
     },
     "userRequestIds": {
       "name": "userRequestIds",
@@ -1653,7 +1643,8 @@
       "items": {
         "type": "string"
       },
-      "description": "Filter items by user request id list."
+      "description": "Filter items by user request id list.",
+      "x-ms-parameter-location": "method"
     },
     "runStatuses": {
       "name": "runStatuses",
@@ -1676,7 +1667,8 @@
           "modelAsString": true
         }
       },
-      "description": "Filter workflow runs by workflow run status."
+      "description": "Filter workflow runs by workflow run status.",
+      "x-ms-parameter-location": "method"
     },
     "taskStatuses": {
       "name": "taskStatuses",
@@ -1699,14 +1691,16 @@
           "modelAsString": true
         }
       },
-      "description": "Filter workflow tasks by status."
+      "description": "Filter workflow tasks by status.",
+      "x-ms-parameter-location": "method"
     },
     "workflowNameKeyword": {
       "name": "workflowNameKeyword",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The key word which could used to filter workflow item with related workflow."
+      "description": "The key word which could used to filter workflow item with related workflow.",
+      "x-ms-parameter-location": "method"
     },
     "requestRole": {
       "name": "requestRole",
@@ -1725,7 +1719,8 @@
           "modelAsString": true
         }
       },
-      "description": "To filter user's sent, received or history workflow tasks."
+      "description": "To filter user's sent, received or history workflow tasks.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
