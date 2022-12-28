@@ -302,21 +302,19 @@
         "graphApiComputeEndpoint": {
           "type": "string",
           "readOnly": true,
-          "description": "Dedicated Gateway Endpoint for Graph API Account."
+          "description": "graphApiCompute endpoint for the service."
         },
         "sqlDedicatedGatewayEndpoint": {
           "type": "string",
           "readOnly": true,
-          "description": "Dedicated Gateway Endpoint for SQL API Account."
+          "description": "SqlDedicatedGateway endpoint for the service."
         },
         "locations": {
           "type": "array",
           "readOnly": true,
-          "description": "An array that contains all of the locations enabled for the Cosmos DB account.",
+          "description": "An array that contains all of the locations for the service.",
           "items": {
-            "description": "A region in which the Azure Cosmos DB database account is deployed.",
-            "type": "object",
-            "x-ms-identifiers": []
+            "$ref": "#/definitions/RegionalServiceResource"
           }
         }
       },
