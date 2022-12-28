@@ -2,18 +2,16 @@
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestGroup",
-    "serverGroupName": "hsctestsg",
+    "clusterName": "hsctestsg",
     "api-version": "2022-11-08",
     "parameters": {
-      "location": "westus",
       "properties": {
-        "serverRoleGroups": [
-          {
-            "name": "",
-            "role": "Worker",
-            "storageQuotaInMb": 8388608
-          }
-        ]
+        "maintenanceWindow": {
+          "dayOfWeek": 0,
+          "startHour": 8,
+          "startMinute": 0,
+          "customWindow": "Enabled"
+        }
       }
     }
   },
@@ -32,7 +30,7 @@
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {},
-        "location": "westus2"
+        "location": "westus"
       }
     },
     "202": {}

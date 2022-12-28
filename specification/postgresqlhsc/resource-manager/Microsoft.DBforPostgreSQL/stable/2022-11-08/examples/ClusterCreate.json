@@ -7,14 +7,24 @@
     "parameters": {
       "location": "westus",
       "properties": {
-        "createMode": "PointInTimeRestore",
-        "pointInTimeUTC": "2017-12-14T00:00:37.467Z",
-        "sourceLocation": "eastus",
-        "sourceSubscriptionId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-        "sourceResourceGroupName": "SourceGroup",
-        "sourceServerGroupName": "pgtests-source-server-group",
-        "enableMx": true,
-        "enableZfs": false
+        "administratorLoginPassword": "p@ssword1234",
+        "postgresqlVersion": "15",
+        "citusVersion": "11.1",
+        "preferredPrimaryZone": "1",
+        "enableHa": true,
+        "enableShardsOnCoordinator": false,
+        "coordinatorServerEdition": "GeneralPurpose",
+        "coordinatorStorageQuotaInMb": 524288,
+        "coordinatorVCores": 4,
+        "coordinatorEnablePublicIpAccess": "true",
+        "nodeServerEdition": "MemoryOptimized",
+        "nodeCount": 3,
+        "nodeStorageQuotaInMb": 524288,
+        "nodeVCores": 8,
+        "nodeEnablePublicIpAccess": "false"
+      },
+      "tags": {
+        "ElasticServer": "1"
       }
     }
   },
@@ -33,7 +43,7 @@
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {},
-        "location": "westus2"
+        "location": "westus"
       }
     },
     "201": {
@@ -50,7 +60,7 @@
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {},
-        "location": "westus2"
+        "location": "westus"
       }
     },
     "202": {}

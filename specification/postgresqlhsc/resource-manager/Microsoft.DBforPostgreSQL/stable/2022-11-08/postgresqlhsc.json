@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HyperscaleCitusManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL Hyperscale (Citus) resources including server groups, servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations.",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Cosmos DB for PostgreSQL resources including clusters, servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations.",
     "version": "2022-11-08"
   },
   "host": "management.azure.com",
@@ -37,15 +37,15 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/serverGroupsv2": {
       "get": {
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_List",
+        "operationId": "Clusters_List",
         "x-ms-examples": {
-          "List all the server groups": {
-            "$ref": "./examples/ServerGroupList.json"
+          "List all the clusters": {
+            "$ref": "./examples/ClusterList.json"
           }
         },
-        "description": "List all the server groups in a given subscription.",
+        "description": "List all the clusters in a given subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupListResult"
+              "$ref": "#/definitions/ClusterListResult"
             }
           },
           "default": {
@@ -76,15 +76,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2": {
       "get": {
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_ListByResourceGroup",
+        "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
           "List the server groups by resource group": {
-            "$ref": "./examples/ServerGroupListByResourceGroup.json"
+            "$ref": "./examples/ClusterListByResourceGroup.json"
           }
         },
-        "description": "List all the server groups in a given resource group.",
+        "description": "List all the clusters in a given resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupListResult"
+              "$ref": "#/definitions/ClusterListResult"
             }
           },
           "default": {
@@ -115,23 +115,23 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}": {
       "put": {
-        "description": "Creates a new server group with servers.",
+        "description": "Creates a new cluster with servers.",
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_CreateOrUpdate",
+        "operationId": "Clusters_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a new server group": {
-            "$ref": "./examples/ServerGroupCreate.json"
+            "$ref": "./examples/ClusterCreate.json"
           },
           "Create a new server group as a point in time restore": {
-            "$ref": "./examples/ServerGroupCreatePITR.json"
+            "$ref": "./examples/ClusterCreatePITR.json"
           },
           "Create a new server group as a read replica": {
-            "$ref": "./examples/ServerGroupCreateReadReplica.json"
+            "$ref": "./examples/ClusterCreateReadReplica.json"
           }
         },
         "parameters": [
@@ -145,29 +145,29 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroup"
+              "$ref": "#/definitions/Cluster"
             },
-            "description": "The required parameters for creating or updating a server group."
+            "description": "The required parameters for creating or updating a cluster."
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroup"
+              "$ref": "#/definitions/ClusterResponse"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ServerGroup"
+              "$ref": "#/definitions/ClusterResponse"
             }
           },
           "202": {
@@ -182,14 +182,14 @@
         }
       },
       "get": {
-        "description": "Gets information about a server group.",
+        "description": "Gets information about a cluster.",
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_Get",
+        "operationId": "Clusters_Get",
         "x-ms-examples": {
           "Get the server group": {
-            "$ref": "./examples/ServerGroupGet.json"
+            "$ref": "./examples/ClusterGet.json"
           }
         },
         "parameters": [
@@ -203,14 +203,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroup"
+              "$ref": "#/definitions/ClusterResponse"
             }
           },
           "default": {
@@ -222,15 +222,15 @@
         }
       },
       "delete": {
-        "description": "Deletes a server group together with servers in it.",
+        "description": "Deletes a cluster together with servers in it.",
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_Delete",
+        "operationId": "Clusters_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete the server group": {
-            "$ref": "./examples/ServerGroupDelete.json"
+            "$ref": "./examples/ClusterDelete.json"
           }
         },
         "parameters": [
@@ -244,7 +244,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -266,27 +266,27 @@
         }
       },
       "patch": {
-        "description": "Updates an existing server group. The request body can contain one to many of the properties present in the normal server group definition.",
+        "description": "Updates an existing cluster. The request body can contain one to many of the properties present in the normal server group definition.",
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_Update",
+        "operationId": "Clusters_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update the server group": {
-            "$ref": "./examples/ServerGroupUpdate.json"
+            "$ref": "./examples/ClusterUpdate.json"
           },
           "Scale compute": {
-            "$ref": "./examples/ServerGroupScaleCompute.json"
+            "$ref": "./examples/ClusterScaleCompute.json"
           },
           "Scale storage": {
-            "$ref": "./examples/ServerGroupScaleStorage.json"
+            "$ref": "./examples/ClusterScaleStorage.json"
           },
           "Add new worker nodes": {
-            "$ref": "./examples/ServerGroupAddNode.json"
+            "$ref": "./examples/ClusterAddNode.json"
           },
           "Update customer maintenance window": {
-            "$ref": "./examples/ServerGroupUpdateMaintenanceWindow.json"
+            "$ref": "./examples/ClusterUpdateMaintenanceWindow.json"
           }
         },
         "parameters": [
@@ -300,14 +300,14 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroupForUpdate"
+              "$ref": "#/definitions/ClusterForUpdate"
             },
             "description": "The parameters for updating a server group."
           }
@@ -316,7 +316,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroup"
+              "$ref": "#/definitions/ClusterResponse"
             }
           },
           "202": {
@@ -354,7 +354,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -399,7 +399,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -444,7 +444,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -492,7 +492,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -538,7 +538,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -593,7 +593,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -639,7 +639,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/FirewallRuleNameParameter"
@@ -701,7 +701,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/FirewallRuleNameParameter"
@@ -747,7 +747,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/FirewallRuleNameParameter"
@@ -792,7 +792,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -838,7 +838,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/RoleNameParameter"
@@ -900,7 +900,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/RoleNameParameter"
@@ -948,7 +948,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -994,7 +994,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -1037,7 +1037,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -1080,7 +1080,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -1103,9 +1103,9 @@
       "post": {
         "description": "Check the availability of name for resource",
         "tags": [
-          "ServerGroups"
+          "Clusters"
         ],
-        "operationId": "ServerGroups_CheckNameAvailability",
+        "operationId": "Clusters_CheckNameAvailability",
         "x-ms-examples": {
           "Check name availability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -1203,7 +1203,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -1248,7 +1248,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
@@ -1294,7 +1294,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
@@ -1351,7 +1351,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
@@ -1402,7 +1402,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -1447,7 +1447,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerGroupNameParameter"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/GroupNameParameter"
@@ -1474,72 +1474,6 @@
     }
   },
   "definitions": {
-    "PostgreSQLVersion": {
-      "type": "string",
-      "description": "The PostgreSQL version.",
-      "enum": [
-        "11",
-        "12"
-      ],
-      "x-ms-enum": {
-        "name": "PostgreSQLVersion",
-        "modelAsString": true
-      }
-    },
-    "CitusVersion": {
-      "type": "string",
-      "description": "The Citus version.",
-      "enum": [
-        "8.3",
-        "9.0",
-        "9.1",
-        "9.2",
-        "9.3",
-        "9.4",
-        "9.5"
-      ],
-      "x-ms-enum": {
-        "name": "CitusVersion",
-        "modelAsString": true
-      }
-    },
-    "ServerState": {
-      "type": "string",
-      "description": "A state of a server group/server that is visible to user.",
-      "enum": [
-        "Ready",
-        "Dropping",
-        "Disabled",
-        "Starting",
-        "Stopping",
-        "Stopped",
-        "Updating",
-        "Provisioning"
-      ],
-      "x-ms-enum": {
-        "name": "ServerState",
-        "modelAsString": true
-      },
-      "readOnly": true
-    },
-    "ServerHaState": {
-      "type": "string",
-      "description": "A state of a server role group/server that is visible to user for HA feature.",
-      "enum": [
-        "NotEnabled",
-        "CreatingStandby",
-        "ReplicatingData",
-        "FailingOver",
-        "Healthy",
-        "RemovingStandby",
-        "NotSync"
-      ],
-      "x-ms-enum": {
-        "name": "ServerHaState",
-        "modelAsString": true
-      },
-      "readOnly": true
-    },
     "ServerRole": {
       "type": "string",
       "description": "The role of a server.",
@@ -1552,25 +1486,12 @@
         "modelAsString": true
       }
     },
-    "FullyQualifiedDomainName": {
-      "type": "string",
-      "description": "The fully qualified domain name of a server.",
-      "readOnly": true
-    },
     "ServerProperties": {
       "description": "The properties of a server.",
       "properties": {
         "serverEdition": {
           "type": "string",
-          "description": "The edition of a server (default: GeneralPurpose).",
-          "enum": [
-            "GeneralPurpose",
-            "MemoryOptimized"
-          ],
-          "x-ms-enum": {
-            "name": "ServerEdition",
-            "modelAsString": true
-          }
+          "description": "The edition of a server"
         },
         "storageQuotaInMb": {
           "type": "integer",
@@ -1593,54 +1514,6 @@
         }
       }
     },
-    "ServerRoleGroupList": {
-      "type": "array",
-      "description": "The list of server role groups.",
-      "items": {
-        "$ref": "#/definitions/ServerRoleGroup"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ],
-      "minItems": 1,
-      "maxItems": 2,
-      "uniqueItems": true
-    },
-    "ServerRoleGroup": {
-      "description": "Represents a server role group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerProperties"
-        }
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the server role group."
-        },
-        "role": {
-          "$ref": "#/definitions/ServerRole",
-          "description": "The role of servers in the server role group."
-        },
-        "serverCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of servers in the server role group."
-        },
-        "serverNames": {
-          "type": "array",
-          "description": "The list of server names in the server role group.",
-          "items": {
-            "$ref": "#/definitions/ServerNameItem"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "readOnly": true,
-          "uniqueItems": true
-        }
-      }
-    },
     "ServerNameItem": {
       "description": "The name object for a server.",
       "properties": {
@@ -1649,8 +1522,9 @@
           "description": "The name of a server."
         },
         "fullyQualifiedDomainName": {
-          "$ref": "#/definitions/FullyQualifiedDomainName",
-          "description": "The fully qualified domain name of a server."
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
         }
       }
     },
@@ -1663,45 +1537,40 @@
       ],
       "properties": {
         "fullyQualifiedDomainName": {
-          "$ref": "#/definitions/FullyQualifiedDomainName",
-          "description": "The fully qualified domain name of a server."
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
         },
         "role": {
           "$ref": "#/definitions/ServerRole",
-          "description": "The role of server in the server group."
+          "description": "The role of server in the cluster."
         },
         "state": {
-          "$ref": "#/definitions/ServerState",
-          "description": "A state of a server that is visible to user."
+          "type": "string",
+          "description": "A state of a server group/server that is visible to user.",
+          "readOnly": true
         },
         "haState": {
-          "$ref": "#/definitions/ServerHaState",
-          "description": "A state of a server group that is visible to user for HA feature."
+          "type": "string",
+          "description": "A state of HA feature for the cluster.",
+          "readOnly": true
         },
         "administratorLogin": {
           "type": "string",
           "description": "The administrator's login name of a servers in server group."
         },
         "postgresqlVersion": {
-          "$ref": "#/definitions/PostgreSQLVersion",
+          "type": "string",
           "description": "The PostgreSQL version of server."
         },
         "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
+          "type": "string",
           "description": "The Citus version of server."
-        },
-        "availabilityZone": {
-          "type": "string",
-          "description": "Availability Zone information of the server group."
-        },
-        "standbyAvailabilityZone": {
-          "type": "string",
-          "description": "Standby Availability Zone information of the server group."
         }
       }
     },
     "ServerGroupServer": {
-      "description": "Represents a server in a server group.",
+      "description": "Represents a server in a cluster.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
@@ -1714,7 +1583,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ServerGroupServerProperties",
-          "description": "The properties of a server in a server group.",
+          "description": "The properties of a server in a cluster.",
           "x-ms-client-flatten": true
         }
       }
@@ -1731,17 +1600,17 @@
         }
       }
     },
-    "ServerGroupForUpdate": {
-      "description": "Represents a server group for update.",
+    "ClusterForUpdate": {
+      "description": "Represents a cluster for update.",
       "properties": {
         "location": {
           "type": "string",
           "description": "The location the resource resides in."
         },
         "properties": {
-          "$ref": "#/definitions/ServerGroupPropertiesForUpdate",
+          "$ref": "#/definitions/ClusterPropertiesForUpdate",
           "x-ms-client-flatten": true,
-          "description": "Properties of the server group."
+          "description": "Properties of the cluster."
         },
         "tags": {
           "type": "object",
@@ -1752,8 +1621,8 @@
         }
       }
     },
-    "ServerGroupPropertiesForUpdate": {
-      "description": "The properties used to update a server group.",
+    "ClusterPropertiesForUpdate": {
+      "description": "The properties used to update a cluster.",
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
@@ -1765,50 +1634,84 @@
           ],
           "description": "The password of the administrator login."
         },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The backup retention days for server group."
-        },
         "postgresqlVersion": {
-          "$ref": "#/definitions/PostgreSQLVersion",
-          "description": "The PostgreSQL version of server group."
+          "type": "string",
+          "description": "The PostgreSQL version of the cluster."
         },
         "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
-          "description": "The Citus version of server group."
+          "type": "string",
+          "description": "The Citus version of the cluster."
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the server group."
+          "description": "If shards on coordinator is enabled or not for the cluster."
         },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the cluster."
+        },
+        "preferredPrimaryZone": {
+          "type": "string",
+          "description": "Preferred primary zone for the cluster"
+        },
+        "coordinatorServerEdition": {
+          "type": "string",
+          "description": "The edition of the coordinator (default: GeneralPurpose)."
+        },
+        "coordinatorStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of the coordinator in MB (max: 2097152 = 2TiB)."
+        },
+        "coordinatorVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of the coordinator (max: 64)."
+        },
+        "coordinatorEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for the coordinator.",
+          "readOnly": true
+        },
+        "nodeServerEdition": {
+          "type": "string",
+          "description": "The edition of a node (default: MemoryOptimized)."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Worker node count of the cluster"
+        },
+        "nodeStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of a node in MB (max: 2097152 = 2TiB)."
+        },
+        "nodeVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of a node (max: 64)."
+        },
+        "nodeEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a node.",
+          "readOnly": true
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server group."
-        },
-        "availabilityZone": {
-          "type": "string",
-          "description": "Availability Zone information of the server group."
-        },
-        "standbyAvailabilityZone": {
-          "type": "string",
-          "description": "Standby Availability Zone information of the server group."
+          "description": "Maintenance window of a cluster."
         }
       }
     },
-    "ServerGroupListResult": {
+    "ClusterListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerGroup"
+            "$ref": "#/definitions/ClusterResponse"
           },
-          "description": "The list of server groups"
+          "description": "The list of clusters"
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
@@ -1816,54 +1719,26 @@
           "readOnly": true
         }
       },
-      "description": "A list of server groups."
+      "description": "A list of clusters."
     },
-    "ServerGroup": {
-      "description": "Represents a server group for create.",
+    "Cluster": {
+      "description": "Represents a cluster for create.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "The system metadata relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
         "properties": {
-          "$ref": "#/definitions/ServerGroupProperties",
+          "$ref": "#/definitions/ClusterProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of the server group create."
+          "description": "Properties of the cluster create."
         }
       }
     },
-    "ServerGroupProperties": {
-      "description": "The properties used to create a new server group.",
+    "ClusterProperties": {
+      "description": "The properties used to create a new cluster.",
       "properties": {
-        "createMode": {
-          "type": "string",
-          "description": "The mode to create a new server group.",
-          "enum": [
-            "Default",
-            "PointInTimeRestore",
-            "ReadReplica"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation).",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "administratorLoginPassword": {
           "type": "string",
           "x-ms-secret": true,
@@ -1874,134 +1749,89 @@
           ],
           "description": "The password of the administrator login."
         },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The backup retention days for server group."
-        },
         "postgresqlVersion": {
-          "$ref": "#/definitions/PostgreSQLVersion",
-          "description": "The PostgreSQL version of server group."
+          "type": "string",
+          "description": "The PostgreSQL version of cluster."
         },
         "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
-          "description": "The Citus version of server group."
-        },
-        "enableMx": {
-          "type": "boolean",
-          "description": "If Citus MX is enabled or not for the server group.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "enableZfs": {
-          "type": "boolean",
-          "description": "If ZFS compression is enabled or not for the server group.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "type": "string",
+          "description": "The Citus version of cluster."
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the server group."
-        },
-        "state": {
-          "$ref": "#/definitions/ServerState",
-          "description": "A state of a server group that is visible to user."
+          "description": "If shards on coordinator is enabled or not for the cluster."
         },
         "earliestRestoreTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The earliest restore point time (ISO8601 format) for server group.",
+          "description": "The earliest restore point time (ISO8601 format) for the cluster.",
           "readOnly": true
         },
-        "resourceProviderType": {
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the cluster."
+        },
+        "preferredPrimaryZone": {
           "type": "string",
-          "description": "The resource provider type of server group.",
-          "enum": [
-            "Meru",
-            "Marlin"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceProviderType",
-            "modelAsString": true
-          },
+          "description": "Preferred primary zone for the cluster"
+        },
+        "coordinatorServerEdition": {
+          "type": "string",
+          "description": "The edition of the coordinator (default: GeneralPurpose)."
+        },
+        "coordinatorStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of the coordinator in MB (max: 2097152 = 2TiB)."
+        },
+        "coordinatorVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of the coordinator (max: 64)."
+        },
+        "coordinatorEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for the coordinator.",
           "readOnly": true
         },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
+        "nodeServerEdition": {
+          "type": "string",
+          "description": "The edition of a node (default: MemoryOptimized)."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Worker node count of the cluster"
+        },
+        "nodeStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of a node in MB (max: 2097152 = 2TiB)."
+        },
+        "nodeVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of a node (max: 64)."
+        },
+        "nodeEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a node.",
+          "readOnly": true
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server group."
+          "description": "Maintenance window of a cluster."
         },
-        "availabilityZone": {
+        "sourceResourceId": {
           "type": "string",
-          "description": "Availability Zone information of the server group."
-        },
-        "standbyAvailabilityZone": {
-          "type": "string",
-          "description": "Standby Availability Zone information of the server group."
-        },
-        "delegatedSubnetArguments": {
-          "description": "The delegated subnet arguments for a server group.",
-          "properties": {
-            "subnetArmResourceId": {
-              "type": "string",
-              "description": "delegated subnet arm resource id."
-            }
-          }
-        },
-        "privateDnsZoneArguments": {
-          "description": "The private dns zone arguments for a server group.",
-          "properties": {
-            "privateDnsZoneArmResourceId": {
-              "type": "string",
-              "description": "private dns zone arm resource id."
-            }
-          }
-        },
-        "readReplicas": {
-          "type": "array",
-          "description": "The array of read replica server groups.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "uniqueItems": true
-        },
-        "sourceServerGroup": {
-          "type": "string",
-          "description": "The source server group id for read replica server groups.",
-          "readOnly": true
-        },
-        "sourceSubscriptionId": {
-          "type": "string",
-          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "sourceResourceGroupName": {
-          "type": "string",
-          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "sourceServerGroupName": {
-          "type": "string",
-          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
+          "description": "The source resource id to restore from. It's required for 'PointInTimeRestore' or 'ReadReplica' operations",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
+          "description": "The source cluster location to restore from. It's required for 'PointInTimeRestore' or 'ReadReplica' operations",
           "x-ms-mutability": [
             "create"
           ]
@@ -2009,16 +1839,156 @@
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required for'PointInTimeRestore' operation",
           "x-ms-mutability": [
             "create"
           ]
         }
       }
     },
+    "ClusterResponse": {
+      "description": "Represents a cluster in response body.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterResponseProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the cluster response body."
+        }
+      }
+    },
+    "ClusterResponseProperties": {
+      "description": "roperties of the cluster response body.",
+      "properties": {
+        "provisioningState":{
+          "type": "string",
+          "description": "Provisioning state of the cluster",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "A state of a cluster/server that is visible to user.",
+          "readOnly": true
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "Administrator Login username for the PostgreSQL"
+        },
+        "postgresqlVersion": {
+          "type": "string",
+          "description": "The PostgreSQL version of cluster."
+        },
+        "citusVersion": {
+          "type": "string",
+          "description": "The Citus version of cluster."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a cluster."
+        },
+        "preferredPrimaryZone": {
+          "type": "string",
+          "description": "Preferred primary zone for the cluster"
+        },
+        "enableShardsOnCoordinator": {
+          "type": "boolean",
+          "description": "If shards on coordinator is enabled or not for the cluster."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the server."
+        },
+        "coordinatorServerEdition": {
+          "type": "string",
+          "description": "The edition of a coordinator server (default: GeneralPurpose)."
+        },
+        "coordinatorStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of a server in MB (max: 2097152 = 2TiB)."
+        },
+        "coordinatorVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of a server (max: 64)."
+        },
+        "coordinatorEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a server.",
+          "readOnly": true
+        },
+        "nodeServerEdition": {
+          "type": "string",
+          "description": "The edition of a node server (default: MemoryOptimized)."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Worker node count of the cluster"
+        },
+        "nodeStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of a server in MB (max: 2097152 = 2TiB)."
+        },
+        "nodeVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of a server (max: 64)."
+        },
+        "nodeEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a server.",
+          "readOnly": true
+        },
+        "serverNames": {
+          "type": "array",
+          "description": "The list of server names in the cluster",
+          "items": {
+            "$ref": "#/definitions/ServerNameItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "sourceCluster": {
+          "type": "string",
+          "description": "The source server group id for read replica clusters.",
+          "readOnly": true
+        },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica clusters.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "earliestRestoreTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for the cluster.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "The private endpoint connections for a cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "MaintenanceWindow": {
       "type": "object",
-      "description": "Maintenance window of a server group.",
+      "description": "Maintenance window of a cluster.",
       "properties": {
         "customWindow": {
           "type": "string",
@@ -2636,12 +2606,12 @@
     }
   },
   "parameters": {
-    "ServerGroupNameParameter": {
-      "name": "serverGroupName",
+    "ClusterNameParameter": {
+      "name": "clusterGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server group.",
+      "description": "The name of the cluster.",
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"

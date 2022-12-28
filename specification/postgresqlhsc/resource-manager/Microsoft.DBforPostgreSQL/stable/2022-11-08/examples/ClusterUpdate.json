@@ -2,36 +2,14 @@
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestGroup",
-    "serverGroupName": "hsctestsg",
+    "clusterName": "hsctestsg",
     "api-version": "2022-11-08",
     "parameters": {
       "properties": {
-        "postgresqlVersion": "12",
-        "administratorLoginPassword": "secret",
-        "backupRetentionDays": 30,
-        "serverRoleGroups": [
-          {
-            "name": "",
-            "role": "Coordinator",
-            "serverCount": 1,
-            "serverEdition": "GeneralPurpose",
-            "vCores": 8,
-            "storageQuotaInMb": 1048576,
-            "enableHa": false
-          },
-          {
-            "name": "",
-            "role": "Worker",
-            "serverCount": 4,
-            "serverEdition": "MemoryOptimized",
-            "vCores": 4,
-            "storageQuotaInMb": 524288,
-            "enableHa": true
-          }
-        ]
-      },
-      "tags": {
-        "ElasticServer": "2"
+        "administratorLoginPassword": "newP@ssword1",
+        "coordinatorVCores" : 16,
+        "nodeCount" : 4,
+        "nodeVCores" : 16
       }
     }
   },
@@ -50,7 +28,7 @@
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {},
-        "location": "westus2"
+        "location": "westus"
       }
     },
     "202": {}

@@ -2,49 +2,13 @@
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestGroup",
-    "serverGroupName": "hsctestsg",
+    "clusterName": "hsctestsg",
     "api-version": "2022-11-08",
     "parameters": {
       "location": "westus",
       "properties": {
-        "administratorLogin": "citus",
-        "administratorLoginPassword": "password",
-        "backupRetentionDays": 35,
-        "delegatedSubnetArguments": {
-          "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
-        },
-        "privateDnsZoneArguments": {
-          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone"
-        },
-        "enableMx": true,
-        "enableZfs": false,
-        "postgresqlVersion": "12",
-        "citusVersion": "9.5",
-        "availabilityZone": "1",
-        "standbyAvailabilityZone": "2",
-        "serverRoleGroups": [
-          {
-            "name": "",
-            "role": "Coordinator",
-            "serverCount": 1,
-            "serverEdition": "GeneralPurpose",
-            "vCores": 4,
-            "storageQuotaInMb": 524288,
-            "enableHa": true
-          },
-          {
-            "name": "",
-            "role": "Worker",
-            "serverCount": 3,
-            "serverEdition": "MemoryOptimized",
-            "vCores": 4,
-            "storageQuotaInMb": 524288,
-            "enableHa": false
-          }
-        ]
-      },
-      "tags": {
-        "ElasticServer": "1"
+        "sourceLocation": "eastus",
+        "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/pgtests-source-cluster"
       }
     }
   },
