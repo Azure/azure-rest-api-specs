@@ -34,11 +34,11 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}/SecurityOperators": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}/securityOperators": {
       "get": {
         "x-ms-examples": {
           "List SecurityOperators": {
-            "$ref": "./examples/ListSecurityOperators_example.json"
+            "$ref": "./examples/SecurityOperators/ListSecurityOperators_example.json"
           }
         },
         "tags": [
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}/SecurityOperators/{securityOperatorName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}": {
       "get": {
         "x-ms-examples": {
           "Get a specific security operator by scope and securityOperatorName": {
@@ -198,6 +198,7 @@
   },
     "definitions": {
       "SecurityOperatorList": {
+        "type": "object",
         "description": "List of SecurityOperator response.",
         "required": [
           "value"
