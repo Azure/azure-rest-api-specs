@@ -381,6 +381,9 @@
           },
           "SearchCreateOrUpdateServiceDisableLocalAuth": {
             "$ref": "./examples/SearchCreateOrUpdateServiceDisableLocalAuth.json"
+          },
+          "SearchCreateOrUpdateServiceWithCmkEnforcement": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceWithCmkEnforcement.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -462,6 +465,9 @@
           },
           "SearchUpdateServiceDisableLocalAuth": {
             "$ref": "./examples/SearchUpdateServiceDisableLocalAuth.json"
+          },
+          "SearchUpdateServiceWithCmkEnforcement": {
+            "$ref": "./examples/SearchUpdateServiceWithCmkEnforcement.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -1472,6 +1478,67 @@
       },
       "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
     },
+    "EncryptionWithCmk": {
+      "type": "object",
+      "properties": {
+        "enforcement": {
+          "description": "Describes how a search service should enforce having one or more non customer encrypted resources.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "name": "SearchEncryptionWithCmk",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Disabled",
+                "name": "Disabled",
+                "description": "No enforcement will be made and the search service can have non customer encrypted resources."
+              },
+              {
+                "value": "Enabled",
+                "name": "Enabled",
+                "description": "Search service will be marked as non-compliant if there are one or more non customer encrypted resources."
+              },
+              {
+                "value": "Unspecified",
+                "name": "Unspecified",
+                "description": "Enforcement policy is not explicitly specified, with the behavior being the same as if it were set to 'Disabled'."
+              }
+            ]
+          }
+        },
+        "encryptionComplianceStatus": {
+          "readOnly": true,
+          "description": "Describes whether the search service is compliant or not with respect to having non customer encrypted resources. If a service has more than one non customer encrypted resource and 'Enforcement' is 'enabled' then the service will be marked as 'nonCompliant'.",
+          "type": "string",
+          "enum": [
+            "Compliant",
+            "NonCompliant"
+          ],
+          "x-ms-enum": {
+            "name": "SearchEncryptionComplianceStatus",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Compliant",
+                "name": "Compliant",
+                "description": "Indicates that the search service is compliant, either because number of non customer encrypted resources is zero or enforcement is disabled."
+              },
+              {
+                "value": "NonCompliant",
+                "name": "NonCompliant",
+                "description": "Indicates that the search service has more than 1 non customer encrypted resources."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes a policy that determines how resources within the search service are to be encrypted with Customer Managed Keys."
+    },
     "PrivateEndpointConnection": {
       "properties": {
         "properties": {
@@ -2047,6 +2114,10 @@
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
+        },
+        "encryptionWithCmk": {
+          "$ref": "#/definitions/EncryptionWithCmk",
+          "description": "Specifies any policy regarding encryption of resources (such as indexes) using customer manager keys within a search service."
         },
         "disableLocalAuth": {
           "type": "boolean",
