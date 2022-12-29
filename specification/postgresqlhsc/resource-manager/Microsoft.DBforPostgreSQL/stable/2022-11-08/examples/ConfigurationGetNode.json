@@ -4,21 +4,7 @@
     "resourceGroupName": "TestResourceGroup",
     "serverGroupName": "hsctestsg",
     "configurationName": "array_nulls",
-    "api-version": "2022-11-08",
-    "parameters": {
-      "properties": {
-        "serverRoleGroupConfigurations": [
-          {
-            "role": "Coordinator",
-            "value": "on"
-          },
-          {
-            "role": "Worker",
-            "value": "off"
-          }
-        ]
-      }
-    }
+    "api-version": "2022-11-08"
   },
   "responses": {
     "200": {
@@ -35,19 +21,14 @@
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {
-          "serverRoleGroupConfigurations": [
-            {
-              "role": "Coordinator",
-              "value": "on"
-            },
-            {
-              "role": "Worker",
-              "value": "off"
-            }
-          ]
+          "description": "Enable input of NULL elements in arrays.",
+          "dataType": "Boolean",
+          "allowedValues": "on,off",
+          "value": "off",
+          "defaultValue": "on",
+          "source": "user-override"
         }
       }
-    },
-    "202": {}
+    }
   }
 }

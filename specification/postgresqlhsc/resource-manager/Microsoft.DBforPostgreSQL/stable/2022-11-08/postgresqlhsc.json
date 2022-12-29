@@ -80,7 +80,7 @@
         ],
         "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
-          "List the server groups by resource group": {
+          "List the clusters by resource group": {
             "$ref": "./examples/ClusterListByResourceGroup.json"
           }
         },
@@ -124,13 +124,13 @@
         "operationId": "Clusters_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a new server group": {
+          "Create a new cluster": {
             "$ref": "./examples/ClusterCreate.json"
           },
-          "Create a new server group as a point in time restore": {
+          "Create a new cluster as a point in time restore": {
             "$ref": "./examples/ClusterCreatePITR.json"
           },
-          "Create a new server group as a read replica": {
+          "Create a new cluster as a read replica": {
             "$ref": "./examples/ClusterCreateReadReplica.json"
           }
         },
@@ -188,7 +188,7 @@
         ],
         "operationId": "Clusters_Get",
         "x-ms-examples": {
-          "Get the server group": {
+          "Get the cluster": {
             "$ref": "./examples/ClusterGet.json"
           }
         },
@@ -229,7 +229,7 @@
         "operationId": "Clusters_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete the server group": {
+          "Delete the cluster": {
             "$ref": "./examples/ClusterDelete.json"
           }
         },
@@ -266,14 +266,14 @@
         }
       },
       "patch": {
-        "description": "Updates an existing cluster. The request body can contain one to many of the properties present in the normal server group definition.",
+        "description": "Updates an existing cluster. The request body can contain one to many of the properties present in the normal cluster definition.",
         "tags": [
           "Clusters"
         ],
         "operationId": "Clusters_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the server group": {
+          "Update the cluster": {
             "$ref": "./examples/ClusterUpdate.json"
           },
           "Scale compute": {
@@ -309,7 +309,7 @@
             "schema": {
               "$ref": "#/definitions/ClusterForUpdate"
             },
-            "description": "The parameters for updating a server group."
+            "description": "The parameters for updating a cluster."
           }
         ],
         "responses": {
@@ -331,16 +331,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/servers": {
       "get": {
-        "description": "Lists servers of a server group.",
+        "description": "Lists servers of a cluster.",
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_ListByServerGroup",
+        "operationId": "Servers_ListByCluster",
         "x-ms-examples": {
-          "List servers of the server group": {
-            "$ref": "./examples/ServerListByServerGroup.json"
+          "List servers of the cluster": {
+            "$ref": "./examples/ServerListByCluster.json"
           }
         },
         "parameters": [
@@ -361,7 +361,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupServerListResult"
+              "$ref": "#/definitions/ClusterServerListResult"
             }
           },
           "default": {
@@ -376,15 +376,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/servers/{serverName}": {
       "get": {
-        "description": "Gets information about a server in server group.",
+        "description": "Gets information about a server in cluster.",
         "tags": [
           "Servers"
         ],
         "operationId": "Servers_Get",
         "x-ms-examples": {
-          "Get the server of server group": {
+          "Get the server of cluster": {
             "$ref": "./examples/ServerGet.json"
           }
         },
@@ -409,7 +409,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupServer"
+              "$ref": "#/definitions/ClusterServer"
             }
           },
           "default": {
@@ -421,15 +421,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/servers/{serverName}/configurations": {
       "get": {
-        "description": "List all the configurations of a server in server group.",
+        "description": "List all the configurations of a server in cluster.",
         "tags": [
           "Configurations"
         ],
         "operationId": "Configurations_ListByServer",
         "x-ms-examples": {
-          "List configurations of the server that in the server group": {
+          "List configurations of the server that in the cluster": {
             "$ref": "./examples/ConfigurationListByServer.json"
           }
         },
@@ -469,16 +469,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/configurations": {
       "get": {
-        "description": "List all the configurations of a server group.",
+        "description": "List all the configurations of a cluster.",
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_ListByServerGroup",
+        "operationId": "Configurations_ListByCluster",
         "x-ms-examples": {
-          "List configurations of the server group": {
-            "$ref": "./examples/ConfigurationListByServerGroup.json"
+          "List configurations of the cluster": {
+            "$ref": "./examples/ConfigurationListByCluster.json"
           }
         },
         "parameters": [
@@ -499,7 +499,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupConfigurationListResult"
+              "$ref": "#/definitions/ClusterConfigurationListResult"
             }
           },
           "default": {
@@ -514,17 +514,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations/{configurationName}": {
-      "patch": {
-        "description": "Updates configuration of server role groups in a server group",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/configurations/{configurationName}/coordinator": {
+      "put": {
+        "description": "Updates configuration of coordinator in a cluster",
         "tags": [
           "Configurations"
         ],
         "operationId": "Configurations_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update single configuration of the server group": {
-            "$ref": "./examples/ConfigurationUpdate.json"
+          "Update single configuration of the cluster   ": {
+            "$ref": "./examples/ConfigurationUpdateCoordinator.json"
           }
         },
         "parameters": [
@@ -548,16 +548,16 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroupConfiguration"
+              "$ref": "#/definitions/ServerConfigurationRequest"
             },
-            "description": "The required parameters for updating a server group configuration."
+            "description": "The required parameters for updating a cluster configuration."
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupConfiguration"
+              "$ref": "#/definitions/ServerConfiguration"
             }
           },
           "202": {
@@ -572,14 +572,14 @@
         }
       },
       "get": {
-        "description": "Gets information about single server group configuration.",
+        "description": "Gets information of a coordinator configuration.",
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_Get",
+        "operationId": "Configuration_Get_Coordinator",
         "x-ms-examples": {
-          "Get single configuration of the server group": {
-            "$ref": "./examples/ConfigurationGet.json"
+          "Get single configuration of the cluster": {
+            "$ref": "./examples/ConfigurationGetCoordinator.json"
           }
         },
         "parameters": [
@@ -603,7 +603,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupConfiguration"
+              "$ref": "#/definitions/ServerConfiguration"
             }
           },
           "default": {
@@ -615,7 +615,108 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/configurations/{configurationName}/node": {
+      "put": {
+        "description": "Updates configuration of nodes in a cluster",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Update_Node",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update single configuration of the cluster   ": {
+            "$ref": "./examples/ConfigurationUpdateNode.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationRequest"
+            },
+            "description": "The required parameters for updating a cluster configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information of a node configuration.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configuration_Get_Node",
+        "x-ms-examples": {
+          "Get single configuration of the cluster": {
+            "$ref": "./examples/ConfigurationGetNode.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/firewallRules/{firewallRuleName}": {
       "put": {
         "description": "Creates a new firewall rule or updates an existing firewall rule.",
         "tags": [
@@ -624,7 +725,7 @@
         "operationId": "FirewallRules_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a firewall rule of the server group": {
+          "Create a firewall rule of the cluster": {
             "$ref": "./examples/FirewallRuleCreate.json"
           }
         },
@@ -679,14 +780,14 @@
         }
       },
       "delete": {
-        "description": "Deletes a server group firewall rule.",
+        "description": "Deletes a cluster firewall rule.",
         "tags": [
           "FirewallRules"
         ],
         "operationId": "FirewallRules_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete the firewall rule of the server group": {
+          "Delete the firewall rule of the cluster": {
             "$ref": "./examples/FirewallRuleDelete.json"
           }
         },
@@ -726,13 +827,13 @@
         }
       },
       "get": {
-        "description": "Gets information about a server group firewall rule.",
+        "description": "Gets information about a cluster firewall rule.",
         "tags": [
           "FirewallRules"
         ],
         "operationId": "FirewallRules_Get",
         "x-ms-examples": {
-          "Get the firewall rule of the server group": {
+          "Get the firewall rule of the cluster": {
             "$ref": "./examples/FirewallRuleGet.json"
           }
         },
@@ -769,16 +870,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/firewallRules": {
       "get": {
-        "description": "List all the firewall rules in a given server group.",
+        "description": "List all the firewall rules in a given cluster.",
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FirewallRules_ListByServerGroup",
+        "operationId": "FirewallRules_ListByCluster",
         "x-ms-examples": {
-          "List firewall rules of the server group": {
-            "$ref": "./examples/FirewallRuleListByServerGroup.json"
+          "List firewall rules of the cluster": {
+            "$ref": "./examples/FirewallRuleListByCluster.json"
           }
         },
         "parameters": [
@@ -814,7 +915,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/roles/{roleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/roles/{roleName}": {
       "put": {
         "tags": [
           "Roles"
@@ -888,7 +989,7 @@
             "$ref": "./examples/RoleDelete.json"
           }
         },
-        "description": "Deletes a server group role.",
+        "description": "Deletes a cluster role.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -925,18 +1026,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/roles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/roles": {
       "get": {
         "tags": [
           "Roles"
         ],
-        "operationId": "Roles_ListByServerGroup",
+        "operationId": "Roles_ListByCluster",
         "x-ms-examples": {
           "RoleList": {
-            "$ref": "./examples/RoleListByServerGroup.json"
+            "$ref": "./examples/RoleListByCluster.json"
           }
         },
-        "description": "List all the roles in a given server group.",
+        "description": "List all the roles in a given cluster.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -970,17 +1071,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/restart": {
       "post": {
-        "description": "Restarts the server group.",
+        "description": "Restarts the cluster.",
         "tags": [
-          "ServerGroupOperations"
+          "ClusterOperations"
         ],
-        "operationId": "ServerGroups_Restart",
+        "operationId": "Cluster_Restart",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Restart all servers in the server group": {
-            "$ref": "./examples/ServerGroupRestart.json"
+          "Restart all servers in the cluster": {
+            "$ref": "./examples/ClusterRestart.json"
           }
         },
         "parameters": [
@@ -1013,17 +1114,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/start": {
       "post": {
-        "description": "Starts the server group.",
+        "description": "Starts the cluster.",
         "tags": [
-          "ServerGroupOperations"
+          "ClusterOperations"
         ],
-        "operationId": "ServerGroups_Start",
+        "operationId": "Cluster_Start",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Start all servers in the server group": {
-            "$ref": "./examples/ServerGroupStart.json"
+          "Start all servers in the cluster": {
+            "$ref": "./examples/ClusterStart.json"
           }
         },
         "parameters": [
@@ -1056,17 +1157,60 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/stop": {
       "post": {
-        "description": "Stops the server group.",
+        "description": "Stops the cluster.",
         "tags": [
-          "ServerGroupOperations"
+          "ClusterOperations"
         ],
-        "operationId": "ServerGroups_Stop",
+        "operationId": "Cluster_Stop",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Stop all servers in the server group": {
-            "$ref": "./examples/ServerGroupStop.json"
+          "Stop all servers in the cluster": {
+            "$ref": "./examples/ClusterStop.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/promote": {
+      "post": {
+        "description": "Promote the read replica cluster.",
+        "tags": [
+          "ClusterOperations"
+        ],
+        "operationId": "Cluster_PromoteReadReplica",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Promote the read replica": {
+            "$ref": "./examples/ClusterPromoteReadReplica.json"
           }
         },
         "parameters": [
@@ -1180,16 +1324,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/privateEndpointConnections": {
       "get": {
-        "description": "Gets list of private endpoint connections on a server group.",
+        "description": "Gets list of private endpoint connections on a cluster.",
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "operationId": "PrivateEndpointConnections_ListByServerGroup",
+        "operationId": "PrivateEndpointConnections_ListByCluster",
         "x-ms-examples": {
-          "Gets list of private endpoint connections on a server group.": {
-            "$ref": "./examples/PrivateEndpointConnectionsListByServerGroup.json"
+          "Gets list of private endpoint connections on a cluster.": {
+            "$ref": "./examples/PrivateEndpointConnectionsListByCluster.json"
           }
         },
         "parameters": [
@@ -1225,7 +1369,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "description": "Gets private endpoint connection.",
         "tags": [
@@ -1304,7 +1448,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnectionRequest"
             }
           }
         ],
@@ -1379,16 +1523,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/privateLinkResources": {
       "get": {
-        "description": "Gets the private link resources for server group.",
+        "description": "Gets the private link resources for cluster.",
         "tags": [
           "PrivateLinkResources"
         ],
-        "operationId": "PrivateLinkResources_ListByServerGroup",
+        "operationId": "PrivateLinkResources_ListByCluster",
         "x-ms-examples": {
-          "Gets the private link resources for server group.": {
-            "$ref": "./examples/PrivateLinkResourceListByServerGroup.json"
+          "Gets the private link resources for cluster.": {
+            "$ref": "./examples/PrivateLinkResourceListByCluster.json"
           }
         },
         "parameters": [
@@ -1424,15 +1568,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/privateLinkResources/{groupName}": {
       "get": {
-        "description": "Gets a private link resource for server group.",
+        "description": "Gets a private link resource for cluster.",
         "tags": [
           "PrivateLinkResources"
         ],
         "operationId": "PrivateLinkResources_Get",
         "x-ms-examples": {
-          "Gets a private link resource for server group.": {
+          "Gets a private link resource for cluster.": {
             "$ref": "./examples/PrivateLinkResourcesGet.json"
           }
         },
@@ -1528,8 +1672,8 @@
         }
       }
     },
-    "ServerGroupServerProperties": {
-      "description": "The properties of a server in server group.",
+    "ClusterServerProperties": {
+      "description": "The properties of a server in cluster.",
       "allOf": [
         {
           "$ref": "#/definitions/ServerProperties"
@@ -1547,7 +1691,7 @@
         },
         "state": {
           "type": "string",
-          "description": "A state of a server group/server that is visible to user.",
+          "description": "A state of a cluster/server that is visible to user.",
           "readOnly": true
         },
         "haState": {
@@ -1557,7 +1701,7 @@
         },
         "administratorLogin": {
           "type": "string",
-          "description": "The administrator's login name of a servers in server group."
+          "description": "The administrator's login name of a servers in cluster."
         },
         "postgresqlVersion": {
           "type": "string",
@@ -1569,7 +1713,7 @@
         }
       }
     },
-    "ServerGroupServer": {
+    "ClusterServer": {
       "description": "Represents a server in a cluster.",
       "allOf": [
         {
@@ -1582,20 +1726,20 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
-          "$ref": "#/definitions/ServerGroupServerProperties",
+          "$ref": "#/definitions/ClusterServerProperties",
           "description": "The properties of a server in a cluster.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ServerGroupServerListResult": {
-      "description": "A list of servers in a server group.",
+    "ClusterServerListResult": {
+      "description": "A list of servers in a cluster.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of servers in a server group.",
+          "description": "The list of servers in a cluster.",
           "items": {
-            "$ref": "#/definitions/ServerGroupServer"
+            "$ref": "#/definitions/ClusterServer"
           }
         }
       }
@@ -1861,7 +2005,7 @@
       }
     },
     "ClusterResponseProperties": {
-      "description": "roperties of the cluster response body.",
+      "description": "Properties of the cluster response body.",
       "properties": {
         "provisioningState":{
           "type": "string",
@@ -1958,7 +2102,7 @@
         },
         "sourceCluster": {
           "type": "string",
-          "description": "The source server group id for read replica clusters.",
+          "description": "The source cluster id for read replica clusters.",
           "readOnly": true
         },
         "readReplicas": {
@@ -2011,27 +2155,8 @@
         }
       }
     },
-    "ServerGroupConfiguration": {
-      "description": "Represents the configuration list of server role groups in a server group.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "description": "The system metadata relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerGroupConfigurationProperties",
-          "description": "The properties of server group configuration.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ServerGroupConfigurationProperties": {
-      "description": "The properties of server group configuration.",
+    "ClusterConfigurationProperties": {
+      "description": "The properties of cluster configuration.",
       "properties": {
         "description": {
           "type": "string",
@@ -2058,6 +2183,10 @@
           "description": "Allowed values of the configuration.",
           "readOnly": true
         },
+        "requiresRestart": {
+          "type": "boolean",
+          "description": "If configuration change requires restart."
+        },
         "serverRoleGroupConfigurations": {
           "type": "array",
           "description": "The list of server role group configuration values.",
@@ -2071,6 +2200,25 @@
       "required": [
         "serverRoleGroupConfigurations"
       ]
+    },
+    "ClusterConfiguration": {
+      "description": "Represents the configuration list of server role groups in a cluster.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterConfigurationProperties",
+          "description": "The properties of cluster configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "ServerRoleGroupConfiguration": {
       "description": "Represents server role group configuration value.",
@@ -2099,14 +2247,14 @@
         "value"
       ]
     },
-    "ServerGroupConfigurationListResult": {
-      "description": "A list of server group configurations.",
+    "ClusterConfigurationListResult": {
+      "description": "A list of cluster configurations.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of server group configurations.",
+          "description": "The list of cluster configurations.",
           "items": {
-            "$ref": "#/definitions/ServerGroupConfiguration"
+            "$ref": "#/definitions/ClusterConfiguration"
           }
         },
         "nextLink": {
@@ -2157,11 +2305,24 @@
           "type": "string",
           "description": "Allowed values of the configuration.",
           "readOnly": true
+        },
+        "requiresRestart": {
+          "type": "boolean",
+          "description": "If configuration change requires restart."
         }
       },
       "required": [
         "value"
       ]
+    },
+    "ServerConfigurationRequest": {
+      "description": "Represents a configuration.",
+      "properties": {
+        "value":{
+          "description": "Represents the value of a configuration.",
+          "type": "string"
+        }
+      }
     },
     "ServerConfiguration": {
       "description": "Represents a configuration.",
@@ -2200,16 +2361,16 @@
       }
     },
     "FirewallRuleProperties": {
-      "description": "The properties of a server group firewall rule.",
+      "description": "The properties of a cluster firewall rule.",
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the server group firewall rule. Must be IPv4 format.",
+          "description": "The start IP address of the cluster firewall rule. Must be IPv4 format.",
           "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the server group firewall rule. Must be IPv4 format.",
+          "description": "The end IP address of the cluster firewall rule. Must be IPv4 format.",
           "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
         }
       },
@@ -2219,7 +2380,7 @@
       ]
     },
     "FirewallRule": {
-      "description": "Represents a server group firewall rule.",
+      "description": "Represents a cluster firewall rule.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
@@ -2245,7 +2406,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of firewall rules in a server group.",
+          "description": "The list of firewall rules in a cluster.",
           "items": {
             "$ref": "#/definitions/FirewallRule"
           }
@@ -2262,13 +2423,13 @@
             "create",
             "update"
           ],
-          "description": "The password of the server group role."
+          "description": "The password of the cluster role."
         }
       },
       "required": [
         "password"
       ],
-      "description": "The properties of a server group role."
+      "description": "The properties of a cluster role."
     },
     "Role": {
       "properties": {
@@ -2287,7 +2448,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a server group role."
+      "description": "Represents a cluster role."
     },
     "RoleListResult": {
       "properties": {
@@ -2296,7 +2457,7 @@
           "items": {
             "$ref": "#/definitions/Role"
           },
-          "description": "The list of roles in a server group."
+          "description": "The list of roles in a cluster."
         }
       },
       "description": "A list of roles."
@@ -2452,8 +2613,22 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequest": {
+      "description": "A private endpoint connection",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionRequestProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the private endpoint connection."
         }
@@ -2532,8 +2707,21 @@
       },
       "description": "A list of private link resources."
     },
-    "PrivateEndpointConnectionProperties": {
+    "PrivateEndpointConnectionRequestProperties": {
       "description": "The properties used to create a private endpoint connection",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "The properties in private endpoint connection",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpointProperty",
@@ -2631,7 +2819,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server group configuration.",
+      "description": "The name of the cluster configuration.",
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"
@@ -2641,7 +2829,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server group firewall rule.",
+      "description": "The name of the cluster firewall rule.",
       "x-ms-parameter-location": "method"
     },
     "RoleNameParameter": {
@@ -2649,7 +2837,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server group role.",
+      "description": "The name of the cluster role.",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
