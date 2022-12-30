@@ -11,6 +11,80 @@
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}": {
+      "put": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Create or update a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultCreateOrUpdateParameters"
+            },
+            "description": "Parameters to create or update the vault"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created or updated vault",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "200": {
+            "description": "Created or updated vault",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new vault or update an existing vault": {
+            "$ref": "./examples/createVault.json"
+          },
+          "Create or update a vault with network acls": {
+            "$ref": "./examples/createVaultWithNetworkAcls.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
       "get": {
         "tags": [
           "Vaults"
@@ -56,6 +130,205 @@
         "x-ms-examples": {
           "Retrieve a vault": {
             "$ref": "./examples/getVault.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_ListByResourceGroup",
+        "description": "The List operation gets information about the vaults associated with the subscription and within the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the vault belongs."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all key vaults in the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/VaultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List vaults in the specified resource group": {
+            "$ref": "./examples/listVaultByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/vaults": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_ListBySubscription",
+        "description": "The List operation gets information about the vaults associated with the subscription.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all key vaults in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/VaultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List vaults in the specified subscription": {
+            "$ref": "./examples/listVaultBySubscription.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}": {
+      "put": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_UpdateAccessPolicy",
+        "description": "Update access policies in a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the vault belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "name": "operationKind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "add",
+              "replace",
+              "remove"
+            ],
+            "x-ms-enum": {
+              "name": "AccessPolicyUpdateKind",
+              "modelAsString": false
+            },
+            "description": "Name of the operation"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
+            },
+            "description": "Access policy to merge into the vault"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The updated access policies",
+            "schema": {
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
+            }
+          },
+          "200": {
+            "description": "The updated access policies",
+            "schema": {
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add an access policy, or update an access policy with new permissions": {
+            "$ref": "./examples/updateAccessPoliciesAdd.json"
           }
         },
         "produces": [
