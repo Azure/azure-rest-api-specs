@@ -85,6 +85,130 @@
           "application/json"
         ]
       },
+      "patch": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_Update",
+        "description": "Update a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultPatchParameters"
+            },
+            "description": "Parameters to patch the vault"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Patched vault",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "200": {
+            "description": "Patched vault",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an existing vault": {
+            "$ref": "./examples/updateVault.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_Delete",
+        "description": "Deletes the specified Azure key vault.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the vault belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vault to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK Response."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a vault": {
+            "$ref": "./examples/deleteVault.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
       "get": {
         "tags": [
           "Vaults"
@@ -251,6 +375,164 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/deletedVaults": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_ListDeleted",
+        "description": "Gets information about the deleted vaults in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about all deleted key vaults in a subscription.",
+            "schema": {
+              "$ref": "#/definitions/DeletedVaultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deleted vaults in the specified subscription": {
+            "$ref": "./examples/listDeletedVaults.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_GetDeleted",
+        "description": "Gets the deleted Azure key vault.",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vault."
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted vault."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about the deleted vault.",
+            "schema": {
+              "$ref": "#/definitions/DeletedVault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a deleted vault": {
+            "$ref": "./examples/getDeletedVault.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}/purge": {
+      "post": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_PurgeDeleted",
+        "x-ms-long-running-operation": true,
+        "description": "Permanently deletes the specified vault. aka Purges the deleted Azure key vault.",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the soft-deleted vault."
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the soft-deleted vault."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The vault is purged."
+          },
+          "202": {
+            "description": "Vault is being purged."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Purge a deleted vault": {
+            "$ref": "./examples/purgeDeletedVault.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}": {
       "put": {
         "tags": [
@@ -329,6 +611,132 @@
         "x-ms-examples": {
           "Add an access policy, or update an access policy with new permissions": {
             "$ref": "./examples/updateAccessPoliciesAdd.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resources": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_List",
+        "description": "The List operation gets information about the vaults associated with the subscription.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "resourceType eq 'Microsoft.KeyVault/vaults'"
+            ],
+            "x-ms-enum": {
+              "name": "VaultListFilterTypes",
+              "modelAsString": false
+            },
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "x-ms-api-version": false,
+            "type": "string",
+            "enum": [
+              "2015-11-01"
+            ],
+            "x-ms-enum": {
+              "name": "ResourceManagerApiVersions",
+              "modelAsString": false
+            },
+            "description": "Azure Resource Manager Api Version."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all key vaults in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List vaults in the specified subscription": {
+            "$ref": "./examples/listVault.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_CheckNameAvailability",
+        "description": "Checks that the vault name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultCheckNameAvailabilityParameters"
+            },
+            "description": "The name of the vault."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the vault name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a vault name": {
+            "$ref": "./examples/checkVaultNameAvailability.json"
           }
         },
         "produces": [
