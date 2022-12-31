@@ -1,4 +1,3 @@
-
 {
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
@@ -7,27 +6,27 @@
     "api-version": "2022-09-01",
     "siteAuthSettingsV2": {
       "properties": {
-        "platform" : {
-          "enabled" : true,
-          "runtimeVersion" : "~1",
-          "configFilePath" : "/auth/config.json"
+        "platform": {
+          "enabled": true,
+          "runtimeVersion": "~1",
+          "configFilePath": "/auth/config.json"
         },
-        "globalValidation" : {
-          "requireAuthentication" : true,
+        "globalValidation": {
+          "requireAuthentication": true,
           "unauthenticatedClientAction": "Return403",
-          "excludedPaths" : [
+          "excludedPaths": [
             "/nosecrets/Path"
           ]
         },
-        "identityProviders" : {
-          "google" : {
-            "enabled" : true,
-            "registration" : {
-              "clientId" : "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
-              "clientSecretSettingName" : "ClientSecret"
+        "identityProviders": {
+          "google": {
+            "enabled": true,
+            "registration": {
+              "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
+              "clientSecretSettingName": "ClientSecret"
             },
-            "login" : {
-              "scopes" : [
+            "login": {
+              "scopes": [
                 "admin"
               ]
             },
@@ -38,38 +37,38 @@
             }
           }
         },
-        "login" : {
-          "routes" : {
-            "logoutEndpoint" : "https://app.com/logout"
+        "login": {
+          "routes": {
+            "logoutEndpoint": "https://app.com/logout"
           },
-          "tokenStore" : {
-            "enabled" : true,
-            "tokenRefreshExtensionHours" : 96,
-            "fileSystem" : {
-              "directory" : "/wwwroot/sites/example"
+          "tokenStore": {
+            "enabled": true,
+            "tokenRefreshExtensionHours": 96,
+            "fileSystem": {
+              "directory": "/wwwroot/sites/example"
             }
           },
-          "preserveUrlFragmentsForLogins" : true,
-          "allowedExternalRedirectUrls" : [
+          "preserveUrlFragmentsForLogins": true,
+          "allowedExternalRedirectUrls": [
             "https://someurl.com"
           ],
-          "cookieExpiration" : {
-            "convention" : "IdentityProviderDerived",
-            "timeToExpiration" : "2022:09-01T00:00Z"
+          "cookieExpiration": {
+            "convention": "IdentityProviderDerived",
+            "timeToExpiration": "2022:09-01T00:00Z"
           },
-          "nonce" : {
-            "validateNonce" : true
+          "nonce": {
+            "validateNonce": true
           }
         },
         "httpSettings": {
-          "requireHttps" : true,
-          "routes" : {
-            "apiPrefix" : "/authv2/"
+          "requireHttps": true,
+          "routes": {
+            "apiPrefix": "/authv2/"
           },
-          "forwardProxy" : {
-            "convention" : "Standard",
+          "forwardProxy": {
+            "convention": "Standard",
             "customHostHeaderName": "authHeader",
-            "customProtoHeaderName" : "customProtoHeader"
+            "customProtoHeaderName": "customProtoHeader"
           }
         }
       }
@@ -84,27 +83,27 @@
         "type": "Microsoft.Web/sites/authsettingsv2",
         "kind": "app",
         "properties": {
-          "platform" : {
-            "enabled" : true,
-            "runtimeVersion" : "~1",
-            "configFilePath" : "/auth/config.json"
+          "platform": {
+            "enabled": true,
+            "runtimeVersion": "~1",
+            "configFilePath": "/auth/config.json"
           },
-          "globalValidation" : {
-            "requireAuthentication" : true,
+          "globalValidation": {
+            "requireAuthentication": true,
             "unauthenticatedClientAction": "Return403",
-            "excludedPaths" : [
+            "excludedPaths": [
               "/nosecrets/Path"
             ]
           },
-          "identityProviders" : {
-            "google" : {
-              "enabled" : true,
-              "registration" : {
-                "clientId" : "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
-                "clientSecretSettingName" : "ClientSecret"
+          "identityProviders": {
+            "google": {
+              "enabled": true,
+              "registration": {
+                "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
+                "clientSecretSettingName": "ClientSecret"
               },
-              "login" : {
-                "scopes" : [
+              "login": {
+                "scopes": [
                   "admin"
                 ]
               },
@@ -115,38 +114,38 @@
               }
             }
           },
-          "login" : {
-            "routes" : {
-              "logoutEndpoint" : "https://app.com/logout"
+          "login": {
+            "routes": {
+              "logoutEndpoint": "https://app.com/logout"
             },
-            "tokenStore" : {
-              "enabled" : true,
-              "tokenRefreshExtensionHours" : 96,
-              "fileSystem" : {
-                "directory" : "/wwwroot/sites/example"
+            "tokenStore": {
+              "enabled": true,
+              "tokenRefreshExtensionHours": 96,
+              "fileSystem": {
+                "directory": "/wwwroot/sites/example"
               }
             },
-            "preserveUrlFragmentsForLogins" : true,
-            "allowedExternalRedirectUrls" : [
+            "preserveUrlFragmentsForLogins": true,
+            "allowedExternalRedirectUrls": [
               "https://someurl.com"
             ],
-            "cookieExpiration" : {
-              "convention" : "IdentityProviderDerived",
-              "timeToExpiration" : "2022:09-01T00:00Z"
+            "cookieExpiration": {
+              "convention": "IdentityProviderDerived",
+              "timeToExpiration": "2022:09-01T00:00Z"
             },
-            "nonce" : {
-              "validateNonce" : true
+            "nonce": {
+              "validateNonce": true
             }
           },
           "httpSettings": {
-            "requireHttps" : true,
-            "routes" : {
-              "apiPrefix" : "/authv2/"
+            "requireHttps": true,
+            "routes": {
+              "apiPrefix": "/authv2/"
             },
-            "forwardProxy" : {
-              "convention" : "Standard",
+            "forwardProxy": {
+              "convention": "Standard",
               "customHostHeaderName": "authHeader",
-              "customProtoHeaderName" : "customProtoHeader"
+              "customProtoHeaderName": "customProtoHeader"
             }
           }
         }
