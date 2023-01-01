@@ -66,7 +66,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.js#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -106,7 +106,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.js#/definitions/PrivateEndpointConnection"
             }
           },
           {
@@ -120,7 +120,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.js#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
@@ -230,7 +230,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.js#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -273,7 +273,7 @@
           "200": {
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -295,103 +295,6 @@
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "description": "State of the private endpoint connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the private endpoint.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "required": [
-        "status",
-        "description"
-      ],
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The private link service connection status.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The private link service connection description.",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "The actions required for private link service connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionListResult": {
-      "description": "A list of private endpoint connections.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
-          "description": "The resource management error response."
-        }
-      },
-      "description": "An error response from the Batch service."
-    },
     "TagsObject": {
       "type": "object",
       "properties": {
