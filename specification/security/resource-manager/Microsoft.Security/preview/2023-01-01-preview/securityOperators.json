@@ -196,70 +196,70 @@
       }
     }
   },
-    "definitions": {
-      "SecurityOperatorList": {
-        "type": "object",
-        "description": "List of SecurityOperator response.",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of SecurityOperator configurations",
-            "items": {
-              "$ref": "#/definitions/SecurityOperator"
-            }
+  "definitions": {
+    "SecurityOperatorList": {
+      "type": "object",
+      "description": "List of SecurityOperator response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SecurityOperator configurations",
+          "items": {
+            "$ref": "#/definitions/SecurityOperator"
           }
         }
-      },
-      "SecurityOperator": {
-        "type": "object",
-        "description": "Security operator under a given subscription and pricing",
-        "properties": {
-          "identity": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "../../../common/v1/types.json#/definitions/Resource"
-          }
-        ]
       }
     },
-    "parameters": {
-      "PricingName": {
-        "name": "pricingName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "name of the pricing configuration",
-        "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
-        "minLength": 3,
-        "maxLength": 63,
-        "x-ms-parameter-location": "method"
+    "SecurityOperator": {
+      "type": "object",
+      "description": "Security operator under a given subscription and pricing",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+        }
       },
-      "SecurityOperatorName": {
-        "name": "securityOperatorName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "name of the securityOperator",
-        "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
-        "minLength": 3,
-        "maxLength": 63,
-        "x-ms-parameter-location": "method"
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "PricingName": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityOperatorName": {
+      "name": "securityOperatorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the securityOperator",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityOperator": {
+      "name": "SecurityOperator",
+      "in": "body",
+      "required": true,
+      "description": "SecurityOperator object",
+      "schema": {
+        "$ref": "#/definitions/SecurityOperator"
       },
-      "SecurityOperator": {
-        "name": "SecurityOperator",
-        "in": "body",
-        "required": true,
-        "description": "SecurityOperator object",
-        "schema": {
-          "$ref": "#/definitions/SecurityOperator"
-        },
-        "x-ms-parameter-location": "method"
-      }
+      "x-ms-parameter-location": "method"
     }
   }
+}
