@@ -148,6 +148,15 @@ input-file:
   - Microsoft.Security/stable/2022-03-01/pricings.json
 ```
 
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Security/stable/2023-01-01/pricings.json
+```
+
 ### Tag: package-preview-2021-12
 
 These settings apply only when `--tag=package-preview-2021-12-only` is specified on the command line.
@@ -277,7 +286,7 @@ input-file:
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/stable/2022-03-01/pricings.json
+- Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
