@@ -1607,7 +1607,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{clusterName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "description": "Gets a private link resource for cluster.",
         "tags": [
@@ -1633,7 +1633,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/GroupNameParameter"
+            "$ref": "#/parameters/PrivateLinkResourceName"
           }
         ],
         "responses": {
@@ -2923,8 +2923,8 @@
       "description": "The name of the private endpoint connection.",
       "x-ms-parameter-location": "method"
     },
-    "GroupNameParameter": {
-      "name": "groupName",
+    "PrivateLinkResourceName": {
+      "name": "privateLinkResourceName",
       "in": "path",
       "required": true,
       "type": "string",
