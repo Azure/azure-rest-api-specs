@@ -1441,7 +1441,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnectionProperty"
             }
           },
           "default": {
@@ -1495,7 +1495,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnectionProperty"
             }
           },
           "202": {
@@ -2657,6 +2657,25 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionSimpleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperty": {
+      "description": "A private endpoint connection property",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the private endpoint connection."
@@ -2679,7 +2698,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/PrivateEndpointConnectionProperty"
           },
           "description": "The list of private endpoint connections"
         },
@@ -2699,6 +2718,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Properties of the private link resource."
@@ -2773,6 +2796,19 @@
         "provisioningState": {
           "type": "string",
           "description": "State of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionSimpleProperties": {
+      "description": "The properties in private endpoint connection",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
         }
       }
     },
