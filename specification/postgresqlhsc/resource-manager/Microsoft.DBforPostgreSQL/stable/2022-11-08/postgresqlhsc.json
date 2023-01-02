@@ -161,20 +161,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClusterResponse"
-            }
-          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ClusterResponse"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1853,8 +1844,7 @@
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator.",
-          "readOnly": true
+          "description": "If public IP is requested or not for the coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -1967,15 +1957,14 @@
           "format": "int64",
           "description": "The storage of the coordinator in MB (max: 2097152 = 2TiB)."
         },
-        "coordinatorVCores": {
+      "coordinatorVCores": {
           "type": "integer",
           "format": "int64",
           "description": "The vCores count of the coordinator (max: 64)."
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator.",
-          "readOnly": true
+          "description": "If public IP is requested or not for the coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -1998,8 +1987,7 @@
         },
         "nodeEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a node.",
-          "readOnly": true
+          "description": "If public IP is requested or not for a node."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -2031,6 +2019,11 @@
     },
     "ClusterResponse": {
       "description": "Represents a cluster in response body.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "systemData": {
           "description": "The system metadata relating to this resource",
@@ -2100,8 +2093,7 @@
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server.",
-          "readOnly": true
+          "description": "If public IP is requested or not for a server."
         },
         "nodeServerEdition": {
           "type": "string",
