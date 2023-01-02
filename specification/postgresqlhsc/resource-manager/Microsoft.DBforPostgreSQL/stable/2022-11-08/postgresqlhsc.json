@@ -1487,7 +1487,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionRequest"
+              "$ref": "#/definitions/PrivateEndpointConnectionActionRequest"
             }
           }
         ],
@@ -2682,11 +2682,11 @@
         }
       }
     },
-    "PrivateEndpointConnectionRequest": {
+    "PrivateEndpointConnectionActionRequest": {
       "description": "A private endpoint connection",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionRequestProperties",
+          "$ref": "#/definitions/PrivateEndpointConnectionActionRequestProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the private endpoint connection."
         }
@@ -2769,15 +2769,15 @@
       },
       "description": "A list of private link resources."
     },
-    "PrivateEndpointConnectionRequestProperties": {
+    "PrivateEndpointConnectionActionRequestProperties": {
       "description": "The properties used to create a private endpoint connection",
       "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
+        "id": {
+          "type": "string",
           "description": "Private endpoint which the connection belongs to."
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "Connection state of the private endpoint connection."
         }
       }
@@ -2819,6 +2819,19 @@
           "type": "string",
           "description": "The actions required for private link service connection."
         },
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
         "description": {
           "type": "string",
           "description": "The private link service connection description."
