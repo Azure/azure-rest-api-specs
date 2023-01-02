@@ -152,6 +152,12 @@
               "$ref": "#/definitions/Pricing"
             }
           },
+          "207": {
+            "description": "Partial Success - Missing Permissions",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -164,6 +170,7 @@
   },
   "definitions": {
     "PricingList": {
+      "type": "object",
       "description": "List of pricing configurations response.",
       "required": [
         "value"
@@ -264,7 +271,7 @@
           "description": "The extension type name.",
           "enum": [
             "AgentlessVmScanning",
-            "KubernetesMonitoring",
+            "AgentlessDiscoveryForKubernetes",
             "DataSensitivityScanning",
             "StorageAntiMalware",
             "StorageSensitivityScanning",
@@ -279,8 +286,8 @@
                 "description": "Available for DCSPM and D4Servers P2 plans."
               },
               {
-                "value": "KubernetesMonitoring",
-                "description": "Gathers information about Kubernetes cluster architecture, workload objects, and setup. Required for agentless discovery and monitoring of Kubernetes and containers estate, identity and network exposure detection, attack path analysis and risk hunting as part of the cloud security explorer.\r\nAvailable for DCSPM plan."
+                "value": "AgentlessDiscoveryForKubernetes",
+                "description": "API-based discovery of information about Kubernetes cluster architecture, workload objects, and setup. Required for Kubernetes inventory, identity and network exposure detection, attack path analysis and risk hunting as part of the cloud security explorer.\r\nAvailable for DCSPM plan."
               },
               {
                 "value": "DataSensitivityScanning",
@@ -323,6 +330,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
       "description": "name of the pricing configuration",
       "x-ms-parameter-location": "method"
     },
