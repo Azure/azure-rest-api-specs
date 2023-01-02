@@ -245,9 +245,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -313,14 +310,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ClusterResponse"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -557,14 +551,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ServerConfiguration"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -661,14 +652,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ServerConfiguration"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -765,20 +753,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -821,9 +800,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -970,20 +946,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Role"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Role"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1026,9 +993,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -1258,9 +1222,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -1483,14 +1444,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully approved or rejected private endpoint connection.",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionProperty"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1532,9 +1490,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted private endpoint connection."
-          },
           "202": {
             "description": "Accepted"
           },
@@ -1728,6 +1683,10 @@
           "type": "string",
           "description": "A state of HA feature for the cluster.",
           "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability Zone information of the server."
         },
         "administratorLogin": {
           "type": "string",
@@ -2349,9 +2308,15 @@
     "ServerConfigurationRequest": {
       "description": "Represents a configuration.",
       "properties": {
-        "value":{
-          "description": "Represents the value of a configuration.",
-          "type": "string"
+        "properties": {
+          "description": "Represents a configuration properties",
+          "type": "object",
+          "properties": {
+            "value":{
+              "description": "Represents the value of a configuration.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -2727,14 +2692,14 @@
           "type": "string",
           "description": "The private link resource group id."
         },
-        "memberNames": {
+        "requiredMembers": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "description": "The private link resource required member names."
         },
-        "zoneNames": {
+        "requiredZoneNames": {
           "type": "array",
           "items": {
             "type": "string"
@@ -2781,6 +2746,13 @@
           "$ref": "#/definitions/PrivateEndpointProperty",
           "description": "Private endpoint which the connection belongs to."
         },
+        "groupIds" :{
+          "type":"array",
+          "description": "Group ids of the private endpoint connection.",
+          "items": {
+            "type": "string"
+          }
+        },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
           "description": "Connection state of the private endpoint connection."
@@ -2797,6 +2769,13 @@
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpointProperty",
           "description": "Private endpoint which the connection belongs to."
+        },
+        "groupIds" :{
+          "type":"array",
+          "description": "Group ids of the private endpoint connection.",
+          "items": {
+            "type": "string"
+          }
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
