@@ -492,8 +492,7 @@
           "x-ms-enum": {
             "name": "ActiveRevisionsMode",
             "modelAsString": true
-          },
-          "default": "Single"
+          }
         },
         "ingress": {
           "$ref": "#/definitions/Ingress",
@@ -662,8 +661,7 @@
           "x-ms-enum": {
             "name": "appProtocol",
             "modelAsString": true
-          },
-          "default": "http"
+          }
         },
         "appPort": {
           "format": "int32",
@@ -737,8 +735,7 @@
           "x-ms-enum": {
             "name": "IngressTransportMethod",
             "modelAsString": true
-          },
-          "default": "auto"
+          }
         },
         "traffic": {
           "description": "Traffic weights for app's revisions",
@@ -774,6 +771,41 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "stickySessions": {
+          "description": "Sticky Sessions for Single Revision Mode",
+          "type": "object",
+          "properties": {
+            "affinity": {
+              "description": "Sticky Session Affinity",
+              "enum": [
+                "sticky",
+                "none"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "affinity",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "clientCertificateMode": {
+          "description": "Client certificate mode for mTLS authentication. Ignore indicates server drops client certificate on forwarding. Accept indicates server forwards client certificate but does not require a client certificate. Require indicates server requires a client certificate.",
+          "enum": [
+            "ignore",
+            "accept",
+            "require"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IngressClientCertificateMode",
+            "modelAsString": true
+          }
+        },
+        "corsPolicy": {
+          "description": "CORS policy for container app",
+          "$ref": "#/definitions/CorsPolicy"
         }
       }
     },
@@ -921,6 +953,52 @@
             "name": "action",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "CorsPolicy": {
+      "description": "Cross-Origin-Resource-Sharing policy",
+      "type": "object",
+      "required": [
+        "allowedOrigins"
+      ],
+      "properties": {
+        "allowedOrigins": {
+          "description": "allowed origins",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedMethods": {
+          "description": "allowed HTTP methods",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedHeaders": {
+          "description": "allowed HTTP headers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposeHeaders": {
+          "description": "expose HTTP headers ",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxAge": {
+          "format": "int32",
+          "description": "max time client can cache the result",
+          "type": "integer"
+        },
+        "allowCredentials": {
+          "description": "allow credential or not",
+          "type": "boolean"
         }
       }
     },

@@ -45,7 +45,28 @@
                 "ipAddressRange": "192.168.1.1/8",
                 "action": "Allow"
               }
-            ]
+            ],
+            "clientCertificateMode": "accept",
+            "corsPolicy": {
+              "allowedOrigins": [
+                "https://a.test.com",
+                "https://b.test.com"
+              ],
+              "allowedMethods": [
+                "GET",
+                "POST"
+              ],
+              "allowedHeaders": [
+                "HEADER1",
+                "HEADER2"
+              ],
+              "exposeHeaders": [
+                "HEADER3",
+                "HEADER4"
+              ],
+              "maxAge": 1234,
+              "allowCredentials": true
+            }
           },
           "dapr": {
             "enabled": true,

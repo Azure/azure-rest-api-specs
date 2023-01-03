@@ -1141,6 +1141,101 @@
           "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
+    },
+    "ManagedCertificate": {
+      "description": "Managed certificates used for Custom Domain bindings of Container Apps in a Managed Environment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the certificate.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "DeleteFailed",
+                "Pending"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CertificateProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string"
+            },
+            "error": {
+              "description": "Any error occurred during the certificate provision.",
+              "type": "string",
+              "readOnly": true
+            },
+            "domainControlValidation": {
+              "description": "Selected type of domain control validation for managed certificates.",
+              "enum": [
+                "CNAME",
+                "HTTP",
+                "TXT"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ManagedCertificateDomainControlValidation",
+                "modelAsString": true
+              }
+            },
+            "validationToken": {
+              "description": "A TXT token used for DNS TXT domain control validation when issuing this type of managed certificates.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "ManagedCertificatePatch": {
+      "description": "A managed certificate to update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "ManagedCertificateCollection": {
+      "description": "Collection of Managed Certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedCertificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "securityDefinitions": {
