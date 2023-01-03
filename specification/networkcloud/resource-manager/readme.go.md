@@ -9,5 +9,5 @@ namespace: networkcloud
 module-name: sdk/resourcemanager/$(namespace)/arm$(namespace)
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
-module-version: 0.1.0
+module-version: 0.2.0
 ```
