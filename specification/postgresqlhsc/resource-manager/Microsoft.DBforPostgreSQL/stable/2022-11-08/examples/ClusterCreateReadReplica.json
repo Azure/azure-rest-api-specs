@@ -30,8 +30,47 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
-        "properties": {},
-        "location": "westus2"
+        "properties": {
+          "provisioningState": "Provisioning",
+          "state": "Provisioning",
+          "postgresqlVersion": "15",
+          "citusVersion": "11.1",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "preferredPrimaryZone": "1",
+          "nodeCount": 3,
+          "enableShardsOnCoordinator": false,
+          "coordinatorServerEdition": "GeneralPurpose",
+          "coordinatorStorageQuotaInMb": 524288,
+          "coordinatorVCores": 4,
+          "coordinatorEnablePublicIpAccess": true,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 524288,
+          "nodeVCores": 8,
+          "nodeEnablePublicIpAccess": false,
+          "serverNames": [
+            {
+              "name": "hsctestsg-c",
+              "fullyQualifiedDomainName": "c.hsctestsg.marlin-development.com"
+            },
+            {
+              "name": "hsctestsg-w0",
+              "fullyQualifiedDomainName": "w0.hsctestsg.marlin-development.com"
+            }
+          ],
+          "pointInTimeUTC": null,
+          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/pgtests-source-cluster",
+          "sourceLocation": "westus",
+          "enableHa": true,
+          "readReplicas": [],
+          "earliestRestoreTime": null,
+          "privateEndpointConnections": []
+        },
+        "location": "westus"
       }
     }
   }
