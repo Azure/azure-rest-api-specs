@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "TestResourceGroup",
+    "publisherName": "TestPublisher",
+    "artifactStoreName": "TestArtifactStoreName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "fedrbac",
+            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifacts/fedrbac",
+            "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifacts",
+            "properties": {
+              "artifactVersions": [
+                {
+                  "artifactVersion": "1.0.0",
+                  "artifactType": "HelmPackage",
+                  "artifactState": "Active"
+                }
+              ]
+            }
+          },
+          {
+            "name": "fedrbac2",
+            "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifacts/fedrbac2",
+            "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifacts",
+            "properties": {
+              "artifactVersions": [
+                {
+                  "artifactVersion": "1.0.0",
+                  "artifactType": "OCIArtifact",
+                  "artifactState": "Active"
+                },
+                {
+                  "artifactVersion": "2.0.0",
+                  "artifactType": "OCIArtifact",
+                  "artifactState": "Preview"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "{refererHeaderUrl}?$skipToken={opaqueString}"
+      }
+    }
+  }
+}
