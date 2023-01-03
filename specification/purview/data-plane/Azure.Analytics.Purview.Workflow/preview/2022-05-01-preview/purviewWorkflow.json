@@ -88,7 +88,7 @@
         "description": "Get a specific workflow.",
         "operationId": "GetWorkflow",
         "x-ms-examples": {
-          "WorkflowDefinition_Get": {
+          "Workflow_Get": {
             "$ref": "./examples/GetWorkflow.json"
           }
         },
@@ -119,11 +119,11 @@
         "tags": [
           "Workflows"
         ],
-        "description": "Create or update a workflow.",
-        "operationId": "CreateOrUpdateWorkflow",
+        "description": "Create or replace a workflow.",
+        "operationId": "CreateOrReplaceWorkflow",
         "x-ms-examples": {
           "Workflow_CreateOrUpdate": {
-            "$ref": "./examples/CreateOrUpdateWorkflow.json"
+            "$ref": "./examples/CreateOrReplaceWorkflow.json"
           }
         },
         "parameters": [
@@ -209,7 +209,7 @@
             "required": true,
             "description": "The payload of submitting a user request.",
             "schema": {
-              "$ref": "#/definitions/UserRequestsPayload"
+              "$ref": "#/definitions/UserRequestPayload"
             }
           },
           {
@@ -220,7 +220,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UserRequestsResponse"
+              "$ref": "#/definitions/UserRequestResponse"
             }
           },
           "default": {
@@ -232,10 +232,10 @@
         }
       }
     },
-    "/runs": {
+    "/workflowruns": {
       "get": {
         "tags": [
-          "WorkflowRun"
+          "WorkflowRuns"
         ],
         "description": "List workflow runs.",
         "operationId": "ListWorkflowRuns",
@@ -255,7 +255,7 @@
             "$ref": "#/parameters/timeWindow"
           },
           {
-            "$ref": "#/parameters/orderBy"
+            "$ref": "#/parameters/orderby"
           },
           {
             "$ref": "#/parameters/runStatuses"
@@ -286,10 +286,10 @@
         }
       }
     },
-    "/runs/{workflowRunId}": {
+    "/workflowruns/{workflowRunId}": {
       "get": {
         "tags": [
-          "WorkflowRun"
+          "WorkflowRuns"
         ],
         "description": "Get a workflow run.",
         "operationId": "GetWorkflowRun",
@@ -322,10 +322,10 @@
         }
       }
     },
-    "/runs/{workflowRunId}/cancel": {
+    "/workflowruns/{workflowRunId}/cancel": {
       "post": {
         "tags": [
-          "WorkflowRun"
+          "WorkflowRuns"
         ],
         "description": "Cancel a workflow run.",
         "operationId": "CancelWorkflowRun",
@@ -347,7 +347,7 @@
             "required": true,
             "description": "Reply of canceling a workflow run.",
             "schema": {
-              "$ref": "#/definitions/WorkflowRunCancelReply"
+              "$ref": "#/definitions/WorkflowRunCancelRequest"
             }
           }
         ],
@@ -364,10 +364,10 @@
         }
       }
     },
-    "/tasks": {
+    "/workflowtasks": {
       "get": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Get all workflow tasks.",
         "operationId": "ListWorkflowTasks",
@@ -396,7 +396,7 @@
             "$ref": "#/parameters/maxpagesize"
           },
           {
-            "$ref": "#/parameters/orderBy"
+            "$ref": "#/parameters/orderby"
           },
           {
             "$ref": "#/parameters/taskTypes"
@@ -424,10 +424,10 @@
         }
       }
     },
-    "/tasks/{taskId}": {
+    "/workflowtasks/{taskId}": {
       "get": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Get a work task.",
         "operationId": "GetWorkflowTask",
@@ -457,10 +457,10 @@
         }
       }
     },
-    "/tasks/{taskId}/approve-approval": {
+    "/workflowtasks/{taskId}/approve-approval": {
       "post": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Approve an approval task.",
         "operationId": "ApproveApprovalTask",
@@ -499,10 +499,10 @@
         }
       }
     },
-    "/tasks/{taskId}/reject-approval": {
+    "/workflowtasks/{taskId}/reject-approval": {
       "post": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Reject an approval task.",
         "operationId": "RejectApprovalTask",
@@ -541,10 +541,10 @@
         }
       }
     },
-    "/tasks/{taskId}/reassign": {
+    "/workflowtasks/{taskId}/reassign": {
       "post": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Reassign a workflow task.",
         "operationId": "ReassignWorkflowTask",
@@ -583,10 +583,10 @@
         }
       }
     },
-    "/tasks/{taskId}/change-task-status": {
+    "/workflowtasks/{taskId}/change-task-status": {
       "post": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Update the status of a workflow task request.",
         "operationId": "UpdateTaskRequest",
@@ -625,10 +625,10 @@
         }
       }
     },
-    "/tasks/{taskId}/claim-task": {
+    "/workflowtasks/{taskId}/claim-task": {
       "post": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Claim a DSAR task request.",
         "operationId": "ClaimDSARTaskRequest",
@@ -667,10 +667,10 @@
         }
       }
     },
-    "/tasks/{taskId}/release-task": {
+    "/workflowtasks/{taskId}/release-task": {
       "post": {
         "tags": [
-          "Tasks"
+          "WorkflowTasks"
         ],
         "description": "Release a DSAR task request.",
         "operationId": "ReleaseDSARTaskRequest",
@@ -753,7 +753,9 @@
           "description": "The person who created the workflow."
         },
         "lastUpdateTime": {
-          "$ref": "#/definitions/LastUpdateTime"
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time."
         },
         "updatedBy": {
           "type": "string",
@@ -765,7 +767,7 @@
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Whether the workflow enabled or not."
+          "description": "Whether the workflow is enabled or not."
         },
         "description": {
           "type": "string",
@@ -812,7 +814,7 @@
             "modelAsString": true
           }
         },
-        "underTermHierarchy": {
+        "underGlossaryHierarchy": {
           "type": "string",
           "description": "Glossary term hierarchy path."
         },
@@ -848,7 +850,7 @@
           "type": "string",
           "description": "Description of a workflow."
         },
-        "actionDAG": {
+        "actionDag": {
           "type": "object",
           "description": "The action DAG(Directed Acyclic Graph), it defines actual flow."
         }
@@ -861,7 +863,7 @@
       ]
     },
     "Workflow": {
-      "description": "The workflow properties. It includes the associated objects, type, actual flow and other properties of a workflow.",
+      "description": "The workflow properties. It includes the triggers, actual flow and other properties of a workflow.",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowMetadata"
@@ -869,18 +871,18 @@
         {
           "type": "object",
           "properties": {
-            "actionDAG": {
+            "actionDag": {
               "type": "object",
               "description": "The action DAG(Directed Acyclic Graph), it defines steps to be executed in a workflow run and their order."
             }
           },
           "required": [
-            "actionDAG"
+            "actionDag"
           ]
         }
       ]
     },
-    "UserRequestsPayload": {
+    "UserRequestPayload": {
       "type": "object",
       "properties": {
         "requestId": {
@@ -894,6 +896,10 @@
           "items": {
             "$ref": "#/definitions/Operation"
           }
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment when submit a user request."
         }
       },
       "required": [
@@ -903,20 +909,14 @@
     },
     "Operation": {
       "type": "object",
-      "description": "The operation user want to submit, it matches one Purview API call and will do the operation directly",
+      "description": "The operation user wants to perform.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/WorkflowRunType"
+          "$ref": "#/definitions/OperationType"
         },
         "payload": {
           "type": "object",
           "description": "The payload of each operation which user want to submit."
-        },
-        "workflowRunIds": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WorkflowRunId"
-          }
         }
       },
       "required": [
@@ -924,27 +924,65 @@
         "payload"
       ]
     },
-    "UserRequestsResponse": {
-      "description": "Describes user ask to do operation(s) on Purview. If any workflow's trigger matches with an operation in request, a run of the workflow is created. Each operation in user request matches one Purview API call doing the operation directly.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserRequestsPayload"
-        }
-      ],
+    "UserRequestResponse": {
+      "description": "Describes user ask to do operation(s) on Purview.",
       "type": "object",
       "properties": {
+        "requestId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The user request id."
+        },
         "requestor": {
           "$ref": "#/definitions/RequestorId"
+        },
+        "operations": {
+          "type": "array",
+          "description": "The list of operations user want to submit, each operation matches one Purview API call and will do the operation directly.",
+          "items": {
+            "type": "object",
+            "description": "The operation user wants to perform.",
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/OperationType"
+              },
+              "payload": {
+                "type": "object",
+                "description": "The payload of each operation which user want to submit."
+              },
+              "workflowRunIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/WorkflowRunId"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "payload"
+            ]
+          }
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment when submit a user request."
         },
         "status": {
           "$ref": "#/definitions/Status"
         }
-      }
+      },
+      "required": [
+        "requestId",
+        "requestor",
+        "operations",
+        "status"
+      ]
     },
     "Status": {
       "type": "string",
-      "description": "The status of an action.",
+      "description": "The status.",
       "enum": [
+        "NotStarted",
         "InProgress",
         "Failed",
         "Completed",
@@ -970,7 +1008,7 @@
     "RequestorId": {
       "type": "string",
       "format": "uuid",
-      "description": "The person who triggered the workflow run."
+      "description": "The person who submitted the user request."
     },
     "WorkflowRunList": {
       "type": "object",
@@ -1022,10 +1060,12 @@
         },
         "endTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The time of workflow run completed."
         },
         "cancelTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The time of workflow run be canceled."
         },
         "cancelComment": {
@@ -1047,7 +1087,7 @@
       "description": "The input of a workflow run. Align with operation in user request. ",
       "properties": {
         "type": {
-          "$ref": "#/definitions/WorkflowRunType"
+          "$ref": "#/definitions/WorkflowRunPayloadType"
         },
         "targetValue": {
           "type": "string",
@@ -1058,6 +1098,24 @@
         "type",
         "targetValue"
       ]
+    },
+    "WorkflowRunPayloadType": {
+      "type": "string",
+      "description": "The workflow run payload type.",
+      "enum": [
+        "CreateTerm",
+        "UpdateTerm",
+        "DeleteTerm",
+        "ImportTerms",
+        "UpdateAsset",
+        "GrantDataAccess",
+        "DSARDelete",
+        "DSARExport"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowRunPayloadType",
+        "modelAsString": true
+      }
     },
     "WorkflowRun": {
       "description": "The execution of a workflow. It includes workflow action DAG at run time (action DAG snapshot), run payload, status of the entire run and other properties of a run. ",
@@ -1087,7 +1145,7 @@
           "description": "The input of a workflow run. Align with operation in user request. ",
           "properties": {
             "type": {
-              "$ref": "#/definitions/WorkflowRunType"
+              "$ref": "#/definitions/WorkflowRunPayloadType"
             },
             "targetValue": {
               "type": "string",
@@ -1109,17 +1167,19 @@
         },
         "endTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The time of workflow run completed."
         },
         "cancelTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The time of workflow run be canceled."
         },
         "cancelComment": {
           "type": "string",
           "description": "The comment when cancel a workflow run."
         },
-        "actionDAG": {
+        "actionDag": {
           "type": "object",
           "description": "The action DAG(Directed Acyclic Graph), it defines actual flow."
         },
@@ -1128,7 +1188,7 @@
         }
       },
       "required": [
-        "actionDAG",
+        "actionDag",
         "detail"
       ]
     },
@@ -1149,7 +1209,7 @@
         "actions"
       ]
     },
-    "WorkflowRunCancelReply": {
+    "WorkflowRunCancelRequest": {
       "type": "object",
       "properties": {
         "comment": {
@@ -1212,14 +1272,14 @@
         "requestorId": {
           "$ref": "#/definitions/RequestorId"
         },
-        "submittedTime": {
-          "$ref": "#/definitions/SubmittedTime"
+        "createdTime": {
+          "$ref": "#/definitions/CreatedTime"
         },
-        "lastUpdatedTime": {
+        "lastUpdateTime": {
           "$ref": "#/definitions/LastUpdateTime"
         },
         "payload": {
-          "$ref": "#/definitions/TaskRunPayload"
+          "$ref": "#/definitions/TaskPayload"
         }
       },
       "required": [
@@ -1229,17 +1289,17 @@
         "workflowRunId",
         "workflowId",
         "requestorId",
-        "submittedTime",
-        "lastUpdatedTime",
+        "createdTime",
+        "lastUpdateTime",
         "payload"
       ]
     },
-    "TaskRunPayload": {
+    "TaskPayload": {
       "type": "object",
       "description": "Info and material that helps assignees to take action.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/WorkflowRunType"
+          "$ref": "#/definitions/TaskPayloadType"
         },
         "targetValue": {
           "type": "string",
@@ -1247,7 +1307,7 @@
         },
         "payload": {
           "type": "object",
-          "description": "The input payload when submit a user request."
+          "description": "The payload of the task."
         }
       },
       "required": [
@@ -1256,9 +1316,27 @@
         "payload"
       ]
     },
-    "WorkflowRunType": {
+    "TaskPayloadType": {
       "type": "string",
-      "description": "The workflow run type.",
+      "description": "The task payload type.",
+      "enum": [
+        "CreateTerm",
+        "UpdateTerm",
+        "DeleteTerm",
+        "ImportTerms",
+        "UpdateAsset",
+        "GrantDataAccess",
+        "DSARDelete",
+        "DSARExport"
+      ],
+      "x-ms-enum": {
+        "name": "TaskPayloadType",
+        "modelAsString": true
+      }
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "The operation type.",
       "enum": [
         "CreateTerm",
         "UpdateTerm",
@@ -1277,12 +1355,17 @@
     "SubmittedTime": {
       "type": "string",
       "format": "date-time",
-      "description": "The submitted time of an action."
+      "description": "The submitted time."
+    },
+    "CreatedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The created time."
     },
     "LastUpdateTime": {
       "type": "string",
       "format": "date-time",
-      "description": "The last update time of an action."
+      "description": "The last update time."
     },
     "ApprovalDetail": {
       "x-ms-discriminator-value": "approval",
@@ -1469,7 +1552,10 @@
         "error": {
           "$ref": "#/definitions/ErrorModel"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ErrorModel": {
       "description": "Default error model",
@@ -1578,8 +1664,8 @@
       "description": "Time window of filtering items.",
       "x-ms-parameter-location": "method"
     },
-    "orderBy": {
-      "name": "orderBy",
+    "orderby": {
+      "name": "orderby",
       "in": "query",
       "required": false,
       "type": "string",
@@ -1590,7 +1676,7 @@
         "requestor asc"
       ],
       "x-ms-enum": {
-        "name": "orderBy",
+        "name": "orderby",
         "modelAsString": true
       },
       "description": "The key word which used to sort the results.",
