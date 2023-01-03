@@ -569,12 +569,7 @@
             "description": "Schema of the term update body.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "items": {
-                  "$ref": "#/definitions/TextListItem"
-                }
-              }
+              "$ref": "#/definitions/TextListItem"
             },
             "x-ms-parameter-location": "method"
           }
@@ -604,7 +599,7 @@
       "type": "string",
       "x-nullable": false,
       "enum": [
-        "HateSpeech",
+        "Hate",
         "SelfHarm",
         "Sexual",
         "Violence"
@@ -706,7 +701,7 @@
             "$ref": "#/definitions/TextListMatchResult"
           }
         },
-        "hateSpeechResult": {
+        "hateResult": {
           "$ref": "#/definitions/TextDetectResult"
         },
         "selfHarmResult": {
@@ -827,7 +822,7 @@
                   "$ref": "#/definitions/TextListMatchResult"
                 }
               },
-              "hateSpeechResult": {
+              "hateResult": {
                 "$ref": "#/definitions/TextDetectResult"
               },
               "selfHarmResult": {
@@ -920,7 +915,7 @@
       "type": "string",
       "x-nullable": false,
       "enum": [
-        "HateSpeech",
+        "Hate",
         "SelfHarm",
         "Sexual",
         "Violence"
@@ -988,7 +983,7 @@
       "description": "The analysis response of the image",
       "type": "object",
       "properties": {
-        "hateSpeechResult": {
+        "hateResult": {
           "$ref": "#/definitions/ImageDetectResult"
         },
         "selfHarmResult": {
@@ -1090,7 +1085,7 @@
                 "description": "imageId of individual image in batch",
                 "type": "string"
               },
-              "hateSpeechResult": {
+              "hateResult": {
                 "$ref": "#/definitions/ImageDetectResult"
               },
               "selfHarmResult": {
