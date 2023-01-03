@@ -26,17 +26,34 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-12
+tag: package-2023-02
 ```
 
 ---
 
 
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.SecurityInsights/stable/2023-02-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/Watchlists.json
+  - Microsoft.SecurityInsights/stable/2023-02-01/operations.json
+```
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-12'
+``` yaml $(tag) == 'package-preview-2022-12'
 input-file:
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/AutomationRules.json
@@ -59,6 +76,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/operations.json
 ```
+
 ### Tag: package-2022-11
 
 These settings apply only when `--tag=package-2022-11` is specified on the command line.
