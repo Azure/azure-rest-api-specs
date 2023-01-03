@@ -1109,6 +1109,46 @@
       },
       "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
     },
+    "AgentUpgrade": {
+      "type": "object",
+      "properties": {
+        "desiredVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the version info w.r.t AgentUpgrade for the machine."
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The correlation ID passed in from RSM per upgrade."
+      },
+        "enableAutomaticUpgrade": {
+        "type": "boolean",
+        "readOnly": true,
+        "description": "Specifies if RSM should try to upgrade this machine"
+      },
+        "lastAttemptTimestamp": {
+        "type": "timestamp",
+        "readOnly": true,
+        "description": "Timestamp of last upgrade attempt"
+      },
+        "lastAttemptStatus": {
+        "type": "string",
+        "readOnly": true,
+        "enum": [
+          "Empty",
+          "Success",
+          "Failed"
+        ],
+        "description": "Specifies the status of Agent Upgrade."
+      },
+        "lastAttemptMessage": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Failure message of last upgrade attempt if any."
+      },
+      "description": "The info w.r.t Agent Upgrade."
+    },
     "OSProfile": {
       "type": "object",
       "properties": {
@@ -1301,6 +1341,10 @@
         "cloudMetadata": {
           "$ref": "#/definitions/CloudMetadata",
           "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
+        },
+        "agentUpgrade": {
+          "$ref": "#/definitions/AgentUpgrade",
+          "description": "The info of the machine w.r.t Agent Upgrade"
         },
         "parentClusterResourceId": {
           "type": "string",
