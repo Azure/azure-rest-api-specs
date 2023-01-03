@@ -2681,6 +2681,9 @@ directive:
   - suppress: R3023
     from: networkManagerGroupMembership.json
     reason: Extension Resource, not new RP.
+  - suppress: XmsIdentifierValidation
+    from: networkManagerGroupMembership.json
+    reason: By design, no id is needed for groupmembership resources.
 ```
 
 ---
