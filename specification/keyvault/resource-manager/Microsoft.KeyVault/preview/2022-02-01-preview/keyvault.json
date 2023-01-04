@@ -264,94 +264,6 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}": {
-      "put": {
-        "tags": [
-          "Vaults"
-        ],
-        "operationId": "Vaults_UpdateAccessPolicy",
-        "description": "Update access policies in a key vault in the specified subscription.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the vault belongs."
-          },
-          {
-            "name": "vaultName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "description": "Name of the vault"
-          },
-          {
-            "name": "operationKind",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "add",
-              "replace",
-              "remove"
-            ],
-            "x-ms-enum": {
-              "name": "AccessPolicyUpdateKind",
-              "modelAsString": false
-            },
-            "description": "Name of the operation"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VaultAccessPolicyParameters"
-            },
-            "description": "Access policy to merge into the vault"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The updated access policies",
-            "schema": {
-              "$ref": "#/definitions/VaultAccessPolicyParameters"
-            }
-          },
-          "200": {
-            "description": "The updated access policies",
-            "schema": {
-              "$ref": "#/definitions/VaultAccessPolicyParameters"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Add an access policy, or update an access policy with new permissions": {
-            "$ref": "./examples/updateAccessPoliciesAdd.json"
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults": {
       "get": {
         "tags": [
@@ -621,6 +533,94 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}": {
+      "put": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_UpdateAccessPolicy",
+        "description": "Update access policies in a key vault in the specified subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the vault belongs."
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the vault"
+          },
+          {
+            "name": "operationKind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "add",
+              "replace",
+              "remove"
+            ],
+            "x-ms-enum": {
+              "name": "AccessPolicyUpdateKind",
+              "modelAsString": false
+            },
+            "description": "Name of the operation"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
+            },
+            "description": "Access policy to merge into the vault"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The updated access policies",
+            "schema": {
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
+            }
+          },
+          "200": {
+            "description": "The updated access policies",
+            "schema": {
+              "$ref": "#/definitions/VaultAccessPolicyParameters"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add an access policy, or update an access policy with new permissions": {
+            "$ref": "./examples/updateAccessPoliciesAdd.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resources": {
       "get": {
         "tags": [
@@ -657,7 +657,8 @@
             "x-ms-api-version": false,
             "type": "string",
             "enum": [
-              "2015-11-01"
+              "2015-11-01",
+              "2022-02-01-preview"
             ],
             "x-ms-enum": {
               "name": "ResourceManagerApiVersions",
@@ -1057,7 +1058,8 @@
       "required": [
         "name",
         "family"
-      ]
+      ],
+      "type": "object"
     },
     "AccessPolicyEntry": {
       "properties": {
@@ -1085,7 +1087,8 @@
         "tenantId",
         "objectId",
         "permissions"
-      ]
+      ],
+      "type": "object"
     },
     "Permissions": {
       "properties": {
@@ -1204,7 +1207,8 @@
           "description": "Permissions to storage accounts"
         }
       },
-      "description": "Permissions the identity has for keys, secrets, certificates and storage."
+      "description": "Permissions the identity has for keys, secrets, certificates and storage.",
+      "type": "object"
     },
     "VaultProperties": {
       "properties": {
@@ -1315,7 +1319,8 @@
         "tenantId",
         "sku"
       ],
-      "description": "Properties of the vault"
+      "description": "Properties of the vault",
+      "type": "object"
     },
     "VaultPatchProperties": {
       "properties": {
@@ -1385,7 +1390,8 @@
           "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules."
         }
       },
-      "description": "Properties of the vault"
+      "description": "Properties of the vault",
+      "type": "object"
     },
     "VaultAccessPolicyProperties": {
       "properties": {
@@ -1400,7 +1406,8 @@
       "required": [
         "accessPolicies"
       ],
-      "description": "Properties of the vault access policy"
+      "description": "Properties of the vault access policy",
+      "type": "object"
     },
     "DeletedVaultProperties": {
       "properties": {
@@ -1440,7 +1447,8 @@
           "description": "Purge protection status of the original vault."
         }
       },
-      "description": "Properties of the deleted vault."
+      "description": "Properties of the deleted vault.",
+      "type": "object"
     },
     "VaultCreateOrUpdateParameters": {
       "properties": {
@@ -1465,7 +1473,8 @@
         "location",
         "properties"
       ],
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "VaultPatchParameters": {
       "properties": {
@@ -1482,7 +1491,8 @@
         }
       },
       "description": "Parameters for creating or updating a vault",
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "VaultAccessPolicyParameters": {
       "properties": {
@@ -1515,7 +1525,8 @@
       "required": [
         "properties"
       ],
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "Vault": {
       "properties": {
@@ -1558,7 +1569,8 @@
         "properties"
       ],
       "description": "Resource information with extended details.",
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "DeletedVault": {
       "properties": {
@@ -1582,7 +1594,8 @@
           "description": "Properties of the vault"
         }
       },
-      "description": "Deleted vault information with extended details."
+      "description": "Deleted vault information with extended details.",
+      "type": "object"
     },
     "VaultListResult": {
       "properties": {
@@ -1598,7 +1611,8 @@
           "description": "The URL to get the next set of vaults."
         }
       },
-      "description": "List of vaults"
+      "description": "List of vaults",
+      "type": "object"
     },
     "DeletedVaultListResult": {
       "properties": {
@@ -1614,7 +1628,8 @@
           "description": "The URL to get the next set of deleted vaults."
         }
       },
-      "description": "List of vaults"
+      "description": "List of vaults",
+      "type": "object"
     },
     "ResourceListResult": {
       "properties": {
@@ -1630,7 +1645,8 @@
           "description": "The URL to get the next set of vault resources."
         }
       },
-      "description": "List of vault resources."
+      "description": "List of vault resources.",
+      "type": "object"
     },
     "Resource": {
       "properties": {
@@ -1664,7 +1680,8 @@
         }
       },
       "description": "Key Vault resource",
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "VaultCheckNameAvailabilityParameters": {
       "properties": {
@@ -1688,7 +1705,8 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availability of the vault name."
+      "description": "The parameters used to check the availability of the vault name.",
+      "type": "object"
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -1716,7 +1734,8 @@
           "description": "An error message explaining the Reason value in more detail."
         }
       },
-      "description": "The CheckNameAvailability operation response."
+      "description": "The CheckNameAvailability operation response.",
+      "type": "object"
     },
     "NetworkRuleSet": {
       "properties": {
@@ -1759,7 +1778,8 @@
           "description": "The list of virtual network rules."
         }
       },
-      "description": "A set of rules governing the network accessibility of a vault."
+      "description": "A set of rules governing the network accessibility of a vault.",
+      "type": "object"
     },
     "IPRule": {
       "properties": {
@@ -1771,7 +1791,8 @@
       "required": [
         "value"
       ],
-      "description": "A rule governing the accessibility of a vault from a specific ip address or ip range."
+      "description": "A rule governing the accessibility of a vault from a specific ip address or ip range.",
+      "type": "object"
     },
     "VirtualNetworkRule": {
       "properties": {
@@ -1787,7 +1808,8 @@
       "required": [
         "id"
       ],
-      "description": "A rule governing the accessibility of a vault from a specific virtual network."
+      "description": "A rule governing the accessibility of a vault from a specific virtual network.",
+      "type": "object"
     },
     "PrivateEndpointConnectionItem": {
       "properties": {
@@ -1805,7 +1827,8 @@
           "description": "Private endpoint connection properties."
         }
       },
-      "description": "Private endpoint connection item."
+      "description": "Private endpoint connection item.",
+      "type": "object"
     },
     "PrivateEndpointConnection": {
       "properties": {
@@ -1825,7 +1848,8 @@
         }
       ],
       "description": "Private endpoint connection resource.",
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "type": "object"
     },
     "PrivateEndpointConnectionListResult": {
       "properties": {
@@ -1841,7 +1865,8 @@
           "description": "The URL to get the next set of private endpoint connections."
         }
       },
-      "description": "List of private endpoint connections."
+      "description": "List of private endpoint connections.",
+      "type": "object"
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
@@ -1858,7 +1883,8 @@
           "description": "Provisioning state of the private endpoint connection."
         }
       },
-      "description": "Properties of the private endpoint connection resource."
+      "description": "Properties of the private endpoint connection resource.",
+      "type": "object"
     },
     "PrivateEndpoint": {
       "properties": {
@@ -1868,7 +1894,8 @@
           "description": "Full identifier of the private endpoint resource."
         }
       },
-      "description": "Private endpoint object properties."
+      "description": "Private endpoint object properties.",
+      "type": "object"
     },
     "PrivateLinkServiceConnectionState": {
       "properties": {
@@ -1892,7 +1919,8 @@
           }
         }
       },
-      "description": "An object that represents the approval state of the private link connection."
+      "description": "An object that represents the approval state of the private link connection.",
+      "type": "object"
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -1935,7 +1963,8 @@
           }
         }
       },
-      "description": "A list of private link resources"
+      "description": "A list of private link resources",
+      "type": "object"
     },
     "PrivateLinkResource": {
       "properties": {
@@ -1950,7 +1979,8 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "A private link resource"
+      "description": "A private link resource",
+      "type": "object"
     },
     "PrivateLinkResourceProperties": {
       "properties": {
@@ -1975,7 +2005,8 @@
           "description": "Required DNS zone names of the the private link resource."
         }
       },
-      "description": "Properties of a private link resource."
+      "description": "Properties of a private link resource.",
+      "type": "object"
     }
   },
   "parameters": {
