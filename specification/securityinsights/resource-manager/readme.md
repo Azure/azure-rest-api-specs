@@ -45,8 +45,8 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/Entities.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/EntityQueries.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/EntityQueryTemplates.json
-  - Microsoft.SecurityInsights/preview/2022-12-01-preview/ExportConnections.json
-  - Microsoft.SecurityInsights/preview/2022-12-01-preview/ExportJobs.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/ExportConnections.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/ExportJobs.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/FileImports.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/Incidents.json
   - Microsoft.SecurityInsights/preview/2023-03-01-preview/Metadata.json
