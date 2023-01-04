@@ -558,6 +558,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
