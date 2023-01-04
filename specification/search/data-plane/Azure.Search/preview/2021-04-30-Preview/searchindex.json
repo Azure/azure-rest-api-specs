@@ -104,6 +104,16 @@
             }
           },
           {
+            "$ref": "#/definitions/Debug",
+            "name": "debug",
+            "in": "query",
+            "type": "string",
+            "x-ms-client-name": "Debug",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "facet",
             "in": "query",
             "type": "array",
@@ -244,6 +254,44 @@
             "in": "query",
             "type": "string",
             "description": "The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticErrorHandling",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "fail",
+              "partial"
+            ],
+            "x-ms-enum": {
+              "name": "SemanticErrorHandling",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "fail",
+                  "name": "Fail",
+                  "description": "Default behavior. If there is an exception during semantic processing, the query will fail and return the appropriate HTTP code depending on the error."
+                },
+                {
+                  "value": "partial",
+                  "name": "Partial",
+                  "description": "If there is an exception during semantic processing, the query return partial results with a 206 status code. Partial result content depends on which semantic step failed and the reason for the failure."
+                }
+              ]
+            },
+            "description": "A value that specifies which response to return when semantic processing fails.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticMaxWaitInMilliseconds",
+            "in": "query",
+            "type": "integer",
+            "description": "The time in milliseconds to wait before the semantic processing step times out. Must be set to a value >= 750. Only valid when semanticErrorHandling is set to 'partial'.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -1180,6 +1228,133 @@
       "additionalProperties": true,
       "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.."
     },
+    "AnswersDebugInfo": {
+      "properties": {
+        "queryClassifiedAsQuestion": {
+          "type": "boolean",
+          "description": "Specifies whether the given query was classified as a question.",
+          "readOnly": true
+        }
+      },
+      "x-ms-client-name": "AnswersDebugInfo",
+      "description": "Provides debug information for an Answers construct in the search result."
+    },
+    "SemanticDebugInfo": {
+      "x-ms-client-name": "SemanticDebugInfo",
+      "description": "Provides semantic debug information for this the search result.",
+      "properties": {
+        "answers": {
+          "$ref": "#/definitions/AnswersDebugInfo",
+          "readOnly": true
+        }
+      }
+    },
+    "RerankerInputUsage": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The portion of the title field used for semantic processing."
+        },
+        "content": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The portion of the combined content fields used for semantic processing."
+        },
+        "keywords": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The portion of the combined keyword fields used for semantic processing."
+        }
+      },
+      "description": "The combined semantic fields used as input for semantic processing. The input string is subject to a maximum length. The values from the provided fields are concatenated until the maximum limit is reached.",
+      "x-ms-client-name": "RerankerInput"
+    },
+    "SemanticFieldUsage": {
+      "x-ms-client-name": "SemanticFieldUsage",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of this semantic field."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Indicates whether the contents of the semantic field were used in full, partially, or not at all when constructing the input string for semantic processing.",
+          "enum": [
+            "used",
+            "unused",
+            "partial"
+          ],
+          "x-ms-enum": {
+            "name": "SemanticFieldState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "used",
+                "name": "Used",
+                "description": "The field was fully used."
+              },
+              {
+                "value": "unused",
+                "name": "Unused",
+                "description": "The field was not used."
+              },
+              {
+                "value": "partial",
+                "name": "Partial",
+                "description": "The field was partially used."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DocumentSemanticDebugInfo": {
+      "x-ms-client-name": "Semantic",
+      "description": "Semantic debug information for this match.",
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticFieldUsage",
+          "description": "The title field used in semantic processing.",
+          "readOnly": true,
+          "x-ms-client-name": "TitleField"
+        },
+        "contentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticFieldUsage"
+          },
+          "description": "The list of content fields used in semantic processing.",
+          "readOnly": true,
+          "x-ms-client-name": "ContentFields"
+        },
+        "keywordFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticFieldUsage"
+          },
+          "description": "The list of keyword fields used in semantic processing.",
+          "readOnly": true,
+          "x-ms-client-name": "KeywordFields"
+        },
+        "rerankerInput": {
+          "$ref": "#/definitions/RerankerInputUsage",
+          "readOnly": true,
+          "x-ms-client-name": "RerankerInput"
+        }
+      }
+    },
+    "DocumentDebugInfo": {
+      "x-ms-client-name": "DocumentDebugInfo",
+      "description": "Debug information for this match.",
+      "properties": {
+        "semantic": {
+          "$ref": "#/definitions/DocumentSemanticDebugInfo"
+        }
+      }
+    },
     "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
@@ -1216,7 +1391,76 @@
           "readOnly": true,
           "x-ms-client-name": "Answers",
           "x-nullable": true,
-          "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
+          "description": "The Answers construction of a search result. This value will be null if Answers was unspecified or set to 'none'."
+        },
+        "@search.debugInfo": {
+          "description": "Debug information for this search result.",
+          "properties": {
+            "semantic": {
+              "$ref": "#/definitions/SemanticDebugInfo"
+            }
+          },
+          "readOnly": true,
+          "x-ms-client-name": "DebugInfo",
+          "x-nullable": true
+        },
+        "@search.semanticPartialResponseReason": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseReason",
+          "enum": [
+            "transient",
+            "maxWaitExceeded",
+            "capacityOverloaded"
+          ],
+          "x-ms-enum": {
+            "name": "SemanticPartialResponseReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "transient",
+                "name": "Transient",
+                "description": "Transient issues caused semantic processing to terminate before all results could be processed."
+              },
+              {
+                "value": "maxWaitExceeded",
+                "name": "MaxWaitExceeded",
+                "description": "Semantic processing exceeded the maximum wait time. Only a subset of the initial results were reranked."
+              },
+              {
+                "value": "capacityOverloaded",
+                "name": "CapacityOverloaded",
+                "description": "The service was overloaded, causing semantic processing to terminate before all results could be processed."
+              }
+            ]
+          },
+          "description": "The cause for semantic processing failure."
+        },
+        "@search.semanticPartialResponseType": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseType",
+          "enum": [
+            "baseResults",
+            "rerankedResults"
+          ],
+          "x-ms-enum": {
+            "name": "SemanticPartialResponseType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "baseResults",
+                "name": "BaseResults",
+                "description": "Search results were not semantically reranked and do not contain semantic captions, highlights, or answers."
+              },
+              {
+                "value": "rerankedResults",
+                "name": "RerankedResults",
+                "description": "Search results are semantically reranked and include semantic captions, but do not include semantic highlights or answers."
+              }
+            ]
+          },
+          "description": "Indicates whether the response contains just the base search result or semantically reranked search results lacking semantic highlights or answers."
         },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
@@ -1284,6 +1528,12 @@
           "x-ms-client-name": "Captions",
           "x-nullable": true,
           "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
+        },
+        "@search.documentDebugInfo": {
+          "$ref": "#/definitions/DocumentDebugInfo",
+          "readOnly": true,
+          "x-ms-client-name": "DocumentDebugInfo",
+          "description": "Debug information for this match."
         }
       },
       "required": [
@@ -1528,6 +1778,31 @@
         ]
       },
       "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'."
+    },
+    "Debug": {
+      "name": "debug",
+      "type": "string",
+      "enum": [
+        "disabled",
+        "semantic"
+      ],
+      "x-ms-enum": {
+        "name": "QueryDebugMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "disabled",
+            "name": "Disabled",
+            "description": "Do not return debug information for the query."
+          },
+          {
+            "value": "semantic",
+            "name": "Semantic",
+            "description": "Return semantic debug information for the query."
+          }
+        ]
+      },
+      "description": "This parameter determines whether debug information is returned in a query response. Valid values are 'disabled' and 'semantic'. Values are case-insensitive. The default is 'disabled'. Currently, only queries having queryType set to 'semantic' can return debug information."
     },
     "QueryLanguage": {
       "type": "string",
@@ -2034,6 +2309,10 @@
           "description": "A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation.",
           "x-ms-client-name": "IncludeTotalResultCount"
         },
+        "debug":{
+          "$ref": "#/definitions/Debug",
+          "description": "This parameter determines whether debug information is returned in a query response. Valid values are 'disabled' and 'semantic'. Values are case-insensitive. The default is 'disabled'. Currently, only queries having queryType set to 'semantic' can return debug information."
+        },
         "facets": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
@@ -2100,6 +2379,15 @@
         "semanticConfiguration": {
           "type": "string",
           "description": "The name of a semantic configuration that will be used when processing documents for queries of type semantic."
+        },
+        "semanticErrorHandling": {
+          "type": "string",
+          "description": "A value that specifies whether to fail the request when semantic processing is unavailable or to instead return the base results."
+        },
+        "semanticMaxWaitInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum amount of time to wait for semantic enrichment. If semantic processing exceeds this duration, partial results will be returned instead. This duration does not include time spent retrieving documents from the search index. Must be set to a value greater than or equal to 750. Only valid when semanticErrorHandling is set to 'partial'."
         },
         "search": {
           "type": "string",
