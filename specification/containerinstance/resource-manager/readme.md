@@ -26,7 +26,7 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-10
+tag: package-2022-09
 ```
 
 
