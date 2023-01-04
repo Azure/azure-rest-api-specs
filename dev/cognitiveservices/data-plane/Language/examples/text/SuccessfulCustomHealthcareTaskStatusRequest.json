@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "Endpoint": "{Endpoint}",
+    "jobId": "1780194a-e9c1-4298-b0d4-fdc59ba818a0"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "createdDateTime": "2022-07-20T18:43:35Z",
+        "displayName": "Extracting Custom Health Entities",
+        "expirationDateTime": "2022-07-21T18:43:35Z",
+        "jobId": "1780194a-e9c1-4298-b0d4-fdc59ba818a0",
+        "lastUpdatedDateTime": "2022-07-20T18:43:36Z",
+        "status": "succeeded",
+        "tasks": {
+          "completed": 1,
+          "failed": 0,
+          "inProgress": 0,
+          "total": 1,
+          "items": [
+            {
+              "kind": "CustomHealthcareLROResults",
+              "lastUpdateDateTime": "2022-07-20T18:43:36.7159045Z",
+              "status": "succeeded",
+              "results": {
+                "documents": [
+                  {
+                    "id": "1",
+                    "entities": [
+                      {
+                        "offset": 11,
+                        "length": 5,
+                        "text": "100mg",
+                        "category": "Dosage",
+                        "confidenceScore": 0.98,
+                        "entityComponentInformation": [
+                          {
+                            "componentKind": "PrebuiltComponent",
+                            "value": "Dosage.Prebuilt"
+                          }
+                        ]
+                      },
+                      {
+                        "offset": 17,
+                        "length": 9,
+                        "text": "ibuprofen",
+                        "category": "MedicationName",
+                        "confidenceScore": 1,
+                        "name": "ibuprofen",
+                        "entityComponentInformation": [
+                          {
+                            "componentKind": "ListComponent",
+                            "value": "MedicationName.List"
+                          }
+                        ]
+                      },
+                      {
+                        "offset": 34,
+                        "length": 11,
+                        "text": "twice daily",
+                        "category": "Frequency",
+                        "confidenceScore": 1,
+                        "entityComponentInformation": [
+                          {
+                            "componentKind": "LearnedComponent",
+                            "value": "Frequency.Learned"
+                          }
+                        ]
+                      }
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "errors": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
