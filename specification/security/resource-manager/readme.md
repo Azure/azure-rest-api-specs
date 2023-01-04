@@ -306,7 +306,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
@@ -546,6 +545,19 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
 - Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-01-preview-only
+
+These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
