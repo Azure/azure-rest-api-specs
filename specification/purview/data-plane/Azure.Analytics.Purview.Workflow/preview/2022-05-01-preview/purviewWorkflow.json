@@ -255,7 +255,20 @@
             "$ref": "#/parameters/timeWindow"
           },
           {
-            "$ref": "#/parameters/orderby"
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "startTime desc",
+              "startTime asc"
+            ],
+            "x-ms-enum": {
+              "name": "orderby",
+              "modelAsString": true
+            },
+            "description": "The key word which used to sort the results.",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/runStatuses"
@@ -396,7 +409,20 @@
             "$ref": "#/parameters/maxpagesize"
           },
           {
-            "$ref": "#/parameters/orderby"
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "createdTime desc",
+              "createdTime asc"
+            ],
+            "x-ms-enum": {
+              "name": "orderby",
+              "modelAsString": true
+            },
+            "description": "The key word which used to sort the results.",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/taskTypes"
@@ -429,7 +455,7 @@
         "tags": [
           "WorkflowTasks"
         ],
-        "description": "Get a work task.",
+        "description": "Get a workflow task.",
         "operationId": "GetWorkflowTask",
         "x-ms-examples": {
           "WorkTask_Get": {
@@ -1367,7 +1393,7 @@
       "format": "date-time",
       "description": "The last update time."
     },
-    "ApprovalDetail": {
+    "Approval": {
       "x-ms-discriminator-value": "approval",
       "description": "The workflow approval task properties.",
       "type": "object",
@@ -1376,53 +1402,56 @@
           "$ref": "#/definitions/WorkflowTask"
         },
         {
-          "type": "object",
           "properties": {
             "approvalDetail": {
-              "type": "object",
-              "properties": {
-                "approvalType": {
-                  "type": "string",
-                  "description": "The approval type of an approval task.",
-                  "enum": [
-                    "PendingOnAny",
-                    "PendingOnAll"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ApprovalType",
-                    "modelAsString": true
-                  }
-                },
-                "status": {
-                  "type": "string",
-                  "description": "The status of an approval task.",
-                  "enum": [
-                    "Pending",
-                    "Approved",
-                    "Rejected",
-                    "Canceled"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ApprovalTaskStatus",
-                    "modelAsString": true
-                  }
-                },
-                "approvers": {
-                  "type": "object",
-                  "items": {
-                    "$ref": "#/definitions/ApproverResponse"
-                  },
-                  "description": "The list of approvers with reply."
-                }
-              },
-              "required": [
-                "approvalType",
-                "status",
-                "approvers"
-              ]
+              "$ref": "#/definitions/ApprovalDetail"
             }
           }
         }
+      ]
+    },
+    "ApprovalDetail": {
+      "type": "object",
+      "description": "The approval task details",
+      "properties": {
+        "approvalType": {
+          "type": "string",
+          "description": "The approval type of an approval task.",
+          "enum": [
+            "PendingOnAny",
+            "PendingOnAll"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of an approval task.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalTaskStatus",
+            "modelAsString": true
+          }
+        },
+        "approvers": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ApproverResponse"
+          },
+          "description": "The list of approvers with reply."
+        }
+      },
+      "required": [
+        "approvalType",
+        "status",
+        "approvers"
       ]
     },
     "ApproverResponse": {
@@ -1456,18 +1485,26 @@
         "reply"
       ]
     },
-    "TaskDetail": {
+    "Task": {
       "x-ms-discriminator-value": "task",
       "description": "The workflow task request properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowTask"
         },
         {
-          "type": "object",
-          "description": "The details of task request."
+          "properties": {
+            "taskDetail": {
+              "$ref": "#/definitions/TaskDetail"
+            }
+          }
         }
       ]
+    },
+    "TaskDetail": {
+      "type": "object",
+      "description": "The workflow task details."
     },
     "ApprovalResponseComment": {
       "type": "object",
@@ -1662,24 +1699,6 @@
         "modelAsString": true
       },
       "description": "Time window of filtering items.",
-      "x-ms-parameter-location": "method"
-    },
-    "orderby": {
-      "name": "orderby",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "submittedTime desc",
-        "requestor desc",
-        "submittedTime asc",
-        "requestor asc"
-      ],
-      "x-ms-enum": {
-        "name": "orderby",
-        "modelAsString": true
-      },
-      "description": "The key word which used to sort the results.",
       "x-ms-parameter-location": "method"
     },
     "maxpagesize": {
