@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPoliciesCollection"
+              "$ref": "#/definitions/DaprResiliencyCircuitBreakerPoliciesCollection"
             }
           },
           "default": {
@@ -234,6 +234,29 @@
           "Delete Dapr Resiliency Circuit Breaker Policy": {
             "$ref": "./examples/DaprResiliencyCircuitBreakerPolicies_Delete.json"
           }
+        }
+      }
+    }
+  }, 
+  "definitions": {
+    "DaprResiliencyCircuitBreakerPoliciesCollection": {
+      "description": "Dapr Resiliency Circuit Breaker Policy ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPoliciesCollection"
+              "$ref": "#/definitions/DaprResiliencyTimeoutPoliciesCollection"
             }
           },
           "default": {
@@ -234,6 +234,29 @@
           "Delete Dapr Resiliency Timeout Policy": {
             "$ref": "./examples/DaprResiliencyTimeoutPolicies_Delete.json"
           }
+        }
+      }
+    }
+  }, 
+  "definitions": {
+    "DaprResiliencyTimeoutPoliciesCollection": {
+      "description": "Dapr Resiliency Timeout Policy ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
