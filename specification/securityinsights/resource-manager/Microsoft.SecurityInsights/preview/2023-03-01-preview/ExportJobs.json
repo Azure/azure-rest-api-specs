@@ -1,0 +1,454 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/exportConnections/{exportConnectionId}/exportJobs": {
+      "get": {
+        "x-ms-examples": {
+          "Get all export jobs.": {
+            "$ref": "./examples/exportJobs/GetExportJobs.json"
+          }
+        },
+        "tags": [
+          "ExportJobs"
+        ],
+        "description": "Gets all export jobs, without export jobs items.",
+        "operationId": "ExportJobs_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ExportConnectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExportJobList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/exportConnections/{exportConnectionId}/exportJobs/{exportJobId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an export job.": {
+            "$ref": "./examples/exportJobs/GetExportJobById.json"
+          }
+        },
+        "tags": [
+          "ExportJobs"
+        ],
+        "description": "Gets an export job by its identifier.",
+        "operationId": "ExportJobs_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ExportConnectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExportJobIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates an export job.": {
+            "$ref": "./examples/exportJobs/CreateExportJob.json"
+          }
+        },
+        "tags": [
+          "ExportJobs"
+        ],
+        "description": "Creates an export job.",
+        "operationId": "ExportJobs_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ExportConnectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExportJobIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExportJob"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExportJob"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ExportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExportJobList": {
+      "description": "List all the export jobs.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of export jobs.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of export jobs.",
+          "items": {
+            "$ref": "#/definitions/ExportJob"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "ExportJob": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a ExportJob in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "export job properties",
+          "$ref": "#/definitions/ExportJobProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ExportJobProperties": {
+      "description": "Describes export job properties",
+      "properties": {
+        "jobId": {
+          "description": "The id (a Guid) of the export job",
+          "type": "string"
+        },
+        "connectionId": {
+          "description": "The id (a Guid) of the export connection",
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/Version",
+          "description": "The version number associated with the export job",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the export job",
+          "type": "string"
+        },
+        "exportType": {
+          "description": "Export type of the export job.",
+          "$ref": "#/definitions/ExportType"
+        },
+        "startTime": {
+          "description": "Start time of the export job.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time of the export job.",
+          "type": "string"
+        },
+        "lastUpdateTime": {
+          "description": "Last update time of the export job.",
+          "type": "string"
+        },
+        "jobResult": {
+          "description": "Export type of the export job.",
+          "$ref": "#/definitions/ExportJobResultInfo"
+        },
+        "exportContents": {
+          "description": "Array of export job content info types.",
+          "items": {
+            "description": "An export job content",
+            "$ref": "#/definitions/ExportJobContentInfo"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "connectionId",
+        "exportType"
+      ],
+      "type": "object"
+    },
+    "ExportJobResultInfo": {
+      "description": "Details about the export job result.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "jobOutcome": {
+          "description": "Different outcomes for a job.",
+          "$ref": "#/definitions/ExportJobOutcome"
+        },
+        "webhookUrl": {
+          "description": "Different statuses for a job.",
+          "$ref": "#/definitions/ExportJobStatus"
+        },
+        "message": {
+          "description": "Export message for job.",
+          "type": "string"
+        },
+        "pullRequestUrl": {
+          "description": "URL for the export job pull request",
+          "type": "string"
+        },
+        "pullRequestId": {
+          "description": "Id for the export job pull request",
+          "type": "string"
+        }
+      }
+    },
+    "ExportJobContentInfo": {
+      "description": "Details about the export job contents.",
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "description": "Different content types for a job.",
+          "$ref": "#/definitions/ContentType"
+        },
+        "contentIds": {
+          "description": "All content ids exported in the job",
+          "items": {
+            "description": "A content id",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "ExportJobStatus": {
+      "description": "The status of the export job.",
+      "enum": [
+        "Queued",
+        "InProgress",
+        "Complete"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ExportJobStatus",
+        "values": [
+          {
+            "value": "Queued"
+          },
+          {
+            "value": "InProgress"
+          },
+          {
+            "value": "Complete"
+          }
+        ]
+      }
+    },
+    "ExportJobOutcome": {
+      "description": "The outcome of the export job.",
+      "enum": [
+        "Success",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ExportJobOutcome",
+        "values": [
+          {
+            "value": "Success"
+          },
+          {
+            "value": "Failed"
+          }
+        ]
+      }
+    },
+    "ExportType": {
+      "description": "The type of export for export connection.",
+      "enum": [
+        "Scheduled",
+        "OnDemand"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ExportType",
+        "values": [
+          {
+            "value": "Scheduled"
+          },
+          {
+            "value": "OnDemand"
+          }
+        ]
+      }
+    },
+    "ContentType": {
+      "description": "The content type of a export job path.",
+      "enum": [
+        "AnalyticRule"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ContentType",
+        "values": [
+          {
+            "value": "AnalyticRule"
+          }
+        ]
+      }
+    },
+    "Version": {
+      "description": "The version of the export job.",
+      "enum": [
+        "V1"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Version",
+        "values": [
+          {
+            "value": "V1"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ExportConnectionIdParameter": {
+      "description": "Export connection Id",
+      "in": "path",
+      "name": "exportConnectionId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ExportJobIdParameter": {
+      "description": "Export job Id",
+      "in": "path",
+      "name": "exportJobId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ExportJob": {
+      "description": "The ExportJob",
+      "in": "body",
+      "name": "exportJob",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ExportJob"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

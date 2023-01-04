@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/exportconnections/789e0c1f-4a3d-43ad-809c-e713b677b04a",
+            "name": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+            "type": "Microsoft.SecurityInsights/ExportConnections",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "properties": {
+              "connectionId": "789e0c1f-4a3d-43ad-809c-e713b677b04a",
+              "version": "V1",
+              "displayName": "My Export Connection",
+              "description": "This is a export connection",
+              "repoType": "Github",
+              "contentTypes": [
+                "AnalyticRules",
+                "Workbook"
+              ],
+              "repository": {
+                "url": "https://github.com/user/repo",
+                "branch": "main"
+              },
+              "servicePrincipal": {
+                "id": "71bdc7aa-8dee-417f-b3f3-9daea339159b",
+                "tenantId": "50e5f486-94ee-4a00-a3bb-37127b4f2165",
+                "appId": "c07d074d-e207-4187-968a-27262815208b"
+              },
+              "exportType": "Scheduled",
+              "runFrequency": "0 0 * * *",
+              "nextScheduledTime": "2022-08-13T20:00:00.000Z",
+              "lastRunTime": "2022-08-13T20:00:00.000Z"
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2021-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

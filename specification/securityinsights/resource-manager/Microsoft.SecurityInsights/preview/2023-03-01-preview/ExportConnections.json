@@ -1,0 +1,421 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/exportConnections": {
+      "get": {
+        "x-ms-examples": {
+          "Get all export connections.": {
+            "$ref": "./examples/exportConnections/GetExportConnections.json"
+          }
+        },
+        "tags": [
+          "ExportConnections"
+        ],
+        "description": "Gets all export connections, without export connection items.",
+        "operationId": "ExportConnections_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExportConnectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/exportConnections/{exportConnectionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an export connection.": {
+            "$ref": "./examples/exportConnections/GetExportConnectionById.json"
+          }
+        },
+        "tags": [
+          "ExportConnections"
+        ],
+        "description": "Gets an export connection by its identifier.",
+        "operationId": "ExportConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ExportConnectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExportConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an export connection.": {
+            "$ref": "./examples/exportConnections/DeleteExportConnection.json"
+          }
+        },
+        "tags": [
+          "ExportConnections"
+        ],
+        "description": "Delete an export connection.",
+        "operationId": "ExportConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ExportConnectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates an export connection.": {
+            "$ref": "./examples/exportConnections/CreateExportConnection.json"
+          }
+        },
+        "tags": [
+          "ExportConnections"
+        ],
+        "description": "Creates an export connection.",
+        "operationId": "ExportConnections_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ExportConnectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExportConnection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExportConnection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ExportConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExportConnectionList": {
+      "description": "List all the export connections.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of export connections.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of export connections.",
+          "items": {
+            "$ref": "#/definitions/ExportConnection"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "ExportConnection": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a ExportConnection in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "export connection properties",
+          "$ref": "#/definitions/ExportConnectionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ExportConnectionProperties": {
+      "description": "Describes export connection properties",
+      "properties": {
+        "connectionId": {
+          "description": "The id (a Guid) of the export connection",
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/Version",
+          "description": "The version number associated with the export connection",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the export connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the export connection",
+          "type": "string"
+        },
+        "repoType": {
+          "$ref": "#/definitions/RepoType",
+          "description": "The repository type of the export connection",
+          "type": "string"
+        },
+        "contentTypes": {
+          "description": "Array of export connection content types.",
+          "items": {
+            "$ref": "#/definitions/ContentType"
+          },
+          "type": "array"
+        },
+        "repository": {
+          "description": "Repository metadata.",
+          "$ref": "#/definitions/Repository"
+        },
+        "exportType": {
+          "description": "Export type of the export connection.",
+          "$ref": "#/definitions/ExportType"
+        },
+        "nextScheduledTime": {
+          "description": "Export type of the export connection.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "repoType",
+        "contentTypes",
+        "repository"
+      ],
+      "type": "object"
+    },
+    "ExportType": {
+      "description": "The type of export for export connection.",
+      "enum": [
+        "Scheduled",
+        "OnDemand"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ExportType",
+        "values": [
+          {
+            "value": "Scheduled"
+          },
+          {
+            "value": "OnDemand"
+          }
+        ]
+      }
+    },
+    "Repository": {
+      "type": "object",
+      "description": "metadata of a repository.",
+      "properties": {
+        "url": {
+          "description": "Url of repository.",
+          "type": "string"
+        },
+        "branch": {
+          "description": "Branch name of repository.",
+          "type": "string"
+        }
+      }
+    },
+    "ContentType": {
+      "description": "The content type of an export connection path.",
+      "enum": [
+        "AnalyticRule"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ContentType",
+        "values": [
+          {
+            "value": "AnalyticRule"
+          }
+        ]
+      }
+    },
+    "RepoType": {
+      "description": "The type of repository.",
+      "enum": [
+        "Github",
+        "DevOps"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "RepoType",
+        "values": [
+          {
+            "value": "Github"
+          },
+          {
+            "value": "DevOps"
+          }
+        ]
+      }
+    },
+    "Version": {
+      "description": "The version of the export connection.",
+      "enum": [
+        "V1"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Version",
+        "values": [
+          {
+            "value": "V1"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ExportConnectionIdParameter": {
+      "description": "Export connection Id",
+      "in": "path",
+      "name": "exportConnectionId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ExportConnection": {
+      "description": "The ExportConnection",
+      "in": "body",
+      "name": "exportConnection",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ExportConnection"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
