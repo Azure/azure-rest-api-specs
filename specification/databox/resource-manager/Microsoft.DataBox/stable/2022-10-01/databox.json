@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-09-01",
+    "version": "2022-10-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -4779,46 +4779,48 @@
     },
     "MitigateJobRequest": {
       "description": "The Mitigate Job captured from request body for Mitigate API",
-      "required": [
-        "customerResolutionCode"
-      ],
       "type": "object",
       "properties": {
-        "customerResolutionCode": {
-          "description": "Resolution code for the job",
-          "enum": [
-            "None",
-            "MoveToCleanUpDevice",
-            "Resume",
-            "Restart",
-            "ReachOutToOperation"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CustomerResolutionCode",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "None",
-                "description": "No Resolution Yet"
-              },
-              {
-                "value": "MoveToCleanUpDevice",
-                "description": "Clean the device"
-              },
-              {
-                "value": "Resume",
-                "description": "Resume the job to same stage"
-              },
-              {
-                "description": "Restart whole action.",
-                "value": "Restart"
-              },
-              {
-                "description": "Reach out to operation for further action.",
-                "value": "ReachOutToOperation"
-              }
-            ]
+        "serialNumberCustomerResolutionMap": {
+          "description": "Serial number and the customer resolution code corresponding to each serial number",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "description": "Available customer resolution codes on a job",
+            "enum": [
+              "None",
+              "MoveToCleanUpDevice",
+              "Resume",
+              "Restart",
+              "ReachOutToOperation"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "CustomerResolutionCode",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "None",
+                  "description": "No Resolution Yet"
+                },
+                {
+                  "value": "MoveToCleanUpDevice",
+                  "description": "Clean the device"
+                },
+                {
+                  "value": "Resume",
+                  "description": "Resume the job"
+                },
+                {
+                  "value": "Restart",
+                  "description": "Restart whole action"
+                },
+                {
+                  "value": "ReachOutToOperation",
+                  "description": "Reach out to operation for further action"
+                }
+              ]
+            }
           }
         }
       }
