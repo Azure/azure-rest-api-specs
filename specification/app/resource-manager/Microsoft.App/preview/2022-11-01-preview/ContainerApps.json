@@ -535,6 +535,14 @@
           "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
+        "managedBy": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
         "properties": {
           "description": "ContainerApp resource specific properties",
           "type": "object",
