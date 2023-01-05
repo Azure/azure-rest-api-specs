@@ -2249,6 +2249,9 @@
           "enum": [
             "directory"
           ]
+        },
+        {
+          "$ref": "#/parameters/AllowTrailingDot"
         }
       ]
     },
@@ -2283,6 +2286,9 @@
           },
           {
             "$ref": "#/parameters/FileChangeTime"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -2422,6 +2428,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -2531,6 +2540,9 @@
             "$ref": "#/parameters/ListFilesExtendedInfo"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -2635,6 +2647,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -2724,6 +2739,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -2847,6 +2865,12 @@
           },
           {
             "$ref": "#/parameters/Metadata"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
+            "$ref": "#/parameters/SourceAllowTrailingDot"
           }
         ],
         "responses": {
@@ -3884,6 +3908,9 @@
         },
         {
           "$ref": "#/parameters/FilePath"
+        },
+        {
+          "$ref": "#/parameters/AllowTrailingDot"
         }
       ]
     },
@@ -3948,6 +3975,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -4083,6 +4113,9 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -4174,6 +4207,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -4292,6 +4328,9 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -4404,6 +4443,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -4520,6 +4562,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -4675,6 +4720,9 @@
             "$ref": "#/parameters/FileLastWriteTimeMode"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -4806,6 +4854,12 @@
           },
           {
             "$ref": "#/parameters/FileLastWriteTimeMode"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
+            "$ref": "#/parameters/SourceAllowTrailingDot"
           }
         ],
         "responses": {
@@ -4920,6 +4974,9 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -5051,6 +5108,12 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
+            "$ref": "#/parameters/SourceAllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -5154,6 +5217,9 @@
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -5236,6 +5302,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -5327,6 +5396,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -5456,6 +5528,12 @@
           },
           {
             "$ref": "#/parameters/FileContentType"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
+            "$ref": "#/parameters/SourceAllowTrailingDot"
           }
         ],
         "responses": {
@@ -7275,6 +7353,22 @@
         "modelAsString": false
       },
       "x-ms-parameter-location": "method"
+    },
+    "AllowTrailingDot": {
+      "name": "x-ms-allow-trailing-dot",
+      "description": "If true, the trailing dot will not be trimmed from the target URI.",
+      "x-ms-client-name": "allowTrailingDot",
+      "in": "header",
+      "required": false,
+      "type": "boolean"
+    },
+    "SourceAllowTrailingDot": {
+      "name": "x-ms-source-allow-trailing-dot",
+      "description": "If true, the trailing dot will not be trimmed from the source URI.",
+      "x-ms-client-name": "allowSourceTrailingDot",
+      "in": "header",
+      "required": false,
+      "type": "boolean"
     }
   }
 }
