@@ -37,15 +37,25 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 title: BillingManagementClient
 description: Billing Client
 input-file:
-- Microsoft.Billing/stable/2023-04-01/billing.json
-- Microsoft.Billing/stable/2023-04-01/billingOperations.json
-directive:
-  - suppress: R4009
-    from: Microsoft.Billing/stable/2023-04-01/billing.json
-    reason: systemData is not in this API version
-  - suppress: R4009
-    from: Microsoft.Billing/stable/2023-04-01/billingOperations.json
-    reason: systemData is not in this API version
+- Microsoft.Billing/stable/2023-04-01/agreement.json
+- Microsoft.Billing/stable/2023-04-01/availableBalance.json
+- Microsoft.Billing/stable/2023-04-01/billingAccount.json
+- Microsoft.Billing/stable/2023-04-01/billingPermission.json
+- Microsoft.Billing/stable/2023-04-01/billingProfile.json
+- Microsoft.Billing/stable/2023-04-01/billingProperty.json
+- Microsoft.Billing/stable/2023-04-01/billingRoleAssignment.json
+- Microsoft.Billing/stable/2023-04-01/billingRoleDefinition.json
+- Microsoft.Billing/stable/2023-04-01/billingSubscription.json
+- Microsoft.Billing/stable/2023-04-01/customer.json
+- Microsoft.Billing/stable/2023-04-01/instruction.json
+- Microsoft.Billing/stable/2023-04-01/invoice.json
+- Microsoft.Billing/stable/2023-04-01/invoiceSection.json
+- Microsoft.Billing/stable/2023-04-01/operation.json
+- Microsoft.Billing/stable/2023-04-01/policy.json
+- Microsoft.Billing/stable/2023-04-01/product.json
+- Microsoft.Billing/stable/2023-04-01/reservation.json
+- Microsoft.Billing/stable/2023-04-01/transaction.json
+- Microsoft.Billing/stable/2023-04-01/types.json
 ```
 
 ### Tag: package-2021-10
