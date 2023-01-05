@@ -2811,6 +2811,9 @@
             "$ref": "#/parameters/includeTermHierarchy"
           },
           {
+            "$ref": "#/parameters/includeMultiTemplates"
+          },
+          {
             "in": "formData",
             "name": "file",
             "description": "The csv file to import glossary terms from.",
@@ -2826,6 +2829,12 @@
             "description": "Accepted. A job to import glossary terms via csv has been accepted.",
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2864,6 +2873,9 @@
             "$ref": "#/parameters/includeTermHierarchy"
           },
           {
+            "$ref": "#/parameters/includeMultiTemplates"
+          },
+          {
             "in": "formData",
             "name": "file",
             "description": "The csv file to import glossary terms from.",
@@ -2879,6 +2891,12 @@
             "description": "Accepted. A job to import glossary terms via csv has been accepted.",
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2951,6 +2969,12 @@
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
+            "$ref": "#/parameters/includeMultiTemplates"
+          },
+          {
+            "$ref": "#/parameters/includeRichTextFlag"
           },
           {
             "in": "body",
@@ -3111,6 +3135,12 @@
             "description": "Accepted. A job to delete glossary terms has been accepted.",
             "schema": {
               "$ref": "#/definitions/BulkDeleteOperation"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -8637,6 +8667,24 @@
     "includeTermHierarchy": {
       "name": "includeTermHierarchy",
       "description": "Whether include term hierarchy",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "includeMultiTemplates": {
+      "name": "includeMultiTemplates",
+      "description": "Whether include multi term templates for term import/export",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "includeRichTextFlag": {
+      "name": "includeRichTextFlag",
+      "description": "Whether include rich text for term export",
       "in": "query",
       "required": false,
       "type": "boolean",
