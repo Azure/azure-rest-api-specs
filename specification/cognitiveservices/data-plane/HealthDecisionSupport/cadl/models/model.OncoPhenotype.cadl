@@ -7,10 +7,8 @@ using Cadl.Rest;
 
 namespace HealthDecisionSupportAPI;
 
-
 @doc("The body of the Onco Phenotype request.")
 model OncoPhenotypeRequest extends Request {
-
   @doc("Configuration affecting the Onco Phenotype model's inference.")
   configuration?: OncoPhenotypeModelConfiguration;
 }
@@ -24,7 +22,6 @@ model OncoPhenotypeResponse {
   results?: OncoPhenotypeResults;
 }
 
-
 @doc("The inference results for the Onco Phenotype request.")
 model OncoPhenotypeResults {
   @doc("Results for the patients given in the request.")
@@ -33,7 +30,6 @@ model OncoPhenotypeResults {
   @doc("The version of the model used for inference, expressed as the model date.")
   modelVersion: ModelVersion;
 }
-
 
 @doc("The results of the model's work for a single patient.")
 model OncoPhenotypePatientResult {
@@ -44,12 +40,10 @@ model OncoPhenotypePatientResult {
   inferences: OncoPhenotypeInference[];
 }
 
-
 @doc("An inference made by the Onco Phenotype model regarding a patient.")
 model OncoPhenotypeInference {
   @doc("The type of the Onco Phenotype inference")
   type: OncoPhenotypeInferenceType;
-
   ...Inference;
 
   @doc("The evidence corresponding to the inference value.")
@@ -61,10 +55,8 @@ An identifier for a clinical case, if there are multiple clinical cases regardin
   caseId?: string;
 }
 
-
 @doc("Configuration affecting the Onco Phenotype model's inference.")
-model OncoPhenotypeModelConfiguration extends ModelConfiguration{
-
+model OncoPhenotypeModelConfiguration extends ModelConfiguration {
   @doc("""
 A list of inference types to be inferred for the current request.
 This could be used if only part of the Onco Phenotype inferences are required.
@@ -78,7 +70,6 @@ An indication whether to perform a preliminary step on the patient's documents t
   checkForCancerCase?: boolean = false;
 }
 
-
 enum OncoPhenotypeInferenceTypeKnownValues {
   TumorSite: "tumorSite",
   Histology: "histology",
@@ -90,10 +81,6 @@ enum OncoPhenotypeInferenceTypeKnownValues {
   PathologicStageM: "pathologicStageM",
 }
 
-
 @doc("The type of the Onco Phenotype inference.")
 @knownValues(OncoPhenotypeInferenceTypeKnownValues)
-model OncoPhenotypeInferenceType is string;
-
-
-
+scalar OncoPhenotypeInferenceType extends string;

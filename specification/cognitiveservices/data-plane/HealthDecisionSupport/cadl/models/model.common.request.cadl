@@ -11,7 +11,6 @@ model Request {
   patients: Patient[];
 }
 
-
 @doc("General configuration common to all models.")
 model ModelConfiguration {
   @doc("An indication whether the model should produce verbose output.")
@@ -22,7 +21,6 @@ An indication whether the model's output should include evidence for the inferen
 """)
   includeEvidence?: boolean = true;
 }
-
 
 @doc("A patient record, including their clinical information and data.")
 model Patient {
@@ -41,7 +39,6 @@ Patient structured information, including demographics and known structured clin
   data?: PatientDocument[];
 }
 
-
 @doc("""
 Patient structured information, including demographics and known structured clinical information.
 """)
@@ -56,21 +53,20 @@ model PatientInfo {
   clinicalInfo?: ClinicalCodedElement[];
 }
 
-
-@doc("The patient's date of birth.")
+@doc("The patient's gender.")
 @knownValues(PatientInfoGenderKnownValues)
-model PatientInfoGender is string;
+scalar PatientInfoGender extends string;
+@doc("Patient gender known values.")
 enum PatientInfoGenderKnownValues {
-    Female: "female",
-    Male: "male",
-    Unspecified: "unspecified",
-  }
+  Female: "female",
+  Male: "male",
+  Unspecified: "unspecified",
+}
 
-@doc("""
-The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).
-""")
+@doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
 @knownValues(DocumentTypeKnownValues)
-model DocumentType is string;
+scalar DocumentType extends string;
+@doc("Document type, known values")
 enum DocumentTypeKnownValues {
   Note: "note",
   FhirBundle: "fhirBundle",
@@ -78,9 +74,9 @@ enum DocumentTypeKnownValues {
   GenomicSequencing: "genomicSequencing",
 }
 
-@doc("The type of the clinical document.")
 @knownValues(ClinicalDocumentTypeKnownValues)
-model ClinicalDocumentType is string;
+scalar ClinicalDocumentType extends string;
+@doc("The type of the clinical document.")
 enum ClinicalDocumentTypeKnownValues {
   Consultation: "consultation",
   DischargeSummary: "dischargeSummary",
@@ -98,29 +94,22 @@ In case the source type is 'inline', the content is given as a string (for insta
 In case the source type is 'reference', the content is given as a URI.
 """)
 @knownValues(DocumentContentSourceTypeKnownValues)
-model DocumentContentSourceType is string;
+scalar DocumentContentSourceType extends string;
+@doc("Document content source, known values")
 enum DocumentContentSourceTypeKnownValues {
   Inline: "inline",
   Reference: "reference",
 }
 
-
-
-@doc("""
-A clinical document related to a patient. Document here is in the wide sense - not just a text document (note).
-""")
+@doc("A clinical document related to a patient. Document here is in the wide sense - not just a text document (note).")
 model PatientDocument {
-  @doc("""
-The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).
-""")
+  @doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
   type: DocumentType;
 
   @doc("The type of the clinical document.")
   clinicalType?: ClinicalDocumentType;
 
-  @doc("""
-A given identifier for the document. Has to be unique across all documents for a single patient.
-""")
+  @doc("A given identifier for the document. Has to be unique across all documents for a single patient.")
   @minLength(1)
   id: string;
 
@@ -133,7 +122,6 @@ A given identifier for the document. Has to be unique across all documents for a
   @doc("The content of the patient document.")
   content: DocumentContent;
 }
-
 
 @doc("The content of the patient document.")
 model DocumentContent {

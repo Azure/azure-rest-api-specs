@@ -1,15 +1,13 @@
-
 import "@cadl-lang/rest";
 using Cadl.Http;
 
 namespace HealthDecisionSupportAPI;
 
 @doc("The request was accepted and a job was created.")
-model SuccessfulPostJobResponse{
+model SuccessfulPostJobResponse {
   @doc("The status code.")
   @statusCode
   statusCode: 202;
-
   ...Azure.Core.Foundations.RetryAfterHeader;
 
   @doc("Indicates whether the repeatable request was accepted or rejected.")
@@ -18,15 +16,12 @@ model SuccessfulPostJobResponse{
   repeatabilityResult?: RepeatabilityResult;
 }
 
-
 @doc("""
 "The result of a repeatable request (`accepted`/`rejected`), as specified in [OASIS Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityResult).
 """)
 @knownValues(RepeatabilityResultKnownValues)
-model RepeatabilityResult is string;
+scalar RepeatabilityResult extends string;
 enum RepeatabilityResultKnownValues {
   Accepted: "accepted",
   Rejected: "rejected",
 }
-
-

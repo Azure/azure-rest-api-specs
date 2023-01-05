@@ -5,11 +5,11 @@ using Cadl.Rest;
 
 namespace HealthDecisionSupportAPI;
 
-
 @doc("The generic part of the Health Decision Support response, common to all models.")
 model Response {
   @doc("A processing job identifier.")
   @key
+  @format("uuid")
   jobId: string;
 
   @doc("The date and time when the processing job was created.")
@@ -49,7 +49,6 @@ model Inference {
   confidenceScore?: float32;
 }
 
-
 @doc("A piece of evidence corresponding to an inference.")
 model InferenceEvidence {
   @doc("A piece of evidence from a clinical note (text document).")
@@ -71,14 +70,12 @@ system.
 model TrialMatcherInferenceEvidence {
   @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
   eligibilityCriteriaEvidence?: string;
-  
   ...InferenceEvidence;
 }
 
-
 @doc("The status of the processing job.")
 @knownValues(JobStatusKnownValues)
-model JobStatus is string;
+scalar JobStatus extends string;
 enum JobStatusKnownValues {
   NotStarted: "notStarted",
   Running: "running",
@@ -88,4 +85,4 @@ enum JobStatusKnownValues {
 }
 
 @doc("The version of the model used for inference, expressed as the model date.")
-model ModelVersion is plainDate;
+scalar ModelVersion extends plainDate;

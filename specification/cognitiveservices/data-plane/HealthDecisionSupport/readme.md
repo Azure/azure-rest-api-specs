@@ -37,13 +37,13 @@ These settings apply only when `--tag=2022-01-01-preview` is specified on the co
 
 ```yaml $(tag) == '2022-01-01-preview'
 input-file:
-  - preview/2022-01-01-preview/HealthDecisionSupport.json
+  - preview/2022-01-01-preview/openapi.json
 ```
 
 ## Suppression
 ``` yaml
 directive:
   - suppress: AvoidAnonymousTypes
-    from: HealthDecisionSupport.json
+    from: openapi.json
     reason: When 'allOf' is used for model composition reflecting inheritance, objects containing added properties have no type meaning
 ```

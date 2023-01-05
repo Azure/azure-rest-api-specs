@@ -7,7 +7,6 @@ using Cadl.Rest;
 
 namespace HealthDecisionSupportAPI;
 
-
 @doc("The body of the Trial Matcher request.")
 model TrialMatcherRequest extends Request {
   @doc("Configuration affecting the Trial Matcher model's inference.")
@@ -15,7 +14,7 @@ model TrialMatcherRequest extends Request {
 }
 
 @doc("Configuration affecting the Trial Matcher model's inference.")
-model TrialMatcherModelConfiguration extends ModelConfiguration{
+model TrialMatcherModelConfiguration extends ModelConfiguration {
   @doc("""
 The clinical trials that the patient(s) should be matched to. <br />The trial
 selection can be given as a list of custom clinical trials and/or a list of
@@ -25,7 +24,6 @@ resulting trial set is a union of the two sets.
   clinicalTrials: ClinicalTrials;
 }
 
-
 @resource("trialmatcher/jobs")
 @doc("The response for the Trial Matcher request.")
 model TrialMatcherResponse {
@@ -34,7 +32,6 @@ model TrialMatcherResponse {
   @doc("The inference results for the Trial Matcher request.")
   results?: TrialMatcherResults;
 }
-
 
 @doc("The inference results for the Trial Matcher request.")
 model TrialMatcherResults {
@@ -47,7 +44,6 @@ model TrialMatcherResults {
   @doc("The date when the clinical trials knowledge graph was last updated.")
   knowledgeGraphLastUpdateDate?: plainDate;
 }
-
 
 @doc("The results of the model's work for a single patient.")
 model TrialMatcherPatientResult {
@@ -104,14 +100,13 @@ model ClinicalNoteEvidence {
 model TrialMatcherInference {
   @doc("The type of the Trial Matcher inference.")
   type: TrialMatcherInferenceType;
-
   ...Inference;
 
   @doc("The evidence corresponding to the inference value.")
   evidence?: TrialMatcherInferenceEvidence[];
 
   @doc("The identifier of the clinical trial.")
-  @minLength(1) 
+  @minLength(1)
   id?: string;
 
   @doc("Possible sources of a clinical trial.")
@@ -120,7 +115,6 @@ model TrialMatcherInference {
   @doc("Trial data which is of interest to the potential participant.")
   metadata?: ClinicalTrialMetadata;
 }
-
 
 @doc("""
 The clinical trials that the patient(s) should be matched to. 
@@ -139,7 +133,6 @@ clinical trial registry.
   @minItems(1)
   registryFilters?: ClinicalTrialRegistryFilter[];
 }
-
 
 @doc("""
 A filter defining a subset of clinical trials from a given clinical trial registry (e.g. clinicaltrials.gov).
@@ -212,7 +205,6 @@ Leaving this list empty will not limit the trial facility area boundaries.
   facilityAreas?: Area[];
 }
 
-
 @doc("""
 A geographical area, expressed as a `Circle` geometry represented using a `GeoJSON Feature` (see [GeoJSON spec](https://tools.ietf.org/html/rfc7946)).
 """)
@@ -251,7 +243,6 @@ model AreaProperties {
   //@exclusiveMinimum(true)
   radius: float64;
 }
-
 
 @doc("A description of a clinical trial.")
 model ClinicalTrialDetails {
@@ -296,7 +287,6 @@ model ClinicalTrialDemographicsAcceptedAgeRange {
   maximumAge?: Age;
 }
 
-
 @doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
 model Age {
   @doc("Possible units for a person's age.")
@@ -332,7 +322,7 @@ Medical conditions and their synonyms which are relevant for the clinical trial,
   sponsors?: string[];
 
   @doc("""
-Contact details of the trial administrators, for patients that want to sparticipate in the trial.
+Contact details of the trial administrators, for patients that want to participate in the trial.
 """)
   contacts?: ContactDetails[];
 
@@ -356,119 +346,117 @@ model ContactDetails {
 model ClinicalTrialResearchFacility {
   @doc("The facility's name.")
   name: string;
-  
   ...Location;
 }
 
 @doc("Gender definitions as accepted by clinical trials.")
 @knownValues(ClinicalTrialAcceptedGenderKnownValues)
-model ClinicalTrialAcceptedGender is string;
+scalar ClinicalTrialAcceptedGender extends string;
+@doc("Clinical trial accepted gender, known values")
 enum ClinicalTrialAcceptedGenderKnownValues {
-    Female: "female",
-    Male: "male",
+  Female: "female",
+  Male: "male",
 }
-
 
 @doc("Possible units for a person's age.")
 @knownValues(AgeUnitKnownValues)
-model AgeUnit is string;
+scalar AgeUnit extends string;
+@doc("Age units, known values")
 enum AgeUnitKnownValues {
-    Years: "years",
-    Months: "months",
-    Days: "days",
+  Years: "years",
+  Months: "months",
+  Days: "days",
 }
-
 
 @doc("Possible phases of a clinical trial.")
 @knownValues(ClinicalTrialPhaseKnownValues)
-model ClinicalTrialPhase is string;
+scalar ClinicalTrialPhase extends string;
+@doc("Clinical trial, possible phases known values")
 enum ClinicalTrialPhaseKnownValues {
-    NotApplicable: "notApplicable",
-    EarlyPhase1: "earlyPhase1",
-    Phase1: "phase1",
-    Phase2: "phase2",
-    Phase3: "phase3",
-    Phase4: "phase4",
+  NotApplicable: "notApplicable",
+  EarlyPhase1: "earlyPhase1",
+  Phase1: "phase1",
+  Phase2: "phase2",
+  Phase3: "phase3",
+  Phase4: "phase4",
 }
-
 
 @doc("Possible study types of a clinical trial.")
 @knownValues(ClinicalTrialStudyTypeKnownValues)
-model ClinicalTrialStudyType is string;
+scalar ClinicalTrialStudyType extends string;
+@doc("Clinical trial, possible study types, known values.")
 enum ClinicalTrialStudyTypeKnownValues {
-    Interventional: "interventional",
-    Observational: "observational",
-    ExpandedAccess: "expandedAccess",
-    PatientRegistries: "patientRegistries",
+  Interventional: "interventional",
+  Observational: "observational",
+  ExpandedAccess: "expandedAccess",
+  PatientRegistries: "patientRegistries",
 }
-
 
 @doc("Possible recruitment status of a clinical trial.")
 @knownValues(ClinicalTrialRecruitmentStatusKnownValues)
-model ClinicalTrialRecruitmentStatus is string;
+scalar ClinicalTrialRecruitmentStatus extends string;
+@doc("Clinical trial, possible recruitment status, known values.")
 enum ClinicalTrialRecruitmentStatusKnownValues {
-    UnknownStatus: "unknownStatus",
-    NotYetRecruiting: "notYetRecruiting",
-    Recruiting: "recruiting",
-    EnrollingByInvitation: "enrollingByInvitation",
+  UnknownStatus: "unknownStatus",
+  NotYetRecruiting: "notYetRecruiting",
+  Recruiting: "recruiting",
+  EnrollingByInvitation: "enrollingByInvitation",
 }
-
 
 @doc("Possible purposes of a clinical trial.")
 @knownValues(ClinicalTrialPurposeKnownValues)
-model ClinicalTrialPurpose is string;
+scalar ClinicalTrialPurpose extends string;
+@doc("Clinical trial, possible purposes, known values.")
 enum ClinicalTrialPurposeKnownValues {
-    NotApplicable: "notApplicable",
-    Screening: "screening",
-    Diagnostic: "diagnostic",
-    Prevention: "prevention",
-    HealthServicesResearch: "healthServicesResearch",
-    Treatment: "treatment",
-    DeviceFeasibility: "deviceFeasibility",
-    SupportiveCare: "supportiveCare",
-    BasicScience: "basicScience",
-    Other: "other",
+  NotApplicable: "notApplicable",
+  Screening: "screening",
+  Diagnostic: "diagnostic",
+  Prevention: "prevention",
+  HealthServicesResearch: "healthServicesResearch",
+  Treatment: "treatment",
+  DeviceFeasibility: "deviceFeasibility",
+  SupportiveCare: "supportiveCare",
+  BasicScience: "basicScience",
+  Other: "other",
 }
-
 
 @doc("Possible sources of a clinical trial.")
 @knownValues(ClinicalTrialSourceKnownValues)
-model ClinicalTrialSource is string;
+scalar ClinicalTrialSource extends string;
+@doc("Clinical trial, possible sources, known values.")
 enum ClinicalTrialSourceKnownValues {
-    Custom: "custom",
-    ClinicaltrialsGov: "clinicaltrials.gov",
+  Custom: "custom",
+  ClinicaltrialsGov: "clinicaltrials.gov",
 }
-  
 
 @doc("`GeoJSON` type.")
 @knownValues(GeoJsonTypeKnownValues)
-model GeoJsonType is string;
+scalar GeoJsonType extends string;
+@doc("`GeoJSON` type, known values")
 enum GeoJsonTypeKnownValues {
-    Feature: "Feature",
+  Feature: "Feature",
 }
-
 
 @doc("`GeoJSON` geometry type.")
 @knownValues(GeoJsonGeometryTypeKnownValues)
-model GeoJsonGeometryType is string;
+scalar GeoJsonGeometryType extends string;
+@doc("`GeoJSON` geometry type, known values.")
 enum GeoJsonGeometryTypeKnownValues {
-    Point : "Point",
+  Point: "Point",
 }
-
 
 @doc("`GeoJSON` object sub-type.")
 @knownValues(GeoJsonPropertiesSubTypeKnownValues)
-model GeoJsonPropertiesSubType is string;
+scalar GeoJsonPropertiesSubType extends string;
+@doc("`GeoJSON` object sub-type, known values")
 enum GeoJsonPropertiesSubTypeKnownValues {
-    Circle: "Circle",
+  Circle: "Circle",
 }
-
 
 @doc("The type of the Trial Matcher inference.")
 @knownValues(TrialMatcherInferenceTypeKnownValues)
-model TrialMatcherInferenceType is string;
+scalar TrialMatcherInferenceType extends string;
+@doc("Trial matcher inference type, known values.")
 enum TrialMatcherInferenceTypeKnownValues {
-    TrialEligibility: "trialEligibility",
+  TrialEligibility: "trialEligibility",
 }
-
-  

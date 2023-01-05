@@ -1,33 +1,29 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
 import "./routes/route.oncophenotype.cadl";
 import "./routes/route.trialmatcher.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
 using Cadl.Versioning;
+using OpenAPI;
 
 @service({title: "Health Decision Support API"})
 @versioned(QueryApiVersion)
-
+@doc("Health Decision Support provides an API that serves decision support models, specific for Health & Life Sciences, that perform a decision support inference to be used by a human.")
 @server(
   "{endpoint}/healthdecisionsupport",
   "Health Decision Support provides an API that serves decision support models, specific for Health & Life Sciences, that perform a decision support inference to be used by a human.",
   {
-    @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://westus2.api.cognitive.microsoft.com).
-""")
-  endpoint: string,
+    @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).")
+    @extension("x-ms-parameter-location", "method")
+    @extension("x-ms-skip-url-encoding", true)
+    endpoint: string,
   }
 )
 
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 
-@doc("""
-Health Decision Support provides an API that serves decision support models,
-specific for Health & Life Sciences, that perform a decision support inference
-to be used by a human.
-""")
 namespace HealthDecisionSupportAPI;
 
 enum QueryApiVersion {

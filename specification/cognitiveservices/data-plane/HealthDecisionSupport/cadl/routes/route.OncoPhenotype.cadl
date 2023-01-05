@@ -1,17 +1,24 @@
 import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@cadl-lang/openapi";
 import "../models/model.oncophenotype.cadl";
 import "../primitives.cadl";
 
 using Azure.Core;
 using Cadl.Rest;
 using Cadl.Http;
+using Autorest;
+using OpenAPI;
 
 namespace HealthDecisionSupportAPI;
 
 interface OncoPhenotype {
   @summary("Create Onco Phenotype job")
+  @tag("OncoPhenotype")
   @doc("Creates an Onco Phenotype job with the given request body.")
+  @extension("x-ms-long-running-operation", true)
   @route("/oncophenotype/jobs")
+  @example("./examples/SuccessfulOncoPhenotypeRequest.json", "SuccessfulOncoPhenotypeAnalyzeRequest")
   @post
   CreateJob is Azure.Core.Foundations.LongRunningOperation<
     {
@@ -25,6 +32,8 @@ interface OncoPhenotype {
   >;
 
   @summary("Get Onco Phenotype job details")
+  @tag("OncoPhenotype")
   @doc("Gets the status and details of the Onco Phenotype job.")
+  @example("./examples/SuccessfulOncoPhenotypeResponse.json", "SuccessfulOncoPhenotypeGetAnalyzeStatus")
   GetJob is Azure.Core.ResourceRead<OncoPhenotypeResponse>;
 }

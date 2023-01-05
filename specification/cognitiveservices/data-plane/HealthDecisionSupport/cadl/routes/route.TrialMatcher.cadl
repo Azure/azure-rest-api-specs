@@ -1,16 +1,24 @@
 import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@cadl-lang/openapi";
 import "../models/model.trialmatcher.cadl";
 import "../primitives.cadl";
+
 using Azure.Core;
 using Cadl.Rest;
 using Cadl.Http;
+using Autorest;
+using OpenAPI;
 
 namespace HealthDecisionSupportAPI;
 
 interface TrialMatcher {
   @summary("Create Trial Matcher job")
+  @tag("TrialMatcher")
   @doc("Creates a Trial Matcher job with the given request body.")
+  @extension("x-ms-long-running-operation", true)
   @route("/trialmatcher/jobs")
+  @example("./examples/SuccessfulTrialMatcherRequest.json", "SuccessfulTrialMatcherAnalyzeRequest")
   @post
   CreateJob is Azure.Core.Foundations.LongRunningOperation<
     {
@@ -24,6 +32,8 @@ interface TrialMatcher {
   >;
 
   @summary("Get Trial Matcher job details")
+  @tag("TrialMatcher")
   @doc("Gets the status and details of the Trial Matcher job.")
+  @example("./examples/SuccessfulTrialMatcherResponse.json", "SuccessfulTrialMatcherGetAnalyzeStatus")
   GetJob is Azure.Core.ResourceRead<TrialMatcherResponse>;
 }
