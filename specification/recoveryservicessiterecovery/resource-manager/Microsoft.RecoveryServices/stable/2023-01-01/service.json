@@ -23722,6 +23722,14 @@
           "description": "The target proximity placement group ARM Id.",
           "type": "string"
         },
+        "confidentialVmKeyVaultId": {
+          "description": "The confidential VM key vault Id for ADE installation.",
+          "type": "string"
+        },
+        "targetVmSecurityProfile": {
+          "$ref": "#/definitions/VMwareCbtSecurityProfileInput",
+          "description": "The target VM security profile."
+        },
         "targetBootDiagnosticsStorageAccountId": {
           "description": "The target boot diagnostics storage account ARM Id.",
           "type": "string"
@@ -23798,6 +23806,10 @@
         "performShutdown": {
           "description": "A value indicating whether VM is to be shutdown.",
           "type": "string"
+        },
+        "osUpgradeVersion": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -23818,6 +23830,11 @@
         },
         "osType": {
           "description": "The type of the OS on the VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "The name of the OS on the VM.",
           "type": "string",
           "readOnly": true
         },
@@ -23882,6 +23899,14 @@
         "targetProximityPlacementGroupId": {
           "description": "The target proximity placement group Id.",
           "type": "string"
+        },
+        "confidentialVmKeyVaultId": {
+          "description": "The confidential VM key vault Id for ADE installation.",
+          "type": "string"
+        },
+        "targetVmSecurityProfile": {
+          "$ref": "#/definitions/VMwareCbtSecurityProfileDetails",
+          "description": "The target VM security profile."
         },
         "targetBootDiagnosticsStorageAccountId": {
           "description": "The target boot diagnostics storage account ARM Id.",
@@ -24015,6 +24040,13 @@
           "description": "The tags for the target disks.",
           "type": "object",
           "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "supportedOSVersions": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "array",
+          "items": {
             "type": "string"
           }
         }
@@ -24381,6 +24413,67 @@
       },
       "x-ms-discriminator-value": "VMwareCbt"
     },
+    "VMwareCbtSecurityProfileDetails": {
+      "description": "Security profile details.",
+      "type": "object",
+      "properties": {
+        "targetVmSecurityType": {
+          "description": "The target VM security type.",
+          "type": "string"
+        },
+        "isTargetVmSecureBootEnabled": {
+          "description": "A value indicating whether secure boot to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmTpmEnabled": {
+          "description": "A value indicating whether trusted platform module to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmIntegrityMonitoringEnabled": {
+          "description": "A value indicating whether integrity monitoring to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmConfidentialEncryptionEnabled": {
+          "description": "A value indicating whether confidential compute encryption to be enabled.",
+          "type": "string"
+        }
+      }
+    },
+    "VMwareCbtSecurityProfileInput": {
+      "description": "VMwareCbt security profile input.",
+      "type": "object",
+      "properties": {
+        "targetVmSecurityType": {
+          "description": "The target VM security type.",
+          "enum": [
+            "None",
+            "TrustedLaunch",
+            "ConfidentialVM"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecurityType",
+            "modelAsString": true
+          }
+        },
+        "isTargetVmSecureBootEnabled": {
+          "description": "A value indicating whether secure boot to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmTpmEnabled": {
+          "description": "A value indicating whether trusted platform module to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmIntegrityMonitoringEnabled": {
+          "description": "A value indicating whether integrity monitoring to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmConfidentialEncryptionEnabled": {
+          "description": "A value indicating whether confidential compute encryption to be enabled.",
+          "type": "string"
+        }
+      }
+    },
     "VMwareCbtTestMigrateInput": {
       "description": "VMwareCbt specific test migrate input.",
       "required": [
@@ -24410,6 +24503,10 @@
             "$ref": "#/definitions/VMwareCbtNicInput"
           },
           "x-ms-identifiers": []
+        },
+        "osUpgradeVersion": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
