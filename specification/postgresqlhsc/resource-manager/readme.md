@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for PostgreSQL Hyperscale.
+This is the AutoRest configuration file for Cosmos DB for PostgreSQL.
 
 ## Getting Started
 
@@ -22,32 +22,23 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the PostgreSQL Hyperscale API.
+These are the global settings for the Cosmos DB for PostgreSQL API.
 
 ``` yaml
-title: Microsoft PostgreSQL Hyperscale
+title: Cosmos DB for PostgreSQL
 openapi-type: arm
-tag: package-2022-11
+tag: package-2022-11-08
 ```
 
 
-### Tag: package-2022-11
+### Tag: package-2022-11-08
 
-These settings apply only when `--tag=package-2022-11` is specified on the command line.
+These settings apply only when `--tag=package-2022-11-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11'
+```yaml $(tag) == 'package-2022-11-08'
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json
 ```
-### Tag: package-2020-10-05-privatepreview
-
-These settings apply only when `--tag=package-2020-10-05-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-05-privatepreview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2020-10-05-privatepreview/postgresqlhsc.json
-```
-
 ---
 
 # Code Generation
