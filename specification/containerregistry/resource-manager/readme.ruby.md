@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2022-12
   - tag: package-2022-02-preview
   - tag: package-2021-12-preview
   - tag: package-2021-09
@@ -23,6 +24,16 @@ batch:
   - tag: package-2017-06-preview
   - tag: package-2017-03
   - tag: package-2016-06-preview
+```
+
+### Tag: package-2022-12 and ruby
+
+These settings apply only when `--tag=package-2022-12 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2022-12' && $(ruby)
+namespace: "Azure::ContainerRegistry::Mgmt::V2022_12_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_registry/lib
 ```
 
 ### Tag: package-2022-02-preview and ruby
