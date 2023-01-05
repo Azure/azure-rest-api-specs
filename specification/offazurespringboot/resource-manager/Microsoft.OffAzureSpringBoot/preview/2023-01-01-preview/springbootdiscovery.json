@@ -1101,6 +1101,11 @@
     },
     "springbootsitesPatch": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -1108,6 +1113,10 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/springbootsitesProperties",
+          "description": "The springbootsites resource definition."
         }
       },
       "description": "The springbootsites resource patch definition."
@@ -1266,6 +1275,11 @@
     },
     "springbootserversPatch": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -1273,6 +1287,10 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/springbootserversProperties",
+          "description": "The springbootsites resource definition."
         }
       },
       "description": "The springbootservers resource patch definition."
@@ -1443,9 +1461,15 @@
           },
           "description": "The static content location list."
         },
+        "connectionStrings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The connection string list."
+        },
         "lastUpdatedTime": {
           "description": "Time when this springbootapps instance was last updated.",
-          "readOnly": true,
           "type": "string",
           "format": "date-time"
         },
@@ -1504,7 +1528,16 @@
     },
     "springbootappsPatch": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/springbootappsProperties",
+          "description": "The springbootapps resource definition."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
