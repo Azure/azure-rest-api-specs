@@ -1,26 +1,19 @@
 {
   "parameters": {
-    "api-version": "2022-09-01-preview",
+    "api-version": "2022-12-01-preview",
     "AzureKey": "[subscription-key]",
-    "reverseGeocodingBatchRequestBody": {
+    "geocodingBatchRequestBody": {
       "batchItems": [
         {
-          "coordinates": [
-            -122.128275,
-            47.639429
-          ],
-          "resultTypes": [
-            "Address",
-            "PopulatedPlace"
-          ],
+          "addressLine": "One, Microsoft Way, Redmond, WA 98052",
+          "top": 2,
           "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
         },
         {
-          "coordinates": [
-            -122.341979399674,
-            47.6095253501216
-          ],
-          "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7"
+          "addressLine": "Pike Pl",
+          "adminDistrict": "WA",
+          "locality": "Seattle",
+          "top": 3
         }
       ]
     }
@@ -108,7 +101,6 @@
             ]
           },
           {
-            "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7",
             "type": "FeatureCollection",
             "features": [
               {
@@ -131,7 +123,7 @@
                     "postalCode": "98101",
                     "addressLine": "Pike Pl"
                   },
-                  "type": "address",
+                  "type": "RoadBlock",
                   "confidence": "High",
                   "matchCodes": [
                     "Good"
@@ -254,10 +246,9 @@
             ]
           },
           {
-            "optionalId": "3K5O3Y832J2YV6D7XNGUSM4ECCUGDEFN172CJQNN",
             "error": {
-              "code": "400 Bad Request",
-              "message": "The provided coordinates in query are invalid, out of range, or not in the expected format"
+              "code": "Conflicting Parameters",
+              "message": "When 'query' is present, only the following parameters are valid: 'bbox, location, view, top'. 'addressLine' was passed"
             }
           }
         ]
