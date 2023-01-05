@@ -62,7 +62,6 @@ directive:
     from: Accounts.json
 ```
 
-
 ### Tag: package-2023-01
 
 These settings apply only when `--tag=package-2023-01` is specified on the command line.
@@ -70,7 +69,14 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 ```yaml $(tag) == 'package-2023-01'
 input-file:
   - Microsoft.Media/Accounts/stable/2023-01-01/Accounts.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
 ```
+
 ### Tag: package-metadata-2022-08
 
 These settings apply only when `--tag=package-metadata-2022-08` is specified on the command line.
