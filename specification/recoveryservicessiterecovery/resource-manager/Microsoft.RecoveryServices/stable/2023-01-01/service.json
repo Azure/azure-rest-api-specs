@@ -22303,7 +22303,7 @@
             "type": "string"
           },
           "activeLocation": {
-            "description": "The Current active location of the Prptection cluster.",
+            "description": "The Current active location of the Protection cluster.",
             "type": "string"
           },
           "allowedOperations": {
@@ -22354,7 +22354,7 @@
             "type": "string"
           },
           "clusterNodeFQDNs": {
-            "description": "The List of cluster Node FQDN's.",
+            "description": "The List of cluster Node FQDNs.",
             "type": "array",
             "items": {
               "type": "string"
@@ -25951,55 +25951,56 @@
         "x-ms-discriminator-value": "VMwareVirtualMachine"
       }
     },
-  "parameters": {
-    "SubscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription Id.",
-      "required": true,
-      "type": "string"
-    },
-    "ResourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group where the recovery services vault is present.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ResourceName": {
-      "name": "resourceName",
-      "in": "path",
-      "description": "The name of the recovery services vault.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client Api Version.",
-      "required": true,
-      "type": "string"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account."
+    "parameters": {
+      "SubscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The subscription Id.",
+        "required": true,
+        "type": "string"
       },
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow"
-    }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "tags": []
+      "ResourceGroupName": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "description": "The name of the resource group where the recovery services vault is present.",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "client"
+      },
+      "ResourceName": {
+        "name": "resourceName",
+        "in": "path",
+        "description": "The name of the recovery services vault.",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "client"
+      },
+      "ApiVersion": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Client Api Version.",
+        "required": true,
+        "type": "string"
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account."
+        },
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow"
+      }
+    },
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "tags": []
+  }
 }
