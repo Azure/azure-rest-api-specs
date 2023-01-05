@@ -11,6 +11,7 @@ External Contributors can read [Getting Started with OpenAPI Specifications](htt
 
 
 
+
 <!--Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.-->
 
 ### Terminology
