@@ -40,7 +40,7 @@
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/VirtualNetworkNameParameter"
@@ -109,30 +109,16 @@
           "$ref": "#/definitions/NetworkGroupMembershipProperties",
           "description": "The network group membership properties"
         },
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
         "location": {
           "type": "string",
           "description": "Resource Location."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata related to this resource.",
-          "$ref": "./network.json#/definitions/SystemData"
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+        }
+      ],
       "description": "Resource of networkGroupMembership."
     },
     "NetworkGroupMembershipProperties": {
@@ -233,14 +219,6 @@
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "VirtualNetworkNameParameter": {
       "name": "virtualNetworkName",
       "in": "path",
